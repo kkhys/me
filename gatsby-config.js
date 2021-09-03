@@ -1,18 +1,36 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
-    author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
-    },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    title: `Kiki blog`,
+    author: `Keiten Kiki`,
+    description: `秘密のブログ。`,
+    siteUrl: `https://ktnkk.com/`,
     social: {
-      twitter: `kylemathews`,
+      twitter: `ktnkk_`,
     },
+    categories: [
+      {
+        name: "Fashion",
+        slug: "f",
+        color: "#e40c6a",
+      },
+      {
+        name: "Life",
+        slug: "l",
+        color: "#ccf75f",
+      },
+      {
+        name: "Onsen",
+        slug: "o",
+        color: "#2bdfff",
+      },
+      {
+        name: "Tech",
+        slug: "t",
+        color: "#79ff2b",
+      },
+    ],
   },
   plugins: [
-    `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -23,18 +41,27 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/content/assets`,
+        name: `assets`,
       },
     },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-remark-code-titles`,
+          {
+            resolve: "gatsby-remark-embed-youtube",
+            options: {
+              width: 650,
+              height: 365,
+            },
+          },
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 630,
+              maxWidth: 700,
+              linkImagesToOriginal: false,
             },
           },
           {
@@ -43,7 +70,44 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
+          {
+            resolve: "gatsby-remark-custom-blocks",
+            options: {
+              blocks: {
+                simple: {
+                  classes: "simple",
+                  title: "optional",
+                },
+                info: {
+                  classes: "info",
+                  title: "optional",
+                },
+                alert: {
+                  classes: "alert",
+                  title: "optional",
+                },
+                notice: {
+                  classes: "notice",
+                  title: "optional",
+                },
+                imageSmall: {
+                  classes: "image-small",
+                },
+                imageMedium: {
+                  classes: "image-medium",
+                },
+              },
+            },
+          },
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: "language-",
+              inlineCodeMarker: null,
+              aliases: {},
+              noInlineHighlight: false,
+            },
+          },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],
@@ -51,12 +115,30 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: `ADD YOUR TRACKING ID HERE`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Kiki blog | 秘密のブログ`,
+        short_name: `Kiki blog`,
+        start_url: `/`,
+        background_color: `rgb(33, 36, 45)`,
+        theme_color: `#0ce429`,
+        display: `minimal-ui`,
+        icon: `content/assets/favicon.png`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "",
+      },
+    },
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-twitter`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-styled-components`,
+    // RSS feed
+    // ref: https://www.gatsbyjs.com/docs/how-to/adding-common-features/adding-an-rss-feed/
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -74,57 +156,40 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes.map(node => {
-                return Object.assign({}, node.frontmatter, {
-                  description: node.excerpt,
-                  date: node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + node.fields.slug,
-                  custom_elements: [{ "content:encoded": node.html }],
-                })
-              })
+            serialize: ({query: {site, allMarkdownRemark}}) => {
+              return allMarkdownRemark.edges.map((edge) => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.excerpt,
+                  date: edge.node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                });
+              });
             },
             query: `
               {
                 allMarkdownRemark(
                   sort: { order: DESC, fields: [frontmatter___date] },
                 ) {
-                  nodes {
-                    excerpt
-                    html
-                    fields {
-                      slug
-                    }
-                    frontmatter {
-                      title
-                      date
+                  edges {
+                    node {
+                      excerpt
+                      html
+                      fields { slug }
+                      frontmatter {
+                        title
+                        date
+                      }
                     }
                   }
                 }
               }
             `,
             output: "/rss.xml",
+            title: "ktnkk.com RSS feed",
           },
         ],
       },
     },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
-        start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
-      },
-    },
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-gatsby-cloud`,
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
-}
+};
