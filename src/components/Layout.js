@@ -1,36 +1,63 @@
-import * as React from "react"
-import { Link } from "gatsby"
+import React from "react";
+import {ThemeProvider} from "styled-components";
+import {Helmet} from "react-helmet";
+import GlobalStyle from "../styles/global";
+import theme from "../styles/theme";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import ContentWrapper from "../components/ContentWrapper";
+import styled from "styled-components";
 
-const Layout = ({ location, title, children }) => {
-  const rootPath = `${__PATH_PREFIX__}/`
-  const isRootPath = location.pathname === rootPath
-  let header
-
-  if (isRootPath) {
-    header = (
-      <h1 className="main-heading">
-        <Link to="/">{title}</Link>
-      </h1>
-    )
-  } else {
-    header = (
-      <Link className="header-link-home" to="/">
-        {title}
-      </Link>
-    )
+const Content = styled.div`
+  margin-top: 1rem;
+  display: flex;
+  min-height: 85vh;
+  align-items: flex-start;
+  justify-content: center;
+  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+    display: block;
   }
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    margin-top: 0.5rem;
+  }
+`;
 
-  return (
-    <div className="global-wrapper" data-is-root-path={isRootPath}>
-      <header className="global-header">{header}</header>
-      <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-      </footer>
-    </div>
-  )
+const MainWrapper = styled.div`
+  width: calc(100% - ${(props) => props.theme.sizes.bioWidth} - 40px);
+  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+    width: 100%;
+  }
+`;
+
+class Layout extends React.Component {
+  render() {
+    const {location, title, children} = this.props;
+
+    return (
+      <ThemeProvider theme={theme}>
+        <Helmet>
+          <link rel="preconnect" href="https://fonts.googleapis.com"/>
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
+            rel="stylesheet"
+          />
+        </Helmet>
+        <div className="siteRoot">
+          <Header title={title} location={location}/>
+          <ContentWrapper>
+            <Content>
+              <MainWrapper>
+                <main>{children}</main>
+              </MainWrapper>
+            </Content>
+          </ContentWrapper>
+          <Footer/>
+          <GlobalStyle/>
+        </div>
+      </ThemeProvider>
+    );
+  }
 }
 
-export default Layout
+export default Layout;
