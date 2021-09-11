@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Kiki blog`,
+    title: `KIKI BLOG`,
     author: `Keiten Kiki`,
-    description: `秘密のブログ。`,
+    description: ``,
     siteUrl: `https://ktnkk.com/`,
     social: {
       twitter: `ktnkk_`,
@@ -11,22 +11,30 @@ module.exports = {
       {
         name: "Fashion",
         slug: "f",
-        color: "#e40c6a",
+        color: "#ffbb5c",
+        borderColor: "#745a35",
+        background: "393024",
       },
       {
         name: "Life",
         slug: "l",
-        color: "#ccf75f",
+        color: "#ffe085",
+        borderColor: "#746b46",
+        background: "39372b",
       },
       {
         name: "Onsen",
         slug: "o",
-        color: "#2bdfff",
+        color: "#80d2ff",
+        borderColor: "#3e647a",
+        background: "#223441",
       },
       {
         name: "Tech",
         slug: "t",
-        color: "#79ff2b",
+        color: "#a1e3b5",
+        borderColor: "#4c6c5b",
+        background: "#283734",
       },
     ],
   },
@@ -49,7 +57,11 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-remark-autolink-headers`,
           `gatsby-remark-code-titles`,
+          `gatsby-remark-katex`,
+          `gatsby-remark-graphviz`,
+          `gatsby-remark-external-links`,
           {
             resolve: "gatsby-remark-embed-youtube",
             options: {
@@ -74,19 +86,19 @@ module.exports = {
             resolve: "gatsby-remark-custom-blocks",
             options: {
               blocks: {
-                simple: {
+                s: {
                   classes: "simple",
                   title: "optional",
                 },
-                info: {
+                i: {
                   classes: "info",
                   title: "optional",
                 },
-                alert: {
+                a: {
                   classes: "alert",
                   title: "optional",
                 },
-                notice: {
+                n: {
                   classes: "notice",
                   title: "optional",
                 },
@@ -118,7 +130,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Kiki blog | 秘密のブログ`,
+        name: `KIKI BLOG`,
         short_name: `Kiki blog`,
         start_url: `/`,
         background_color: `rgb(33, 36, 45)`,
@@ -189,6 +201,13 @@ module.exports = {
             title: "ktnkk.com RSS feed",
           },
         ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-nprogress`,
+      options: {
+        color: `#60e378`,
+        showSpinner: false,
       },
     },
   ],

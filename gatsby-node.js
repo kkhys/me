@@ -1,115 +1,105 @@
-const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const path = require(`path`);
+const {createFilePath} = require(`gatsby-source-filesystem`);
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
+exports.createPages = ({graphql, actions}) => {
+  const {createPage} = actions;
 
-  // Define a template for blog post
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
-
-  // Get all markdown blog posts sorted by date
-  const result = await graphql(
+  return graphql(
     `
       {
         allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
+          sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
         ) {
-          nodes {
-            id
-            fields {
-              slug
+          edges {
+            node {
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+                date(formatString: "YYYY.MM.DD")
+                emoji
+                category
+                slug
+              }
             }
           }
         }
       }
     `
-  )
+  ).then(result => {
+    if (result.errors) {
+      throw result.errors;
+    }
 
-  if (result.errors) {
-    reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
-      result.errors
-    )
-    return
-  }
+    const posts = result.data.allMarkdownRemark.edges;
 
-  const posts = result.data.allMarkdownRemark.nodes
+    // Create category posts pages
+    // ref: https://www.gatsbyjs.org/docs/adding-tags-and-categories-to-blog-posts/
+    let categories = [];
+    posts.forEach(post => {
+      if (post.node.frontmatter.category) {
+        categories.push(post.node.frontmatter.category);
+      }
+    });
+    categories = new Set(categories);
+    categories.forEach(category => {
+      createPage({
+        path: `/${category}/`,
+        component: path.resolve("src/templates/categories.js"),
+        context: {
+          category
+        }
+      });
+    });
 
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
+    // get related Posts(retrive maximum 5 posts for each category)
+    let allRelatedPosts = {};
+    categories.forEach(category => {
+      let categoryPosts = posts.filter(post => {
+        return post.node.frontmatter.category === category;
+      });
+      allRelatedPosts[category] = categoryPosts
+        ? categoryPosts.slice(0, 5)
+        : [];
+    });
 
-  if (posts.length > 0) {
+    // Create blog posts pages.
     posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+      // const previous =
+      //   index === posts.length - 1 ? null : posts[index + 1].node;
+      // const next = index === 0 ? null : posts[index - 1].node;
+
+      // setup related posts
+      // get the posts that has same categories.
+      let relatedPosts = allRelatedPosts[post.node.frontmatter.category];
+      // remove myself
+      relatedPosts = relatedPosts.filter(relatedPost => {
+        return !(relatedPost.node.fields.slug === post.node.fields.slug);
+      });
 
       createPage({
-        path: post.fields.slug,
-        component: blogPost,
+        path: post.node.frontmatter.slug,
+        component: path.resolve(`./src/templates/post.js`),
         context: {
-          id: post.id,
-          previousPostId,
-          nextPostId,
-        },
-      })
-    })
-  }
-}
+          slug: post.node.fields.slug,
+          relatedPosts
+        }
+      });
+    });
+  });
+};
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+exports.onCreateNode = ({node, actions, getNode}) => {
+  const {createNodeField} = actions;
 
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-
+    const value = createFilePath({node, getNode});
     createNodeField({
       name: `slug`,
       node,
-      value,
-    })
+      value
+    });
   }
-}
-
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
-
-  // Explicitly define the siteMetadata {} object
-  // This way those will always be defined even if removed from gatsby-config.js
-
-  // Also explicitly define the Markdown frontmatter
-  // This way the "MarkdownRemark" queries will return `null` even when no
-  // blog posts are stored inside "content/blog" instead of returning an error
-  createTypes(`
-    type SiteSiteMetadata {
-      author: Author
-      siteUrl: String
-      social: Social
-    }
-
-    type Author {
-      name: String
-      summary: String
-    }
-
-    type Social {
-      twitter: String
-    }
-
-    type MarkdownRemark implements Node {
-      frontmatter: Frontmatter
-      fields: Fields
-    }
-
-    type Frontmatter {
-      title: String
-      description: String
-      date: Date @dateformat
-    }
-
-    type Fields {
-      slug: String
-    }
-  `)
-}
+};
