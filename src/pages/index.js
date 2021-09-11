@@ -1,69 +1,44 @@
-import * as React from "react"
-import { Link, graphql } from "gatsby"
+import React from "react";
+import {graphql} from "gatsby";
+import {Helmet} from "react-helmet";
+import styled from "styled-components";
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Layout from "../components/Layout";
+import SEO from "../components/SEO";
+import PostCard from "../components/PostCard";
+import CategoryMenu from "../components/CategoryMenu";
+import HomeJsonLd from "../components/json/HomeJsonLd";
 
-const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+const PostsContainer = styled.div`
+  margin-top: 1.5rem;
+`;
 
-  if (posts.length === 0) {
+class BlogIndex extends React.Component {
+  render() {
+    const {data} = this.props;
+    const siteTitle = data.site.siteMetadata.title;
+    const posts = data.allMarkdownRemark.edges;
+    const {location} = this.props;
+
     return (
-      <Layout location={location} title={siteTitle}>
-        <Seo title="All posts" />
-        <Bio />
-        <p>
-          No blog posts found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
+      <Layout location={this.props.location} title={siteTitle}>
+        <SEO title=""/>
+        <Helmet>
+          <link rel="canonical" href="https://ktnkk.com"/>
+        </Helmet>
+        <HomeJsonLd/>
+        <CategoryMenu location={location}/>
+        <PostsContainer>
+          {posts.map(({node}) => {
+            return <PostCard key={node.fields.slug} node={node}/>;
+          })}
+        </PostsContainer>
       </Layout>
-    )
+    );
   }
-
-  return (
-    <Layout location={location} title={siteTitle}>
-      <Seo title="All posts" />
-      <Bio />
-      <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
-
-          return (
-            <li key={post.fields.slug}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h2>
-                    <Link to={post.fields.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </h2>
-                  <small>{post.frontmatter.date}</small>
-                </header>
-                <section>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
-              </article>
-            </li>
-          )
-        })}
-      </ol>
-    </Layout>
-  )
 }
 
-export default BlogIndex
+export default BlogIndex;
 
 export const pageQuery = graphql`
   query {
@@ -73,17 +48,20 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      nodes {
-        excerpt
-        fields {
-          slug
-        }
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          title
-          description
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            date(formatString: "YYYY.MM.DD")
+            title
+            emoji
+            category
+            slug
+          }
         }
       }
     }
   }
-`
+`;
