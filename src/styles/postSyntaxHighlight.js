@@ -24,8 +24,9 @@ const SyntaxHighlightStyle = css`
 
   pre[class*="language-"],
   :not(pre) > code[class*="language-"] {
-    background: ${(props) => props.theme.colors.blackLight};
+    background: #22272e;
     border-radius: 5px;
+    border: 1px solid #444c56;
     @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
       border-radius: 0;
     }
@@ -165,18 +166,19 @@ const SyntaxHighlightStyle = css`
   .gatsby-code-title {
     position: relative;
     margin: 1.5em 0 -24px auto;
-    background: #20242e;
-    color: #fff;
+    background: #2d333b;
+    color: #c9d1d9;
     font-size: 12px;
     height: 24px;
     padding: 0 8px;
-    line-height: 24px;
+    line-height: 22px;
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
     Courier New, monospace;
     font-weight: 700;
     border-radius: 0 4px;
     display: table;
     z-index: 2;
+    border: 1px solid #444c56;
     @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
       border-radius: 0;
       margin-right: -${(props) => props.theme.sideSpace.contentSmall};
@@ -192,12 +194,12 @@ const SyntaxHighlightStyle = css`
   p > code,
   li > code {
     display: inline-block;
-    background: #edf2f7;
+    background: #1c4428;
     padding: 0.1em 0.3em;
     margin: 0 0.2em;
     border-radius: 3px;
     line-height: 1.4;
-    color: #454e63 !important;
+    color: #c9d1d9 !important;
   }
 `;
 

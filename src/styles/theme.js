@@ -1,12 +1,12 @@
 const variables = {
   colors: {
     base: "#121212",
-    background: "#21242d", //#141c23
+    background: "#0d1117",
     blackLight: "#313746",
     gray: "#727d86",
     silver: "#969fa7",
-    whitesmoke: "#f1f4f7",
-    highlight: "#1da1f2",
+    whitesmoke: "#2e363f",
+    highlight: "#58a6ff",
     red: "#f7615f",
     orange: "#ffa22b",
     gradient: "linear-gradient(-45deg,#ffa649,#f7645b,#805ed4)",

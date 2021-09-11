@@ -3,14 +3,15 @@ import svgHeadingIcon from "../svg/others/heading-icon.svg";
 
 const postContentStyle = css`
   margin: 1.5em 0 1em;
-  line-height: 1.9;
+  line-height: 2;
 
   a:hover {
     text-decoration: underline;
   }
 
   p {
-    margin-bottom: 1.5em;
+    margin-bottom: 2em;
+    text-indent: 1em;
   }
 
   h2,
@@ -67,7 +68,7 @@ const postContentStyle = css`
   }
 
   ul, ol {
-    margin: 1em 0;
+    margin: 2em 0;
 
     p {
       margin: 0;
@@ -121,6 +122,7 @@ const postContentStyle = css`
 
   strong {
     font-weight: 700;
+    border-bottom: 1px dashed #f49810;
   }
 
   em {
@@ -135,7 +137,7 @@ const postContentStyle = css`
     display: block;
     margin: 2em 0;
     border: none;
-    border-top: dotted 3px #e1eaf3;
+    border-top: dotted 3px #c9d1d9;
   }
 
   table {
@@ -149,8 +151,8 @@ const postContentStyle = css`
     line-height: 1.4;
 
     th {
-      background-color: ${(props) => props.theme.colors.highlight};
-      color: #FFF;
+      background-color: #2d333b;
+      color: #c9d1d9;
       padding: 10px 12px;
       text-align: center;
       font-weight: 700;
@@ -165,8 +167,8 @@ const postContentStyle = css`
     }
 
     td {
-      background-color: ${(props) => props.theme.colors.whitesmoke};
-      color: ${(props) => props.theme.colors.blackLight};
+      background-color: #22272e;
+      color: #c9d1d9;
       padding: 10px 12px;
     }
 
@@ -204,10 +206,14 @@ const postContentStyle = css`
 
   .gatsby-resp-image-wrapper {
     margin: 1em 0;
-    border: solid 1px #e5e8ea;
+    border: solid 1px #30363d;
     box-shadow: 0 2px 5px -1px rgba(0, 0, 0, .25);
     border-radius: 4px;
     overflow: hidden;
+  }
+
+  a.anchor {
+    fill: #c9d1d9;
   }
 `;
 

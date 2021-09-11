@@ -50,13 +50,18 @@ const postCustomBlockStyle = css`
   .custom-block.alert,
   .custom-block.notice {
     padding: 0.7em 1em;
-    border-left: solid 4px ${(props) => props.theme.colors.highlight};
-    border-radius: 1px 3px 3px 1px;
+    border: solid 1px;
+    border-radius: 3px;
+  }
+  
+  .custom-block.info {
+    border-color: #314064;
+    background: #10192c;
   }
 
   .custom-block.alert {
-    border-left-color: ${(props) => props.theme.colors.red};
-    background: #ffeff0;
+    border-color: #713f50;
+    background: #371f2b;
 
     .custom-block-heading {
       color: ${(props) => props.theme.colors.red};
@@ -64,8 +69,8 @@ const postCustomBlockStyle = css`
   }
 
   .custom-block.notice {
-    border-left-color: ${(props) => props.theme.colors.orange};
-    background: #fff4df;
+    border-color: #634711;
+    background: #272115;
 
     .custom-block-heading {
       color: ${(props) => props.theme.colors.orange};
