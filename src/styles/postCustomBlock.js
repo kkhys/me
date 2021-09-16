@@ -1,9 +1,9 @@
-import {css} from "styled-components";
+import { css } from "styled-components";
 
 const postCustomBlockStyle = css`
   .custom-block {
     margin: 1em 0;
-    background: ${(props) => props.theme.colors.whitesmoke};
+    background: ${props => props.theme.colors.whitesmoke};
   }
 
   .custom-block-heading {
@@ -53,7 +53,7 @@ const postCustomBlockStyle = css`
     border: solid 1px;
     border-radius: 3px;
   }
-  
+
   .custom-block.info {
     border-color: #314064;
     background: #10192c;
@@ -64,7 +64,7 @@ const postCustomBlockStyle = css`
     background: #371f2b;
 
     .custom-block-heading {
-      color: ${(props) => props.theme.colors.red};
+      color: ${props => props.theme.colors.red};
     }
   }
 
@@ -73,13 +73,13 @@ const postCustomBlockStyle = css`
     background: #272115;
 
     .custom-block-heading {
-      color: ${(props) => props.theme.colors.orange};
+      color: ${props => props.theme.colors.orange};
     }
   }
 
   .custom-block.image-small,
   .custom-block.image-medium {
-    background: ${(props) => props.theme.colors.whitesmoke};
+    background: ${props => props.theme.colors.whitesmoke};
     padding: 1.5em;
     text-align: center;
     border-radius: 5px;

@@ -1,13 +1,13 @@
 import React from "react";
-import {Helmet} from "react-helmet";
-import {StaticQuery, graphql} from "gatsby";
+import { Helmet } from "react-helmet";
+import { StaticQuery, graphql } from "gatsby";
 
-const CategoryJsonLD = ({categorySlug, categoryName}) => {
+const CategoryJsonLD = ({ categorySlug, categoryName }) => {
   return (
     <StaticQuery
       query={jsonLdCategoryQuery}
-      render={(data) => {
-        const {siteUrl} = data.site.siteMetadata;
+      render={data => {
+        const { siteUrl } = data.site.siteMetadata;
         //bread crumbs
         const jsonBreadCrumbs = {
           "@context": "http://schema.org",
@@ -18,18 +18,18 @@ const CategoryJsonLD = ({categorySlug, categoryName}) => {
               position: 1,
               item: {
                 "@id": siteUrl,
-                name: "HOME",
-              },
+                name: "HOME"
+              }
             },
             {
               "@type": "ListItem",
               position: 2,
               item: {
                 "@id": `${siteUrl}/${categorySlug}`,
-                name: categoryName,
-              },
-            },
-          ],
+                name: categoryName
+              }
+            }
+          ]
         };
         return (
           <Helmet>

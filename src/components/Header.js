@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "gatsby";
+import { Link } from "gatsby";
 import styled from "styled-components";
 import ContentWrapper from "../components/ContentWrapper";
 import svgLogo from "../svg/logo.svg";
@@ -19,7 +19,7 @@ const HeaderInner = styled.div`
 
   .logo {
     display: block;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    @media screen and (max-width: ${props => props.theme.responsive.small}) {
       margin: 0 auto;
     }
   }
@@ -41,7 +41,7 @@ const HeaderInner = styled.div`
   }
 `;
 
-const Header = ({title, location}) => {
+const Header = ({ title, location }) => {
   const rootPath = `${__PATH_PREFIX__}/`;
   const HeadingLevel = location.pathname === rootPath ? "h1" : "h3";
 

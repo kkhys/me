@@ -1,5 +1,5 @@
 import React from "react";
-import {graphql} from "gatsby";
+import { graphql } from "gatsby";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import PostCard from "../components/PostCard";
@@ -18,12 +18,12 @@ const Heading = styled.h1`
 
 class CategoryTemplate extends React.Component {
   render() {
-    const {data, pageContext} = this.props;
+    const { data, pageContext } = this.props;
     const posts = data.allMarkdownRemark.edges;
-    const {location} = this.props;
+    const { location } = this.props;
     // get Category name from category slug
     const categorySlug = pageContext.category;
-    const categoryObject = data.site.siteMetadata.categories.find((cat) => {
+    const categoryObject = data.site.siteMetadata.categories.find(cat => {
       return cat.slug === categorySlug;
     });
     // use slug when name doesn't exist
@@ -31,15 +31,15 @@ class CategoryTemplate extends React.Component {
 
     return (
       <Layout location={this.props.location} title={categoryName}>
-        <SEO title={categoryName}/>
+        <SEO title={categoryName} />
         <CategoryJsonLd
           categorySlug={categorySlug}
           categoryName={categoryName}
         />
-        <CategoryMenu location={location}/>
+        <CategoryMenu location={location} />
         <Heading>{categoryName}</Heading>
-        {posts.map(({node}) => {
-          return <PostCard key={node.fields.slug} node={node}/>;
+        {posts.map(({ node }) => {
+          return <PostCard key={node.fields.slug} node={node} />;
         })}
       </Layout>
     );

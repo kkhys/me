@@ -1,13 +1,13 @@
 import React from "react";
-import {Helmet} from "react-helmet";
-import {StaticQuery, graphql} from "gatsby";
+import { Helmet } from "react-helmet";
+import { StaticQuery, graphql } from "gatsby";
 
 const JsonLD = () => {
   return (
     <StaticQuery
       query={jsonLdHomeQuery}
-      render={(data) => {
-        const {title, siteUrl, description, author} = data.site.siteMetadata;
+      render={data => {
+        const { title, siteUrl, description, author } = data.site.siteMetadata;
 
         const publisher = {
           "@type": "Organization",
@@ -16,8 +16,8 @@ const JsonLD = () => {
             "@type": "ImageObject",
             url: `${siteUrl}/images/avatar.png`,
             width: 150,
-            height: 150,
-          },
+            height: 150
+          }
         };
 
         const jsonLd = {
@@ -27,16 +27,16 @@ const JsonLD = () => {
             "@type": "ImageObject",
             url: `${siteUrl}/images/ogp.png`,
             height: 1200,
-            width: 630,
+            width: 630
           },
           url: siteUrl,
           name: title,
           author: {
             "@type": "Person",
-            name: author,
+            name: author
           },
           description: description,
-          publisher,
+          publisher
         };
 
         return (

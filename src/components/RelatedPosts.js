@@ -1,13 +1,13 @@
 import React from "react";
-import {Link} from "gatsby";
+import { Link } from "gatsby";
 import styled from "styled-components";
 import twemoji from "twemoji";
 
 const Wrapper = styled.div`
-  background: ${(props) => props.theme.colors.whitesmoke};
-  padding: 2em ${(props) => props.theme.sideSpace.contentLarge};
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-    padding: 30px ${(props) => props.theme.sideSpace.contentSmall};
+  background: ${props => props.theme.colors.whitesmoke};
+  padding: 2em ${props => props.theme.sideSpace.contentLarge};
+  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+    padding: 30px ${props => props.theme.sideSpace.contentSmall};
   }
 `;
 
@@ -22,7 +22,7 @@ const PostCardWrapper = styled.div`
     color: #c9d1d9;
     border: 1px solid #444c56;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    @media screen and (max-width: ${props => props.theme.responsive.small}) {
       padding: 10px;
     }
   }
@@ -35,7 +35,7 @@ const PostCardEmoji = styled.p`
   margin: 0;
   width: 80px;
   height: 80px;
-  background: ${(props) => props.theme.colors.whitesmoke};
+  background: ${props => props.theme.colors.whitesmoke};
   border-radius: 10px;
   font-size: 50px;
 
@@ -60,10 +60,10 @@ const PostCardContent = styled.div`
     margin-bottom: 0.1em;
     letter-spacing: 0.05em;
     font-size: 0.8em;
-    color: ${(props) => props.theme.colors.silver};
+    color: ${props => props.theme.colors.silver};
   }
 
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: ${props => props.theme.responsive.small}) {
     padding-left: 15px;
     h5 {
       font-size: 1em;
@@ -71,17 +71,17 @@ const PostCardContent = styled.div`
   }
 `;
 
-const RelatedPostCard = ({node}) => {
+const RelatedPostCard = ({ node }) => {
   const title = node.frontmatter.title || node.fields.slug;
   const emoji = twemoji.parse(node.frontmatter.emoji || "🐱", {
     folder: "svg",
-    ext: ".svg",
+    ext: ".svg"
   });
 
   return (
     <PostCardWrapper>
       <Link to={`/` + node.frontmatter.slug} className="post-card-link">
-        <PostCardEmoji dangerouslySetInnerHTML={{__html: emoji}}/>
+        <PostCardEmoji dangerouslySetInnerHTML={{ __html: emoji }} />
         <PostCardContent>
           <h5>{title}</h5>
           <time>{node.frontmatter.date}</time>
@@ -91,13 +91,13 @@ const RelatedPostCard = ({node}) => {
   );
 };
 
-const RelatedPosts = ({posts}) => {
+const RelatedPosts = ({ posts }) => {
   if (!posts.length) return null;
   let content = [];
 
-  posts.forEach((post) => {
+  posts.forEach(post => {
     content.push(
-      <RelatedPostCard key={post.node.fields.slug} node={post.node}/>
+      <RelatedPostCard key={post.node.fields.slug} node={post.node} />
     );
   });
   return <Wrapper>{content}</Wrapper>;

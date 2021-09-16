@@ -1,12 +1,12 @@
-import {css} from "styled-components";
+import { css } from "styled-components";
 
 const boxPaddingSide = "1.2em";
 
 const SyntaxHighlightStyle = css`
   .gatsby-highlight {
     margin: 1.5em 0;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-      margin: 1.5em -${(props) => props.theme.sideSpace.contentSmall};
+    @media screen and (max-width: ${props => props.theme.responsive.small}) {
+      margin: 1.5em -${props => props.theme.sideSpace.contentSmall};
     }
   }
 
@@ -27,7 +27,7 @@ const SyntaxHighlightStyle = css`
     background: #22272e;
     border-radius: 5px;
     border: 1px solid #444c56;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    @media screen and (max-width: ${props => props.theme.responsive.small}) {
       border-radius: 0;
     }
   }
@@ -173,15 +173,15 @@ const SyntaxHighlightStyle = css`
     padding: 0 8px;
     line-height: 22px;
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
-    Courier New, monospace;
+      Courier New, monospace;
     font-weight: 700;
     border-radius: 0 4px;
     display: table;
     z-index: 2;
     border: 1px solid #444c56;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    @media screen and (max-width: ${props => props.theme.responsive.small}) {
       border-radius: 0;
-      margin-right: -${(props) => props.theme.sideSpace.contentSmall};
+      margin-right: -${props => props.theme.sideSpace.contentSmall};
     }
   }
 

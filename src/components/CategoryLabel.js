@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, StaticQuery, graphql} from "gatsby";
+import { Link, StaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -11,27 +11,31 @@ const Wrapper = styled.div`
     border-radius: 2em;
     font-weight: 700;
     border: 1px solid;
-    @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+    @media screen and (max-width: ${props => props.theme.responsive.large}) {
       font-size: 11px;
       padding: 2.5px 6px;
     }
   }
 `;
 
-const categoryLabel = ({slug, isLink}) => {
+const categoryLabel = ({ slug, isLink }) => {
   if (!slug) return null;
   return (
     <StaticQuery
       query={categoryQuery}
-      render={(data) => {
-        const {categories} = data.site.siteMetadata;
-        const categoryObject = categories.find((cat) => {
+      render={data => {
+        const { categories } = data.site.siteMetadata;
+        const categoryObject = categories.find(cat => {
           return cat.slug === slug;
         });
         const categoryName = categoryObject ? categoryObject.name : slug;
         const categoryColor = categoryObject ? categoryObject.color : "#6d4bf5";
-        const categoryBorderColor = categoryObject ? categoryObject.borderColor : "#fff";
-        const categoryBackground = categoryObject ? categoryObject.background : "#6d4bf5";
+        const categoryBorderColor = categoryObject
+          ? categoryObject.borderColor
+          : "#fff";
+        const categoryBackground = categoryObject
+          ? categoryObject.background
+          : "#6d4bf5";
         const content = isLink ? (
           <Link
             to={`/${slug}`}
@@ -39,7 +43,7 @@ const categoryLabel = ({slug, isLink}) => {
             style={{
               color: categoryColor,
               borderColor: categoryBorderColor,
-              background: categoryBackground,
+              background: categoryBackground
             }}
           >
             {categoryName}
@@ -50,7 +54,7 @@ const categoryLabel = ({slug, isLink}) => {
             style={{
               color: categoryColor,
               borderColor: categoryBorderColor,
-              background: categoryBackground,
+              background: categoryBackground
             }}
           >
             {categoryName}

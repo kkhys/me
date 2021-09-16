@@ -1,5 +1,5 @@
 import React from "react";
-import {graphql, Link} from "gatsby";
+import { graphql, Link } from "gatsby";
 import styled from "styled-components";
 
 import Layout from "../components/Layout";
@@ -10,7 +10,7 @@ import svg404 from "../svg/others/404.svg";
 const Wrapper = styled.div`
   color: #fff;
   text-align: center;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: ${props => props.theme.responsive.small}) {
     margin-top: 2em;
   }
 `;
@@ -34,24 +34,24 @@ const StyledLink = styled(Link)`
   background: #fff;
   font-size: 20px;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.blackLight};
+  color: ${props => props.theme.colors.blackLight};
   border-radius: 4px;
 
   &:hover {
-    background: ${(props) => props.theme.colors.highlight};
+    background: ${props => props.theme.colors.highlight};
   }
 `;
 
 class NotFoundPage extends React.Component {
   render() {
-    const {data} = this.props;
+    const { data } = this.props;
     const siteTitle = data.site.siteMetadata.title;
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <Wrapper>
-          <SEO title="ページが見つかりません"/>
-          <HeroImage src={svg404}/>
+          <SEO title="ページが見つかりません" />
+          <HeroImage src={svg404} />
           <Title>Not Found</Title>
           <StyledLink to={`/`} className="cat-item__link">
             HOME

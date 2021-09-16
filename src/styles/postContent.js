@@ -1,4 +1,4 @@
-import {css} from "styled-components";
+import { css } from "styled-components";
 import svgHeadingIcon from "../svg/others/heading-icon.svg";
 
 const postContentStyle = css`
@@ -39,7 +39,13 @@ const postContentStyle = css`
       width: 5px;
       height: 100%;
       border-radius: 5px;
-      background: linear-gradient(0deg, #ffa649 0%, #ffa649 50%, #f7645b 50%, #f7645b 100%);
+      background: linear-gradient(
+        0deg,
+        #ffa649 0%,
+        #ffa649 50%,
+        #f7645b 50%,
+        #f7645b 100%
+      );
     }
   }
 
@@ -55,7 +61,7 @@ const postContentStyle = css`
 
     &:before {
       position: absolute;
-      top: .2em;
+      top: 0.2em;
       left: 0;
       content: "";
       display: inline-block;
@@ -67,7 +73,8 @@ const postContentStyle = css`
     }
   }
 
-  ul, ol {
+  ul,
+  ol {
     margin: 2em 0;
 
     p {
@@ -80,7 +87,7 @@ const postContentStyle = css`
   }
 
   ul li {
-    margin: .4em 0;
+    margin: 0.4em 0;
     list-style: disc;
   }
 
@@ -115,7 +122,7 @@ const postContentStyle = css`
         line-height: 25px;
         content: counter(number);
         counter-increment: number;
-        background: ${(props) => props.theme.colors.highlight};
+        background: ${props => props.theme.colors.highlight};
       }
     }
   }
@@ -147,7 +154,7 @@ const postContentStyle = css`
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     width: auto;
-    font-size: .9em;
+    font-size: 0.9em;
     line-height: 1.4;
 
     th {
@@ -196,18 +203,18 @@ const postContentStyle = css`
   blockquote {
     margin: 2.3em 0;
     font-style: italic;
-    background: ${(props) => props.theme.colors.whitesmoke};
+    background: ${props => props.theme.colors.whitesmoke};
     padding: 1em;
 
     p {
-      margin: .3em 0;
+      margin: 0.3em 0;
     }
   }
 
   .gatsby-resp-image-wrapper {
     margin: 1em 0;
     border: solid 1px #30363d;
-    box-shadow: 0 2px 5px -1px rgba(0, 0, 0, .25);
+    box-shadow: 0 2px 5px -1px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
     overflow: hidden;
   }

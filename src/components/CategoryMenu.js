@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {Link} from "gatsby";
+import { Link } from "gatsby";
 import svgNew from "../svg/categories/new.svg";
 import svgDesign from "../svg/categories/design.svg";
 import svgDev from "../svg/categories/dev.svg";
@@ -14,7 +14,7 @@ const Nav = styled.nav`
 
 const CategoryItemList = styled.ul`
   display: flex;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: ${props => props.theme.responsive.small}) {
     margin: 0 -20px;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -35,7 +35,7 @@ const CategoryItem = styled.li`
   width: 70px;
   margin: 0 20px 0 0;
   text-align: center;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: ${props => props.theme.responsive.small}) {
     width: 60px;
     flex: 0 0 auto;
     margin: 0 0 0 15px;
@@ -47,13 +47,13 @@ const CategoryItem = styled.li`
 
   .cat-item__image {
     padding: 2px;
-    background: ${(props) => props.theme.colors.blackLight};
+    background: ${props => props.theme.colors.blackLight};
     border-radius: 50%;
     position: relative;
 
     img {
       position: relative;
-      background: ${(props) => props.theme.colors.blackLight};
+      background: ${props => props.theme.colors.blackLight};
       border-radius: 50%;
       display: block;
       z-index: 2;
@@ -65,8 +65,8 @@ const CategoryItem = styled.li`
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    color: ${(props) => props.theme.colors.gray};
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    color: ${props => props.theme.colors.gray};
+    @media screen and (max-width: ${props => props.theme.responsive.small}) {
       font-size: 12px;
     }
   }
@@ -81,12 +81,12 @@ const CategoryItem = styled.li`
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: ${(props) => props.theme.colors.gradient};
+      background: ${props => props.theme.colors.gradient};
       animation: rotating 2s linear infinite;
     }
 
     img {
-      border: solid 2px ${(props) => props.theme.colors.background};
+      border: solid 2px ${props => props.theme.colors.background};
     }
   }
 
@@ -100,12 +100,12 @@ const CategoryItem = styled.li`
   }
 `;
 
-const CategoryLink = ({catName, catIcon, catLink, path}) => {
+const CategoryLink = ({ catName, catIcon, catLink, path }) => {
   return (
     <CategoryItem className={catLink === path && "active"}>
       <Link to={catLink} className="cat-item__link">
         <div className="cat-item__image">
-          <img src={catIcon} alt={catName}/>
+          <img src={catIcon} alt={catName} />
         </div>
         <div className="cat-item__name">{catName}</div>
       </Link>
@@ -113,17 +113,12 @@ const CategoryLink = ({catName, catIcon, catLink, path}) => {
   );
 };
 
-const CategoryMenu = ({location}) => {
+const CategoryMenu = ({ location }) => {
   const path = location.pathname;
   return (
     <Nav>
       <CategoryItemList>
-        <CategoryLink
-          catName="New"
-          catIcon={svgNew}
-          catLink="/"
-          path={path}
-        />
+        <CategoryLink catName="New" catIcon={svgNew} catLink="/" path={path} />
         <CategoryLink
           catName="Tech"
           catIcon={svgDesign}

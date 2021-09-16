@@ -1,6 +1,6 @@
 import React from "react";
-import {graphql} from "gatsby";
-import {Helmet} from "react-helmet";
+import { graphql } from "gatsby";
+import { Helmet } from "react-helmet";
 import styled from "styled-components";
 
 import Layout from "../components/Layout";
@@ -15,22 +15,22 @@ const PostsContainer = styled.div`
 
 class BlogIndex extends React.Component {
   render() {
-    const {data} = this.props;
+    const { data } = this.props;
     const siteTitle = data.site.siteMetadata.title;
     const posts = data.allMarkdownRemark.edges;
-    const {location} = this.props;
+    const { location } = this.props;
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <SEO title=""/>
+        <SEO title="" />
         <Helmet>
-          <link rel="canonical" href="https://ktnkk.com"/>
+          <link rel="canonical" href="https://ktnkk.com" />
         </Helmet>
-        <HomeJsonLd/>
-        <CategoryMenu location={location}/>
+        <HomeJsonLd />
+        <CategoryMenu location={location} />
         <PostsContainer>
-          {posts.map(({node}) => {
-            return <PostCard key={node.fields.slug} node={node}/>;
+          {posts.map(({ node }) => {
+            return <PostCard key={node.fields.slug} node={node} />;
           })}
         </PostsContainer>
       </Layout>

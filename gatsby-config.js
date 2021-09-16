@@ -5,7 +5,7 @@ module.exports = {
     description: ``,
     siteUrl: `https://ktnkk.com/`,
     social: {
-      twitter: `ktnkk_`,
+      twitter: `ktnkk_`
     },
     categories: [
       {
@@ -13,45 +13,45 @@ module.exports = {
         slug: "f",
         color: "#ffbb5c",
         borderColor: "#745a35",
-        background: "393024",
+        background: "393024"
       },
       {
         name: "Life",
         slug: "l",
         color: "#ffe085",
         borderColor: "#746b46",
-        background: "39372b",
+        background: "39372b"
       },
       {
         name: "Onsen",
         slug: "o",
         color: "#80d2ff",
         borderColor: "#3e647a",
-        background: "#223441",
+        background: "#223441"
       },
       {
         name: "Tech",
         slug: "t",
         color: "#a1e3b5",
         borderColor: "#4c6c5b",
-        background: "#283734",
-      },
-    ],
+        background: "#283734"
+      }
+    ]
   },
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/blog`,
-        name: `blog`,
-      },
+        name: `blog`
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/assets`,
-        name: `assets`,
-      },
+        name: `assets`
+      }
     },
     {
       resolve: `gatsby-transformer-remark`,
@@ -66,21 +66,21 @@ module.exports = {
             resolve: "gatsby-remark-embed-youtube",
             options: {
               width: 650,
-              height: 365,
-            },
+              height: 365
+            }
           },
           {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 700,
-              linkImagesToOriginal: false,
-            },
+              linkImagesToOriginal: false
+            }
           },
           {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
-            },
+              wrapperStyle: `margin-bottom: 1.0725rem`
+            }
           },
           {
             resolve: "gatsby-remark-custom-blocks",
@@ -88,28 +88,28 @@ module.exports = {
               blocks: {
                 s: {
                   classes: "simple",
-                  title: "optional",
+                  title: "optional"
                 },
                 i: {
                   classes: "info",
-                  title: "optional",
+                  title: "optional"
                 },
                 a: {
                   classes: "alert",
-                  title: "optional",
+                  title: "optional"
                 },
                 n: {
                   classes: "notice",
-                  title: "optional",
+                  title: "optional"
                 },
                 imageSmall: {
-                  classes: "image-small",
+                  classes: "image-small"
                 },
                 imageMedium: {
-                  classes: "image-medium",
-                },
-              },
-            },
+                  classes: "image-medium"
+                }
+              }
+            }
           },
           {
             resolve: `gatsby-remark-prismjs`,
@@ -117,13 +117,13 @@ module.exports = {
               classPrefix: "language-",
               inlineCodeMarker: null,
               aliases: {},
-              noInlineHighlight: false,
-            },
+              noInlineHighlight: false
+            }
           },
           `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
-        ],
-      },
+          `gatsby-remark-smartypants`
+        ]
+      }
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -136,14 +136,14 @@ module.exports = {
         background_color: `rgb(33, 36, 45)`,
         theme_color: `#0ce429`,
         display: `minimal-ui`,
-        icon: `content/assets/favicon.png`,
-      },
+        icon: `content/assets/favicon.png`
+      }
     },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "test",
-      },
+        trackingId: "test"
+      }
     },
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-twitter`,
@@ -168,13 +168,13 @@ module.exports = {
         `,
         feeds: [
           {
-            serialize: ({query: {site, allMarkdownRemark}}) => {
-              return allMarkdownRemark.edges.map((edge) => {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.edges.map(edge => {
                 return Object.assign({}, edge.node.frontmatter, {
                   description: edge.node.excerpt,
                   date: edge.node.frontmatter.date,
                   url: site.siteMetadata.siteUrl + edge.node.fields.slug,
-                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug
                 });
               });
             },
@@ -198,17 +198,17 @@ module.exports = {
               }
             `,
             output: "/rss.xml",
-            title: "ktnkk.com RSS feed",
-          },
-        ],
-      },
+            title: "ktnkk.com RSS feed"
+          }
+        ]
+      }
     },
     {
       resolve: `gatsby-plugin-nprogress`,
       options: {
         color: `#60e378`,
-        showSpinner: false,
-      },
-    },
-  ],
+        showSpinner: false
+      }
+    }
+  ]
 };

@@ -4,11 +4,11 @@ import svgTwitterWhite from "../svg/socials/twitter.svg";
 
 const Wrapper = styled.div`
   margin: 1.8rem 0 0;
-  padding: 0 ${(props) => props.theme.sideSpace.contentLarge};
+  padding: 0 ${props => props.theme.sideSpace.contentLarge};
   text-align: center;
   color: #c9d1d9;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-    padding: 0 ${(props) => props.theme.sideSpace.contentSmall};
+  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+    padding: 0 ${props => props.theme.sideSpace.contentSmall};
   }
 `;
 
@@ -30,7 +30,7 @@ const ShareLink = styled.a`
   line-height: 40px;
   border-radius: 50%;
   color: #c9d1d9;
-  background: ${(props) => props.theme.colors.blackLight};
+  background: ${props => props.theme.colors.blackLight};
   font-weight: 700;
   vertical-align: middle;
 
@@ -42,10 +42,10 @@ const GitHubLink = styled.a`
   display: inline-block;
   margin-top: 1em;
   font-size: 0.85em;
-  color: ${(props) => props.theme.colors.silver};
+  color: ${props => props.theme.colors.silver};
 `;
 
-const ShareButtons = ({slug, title, emoji}) => {
+const ShareButtons = ({ slug, title, emoji }) => {
   const encodedTitle = encodeURIComponent(
     `${emoji || "🐱"}${title} | KIKI BLOG`
   );
@@ -64,20 +64,20 @@ const ShareButtons = ({slug, title, emoji}) => {
             style={{
               width: "24px",
               height: "19px",
-              marginTop: "11px",
+              marginTop: "11px"
             }}
           />
         </ShareLink>
         <ShareLink
           href={`https://www.facebook.com/share.php?u=${pageUrl}`}
-          style={{fontSize: "20px"}}
+          style={{ fontSize: "20px" }}
           rel="nofollow"
         >
           f
         </ShareLink>
         <ShareLink
           href={`http://b.hatena.ne.jp/add?mode=confirm&url=${pageUrl}`}
-          style={{fontSize: "19px"}}
+          style={{ fontSize: "19px" }}
           rel="nofollow"
         >
           B!

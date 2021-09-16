@@ -1,6 +1,6 @@
 import React from "react";
-import {ThemeProvider} from "styled-components";
-import {Helmet} from "react-helmet";
+import { ThemeProvider } from "styled-components";
+import { Helmet } from "react-helmet";
 import GlobalStyle from "../styles/global";
 import theme from "../styles/theme";
 import Header from "../components/Header";
@@ -14,37 +14,37 @@ const Content = styled.div`
   min-height: 85vh;
   align-items: flex-start;
   justify-content: center;
-  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+  @media screen and (max-width: ${props => props.theme.responsive.large}) {
     display: block;
   }
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: ${props => props.theme.responsive.small}) {
     margin-top: 0.5rem;
   }
 `;
 
 const MainWrapper = styled.div`
-  width: calc(100% - ${(props) => props.theme.sizes.bioWidth} - 40px);
-  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+  width: calc(100% - ${props => props.theme.sizes.bioWidth} - 40px);
+  @media screen and (max-width: ${props => props.theme.responsive.large}) {
     width: 100%;
   }
 `;
 
 class Layout extends React.Component {
   render() {
-    const {location, title, children} = this.props;
+    const { location, title, children } = this.props;
 
     return (
       <ThemeProvider theme={theme}>
         <Helmet>
-          <link rel="preconnect" href="https://fonts.googleapis.com"/>
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
           <link
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
             rel="stylesheet"
           />
         </Helmet>
         <div className="siteRoot">
-          <Header title={title} location={location}/>
+          <Header title={title} location={location} />
           <ContentWrapper>
             <Content>
               <MainWrapper>
@@ -52,8 +52,8 @@ class Layout extends React.Component {
               </MainWrapper>
             </Content>
           </ContentWrapper>
-          <Footer/>
-          <GlobalStyle/>
+          <Footer />
+          <GlobalStyle />
         </div>
       </ThemeProvider>
     );

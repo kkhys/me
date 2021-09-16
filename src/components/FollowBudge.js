@@ -21,7 +21,7 @@ const ShareButtons = () => {
   return (
     <Follow>
       <FollowLink href="https://twitter.com/ktnkk_" rel="nofollow">
-        <img src={svgTwitterWhite} alt="Twitter" width={31} height={17}/>
+        <img src={svgTwitterWhite} alt="Twitter" width={31} height={17} />
         Follow @ktnkk_
       </FollowLink>
     </Follow>
