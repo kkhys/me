@@ -7,10 +7,7 @@ exports.createPages = ({ graphql, actions }) => {
   return graphql(
     `
       {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: DESC }
-          limit: 1000
-        ) {
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
           edges {
             node {
               fields {
@@ -60,9 +57,7 @@ exports.createPages = ({ graphql, actions }) => {
       let categoryPosts = posts.filter(post => {
         return post.node.frontmatter.category === category;
       });
-      allRelatedPosts[category] = categoryPosts
-        ? categoryPosts.slice(0, 5)
-        : [];
+      allRelatedPosts[category] = categoryPosts ? categoryPosts.slice(0, 5) : [];
     });
 
     // Create blog posts pages.

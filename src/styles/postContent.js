@@ -39,13 +39,7 @@ const postContentStyle = css`
       width: 5px;
       height: 100%;
       border-radius: 5px;
-      background: linear-gradient(
-        0deg,
-        #ffa649 0%,
-        #ffa649 50%,
-        #f7645b 50%,
-        #f7645b 100%
-      );
+      background: linear-gradient(0deg, #ffa649 0%, #ffa649 50%, #f7645b 50%, #f7645b 100%);
     }
   }
 

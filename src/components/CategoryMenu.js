@@ -119,30 +119,10 @@ const CategoryMenu = ({ location }) => {
     <Nav>
       <CategoryItemList>
         <CategoryLink catName="New" catIcon={svgNew} catLink="/" path={path} />
-        <CategoryLink
-          catName="Tech"
-          catIcon={svgDesign}
-          catLink="/t"
-          path={path}
-        />
-        <CategoryLink
-          catName="Fashion"
-          catIcon={svgDev}
-          catLink="/f"
-          path={path}
-        />
-        <CategoryLink
-          catName="Onsen"
-          catIcon={svgSelf}
-          catLink="/o"
-          path={path}
-        />
-        <CategoryLink
-          catName="Life"
-          catIcon={svgCollection}
-          catLink="/l"
-          path={path}
-        />
+        <CategoryLink catName="Tech" catIcon={svgDesign} catLink="/t" path={path} />
+        <CategoryLink catName="Fashion" catIcon={svgDev} catLink="/f" path={path} />
+        <CategoryLink catName="Onsen" catIcon={svgSelf} catLink="/o" path={path} />
+        <CategoryLink catName="Life" catIcon={svgCollection} catLink="/l" path={path} />
       </CategoryItemList>
     </Nav>
   );

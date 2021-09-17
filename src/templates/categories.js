@@ -32,10 +32,7 @@ class CategoryTemplate extends React.Component {
     return (
       <Layout location={this.props.location} title={categoryName}>
         <SEO title={categoryName} />
-        <CategoryJsonLd
-          categorySlug={categorySlug}
-          categoryName={categoryName}
-        />
+        <CategoryJsonLd categorySlug={categorySlug} categoryName={categoryName} />
         <CategoryMenu location={location} />
         <Heading>{categoryName}</Heading>
         {posts.map(({ node }) => {

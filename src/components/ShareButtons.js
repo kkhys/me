@@ -46,18 +46,13 @@ const GitHubLink = styled.a`
 `;
 
 const ShareButtons = ({ slug, title, emoji }) => {
-  const encodedTitle = encodeURIComponent(
-    `${emoji || "🐱"}${title} | KIKI BLOG`
-  );
+  const encodedTitle = encodeURIComponent(`${emoji || "🐱"}${title} | KIKI BLOG`);
   const pageUrl = `https://ktnkk.com${slug}`;
   return (
     <Wrapper>
       <ShareTitle>SHARE</ShareTitle>
       <ShareLinks>
-        <ShareLink
-          href={`https://twitter.com/share?url=${pageUrl}&text=${encodedTitle}&via=ktnkk_`}
-          rel="nofollow"
-        >
+        <ShareLink href={`https://twitter.com/share?url=${pageUrl}&text=${encodedTitle}&via=ktnkk_`} rel="nofollow">
           <img
             src={svgTwitterWhite}
             alt="Twitter"
@@ -68,11 +63,7 @@ const ShareButtons = ({ slug, title, emoji }) => {
             }}
           />
         </ShareLink>
-        <ShareLink
-          href={`https://www.facebook.com/share.php?u=${pageUrl}`}
-          style={{ fontSize: "20px" }}
-          rel="nofollow"
-        >
+        <ShareLink href={`https://www.facebook.com/share.php?u=${pageUrl}`} style={{ fontSize: "20px" }} rel="nofollow">
           f
         </ShareLink>
         <ShareLink
@@ -83,10 +74,7 @@ const ShareButtons = ({ slug, title, emoji }) => {
           B!
         </ShareLink>
       </ShareLinks>
-      <GitHubLink
-        href={`https://github.com/ktnkk/blog/edit/main/content/blog${slug}index.md`}
-        rel="nofollow"
-      >
+      <GitHubLink href={`https://github.com/ktnkk/blog/edit/main/content/blog${slug}index.md`} rel="nofollow">
         Edit on GitHub
       </GitHubLink>
     </Wrapper>

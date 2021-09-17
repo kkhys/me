@@ -90,10 +90,7 @@ class BlogPostTemplate extends React.Component {
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title={title} description={description || post.excerpt} />
         <Helmet>
-          <link
-            rel="canonical"
-            href={`https://ktnkk.com${this.props.location.pathname}`}
-          />
+          <link rel="canonical" href={`https://ktnkk.com${this.props.location.pathname}`} />
         </Helmet>
         <PostJsonLd
           title={title}

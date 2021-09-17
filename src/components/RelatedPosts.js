@@ -96,9 +96,7 @@ const RelatedPosts = ({ posts }) => {
   let content = [];
 
   posts.forEach(post => {
-    content.push(
-      <RelatedPostCard key={post.node.fields.slug} node={post.node} />
-    );
+    content.push(<RelatedPostCard key={post.node.fields.slug} node={post.node} />);
   });
   return <Wrapper>{content}</Wrapper>;
 };

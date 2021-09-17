@@ -172,8 +172,7 @@ const SyntaxHighlightStyle = css`
     height: 24px;
     padding: 0 8px;
     line-height: 22px;
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono,
-      Courier New, monospace;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
     font-weight: 700;
     border-radius: 0 4px;
     display: table;

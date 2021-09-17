@@ -8,8 +8,7 @@ const SEO = ({ description, lang, meta, title }) => {
     <StaticQuery
       query={detailsQuery}
       render={data => {
-        const metaDescription =
-          description || data.site.siteMetadata.description;
+        const metaDescription = description || data.site.siteMetadata.description;
         const defaultTitle = "KIKI BLOG";
         return (
           <Helmet

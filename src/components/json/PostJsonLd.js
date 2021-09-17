@@ -44,9 +44,7 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }) => {
         const categoryObject = categories.find(cat => {
           return cat.slug === categorySlug;
         });
-        const categoryName = categoryObject
-          ? categoryObject.name
-          : categorySlug;
+        const categoryName = categoryObject ? categoryObject.name : categorySlug;
 
         const jsonBreadCrumbs = {
           "@context": "http://schema.org",
@@ -81,9 +79,7 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }) => {
         return (
           <Helmet>
             <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-            <script type="application/ld+json">
-              {JSON.stringify(jsonBreadCrumbs)}
-            </script>
+            <script type="application/ld+json">{JSON.stringify(jsonBreadCrumbs)}</script>
           </Helmet>
         );
       }}

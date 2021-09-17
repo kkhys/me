@@ -30,12 +30,8 @@ const categoryLabel = ({ slug, isLink }) => {
         });
         const categoryName = categoryObject ? categoryObject.name : slug;
         const categoryColor = categoryObject ? categoryObject.color : "#6d4bf5";
-        const categoryBorderColor = categoryObject
-          ? categoryObject.borderColor
-          : "#fff";
-        const categoryBackground = categoryObject
-          ? categoryObject.background
-          : "#6d4bf5";
+        const categoryBorderColor = categoryObject ? categoryObject.borderColor : "#fff";
+        const categoryBackground = categoryObject ? categoryObject.background : "#6d4bf5";
         const content = isLink ? (
           <Link
             to={`/${slug}`}

@@ -33,9 +33,7 @@ const CategoryJsonLD = ({ categorySlug, categoryName }) => {
         };
         return (
           <Helmet>
-            <script type="application/ld+json">
-              {JSON.stringify(jsonBreadCrumbs)}
-            </script>
+            <script type="application/ld+json">{JSON.stringify(jsonBreadCrumbs)}</script>
           </Helmet>
         );
       }}

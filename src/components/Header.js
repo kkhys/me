@@ -51,13 +51,7 @@ const Header = ({ title, location }) => {
         <HeaderInner>
           <HeadingLevel>
             <Link to={`/`} className="logo-link">
-              <img
-                className="logo"
-                src={svgLogo}
-                alt={title}
-                width={165}
-                height={37}
-              />
+              <img className="logo" src={svgLogo} alt={title} width={165} height={37} />
             </Link>
           </HeadingLevel>
         </HeaderInner>
