@@ -199,6 +199,7 @@ const SyntaxHighlightStyle = css`
     border-radius: 3px;
     line-height: 1.4;
     color: #c9d1d9 !important;
+    text-indent: 0;
   }
 `;
 
