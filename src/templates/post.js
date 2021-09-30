@@ -10,7 +10,6 @@ import CategoryLabel from "../components/CategoryLabel";
 import PostJsonLd from "../components/json/PostJsonLd";
 import RelatedPosts from "../components/RelatedPosts";
 import ShareButtons from "../components/ShareButtons";
-import FollowBudge from "../components/FollowBudge";
 
 import postSyntaxHighlightStyle from "../styles/postSyntaxHighlight";
 import postContentStyle from "../styles/postContent";
@@ -113,7 +112,6 @@ class BlogPostTemplate extends React.Component {
             <PostTitle>{title}</PostTitle>
             <CategoryLabel slug={category} isLink="true" />
             <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
-            <FollowBudge />
             <ShareButtons slug={slug} title={title} emoji={emoji} />
           </ContentMain>
           <aside>
