@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import svgTwitterWhite from "../svg/socials/twitter.svg";
+import { graphql } from "gatsby";
 
 const Wrapper = styled.div`
   margin: 1.8rem 0 0;
@@ -45,14 +46,21 @@ const GitHubLink = styled.a`
   color: ${props => props.theme.colors.silver};
 `;
 
-const ShareButtons = ({ slug, title, emoji }) => {
-  const encodedTitle = encodeURIComponent(`${emoji || "🐱"}${title} | KIKI BLOG`);
+const ShareButtons = ({ slug, title, emoji, category }) => {
+  const encodedTitle = encodeURIComponent(`${emoji || "🦇"}${title} | KIKI BLOG`);
   const pageUrl = `https://ktnkk.com${slug}`;
+  const categoryName = category.toLowerCase();
+  const submodule = `blog.${categoryName}`;
+  const date = slug.replace(`/${categoryName}`, "");
   return (
     <Wrapper>
       <ShareTitle>SHARE</ShareTitle>
       <ShareLinks>
-        <ShareLink href={`https://twitter.com/share?url=${pageUrl}&text=${encodedTitle}&via=ktnkk_`} rel="nofollow">
+        <ShareLink
+          href={`https://twitter.com/share?url=${pageUrl}&text=${encodedTitle}&via=ktnkk_`}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+        >
           <img
             src={svgTwitterWhite}
             alt="Twitter"
@@ -63,18 +71,28 @@ const ShareButtons = ({ slug, title, emoji }) => {
             }}
           />
         </ShareLink>
-        <ShareLink href={`https://www.facebook.com/share.php?u=${pageUrl}`} style={{ fontSize: "20px" }} rel="nofollow">
+        <ShareLink
+          href={`https://www.facebook.com/share.php?u=${pageUrl}`}
+          style={{ fontSize: "20px" }}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+        >
           f
         </ShareLink>
         <ShareLink
-          href={`http://b.hatena.ne.jp/add?mode=confirm&url=${pageUrl}`}
+          href={`https://b.hatena.ne.jp/add?mode=confirm&url=${pageUrl}`}
           style={{ fontSize: "19px" }}
-          rel="nofollow"
+          target="_blank"
+          rel="noopener noreferrer nofollow"
         >
           B!
         </ShareLink>
       </ShareLinks>
-      <GitHubLink href={`https://github.com/ktnkk/blog/edit/main/content/blog${slug}index.md`} rel="nofollow">
+      <GitHubLink
+        href={`https://github.com/ktnkk/${submodule}/edit/main${date}index.md`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Edit on GitHub
       </GitHubLink>
     </Wrapper>

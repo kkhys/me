@@ -26,7 +26,7 @@ const Footer = () => {
       <ContentWrapper>
         <FooterInner>
           <div>
-            <a href="https://github.com/ktnkk/blog" rel="nofollow">
+            <a href="https://github.com/ktnkk/blog" target="_blank" rel="noopener noreferrer">
               SourceCode
             </a>
           </div>

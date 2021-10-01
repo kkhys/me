@@ -83,8 +83,13 @@ class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark;
     const siteTitle = this.props.data.site.siteMetadata.title;
+    const siteCategory = this.props.data.site.siteMetadata.categories;
     const { relatedPosts, slug } = this.props.pageContext;
     const { title, description, date, category, emoji } = post.frontmatter;
+    const categoryObject = siteCategory.find(cat => {
+      return cat.slug === category;
+    });
+    const categoryName = categoryObject ? categoryObject.name : slug;
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title={title} description={description || post.excerpt} />
@@ -112,7 +117,7 @@ class BlogPostTemplate extends React.Component {
             <PostTitle>{title}</PostTitle>
             <CategoryLabel slug={category} isLink="true" />
             <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
-            <ShareButtons slug={slug} title={title} emoji={emoji} />
+            <ShareButtons slug={slug} title={title} emoji={emoji} category={categoryName} />
           </ContentMain>
           <aside>
             <RelatedPosts posts={relatedPosts} />
@@ -131,6 +136,10 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+        categories {
+          name
+          slug
+        }
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
