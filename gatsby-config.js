@@ -130,8 +130,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `KIKI BLOG`,
-        short_name: `Kiki blog`,
+        name: `ktnkk.log`,
+        short_name: `ktnkk`,
         start_url: `/`,
         background_color: `rgb(33, 36, 45)`,
         theme_color: `#0ce429`,

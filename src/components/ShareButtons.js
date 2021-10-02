@@ -47,7 +47,7 @@ const GitHubLink = styled.a`
 `;
 
 const ShareButtons = ({ slug, title, emoji, category }) => {
-  const encodedTitle = encodeURIComponent(`${emoji || "🦇"}${title} | KIKI BLOG`);
+  const encodedTitle = encodeURIComponent(`${emoji || "🦇"}${title} | ktnkk.log`);
   const pageUrl = `https://ktnkk.com${slug}`;
   const categoryName = category.toLowerCase();
   const submodule = `blog.${categoryName}`;

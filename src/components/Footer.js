@@ -30,7 +30,7 @@ const Footer = () => {
               SourceCode
             </a>
           </div>
-          <div>© {new Date().getFullYear()}, KIKI</div>
+          <div>© {new Date().getFullYear()}, ktnkk.log</div>
         </FooterInner>
       </ContentWrapper>
     </FooterContent>

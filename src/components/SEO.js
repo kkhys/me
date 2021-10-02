@@ -9,7 +9,7 @@ const SEO = ({ description, lang, meta, title }) => {
       query={detailsQuery}
       render={data => {
         const metaDescription = description || data.site.siteMetadata.description;
-        const defaultTitle = "KIKI BLOG";
+        const defaultTitle = "ktnkk.log";
         return (
           <Helmet
             htmlAttributes={{
