@@ -86,6 +86,7 @@ class BlogPostTemplate extends React.Component {
     const siteCategory = this.props.data.site.siteMetadata.categories;
     const { relatedPosts, slug } = this.props.pageContext;
     const { title, description, date, category, emoji } = post.frontmatter;
+    const pageSlug = post.frontmatter.slug;
     const categoryObject = siteCategory.find(cat => {
       return cat.slug === category;
     });
@@ -117,7 +118,7 @@ class BlogPostTemplate extends React.Component {
             <PostTitle>{title}</PostTitle>
             <CategoryLabel slug={category} isLink="true" />
             <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
-            <ShareButtons slug={slug} title={title} emoji={emoji} category={categoryName} />
+            <ShareButtons slug={slug} title={title} emoji={emoji} category={categoryName} pageSlug={pageSlug} />
           </ContentMain>
           <aside>
             <RelatedPosts posts={relatedPosts} />
@@ -152,6 +153,7 @@ export const pageQuery = graphql`
         date(formatString: "YYYY.MM.DD")
         emoji
         category
+        slug
       }
     }
   }

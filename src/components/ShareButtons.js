@@ -46,9 +46,9 @@ const GitHubLink = styled.a`
   color: ${props => props.theme.colors.silver};
 `;
 
-const ShareButtons = ({ slug, title, emoji, category }) => {
+const ShareButtons = ({ slug, title, emoji, category, pageSlug }) => {
   const encodedTitle = encodeURIComponent(`${emoji || "🦇"}${title} | ktnkk.log`);
-  const pageUrl = `https://ktnkk.com${slug}`;
+  const pageUrl = `https://ktnkk.com/${pageSlug}`;
   const categoryName = category.toLowerCase();
   const submodule = `blog.${categoryName}`;
   const date = slug.replace(`/${categoryName}`, "");
