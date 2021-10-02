@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `KIKI BLOG`,
+    title: `ktnkk.log`,
     author: `Keiten Kiki`,
     description: ``,
     siteUrl: `https://ktnkk.com/`,
