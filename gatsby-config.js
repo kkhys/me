@@ -131,11 +131,11 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `ktnkk.log`,
-        short_name: `ktnkk`,
+        short_name: `ktnkk.log`,
         start_url: `/`,
-        background_color: `rgb(33, 36, 45)`,
-        theme_color: `#0ce429`,
-        display: `minimal-ui`,
+        background_color: `#0d1117`,
+        theme_color: `#313746`,
+        display: `fullscreen`,
         icon: `content/assets/favicon.png`
       }
     },
