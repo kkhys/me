@@ -14,7 +14,6 @@ const SyntaxHighlightStyle = css`
   pre[class*="language-"] {
     hyphens: none;
     white-space: pre;
-    white-space: pre-wrap;
     word-wrap: normal;
     font-family: Menlo, Monaco, "Courier New", monospace;
     font-size: 14.5px;
@@ -29,6 +28,7 @@ const SyntaxHighlightStyle = css`
     border: 1px solid #444c56;
     @media screen and (max-width: ${props => props.theme.responsive.small}) {
       border-radius: 0;
+      border: 0;
     }
   }
 
@@ -181,6 +181,7 @@ const SyntaxHighlightStyle = css`
     @media screen and (max-width: ${props => props.theme.responsive.small}) {
       border-radius: 0;
       margin-right: -${props => props.theme.sideSpace.contentSmall};
+      border: 0;
     }
   }
 
