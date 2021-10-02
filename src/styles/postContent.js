@@ -1,5 +1,4 @@
 import { css } from "styled-components";
-import svgHeadingIcon from "../svg/others/heading-icon.svg";
 
 const postContentStyle = css`
   margin: 1.5em 0 1em;
@@ -39,7 +38,7 @@ const postContentStyle = css`
       width: 5px;
       height: 100%;
       border-radius: 5px;
-      background: linear-gradient(0deg, #ffa649 0%, #ffa649 50%, #f7645b 50%, #f7645b 100%);
+      background-image: linear-gradient(0deg, #00cdac 0%, #8ddad5 100%);
     }
   }
 
@@ -49,22 +48,8 @@ const postContentStyle = css`
   }
 
   h4 {
-    position: relative;
-    padding-left: 18px;
+    margin: 55px 0 12px;
     font-size: 1.1em;
-
-    &:before {
-      position: absolute;
-      top: 0.2em;
-      left: 0;
-      content: "";
-      display: inline-block;
-      width: 14px;
-      height: 19px;
-      background-image: url("${svgHeadingIcon}");
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
   }
 
   ul,

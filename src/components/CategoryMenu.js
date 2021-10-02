@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 import svgNew from "../svg/categories/new.svg";
-import svgDesign from "../svg/categories/design.svg";
-import svgDev from "../svg/categories/dev.svg";
-import svgCollection from "../svg/categories/collection.svg";
-import svgSelf from "../svg/categories/self.svg";
+import svgFashion from "../svg/categories/fashion.svg";
+import svgTech from "../svg/categories/tech.svg";
+import svgLife from "../svg/categories/life.svg";
+import svgOnsen from "../svg/categories/onsen.svg";
 
 const Nav = styled.nav`
   display: block;
@@ -119,10 +119,10 @@ const CategoryMenu = ({ location }) => {
     <Nav>
       <CategoryItemList>
         <CategoryLink catName="New" catIcon={svgNew} catLink="/" path={path} />
-        <CategoryLink catName="Tech" catIcon={svgDesign} catLink="/t" path={path} />
-        <CategoryLink catName="Fashion" catIcon={svgDev} catLink="/f" path={path} />
-        <CategoryLink catName="Onsen" catIcon={svgSelf} catLink="/o" path={path} />
-        <CategoryLink catName="Life" catIcon={svgCollection} catLink="/l" path={path} />
+        <CategoryLink catName="Tech" catIcon={svgTech} catLink="/t" path={path} />
+        <CategoryLink catName="Fashion" catIcon={svgFashion} catLink="/f" path={path} />
+        <CategoryLink catName="Onsen" catIcon={svgOnsen} catLink="/o" path={path} />
+        <CategoryLink catName="Life" catIcon={svgLife} catLink="/l" path={path} />
       </CategoryItemList>
     </Nav>
   );
