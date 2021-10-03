@@ -1,12 +1,11 @@
 version: 2
-schedule: &schedule
-  timezone: "Asia/Tokyo"
-  interval: "daily"
-  time: "03:00"
 updates:
   - package-ecosystem: "npm"
     directory: "/"
-    schedule: *schedule
+    schedule:
+      timezone: "Asia/Tokyo"
+      interval: "daily"
+      time: "03:00"
     target-branch: "dev"
     allow:
       - dependency-type: "all"
@@ -25,7 +24,10 @@ updates:
     rebase-strategy: "auto"
   - package-ecosystem: "docker"
     directory: "/"
-    schedule: *schedule
+    schedule:
+      timezone: "Asia/Tokyo"
+      interval: "daily"
+      time: "03:00"
     target-branch: "dev"
     allow:
       - dependency-type: "all"
