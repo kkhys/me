@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { graphql, Link } from "gatsby";
 import styled from "styled-components";
 
@@ -6,6 +6,23 @@ import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 
 import svg404 from "../svg/others/404.svg";
+
+const NotFoundPage = ({ data, location }) => {
+  const siteTitle = data.site.siteMetadata.title;
+
+  return (
+    <Layout location={location} title={siteTitle}>
+      <Wrapper>
+        <SEO title="ページが見つかりません" />
+        <HeroImage src={svg404} />
+        <Title>Not Found</Title>
+        <StyledLink to={`/`} className="cat-item__link">
+          HOME
+        </StyledLink>
+      </Wrapper>
+    </Layout>
+  );
+};
 
 const Wrapper = styled.div`
   color: #fff;
@@ -42,28 +59,6 @@ const StyledLink = styled(Link)`
   }
 `;
 
-class NotFoundPage extends React.Component {
-  render() {
-    const { data } = this.props;
-    const siteTitle = data.site.siteMetadata.title;
-
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <Wrapper>
-          <SEO title="ページが見つかりません" />
-          <HeroImage src={svg404} />
-          <Title>Not Found</Title>
-          <StyledLink to={`/`} className="cat-item__link">
-            HOME
-          </StyledLink>
-        </Wrapper>
-      </Layout>
-    );
-  }
-}
-
-export default NotFoundPage;
-
 export const pageQuery = graphql`
   query {
     site {
@@ -73,3 +68,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default NotFoundPage;

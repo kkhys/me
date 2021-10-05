@@ -1,6 +1,23 @@
-import React from "react";
+import * as React from "react";
 import styled from "styled-components";
 import ContentWrapper from "../components/ContentWrapper";
+
+const Footer = () => {
+  return (
+    <FooterContent>
+      <ContentWrapper>
+        <FooterInner>
+          <div>
+            <a href="https://github.com/ktnkk/blog" target="_blank" rel="noopener noreferrer">
+              SourceCode
+            </a>
+          </div>
+          <div>© {new Date().getFullYear()}, ktnkk.log</div>
+        </FooterInner>
+      </ContentWrapper>
+    </FooterContent>
+  );
+};
 
 const FooterContent = styled.footer`
   padding: 0.1em 0;
@@ -19,22 +36,5 @@ const FooterInner = styled.div`
     text-decoration: underline;
   }
 `;
-
-const Footer = () => {
-  return (
-    <FooterContent>
-      <ContentWrapper>
-        <FooterInner>
-          <div>
-            <a href="https://github.com/ktnkk/blog" target="_blank" rel="noopener noreferrer">
-              SourceCode
-            </a>
-          </div>
-          <div>© {new Date().getFullYear()}, ktnkk.log</div>
-        </FooterInner>
-      </ContentWrapper>
-    </FooterContent>
-  );
-};
 
 export default Footer;

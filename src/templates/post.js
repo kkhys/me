@@ -17,6 +17,55 @@ import postCustomBlockStyle from "../styles/postCustomBlock";
 
 require(`katex/dist/katex.min.css`);
 
+const BlogPostTemplate = ({ data, pageContext, location }) => {
+  const post = data.markdownRemark;
+  const siteTitle = data.site.siteMetadata.title;
+  const siteCategory = data.site.siteMetadata.categories;
+  const { relatedPosts, slug } = pageContext;
+  const { title, description, date, category, emoji } = post.frontmatter;
+  const pageSlug = post.frontmatter.slug;
+  const categoryObject = siteCategory.find(cat => {
+    return cat.slug === category;
+  });
+  const categoryName = categoryObject ? categoryObject.name : slug;
+
+  return (
+    <Layout location={location} title={siteTitle}>
+      <SEO title={title} description={description || post.excerpt} />
+      <Helmet>
+        <link rel="canonical" href={`https://ktnkk.com${location.pathname}`} />
+      </Helmet>
+      <PostJsonLd
+        title={title}
+        description={description || post.excerpt}
+        date={date}
+        url={location.href}
+        categorySlug={category}
+      />
+      <Content>
+        <HeroImage
+          dangerouslySetInnerHTML={{
+            __html: twemoji.parse(emoji || "🐙", {
+              folder: "svg",
+              ext: ".svg"
+            })
+          }}
+        />
+        <ContentMain>
+          <PostDate>{date}</PostDate>
+          <PostTitle>{title}</PostTitle>
+          <CategoryLabel slug={category} isLink="true" />
+          <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
+          <ShareButtons slug={slug} title={title} emoji={emoji} category={categoryName} pageSlug={pageSlug} />
+        </ContentMain>
+        <aside>
+          <RelatedPosts posts={relatedPosts} />
+        </aside>
+      </Content>
+    </Layout>
+  );
+};
+
 const Content = styled.section`
   position: relative;
   overflow: hidden;
@@ -79,58 +128,6 @@ const PostContent = styled.div`
   ${postCustomBlockStyle}
 `;
 
-class BlogPostTemplate extends React.Component {
-  render() {
-    const post = this.props.data.markdownRemark;
-    const siteTitle = this.props.data.site.siteMetadata.title;
-    const siteCategory = this.props.data.site.siteMetadata.categories;
-    const { relatedPosts, slug } = this.props.pageContext;
-    const { title, description, date, category, emoji } = post.frontmatter;
-    const pageSlug = post.frontmatter.slug;
-    const categoryObject = siteCategory.find(cat => {
-      return cat.slug === category;
-    });
-    const categoryName = categoryObject ? categoryObject.name : slug;
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <SEO title={title} description={description || post.excerpt} />
-        <Helmet>
-          <link rel="canonical" href={`https://ktnkk.com${this.props.location.pathname}`} />
-        </Helmet>
-        <PostJsonLd
-          title={title}
-          description={description || post.excerpt}
-          date={date}
-          url={this.props.location.href}
-          categorySlug={category}
-        />
-        <Content>
-          <HeroImage
-            dangerouslySetInnerHTML={{
-              __html: twemoji.parse(emoji || "🐙", {
-                folder: "svg",
-                ext: ".svg"
-              })
-            }}
-          />
-          <ContentMain>
-            <PostDate>{date}</PostDate>
-            <PostTitle>{title}</PostTitle>
-            <CategoryLabel slug={category} isLink="true" />
-            <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
-            <ShareButtons slug={slug} title={title} emoji={emoji} category={categoryName} pageSlug={pageSlug} />
-          </ContentMain>
-          <aside>
-            <RelatedPosts posts={relatedPosts} />
-          </aside>
-        </Content>
-      </Layout>
-    );
-  }
-}
-
-export default BlogPostTemplate;
-
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     site {
@@ -158,3 +155,5 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export default BlogPostTemplate;

@@ -1,8 +1,27 @@
-import React from "react";
+import * as React from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import ContentWrapper from "../components/ContentWrapper";
 import svgLogo from "../svg/logo.svg";
+
+const Header = ({ title, location }) => {
+  const rootPath = `${__PATH_PREFIX__}/`;
+  const HeadingLevel = location.pathname === rootPath ? "h1" : "h3";
+
+  return (
+    <HeaderTag>
+      <ContentWrapper>
+        <HeaderInner>
+          <HeadingLevel>
+            <Link to={`/`} className="logo-link">
+              <img className="logo" src={svgLogo} alt={title} width={165} height={37} />
+            </Link>
+          </HeadingLevel>
+        </HeaderInner>
+      </ContentWrapper>
+    </HeaderTag>
+  );
+};
 
 const HeaderTag = styled.header`
   padding: 1.4rem 0;
@@ -40,24 +59,5 @@ const HeaderInner = styled.div`
     }
   }
 `;
-
-const Header = ({ title, location }) => {
-  const rootPath = `${__PATH_PREFIX__}/`;
-  const HeadingLevel = location.pathname === rootPath ? "h1" : "h3";
-
-  return (
-    <HeaderTag>
-      <ContentWrapper>
-        <HeaderInner>
-          <HeadingLevel>
-            <Link to={`/`} className="logo-link">
-              <img className="logo" src={svgLogo} alt={title} width={165} height={37} />
-            </Link>
-          </HeadingLevel>
-        </HeaderInner>
-      </ContentWrapper>
-    </HeaderTag>
-  );
-};
 
 export default Header;
