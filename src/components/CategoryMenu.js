@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 import svgNew from "../svg/categories/new.svg";
@@ -6,6 +6,34 @@ import svgFashion from "../svg/categories/fashion.svg";
 import svgTech from "../svg/categories/tech.svg";
 import svgLife from "../svg/categories/life.svg";
 import svgOnsen from "../svg/categories/onsen.svg";
+
+const CategoryLink = ({ catName, catIcon, catLink, path }) => {
+  return (
+    <CategoryItem className={catLink === path && "active"}>
+      <Link to={catLink} className="cat-item__link">
+        <div className="cat-item__image">
+          <img src={catIcon} alt={catName} />
+        </div>
+        <div className="cat-item__name">{catName}</div>
+      </Link>
+    </CategoryItem>
+  );
+};
+
+const CategoryMenu = ({ location }) => {
+  const path = location.pathname;
+  return (
+    <Nav>
+      <CategoryItemList>
+        <CategoryLink catName="New" catIcon={svgNew} catLink="/" path={path} />
+        <CategoryLink catName="Tech" catIcon={svgTech} catLink="/t" path={path} />
+        <CategoryLink catName="Fashion" catIcon={svgFashion} catLink="/f" path={path} />
+        <CategoryLink catName="Onsen" catIcon={svgOnsen} catLink="/o" path={path} />
+        <CategoryLink catName="Life" catIcon={svgLife} catLink="/l" path={path} />
+      </CategoryItemList>
+    </Nav>
+  );
+};
 
 const Nav = styled.nav`
   display: block;
@@ -99,33 +127,5 @@ const CategoryItem = styled.li`
     }
   }
 `;
-
-const CategoryLink = ({ catName, catIcon, catLink, path }) => {
-  return (
-    <CategoryItem className={catLink === path && "active"}>
-      <Link to={catLink} className="cat-item__link">
-        <div className="cat-item__image">
-          <img src={catIcon} alt={catName} />
-        </div>
-        <div className="cat-item__name">{catName}</div>
-      </Link>
-    </CategoryItem>
-  );
-};
-
-const CategoryMenu = ({ location }) => {
-  const path = location.pathname;
-  return (
-    <Nav>
-      <CategoryItemList>
-        <CategoryLink catName="New" catIcon={svgNew} catLink="/" path={path} />
-        <CategoryLink catName="Tech" catIcon={svgTech} catLink="/t" path={path} />
-        <CategoryLink catName="Fashion" catIcon={svgFashion} catLink="/f" path={path} />
-        <CategoryLink catName="Onsen" catIcon={svgOnsen} catLink="/o" path={path} />
-        <CategoryLink catName="Life" catIcon={svgLife} catLink="/l" path={path} />
-      </CategoryItemList>
-    </Nav>
-  );
-};
 
 export default CategoryMenu;

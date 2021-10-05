@@ -1,8 +1,29 @@
-import React from "react";
+import * as React from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import twemoji from "twemoji";
 import CategoryLabel from "../components/CategoryLabel";
+
+const PostCard = ({ node }) => {
+  const title = node.frontmatter.title || node.fields.slug;
+  const emoji = twemoji.parse(node.frontmatter.emoji || "🐙", {
+    folder: "svg",
+    ext: ".svg"
+  });
+
+  return (
+    <PostCardWrapper>
+      <Link to={`/` + node.frontmatter.slug} className="post-card-link">
+        <PostCardEmoji dangerouslySetInnerHTML={{ __html: emoji }} />
+        <PostCardContent>
+          <h3>{title}</h3>
+          <time>{node.frontmatter.date}</time>
+          <CategoryLabel slug={node.frontmatter.category} />
+        </PostCardContent>
+      </Link>
+    </PostCardWrapper>
+  );
+};
 
 const PostCardWrapper = styled.div`
   .post-card-link {
@@ -71,26 +92,5 @@ const PostCardContent = styled.div`
     }
   }
 `;
-
-const PostCard = ({ node }) => {
-  const title = node.frontmatter.title || node.fields.slug;
-  const emoji = twemoji.parse(node.frontmatter.emoji || "🐙", {
-    folder: "svg",
-    ext: ".svg"
-  });
-
-  return (
-    <PostCardWrapper>
-      <Link to={`/` + node.frontmatter.slug} className="post-card-link">
-        <PostCardEmoji dangerouslySetInnerHTML={{ __html: emoji }} />
-        <PostCardContent>
-          <h3>{title}</h3>
-          <time>{node.frontmatter.date}</time>
-          <CategoryLabel slug={node.frontmatter.category} />
-        </PostCardContent>
-      </Link>
-    </PostCardWrapper>
-  );
-};
 
 export default PostCard;

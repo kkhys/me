@@ -1,5 +1,9 @@
-import React from "react";
+import * as React from "react";
 import styled from "styled-components";
+
+const ContentWrapper = ({ children }) => {
+  return <IndexContent>{children}</IndexContent>;
+};
 
 const IndexContent = styled.div`
   max-width: ${props => props.theme.sizes.maxWidth};
@@ -12,9 +16,5 @@ const IndexContent = styled.div`
     padding: 0 ${props => props.theme.sideSpace.small};
   }
 `;
-
-const ContentWrapper = ({ children }) => {
-  return <IndexContent>{children}</IndexContent>;
-};
 
 export default ContentWrapper;
