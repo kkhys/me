@@ -60,7 +60,7 @@ const StyledLink = styled(Link)`
 `;
 
 export const pageQuery = graphql`
-  query {
+  query NotFoundQuery {
     site {
       siteMetadata {
         title

@@ -63,7 +63,7 @@ const Wrapper = styled.div`
 `;
 
 const categoryQuery = graphql`
-  query categoryQuery {
+  query CategoryQuery {
     site {
       siteMetadata {
         categories {

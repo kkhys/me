@@ -35,7 +35,7 @@ const PostsContainer = styled.div`
 `;
 
 export const pageQuery = graphql`
-  query {
+  query BlogIndexQuery {
     site {
       siteMetadata {
         title

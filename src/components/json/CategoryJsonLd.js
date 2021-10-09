@@ -44,7 +44,7 @@ const CategoryJsonLD = ({ categorySlug, categoryName }) => {
 export default CategoryJsonLD;
 
 const jsonLdCategoryQuery = graphql`
-  query jsonLdCategoryQuery {
+  query JsonLdCategoryQuery {
     site {
       siteMetadata {
         siteUrl
