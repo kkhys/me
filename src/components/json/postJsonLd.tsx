@@ -38,7 +38,7 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }) => {
     image: `${siteUrl}/images/avatar.png`
   };
   const jsonLd = {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: title,
     image: `${siteUrl}/images/ogp.png`,
@@ -56,7 +56,7 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }) => {
   });
   const categoryName = categoryObject ? categoryObject.name : categorySlug;
   const jsonBreadCrumbs = {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       {

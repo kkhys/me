@@ -17,7 +17,7 @@ const CategoryJsonLD = ({ categorySlug, categoryName }) => {
 
   const { siteUrl } = site.siteMetadata;
   const jsonBreadCrumbs = {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       {

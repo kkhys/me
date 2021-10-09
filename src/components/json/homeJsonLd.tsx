@@ -30,7 +30,7 @@ const JsonLD = () => {
     }
   };
   const jsonLd = {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "WebSite",
     image: {
       "@type": "ImageObject",
