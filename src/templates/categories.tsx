@@ -1,10 +1,10 @@
 import * as React from "react";
 import { graphql } from "gatsby";
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
-import PostCard from "../components/PostCard";
-import CategoryMenu from "../components/CategoryMenu";
-import CategoryJsonLd from "../components/json/CategoryJsonLd";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import PostCard from "../components/postCard";
+import CategoryMenu from "../components/categoryMenu";
+import CategoryJsonLd from "../components/json/categoryJsonLd";
 import styled from "styled-components";
 
 const CategoryTemplate = ({ data, pageContext, location }) => {
@@ -37,8 +37,10 @@ const Heading = styled.h1`
   letter-spacing: 1px;
 `;
 
+export default CategoryTemplate;
+
 export const pageQuery = graphql`
-  query BlogPostByCategory($category: String) {
+  query CategoryTemplate($category: String) {
     site {
       siteMetadata {
         categories {
@@ -70,5 +72,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default CategoryTemplate;

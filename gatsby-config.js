@@ -209,6 +209,12 @@ module.exports = {
         color: `#60e378`,
         showSpinner: false
       }
+    },
+    {
+      resolve: `gatsby-plugin-typegen`,
+      options: {
+        outputPath: `types/gatsby-types.d.ts`
+      }
     }
   ]
 };

@@ -3,13 +3,13 @@ import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
-import PostCard from "../components/PostCard";
-import CategoryMenu from "../components/CategoryMenu";
-import HomeJsonLd from "../components/json/HomeJsonLd";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import PostCard from "../components/postCard";
+import CategoryMenu from "../components/categoryMenu";
+import HomeJsonLd from "../components/json/homeJsonLd";
 
-const BlogIndex = ({ data, location }) => {
+const Index = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title;
   const posts = data.allMarkdownRemark.edges;
 
@@ -34,8 +34,10 @@ const PostsContainer = styled.div`
   margin-top: 1.5rem;
 `;
 
+export default Index;
+
 export const pageQuery = graphql`
-  query {
+  query Index {
     site {
       siteMetadata {
         title
@@ -59,5 +61,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default BlogIndex;

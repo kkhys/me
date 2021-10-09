@@ -21,6 +21,7 @@
     "gatsby-plugin-sitemap": "^4.10.0",
     "gatsby-plugin-styled-components": "^4.14.0",
     "gatsby-plugin-twitter": "^3.14.0",
+    "gatsby-plugin-typegen": "^2.2.4",
     "gatsby-remark-autolink-headers": "^4.11.0",
     "gatsby-remark-code-titles": "^1.1.0",
     "gatsby-remark-copy-linked-files": "^4.11.0",
@@ -47,11 +48,17 @@
     "twemoji": "^13.1.0"
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.3",
+    "@types/styled-components": "^5.1.15",
+    "@types/twemoji": "^12.1.2",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.3"
   },
   "homepage": "https://github.com/ktnkk/blog#readme",
   "keywords": [
@@ -65,7 +72,7 @@
   },
   "scripts": {
     "build": "git submodule update --remote && gatsby build",
-    "develop": "gatsby develop -H 0.0.0.0",
+    "dev": "gatsby develop -H 0.0.0.0",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "yarn run develop",
     "serve": "gatsby serve",

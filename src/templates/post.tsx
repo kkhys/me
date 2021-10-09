@@ -4,12 +4,12 @@ import { Helmet } from "react-helmet";
 import twemoji from "twemoji";
 import styled from "styled-components";
 
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
-import CategoryLabel from "../components/CategoryLabel";
-import PostJsonLd from "../components/json/PostJsonLd";
-import RelatedPosts from "../components/RelatedPosts";
-import ShareButtons from "../components/ShareButtons";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import CategoryLabel from "../components/categoryLabel";
+import PostJsonLd from "../components/json/postJsonLd";
+import RelatedPosts from "../components/relatedPosts";
+import ShareButtons from "../components/shareButtons";
 
 import postSyntaxHighlightStyle from "../styles/postSyntaxHighlight";
 import postContentStyle from "../styles/postContent";
@@ -17,7 +17,7 @@ import postCustomBlockStyle from "../styles/postCustomBlock";
 
 require(`katex/dist/katex.min.css`);
 
-const BlogPostTemplate = ({ data, pageContext, location }) => {
+const PostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark;
   const siteTitle = data.site.siteMetadata.title;
   const siteCategory = data.site.siteMetadata.categories;
@@ -128,8 +128,10 @@ const PostContent = styled.div`
   ${postCustomBlockStyle}
 `;
 
+export default PostTemplate;
+
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query PostTemplate($slug: String!) {
     site {
       siteMetadata {
         title
@@ -155,5 +157,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default BlogPostTemplate;
