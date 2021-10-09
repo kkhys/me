@@ -40,7 +40,7 @@ const Heading = styled.h1`
 export default CategoryTemplate;
 
 export const pageQuery = graphql`
-  query CategoryTemplateQuery($category: String) {
+  query CategoryTemplate($category: String) {
     site {
       siteMetadata {
         categories {

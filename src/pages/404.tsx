@@ -62,7 +62,7 @@ const StyledLink = styled(Link)`
 export default NotFoundPage;
 
 export const pageQuery = graphql`
-  query NotFoundPageQuery {
+  query NotFoundPage {
     site {
       siteMetadata {
         title

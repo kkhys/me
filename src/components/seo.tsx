@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
 const Seo = ({ description, lang, meta, title }) => {
-  const { site } = useStaticQuery<GatsbyTypes.SeoQueryQuery>(
+  const { site } = useStaticQuery<GatsbyTypes.SeoQuery>(
     graphql`
-      query SeoQuery {
+      query Seo {
         site {
           siteMetadata {
             title

@@ -9,7 +9,7 @@ import PostCard from "../components/postCard";
 import CategoryMenu from "../components/categoryMenu";
 import HomeJsonLd from "../components/json/homeJsonLd";
 
-const BlogIndex = ({ data, location }) => {
+const Index = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title;
   const posts = data.allMarkdownRemark.edges;
 
@@ -34,10 +34,10 @@ const PostsContainer = styled.div`
   margin-top: 1.5rem;
 `;
 
-export default BlogIndex;
+export default Index;
 
 export const pageQuery = graphql`
-  query BlogIndexQuery {
+  query Index {
     site {
       siteMetadata {
         title

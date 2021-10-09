@@ -2,10 +2,10 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
-const JsonLD = () => {
-  const { site } = useStaticQuery<GatsbyTypes.JsonLdHomeQueryQuery>(
+const HomeJsonLD = () => {
+  const { site } = useStaticQuery<GatsbyTypes.HomeJsonLDQuery>(
     graphql`
-      query JsonLdHomeQuery {
+      query HomeJsonLD {
         site {
           siteMetadata {
             title
@@ -55,4 +55,4 @@ const JsonLD = () => {
   );
 };
 
-export default JsonLD;
+export default HomeJsonLD;

@@ -3,9 +3,9 @@ import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
 const PostJsonLD = ({ title, description, date, categorySlug, url }) => {
-  const { site } = useStaticQuery<GatsbyTypes.JsonLdPostQueryQuery>(
+  const { site } = useStaticQuery<GatsbyTypes.PostJsonLDQuery>(
     graphql`
-      query JsonLdPostQuery {
+      query PostJsonLD {
         site {
           siteMetadata {
             siteUrl

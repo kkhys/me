@@ -17,7 +17,7 @@ import postCustomBlockStyle from "../styles/postCustomBlock";
 
 require(`katex/dist/katex.min.css`);
 
-const BlogPostTemplate = ({ data, pageContext, location }) => {
+const PostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark;
   const siteTitle = data.site.siteMetadata.title;
   const siteCategory = data.site.siteMetadata.categories;
@@ -128,10 +128,10 @@ const PostContent = styled.div`
   ${postCustomBlockStyle}
 `;
 
-export default BlogPostTemplate;
+export default PostTemplate;
 
 export const pageQuery = graphql`
-  query BlogPostTemplateQuery($slug: String!) {
+  query PostTemplate($slug: String!) {
     site {
       siteMetadata {
         title
