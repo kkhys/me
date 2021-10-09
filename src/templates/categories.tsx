@@ -37,8 +37,10 @@ const Heading = styled.h1`
   letter-spacing: 1px;
 `;
 
+export default CategoryTemplate;
+
 export const pageQuery = graphql`
-  query BlogPostByCategory($category: String) {
+  query CategoryTemplateQuery($category: String) {
     site {
       siteMetadata {
         categories {
@@ -70,5 +72,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default CategoryTemplate;

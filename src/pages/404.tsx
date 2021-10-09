@@ -59,8 +59,10 @@ const StyledLink = styled(Link)`
   }
 `;
 
+export default NotFoundPage;
+
 export const pageQuery = graphql`
-  query NotFoundQuery {
+  query NotFoundPageQuery {
     site {
       siteMetadata {
         title
@@ -68,5 +70,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default NotFoundPage;

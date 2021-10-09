@@ -62,6 +62,8 @@ const Wrapper = styled.div`
   }
 `;
 
+export default categoryLabel;
+
 const categoryQuery = graphql`
   query CategoryQuery {
     site {
@@ -77,5 +79,3 @@ const categoryQuery = graphql`
     }
   }
 `;
-
-export default categoryLabel;

@@ -3980,56 +3980,53 @@ declare namespace GatsbyTypes {
     readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
   };
 
-  type CategoryQueryQueryVariables = Exact<{ [key: string]: never }>;
+  type CategoryTemplateQueryQueryVariables = Exact<{
+    category: Maybe<Scalars["String"]>;
+  }>;
 
-  type CategoryQueryQuery = {
+  type CategoryTemplateQueryQuery = {
     readonly site: Maybe<{
       readonly siteMetadata: Maybe<{
-        readonly categories: Maybe<
-          ReadonlyArray<
-            Maybe<Pick<SiteSiteMetadataCategories, "name" | "slug" | "color" | "borderColor" | "background">>
-          >
-        >;
+        readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, "name" | "slug" | "color">>>>;
       }>;
     }>;
+    readonly allMarkdownRemark: {
+      readonly edges: ReadonlyArray<{
+        readonly node: {
+          readonly fields: Maybe<Pick<MarkdownRemarkFields, "slug">>;
+          readonly frontmatter: Maybe<
+            Pick<MarkdownRemarkFrontmatter, "date" | "title" | "emoji" | "category" | "slug">
+          >;
+        };
+      }>;
+    };
   };
 
-  type JsonLdCategoryQueryQueryVariables = Exact<{ [key: string]: never }>;
+  type BlogPostTemplateQueryQueryVariables = Exact<{
+    slug: Scalars["String"];
+  }>;
 
-  type JsonLdCategoryQueryQuery = {
-    readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "siteUrl">> }>;
-  };
-
-  type JsonLdPostQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-  type JsonLdPostQueryQuery = {
+  type BlogPostTemplateQueryQuery = {
     readonly site: Maybe<{
       readonly siteMetadata: Maybe<
-        Pick<SiteSiteMetadata, "siteUrl" | "author"> & {
+        Pick<SiteSiteMetadata, "title" | "author"> & {
           readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, "name" | "slug">>>>;
         }
       >;
     }>;
+    readonly markdownRemark: Maybe<
+      Pick<MarkdownRemark, "id" | "excerpt" | "html"> & {
+        readonly frontmatter: Maybe<
+          Pick<MarkdownRemarkFrontmatter, "title" | "description" | "date" | "emoji" | "category" | "slug">
+        >;
+      }
+    >;
   };
 
-  type NotFoundQueryQueryVariables = Exact<{ [key: string]: never }>;
+  type NotFoundPageQueryQueryVariables = Exact<{ [key: string]: never }>;
 
-  type NotFoundQueryQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">> }> };
-
-  type JsonLdHomeQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-  type JsonLdHomeQueryQuery = {
-    readonly site: Maybe<{
-      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title" | "siteUrl" | "description" | "author">>;
-    }>;
-  };
-
-  type SeoQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-  type SeoQueryQuery = {
-    readonly site: Maybe<{
-      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title" | "siteUrl" | "description" | "author">>;
-    }>;
+  type NotFoundPageQueryQuery = {
+    readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title">> }>;
   };
 
   type BlogIndexQueryQueryVariables = Exact<{ [key: string]: never }>;
@@ -4048,47 +4045,59 @@ declare namespace GatsbyTypes {
     };
   };
 
-  type BlogPostByCategoryQueryVariables = Exact<{
-    category: Maybe<Scalars["String"]>;
-  }>;
+  type PagesQueryQueryVariables = Exact<{ [key: string]: never }>;
 
-  type BlogPostByCategoryQuery = {
-    readonly site: Maybe<{
-      readonly siteMetadata: Maybe<{
-        readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, "name" | "slug" | "color">>>>;
-      }>;
-    }>;
-    readonly allMarkdownRemark: {
-      readonly edges: ReadonlyArray<{
-        readonly node: {
-          readonly fields: Maybe<Pick<MarkdownRemarkFields, "slug">>;
-          readonly frontmatter: Maybe<
-            Pick<MarkdownRemarkFrontmatter, "date" | "title" | "emoji" | "category" | "slug">
-          >;
-        };
-      }>;
-    };
+  type PagesQueryQuery = {
+    readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, "functionRoute">> };
+    readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, "path">> };
   };
 
-  type BlogPostBySlugQueryVariables = Exact<{
-    slug: Scalars["String"];
-  }>;
+  type CategoryQueryQueryVariables = Exact<{ [key: string]: never }>;
 
-  type BlogPostBySlugQuery = {
+  type CategoryQueryQuery = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<{
+        readonly categories: Maybe<
+          ReadonlyArray<
+            Maybe<Pick<SiteSiteMetadataCategories, "name" | "slug" | "color" | "borderColor" | "background">>
+          >
+        >;
+      }>;
+    }>;
+  };
+
+  type JsonLdPostQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+  type JsonLdPostQueryQuery = {
     readonly site: Maybe<{
       readonly siteMetadata: Maybe<
-        Pick<SiteSiteMetadata, "title" | "author"> & {
+        Pick<SiteSiteMetadata, "siteUrl" | "author"> & {
           readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, "name" | "slug">>>>;
         }
       >;
     }>;
-    readonly markdownRemark: Maybe<
-      Pick<MarkdownRemark, "id" | "excerpt" | "html"> & {
-        readonly frontmatter: Maybe<
-          Pick<MarkdownRemarkFrontmatter, "title" | "description" | "date" | "emoji" | "category" | "slug">
-        >;
-      }
-    >;
+  };
+
+  type JsonLdCategoryQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+  type JsonLdCategoryQueryQuery = {
+    readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "siteUrl">> }>;
+  };
+
+  type JsonLdHomeQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+  type JsonLdHomeQueryQuery = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title" | "siteUrl" | "description" | "author">>;
+    }>;
+  };
+
+  type SeoQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+  type SeoQueryQuery = {
+    readonly site: Maybe<{
+      readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, "title" | "siteUrl" | "description" | "author">>;
+    }>;
   };
 
   type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, "base64" | "width" | "height" | "src" | "srcSet">;
@@ -4143,11 +4152,4 @@ declare namespace GatsbyTypes {
     ImageSharpFluid,
     "aspectRatio" | "src" | "srcSet" | "srcWebp" | "srcSetWebp" | "sizes"
   >;
-
-  type PagesQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-  type PagesQueryQuery = {
-    readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, "functionRoute">> };
-    readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, "path">> };
-  };
 }

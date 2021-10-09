@@ -128,8 +128,10 @@ const PostContent = styled.div`
   ${postCustomBlockStyle}
 `;
 
+export default BlogPostTemplate;
+
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostTemplateQuery($slug: String!) {
     site {
       siteMetadata {
         title
@@ -155,5 +157,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default BlogPostTemplate;

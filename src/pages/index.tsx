@@ -34,6 +34,8 @@ const PostsContainer = styled.div`
   margin-top: 1.5rem;
 `;
 
+export default BlogIndex;
+
 export const pageQuery = graphql`
   query BlogIndexQuery {
     site {
@@ -59,5 +61,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default BlogIndex;
