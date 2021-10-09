@@ -2,8 +2,8 @@ import * as React from "react";
 import { graphql, Link } from "gatsby";
 import styled from "styled-components";
 
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
 
 import svg404 from "../svg/others/404.svg";
 

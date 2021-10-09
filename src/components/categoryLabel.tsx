@@ -5,7 +5,7 @@ import styled from "styled-components";
 const categoryLabel = ({ slug, isLink }) => {
   if (!slug) return null;
   return (
-    <StaticQuery
+    <StaticQuery<GatsbyTypes.CategoryQueryQuery>
       query={categoryQuery}
       render={data => {
         const { categories } = data.site.siteMetadata;

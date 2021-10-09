@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
 const Seo = ({ description, lang, meta, title }) => {
-  const { site } = useStaticQuery(
+  const { site } = useStaticQuery<GatsbyTypes.SeoQueryQuery>(
     graphql`
       query SeoQuery {
         site {
@@ -56,7 +56,7 @@ const Seo = ({ description, lang, meta, title }) => {
         },
         {
           name: `twitter:creator`,
-          content: data.site.siteMetadata.author
+          content: site.siteMetadata.author
         },
         {
           name: `twitter:title`,

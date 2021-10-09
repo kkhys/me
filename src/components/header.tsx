@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
-import ContentWrapper from "../components/ContentWrapper";
+import ContentWrapper from "./contentWrapper";
 import svgLogo from "../svg/logo.svg";
 
 const Header = ({ title, location }) => {

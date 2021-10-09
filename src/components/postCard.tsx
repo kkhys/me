@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import twemoji from "twemoji";
-import CategoryLabel from "../components/CategoryLabel";
+import CategoryLabel from "./categoryLabel";
 
 const PostCard = ({ node }) => {
   const title = node.frontmatter.title || node.fields.slug;

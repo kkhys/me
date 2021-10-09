@@ -42,7 +42,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   categories.forEach(category => {
     createPage({
       path: `/${category}/`,
-      component: path.resolve("src/templates/categories.js"),
+      component: path.resolve("src/templates/categories.tsx"),
       context: {
         category
       }
@@ -65,7 +65,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
     createPage({
       path: post.node.frontmatter.slug,
-      component: path.resolve(`./src/templates/post.js`),
+      component: path.resolve(`./src/templates/post.tsx`),
       context: {
         slug: post.node.fields.slug,
         relatedPosts

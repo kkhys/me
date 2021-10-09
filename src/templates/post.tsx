@@ -4,12 +4,12 @@ import { Helmet } from "react-helmet";
 import twemoji from "twemoji";
 import styled from "styled-components";
 
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
-import CategoryLabel from "../components/CategoryLabel";
-import PostJsonLd from "../components/json/PostJsonLd";
-import RelatedPosts from "../components/RelatedPosts";
-import ShareButtons from "../components/ShareButtons";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import CategoryLabel from "../components/categoryLabel";
+import PostJsonLd from "../components/json/postJsonLd";
+import RelatedPosts from "../components/relatedPosts";
+import ShareButtons from "../components/shareButtons";
 
 import postSyntaxHighlightStyle from "../styles/postSyntaxHighlight";
 import postContentStyle from "../styles/postContent";
