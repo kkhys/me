@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import ContentWrapper from "../components/ContentWrapper";
+import ContentWrapper from "./contentWrapper";
 
 const Footer = () => {
   return (

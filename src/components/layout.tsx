@@ -3,9 +3,9 @@ import { ThemeProvider } from "styled-components";
 import { Helmet } from "react-helmet";
 import GlobalStyle from "../styles/global";
 import theme from "../styles/theme";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import ContentWrapper from "../components/ContentWrapper";
+import Header from "./header";
+import Footer from "./footer";
+import ContentWrapper from "./contentWrapper";
 import styled from "styled-components";
 
 const Layout = ({ location, title, children }) => {

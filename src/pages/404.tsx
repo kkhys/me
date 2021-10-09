@@ -2,8 +2,8 @@ import * as React from "react";
 import { graphql, Link } from "gatsby";
 import styled from "styled-components";
 
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
 
 import svg404 from "../svg/others/404.svg";
 
@@ -59,8 +59,10 @@ const StyledLink = styled(Link)`
   }
 `;
 
+export default NotFoundPage;
+
 export const pageQuery = graphql`
-  query {
+  query NotFoundPage {
     site {
       siteMetadata {
         title
@@ -68,5 +70,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-
-export default NotFoundPage;
