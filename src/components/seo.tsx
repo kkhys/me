@@ -44,7 +44,7 @@ const Seo = ({ description, lang, meta, title }) => {
         },
         {
           property: `og:image`,
-          content: `${site.siteMetadata.siteUrl}/images/ogp.png`
+          content: `${site.siteMetadata.siteUrl}/images/ogp-large.png`
         },
         {
           property: `og:type`,
