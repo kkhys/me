@@ -3,7 +3,7 @@ module.exports = {
     title: `ktnkk.log`,
     author: `Keiten Kiki`,
     description: ``,
-    siteUrl: `https://ktnkk.com/`,
+    siteUrl: `https://ktnkk.com`,
     social: {
       twitter: `ktnkk_`
     },
@@ -102,10 +102,10 @@ module.exports = {
                   classes: "notice",
                   title: "optional"
                 },
-                imageSmall: {
+                imgS: {
                   classes: "image-small"
                 },
-                imageMedium: {
+                imgM: {
                   classes: "image-medium"
                 }
               }
@@ -117,7 +117,20 @@ module.exports = {
               classPrefix: "language-",
               inlineCodeMarker: null,
               aliases: {},
-              noInlineHighlight: false
+              showLineNumbers: false,
+              noInlineHighlight: false,
+              prompt: {
+                user: "",
+                host: "",
+                global: true
+              },
+              escapeEntities: {}
+            }
+          },
+          {
+            resolve: `gatsby-remark-katex`,
+            options: {
+              strict: `ignore`
             }
           },
           `gatsby-remark-copy-linked-files`,
