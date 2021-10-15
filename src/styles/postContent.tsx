@@ -75,34 +75,12 @@ const postContentStyle = css`
   }
 
   ol {
-    counter-reset: number;
-
     & > li {
-      list-style: none;
+      list-style: decimal;
       list-style-position: inside;
       position: relative;
       line-height: 25px;
-      padding-left: 34px;
       margin: 1em 0;
-
-      &:before {
-        display: inline-block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        background: #5c9ee7;
-        color: #fff;
-        font-weight: 700;
-        font-size: 14px;
-        text-align: center;
-        line-height: 25px;
-        content: counter(number);
-        counter-increment: number;
-        background: ${props => props.theme.colors.highlight};
-      }
     }
   }
 

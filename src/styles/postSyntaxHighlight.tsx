@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-const boxPaddingSide = "1.2em";
+const boxPaddingSide = "1.05em";
 
 const SyntaxHighlightStyle = css`
   .gatsby-highlight {
@@ -152,13 +152,13 @@ const SyntaxHighlightStyle = css`
   /* Line highlight plugin */
 
   .gatsby-highlight-code-line {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: #3a362b;
     display: table;
     min-width: calc(100% + ${boxPaddingSide} * 2);
     margin-right: -${boxPaddingSide};
     margin-left: -${boxPaddingSide};
     padding-left: 12px;
-    border-left: 5px solid #22aef1;
+    border-left: 3px solid #6c5322;
   }
 
   /*gatsby-remark-code-titles*/
@@ -201,6 +201,29 @@ const SyntaxHighlightStyle = css`
     line-height: 1.4;
     color: #c9d1d9 !important;
     text-indent: 0;
+  }
+
+  .command-line-prompt {
+    border-right: 0;
+  }
+
+  .command-line-prompt > span:before {
+    color: #999;
+    content: " ";
+    display: block;
+    padding-right: 0;
+  }
+
+  .command-line-prompt > span[data-user]:before {
+    content: "$";
+  }
+
+  .command-line-prompt > span[data-user="root"]:before {
+    content: "#";
+  }
+
+  .command-line-prompt > span[data-prompt]:before {
+    content: attr(data-prompt);
   }
 `;
 
