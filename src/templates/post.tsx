@@ -15,7 +15,7 @@ import postSyntaxHighlightStyle from "../styles/postSyntaxHighlight";
 import postContentStyle from "../styles/postContent";
 import postCustomBlockStyle from "../styles/postCustomBlock";
 
-require(`katex/dist/katex.min.css`);
+import "katex/dist/katex.min.css";
 
 const PostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark;
