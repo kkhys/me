@@ -165,8 +165,13 @@ module.exports = {
     `gatsby-plugin-twitter`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
-    // RSS feed
-    // ref: https://www.gatsbyjs.com/docs/how-to/adding-common-features/adding-an-rss-feed/
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://ktnkk.com`,
+        stripQueryString: true
+      }
+    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
