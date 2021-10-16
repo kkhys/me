@@ -153,9 +153,12 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: "gatsby-plugin-google-gtag",
       options: {
-        trackingId: "test"
+        trackingIds: ["G-RWPTJLWZ5B"],
+        pluginConfig: {
+          head: true
+        }
       }
     },
     `gatsby-plugin-sitemap`,
