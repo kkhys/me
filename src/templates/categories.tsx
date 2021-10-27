@@ -6,6 +6,7 @@ import PostCard from "../components/postCard";
 import CategoryMenu from "../components/categoryMenu";
 import CategoryJsonLd from "../components/json/categoryJsonLd";
 import styled from "styled-components";
+import Pagination from "../components/pagination";
 
 const CategoryTemplate = ({ data, pageContext, location }) => {
   const posts = data.allMarkdownRemark.edges;
@@ -15,15 +16,25 @@ const CategoryTemplate = ({ data, pageContext, location }) => {
   });
   const categoryName = categoryObject ? categoryObject.name : categorySlug;
 
+  const { currentPage, hasNextPage, hasPrevPage, numPages } = pageContext;
+  const postPagePath = page => (page <= 1 ? `/${categorySlug}` : `/${categorySlug}/${page}/`);
+
   return (
     <Layout location={location} title={categoryName}>
       <SEO title={categoryName} />
       <CategoryJsonLd categorySlug={categorySlug} categoryName={categoryName} />
-      <CategoryMenu location={location} />
+      <CategoryMenu location={location} currentPage={currentPage} />
       <Heading>{categoryName}</Heading>
       {posts.map(({ node }) => {
         return <PostCard key={node.fields.slug} node={node} />;
       })}
+      <Pagination
+        pagePath={postPagePath}
+        numPages={numPages}
+        currentPage={currentPage}
+        hasNextPage={hasNextPage}
+        hasPrevPage={hasPrevPage}
+      />
     </Layout>
   );
 };
@@ -40,7 +51,7 @@ const Heading = styled.h1`
 export default CategoryTemplate;
 
 export const pageQuery = graphql`
-  query CategoryTemplate($category: String) {
+  query CategoryTemplate($category: String, $skip: Int!, $limit: Int!) {
     site {
       siteMetadata {
         categories {
@@ -51,9 +62,10 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      limit: 1000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { category: { eq: $category } } }
+      limit: $limit
+      skip: $skip
     ) {
       edges {
         node {

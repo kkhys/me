@@ -7,9 +7,15 @@ import svgTech from "../svg/categories/tech.svg";
 import svgLife from "../svg/categories/life.svg";
 import svgOnsen from "../svg/categories/onsen.svg";
 
-const CategoryLink = ({ catName, catIcon, catLink, path }) => {
+const CategoryLink = ({ catName, catIcon, catLink, path, currentPage }) => {
+  const pathInclude =
+    currentPage === 1
+      ? path === catLink
+      : catLink === "/"
+      ? path === `/${currentPage}/`
+      : path === `${catLink}/${currentPage}/`;
   return (
-    <CategoryItem className={catLink === path && "active"}>
+    <CategoryItem className={pathInclude && "active"}>
       <Link to={catLink} className="cat-item__link">
         <div className="cat-item__image">
           <img src={catIcon} alt={catName} />
@@ -20,16 +26,16 @@ const CategoryLink = ({ catName, catIcon, catLink, path }) => {
   );
 };
 
-const CategoryMenu = ({ location }) => {
+const CategoryMenu = ({ location, currentPage }) => {
   const path = location.pathname;
   return (
     <Nav>
       <CategoryItemList>
-        <CategoryLink catName="New" catIcon={svgNew} catLink="/" path={path} />
-        <CategoryLink catName="Tech" catIcon={svgTech} catLink="/t" path={path} />
-        <CategoryLink catName="Fashion" catIcon={svgFashion} catLink="/f" path={path} />
-        <CategoryLink catName="Onsen" catIcon={svgOnsen} catLink="/o" path={path} />
-        <CategoryLink catName="Life" catIcon={svgLife} catLink="/l" path={path} />
+        <CategoryLink catName="New" catIcon={svgNew} catLink="/" path={path} currentPage={currentPage} />
+        <CategoryLink catName="Tech" catIcon={svgTech} catLink="/t" path={path} currentPage={currentPage} />
+        <CategoryLink catName="Fashion" catIcon={svgFashion} catLink="/f" path={path} currentPage={currentPage} />
+        <CategoryLink catName="Onsen" catIcon={svgOnsen} catLink="/o" path={path} currentPage={currentPage} />
+        <CategoryLink catName="Life" catIcon={svgLife} catLink="/l" path={path} currentPage={currentPage} />
       </CategoryItemList>
     </Nav>
   );
