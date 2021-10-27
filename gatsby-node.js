@@ -38,14 +38,29 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       categories.push(post.node.frontmatter.category);
     }
   });
+
   categories = new Set(categories);
+  const postsPerPage = 8;
+
   categories.forEach(category => {
-    createPage({
-      path: `/${category}/`,
-      component: path.resolve("src/templates/categories.tsx"),
-      context: {
-        category
-      }
+    let categoryPosts = posts.filter(post => {
+      return post.node.frontmatter.category === category;
+    });
+    const catNumPages = Math.ceil(categoryPosts.length / postsPerPage);
+    Array.from({ length: catNumPages }).forEach((_, i) => {
+      createPage({
+        path: i === 0 ? `/${category}` : `/${category}/${i + 1}`,
+        component: path.resolve("src/templates/categories.tsx"),
+        context: {
+          category,
+          limit: postsPerPage,
+          skip: i * postsPerPage,
+          numPages: catNumPages,
+          currentPage: i + 1,
+          hasPrevPage: i !== 0,
+          hasNextPage: i !== catNumPages - 1
+        }
+      });
     });
   });
 
@@ -69,6 +84,23 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       context: {
         slug: post.node.fields.slug,
         relatedPosts
+      }
+    });
+  });
+
+  const numPages = Math.ceil(posts.length / postsPerPage);
+
+  Array.from({ length: numPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/` : `/${i + 1}`,
+      component: path.resolve("./src/templates/index.tsx"),
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        numPages,
+        currentPage: i + 1,
+        hasPrevPage: i !== 0,
+        hasNextPage: i !== numPages - 1
       }
     });
   });
