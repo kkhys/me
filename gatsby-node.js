@@ -3,10 +3,15 @@ const { createFilePath } = require(`gatsby-source-filesystem`);
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
+  const isPublished = process.env.NODE_ENV === "production" ? [true] : [true, false];
 
   const result = await graphql(`
     {
-      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
+      allMarkdownRemark(
+        sort: { fields: [frontmatter___date], order: DESC }
+        limit: 1000
+        filter: { frontmatter: { published: { in: [${isPublished}] } } }
+      ) {
         edges {
           node {
             fields {
@@ -53,6 +58,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         component: path.resolve("src/templates/categories.tsx"),
         context: {
           category,
+          isPublished,
           limit: postsPerPage,
           skip: i * postsPerPage,
           numPages: catNumPages,
@@ -95,6 +101,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       path: i === 0 ? `/` : `/${i + 1}`,
       component: path.resolve("./src/templates/index.tsx"),
       context: {
+        isPublished,
         limit: postsPerPage,
         skip: i * postsPerPage,
         numPages,
