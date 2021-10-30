@@ -48,13 +48,18 @@ const PostsContainer = styled.div`
 export default Index;
 
 export const pageQuery = graphql`
-  query Index($skip: Int!, $limit: Int!) {
+  query Index($skip: Int!, $limit: Int!, $isPublished: [Boolean]!) {
     site {
       siteMetadata {
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: $limit, skip: $skip) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { published: { in: $isPublished } } }
+      limit: $limit
+      skip: $skip
+    ) {
       edges {
         node {
           fields {
