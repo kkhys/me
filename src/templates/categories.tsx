@@ -51,7 +51,7 @@ const Heading = styled.h1`
 export default CategoryTemplate;
 
 export const pageQuery = graphql`
-  query CategoryTemplate($category: String, $skip: Int!, $limit: Int!) {
+  query CategoryTemplate($category: String, $skip: Int!, $limit: Int!, $isPublished: [Boolean]!) {
     site {
       siteMetadata {
         categories {
@@ -63,7 +63,7 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: $category } } }
+      filter: { frontmatter: { category: { eq: $category }, published: { in: $isPublished } } }
       limit: $limit
       skip: $skip
     ) {
