@@ -103,13 +103,11 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "git submodule update --remote && gatsby build",
-    "dev": "gatsby develop -H 0.0.0.0",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider; git submodule update --remote && gatsby build",
+    "dev": "export NODE_OPTIONS=--openssl-legacy-provider; gatsby develop -H 0.0.0.0",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "yarn run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "lint": "eslint ."
   }
 }
