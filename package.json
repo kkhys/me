@@ -105,9 +105,10 @@
   "scripts": {
     "build": "export NODE_OPTIONS=--openssl-legacy-provider; git submodule update --remote && gatsby build",
     "dev": "export NODE_OPTIONS=--openssl-legacy-provider; gatsby develop -H 0.0.0.0",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "lint": "eslint ."
+    "fmt": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "lint:es": "eslint .",
+    "lint:text": "textlint \"**/*.md\""
   }
 }
