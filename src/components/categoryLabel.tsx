@@ -23,13 +23,17 @@ const CategoryLabel = ({ slug, isLink }) => {
   );
 
   const { categories } = site.siteMetadata;
-  const categoryObject = categories.find(cat => {
+  const categoryObject = categories.find((cat) => {
     return cat.slug === slug;
   });
   const categoryName = categoryObject ? categoryObject.name : slug;
   const categoryColor = categoryObject ? categoryObject.color : "#6d4bf5";
-  const categoryBorderColor = categoryObject ? categoryObject.borderColor : "#fff";
-  const categoryBackground = categoryObject ? categoryObject.background : "#6d4bf5";
+  const categoryBorderColor = categoryObject
+    ? categoryObject.borderColor
+    : "#fff";
+  const categoryBackground = categoryObject
+    ? categoryObject.background
+    : "#6d4bf5";
   const content = isLink ? (
     <Link
       to={`/${slug}`}
@@ -37,7 +41,7 @@ const CategoryLabel = ({ slug, isLink }) => {
       style={{
         color: categoryColor,
         borderColor: categoryBorderColor,
-        background: categoryBackground
+        background: categoryBackground,
       }}
     >
       {categoryName}
@@ -48,7 +52,7 @@ const CategoryLabel = ({ slug, isLink }) => {
       style={{
         color: categoryColor,
         borderColor: categoryBorderColor,
-        background: categoryBackground
+        background: categoryBackground,
       }}
     >
       {categoryName}
@@ -67,7 +71,7 @@ const Wrapper = styled.div`
     border-radius: 2em;
     font-weight: 700;
     border: 1px solid;
-    @media screen and (max-width: ${props => props.theme.responsive.large}) {
+    @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
       font-size: 11px;
       padding: 2.5px 6px;
     }

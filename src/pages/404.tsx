@@ -27,7 +27,7 @@ const NotFoundPage = ({ data, location }) => {
 const Wrapper = styled.div`
   color: #fff;
   text-align: center;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     margin-top: 2em;
   }
 `;
@@ -51,11 +51,11 @@ const StyledLink = styled(Link)`
   background: #fff;
   font-size: 20px;
   font-weight: 700;
-  color: ${props => props.theme.colors.blackLight};
+  color: ${(props) => props.theme.colors.blackLight};
   border-radius: 4px;
 
   &:hover {
-    background: ${props => props.theme.colors.highlight};
+    background: ${(props) => props.theme.colors.highlight};
   }
 `;
 

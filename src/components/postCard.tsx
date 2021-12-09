@@ -8,7 +8,7 @@ const PostCard = ({ node }) => {
   const title = node.frontmatter.title || node.fields.slug;
   const emoji = twemoji.parse(node.frontmatter.emoji || "🐙", {
     folder: "svg",
-    ext: ".svg"
+    ext: ".svg",
   });
 
   return (
@@ -31,8 +31,8 @@ const PostCardWrapper = styled.div`
     align-items: start;
     padding: 1.4em 0;
     color: #c9d1d9;
-    border-top: solid 1px ${props => props.theme.colors.blackLight};
-    @media screen and (max-width: ${props => props.theme.responsive.large}) {
+    border-top: solid 1px ${(props) => props.theme.colors.blackLight};
+    @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
       padding: 1em 0;
     }
   }
@@ -44,7 +44,7 @@ const PostCardEmoji = styled.p`
   margin: 0;
   width: 90px;
   height: 90px;
-  background: ${props => props.theme.colors.blackLight};
+  background: ${(props) => props.theme.colors.blackLight};
   border-radius: 12px;
   font-size: 50px;
 
@@ -53,7 +53,7 @@ const PostCardEmoji = styled.p`
     height: 45px;
   }
 
-  @media screen and (max-width: ${props => props.theme.responsive.large}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
     width: 70px;
     height: 70px;
     img {
@@ -77,10 +77,10 @@ const PostCardContent = styled.div`
     margin-bottom: 0.2em;
     letter-spacing: 0.05em;
     font-size: 0.9em;
-    color: ${props => props.theme.colors.gray};
+    color: ${(props) => props.theme.colors.gray};
   }
 
-  @media screen and (max-width: ${props => props.theme.responsive.large}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
     width: calc(100% - 70px);
     padding-left: 15px;
     h3 {

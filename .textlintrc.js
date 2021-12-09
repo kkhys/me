@@ -2,11 +2,11 @@ module.exports = {
   filters: {
     comments: {
       enablingComment: "textlint-enable",
-      disablingComment: "textlint-disable"
+      disablingComment: "textlint-disable",
     },
     allowlist: {
-      allowlistConfigPaths: ["textlint/allow.yml"]
-    }
+      allowlistConfigPaths: ["textlint/allow.yml"],
+    },
   },
   rules: {
     "max-ten": {
@@ -17,13 +17,13 @@ module.exports = {
       // 読点として扱う文字
       touten: "、",
       // 句点として扱う文字
-      kuten: "。"
+      kuten: "。",
     },
     "max-kanji-continuous-len": {
       // 連続できる漢字の文字数
       max: 6,
       // 例外として無視する単語
-      allow: ["東急田園都市線"]
+      allow: ["東急田園都市線"],
     },
     "no-mix-dearu-desumasu": {
       // 見出し
@@ -33,7 +33,7 @@ module.exports = {
       // 箇条書き
       preferInList: "である",
       // 文末以外でも、敬体と常体を厳しくチェックするかどうか
-      strict: true
+      strict: true,
     },
     "no-doubled-joshi": {
       // 助詞のtoken同士の間隔値が1以下ならエラーにする
@@ -44,17 +44,17 @@ module.exports = {
       allow: ["も", "や"],
       // 文の区切り文字となる配列
       separatorCharacters: ["。", "？", "！"],
-      commaCharacters: ["、"]
+      commaCharacters: ["、"],
     },
     "no-mixed-zenkaku-and-hankaku-alphabet": {
-      prefer: "半角"
+      prefer: "半角",
     },
     "sentence-length": {
       max: 100,
-      skipUrlStringLink: true
+      skipUrlStringLink: true,
     },
     "first-sentence-length": {
-      max: 50
+      max: 50,
     },
     "ja-no-mixed-period": {
       // 優先する句点文字
@@ -64,7 +64,7 @@ module.exports = {
       // 末尾に絵文字を置くことを許可するか
       allowEmojiAtEnd: false,
       // 句点で終わって無い場合に`periodMark`を--fix時に追加するかどうか
-      forceAppendPeriod: false
+      forceAppendPeriod: false,
     },
     // "no-dead-link": {
     //   // 相対URIの可用性をチェック
@@ -87,7 +87,7 @@ module.exports = {
       checkBlockQuote: false,
       checkEmphasis: true,
       checkHeader: false,
-      rulePaths: ["textlint/prh.yml"]
+      rulePaths: ["textlint/prh.yml"],
     },
     "no-double-negative-ja": true,
     "no-hankaku-kana": true,
@@ -103,7 +103,7 @@ module.exports = {
     "ja-unnatural-alphabet": true,
     "@textlint-ja/textlint-rule-no-insert-dropping-sa": true,
     "prefer-tari-tari": true,
-    "@textlint-ja/no-filler": true
+    "@textlint-ja/no-filler": true,
     // "preset-jtf-style": true
-  }
+  },
 };

@@ -31,11 +31,41 @@ const CategoryMenu = ({ location, currentPage }) => {
   return (
     <Nav>
       <CategoryItemList>
-        <CategoryLink catName="New" catIcon={svgNew} catLink="/" path={path} currentPage={currentPage} />
-        <CategoryLink catName="Tech" catIcon={svgTech} catLink="/t" path={path} currentPage={currentPage} />
-        <CategoryLink catName="Fashion" catIcon={svgFashion} catLink="/f" path={path} currentPage={currentPage} />
-        <CategoryLink catName="Onsen" catIcon={svgOnsen} catLink="/o" path={path} currentPage={currentPage} />
-        <CategoryLink catName="Life" catIcon={svgLife} catLink="/l" path={path} currentPage={currentPage} />
+        <CategoryLink
+          catName="New"
+          catIcon={svgNew}
+          catLink="/"
+          path={path}
+          currentPage={currentPage}
+        />
+        <CategoryLink
+          catName="Tech"
+          catIcon={svgTech}
+          catLink="/t"
+          path={path}
+          currentPage={currentPage}
+        />
+        <CategoryLink
+          catName="Fashion"
+          catIcon={svgFashion}
+          catLink="/f"
+          path={path}
+          currentPage={currentPage}
+        />
+        <CategoryLink
+          catName="Onsen"
+          catIcon={svgOnsen}
+          catLink="/o"
+          path={path}
+          currentPage={currentPage}
+        />
+        <CategoryLink
+          catName="Life"
+          catIcon={svgLife}
+          catLink="/l"
+          path={path}
+          currentPage={currentPage}
+        />
       </CategoryItemList>
     </Nav>
   );
@@ -48,7 +78,7 @@ const Nav = styled.nav`
 
 const CategoryItemList = styled.ul`
   display: flex;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     margin: 0 -20px;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -69,7 +99,7 @@ const CategoryItem = styled.li`
   width: 70px;
   margin: 0 20px 0 0;
   text-align: center;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     width: 60px;
     flex: 0 0 auto;
     margin: 0 0 0 15px;
@@ -81,13 +111,13 @@ const CategoryItem = styled.li`
 
   .cat-item__image {
     padding: 2px;
-    background: ${props => props.theme.colors.blackLight};
+    background: ${(props) => props.theme.colors.blackLight};
     border-radius: 50%;
     position: relative;
 
     img {
       position: relative;
-      background: ${props => props.theme.colors.blackLight};
+      background: ${(props) => props.theme.colors.blackLight};
       border-radius: 50%;
       display: block;
       z-index: 2;
@@ -99,8 +129,8 @@ const CategoryItem = styled.li`
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    color: ${props => props.theme.colors.gray};
-    @media screen and (max-width: ${props => props.theme.responsive.small}) {
+    color: ${(props) => props.theme.colors.gray};
+    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
       font-size: 12px;
     }
   }
@@ -115,12 +145,12 @@ const CategoryItem = styled.li`
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: ${props => props.theme.colors.gradient};
+      background: ${(props) => props.theme.colors.gradient};
       animation: rotating 2s linear infinite;
     }
 
     img {
-      border: solid 2px ${props => props.theme.colors.background};
+      border: solid 2px ${(props) => props.theme.colors.background};
     }
   }
 

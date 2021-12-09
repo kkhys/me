@@ -25,23 +25,25 @@ const CategoryJsonLD = ({ categorySlug, categoryName }) => {
         position: 1,
         item: {
           "@id": siteUrl,
-          name: "HOME"
-        }
+          name: "HOME",
+        },
       },
       {
         "@type": "ListItem",
         position: 2,
         item: {
           "@id": `${siteUrl}/${categorySlug}`,
-          name: categoryName
-        }
-      }
-    ]
+          name: categoryName,
+        },
+      },
+    ],
   };
 
   return (
     <Helmet>
-      <script type="application/ld+json">{JSON.stringify(jsonBreadCrumbs)}</script>
+      <script type="application/ld+json">
+        {JSON.stringify(jsonBreadCrumbs)}
+      </script>
     </Helmet>
   );
 };

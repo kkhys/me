@@ -9,23 +9,23 @@ const variables = {
     highlight: "#58a6ff",
     red: "#f7615f",
     orange: "#ffa22b",
-    gradient: "linear-gradient(-225deg, #7085B6 0%, #87A7D9 50%, #DEF3F8 100%)"
+    gradient: "linear-gradient(-225deg, #7085B6 0%, #87A7D9 50%, #DEF3F8 100%)",
   },
   sizes: {
     bioWidth: "290px",
-    maxWidth: "1100px"
+    maxWidth: "1100px",
   },
   sideSpace: {
     small: "20px",
     large: "1.5em",
     contentSmall: "20px",
-    contentLarge: "2.5em"
+    contentLarge: "2.5em",
   },
   responsive: {
     small: "500px",
     medium: "768px",
-    large: "950px"
-  }
+    large: "950px",
+  },
 };
 
 export default variables;

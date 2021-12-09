@@ -160,7 +160,7 @@ const postContentStyle = css`
   blockquote {
     margin: 2.3em 0;
     font-style: italic;
-    background: ${props => props.theme.colors.whitesmoke};
+    background: ${(props) => props.theme.colors.whitesmoke};
     padding: 1em;
 
     p {

@@ -24,7 +24,7 @@ const PostTemplate = ({ data, pageContext, location }) => {
   const { relatedPosts, slug } = pageContext;
   const { title, description, date, category, emoji } = post.frontmatter;
   const pageSlug = post.frontmatter.slug;
-  const categoryObject = siteCategory.find(cat => {
+  const categoryObject = siteCategory.find((cat) => {
     return cat.slug === category;
   });
   const categoryName = categoryObject ? categoryObject.name : slug;
@@ -47,8 +47,8 @@ const PostTemplate = ({ data, pageContext, location }) => {
           dangerouslySetInnerHTML={{
             __html: twemoji.parse(emoji || "🐙", {
               folder: "svg",
-              ext: ".svg"
-            })
+              ext: ".svg",
+            }),
           }}
         />
         <ContentMain>
@@ -56,7 +56,13 @@ const PostTemplate = ({ data, pageContext, location }) => {
           <PostTitle>{title}</PostTitle>
           <CategoryLabel slug={category} isLink="true" />
           <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
-          <ShareButtons slug={slug} title={title} emoji={emoji} category={categoryName} pageSlug={pageSlug} />
+          <ShareButtons
+            slug={slug}
+            title={title}
+            emoji={emoji}
+            category={categoryName}
+            pageSlug={pageSlug}
+          />
         </ContentMain>
         <aside>
           <RelatedPosts posts={relatedPosts} />
@@ -71,14 +77,14 @@ const Content = styled.section`
   overflow: hidden;
   font-size: 16px;
   border-radius: 15px;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
-    margin: 0 -${props => props.theme.sideSpace.small};
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    margin: 0 -${(props) => props.theme.sideSpace.small};
   }
 `;
 
 const HeroImage = styled.p`
   position: relative;
-  background: ${props => props.theme.colors.blackLight};
+  background: ${(props) => props.theme.colors.blackLight};
   text-align: center;
   background-repeat: repeat;
   background-size: 400px;
@@ -92,23 +98,23 @@ const HeroImage = styled.p`
     height: 110px;
   }
 
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     min-height: 190px;
   }
 `;
 
 const ContentMain = styled.div`
-  padding: 1.8em ${props => props.theme.sideSpace.contentLarge};
+  padding: 1.8em ${(props) => props.theme.sideSpace.contentLarge};
   background: #0d1117;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
-    padding: 30px ${props => props.theme.sideSpace.contentSmall};
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    padding: 30px ${(props) => props.theme.sideSpace.contentSmall};
   }
 `;
 
 const PostTitle = styled.h1`
   margin: 0.1em 0 0.3em;
   font-size: 1.8em;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     font-size: 25px;
   }
   font-weight: 700;
@@ -117,7 +123,7 @@ const PostTitle = styled.h1`
 
 const PostDate = styled.time`
   display: block;
-  color: ${props => props.theme.colors.silver};
+  color: ${(props) => props.theme.colors.silver};
   font-size: 0.9em;
   letter-spacing: 0.05em;
 `;
