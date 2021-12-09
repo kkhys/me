@@ -2,7 +2,14 @@ import * as React from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 
-const Pagination = ({ numPages, currentPage, hasNextPage, hasPrevPage, pagePath, className }) => {
+const Pagination = ({
+  numPages,
+  currentPage,
+  hasNextPage,
+  hasPrevPage,
+  pagePath,
+  className,
+}) => {
   if (!hasNextPage && !hasPrevPage) {
     return null;
   }
@@ -16,9 +23,25 @@ const Pagination = ({ numPages, currentPage, hasNextPage, hasPrevPage, pagePath,
   } else if (currentPage <= 4) {
     pageNumbers = [1, 2, 3, 4, 5, "…", numPages];
   } else if (currentPage < numPages - 3) {
-    pageNumbers = [1, "…", currentPage - 1, currentPage, currentPage + 1, "…", numPages];
+    pageNumbers = [
+      1,
+      "…",
+      currentPage - 1,
+      currentPage,
+      currentPage + 1,
+      "…",
+      numPages,
+    ];
   } else {
-    pageNumbers = [1, "…", numPages - 4, numPages - 3, numPages - 2, numPages - 1, numPages];
+    pageNumbers = [
+      1,
+      "…",
+      numPages - 4,
+      numPages - 3,
+      numPages - 2,
+      numPages - 1,
+      numPages,
+    ];
   }
 
   return (
@@ -38,7 +61,10 @@ const Pagination = ({ numPages, currentPage, hasNextPage, hasPrevPage, pagePath,
             {pn === "…" ? (
               <span>…</span>
             ) : (
-              <Link to={pagePath(pn)} className={pn === currentPage ? "selected" : ""}>
+              <Link
+                to={pagePath(pn)}
+                className={pn === currentPage ? "selected" : ""}
+              >
                 {pn}
               </Link>
             )}

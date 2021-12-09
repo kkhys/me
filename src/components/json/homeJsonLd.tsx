@@ -26,8 +26,8 @@ const HomeJsonLD = () => {
       "@type": "ImageObject",
       url: `${siteUrl}/images/avatar.png`,
       width: 150,
-      height: 150
-    }
+      height: 150,
+    },
   };
   const jsonLd = {
     "@context": "https://schema.org",
@@ -36,16 +36,16 @@ const HomeJsonLD = () => {
       "@type": "ImageObject",
       url: `${siteUrl}/images/ogp.png`,
       height: 1200,
-      width: 630
+      width: 630,
     },
     url: siteUrl,
     name: title,
     author: {
       "@type": "Person",
-      name: author
+      name: author,
     },
     description: description,
-    publisher
+    publisher,
   };
 
   return (

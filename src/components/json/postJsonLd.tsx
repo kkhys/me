@@ -29,13 +29,13 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }) => {
       "@type": "ImageObject",
       url: `${siteUrl}/images/avatar.png`,
       width: 150,
-      height: 150
-    }
+      height: 150,
+    },
   };
   const authorData = {
     "@type": "Person",
     name: author,
-    image: `${siteUrl}/images/avatar.png`
+    image: `${siteUrl}/images/avatar.png`,
   };
   const jsonLd = {
     "@context": "https://schema.org",
@@ -49,9 +49,9 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }) => {
     dateModified: dateFormatted,
     description: description,
     author: authorData,
-    publisher
+    publisher,
   };
-  const categoryObject = categories.find(cat => {
+  const categoryObject = categories.find((cat) => {
     return cat.slug === categorySlug;
   });
   const categoryName = categoryObject ? categoryObject.name : categorySlug;
@@ -64,32 +64,34 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }) => {
         position: 1,
         item: {
           "@id": siteUrl,
-          name: "HOME"
-        }
+          name: "HOME",
+        },
       },
       {
         "@type": "ListItem",
         position: 2,
         item: {
           "@id": `${siteUrl}/${categorySlug}`,
-          name: categoryName
-        }
+          name: categoryName,
+        },
       },
       {
         "@type": "ListItem",
         position: 3,
         item: {
           "@id": url,
-          name: title
-        }
-      }
-    ]
+          name: title,
+        },
+      },
+    ],
   };
 
   return (
     <Helmet>
       <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      <script type="application/ld+json">{JSON.stringify(jsonBreadCrumbs)}</script>
+      <script type="application/ld+json">
+        {JSON.stringify(jsonBreadCrumbs)}
+      </script>
     </Helmet>
   );
 };

@@ -11,13 +11,14 @@ import Pagination from "../components/pagination";
 const CategoryTemplate = ({ data, pageContext, location }) => {
   const posts = data.allMarkdownRemark.edges;
   const categorySlug = pageContext.category;
-  const categoryObject = data.site.siteMetadata.categories.find(cat => {
+  const categoryObject = data.site.siteMetadata.categories.find((cat) => {
     return cat.slug === categorySlug;
   });
   const categoryName = categoryObject ? categoryObject.name : categorySlug;
 
   const { currentPage, hasNextPage, hasPrevPage, numPages } = pageContext;
-  const postPagePath = page => (page <= 1 ? `/${categorySlug}` : `/${categorySlug}/${page}/`);
+  const postPagePath = (page) =>
+    page <= 1 ? `/${categorySlug}` : `/${categorySlug}/${page}/`;
 
   return (
     <Layout location={location} title={categoryName}>
@@ -51,7 +52,12 @@ const Heading = styled.h1`
 export default CategoryTemplate;
 
 export const pageQuery = graphql`
-  query CategoryTemplate($category: String, $skip: Int!, $limit: Int!, $isPublished: [Boolean]!) {
+  query CategoryTemplate(
+    $category: String
+    $skip: Int!
+    $limit: Int!
+    $isPublished: [Boolean]!
+  ) {
     site {
       siteMetadata {
         categories {
@@ -63,7 +69,12 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: $category }, published: { in: $isPublished } } }
+      filter: {
+        frontmatter: {
+          category: { eq: $category }
+          published: { in: $isPublished }
+        }
+      }
       limit: $limit
       skip: $skip
     ) {

@@ -3,7 +3,9 @@ import styled from "styled-components";
 import svgTwitterWhite from "../svg/socials/twitter.svg";
 
 const ShareButtons = ({ slug, title, emoji, category, pageSlug }) => {
-  const encodedTitle = encodeURIComponent(`${emoji || "🦇"}${title} | ktnkk.log`);
+  const encodedTitle = encodeURIComponent(
+    `${emoji || "🦇"}${title} | ktnkk.log`
+  );
   const pageUrl = `https://ktnkk.com/${pageSlug}`;
   const categoryName = category.toLowerCase();
   const submodule = `blog.${categoryName}`;
@@ -23,7 +25,7 @@ const ShareButtons = ({ slug, title, emoji, category, pageSlug }) => {
             style={{
               width: "24px",
               height: "19px",
-              marginTop: "11px"
+              marginTop: "11px",
             }}
           />
         </ShareLink>
@@ -57,11 +59,11 @@ const ShareButtons = ({ slug, title, emoji, category, pageSlug }) => {
 
 const Wrapper = styled.div`
   margin: 1.8rem 0 0;
-  padding: 0 ${props => props.theme.sideSpace.contentLarge};
+  padding: 0 ${(props) => props.theme.sideSpace.contentLarge};
   text-align: center;
   color: #c9d1d9;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
-    padding: 0 ${props => props.theme.sideSpace.contentSmall};
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    padding: 0 ${(props) => props.theme.sideSpace.contentSmall};
   }
 `;
 
@@ -83,7 +85,7 @@ const ShareLink = styled.a`
   line-height: 40px;
   border-radius: 50%;
   color: #c9d1d9;
-  background: ${props => props.theme.colors.blackLight};
+  background: ${(props) => props.theme.colors.blackLight};
   font-weight: 700;
   vertical-align: middle;
 
@@ -95,7 +97,7 @@ const GitHubLink = styled.a`
   display: inline-block;
   margin-top: 1em;
   font-size: 0.85em;
-  color: ${props => props.theme.colors.silver};
+  color: ${(props) => props.theme.colors.silver};
 `;
 
 export default ShareButtons;

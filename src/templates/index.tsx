@@ -15,7 +15,7 @@ const Index = ({ data, pageContext, location }) => {
   const posts = data.allMarkdownRemark.edges;
 
   const { currentPage, hasNextPage, hasPrevPage, numPages } = pageContext;
-  const postPagePath = page => (page <= 1 ? `/` : `/${page}/`);
+  const postPagePath = (page) => (page <= 1 ? `/` : `/${page}/`);
 
   return (
     <Layout location={location} title={siteTitle}>

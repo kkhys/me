@@ -24,7 +24,7 @@ const Seo = ({ description, lang, meta, title }) => {
   return (
     <Helmet
       htmlAttributes={{
-        lang
+        lang,
       }}
       defaultTitle={defaultTitle}
       title={title}
@@ -32,44 +32,44 @@ const Seo = ({ description, lang, meta, title }) => {
       meta={[
         {
           name: `description`,
-          content: metaDescription
+          content: metaDescription,
         },
         {
           property: `og:title`,
-          content: title || defaultTitle
+          content: title || defaultTitle,
         },
         {
           property: `og:description`,
-          content: metaDescription
+          content: metaDescription,
         },
         {
           property: `og:image`,
-          content: `${site.siteMetadata.siteUrl}/images/ogp-large.png`
+          content: `${site.siteMetadata.siteUrl}/images/ogp-large.png`,
         },
         {
           property: `og:type`,
-          content: `website`
+          content: `website`,
         },
         {
           name: `twitter:card`,
-          content: `summary`
+          content: `summary`,
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author
+          content: site.siteMetadata.author,
         },
         {
           name: `twitter:title`,
-          content: title
+          content: title,
         },
         {
           name: `twitter:description`,
-          content: metaDescription
+          content: metaDescription,
         },
         {
           name: `google-site-verification`,
-          content: `test`
-        }
+          content: `test`,
+        },
       ].concat(meta)}
     />
   );
@@ -77,7 +77,7 @@ const Seo = ({ description, lang, meta, title }) => {
 
 Seo.defaultProps = {
   lang: `ja`,
-  meta: []
+  meta: [],
 };
 
 export default Seo;

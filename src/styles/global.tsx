@@ -32,7 +32,7 @@ const globalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${props => props.theme.colors.background};
+    background: ${(props) => props.theme.colors.background};
     color: #c9d1d9;
     line-height: 1.6;
     font-size: 100%;
@@ -48,7 +48,7 @@ const globalStyle = createGlobalStyle`
   }
 
   a {
-    color: ${props => props.theme.colors.highlight};
+    color: ${(props) => props.theme.colors.highlight};
     text-decoration: none;
     transition: .2s;
 
