@@ -103,7 +103,7 @@ module.exports = {
     "ja-unnatural-alphabet": true,
     "@textlint-ja/textlint-rule-no-insert-dropping-sa": true,
     "prefer-tari-tari": true,
-    "@textlint-ja/no-filler": true,
+    "@textlint-ja/no-filler": true
     // "preset-jtf-style": true
   }
 };
