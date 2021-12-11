@@ -103,12 +103,12 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "export NODE_OPTIONS=--openssl-legacy-provider; git submodule update --remote && gatsby build",
-    "dev": "export NODE_OPTIONS=--openssl-legacy-provider; gatsby develop -H 0.0.0.0",
+    "build": "git submodule update --remote && gatsby build",
+    "dev": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "fmt": "prettier --write \"**/*.{js,jsx,ts,tsx,json,yml}\"",
     "lint:es": "eslint .",
-    "lint:text": "textlint \"**/*.md\""
+    "lint:txt": "textlint \"**/*.md\""
   }
 }
