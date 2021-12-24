@@ -1,13 +1,15 @@
 "use strict";
 
+const { resolve } = require("path");
 module.exports = {
   siteMetadata: {
-    title: `ktnkk.log`,
-    author: `Keiten Kiki`,
-    description: ``,
-    siteUrl: `https://ktnkk.com`,
+    title: "ktnkk.log",
+    author: "Keiten Kiki",
+    description: "",
+    siteUrl: "https://ktnkk.com",
     social: {
-      twitter: `ktnkk_`,
+      twitter: "ktnkk_",
+      instagram: "ktnkk_",
     },
     categories: [
       {
@@ -22,7 +24,7 @@ module.exports = {
         slug: "l",
         color: "#ffe085",
         borderColor: "#746b46",
-        background: "39372b",
+        background: "#39372b",
       },
       {
         name: "Onsen",
@@ -41,43 +43,43 @@ module.exports = {
     ],
   },
   plugins: [
-    `gatsby-plugin-sitemap`,
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-styled-components`,
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    "gatsby-plugin-sitemap",
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-styled-components",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-source-filesystem",
       options: {
-        path: `${__dirname}/content/blog`,
-        name: `blog`,
+        name: "blog",
+        path: resolve(__dirname, "content", "blog"),
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-source-filesystem",
       options: {
-        path: `${__dirname}/content/assets`,
-        name: `assets`,
+        name: "assets",
+        path: resolve(__dirname, "content", "assets"),
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          `gatsby-remark-autolink-headers`,
-          `gatsby-remark-code-titles`,
-          `gatsby-remark-katex`,
-          `gatsby-remark-graphviz`,
-          `gatsby-remark-external-links`,
+          "gatsby-remark-autolink-headers",
+          "gatsby-remark-code-titles",
+          "gatsby-remark-katex",
+          "gatsby-remark-graphviz",
+          "gatsby-remark-external-links",
           {
-            resolve: `gatsby-remark-images`,
+            resolve: "gatsby-remark-images",
             options: {
               maxWidth: 700,
               linkImagesToOriginal: false,
             },
           },
           {
-            resolve: `gatsby-remark-prismjs`,
+            resolve: "gatsby-remark-prismjs",
             options: {
               classPrefix: "language-",
               inlineCodeMarker: null,
@@ -93,24 +95,24 @@ module.exports = {
             },
           },
           {
-            resolve: `gatsby-remark-katex`,
+            resolve: "gatsby-remark-katex",
             options: {
-              strict: `ignore`,
+              strict: "ignore",
             },
           },
         ],
       },
     },
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: "gatsby-plugin-manifest",
       options: {
-        name: `ktnkk.log`,
-        short_name: `ktnkk.log`,
-        start_url: `/`,
-        background_color: `#0d1117`,
-        theme_color: `#313746`,
-        display: `fullscreen`,
-        icon: `content/assets/favicon.png`,
+        name: "ktnkk.log",
+        short_name: "ktnkk.log",
+        start_url: "/",
+        background_color: "#0d1117",
+        theme_color: "#313746",
+        display: "fullscreen",
+        icon: resolve(__dirname, "content", "assets", "favicon.png"),
       },
     },
     {
@@ -123,9 +125,9 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-canonical-urls`,
+      resolve: "gatsby-plugin-canonical-urls",
       options: {
-        siteUrl: `https://ktnkk.com`,
+        siteUrl: "https://ktnkk.com",
         stripQueryString: true,
       },
     },
@@ -136,7 +138,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-feed`,
+      resolve: "gatsby-plugin-feed",
       options: {
         query: `
           {
@@ -188,9 +190,9 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-nprogress`,
+      resolve: "gatsby-plugin-nprogress",
       options: {
-        color: `#60e378`,
+        color: "#60e378",
         showSpinner: false,
       },
     },
