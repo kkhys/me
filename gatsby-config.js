@@ -41,6 +41,11 @@ module.exports = {
     ],
   },
   plugins: [
+    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-styled-components`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -65,52 +70,10 @@ module.exports = {
           `gatsby-remark-graphviz`,
           `gatsby-remark-external-links`,
           {
-            resolve: "gatsby-remark-embed-youtube",
-            options: {
-              width: 650,
-              height: 365,
-            },
-          },
-          {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 700,
               linkImagesToOriginal: false,
-            },
-          },
-          {
-            resolve: `gatsby-remark-responsive-iframe`,
-            options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
-            },
-          },
-          {
-            resolve: "gatsby-remark-custom-blocks",
-            options: {
-              blocks: {
-                s: {
-                  classes: "simple",
-                  title: "optional",
-                },
-                i: {
-                  classes: "info",
-                  title: "optional",
-                },
-                a: {
-                  classes: "alert",
-                  title: "optional",
-                },
-                n: {
-                  classes: "notice",
-                  title: "optional",
-                },
-                imgS: {
-                  classes: "image-small",
-                },
-                imgM: {
-                  classes: "image-medium",
-                },
-              },
             },
           },
           {
@@ -135,13 +98,9 @@ module.exports = {
               strict: `ignore`,
             },
           },
-          `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-smartypants`,
         ],
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -163,10 +122,6 @@ module.exports = {
         },
       },
     },
-    `gatsby-plugin-sitemap`,
-    `gatsby-plugin-twitter`,
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
