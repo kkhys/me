@@ -4,9 +4,24 @@
   "description": "A personal blog by @ktnkk",
   "version": "0.1.0",
   "author": "Keiten Kiki <ktnkk@pm.me>",
+  "homepage": "https://github.com/ktnkk/blog#readme",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ktnkk/blog/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+  },
+  "keywords": [
+    "blog",
+    "dokcer",
+    "typescript",
+    "styled-components",
+    "gatsby",
+    "netlify"
+  ],
+  "main": "n/a",
   "dependencies": {
     "babel-plugin-styled-components": "^2.0.2",
     "gatsby": "^3.14.6",
@@ -89,16 +104,6 @@
     "textlint-rule-prh": "^5.3.0",
     "textlint-rule-sentence-length": "^3.0.0",
     "typescript": "^4.5.4"
-  },
-  "homepage": "https://github.com/ktnkk/blog#readme",
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
-  "main": "n/a",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
     "build": "git submodule update --remote && gatsby build",
