@@ -87,7 +87,7 @@
     "clean": "gatsby clean",
     "fmt": "prettier --write \"**/*.{js,jsx,ts,tsx,json,yml,md}\"",
     "lint:es": "eslint .",
-    "lint:txt": "textlint \"**/*.md\"",
+    "lint:txt": "textlint \"**/*.md\" && textlint --cache \"**/*.md\"",
     "lint:md": "markdownlint --fix \"**/*.md\""
   }
 }
