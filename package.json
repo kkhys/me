@@ -60,6 +60,8 @@
     "twemoji": "^13.1.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.0.0",
+    "@commitlint/config-conventional": "^16.0.0",
     "@types/react-helmet": "^6.1.3",
     "@types/styled-components": "^5.1.17",
     "@types/twemoji": "^12.1.2",
@@ -71,9 +73,13 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.1",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.4",
     "markdownlint": "^0.24.0",
     "markdownlint-cli": "^0.30.0",
     "prettier": "^2.5.1",
+    "semantic-release": "^18.0.1",
+    "semantic-release-cli": "^5.4.4",
     "textlint": "^12.1.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-no-dead-link": "^4.8.0",
@@ -88,6 +94,7 @@
     "fmt": "prettier --write \"**/*.{js,jsx,ts,tsx,json,yml,md}\"",
     "lint:es": "eslint .",
     "lint:txt": "textlint \"**/*.md\" && textlint --cache \"**/*.md\"",
-    "lint:md": "markdownlint --fix \"**/*.md\""
+    "lint:md": "markdownlint --fix \"**/*.md\"",
+    "prepare": "husky install"
   }
 }
