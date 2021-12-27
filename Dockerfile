@@ -7,5 +7,4 @@ RUN apt update -q \
     && apt install -y \
        build-essential \
        git
-RUN yarn global add gatsby-cli
-EXPOSE 8000
+RUN yarn
