@@ -1,10 +1,24 @@
 "use strict";
 
+exports.onCreateWebpackConfig = ({ actions: { setWebpackConfig } }) => {
+  setWebpackConfig({
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "src"),
+        _: path.resolve(__dirname, "src", "components"),
+      },
+    },
+  });
+};
+
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions;
+exports.createPages = async ({
+  graphql,
+  actions: { createPage },
+  reporter: { panicOnBuild },
+}) => {
   const isPublished =
     process.env.NODE_ENV === "production" ? [true] : [true, false];
 
@@ -34,10 +48,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   `);
 
   if (result.errors) {
-    reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
-      result.errors
-    );
+    panicOnBuild(`There was an error loading your blog posts`, result.errors);
     return;
   }
 
@@ -119,9 +130,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   });
 };
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions;
-
+exports.onCreateNode = ({ node, actions: { createNodeField }, getNode }) => {
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({ node, getNode });
     createNodeField({
