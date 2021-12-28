@@ -8,8 +8,8 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { CatLabel } from "../components/molecules";
 import PostJsonLd from "../components/json/postJsonLd";
-import RelatedPosts from "../components/relatedPosts";
 import ShareButtons from "../components/shareButtons";
+import { RelatedPosts } from "../components/organisms";
 
 import postSyntaxHighlightStyle from "../styles/postSyntaxHighlight";
 import postContentStyle from "../styles/postContent";

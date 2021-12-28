@@ -5,11 +5,11 @@ import styled from "styled-components";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import PostCard from "../components/postCard";
 import {
   CatMenu,
   StyledPagination as Pagination,
 } from "../components/molecules";
+import { PostCard } from "../components/organisms";
 import HomeJsonLd from "../components/json/homeJsonLd";
 
 const Index = ({ data, pageContext, location }) => {
