@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Link } from "gatsby";
-import svgNew from "../../../svg/categories/new.svg";
-import svgFashion from "../../../svg/categories/fashion.svg";
-import svgTech from "../../../svg/categories/tech.svg";
-import svgLife from "../../../svg/categories/life.svg";
-import svgOnsen from "../../../svg/categories/onsen.svg";
-import { Nav, CategoryItemList, CategoryItem } from "./styles";
+import svgNew from "@/svg/categories/new.svg";
+import svgFashion from "@/svg/categories/fashion.svg";
+import svgTech from "@/svg/categories/tech.svg";
+import svgLife from "@/svg/categories/life.svg";
+import svgOnsen from "@/svg/categories/onsen.svg";
+import * as styles from "./styles";
 
 const CategoryLink = ({ catName, catIcon, catLink, path, currentPage }) => {
   const pathInclude =
@@ -14,23 +14,24 @@ const CategoryLink = ({ catName, catIcon, catLink, path, currentPage }) => {
       : catLink === "/"
       ? path === `/${currentPage}/`
       : path === `${catLink}/${currentPage}/`;
+  const isActive = pathInclude ? "active" : "";
   return (
-    <CategoryItem className={pathInclude && "active"}>
-      <Link to={catLink} className="cat-item__link">
-        <div className="cat-item__image">
+    <li css={styles.item()} className={isActive}>
+      <Link to={catLink} css={styles.link()}>
+        <div className="cat-item__img">
           <img src={catIcon} alt={catName} />
         </div>
-        <div className="cat-item__name">{catName}</div>
+        <div css={styles.name()}>{catName}</div>
       </Link>
-    </CategoryItem>
+    </li>
   );
 };
 
 const CategoryMenu = ({ location, currentPage }) => {
   const path = location.pathname;
   return (
-    <Nav>
-      <CategoryItemList>
+    <nav css={styles.nav()}>
+      <ul css={styles.list()}>
         <CategoryLink
           catName="New"
           catIcon={svgNew}
@@ -66,8 +67,8 @@ const CategoryMenu = ({ location, currentPage }) => {
           path={path}
           currentPage={currentPage}
         />
-      </CategoryItemList>
-    </Nav>
+      </ul>
+    </nav>
   );
 };
 

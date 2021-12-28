@@ -1,12 +1,6 @@
 import * as React from "react";
-// import svgTwitterWhite from "../svg/socials/twitter.svg";
-import {
-  Wrapper,
-  ShareLink,
-  ShareLinks,
-  ShareTitle,
-  GitHubLink,
-} from "./styles";
+import svgTwitterWhite from "@/svg/socials/twitter.svg";
+import * as styles from "./styles";
 
 const ShareButtons = ({ slug, title, emoji, category, pageSlug }) => {
   const encodedTitle = encodeURIComponent(
@@ -17,16 +11,17 @@ const ShareButtons = ({ slug, title, emoji, category, pageSlug }) => {
   const submodule = `blog.${categoryName}`;
   const date = slug.replace(`/${categoryName}`, "");
   return (
-    <Wrapper>
-      <ShareTitle>SHARE</ShareTitle>
-      <ShareLinks>
-        <ShareLink
+    <div css={styles.root()}>
+      <div css={styles.title()}>SHARE</div>
+      <div css={styles.links()}>
+        <a
           href={`https://twitter.com/share?url=${pageUrl}&text=${encodedTitle}&via=ktnkk_`}
           target="_blank"
           rel="noopener noreferrer nofollow"
+          css={styles.link()}
         >
           <img
-            // src={svgTwitterWhite}
+            src={svgTwitterWhite}
             alt="Twitter"
             style={{
               width: "24px",
@@ -34,32 +29,35 @@ const ShareButtons = ({ slug, title, emoji, category, pageSlug }) => {
               marginTop: "11px",
             }}
           />
-        </ShareLink>
-        <ShareLink
+        </a>
+        <a
           href={`https://www.facebook.com/share.php?u=${pageUrl}`}
           style={{ fontSize: "20px" }}
           target="_blank"
           rel="noopener noreferrer nofollow"
+          css={styles.link()}
         >
           f
-        </ShareLink>
-        <ShareLink
+        </a>
+        <a
           href={`https://b.hatena.ne.jp/add?mode=confirm&url=${pageUrl}`}
           style={{ fontSize: "19px" }}
           target="_blank"
           rel="noopener noreferrer nofollow"
+          css={styles.link()}
         >
           B!
-        </ShareLink>
-      </ShareLinks>
-      <GitHubLink
+        </a>
+      </div>
+      <a
         href={`https://github.com/ktnkk/${submodule}/edit/main${date}index.md`}
         target="_blank"
         rel="noopener noreferrer"
+        css={styles.ghLink()}
       >
         Edit on GitHub
-      </GitHubLink>
-    </Wrapper>
+      </a>
+    </div>
   );
 };
 

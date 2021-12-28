@@ -151,11 +151,9 @@ const globalStyle = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
-
   * {
     box-sizing: border-box;
   }
-
   img {
     max-width: 100%;
   }
@@ -169,7 +167,6 @@ const globalStyle = css`
     appearance: none;
     border-radius: 0;
     resize: none;
-
     &:focus {
       outline: none;
     }

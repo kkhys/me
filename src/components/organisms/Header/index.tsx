@@ -1,16 +1,16 @@
 import * as React from "react";
 import { Link } from "gatsby";
-import { ContentLayout } from "../../atoms";
-import svgLogo from "../../../svg/logo.svg";
-import { HeaderTag, HeaderInner } from "./styles";
+import { ContentLayout } from "_/atoms";
+import svgLogo from "@/svg/logo.svg";
+import * as styles from "./styles";
 
 const Header = ({ title, location }) => {
   const rootPath = `${__PATH_PREFIX__}/`;
   const HeadingLevel = location.pathname === rootPath ? "h1" : "h3";
   return (
-    <HeaderTag>
+    <header css={styles.root()}>
       <ContentLayout>
-        <HeaderInner>
+        <div css={styles.inner()}>
           <HeadingLevel>
             <Link to="/" className="logo-link">
               <img
@@ -22,9 +22,9 @@ const Header = ({ title, location }) => {
               />
             </Link>
           </HeadingLevel>
-        </HeaderInner>
+        </div>
       </ContentLayout>
-    </HeaderTag>
+    </header>
   );
 };
 

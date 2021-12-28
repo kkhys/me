@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-export const Wrapper = styled.div`
+export const root = () => css`
   background: #2e363f; // FIXME
   padding: 2em 2.5em; // FIXME
   @media screen and (max-width: 500px) {
@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const PostCardWrapper = styled.div`
+export const card = () => css`
   .post-card-link {
     display: flex;
     align-items: center;
@@ -27,7 +27,7 @@ export const PostCardWrapper = styled.div`
   }
 `;
 
-export const PostCardEmoji = styled.p`
+export const emoji = () => css`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,23 +37,20 @@ export const PostCardEmoji = styled.p`
   background: #2e363f; // FIXME
   border-radius: 10px;
   font-size: 50px;
-
   img {
     width: 45px;
     height: 45px;
   }
 `;
 
-export const PostCardContent = styled.div`
+export const content = () => css`
   width: calc(100% - 80px);
   padding-left: 15px;
-
   h5 {
     font-size: 1.1em;
     font-weight: 700;
     line-height: 1.45;
   }
-
   time {
     display: block;
     margin-bottom: 0.1em;
@@ -61,7 +58,6 @@ export const PostCardContent = styled.div`
     font-size: 0.8em;
     color: #969fa7; // FIXME
   }
-
   @media screen and (max-width: 500px) {
     // FIXME
     padding-left: 15px;

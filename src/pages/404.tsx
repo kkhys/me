@@ -1,61 +1,61 @@
 import * as React from "react";
 import { graphql, Link } from "gatsby";
-import styled from "@emotion/styled";
 
-import Layout from "../components/layout";
-import SEO from "../components/seo";
+import Layout from "_/layout";
+import SEO from "_/seo";
 
-import svg404 from "../svg/others/404.svg";
+import svg404 from "@/svg/others/404.svg";
+import { css } from "@emotion/react";
 
 const NotFoundPage = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title;
 
   return (
     <Layout location={location} title={siteTitle}>
-      <Wrapper>
+      <div css={root()}>
         <SEO title="ページが見つかりません" />
-        <HeroImage src={svg404} />
-        <Title>Not Found</Title>
-        <StyledLink to={`/`} className="cat-item__link">
+        <img css={img()} src={svg404} alt="Not found" />
+        <div css={title()}>Not Found</div>
+        <Link css={link()} to="/" className="cat-item__link">
           HOME
-        </StyledLink>
-      </Wrapper>
+        </Link>
+      </div>
     </Layout>
   );
 };
 
-const Wrapper = styled.div`
+const root = () => css`
   color: #fff;
   text-align: center;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: 500px) {
+    // FIXME
     margin-top: 2em;
   }
 `;
 
-const HeroImage = styled.img`
+const img = () => css`
   display: block;
   max-width: 300px;
   margin: 0 auto;
 `;
 
-const Title = styled.div`
+const title = () => css`
   font-size: 55px;
   font-weight: 700;
   color: #fff;
 `;
 
-const StyledLink = styled(Link)`
+const link = () => css`
   margin-top: 0.7em;
   display: inline-block;
   padding: 0.3em 1em;
   background: #fff;
   font-size: 20px;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.blackLight};
+  color: #313746;
   border-radius: 4px;
-
   &:hover {
-    background: ${(props) => props.theme.colors.highlight};
+    background: #58a6ff;
   }
 `;
 

@@ -2,19 +2,16 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 import twemoji from "twemoji";
-import styled from "@emotion/styled";
-
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import { CatLabel, ShareButtons } from "../components/molecules";
-import PostJsonLd from "../components/jsonLd/postJsonLd";
-import { RelatedPosts } from "../components/organisms";
-
-import postSyntaxHighlightStyle from "../styles/postSyntaxHighlight";
-import postContentStyle from "../styles/postContent";
-import postCustomBlockStyle from "../styles/postCustomBlock";
-
+import Layout from "_/layout";
+import SEO from "_/seo";
+import { CatLabel, ShareButtons } from "_/molecules";
+import PostJsonLd from "_/jsonLd/postJsonLd";
+import { RelatedPosts } from "_/organisms";
+import postSyntaxHighlightStyle from "@/styles/postSyntaxHighlight";
+import postContentStyle from "@/styles/postContent";
+import postCustomBlockStyle from "@/styles/postCustomBlock";
 import "katex/dist/katex.min.css";
+import { css } from "@emotion/react";
 
 const PostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark;
@@ -41,20 +38,24 @@ const PostTemplate = ({ data, pageContext, location }) => {
         url={location.href}
         categorySlug={category}
       />
-      <Content>
-        <HeroImage
+      <section css={content()}>
+        <p
           dangerouslySetInnerHTML={{
             __html: twemoji.parse(emoji || "🐙", {
               folder: "svg",
               ext: ".svg",
             }),
           }}
+          css={hero()}
         />
-        <ContentMain>
-          <PostDate>{date}</PostDate>
-          <PostTitle>{title}</PostTitle>
+        <div css={main()}>
+          <time css={postDate()}>{date}</time>
+          <h1 css={header()}>{title}</h1>
           <CatLabel slug={category} isLink="true" />
-          <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
+          <div
+            css={postContent()}
+            dangerouslySetInnerHTML={{ __html: post.html }}
+          />
           <ShareButtons
             slug={slug}
             title={title}
@@ -62,28 +63,29 @@ const PostTemplate = ({ data, pageContext, location }) => {
             category={categoryName}
             pageSlug={pageSlug}
           />
-        </ContentMain>
+        </div>
         <aside>
           <RelatedPosts posts={relatedPosts} />
         </aside>
-      </Content>
+      </section>
     </Layout>
   );
 };
 
-const Content = styled.section`
+const content = () => css`
   position: relative;
   overflow: hidden;
   font-size: 16px;
   border-radius: 15px;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-    margin: 0 -${(props) => props.theme.sideSpace.small};
+  @media screen and (max-width: 500px) {
+    // FIXME
+    margin: 0 -20px; // FIXME
   }
 `;
 
-const HeroImage = styled.p`
+const hero = () => css`
   position: relative;
-  background: ${(props) => props.theme.colors.blackLight};
+  background: #313746; // FIXME
   text-align: center;
   background-repeat: repeat;
   background-size: 400px;
@@ -91,43 +93,44 @@ const HeroImage = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
-
   .emoji {
     width: 110px;
     height: 110px;
   }
-
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: 500px) {
+    // FIXME
     min-height: 190px;
   }
 `;
 
-const ContentMain = styled.div`
-  padding: 1.8em ${(props) => props.theme.sideSpace.contentLarge};
+const main = () => css`
+  padding: 1.8em 2.5em; // FIXME
   background: #0d1117;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-    padding: 30px ${(props) => props.theme.sideSpace.contentSmall};
+  @media screen and (max-width: 500px) {
+    // FIXME
+    padding: 30px 20px; // FIXME
   }
 `;
 
-const PostTitle = styled.h1`
+const header = () => css`
   margin: 0.1em 0 0.3em;
   font-size: 1.8em;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: 500px) {
+    // FIXME
     font-size: 25px;
   }
   font-weight: 700;
   line-height: 1.5;
 `;
 
-const PostDate = styled.time`
+const postDate = () => css`
   display: block;
-  color: ${(props) => props.theme.colors.silver};
+  color: #969fa7; // FIXME
   font-size: 0.9em;
   letter-spacing: 0.05em;
 `;
 
-const PostContent = styled.div`
+const postContent = () => css`
   ${postSyntaxHighlightStyle}
   ${postContentStyle}
   ${postCustomBlockStyle}

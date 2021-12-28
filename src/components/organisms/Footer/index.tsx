@@ -1,12 +1,12 @@
 import * as React from "react";
-import { ContentLayout } from "../../atoms";
-import { FooterContent, FooterInner } from "./styles";
+import { ContentLayout } from "_/atoms";
+import * as styles from "./styles";
 
 const Footer = () => {
   return (
-    <FooterContent>
+    <footer css={styles.root()}>
       <ContentLayout>
-        <FooterInner>
+        <div css={styles.inner()}>
           <div>
             <a
               href="https://github.com/ktnkk/blog"
@@ -17,9 +17,9 @@ const Footer = () => {
             </a>
           </div>
           <div>© {new Date().getFullYear()}, ktnkk.log</div>
-        </FooterInner>
+        </div>
       </ContentLayout>
-    </FooterContent>
+    </footer>
   );
 };
 

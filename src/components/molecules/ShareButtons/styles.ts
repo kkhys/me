@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-export const Wrapper = styled.div`
+export const root = () => css`
   margin: 1.8rem 0 0;
   padding: 0 2.5em; // FIXME
   text-align: center;
@@ -11,17 +11,17 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const ShareTitle = styled.div`
+export const title = () => css`
   font-weight: 700;
   font-size: 1.2em;
   letter-spacing: 0.05em;
 `;
 
-export const ShareLinks = styled.div`
+export const links = () => css`
   margin-top: 0.5em;
 `;
 
-export const ShareLink = styled.a`
+export const link = () => css`
   display: inline-block;
   margin: 0 6px;
   width: 40px;
@@ -32,12 +32,12 @@ export const ShareLink = styled.a`
   background: #313746; // FIXME
   font-weight: 700;
   vertical-align: middle;
-
   &:hover {
     transform: translateY(-2px);
   }
 `;
-export const GitHubLink = styled.a`
+
+export const ghLink = () => css`
   display: inline-block;
   margin-top: 1em;
   font-size: 0.85em;

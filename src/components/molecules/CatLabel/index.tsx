@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
-import { Wrapper } from "./styles";
+import * as styles from "./styles";
 
 const CategoryLabel = ({ slug, isLink = false }) => {
   if (!slug) return null;
@@ -59,7 +59,7 @@ const CategoryLabel = ({ slug, isLink = false }) => {
     </span>
   );
 
-  return <Wrapper>{content}</Wrapper>;
+  return <div css={styles.root}>{content}</div>;
 };
 
 export default CategoryLabel;

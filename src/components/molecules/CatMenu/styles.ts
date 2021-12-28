@@ -1,11 +1,11 @@
-import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-export const Nav = styled.nav`
+export const nav = () => css`
   display: block;
   margin: 0;
 `;
 
-export const CategoryItemList = styled.ul`
+export const list = () => css`
   display: flex;
   @media screen and (max-width: 500px) {
     // FIXME
@@ -16,7 +16,6 @@ export const CategoryItemList = styled.ul`
     ::-webkit-scrollbar {
       display: none;
     }
-
     &:after {
       content: "";
       width: 40px;
@@ -25,7 +24,7 @@ export const CategoryItemList = styled.ul`
   }
 `;
 
-export const CategoryItem = styled.li`
+export const item = () => css`
   width: 70px;
   margin: 0 20px 0 0;
   text-align: center;
@@ -35,17 +34,11 @@ export const CategoryItem = styled.li`
     flex: 0 0 auto;
     margin: 0 0 0 15px;
   }
-
-  .cat-item__link {
-    color: #c9d1d9;
-  }
-
-  .cat-item__image {
+  .cat-item__img {
     padding: 2px;
     background: #313746; // FIXME
     border-radius: 50%;
     position: relative;
-
     img {
       position: relative;
       background: #313746; // FIXME
@@ -54,21 +47,8 @@ export const CategoryItem = styled.li`
       z-index: 2;
     }
   }
-
-  .cat-item__name {
-    margin-top: 5px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: #727d86; // FIXME
-    @media screen and (max-width: 500px) {
-      // FIXME
-      font-size: 12px;
-    }
-  }
-
   &.active {
-    .cat-item__image:after {
+    .cat-item__img:after {
       content: "";
       position: absolute;
       display: block;
@@ -85,12 +65,10 @@ export const CategoryItem = styled.li`
       ); // FIXME
       animation: rotating 2s linear infinite;
     }
-
     img {
       border: solid 2px #0d1117; // FIXME
     }
   }
-
   @keyframes rotating {
     from {
       transform: rotate(0deg);
@@ -98,5 +76,21 @@ export const CategoryItem = styled.li`
     to {
       transform: rotate(360deg);
     }
+  }
+`;
+
+export const link = () => css`
+  color: #c9d1d9;
+`;
+
+export const name = () => css`
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #727d86; // FIXME
+  @media screen and (max-width: 500px) {
+    // FIXME
+    font-size: 12px;
   }
 `;

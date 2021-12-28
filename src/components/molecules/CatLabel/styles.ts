@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-export const Wrapper = styled.div`
+export const root = () => css`
   .category-text {
     display: inline;
     padding: 3px 10px;

@@ -1,18 +1,16 @@
-import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-export const HeaderTag = styled.header`
+export const root = () => css`
   padding: 1.4rem 0;
   width: 100%;
 `;
 
-export const HeaderInner = styled.div`
+export const inner = () => css`
   position: relative;
-
   h1,
   h3 {
     width: 100%;
   }
-
   .logo {
     display: block;
     @media screen and (max-width: 500px) {
@@ -20,18 +18,15 @@ export const HeaderInner = styled.div`
       margin: 0 auto;
     }
   }
-
   .logo-link {
     display: block;
   }
-
   .message-link {
     position: absolute;
     right: 0;
     top: 7px;
     display: block;
     width: 34px;
-
     &:hover {
       top: 5px;
     }

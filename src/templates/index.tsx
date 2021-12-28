@@ -1,21 +1,18 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
-import styled from "@emotion/styled";
-
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import { CatMenu, Pagination } from "../components/molecules";
-import { PostCard } from "../components/organisms";
-import HomeJsonLd from "../components/jsonLd/homeJsonLd";
+import Layout from "_/layout";
+import SEO from "_/seo";
+import { CatMenu, Pagination } from "_/molecules";
+import { PostCard } from "_/organisms";
+import HomeJsonLd from "_/jsonLd/homeJsonLd";
+import { css } from "@emotion/react";
 
 const Index = ({ data, pageContext, location }) => {
   const siteTitle = data.site.siteMetadata.title;
   const posts = data.allMarkdownRemark.edges;
-
   const { currentPage, hasNextPage, hasPrevPage, numPages } = pageContext;
   const postPagePath = (page) => (page <= 1 ? `/` : `/${page}/`);
-
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="" />
@@ -24,11 +21,11 @@ const Index = ({ data, pageContext, location }) => {
       </Helmet>
       <HomeJsonLd />
       <CatMenu location={location} currentPage={currentPage} />
-      <PostsContainer>
+      <div css={container()}>
         {posts.map(({ node }) => {
           return <PostCard key={node.fields.slug} node={node} />;
         })}
-      </PostsContainer>
+      </div>
       <Pagination
         pagePath={postPagePath}
         numPages={numPages}
@@ -40,7 +37,7 @@ const Index = ({ data, pageContext, location }) => {
   );
 };
 
-const PostsContainer = styled.div`
+const container = () => css`
   margin-top: 1.5rem;
 `;
 

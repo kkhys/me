@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-export const IndexContent = styled.div`
+export const root = () => css`
   max-width: 1100px; // FIXME
   margin: 0 auto;
   padding: 0 1.5em; // FIXME

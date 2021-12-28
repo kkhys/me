@@ -1,12 +1,11 @@
 import * as React from "react";
-import { ThemeProvider } from "@emotion/react";
+import { css, ThemeProvider } from "@emotion/react";
 import { Helmet } from "react-helmet";
-import theme from "../styles/theme";
-import { Footer, Header } from "./organisms";
-import { ContentLayout } from "./atoms";
-import styled from "@emotion/styled";
+import theme from "@/styles/theme";
+import { Footer, Header } from "_/organisms";
+import { ContentLayout } from "_/atoms";
 import { Global } from "@emotion/react";
-import globalStyle from "../styles/global";
+import globalStyle from "@/styles/global";
 
 const Layout = ({ location, title, children }) => {
   return (
@@ -22,11 +21,11 @@ const Layout = ({ location, title, children }) => {
       <div className="siteRoot">
         <Header title={title} location={location} />
         <ContentLayout>
-          <Content>
-            <MainWrapper>
+          <div css={content()}>
+            <div css={main()}>
               <main>{children}</main>
-            </MainWrapper>
-          </Content>
+            </div>
+          </div>
         </ContentLayout>
         <Footer />
         <Global styles={globalStyle} />
@@ -35,7 +34,7 @@ const Layout = ({ location, title, children }) => {
   );
 };
 
-const Content = styled.div`
+const content = () => css`
   margin-top: 1rem;
   display: flex;
   min-height: 85vh;
@@ -51,7 +50,7 @@ const Content = styled.div`
   }
 `;
 
-const MainWrapper = styled.div`
+const main = () => css`
   width: calc(100% - 290px - 40px); // FIXME
   @media screen and (max-width: 950px) {
     // FIXME

@@ -4101,10 +4101,10 @@ type PostJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
       & { readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug'>>>> }
     )> }> };
 
-type CategoryLabelQueryVariables = Exact<{ [key: string]: never; }>;
+type HomeJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type CategoryLabelQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<{ readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug' | 'color' | 'borderColor' | 'background'>>>> }> }> };
+type HomeJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl' | 'description' | 'author'>> }> };
 
 type CategoryJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4116,10 +4116,10 @@ type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
 type SeoQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl' | 'description' | 'author'>> }> };
 
-type HomeJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
+type CategoryLabelQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type HomeJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl' | 'description' | 'author'>> }> };
+type CategoryLabelQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<{ readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug' | 'color' | 'borderColor' | 'background'>>>> }> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
