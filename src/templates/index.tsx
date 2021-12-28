@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import PostCard from "../components/postCard";
-import CategoryMenu from "../components/categoryMenu";
+import { CatMenu } from "../components/molecules";
 import HomeJsonLd from "../components/json/homeJsonLd";
 import Pagination from "../components/pagination";
 
@@ -24,7 +24,7 @@ const Index = ({ data, pageContext, location }) => {
         <link rel="canonical" href="https://ktnkk.com" />
       </Helmet>
       <HomeJsonLd />
-      <CategoryMenu location={location} currentPage={currentPage} />
+      <CatMenu location={location} currentPage={currentPage} />
       <PostsContainer>
         {posts.map(({ node }) => {
           return <PostCard key={node.fields.slug} node={node} />;

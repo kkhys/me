@@ -3,8 +3,8 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import PostCard from "../components/postCard";
-import CategoryMenu from "../components/categoryMenu";
 import CategoryJsonLd from "../components/json/categoryJsonLd";
+import { CatMenu } from "../components/molecules";
 import styled from "styled-components";
 import Pagination from "../components/pagination";
 
@@ -24,7 +24,7 @@ const CategoryTemplate = ({ data, pageContext, location }) => {
     <Layout location={location} title={categoryName}>
       <SEO title={categoryName} />
       <CategoryJsonLd categorySlug={categorySlug} categoryName={categoryName} />
-      <CategoryMenu location={location} currentPage={currentPage} />
+      <CatMenu location={location} currentPage={currentPage} />
       <Heading>{categoryName}</Heading>
       {posts.map(({ node }) => {
         return <PostCard key={node.fields.slug} node={node} />;
