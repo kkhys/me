@@ -4,9 +4,11 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 import PostCard from "../components/postCard";
 import CategoryJsonLd from "../components/json/categoryJsonLd";
-import { CatMenu } from "../components/molecules";
+import {
+  CatMenu,
+  StyledPagination as Pagination,
+} from "../components/molecules";
 import styled from "styled-components";
-import Pagination from "../components/pagination";
 
 const CategoryTemplate = ({ data, pageContext, location }) => {
   const posts = data.allMarkdownRemark.edges;

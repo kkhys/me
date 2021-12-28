@@ -6,9 +6,11 @@ import styled from "styled-components";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import PostCard from "../components/postCard";
-import { CatMenu } from "../components/molecules";
+import {
+  CatMenu,
+  StyledPagination as Pagination,
+} from "../components/molecules";
 import HomeJsonLd from "../components/json/homeJsonLd";
-import Pagination from "../components/pagination";
 
 const Index = ({ data, pageContext, location }) => {
   const siteTitle = data.site.siteMetadata.title;
