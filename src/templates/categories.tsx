@@ -2,12 +2,12 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import PostCard from "../components/postCard";
 import CategoryJsonLd from "../components/json/categoryJsonLd";
 import {
   CatMenu,
   StyledPagination as Pagination,
 } from "../components/molecules";
+import { PostCard } from "../components/organisms";
 import styled from "styled-components";
 
 const CategoryTemplate = ({ data, pageContext, location }) => {
