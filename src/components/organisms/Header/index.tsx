@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "gatsby";
-import ContentWrapper from "../../contentWrapper";
+import { ContentLayout } from "../../atoms";
 // import svgLogo from "../../../svg/logo";
 import { HeaderTag, HeaderInner } from "./styles";
 
@@ -9,7 +9,7 @@ const Header = ({ title, location }) => {
   const HeadingLevel = location.pathname === rootPath ? "h1" : "h3";
   return (
     <HeaderTag>
-      <ContentWrapper>
+      <ContentLayout>
         <HeaderInner>
           <HeadingLevel>
             <Link to="/" className="logo-link">
@@ -23,7 +23,7 @@ const Header = ({ title, location }) => {
             </Link>
           </HeadingLevel>
         </HeaderInner>
-      </ContentWrapper>
+      </ContentLayout>
     </HeaderTag>
   );
 };

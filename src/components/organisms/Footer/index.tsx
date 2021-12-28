@@ -1,11 +1,11 @@
 import * as React from "react";
-import ContentWrapper from "../../contentWrapper";
+import { ContentLayout } from "../../atoms";
 import { FooterContent, FooterInner } from "./styles";
 
 const Footer = () => {
   return (
     <FooterContent>
-      <ContentWrapper>
+      <ContentLayout>
         <FooterInner>
           <div>
             <a
@@ -18,7 +18,7 @@ const Footer = () => {
           </div>
           <div>© {new Date().getFullYear()}, ktnkk.log</div>
         </FooterInner>
-      </ContentWrapper>
+      </ContentLayout>
     </FooterContent>
   );
 };

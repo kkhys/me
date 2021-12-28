@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import GlobalStyle from "../styles/global";
 import theme from "../styles/theme";
 import { Footer, Header } from "./organisms";
-import ContentWrapper from "./contentWrapper";
+import { ContentLayout } from "./atoms";
 import styled from "styled-components";
 
 const Layout = ({ location, title, children }) => {
@@ -20,13 +20,13 @@ const Layout = ({ location, title, children }) => {
       </Helmet>
       <div className="siteRoot">
         <Header title={title} location={location} />
-        <ContentWrapper>
+        <ContentLayout>
           <Content>
             <MainWrapper>
               <main>{children}</main>
             </MainWrapper>
           </Content>
-        </ContentWrapper>
+        </ContentLayout>
         <Footer />
         <GlobalStyle />
       </div>
