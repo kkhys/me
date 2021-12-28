@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import twemoji from "twemoji";
-import CategoryLabel from "./categoryLabel";
+import { CatLabel } from "./molecules";
 
 const PostCard = ({ node }) => {
   const title = node.frontmatter.title || node.fields.slug;
@@ -18,7 +18,7 @@ const PostCard = ({ node }) => {
         <PostCardContent>
           <h3>{title}</h3>
           <time>{node.frontmatter.date}</time>
-          <CategoryLabel slug={node.frontmatter.category} />
+          <CatLabel slug={node.frontmatter.category} />
         </PostCardContent>
       </Link>
     </PostCardWrapper>

@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import CategoryLabel from "../components/categoryLabel";
+import { CatLabel } from "../components/molecules";
 import PostJsonLd from "../components/json/postJsonLd";
 import RelatedPosts from "../components/relatedPosts";
 import ShareButtons from "../components/shareButtons";
@@ -54,7 +54,7 @@ const PostTemplate = ({ data, pageContext, location }) => {
         <ContentMain>
           <PostDate>{date}</PostDate>
           <PostTitle>{title}</PostTitle>
-          <CategoryLabel slug={category} isLink="true" />
+          <CatLabel slug={category} isLink="true" />
           <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
           <ShareButtons
             slug={slug}
