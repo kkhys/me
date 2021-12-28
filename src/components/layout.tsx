@@ -3,8 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { Helmet } from "react-helmet";
 import GlobalStyle from "../styles/global";
 import theme from "../styles/theme";
-import Footer from "./footer";
-import { Header } from "./organisms";
+import { Footer, Header } from "./organisms";
 import ContentWrapper from "./contentWrapper";
 import styled from "styled-components";
 
