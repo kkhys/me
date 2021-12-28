@@ -263,6 +263,8 @@ type Site = Node & {
   readonly siteMetadata: Maybe<SiteSiteMetadata>;
   readonly port: Maybe<Scalars['Int']>;
   readonly host: Maybe<Scalars['String']>;
+  readonly polyfill: Maybe<Scalars['Boolean']>;
+  readonly pathPrefix: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -999,6 +1001,8 @@ type Query_siteArgs = {
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
   port: Maybe<IntQueryOperatorInput>;
   host: Maybe<StringQueryOperatorInput>;
+  polyfill: Maybe<BooleanQueryOperatorInput>;
+  pathPrefix: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -2220,6 +2224,8 @@ type SiteFieldsEnum =
   | 'siteMetadata.categories.background'
   | 'port'
   | 'host'
+  | 'polyfill'
+  | 'pathPrefix'
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -2353,6 +2359,8 @@ type SiteFilterInput = {
   readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
   readonly port: Maybe<IntQueryOperatorInput>;
   readonly host: Maybe<StringQueryOperatorInput>;
+  readonly polyfill: Maybe<BooleanQueryOperatorInput>;
+  readonly pathPrefix: Maybe<StringQueryOperatorInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
@@ -4029,11 +4037,6 @@ type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
-type HomeJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type HomeJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl' | 'description' | 'author'>> }> };
-
 type PostJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4041,6 +4044,16 @@ type PostJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
       Pick<SiteSiteMetadata, 'siteUrl' | 'author'>
       & { readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug'>>>> }
     )> }> };
+
+type HomeJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type HomeJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl' | 'description' | 'author'>> }> };
+
+type CategoryLabelQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type CategoryLabelQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<{ readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug' | 'color' | 'borderColor' | 'background'>>>> }> }> };
 
 type CategoryJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4051,11 +4064,6 @@ type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type SeoQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl' | 'description' | 'author'>> }> };
-
-type CategoryLabelQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type CategoryLabelQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<{ readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug' | 'color' | 'borderColor' | 'background'>>>> }> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
