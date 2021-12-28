@@ -1,12 +1,11 @@
 import * as React from "react";
-import { ThemeProvider } from "styled-components";
+import { css, ThemeProvider } from "@emotion/react";
 import { Helmet } from "react-helmet";
-import GlobalStyle from "../styles/global";
-import theme from "../styles/theme";
-import Header from "./header";
-import Footer from "./footer";
-import ContentWrapper from "./contentWrapper";
-import styled from "styled-components";
+import theme from "@/styles/theme";
+import { Footer, Header } from "_/organisms";
+import { ContentLayout } from "_/atoms";
+import { Global } from "@emotion/react";
+import globalStyle from "@/styles/global";
 
 const Layout = ({ location, title, children }) => {
   return (
@@ -21,37 +20,40 @@ const Layout = ({ location, title, children }) => {
       </Helmet>
       <div className="siteRoot">
         <Header title={title} location={location} />
-        <ContentWrapper>
-          <Content>
-            <MainWrapper>
+        <ContentLayout>
+          <div css={content()}>
+            <div css={main()}>
               <main>{children}</main>
-            </MainWrapper>
-          </Content>
-        </ContentWrapper>
+            </div>
+          </div>
+        </ContentLayout>
         <Footer />
-        <GlobalStyle />
+        <Global styles={globalStyle} />
       </div>
     </ThemeProvider>
   );
 };
 
-const Content = styled.div`
+const content = () => css`
   margin-top: 1rem;
   display: flex;
   min-height: 85vh;
   align-items: flex-start;
   justify-content: center;
-  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+  @media screen and (max-width: 950px) {
+    // FIXME
     display: block;
   }
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: 500px) {
+    // FIXME
     margin-top: 0.5rem;
   }
 `;
 
-const MainWrapper = styled.div`
-  width: calc(100% - ${(props) => props.theme.sizes.bioWidth} - 40px);
-  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+const main = () => css`
+  width: calc(100% - 290px - 40px); // FIXME
+  @media screen and (max-width: 950px) {
+    // FIXME
     width: 100%;
   }
 `;

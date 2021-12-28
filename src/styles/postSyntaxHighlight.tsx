@@ -1,15 +1,15 @@
-import { css } from "styled-components";
+import { css } from "@emotion/react";
 
 const boxPaddingSide = "1.05em";
 
 const SyntaxHighlightStyle = css`
   .gatsby-highlight {
     margin: 1.5em 0;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-      margin: 1.5em -${(props) => props.theme.sideSpace.contentSmall};
+    @media screen and (max-width: 500px) {
+      // FIXME
+      margin: 1.5em - 20px; // FIXME
     }
   }
-
   code[class*="language-"],
   pre[class*="language-"] {
     hyphens: none;
@@ -20,74 +20,63 @@ const SyntaxHighlightStyle = css`
     color: #22aef1;
     text-shadow: none;
   }
-
   pre[class*="language-"],
   :not(pre) > code[class*="language-"] {
     background: #22272e;
     border-radius: 5px;
     border: 1px solid #444c56;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    @media screen and (max-width: 500px) {
+      // FIXME
       border-radius: 0;
       border: 0;
     }
   }
-
   pre[class*="language-"] {
     padding: 26px ${boxPaddingSide};
     overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
-
   pre[class*="language-"] {
     position: relative;
   }
-
   pre[class*="language-"] code {
     white-space: pre;
     display: block;
   }
-
   :not(pre) > code[class*="language-"] {
     padding: 0.15em 0.2em 0.05em;
     border-radius: 0.3em;
     border: 0.13em solid #7a6652;
     box-shadow: 1px 1px 0.3em -0.1em #000 inset;
   }
-
   .token.namespace {
     opacity: 0.7;
   }
-
   .token.comment,
   .token.prolog,
   .token.doctype,
   .token.cdata {
     color: rgba(255, 255, 255, 0.6);
   }
-
   .token.operator,
   .token.boolean,
   .token.number {
     color: #a77afe;
   }
-
   .token.attr-name,
   .token.string {
     color: #ffab3c;
   }
-
   .token.entity,
   .token.url,
   .language-css .token.string,
   .style .token.string {
     color: #ffab3c;
   }
-
   .token.selector,
   .token.inserted {
     color: #3eda86;
   }
-
   .token.atrule,
   .token.attr-value,
   .token.keyword,
@@ -95,62 +84,48 @@ const SyntaxHighlightStyle = css`
   .token.deleted {
     color: #ff7574;
   }
-
   .token.regex,
   .token.statement {
     color: #22aef1;
   }
-
   .token.placeholder,
   .token.variable {
     color: #fff;
   }
-
   .token.important,
   .token.statement,
   .token.bold {
     font-weight: 700;
   }
-
   .token.punctuation {
     color: #bebec5;
   }
-
   .token.entity {
     cursor: help;
   }
-
   .token.italic {
     font-style: italic;
   }
-
   code.language-markup {
     color: #f9f9f9;
   }
-
   code.language-markup .token.tag {
     color: #ff7574;
   }
-
   code.language-markup .token.attr-name {
     color: #3eda86;
   }
-
   code.language-markup .token.attr-value {
     color: #ffab3c;
   }
-
   code.language-markup .token.style,
   code.language-markup .token.script {
     color: #22aef1;
   }
-
   code.language-markup .token.script .token.keyword {
     color: #22aef1;
   }
-
   /* Line highlight plugin */
-
   .gatsby-highlight-code-line {
     background-color: #3a362b;
     display: table;
@@ -160,9 +135,7 @@ const SyntaxHighlightStyle = css`
     padding-left: 12px;
     border-left: 3px solid #6c5322;
   }
-
   /*gatsby-remark-code-titles*/
-
   .gatsby-code-title {
     position: relative;
     margin: 1.5em 0 -24px auto;
@@ -179,19 +152,17 @@ const SyntaxHighlightStyle = css`
     display: table;
     z-index: 2;
     border: 1px solid #444c56;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    @media screen and (max-width: 500px) {
+      // FIXME
       border-radius: 0;
-      margin-right: -${(props) => props.theme.sideSpace.contentSmall};
+      margin-right: -20px; // FIXME
       border: 0;
     }
   }
-
   .gatsby-code-title + .gatsby-highlight {
     margin-top: 0;
   }
-
   /* Inline code */
-
   p > code,
   li > code {
     display: inline-block;
@@ -203,26 +174,21 @@ const SyntaxHighlightStyle = css`
     color: #c9d1d9 !important;
     text-indent: 0;
   }
-
   .command-line-prompt {
     border-right: 0;
   }
-
   .command-line-prompt > span:before {
     color: #999;
     content: " ";
     display: block;
     padding-right: 0;
   }
-
   .command-line-prompt > span[data-user]:before {
     content: "$";
   }
-
   .command-line-prompt > span[data-user="root"]:before {
     content: "#";
   }
-
   .command-line-prompt > span[data-prompt]:before {
     content: attr(data-prompt);
   }

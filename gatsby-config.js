@@ -45,7 +45,7 @@ module.exports = {
   plugins: [
     "gatsby-plugin-sitemap",
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-styled-components",
+    "gatsby-plugin-emotion",
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     {
@@ -196,11 +196,11 @@ module.exports = {
         showSpinner: false,
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-typegen`,
-    //   options: {
-    //     outputPath: `types/gatsby-types.d.ts`
-    //   }
-    // }
+    {
+      resolve: `gatsby-plugin-typegen`,
+      options: {
+        outputPath: `types/gatsby-types.d.ts`,
+      },
+    },
   ],
 };

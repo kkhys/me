@@ -1,22 +1,18 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
-import styled from "styled-components";
-
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import PostCard from "../components/postCard";
-import CategoryMenu from "../components/categoryMenu";
-import HomeJsonLd from "../components/json/homeJsonLd";
-import Pagination from "../components/pagination";
+import Layout from "_/layout";
+import SEO from "_/seo";
+import { CatMenu, Pagination } from "_/molecules";
+import { PostCard } from "_/organisms";
+import HomeJsonLd from "_/jsonLd/homeJsonLd";
+import { css } from "@emotion/react";
 
 const Index = ({ data, pageContext, location }) => {
   const siteTitle = data.site.siteMetadata.title;
   const posts = data.allMarkdownRemark.edges;
-
   const { currentPage, hasNextPage, hasPrevPage, numPages } = pageContext;
   const postPagePath = (page) => (page <= 1 ? `/` : `/${page}/`);
-
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="" />
@@ -24,12 +20,12 @@ const Index = ({ data, pageContext, location }) => {
         <link rel="canonical" href="https://ktnkk.com" />
       </Helmet>
       <HomeJsonLd />
-      <CategoryMenu location={location} currentPage={currentPage} />
-      <PostsContainer>
+      <CatMenu location={location} currentPage={currentPage} />
+      <div css={container()}>
         {posts.map(({ node }) => {
           return <PostCard key={node.fields.slug} node={node} />;
         })}
-      </PostsContainer>
+      </div>
       <Pagination
         pagePath={postPagePath}
         numPages={numPages}
@@ -41,7 +37,7 @@ const Index = ({ data, pageContext, location }) => {
   );
 };
 
-const PostsContainer = styled.div`
+const container = () => css`
   margin-top: 1.5rem;
 `;
 

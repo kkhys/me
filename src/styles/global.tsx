@@ -1,23 +1,91 @@
-import { createGlobalStyle } from "styled-components";
+import { css } from "@emotion/react";
 
-const globalStyle = createGlobalStyle`
+const globalStyle = css`
   /* https://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
   */
-  html, body, div, span, applet, object, iframe,
-  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-  a, abbr, acronym, address, big, cite, code,
-  del, dfn, em, img, ins, kbd, q, s, samp,
-  small, strike, strong, sub, sup, tt, var,
-  b, u, i, center,
-  dl, dt, dd, ol, ul, li,
-  fieldset, form, label, legend,
-  table, caption, tbody, tfoot, thead, tr, th, td,
-  article, aside, canvas, details, embed,
-  figure, figcaption, footer, header, hgroup,
-  menu, nav, output, ruby, section, summary,
-  time, mark, audio, video {
+  html,
+  body,
+  div,
+  span,
+  applet,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  big,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  s,
+  samp,
+  small,
+  strike,
+  strong,
+  sub,
+  sup,
+  tt,
+  var,
+  b,
+  u,
+  i,
+  center,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  embed,
+  figure,
+  figcaption,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  output,
+  ruby,
+  section,
+  summary,
+  time,
+  mark,
+  audio,
+  video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -26,64 +94,69 @@ const globalStyle = createGlobalStyle`
     vertical-align: baseline;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   }
-
-  html, body {
+  html,
+  body {
     height: 100%;
   }
-
   body {
-    background: ${(props) => props.theme.colors.background};
+    background: #0d1117; // FIXME
     color: #c9d1d9;
     line-height: 1.6;
     font-size: 100%;
     font-weight: 400;
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: "Noto Sans JP", sans-serif;
     -webkit-text-size-adjust: none;
     letter-spacing: 0.05em;
   }
-
-  article, aside, details, figcaption, figure,
-  footer, header, hgroup, menu, nav, section {
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  section {
     display: block;
   }
-
   a {
-    color: ${(props) => props.theme.colors.highlight};
+    color: #58a6ff; // FIXME
     text-decoration: none;
-    transition: .2s;
-
+    transition: 0.2s;
     :focus {
       outline: none;
     }
   }
-
-  ol, ul, li {
+  ol,
+  ul,
+  li {
     list-style: none;
   }
 
-  blockquote, q {
+  blockquote,
+  q {
     quotes: none;
   }
 
-  blockquote::before, blockquote::after,
-  q::before, q::after {
-    content: '';
+  blockquote::before,
+  blockquote::after,
+  q::before,
+  q::after {
+    content: "";
     content: none;
   }
-
   table {
     border-collapse: collapse;
     border-spacing: 0;
   }
-
   * {
     box-sizing: border-box;
   }
-
   img {
     max-width: 100%;
   }
-
   button,
   input {
     font-family: inherit;
@@ -94,7 +167,6 @@ const globalStyle = createGlobalStyle`
     appearance: none;
     border-radius: 0;
     resize: none;
-
     &:focus {
       outline: none;
     }
