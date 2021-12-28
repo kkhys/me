@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { CatLabel, ShareButtons } from "../components/molecules";
-import PostJsonLd from "../components/json/postJsonLd";
+import PostJsonLd from "../components/jsonLd/postJsonLd";
 import { RelatedPosts } from "../components/organisms";
 
 import postSyntaxHighlightStyle from "../styles/postSyntaxHighlight";

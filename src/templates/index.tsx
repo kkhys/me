@@ -10,7 +10,7 @@ import {
   StyledPagination as Pagination,
 } from "../components/molecules";
 import { PostCard } from "../components/organisms";
-import HomeJsonLd from "../components/json/homeJsonLd";
+import HomeJsonLd from "../components/jsonLd/homeJsonLd";
 
 const Index = ({ data, pageContext, location }) => {
   const siteTitle = data.site.siteMetadata.title;
