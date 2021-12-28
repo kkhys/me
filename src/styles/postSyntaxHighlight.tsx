@@ -1,12 +1,13 @@
-import { css } from "styled-components";
+import { css } from "@emotion/react";
 
 const boxPaddingSide = "1.05em";
 
 const SyntaxHighlightStyle = css`
   .gatsby-highlight {
     margin: 1.5em 0;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-      margin: 1.5em -${(props) => props.theme.sideSpace.contentSmall};
+    @media screen and (max-width: 500px) {
+      // FIXME
+      margin: 1.5em - 20px; // FIXME
     }
   }
 
@@ -26,7 +27,8 @@ const SyntaxHighlightStyle = css`
     background: #22272e;
     border-radius: 5px;
     border: 1px solid #444c56;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    @media screen and (max-width: 500px) {
+      // FIXME
       border-radius: 0;
       border: 0;
     }
@@ -179,9 +181,10 @@ const SyntaxHighlightStyle = css`
     display: table;
     z-index: 2;
     border: 1px solid #444c56;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    @media screen and (max-width: 500px) {
+      // FIXME
       border-radius: 0;
-      margin-right: -${(props) => props.theme.sideSpace.contentSmall};
+      margin-right: -20px; // FIXME
       border: 0;
     }
   }

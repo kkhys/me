@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import { Wrapper } from "./styles";
 
-const CategoryLabel = ({ slug, isLink }) => {
+const CategoryLabel = ({ slug, isLink = false }) => {
   if (!slug) return null;
   const { site } = useStaticQuery<GatsbyTypes.CategoryLabelQuery>(
     graphql`

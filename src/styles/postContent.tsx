@@ -1,4 +1,4 @@
-import { css } from "styled-components";
+import { css } from "@emotion/react";
 
 const postContentStyle = css`
   margin: 1.5em 0 1em;
@@ -160,7 +160,7 @@ const postContentStyle = css`
   blockquote {
     margin: 2.3em 0;
     font-style: italic;
-    background: ${(props) => props.theme.colors.whitesmoke};
+    background: #2e363f; // FIXME
     padding: 1em;
 
     p {

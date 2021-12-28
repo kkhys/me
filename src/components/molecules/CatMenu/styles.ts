@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const Nav = styled.nav`
   display: block;
@@ -7,7 +7,8 @@ export const Nav = styled.nav`
 
 export const CategoryItemList = styled.ul`
   display: flex;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: 500px) {
+    // FIXME
     margin: 0 -20px;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -28,7 +29,8 @@ export const CategoryItem = styled.li`
   width: 70px;
   margin: 0 20px 0 0;
   text-align: center;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: 500px) {
+    // FIXME
     width: 60px;
     flex: 0 0 auto;
     margin: 0 0 0 15px;
@@ -40,13 +42,13 @@ export const CategoryItem = styled.li`
 
   .cat-item__image {
     padding: 2px;
-    background: ${(props) => props.theme.colors.blackLight};
+    background: #313746; // FIXME
     border-radius: 50%;
     position: relative;
 
     img {
       position: relative;
-      background: ${(props) => props.theme.colors.blackLight};
+      background: #313746; // FIXME
       border-radius: 50%;
       display: block;
       z-index: 2;
@@ -58,8 +60,9 @@ export const CategoryItem = styled.li`
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    color: ${(props) => props.theme.colors.gray};
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    color: #727d86; // FIXME
+    @media screen and (max-width: 500px) {
+      // FIXME
       font-size: 12px;
     }
   }
@@ -74,12 +77,17 @@ export const CategoryItem = styled.li`
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: ${(props) => props.theme.colors.gradient};
+      background: linear-gradient(
+        -225deg,
+        #7085b6 0%,
+        #87a7d9 50%,
+        #def3f8 100%
+      ); // FIXME
       animation: rotating 2s linear infinite;
     }
 
     img {
-      border: solid 2px ${(props) => props.theme.colors.background};
+      border: solid 2px #0d1117; // FIXME
     }
   }
 

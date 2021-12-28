@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const HeaderTag = styled.header`
   padding: 1.4rem 0;
@@ -15,7 +15,8 @@ export const HeaderInner = styled.div`
 
   .logo {
     display: block;
-    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+    @media screen and (max-width: 500px) {
+      // FIXME
       margin: 0 auto;
     }
   }

@@ -1,9 +1,9 @@
-import { css } from "styled-components";
+import { css } from "@emotion/react";
 
 const postCustomBlockStyle = css`
   .custom-block {
     margin: 1em 0;
-    background: ${(props) => props.theme.colors.whitesmoke};
+    background: #2e363f; // FIXME
   }
 
   .custom-block-heading {
@@ -64,7 +64,7 @@ const postCustomBlockStyle = css`
     background: #371f2b;
 
     .custom-block-heading {
-      color: ${(props) => props.theme.colors.red};
+      color: #f7615f; // FIXME
     }
   }
 
@@ -73,13 +73,13 @@ const postCustomBlockStyle = css`
     background: #272115;
 
     .custom-block-heading {
-      color: ${(props) => props.theme.colors.orange};
+      color: #ffa22b; // FIXME
     }
   }
 
   .custom-block.image-small,
   .custom-block.image-medium {
-    background: ${(props) => props.theme.colors.whitesmoke};
+    background: #2e363f; // FIXME
     padding: 1.5em;
     text-align: center;
     border-radius: 5px;

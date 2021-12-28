@@ -1,12 +1,13 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   margin: 1.8rem 0 0;
-  padding: 0 ${(props) => props.theme.sideSpace.contentLarge};
+  padding: 0 2.5em; // FIXME
   text-align: center;
   color: #c9d1d9;
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-    padding: 0 ${(props) => props.theme.sideSpace.contentSmall};
+  @media screen and (max-width: 500px) {
+    // FIXME
+    padding: 0 20px; // FIXME
   }
 `;
 
@@ -28,7 +29,7 @@ export const ShareLink = styled.a`
   line-height: 40px;
   border-radius: 50%;
   color: #c9d1d9;
-  background: ${(props) => props.theme.colors.blackLight};
+  background: #313746; // FIXME
   font-weight: 700;
   vertical-align: middle;
 
@@ -40,5 +41,5 @@ export const GitHubLink = styled.a`
   display: inline-block;
   margin-top: 1em;
   font-size: 0.85em;
-  color: ${(props) => props.theme.colors.silver};
+  color: #969fa7; // FIXME
 `;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const PostCardWrapper = styled.div`
   .post-card-link {
@@ -6,8 +6,9 @@ export const PostCardWrapper = styled.div`
     align-items: start;
     padding: 1.4em 0;
     color: #c9d1d9;
-    border-top: solid 1px ${(props) => props.theme.colors.blackLight};
-    @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+    border-top: solid 1px #313746; // FIXME
+    @media screen and (max-width: 950px) {
+      // FIXME
       padding: 1em 0;
     }
   }
@@ -19,7 +20,7 @@ export const PostCardEmoji = styled.p`
   margin: 0;
   width: 90px;
   height: 90px;
-  background: ${(props) => props.theme.colors.blackLight};
+  background: #313746; // FIXME
   border-radius: 12px;
   font-size: 50px;
 
@@ -28,7 +29,8 @@ export const PostCardEmoji = styled.p`
     height: 45px;
   }
 
-  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+  @media screen and (max-width: 950px) {
+    // FIXME
     width: 70px;
     height: 70px;
     img {
@@ -52,10 +54,11 @@ export const PostCardContent = styled.div`
     margin-bottom: 0.2em;
     letter-spacing: 0.05em;
     font-size: 0.9em;
-    color: ${(props) => props.theme.colors.gray};
+    color: #727d86; // FIXME
   }
 
-  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+  @media screen and (max-width: 950px) {
+    // FIXME
     width: calc(100% - 70px);
     padding-left: 15px;
     h3 {

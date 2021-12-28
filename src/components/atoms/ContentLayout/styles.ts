@@ -1,13 +1,15 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const IndexContent = styled.div`
-  max-width: ${(props) => props.theme.sizes.maxWidth};
+  max-width: 1100px; // FIXME
   margin: 0 auto;
-  padding: 0 ${(props) => props.theme.sideSpace.large};
-  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+  padding: 0 1.5em; // FIXME
+  @media screen and (max-width: 950px) {
+    // FIXME
     max-width: 760px;
   }
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
-    padding: 0 ${(props) => props.theme.sideSpace.small};
+  @media screen and (max-width: 500px) {
+    // FIXME
+    padding: 0 20px; // FIXME
   }
 `;

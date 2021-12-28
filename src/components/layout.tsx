@@ -1,11 +1,12 @@
 import * as React from "react";
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "@emotion/react";
 import { Helmet } from "react-helmet";
-import GlobalStyle from "../styles/global";
 import theme from "../styles/theme";
 import { Footer, Header } from "./organisms";
 import { ContentLayout } from "./atoms";
-import styled from "styled-components";
+import styled from "@emotion/styled";
+import { Global } from "@emotion/react";
+import globalStyle from "../styles/global";
 
 const Layout = ({ location, title, children }) => {
   return (
@@ -28,7 +29,7 @@ const Layout = ({ location, title, children }) => {
           </Content>
         </ContentLayout>
         <Footer />
-        <GlobalStyle />
+        <Global styles={globalStyle} />
       </div>
     </ThemeProvider>
   );
@@ -40,17 +41,20 @@ const Content = styled.div`
   min-height: 85vh;
   align-items: flex-start;
   justify-content: center;
-  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+  @media screen and (max-width: 950px) {
+    // FIXME
     display: block;
   }
-  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+  @media screen and (max-width: 500px) {
+    // FIXME
     margin-top: 0.5rem;
   }
 `;
 
 const MainWrapper = styled.div`
-  width: calc(100% - ${(props) => props.theme.sizes.bioWidth} - 40px);
-  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+  width: calc(100% - 290px - 40px); // FIXME
+  @media screen and (max-width: 950px) {
+    // FIXME
     width: 100%;
   }
 `;

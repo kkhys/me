@@ -3,12 +3,9 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import CategoryJsonLd from "../components/jsonLd/categoryJsonLd";
-import {
-  CatMenu,
-  StyledPagination as Pagination,
-} from "../components/molecules";
+import { CatMenu, Pagination } from "../components/molecules";
 import { PostCard } from "../components/organisms";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const CategoryTemplate = ({ data, pageContext, location }) => {
   const posts = data.allMarkdownRemark.edges;

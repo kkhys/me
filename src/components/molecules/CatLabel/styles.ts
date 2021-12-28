@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   .category-text {
@@ -9,7 +9,8 @@ export const Wrapper = styled.div`
     border-radius: 2em;
     font-weight: 700;
     border: 1px solid;
-    @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
+    @media screen and (max-width: 950px) {
+      // FIXME
       font-size: 11px;
       padding: 2.5px 6px;
     }

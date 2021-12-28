@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "gatsby";
 import { ContentLayout } from "../../atoms";
-// import svgLogo from "../../../svg/logo";
+import svgLogo from "../../../svg/logo.svg";
 import { HeaderTag, HeaderInner } from "./styles";
 
 const Header = ({ title, location }) => {
@@ -15,7 +15,7 @@ const Header = ({ title, location }) => {
             <Link to="/" className="logo-link">
               <img
                 className="logo"
-                // src={svgLogo}
+                src={svgLogo}
                 alt={title}
                 width={165}
                 height={37}

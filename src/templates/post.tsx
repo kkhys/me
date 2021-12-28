@@ -2,7 +2,7 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
 import twemoji from "twemoji";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";

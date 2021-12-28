@@ -1,14 +1,11 @@
 import * as React from "react";
 import { graphql } from "gatsby";
 import { Helmet } from "react-helmet";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import {
-  CatMenu,
-  StyledPagination as Pagination,
-} from "../components/molecules";
+import { CatMenu, Pagination } from "../components/molecules";
 import { PostCard } from "../components/organisms";
 import HomeJsonLd from "../components/jsonLd/homeJsonLd";
 
