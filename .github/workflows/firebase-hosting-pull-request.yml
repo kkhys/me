@@ -6,7 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: yarn && yarn clean && yarn build
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.SUB_MODULE_TOKEN }}
+          submodules: true
+      - run: yarn && yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
