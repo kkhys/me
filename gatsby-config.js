@@ -53,6 +53,7 @@ module.exports = {
       options: {
         name: "blog",
         path: resolve(__dirname, "content", "blog"),
+        ignore: [resolve(__dirname, "content", "blog", "onsen", "archives")],
       },
     },
     {
