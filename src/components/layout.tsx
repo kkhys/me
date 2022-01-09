@@ -1,6 +1,5 @@
 import * as React from "react";
 import { css, ThemeProvider } from "@emotion/react";
-import { Helmet } from "react-helmet";
 import theme from "@/styles/theme";
 import { Footer, Header } from "_/organisms";
 import { ContentLayout } from "_/atoms";
