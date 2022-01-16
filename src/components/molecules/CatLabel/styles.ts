@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const root = () => css`
   .category-text {
     display: inline;
-    padding: 3px 10px;
+    padding: 6px 10px;
     line-height: 1.2;
     font-size: 12px;
     border-radius: 2em;

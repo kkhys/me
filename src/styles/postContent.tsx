@@ -95,6 +95,7 @@ const postContentStyle = css`
     width: auto;
     font-size: 0.9em;
     line-height: 1.4;
+    margin-bottom: 2em;
     th {
       background-color: #2d333b;
       color: #c9d1d9;
