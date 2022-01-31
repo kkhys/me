@@ -22,6 +22,30 @@
     "netlify"
   ],
   "main": "n/a",
+  "branches": [
+    "main"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,json,yml}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "dependencies": {
     "@babel/preset-react": "^7.16.7",
     "@emotion/babel-plugin": "^11.7.2",
@@ -30,7 +54,6 @@
     "firebase": "^9.6.1",
     "gatsby": "^3.14.6",
     "gatsby-cli": "^4.4.0",
-    "gatsby-plugin-canonical-urls": "^3.14.0",
     "gatsby-plugin-emotion": "^7.5.0",
     "gatsby-plugin-feed": "^3.14.0",
     "gatsby-plugin-google-gtag": "^3.14.0",
@@ -46,14 +69,11 @@
     "gatsby-remark-autolink-headers": "^4.11.0",
     "gatsby-remark-code-titles": "^1.1.0",
     "gatsby-remark-external-links": "^0.0.4",
-    "gatsby-remark-graphviz": "^3.11.0",
     "gatsby-remark-images": "^5.11.0",
-    "gatsby-remark-katex": "~4.2.0",
     "gatsby-remark-prismjs": "^5.10.0",
     "gatsby-source-filesystem": "^3.14.0",
     "gatsby-transformer-remark": "~3.2.0",
     "gatsby-transformer-sharp": "^3.14.0",
-    "katex": "^0.15.1",
     "netlify-cli": "^8.13.0",
     "prismjs": "^1.26.0",
     "react": "^17.0.1",
@@ -99,18 +119,5 @@
     "lint:txt": "textlint \"**/*.md\" && textlint --cache \"**/*.md\"",
     "lint:md": "markdownlint --fix \"**/*.md\"",
     "prepare": "husky install"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,md,json,yml}": ["prettier --write"]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
