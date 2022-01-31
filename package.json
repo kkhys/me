@@ -99,5 +99,18 @@
     "lint:txt": "textlint \"**/*.md\" && textlint --cache \"**/*.md\"",
     "lint:md": "markdownlint --fix \"**/*.md\"",
     "prepare": "husky install"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,json,yml}": ["prettier --write"]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
