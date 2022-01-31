@@ -4046,6 +4046,19 @@ type HomeJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
 
 type HomeJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl' | 'description' | 'author'>> }> };
 
+type CategoryJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type CategoryJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'siteUrl'>> }> };
+
+type PostJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PostJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
+      Pick<SiteSiteMetadata, 'siteUrl' | 'author'>
+      & { readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug'>>>> }
+    )> }> };
+
 type CategoryLabelQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4055,14 +4068,6 @@ type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type SeoQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl' | 'description' | 'author'>> }> };
-
-type PostJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PostJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
-      Pick<SiteSiteMetadata, 'siteUrl' | 'author'>
-      & { readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug'>>>> }
-    )> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -4089,10 +4094,5 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type CategoryJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type CategoryJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'siteUrl'>> }> };
 
 }
