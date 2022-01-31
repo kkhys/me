@@ -69,8 +69,6 @@ module.exports = {
         plugins: [
           "gatsby-remark-autolink-headers",
           "gatsby-remark-code-titles",
-          "gatsby-remark-katex",
-          "gatsby-remark-graphviz",
           "gatsby-remark-external-links",
           {
             resolve: "gatsby-remark-images",
@@ -98,12 +96,6 @@ module.exports = {
               escapeEntities: {},
             },
           },
-          {
-            resolve: "gatsby-remark-katex",
-            options: {
-              strict: "ignore",
-            },
-          },
         ],
       },
     },
@@ -129,16 +121,11 @@ module.exports = {
       },
     },
     {
-      resolve: "gatsby-plugin-canonical-urls",
-      options: {
-        siteUrl: "https://ktnkk.com",
-        stripQueryString: true,
-      },
-    },
-    {
       resolve: "gatsby-plugin-robots-txt",
       options: {
-        configFile: "robots-txt.config.js",
+        host: "https://ktnkk.com",
+        sitemap: "https://ktnkk.com/sitemap/sitemap-index.xml",
+        policy: [{ userAgent: "*" }],
       },
     },
     {

@@ -10,7 +10,6 @@ import { RelatedPosts } from "_/organisms";
 import postSyntaxHighlightStyle from "@/styles/postSyntaxHighlight";
 import postContentStyle from "@/styles/postContent";
 import postCustomBlockStyle from "@/styles/postCustomBlock";
-import "katex/dist/katex.min.css";
 import { css } from "@emotion/react";
 
 const PostTemplate = ({ data, pageContext, location }) => {
