@@ -410,7 +410,6 @@ type SitePluginPluginOptions = {
   readonly showLineNumbers: Maybe<Scalars['Boolean']>;
   readonly noInlineHighlight: Maybe<Scalars['Boolean']>;
   readonly prompt: Maybe<SitePluginPluginOptionsPrompt>;
-  readonly strict: Maybe<Scalars['String']>;
   readonly short_name: Maybe<Scalars['String']>;
   readonly start_url: Maybe<Scalars['String']>;
   readonly background_color: Maybe<Scalars['String']>;
@@ -425,9 +424,9 @@ type SitePluginPluginOptions = {
   readonly cacheDigest: Maybe<Scalars['String']>;
   readonly trackingIds: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly pluginConfig: Maybe<SitePluginPluginOptionsPluginConfig>;
-  readonly siteUrl: Maybe<Scalars['String']>;
-  readonly stripQueryString: Maybe<Scalars['Boolean']>;
-  readonly configFile: Maybe<Scalars['String']>;
+  readonly host: Maybe<Scalars['String']>;
+  readonly sitemap: Maybe<Scalars['String']>;
+  readonly policy: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsPolicy>>>;
   readonly feeds: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsFeeds>>>;
   readonly color: Maybe<Scalars['String']>;
   readonly showSpinner: Maybe<Scalars['Boolean']>;
@@ -462,7 +461,6 @@ type SitePluginPluginOptionsPluginsPluginOptions = {
   readonly showLineNumbers: Maybe<Scalars['Boolean']>;
   readonly noInlineHighlight: Maybe<Scalars['Boolean']>;
   readonly prompt: Maybe<SitePluginPluginOptionsPluginsPluginOptionsPrompt>;
-  readonly strict: Maybe<Scalars['String']>;
 };
 
 type SitePluginPluginOptionsPluginsPluginOptionsPrompt = {
@@ -479,6 +477,10 @@ type SitePluginPluginOptionsPrompt = {
 
 type SitePluginPluginOptionsPluginConfig = {
   readonly head: Maybe<Scalars['Boolean']>;
+};
+
+type SitePluginPluginOptionsPolicy = {
+  readonly userAgent: Maybe<Scalars['String']>;
 };
 
 type SitePluginPluginOptionsFeeds = {
@@ -2618,7 +2620,6 @@ type SitePluginPluginOptionsFilterInput = {
   readonly showLineNumbers: Maybe<BooleanQueryOperatorInput>;
   readonly noInlineHighlight: Maybe<BooleanQueryOperatorInput>;
   readonly prompt: Maybe<SitePluginPluginOptionsPromptFilterInput>;
-  readonly strict: Maybe<StringQueryOperatorInput>;
   readonly short_name: Maybe<StringQueryOperatorInput>;
   readonly start_url: Maybe<StringQueryOperatorInput>;
   readonly background_color: Maybe<StringQueryOperatorInput>;
@@ -2633,9 +2634,9 @@ type SitePluginPluginOptionsFilterInput = {
   readonly cacheDigest: Maybe<StringQueryOperatorInput>;
   readonly trackingIds: Maybe<StringQueryOperatorInput>;
   readonly pluginConfig: Maybe<SitePluginPluginOptionsPluginConfigFilterInput>;
-  readonly siteUrl: Maybe<StringQueryOperatorInput>;
-  readonly stripQueryString: Maybe<BooleanQueryOperatorInput>;
-  readonly configFile: Maybe<StringQueryOperatorInput>;
+  readonly host: Maybe<StringQueryOperatorInput>;
+  readonly sitemap: Maybe<StringQueryOperatorInput>;
+  readonly policy: Maybe<SitePluginPluginOptionsPolicyFilterListInput>;
   readonly feeds: Maybe<SitePluginPluginOptionsFeedsFilterListInput>;
   readonly color: Maybe<StringQueryOperatorInput>;
   readonly showSpinner: Maybe<BooleanQueryOperatorInput>;
@@ -2674,7 +2675,6 @@ type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   readonly showLineNumbers: Maybe<BooleanQueryOperatorInput>;
   readonly noInlineHighlight: Maybe<BooleanQueryOperatorInput>;
   readonly prompt: Maybe<SitePluginPluginOptionsPluginsPluginOptionsPromptFilterInput>;
-  readonly strict: Maybe<StringQueryOperatorInput>;
 };
 
 type SitePluginPluginOptionsPluginsPluginOptionsPromptFilterInput = {
@@ -2691,6 +2691,14 @@ type SitePluginPluginOptionsPromptFilterInput = {
 
 type SitePluginPluginOptionsPluginConfigFilterInput = {
   readonly head: Maybe<BooleanQueryOperatorInput>;
+};
+
+type SitePluginPluginOptionsPolicyFilterListInput = {
+  readonly elemMatch: Maybe<SitePluginPluginOptionsPolicyFilterInput>;
+};
+
+type SitePluginPluginOptionsPolicyFilterInput = {
+  readonly userAgent: Maybe<StringQueryOperatorInput>;
 };
 
 type SitePluginPluginOptionsFeedsFilterListInput = {
@@ -2876,7 +2884,6 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.prompt.user'
   | 'pluginCreator.pluginOptions.prompt.host'
   | 'pluginCreator.pluginOptions.prompt.global'
-  | 'pluginCreator.pluginOptions.strict'
   | 'pluginCreator.pluginOptions.short_name'
   | 'pluginCreator.pluginOptions.start_url'
   | 'pluginCreator.pluginOptions.background_color'
@@ -2891,9 +2898,10 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.cacheDigest'
   | 'pluginCreator.pluginOptions.trackingIds'
   | 'pluginCreator.pluginOptions.pluginConfig.head'
-  | 'pluginCreator.pluginOptions.siteUrl'
-  | 'pluginCreator.pluginOptions.stripQueryString'
-  | 'pluginCreator.pluginOptions.configFile'
+  | 'pluginCreator.pluginOptions.host'
+  | 'pluginCreator.pluginOptions.sitemap'
+  | 'pluginCreator.pluginOptions.policy'
+  | 'pluginCreator.pluginOptions.policy.userAgent'
   | 'pluginCreator.pluginOptions.feeds'
   | 'pluginCreator.pluginOptions.feeds.query'
   | 'pluginCreator.pluginOptions.feeds.output'
@@ -3187,7 +3195,6 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.plugins.pluginOptions.classPrefix'
   | 'pluginOptions.plugins.pluginOptions.showLineNumbers'
   | 'pluginOptions.plugins.pluginOptions.noInlineHighlight'
-  | 'pluginOptions.plugins.pluginOptions.strict'
   | 'pluginOptions.plugins.nodeAPIs'
   | 'pluginOptions.plugins.browserAPIs'
   | 'pluginOptions.plugins.ssrAPIs'
@@ -3220,7 +3227,6 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.prompt.user'
   | 'pluginOptions.prompt.host'
   | 'pluginOptions.prompt.global'
-  | 'pluginOptions.strict'
   | 'pluginOptions.short_name'
   | 'pluginOptions.start_url'
   | 'pluginOptions.background_color'
@@ -3235,9 +3241,10 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.cacheDigest'
   | 'pluginOptions.trackingIds'
   | 'pluginOptions.pluginConfig.head'
-  | 'pluginOptions.siteUrl'
-  | 'pluginOptions.stripQueryString'
-  | 'pluginOptions.configFile'
+  | 'pluginOptions.host'
+  | 'pluginOptions.sitemap'
+  | 'pluginOptions.policy'
+  | 'pluginOptions.policy.userAgent'
   | 'pluginOptions.feeds'
   | 'pluginOptions.feeds.query'
   | 'pluginOptions.feeds.output'
@@ -4051,6 +4058,11 @@ type CategoryJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
 
 type CategoryJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'siteUrl'>> }> };
 
+type CategoryLabelQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type CategoryLabelQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<{ readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug' | 'color' | 'borderColor' | 'background'>>>> }> }> };
+
 type PostJsonLDQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4058,11 +4070,6 @@ type PostJsonLDQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
       Pick<SiteSiteMetadata, 'siteUrl' | 'author'>
       & { readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug'>>>> }
     )> }> };
-
-type CategoryLabelQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type CategoryLabelQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<{ readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug' | 'color' | 'borderColor' | 'background'>>>> }> }> };
 
 type SeoQueryVariables = Exact<{ [key: string]: never; }>;
 
