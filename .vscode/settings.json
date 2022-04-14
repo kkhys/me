@@ -3,5 +3,11 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
+  },
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
   }
 }
