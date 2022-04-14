@@ -7,7 +7,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "lint:es": "eslint ."
+    "lint:es": "eslint .",
+    "fix:es": "eslint . --fix"
   },
   "dependencies": {
     "gatsby": "^4.12.1",
