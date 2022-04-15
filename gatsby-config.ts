@@ -4,7 +4,7 @@ const config: GatsbyConfig = {
   siteMetadata: {
     title: 'ktnkk.me',
   },
-  plugins: [],
+  plugins: ['gatsby-plugin-emotion'],
 };
 
 export default config;
