@@ -21,15 +21,10 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint"
-  ],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "no-use-before-define": 0,
-    "@typescript-eslint/no-use-before-define": [
-      2
-    ],
+    "@typescript-eslint/no-use-before-define": [2],
     "import/extensions": [
       2,
       "ignorePackages",
@@ -44,19 +39,13 @@
     "import/no-extraneous-dependencies": [
       2,
       {
-        "devDependencies": [
-          ".storybook/**",
-          "**/*.stories.tsx"
-        ]
+        "devDependencies": [".storybook/**", "**/*.stories.tsx"]
       }
     ],
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [
-          ".jsx",
-          ".tsx"
-        ]
+        "extensions": [".jsx", ".tsx"]
       }
     ],
     "react/require-default-props": 0,

@@ -1,8 +1,8 @@
-import type { GatsbyConfig } from "gatsby";
+import type { GatsbyConfig } from 'gatsby';
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: "ktnkk.me",
+    title: 'ktnkk.me',
   },
   plugins: [],
 };
