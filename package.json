@@ -3,12 +3,16 @@
   "scripts": {
     "build": "gatsby build",
     "dev": "gatsby develop",
-    "fmt": "prettier --write \"**/*.{js,jsx,ts,tsx,json,yml,md}\"",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "lint:es": "eslint .",
-    "fix:es": "eslint . --fix"
+    "lint": "run-p -c -l lint:**",
+    "lint:prettier": "prettier --check .",
+    "lint:eslint": "eslint . --ext .ts,.tsx",
+    "lint:tsc": "tsc",
+    "fix": "run-s -l fix:**",
+    "fix:prettier": "prettier --write .",
+    "fix:eslint": "eslint . --ext .ts,.tsx --fix"
   },
   "dependencies": {
     "gatsby": "^4.12.1",
@@ -21,7 +25,14 @@
     "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.6.2",
     "typescript": "^4.6.3"
   }

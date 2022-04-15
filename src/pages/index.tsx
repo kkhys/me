@@ -1,11 +1,9 @@
 import React, { FC } from "react";
 
-const Home: FC = () => {
-  return (
+const Home: FC = () => (
     <div>
       <h1>Hello world!</h1>
     </div>
   );
-};
 
 export default Home;
