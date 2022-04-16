@@ -1,16 +1,11 @@
-import type React from 'react';
+import React from 'react';
 import type { FC, ReactNode } from 'react';
-import { ThemeProvider } from '@emotion/react';
-import theme from '@/theme';
 
-type LayoutProps = {
-  children: ReactNode;
-};
-
-const Layout: FC<LayoutProps> = ({ children }) => (
-  <ThemeProvider theme={theme}>
-    <main>{children}</main>
-  </ThemeProvider>
+const Layout: FC<{ children: ReactNode }> = ({ children }) => (
+  <>
+    <p>layout test</p>
+    {children}
+  </>
 );
 
 export default Layout;
