@@ -21,7 +21,13 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "@emotion"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "@emotion",
+    "import",
+    "unused-imports"
+  ],
   "rules": {
     "no-use-before-define": 0,
     "@typescript-eslint/no-use-before-define": [2],
@@ -55,6 +61,40 @@
       {
         "namedComponents": "arrow-function",
         "unnamedComponents": "arrow-function"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": 0,
+    "unused-imports/no-unused-imports": 2,
+    "import/order": [
+      2,
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling"],
+          "object",
+          "type",
+          "index"
+        ],
+        "newlines-between": "never",
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "pathGroups": [
+          {
+            "pattern": "@/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "_/**",
+            "group": "internal",
+            "position": "before"
+          }
+        ]
       }
     ]
   },
