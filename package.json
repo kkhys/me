@@ -10,7 +10,7 @@
     "lint": "run-p -c -l lint:**",
     "lint:prettier": "prettier --check .",
     "lint:eslint": "eslint . --ext .ts,.tsx",
-    "lint:stylelint": "stylelint --ignore-path .gitignore \"src/**/*.+(ts|tsx)\"",
+    "lint:stylelint": "stylelint \"src/**/*.+(ts|tsx)\"",
     "lint:tsc": "tsc",
     "fix": "run-s -l fix:**",
     "fix:prettier": "prettier --write .",
