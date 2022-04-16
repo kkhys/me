@@ -1,6 +1,6 @@
+import { css, useTheme } from '@emotion/react';
 import type React from 'react';
 import type { FC } from 'react';
-import { css, useTheme } from '@emotion/react';
 
 const underline = (color: string) => css`
   color: ${color};
