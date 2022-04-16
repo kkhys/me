@@ -1,7 +1,6 @@
 {
   "**/*.{js,jsx,ts,tsx}": [
     "eslint . --ext .ts,.tsx",
-    "tsc",
     "prettier --write .",
     "eslint . --ext .ts,.tsx --fix"
   ],
