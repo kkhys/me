@@ -1,5 +1,7 @@
 import { css, useTheme } from '@emotion/react';
-import type React from 'react';
+import React from 'react';
+import { GlobalLayout } from '@/layouts';
+import { Paragraph } from '_/atoms';
 import type { FC } from 'react';
 
 const underline = (color: string) => css`
@@ -12,6 +14,11 @@ const Heading = () => {
   return <h1 css={underline(theme.color.base)}>test</h1>;
 };
 
-const Home: FC = () => <Heading />;
+const Home: FC = () => (
+  <GlobalLayout>
+    <Heading />
+    <Paragraph />
+  </GlobalLayout>
+);
 
 export default Home;
