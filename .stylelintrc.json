@@ -6,5 +6,19 @@
       "files": "src/**/*.{ts,tsx}",
       "customSyntax": "@stylelint/postcss-css-in-js"
     }
-  ]
+  ],
+  "rules": {
+    "unit-disallowed-list": [
+      "px",
+      {
+        "ignoreMediaFeatureNames": {
+          "px": ["min-width", "max-width"]
+        },
+        "ignoreProperties": {
+          "px": ["/^$?border(?!-radius)/"]
+        }
+      }
+    ],
+    "selector-pseudo-element-colon-notation": "double"
+  }
 }
