@@ -10,8 +10,15 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'blog',
-        path: path.resolve('contents'),
+        name: 'blogTech',
+        path: path.resolve('contents', 'tech', 'articles'),
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'blogLife',
+        path: path.resolve('contents', 'life', 'articles'),
       },
     },
     {

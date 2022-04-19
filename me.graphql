@@ -380,8 +380,6 @@ type MarkdownRemarkEdge {
 }
 
 type MarkdownRemarkFrontmatter {
-  about: String
-  assignees: String
   category: String
   createdAt(
     "Returns the difference between this date and the current time. Defaults to \"milliseconds\" but you can also pass in as the measurement \"years\", \"months\", \"weeks\", \"days\", \"hours\", \"minutes\", and \"seconds\"."
@@ -395,8 +393,6 @@ type MarkdownRemarkFrontmatter {
   ): Date
   description: String
   emoji: String
-  labels: String
-  name: String
   published: Boolean
   slug: String
   tags: [String]
@@ -862,14 +858,10 @@ enum FileFieldsEnum {
   childMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childMarkdownRemark___excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childMarkdownRemark___fileAbsolutePath
-  childMarkdownRemark___frontmatter___about
-  childMarkdownRemark___frontmatter___assignees
   childMarkdownRemark___frontmatter___category
   childMarkdownRemark___frontmatter___createdAt
   childMarkdownRemark___frontmatter___description
   childMarkdownRemark___frontmatter___emoji
-  childMarkdownRemark___frontmatter___labels
-  childMarkdownRemark___frontmatter___name
   childMarkdownRemark___frontmatter___published
   childMarkdownRemark___frontmatter___slug
   childMarkdownRemark___frontmatter___tags
@@ -930,14 +922,10 @@ enum FileFieldsEnum {
   childrenMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childrenMarkdownRemark___excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childrenMarkdownRemark___fileAbsolutePath
-  childrenMarkdownRemark___frontmatter___about
-  childrenMarkdownRemark___frontmatter___assignees
   childrenMarkdownRemark___frontmatter___category
   childrenMarkdownRemark___frontmatter___createdAt
   childrenMarkdownRemark___frontmatter___description
   childrenMarkdownRemark___frontmatter___emoji
-  childrenMarkdownRemark___frontmatter___labels
-  childrenMarkdownRemark___frontmatter___name
   childrenMarkdownRemark___frontmatter___published
   childrenMarkdownRemark___frontmatter___slug
   childrenMarkdownRemark___frontmatter___tags
@@ -1146,14 +1134,10 @@ enum MarkdownRemarkFieldsEnum {
   excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   fileAbsolutePath
-  frontmatter___about
-  frontmatter___assignees
   frontmatter___category
   frontmatter___createdAt
   frontmatter___description
   frontmatter___emoji
-  frontmatter___labels
-  frontmatter___name
   frontmatter___published
   frontmatter___slug
   frontmatter___tags
@@ -1939,14 +1923,10 @@ input MarkdownRemarkFilterListInput {
 }
 
 input MarkdownRemarkFrontmatterFilterInput {
-  about: StringQueryOperatorInput
-  assignees: StringQueryOperatorInput
   category: StringQueryOperatorInput
   createdAt: DateQueryOperatorInput
   description: StringQueryOperatorInput
   emoji: StringQueryOperatorInput
-  labels: StringQueryOperatorInput
-  name: StringQueryOperatorInput
   published: BooleanQueryOperatorInput
   slug: StringQueryOperatorInput
   tags: StringQueryOperatorInput
