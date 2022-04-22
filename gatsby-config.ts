@@ -30,6 +30,12 @@ const config: GatsbyConfig = {
         ],
       },
     },
+    {
+      resolve: `gatsby-plugin-typegen`,
+      options: {
+        outputPath: path.resolve('src', 'types', 'gatsby-types.d.ts'),
+      },
+    },
   ],
 };
 
