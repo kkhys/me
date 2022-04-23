@@ -54,7 +54,8 @@ const numberOfPages = (posts?: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>) =>
 const categoryPosts = (
   posts?: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>,
   category?: string,
-) => posts?.filter((post) => post.node.frontmatter?.category === category);
+): GatsbyTypes.MarkdownRemarkEdge[] | undefined =>
+  posts?.filter((post) => post.node.frontmatter?.category === category);
 
 const sliceRelatedPosts = (
   posts: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>,
