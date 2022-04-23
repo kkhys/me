@@ -33,16 +33,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   }
 };
 
-// const test1 = (num: number) => num + 5;
-// const test2 = (num: number) => num - 3;
-//
-// const compose =
-//   (...fns: Array<(arg0: number) => number>) =>
-//   (arg: number) =>
-//     fns.reduce((composed, f) => f(composed), arg);
-//
-// compose(test1, test2)(10);
-
 const isPublished = (env?: string) =>
   env === 'production' ? 'true' : 'true' || 'false';
 
