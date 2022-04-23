@@ -1,7 +1,7 @@
 import { css, useTheme } from '@emotion/react';
 import React from 'react';
 import { GlobalLayout } from '@/layouts';
-import { Paragraph } from '_/atoms';
+import { Paragraph } from '^/atoms';
 import type { FC } from 'react';
 
 const underline = (color: string) => css`
