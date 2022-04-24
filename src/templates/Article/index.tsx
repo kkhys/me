@@ -1,10 +1,10 @@
 import React from 'react';
 import type { FC } from 'react';
 
-const PostTemplate: FC = () => (
+const ArticleTemplate: FC = () => (
   <div>
     <p>post template</p>
   </div>
 );
 
-export default PostTemplate;
+export default ArticleTemplate;

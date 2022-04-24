@@ -54,39 +54,41 @@ const categorySet = (
 const numberOfPages = (posts?: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>) =>
   posts ? Math.ceil(posts.length / POSTS_PER_PAGE) : 0;
 
-const categoryPosts = (
-  posts?: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>,
+const categoryArticles = (
+  articles?: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>,
   category?: string,
 ): GatsbyTypes.MarkdownRemarkEdge[] | undefined =>
-  posts?.filter((post) => post.node.frontmatter?.category === category);
+  articles?.filter(
+    (article) => article.node.frontmatter?.category === category,
+  );
 
-const sliceRelatedPosts = (
-  posts: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>,
+const sliceRelatedArticles = (
+  articles: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>,
   count: number,
 ) => {
-  const postObject: {
+  const articlesObject: {
     [key: string]: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge> | undefined;
   } = {};
-  categorySet(posts).forEach((category) => {
-    postObject[category] = categoryPosts(posts, category)
-      ? categoryPosts(posts, category)?.slice(0, count)
+  categorySet(articles).forEach((category) => {
+    articlesObject[category] = categoryArticles(articles, category)
+      ? categoryArticles(articles, category)?.slice(0, count)
       : [];
   });
-  return postObject;
+  return articlesObject;
 };
 
-const categoryRelatedPosts = (
-  posts: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>,
-  post: GatsbyTypes.MarkdownRemarkEdge,
+const categoryRelatedArticles = (
+  articles: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>,
+  article: GatsbyTypes.MarkdownRemarkEdge,
 ) => {
-  let relatedPosts = sliceRelatedPosts(posts, RELATED_POSTS_COUNT)[
-    post.node.frontmatter?.category || 'tech'
+  let relatedArticles = sliceRelatedArticles(articles, RELATED_POSTS_COUNT)[
+    article.node.frontmatter?.category || 'tech'
   ] as ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>;
-  relatedPosts = relatedPosts.filter(
-    (relatedPost) =>
-      !(relatedPost.node.fields?.slug === post.node.fields?.slug),
+  relatedArticles = relatedArticles.filter(
+    (relatedArticle) =>
+      !(relatedArticle.node.fields?.slug === article.node.fields?.slug),
   );
-  return relatedPosts;
+  return relatedArticles;
 };
 
 export const createPages: GatsbyNode['createPages'] = async ({
@@ -127,51 +129,52 @@ export const createPages: GatsbyNode['createPages'] = async ({
   if (result.errors)
     panicOnBuild('There was an error loading my blog posts', result.errors);
 
-  const posts = result.data?.allMarkdownRemark.edges;
+  const articles = result.data?.allMarkdownRemark.edges;
 
-  categorySet(posts).forEach((category) => {
+  categorySet(articles).forEach((category) => {
     Array.from({
-      length: numberOfPages(categoryPosts(posts, category)),
+      length: numberOfPages(categoryArticles(articles, category)),
     }).forEach((_, i) => {
       createPage({
         path: i === 0 ? `/${category}` : `/${category}/${i + 1}`,
-        component: path.resolve('src', 'templates', 'category.tsx'),
+        component: path.resolve('src', 'templates', 'Category', 'index.tsx'),
         context: {
           category,
           isPublished: isPublished(process.env.NODE_ENV),
           limit: POSTS_PER_PAGE,
           skip: i * POSTS_PER_PAGE,
-          numberOfPages: numberOfPages(categoryPosts(posts, category)),
+          numberOfPages: numberOfPages(categoryArticles(articles, category)),
           currentPage: i + 1,
           hasPrevPage: i !== 0,
-          hasNextPage: i !== numberOfPages(categoryPosts(posts, category)) - 1,
+          hasNextPage:
+            i !== numberOfPages(categoryArticles(articles, category)) - 1,
         },
       });
     });
   });
 
-  posts?.forEach((post) => {
+  articles?.forEach((article) => {
     createPage({
-      path: post.node.frontmatter?.slug || '',
-      component: path.resolve('src', 'templates', 'post.tsx'),
+      path: article.node.frontmatter?.slug || '',
+      component: path.resolve('src', 'templates', 'Article', 'index.tsx'),
       context: {
-        slug: post.node.fields?.slug,
-        relatedPosts: categoryRelatedPosts(posts, post),
+        slug: article.node.fields?.slug,
+        relatedArticles: categoryRelatedArticles(articles, article),
       },
     });
 
-    Array.from({ length: numberOfPages(posts) }).forEach((_, i) => {
+    Array.from({ length: numberOfPages(articles) }).forEach((_, i) => {
       createPage({
         path: i === 0 ? '/' : `/${i + 1}`,
-        component: path.resolve('src', 'templates', 'index.tsx'),
+        component: path.resolve('src', 'templates', 'New', 'index.tsx'),
         context: {
           isPublished: isPublished(process.env.NODE_ENV),
           limit: POSTS_PER_PAGE,
           skip: i * POSTS_PER_PAGE,
-          numberOfPages: numberOfPages(posts),
+          numberOfPages: numberOfPages(articles),
           currentPage: i + 1,
           hasPrevPage: i !== 0,
-          hasNextPage: i !== numberOfPages(posts) - 1,
+          hasNextPage: i !== numberOfPages(articles) - 1,
         },
       });
     });

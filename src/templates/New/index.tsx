@@ -2,7 +2,7 @@ import { graphql, PageProps } from 'gatsby';
 import type React from 'react';
 import type { FC } from 'react';
 
-const IndexTemplate: FC<PageProps<GatsbyTypes.IndexTemplateQuery>> = ({
+const NewTemplate: FC<PageProps<GatsbyTypes.NewTemplateQuery>> = ({
   data,
   pageContext,
   location,
@@ -12,10 +12,10 @@ const IndexTemplate: FC<PageProps<GatsbyTypes.IndexTemplateQuery>> = ({
   </div>
 );
 
-export default IndexTemplate;
+export default NewTemplate;
 
 export const pageQuery = graphql`
-  query IndexTemplate($skip: Int!, $limit: Int!, $isPublished: [Boolean]!) {
+  query NewTemplate($skip: Int!, $limit: Int!, $isPublished: [Boolean]!) {
     site {
       siteMetadata {
         title
