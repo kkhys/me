@@ -2731,6 +2731,15 @@ type MarkdownRemarkSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type IndexTemplateQueryVariables = Exact<{
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+  isPublished: ReadonlyArray<Maybe<Scalars['Boolean']>> | Maybe<Scalars['Boolean']>;
+}>;
+
+
+type IndexTemplateQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'createdAt' | 'title' | 'emoji' | 'category' | 'slug'>> } }> } };
+
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
