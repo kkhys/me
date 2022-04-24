@@ -33,8 +33,11 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   }
 };
 
+const isPublishedStr = (env?: string) =>
+  env === 'production' ? 'true' : 'true, false';
+
 const isPublished = (env?: string) =>
-  env === 'production' ? 'true' : 'true' || 'false';
+  env === 'production' ? [true] : [true, false];
 
 const categorySet = (
   posts?: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>,
@@ -99,7 +102,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
       allMarkdownRemark(
         sort: { fields: [frontmatter___createdAt], order: DESC }
         limit: 1000
-        filter: { frontmatter: { published: { in: [${isPublished(
+        filter: { frontmatter: { published: { in: [${isPublishedStr(
           process.env.NODE_ENV,
         )}] } } }
       ) {
@@ -135,7 +138,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
         component: path.resolve('src', 'templates', 'category.tsx'),
         context: {
           category,
-          isPublished,
+          isPublished: isPublished(process.env.NODE_ENV),
           limit: POSTS_PER_PAGE,
           skip: i * POSTS_PER_PAGE,
           numberOfPages: numberOfPages(categoryPosts(posts, category)),
@@ -162,10 +165,10 @@ export const createPages: GatsbyNode['createPages'] = async ({
         path: i === 0 ? '/' : `/${i + 1}`,
         component: path.resolve('src', 'templates', 'index.tsx'),
         context: {
-          isPublished,
+          isPublished: isPublished(process.env.NODE_ENV),
           limit: POSTS_PER_PAGE,
           skip: i * POSTS_PER_PAGE,
-          numberOfPages,
+          numberOfPages: numberOfPages(posts),
           currentPage: i + 1,
           hasPrevPage: i !== 0,
           hasNextPage: i !== numberOfPages(posts) - 1,
