@@ -114,9 +114,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
               slug
             }
             frontmatter {
-              title
               createdAt(formatString: "YYYY.MM.DD")
-              emoji
               category
               slug
             }

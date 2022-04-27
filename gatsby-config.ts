@@ -3,7 +3,16 @@ import type { GatsbyConfig } from 'gatsby';
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: 'ktnkk.me',
+    siteTitle: 'ktnkk.log',
+    siteUrl: 'https://ktnkk.me/',
+    siteDescription: '',
+    author: 'Keiten Kiki',
+    copyright: `CC BY-NC-SA 4.0 ${new Date().getFullYear()}-PRESENT © Keiten Kiki`,
+    image: '',
+    social: {
+      twitter: '@cp7rdr7zff6ttq',
+      github: 'ktnkk',
+    },
   },
   plugins: [
     'gatsby-plugin-emotion',
