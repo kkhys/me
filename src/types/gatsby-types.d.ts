@@ -278,6 +278,18 @@ type Site_buildTimeArgs = {
 type SiteSiteMetadata = {
   readonly title: Maybe<Scalars['String']>;
   readonly description: Maybe<Scalars['String']>;
+  readonly siteTitle: Maybe<Scalars['String']>;
+  readonly siteUrl: Maybe<Scalars['String']>;
+  readonly siteDescription: Maybe<Scalars['String']>;
+  readonly author: Maybe<Scalars['String']>;
+  readonly copyright: Maybe<Scalars['String']>;
+  readonly image: Maybe<Scalars['String']>;
+  readonly social: Maybe<SiteSiteMetadataSocial>;
+};
+
+type SiteSiteMetadataSocial = {
+  readonly twitter: Maybe<Scalars['String']>;
+  readonly github: Maybe<Scalars['String']>;
 };
 
 type SiteFunction = Node & {
@@ -1484,6 +1496,18 @@ type DirectorySortInput = {
 type SiteSiteMetadataFilterInput = {
   readonly title: Maybe<StringQueryOperatorInput>;
   readonly description: Maybe<StringQueryOperatorInput>;
+  readonly siteTitle: Maybe<StringQueryOperatorInput>;
+  readonly siteUrl: Maybe<StringQueryOperatorInput>;
+  readonly siteDescription: Maybe<StringQueryOperatorInput>;
+  readonly author: Maybe<StringQueryOperatorInput>;
+  readonly copyright: Maybe<StringQueryOperatorInput>;
+  readonly image: Maybe<StringQueryOperatorInput>;
+  readonly social: Maybe<SiteSiteMetadataSocialFilterInput>;
+};
+
+type SiteSiteMetadataSocialFilterInput = {
+  readonly twitter: Maybe<StringQueryOperatorInput>;
+  readonly github: Maybe<StringQueryOperatorInput>;
 };
 
 type SiteConnection = {
@@ -1535,6 +1559,14 @@ type SiteFieldsEnum =
   | 'buildTime'
   | 'siteMetadata.title'
   | 'siteMetadata.description'
+  | 'siteMetadata.siteTitle'
+  | 'siteMetadata.siteUrl'
+  | 'siteMetadata.siteDescription'
+  | 'siteMetadata.author'
+  | 'siteMetadata.copyright'
+  | 'siteMetadata.image'
+  | 'siteMetadata.social.twitter'
+  | 'siteMetadata.social.github'
   | 'port'
   | 'host'
   | 'polyfill'
@@ -2744,5 +2776,13 @@ type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+
+type SEOQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SEOQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
+      Pick<SiteSiteMetadata, 'siteTitle' | 'siteUrl' | 'siteDescription' | 'author' | 'copyright' | 'image'>
+      & { readonly social: Maybe<Pick<SiteSiteMetadataSocial, 'twitter' | 'github'>> }
+    )> }> };
 
 }
