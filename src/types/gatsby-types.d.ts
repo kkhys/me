@@ -284,6 +284,7 @@ type SiteSiteMetadata = {
   readonly author: Maybe<Scalars['String']>;
   readonly copyright: Maybe<Scalars['String']>;
   readonly image: Maybe<Scalars['String']>;
+  readonly monetization: Maybe<Scalars['String']>;
   readonly social: Maybe<SiteSiteMetadataSocial>;
 };
 
@@ -1502,6 +1503,7 @@ type SiteSiteMetadataFilterInput = {
   readonly author: Maybe<StringQueryOperatorInput>;
   readonly copyright: Maybe<StringQueryOperatorInput>;
   readonly image: Maybe<StringQueryOperatorInput>;
+  readonly monetization: Maybe<StringQueryOperatorInput>;
   readonly social: Maybe<SiteSiteMetadataSocialFilterInput>;
 };
 
@@ -1565,6 +1567,7 @@ type SiteFieldsEnum =
   | 'siteMetadata.author'
   | 'siteMetadata.copyright'
   | 'siteMetadata.image'
+  | 'siteMetadata.monetization'
   | 'siteMetadata.social.twitter'
   | 'siteMetadata.social.github'
   | 'port'
@@ -2781,7 +2784,7 @@ type SEOQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type SEOQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
-      Pick<SiteSiteMetadata, 'siteTitle' | 'siteUrl' | 'siteDescription' | 'author' | 'copyright' | 'image'>
+      Pick<SiteSiteMetadata, 'siteTitle' | 'siteUrl' | 'siteDescription' | 'author' | 'copyright' | 'image' | 'monetization'>
       & { readonly social: Maybe<Pick<SiteSiteMetadataSocial, 'twitter' | 'github'>> }
     )> }> };
 
