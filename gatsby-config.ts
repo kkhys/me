@@ -9,10 +9,22 @@ const config: GatsbyConfig = {
     author: 'Keiten Kiki',
     copyright: `CC BY-NC-SA 4.0 ${new Date().getFullYear()}-PRESENT © Keiten Kiki`,
     image: '',
+    monetization: '$ilp.uphold.com/xbx8JNwbeF4F',
     social: {
-      twitter: '@cp7rdr7zff6ttq',
+      twitter: 'cp7rdr7zff6ttq',
       github: 'ktnkk',
+      instagram: 'q97ba8j5ebz9xsr6vmfqh4tp7yuf58',
     },
+    categories: [
+      {
+        name: 'life',
+        slug: 'l',
+      },
+      {
+        name: 'tech',
+        slug: 't',
+      },
+    ],
   },
   plugins: [
     'gatsby-plugin-emotion',
