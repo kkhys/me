@@ -52,9 +52,15 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: `gatsby-plugin-typegen`,
+      resolve: 'gatsby-plugin-typegen',
       options: {
         outputPath: path.resolve('src', 'types', 'gatsby-types.d.ts'),
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: 'https://ktnkk.me',
       },
     },
   ],
