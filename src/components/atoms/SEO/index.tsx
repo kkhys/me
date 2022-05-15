@@ -52,7 +52,7 @@ const SEO: FC<Partial<SEOProps>> = ({
       ? `${pageTitle} | ${site?.siteMetadata?.siteTitle as string}`
       : site?.siteMetadata?.siteTitle,
     siteUrl: site?.siteMetadata?.siteUrl,
-    themeColor: color.base,
+    themeColor: color.baseBackground,
     description: pageDescription || site?.siteMetadata?.siteDescription,
     url: new URL(pathname, site?.siteMetadata?.siteUrl).toString(),
     author: site?.siteMetadata?.author,
