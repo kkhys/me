@@ -286,11 +286,18 @@ type SiteSiteMetadata = {
   readonly image: Maybe<Scalars['String']>;
   readonly monetization: Maybe<Scalars['String']>;
   readonly social: Maybe<SiteSiteMetadataSocial>;
+  readonly categories: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataCategories>>>;
 };
 
 type SiteSiteMetadataSocial = {
   readonly twitter: Maybe<Scalars['String']>;
   readonly github: Maybe<Scalars['String']>;
+  readonly instagram: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataCategories = {
+  readonly name: Maybe<Scalars['String']>;
+  readonly slug: Maybe<Scalars['String']>;
 };
 
 type SiteFunction = Node & {
@@ -1505,11 +1512,22 @@ type SiteSiteMetadataFilterInput = {
   readonly image: Maybe<StringQueryOperatorInput>;
   readonly monetization: Maybe<StringQueryOperatorInput>;
   readonly social: Maybe<SiteSiteMetadataSocialFilterInput>;
+  readonly categories: Maybe<SiteSiteMetadataCategoriesFilterListInput>;
 };
 
 type SiteSiteMetadataSocialFilterInput = {
   readonly twitter: Maybe<StringQueryOperatorInput>;
   readonly github: Maybe<StringQueryOperatorInput>;
+  readonly instagram: Maybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataCategoriesFilterListInput = {
+  readonly elemMatch: Maybe<SiteSiteMetadataCategoriesFilterInput>;
+};
+
+type SiteSiteMetadataCategoriesFilterInput = {
+  readonly name: Maybe<StringQueryOperatorInput>;
+  readonly slug: Maybe<StringQueryOperatorInput>;
 };
 
 type SiteConnection = {
@@ -1570,6 +1588,10 @@ type SiteFieldsEnum =
   | 'siteMetadata.monetization'
   | 'siteMetadata.social.twitter'
   | 'siteMetadata.social.github'
+  | 'siteMetadata.social.instagram'
+  | 'siteMetadata.categories'
+  | 'siteMetadata.categories.name'
+  | 'siteMetadata.categories.slug'
   | 'port'
   | 'host'
   | 'polyfill'
