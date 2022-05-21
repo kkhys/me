@@ -1,10 +1,12 @@
 import { Link } from 'gatsby';
 import React from 'react';
+import type { Interpolation, Theme } from '@emotion/react';
 import type { FC, ReactNode } from 'react';
 
 type AnchorProps = {
   to: string;
   children: ReactNode;
+  className?: Interpolation<Theme>;
   isExternal?: boolean;
   isFollow?: boolean;
 };
@@ -12,6 +14,7 @@ type AnchorProps = {
 const Anchor: FC<AnchorProps> = ({
   to,
   children,
+  className,
   isExternal = false,
   isFollow = false,
 }) =>
@@ -20,11 +23,14 @@ const Anchor: FC<AnchorProps> = ({
       href={to}
       target='_blank'
       rel={`noreferrer noopener ${isFollow ? '' : 'nofollow'}`}
+      css={className}
     >
       {children}
     </a>
   ) : (
-    <Link to={to}>{children}</Link>
+    <Link to={to} css={className}>
+      {children}
+    </Link>
   );
 
 export default Anchor;
