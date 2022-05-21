@@ -2795,7 +2795,7 @@ type NewTemplateQueryVariables = Exact<{
 }>;
 
 
-type NewTemplateQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'createdAt' | 'title' | 'emoji' | 'category' | 'slug'>> } }> } };
+type NewTemplateQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'siteTitle' | 'copyright'>> }>, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'createdAt' | 'title' | 'emoji' | 'category' | 'slug'>> } }> } };
 
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
