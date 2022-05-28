@@ -11,7 +11,6 @@ const ArticleCard: FC<
     folder: 'svg',
     ext: '.svg',
   });
-  console.log(`title: ${title as string}`);
   const cardTitle = title || '無題';
   return (
     <div css={styles.root()}>
