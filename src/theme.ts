@@ -4,7 +4,7 @@ export const color = {
   body: '#c9d1d9',
   // bodyContent: '',
   // gray: '',
-  // grayLighter: '',
+  grayLighter: '#313746',
   grayDarker: '#727d86',
   // grayBorder: '',
   grayBorderLighter: '#313746',
