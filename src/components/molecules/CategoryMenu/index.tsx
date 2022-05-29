@@ -42,8 +42,8 @@ const CategoryLink: FC<CategoryLinkProps> = ({
             css={[styles.icon(), isActive && styles.iconActive()]}
           />
         </div>
+        <div css={styles.label()}>{label}</div>
       </Anchor>
-      <div css={styles.label()}>{label}</div>
     </li>
   );
 };

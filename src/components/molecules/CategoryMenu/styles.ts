@@ -5,10 +5,21 @@ const item = () => css`
   width: 70px;
   margin: 0 20px 0 0;
   text-align: center;
+
   ${mediaQuery.max} {
     flex: 0 0 auto;
     width: 60px;
     margin: 0 0 0 15px;
+  }
+
+  // FIXME
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -30,7 +41,7 @@ const iconWrapperActive = () => css`
     height: 100%;
     border-radius: 50%;
     background: linear-gradient(-225deg, #7085b6 0%, #87a7d9 50%, #def3f8 100%);
-    animation: rotation 2s linear infinite;
+    animation: rotation 2s linear infinite; // FIXME
   }
 `;
 
@@ -43,7 +54,8 @@ const icon = () => css`
 `;
 
 const iconActive = () => css`
-  border: solid 2px transparent;
+  border: solid 2px ${color.baseBackground};
+  box-sizing: content-box;
 `;
 
 const label = () => css`
@@ -51,6 +63,7 @@ const label = () => css`
   font-size: ${font.size.s};
   font-weight: ${font.weight.bold};
   color: ${color.grayDarker};
+
   ${mediaQuery.max} {
     font-size: ${font.size.xs};
   }
@@ -63,14 +76,17 @@ const nav = () => css`
 
 const list = () => css`
   display: flex;
+
   ${mediaQuery.max} {
     margin: 0 -20px;
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+
     ::-webkit-scrollbar {
       display: none;
     }
+
     &::after {
       content: '';
       width: 40px;

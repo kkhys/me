@@ -12,31 +12,27 @@ const ArticleCard: FC<
     ext: '.svg',
   });
   const cardTitle = title || '無題';
-  return (
+  return link ? (
+    <Anchor to={`/${link}`} css={styles.root()}>
+      <p
+        dangerouslySetInnerHTML={{ __html: parsedEmoji }}
+        css={styles.emoji()}
+      />
+      <div css={styles.content()}>
+        <h3 css={styles.heading()}>{cardTitle}</h3>
+        {createdAt && <time css={styles.createdAt()}>{createdAt}</time>}
+      </div>
+    </Anchor>
+  ) : (
     <div css={styles.root()}>
-      {link ? (
-        <Anchor to={`/${link}`}>
-          <p
-            dangerouslySetInnerHTML={{ __html: parsedEmoji }}
-            css={styles.emoji()}
-          />
-          <div css={styles.content()}>
-            <h3 css={styles.heading()}>{cardTitle}</h3>
-            {createdAt && <time css={styles.createdAt()}>{createdAt}</time>}
-          </div>
-        </Anchor>
-      ) : (
-        <>
-          <p
-            dangerouslySetInnerHTML={{ __html: parsedEmoji }}
-            css={styles.emoji()}
-          />
-          <div css={styles.content()}>
-            <h3>{title}</h3>
-            <time>{createdAt}</time>
-          </div>
-        </>
-      )}
+      <p
+        dangerouslySetInnerHTML={{ __html: parsedEmoji }}
+        css={styles.emoji()}
+      />
+      <div css={styles.content()}>
+        <h3>{title}</h3>
+        <time>{createdAt}</time>
+      </div>
     </div>
   );
 };

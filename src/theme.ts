@@ -51,6 +51,9 @@ export const mediaQuery = {
 };
 
 export const layout = {
+  width: {
+    pc: '700',
+  },
   maxWidth: {
     tablet: 760,
     pc: 1100,
