@@ -456,7 +456,7 @@ type Query {
     directory(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, changeTime: DateQueryOperatorInput, children: NodeFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): Directory
     file(absolutePath: StringQueryOperatorInput, accessTime: DateQueryOperatorInput, atime: DateQueryOperatorInput, atimeMs: FloatQueryOperatorInput, base: StringQueryOperatorInput, birthTime: DateQueryOperatorInput, birthtime: DateQueryOperatorInput, birthtimeMs: FloatQueryOperatorInput, blksize: IntQueryOperatorInput, blocks: IntQueryOperatorInput, changeTime: DateQueryOperatorInput, childMarkdownRemark: MarkdownRemarkFilterInput, children: NodeFilterListInput, childrenMarkdownRemark: MarkdownRemarkFilterListInput, ctime: DateQueryOperatorInput, ctimeMs: FloatQueryOperatorInput, dev: IntQueryOperatorInput, dir: StringQueryOperatorInput, ext: StringQueryOperatorInput, extension: StringQueryOperatorInput, gid: IntQueryOperatorInput, id: StringQueryOperatorInput, ino: FloatQueryOperatorInput, internal: InternalFilterInput, mode: IntQueryOperatorInput, modifiedTime: DateQueryOperatorInput, mtime: DateQueryOperatorInput, mtimeMs: FloatQueryOperatorInput, name: StringQueryOperatorInput, nlink: IntQueryOperatorInput, parent: NodeFilterInput, prettySize: StringQueryOperatorInput, publicURL: StringQueryOperatorInput, rdev: IntQueryOperatorInput, relativeDirectory: StringQueryOperatorInput, relativePath: StringQueryOperatorInput, root: StringQueryOperatorInput, size: IntQueryOperatorInput, sourceInstanceName: StringQueryOperatorInput, uid: IntQueryOperatorInput): File
     markdownRemark(children: NodeFilterListInput, excerpt: StringQueryOperatorInput, excerptAst: JSONQueryOperatorInput, fields: MarkdownRemarkFieldsFilterInput, fileAbsolutePath: StringQueryOperatorInput, frontmatter: MarkdownRemarkFrontmatterFilterInput, headings: MarkdownHeadingFilterListInput, html: StringQueryOperatorInput, htmlAst: JSONQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput, rawMarkdownBody: StringQueryOperatorInput, tableOfContents: StringQueryOperatorInput, timeToRead: IntQueryOperatorInput, wordCount: MarkdownWordCountFilterInput): MarkdownRemark
-    site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, jsxRuntime: StringQueryOperatorInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput, trailingSlash: StringQueryOperatorInput): Site
+    site(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, graphqlTypegen: BooleanQueryOperatorInput, host: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, jsxRuntime: StringQueryOperatorInput, parent: NodeFilterInput, pathPrefix: StringQueryOperatorInput, polyfill: BooleanQueryOperatorInput, port: IntQueryOperatorInput, siteMetadata: SiteSiteMetadataFilterInput, trailingSlash: StringQueryOperatorInput): Site
     siteBuildMetadata(buildTime: DateQueryOperatorInput, children: NodeFilterListInput, id: StringQueryOperatorInput, internal: InternalFilterInput, parent: NodeFilterInput): SiteBuildMetadata
     siteFunction(absoluteCompiledFilePath: StringQueryOperatorInput, children: NodeFilterListInput, functionRoute: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, matchPath: StringQueryOperatorInput, originalAbsoluteFilePath: StringQueryOperatorInput, originalRelativeFilePath: StringQueryOperatorInput, parent: NodeFilterInput, pluginName: StringQueryOperatorInput, relativeCompiledFilePath: StringQueryOperatorInput): SiteFunction
     sitePage(children: NodeFilterListInput, component: StringQueryOperatorInput, componentChunkName: StringQueryOperatorInput, id: StringQueryOperatorInput, internal: InternalFilterInput, internalComponentName: StringQueryOperatorInput, matchPath: StringQueryOperatorInput, pageContext: JSONQueryOperatorInput, parent: NodeFilterInput, path: StringQueryOperatorInput, pluginCreator: SitePluginFilterInput): SitePage
@@ -475,6 +475,7 @@ type Site implements Node {
         locale: String
     ): Date
     children: [Node!]!
+    graphqlTypegen: Boolean
     host: String
     id: ID!
     internal: Internal!
@@ -710,6 +711,7 @@ type SitePluginGroupConnection {
 
 type SiteSiteMetadata {
     author: String
+    categories: [SiteSiteMetadataCategories]
     copyright: String
     description: String
     image: String
@@ -721,8 +723,14 @@ type SiteSiteMetadata {
     title: String
 }
 
+type SiteSiteMetadataCategories {
+    name: String
+    slug: String
+}
+
 type SiteSiteMetadataSocial {
     github: String
+    instagram: String
     twitter: String
 }
 
@@ -1356,6 +1364,7 @@ enum SiteFieldsEnum {
     children___parent___internal___type
     children___parent___parent___children
     children___parent___parent___id
+    graphqlTypegen
     host
     id
     internal___content
@@ -1409,6 +1418,9 @@ enum SiteFieldsEnum {
     polyfill
     port
     siteMetadata___author
+    siteMetadata___categories
+    siteMetadata___categories___name
+    siteMetadata___categories___slug
     siteMetadata___copyright
     siteMetadata___description
     siteMetadata___image
@@ -1417,6 +1429,7 @@ enum SiteFieldsEnum {
     siteMetadata___siteTitle
     siteMetadata___siteUrl
     siteMetadata___social___github
+    siteMetadata___social___instagram
     siteMetadata___social___twitter
     siteMetadata___title
     trailingSlash
@@ -2007,6 +2020,7 @@ input SiteBuildMetadataSortInput {
 input SiteFilterInput {
     buildTime: DateQueryOperatorInput
     children: NodeFilterListInput
+    graphqlTypegen: BooleanQueryOperatorInput
     host: StringQueryOperatorInput
     id: StringQueryOperatorInput
     internal: InternalFilterInput
@@ -2078,8 +2092,18 @@ input SitePluginSortInput {
     order: [SortOrderEnum] = [ASC]
 }
 
+input SiteSiteMetadataCategoriesFilterInput {
+    name: StringQueryOperatorInput
+    slug: StringQueryOperatorInput
+}
+
+input SiteSiteMetadataCategoriesFilterListInput {
+    elemMatch: SiteSiteMetadataCategoriesFilterInput
+}
+
 input SiteSiteMetadataFilterInput {
     author: StringQueryOperatorInput
+    categories: SiteSiteMetadataCategoriesFilterListInput
     copyright: StringQueryOperatorInput
     description: StringQueryOperatorInput
     image: StringQueryOperatorInput
@@ -2093,6 +2117,7 @@ input SiteSiteMetadataFilterInput {
 
 input SiteSiteMetadataSocialFilterInput {
     github: StringQueryOperatorInput
+    instagram: StringQueryOperatorInput
     twitter: StringQueryOperatorInput
 }
 
