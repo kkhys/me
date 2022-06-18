@@ -6,8 +6,8 @@ const badge = (color: string) => {
   const hsl = hex2hsl(color);
 
   return css`
-    display: inline;
-    padding: 6px 10px;
+    display: inline-block;
+    padding: 3px 10px;
     font-size: ${font.size.s};
     border-radius: 2rem;
     font-weight: ${font.weight.bold};
