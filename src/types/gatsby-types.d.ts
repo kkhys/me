@@ -299,6 +299,7 @@ type SiteSiteMetadataSocial = {
 type SiteSiteMetadataCategories = {
   readonly name: Maybe<Scalars['String']>;
   readonly slug: Maybe<Scalars['String']>;
+  readonly color: Maybe<Scalars['String']>;
 };
 
 type SiteFunction = Node & {
@@ -1530,6 +1531,7 @@ type SiteSiteMetadataCategoriesFilterListInput = {
 type SiteSiteMetadataCategoriesFilterInput = {
   readonly name: Maybe<StringQueryOperatorInput>;
   readonly slug: Maybe<StringQueryOperatorInput>;
+  readonly color: Maybe<StringQueryOperatorInput>;
 };
 
 type SiteConnection = {
@@ -1594,6 +1596,7 @@ type SiteFieldsEnum =
   | 'siteMetadata.categories'
   | 'siteMetadata.categories.name'
   | 'siteMetadata.categories.slug'
+  | 'siteMetadata.categories.color'
   | 'port'
   | 'host'
   | 'polyfill'
@@ -2799,7 +2802,10 @@ type NewTemplateQueryVariables = Exact<{
 }>;
 
 
-type NewTemplateQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'siteTitle' | 'copyright'>> }>, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'createdAt' | 'title' | 'emoji' | 'category' | 'slug'>> } }> } };
+type NewTemplateQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<(
+      Pick<SiteSiteMetadata, 'siteTitle' | 'copyright'>
+      & { readonly categories: Maybe<ReadonlyArray<Maybe<Pick<SiteSiteMetadataCategories, 'name' | 'slug' | 'color'>>>> }
+    )> }>, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: Maybe<Pick<MarkdownRemarkFields, 'slug'>>, readonly frontmatter: Maybe<Pick<MarkdownRemarkFrontmatter, 'createdAt' | 'title' | 'emoji' | 'category' | 'slug'>> } }> } };
 
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
