@@ -7,14 +7,14 @@ const badge = (color: string) => {
 
   return css`
     display: inline-block;
-    padding: 3px 10px;
+    padding: 0.1rem 0.6rem;
     font-size: ${font.size.s};
     border-radius: 2rem;
     font-weight: ${font.weight.bold};
     color: hsl(
       ${hsl[0]},
       ${hsl[1]}%,
-      ${hsl[2] && hsl[2] <= 95 ? hsl[2] + 5 : hsl[2]}%
+      ${hsl[2] && hsl[2] <= 95 ? hsl[2] + 5 : 80}%
     );
     border: 1px solid ${color};
     background-color: rgba(${hex2rgba(color, 0.18).toString()});
