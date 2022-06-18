@@ -1,12 +1,27 @@
 import React from 'react';
 import twemoji from 'twemoji';
 import { Anchor } from '^/atoms';
+import { CategoryBadge } from '^/molecules';
 import * as styles from './styles';
 import type { FC } from 'react';
 
-const ArticleCard: FC<
-  Partial<Record<'link' | 'emoji' | 'title' | 'createdAt', string>>
-> = ({ link, emoji, title, createdAt }) => {
+type ArticleCardProps = {
+  link?: string;
+  emoji?: string;
+  title?: string;
+  createdAt?: string;
+  category?: string;
+  categoryObjects?: Record<'name' | 'slug' | 'color', string>[];
+};
+
+const ArticleCard: FC<ArticleCardProps> = ({
+  link,
+  emoji,
+  title,
+  createdAt,
+  category,
+  categoryObjects,
+}) => {
   const parsedEmoji = twemoji.parse(emoji || '📝', {
     folder: 'svg',
     ext: '.svg',
@@ -21,6 +36,7 @@ const ArticleCard: FC<
       <div css={styles.content()}>
         <h3 css={styles.heading()}>{cardTitle}</h3>
         {createdAt && <time css={styles.createdAt()}>{createdAt}</time>}
+        <CategoryBadge slug={category} categoryObjects={categoryObjects} />
       </div>
     </Anchor>
   ) : (
@@ -32,6 +48,7 @@ const ArticleCard: FC<
       <div css={styles.content()}>
         <h3>{title}</h3>
         <time>{createdAt}</time>
+        <CategoryBadge slug={category} categoryObjects={categoryObjects} />
       </div>
     </div>
   );
