@@ -1,4 +1,5 @@
 import React from 'react';
+import { Anchor } from '^/atoms';
 import * as styles from './styles';
 import type { FC } from 'react';
 
@@ -20,7 +21,7 @@ const CategoryBadge: FC<CategoryBadgeProps> = ({
   const categoryName = categoryObject ? categoryObject.name : '無分類';
   const categoryColor = categoryObject ? categoryObject.color : ''; // FIXME
   const content = <span css={styles.badge(categoryColor)}>{categoryName}</span>;
-  return isLink ? <div>{content}</div> : <div>{content}</div>;
+  return isLink ? <Anchor to={`/${slug}`}>{content}</Anchor> : <> {content}</>;
 };
 
 export default CategoryBadge;
