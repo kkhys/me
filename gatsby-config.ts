@@ -18,11 +18,13 @@ const config: GatsbyConfig = {
     categories: [
       {
         name: 'life',
-        slug: 'l',
+        slug: 'life',
+        color: '#ffe085',
       },
       {
         name: 'tech',
-        slug: 't',
+        slug: 'tech',
+        color: '#a1e3b5',
       },
     ],
   },
