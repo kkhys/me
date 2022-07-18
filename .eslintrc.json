@@ -10,7 +10,8 @@
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "prettier"
+    "prettier",
+    "plugin:tailwindcss/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -21,7 +22,13 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "import", "unused-imports"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "import",
+    "unused-imports",
+    "tailwindcss"
+  ],
   "rules": {
     "react/prop-types": 0,
     "no-use-before-define": 0,
@@ -87,13 +94,16 @@
             "position": "before"
           },
           {
-            "pattern": "_/**",
+            "pattern": "^/**",
             "group": "internal",
             "position": "before"
           }
         ]
       }
-    ]
+    ],
+    "tailwindcss/classnames-order": 1,
+    "tailwindcss/no-custom-classname": 0,
+    "tailwindcss/no-contradicting-classname": 2
   },
   "settings": {
     "import/resolver": {
