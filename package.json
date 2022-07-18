@@ -13,7 +13,9 @@
     "fix": "run-s -l fix:**",
     "fix:prettier": "prettier --write .",
     "fix:eslint": "eslint . --ext .ts,.tsx --fix",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "sb": "start-storybook -p 6006",
+    "build:sb": "build-storybook"
   },
   "dependencies": {
     "gatsby": "^4.18.2",
@@ -22,14 +24,24 @@
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.6",
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-webpack5": "^6.5.9",
+    "@storybook/manager-webpack5": "^6.5.9",
+    "@storybook/react": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
     "@types/node": "^18.0.5",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@types/react-helmet": "^6.1.5",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
+    "babel-loader": "^8.2.5",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -46,6 +58,7 @@
     "prettier": "^2.7.1",
     "semantic-release": "^19.0.3",
     "semantic-release-cli": "^5.4.4",
+    "storybook-addon-gatsby": "^0.0.5",
     "typescript": "^4.7.4"
   }
 }
