@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@/components';
+import { Button } from '^/index';
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

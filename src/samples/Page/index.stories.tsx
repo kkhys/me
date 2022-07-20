@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/await-thenable */
 import { within, userEvent } from '@storybook/testing-library';
 import React from 'react';
-import { Page } from '@/components';
+import { Page } from '^/index';
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
 export default {

@@ -1,6 +1,6 @@
 import React from 'react';
-import '^/Page/page.css';
-import { Header } from '@/components';
+import '@/samples/Page/page.css';
+import { Header } from '^/index';
 
 type User = {
   name: string;

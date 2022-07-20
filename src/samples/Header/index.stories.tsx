@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from '@/components';
+import { Header } from '^/index';
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
 export default {
