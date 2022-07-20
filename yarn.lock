@@ -4638,15 +4638,20 @@
     "@types/node" "*"
     form-data "^3.0.0"
 
-"@types/node@*", "@types/node@>=10.0.0", "@types/node@>=12", "@types/node@^18.0.5":
-  version "18.0.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.0.5.tgz#96be8113b014e9e7f0c3609c4a25afadd85ff659"
-  integrity sha512-En7tneq+j0qAiVwysBD79y86MT3ModuoIJbe7JXp+sb5UAjInSShmK3nXXMioBzfF7rXC12hv12d4IyCVwN4dA==
+"@types/node@*":
+  version "18.0.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.0.6.tgz#0ba49ac517ad69abe7a1508bc9b3a5483df9d5d7"
+  integrity sha512-/xUq6H2aQm261exT6iZTMifUySEt4GR5KX8eYyY+C4MSNPqSh9oNIP7tz2GLKTlFaiBbgZNxffoR3CVRG+cljw==
 
 "@types/node@16.9.1":
   version "16.9.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-16.9.1.tgz#0611b37db4246c937feef529ddcc018cf8e35708"
   integrity sha512-QpLcX9ZSsq3YYUUnD3nFDY8H7wctAhQj/TFKL8Ya8v5fMm3CFXxo8zStsLAl780ltoYoo1WvKUVGBQK+1ifr7g==
+
+"@types/node@>=10.0.0", "@types/node@>=12", "@types/node@^18.0.5":
+  version "18.0.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.0.5.tgz#96be8113b014e9e7f0c3609c4a25afadd85ff659"
+  integrity sha512-En7tneq+j0qAiVwysBD79y86MT3ModuoIJbe7JXp+sb5UAjInSShmK3nXXMioBzfF7rXC12hv12d4IyCVwN4dA==
 
 "@types/node@^14.0.10 || ^16.0.0", "@types/node@^14.14.20 || ^16.0.0":
   version "16.11.45"
@@ -7771,9 +7776,9 @@ clone-deep@^4.0.1:
     shallow-clone "^3.0.0"
 
 clone-response@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/clone-response/-/clone-response-1.0.2.tgz#d1dc973920314df67fbeb94223b4ee350239e96b"
-  integrity sha512-yjLXh88P599UOyPTFX0POsd7WxnbsVsGohcwzHOLspIhhpalPw1BcqED8NblyZLKcGrL8dTgMlcaZxV2jAD41Q==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/clone-response/-/clone-response-1.0.3.tgz#af2032aa47816399cf5f0a1d0db902f517abb8c3"
+  integrity sha512-ROoL94jJH2dUVML2Y/5PEDNaSHgeOdSDicUyS7izcF63G6sTc/FTjLub4b8Il9S8S0beOfYt0TaA5qvFK+w0wA==
   dependencies:
     mimic-response "^1.0.0"
 
@@ -10804,10 +10809,10 @@ gatsby-cli@^4.18.1:
     yoga-layout-prebuilt "^1.10.0"
     yurnalist "^2.1.0"
 
-gatsby-core-utils@^3.18.1:
-  version "3.18.1"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-3.18.1.tgz#7a9451ad1802a6489d24d5b52176720345e1b967"
-  integrity sha512-sJTxRqizLxYy/tSFk0ydfqEZ3ek1So9HDVUa39F6Oi8XuPCBTFzaAooUvowKGneI5YUbdk5y4VO4ybwVUynntw==
+gatsby-core-utils@^3.18.1, gatsby-core-utils@^3.19.0:
+  version "3.19.0"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-3.19.0.tgz#9de637574af1d1d283ffa9b38f058aa2dc6e3d12"
+  integrity sha512-cjXs9DsXkPZt+UdiLHxtq+rGMGVrcnM0KwkawlruvPchI7lqGNv9CScqlvYPxx1dBhu3zSZS26EBALMlFhyOJA==
   dependencies:
     "@babel/runtime" "^7.15.4"
     ci-info "2.0.0"
@@ -10946,15 +10951,15 @@ gatsby-plugin-typescript@^4.18.1:
     babel-plugin-remove-graphql-queries "^4.18.1"
 
 gatsby-plugin-utils@^3.12.1:
-  version "3.12.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-utils/-/gatsby-plugin-utils-3.12.1.tgz#c6a3ce71b99b7ac0f1dd87c54e3565f03b036ef6"
-  integrity sha512-Rx7/MFtiJ+pyvPLqCPj5beyMN6qOx3EYMrOqmvrWJaM32nxMfHZqUqxGruufyFNVe6edfRuNuXcKaPXlGlyexA==
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-utils/-/gatsby-plugin-utils-3.13.0.tgz#89580b70cba3036a7ed20986c5f17dfa6db98497"
+  integrity sha512-iFFWswld/Nu8IrSCikZXC4/cud9txv3ikjkQiGLccJStS9VH2rSY4XEMNRqsKN9Spe3pFBOr/97yYUaPhZaQWg==
   dependencies:
     "@babel/runtime" "^7.15.4"
     "@gatsbyjs/potrace" "^2.2.0"
     fs-extra "^10.1.0"
-    gatsby-core-utils "^3.18.1"
-    gatsby-sharp "^0.12.0"
+    gatsby-core-utils "^3.19.0"
+    gatsby-sharp "^0.13.0"
     graphql-compose "^9.0.7"
     import-from "^4.0.0"
     joi "^17.4.2"
@@ -10979,6 +10984,14 @@ gatsby-sharp@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/gatsby-sharp/-/gatsby-sharp-0.12.0.tgz#2cb886809222c9429ca114f9752be52c96f6c47a"
   integrity sha512-dZa/AgxmPzD0vvROEZSuT3IdzAFTxnq1FfLTf9n3mywonvsKYc84zj6nf8TEzBrVrBFAaLvZek4NpVAKWGr4/w==
+  dependencies:
+    "@types/sharp" "^0.30.0"
+    sharp "^0.30.3"
+
+gatsby-sharp@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/gatsby-sharp/-/gatsby-sharp-0.13.0.tgz#995865616f82235c1007b690a162744f8be2c0af"
+  integrity sha512-dGuIuWP3rC7hXl/CgkHEY4WQEW+B9Rsg8uo6u+OumuLnLBxD4vTusEIGctVKzlyIxpENEQylQ7w1JKHX9fOy9g==
   dependencies:
     "@types/sharp" "^0.30.0"
     sharp "^0.30.3"
@@ -13533,9 +13546,9 @@ keyv@^3.0.0:
     json-buffer "3.0.0"
 
 keyv@^4.0.0:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.3.2.tgz#e839df676a0c7ee594c8835e7c1c83742558e5c2"
-  integrity sha512-kn8WmodVBe12lmHpA6W8OY7SNh6wVR+Z+wZESF4iF5FCazaVXGWOtnbnvX0tMQ1bO+/TmOD9LziuYMvrIIs0xw==
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/keyv/-/keyv-4.3.3.tgz#6c1bcda6353a9e96fc1b4e1aeb803a6e35090ba9"
+  integrity sha512-AcysI17RvakTh8ir03+a3zJr5r0ovnAH/XTXei/4HIv3bL2K/jzvgivLK9UuI/JbU1aJjM3NSAnVvVVd3n+4DQ==
   dependencies:
     compress-brotli "^1.3.8"
     json-buffer "3.0.1"
@@ -18461,9 +18474,9 @@ responselike@^1.0.2:
     lowercase-keys "^1.0.0"
 
 responselike@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/responselike/-/responselike-2.0.0.tgz#26391bcc3174f750f9a79eacc40a12a5c42d7723"
-  integrity sha512-xH48u3FTB9VsZw7R+vvgaKeLKzT6jOogbQhEe/jewwnZgzPcnyWui2Av6JpoYZF/91uueC+lqhWqeURw5/qhCw==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/responselike/-/responselike-2.0.1.tgz#9a0bc8fdc252f3fb1cca68b016591059ba1422bc"
+  integrity sha512-4gl03wn3hj1HP3yzgdI7d3lCkF95F21Pz4BPGvKHinyQzALR5CapwC8yIi0Rh58DEMQ/SguC03wFj2k0M/mHhw==
   dependencies:
     lowercase-keys "^2.0.0"
 
