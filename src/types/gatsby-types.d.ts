@@ -1400,6 +1400,7 @@ type SiteFieldsEnum =
   | 'pathPrefix'
   | 'polyfill'
   | 'siteMetadata.description'
+  | 'siteMetadata.siteTitle'
   | 'siteMetadata.title'
   | 'trailingSlash';
 
@@ -2154,11 +2155,13 @@ type SitePluginSortInput = {
 
 type SiteSiteMetadata = {
   readonly description: Maybe<Scalars['String']>;
+  readonly siteTitle: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataFilterInput = {
   readonly description: InputMaybe<StringQueryOperatorInput>;
+  readonly siteTitle: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
 };
 
