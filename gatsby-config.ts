@@ -17,10 +17,8 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: {
-          name: 'blogLife',
-          path: path.resolve('contents', 'life', 'articles'),
-        },
+        name: 'blogLife',
+        path: path.resolve('contents', 'life', 'articles'),
       },
     },
     {
