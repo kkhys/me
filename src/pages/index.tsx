@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Heading, Button, Section } from '^/elements';
+import { Text, Heading, Button, Section, Grid } from '^/elements';
 
 const Home = () => (
   <>
@@ -10,6 +10,11 @@ const Home = () => (
     <Section heading='section test'>
       <Text>test</Text>
     </Section>
+    <Grid items={3}>
+      <Text>grid test 1</Text>
+      <Text>grid test 2</Text>
+      <Text>grid test 3</Text>
+    </Grid>
   </>
 );
 
