@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Heading, Button } from '^/elements';
+import { Text, Heading, Button, Section } from '^/elements';
 
 const Home = () => (
   <>
@@ -7,6 +7,9 @@ const Home = () => (
     <Text>text test</Text>
     <Heading>heading test</Heading>
     <Button>button test</Button>
+    <Section heading='section test'>
+      <Text>test</Text>
+    </Section>
   </>
 );
 
