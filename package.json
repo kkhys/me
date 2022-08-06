@@ -15,9 +15,11 @@
     "fix:eslint": "eslint . --ext .ts,.tsx --fix",
     "postinstall": "husky install",
     "sb": "start-storybook -p 6006",
-    "build:sb": "build-storybook"
+    "build:sb": "build-storybook",
+    "chromatic": "npx chromatic --project-token=d5b5207f69d0"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
     "gatsby": "^4.20.0",
     "gatsby-plugin-typegen": "^3.0.0",
     "gatsby-remark-autolink-headers": "^5.19.0",
@@ -49,6 +51,7 @@
     "@typescript-eslint/parser": "^5.31.0",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
+    "chromatic": "^6.7.3",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -71,5 +74,8 @@
     "storybook-addon-gatsby": "^0.0.5",
     "tailwindcss": "^3.1.6",
     "typescript": "^4.7.4"
-  }
+  },
+  "version": "",
+  "readme": "ERROR: No README data found!",
+  "_id": "me@"
 }
