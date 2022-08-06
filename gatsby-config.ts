@@ -4,6 +4,7 @@ import type { GatsbyConfig } from 'gatsby';
 const config: GatsbyConfig = {
   siteMetadata: {
     siteTitle: 'ktnkk.me',
+    copyright: '',
   },
   plugins: [
     'gatsby-plugin-postcss',

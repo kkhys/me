@@ -1938,6 +1938,7 @@ type SiteFieldsEnum =
   | 'parent.parent.parent.id'
   | 'pathPrefix'
   | 'polyfill'
+  | 'siteMetadata.copyright'
   | 'siteMetadata.description'
   | 'siteMetadata.siteTitle'
   | 'siteMetadata.title'
@@ -2693,12 +2694,14 @@ type SitePluginSortInput = {
 };
 
 type SiteSiteMetadata = {
+  readonly copyright: Maybe<Scalars['String']>;
   readonly description: Maybe<Scalars['String']>;
   readonly siteTitle: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataFilterInput = {
+  readonly copyright: InputMaybe<StringQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly siteTitle: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
