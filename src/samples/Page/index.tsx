@@ -1,6 +1,6 @@
 import React from 'react';
 import '@/samples/Page/page.css';
-import { Header } from '^/index';
+import { Header2 } from '^/index';
 
 type User = {
   name: string;
@@ -11,7 +11,7 @@ const Page: React.VFC = () => {
 
   return (
     <article>
-      <Header
+      <Header2
         user={user}
         onLogin={() => setUser({ name: 'Jane Doe' })}
         onLogout={() => setUser(undefined)}

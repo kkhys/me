@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/await-thenable */
 import { within, userEvent } from '@storybook/testing-library';
 import React from 'react';
-import { Page } from '^/index';
+import { Page2 } from '^/index';
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
 export default {
   title: 'Example/Page',
-  component: Page,
+  component: Page2,
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'fullscreen',
   },
-} as ComponentMeta<typeof Page>;
+} as ComponentMeta<typeof Page2>;
 
-const Template: ComponentStory<typeof Page> = (args) => <Page {...args} />;
+const Template: ComponentStory<typeof Page2> = (args) => <Page2 {...args} />;
 
 export const LoggedOut = Template.bind({});
 
