@@ -92,8 +92,8 @@ const MobileHeader: FC<MobileHeaderProps> = ({ title, isHome, openMenu }) => {
   );
 };
 
-export const Header: FC<HeaderProps> = ({ title, location }) => {
-  const isHome = location.pathname === '/';
+export const Header: FC<HeaderProps> = ({ title, location: { pathname } }) => {
+  const isHome = pathname === '/';
 
   const { isOpen, openDrawer, closeDrawer } = useDrawer();
 

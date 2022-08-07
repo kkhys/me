@@ -155,10 +155,11 @@ export const createPages: GatsbyNode['createPages'] = async ({
           'src',
           'components',
           'templates',
-          'Top',
+          'Home',
           'index.tsx',
         ),
         context: {
+          isPublished: [true, false],
           limit: POST_PER_PAGE,
           skip: i * POST_PER_PAGE,
           numberOfPages: numberOfPages(articles),

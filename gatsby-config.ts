@@ -4,7 +4,17 @@ import type { GatsbyConfig } from 'gatsby';
 const config: GatsbyConfig = {
   siteMetadata: {
     siteTitle: 'ktnkk.me',
-    copyright: '',
+    copyright: `CC BY-NC-SA 4.0 ${new Date().getFullYear()}-PRESENT © Keiten Kiki`,
+    category: [
+      {
+        name: 'tech',
+        slug: 't',
+      },
+      {
+        name: 'life',
+        slug: 'l',
+      },
+    ],
   },
   plugins: [
     'gatsby-plugin-postcss',

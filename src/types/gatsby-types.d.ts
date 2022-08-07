@@ -1938,6 +1938,9 @@ type SiteFieldsEnum =
   | 'parent.parent.parent.id'
   | 'pathPrefix'
   | 'polyfill'
+  | 'siteMetadata.category'
+  | 'siteMetadata.category.name'
+  | 'siteMetadata.category.slug'
   | 'siteMetadata.copyright'
   | 'siteMetadata.description'
   | 'siteMetadata.siteTitle'
@@ -2694,13 +2697,29 @@ type SitePluginSortInput = {
 };
 
 type SiteSiteMetadata = {
+  readonly category: Maybe<ReadonlyArray<Maybe<SiteSiteMetadataCategory>>>;
   readonly copyright: Maybe<Scalars['String']>;
   readonly description: Maybe<Scalars['String']>;
   readonly siteTitle: Maybe<Scalars['String']>;
   readonly title: Maybe<Scalars['String']>;
 };
 
+type SiteSiteMetadataCategory = {
+  readonly name: Maybe<Scalars['String']>;
+  readonly slug: Maybe<Scalars['String']>;
+};
+
+type SiteSiteMetadataCategoryFilterInput = {
+  readonly name: InputMaybe<StringQueryOperatorInput>;
+  readonly slug: InputMaybe<StringQueryOperatorInput>;
+};
+
+type SiteSiteMetadataCategoryFilterListInput = {
+  readonly elemMatch: InputMaybe<SiteSiteMetadataCategoryFilterInput>;
+};
+
 type SiteSiteMetadataFilterInput = {
+  readonly category: InputMaybe<SiteSiteMetadataCategoryFilterListInput>;
   readonly copyright: InputMaybe<StringQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly siteTitle: InputMaybe<StringQueryOperatorInput>;
@@ -2724,6 +2743,15 @@ type StringQueryOperatorInput = {
   readonly nin: InputMaybe<ReadonlyArray<InputMaybe<Scalars['String']>>>;
   readonly regex: InputMaybe<Scalars['String']>;
 };
+
+type HomeTemplateQueryVariables = Exact<{
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+  isPublished: ReadonlyArray<InputMaybe<Scalars['Boolean']>> | InputMaybe<Scalars['Boolean']>;
+}>;
+
+
+type HomeTemplateQuery = { readonly site: { readonly siteMetadata: { readonly siteTitle: string | null, readonly copyright: string | null, readonly category: ReadonlyArray<{ readonly name: string | null, readonly slug: string | null } | null> | null } | null } | null, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly createdAt: string | null, readonly title: string | null, readonly emoji: string | null, readonly category: string | null, readonly slug: string | null } | null } }> } };
 
 
 }
