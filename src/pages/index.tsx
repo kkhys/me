@@ -1,8 +1,12 @@
 import React from 'react';
 import { Text, Heading, Button, Section, Grid, IconBag } from '^/elements';
+import { Header } from '^/global';
+import type { PageProps } from 'gatsby';
+import type { FC } from 'react';
 
-const Home = () => (
+const Home: FC<PageProps> = ({ location }) => (
   <>
+    <Header title='ktnkk.me' location={location} />
     <h1 className='text-3xl font-bold underline'>Hello world!!!</h1>
     <Text>text test</Text>
     <Heading>heading test</Heading>
