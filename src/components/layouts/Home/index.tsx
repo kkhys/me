@@ -18,14 +18,14 @@ const HomeLayout: FC<HomeLayoutProps> = ({
   copyright,
   articles,
 }) => (
-  <>
+  <div className='flex min-h-screen flex-col'>
     <Header title={title} location={location} />
     <main role='main' className='grow'>
       <Text>test</Text>
       <ArticleCards articles={articles} />
     </main>
     <Footer copyright={copyright} location={location} />
-  </>
+  </div>
 );
 
 export default HomeLayout;
