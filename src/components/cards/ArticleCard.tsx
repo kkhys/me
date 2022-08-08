@@ -1,11 +1,12 @@
 import clsx from 'clsx';
 import { Link } from 'gatsby';
 import React from 'react';
+import twemoji from 'twemoji';
 import { Text } from '^/elements';
 import type { FC } from 'react';
 
 type ArticleCardProps = {
-  article: Pick<Article, 'title'>;
+  article: Pick<Article, 'handle' | 'title' | 'emoji' | 'createdAt'>;
   className?: string;
   onClick?: () => void;
 };
@@ -15,47 +16,31 @@ export const ArticleCard: FC<ArticleCardProps> = ({
   className,
   onClick,
 }) => {
+  const { handle, title, emoji, createdAt } = article;
   const styles = clsx('grid gap-6', className);
+  const parsedEmoji = twemoji.parse(emoji || '', {
+    folder: 'svg',
+    ext: '.svg',
+  });
 
   return (
-    <Link onClick={onClick} to='/test'>
+    <Link onClick={onClick} to={`/${handle}`}>
       <div className={styles}>
-        <div className='card-image aspect-[4/5] bg-primary/5'>
-          <Text
-            as='label'
-            size='fine'
-            className='absolute top-0 right-0 m-4 text-right text-notice'
-          >
-            test
-          </Text>
-          {/* {image && ( */}
-          {/*  <Image */}
-          {/*    className='fadeIn aspect-[4/5] w-full object-cover' */}
-          {/*    widths={[320]} */}
-          {/*    sizes='320px' */}
-          {/*    loaderOptions={{ */}
-          {/*      crop: 'center', */}
-          {/*      scale: 2, */}
-          {/*      width: 320, */}
-          {/*      height: 400, */}
-          {/*    }} */}
-          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-          {/*    // @ts-ignore Stock type has `src` as optional */}
-          {/*    data={image} */}
-          {/*    alt={image.altText || `Picture of ${product.title}`} */}
-          {/*    loading={loading} */}
-          {/*  /> */}
-          {/* )} */}
-        </div>
+        <div className='card-image aspect-[1/1] bg-primary/5' />
         <div className='grid gap-1'>
           <Text
             className='w-full overflow-hidden text-ellipsis whitespace-nowrap '
             as='h3'
           >
-            {article.title}
+            {title}
           </Text>
           <div className='flex gap-4'>
-            <Text className='flex gap-4'>test2</Text>
+            <Text className='flex gap-4'>{createdAt}</Text>
+            <p>{emoji}</p>
+            <p
+              dangerouslySetInnerHTML={{ __html: parsedEmoji }}
+              className='w-8'
+            />
           </div>
         </div>
       </div>

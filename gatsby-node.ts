@@ -95,13 +95,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
     }).forEach((_, i) => {
       createPage({
         path: i === 0 ? `/${category}` : `/${category}/${i + 1}`,
-        component: path.resolve(
-          'src',
-          'components',
-          'templates',
-          'Category',
-          'index.tsx',
-        ),
+        component: path.resolve('src', 'templates', 'Category', 'index.tsx'),
         context: {
           category,
           limit: POST_PER_PAGE,
@@ -135,13 +129,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
     createPage({
       path: article.node.frontmatter?.slug || '',
-      component: path.resolve(
-        'src',
-        'components',
-        'templates',
-        'Article',
-        'index.tsx',
-      ),
+      component: path.resolve('src', 'templates', 'Article', 'index.tsx'),
       context: {
         slug: article.node.fields?.slug,
         relatedArticles,
@@ -151,13 +139,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
     Array.from({ length: numberOfPages(articles) }).forEach((_, i) => {
       createPage({
         path: i === 0 ? '/' : `/${i + 1}`,
-        component: path.resolve(
-          'src',
-          'components',
-          'templates',
-          'Home',
-          'index.tsx',
-        ),
+        component: path.resolve('src', 'templates', 'Home', 'index.tsx'),
         context: {
           isPublished: [true, false],
           limit: POST_PER_PAGE,

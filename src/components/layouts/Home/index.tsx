@@ -9,7 +9,7 @@ type HomeLayoutProps = {
   title: string;
   location: WindowLocation;
   copyright: string;
-  articles: Pick<Article, 'title'>[];
+  articles: Pick<Article, 'handle' | 'title' | 'emoji' | 'createdAt'>[];
 };
 
 const HomeLayout: FC<HomeLayoutProps> = ({
