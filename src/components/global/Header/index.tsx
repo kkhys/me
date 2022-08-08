@@ -35,7 +35,7 @@ const DesktopHeader: FC<DesktopHeaderProps> = ({ isHome, title }) => {
 
   return (
     <header role='banner' className={styles.container}>
-      <div className='flex gap-12'>
+      <div className='container flex gap-12'>
         <Link className='font-bold' to='/'>
           {title}
         </Link>
@@ -46,11 +46,6 @@ const DesktopHeader: FC<DesktopHeaderProps> = ({ isHome, title }) => {
         {/*    </Link> */}
         {/*  ))} */}
         {/* </nav> */}
-      </div>
-      <div className='flex items-center gap-1'>
-        <Link to='/account' className={styles.button}>
-          <IconAccount />
-        </Link>
       </div>
     </header>
   );

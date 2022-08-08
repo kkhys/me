@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArticleGrid } from '^/article';
-import { Text } from '^/elements';
+import { Heading } from '^/elements';
 import { Footer, Header } from '^/global';
 import type { WindowLocation } from '@reach/router';
 import type { FC } from 'react';
@@ -18,10 +18,10 @@ const HomeLayout: FC<HomeLayoutProps> = ({
   copyright,
   articles,
 }) => (
-  <div className='flex min-h-screen flex-col'>
+  <div className='flex flex-col'>
     <Header title={title} location={location} />
-    <main role='main' className='grow'>
-      <Text>test</Text>
+    <main role='main' className='container min-h-screen-no-nav grow'>
+      <Heading>test</Heading>
       <ArticleGrid articles={articles} />
     </main>
     <Footer copyright={copyright} location={location} />

@@ -29,6 +29,15 @@ module.exports = {
       '8xl': ['6rem', { lineHeight: '1' }],
       '9xl': ['8rem', { lineHeight: '1' }],
     },
+    container: {
+      center: true,
+      screens: {
+        md: '48rem',
+      },
+      padding: {
+        DEFAULT: '1.5rem',
+      },
+    },
     extend: {
       colors: {
         primary: withOpacityValue('--color-primary'),
@@ -53,6 +62,11 @@ module.exports = {
         screen: 'var(--screen-height, 100vh)',
       },
       height: {
+        screen: 'var(--screen-height, 100vh)',
+        'screen-no-nav':
+          'calc(var(--screen-height, 100vh) - var(--height-nav))',
+      },
+      minHeight: {
         screen: 'var(--screen-height, 100vh)',
         'screen-no-nav':
           'calc(var(--screen-height, 100vh) - var(--height-nav))',
