@@ -46,8 +46,17 @@ const HomeTemplate: FC<PageProps<GatsbyTypes.HomeTemplateQuery>> = ({
 }) => {
   const siteTitle = data.site?.siteMetadata?.siteTitle as string;
   const copyright = data.site?.siteMetadata?.copyright as string;
+  const articles = data.allMarkdownRemark.edges.map((edge) => ({
+    title: edge?.node?.frontmatter?.title || '無題',
+    emoji: edge?.node?.frontmatter?.emoji || '', // FIXME
+  }));
   return (
-    <HomeLayout title={siteTitle} location={location} copyright={copyright} />
+    <HomeLayout
+      title={siteTitle}
+      location={location}
+      copyright={copyright}
+      articles={articles}
+    />
   );
 };
 
