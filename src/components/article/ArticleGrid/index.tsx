@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import { ArticleCard } from '^/cards';
-import { Grid } from '^/elements';
+import { Grid, Text } from '^/elements';
 import type { FC } from 'react';
 
 export const ArticleGrid: FC<{ articles: Pick<Article, 'title'>[] }> = ({
@@ -10,9 +10,9 @@ export const ArticleGrid: FC<{ articles: Pick<Article, 'title'>[] }> = ({
   if (!articles) {
     return (
       <>
-        <p>No products found on this collection</p>
-        <Link to='/products'>
-          <p className='underline'>Browse catalog</p>
+        <Text>No articles found</Text>
+        <Link to='/'>
+          <Text className='underline'>Back to top</Text>
         </Link>
       </>
     );
