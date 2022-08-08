@@ -8,7 +8,7 @@ type GridProps = {
   flow: 'row' | 'col';
   gap: 'default' | 'blog';
   items: number;
-  layout: 'default' | 'products' | 'auto' | 'blog';
+  layout: 'default' | 'articles' | 'auto';
   [key: string]: any;
 };
 
@@ -25,13 +25,9 @@ export const Grid: FC<Partial<GridProps>> = ({
     default: `grid-cols-1 
     ${items === 2 ? 'md:grid-cols-2' : ''}
     ${items === 3 ? 'sm:grid-cols-3' : ''}
-    ${items > 3 ? 'md:grid-cols-3' : ''}
     ${items >= 4 ? 'lg:grid-cols-4' : ''}`,
-    products: `grid-cols-2 
-    ${items >= 3 ? 'md:grid-cols-3' : ''}
-    ${items >= 4 ? 'lg:grid-cols-4' : ''}`,
+    articles: `grid-cols-2 md:grid-cols-3`,
     auto: 'auto-cols-auto',
-    blog: `grid-cols-2 pt-24`,
   };
 
   const gaps = {

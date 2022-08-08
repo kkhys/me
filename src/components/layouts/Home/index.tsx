@@ -1,7 +1,7 @@
 import React from 'react';
+import { ArticleGrid } from '^/article';
 import { Text } from '^/elements';
 import { Footer, Header } from '^/global';
-import { ArticleCards } from '^/sections';
 import type { WindowLocation } from '@reach/router';
 import type { FC } from 'react';
 
@@ -22,7 +22,7 @@ const HomeLayout: FC<HomeLayoutProps> = ({
     <Header title={title} location={location} />
     <main role='main' className='grow'>
       <Text>test</Text>
-      <ArticleCards articles={articles} />
+      <ArticleGrid articles={articles} />
     </main>
     <Footer copyright={copyright} location={location} />
   </div>
