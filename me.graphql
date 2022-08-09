@@ -381,7 +381,7 @@ type MarkdownRemarkEdge {
 }
 
 type MarkdownRemarkFields {
-  slug: String
+  filePath: String
 }
 
 type MarkdownRemarkFrontmatter {
@@ -718,8 +718,8 @@ type SiteSiteMetadata {
 }
 
 type SiteSiteMetadataCategory {
+  handle: String
   name: String
-  slug: String
 }
 
 enum DirectoryFieldsEnum {
@@ -871,7 +871,7 @@ enum FileFieldsEnum {
   childMarkdownRemark___children___parent___id
   childMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childMarkdownRemark___excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  childMarkdownRemark___fields___slug
+  childMarkdownRemark___fields___filePath
   childMarkdownRemark___fileAbsolutePath
   childMarkdownRemark___frontmatter___category
   childMarkdownRemark___frontmatter___createdAt
@@ -936,7 +936,7 @@ enum FileFieldsEnum {
   childrenMarkdownRemark___children___parent___id
   childrenMarkdownRemark___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childrenMarkdownRemark___excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  childrenMarkdownRemark___fields___slug
+  childrenMarkdownRemark___fields___filePath
   childrenMarkdownRemark___fileAbsolutePath
   childrenMarkdownRemark___frontmatter___category
   childrenMarkdownRemark___frontmatter___createdAt
@@ -1149,7 +1149,7 @@ enum MarkdownRemarkFieldsEnum {
   children___parent___parent___id
   excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   excerptAst @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  fields___slug
+  fields___filePath
   fileAbsolutePath
   frontmatter___category
   frontmatter___createdAt
@@ -1406,8 +1406,8 @@ enum SiteFieldsEnum {
   polyfill
   port
   siteMetadata___category
+  siteMetadata___category___handle
   siteMetadata___category___name
-  siteMetadata___category___slug
   siteMetadata___copyright
   siteMetadata___description
   siteMetadata___siteTitle
@@ -1924,7 +1924,7 @@ input MarkdownHeadingFilterListInput {
 }
 
 input MarkdownRemarkFieldsFilterInput {
-  slug: StringQueryOperatorInput
+  filePath: StringQueryOperatorInput
 }
 
 input MarkdownRemarkFilterInput {
@@ -2073,8 +2073,8 @@ input SitePluginSortInput {
 }
 
 input SiteSiteMetadataCategoryFilterInput {
+  handle: StringQueryOperatorInput
   name: StringQueryOperatorInput
-  slug: StringQueryOperatorInput
 }
 
 input SiteSiteMetadataCategoryFilterListInput {

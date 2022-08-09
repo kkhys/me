@@ -2744,10 +2744,16 @@ type StringQueryOperatorInput = {
   readonly regex: InputMaybe<Scalars['String']>;
 };
 
+type ArticleTemplateQueryVariables = Exact<{
+  filePath: Scalars['String'];
+}>;
+
+
+type ArticleTemplateQuery = { readonly site: { readonly siteMetadata: { readonly siteTitle: string | null, readonly copyright: string | null, readonly category: ReadonlyArray<{ readonly name: string | null, readonly handle: string | null } | null> | null } | null } | null, readonly markdownRemark: { readonly html: string | null, readonly frontmatter: { readonly createdAt: string | null, readonly title: string | null, readonly description: string | null, readonly emoji: string | null, readonly category: string | null, readonly handle: string | null } | null } | null };
+
 type HomeTemplateQueryVariables = Exact<{
-  skip: Scalars['Int'];
-  limit: Scalars['Int'];
   isPublished: ReadonlyArray<InputMaybe<Scalars['Boolean']>> | InputMaybe<Scalars['Boolean']>;
+  limit: Scalars['Int'];
 }>;
 
 

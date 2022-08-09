@@ -2,7 +2,7 @@ import path from 'path';
 import { createFilePath } from 'gatsby-source-filesystem';
 import type { GatsbyNode } from 'gatsby';
 
-const POST_PER_PAGE = 8;
+const POST_PER_PAGE = 9;
 const RELATED_POSTS_COUNT = 5;
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
@@ -138,18 +138,13 @@ export const createPages: GatsbyNode['createPages'] = async ({
       },
     });
 
-    Array.from({ length: numberOfPages(articles) }).forEach((_, i) => {
+    Array.from({ length: numberOfPages(articles) }).forEach(() => {
       createPage({
-        path: i === 0 ? '/' : `/${i + 1}`,
+        path: '/',
         component: path.resolve('src', 'templates', 'Home', 'index.tsx'),
         context: {
           isPublished: [true, false],
           limit: POST_PER_PAGE,
-          skip: i * POST_PER_PAGE,
-          numberOfPages: numberOfPages(articles),
-          currentPage: i + 1,
-          hasPrevPage: i !== 0,
-          hasNextPage: i !== numberOfPages(articles) - 1,
         },
       });
     });

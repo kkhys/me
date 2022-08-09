@@ -4,7 +4,7 @@ import { HomeLayout } from '^/layouts';
 import type { FC } from 'react';
 
 export const PAGE_QUERY = graphql`
-  query HomeTemplate($skip: Int!, $limit: Int!, $isPublished: [Boolean]!) {
+  query HomeTemplate($isPublished: [Boolean]!, $limit: Int!) {
     site {
       siteMetadata {
         siteTitle
@@ -19,7 +19,6 @@ export const PAGE_QUERY = graphql`
       sort: { fields: [frontmatter___createdAt], order: DESC }
       filter: { frontmatter: { published: { in: $isPublished } } }
       limit: $limit
-      skip: $skip
     ) {
       edges {
         node {
@@ -54,7 +53,7 @@ const HomeTemplate: FC<PageProps<GatsbyTypes.HomeTemplateQuery>> = ({
   }));
   return (
     <HomeLayout
-      title={siteTitle}
+      siteTitle={siteTitle}
       location={location}
       copyright={copyright}
       articles={articles}

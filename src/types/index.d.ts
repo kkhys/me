@@ -1,8 +1,9 @@
 type Article = {
   handle: string;
   title: string;
+  description?: string;
   emoji: string;
   category: string;
-  slug: string;
   createdAt: string;
+  html: string;
 };
