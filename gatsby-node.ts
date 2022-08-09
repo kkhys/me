@@ -26,7 +26,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   if (node.internal.type === 'MarkdownRemark') {
     const value = createFilePath({ node, getNode });
     createNodeField({
-      name: 'slug',
+      name: 'filePath',
       node,
       value,
     });
@@ -50,12 +50,12 @@ export const createPages: GatsbyNode['createPages'] = async ({
         edges {
           node {
             fields {
-              slug
+              filePath
             }
             frontmatter {
               createdAt(formatString: "YYYY.MM.DD")
               category
-              slug
+              handle
             }
           }
         }
@@ -124,14 +124,16 @@ export const createPages: GatsbyNode['createPages'] = async ({
     ] as ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>;
     relatedArticles = relatedArticles.filter(
       (relatedArticle) =>
-        !(relatedArticle.node.fields?.slug === article.node.fields?.slug),
+        !(
+          relatedArticle.node.fields?.filePath === article.node.fields?.filePath
+        ),
     );
 
     createPage({
-      path: article.node.frontmatter?.slug || '',
+      path: article.node.frontmatter?.handle || '',
       component: path.resolve('src', 'templates', 'Article', 'index.tsx'),
       context: {
-        slug: article.node.fields?.slug,
+        filePath: article.node.fields?.filePath,
         relatedArticles,
       },
     });

@@ -11,7 +11,7 @@ export const PAGE_QUERY = graphql`
         copyright
         category {
           name
-          slug
+          handle
         }
       }
     }
@@ -24,14 +24,14 @@ export const PAGE_QUERY = graphql`
       edges {
         node {
           fields {
-            slug
+            filePath
           }
           frontmatter {
             createdAt(formatString: "YYYY.MM.DD")
             title
             emoji
             category
-            slug
+            handle
           }
         }
       }
@@ -47,7 +47,7 @@ const HomeTemplate: FC<PageProps<GatsbyTypes.HomeTemplateQuery>> = ({
   const siteTitle = data.site?.siteMetadata?.siteTitle as string;
   const copyright = data.site?.siteMetadata?.copyright as string;
   const articles = data.allMarkdownRemark.edges.map((edge) => ({
-    handle: edge?.node?.frontmatter?.slug || '#',
+    handle: edge?.node?.frontmatter?.handle || '#',
     title: edge?.node?.frontmatter?.title || '無題',
     emoji: edge?.node?.frontmatter?.emoji || '', // FIXME
     createdAt: edge?.node?.frontmatter?.createdAt || '',

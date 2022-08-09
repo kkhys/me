@@ -566,14 +566,14 @@ type FileFieldsEnum =
   | 'childMarkdownRemark.children.parent.id'
   | 'childMarkdownRemark.excerpt'
   | 'childMarkdownRemark.excerptAst'
-  | 'childMarkdownRemark.fields.slug'
+  | 'childMarkdownRemark.fields.filePath'
   | 'childMarkdownRemark.fileAbsolutePath'
   | 'childMarkdownRemark.frontmatter.category'
   | 'childMarkdownRemark.frontmatter.createdAt'
   | 'childMarkdownRemark.frontmatter.description'
   | 'childMarkdownRemark.frontmatter.emoji'
+  | 'childMarkdownRemark.frontmatter.handle'
   | 'childMarkdownRemark.frontmatter.published'
-  | 'childMarkdownRemark.frontmatter.slug'
   | 'childMarkdownRemark.frontmatter.tags'
   | 'childMarkdownRemark.frontmatter.title'
   | 'childMarkdownRemark.frontmatter.updatedAt'
@@ -631,14 +631,14 @@ type FileFieldsEnum =
   | 'childrenMarkdownRemark.children.parent.id'
   | 'childrenMarkdownRemark.excerpt'
   | 'childrenMarkdownRemark.excerptAst'
-  | 'childrenMarkdownRemark.fields.slug'
+  | 'childrenMarkdownRemark.fields.filePath'
   | 'childrenMarkdownRemark.fileAbsolutePath'
   | 'childrenMarkdownRemark.frontmatter.category'
   | 'childrenMarkdownRemark.frontmatter.createdAt'
   | 'childrenMarkdownRemark.frontmatter.description'
   | 'childrenMarkdownRemark.frontmatter.emoji'
+  | 'childrenMarkdownRemark.frontmatter.handle'
   | 'childrenMarkdownRemark.frontmatter.published'
-  | 'childrenMarkdownRemark.frontmatter.slug'
   | 'childrenMarkdownRemark.frontmatter.tags'
   | 'childrenMarkdownRemark.frontmatter.title'
   | 'childrenMarkdownRemark.frontmatter.updatedAt'
@@ -1048,7 +1048,7 @@ type MarkdownRemarkEdge = {
 };
 
 type MarkdownRemarkFields = {
-  readonly slug: Maybe<Scalars['String']>;
+  readonly filePath: Maybe<Scalars['String']>;
 };
 
 type MarkdownRemarkFieldsEnum =
@@ -1093,14 +1093,14 @@ type MarkdownRemarkFieldsEnum =
   | 'children.parent.parent.id'
   | 'excerpt'
   | 'excerptAst'
-  | 'fields.slug'
+  | 'fields.filePath'
   | 'fileAbsolutePath'
   | 'frontmatter.category'
   | 'frontmatter.createdAt'
   | 'frontmatter.description'
   | 'frontmatter.emoji'
+  | 'frontmatter.handle'
   | 'frontmatter.published'
-  | 'frontmatter.slug'
   | 'frontmatter.tags'
   | 'frontmatter.title'
   | 'frontmatter.updatedAt'
@@ -1165,7 +1165,7 @@ type MarkdownRemarkFieldsEnum =
   | 'wordCount.words';
 
 type MarkdownRemarkFieldsFilterInput = {
-  readonly slug: InputMaybe<StringQueryOperatorInput>;
+  readonly filePath: InputMaybe<StringQueryOperatorInput>;
 };
 
 type MarkdownRemarkFilterInput = {
@@ -1196,8 +1196,8 @@ type MarkdownRemarkFrontmatter = {
   readonly createdAt: Maybe<Scalars['Date']>;
   readonly description: Maybe<Scalars['String']>;
   readonly emoji: Maybe<Scalars['String']>;
+  readonly handle: Maybe<Scalars['String']>;
   readonly published: Maybe<Scalars['Boolean']>;
-  readonly slug: Maybe<Scalars['String']>;
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly title: Maybe<Scalars['String']>;
   readonly updatedAt: Maybe<Scalars['Date']>;
@@ -1224,8 +1224,8 @@ type MarkdownRemarkFrontmatterFilterInput = {
   readonly createdAt: InputMaybe<DateQueryOperatorInput>;
   readonly description: InputMaybe<StringQueryOperatorInput>;
   readonly emoji: InputMaybe<StringQueryOperatorInput>;
+  readonly handle: InputMaybe<StringQueryOperatorInput>;
   readonly published: InputMaybe<BooleanQueryOperatorInput>;
-  readonly slug: InputMaybe<StringQueryOperatorInput>;
   readonly tags: InputMaybe<StringQueryOperatorInput>;
   readonly title: InputMaybe<StringQueryOperatorInput>;
   readonly updatedAt: InputMaybe<DateQueryOperatorInput>;
@@ -1939,8 +1939,8 @@ type SiteFieldsEnum =
   | 'pathPrefix'
   | 'polyfill'
   | 'siteMetadata.category'
+  | 'siteMetadata.category.handle'
   | 'siteMetadata.category.name'
-  | 'siteMetadata.category.slug'
   | 'siteMetadata.copyright'
   | 'siteMetadata.description'
   | 'siteMetadata.siteTitle'
@@ -2705,13 +2705,13 @@ type SiteSiteMetadata = {
 };
 
 type SiteSiteMetadataCategory = {
+  readonly handle: Maybe<Scalars['String']>;
   readonly name: Maybe<Scalars['String']>;
-  readonly slug: Maybe<Scalars['String']>;
 };
 
 type SiteSiteMetadataCategoryFilterInput = {
+  readonly handle: InputMaybe<StringQueryOperatorInput>;
   readonly name: InputMaybe<StringQueryOperatorInput>;
-  readonly slug: InputMaybe<StringQueryOperatorInput>;
 };
 
 type SiteSiteMetadataCategoryFilterListInput = {
@@ -2751,7 +2751,7 @@ type HomeTemplateQueryVariables = Exact<{
 }>;
 
 
-type HomeTemplateQuery = { readonly site: { readonly siteMetadata: { readonly siteTitle: string | null, readonly copyright: string | null, readonly category: ReadonlyArray<{ readonly name: string | null, readonly slug: string | null } | null> | null } | null } | null, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: { readonly slug: string | null } | null, readonly frontmatter: { readonly createdAt: string | null, readonly title: string | null, readonly emoji: string | null, readonly category: string | null, readonly slug: string | null } | null } }> } };
+type HomeTemplateQuery = { readonly site: { readonly siteMetadata: { readonly siteTitle: string | null, readonly copyright: string | null, readonly category: ReadonlyArray<{ readonly name: string | null, readonly handle: string | null } | null> | null } | null } | null, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: { readonly filePath: string | null } | null, readonly frontmatter: { readonly createdAt: string | null, readonly title: string | null, readonly emoji: string | null, readonly category: string | null, readonly handle: string | null } | null } }> } };
 
 
 }

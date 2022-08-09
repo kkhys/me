@@ -8,11 +8,11 @@ const config: GatsbyConfig = {
     category: [
       {
         name: 'tech',
-        slug: 't',
+        handle: 't',
       },
       {
         name: 'life',
-        slug: 'l',
+        handle: 'l',
       },
     ],
   },
