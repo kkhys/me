@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading } from '^/elements';
+import { Heading, Prose } from '^/elements';
 import { Footer, Header } from '^/global';
 import type { WindowLocation } from '@reach/router';
 import type { FC } from 'react';
@@ -23,7 +23,7 @@ const ArticleLayout: FC<ArticleLayoutProps> = ({
       <Header title={siteTitle} location={location} />
       <main role='main' className='container min-h-screen-no-nav grow'>
         <Heading>article test</Heading>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <Prose html={html} />
       </main>
       <Footer copyright={copyright} location={location} />
     </div>
