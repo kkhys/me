@@ -17,12 +17,12 @@ const ArticleLayout: FC<ArticleLayoutProps> = ({
   copyright,
   article,
 }) => {
-  const { html } = article;
+  const { title, html } = article;
   return (
     <div className='flex flex-col'>
       <Header title={siteTitle} location={location} />
       <main role='main' className='container min-h-screen-no-nav grow'>
-        <Heading>article test</Heading>
+        <Heading>{title}</Heading>
         <Prose html={html} />
       </main>
       <Footer copyright={copyright} location={location} />

@@ -97,6 +97,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
         path: i === 0 ? `/${category}` : `/${category}/${i + 1}`,
         component: path.resolve('src', 'templates', 'Category', 'index.tsx'),
         context: {
+          isPublished: [true, false],
           category,
           limit: POST_PER_PAGE,
           skip: i * POST_PER_PAGE,

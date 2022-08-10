@@ -2751,6 +2751,16 @@ type ArticleTemplateQueryVariables = Exact<{
 
 type ArticleTemplateQuery = { readonly site: { readonly siteMetadata: { readonly siteTitle: string | null, readonly copyright: string | null, readonly category: ReadonlyArray<{ readonly name: string | null, readonly handle: string | null } | null> | null } | null } | null, readonly markdownRemark: { readonly html: string | null, readonly frontmatter: { readonly createdAt: string | null, readonly title: string | null, readonly description: string | null, readonly emoji: string | null, readonly category: string | null, readonly handle: string | null } | null } | null };
 
+type CategoryTemplateQueryVariables = Exact<{
+  category: InputMaybe<Scalars['String']>;
+  skip: Scalars['Int'];
+  limit: Scalars['Int'];
+  isPublished: ReadonlyArray<InputMaybe<Scalars['Boolean']>> | InputMaybe<Scalars['Boolean']>;
+}>;
+
+
+type CategoryTemplateQuery = { readonly site: { readonly siteMetadata: { readonly siteTitle: string | null, readonly copyright: string | null, readonly category: ReadonlyArray<{ readonly name: string | null, readonly handle: string | null } | null> | null } | null } | null, readonly allMarkdownRemark: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: { readonly filePath: string | null } | null, readonly frontmatter: { readonly createdAt: string | null, readonly title: string | null, readonly emoji: string | null, readonly category: string | null, readonly handle: string | null } | null } }> } };
+
 type HomeTemplateQueryVariables = Exact<{
   isPublished: ReadonlyArray<InputMaybe<Scalars['Boolean']>> | InputMaybe<Scalars['Boolean']>;
   limit: Scalars['Int'];

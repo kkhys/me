@@ -1,6 +1,6 @@
 import { graphql, PageProps } from 'gatsby';
 import React from 'react';
-import ArticleLayout from '^/layouts/Article';
+import { ArticleLayout } from '^/layouts';
 import type { FC } from 'react';
 
 export const PAGE_QUERY = graphql`
