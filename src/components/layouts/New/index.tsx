@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArticleGrid } from '^/article';
+import { CategoryPagination, CategoryTabs } from '^/category';
 import { Section } from '^/elements';
 import { Footer, Header, PageHeader } from '^/global';
 import type { WindowLocation } from '@reach/router';
@@ -23,7 +24,9 @@ const CategoryLayout: FC<NewLayoutProps> = ({
     <main role='main' className='container min-h-screen-no-nav grow'>
       <PageHeader heading='New' />
       <Section>
+        <CategoryTabs />
         <ArticleGrid articles={articles} />
+        <CategoryPagination />
       </Section>
     </main>
     <Footer copyright={copyright} location={location} />
