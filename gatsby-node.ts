@@ -2,7 +2,7 @@ import path from 'path';
 import { createFilePath } from 'gatsby-source-filesystem';
 import type { GatsbyNode } from 'gatsby';
 
-const POST_PER_PAGE = 9;
+const POSTS_PER_PAGE = 9;
 const RELATED_POSTS_COUNT = 5;
 
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
@@ -80,7 +80,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
   const numberOfPages = (
     edges?: ReadonlyArray<GatsbyTypes.MarkdownRemarkEdge>,
-  ) => (edges ? Math.ceil(edges.length / POST_PER_PAGE) : 0);
+  ) => (edges ? Math.ceil(edges.length / POSTS_PER_PAGE) : 0);
 
   const categoryArticles = (
     category?: string,
@@ -99,8 +99,8 @@ export const createPages: GatsbyNode['createPages'] = async ({
         context: {
           isPublished: [true, false],
           category,
-          limit: POST_PER_PAGE,
-          skip: i * POST_PER_PAGE,
+          limit: POSTS_PER_PAGE,
+          skip: i * POSTS_PER_PAGE,
           numberOfPages: numberOfPages(categoryArticles(category)),
           currentPage: i + 1,
           hasPrevPage: i !== 0,
@@ -139,13 +139,27 @@ export const createPages: GatsbyNode['createPages'] = async ({
       },
     });
 
-    Array.from({ length: numberOfPages(articles) }).forEach(() => {
+    Array.from({ length: numberOfPages(articles) }).forEach((_, i) => {
       createPage({
         path: '/',
         component: path.resolve('src', 'templates', 'Home', 'index.tsx'),
         context: {
           isPublished: [true, false],
-          limit: POST_PER_PAGE,
+          limit: POSTS_PER_PAGE,
+        },
+      });
+
+      createPage({
+        path: i === 0 ? '/new' : `/new/${i + 1}`,
+        component: path.resolve('src', 'templates', 'New', 'index.tsx'),
+        context: {
+          isPublished: [true, false],
+          limit: POSTS_PER_PAGE,
+          skip: i * POSTS_PER_PAGE,
+          numberOfPages: numberOfPages(articles),
+          currentPage: i + 1,
+          hasPrevPage: i !== 0,
+          hasNextPage: i !== numberOfPages(articles) - 1,
         },
       });
     });
