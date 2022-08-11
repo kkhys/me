@@ -21,7 +21,7 @@ const HomeLayout: FC<HomeLayoutProps> = ({
   <div className='flex flex-col'>
     <Header title={siteTitle} location={location} />
     <main role='main' className='container min-h-screen-no-nav grow'>
-      <Section>
+      <Section padding='y'>
         <ArticleGrid articles={articles} />
       </Section>
     </main>

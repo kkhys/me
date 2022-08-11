@@ -7,7 +7,7 @@ type PageHeaderProps = {
   children: ReactNode;
   className: string;
   heading: string;
-  variant: 'default' | 'allCollections';
+  variant: 'default';
   [key: string]: any;
 };
 
@@ -19,9 +19,7 @@ export const PageHeader: FC<Partial<PageHeaderProps>> = ({
   ...props
 }) => {
   const variants: Record<string, string> = {
-    default: 'grid w-full gap-8 p-6 py-8 md:p-8 lg:p-12 justify-items-start',
-    allCollections:
-      'flex justify-between items-baseline gap-8 p-6 md:p-8 lg:p-12',
+    default: 'grid w-full gap-8 py-8 lg:py-12 justify-items-start',
   };
 
   const styles = clsx(variants[variant], className);

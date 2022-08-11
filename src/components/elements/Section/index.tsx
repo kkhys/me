@@ -11,7 +11,7 @@ type SectionProps = {
   divider: 'none' | 'top' | 'bottom' | 'both';
   display: 'grid' | 'flex';
   heading: string;
-  padding: 'x' | 'y' | 'all';
+  padding: 'x' | 'y' | 'all' | 'none';
   [key: string]: any;
 };
 
@@ -22,13 +22,14 @@ export const Section: FC<Partial<SectionProps>> = ({
   divider = 'none',
   display = 'grid',
   heading,
-  padding = 'all',
+  padding = 'none',
   ...props
 }) => {
   const paddings = {
     x: 'px-6 md:px-8 lg:px-12',
     y: 'py-6 md:py-8 lg:py-12',
     all: 'p-6 md:p-8 lg:p-12',
+    none: 'p-0',
   };
 
   const dividers = {
