@@ -1,8 +1,8 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import { useWindowScroll } from 'react-use';
-import { Heading, IconAccount, IconMenu } from '^/elements';
-import { MenuDrawer, useDrawer } from '^/global';
+import { Heading, IconMenu } from '^/elements';
+import { MenuDrawer, ThemeSelector, useDrawer } from '^/global';
 import type { WindowLocation } from '@reach/router';
 import type { FC } from 'react';
 
@@ -46,6 +46,7 @@ const DesktopHeader: FC<DesktopHeaderProps> = ({ isHome, title }) => {
         {/*    </Link> */}
         {/*  ))} */}
         {/* </nav> */}
+        <ThemeSelector className='relative' />
       </div>
     </header>
   );
@@ -79,9 +80,9 @@ const MobileHeader: FC<MobileHeaderProps> = ({ title, isHome, openMenu }) => {
       </Link>
 
       <div className='flex w-full items-center justify-end gap-4'>
-        <Link to='/account' className={styles.button}>
-          <IconAccount />
-        </Link>
+        {/* <Link to='/account' className={styles.button}> */}
+        {/* <IconAccount /> */}
+        {/* </Link> */}
       </div>
     </header>
   );
