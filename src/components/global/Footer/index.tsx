@@ -20,7 +20,7 @@ export const Footer: FC<FooterProps> = ({
       as='footer'
       role='contentinfo'
       display='flex'
-      className='container justify-center bg-primary py-8 px-6 text-contrast dark:bg-contrast dark:text-primary md:px-8 lg:px-12'
+      className='justify-center bg-primary py-8 px-6 text-contrast dark:bg-contrast dark:text-primary md:px-8 lg:px-12'
     >
       <div className='opacity-50'>
         <Text>{copyright}</Text>
