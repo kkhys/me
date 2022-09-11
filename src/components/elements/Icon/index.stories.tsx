@@ -1,17 +1,17 @@
 import React from 'react';
-import { IconBag } from '^/elements';
+import { IconMenu } from '^/elements';
 import type { ComponentStory, ComponentMeta } from '@storybook/react';
 
 export default {
   title: 'Element/Icon',
-  component: IconBag,
+  component: IconMenu,
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof IconBag>;
+} as ComponentMeta<typeof IconMenu>;
 
-const Template: ComponentStory<typeof IconBag> = (args) => (
-  <IconBag {...args} />
+const Template: ComponentStory<typeof IconMenu> = (args) => (
+  <IconMenu {...args} />
 );
 
 export const Default = Template.bind({});

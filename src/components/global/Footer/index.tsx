@@ -16,7 +16,6 @@ export const Footer: FC<FooterProps> = ({
 
   return (
     <Section
-      divider={isHome ? 'none' : 'top'}
       as='footer'
       role='contentinfo'
       display='flex'
