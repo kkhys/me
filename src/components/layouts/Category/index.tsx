@@ -31,7 +31,7 @@ const CategoryLayout: FC<CategoryLayoutProps> = ({
         <CategoryPagination />
       </Section>
     </main>
-    <Footer copyright={copyright} location={location} />
+    <Footer copyright={copyright} />
   </div>
 );
 

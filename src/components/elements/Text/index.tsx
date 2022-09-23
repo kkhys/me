@@ -6,7 +6,7 @@ import type { ElementType, FC, ReactNode } from 'react';
 type TextProps = {
   as?: ElementType;
   className?: string;
-  color?: 'default' | 'primary' | 'subtle' | 'notice' | 'contrast';
+  color?: 'default' | 'primary' | 'subtle' | 'contrast';
   size?: 'lead' | 'copy' | 'fine';
   width?: 'default' | 'narrow' | 'wide';
   children: ReactNode;
@@ -24,10 +24,9 @@ export const Text: FC<TextProps> = ({
 }) => {
   const colors: Record<string, string> = {
     default: 'inherit',
-    primary: 'text-primary/90',
-    subtle: 'text-primary/50',
-    notice: 'text-notice',
-    contrast: 'text-contrast/90',
+    primary: 'text-primary/90 dark:text-contrast/90',
+    subtle: 'text-contrast/50 dark:text-primary/50',
+    contrast: 'text-contrast/90 dark:text-primary/90',
   };
 
   const sizes: Record<string, string> = {

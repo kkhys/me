@@ -25,7 +25,7 @@ const HomeLayout: FC<HomeLayoutProps> = ({
         <ArticleGrid articles={articles} />
       </Section>
     </main>
-    <Footer copyright={copyright} location={location} />
+    <Footer copyright={copyright} />
   </div>
 );
 

@@ -25,7 +25,7 @@ const ArticleLayout: FC<ArticleLayoutProps> = ({
         <Heading>{title}</Heading>
         <Prose html={html} />
       </main>
-      <Footer copyright={copyright} location={location} />
+      <Footer copyright={copyright} />
     </div>
   );
 };

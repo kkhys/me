@@ -42,7 +42,6 @@ module.exports = {
       colors: {
         primary: withOpacityValue('--color-primary'),
         contrast: withOpacityValue('--color-contrast'),
-        notice: withOpacityValue('--color-accent'),
       },
       screens: {
         sm: '32em',
