@@ -24,9 +24,9 @@ export const Text: FC<TextProps> = ({
 }) => {
   const colors: Record<string, string> = {
     default: 'inherit',
-    primary: 'text-primary/90 dark:text-contrast/90',
-    subtle: 'text-contrast/50 dark:text-primary/50',
-    contrast: 'text-contrast/90 dark:text-primary/90',
+    primary: 'text-primary/90',
+    subtle: 'text-primary/50',
+    contrast: 'text-contrast/90',
   };
 
   const sizes: Record<string, string> = {

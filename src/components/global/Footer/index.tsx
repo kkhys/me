@@ -11,7 +11,7 @@ export const Footer: FC<FooterProps> = ({ copyright }) => (
     as='footer'
     role='contentinfo'
     display='flex'
-    className='justify-center bg-primary py-8 px-6 dark:bg-contrast md:px-8 lg:px-12'
+    className='justify-center bg-contrast py-8 px-6 md:px-8 lg:px-12'
   >
     <Text color='subtle'>{copyright}</Text>
   </Section>

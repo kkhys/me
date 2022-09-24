@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import { useWindowScroll } from 'react-use';
-import { Heading, IconMenu } from '^/elements';
+import { Heading } from '^/elements';
 import { MenuDrawer, ThemeSelector, useDrawer } from '^/global';
 import type { WindowLocation } from '@reach/router';
 import type { FC } from 'react';
@@ -65,9 +65,9 @@ const MobileHeader: FC<MobileHeaderProps> = ({ title, isHome, openMenu }) => {
   return (
     <header role='banner' className={styles.container}>
       <div className='flex w-full items-center justify-start gap-4'>
-        <button type='button' onClick={openMenu} className={styles.button}>
-          <IconMenu />
-        </button>
+        {/* <button type='button' onClick={openMenu} className={styles.button}> */}
+        {/*  <IconMenu /> */}
+        {/* </button> */}
       </div>
 
       <Link
