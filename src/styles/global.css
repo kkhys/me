@@ -6,24 +6,26 @@
 :root {
   --color-primary: 24 24 27; /* #18181B */
   --color-contrast: 255 255 255; /* #FFFFFF */
-  --color-white: #FFFFFF;
-  --color-black: #000000;
-  --font-size-fine: 0.75rem; /* text-xs */
-  --font-size-copy: 1rem; /* text-base */
-  --font-size-lead: 1.125rem; /* text-lg */
-  --font-size-heading: 1.5rem; /* text-2xl */
-  --font-size-display: 2.5rem; /* text-4xl */
+  /*--font-size-fine: 0.75rem; !* text-xs *!*/
+  /*--font-size-copy: 1rem; !* text-base *!*/
+  /*--font-size-lead: 1.125rem; !* text-lg *!*/
+  /*--font-size-heading: 1.5rem; !* text-2xl *!*/
+  /*--font-size-display: 2.5rem; !* text-4xl *!*/
   --height-nav: 3rem;
   --screen-height: 100vh;
 
-  @media (min-width: 32em) {
+  /* md */
+  @media (min-width: 768px) {
     --height-nav: 3.5rem;
   }
-  @media (min-width: 48em) {
+
+  /* lg */
+  @media (min-width: 1024px) {
     --height-nav: 4rem;
     --font-size-heading: 2rem; /* text-3xl */
     --font-size-display: 3rem; /* text-5xl */
   }
+
   @supports (height: 100lvh) {
     --screen-height: 100lvh;
   }

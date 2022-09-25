@@ -38,6 +38,17 @@ const config: GatsbyConfig = {
         plugins: [
           'gatsby-remark-autolink-headers',
           'gatsby-remark-external-links',
+          'gatsby-remark-code-titles',
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              prompt: {
+                user: '',
+                host: '',
+                global: true,
+              },
+            },
+          },
         ],
       },
     },
