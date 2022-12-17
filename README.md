@@ -1,6 +1,6 @@
-**[ktnkk.me](https://ktnkk.me)**
+**[kkhys.me](https://kkhys.me)**
 
-my personal website powered by [Gatsby](https://www.gatsbyjs.com/)
+my personal website powered by [Next.js](https://nextjs.org/)
 
 <br>
 
