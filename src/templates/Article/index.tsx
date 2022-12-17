@@ -31,7 +31,6 @@ export const PAGE_QUERY = graphql`
 
 const ArticleTemplate: FC<PageProps<GatsbyTypes.ArticleTemplateQuery>> = ({
   data,
-  pageContext,
   location,
 }) => {
   const siteTitle = data.site?.siteMetadata?.siteTitle as string;
