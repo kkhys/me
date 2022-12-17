@@ -57,7 +57,7 @@ const CategoryTemplate: FC<PageProps<GatsbyTypes.CategoryTemplateQuery>> = ({
   const { category, numberOfPages, currentPage, hasPrevPage, hasNextPage } =
     pageContext as CategoryContext;
   const siteTitle = data.site?.siteMetadata?.siteTitle as string;
-  const copyright = data.site.siteMetadata?.copyright as string;
+  const copyright = data.site?.siteMetadata?.copyright as string;
   const articles = data.allMarkdownRemark.edges.map((edge) => ({
     handle: edge?.node?.frontmatter?.handle || '#',
     title: edge?.node?.frontmatter?.title || '無題',
