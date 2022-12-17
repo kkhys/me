@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      timezone: 'Asia/Tokyo'
+      interval: 'daily'
+      time: '03:00'
+    assignees:
+      - 'ktnkk'
+    open-pull-requests-limit: 100
