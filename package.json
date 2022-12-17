@@ -5,8 +5,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --dir src",
-    "fix": "next lint --fix --dir src",
+    "lint": "run-p -c -l lint:**",
+    "lint:prettier": "prettier --check src",
+    "lint:eslint": "next lint --dir src",
+    "lint:tsc": "tsc",
+    "fix": "run-s -l fix:**",
+    "fix:prettier": "prettier --write src",
+    "fix:eslint": "next lint --fix --dir src",
     "postinstall": "husky install"
   },
   "dependencies": {
@@ -37,6 +42,7 @@
     "eslint-plugin-tailwindcss": "^3.7.1",
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.2",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
     "semantic-release": "^19.0.5",

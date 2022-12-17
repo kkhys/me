@@ -28,7 +28,13 @@
       "error",
       {
         "groups": [
-          "builtin", "external", "parent", "sibling", "index", "object", "type"
+          "builtin",
+          "external",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
         ],
         "pathGroups": [
           {
@@ -42,9 +48,7 @@
             "position": "before"
           }
         ],
-        "pathGroupsExcludedImportTypes": [
-          "builtin"
-        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
         "alphabetize": {
           "order": "asc"
         },
@@ -52,6 +56,8 @@
       }
     ],
     "@typescript-eslint/consistent-type-imports": [
-      "error", { "prefer": "type-imports" }]
+      "error",
+      { "prefer": "type-imports" }
+    ]
   }
 }
