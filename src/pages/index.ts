@@ -1,3 +1,3 @@
-import { Home } from '@/components/pages';
+import { HomePage } from '@/components/pages';
 
-export default Home;
+export default HomePage;
