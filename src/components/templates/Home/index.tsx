@@ -1,15 +1,20 @@
-import { Container } from '@/components/global';
+import { Container } from '@/components/elements';
+import { Footer, Header } from '@/components/global';
 
 const HomeTemplate = () => {
   return (
-    // @ts-ignore
-    <Container>
-      <div className='flex items-center justify-center'>
-        <h1 className='flex h-screen items-center justify-center text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl'>
-          Coming soon...
-        </h1>
-      </div>
-    </Container>
+    <>
+      <Header />
+      {/*@ts-ignore*/}
+      <Container>
+        <div className='flex items-center justify-center'>
+          <h1 className='flex h-screen items-center justify-center text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl'>
+            Coming soon...
+          </h1>
+        </div>
+      </Container>
+      <Footer />
+    </>
   );
 };
 

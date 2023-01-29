@@ -33,7 +33,7 @@ const modeScript = `
 
 const Document = () => {
   return (
-    <Html className='h-full antialiased' lang='en'>
+    <Html className='h-full antialiased' lang='ja'>
       <Head>
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />
         <link
