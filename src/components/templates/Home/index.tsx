@@ -1,9 +1,10 @@
-import { Container } from '@/components/elements';
+import { Container, HeroPattern } from '@/components/elements';
 import { Footer, Header } from '@/components/global';
 
 const HomeTemplate = () => {
   return (
     <>
+      <HeroPattern />
       <Header />
       {/*@ts-ignore*/}
       <Container>
