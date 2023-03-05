@@ -15,27 +15,13 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "react",
-    "@typescript-eslint",
-    "import",
-    "unused-imports",
-    "tailwindcss"
-  ],
+  "plugins": ["react", "@typescript-eslint", "import", "unused-imports", "tailwindcss"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "import/order": [
       "error",
       {
-        "groups": [
-          "builtin",
-          "external",
-          "parent",
-          "sibling",
-          "index",
-          "object",
-          "type"
-        ],
+        "groups": ["builtin", "external", "parent", "sibling", "index", "object", "type"],
         "pathGroups": [
           {
             "pattern": "{react,react-dom/**,react-router-dom}",
@@ -55,9 +41,6 @@
         "newlines-between": "always"
       }
     ],
-    "@typescript-eslint/consistent-type-imports": [
-      "error",
-      { "prefer": "type-imports" }
-    ]
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }]
   }
 }

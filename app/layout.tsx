@@ -1,19 +1,15 @@
-import '#/styles/globals.css'
-import { ReactNode } from "react";
+import '#/styles/globals.css';
+import { ReactNode } from 'react';
 
 export const metadata = {
   title: 'kkhys.me',
   description: 'Personal website of Keisuke Hayashi.',
-}
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="ja">
+    <html lang='ja'>
       <body>{children}</body>
     </html>
-  )
+  );
 }

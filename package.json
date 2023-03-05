@@ -5,7 +5,8 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "fix": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx|css|md|yml)\""
   },
   "dependencies": {
     "@types/node": "18.14.6",
