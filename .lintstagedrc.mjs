@@ -1,5 +1,7 @@
 import path from 'path';
 
+const buildTscCommand = () => 'pnpm tsc --noEmit'
+
 const buildEslintCommand = (filenames) =>
   `next lint --fix --file ${filenames
     .map((filename) => path.relative(process.cwd(), filename))
@@ -11,6 +13,7 @@ const buildPrettierCommand = (filenames) =>
     .join(' ')}`;
 
 export default {
+  '*.{ts,tsx}': [buildTscCommand],
   '*.{cjs,mjs,ts,tsx}': [buildEslintCommand],
-  '*.{cjs,mjs,ts,tsx,json,md,yml}': [buildPrettierCommand()]
+  // '*.{cjs,mjs,ts,tsx,json,md,yml}': [buildPrettierCommand]
 };
