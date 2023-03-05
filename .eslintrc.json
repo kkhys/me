@@ -5,10 +5,10 @@
     "es2022": true
   },
   "extends": [
-    "next/core-web-vitals",
     "airbnb-typescript",
-    "prettier",
-    "plugin:tailwindcss/recommended"
+    "plugin:@next/next/recommended",
+    "plugin:tailwindcss/recommended",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
