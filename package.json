@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "fix": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx|css|md|yml)\""
+    "fix": "prettier --ignore-path .gitignore --write . \"!pnpm-lock.yaml\""
   },
   "dependencies": {
     "next": "13.2.3",
