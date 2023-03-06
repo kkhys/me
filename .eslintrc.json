@@ -41,6 +41,15 @@
         "newlines-between": "always"
       }
     ],
-    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }]
+    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports" }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "": "never", // TODO: 奇妙な解決策を調査する @see: https://github.com/import-js/eslint-plugin-import/issues/1573#issuecomment-565973643
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
   }
 }
