@@ -13,7 +13,6 @@ const buildPrettierCommand = (filenames) =>
     .join(' ')}`;
 
 export default {
-  '*.{ts,tsx}': [buildTscCommand],
-  '*.{cjs,mjs,ts,tsx}': [buildEslintCommand],
+  '*.{ts,tsx}': [buildTscCommand, buildEslintCommand],
   '*.{cjs,mjs,ts,tsx,json,md,yml}': [buildPrettierCommand],
 };
