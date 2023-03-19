@@ -46,8 +46,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
     <html className='h-full antialiased' lang='ja'>
       {/* TODO: サニタイズする（そもそもすべきなのか調査） */}
       <Script id='mode-script' dangerouslySetInnerHTML={{ __html: modeScript }} />
-      {/* TODO: url を相対的にするとエラーになる件を調査 */}
-      <body className="bg-gray-1100 bg-[url('http://localhost:3000/grid.svg')]">{children}</body>
+      {/* TODO: url を相対的にするとエラーになる件を調査 @see: https://github.com/vercel/turbo/issues/3573 */}
+      <body className="bg-gray-1100 bg-[url('https://kkhys.me/grid.svg')]">{children}</body>
     </html>
   );
 };
