@@ -1,8 +1,12 @@
+const colors = require('tailwindcss/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./app/**/*.tsx', './components/**/*.tsx', './features/**/*.tsx'],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   darkMode: 'class',
-  plugins: [require('@tailwindcss/typography')],
   theme: {
     fontSize: {
       xs: ['0.8125rem', { lineHeight: '1.5rem' }],
@@ -305,6 +309,17 @@ module.exports = {
         7.5: '0.075',
         15: '0.15',
       },
+      colors: {
+        gray: colors.zinc,
+        'gray-1000': 'rgb(17,17,19)',
+        'gray-1100': 'rgb(10,10,11)',
+      },
+      backgroundImage: ({ theme }) => ({
+        'border-gradient': `radial-gradient(at left top, ${theme('colors.gray.500')}, 50px, ${theme(
+          'colors.gray.800',
+        )} 50%)`,
+      }),
     },
   },
+  plugins: [require('@tailwindcss/typography')],
 };
