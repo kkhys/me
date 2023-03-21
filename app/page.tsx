@@ -1,15 +1,19 @@
 import { Container } from '#/components/elements';
+import { Header } from '#/components/global';
 
-const Home = () => {
+const HomePage = () => {
   return (
-    <Container>
-      <div className='flex items-center justify-center'>
-        <h1 className='flex h-screen items-center justify-center text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl'>
-          Coming soon...
-        </h1>
-      </div>
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <div className='flex items-center justify-center'>
+          <h1 className='flex h-screen items-center justify-center text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl'>
+            Coming soon...
+          </h1>
+        </div>
+      </Container>
+    </>
   );
 };
 
-export default Home;
+export default HomePage;

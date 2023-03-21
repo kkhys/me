@@ -47,7 +47,16 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       {/* TODO: サニタイズする（そもそもすべきなのか調査） */}
       <Script id='mode-script' dangerouslySetInnerHTML={{ __html: modeScript }} />
       {/* TODO: url を相対的にするとエラーになる件を調査 @see: https://github.com/vercel/turbo/issues/3573 */}
-      <body className="bg-gray-1100 bg-[url('https://kkhys.me/grid.svg')]">{children}</body>
+      <body className="dark:bg-gray-1100 flex h-full flex-col bg-zinc-50 bg-[url('https://kkhys.me/grid.svg')]">
+        <div className='fixed inset-0 flex justify-center sm:px-8'>
+          <div className='flex w-full max-w-7xl lg:px-8'>
+            <div className='dark:bg-gray-1000 w-full bg-white ring-1 ring-zinc-100 dark:ring-zinc-300/20' />
+          </div>
+        </div>
+        <div className='relative'>
+          <main>{children}</main>
+        </div>
+      </body>
     </html>
   );
 };

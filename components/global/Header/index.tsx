@@ -1,3 +1,5 @@
+'use client';
+
 import type { CSSProperties } from 'react';
 import { Fragment, useEffect, useRef } from 'react';
 
@@ -203,6 +205,8 @@ const Avatar = ({
       <Image
         src={avatarImage}
         alt=''
+        height={50}
+        width={50}
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
           'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
@@ -216,7 +220,7 @@ const Avatar = ({
 
 export const Header = () => {
   const segment = useSelectedLayoutSegment();
-  let isHomePage = segment === '/';
+  let isHomePage = segment === null;
 
   let headerRef = useRef<HTMLDivElement>(null);
   let avatarRef = useRef<HTMLDivElement>(null);
