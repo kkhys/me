@@ -1,5 +1,5 @@
 import { Container } from '#/components/elements';
-import { Header } from '#/components/global';
+import { Footer, Header } from '#/components/global';
 
 const HomePage = () => {
   return (
@@ -12,6 +12,7 @@ const HomePage = () => {
           </h1>
         </div>
       </Container>
+      <Footer />
     </>
   );
 };
