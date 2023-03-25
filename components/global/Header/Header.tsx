@@ -12,7 +12,8 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 import type { LinkProps } from 'next/link';
 
 import avatarImage from '#/assets/avatar.jpg';
-import { ChevronDownIcon, CloseIcon, Container, MoonIcon, SunIcon } from '#/components/elements';
+import { ChevronDownIcon, CloseIcon, MoonIcon, SunIcon } from '#/components/general';
+import { Container } from '#/components/layout';
 
 type NavigationItemProps = {
   href: string;

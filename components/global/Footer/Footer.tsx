@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { InnerContainer, OuterContainer } from '#/components/elements';
+import { InnerContainer, OuterContainer } from '#/components/layout';
 
 const NavLink = ({
   href,

@@ -1,5 +1,5 @@
-import { Container } from '#/components/elements';
 import { Footer } from '#/components/global';
+import { Container } from '#/components/layout';
 
 const HomePage = () => {
   return (
