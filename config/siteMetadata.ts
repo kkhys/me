@@ -1,5 +1,6 @@
 export const siteMetadata = {
   title: 'kkhys.me',
   siteUrl: 'https://kkhys.me',
-  description: '',
+  description: 'Personal website of Keisuke Hayashi.',
+  developer: 'Keisuke Hayashi',
 };
