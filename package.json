@@ -13,6 +13,7 @@
     "fix:eslint": "next lint --ignore-path .gitignore --fix",
     "sb:dev": "storybook dev -p 6006 -s public",
     "sb:build": "storybook build -s public",
+    "build-storybook": "storybook build -s public",
     "sb:serve": "serve storybook-static",
     "chromatic": "chromatic --exit-zero-on-changes",
     "postinstall": "husky install"
