@@ -11,6 +11,7 @@ const config: StorybookConfig = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    '@storybook/addon-viewport',
     {
       name: '@storybook/addon-styling',
       options: {
@@ -24,6 +25,10 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: 'tag',
+    defaultName: 'Documentation',
+  },
+  core: {
+    disableTelemetry: true,
   },
 };
 
