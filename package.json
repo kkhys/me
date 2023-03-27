@@ -14,7 +14,7 @@
     "sb:dev": "storybook dev -p 6006 -s public",
     "sb:build": "storybook build -s public",
     "sb:serve": "serve storybook-static",
-    "chromatic": "chromatic --exit-zero-on-changes --build-script-name sb:build",
+    "chromatic": "chromatic --exit-zero-on-changes --build-script-name \"sb:build\"",
     "postinstall": "husky install"
   },
   "dependencies": {
