@@ -38,7 +38,7 @@ const preview: Preview = {
     viewport: {
       viewports: {
         ...customViewports,
-        ...INITIAL_VIEWPORTS,
+        ...INITIAL_VIEWPORTS, // TODO: customViewports に組み込む
       },
     },
   },
