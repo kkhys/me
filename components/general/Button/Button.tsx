@@ -18,14 +18,36 @@ const sizes = {
 };
 
 type IconProps =
-  | { startIcon: ReactElement; endIcon?: never }
+  | {
+      /**
+       * TODO: startIcon description
+       */
+      startIcon: ReactElement;
+      /**
+       * TODO: endIcon description
+       */
+      endIcon?: never;
+    }
   | { endIcon: ReactElement; startIcon?: never }
   | { endIcon?: undefined; startIcon?: undefined };
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  /**
+   * TODO: variant description
+   */
   variant?: keyof typeof variants;
+  /**
+   * TODO: size description
+   */
   size?: keyof typeof sizes;
+  /**
+   * TODO: isLoading description
+   */
   isLoading?: boolean;
+  /**
+   * TODO: children description
+   */
+  children?: string;
 } & IconProps;
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

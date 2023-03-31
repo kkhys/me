@@ -17,7 +17,13 @@ export type SpinProps = {
    * The size of Spin, options:
    */
   size?: keyof typeof sizes;
+  /**
+   * TODO: variant description
+   */
   variant?: keyof typeof variants;
+  /**
+   * TODO: className description
+   */
   className?: string;
 };
 

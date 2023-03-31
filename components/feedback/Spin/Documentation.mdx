@@ -1,4 +1,4 @@
-import { Meta, Subtitle, Title } from '@storybook/blocks';
+import { Controls, Meta, Story, Subtitle, Title } from '@storybook/blocks';
 import * as SpinStories from './Spin.stories';
 
 <Meta of={SpinStories} />
@@ -6,3 +6,5 @@ import * as SpinStories from './Spin.stories';
 <Title>Spin</Title>
 
 <Subtitle>A spinner for displaying loading state of a page or a section.</Subtitle>
+
+<Controls of={SpinStories.Default} />
