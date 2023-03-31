@@ -129,6 +129,14 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       {/* TODO: サニタイズする（そもそもすべきなのか調査） */}
       <Script id='mode-script' dangerouslySetInnerHTML={{ __html: modeScript }} />
       {/* TODO: url を相対的にするとエラーになる件を調査 @see: https://github.com/vercel/turbo/issues/3573 */}
+      <head>
+        <script
+          defer
+          src='https://unpkg.com/@tinybirdco/flock.js'
+          data-host='https://api.tinybird.co'
+          data-token='p.eyJ1IjogImIwYjI3YjU1LTY1NzQtNDg5Mi1iZTM3LTVkMDhmMWRiZTMxOCIsICJpZCI6ICI0ODk3YTBiZC05YjI4LTQxNzAtYTBlZS0zZjlhOGZmNTk3MDAifQ.zS1GqNULFk3mUPWEnwC1eoD71FGHAeZhs-FCHVR9Pp0'
+        ></script>
+      </head>
       <body className="dark:bg-gray-1100 flex h-full flex-col bg-zinc-50 bg-[url('https://kkhys.me/grid.svg')]">
         <div className='fixed inset-0 flex justify-center sm:px-8'>
           <div className='flex w-full max-w-7xl lg:px-8'>
