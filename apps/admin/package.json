@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "admin",
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
@@ -9,7 +9,7 @@
     "clean": "rm -rf .next node_modules .turbo",
     "storybook:dev": "storybook dev --port 6009 --ci --quiet",
     "storybook:build": "storybook build --quiet",
-    "storybook:move": "mv storybook-static ../../storybook-static/docs"
+    "storybook:move": "mv storybook-static ../../storybook-static/admin"
   },
   "dependencies": {
     "next": "13.3.0",

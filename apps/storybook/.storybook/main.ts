@@ -12,9 +12,9 @@ const config = {
       title: 'Web',
       url: process.env.NODE_ENV === 'development' ? 'http://localhost:6008/' : 'web/',
     },
-    docs: {
-      title: 'Docs',
-      url: process.env.NODE_ENV === 'development' ? 'http://localhost:6009/' : 'docs/',
+    admin: {
+      title: 'Admin',
+      url: process.env.NODE_ENV === 'development' ? 'http://localhost:6009/' : 'admin/',
     },
   },
   addons: [
