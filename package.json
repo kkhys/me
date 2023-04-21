@@ -2,14 +2,14 @@
   "name": "me",
   "private": true,
   "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "clean": "turbo run clean && rm -rf node_modules storybook-static",
+    "storybook:dev": "turbo run storybook:dev",
+    "storybook:build": "turbo run storybook:build",
+    "storybook:move": "turbo run storybook:move --filter=storybook && turbo run storybook:move --filter=!storybook",
+    "format": "prettier --ignore-path .gitignore --write . \"!pnpm-lock.yaml\" \"!pnpm-workspace.yaml\"",
     "postinstall": "husky install"
-  },
-  "packageManager": "pnpm@7.29.1",
-  "engines": {
-    "node": "18",
-    "pnpm": ">=7.29.1",
-    "npm": "use pnpm please!",
-    "yarn": "use pnpm please!"
   },
   "devDependencies": {
     "@commitlint/cli": "17.6.1",
@@ -20,5 +20,12 @@
     "lint-staged": "13.2.1",
     "prettier": "2.8.7",
     "turbo": "1.9.1"
+  },
+  "packageManager": "pnpm@7.30.0",
+  "engines": {
+    "node": "18",
+    "pnpm": ">=7.30.0",
+    "npm": "use pnpm please!",
+    "yarn": "use pnpm please!"
   }
 }

@@ -1,0 +1,154 @@
+import type { ReactNode } from 'react';
+
+import '#/styles/globals.css';
+import Script from 'next/script';
+
+import { siteMetadata } from '#/config';
+
+const { title, siteUrl, description, developer } = siteMetadata;
+
+export const metadata = {
+  title: {
+    default: title,
+    template: `%s | ${title}`,
+  },
+  description,
+  generator: 'Next.js',
+  applicationName: title,
+  referrer: 'origin-when-cross-origin',
+  keywords: ['blog'],
+  authors: [{ name: developer }],
+  creator: developer,
+  publisher: developer,
+  formatDetection: {
+    email: false,
+    telephone: false,
+    address: false,
+  },
+  openGraph: {
+    title,
+    description,
+    url: siteUrl,
+    siteName: title,
+    // images: [
+    //   {
+    //     url: 'https://kkhys.me/og.png',
+    //     width: 800,
+    //     height: 600,
+    //   },
+    //   {
+    //     url: 'https://kkhys.me/og-alt.png',
+    //     width: 1800,
+    //     height: 1600,
+    //     alt: 'My custom alt',
+    //   },
+    // ],
+    locale: 'ja-JP',
+    type: 'website',
+  },
+  // robots: {
+  //   index: false,
+  //   follow: true,
+  //   nocache: true,
+  //   googleBot: {
+  //     index: true,
+  //     follow: false,
+  //     noimageindex: true,
+  //     'max-video-preview': -1,
+  //     'max-image-preview': 'large',
+  //     'max-snippet': -1,
+  //   },
+  // },
+  // icons: {
+  //   icon: '/icon.png',
+  //   shortcut: '/shortcut-icon.png',
+  //   apple: '/apple-icon.png',
+  // },
+  // themeColor: [
+  //   { media: '(prefers-color-scheme: light)', color: 'cyan' },
+  //   { media: '(prefers-color-scheme: dark)', color: 'black' },
+  // ],
+  // manifest: 'https://kkhys.me/manifest.json',
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    // siteId: '1467726470533754880',
+    creator: '@kkhys_',
+    // creatorId: '1467726470533754880',
+    // images: {
+    //   url: 'https://kkhys.me/og.png',
+    //   alt: 'kkhys.me Logo',
+    // }
+  },
+  // verification: {
+  //   google: '',
+  // },
+  alternates: {
+    canonical: siteUrl,
+    // types: {
+    //   'application/rss+xml': 'https://kkhys.me/rss',
+    // },
+  },
+  category: 'technology',
+};
+
+// TODO: 圧縮した方が良いのか調査
+const modeScript = `
+  let darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  updateMode()
+  darkModeMediaQuery.addEventListener('change', updateModeWithoutTransitions)
+  window.addEventListener('storage', updateModeWithoutTransitions)
+  function updateMode() {
+    let isSystemDarkMode = darkModeMediaQuery.matches
+    let isDarkMode = window.localStorage.isDarkMode === 'true' || (!('isDarkMode' in window.localStorage) && isSystemDarkMode)
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+    if (isDarkMode === isSystemDarkMode) {
+      delete window.localStorage.isDarkMode
+    }
+  }
+  function disableTransitionsTemporarily() {
+    document.documentElement.classList.add('[&_*]:!transition-none')
+    window.setTimeout(() => {
+      document.documentElement.classList.remove('[&_*]:!transition-none')
+    }, 0)
+  }
+  function updateModeWithoutTransitions() {
+    disableTransitionsTemporarily()
+    updateMode()
+  }
+`;
+
+const RootLayout = ({ children }: { children: ReactNode }) => {
+  return (
+    <html className='h-full antialiased' lang='ja'>
+      {/* TODO: サニタイズする（そもそもすべきなのか調査） */}
+      <Script id='mode-script' dangerouslySetInnerHTML={{ __html: modeScript }} />
+      {/* TODO: url を相対的にするとエラーになる件を調査 @see: https://github.com/vercel/turbo/issues/3573 */}
+      <head>
+        <script
+          defer
+          src='https://unpkg.com/@tinybirdco/flock.js'
+          data-host='https://api.tinybird.co'
+          data-token='p.eyJ1IjogImIwYjI3YjU1LTY1NzQtNDg5Mi1iZTM3LTVkMDhmMWRiZTMxOCIsICJpZCI6ICI0ODk3YTBiZC05YjI4LTQxNzAtYTBlZS0zZjlhOGZmNTk3MDAifQ.zS1GqNULFk3mUPWEnwC1eoD71FGHAeZhs-FCHVR9Pp0'
+        ></script>
+      </head>
+      <body className="dark:bg-gray-1100 flex h-full flex-col bg-zinc-50 bg-[url('https://kkhys.me/grid.svg')]">
+        <div className='fixed inset-0 flex justify-center sm:px-8'>
+          <div className='flex w-full max-w-7xl lg:px-8'>
+            <div className='dark:bg-gray-1000 w-full bg-white ring-1 ring-zinc-100 dark:ring-zinc-300/20' />
+          </div>
+        </div>
+        <div className='relative'>
+          <main>{children}</main>
+        </div>
+      </body>
+    </html>
+  );
+};
+
+export default RootLayout;
