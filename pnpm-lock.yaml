@@ -29,6 +29,76 @@ importers:
         specifier: 1.9.1
         version: 1.9.1
 
+  apps/admin:
+    dependencies:
+      next:
+        specifier: 13.3.0
+        version: 13.3.0(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+    devDependencies:
+      '@kkhys/tailwind-config':
+        specifier: workspace:*
+        version: link:../../packages/tailwind-config
+      '@storybook/addon-essentials':
+        specifier: 7.0.5
+        version: 7.0.5(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-interactions':
+        specifier: 7.0.5
+        version: 7.0.5(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/addon-links':
+        specifier: 7.0.5
+        version: 7.0.5(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/blocks':
+        specifier: 7.0.5
+        version: 7.0.5(react-dom@18.2.0)(react@18.2.0)
+      '@storybook/nextjs':
+        specifier: 7.0.5
+        version: 7.0.5(@babel/core@7.21.4)(esbuild@0.17.17)(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)(ts-node@10.9.1)(typescript@5.0.4)(webpack@5.80.0)
+      '@storybook/react':
+        specifier: 7.0.5
+        version: 7.0.5(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)
+      '@storybook/testing-library':
+        specifier: 0.0.14-next.2
+        version: 0.0.14-next.2
+      '@types/node':
+        specifier: 18.15.11
+        version: 18.15.11
+      '@types/react':
+        specifier: 18.0.35
+        version: 18.0.35
+      '@types/react-dom':
+        specifier: 18.0.11
+        version: 18.0.11
+      autoprefixer:
+        specifier: 10.4.14
+        version: 10.4.14(postcss@8.4.22)
+      eslint:
+        specifier: 8.38.0
+        version: 8.38.0
+      eslint-config-next:
+        specifier: 13.3.0
+        version: 13.3.0(eslint@8.38.0)(typescript@5.0.4)
+      eslint-plugin-storybook:
+        specifier: 0.6.11
+        version: 0.6.11(eslint@8.38.0)(typescript@5.0.4)
+      postcss:
+        specifier: 8.4.22
+        version: 8.4.22
+      storybook:
+        specifier: 7.0.5
+        version: 7.0.5
+      tailwindcss:
+        specifier: 3.3.1
+        version: 3.3.1(postcss@8.4.22)(ts-node@10.9.1)
+      typescript:
+        specifier: 5.0.4
+        version: 5.0.4
+
   apps/docs:
     dependencies:
       next:
@@ -293,6 +363,9 @@ importers:
       autoprefixer:
         specifier: 10.4.14
         version: 10.4.14(postcss@8.4.22)
+      concurrently:
+        specifier: 8.0.1
+        version: 8.0.1
       npm-run-all:
         specifier: 4.1.5
         version: 4.1.5
@@ -5367,6 +5440,22 @@ packages:
       typedarray: 0.0.6
     dev: true
 
+  /concurrently@8.0.1:
+    resolution: {integrity: sha512-Sh8bGQMEL0TAmAm2meAXMjcASHZa7V0xXQVDBLknCPa9TPtkY9yYs+0cnGGgfdkW0SV1Mlg+hVGfXcoI8d3MJA==}
+    engines: {node: ^14.13.0 || >=16.0.0}
+    hasBin: true
+    dependencies:
+      chalk: 4.1.2
+      date-fns: 2.29.3
+      lodash: 4.17.21
+      rxjs: 7.8.0
+      shell-quote: 1.8.1
+      spawn-command: 0.0.2-1
+      supports-color: 8.1.1
+      tree-kill: 1.2.2
+      yargs: 17.7.1
+    dev: true
+
   /console-control-strings@1.1.0:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
     dev: true
@@ -5594,6 +5683,11 @@ packages:
   /dargs@7.0.0:
     resolution: {integrity: sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==}
     engines: {node: '>=8'}
+    dev: true
+
+  /date-fns@2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
     dev: true
 
   /debug@2.6.9:
@@ -10175,6 +10269,10 @@ packages:
     resolution: {integrity: sha512-q/JSVd1Lptzhf5bkYm4ob4iWPjx0KiRe3sRFBNrVqbJkFaBm5vbbowy1mymoPNLRa52+oadOhJ+K49wsSeSjTA==}
     dev: true
 
+  /spawn-command@0.0.2-1:
+    resolution: {integrity: sha512-n98l9E2RMSJ9ON1AKisHzz7V42VDiBQGY6PB1BwRglz99wpVsSuGzQ+jOi6lFXBGVTCrRpltvjm+/XA+tpeJrg==}
+    dev: true
+
   /spdx-correct@3.2.0:
     resolution: {integrity: sha512-kN9dJbvnySHULIluDHy32WHRUu3Og7B9sbY7tsFLctQkIqnMh3hErYgdMjTYuqmcXX+lK5T1lnUt3G7zNswmZA==}
     dependencies:
@@ -10673,6 +10771,11 @@ packages:
 
   /tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+    dev: true
+
+  /tree-kill@1.2.2:
+    resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
+    hasBin: true
     dev: true
 
   /trim-newlines@3.0.1:
