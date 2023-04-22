@@ -99,76 +99,6 @@ importers:
         specifier: 5.0.4
         version: 5.0.4
 
-  apps/docs:
-    dependencies:
-      next:
-        specifier: 13.3.0
-        version: 13.3.0(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)
-      react:
-        specifier: 18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: 18.2.0
-        version: 18.2.0(react@18.2.0)
-    devDependencies:
-      '@kkhys/tailwind-config':
-        specifier: workspace:*
-        version: link:../../packages/tailwind-config
-      '@storybook/addon-essentials':
-        specifier: 7.0.5
-        version: 7.0.5(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-interactions':
-        specifier: 7.0.5
-        version: 7.0.5(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/addon-links':
-        specifier: 7.0.5
-        version: 7.0.5(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/blocks':
-        specifier: 7.0.5
-        version: 7.0.5(react-dom@18.2.0)(react@18.2.0)
-      '@storybook/nextjs':
-        specifier: 7.0.5
-        version: 7.0.5(@babel/core@7.21.4)(esbuild@0.17.17)(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)(ts-node@10.9.1)(typescript@5.0.4)(webpack@5.80.0)
-      '@storybook/react':
-        specifier: 7.0.5
-        version: 7.0.5(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)
-      '@storybook/testing-library':
-        specifier: 0.0.14-next.2
-        version: 0.0.14-next.2
-      '@types/node':
-        specifier: 18.15.11
-        version: 18.15.11
-      '@types/react':
-        specifier: 18.0.35
-        version: 18.0.35
-      '@types/react-dom':
-        specifier: 18.0.11
-        version: 18.0.11
-      autoprefixer:
-        specifier: 10.4.14
-        version: 10.4.14(postcss@8.4.22)
-      eslint:
-        specifier: 8.38.0
-        version: 8.38.0
-      eslint-config-next:
-        specifier: 13.3.0
-        version: 13.3.0(eslint@8.38.0)(typescript@5.0.4)
-      eslint-plugin-storybook:
-        specifier: 0.6.11
-        version: 0.6.11(eslint@8.38.0)(typescript@5.0.4)
-      postcss:
-        specifier: 8.4.22
-        version: 8.4.22
-      storybook:
-        specifier: 7.0.5
-        version: 7.0.5
-      tailwindcss:
-        specifier: 3.3.1
-        version: 3.3.1(postcss@8.4.22)(ts-node@10.9.1)
-      typescript:
-        specifier: 5.0.4
-        version: 5.0.4
-
   apps/storybook:
     dependencies:
       react:
@@ -5033,7 +4963,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001481
-      electron-to-chromium: 1.4.368
+      electron-to-chromium: 1.4.369
       node-releases: 2.0.10
       update-browserslist-db: 1.0.11(browserslist@4.21.5)
 
@@ -5987,8 +5917,8 @@ packages:
       jake: 10.8.5
     dev: true
 
-  /electron-to-chromium@1.4.368:
-    resolution: {integrity: sha512-e2aeCAixCj9M7nJxdB/wDjO6mbYX+lJJxSJCXDzlr5YPGYVofuJwGN9nKg2o6wWInjX6XmxRinn3AeJMK81ltw==}
+  /electron-to-chromium@1.4.369:
+    resolution: {integrity: sha512-LfxbHXdA/S+qyoTEA4EbhxGjrxx7WK2h6yb5K2v0UCOufUKX+VZaHbl3svlzZfv9sGseym/g3Ne4DpsgRULmqg==}
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
