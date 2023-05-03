@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import * as process from 'process';
 
 const config = {
-  stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(ts|tsx)'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx)'],
   refs: {
     ui: {
       title: 'Ui',
