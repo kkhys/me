@@ -139,10 +139,10 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
         ></script>
       </head>
       <Analytics />
-      <body className="dark:bg-gray-1100 flex h-full flex-col bg-zinc-50 bg-[url('https://kkhys.me/grid.svg')]">
+      <body className="flex h-full flex-col bg-zinc-50 bg-[url('https://kkhys.me/grid.svg')] dark:bg-gray-1100">
         <div className='fixed inset-0 flex justify-center sm:px-8'>
           <div className='flex w-full max-w-7xl lg:px-8'>
-            <div className='dark:bg-gray-1000 w-full bg-white ring-1 ring-zinc-100 dark:ring-zinc-300/20' />
+            <div className='w-full bg-white ring-1 ring-zinc-100 dark:bg-gray-1000 dark:ring-zinc-300/20' />
           </div>
         </div>
         <div className='relative'>

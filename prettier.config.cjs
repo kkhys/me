@@ -10,8 +10,8 @@ const config = {
   printWidth: 100,
   tabWidth: 2,
   useTabs: false,
-  plugins: ['prettier-plugin-tailwind'],
+  plugins: ['prettier-plugin-tailwindcss'],
   tailwindConfig: './packages/tailwind-config/tailwind.config.ts',
-}
+};
 
 module.exports = config;
