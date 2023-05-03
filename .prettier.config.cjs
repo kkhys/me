@@ -1,6 +1,7 @@
 /** @typedef { import('prettier').Config } PrettierConfig */
+/** @typedef {{ tailwindConfig: string }} TailwindConfig */
 
-/** @type { PrettierConfig } */
+/** @type { PrettierConfig | TailwindConfig } */
 
 const config = {
   jsxSingleQuote: true,
@@ -9,6 +10,8 @@ const config = {
   printWidth: 100,
   tabWidth: 2,
   useTabs: false,
+  plugins: ['prettier-plugin-tailwind'],
+  tailwindConfig: './packages/tailwind-config/tailwind.config.ts',
 }
 
 module.exports = config;
