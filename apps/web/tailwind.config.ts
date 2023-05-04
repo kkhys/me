@@ -1,7 +1,9 @@
 import type { Config } from 'tailwindcss';
 
+import baseConfig from "@kkhys/tailwind-config";
+
 export default {
   content: ['./app/**/*.tsx', './features/**/*.tsx'],
   darkMode: 'class',
-  presets: [require('@kkhys/tailwind-config/tailwind.config')], // TODO: @kkhys/tailwind-config で表記できるようにする
+  presets: [baseConfig],
 } satisfies Config;

@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss';
 
+import baseConfig from "@kkhys/tailwind-config";
+
 export default {
   content: ['./src/**/*.tsx'],
   prefix: 'ui-',
@@ -7,5 +9,5 @@ export default {
   // corePlugins: {
   //   preflight: false,
   // },
-  presets: [require('@kkhys/tailwind-config/tailwind.config.ts')],
+  presets: [baseConfig],
 } satisfies Config;
