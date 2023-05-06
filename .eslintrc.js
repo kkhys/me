@@ -2,20 +2,16 @@
 
 const config = {
   root: true,
-  extends: ["@kkhys/eslint-config"],
-  parser: "@typescript-eslint/parser",
+  extends: ['@kkhys/eslint-config'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: "latest",
+    ecmaVersion: 'latest',
     tsconfigRootDir: '.', // FIXME:  __dirname がエラーになるので修正が必要
-    project: [
-      "./tsconfig.json",
-      "./apps/*/tsconfig.json",
-      "./packages/*/tsconfig.json",
-    ],
+    project: ['./tsconfig.json', './apps/*/tsconfig.json', './packages/*/tsconfig.json'],
   },
   settings: {
     next: {
-      rootDir: ["apps/admin", "apps/web"],
+      rootDir: ['apps/admin', 'apps/web'],
     },
   },
 };
