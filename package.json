@@ -9,19 +9,25 @@
     "storybook:build": "turbo run storybook:build",
     "storybook:move": "turbo run storybook:move --filter=storybook && turbo run storybook:move --filter=!storybook",
     "format": "prettier --ignore-path .gitignore --write . \"!pnpm-lock.yaml\" \"!pnpm-workspace.yaml\"",
+    "lint": "turbo lint && manypkg check",
+    "lint:fix": "turbo lint:fix && manypkg fix",
     "postinstall": "husky install"
   },
-  "devDependencies": {
+  "dependencies": {
     "@commitlint/cli": "17.6.1",
     "@commitlint/config-conventional": "17.6.1",
+    "@kkhys/eslint-config": "0.1.0",
+    "@manypkg/cli": "0.20.0",
     "@types/prettier": "2.7.2",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
+    "eslint": "8.38.0",
     "husky": "8.0.3",
     "lint-staged": "13.2.1",
     "prettier": "2.8.7",
     "prettier-plugin-tailwindcss": "0.2.8",
-    "turbo": "1.9.1"
+    "turbo": "1.9.1",
+    "typescript": "5.0.4"
   },
   "packageManager": "pnpm@7.32.2",
   "engines": {

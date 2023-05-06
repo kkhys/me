@@ -1,5 +1,5 @@
 import '#/styles/globals.css';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export const metadata = {
   title: 'admin',
