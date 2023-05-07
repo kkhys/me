@@ -6,7 +6,7 @@ const config = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
-    tsconfigRootDir: '.', // FIXME:  __dirname がエラーになるので修正が必要
+    tsconfigRootDir: __dirname,
     project: ['./tsconfig.json', './apps/*/tsconfig.json', './packages/*/tsconfig.json'],
   },
   settings: {
