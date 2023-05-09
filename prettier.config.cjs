@@ -11,7 +11,7 @@ const config = {
   tabWidth: 2,
   useTabs: false,
   plugins: ['prettier-plugin-tailwindcss'],
-  tailwindConfig: './packages/tailwind-config',
+  tailwindConfig: './packages/config/tailwind',
 };
 
 module.exports = config;
