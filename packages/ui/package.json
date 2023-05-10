@@ -21,10 +21,11 @@
     "build": "run-p build:*",
     "build:scripts": "vite build",
     "build:types": "tsc --emitDeclarationOnly",
-    "clean": "rm -rf dist node_modules. .turbo",
+    "clean": "git clean -xdf dist .turbo node_modules",
     "storybook:dev": "storybook dev -p 6007 --ci --quiet",
     "storybook:build": "storybook build --quiet",
-    "storybook:move": "mv storybook-static ../../storybook-static/ui"
+    "storybook:move": "mv storybook-static ../../storybook-static/ui",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@heroicons/react": "2.0.17",

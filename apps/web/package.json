@@ -7,10 +7,11 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "pnpm lint --fix",
-    "clean": "rm -rf .next node_modules .turbo",
+    "clean": "git clean -xdf .next .turbo node_modules",
     "storybook:dev": "storybook dev --port 6008 --ci --quiet",
     "storybook:build": "storybook build --quiet",
-    "storybook:move": "mv storybook-static ../../storybook-static/web"
+    "storybook:move": "mv storybook-static ../../storybook-static/web",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@kkhys/ui": "0.1.0",

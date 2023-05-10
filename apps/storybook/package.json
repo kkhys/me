@@ -2,10 +2,11 @@
   "name": "@kkhys/storybook",
   "private": true,
   "scripts": {
-    "clean": "rm -rf node_modules .turbo",
+    "clean": "git clean -xdf .turbo node_modules",
     "storybook:dev": "storybook dev --port 6006 --quiet",
     "storybook:build": "storybook build --quiet",
-    "storybook:move": "mv storybook-static ../../storybook-static"
+    "storybook:move": "mv storybook-static ../../storybook-static",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "react": "18.2.0",

@@ -2,15 +2,17 @@
   "name": "me",
   "private": true,
   "scripts": {
-    "dev": "turbo run dev",
-    "build": "turbo run build",
-    "clean": "turbo run clean && rm -rf node_modules storybook-static",
+    "dev": "turbo dev --parallel",
+    "build": "turbo build",
+    "clean": "git clean -xdf node_modules storybook-static",
+    "clean:workspace": "turbo clean",
     "storybook:dev": "turbo run storybook:dev",
     "storybook:build": "turbo run storybook:build",
     "storybook:move": "turbo run storybook:move --filter=storybook && turbo run storybook:move --filter=!storybook",
-    "format": "prettier --ignore-path .gitignore --write . \"!pnpm-lock.yaml\" \"!pnpm-workspace.yaml\"",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.{js,cjs,mjs,ts,tsx,md,json,yml,yaml}\" \"!pnpm-lock.yaml\" \"!pnpm-workspace.yaml\"",
     "lint": "turbo lint && manypkg check",
     "lint:fix": "turbo lint:fix && manypkg fix",
+    "type-check": "turbo type-check",
     "postinstall": "husky install"
   },
   "dependencies": {

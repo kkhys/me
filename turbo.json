@@ -10,9 +10,10 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", "dist"]
     },
-    "lint": {},
-    "lint:fix": {},
     "clean": {
+      "cache": false
+    },
+    "//#clean": {
       "cache": false
     },
     "storybook:dev": {
@@ -23,6 +24,11 @@
       "outputs": ["storybook-static/**"]
     },
     "storybook:move": {
+      "cache": false
+    },
+    "lint": {},
+    "lint:fix": {},
+    "type-check": {
       "cache": false
     }
   }

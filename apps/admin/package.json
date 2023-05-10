@@ -7,10 +7,11 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "pnpm lint --fix",
-    "clean": "rm -rf .next node_modules .turbo",
+    "clean": "git clean -xdf .next .turbo node_modules",
     "storybook:dev": "storybook dev --port 6009 --ci --quiet",
     "storybook:build": "storybook build --quiet",
-    "storybook:move": "mv storybook-static ../../storybook-static/admin"
+    "storybook:move": "mv storybook-static ../../storybook-static/admin",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "next": "13.3.0",
