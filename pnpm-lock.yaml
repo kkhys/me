@@ -5,11 +5,11 @@ importers:
   .:
     dependencies:
       '@commitlint/cli':
-        specifier: 17.6.1
-        version: 17.6.1
+        specifier: 17.6.3
+        version: 17.6.3
       '@commitlint/config-conventional':
-        specifier: 17.6.1
-        version: 17.6.1
+        specifier: 17.6.3
+        version: 17.6.3
       '@kkhys/eslint-config':
         specifier: 0.1.0
         version: link:packages/config/eslint
@@ -181,8 +181,8 @@ importers:
         specifier: 0.1.0
         version: link:../../packages/ui
       '@vercel/analytics':
-        specifier: 1.0.0
-        version: 1.0.0(react@18.2.0)
+        specifier: 1.0.1
+        version: 1.0.1
       next:
         specifier: 13.3.0
         version: 13.3.0(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
@@ -1755,8 +1755,8 @@ packages:
     dev: true
     optional: true
 
-  /@commitlint/cli@17.6.1:
-    resolution: {integrity: sha512-kCnDD9LE2ySiTnj/VPaxy4/oRayRcdv4aCuVxtoum8SxIU7OADHc0nJPQfheE8bHcs3zZdWzDMWltRosuT13bg==}
+  /@commitlint/cli@17.6.3:
+    resolution: {integrity: sha512-ItSz2fd4F+CujgIbQOfNNerDF1eFlsBGEfp9QcCb1kxTYMuKTYZzA6Nu1YRRrIaaWwe2E7awUGpIMrPoZkOG3A==}
     engines: {node: '>=v14'}
     hasBin: true
     dependencies:
@@ -1775,8 +1775,8 @@ packages:
       - '@swc/wasm'
     dev: false
 
-  /@commitlint/config-conventional@17.6.1:
-    resolution: {integrity: sha512-ng/ybaSLuTCH9F+7uavSOnEQ9EFMl7lHEjfAEgRh1hwmEe8SpLKpQeMo2aT1IWvHaGMuTb+gjfbzoRf2IR23NQ==}
+  /@commitlint/config-conventional@17.6.3:
+    resolution: {integrity: sha512-bLyHEjjRWqlLQWIgYFHmUPbEFMOOLXeF3QbUinDIJev/u9e769tkoTH9YPknEywiuIrAgZaVo+OfzAIsJP0fsw==}
     engines: {node: '>=v14'}
     dependencies:
       conventional-changelog-conventionalcommits: 5.0.0
@@ -4396,12 +4396,8 @@ packages:
       eslint-visitor-keys: 3.4.1
     dev: false
 
-  /@vercel/analytics@1.0.0(react@18.2.0):
-    resolution: {integrity: sha512-RQmj7pv82JwGDHrnKeRc6TtSw2U7rWNubc2IH0ernTzWTj02yr9zvIYiYJeztsBzrJtWv7m8Nz6vxxb+cdEtJw==}
-    peerDependencies:
-      react: ^16.8||^17||^18
-    dependencies:
-      react: 18.2.0
+  /@vercel/analytics@1.0.1:
+    resolution: {integrity: sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==}
     dev: false
 
   /@vitejs/plugin-react-swc@3.0.0(vite@4.3.5):
