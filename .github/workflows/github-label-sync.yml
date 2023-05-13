@@ -4,8 +4,8 @@ on:
     branches:
       - main
     paths:
-      - .github/labels.yaml
-      - .github/workflows/github-label-sync.yaml
+      - .github/labels.yml
+      - .github/workflows/github-label-sync.yml
   workflow_dispatch:
 jobs:
   build:
