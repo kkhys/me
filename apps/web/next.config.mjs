@@ -1,11 +1,15 @@
 /** @type { import('next').NextConfig } */
 
+import nextMDX from '@next/mdx';
+
 const nextConfig = {
   experimental: {
     appDir: true,
-    // typedRoutes: true,
+    mdxRs: true,
   },
   transpilePackages: ['@kkhys/ui'],
 };
 
-export default nextConfig;
+const withMDX = nextMDX();
+
+export default withMDX(nextConfig);
