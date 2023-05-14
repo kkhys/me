@@ -9,7 +9,7 @@
     "storybook:dev": "turbo run storybook:dev",
     "storybook:build": "turbo run storybook:build",
     "storybook:move": "turbo run storybook:move --filter=storybook && turbo run storybook:move --filter=!storybook",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.{js,cjs,mjs,ts,tsx,md,json,yml,yaml}\" \"!pnpm-lock.yaml\" \"!pnpm-workspace.yaml\"",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.{js,cjs,mjs,ts,tsx,md,json,json5,yml,yaml}\" \"!pnpm-lock.yaml\" \"!pnpm-workspace.yaml\"",
     "lint": "turbo lint && manypkg check",
     "lint:fix": "turbo lint:fix && manypkg fix",
     "type-check": "turbo type-check",
@@ -18,6 +18,7 @@
   "dependencies": {
     "@commitlint/cli": "17.6.3",
     "@commitlint/config-conventional": "17.6.3",
+    "@ianvs/prettier-plugin-sort-imports": "3.7.2",
     "@kkhys/eslint-config": "0.1.0",
     "@kkhys/tsconfig": "0.1.0",
     "@manypkg/cli": "0.20.0",
