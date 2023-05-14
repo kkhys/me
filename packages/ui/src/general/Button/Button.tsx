@@ -1,6 +1,8 @@
-import type { ButtonHTMLAttributes, ReactElement } from 'react';
-import { forwardRef } from 'react';
-
+import {
+  forwardRef,
+  type ButtonHTMLAttributes,
+  type ReactElement,
+} from 'react';
 import clsx from 'clsx';
 
 import { Spin } from '#/feedback';

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { Spin } from '#/feedback';
 
 const meta: Meta<typeof Spin> = {

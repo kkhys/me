@@ -27,11 +27,20 @@ type SpinProps = {
   className?: string;
 };
 
-export const Spin = ({ size = 'md', variant = 'primary', className = '' }: SpinProps) => {
+export const Spin = ({
+  size = 'md',
+  variant = 'primary',
+  className = '',
+}: SpinProps) => {
   return (
     <>
       <svg
-        className={clsx('ui-animate-spin', sizes[size], variants[variant], className)}
+        className={clsx(
+          'ui-animate-spin',
+          sizes[size],
+          variants[variant],
+          className,
+        )}
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
         viewBox='0 0 24 24'

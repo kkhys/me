@@ -1,14 +1,14 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
-  "packageRules": [
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: ['config:base'],
+  packageRules: [
     {
-      "matchPackagePatterns": ["^@kkhys/"],
-      "enabled": false
-    }
+      matchPackagePatterns: ['^@kkhys/'],
+      enabled: false,
+    },
   ],
-  "updateInternalDeps": true,
-  "rangeStrategy": "bump",
-  "automerge": true,
-  assignees: ["kkhys"]
+  updateInternalDeps: true,
+  rangeStrategy: 'bump',
+  automerge: true,
+  assignees: ['kkhys'],
 }

@@ -9,7 +9,11 @@ const config = {
     // FIXME: エラー修正
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json', './apps/*/tsconfig.json', './packages/*/tsconfig.json'],
+    project: [
+      './tsconfig.json',
+      './apps/*/tsconfig.json',
+      './packages/*/tsconfig.json',
+    ],
   },
   settings: {
     next: {

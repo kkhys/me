@@ -2,9 +2,9 @@ import type { ReactNode } from 'react';
 
 import '#/styles/globals.css';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/react';
 
 import { siteMetadata } from '#/config';
-import { Analytics } from '@vercel/analytics/react';
 
 const { title, siteUrl, description, developer } = siteMetadata;
 
@@ -128,7 +128,10 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html className='h-full antialiased' lang='ja'>
       {/* TODO: サニタイズする（そもそもすべきなのか調査） */}
-      <Script id='mode-script' dangerouslySetInnerHTML={{ __html: modeScript }} />
+      <Script
+        id='mode-script'
+        dangerouslySetInnerHTML={{ __html: modeScript }}
+      />
       {/* TODO: url を相対的にするとエラーになる件を調査 @see: https://github.com/vercel/turbo/issues/3573 */}
       <head>
         <script

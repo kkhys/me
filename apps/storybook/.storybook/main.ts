@@ -1,20 +1,29 @@
-import type { StorybookConfig } from '@storybook/react-vite';
 import * as process from 'process';
+import type { StorybookConfig } from '@storybook/react-vite';
 
 const config = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx)'],
   refs: {
     ui: {
       title: 'Ui',
-      url: process.env.NODE_ENV === 'development' ? 'http://localhost:6007/' : 'ui/',
+      url:
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:6007/'
+          : 'ui/',
     },
     web: {
       title: 'Web',
-      url: process.env.NODE_ENV === 'development' ? 'http://localhost:6008/' : 'web/',
+      url:
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:6008/'
+          : 'web/',
     },
     admin: {
       title: 'Admin',
-      url: process.env.NODE_ENV === 'development' ? 'http://localhost:6009/' : 'admin/',
+      url:
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:6009/'
+          : 'admin/',
     },
   },
   addons: [
