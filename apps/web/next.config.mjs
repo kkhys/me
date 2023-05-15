@@ -1,6 +1,6 @@
 /** @type { import('next').NextConfig } */
 
-import nextMDX from '@next/mdx';
+import { withContentlayer } from 'next-contentlayer';
 
 const nextConfig = {
   experimental: {
@@ -10,6 +10,4 @@ const nextConfig = {
   transpilePackages: ['@kkhys/ui'],
 };
 
-const withMDX = nextMDX();
-
-export default withMDX(nextConfig);
+export default withContentlayer(nextConfig);
