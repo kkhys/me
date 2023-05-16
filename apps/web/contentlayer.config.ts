@@ -1,6 +1,6 @@
 import { makeSource } from 'contentlayer/source-files';
 
-import { Post } from '#/contents/definitions/Post';
+import { Post } from './contents/definitions/Post';
 
 export default makeSource({
   contentDirPath: 'contents',
