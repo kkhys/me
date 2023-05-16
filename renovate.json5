@@ -4,21 +4,19 @@
   packageRules: [
     {
       matchPackagePatterns: ['^@kkhys/'],
-      enabled: false
+      enabled: false,
     },
     {
-      "packagePatterns": ['^@types/'],
-      "automerge": true,
-      "major": {
-        "automerge": false
-      }
-    }
+      packagePatterns: ['^@types/'],
+      automerge: true,
+      major: {
+        automerge: false,
+      },
+    },
   ],
   updateInternalDeps: true,
   rangeStrategy: 'bump',
   dependencyDashboard: true,
   assignees: ['kkhys'],
-  schedule: [
-    'after 1am and before 6am'
-  ]
+  schedule: ['after 1am and before 6am'],
 }

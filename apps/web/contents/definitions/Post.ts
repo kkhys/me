@@ -2,17 +2,27 @@ import { defineDocumentType } from 'contentlayer/source-files';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
-  filePathPattern: `posts/*.mdx`,
+  filePathPattern: `posts/**/index.mdx`,
   contentType: 'mdx',
   fields: {
     title: {
       type: 'string',
-      description: 'The title of the post',
       required: true,
     },
-    date: {
+    description: {
+      type: 'string',
+    },
+    status: {
+      type: 'enum',
+      options: ['draft', 'published'],
+      required: true,
+    },
+    publishedAt: {
       type: 'date',
-      description: 'The date of the post',
+      required: true,
+    },
+    slug: {
+      type: 'string',
       required: true,
     },
   },

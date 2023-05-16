@@ -2,26 +2,34 @@ import { allPosts } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
-export const generateStaticParams = async () =>
-  allPosts.map((post) => ({ slug: post._raw.flattenedPath }));
+export const generateStaticParams = () =>
+  allPosts.map(({ slug }) => ({ slug }));
 
-export const generateMetadata = ({ params }) => {
-  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
-  return { title: post.title };
+export const generateMetadata = ({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) => {
+  return allPosts.find((post) => post.slug === slug).title;
 };
 
-const PostLayout = ({ params }: { params: { slug: string } }) => {
-  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug);
+const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
+  const { title, publishedAt, body } = allPosts.find(
+    (post) => post.slug === slug,
+  );
 
-  const Content = getMDXComponent(post.body.code);
+  const Content = getMDXComponent(body.code);
 
   return (
     <article className='mx-auto max-w-xl py-8'>
       <div className='mb-8 text-center'>
-        <time dateTime={post.date} className='mb-1 text-xs text-gray-600'>
-          {format(parseISO(post.date), 'LLLL d, yyyy')}
+        <time
+          dateTime={publishedAt as string}
+          className='mb-1 text-xs text-gray-600'
+        >
+          {format(parseISO(publishedAt as string), 'LLLL d, yyyy')}
         </time>
-        <h1>{post.title}</h1>
+        <h1>{title}</h1>
       </div>
       <Content />
     </article>
