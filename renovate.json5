@@ -1,14 +1,24 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
-  extends: ['config:base'],
+  extends: ['config:base', 'prHourlyLimitNone', ':timezone(Asia/Tokyo)'],
   packageRules: [
     {
       matchPackagePatterns: ['^@kkhys/'],
-      enabled: false,
+      enabled: false
     },
+    {
+      "packagePatterns": ['^@types/'],
+      "automerge": true,
+      "major": {
+        "automerge": false
+      }
+    }
   ],
   updateInternalDeps: true,
   rangeStrategy: 'bump',
-  automerge: true,
+  dependencyDashboard: true,
   assignees: ['kkhys'],
+  schedule: [
+    'after 1am and before 6am'
+  ]
 }
