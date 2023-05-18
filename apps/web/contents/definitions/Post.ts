@@ -1,5 +1,7 @@
 import { defineDocumentType } from 'contentlayer/source-files';
 
+import { Tag } from '../definitions';
+
 export const Post = defineDocumentType(() => ({
   name: 'Post',
   filePathPattern: `posts/**/index.mdx`,
@@ -8,6 +10,19 @@ export const Post = defineDocumentType(() => ({
     title: {
       type: 'string',
       required: true,
+    },
+    emoji: {
+      type: 'string',
+      required: true,
+    },
+    category: {
+      type: 'enum',
+      options: ['test', 'test2'],
+      required: true,
+    },
+    tags: {
+      type: 'list',
+      of: Tag,
     },
     description: {
       type: 'string',
@@ -21,6 +36,9 @@ export const Post = defineDocumentType(() => ({
       type: 'date',
       required: true,
     },
+    updatedAt: {
+      type: 'date',
+    },
     slug: {
       type: 'string',
       required: true,
@@ -29,7 +47,7 @@ export const Post = defineDocumentType(() => ({
   computedFields: {
     url: {
       type: 'string',
-      resolve: (doc) => `/${doc._raw.flattenedPath}`,
+      resolve: (document) => `/posts/${document.slug}`,
     },
   },
 }));

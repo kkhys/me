@@ -9,7 +9,7 @@
     "storybook:dev": "turbo run storybook:dev",
     "storybook:build": "turbo run storybook:build",
     "storybook:move": "turbo run storybook:move --filter=storybook && turbo run storybook:move --filter=!storybook",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.{js,cjs,mjs,ts,tsx,md,json,json5,yml,yaml}\" \"!pnpm-lock.yaml\" \"!pnpm-workspace.yaml\"",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.{js,cjs,mjs,ts,tsx,md,mdx,json,json5,yml,yaml}\" \"!pnpm-lock.yaml\" \"!pnpm-workspace.yaml\"",
     "lint": "turbo lint && manypkg check",
     "lint:fix": "turbo lint:fix && manypkg fix",
     "type-check": "turbo type-check",

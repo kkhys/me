@@ -1,4 +1,4 @@
-import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+import { ColorItem, ColorPalette, Meta } from '@storybook/blocks';
 
 <Meta title='Colors' />
 
@@ -8,8 +8,16 @@ import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
     subtitle='Some of the greys'
     colors={{ White: '#FFFFFF', Alabaster: '#F8F8F8', Concrete: '#F3F3F3' }}
   />
-  <ColorItem title='theme.color.primary' subtitle='Coral' colors={{ WildWatermelon: '#FF4785' }} />
-  <ColorItem title='theme.color.secondary' subtitle='Ocean' colors={{ DodgerBlue: '#1EA7FD' }} />
+  <ColorItem
+    title='theme.color.primary'
+    subtitle='Coral'
+    colors={{ WildWatermelon: '#FF4785' }}
+  />
+  <ColorItem
+    title='theme.color.secondary'
+    subtitle='Ocean'
+    colors={{ DodgerBlue: '#1EA7FD' }}
+  />
   <ColorItem
     title='theme.color.positive'
     subtitle='Green'

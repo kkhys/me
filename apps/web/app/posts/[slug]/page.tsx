@@ -12,9 +12,8 @@ export const generateMetadata = ({
 }) => allPosts.find((post) => post.slug === slug).title;
 
 const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
-  const { title, publishedAt, body } = allPosts.find(
-    (post) => post.slug === slug,
-  );
+  const { title, emoji, category, tags, publishedAt, updatedAt, body } =
+    allPosts.find((post) => post.slug === slug);
 
   const Content = getMDXComponent(body.code);
 
@@ -25,6 +24,10 @@ const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
           {format(parseISO(publishedAt), 'LLLL d, yyyy')}
         </time>
         <h1>{title}</h1>
+        <p>{emoji}</p>
+        <p>category: {category}</p>
+        <p>tags: {tags[0].title}</p>
+        <p>updatedAt: {updatedAt}</p>
       </div>
       <Content />
     </article>
