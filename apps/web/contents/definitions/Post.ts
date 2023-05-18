@@ -1,6 +1,7 @@
 import { defineDocumentType } from 'contentlayer/source-files';
+import { format, parseISO } from 'date-fns';
 
-import { Tag } from '../definitions';
+import { Category, Tag } from '../definitions';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -16,8 +17,8 @@ export const Post = defineDocumentType(() => ({
       required: true,
     },
     category: {
-      type: 'enum',
-      options: ['test', 'test2'],
+      type: 'nested',
+      of: Category,
       required: true,
     },
     tags: {
@@ -47,7 +48,17 @@ export const Post = defineDocumentType(() => ({
   computedFields: {
     url: {
       type: 'string',
-      resolve: (document) => `/posts/${document.slug}`,
+      resolve: ({ slug }) => `/posts/${slug}`,
+    },
+    publishedAtFormatted: {
+      type: 'string',
+      resolve: ({ publishedAt }) =>
+        format(parseISO(publishedAt), 'LLLL d, yyyy'),
+    },
+    updatedAtFormatted: {
+      type: 'string',
+      resolve: ({ updatedAt }) =>
+        updatedAt ? format(parseISO(updatedAt), 'LLLL d, yyyy') : undefined,
     },
   },
 }));

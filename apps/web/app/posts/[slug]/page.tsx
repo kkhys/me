@@ -1,5 +1,4 @@
 import { allPosts } from 'contentlayer/generated';
-import { format, parseISO } from 'date-fns';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
 export const generateStaticParams = () =>
@@ -12,8 +11,16 @@ export const generateMetadata = ({
 }) => allPosts.find((post) => post.slug === slug).title;
 
 const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
-  const { title, emoji, category, tags, publishedAt, updatedAt, body } =
-    allPosts.find((post) => post.slug === slug);
+  const {
+    title,
+    emoji,
+    category,
+    tags,
+    publishedAt,
+    publishedAtFormatted,
+    updatedAt,
+    body,
+  } = allPosts.find((post) => post.slug === slug);
 
   const Content = getMDXComponent(body.code);
 
@@ -21,11 +28,11 @@ const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
     <article className='mx-auto max-w-xl py-8'>
       <div className='mb-8 text-center'>
         <time dateTime={publishedAt} className='mb-1 text-xs text-gray-600'>
-          {format(parseISO(publishedAt), 'LLLL d, yyyy')}
+          {publishedAtFormatted}
         </time>
         <h1>{title}</h1>
         <p>{emoji}</p>
-        <p>category: {category}</p>
+        <p>category: {category.title}</p>
         <p>tags: {tags[0].title}</p>
         <p>updatedAt: {updatedAt}</p>
       </div>
