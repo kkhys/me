@@ -1,5 +1,6 @@
 import { allPosts } from 'contentlayer/generated';
 import { getMDXComponent } from 'next-contentlayer/hooks';
+import twemoji from 'twemoji';
 
 export const generateStaticParams = () =>
   allPosts.map(({ slug }) => ({ slug }));
@@ -24,6 +25,11 @@ const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
 
   const Content = getMDXComponent(body.code);
 
+  const parsedEmoji = twemoji.parse(emoji || '🐙', {
+    folder: 'svg',
+    ext: '.svg',
+  });
+
   return (
     <article className='mx-auto max-w-xl py-8'>
       <div className='mb-8 text-center'>
@@ -31,7 +37,7 @@ const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
           {publishedAtFormatted}
         </time>
         <h1>{title}</h1>
-        <p>{emoji}</p>
+        <p dangerouslySetInnerHTML={{ __html: parsedEmoji }} className='w-8' />
         <p>category: {category.title}</p>
         <p>tags: {tags[0].title}</p>
         <p>updatedAt: {updatedAt}</p>
