@@ -2,6 +2,8 @@ import { allPosts } from 'contentlayer/generated';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 import twemoji from 'twemoji';
 
+import { ThemeChanger } from '#/ui/ThemeChanger';
+
 export const generateStaticParams = () =>
   allPosts.map(({ slug }) => ({ slug }));
 
@@ -42,6 +44,7 @@ const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
         <p>tags: {tags[0].title}</p>
         <p>updatedAt: {updatedAt}</p>
       </div>
+      <ThemeChanger />
       <Content />
     </article>
   );
