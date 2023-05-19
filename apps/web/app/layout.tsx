@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react';
 
 import '#/styles/globals.css';
-import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 
 import { SITE_METADATA } from '#/config';
@@ -94,53 +93,9 @@ export const metadata = {
   category: 'technology',
 };
 
-// TODO: 圧縮した方が良いのか調査
-const modeScript = `
-  let darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-  updateMode()
-  darkModeMediaQuery.addEventListener('change', updateModeWithoutTransitions)
-  window.addEventListener('storage', updateModeWithoutTransitions)
-  function updateMode() {
-    let isSystemDarkMode = darkModeMediaQuery.matches
-    let isDarkMode = window.localStorage.isDarkMode === 'true' || (!('isDarkMode' in window.localStorage) && isSystemDarkMode)
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-    if (isDarkMode === isSystemDarkMode) {
-      delete window.localStorage.isDarkMode
-    }
-  }
-  function disableTransitionsTemporarily() {
-    document.documentElement.classList.add('[&_*]:!transition-none')
-    window.setTimeout(() => {
-      document.documentElement.classList.remove('[&_*]:!transition-none')
-    }, 0)
-  }
-  function updateModeWithoutTransitions() {
-    disableTransitionsTemporarily()
-    updateMode()
-  }
-`;
-
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html className='h-full antialiased' lang='ja'>
-      {/* TODO: サニタイズする（そもそもすべきなのか調査） */}
-      <Script
-        id='mode-script'
-        dangerouslySetInnerHTML={{ __html: modeScript }}
-      />
-      {/* TODO: url を相対的にするとエラーになる件を調査 @see: https://github.com/vercel/turbo/issues/3573 */}
-      <head>
-        <script
-          defer
-          src='https://unpkg.com/@tinybirdco/flock.js'
-          data-host='https://api.tinybird.co'
-          data-token='p.eyJ1IjogImIwYjI3YjU1LTY1NzQtNDg5Mi1iZTM3LTVkMDhmMWRiZTMxOCIsICJpZCI6ICI0ODk3YTBiZC05YjI4LTQxNzAtYTBlZS0zZjlhOGZmNTk3MDAifQ.zS1GqNULFk3mUPWEnwC1eoD71FGHAeZhs-FCHVR9Pp0'
-        ></script>
-      </head>
       <Analytics />
       <body className="flex h-full flex-col bg-zinc-50 bg-[url('https://kkhys.me/grid.svg')] dark:bg-gray-1100">
         <div className='fixed inset-0 flex justify-center sm:px-8'>
