@@ -1,1 +1,1 @@
-export * from './siteMetadata';
+export * from './constants';

@@ -4,9 +4,9 @@ import '#/styles/globals.css';
 import Script from 'next/script';
 import { Analytics } from '@vercel/analytics/react';
 
-import { siteMetadata } from '#/config';
+import { SITE_METADATA } from '#/config';
 
-const { title, siteUrl, description, developer } = siteMetadata;
+const { title, siteUrl, description, developer } = SITE_METADATA;
 
 export const metadata = {
   title: {

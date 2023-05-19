@@ -20,10 +20,10 @@ const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
     publishedAt,
     publishedAtFormatted,
     updatedAt,
-    body,
+    body: { code },
   } = allPosts.find((post) => post.slug === slug);
 
-  const Content = getMDXComponent(body.code);
+  const Content = getMDXComponent(code);
 
   const parsedEmoji = twemoji.parse(emoji || '🐙', {
     folder: 'svg',

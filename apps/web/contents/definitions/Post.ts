@@ -1,6 +1,7 @@
 import { defineDocumentType } from 'contentlayer/source-files';
 import { format, parseISO } from 'date-fns';
 
+import { SITE_METADATA } from '../../config';
 import { Category, Tag } from '../definitions';
 
 export const Post = defineDocumentType(() => ({
@@ -49,6 +50,16 @@ export const Post = defineDocumentType(() => ({
     url: {
       type: 'string',
       resolve: ({ slug }) => `/posts/${slug}`,
+    },
+    editUrl: {
+      type: 'string',
+      resolve: ({ _raw: { sourceFilePath } }) =>
+        `${SITE_METADATA.repositoryUrl}/edit/main/apps/web/contents/${sourceFilePath}`,
+    },
+    sourceUrl: {
+      type: 'string',
+      resolve: ({ _raw: { sourceFilePath } }) =>
+        `${SITE_METADATA.repositoryUrl}/blob/main/apps/web/contents/${sourceFilePath}?plain=1`,
     },
     publishedAtFormatted: {
       type: 'string',
