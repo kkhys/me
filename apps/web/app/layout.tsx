@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import '#/styles/globals.css';
 import { Analytics } from '@vercel/analytics/react';
 
+import { Providers } from '#/app/providers';
 import { SITE_METADATA } from '#/config';
 
 const { title, siteUrl, description, developer } = SITE_METADATA;
@@ -104,7 +105,9 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           </div>
         </div>
         <div className='relative'>
-          <main>{children}</main>
+          <main>
+            <Providers>{children}</Providers>
+          </main>
         </div>
       </body>
     </html>
