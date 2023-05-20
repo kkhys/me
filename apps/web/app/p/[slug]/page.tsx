@@ -2,6 +2,7 @@ import { allPosts } from 'contentlayer/generated';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 import twemoji from 'twemoji';
 
+import { mdxComponents } from '#/ui/MdxComponents';
 import { ThemeChanger } from '#/ui/ThemeChanger';
 
 export const generateStaticParams = () =>
@@ -13,7 +14,7 @@ export const generateMetadata = ({
   params: { slug: string };
 }) => allPosts.find((post) => post.slug === slug).title;
 
-const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
+const Page = ({ params: { slug } }: { params: { slug: string } }) => {
   const {
     title,
     emoji,
@@ -45,9 +46,9 @@ const PostLayout = ({ params: { slug } }: { params: { slug: string } }) => {
         <p>updatedAt: {updatedAt}</p>
       </div>
       <ThemeChanger />
-      <Content />
+      <Content components={mdxComponents} />
     </article>
   );
 };
 
-export default PostLayout;
+export default Page;

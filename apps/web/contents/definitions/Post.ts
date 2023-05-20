@@ -49,7 +49,7 @@ export const Post = defineDocumentType(() => ({
   computedFields: {
     url: {
       type: 'string',
-      resolve: ({ slug }) => `/posts/${slug}`,
+      resolve: ({ slug }) => `/p/${slug}`,
     },
     editUrl: {
       type: 'string',

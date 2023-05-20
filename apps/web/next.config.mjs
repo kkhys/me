@@ -5,6 +5,7 @@ import { withContentlayer } from 'next-contentlayer';
 const nextConfig = {
   experimental: {
     appDir: true,
+    scrollRestoration: true,
   },
   transpilePackages: ['@kkhys/ui'],
 };
