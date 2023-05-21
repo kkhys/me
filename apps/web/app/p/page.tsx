@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { allPosts, type Post } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 
+import { Header } from '#/features/global/ui';
+
 const PostCard = (post: Post) => {
   return (
     <div className='mb-8'>
@@ -31,6 +33,7 @@ const Page = () => {
 
   return (
     <div className='mx-auto max-w-xl py-8'>
+      <Header />
       <h1 className='mb-8 text-center text-3xl font-bold'>Next.js Example</h1>
       {posts.map((post, idx) => (
         <PostCard key={idx} {...post} />
