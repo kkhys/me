@@ -2,8 +2,8 @@ import { allPosts } from 'contentlayer/generated';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 import twemoji from 'twemoji';
 
-import { mdxComponents } from '#/ui/MdxComponents';
-import { ThemeChanger } from '#/ui/ThemeChanger';
+import { ModeToggle } from '#/features/global/ui/ModeToggle';
+import { mdxComponents } from '#/features/mdx/ui';
 
 export const generateStaticParams = () =>
   allPosts.map(({ slug }) => ({ slug }));
@@ -45,7 +45,7 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
         <p>tags: {tags[0].title}</p>
         <p>updatedAt: {updatedAt}</p>
       </div>
-      <ThemeChanger />
+      <ModeToggle />
       <Content components={mdxComponents} />
     </article>
   );

@@ -1,11 +1,8 @@
 import Link from 'next/link';
 import { allPosts, type Post } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
-import { getMDXComponent } from 'next-contentlayer/hooks';
 
 const PostCard = (post: Post) => {
-  const Content = getMDXComponent(post.body.code);
-
   return (
     <div className='mb-8'>
       <h2 className='text-xl'>
@@ -23,9 +20,6 @@ const PostCard = (post: Post) => {
       >
         {post.publishedAtFormatted}
       </time>
-      <div className='text-sm'>
-        <Content />
-      </div>
     </div>
   );
 };
