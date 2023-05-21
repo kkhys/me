@@ -32,7 +32,7 @@ const PostCard = (post: Post) => {
 
 const Page = () => {
   const posts = allPosts.sort((a, b) =>
-    compareDesc(new Date(a.updatedAt), new Date(b.updatedAt)),
+    compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)),
   );
 
   return (
