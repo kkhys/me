@@ -216,8 +216,7 @@ const Avatar = ({
 };
 
 export const Header = () => {
-  const pathname = usePathname();
-  const isHomePage = pathname === '/';
+  const isHomePage = usePathname() === '/';
 
   const headerRef = useRef<HTMLDivElement>(null);
   const avatarRef = useRef<HTMLDivElement>(null);

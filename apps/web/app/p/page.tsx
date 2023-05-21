@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { allPosts, type Post } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 
-import { Header } from '#/features/global/ui';
+import { Footer, Header } from '#/features/global/ui';
 import { Container } from '#/ui';
 
 const PostCard = (post: Post) => {
@@ -45,6 +45,7 @@ const Page = () => {
           ))}
         </div>
       </Container>
+      <Footer />
     </>
   );
 };
