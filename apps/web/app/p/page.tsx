@@ -3,6 +3,7 @@ import { allPosts, type Post } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 
 import { Header } from '#/features/global/ui';
+import { Container } from '#/ui';
 
 const PostCard = (post: Post) => {
   return (
@@ -32,13 +33,19 @@ const Page = () => {
   );
 
   return (
-    <div className='mx-auto max-w-xl py-8'>
+    <>
       <Header />
-      <h1 className='mb-8 text-center text-3xl font-bold'>Next.js Example</h1>
-      {posts.map((post, idx) => (
-        <PostCard key={idx} {...post} />
-      ))}
-    </div>
+      <Container>
+        <div className='mx-auto max-w-xl py-8'>
+          <h1 className='mb-8 text-center text-3xl font-bold'>
+            Next.js Example
+          </h1>
+          {posts.map((post, idx) => (
+            <PostCard key={idx} {...post} />
+          ))}
+        </div>
+      </Container>
+    </>
   );
 };
 

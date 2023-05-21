@@ -1,5 +1,6 @@
 // import { Footer } from '#/components/global';
-import { Container } from '@kkhys/ui';
+
+import { Container } from '#/ui';
 
 const HomePage = () => {
   return (

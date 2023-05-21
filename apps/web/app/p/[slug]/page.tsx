@@ -2,6 +2,7 @@ import { allPosts } from 'contentlayer/generated';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 import twemoji from 'twemoji';
 
+import { Header } from '#/features/global/ui';
 import { mdxComponents } from '#/features/mdx/ui';
 
 export const generateStaticParams = () =>
@@ -33,24 +34,30 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
   });
 
   return (
-    <article className='mx-auto max-w-xl py-8'>
-      <div className='mb-8 text-center'>
-        <time dateTime={publishedAt} className='mb-1 text-xs text-gray-600'>
-          {publishedAtFormatted}
-        </time>
-        <h1>{title}</h1>
-        <p dangerouslySetInnerHTML={{ __html: parsedEmoji }} className='w-8' />
-        <p>category: {category.title}</p>
-        <p>tags: {tags[0].title}</p>
-        <p>updatedAt: {updatedAt}</p>
-      </div>
-      <div className='rounded-lg bg-kkhys-border-gradient-dark p-px shadow-lg shadow-black/20'>
-        <div className='rounded-lg bg-black'>
-          <div className='h-24 pt-10' />
+    <>
+      <Header />
+      <article className='mx-auto max-w-xl py-8'>
+        <div className='mb-8 text-center'>
+          <time dateTime={publishedAt} className='mb-1 text-xs text-gray-600'>
+            {publishedAtFormatted}
+          </time>
+          <h1>{title}</h1>
+          <p
+            dangerouslySetInnerHTML={{ __html: parsedEmoji }}
+            className='w-8'
+          />
+          <p>category: {category.title}</p>
+          <p>tags: {tags[0].title}</p>
+          <p>updatedAt: {updatedAt}</p>
         </div>
-      </div>
-      <Content components={mdxComponents} />
-    </article>
+        <div className='rounded-lg bg-kkhys-border-gradient-dark p-px shadow-lg shadow-black/20'>
+          <div className='rounded-lg bg-black'>
+            <div className='h-24 pt-10' />
+          </div>
+        </div>
+        <Content components={mdxComponents} />
+      </article>
+    </>
   );
 };
 

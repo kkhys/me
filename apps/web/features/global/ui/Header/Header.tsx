@@ -13,10 +13,9 @@ import { usePathname } from 'next/navigation';
 import { Popover, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 
-import { Container } from '@kkhys/ui';
-
 import { ChevronDownIcon, CloseIcon } from '#/features/global/ui';
 import avatarImage from '#/assets/avatar.jpg';
+import { Container } from '#/ui';
 
 const MobileNavigationItem = ({
   href,
@@ -337,7 +336,11 @@ export const Header = () => {
             />
             <Container
               className='top-0 order-last -mb-3 pt-3'
-              style={{ position: 'var(--header-position)' }}
+              style={
+                {
+                  position: 'var(--header-position)',
+                } as unknown as CSSProperties
+              }
             >
               <div
                 className='top-[var(--avatar-top,theme(spacing.3))] w-full'
@@ -374,7 +377,11 @@ export const Header = () => {
         >
           <Container
             className='top-[var(--header-top,theme(spacing.6))] w-full'
-            style={{ position: 'var(--header-inner-position)' }}
+            style={
+              {
+                position: 'var(--header-inner-position)',
+              } as unknown as CSSProperties
+            }
           >
             <div className='relative flex gap-4'>
               <div className='flex flex-1'>
