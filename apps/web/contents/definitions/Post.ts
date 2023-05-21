@@ -31,7 +31,8 @@ const getSlug = (id: string) => {
     .update(Buffer.from(reHash, 'hex').toString('hex'))
     .getHash('HEX')
     .substring(0, 8);
-  return bs58.encode(Buffer.from(reHash + checksum, 'hex')).substring(0, 32);
+
+  return bs58.encode(Buffer.from(checksum + reHash, 'hex')).substring(0, 32);
 };
 
 export const Post = defineDocumentType(() => ({
