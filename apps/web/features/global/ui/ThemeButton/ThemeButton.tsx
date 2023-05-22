@@ -5,19 +5,11 @@ import { useTheme } from 'next-themes';
 
 import { MoonIcon, SunIcon } from '#/ui';
 
-export const ModeToggle = () => {
+export const ThemeButton = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
-  const disableTransitionsTemporarily = () => {
-    document.documentElement.classList.add('[&_*]:!transition-none');
-    window.setTimeout(() => {
-      document.documentElement.classList.remove('[&_*]:!transition-none');
-    }, 0);
-  };
-
   const toggleTheme = () => {
-    disableTransitionsTemporarily();
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
