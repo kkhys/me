@@ -13,9 +13,8 @@ import { usePathname } from 'next/navigation';
 import { Popover, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 
-import { ChevronDownIcon, CloseIcon } from '#/features/global/ui';
 import avatarImage from '#/assets/avatar.jpg';
-import { Container } from '#/ui';
+import { ChevronDownIcon, CloseIcon, Container } from '#/ui';
 
 const MobileNavigationItem = ({
   href,

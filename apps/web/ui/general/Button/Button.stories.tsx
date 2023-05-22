@@ -1,7 +1,6 @@
-import { RocketLaunchIcon } from '@heroicons/react/24/outline';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '#/general';
+import { Button, MoonIcon } from '#/ui';
 
 const meta: Meta<typeof Button> = {
   title: 'General/Button',
@@ -28,13 +27,13 @@ export const Primary: Story = {
 export const WithStartIcon: Story = {
   args: {
     children: 'Button',
-    // startIcon: <RocketLaunchIcon className='h-4 w-4' />,
+    startIcon: <MoonIcon className='h-4 w-4' />,
   },
 };
 
 export const WithEndIcon: Story = {
   args: {
     children: 'Button',
-    // endIcon: <RocketLaunchIcon className='h-4 w-4' />,
+    endIcon: <MoonIcon className='h-4 w-4' />,
   },
 };
