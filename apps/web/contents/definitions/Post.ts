@@ -76,7 +76,7 @@ export const Post = defineDocumentType(() => ({
   computedFields: {
     url: {
       type: 'string',
-      resolve: ({ _id }) => `/p/${getSlug(_id)}`,
+      resolve: ({ _id }) => `/posts/${getSlug(_id)}`,
     },
     editUrl: {
       type: 'string',
@@ -101,6 +101,18 @@ export const Post = defineDocumentType(() => ({
     slug: {
       type: 'string',
       resolve: ({ _id }) => getSlug(_id),
+    },
+    pattern: {
+      type: 'json',
+      resolve: () => {
+        return {
+          patternY: '16',
+          patternSquare: [
+            [0, 1],
+            [1, 3],
+          ],
+        };
+      },
     },
   },
 }));

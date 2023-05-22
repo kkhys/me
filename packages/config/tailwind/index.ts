@@ -18,6 +18,12 @@ export default {
           'colors.gray.500',
         )}, 50px, ${theme('colors.gray.800')} 50%)`,
       }),
+      opacity: {
+        1: '0.01',
+        2.5: '0.025',
+        7.5: '0.075',
+        15: '0.15',
+      },
     },
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],

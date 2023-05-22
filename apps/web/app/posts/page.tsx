@@ -3,6 +3,7 @@ import { allPosts, type Post } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 
 import { Footer, Header } from '#/features/global/ui';
+import { BlogCards } from '#/features/posts/ui';
 import { Container } from '#/ui';
 
 const PostCard = (post: Post) => {
@@ -43,6 +44,7 @@ const Page = () => {
           {posts.map((post, idx) => (
             <PostCard key={idx} {...post} />
           ))}
+          <BlogCards frontMatters={posts} />
         </div>
       </Container>
       <Footer />
