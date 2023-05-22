@@ -70,7 +70,7 @@ const BlogPattern = ({
   );
 };
 
-const BlogCard = ({ frontMatter }: { frontMatter: Post }) => {
+const BlogCard = ({ post }: { post: Post }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -90,39 +90,39 @@ const BlogCard = ({ frontMatter }: { frontMatter: Post }) => {
 
   return (
     <div
-      key={frontMatter.title}
+      key={post.title}
       onMouseMove={onMouseMove}
       className='group relative flex rounded-2xl bg-gray-50 transition-shadow hover:shadow-md hover:shadow-gray-900/5 dark:bg-white/2.5 dark:hover:shadow-black/5'
     >
       <BlogPattern
         mouseX={mouseX as unknown as number}
         mouseY={mouseY as unknown as number}
-        patternY={frontMatter.pattern.y}
-        patternSquare={frontMatter.pattern.squares}
+        patternY={post.pattern.y}
+        patternSquare={post.pattern.square}
       />
       <div className='absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/7.5 group-hover:ring-gray-900/10 dark:ring-white/10 dark:group-hover:ring-white/20' />
       <div className='relative rounded-2xl px-4 pb-4 pt-16'>
-        <BlogIcon emoji={frontMatter.emoji} />
+        <BlogIcon emoji={post.emoji} />
         <h3 className='mt-4 text-sm font-semibold leading-7 text-gray-900 dark:text-white'>
-          <Link href={frontMatter.url}>
+          <Link href={post.url}>
             <span className='absolute inset-0 rounded-2xl' />
-            {frontMatter.title}
+            {post.title}
           </Link>
         </h3>
         <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
-          {frontMatter.publishedAtFormatted}
+          {post.publishedAtFormatted}
         </p>
       </div>
     </div>
   );
 };
 
-export const BlogCards = ({ frontMatters }: { frontMatters: Post[] }) => {
+export const BlogCards = ({ posts }: { posts: Post[] }) => {
   return (
     <div className='my-16 xl:max-w-none'>
-      <div className='not-prose mt-4 grid grid-cols-1 gap-8 border-t border-gray-900/5 pt-10 dark:border-white/5 sm:grid-cols-2 xl:grid-cols-3'>
-        {frontMatters.map((frontMatter) => (
-          <BlogCard key={frontMatter.title} frontMatter={frontMatter} />
+      <div className='mt-4 grid grid-cols-1 gap-8 pt-10 sm:grid-cols-2 xl:grid-cols-3'>
+        {posts.map((post) => (
+          <BlogCard key={post.title} post={post} />
         ))}
       </div>
     </div>

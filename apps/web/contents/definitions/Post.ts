@@ -106,8 +106,8 @@ export const Post = defineDocumentType(() => ({
       type: 'json',
       resolve: () => {
         return {
-          patternY: '16',
-          patternSquare: [
+          y: '16',
+          square: [
             [0, 1],
             [1, 3],
           ],
