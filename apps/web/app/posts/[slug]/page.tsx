@@ -1,9 +1,9 @@
 import { allPosts } from 'contentlayer/generated';
 import { getMDXComponent } from 'next-contentlayer/hooks';
-import twemoji from 'twemoji';
 
 import { Footer, Header } from '#/features/global/ui';
 import { mdxComponents } from '#/features/mdx/ui';
+import { BrowserBackButton } from '#/features/posts/ui';
 import { Container } from '#/ui';
 
 export const generateStaticParams = () =>
@@ -18,47 +18,50 @@ export const generateMetadata = ({
 const Page = ({ params: { slug } }: { params: { slug: string } }) => {
   const {
     title,
-    emoji,
-    category,
-    tags,
+    // emoji,
+    // category,
+    // tags,
     publishedAt,
     publishedAtFormatted,
-    updatedAt,
+    // updatedAt,
     body: { code },
   } = allPosts.find((post) => post.slug === slug);
 
   const Content = getMDXComponent(code);
 
-  const parsedEmoji = twemoji.parse(emoji || '🐙', {
-    folder: 'svg',
-    ext: '.svg',
-  });
+  // const parsedEmoji = twemoji.parse(emoji || '🐙', {
+  //   folder: 'svg',
+  //   ext: '.svg',
+  // });
 
   return (
     <>
       <Header />
-      <Container>
-        <article className='mx-auto max-w-xl py-8'>
-          <div className='mb-8 text-center'>
-            <time dateTime={publishedAt} className='mb-1 text-xs text-gray-600'>
-              {publishedAtFormatted}
-            </time>
-            <h1>{title}</h1>
-            <p
-              dangerouslySetInnerHTML={{ __html: parsedEmoji }}
-              className='w-8'
-            />
-            <p>category: {category.title}</p>
-            <p>tags: {tags[0].title}</p>
-            <p>updatedAt: {updatedAt}</p>
+      <Container className='mt-16 lg:mt-32'>
+        <div className='xl:relative'>
+          <div className='mx-auto max-w-2xl'>
+            {/*{previousPathname && (*/}
+            <BrowserBackButton />
+            {/*)}*/}
+            <article>
+              <header className='flex flex-col'>
+                <h1 className='mt-6 text-4xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-5xl'>
+                  {title}
+                </h1>
+                <time
+                  dateTime={publishedAt}
+                  className='order-first flex items-center text-base text-gray-400 dark:text-gray-500'
+                >
+                  <span className='h-4 w-0.5 rounded-full bg-gray-200 dark:bg-gray-500' />
+                  <span className='ml-3'>{publishedAtFormatted}</span>
+                </time>
+              </header>
+              <div className='mt-8'>
+                <Content className='mt-8' components={mdxComponents} />
+              </div>
+            </article>
           </div>
-          <div className='rounded-lg bg-kkhys-border-gradient-dark p-px shadow-lg shadow-black/20'>
-            <div className='rounded-lg bg-black'>
-              <div className='h-24 pt-10' />
-            </div>
-          </div>
-          <Content components={mdxComponents} />
-        </article>
+        </div>
       </Container>
       <Footer />
     </>
