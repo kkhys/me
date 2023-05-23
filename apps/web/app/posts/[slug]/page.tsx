@@ -56,8 +56,8 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
                   <span className='ml-3'>{publishedAtFormatted}</span>
                 </time>
               </header>
-              <div className='mt-8'>
-                <Content className='mt-8' components={mdxComponents} />
+              <div className='prose mt-8 dark:prose-invert'>
+                <Content components={mdxComponents} />
               </div>
             </article>
           </div>
