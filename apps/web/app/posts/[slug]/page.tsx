@@ -4,7 +4,7 @@ import { getMDXComponent } from 'next-contentlayer/hooks';
 import { Footer, Header } from '#/features/global/ui';
 import { mdxComponents } from '#/features/mdx/ui';
 import { BrowserBackButton } from '#/features/posts/ui';
-import { Container } from '#/ui';
+import { Container, Prose } from '#/ui';
 
 export const generateStaticParams = () =>
   allPosts.map(({ slug }) => ({ slug }));
@@ -56,9 +56,9 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
                   <span className='ml-3'>{publishedAtFormatted}</span>
                 </time>
               </header>
-              <div className='prose mt-8 dark:prose-invert'>
+              <Prose className='mt-8'>
                 <Content components={mdxComponents} />
-              </div>
+              </Prose>
             </article>
           </div>
         </div>
