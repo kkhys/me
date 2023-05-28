@@ -5,6 +5,7 @@ import { Footer, Header } from '#/features/global/ui';
 import { mdxComponents } from '#/features/mdx/ui';
 import { BrowserBackButton } from '#/features/posts/ui';
 import { Container, Prose } from '#/ui';
+import 'katex/dist/katex.min.css';
 
 export const generateStaticParams = () =>
   allPosts.map(({ slug }) => ({ slug }));
