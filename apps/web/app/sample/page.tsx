@@ -22,7 +22,7 @@ const SocialLink = ({
   );
 };
 
-const SampleLayout = () => {
+const SamplePage = () => {
   return (
     <>
       <Header />
@@ -59,4 +59,4 @@ const SampleLayout = () => {
   );
 };
 
-export default SampleLayout;
+export default SamplePage;

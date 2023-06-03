@@ -4,6 +4,7 @@ export const SITE_METADATA = {
   repositoryUrl: 'https://github.com/kkhys/me',
   description: 'Personal website of Keisuke Hayashi.',
   developer: 'Keisuke Hayashi',
+  email: 'hi@kkhys.me',
   social: {
     twitter: {
       url: 'https://twitter.com/kkhys_',

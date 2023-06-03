@@ -85,9 +85,7 @@ const MobileNavigation = ({ className }: { className: string }) => {
             <nav className='mt-6'>
               <ul className='-my-2 divide-y divide-gray-100 text-base text-gray-800 dark:divide-gray-100/5 dark:text-gray-300'>
                 <MobileNavigationItem href='/about'>About</MobileNavigationItem>
-                <MobileNavigationItem href='/articles'>
-                  Articles
-                </MobileNavigationItem>
+                <MobileNavigationItem href='/posts'>Blog</MobileNavigationItem>
                 <MobileNavigationItem href='/projects'>
                   Projects
                 </MobileNavigationItem>
@@ -152,7 +150,7 @@ const DesktopNavigation = (props: JSX.IntrinsicElements['nav']) => {
     <nav {...props}>
       <ul className='flex rounded-lg bg-white/90 px-3 text-sm font-medium text-gray-800 shadow-lg shadow-gray-800/5 ring-1 ring-gray-900/5 backdrop-blur dark:bg-gray-800/90 dark:text-gray-200 dark:ring-white/10'>
         <NavigationItem href='/about'>About</NavigationItem>
-        <NavigationItem href='/articles'>Articles</NavigationItem>
+        <NavigationItem href='/posts'>Blog</NavigationItem>
         <NavigationItem href='/projects'>Projects</NavigationItem>
         <NavigationItem href='/speaking'>Speaking</NavigationItem>
         <NavigationItem href='/uses'>Uses</NavigationItem>
