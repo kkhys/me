@@ -16,6 +16,17 @@ import clsx from 'clsx';
 import avatarImage from '#/assets/avatar.jpg';
 import { ChevronDownIcon, CloseIcon, Container } from '#/ui';
 
+const navigationItem = [
+  {
+    title: 'About',
+    href: '/about',
+  },
+  {
+    title: 'Blog',
+    href: '/posts',
+  },
+] as const;
+
 const MobileNavigationItem = ({
   href,
   children,
@@ -84,15 +95,11 @@ const MobileNavigation = ({ className }: { className: string }) => {
             </div>
             <nav className='mt-6'>
               <ul className='-my-2 divide-y divide-gray-100 text-base text-gray-800 dark:divide-gray-100/5 dark:text-gray-300'>
-                <MobileNavigationItem href='/about'>About</MobileNavigationItem>
-                <MobileNavigationItem href='/posts'>Blog</MobileNavigationItem>
-                <MobileNavigationItem href='/projects'>
-                  Projects
-                </MobileNavigationItem>
-                <MobileNavigationItem href='/speaking'>
-                  Speaking
-                </MobileNavigationItem>
-                <MobileNavigationItem href='/uses'>Uses</MobileNavigationItem>
+                {navigationItem.map(({ title, href }) => (
+                  <MobileNavigationItem key={title} href={href}>
+                    {title}
+                  </MobileNavigationItem>
+                ))}
               </ul>
             </nav>
           </Popover.Panel>
@@ -149,11 +156,11 @@ const DesktopNavigation = (props: JSX.IntrinsicElements['nav']) => {
   return (
     <nav {...props}>
       <ul className='flex rounded-lg bg-white/90 px-3 text-sm font-medium text-gray-800 shadow-lg shadow-gray-800/5 ring-1 ring-gray-900/5 backdrop-blur dark:bg-gray-800/90 dark:text-gray-200 dark:ring-white/10'>
-        <NavigationItem href='/about'>About</NavigationItem>
-        <NavigationItem href='/posts'>Blog</NavigationItem>
-        <NavigationItem href='/projects'>Projects</NavigationItem>
-        <NavigationItem href='/speaking'>Speaking</NavigationItem>
-        <NavigationItem href='/uses'>Uses</NavigationItem>
+        {navigationItem.map(({ title, href }) => (
+          <NavigationItem key={title} href={href}>
+            {title}
+          </NavigationItem>
+        ))}
       </ul>
     </nav>
   );
