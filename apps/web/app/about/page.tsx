@@ -30,6 +30,8 @@ const SocialLink = ({
       <Link
         href={href}
         className='group flex text-sm font-medium text-gray-800 transition hover:text-teal-500 dark:text-gray-200 dark:hover:text-teal-500'
+        target='_blank'
+        rel='noopener noreferrer'
       >
         <Icon className='h-6 w-6 flex-none fill-gray-500 transition group-hover:fill-teal-500' />
         <span className='ml-4'>{children}</span>
