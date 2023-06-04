@@ -240,7 +240,8 @@ export const Header = () => {
     };
 
     const updateHeaderStyles = () => {
-      const { top, height } = headerRef.current.getBoundingClientRect();
+      const top = headerRef.current?.getBoundingClientRect().top ?? 0;
+      const height = headerRef.current?.getBoundingClientRect().height ?? 0;
       const scrollY = clamp(
         window.scrollY,
         0,
