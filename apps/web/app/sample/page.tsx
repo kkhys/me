@@ -53,7 +53,6 @@ const SamplePage = () => {
           </div>
         </div>
       </Container>
-      <Photos />
       <Footer />
     </>
   );
