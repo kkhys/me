@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import clsx from 'clsx';
 import { type Post } from 'contentlayer/generated';
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import twemoji from 'twemoji';
@@ -117,10 +118,16 @@ const BlogCard = ({ post }: { post: Post }) => {
   );
 };
 
-export const BlogCards = ({ posts }: { posts: Post[] }) => {
+export const BlogCards = ({
+  posts,
+  className,
+}: {
+  posts: Post[];
+  className?: string;
+}) => {
   return (
-    <div className='my-16 xl:max-w-none'>
-      <div className='mt-4 grid grid-cols-1 gap-8 pt-10 sm:grid-cols-2 xl:grid-cols-3'>
+    <div className={clsx('xl:max-w-none', className)}>
+      <div className='grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3'>
         {posts.map((post) => (
           <BlogCard key={post.title} post={post} />
         ))}
