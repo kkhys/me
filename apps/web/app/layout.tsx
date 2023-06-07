@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import '#/styles/globals.css';
 
+import { type Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 
 import { Providers } from '#/app/providers';
@@ -10,6 +11,7 @@ import { SITE_METADATA } from '#/config';
 const { title, siteUrl, description, developer } = SITE_METADATA;
 
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: title,
     template: `%s | ${title}`,
@@ -19,7 +21,7 @@ export const metadata = {
   applicationName: title,
   referrer: 'origin-when-cross-origin',
   keywords: ['blog'],
-  authors: [{ name: developer }],
+  authors: [{ name: developer, url: siteUrl }],
   creator: developer,
   publisher: developer,
   formatDetection: {
@@ -34,12 +36,12 @@ export const metadata = {
     siteName: title,
     // images: [
     //   {
-    //     url: 'https://kkhys.me/og.png',
+    //     url: '/og.png',
     //     width: 800,
     //     height: 600,
     //   },
     //   {
-    //     url: 'https://kkhys.me/og-alt.png',
+    //     url: '/og-alt.png',
     //     width: 1800,
     //     height: 1600,
     //     alt: 'My custom alt',
@@ -70,16 +72,16 @@ export const metadata = {
   //   { media: '(prefers-color-scheme: light)', color: 'cyan' },
   //   { media: '(prefers-color-scheme: dark)', color: 'black' },
   // ],
-  // manifest: 'https://kkhys.me/manifest.json',
+  // manifest: '/manifest.json',
   twitter: {
     card: 'summary_large_image',
     title,
     description,
-    // siteId: '1467726470533754880',
+    siteId: '5237731',
     creator: '@kkhys_',
-    // creatorId: '1467726470533754880',
+    creatorId: '5237731',
     // images: {
-    //   url: 'https://kkhys.me/og.png',
+    //   url: '/og.png',
     //   alt: 'kkhys.me Logo',
     // }
   },
@@ -89,11 +91,11 @@ export const metadata = {
   alternates: {
     canonical: siteUrl,
     // types: {
-    //   'application/rss+xml': 'https://kkhys.me/rss',
+    //   'application/rss+xml': '/rss',
     // },
   },
   category: 'technology',
-};
+} satisfies Metadata;
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (

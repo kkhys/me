@@ -1,9 +1,10 @@
 import { type ComponentType, type ReactNode } from 'react';
+import { type Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import clsx from 'clsx';
 
-import { Footer, Header } from '#/features/global/ui';
+import { Footer, Header, ThemeButton } from '#/features/global/ui';
 import portraitImage from '#/assets/portrait.jpg';
 import { SITE_METADATA } from '#/config';
 import {
@@ -13,6 +14,13 @@ import {
   MailIcon,
   TwitterIcon,
 } from '#/ui';
+
+export const metadata = {
+  title: 'About',
+  openGraph: {
+    title: 'About',
+  },
+} satisfies Metadata;
 
 const SocialLink = ({
   className,
@@ -57,7 +65,7 @@ const AboutPage = () => {
             </div>
           </div>
           <div className='lg:order-first lg:row-span-2'>
-            <h1 className='text-4xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-5xl'>
+            <h1 className='text-3xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-4xl'>
               Sample heading
             </h1>
             <div className='mt-6 space-y-7 text-base text-gray-600 dark:text-gray-400'>
@@ -110,6 +118,7 @@ const AboutPage = () => {
             </ul>
           </div>
         </div>
+        <ThemeButton />
       </Container>
       <Footer />
     </>

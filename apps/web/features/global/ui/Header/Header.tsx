@@ -240,8 +240,8 @@ export const Header = () => {
     };
 
     const updateHeaderStyles = () => {
-      const top = headerRef.current?.getBoundingClientRect().top ?? 0;
-      const height = headerRef.current?.getBoundingClientRect().height ?? 0;
+      const top = headerRef.current?.getBoundingClientRect().top;
+      const height = headerRef.current?.getBoundingClientRect().height;
       const scrollY = clamp(
         window.scrollY,
         0,
@@ -401,7 +401,7 @@ export const Header = () => {
                 <DesktopNavigation className='pointer-events-auto hidden md:block' />
               </div>
               <div className='flex justify-end md:flex-1'>
-                <div className='pointer-events-auto'>{/*<ModeToggle />*/}</div>
+                <div className='pointer-events-auto'>{/*<ThemeButton />*/}</div>
               </div>
             </div>
           </Container>
