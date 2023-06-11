@@ -15,9 +15,9 @@ const BlogIcon = ({ emoji }: { emoji?: string }) => {
   });
 
   return (
-    <div className='flex h-7 w-7 items-center justify-center rounded-full bg-gray-900/5 ring-1 ring-gray-900/25 backdrop-blur-[2px] transition duration-300 group-hover:bg-white/50 group-hover:ring-gray-900/25 dark:bg-white/7.5 dark:ring-white/15 dark:group-hover:bg-emerald-300/10 dark:group-hover:ring-emerald-400'>
+    <div className='flex h-12 w-12 items-center justify-center rounded-full bg-white ring-1 ring-gray-900/25 backdrop-blur-[2px] transition duration-300 dark:bg-white/7.5 dark:ring-white/15'>
       <p
-        className='h-5 w-5 p-0.5'
+        className='h-8 w-8 p-0.5'
         dangerouslySetInnerHTML={{ __html: emojiSvg }}
       />
     </div>
@@ -102,15 +102,15 @@ const BlogCard = ({ post }: { post: Post }) => {
         patternSquare={post.pattern.square}
       />
       <div className='absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/7.5 group-hover:ring-gray-900/10 dark:ring-white/10 dark:group-hover:ring-white/20' />
-      <div className='relative rounded-2xl px-4 pb-4 pt-16'>
+      <div className='relative w-full rounded-2xl px-4 py-6'>
         <BlogIcon emoji={post.emoji} />
-        <h3 className='mt-4 text-sm font-semibold leading-7 text-gray-900 dark:text-white'>
+        <h2 className='mt-6 text-sm font-semibold leading-7 text-gray-800 dark:text-gray-100'>
           <Link href={post.url}>
             <span className='absolute inset-0 rounded-2xl' />
             {post.title}
           </Link>
-        </h3>
-        <p className='mt-1 text-sm text-gray-600 dark:text-gray-400'>
+        </h2>
+        <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
           {post.publishedAtFormatted}
         </p>
       </div>
