@@ -2,7 +2,6 @@ import { type ComponentType } from 'react';
 import Link, { type LinkProps } from 'next/link';
 
 import { Footer, Header } from '#/features/global/ui';
-import { Photos } from '#/features/home/ui/Photos';
 import { SITE_METADATA } from '#/config';
 import { Container, GitHubIcon, InstagramIcon, TwitterIcon } from '#/ui';
 

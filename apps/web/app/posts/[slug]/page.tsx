@@ -15,7 +15,12 @@ export const generateMetadata = ({
   params: { slug },
 }: {
   params: { slug: string };
-}) => allPosts.find((post) => post.slug === slug).title;
+}) => {
+  const { title } = allPosts.find((post) => post.slug === slug);
+  return {
+    title,
+  };
+};
 
 const Page = ({ params: { slug } }: { params: { slug: string } }) => {
   const {
@@ -47,7 +52,7 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
             {/*)}*/}
             <article>
               <header className='flex flex-col'>
-                <h1 className='mt-6 text-4xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-5xl'>
+                <h1 className='mt-6 text-3xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-4xl'>
                   {title}
                 </h1>
                 <time
