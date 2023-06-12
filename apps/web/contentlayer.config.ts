@@ -16,17 +16,17 @@ const rehypePrettyCodeOptions: Partial<Options> = {
     fn: 'entity.name.function',
     objKey: 'meta.object-literal.key',
   },
-  onVisitLine(node) {
-    if (node.children.length === 0) {
-      node.children = [{ type: 'text', value: ' ' }];
-    }
-    node.properties.className = [''];
-  },
-  onVisitHighlightedLine(node) {
-    node.properties.className.push(
-      '!border-l-rose-300/70 bg-rose-200/10 before:!text-white/70',
-    );
-  },
+  // onVisitLine(node) {
+  //   if (node.children.length === 0) {
+  //     node.children = [{ type: 'text', value: ' ' }];
+  //   }
+  //   node.properties.className = [''];
+  // },
+  // onVisitHighlightedLine(node) {
+  //   node.properties.className.push(
+  //     '!border-l-rose-300/70 bg-rose-200/10 before:!text-white/70',
+  //   );
+  // },
 };
 
 export default makeSource({
