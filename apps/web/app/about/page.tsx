@@ -66,7 +66,7 @@ const AboutPage = () => {
           </div>
           <div className='lg:order-first lg:row-span-2'>
             <h1 className='text-3xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-4xl'>
-              Sample heading
+              About
             </h1>
             <div className='mt-6 space-y-7 text-base text-gray-600 dark:text-gray-400'>
               <p>

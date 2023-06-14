@@ -22,10 +22,8 @@ const PostsPage = () => {
     <>
       <Header />
       <Container>
-        <div className='mx-auto max-w-3xl'>
-          <PageHeader title='Blog' className='mt-12' />
-          <BlogCards posts={posts} className='mt-12' />
-        </div>
+        <PageHeader title='Blog' className='mt-12' />
+        <BlogCards posts={posts} className='mt-12' />
       </Container>
       <Footer />
     </>
