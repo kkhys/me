@@ -25,30 +25,28 @@ const SamplePage = () => {
   return (
     <BasicLayout>
       <Container className='mt-9'>
-        <div className='max-w-2xl'>
-          <h1 className='text-2xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-3xl'>
-            Keisuke Hayashi
-          </h1>
-          <p className='mt-6 text-base text-gray-600 dark:text-gray-400'>
-            I’m a programmer based in Tokyo.
-          </p>
-          <div className='mt-6 flex gap-6'>
-            <SocialLink
-              href={SITE_METADATA.social.twitter.url}
-              aria-label='Follow on Twitter'
-              icon={TwitterIcon}
-            />
-            <SocialLink
-              href={SITE_METADATA.social.instagram.url}
-              aria-label='Follow on Instagram'
-              icon={InstagramIcon}
-            />
-            <SocialLink
-              href={SITE_METADATA.social.github.url}
-              aria-label='Follow on GitHub'
-              icon={GitHubIcon}
-            />
-          </div>
+        <h1 className='text-2xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-3xl'>
+          Keisuke Hayashi
+        </h1>
+        <p className='mt-6 text-base text-gray-600 dark:text-gray-400'>
+          I’m a programmer based in Tokyo.
+        </p>
+        <div className='mt-6 flex gap-6'>
+          <SocialLink
+            href={SITE_METADATA.social.twitter.url}
+            aria-label='Follow on Twitter'
+            icon={TwitterIcon}
+          />
+          <SocialLink
+            href={SITE_METADATA.social.instagram.url}
+            aria-label='Follow on Instagram'
+            icon={InstagramIcon}
+          />
+          <SocialLink
+            href={SITE_METADATA.social.github.url}
+            aria-label='Follow on GitHub'
+            icon={GitHubIcon}
+          />
         </div>
       </Container>
     </BasicLayout>
