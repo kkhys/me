@@ -8,7 +8,7 @@ import remarkGemoji from 'remark-gemoji';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 
-import { Post } from './contents/definitions';
+import { Fragment, Post } from './contents/definitions';
 
 const rehypePrettyCodeOptions: Partial<Options> = {
   theme: 'one-dark-pro',
@@ -31,7 +31,7 @@ const rehypePrettyCodeOptions: Partial<Options> = {
 
 export default makeSource({
   contentDirPath: 'contents',
-  documentTypes: [Post],
+  documentTypes: [Fragment, Post],
   mdx: {
     remarkPlugins: [[remarkGfm], [remarkGemoji], [remarkMath]],
     rehypePlugins: [
