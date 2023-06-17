@@ -1,7 +1,7 @@
 import { type ComponentType } from 'react';
 import Link, { type LinkProps } from 'next/link';
 
-import { Footer, Header } from '#/features/global/ui';
+import { BasicLayout } from '#/features/global/ui';
 import { SITE_METADATA } from '#/config';
 import { Container, GitHubIcon, InstagramIcon, TwitterIcon } from '#/ui';
 
@@ -23,8 +23,7 @@ const SocialLink = ({
 
 const SamplePage = () => {
   return (
-    <>
-      <Header />
+    <BasicLayout>
       <Container className='mt-9'>
         <div className='max-w-2xl'>
           <h1 className='text-2xl font-bold tracking-tight text-gray-800 dark:text-gray-100 sm:text-3xl'>
@@ -52,8 +51,7 @@ const SamplePage = () => {
           </div>
         </div>
       </Container>
-      <Footer />
-    </>
+    </BasicLayout>
   );
 };
 

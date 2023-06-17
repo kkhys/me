@@ -1,9 +1,8 @@
 import { allPosts } from 'contentlayer/generated';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
-import { Footer, Header } from '#/features/global/ui';
+import { BasicLayout } from '#/features/global/ui';
 import { mdxComponents } from '#/features/mdx/ui';
-import { BrowserBackButton } from '#/features/posts/ui';
 import { Container, Prose } from '#/ui';
 
 import 'katex/dist/katex.min.css';
@@ -42,13 +41,12 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
   // });
 
   return (
-    <>
-      <Header />
-      <Container className='mt-16 lg:mt-32'>
-        <div className='xl:relative'>
+    <BasicLayout>
+      <Container>
+        <div className='mt-16 xl:relative'>
           <div className='mx-auto max-w-2xl'>
             {/*{previousPathname && (*/}
-            <BrowserBackButton />
+            {/*<BrowserBackButton />*/}
             {/*)}*/}
             <article>
               <header className='flex flex-col'>
@@ -70,8 +68,7 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
           </div>
         </div>
       </Container>
-      <Footer />
-    </>
+    </BasicLayout>
   );
 };
 

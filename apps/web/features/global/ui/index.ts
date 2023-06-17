@@ -1,3 +1,4 @@
+export * from './BasicLayout';
 export * from './Footer';
 export * from './GridPattern';
 export * from './Header';
