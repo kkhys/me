@@ -13,6 +13,7 @@ import { usePathname } from 'next/navigation';
 import { Popover, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 
+import { ThemeButton } from '#/features/global/ui/index.client';
 import avatarImage from '#/assets/avatar.jpg';
 import { ChevronDownIcon, CloseIcon, Container } from '#/ui';
 
@@ -401,7 +402,9 @@ export const Header = () => {
                 <DesktopNavigation className='pointer-events-auto hidden md:block' />
               </div>
               <div className='flex justify-end md:flex-1'>
-                <div className='pointer-events-auto'>{/*<ThemeButton />*/}</div>
+                <div className='pointer-events-auto'>
+                  <ThemeButton />
+                </div>
               </div>
             </div>
           </Container>
