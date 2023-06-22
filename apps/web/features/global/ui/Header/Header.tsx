@@ -13,7 +13,8 @@ import { usePathname } from 'next/navigation';
 import { Popover, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 
-import { ThemeButton } from '#/features/global/ui/index.client';
+// TODO: import { ThemeButton } from '#/features/global/ui'; だとなぜかエラーになるバグがある
+import { ThemeButton } from '#/features/global/ui/ThemeButton';
 import avatarImage from '#/assets/avatar.jpg';
 import { ChevronDownIcon, CloseIcon, Container } from '#/ui';
 
