@@ -4,7 +4,7 @@ import { getMDXComponent } from 'next-contentlayer/hooks';
 
 import { BasicLayout, PageHeader } from '#/features/global/ui';
 import { mdxComponents } from '#/features/mdx';
-import { Container, Prose } from '#/ui';
+import { Button, Container, Prose } from '#/ui';
 
 export const metadata = {
   title: 'About',
@@ -26,6 +26,11 @@ const AboutPage = () => {
         <PageHeader title='About' className='mt-16' />
         <Prose className='mt-16'>
           <Content components={mdxComponents} />
+          <p>
+            <Button href='/about' variant='text' arrow='right'>
+              Read more
+            </Button>
+          </p>
         </Prose>
       </Container>
     </BasicLayout>

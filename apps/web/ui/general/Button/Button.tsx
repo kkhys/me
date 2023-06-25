@@ -1,89 +1,59 @@
-import {
-  forwardRef,
-  type ButtonHTMLAttributes,
-  type ReactElement,
-} from 'react';
+import { type ReactNode } from 'react';
+import Link from 'next/link';
 import clsx from 'clsx';
 
-import { Spin } from '#/ui';
+import { ArrowIcon } from '#/ui';
 
-const variants = {
-  primary: 'bg-blue-600 text-white',
-  inverse: 'bg-white text-blue-600',
-  danger: 'bg-red-600 text-white',
+const variantStyles = {
+  primary:
+    'rounded-full bg-gray-900 py-1 px-3 text-white hover:bg-gray-700 dark:bg-emerald-400/10 dark:text-emerald-400 dark:ring-1 dark:ring-inset dark:ring-emerald-400/20 dark:hover:bg-emerald-400/10 dark:hover:text-emerald-300 dark:hover:ring-emerald-300',
+  secondary:
+    'rounded-full bg-gray-100 py-1 px-3 text-gray-900 hover:bg-gray-200 dark:bg-gray-800/40 dark:text-gray-400 dark:ring-1 dark:ring-inset dark:ring-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-300',
+  filled:
+    'rounded-full bg-gray-900 py-1 px-3 text-white hover:bg-gray-700 dark:bg-emerald-500 dark:text-white dark:hover:bg-emerald-400',
+  outline:
+    'rounded-full py-1 px-3 text-gray-700 ring-1 ring-inset ring-gray-900/10 hover:bg-gray-900/2.5 hover:text-gray-900 dark:text-gray-400 dark:ring-white/10 dark:hover:bg-white/5 dark:hover:text-white',
+  text: 'text-emerald-500 no-underline hover:text-emerald-600 dark:text-emerald-400 dark:hover:text-emerald-500',
+} as const;
+
+// TODO: props の型を定義する。
+export const Button = ({
+  variant = 'primary',
+  className,
+  children,
+  arrow,
+  href,
+}: {
+  variant?: keyof typeof variantStyles;
+  className?: string;
+  children: ReactNode;
+  arrow?: 'left' | 'right';
+  href?: string;
+}) => {
+  const Component = href ? Link : 'button';
+
+  className = clsx(
+    'inline-flex gap-0.5 justify-center overflow-hidden text-sm font-medium transition',
+    variantStyles[variant],
+    className,
+  );
+
+  const arrowIcon = (
+    <ArrowIcon
+      className={clsx(
+        'mt-0.5 h-5 w-5',
+        variant === 'text' && 'relative top-px',
+        arrow === 'left' && '-ml-1 rotate-180',
+        arrow === 'right' && '-mr-1',
+      )}
+    />
+  );
+
+  return (
+    <Component className={className} href={href}>
+      {arrow === 'left' && arrowIcon}
+      {children}
+      {arrow === 'right' && arrowIcon}
+    </Component>
+  );
 };
-
-const sizes = {
-  sm: 'py-2 px-4 text-sm',
-  md: 'py-2 px-6 text-md',
-  lg: 'py-3 px-8 text-lg',
-};
-
-type IconProps =
-  | {
-      /**
-       * TODO: startIcon description
-       */
-      startIcon: ReactElement;
-      /**
-       * TODO: endIcon description
-       */
-      endIcon?: never;
-    }
-  | { endIcon: ReactElement; startIcon?: never }
-  | { endIcon?: undefined; startIcon?: undefined };
-
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  /**
-   * TODO: variant description
-   */
-  variant?: keyof typeof variants;
-  /**
-   * TODO: size description
-   */
-  size?: keyof typeof sizes;
-  /**
-   * TODO: isLoading description
-   */
-  isLoading?: boolean;
-  /**
-   * TODO: children description
-   */
-  children?: string;
-} & IconProps;
-
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      type = 'button',
-      className = '',
-      variant = 'primary',
-      size = 'md',
-      isLoading = false,
-      startIcon,
-      endIcon,
-      ...props
-    },
-    ref,
-  ) => {
-    return (
-      <button
-        ref={ref}
-        type={type}
-        className={clsx(
-          'flex items-center justify-center rounded-md border border-gray-300 font-medium shadow-sm hover:opacity-80 focus:outline-none disabled:cursor-not-allowed disabled:opacity-70',
-          variants[variant],
-          sizes[size],
-          className,
-        )}
-        {...props}
-      >
-        {isLoading && <Spin size='sm' className='text-current' />}
-        {!isLoading && startIcon}
-        <span className='mx-2'>{props.children}</span> {!isLoading && endIcon}
-      </button>
-    );
-  },
-);
-
-Button.displayName = 'Button';

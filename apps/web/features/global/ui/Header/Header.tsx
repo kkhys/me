@@ -126,11 +126,11 @@ const NavigationItem = ({
     text: clsx(
       'relative block px-3 py-2 transition',
       isActive
-        ? 'text-cyan-500 dark:text-cyan-400'
-        : 'hover:text-cyan-500 dark:hover:text-cyan-400',
+        ? 'text-emerald-500 dark:text-emerald-400'
+        : 'hover:text-emerald-500 dark:hover:text-emerald-400',
     ),
     underline:
-      'absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-cyan-500/0 via-cyan-500/40 to-cyan-500/0 dark:from-cyan-400/0 dark:via-cyan-400/40 dark:to-cyan-400/0',
+      'absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-emerald-500/0 via-emerald-500/40 to-emerald-500/0 dark:from-emerald-400/0 dark:via-emerald-400/40 dark:to-emerald-400/0',
   };
 
   return (

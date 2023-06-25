@@ -23,17 +23,3 @@ export const Primary: Story = {
     variant: 'primary',
   },
 };
-
-export const WithStartIcon: Story = {
-  args: {
-    children: 'Button',
-    startIcon: <MoonIcon className='h-4 w-4' />,
-  },
-};
-
-export const WithEndIcon: Story = {
-  args: {
-    children: 'Button',
-    endIcon: <MoonIcon className='h-4 w-4' />,
-  },
-};

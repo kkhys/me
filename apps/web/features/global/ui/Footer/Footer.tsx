@@ -11,7 +11,8 @@ const NavigationLink = ({
   children: string;
   isExternal?: boolean;
 }) => {
-  const styles = 'transition hover:text-cyan-500 dark:hover:text-cyan-400';
+  const styles =
+    'transition hover:text-emerald-500 dark:hover:text-emerald-400';
   return isExternal ? (
     <a href={href} target='_blank' rel='noreferrer noopener' className={styles}>
       {children}

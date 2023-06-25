@@ -69,7 +69,7 @@ export const metadata = {
   //   apple: '/apple-icon.png',
   // },
   // themeColor: [
-  //   { media: '(prefers-color-scheme: light)', color: 'cyan' },
+  //   { media: '(prefers-color-scheme: light)', color: 'emerald' },
   //   { media: '(prefers-color-scheme: dark)', color: 'black' },
   // ],
   // manifest: '/manifest.json',
