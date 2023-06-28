@@ -5,6 +5,7 @@ import '#/styles/globals.css';
 import { type Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 
+import { Footer, Header } from '#/features/global/ui';
 import { Providers } from '#/app/providers';
 import { SITE_METADATA } from '#/config';
 
@@ -108,9 +109,15 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
           </div>
         </div>
         <div className='relative'>
-          <main>
-            <Providers>{children}</Providers>
-          </main>
+          <Providers>
+            <div className='flex min-h-screen flex-col justify-between'>
+              <div>
+                <Header />
+                <main className='px-4 pt-14 sm:px-6 lg:px-8'>{children}</main>
+              </div>
+              <Footer />
+            </div>
+          </Providers>
         </div>
       </body>
     </html>

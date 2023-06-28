@@ -2,7 +2,7 @@ import { type Metadata } from 'next';
 import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 
-import { BasicLayout, PageHeader } from '#/features/global/ui';
+import { PageHeader } from '#/features/global/ui';
 import { BlogCards } from '#/features/posts/ui';
 import { Container } from '#/ui';
 
@@ -19,12 +19,10 @@ const PostsPage = () => {
   );
 
   return (
-    <BasicLayout>
-      <Container>
-        <PageHeader title='Blog' className='mt-16' />
-        <BlogCards posts={posts} className='mt-12' />
-      </Container>
-    </BasicLayout>
+    <Container>
+      <PageHeader title='Blog' className='mt-16' />
+      <BlogCards posts={posts} className='mt-12' />
+    </Container>
   );
 };
 
