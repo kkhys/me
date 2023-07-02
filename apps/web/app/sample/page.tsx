@@ -45,7 +45,6 @@ const SamplePage = () => {
           aria-label='Follow on GitHub'
           icon={GitHubIcon}
         />
-        <div className='h-screen'>test</div>
       </div>
     </Container>
   );
