@@ -61,8 +61,8 @@ importers:
         version: 5.1.6
     devDependencies:
       playwright:
-        specifier: 1.36.0
-        version: 1.36.0
+        specifier: 1.36.1
+        version: 1.36.1
 
   apps/admin:
     dependencies:
@@ -12581,7 +12581,7 @@ packages:
     dependencies:
       '@fortawesome/fontawesome-free': 6.4.0
       mermaid: 10.2.4
-      playwright-core: 1.36.0
+      playwright-core: 1.36.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -13866,19 +13866,19 @@ packages:
       find-up: 5.0.0
     dev: true
 
-  /playwright-core@1.36.0:
-    resolution: {integrity: sha512-7RTr8P6YJPAqB+8j5ATGHqD6LvLLM39sYVNsslh78g8QeLcBs5750c6+msjrHUwwGt+kEbczBj1XB22WMwn+WA==}
+  /playwright-core@1.36.1:
+    resolution: {integrity: sha512-7+tmPuMcEW4xeCL9cp9KxmYpQYHKkyjwoXRnoeTowaeNat8PoBMk/HwCYhqkH2fRkshfKEOiVus/IhID2Pg8kg==}
     engines: {node: '>=16'}
     hasBin: true
     dev: true
 
-  /playwright@1.36.0:
-    resolution: {integrity: sha512-ODVOTp5WoRMxDJY3liMmC+wVNicc0cQB17gASvQ+zLBggVK9a2x3gdT5mbl7av+zomvtdirWOqqfD+O6qIrFgw==}
+  /playwright@1.36.1:
+    resolution: {integrity: sha512-2ZqHpD0U0COKR8bqR3W5IkyIAAM0mT9FgGJB9xWCI1qAUkqLxJskA1ueeQOTH2Qfz3+oxdwwf2EzdOX+RkZmmQ==}
     engines: {node: '>=16'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      playwright-core: 1.36.0
+      playwright-core: 1.36.1
     dev: true
 
   /pnp-webpack-plugin@1.7.0(typescript@5.1.6):
