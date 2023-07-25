@@ -61,8 +61,8 @@ importers:
         version: 5.1.6
     devDependencies:
       playwright:
-        specifier: 1.36.1
-        version: 1.36.1
+        specifier: 1.36.2
+        version: 1.36.2
 
   apps/admin:
     dependencies:
@@ -12402,13 +12402,19 @@ packages:
     hasBin: true
     dev: true
 
-  /playwright@1.36.1:
-    resolution: {integrity: sha512-2ZqHpD0U0COKR8bqR3W5IkyIAAM0mT9FgGJB9xWCI1qAUkqLxJskA1ueeQOTH2Qfz3+oxdwwf2EzdOX+RkZmmQ==}
+  /playwright-core@1.36.2:
+    resolution: {integrity: sha512-sQYZt31dwkqxOrP7xy2ggDfEzUxM1lodjhsQ3NMMv5uGTRDsLxU0e4xf4wwMkF2gplIxf17QMBCodSFgm6bFVQ==}
+    engines: {node: '>=16'}
+    hasBin: true
+    dev: true
+
+  /playwright@1.36.2:
+    resolution: {integrity: sha512-4Fmlq3KWsl85Bl4InJw1NC21aeQV0iSZuFvTDcy1F8zVmXmgQRe89GxF8zMSRt/KIS+2tUolak7EXVl9aC+JdA==}
     engines: {node: '>=16'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      playwright-core: 1.36.1
+      playwright-core: 1.36.2
     dev: true
 
   /pnp-webpack-plugin@1.7.0(typescript@5.1.6):
