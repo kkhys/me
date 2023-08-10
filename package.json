@@ -1,7 +1,9 @@
 {
   "name": "me",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "commit": "cz"
+  },
   "packageManager": "pnpm@8.4.0",
   "engines": {
     "node": "18",
@@ -11,5 +13,14 @@
   },
   "volta": {
     "node": "18.17.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0"
   }
 }
