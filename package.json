@@ -2,7 +2,8 @@
   "name": "me",
   "private": true,
   "scripts": {
-    "commit": "cz"
+    "commit": "cz",
+    "format": "prettier --ignore-path .gitignore --write . \"!pnpm-lock.yaml\""
   },
   "packageManager": "pnpm@8.4.0",
   "engines": {
@@ -22,6 +23,7 @@
   "devDependencies": {
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
+    "prettier": "3.0.1",
     "turbo": "1.10.12"
   }
 }
