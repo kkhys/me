@@ -12,4 +12,4 @@ CC BY-NC-SA 4.0</a></samp>.
 
 ## Project Stats
 
-![Alt](https://repobeats.axiom.co/api/embed/680a2ea2bfe127bcc8a58c668fc06635284db949.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/680a2ea2bfe127bcc8a58c668fc06635284db949.svg 'Repobeats analytics image')
