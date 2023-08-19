@@ -4,6 +4,9 @@
 
 /** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
 const config = {
+  jsxSingleQuote: true,
+  singleQuote: true,
+  trailingComma: 'all',
   plugins: [
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss",
