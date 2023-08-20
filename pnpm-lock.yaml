@@ -4,6 +4,9 @@ importers:
 
   .:
     dependencies:
+      '@kkhys/prettier-config':
+        specifier: workspace:*
+        version: link:tooling/prettier
       commitizen:
         specifier: 4.3.0
         version: 4.3.0
