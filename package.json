@@ -29,7 +29,7 @@
   },
   "prettier": "@kkhys/prettier-config",
   "lint-staged": {
-    "**/*": "turbo format --continue -- --write --cache --cache-location='node_modules/.cache/.prettiercache' --ignore-unknown"
+    "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@kkhys/prettier-config": "0.1.0",
