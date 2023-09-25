@@ -4,7 +4,7 @@
   "scripts": {
     "storybook:dev": "storybook dev --port 6006 --quiet",
     "storybook:build": "storybook build --quiet",
-    "clean": "git clean -xdf .turbo node_modules",
+    "clean": "git clean -xdf .turbo node_modules storybook-static",
     "lint": "eslint .",
     "format": "prettier --check \"**/*.{js,cjs,mjs,ts,tsx,md,json}\"",
     "type-check": "tsc --noEmit"
