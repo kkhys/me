@@ -26,7 +26,7 @@ const config = {
     '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: { attributes: false } }],
     'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
   },
-  ignorePatterns: ['**/.eslintrc.cjs', '**/*.config.js', '**/*.config.cjs', '.next', 'dist', 'pnpm-lock.yaml'],
+  ignorePatterns: ['**/.eslintrc.cjs', '**/*.config.js', '**/*.config.cjs', '.next', 'dist', 'pnpm-lock.yaml', 'storybook-static'],
   reportUnusedDisableDirectives: true,
 };
 
