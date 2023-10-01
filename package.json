@@ -1,0 +1,56 @@
+{
+  "name": "me",
+  "private": true,
+  "scripts": {
+    "commit": "cz",
+    "build": "turbo build",
+    "clean": "git clean -xdf node_modules",
+    "clean:workspaces": "turbo clean",
+    "dev": "turbo dev --parallel",
+    "format": "turbo format --continue -- --cache --cache-location='node_modules/.cache/.prettiercache'",
+    "format:fix": "turbo format --continue -- --write --cache --cache-location='node_modules/.cache/.prettiercache'",
+    "lint": "turbo lint --continue -- --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg check",
+    "lint:fix": "turbo lint --continue -- --fix --cache --cache-location 'node_modules/.cache/.eslintcache' && manypkg fix",
+    "typecheck": "turbo typecheck",
+    "storybook:dev": "turbo run storybook:dev",
+    "storybook:build": "turbo run storybook:build",
+    "storybook:move": "turbo run storybook:move --filter=storybook && turbo run storybook:move --filter=!storybook",
+    "prepare": "husky install"
+  },
+  "packageManager": "pnpm@8.4.0",
+  "engines": {
+    "node": ">=18.17.1",
+    "pnpm": ">=8.4.0",
+    "npm": "use pnpm instead of npm please!",
+    "yarn": "use pnpm instead of yarn please!"
+  },
+  "volta": {
+    "node": "18.17.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "prettier": "@kkhys/prettier-config",
+  "lint-staged": {
+    "**/*": "echo 'lint-staged does not execute anything for now.'"
+  },
+  "dependencies": {
+    "@commitlint/cli": "17.7.1",
+    "@commitlint/config-conventional": "17.7.0",
+    "@commitlint/types": "17.4.4",
+    "@kkhys/prettier-config": "0.1.0",
+    "@manypkg/cli": "0.21.0",
+    "@turbo/gen": "1.10.12",
+    "@types/node": "20.5.3",
+    "commitizen": "4.3.0",
+    "cz-conventional-changelog": "3.3.0",
+    "http-server": "14.1.1",
+    "husky": "8.0.3",
+    "lint-staged": "14.0.1",
+    "prettier": "3.0.1",
+    "turbo": "1.10.12",
+    "typescript": "5.1.6"
+  }
+}
