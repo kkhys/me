@@ -10,8 +10,9 @@
     "start": "pnpm with-env next start --port 3000",
     "typecheck": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --",
-    "storybook:dev": "storybook dev --port 6007 --quiet",
-    "storybook:build": "storybook build --quiet"
+    "storybook:dev": "storybook dev --port 6007 --quiet --no-open",
+    "storybook:build": "storybook build --quiet",
+    "storybook:move": "mv storybook-static ../../storybook-static/web"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "0.6.1",

@@ -25,6 +25,16 @@
     },
     "typecheck": {
       "outputs": ["node_modules/.cache/tsbuildinfo.json"]
+    },
+    "storybook:dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "storybook:build": {
+      "outputs": ["storybook-static/**"]
+    },
+    "storybook:move": {
+      "cache": false
     }
   }
 }

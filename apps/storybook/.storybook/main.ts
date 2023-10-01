@@ -7,6 +7,16 @@ function getAbsolutePath(value: string): any {
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx)'],
+  refs: {
+    web: {
+      title: 'Web',
+      url: process.env.NODE_ENV === 'development' ? 'http://localhost:6007/' : 'web/',
+    },
+    admin: {
+      title: 'Admin',
+      url: process.env.NODE_ENV === 'development' ? 'http://localhost:6008/' : 'admin/',
+    },
+  },
   addons: [
     getAbsolutePath('@storybook/addon-links'),
     getAbsolutePath('@storybook/addon-essentials'),
