@@ -49,7 +49,7 @@
 - name: 'type: epic'
   description: ''
   color: '#f2edfc'
-- name: 'type: bump version'
+- name: 'type: bump-version'
   description: ''
   color: '#f2edfc'
 
@@ -72,11 +72,11 @@
 
 # Deploy
 - name: 'deploy: develop'
-  description: ''
+  description: 'pr only'
   color: '#cfd9d9'
 - name: 'deploy: staging'
-  description: ''
+  description: 'pr only'
   color: '#cfd9d9'
 - name: 'deploy: production'
-  description: ''
+  description: 'pr only'
   color: '#cfd9d9'
