@@ -1,3 +1,3 @@
 export default function HomePage() {
-  return <p>admin</p>;
+  return <p className='text-3xl font-bold underline'>admin</p>;
 }
