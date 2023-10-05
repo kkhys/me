@@ -1,3 +1,8 @@
 export default function HomePage() {
-  return <p className='text-3xl font-bold underline'>admin</p>;
+  return (
+    <div>
+      <p className='text-3xl font-bold underline'>admin</p>
+      <button className='btn btn-primary'>Button</button>
+    </div>
+  );
 }
