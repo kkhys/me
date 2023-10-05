@@ -7,4 +7,8 @@ export default {
   content: ['./src/**/*.{ts,tsx}'],
   plugins: [require('daisyui')],
   presets: [baseConfig],
+  daisyui: {
+    themes: ['light', 'dark'],
+    logs: false,
+  },
 } satisfies Config;
