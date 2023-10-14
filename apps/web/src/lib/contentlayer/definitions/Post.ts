@@ -8,8 +8,9 @@ import { format, parseISO } from 'date-fns';
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { env } from '../../../env.mjs';
-import { Category, Tag } from '../definitions';
-import { generateSlug } from '../utils';
+import type { AllTagsTitle, CategoryTitle } from '../constants';
+import { allTagTitles, categoryTitles } from '../constants';
+import { generateCategoryObject, generateSlug, generateTagObject } from '../utils';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -29,14 +30,14 @@ export const Post = defineDocumentType(() => ({
     },
     category: {
       description: 'The category of the post',
-      type: 'nested',
-      of: Category,
+      type: 'enum',
+      options: categoryTitles,
       required: true,
     },
     tags: {
       description: 'Tags associated with the post',
       type: 'list',
-      of: Tag,
+      of: { type: 'enum', options: allTagTitles },
     },
     description: {
       description: 'The description of the post (120 words or less)',
@@ -90,6 +91,21 @@ export const Post = defineDocumentType(() => ({
       description: 'Generate post slug from id',
       type: 'string',
       resolve: ({ _id }) => generateSlug(_id),
+    },
+    categoryObject: {
+      description: 'Create a category object from a category title',
+      type: 'json',
+      resolve: ({ category }) => generateCategoryObject(category as CategoryTitle),
+    },
+    tagObjectList: {
+      description: 'Create a list of tab objects from tag titles',
+      type: 'list',
+      resolve: ({ tags: { _array }, category }) => {
+        if (!_array) return undefined;
+        return (_array as string[]).map((tag) => {
+          return generateTagObject(tag as AllTagsTitle, category as CategoryTitle);
+        });
+      },
     },
   },
 }));
