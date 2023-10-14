@@ -19,13 +19,13 @@
   },
   "packageManager": "pnpm@8.9.0",
   "engines": {
-    "node": ">=18.17.1",
+    "node": ">=18.18.2",
     "pnpm": ">=8.9.0",
     "npm": "use pnpm instead of npm please!",
     "yarn": "use pnpm instead of yarn please!"
   },
   "volta": {
-    "node": "18.17.1"
+    "node": "18.18.2"
   },
   "config": {
     "commitizen": {
@@ -37,18 +37,18 @@
     "**/*": "echo 'lint-staged does not execute anything for now.'"
   },
   "dependencies": {
-    "@commitlint/cli": "17.7.2",
-    "@commitlint/config-conventional": "17.7.0",
+    "@commitlint/cli": "17.8.0",
+    "@commitlint/config-conventional": "17.8.0",
     "@commitlint/types": "17.4.4",
     "@kkhys/prettier-config": "0.1.0",
     "@manypkg/cli": "0.21.0",
     "@turbo/gen": "1.10.15",
-    "@types/node": "20.8.3",
+    "@types/node": "20.8.6",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
     "http-server": "14.1.1",
     "husky": "8.0.3",
-    "lint-staged": "14.0.1",
+    "lint-staged": "15.0.0",
     "prettier": "3.0.3",
     "turbo": "1.10.15",
     "typescript": "5.2.2"
