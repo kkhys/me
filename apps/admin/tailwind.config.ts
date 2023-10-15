@@ -8,7 +8,7 @@ export default {
   plugins: [require('daisyui')],
   presets: [baseConfig],
   daisyui: {
-    themes: ['light', 'dark'],
+    themes: ['dark'],
     logs: false,
   },
 } satisfies Config;
