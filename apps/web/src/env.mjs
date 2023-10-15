@@ -1,26 +1,16 @@
 import { createEnv } from '@t3-oss/env-nextjs';
-
-// import { z } from "zod";
+import { z } from 'zod';
 
 export const env = createEnv({
-  shared: {
-    // VERCEL_URL: z
-    //     .string()
-    //     .optional()
-    //     .transform((v) => (v ? `https://${v}` : undefined)),
-    // PORT: z.coerce.number().default(3000),
-  },
+  shared: {},
   server: {
-    // DATABASE_URL: z.string().url(),
+    ME_REPOSITORY_URL: z.string().url(),
+    BLOG_CONTENTS_REPOSITORY_URL: z.string().url(),
   },
-  client: {
-    // NEXT_PUBLIC_CLIENT_VAR: z.string(),
-  },
+  client: {},
   runtimeEnv: {
-    // VERCEL_URL: process.env.VERCEL_URL,
-    // PORT: process.env.PORT,
-    // DATABASE_URL: process.env.DATABASE_URL,
-    // NEXT_PUBLIC_CLIENT_VAR: process.env.NEXT_PUBLIC_CLIENT_VAR,
+    ME_REPOSITORY_URL: process.env.ME_REPOSITORY_URL,
+    BLOG_CONTENTS_REPOSITORY_URL: process.env.BLOG_CONTENTS_REPOSITORY_URL,
   },
   skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION || process.env.npm_lifecycle_event === 'lint',
 });
