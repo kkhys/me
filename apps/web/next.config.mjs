@@ -1,4 +1,5 @@
 /** @type { import("next").NextConfig } */
+import { withContentlayer } from 'next-contentlayer';
 
 import './src/env.mjs';
 
@@ -7,4 +8,4 @@ const config = {
   typescript: { ignoreBuildErrors: true },
 };
 
-export default config;
+export default withContentlayer(config);
