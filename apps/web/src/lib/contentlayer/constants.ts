@@ -50,7 +50,7 @@ export const lifeTags = [
     title: 'Memorial',
     slug: 'memorial',
     emoji: '🌸',
-  }
+  },
 ] as const;
 
 export const fashionTags = [
