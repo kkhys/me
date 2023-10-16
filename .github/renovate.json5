@@ -5,13 +5,6 @@
     {
       matchPackagePatterns: ['^@kkhys/'],
       enabled: false
-    },
-    {
-      packagePatterns: ['^@types/'],
-      automerge: true,
-      major: {
-        automerge: false
-      }
     }
   ],
   baseBranches: ['develop'],
