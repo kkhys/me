@@ -46,6 +46,11 @@ export const lifeTags = [
     slug: 'travel',
     emoji: '🌎',
   },
+  {
+    title: 'Memorial',
+    slug: 'memorial',
+    emoji: '🌸',
+  }
 ] as const;
 
 export const fashionTags = [
