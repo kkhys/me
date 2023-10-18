@@ -291,8 +291,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2
       '@types/bs58':
-        specifier: 4.0.2
-        version: 4.0.2
+        specifier: 4.0.3
+        version: 4.0.3
       '@types/node':
         specifier: 20.8.6
         version: 20.8.6
@@ -5275,9 +5275,10 @@ packages:
       '@types/node': 20.8.6
     dev: true
 
-  /@types/bs58@4.0.2:
-    resolution: {integrity: sha512-ytn3FpvB9LRQGxK2vMHD12tgmUhx7TUTbA8A2VbhDVC0eqzgfvoU1rYBOeCl7hJDtTMaOg/Sl9xIOQhkY0G4uw==}
+  /@types/bs58@4.0.3:
+    resolution: {integrity: sha512-yVMwEsD7S5YU372eUWAmFRmTqF6EUSqs1Tj2X1kD0hiA4YlE33BhC3tELKLVYpZQEc5gLIQX2BAXmJdXaBARXA==}
     dependencies:
+      '@types/node': 20.8.6
       base-x: 3.0.9
     dev: true
 
