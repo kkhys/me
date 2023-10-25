@@ -13,7 +13,10 @@
     "storybook:dev": "storybook dev --port 6007 --quiet --no-open",
     "storybook:build": "storybook build --quiet",
     "storybook:move": "mv storybook-static ../../storybook-static/web",
-    "test": "pnpm with-env jest --passWithNoTests --silent --detectOpenHandles"
+    "test": "pnpm with-env jest --passWithNoTests --silent --detectOpenHandles",
+    "test:e2e": "pnpm playwright test",
+    "test:e2e:report": "pnpm playwright show-report",
+    "test:e2e:codegen": "pnpm playwright codegen"
   },
   "dependencies": {
     "@radix-ui/react-icons": "1.3.0",
@@ -37,6 +40,7 @@
     "@kkhys/prettier-config": "0.1.0",
     "@kkhys/tailwind-config": "0.1.0",
     "@kkhys/tsconfig": "0.1.0",
+    "@playwright/test": "1.39.0",
     "@storybook/addon-essentials": "7.5.0",
     "@storybook/addon-interactions": "7.5.0",
     "@storybook/addon-links": "7.5.0",
