@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "pnpm with-env next build",
-    "clean": "git clean -xdf .next .turbo node_modules storybook-static .contentlayer",
+    "clean": "git clean -xdf .next .turbo node_modules storybook-static .contentlayer .swc __reports__ coverage playwright-report",
     "dev": "pnpm with-env next dev --port 3000",
     "lint": "dotenv -v SKIP_ENV_VALIDATION=1 next lint",
     "format": "prettier --check \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path ../../.gitignore",
