@@ -8,6 +8,7 @@
     "lint": "dotenv -v SKIP_ENV_VALIDATION=1 next lint",
     "format": "prettier --check \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path ../../.gitignore",
     "start": "pnpm with-env next start --port 3000",
+    "analyze": "ANALYZE=true pnpm build",
     "typecheck": "tsc --noEmit",
     "with-env": "dotenv -e ../../.env --",
     "storybook:dev": "storybook dev --port 6007 --quiet --no-open",
@@ -19,6 +20,7 @@
     "test:e2e:codegen": "pnpm playwright codegen"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "14.0.0",
     "@radix-ui/react-icons": "1.3.0",
     "@radix-ui/react-slot": "1.0.2",
     "@t3-oss/env-nextjs": "0.7.1",
