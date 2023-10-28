@@ -18,10 +18,10 @@
     "test": "turbo test",
     "prepare": "husky install"
   },
-  "packageManager": "pnpm@8.9.2",
+  "packageManager": "pnpm@8.10.0",
   "engines": {
     "node": ">=20.9.0",
-    "pnpm": ">=8.9.2",
+    "pnpm": ">=8.10.0",
     "npm": "use pnpm instead of npm please!",
     "yarn": "use pnpm instead of yarn please!"
   },
@@ -38,13 +38,13 @@
     "**/*": "echo 'lint-staged does not execute anything for now.'"
   },
   "dependencies": {
-    "@commitlint/cli": "18.1.0",
+    "@commitlint/cli": "18.2.0",
     "@commitlint/config-conventional": "18.1.0",
     "@commitlint/types": "18.1.0",
     "@kkhys/prettier-config": "0.1.0",
     "@manypkg/cli": "0.21.0",
     "@turbo/gen": "1.10.16",
-    "@types/node": "20.8.8",
+    "@types/node": "20.8.9",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
     "http-server": "14.1.1",
