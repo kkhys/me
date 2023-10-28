@@ -4,6 +4,13 @@ import bs58 from 'bs58';
 import type { AllTagsTitle, Base, Category, CategoryTitle, FashionTags, LifeTags, Tag, TechTags } from './constants';
 import { allTags, categories, fashionTags, lifeTags, techTags } from './constants';
 
+class NotFoundError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'NotFoundError';
+  }
+}
+
 export const generateSlug = (data: crypto.BinaryLike) => {
   const hashAlgorithm = 'sha512';
   const encoding = 'hex' satisfies crypto.BinaryToTextEncoding;
@@ -23,24 +30,24 @@ export const extractTitle = <T extends Pick<Base, 'title'>>(item: T) => item.tit
 
 const getCategoryFromTitle = (title: CategoryTitle) => {
   const category = categories.find((category) => category.title === title);
-  if (!category) throw new Error(`Category not found: ${title}`);
-  if (!category?.slug) throw new Error(`Slug not found: ${title}`);
-  if (!category?.emoji) throw new Error(`Emoji not found: ${title}`);
+  if (!category) throw new NotFoundError(`Category not found: ${title}`);
+  if (!category?.slug) throw new NotFoundError(`Slug not found: ${title}`);
+  if (!category?.emoji) throw new NotFoundError(`Emoji not found: ${title}`);
   return category;
 };
 
 const getTagFromTitle = (title: AllTagsTitle) => {
   const tag = allTags.find((tag) => tag.title === title);
 
-  if (!tag) throw new Error(`Tag not found: ${title}`);
-  if (!tag?.slug) throw new Error(`Slug not found: ${title}`);
-  if (!tag?.emoji) throw new Error(`Emoji not found: ${title}`);
+  if (!tag) throw new NotFoundError(`Tag not found: ${title}`);
+  if (!tag?.slug) throw new NotFoundError(`Slug not found: ${title}`);
+  if (!tag?.emoji) throw new NotFoundError(`Emoji not found: ${title}`);
 
   return tag;
 };
 
 const isExistTag = <T extends TechTags | LifeTags | FashionTags>(targetTag: T, tagTitle: AllTagsTitle) => {
-  if (!targetTag.map(extractTitle).includes(tagTitle)) throw new Error(`Tag not found: ${tagTitle}`);
+  if (!targetTag.map(extractTitle).includes(tagTitle)) throw new NotFoundError(`Tag not found: ${tagTitle}`);
 
   return true;
 };
