@@ -1,6 +1,10 @@
 import type { Preview } from '@storybook/react';
 
-const preview: Preview = {
+import '#/styles/globals.css';
+
+import { androidViewports, ipadViewports, iphoneViewports, tailwindViewports } from './viewports';
+
+const preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
@@ -9,7 +13,15 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
+    viewport: {
+      viewports: {
+        ...iphoneViewports,
+        ...ipadViewports,
+        ...androidViewports,
+        ...tailwindViewports,
+      },
+    },
   },
-};
+} satisfies Preview;
 
 export default preview;
