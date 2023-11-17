@@ -1,20 +1,79 @@
+import { default as NextLink } from 'next/link';
 import { ChevronRightIcon, EnvelopeOpenIcon, ReloadIcon } from '@radix-ui/react-icons';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from './index';
+import { Button } from '.';
 
 const meta = {
-  title: 'general/button',
+  title: 'General / Button',
   component: Button,
-  parameters: {
-    layout: 'centered',
+  argTypes: {
+    variant: {
+      control: 'radio',
+      description: 'The button variant.',
+      options: ['default', 'secondary', 'outline', 'ghost', 'link', 'destructive'],
+      table: {
+        defaultValue: { summary: 'default' },
+        type: { summary: 'enum', detail: '"default" | "secondary" | "outline" | "ghost" | "link" | "destructive"' },
+      },
+      type: {
+        name: 'enum',
+        value: ['default', 'secondary', 'outline', 'ghost', 'link', 'destructive'],
+      },
+    },
+    size: {
+      control: 'radio',
+      description: 'The button size.',
+      options: ['default', 'sm', 'lg', 'icon'],
+      table: {
+        defaultValue: { summary: 'default' },
+        type: { summary: 'enum', detail: '"default" | "sm" | "lg" | "icon"' },
+      },
+      type: {
+        name: 'enum',
+        value: ['default', 'sm', 'lg', 'icon'],
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Whether the button is disabled.',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: {
+        name: 'boolean',
+      },
+    },
+    asChild: {
+      control: 'boolean',
+      description: 'Whether the button is rendered as a child.',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: {
+        name: 'boolean',
+      },
+    },
+    children: {
+      control: 'text',
+      description: 'The button content.',
+      table: {
+        type: { summary: 'enum', detail: '"string" | "ReactNode"' },
+      },
+      type: {
+        name: 'enum',
+        value: ['string', 'ReactNode'],
+      },
+    },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     children: 'Button',
   },
@@ -22,44 +81,45 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
-    children: 'Button',
     variant: 'secondary',
+    children: 'Secondary',
   },
 };
 
 export const Destructive: Story = {
   args: {
-    children: 'Button',
     variant: 'destructive',
+    children: 'Destructive',
   },
 };
 
 export const Outline: Story = {
   args: {
-    children: 'Button',
     variant: 'outline',
+    children: 'Outline',
   },
 };
 
 export const Ghost: Story = {
   args: {
-    children: 'Button',
     variant: 'ghost',
+    children: 'Ghost',
   },
 };
 
 export const Link: Story = {
   args: {
-    children: 'Button',
     variant: 'link',
+    children: 'Link',
   },
 };
 
 export const Icon: Story = {
   args: {
-    children: <ChevronRightIcon className='h-4 w-4' />,
     variant: 'outline',
     size: 'icon',
+    'aria-label': 'Next',
+    children: <ChevronRightIcon className='h-4 w-4' />,
   },
 };
 
@@ -75,20 +135,19 @@ export const WithIcon: Story = {
 
 export const Loading: Story = {
   args: {
+    disabled: true,
     children: (
       <>
         <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
         Please wait
       </>
     ),
-    disabled: true,
   },
 };
 
 export const AsChild: Story = {
   args: {
-    // TODO: use next/link
-    children: <a href='/#'>Button</a>,
     asChild: true,
+    children: <NextLink href='/?path=/story/general-button--as-child'>Login</NextLink>,
   },
 };

@@ -1,17 +1,169 @@
-import {
-  Controls,
-  Meta,
-  Primary,
-  Stories,
-  Subtitle,
-  Title,
-} from '@storybook/blocks';
+import { Canvas, Controls, Meta, Primary, Subtitle, Title } from '@storybook/blocks';
 
 import * as ButtonStories from './index.stories';
 
 <Meta of={ButtonStories} name='Overview' />
 <Title>Button</Title>
 <Subtitle>Displays a button or a component that looks like a button.</Subtitle>
-<Primary />
+
+## When to use
+
+A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
+
+## Props
+
+<Canvas of={ButtonStories.Default} />
 <Controls />
-<Stories />
+
+```jsx
+import { Button } from '#/ui/general';
+
+export const ButtonDemo = () => <Button>Button</Button>;
+```
+
+## Usage
+
+```jsx
+import { Button } from '#/ui/general';
+
+<Button variant='outline'>Button</Button>;
+```
+
+### Link
+
+You can use the `buttonVariants` helper to create a link that looks like a button.
+
+```jsx
+import Link from 'next/link';
+
+import { buttonVariants } from '#/ui/general';
+
+<Link href='/' className={buttonVariants({ variant: 'outline' })}>
+  Click here
+</Link>;
+```
+
+Alternatively, you can set the `asChild` parameter and nest the link component.
+
+```jsx
+import Link from 'next/link';
+
+import { Button } from '#/ui/general';
+
+<Button asChild>
+  <Link href='/'>Login</Link>
+</Button>;
+```
+
+## Examples
+
+### Secondary
+
+<Canvas of={ButtonStories.Secondary} />
+
+```jsx
+import { Button } from '#/ui/general';
+
+<Button variant='secondary'>Secondary</Button>;
+```
+
+### Destructive
+
+<Canvas of={ButtonStories.Destructive} />
+
+```jsx
+import { Button } from '#/ui/general';
+
+<Button variant='destructive'>Destructive</Button>;
+```
+
+### Outline
+
+<Canvas of={ButtonStories.Outline} />
+
+```jsx
+import { Button } from '#/ui/general';
+
+<Button variant='outline'>Outline</Button>;
+```
+
+### Ghost
+
+<Canvas of={ButtonStories.Ghost} />
+
+```jsx
+import { Button } from '#/ui/general';
+
+<Button variant='ghost'>Ghost</Button>;
+```
+
+### Link
+
+<Canvas of={ButtonStories.Link} />
+
+```jsx
+import { Button } from '#/ui/general';
+
+<Button variant='link'>Link</Button>;
+```
+
+### Icon
+
+<Canvas of={ButtonStories.Icon} />
+
+```jsx
+import { ChevronRightIcon } from '@radix-ui/react-icons';
+
+import { Button } from '#/ui/general';
+
+<Button variant='outline' size='icon'>
+  <ChevronRightIcon className='h-4 w-4' />
+</Button>;
+```
+
+### With Icon
+
+<Canvas of={ButtonStories.WithIcon} />
+
+```jsx
+import { EnvelopeOpenIcon } from '@radix-ui/react-icons';
+
+import { Button } from '#/ui/general';
+
+<Button>
+  <EnvelopeOpenIcon className='mr-2 h-4 w-4' /> Login with Email
+</Button>;
+```
+
+### Loading
+
+<Canvas of={ButtonStories.Loading} />
+
+```jsx
+import { ReloadIcon } from '@radix-ui/react-icons';
+
+import { Button } from '#/ui/general';
+
+<Button disabled>
+  <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
+  Please wait
+</Button>;
+```
+
+### As Child
+
+<Canvas of={ButtonStories.AsChild} />
+
+```jsx
+import Link from 'next/link';
+
+import { Button } from '#/ui/general';
+
+<Button asChild>
+  <Link href='/'>Login</Link>
+</Button>;
+```
+
+## Reference
+
+- [shadcn/ui](https://ui.shadcn.com/docs/components/button)
