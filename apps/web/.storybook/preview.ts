@@ -6,11 +6,10 @@ import { androidViewports, ipadViewports, iphoneViewports, tailwindViewports } f
 
 const preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
+    layout: 'centered',
+    docs: {
+      canvas: {
+        sourceState: 'none',
       },
     },
     viewport: {
