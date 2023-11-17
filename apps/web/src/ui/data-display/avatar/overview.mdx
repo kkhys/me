@@ -1,0 +1,59 @@
+import { Canvas, Meta, Subtitle, Title } from '@storybook/blocks';
+
+import * as AvatarStories from './index.stories';
+
+<Meta of={AvatarStories} name='Overview' />
+<Title>Avatar</Title>
+<Subtitle>An image element with a fallback for representing the user.</Subtitle>
+
+## Props
+
+<Canvas of={AvatarStories.Default} />
+
+```jsx
+import { Avatar, AvatarFallback, AvatarImage } from '#/ui/data-display';
+
+export const AvatarDemo = () => (
+  <Avatar>
+    <AvatarImage src='https://github.com/kkhys.png' alt='@kkhys' />
+    <AvatarFallback>KK</AvatarFallback>
+  </Avatar>
+);
+```
+
+## Usage
+
+```jsx
+import { Avatar, AvatarFallback, AvatarImage } from '#/ui/data-display';
+
+<Avatar>
+  <AvatarImage src='https://github.com/kkhys.png' />
+  <AvatarFallback>KK</AvatarFallback>
+</Avatar>;
+```
+
+## Examples
+
+### Clickable Avatar with tooltip
+
+You can compose the Avatar with a <a href='/?path=/docs/data-display-tooltip--overview'>Tooltip</a> to display extra information.
+
+<Canvas of={AvatarStories.WithTooltip} />
+
+```jsx
+import { Avatar, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
+
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger>
+      <Avatar>…</Avatar>
+    </TooltipTrigger>
+    <TooltipContent side='top'>Tooltip content</TooltipContent>
+  </Tooltip>
+</TooltipProvider>;
+```
+
+## Reference
+
+- [shadcn/ui](https://ui.shadcn.com/docs/components/avatar)
+- [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/avatar)
