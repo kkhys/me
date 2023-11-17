@@ -1,0 +1,83 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+
+import * as HoverCardStories from './index.stories';
+
+<Meta of={HoverCardStories} name='Overview' />
+<Title>Hover Card</Title>
+<Subtitle>For sighted users to preview content available behind a link.</Subtitle>
+
+## When To Use
+
+- The tip is shown on mouse enter, and is hidden on mouse leave. The Tooltip doesn't support complex text or operations.
+- To provide an explanation of a button/text/operation. It's often used instead of the html title attribute.
+
+## Props
+
+<Canvas of={HoverCardStories.Default} />
+<Controls of={HoverCardStories.Default} />
+
+```jsx
+import { CalendarIcon } from '@radix-ui/react-icons';
+
+import { Avatar, AvatarFallback, AvatarImage, HoverCard, HoverCardContent, HoverCardTrigger } from '#/ui/data-display';
+import { Button } from '#/ui/general';
+
+export const HoverCardDemo = () => (
+  <HoverCard>
+    <HoverCardTrigger asChild>
+      <Button variant='link'>@nextjs</Button>
+    </HoverCardTrigger>
+    <HoverCardContent className='w-80'>
+      <div className='flex justify-between space-x-4'>
+        <Avatar>
+          <AvatarImage src='https://github.com/vercel.png' />
+          <AvatarFallback>VC</AvatarFallback>
+        </Avatar>
+        <div className='space-y-1'>
+          <h4 className='text-sm font-semibold'>@nextjs</h4>
+          <p className='text-sm'>The React Framework – created and maintained by @vercel.</p>
+          <div className='flex items-center pt-2'>
+            <CalendarIcon className='mr-2 h-4 w-4 opacity-70' />{' '}
+            <span className='text-muted-foreground text-xs'>Joined December 2021</span>
+          </div>
+        </div>
+      </div>
+    </HoverCardContent>
+  </HoverCard>
+);
+```
+
+## Usage
+
+```jsx
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '#/ui/data-display';
+
+<HoverCard>
+  <HoverCardTrigger>Hover</HoverCardTrigger>
+  <HoverCardContent>The React Framework – created and maintained by @vercel.</HoverCardContent>
+</HoverCard>;
+```
+
+## Examples
+
+### Show instantly
+
+Use the `openDelay` prop to control the time it takes for the hover card to open.
+
+<Canvas of={HoverCardStories.ShowInstantly} />
+
+```jsx
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '#/ui/data-display';
+
+export default () => (
+  <HoverCard openDelay={0}>
+    <HoverCardTrigger>…</HoverCardTrigger>
+    <HoverCardContent>…</HoverCardContent>
+  </HoverCard>
+);
+```
+
+## Reference
+
+- [shadcn/ui](https://ui.shadcn.com/docs/components/hover-card)
+- [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/hover-card)
