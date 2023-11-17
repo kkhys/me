@@ -4,7 +4,7 @@ import type { StorybookConfig } from '@storybook/nextjs';
 const getAbsolutePath = (value: string): any => dirname(require.resolve(join(value, 'package.json')));
 
 const config = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx)'],
+  stories: ['../src/**/overview.mdx', '../src/**/*.stories.@(ts|tsx|mdx)'],
   addons: [
     getAbsolutePath('@storybook/addon-links'),
     getAbsolutePath('@storybook/addon-essentials'),
@@ -25,6 +25,7 @@ const config = {
   },
   core: {
     disableTelemetry: true,
+    disableWhatsNewNotifications: true,
   },
 } satisfies StorybookConfig;
 
