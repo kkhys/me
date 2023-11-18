@@ -1,0 +1,198 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+
+import * as ToastStories from './index.stories';
+
+<Meta of={ToastStories} name='Overview' />
+<Title>Toast</Title>
+<Subtitle>A succinct message that is displayed temporarily.</Subtitle>
+<Canvas of={ToastStories.Default} layout='fullscreen' />
+<Controls of={ToastStories.Default} />
+
+```jsx
+'use client';
+
+import { ToastAction, useToast } from '#/ui/feedback';
+import { Button } from '#/ui/general';
+
+export const ToastDemo = () => {
+  const { toast } = useToast();
+
+  return (
+    <Button
+      variant='outline'
+      onClick={() => {
+        toast({
+          title: 'Scheduled: Catch up ',
+          description: 'Friday, February 10, 2023 at 5:57 PM',
+          action: <ToastAction altText='Goto schedule to undo'>Undo</ToastAction>,
+        });
+      }}
+    >
+      Add to calendar
+    </Button>
+  );
+};
+```
+
+## When To Use
+
+To display a notification message at any of the four corners of the viewport. Typically it can be used in the following cases:
+
+- A notification with complex content.
+- A notification providing a feedback based on the user interaction. Or it may show some details about upcoming steps the user may have to follow.
+- A notification that is pushed by the application.
+
+## Anatomy
+
+Import the component.
+
+```jsx
+import {
+  Toast,
+  ToastAction,
+  ToastClose,
+  ToastDescription,
+  ToastProvider,
+  ToastTitle,
+  ToastViewport,
+} from '#/ui/feedback';
+
+export default () => (
+  <ToastProvider>
+    <Toast>
+      <ToastTitle />
+      <ToastDescription />
+      <ToastAction />
+      <ToastClose />
+    </Toast>
+    <ToastViewport />
+  </ToastProvider>
+);
+```
+
+## Examples
+
+### Simple
+
+<Canvas of={ToastStories.Simple} layout='fullscreen' />
+
+```jsx
+'use client';
+
+import { useToast } from '#/ui/feedback';
+import { Button } from '#/ui/general';
+
+export default () => {
+  const { toast } = useToast();
+
+  return (
+    <Button
+      variant='outline'
+      onClick={() => {
+        toast({
+          description: 'Your message has been sent.',
+        });
+      }}
+    >
+      Show Toast
+    </Button>
+  );
+};
+```
+
+### With Title
+
+<Canvas of={ToastStories.WithTitle} layout='fullscreen' />
+
+```jsx
+'use client';
+
+import { useToast } from '#/ui/feedback';
+import { Button } from '#/ui/general';
+
+export default () => {
+  const { toast } = useToast();
+
+  return (
+    <Button
+      variant='outline'
+      onClick={() => {
+        toast({
+          title: 'Uh oh! Something went wrong.',
+          description: 'There was a problem with your request.',
+        });
+      }}
+    >
+      Show Toast
+    </Button>
+  );
+};
+```
+
+### With Action
+
+<Canvas of={ToastStories.WithAction} layout='fullscreen' />
+
+```jsx
+'use client';
+
+import { ToastAction, useToast } from '#/ui/feedback';
+import { Button } from '#/ui/general';
+
+export default () => {
+  const { toast } = useToast();
+
+  return (
+    <Button
+      variant='outline'
+      onClick={() => {
+        toast({
+          title: 'Uh oh! Something went wrong.',
+          description: 'There was a problem with your request.',
+          action: <ToastAction altText='Try again'>Try again</ToastAction>,
+        });
+      }}
+    >
+      Show Toast
+    </Button>
+  );
+};
+```
+
+### Destructive
+
+<Canvas of={ToastStories.Destructive} layout='fullscreen' />
+
+Use `toast({ variant: "destructive" })` to display a destructive toast.
+
+```jsx
+'use client';
+
+import { ToastAction, useToast } from '#/ui/feedback';
+import { Button } from '#/ui/general';
+
+export default () => {
+  const { toast } = useToast();
+
+  return (
+    <Button
+      variant='outline'
+      onClick={() => {
+        toast({
+          variant: 'destructive',
+          title: 'Uh oh! Something went wrong.',
+          description: 'There was a problem with your request.',
+          action: <ToastAction altText='Try again'>Try again</ToastAction>,
+        });
+      }}
+    >
+      Show Toast
+    </Button>
+  );
+};
+```
+
+## Reference
+
+- [shadcn/ui](https://ui.shadcn.com/docs/components/toast)
+- [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/toast)
