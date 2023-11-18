@@ -5,9 +5,6 @@ import * as AspectRatioStories from './index.stories';
 <Meta of={AspectRatioStories} name='Overview' />
 <Title>Aspect Ratio</Title>
 <Subtitle>Displays content within a desired ratio.</Subtitle>
-
-## Props
-
 <Canvas of={AspectRatioStories.Default} />
 <Controls of={AspectRatioStories.Default} />
 
@@ -28,18 +25,14 @@ export const AspectRatioDemo = () => (
 );
 ```
 
-## Usage
+## Anatomy
+
+Import the component.
 
 ```jsx
-import Image from 'next/image';
-
 import { AspectRatio } from '#/ui/data-display';
 
-<div className='w-[450px]'>
-  <AspectRatio ratio={16 / 9}>
-    <Image src='...' alt='Image' className='rounded-md object-cover' />
-  </AspectRatio>
-</div>;
+export default () => <AspectRatio />;
 ```
 
 ## Reference

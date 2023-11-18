@@ -5,13 +5,6 @@ import * as AccordionStories from './index.stories';
 <Meta of={AccordionStories} name='Overview' />
 <Title>Accordion</Title>
 <Subtitle>A vertically stacked set of interactive headings that each reveal a section of content.</Subtitle>
-
-## When To Use
-
-Can be used to group or hide complex regions to keep the page clean.
-
-## Props
-
 <Canvas of={AccordionStories.Default} />
 <Controls of={AccordionStories.Default} />
 
@@ -38,17 +31,25 @@ export const AccordionDemo = () => (
 );
 ```
 
-## Usage
+## When To Use
+
+Can be used to group or hide complex regions to keep the page clean.
+
+## Anatomy
+
+Import all parts and piece them together.
 
 ```jsx
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '#/ui/data-display';
 
-<Accordion type='single' collapsible>
-  <AccordionItem value='item-1'>
-    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-    <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
-  </AccordionItem>
-</Accordion>;
+export default () => (
+  <Accordion>
+    <AccordionItem>
+      <AccordionTrigger />
+      <AccordionContent />
+    </AccordionItem>
+  </Accordion>
+);
 ```
 
 ## Examples
@@ -62,10 +63,12 @@ Use the `defaultValue` prop to define the open item by default.
 ```jsx
 import { Accordion, AccordionItem } from '#/ui/data-display';
 
-<Accordion type='single' defaultValue='item-2'>
-  <AccordionItem value='item-1'>…</AccordionItem>
-  <AccordionItem value='item-2'>…</AccordionItem>
-</Accordion>;
+export default () => (
+  <Accordion type='single' defaultValue='item-2'>
+    <AccordionItem value='item-1'>…</AccordionItem>
+    <AccordionItem value='item-2'>…</AccordionItem>
+  </Accordion>
+);
 ```
 
 ### Allow collapsing all items
@@ -77,10 +80,12 @@ Use the `collapsible` prop to allow all items to close.
 ```jsx
 import { Accordion, AccordionItem } from '#/ui/data-display';
 
-<Accordion type='single' collapsible>
-  <AccordionItem value='item-1'>…</AccordionItem>
-  <AccordionItem value='item-2'>…</AccordionItem>
-</Accordion>;
+export default () => (
+  <Accordion type='single' collapsible>
+    <AccordionItem value='item-1'>…</AccordionItem>
+    <AccordionItem value='item-2'>…</AccordionItem>
+  </Accordion>
+);
 ```
 
 ### Multiple items open at the same time
@@ -92,10 +97,12 @@ Set the `type` prop to `multiple` to enable opening multiple items at once.
 ```jsx
 import { Accordion, AccordionItem } from '#/ui/data-display';
 
-<Accordion type='multiple'>
-  <AccordionItem value='item-1'>…</AccordionItem>
-  <AccordionItem value='item-2'>…</AccordionItem>
-</Accordion>;
+export default () => (
+  <Accordion type='multiple'>
+    <AccordionItem value='item-1'>…</AccordionItem>
+    <AccordionItem value='item-2'>…</AccordionItem>
+  </Accordion>
+);
 ```
 
 ## Reference

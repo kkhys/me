@@ -1,17 +1,10 @@
-import { Canvas, Controls, Meta, Primary, Subtitle, Title } from '@storybook/blocks';
+import { Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
 
 import * as ButtonStories from './index.stories';
 
 <Meta of={ButtonStories} name='Overview' />
 <Title>Button</Title>
 <Subtitle>Displays a button or a component that looks like a button.</Subtitle>
-
-## When to use
-
-A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
-
-## Props
-
 <Canvas of={ButtonStories.Default} />
 <Controls />
 
@@ -21,12 +14,18 @@ import { Button } from '#/ui/general';
 export const ButtonDemo = () => <Button>Button</Button>;
 ```
 
-## Usage
+## When to use
+
+A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
+
+## Anatomy
+
+Import the component.
 
 ```jsx
 import { Button } from '#/ui/general';
 
-<Button variant='outline'>Button</Button>;
+export default () => <Button />;
 ```
 
 ### Link
@@ -38,9 +37,11 @@ import Link from 'next/link';
 
 import { buttonVariants } from '#/ui/general';
 
-<Link href='/' className={buttonVariants({ variant: 'outline' })}>
-  Click here
-</Link>;
+export default () => (
+  <Link href='/' className={buttonVariants({ variant: 'outline' })}>
+    Click here
+  </Link>
+);
 ```
 
 Alternatively, you can set the `asChild` parameter and nest the link component.
@@ -50,9 +51,11 @@ import Link from 'next/link';
 
 import { Button } from '#/ui/general';
 
-<Button asChild>
-  <Link href='/'>Login</Link>
-</Button>;
+export default () => (
+  <Button asChild>
+    <Link href='/'>Login</Link>
+  </Button>
+);
 ```
 
 ## Examples
@@ -64,7 +67,7 @@ import { Button } from '#/ui/general';
 ```jsx
 import { Button } from '#/ui/general';
 
-<Button variant='secondary'>Secondary</Button>;
+export default () => <Button variant='secondary'>Secondary</Button>;
 ```
 
 ### Destructive
@@ -74,7 +77,7 @@ import { Button } from '#/ui/general';
 ```jsx
 import { Button } from '#/ui/general';
 
-<Button variant='destructive'>Destructive</Button>;
+export default () => <Button variant='destructive'>Destructive</Button>;
 ```
 
 ### Outline
@@ -84,7 +87,7 @@ import { Button } from '#/ui/general';
 ```jsx
 import { Button } from '#/ui/general';
 
-<Button variant='outline'>Outline</Button>;
+export default () => <Button variant='outline'>Outline</Button>;
 ```
 
 ### Ghost
@@ -94,7 +97,7 @@ import { Button } from '#/ui/general';
 ```jsx
 import { Button } from '#/ui/general';
 
-<Button variant='ghost'>Ghost</Button>;
+export default () => <Button variant='ghost'>Ghost</Button>;
 ```
 
 ### Link
@@ -104,7 +107,7 @@ import { Button } from '#/ui/general';
 ```jsx
 import { Button } from '#/ui/general';
 
-<Button variant='link'>Link</Button>;
+export default () => <Button variant='link'>Link</Button>;
 ```
 
 ### Icon
@@ -116,9 +119,11 @@ import { ChevronRightIcon } from '@radix-ui/react-icons';
 
 import { Button } from '#/ui/general';
 
-<Button variant='outline' size='icon'>
-  <ChevronRightIcon className='h-4 w-4' />
-</Button>;
+export default () => (
+  <Button variant='outline' size='icon'>
+    <ChevronRightIcon className='h-4 w-4' />
+  </Button>
+);
 ```
 
 ### With Icon
@@ -130,9 +135,11 @@ import { EnvelopeOpenIcon } from '@radix-ui/react-icons';
 
 import { Button } from '#/ui/general';
 
-<Button>
-  <EnvelopeOpenIcon className='mr-2 h-4 w-4' /> Login with Email
-</Button>;
+export default () => (
+  <Button>
+    <EnvelopeOpenIcon className='mr-2 h-4 w-4' /> Login with Email
+  </Button>
+);
 ```
 
 ### Loading
@@ -144,10 +151,12 @@ import { ReloadIcon } from '@radix-ui/react-icons';
 
 import { Button } from '#/ui/general';
 
-<Button disabled>
-  <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
-  Please wait
-</Button>;
+export default () => (
+  <Button disabled>
+    <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
+    Please wait
+  </Button>
+);
 ```
 
 ### As Child
@@ -159,9 +168,11 @@ import Link from 'next/link';
 
 import { Button } from '#/ui/general';
 
-<Button asChild>
-  <Link href='/'>Login</Link>
-</Button>;
+export default () => (
+  <Button asChild>
+    <Link href='/'>Login</Link>
+  </Button>
+);
 ```
 
 ## Reference

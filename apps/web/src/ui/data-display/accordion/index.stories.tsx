@@ -29,6 +29,18 @@ const meta = {
     children: <AccordionItems />,
   },
   argTypes: {
+    asChild: {
+      control: 'boolean',
+      description:
+        'Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our <a href="https://www.radix-ui.com/primitives/docs/guides/composition" target="_blank" rel="noreferrer noopener">Composition</a> guide for more details.',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: {
+        name: 'boolean',
+      },
+    },
     type: {
       control: 'radio',
       description: 'Determines whether one or multiple items can be opened at the same time.',
@@ -42,16 +54,17 @@ const meta = {
         required: true,
       },
     },
-    collapsible: {
+    value: {
       if: { arg: 'type', eq: 'single' },
-      control: 'boolean',
-      description: 'When `type` is `"single"`, allows closing content when clicking trigger for an open item.',
+      control: 'radio',
+      description:
+        'The controlled value of the item to expand when `type` is `"single"`. Must be used in conjunction with `onValueChange`.',
+      options: ['item-1', 'item-2', 'item-3'],
       table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
+        type: { summary: 'string' },
       },
       type: {
-        name: 'boolean',
+        name: 'string',
       },
     },
     defaultValue: {
@@ -65,6 +78,68 @@ const meta = {
       },
       type: {
         name: 'string',
+      },
+    },
+    onValueChange: {
+      if: { arg: 'type', eq: 'single' },
+      action: 'changed',
+      description: 'Event handler called when the expanded state of an item changes and `type` is `"single"`.',
+      table: {
+        category: 'Events',
+        type: { summary: 'function', detail: '(value: string) => void' },
+      },
+      type: {
+        name: 'function',
+      },
+    },
+    // value: {
+    //   if: { arg: 'type', eq: 'multiple' },
+    //   control: 'multi-select',
+    //   description:
+    //     'The controlled value of the item to expand when `type` is `"multiple"`. Must be used in conjunction with `onValueChange`.',
+    //   options: ['item-1', 'item-2', 'item-3'],
+    //   table: {
+    //     type: { summary: 'string[]' },
+    //   },
+    //   type: {
+    //     name: 'string[]',
+    //   },
+    // },
+    collapsible: {
+      if: { arg: 'type', eq: 'single' },
+      control: 'boolean',
+      description: 'When `type` is `"single"`, allows closing content when clicking trigger for an open item.',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: {
+        name: 'boolean',
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'When `true`, prevents the user from interacting with the accordion and all its items.',
+      table: {
+        defaultValue: { summary: false },
+        type: { summary: 'boolean' },
+      },
+      type: {
+        name: 'boolean',
+      },
+    },
+    dir: {
+      control: 'radio',
+      description:
+        'The reading direction of the accordion when applicable. If omitted, assumes LTR (left-to-right) reading mode.',
+      options: ['ltr', 'rtl'],
+      table: {
+        defaultValue: { summary: 'ltr' },
+        type: { summary: 'enum', detail: '"ltr" | "rtl"' },
+      },
+      type: {
+        name: 'enum',
+        value: ['ltr', 'rtl'],
       },
     },
     className: {

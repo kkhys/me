@@ -1,14 +1,12 @@
-import { Canvas, Meta, Subtitle, Title } from '@storybook/blocks';
+import { Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
 
 import * as AvatarStories from './index.stories';
 
 <Meta of={AvatarStories} name='Overview' />
 <Title>Avatar</Title>
 <Subtitle>An image element with a fallback for representing the user.</Subtitle>
-
-## Props
-
 <Canvas of={AvatarStories.Default} />
+<Controls of={AvatarStories.Default} />
 
 ```jsx
 import { Avatar, AvatarFallback, AvatarImage } from '#/ui/data-display';
@@ -21,15 +19,19 @@ export const AvatarDemo = () => (
 );
 ```
 
-## Usage
+## Anatomy
+
+Import all parts and piece them together.
 
 ```jsx
 import { Avatar, AvatarFallback, AvatarImage } from '#/ui/data-display';
 
-<Avatar>
-  <AvatarImage src='https://github.com/kkhys.png' />
-  <AvatarFallback>KK</AvatarFallback>
-</Avatar>;
+export default () => (
+  <Avatar>
+    <AvatarImage />
+    <AvatarFallback />
+  </Avatar>
+);
 ```
 
 ## Examples
@@ -43,14 +45,16 @@ You can compose the Avatar with a <a href='/?path=/docs/data-display-tooltip--ov
 ```jsx
 import { Avatar, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
 
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger>
-      <Avatar>…</Avatar>
-    </TooltipTrigger>
-    <TooltipContent side='top'>Tooltip content</TooltipContent>
-  </Tooltip>
-</TooltipProvider>;
+export default () => (
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger>
+        <Avatar>…</Avatar>
+      </TooltipTrigger>
+      <TooltipContent side='top'>Tooltip content</TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+);
 ```
 
 ## Reference

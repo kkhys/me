@@ -47,7 +47,8 @@ const meta = {
     },
     asChild: {
       control: 'boolean',
-      description: 'Whether the button is rendered as a child.',
+      description:
+        'Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our <a href="https://www.radix-ui.com/primitives/docs/guides/composition" target="_blank" rel="noreferrer noopener">Composition</a> guide for more details.',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },

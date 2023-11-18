@@ -5,14 +5,6 @@ import * as HoverCardStories from './index.stories';
 <Meta of={HoverCardStories} name='Overview' />
 <Title>Hover Card</Title>
 <Subtitle>For sighted users to preview content available behind a link.</Subtitle>
-
-## When To Use
-
-- The tip is shown on mouse enter, and is hidden on mouse leave. The Tooltip doesn't support complex text or operations.
-- To provide an explanation of a button/text/operation. It's often used instead of the html title attribute.
-
-## Props
-
 <Canvas of={HoverCardStories.Default} />
 <Controls of={HoverCardStories.Default} />
 
@@ -47,15 +39,24 @@ export const HoverCardDemo = () => (
 );
 ```
 
-## Usage
+## When To Use
+
+- The tip is shown on mouse enter, and is hidden on mouse leave. The Tooltip doesn't support complex text or operations.
+- To provide an explanation of a button/text/operation. It's often used instead of the html title attribute.
+
+## Anatomy
+
+Import all parts and piece them together.
 
 ```jsx
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '#/ui/data-display';
 
-<HoverCard>
-  <HoverCardTrigger>Hover</HoverCardTrigger>
-  <HoverCardContent>The React Framework – created and maintained by @vercel.</HoverCardContent>
-</HoverCard>;
+export default () => (
+  <HoverCard>
+    <HoverCardTrigger />
+    <HoverCardContent />
+  </HoverCard>
+);
 ```
 
 ## Examples
