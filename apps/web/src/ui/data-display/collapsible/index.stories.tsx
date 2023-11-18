@@ -46,6 +46,7 @@ const meta = {
       action: 'changed',
       description: 'Event handler called when the open state of the collapsible changes.',
       table: {
+        category: 'Events',
         type: { summary: 'function', detail: '(open: boolean) => void' },
       },
       type: {
