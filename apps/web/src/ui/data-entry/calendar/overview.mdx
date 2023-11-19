@@ -1,0 +1,45 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+
+import * as CalendarStories from './index.stories';
+
+<Meta of={CalendarStories} name='Overview' />
+<Title />
+<Subtitle>A date field component that allows users to enter and edit date.</Subtitle>
+<Canvas of={CalendarStories.Default} />
+<Controls of={CalendarStories.Default} />
+
+```jsx
+'use client';
+
+import * as React from 'react';
+
+import { Calendar } from '#/ui/data-entry';
+
+export const CalendarDemo = () => {
+  const [date, setDate] = (React.useState < Date) | (undefined > new Date());
+
+  return <Calendar mode='single' selected={date} onSelect={setDate} className='rounded-md border shadow' />;
+};
+```
+
+## When To Use
+
+When data is in the form of dates, such as schedules, timetables, prices calendar, lunar calendar.
+
+## Anatomy
+
+```jsx
+import { Calendar } from '#/ui/data-entry';
+
+export default () => <Calendar />;
+```
+
+## Examples
+
+### Form
+
+<Canvas of={CalendarStories.FormStory} layout='fullscreen' />
+
+## Reference
+
+- [shadcn/ui](https://ui.shadcn.com/docs/components/calendar)
