@@ -32,6 +32,14 @@ const HoverCardChildren = () => (
 const meta = {
   title: 'Data Display / HoverCard',
   component: HoverCard,
+  parameters: {
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 350,
+      },
+    },
+  },
   args: {
     children: <HoverCardChildren />,
   },

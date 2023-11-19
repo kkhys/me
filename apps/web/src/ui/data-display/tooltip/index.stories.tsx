@@ -6,6 +6,14 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '.';
 const meta = {
   title: 'Data Display / Tooltip',
   component: Tooltip,
+  parameters: {
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 200,
+      },
+    },
+  },
   args: {
     children: (
       <>

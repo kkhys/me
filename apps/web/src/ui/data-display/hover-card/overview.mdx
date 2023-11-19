@@ -3,9 +3,9 @@ import { Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
 import * as HoverCardStories from './index.stories';
 
 <Meta of={HoverCardStories} name='Overview' />
-<Title>Hover Card</Title>
+<Title />
 <Subtitle>For sighted users to preview content available behind a link.</Subtitle>
-<Canvas of={HoverCardStories.Default} />
+<Canvas of={HoverCardStories.Default} layout='fullscreen' />
 <Controls of={HoverCardStories.Default} />
 
 ```jsx
@@ -60,7 +60,7 @@ export default () => (
 
 Use the `openDelay` prop to control the time it takes for the hover card to open.
 
-<Canvas of={HoverCardStories.ShowInstantly} />
+<Canvas of={HoverCardStories.ShowInstantly} layout='fullscreen' />
 
 ```jsx
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '#/ui/data-display';
