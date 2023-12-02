@@ -7,7 +7,7 @@ import { format, parseISO } from 'date-fns';
  * @see: https://github.com/evanw/esbuild/issues/394
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
-import { env } from '../../../env.mjs';
+import { serverEnv } from '../../../env/index.mjs';
 import type { AllTagsTitle, CategoryTitle } from '../constants';
 import { allTagTitles, categoryTitles } from '../constants';
 import { generateCategoryObject, generateSlug, generateTagObject } from '../utils';
@@ -69,13 +69,13 @@ export const Post = defineDocumentType(() => ({
       description: 'URL to github repository of editable blog content',
       type: 'string',
       resolve: ({ _raw: { sourceFilePath } }) =>
-        `${env.BLOG_CONTENTS_REPOSITORY_URL}/edit/main/contents/${sourceFilePath}`,
+        `${serverEnv.BLOG_CONTENTS_REPOSITORY_URL}/edit/main/contents/${sourceFilePath}`,
     },
     sourceUrl: {
       description: 'URL to the blog content, without rendering the markdown file',
       type: 'string',
       resolve: ({ _raw: { sourceFilePath } }) =>
-        `${env.BLOG_CONTENTS_REPOSITORY_URL}/blob/main/contents/${sourceFilePath}?plain=1`,
+        `${serverEnv.BLOG_CONTENTS_REPOSITORY_URL}/blob/main/contents/${sourceFilePath}?plain=1`,
     },
     publishedAtFormatted: {
       description: 'Formatted publication date and time',
