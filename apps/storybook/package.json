@@ -6,7 +6,6 @@
     "storybook:build": "storybook build --quiet",
     "storybook:move": "mv storybook-static ../../storybook-static",
     "clean": "git clean -xdf .turbo node_modules storybook-static",
-    "lint": "eslint .",
     "format": "prettier --check \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path ../../.gitignore",
     "type-check": "tsc --noEmit"
   },
