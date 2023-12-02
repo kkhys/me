@@ -2,10 +2,20 @@ import React from 'react';
 
 import '#/styles/globals.css';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+import { ThemeProvider } from '#/lib/nextjs/theme-provider';
+import { Toaster } from '#/ui/feedback';
+
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang='ja'>
-      <body>{children}</body>
+      <body>
+        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+          {children}
+          <Toaster />
+        </ThemeProvider>
+      </body>
     </html>
   );
-}
+};
+
+export default Layout;
