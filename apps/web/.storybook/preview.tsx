@@ -6,6 +6,20 @@ import { androidViewports, ipadViewports, iphoneViewports, tailwindViewports } f
 
 const preview = {
   parameters: {
+    // backgrounds: { disable: true },
+    backgrounds: {
+      default: 'twitter',
+      values: [
+        {
+          name: 'twitter',
+          value: '#00aced',
+        },
+        {
+          name: 'facebook',
+          value: '#3b5998',
+        },
+      ],
+    },
     layout: 'centered',
     docs: {
       canvas: {
