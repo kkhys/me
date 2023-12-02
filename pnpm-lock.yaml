@@ -347,8 +347,8 @@ importers:
         specifier: 7.48.2
         version: 7.48.2(react@18.2.0)
       tailwind-merge:
-        specifier: 2.0.0
-        version: 2.0.0
+        specifier: 2.1.0
+        version: 2.1.0
       tailwindcss-animate:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@3.3.5)
@@ -430,7 +430,7 @@ importers:
         version: 18.2.17
       axe-playwright:
         specifier: 1.2.3
-        version: 1.2.3(playwright@1.39.0)
+        version: 1.2.3(playwright@1.40.1)
       dotenv-cli:
         specifier: 7.3.0
         version: 7.3.0
@@ -1894,6 +1894,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+
+  /@babel/runtime@7.23.5:
+    resolution: {integrity: sha512-NdUTHcPe4C99WxPub+K9l9tK5/lV4UXIoaHSYgzco9BCyjKAAwzdBI+wWtYqHt7LJdbo74ZjRPJgzVweq1sz0w==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.0
+    dev: false
 
   /@babel/template@7.22.15:
     resolution: {integrity: sha512-QPErUVm4uyJa60rkI73qneDacvdvzxshT3kksGqlGWYdOTIUOwJ7RDUL8sGqslY1uXWSL6xMFKEXDS3ox2uF0w==}
@@ -8096,7 +8103,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /axe-playwright@1.2.3(playwright@1.39.0):
+  /axe-playwright@1.2.3(playwright@1.40.1):
     resolution: {integrity: sha512-bTxCTNp3kx6sQRMjmuLv8pG3+v+kOCvFXATim1+XUXzW6ykulbbuJdQfgB+vQPNAF9uvYbW2qrv9pg81ZSFV/A==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -8104,7 +8111,7 @@ packages:
       axe-core: 4.8.2
       axe-html-reporter: 2.2.3(axe-core@4.8.2)
       picocolors: 1.0.0
-      playwright: 1.39.0
+      playwright: 1.40.1
     dev: true
 
   /axobject-query@3.2.1:
@@ -14765,26 +14772,10 @@ packages:
       find-up: 6.3.0
     dev: true
 
-  /playwright-core@1.39.0:
-    resolution: {integrity: sha512-+k4pdZgs1qiM+OUkSjx96YiKsXsmb59evFoqv8SKO067qBA+Z2s/dCzJij/ZhdQcs2zlTAgRKfeiiLm8PQ2qvw==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dev: true
-
   /playwright-core@1.40.1:
     resolution: {integrity: sha512-+hkOycxPiV534c4HhpfX6yrlawqVUzITRKwHAmYfmsVreltEl6fAZJ3DPfLMOODw0H3s1Itd6MDCWmP1fl/QvQ==}
     engines: {node: '>=16'}
     hasBin: true
-    dev: true
-
-  /playwright@1.39.0:
-    resolution: {integrity: sha512-naE5QT11uC/Oiq0BwZ50gDmy8c8WLPRTEWuSSFVG2egBka/1qMoSqYQcROMT9zLwJ86oPofcTH2jBY/5wWOgIw==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dependencies:
-      playwright-core: 1.39.0
-    optionalDependencies:
-      fsevents: 2.3.2
     dev: true
 
   /playwright@1.40.1:
@@ -16675,10 +16666,10 @@ packages:
     resolution: {integrity: sha512-AsS729u2RHUfEra9xJrE39peJcc2stq2+poBXX8bcM08Y6g9j/i/PUzwNQqkaJde7Ntg1TO7bSREbR5sdosQ+g==}
     dev: true
 
-  /tailwind-merge@2.0.0:
-    resolution: {integrity: sha512-WO8qghn9yhsldLSg80au+3/gY9E4hFxIvQ3qOmlpXnqpDKoMruKfi/56BbbMg6fHTQJ9QD3cc79PoWqlaQE4rw==}
+  /tailwind-merge@2.1.0:
+    resolution: {integrity: sha512-l11VvI4nSwW7MtLSLYT4ldidDEUwQAMWuSHk7l4zcXZDgnCRa0V3OdCwFfM7DCzakVXMNRwAeje9maFFXT71dQ==}
     dependencies:
-      '@babel/runtime': 7.23.2
+      '@babel/runtime': 7.23.5
     dev: false
 
   /tailwindcss-animate@1.0.7(tailwindcss@3.3.5):
