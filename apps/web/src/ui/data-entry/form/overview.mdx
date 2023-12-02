@@ -16,7 +16,7 @@ Well-designed HTML forms are:
 - Has support for client and server side validation.
 - Well-styled and consistent with the rest of the application.
 
-In this guide, we will take a look at building forms with <a href='https://react-hook-form.com' target='_blank' rel='noopener noreferrer'>`react-hook-form`</a> and <a href='https://zod.dev' target='_blank' rel='noopener noreferrer'>`zod`</a>. We're going to use a `<FormField>` component to compose accessible forms using Radix UI components.
+In this guide, we will take a look at building forms with [`react-hook-form`](https://react-hook-form.com) and [`zod`](https://zod.dev). We're going to use a `<FormField>` component to compose accessible forms using Radix UI components.
 
 ## Features
 
@@ -34,7 +34,7 @@ The `<Form />` component is a wrapper around the `react-hook-form` library. It p
 
 ## Anatomy
 
-```jsx
+```tsx
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '#/ui/data-entry';
 
 export default () => (
@@ -59,9 +59,9 @@ export default () => (
 
 ### 1. Create a form schema
 
-Define the shape of your form using a Zod schema. You can read more about using Zod in the <a href='https://zod.dev' target='_blank' rel='noopener noreferrer'>Zod documentation</a>.
+Define the shape of your form using a Zod schema. You can read more about using Zod in the [Zod documentation](https://zod.dev).
 
-```jsx
+```tsx
 'use client';
 
 import * as z from 'zod';
@@ -106,7 +106,7 @@ export const ProfileForm = () => {
 };
 ```
 
-Since `FormField` is using a controlled component, you need to provide a default value for the field. See the <a href='https://react-hook-form.com/docs/usecontroller' target='_blank' rel='noopener noreferrer'>React Hook Form docs</a> to learn more about controlled components.
+Since `FormField` is using a controlled component, you need to provide a default value for the field. See the [React Hook Form docs](https://react-hook-form.com/docs/usecontroller) to learn more about controlled components.
 
 ### 3. Build your form
 

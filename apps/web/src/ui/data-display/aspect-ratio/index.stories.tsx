@@ -6,16 +6,6 @@ import { AspectRatio } from '.';
 const meta = {
   title: 'Data Display / Aspect Ratio',
   component: AspectRatio,
-  args: {
-    children: (
-      <Image
-        src='https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80'
-        alt='Photo by Drew Beamer'
-        fill
-        className='rounded-md object-cover'
-      />
-    ),
-  },
   argTypes: {
     asChild: {
       control: 'boolean',
@@ -43,6 +33,23 @@ const meta = {
       },
     },
   },
+} satisfies Meta<typeof AspectRatio>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default = {
+  args: {
+    ratio: 16 / 9,
+    children: (
+      <Image
+        src='https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?w=800&dpr=2&q=80'
+        alt='Photo by Drew Beamer'
+        fill
+        className='rounded-md object-cover'
+      />
+    ),
+  },
   decorators: [
     (Story) => (
       <div className='w-[400px]'>
@@ -50,13 +57,4 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof AspectRatio>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
-  args: {
-    ratio: 16 / 9,
-  },
-};
+} satisfies Story;

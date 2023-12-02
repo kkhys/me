@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { PartialStoryFn } from '@storybook/csf';
-import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -115,22 +114,19 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const labelName = 'Airplane Mode';
-const defaultSwitchId = 'default-switch';
-
-const SwitchDecorator = (Story: PartialStoryFn<ReactRenderer>, id: string) => (
-  <div className='flex items-center space-x-2'>
-    <Story />
-    <Label htmlFor={id}>{labelName}</Label>
-  </div>
-);
-
 export const Default = {
   args: {
-    id: defaultSwitchId,
-    'aria-label': labelName,
+    id: 'default-switch',
+    'aria-label': 'Airplane Mode',
   },
-  decorators: [(Story) => SwitchDecorator(Story, defaultSwitchId)],
+  decorators: [
+    (Story) => (
+      <div className='flex items-center space-x-2'>
+        <Story />
+        <Label htmlFor='default-switch'>Airplane Mode</Label>
+      </div>
+    ),
+  ],
 } satisfies Story;
 
 const FormDemo = () => {

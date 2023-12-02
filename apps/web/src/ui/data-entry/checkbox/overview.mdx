@@ -8,23 +8,18 @@ import * as CheckboxStories from './index.stories';
 <Canvas of={CheckboxStories.Default} />
 <Controls of={CheckboxStories.Default} />
 
-```jsx
+```tsx
 'use client';
 
 import { Checkbox, Label } from '#/ui/data-entry';
 
-export const CheckboxDemo = () => (
+export default () => (
   <div className='flex items-center space-x-2'>
     <Checkbox id='terms' aria-label='Accept terms and conditions' />
     <Label htmlFor='terms'>Accept terms and conditions</Label>
   </div>
 );
 ```
-
-## When To Use
-
-- Used for selecting multiple values from several options.
-- If you use only one checkbox, it is the same as using Switch to toggle between two states. The difference is that Switch will trigger the state change directly, but Checkbox just marks the state as changed and this needs to be submitted.
 
 ## Anatomy
 
@@ -40,7 +35,7 @@ export default () => <Checkbox />;
 
 <Canvas of={CheckboxStories.WithText} />
 
-```jsx
+```tsx
 'use client';
 
 import { Checkbox, Label } from '#/ui/data-entry';
@@ -60,7 +55,7 @@ export default () => (
 
 <Canvas of={CheckboxStories.Disabled} />
 
-```jsx
+```tsx
 'use client';
 
 import { Checkbox, Label } from '#/ui/data-entry';
@@ -264,3 +259,4 @@ export default () => {
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/checkbox)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/checkbox)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox)

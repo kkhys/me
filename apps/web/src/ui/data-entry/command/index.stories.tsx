@@ -26,7 +26,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     className: 'rounded-lg border shadow-md',
     children: (
@@ -77,7 +77,7 @@ export const Default: Story = {
       </div>
     ),
   ],
-};
+} satisfies Story;
 
 const DialogDemo = () => {
   const [open, setOpen] = React.useState(false);
@@ -116,6 +116,6 @@ const DialogDemo = () => {
   );
 };
 
-export const Dialog: Story = {
+export const Dialog = {
   render: () => <DialogDemo />,
-};
+} satisfies Story;

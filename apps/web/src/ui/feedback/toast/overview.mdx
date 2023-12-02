@@ -8,7 +8,7 @@ import * as ToastStories from './index.stories';
 <Canvas of={ToastStories.Default} layout='fullscreen' />
 <Controls of={ToastStories.Default} />
 
-```jsx
+```tsx
 'use client';
 
 import { ToastAction, useToast } from '#/ui/feedback';
@@ -36,7 +36,7 @@ export default () => {
 
 ## Anatomy
 
-```jsx
+```tsx
 import {
   Toast,
   ToastAction,
@@ -66,7 +66,7 @@ export default () => (
 
 <Canvas of={ToastStories.Simple} layout='fullscreen' />
 
-```jsx
+```tsx
 'use client';
 
 import { useToast } from '#/ui/feedback';
@@ -94,7 +94,7 @@ export default () => {
 
 <Canvas of={ToastStories.WithTitle} layout='fullscreen' />
 
-```jsx
+```tsx
 'use client';
 
 import { useToast } from '#/ui/feedback';
@@ -123,7 +123,7 @@ export default () => {
 
 <Canvas of={ToastStories.WithAction} layout='fullscreen' />
 
-```jsx
+```tsx
 'use client';
 
 import { ToastAction, useToast } from '#/ui/feedback';
@@ -155,7 +155,7 @@ export default () => {
 
 Use `toast({ variant: "destructive" })` to display a destructive toast.
 
-```jsx
+```tsx
 'use client';
 
 import { ToastAction, useToast } from '#/ui/feedback';
@@ -186,3 +186,4 @@ export default () => {
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/toast)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/toast)
+- [ARIA design pattern](https://www.w3.org/TR/wai-aria/#aria-live)

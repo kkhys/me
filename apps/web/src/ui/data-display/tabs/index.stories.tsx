@@ -110,7 +110,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     defaultValue: 'account',
     className: 'w-[400px]',
@@ -165,4 +165,4 @@ export const Default: Story = {
       </>
     ),
   },
-};
+} satisfies Story;

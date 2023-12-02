@@ -8,24 +8,20 @@ import * as LabelStories from './index.stories';
 <Canvas of={LabelStories.Default} />
 <Controls of={LabelStories.Default} />
 
-```jsx
+```tsx
 import { Checkbox, Label } from '#/ui/data-entry';
 
-export const LabelDemo = () => (
-  <div>
-    <div className='flex items-center space-x-2'>
-      <Checkbox id='terms' />
-      <Label htmlFor='terms'>Accept terms and conditions</Label>
-    </div>
+export default () => (
+  <div className='flex items-center space-x-2'>
+    <Checkbox id='terms' />
+    <Label htmlFor='terms'>Accept terms and conditions</Label>
   </div>
 );
 ```
 
 ## Anatomy
 
-Import the component.
-
-```jsx
+```tsx
 import { Label } from '#/ui/data-entry';
 
 export default () => <Label />;

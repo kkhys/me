@@ -6,33 +6,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '.';
 const meta = {
   title: 'Data Display / Tooltip',
   component: Tooltip,
-  parameters: {
-    docs: {
-      story: {
-        inline: false,
-        iframeHeight: 200,
-      },
-    },
-  },
-  args: {
-    children: (
-      <>
-        <TooltipTrigger asChild>
-          <Button variant='outline'>Hover</Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Add to library</p>
-        </TooltipContent>
-      </>
-    ),
-  },
-  decorators: [
-    (Story) => (
-      <TooltipProvider>
-        <Story />
-      </TooltipProvider>
-    ),
-  ],
   argTypes: {
     defaultOpen: {
       control: 'boolean',
@@ -98,10 +71,32 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-export const ShowInstantly: Story = {
+export const Default = {
   args: {
-    delayDuration: 0,
+    children: (
+      <>
+        <TooltipTrigger asChild>
+          <Button variant='outline'>Hover</Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>Add to library</p>
+        </TooltipContent>
+      </>
+    ),
   },
-};
+  decorators: [
+    (Story) => (
+      <TooltipProvider>
+        <Story />
+      </TooltipProvider>
+    ),
+  ],
+  parameters: {
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 200,
+      },
+    },
+  },
+} satisfies Story;

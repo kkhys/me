@@ -1,30 +1,14 @@
 import * as React from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import { addDays, format } from 'date-fns';
 import type { DateRange } from 'react-day-picker';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import { cn } from '#/lib/shadcn-ui/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '#/ui/data-display';
-import {
-  Calendar,
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '#/ui/data-entry';
-import { toast, ToastDecorator } from '#/ui/feedback';
+import { Calendar, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '#/ui/data-entry';
+import { FormDemo } from '#/ui/data-entry/calendar/index.stories';
+import { ToastDecorator } from '#/ui/feedback';
 import { Button } from '#/ui/general';
 
 const meta = {
@@ -145,70 +129,6 @@ const WithPresetsDemo = () => {
 export const WithPresets = {
   render: () => <WithPresetsDemo />,
 } satisfies Story;
-
-const FormDemo = () => {
-  const FormSchema = z.object({
-    dob: z.date({
-      required_error: 'A date of birth is required.',
-    }),
-  });
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
-
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  };
-
-  return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-        <FormField
-          control={form.control}
-          name='dob'
-          render={({ field }) => (
-            <FormItem className='flex flex-col'>
-              <FormLabel>Date of birth</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant={'outline'}
-                      className={cn('w-[240px] pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
-                    >
-                      {field.value ? format(field.value, 'PPP') : <span>Pick a date</span>}
-                      <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className='w-auto p-0' align='start'>
-                  <Calendar
-                    mode='single'
-                    selected={field.value}
-                    onSelect={field.onChange}
-                    disabled={(date) => date > new Date() || date < new Date('1900-01-01')}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormDescription>Your date of birth is used to calculate your age.</FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type='submit'>Submit</Button>
-      </form>
-    </Form>
-  );
-};
 
 export const FormStory = {
   name: 'Form',

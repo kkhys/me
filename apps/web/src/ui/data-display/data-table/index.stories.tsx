@@ -32,7 +32,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export interface Payment {
+interface Payment {
   id: string;
   amount: number;
   status: 'pending' | 'processing' | 'success' | 'failed';
@@ -272,6 +272,6 @@ const DataTableDemo = () => {
   );
 };
 
-export const Default: Story = {
+export const Default = {
   render: () => <DataTableDemo />,
-};
+} satisfies Story;

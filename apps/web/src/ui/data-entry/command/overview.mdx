@@ -7,7 +7,7 @@ import * as CommandStories from './index.stories';
 <Subtitle>Fast, composable, unstyled command menu for React.</Subtitle>
 <Canvas of={CommandStories.Default} />
 
-```jsx
+```tsx
 import { CalendarIcon, EnvelopeClosedIcon, FaceIcon, GearIcon, PersonIcon, RocketIcon } from '@radix-ui/react-icons';
 
 import {
@@ -21,7 +21,7 @@ import {
   CommandShortcut,
 } from '#/ui/data-entry';
 
-export const CommandDemo = () => (
+export default () => (
   <Command className='rounded-lg border shadow-md'>
     <CommandInput placeholder='Type a command or search...' />
     <CommandList>
@@ -65,13 +65,11 @@ export const CommandDemo = () => (
 
 ## About
 
-The `<Command />` component uses the <a href='https://cmdk.paco.me/' target='_blank' rel='noopener noreferrer'>cmdk</a> component by <a href='https://twitter.com/pacocoursey' target='_blank' rel='noopener noreferrer'>pacocoursey</a>.
+The `<Command />` component uses the [cmdk](https://cmdk.paco.me) component by [pacocoursey](https://twitter.com/pacocoursey).
 
 ## Anatomy
 
-Import all parts and piece them together.
-
-```jsx
+```tsx
 import {
   Command,
   CommandEmpty,
@@ -139,8 +137,8 @@ export default () => {
 
 ### Combobox
 
-You can use the `<Command />` component as a combobox. See the <a href='/?path=/story/data-entry-combobox-overview'>Combobox</a> page for more information.
+You can use the `<Command />` component as a combobox. See the [Combobox](/docs/data-entry-combobox--overview) page for more information.
 
 ## Reference
 
-- [shadcn/ui](https://ui.shadcn.com/docs/components/command)
+[shadcn/ui](https://ui.shadcn.com/docs/components/command)

@@ -8,10 +8,10 @@ import * as AccordionStories from './index.stories';
 <Canvas of={AccordionStories.Default} />
 <Controls of={AccordionStories.Default} />
 
-```jsx
+```tsx
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '#/ui/data-display';
 
-export const AccordionDemo = () => (
+export default () => (
   <Accordion type='single' className='w-[450px]'>
     <AccordionItem value='item-1'>
       <AccordionTrigger>Is it accessible?</AccordionTrigger>
@@ -31,15 +31,9 @@ export const AccordionDemo = () => (
 );
 ```
 
-## When To Use
-
-Can be used to group or hide complex regions to keep the page clean.
-
 ## Anatomy
 
-Import all parts and piece them together.
-
-```jsx
+```tsx
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '#/ui/data-display';
 
 export default () => (
@@ -52,60 +46,8 @@ export default () => (
 );
 ```
 
-## Examples
-
-### Expanded by default
-
-Use the `defaultValue` prop to define the open item by default.
-
-<Canvas of={AccordionStories.DefaultOpen} />
-
-```jsx
-import { Accordion, AccordionItem } from '#/ui/data-display';
-
-export default () => (
-  <Accordion type='single' defaultValue='item-2'>
-    <AccordionItem value='item-1'>…</AccordionItem>
-    <AccordionItem value='item-2'>…</AccordionItem>
-  </Accordion>
-);
-```
-
-### Allow collapsing all items
-
-Use the `collapsible` prop to allow all items to close.
-
-<Canvas of={AccordionStories.Collapsible} />
-
-```jsx
-import { Accordion, AccordionItem } from '#/ui/data-display';
-
-export default () => (
-  <Accordion type='single' collapsible>
-    <AccordionItem value='item-1'>…</AccordionItem>
-    <AccordionItem value='item-2'>…</AccordionItem>
-  </Accordion>
-);
-```
-
-### Multiple items open at the same time
-
-Set the `type` prop to `multiple` to enable opening multiple items at once.
-
-<Canvas of={AccordionStories.Multiple} />
-
-```jsx
-import { Accordion, AccordionItem } from '#/ui/data-display';
-
-export default () => (
-  <Accordion type='multiple'>
-    <AccordionItem value='item-1'>…</AccordionItem>
-    <AccordionItem value='item-2'>…</AccordionItem>
-  </Accordion>
-);
-```
-
 ## Reference
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/accordion)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/accordion)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion)

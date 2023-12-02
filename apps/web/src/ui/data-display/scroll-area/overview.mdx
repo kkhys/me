@@ -8,7 +8,7 @@ import * as ScrollAreaStories from './index.stories';
 <Canvas of={ScrollAreaStories.Default} />
 <Controls of={ScrollAreaStories.Default} />
 
-```jsx
+```tsx
 import * as React from 'react';
 
 import { ScrollArea } from '#/ui/data-display';
@@ -16,7 +16,7 @@ import { Separator } from '#/ui/layout';
 
 const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 
-export const ScrollAreaDemo = () => (
+export default () => (
   <ScrollArea className='h-72 w-48 rounded-md border'>
     <div className='p-4'>
       <h4 className='mb-4 text-sm font-medium leading-none'>Tags</h4>
@@ -35,9 +35,7 @@ export const ScrollAreaDemo = () => (
 
 ## Anatomy
 
-Import the component.
-
-```jsx
+```tsx
 import { ScrollArea } from '#/ui/data-display';
 
 export default () => <ScrollArea />;
@@ -49,7 +47,7 @@ export default () => <ScrollArea />;
 
 <Canvas of={ScrollAreaStories.HorizontalScrolling} />
 
-```jsx
+```tsx
 import * as React from 'react';
 import Image from 'next/image';
 
@@ -70,7 +68,7 @@ export const works = [
   },
 ];
 
-export const ScrollAreaHorizontalDemo = () => (
+export default () => (
   <ScrollArea className='w-96 whitespace-nowrap rounded-md border'>
     <div className='flex w-max space-x-4 p-4'>
       {works.map((artwork) => (

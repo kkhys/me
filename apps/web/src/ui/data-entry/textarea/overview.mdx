@@ -8,21 +8,15 @@ import * as TextareaStories from './index.stories';
 <Canvas of={TextareaStories.Default} />
 <Controls of={TextareaStories.Default} />
 
-```jsx
+```tsx
 import { Textarea } from '#/ui/data-entry';
 
 export default () => <Textarea placeholder='Type your message here.' />;
 ```
 
-## When To Use
-
-For multi-line input.
-
 ## Anatomy
 
-Import the component.
-
-```jsx
+```tsx
 import { Textarea } from '#/ui/data-entry';
 
 export default () => <Textarea />;
@@ -34,7 +28,7 @@ export default () => <Textarea />;
 
 <Canvas of={TextareaStories.Disabled} />
 
-```jsx
+```tsx
 import { Textarea } from '#/ui/data-entry';
 
 export default () => <Textarea placeholder='Type your message here.' disabled />;
@@ -44,7 +38,7 @@ export default () => <Textarea placeholder='Type your message here.' disabled />
 
 <Canvas of={TextareaStories.WithLabel} />
 
-```jsx
+```tsx
 import { Label, Textarea } from '#/ui/data-entry';
 
 export default () => (
@@ -59,7 +53,7 @@ export default () => (
 
 <Canvas of={TextareaStories.WithText} />
 
-```jsx
+```tsx
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
@@ -76,7 +70,7 @@ export default () => (
 
 <Canvas of={TextareaStories.WithButton} />
 
-```jsx
+```tsx
 import { Button, Textarea } from '#/ui/data-entry';
 
 export default () => (
@@ -166,4 +160,4 @@ export default () => {
 
 ## Reference
 
-- [shadcn/ui](https://ui.shadcn.com/docs/components/textarea)
+[shadcn/ui](https://ui.shadcn.com/docs/components/textarea)

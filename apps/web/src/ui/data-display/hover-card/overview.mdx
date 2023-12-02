@@ -8,13 +8,13 @@ import * as HoverCardStories from './index.stories';
 <Canvas of={HoverCardStories.Default} layout='fullscreen' />
 <Controls of={HoverCardStories.Default} />
 
-```jsx
+```tsx
 import { CalendarIcon } from '@radix-ui/react-icons';
 
 import { Avatar, AvatarFallback, AvatarImage, HoverCard, HoverCardContent, HoverCardTrigger } from '#/ui/data-display';
 import { Button } from '#/ui/general';
 
-export const HoverCardDemo = () => (
+export default () => (
   <HoverCard>
     <HoverCardTrigger asChild>
       <Button variant='link'>@nextjs</Button>
@@ -41,34 +41,13 @@ export const HoverCardDemo = () => (
 
 ## Anatomy
 
-Import all parts and piece them together.
-
-```jsx
+```tsx
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '#/ui/data-display';
 
 export default () => (
   <HoverCard>
     <HoverCardTrigger />
     <HoverCardContent />
-  </HoverCard>
-);
-```
-
-## Examples
-
-### Show instantly
-
-Use the `openDelay` prop to control the time it takes for the hover card to open.
-
-<Canvas of={HoverCardStories.ShowInstantly} layout='fullscreen' />
-
-```jsx
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '#/ui/data-display';
-
-export default () => (
-  <HoverCard openDelay={0}>
-    <HoverCardTrigger>…</HoverCardTrigger>
-    <HoverCardContent>…</HoverCardContent>
   </HoverCard>
 );
 ```

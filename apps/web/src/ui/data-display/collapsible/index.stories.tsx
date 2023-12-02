@@ -79,7 +79,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     className: 'w-[350px] space-y-2',
     children: (
@@ -101,4 +101,4 @@ export const Default: Story = {
       </>
     ),
   },
-};
+} satisfies Story;

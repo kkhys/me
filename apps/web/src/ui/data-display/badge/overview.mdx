@@ -8,22 +8,15 @@ import * as BadgeStories from './index.stories';
 <Canvas of={BadgeStories.Default} />
 <Controls of={BadgeStories.Default} />
 
-```jsx
+```tsx
 import { Badge } from '#/ui/data-display';
 
-export const BadgeDemo = () => <Badge>Badge</Badge>;
+export default () => <Badge>Badge</Badge>;
 ```
-
-## When To Use
-
-- It can be used to tag by dimension or property.
-- When categorizing.
 
 ## Anatomy
 
-Import the component.
-
-```jsx
+```tsx
 import { Badge } from '#/ui/data-display';
 
 export default () => <Badge />;
@@ -35,14 +28,16 @@ export default () => <Badge />;
 
 You can use the `badgeVariants` helper to create a link that looks like a badge.
 
-```jsx
+```tsx
 import Link from 'next/link';
 
 import { badgeVariants } from '#/ui/data-display';
 
-<Link href='/' className={badgeVariants({ variant: 'outline' })}>
-  Badge
-</Link>;
+export default () => (
+  <Link href='/' className={badgeVariants({ variant: 'outline' })}>
+    Badge
+  </Link>
+);
 ```
 
 ## Examples
@@ -51,30 +46,30 @@ import { badgeVariants } from '#/ui/data-display';
 
 <Canvas of={BadgeStories.Default} />
 
-```jsx
+```tsx
 import { Badge } from '#/ui/data-display';
 
-<Badge variant='secondary'>Secondary</Badge>;
+export default () => <Badge variant='secondary'>Secondary</Badge>;
 ```
 
 ### Outline
 
 <Canvas of={BadgeStories.Outline} />
 
-```jsx
+```tsx
 import { Badge } from '#/ui/data-display';
 
-<Badge variant='outline'>Outline</Badge>;
+export default () => <Badge variant='outline'>Outline</Badge>;
 ```
 
 ### Destructive
 
 <Canvas of={BadgeStories.Destructive} />
 
-```jsx
+```tsx
 import { Badge } from '#/ui/data-display';
 
-<Badge variant='destructive'>Destructive</Badge>;
+export default () => <Badge variant='destructive'>Destructive</Badge>;
 ```
 
 ## Reference

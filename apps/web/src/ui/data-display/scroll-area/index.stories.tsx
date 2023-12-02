@@ -81,7 +81,7 @@ type Story = StoryObj<typeof meta>;
 
 const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 
-export const Default: Story = {
+export const Default = {
   args: {
     className: 'h-72 w-48 rounded-md border',
     children: (
@@ -98,7 +98,7 @@ export const Default: Story = {
       </div>
     ),
   },
-};
+} satisfies Story;
 
 const works = [
   {
@@ -115,7 +115,7 @@ const works = [
   },
 ];
 
-export const HorizontalScrolling: Story = {
+export const HorizontalScrolling = {
   args: {
     className: 'w-96 whitespace-nowrap rounded-md border',
     children: (
@@ -142,4 +142,4 @@ export const HorizontalScrolling: Story = {
       </>
     ),
   },
-};
+} satisfies Story;

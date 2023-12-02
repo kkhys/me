@@ -10,10 +10,10 @@ import * as RadioGroupStories from './index.stories';
 <Canvas of={RadioGroupStories.Default} />
 <Controls of={RadioGroupStories.Default} />
 
-```jsx
+```tsx
 import { Label, RadioGroup, RadioGroupItem } from '#/ui/data-entry';
 
-export const RadioGroupDemo = () => (
+export default () => (
   <RadioGroup defaultValue='comfortable'>
     <div className='flex items-center space-x-2'>
       <RadioGroupItem value='default' id='r1' />
@@ -31,16 +31,9 @@ export const RadioGroupDemo = () => (
 );
 ```
 
-## When To Use
-
-- Used to select a single state from multiple options.
-- The difference from Select is that Radio is visible to the user and can facilitate the comparison of choice, which means there shouldn't be too many of them.
-
 ## Anatomy
 
-Import all parts and piece them together.
-
-```jsx
+```tsx
 import { RadioGroup, RadioGroupItem } from '#/ui/data-entry';
 
 export default () => (
@@ -82,7 +75,7 @@ const FormSchema = z.object({
   }),
 });
 
-export const RadioGroupForm = () => {
+export default () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
@@ -143,3 +136,9 @@ export const RadioGroupForm = () => {
   );
 };
 ```
+
+## Reference
+
+- [shadcn/ui](https://ui.shadcn.com/docs/components/radio-group)
+- [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/radio-group)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radiobutton)

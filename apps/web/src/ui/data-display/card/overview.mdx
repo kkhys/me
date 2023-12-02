@@ -7,62 +7,54 @@ import * as CardStories from './index.stories';
 <Subtitle>Displays a card with header, content, and footer.</Subtitle>
 <Canvas of={CardStories.Default} />
 
-```jsx
+```tsx
 import * as React from 'react';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/ui/data-display';
 import { Input, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '#/ui/data-entry';
 import { Button } from '#/ui/general';
 
-export const CardWithForm = () => {
-  return (
-    <Card className='w-[350px]'>
-      <CardHeader>
-        <CardTitle>Create project</CardTitle>
-        <CardDescription>Deploy your new project in one-click.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form>
-          <div className='grid w-full items-center gap-4'>
-            <div className='flex flex-col space-y-1.5'>
-              <Label htmlFor='name'>Name</Label>
-              <Input id='name' placeholder='Name of your project' />
-            </div>
-            <div className='flex flex-col space-y-1.5'>
-              <Label htmlFor='framework'>Framework</Label>
-              <Select>
-                <SelectTrigger id='framework'>
-                  <SelectValue placeholder='Select' />
-                </SelectTrigger>
-                <SelectContent position='popper'>
-                  <SelectItem value='next'>Next.js</SelectItem>
-                  <SelectItem value='sveltekit'>SvelteKit</SelectItem>
-                  <SelectItem value='astro'>Astro</SelectItem>
-                  <SelectItem value='nuxt'>Nuxt.js</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+export default () => (
+  <Card className='w-[350px]'>
+    <CardHeader>
+      <CardTitle>Create project</CardTitle>
+      <CardDescription>Deploy your new project in one-click.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <form>
+        <div className='grid w-full items-center gap-4'>
+          <div className='flex flex-col space-y-1.5'>
+            <Label htmlFor='name'>Name</Label>
+            <Input id='name' placeholder='Name of your project' />
           </div>
-        </form>
-      </CardContent>
-      <CardFooter className='flex justify-between'>
-        <Button variant='outline'>Cancel</Button>
-        <Button>Deploy</Button>
-      </CardFooter>
-    </Card>
-  );
-};
+          <div className='flex flex-col space-y-1.5'>
+            <Label htmlFor='framework'>Framework</Label>
+            <Select>
+              <SelectTrigger id='framework'>
+                <SelectValue placeholder='Select' />
+              </SelectTrigger>
+              <SelectContent position='popper'>
+                <SelectItem value='next'>Next.js</SelectItem>
+                <SelectItem value='sveltekit'>SvelteKit</SelectItem>
+                <SelectItem value='astro'>Astro</SelectItem>
+                <SelectItem value='nuxt'>Nuxt.js</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+      </form>
+    </CardContent>
+    <CardFooter className='flex justify-between'>
+      <Button variant='outline'>Cancel</Button>
+      <Button>Deploy</Button>
+    </CardFooter>
+  </Card>
+);
 ```
-
-## When To Use
-
-A card can be used to display content related to a single subject. The content can consist of multiple elements of varying types and sizes.
 
 ## Anatomy
 
-Import all parts and piece them together.
-
-```jsx
+```tsx
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/ui/data-display';
 
 export default () => (
@@ -83,10 +75,9 @@ export default () => (
 
 <Canvas of={CardStories.Default2} />
 
-```jsx
+```tsx
 import { BellIcon, CheckIcon } from '@radix-ui/react-icons';
 
-import { cn } from '#/lib/shadcn-ui/utils';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/ui/data-display';
 import { Switch } from '#/ui/data-entry';
 import { Button } from '#/ui/general';
@@ -106,8 +97,8 @@ const notifications = [
   },
 ];
 
-export const CardDemo = ({ className, ...props }) => (
-  <Card className={cn('w-[380px]', className)} {...props}>
+export default () => (
+  <Card className='w-[380px]'>
     <CardHeader>
       <CardTitle>Notifications</CardTitle>
       <CardDescription>You have 3 unread messages.</CardDescription>
@@ -144,4 +135,4 @@ export const CardDemo = ({ className, ...props }) => (
 
 ## Reference
 
-- [shadcn/ui](https://ui.shadcn.com/docs/components/card)
+[shadcn/ui](https://ui.shadcn.com/docs/components/card)

@@ -8,21 +8,15 @@ import * as SliderStories from './index.stories';
 <Canvas of={SliderStories.Default} />
 <Controls of={SliderStories.Default} />
 
-```jsx
+```tsx
 import { Slider } from '#/ui/data-entry';
 
 export default () => <Slider defaultValue={[50]} max={100} step={1} />;
 ```
 
-## When To Use
-
-To input a value in a range.
-
 ## Anatomy
 
-Import the component.
-
-```jsx
+```tsx
 import { Slider } from '#/ui/data-entry';
 
 export default () => <Slider />;
@@ -32,3 +26,4 @@ export default () => <Slider />;
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/slider)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/slider)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slidertwothumb)

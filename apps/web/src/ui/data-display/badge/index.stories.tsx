@@ -35,29 +35,29 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     children: 'Badge',
   },
-};
+} satisfies Story;
 
-export const Secondary: Story = {
+export const Secondary = {
   args: {
     variant: 'secondary',
     children: 'Secondary',
   },
-};
+} satisfies Story;
 
-export const Outline: Story = {
+export const Outline = {
   args: {
     variant: 'outline',
     children: 'Outline',
   },
-};
+} satisfies Story;
 
-export const Destructive: Story = {
+export const Destructive = {
   args: {
     variant: 'destructive',
     children: 'Destructive',
   },
-};
+} satisfies Story;

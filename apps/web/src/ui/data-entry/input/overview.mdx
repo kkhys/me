@@ -8,22 +8,15 @@ import * as InputStories from './index.stories';
 <Canvas of={InputStories.Default} />
 <Controls of={InputStories.Default} />
 
-```jsx
+```tsx
 import { Input } from '#/ui/data-entry';
 
 export const InputDemo = () => <Input type='email' placeholder='Email' />;
 ```
 
-## When To Use
-
-- A user input in a form field is needed.
-- A search input is required.
-
 ## Anatomy
 
-Import the component.
-
-```jsx
+```tsx
 import { Input } from '#/ui/data-entry';
 
 export default () => <Input />;
@@ -35,7 +28,7 @@ export default () => <Input />;
 
 <Canvas of={InputStories.File} />
 
-```jsx
+```tsx
 import { Input, Label } from '#/ui/data-entry';
 
 export default () => (
@@ -50,7 +43,7 @@ export default () => (
 
 <Canvas of={InputStories.Disabled} />
 
-```jsx
+```tsx
 import { Input } from '#/ui/data-entry';
 
 export default () => <Input disabled type='email' placeholder='Email' />;
@@ -60,7 +53,7 @@ export default () => <Input disabled type='email' placeholder='Email' />;
 
 <Canvas of={InputStories.WithLabel} />
 
-```jsx
+```tsx
 import { Input, Label } from '#/ui/data-entry';
 
 export default () => (
@@ -75,7 +68,7 @@ export default () => (
 
 <Canvas of={InputStories.WithButton} />
 
-```jsx
+```tsx
 import { Button, Input } from '#/ui/data-entry';
 
 export default () => (
@@ -90,7 +83,7 @@ export default () => (
 
 <Canvas of={InputStories.FormStory} layout='fullscreen' />
 
-```jsx
+```tsx
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -105,7 +98,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
-} from '#/ui/data-entry;'
+} from '#/ui/data-entry;';
 import { toast } from '#/ui/feedback';
 
 const FormSchema = z.object({
@@ -117,9 +110,9 @@ const FormSchema = z.object({
 const form = useForm<z.infer<typeof FormSchema>>({
   resolver: zodResolver(FormSchema),
   defaultValues: {
-    username: "",
+    username: '',
   },
-})
+});
 
 const onSubmit = (data: z.infer<typeof FormSchema>) => {
   toast({
@@ -157,4 +150,4 @@ export default () => (
 
 ## Reference
 
-- [shadcn/ui](https://ui.shadcn.com/docs/components/input)
+[shadcn/ui](https://ui.shadcn.com/docs/components/input)

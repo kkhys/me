@@ -51,7 +51,7 @@ const DefaultDemo = () => {
   return <Calendar mode='single' selected={date} onSelect={setDate} className='rounded-md border shadow' />;
 };
 
-export const Default: Story = {
+export const Default = {
   render: () => <DefaultDemo />,
   parameters: {
     docs: {
@@ -61,15 +61,15 @@ export const Default: Story = {
       },
     },
   },
-};
+} satisfies Story;
 
-const FormSchema = z.object({
-  dob: z.date({
-    required_error: 'A date of birth is required.',
-  }),
-});
+export const FormDemo = () => {
+  const FormSchema = z.object({
+    dob: z.date({
+      required_error: 'A date of birth is required.',
+    }),
+  });
 
-const FormDemo = () => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
@@ -127,7 +127,7 @@ const FormDemo = () => {
   );
 };
 
-export const FormStory: Story = {
+export const FormStory = {
   name: 'Form',
   render: () => <FormDemo />,
   decorators: [ToastDecorator],
@@ -139,4 +139,4 @@ export const FormStory: Story = {
       },
     },
   },
-};
+} satisfies Story;

@@ -40,17 +40,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const defaultCheckboxId = 'default-checkbox';
-
 export const Default = {
   args: {
     children: 'Accept terms and conditions',
-    htmlFor: defaultCheckboxId,
+    htmlFor: 'default-checkbox',
   },
   decorators: [
     (Story) => (
       <div className='flex items-center space-x-2'>
-        <Checkbox id={defaultCheckboxId} aria-label='Accept terms and conditionsA' />
+        <Checkbox id='default-checkbox' aria-label='Accept terms and conditionsA' />
         <Story />
       </div>
     ),

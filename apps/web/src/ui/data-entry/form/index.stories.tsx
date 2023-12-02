@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { FormDemo } from '#/ui/data-entry/input/index.stories';
 import { ToastDecorator } from '#/ui/feedback';
@@ -10,7 +10,7 @@ const meta = {
 } satisfies Meta<typeof Form>;
 
 export default meta;
-type Story = Meta<typeof Form>;
+type Story = StoryObj<typeof Form>;
 
 export const Default = {
   render: () => <FormDemo />,

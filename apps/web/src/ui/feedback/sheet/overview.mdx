@@ -8,7 +8,7 @@ import * as SheetStories from './index.stories';
 <Canvas of={SheetStories.Default} />
 <Controls of={SheetStories.Default} />
 
-```jsx
+```tsx
 import { Input, Label } from '#/ui/data-entry';
 import {
   Sheet,
@@ -58,7 +58,7 @@ export default () => (
 
 ## Anatomy
 
-```jsx
+```tsx
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '#/ui/feedback';
 
 export default () => (
@@ -142,7 +142,7 @@ export default () => (
 
 You can adjust the size of the sheet using CSS classes:
 
-```jsx
+```tsx
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '#/ui/feedback';
 
 export default () => (
@@ -164,3 +164,4 @@ export default () => (
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/dialog)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/dialog)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal)

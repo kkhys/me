@@ -67,6 +67,6 @@ const DefaultDemo = () => {
   return <Progress value={progress} className='w-[350px]' />;
 };
 
-export const Default: Story = {
+export const Default = {
   render: () => <DefaultDemo />,
-};
+} satisfies Story;

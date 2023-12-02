@@ -8,10 +8,10 @@ import * as AvatarStories from './index.stories';
 <Canvas of={AvatarStories.Default} />
 <Controls of={AvatarStories.Default} />
 
-```jsx
+```tsx
 import { Avatar, AvatarFallback, AvatarImage } from '#/ui/data-display';
 
-export const AvatarDemo = () => (
+export default = () => (
   <Avatar>
     <AvatarImage src='https://github.com/kkhys.png' alt='@kkhys' />
     <AvatarFallback>KK</AvatarFallback>
@@ -21,9 +21,7 @@ export const AvatarDemo = () => (
 
 ## Anatomy
 
-Import all parts and piece them together.
-
-```jsx
+```tsx
 import { Avatar, AvatarFallback, AvatarImage } from '#/ui/data-display';
 
 export default () => (
@@ -31,29 +29,6 @@ export default () => (
     <AvatarImage />
     <AvatarFallback />
   </Avatar>
-);
-```
-
-## Examples
-
-### Clickable Avatar with tooltip
-
-You can compose the Avatar with a <a href='/?path=/docs/data-display-tooltip--overview'>Tooltip</a> to display extra information.
-
-<Canvas of={AvatarStories.WithTooltip} />
-
-```jsx
-import { Avatar, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
-
-export default () => (
-  <TooltipProvider>
-    <Tooltip>
-      <TooltipTrigger>
-        <Avatar>…</Avatar>
-      </TooltipTrigger>
-      <TooltipContent side='top'>Tooltip content</TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
 );
 ```
 

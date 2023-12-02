@@ -17,7 +17,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   render: () => (
     <div className='flex items-center space-x-4'>
       <Skeleton className='h-12 w-12 rounded-full' />
@@ -27,4 +27,4 @@ export const Default: Story = {
       </div>
     </div>
   ),
-};
+} satisfies Story;

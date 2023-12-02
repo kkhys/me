@@ -10,7 +10,7 @@ import * as DialogStories from './index.stories';
 <Canvas of={DialogStories.Default} />
 <Controls of={DialogStories.Default} />
 
-```jsx
+```tsx
 import { Input, Label } from '#/ui/data-entry';
 import {
   Dialog,
@@ -57,7 +57,7 @@ export default () => (
 
 ## Anatomy
 
-```jsx
+```tsx
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '#/ui/feedback';
 
 export default () => (
@@ -75,9 +75,10 @@ export default () => (
 
 ## Notes
 
-To activate the `Dialog` component from within a `Context Menu` or `Dropdown Menu`, you must encase the `Context Menu` or `Dropdown Menu` component in the `Dialog` component. For more information, refer to the linked issue <a href='https://github.com/radix-ui/primitives/issues/1836' target='_blank' rel='noopener noreferrer'>here</a>.
+To activate the `Dialog` component from within a `Context Menu` or `Dropdown Menu`, you must encase the `Context Menu` or `Dropdown Menu` component in the `Dialog` component. For more information, refer to the linked issue [here](https://github.com/radix-ui/primitives/issues/1836).
 
 ## Reference
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/dialog)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/dialog)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal)

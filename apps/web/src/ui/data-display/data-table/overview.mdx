@@ -7,12 +7,13 @@ import * as DataTableStories from './index.stories';
 <Subtitle>Powerful table and datagrids built using TanStack Table.</Subtitle>
 <Canvas of={DataTableStories.Default} />
 
-```jsx
+```tsx
 'use client';
 
 import * as React from 'react';
 import { CaretSortIcon, ChevronDownIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
 import {
+  ColumnDef,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -33,6 +34,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '#/ui/navigation';
+
+type Payment = {
+  id: string;
+  amount: number;
+  status: 'pending' | 'processing' | 'success' | 'failed';
+  email: string;
+};
 
 const data = [
   {
@@ -65,7 +73,7 @@ const data = [
     status: 'failed',
     email: 'carmella@hotmail.com',
   },
-];
+] satisfies Payment[];
 
 export const columns = [
   {
@@ -145,9 +153,9 @@ export const columns = [
       );
     },
   },
-];
+] satisfies ColumnDef<Payment>[];
 
-export const DataTableDemo = () => {
+export default () => {
   const [sorting, setSorting] = React.useState([]);
   const [columnFilters, setColumnFilters] = React.useState([]);
   const [columnVisibility, setColumnVisibility] = React.useState({});
@@ -267,3 +275,4 @@ export const DataTableDemo = () => {
 ## Reference
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/data-table)
+- [TanStack Table](https://tanstack.com/table)

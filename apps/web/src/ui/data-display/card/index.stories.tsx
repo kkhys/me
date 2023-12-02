@@ -34,7 +34,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     className: 'w-[350px]',
     children: (
@@ -74,7 +74,7 @@ export const Default: Story = {
       </>
     ),
   },
-};
+} satisfies Story;
 
 const notifications = [
   {
@@ -91,7 +91,7 @@ const notifications = [
   },
 ];
 
-export const Default2: Story = {
+export const Default2 = {
   args: {
     className: 'w-[380px]',
     children: (
@@ -129,4 +129,4 @@ export const Default2: Story = {
       </>
     ),
   },
-};
+} satisfies Story;

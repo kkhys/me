@@ -8,16 +8,20 @@ import * as SwitchStories from './index.stories';
 <Canvas of={SwitchStories.Default} />
 <Controls of={SwitchStories.Default} />
 
-## When to use
+```tsx
+import { Label, Switch } from '#/ui/data-entry';
 
-- If you need to represent the switching between two states or on-off state.
-- The difference between `Switch` and `Checkbox` is that `Switch` will trigger a state change directly when you toggle it, while `Checkbox` is generally used for state marking, which should work in conjunction with submit operation.
+export default () => (
+  <div className='flex items-center space-x-2'>
+    <Switch id='airplane-mode' />
+    <Label htmlFor='airplane-mode'>Airplane Mode</Label>
+  </div>
+);
+```
 
 ## Anatomy
 
-Import the component.
-
-```jsx
+```tsx
 import { Switch } from '#/ui/data-entry';
 
 export default () => <Switch />;
@@ -113,3 +117,4 @@ export default () => {
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/switch)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/switch)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch)

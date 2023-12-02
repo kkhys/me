@@ -209,9 +209,9 @@ const DefaultDemo = () => {
   );
 };
 
-export const Default: Story = {
+export const Default = {
   render: () => <DefaultDemo />,
-};
+} satisfies Story;
 
 const SimpleDemo = () => {
   const { toast } = useToast();
@@ -230,9 +230,9 @@ const SimpleDemo = () => {
   );
 };
 
-export const Simple: Story = {
+export const Simple = {
   render: () => <SimpleDemo />,
-};
+} satisfies Story;
 
 const WithTitleDemo = () => {
   const { toast } = useToast();
@@ -252,9 +252,9 @@ const WithTitleDemo = () => {
   );
 };
 
-export const WithTitle: Story = {
+export const WithTitle = {
   render: () => <WithTitleDemo />,
-};
+} satisfies Story;
 
 const WithActionDemo = () => {
   const { toast } = useToast();
@@ -275,9 +275,9 @@ const WithActionDemo = () => {
   );
 };
 
-export const WithAction: Story = {
+export const WithAction = {
   render: () => <WithActionDemo />,
-};
+} satisfies Story;
 
 const DestructiveDemo = () => {
   const { toast } = useToast();
@@ -299,6 +299,6 @@ const DestructiveDemo = () => {
   );
 };
 
-export const Destructive: Story = {
+export const Destructive = {
   render: () => <DestructiveDemo />,
-};
+} satisfies Story;

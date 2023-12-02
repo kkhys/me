@@ -11,11 +11,11 @@ import * as TooltipStories from './index.stories';
 <Canvas of={TooltipStories.Default} />
 <Controls of={TooltipStories.Default} />
 
-```jsx
+```tsx
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
 import { Button } from '#/ui/general';
 
-export const TooltipDemo = () => (
+export default () => (
   <TooltipProvider>
     <Tooltip>
       <TooltipTrigger asChild>
@@ -29,16 +29,9 @@ export const TooltipDemo = () => (
 );
 ```
 
-## When To Use
-
-- The tip is shown on mouse enter, and is hidden on mouse leave. The Tooltip doesn't support complex text or operations.
-- To provide an explanation of a `button/text/operation`. It's often used instead of the html `title` attribute.
-
 ## Anatomy
 
-Import all parts and piece them together.
-
-```jsx
+```tsx
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
 
 export default () => (
@@ -51,31 +44,8 @@ export default () => (
 );
 ```
 
-## Examples
-
-### Show instantly
-
-Use the `delayDuration` prop to control the time it takes for the tooltip to open.
-
-<Canvas of={TooltipStories.ShowInstantly} />
-
-```jsx
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/ui/data-display";
-
-export default () => <TooltipProvider>
-  <Tooltip delayDuration={0}>>
-    <TooltipTrigger>…</TooltipTrigger>
-    <TooltipContent>…<TooltipContent>
-  </Tooltip>
-</TooltipProvider>
-```
-
 ## Reference
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/tooltip)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/tooltip)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip)

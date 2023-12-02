@@ -8,7 +8,7 @@ import * as TabsStories from './index.stories';
 <Canvas of={TabsStories.Default} />
 <Controls of={TabsStories.Default} />
 
-```jsx
+```tsx
 import {
   Card,
   CardContent,
@@ -24,7 +24,7 @@ import {
 import { Input, Label } from '#/ui/data-entry';
 import { Button } from '#/ui/general';
 
-export const TabsDemo = () => (
+export default () => (
   <Tabs defaultValue='account' className='w-[400px]'>
     <TabsList className='grid w-full grid-cols-2'>
       <TabsTrigger value='account'>Account</TabsTrigger>
@@ -78,9 +78,7 @@ export const TabsDemo = () => (
 
 ## Anatomy
 
-Import all parts and piece them together.
-
-```jsx
+```tsx
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#/ui/data-display';
 
 export default () => (
@@ -97,3 +95,4 @@ export default () => (
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/tabs)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/tabs)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabpanel)

@@ -8,21 +8,15 @@ import * as ButtonStories from './index.stories';
 <Canvas of={ButtonStories.Default} />
 <Controls />
 
-```jsx
+```tsx
 import { Button } from '#/ui/general';
 
-export const ButtonDemo = () => <Button>Button</Button>;
+export default () => <Button>Button</Button>;
 ```
-
-## When to use
-
-A button means an operation (or a series of operations). Clicking a button will trigger corresponding business logic.
 
 ## Anatomy
 
-Import the component.
-
-```jsx
+```tsx
 import { Button } from '#/ui/general';
 
 export default () => <Button />;
@@ -32,7 +26,7 @@ export default () => <Button />;
 
 You can use the `buttonVariants` helper to create a link that looks like a button.
 
-```jsx
+```tsx
 import Link from 'next/link';
 
 import { buttonVariants } from '#/ui/general';
@@ -46,7 +40,7 @@ export default () => (
 
 Alternatively, you can set the `asChild` parameter and nest the link component.
 
-```jsx
+```tsx
 import Link from 'next/link';
 
 import { Button } from '#/ui/general';
@@ -64,7 +58,7 @@ export default () => (
 
 <Canvas of={ButtonStories.Secondary} />
 
-```jsx
+```tsx
 import { Button } from '#/ui/general';
 
 export default () => <Button variant='secondary'>Secondary</Button>;
@@ -74,7 +68,7 @@ export default () => <Button variant='secondary'>Secondary</Button>;
 
 <Canvas of={ButtonStories.Destructive} />
 
-```jsx
+```tsx
 import { Button } from '#/ui/general';
 
 export default () => <Button variant='destructive'>Destructive</Button>;
@@ -84,7 +78,7 @@ export default () => <Button variant='destructive'>Destructive</Button>;
 
 <Canvas of={ButtonStories.Outline} />
 
-```jsx
+```tsx
 import { Button } from '#/ui/general';
 
 export default () => <Button variant='outline'>Outline</Button>;
@@ -94,7 +88,7 @@ export default () => <Button variant='outline'>Outline</Button>;
 
 <Canvas of={ButtonStories.Ghost} />
 
-```jsx
+```tsx
 import { Button } from '#/ui/general';
 
 export default () => <Button variant='ghost'>Ghost</Button>;
@@ -104,7 +98,7 @@ export default () => <Button variant='ghost'>Ghost</Button>;
 
 <Canvas of={ButtonStories.Link} />
 
-```jsx
+```tsx
 import { Button } from '#/ui/general';
 
 export default () => <Button variant='link'>Link</Button>;
@@ -114,7 +108,7 @@ export default () => <Button variant='link'>Link</Button>;
 
 <Canvas of={ButtonStories.Icon} />
 
-```jsx
+```tsx
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 
 import { Button } from '#/ui/general';
@@ -130,7 +124,7 @@ export default () => (
 
 <Canvas of={ButtonStories.WithIcon} />
 
-```jsx
+```tsx
 import { EnvelopeOpenIcon } from '@radix-ui/react-icons';
 
 import { Button } from '#/ui/general';
@@ -146,7 +140,7 @@ export default () => (
 
 <Canvas of={ButtonStories.Loading} />
 
-```jsx
+```tsx
 import { ReloadIcon } from '@radix-ui/react-icons';
 
 import { Button } from '#/ui/general';
@@ -163,7 +157,7 @@ export default () => (
 
 <Canvas of={ButtonStories.AsChild} />
 
-```jsx
+```tsx
 import Link from 'next/link';
 
 import { Button } from '#/ui/general';
@@ -178,3 +172,4 @@ export default () => (
 ## Reference
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/button)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/button)

@@ -74,57 +74,57 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     children: 'Button',
   },
-};
+} satisfies Story;
 
-export const Secondary: Story = {
+export const Secondary = {
   args: {
     variant: 'secondary',
     children: 'Secondary',
   },
-};
+} satisfies Story;
 
-export const Destructive: Story = {
+export const Destructive = {
   args: {
     variant: 'destructive',
     children: 'Destructive',
   },
-};
+} satisfies Story;
 
-export const Outline: Story = {
+export const Outline = {
   args: {
     variant: 'outline',
     children: 'Outline',
   },
-};
+} satisfies Story;
 
-export const Ghost: Story = {
+export const Ghost = {
   args: {
     variant: 'ghost',
     children: 'Ghost',
   },
-};
+} satisfies Story;
 
-export const Link: Story = {
+export const Link = {
   args: {
     variant: 'link',
     children: 'Link',
   },
-};
+} satisfies Story;
 
-export const Icon: Story = {
+export const Icon = {
   args: {
     variant: 'outline',
     size: 'icon',
     'aria-label': 'Next',
     children: <ChevronRightIcon className='h-4 w-4' />,
   },
-};
+} satisfies Story;
 
-export const WithIcon: Story = {
+export const WithIcon = {
   args: {
     children: (
       <>
@@ -132,9 +132,9 @@ export const WithIcon: Story = {
       </>
     ),
   },
-};
+} satisfies Story;
 
-export const Loading: Story = {
+export const Loading = {
   args: {
     disabled: true,
     children: (
@@ -144,11 +144,11 @@ export const Loading: Story = {
       </>
     ),
   },
-};
+} satisfies Story;
 
-export const AsChild: Story = {
+export const AsChild = {
   args: {
     asChild: true,
     children: <NextLink href='/?path=/story/general-button--as-child'>Login</NextLink>,
   },
-};
+} satisfies Story;

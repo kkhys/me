@@ -2,32 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '.';
 
-const AccordionItems = () => (
-  <>
-    <AccordionItem value='item-1'>
-      <AccordionTrigger>Is it accessible?</AccordionTrigger>
-      <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
-    </AccordionItem>
-    <AccordionItem value='item-2'>
-      <AccordionTrigger>Is it unstyled?</AccordionTrigger>
-      <AccordionContent>
-        Yes. It&apos;s unstyled by default, giving you freedom over the look and feel.
-      </AccordionContent>
-    </AccordionItem>
-    <AccordionItem value='item-3'>
-      <AccordionTrigger>Can it be animated?</AccordionTrigger>
-      <AccordionContent>Yes! You can animate the Accordion with CSS or JavaScript.</AccordionContent>
-    </AccordionItem>
-  </>
-);
-
 const meta = {
   title: 'Data Display / Accordion',
   component: Accordion,
-  args: {
-    className: 'w-[450px]',
-    children: <AccordionItems />,
-  },
   argTypes: {
     asChild: {
       control: 'boolean',
@@ -158,28 +135,27 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
     type: 'single',
+    className: 'w-[450px]',
+    children: (
+      <>
+        <AccordionItem value='item-1'>
+          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+        </AccordionItem>
+        <AccordionItem value='item-2'>
+          <AccordionTrigger>Is it unstyled?</AccordionTrigger>
+          <AccordionContent>
+            Yes. It&apos;s unstyled by default, giving you freedom over the look and feel.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value='item-3'>
+          <AccordionTrigger>Can it be animated?</AccordionTrigger>
+          <AccordionContent>Yes! You can animate the Accordion with CSS or JavaScript.</AccordionContent>
+        </AccordionItem>
+      </>
+    ),
   },
-};
-
-export const DefaultOpen: Story = {
-  args: {
-    type: 'single',
-    defaultValue: 'item-2',
-  },
-};
-
-export const Collapsible: Story = {
-  args: {
-    type: 'single',
-    collapsible: true,
-  },
-};
-
-export const Multiple: Story = {
-  args: {
-    type: 'multiple',
-  },
-};
+} satisfies Story;

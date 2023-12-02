@@ -8,12 +8,12 @@ import * as PopoverStories from './index.stories';
 <Canvas of={PopoverStories.Default} />
 <Controls of={PopoverStories.Default} />
 
-```jsx
+```tsx
 import { Popover, PopoverContent, PopoverTrigger } from '#/ui/data-display';
 import { Input, Label } from '#/ui/data-entry';
 import { Button } from '#/ui/general';
 
-export const PopoverDemo = () => (
+export default () => (
   <Popover>
     <PopoverTrigger asChild>
       <Button variant='outline'>Open popover</Button>
@@ -48,16 +48,9 @@ export const PopoverDemo = () => (
 );
 ```
 
-## When To Use
-
-- A simple popup menu to provide extra information or operations.
-- Comparing with `HoverCard`, besides information `Popover` card can also provide action elements like links and buttons.
-
 ## Anatomy
 
-Import all parts and piece them together.
-
-```jsx
+```tsx
 import { Popover, PopoverContent, PopoverTrigger } from '#/ui/data-display';
 
 export default () => (
@@ -72,3 +65,4 @@ export default () => (
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/popover)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/popover)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal)

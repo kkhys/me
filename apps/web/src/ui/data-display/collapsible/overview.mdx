@@ -8,7 +8,7 @@ import * as CollapsibleStories from './index.stories';
 <Canvas of={CollapsibleStories.Default} />
 <Controls of={CollapsibleStories.Default} />
 
-```jsx
+```tsx
 'use client';
 
 import * as React from 'react';
@@ -17,7 +17,7 @@ import { CaretSortIcon } from '@radix-ui/react-icons';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '#/ui/data-display';
 import { Button } from '#/ui/general';
 
-export const CollapsibleDemo = () => {
+export default () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
@@ -43,9 +43,7 @@ export const CollapsibleDemo = () => {
 
 ## Anatomy
 
-Import the components and piece the parts together.
-
-```jsx
+```tsx
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '#/ui/data-display';
 
 export default () => (
@@ -60,3 +58,4 @@ export default () => (
 
 - [shadcn/ui](https://ui.shadcn.com/docs/components/collapsible)
 - [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/collapsible)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)

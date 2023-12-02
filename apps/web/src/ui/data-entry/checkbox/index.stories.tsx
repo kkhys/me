@@ -124,28 +124,24 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const defaultCheckboxId = 'default-checkbox';
-const withTextCheckboxId = 'with-text-checkbox';
-const disabledCheckboxId = 'disabled-checkbox';
-
-export const Default: Story = {
+export const Default = {
   args: {
-    id: defaultCheckboxId,
+    id: 'default-checkbox',
     'aria-label': 'Accept terms and conditions',
   },
   decorators: [
     (Story) => (
       <div className='flex items-center space-x-2'>
         <Story />
-        <Label htmlFor={defaultCheckboxId}>Accept terms and conditions</Label>
+        <Label htmlFor='default-checkbox'>Accept terms and conditions</Label>
       </div>
     ),
   ],
-};
+} satisfies Story;
 
-export const WithText: Story = {
+export const WithText = {
   args: {
-    id: withTextCheckboxId,
+    id: 'with-text-checkbox',
     'aria-label': 'Accept terms and conditions',
   },
   decorators: [
@@ -153,17 +149,17 @@ export const WithText: Story = {
       <div className='items-top flex space-x-2'>
         <Story />
         <div className='grid gap-1.5 leading-none'>
-          <Label htmlFor={withTextCheckboxId}>Accept terms and conditions</Label>
+          <Label htmlFor='with-text-checkbox'>Accept terms and conditions</Label>
           <p className='text-muted-foreground text-sm'>You agree to our Terms of Service and Privacy Policy.</p>
         </div>
       </div>
     ),
   ],
-};
+} satisfies Story;
 
-export const Disabled: Story = {
+export const Disabled = {
   args: {
-    id: disabledCheckboxId,
+    id: 'disabled-checkbox',
     disabled: true,
     'aria-label': 'Accept terms and conditions',
   },
@@ -171,11 +167,11 @@ export const Disabled: Story = {
     (Story) => (
       <div className='flex items-center space-x-2'>
         <Story />
-        <Label htmlFor={disabledCheckboxId}>Accept terms and conditions</Label>
+        <Label htmlFor='disabled-checkbox'>Accept terms and conditions</Label>
       </div>
     ),
   ],
-};
+} satisfies Story;
 
 const FormSingleDemo = () => {
   const FormSchema = z.object({
@@ -226,7 +222,7 @@ const FormSingleDemo = () => {
   );
 };
 
-export const FormSingle: Story = {
+export const FormSingle = {
   render: () => <FormSingleDemo />,
   decorators: [ToastDecorator],
   parameters: {
@@ -237,7 +233,7 @@ export const FormSingle: Story = {
       },
     },
   },
-};
+} satisfies Story;
 
 const FormMultipleDemo = () => {
   const items = [
@@ -337,7 +333,7 @@ const FormMultipleDemo = () => {
   );
 };
 
-export const FormMultiple: Story = {
+export const FormMultiple = {
   render: () => <FormMultipleDemo />,
   decorators: [ToastDecorator],
   parameters: {
@@ -348,4 +344,4 @@ export const FormMultiple: Story = {
       },
     },
   },
-};
+} satisfies Story;
