@@ -2,24 +2,25 @@ import type { Preview } from '@storybook/react';
 
 import '#/styles/globals.css';
 
+import { ThemeProvider } from '#/lib/nextjs/theme-provider';
 import { androidViewports, ipadViewports, iphoneViewports, tailwindViewports } from './viewports';
 
 const preview = {
-  parameters: {
-    // backgrounds: { disable: true },
-    backgrounds: {
-      default: 'twitter',
-      values: [
-        {
-          name: 'twitter',
-          value: '#00aced',
-        },
-        {
-          name: 'facebook',
-          value: '#3b5998',
-        },
-      ],
+  globalTypes: {
+    theme: {
+      name: 'Theme',
+      description: 'Global theme for components',
+      defaultValue: 'light',
+      toolbar: {
+        title: 'Theme',
+        icon: 'photo',
+        items: ['system', 'light', 'dark'],
+        dynamicTitle: true,
+      },
     },
+  },
+  parameters: {
+    backgrounds: { disable: true },
     layout: 'centered',
     docs: {
       canvas: {
@@ -35,6 +36,13 @@ const preview = {
       },
     },
   },
+  decorators: [
+    (Story, context) => (
+      <ThemeProvider forcedTheme={context.globals.theme} attribute='class' enableSystem disableTransitionOnChange>
+        <Story />
+      </ThemeProvider>
+    ),
+  ],
 } satisfies Preview;
 
 export default preview;
