@@ -2,7 +2,7 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import { withContentlayer } from 'next-contentlayer';
 
-import './src/env.mjs';
+import './src/env/index.mjs';
 
 const config = {
   eslint: { ignoreDuringBuilds: true },

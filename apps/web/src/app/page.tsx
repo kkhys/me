@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 
-import { Button } from '#/components/ui/button';
+import { Button } from '#/ui/general';
 
 export const metadata = {
   title: 'kkhys.me',
 } satisfies Metadata;
 
-const HomePage = () => {
+const Page = () => {
   return (
     <>
       <p className='text-sky-500'>Hello, world!</p>
@@ -15,4 +15,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Page;
