@@ -430,7 +430,7 @@ importers:
         version: 18.2.17
       axe-playwright:
         specifier: 1.2.3
-        version: 1.2.3(playwright@1.39.0)
+        version: 1.2.3(playwright@1.40.1)
       dotenv-cli:
         specifier: 7.3.0
         version: 7.3.0
@@ -474,8 +474,8 @@ importers:
         specifier: 6.13.1
         version: 6.13.1(eslint@8.54.0)(typescript@5.3.2)
       eslint-config-prettier:
-        specifier: 9.0.0
-        version: 9.0.0(eslint@8.54.0)
+        specifier: 9.1.0
+        version: 9.1.0(eslint@8.54.0)
       eslint-config-turbo:
         specifier: 1.10.16
         version: 1.10.16(eslint@8.54.0)
@@ -8096,7 +8096,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /axe-playwright@1.2.3(playwright@1.39.0):
+  /axe-playwright@1.2.3(playwright@1.40.1):
     resolution: {integrity: sha512-bTxCTNp3kx6sQRMjmuLv8pG3+v+kOCvFXATim1+XUXzW6ykulbbuJdQfgB+vQPNAF9uvYbW2qrv9pg81ZSFV/A==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -8104,7 +8104,7 @@ packages:
       axe-core: 4.8.2
       axe-html-reporter: 2.2.3(axe-core@4.8.2)
       picocolors: 1.0.0
-      playwright: 1.39.0
+      playwright: 1.40.1
     dev: true
 
   /axobject-query@3.2.1:
@@ -10102,8 +10102,8 @@ packages:
     optionalDependencies:
       source-map: 0.6.1
 
-  /eslint-config-prettier@9.0.0(eslint@8.54.0):
-    resolution: {integrity: sha512-IcJsTkJae2S35pRsRAwoCE+925rJJStOdkKnLVgtE+tEpqU0EVVM7OqrwxqgptKdX29NUwC82I5pXsGFIgSevw==}
+  /eslint-config-prettier@9.1.0(eslint@8.54.0):
+    resolution: {integrity: sha512-NSWl5BFQWEPi1j4TjVNItzYV7dZXZ+wP6I6ZhrBGpChQhZRUaElihE9uRRkcbRnNb76UMKDF3r+WTmNcGPKsqw==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -14765,26 +14765,10 @@ packages:
       find-up: 6.3.0
     dev: true
 
-  /playwright-core@1.39.0:
-    resolution: {integrity: sha512-+k4pdZgs1qiM+OUkSjx96YiKsXsmb59evFoqv8SKO067qBA+Z2s/dCzJij/ZhdQcs2zlTAgRKfeiiLm8PQ2qvw==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dev: true
-
   /playwright-core@1.40.1:
     resolution: {integrity: sha512-+hkOycxPiV534c4HhpfX6yrlawqVUzITRKwHAmYfmsVreltEl6fAZJ3DPfLMOODw0H3s1Itd6MDCWmP1fl/QvQ==}
     engines: {node: '>=16'}
     hasBin: true
-    dev: true
-
-  /playwright@1.39.0:
-    resolution: {integrity: sha512-naE5QT11uC/Oiq0BwZ50gDmy8c8WLPRTEWuSSFVG2egBka/1qMoSqYQcROMT9zLwJ86oPofcTH2jBY/5wWOgIw==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dependencies:
-      playwright-core: 1.39.0
-    optionalDependencies:
-      fsevents: 2.3.2
     dev: true
 
   /playwright@1.40.1:
