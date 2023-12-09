@@ -1,9 +1,11 @@
+import { Component } from 'react';
 import type { PartialStoryFn } from '@storybook/csf';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 
 import { useToast } from '#/ui/feedback/toast/use-toast';
 import { Button } from '#/ui/general';
-import { Toast, ToastAction, Toaster } from '.';
+import type { Toast } from '.';
+import { ToastAction, Toaster } from '.';
 
 export const ToastDecorator = (Story: PartialStoryFn<ReactRenderer>) => (
   <>
@@ -14,7 +16,7 @@ export const ToastDecorator = (Story: PartialStoryFn<ReactRenderer>) => (
 
 const meta = {
   title: 'Feedback / Toast',
-  component: Toast,
+  component: Component,
   excludeStories: ['ToastDecorator'],
   parameters: {
     docs: {
