@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ModeToggle } from '#/ui/feature';
+import { ModeToggle } from '.';
 
 const meta = {
   title: 'Feature / Mode Toggle',
