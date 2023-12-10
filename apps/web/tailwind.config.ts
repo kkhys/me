@@ -1,7 +1,10 @@
+import typographyPlugin from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 import baseConfig from '@kkhys/tailwind-config';
+
+import typographyStyles from './src/ui/general/prose/typography';
 
 export default {
   darkMode: ['class'],
@@ -79,7 +82,8 @@ export default {
         '0.5': '0.5px',
       },
     },
+    typography: typographyStyles,
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), typographyPlugin],
   presets: [baseConfig],
 } satisfies Config;
