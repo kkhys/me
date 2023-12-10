@@ -2,13 +2,16 @@ import React from 'react';
 
 import '#/styles/globals.css';
 
-import { jetBrainsMono } from '#/lib/nextjs/fonts';
+import { inter, jetBrainsMono, newsreader, notoSansJP } from '#/lib/nextjs/fonts';
 import { ThemeProvider } from '#/lib/nextjs/theme-provider';
 import { Layout } from '#/ui/feature/global';
 import { Toaster } from '#/ui/feedback';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <html lang='ja' className={`h-full antialiased ${jetBrainsMono.variable}`}>
+  <html
+    lang='ja'
+    className={`h-full antialiased ${notoSansJP.className} ${inter.variable} ${newsreader.variable} ${jetBrainsMono.variable}`}
+  >
     <body className='flex h-full'>
       <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
         <div className='flex w-full'>

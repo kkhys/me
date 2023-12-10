@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 import baseConfig from '@kkhys/tailwind-config';
 
@@ -70,7 +71,9 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       fontFamily: {
-        mono: ['var(--font-jetbrains-mono)'],
+        serif: ['var(--font-inter)', ...defaultTheme.fontFamily.serif],
+        sans: ['var(--font-newsreader)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
       },
       ringWidth: {
         '0.5': '0.5px',
