@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { Footer } from '#/ui/feature/global';
+
 export const Layout = ({ children }: { children: React.ReactNode }) => (
   <>
     <div className='fixed inset-0 flex justify-center sm:px-8'>
@@ -10,7 +12,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
     <div className='relative flex w-full flex-col'>
       {/*<Header />*/}
       <main className='flex-auto'>{children}</main>
-      {/*<Footer />*/}
+      <Footer />
     </div>
   </>
 );
