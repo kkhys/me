@@ -3,14 +3,17 @@ import React from 'react';
 import '#/styles/globals.css';
 
 import { ThemeProvider } from '#/lib/nextjs/theme-provider';
+import { Layout } from '#/ui/feature/global';
 import { Toaster } from '#/ui/feedback';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang='ja'>
-      <body>
+    <html lang='ja' className='h-full antialiased'>
+      <body className='flex h-full'>
         <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-          {children}
+          <div className='flex w-full'>
+            <Layout>{children}</Layout>
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>
@@ -18,4 +21,4 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Layout;
+export default RootLayout;
