@@ -72,6 +72,9 @@ export default {
       fontFamily: {
         mono: ['var(--font-jetbrains-mono)'],
       },
+      ringWidth: {
+        '0.5': '0.5px',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
