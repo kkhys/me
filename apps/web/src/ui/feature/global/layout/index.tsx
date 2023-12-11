@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Footer } from '#/ui/feature/global';
+import { Footer, Header } from '#/ui/feature/global';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => (
   <>
@@ -10,7 +10,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
       </div>
     </div>
     <div className='relative flex w-full flex-col'>
-      {/*<Header />*/}
+      <Header />
       <main className='flex-auto'>{children}</main>
       <Footer />
     </div>
