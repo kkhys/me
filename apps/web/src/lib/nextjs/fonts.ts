@@ -14,6 +14,7 @@ export const newsreader = Newsreader({
   weight: ['400'],
   style: 'italic',
   display: 'swap',
+  adjustFontFallback: false,
   variable: '--font-newsreader',
 });
 
