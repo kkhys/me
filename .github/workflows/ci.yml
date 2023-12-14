@@ -19,6 +19,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+            token: ${{ secrets.SUBMODULE_TOKEN }}
+            submodules: recursive
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.4.0
