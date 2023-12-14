@@ -8,7 +8,6 @@ import { format, parseISO } from 'date-fns';
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { serverEnv } from '../../../env/index.mjs';
-import type { AllTagsTitle, CategoryTitle } from '../constants';
 import { allTagTitles, categoryTitles } from '../constants';
 import { generateCategoryObject, generateSlug, generateTagObject } from '../utils';
 
@@ -80,12 +79,12 @@ export const Post = defineDocumentType(() => ({
     publishedAtFormatted: {
       description: 'Formatted publication date and time',
       type: 'string',
-      resolve: ({ publishedAt }) => format(parseISO(publishedAt as string), 'LLLL d, yyyy'),
+      resolve: ({ publishedAt }) => format(parseISO(publishedAt), 'LLLL d, yyyy'),
     },
     updatedAtFormatted: {
       description: 'Formatted modification date and time',
       type: 'string',
-      resolve: ({ updatedAt }) => (updatedAt ? format(parseISO(updatedAt as string), 'LLLL d, yyyy') : undefined),
+      resolve: ({ updatedAt }) => (updatedAt ? format(parseISO(updatedAt), 'LLLL d, yyyy') : undefined),
     },
     slug: {
       description: 'Generate post slug from id',
@@ -95,14 +94,14 @@ export const Post = defineDocumentType(() => ({
     categoryObject: {
       description: 'Create a category object from a category title',
       type: 'json',
-      resolve: ({ category }) => generateCategoryObject(category as CategoryTitle),
+      resolve: ({ category }) => generateCategoryObject(category),
     },
     tagObjectList: {
       description: 'Create a list of tab objects from tag titles',
       type: 'list',
       resolve: ({ tags, category }) => {
         if (!tags) return undefined;
-        return Array.from(tags as AllTagsTitle[]).map((tag) => generateTagObject(tag, category as CategoryTitle));
+        return Array.from(tags).map((tag) => generateTagObject(tag, category));
       },
     },
   },
