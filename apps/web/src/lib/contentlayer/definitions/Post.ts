@@ -9,6 +9,7 @@ import { format, parseISO } from 'date-fns';
  */
 import { serverEnv } from '../../../env/index.mjs';
 import { allTagTitles, categoryTitles } from '../constants';
+import type { AllTagsTitle } from '../constants';
 import { generateCategoryObject, generateSlug, generateTagObject } from '../utils';
 
 export const Post = defineDocumentType(() => ({
@@ -101,7 +102,8 @@ export const Post = defineDocumentType(() => ({
       type: 'list',
       resolve: ({ tags, category }) => {
         if (!tags) return undefined;
-        return Array.from(tags).map((tag) => generateTagObject(tag, category));
+        const tagTitles: AllTagsTitle[] = Array.from(tags);
+        return tagTitles.map((tag) => generateTagObject(tag, category));
       },
     },
   },
