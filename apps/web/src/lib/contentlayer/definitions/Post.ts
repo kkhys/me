@@ -9,7 +9,7 @@ import { format, parseISO } from 'date-fns';
  */
 import { serverEnv } from '../../../env/index.mjs';
 import { allTagTitles, categoryTitles } from '../constants';
-import type { AllTagsTitle } from '../constants';
+import type { AllTagsTitle, CategoryTitle } from '../constants';
 import { generateCategoryObject, generateSlug, generateTagObject } from '../utils';
 
 export const Post = defineDocumentType(() => ({
@@ -95,15 +95,14 @@ export const Post = defineDocumentType(() => ({
     categoryObject: {
       description: 'Create a category object from a category title',
       type: 'json',
-      resolve: ({ category }) => generateCategoryObject(category),
+      resolve: ({ category }) => generateCategoryObject(category as CategoryTitle),
     },
     tagObjectList: {
       description: 'Create a list of tab objects from tag titles',
       type: 'list',
-      resolve: ({ tags, category }) => {
+      resolve: ({ tags, category }: { tags?: AllTagsTitle[]; category: CategoryTitle }) => {
         if (!tags) return undefined;
-        const tagTitles: AllTagsTitle[] = Array.from(tags);
-        return tagTitles.map((tag) => generateTagObject(tag, category));
+        return tags.map((tag) => generateTagObject(tag, category));
       },
     },
   },
