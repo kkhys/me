@@ -1,7 +1,7 @@
+import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 
 import { Container } from '#/ui/feature/global';
-import {notFound} from "next/navigation";
 
 export const generateStaticParams = () => allPosts.map(({ slug }) => ({ slug }));
 
