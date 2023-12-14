@@ -101,7 +101,7 @@ export const Post = defineDocumentType(() => ({
       type: 'list',
       resolve: ({ tags, category }) => {
         if (!tags) return undefined;
-        return [...tags].map((tag) => generateTagObject(tag, category));
+        return Array.from(tags).map((tag) => generateTagObject(tag, category));
       },
     },
   },
