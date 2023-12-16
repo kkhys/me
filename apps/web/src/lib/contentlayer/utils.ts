@@ -8,8 +8,8 @@ import bs58 from 'bs58';
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { NotFoundError } from '../../exceptions';
-import type { AllTagsTitle, Base, Category, CategoryTitle, FashionTags, LifeTags, Tag, TechTags } from './constants';
-import { allTags, categories, fashionTags, lifeTags, techTags } from './constants';
+import type { AllTagsTitle, Category, CategoryTitle, FashionTags, LifeTags, Tag, TechTags } from './constants';
+import { allTags, categories, extractTitle, fashionTags, lifeTags, techTags } from './constants';
 
 /**
  * Generates a unique slug based on the given data.
@@ -31,15 +31,6 @@ export const generateSlug = (data: crypto.BinaryLike) => {
 
   return bs58.encode(hashArray).slice(0, slugLength);
 };
-
-/**
- * Extracts the 'title' property from the given object.
- *
- * @template T - The type of object containing the 'title' property.
- * @param item - The object from which to extract the 'title'.
- * @return The value of the 'title' property.
- */
-export const extractTitle = <T extends Pick<Base, 'title'>>(item: T) => item.title;
 
 /**
  * Retrieves the category object based on the given title.
