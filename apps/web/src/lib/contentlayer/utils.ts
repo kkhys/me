@@ -1,21 +1,15 @@
 import crypto from 'crypto';
 import bs58 from 'bs58';
 
+/**
+ * esbuild does not support module path aliases, so relative paths are used
+ *
+ * @see: https://github.com/evanw/esbuild/issues/394
+ * @see: https://github.com/contentlayerdev/contentlayer/issues/238
+ */
+import { NotFoundError } from '../../exceptions';
 import type { AllTagsTitle, Base, Category, CategoryTitle, FashionTags, LifeTags, Tag, TechTags } from './constants';
 import { allTags, categories, fashionTags, lifeTags, techTags } from './constants';
-
-/**
- * A custom error class representing a not found error.
- *
- * @extends Error
- * @class
- */
-class NotFoundError extends Error {
-  constructor(message: string) {
-    super(message);
-    this.name = 'NotFoundError';
-  }
-}
 
 /**
  * Generates a unique slug based on the given data.
