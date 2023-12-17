@@ -10,7 +10,7 @@ export const metadata = {
 const Page = () => {
   return (
     <Container>
-      <Prose className='mt-4 font-serif md:mt-16'>
+      <Prose className='font-serif'>
         <FadeInStagger>
           <FadeIn>
             <h1>Keisuke Hayashi</h1>
