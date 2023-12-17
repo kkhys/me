@@ -22,14 +22,14 @@ export const BackButton = () => {
             variant='ghost'
             size='icon'
             onClick={() => router.back()}
-            aria-label={`Go back to “${previousPathname}”`}
+            aria-label='Go back to previous page'
             className='lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-8 xl:mt-0'
           >
             <ResetIcon className='h-4 w-4' />
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          <p>Go back to “{previousPathname}”</p>
+          <p>Go back to previous page</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
