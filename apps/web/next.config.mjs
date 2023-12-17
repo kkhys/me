@@ -7,9 +7,12 @@ import './src/env/index.mjs';
 const config = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
+  /**
+   * @see https://github.com/contentlayerdev/contentlayer/issues/313#issuecomment-1279678289
+   */
   webpack: (config) => {
     config.infrastructureLogging = {
-      level: "error",
+      level: 'error',
     };
     return config;
   },
