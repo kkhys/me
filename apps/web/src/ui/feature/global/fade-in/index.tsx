@@ -15,7 +15,7 @@ export const FadeIn = ({ children, ...props }: React.ComponentPropsWithoutRef<ty
   return (
     <motion.div
       variants={{
-        hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 24 },
+        hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 12 },
         visible: { opacity: 1, y: 0 },
       }}
       transition={{ duration: 0.5 }}
