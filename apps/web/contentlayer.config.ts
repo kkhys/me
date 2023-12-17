@@ -11,5 +11,6 @@ import { Post } from './src/lib/contentlayer/definitions';
 export default makeSource({
   contentDirPath: 'contents',
   documentTypes: [Post],
+  contentDirExclude: ['README.md'],
   mdx: {},
 });
