@@ -1,8 +1,8 @@
-import { Inter, JetBrains_Mono, Newsreader, Noto_Sans_JP } from 'next/font/google';
+import { Inter, JetBrains_Mono, Newsreader, Noto_Emoji, Noto_Sans_JP } from 'next/font/google';
 
 export const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: ['400', '500'],
   display: 'swap',
   variable: '--font-noto-sans-jp',
 });
@@ -24,4 +24,12 @@ export const jetBrainsMono = JetBrains_Mono({
   style: 'normal',
   display: 'swap',
   variable: '--font-jetbrains-mono',
+});
+
+export const notoEmoji = Noto_Emoji({
+  subsets: ['emoji'],
+  display: 'swap',
+  style: 'normal',
+  weight: '700',
+  variable: '--font-noto-emoji',
 });
