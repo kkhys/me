@@ -57,6 +57,7 @@ export default {
           DEFAULT: 'hsl(var(--scrollbar))',
           foreground: 'hsl(var(--scrollbar-foreground))',
         },
+        selection: 'hsl(var(--selection))',
       },
       borderRadius: {
         lg: 'var(--radius)',
