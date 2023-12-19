@@ -23,7 +23,7 @@ export const BackButton = () => {
             size='icon'
             onClick={() => router.back()}
             aria-label='Go back to previous page'
-            className='absolute left-12 top-0 hidden lg:flex'
+            className='absolute left-12 top-0 hidden xl:flex'
           >
             <ResetIcon className='h-4 w-4' />
           </Button>
