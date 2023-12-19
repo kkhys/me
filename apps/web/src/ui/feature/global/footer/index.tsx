@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { ArrowTopRightIcon } from '@radix-ui/react-icons';
+import { ArrowTopRightIcon, GitHubLogoIcon } from '@radix-ui/react-icons';
 import { Book, FolderKanban } from 'lucide-react';
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
@@ -54,6 +54,9 @@ export const Footer = () => (
               {/* TODO: add storybook link */}
               <NavLink href='/' tooltipContent='Storybook' isExternal>
                 <Book className='h-4 w-4' />
+              </NavLink>
+              <NavLink href='https://github.com/kkhys/me' tooltipContent='Source' isExternal>
+                <GitHubLogoIcon className='h-4 w-4' />
               </NavLink>
             </div>
             <p className='text-xs text-zinc-400 dark:text-zinc-500'>
