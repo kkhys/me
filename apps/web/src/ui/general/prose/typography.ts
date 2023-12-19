@@ -70,35 +70,35 @@ const typographyStyles = ({ theme }: PluginUtils) => {
 
         // Base
         color: 'var(--foreground)',
-        lineHeight: theme('lineHeight.7'),
+        lineHeight: theme('lineHeight.8'),
         '> *': {
           marginTop: theme('spacing.10'),
           marginBottom: theme('spacing.10'),
         },
         p: {
-          marginTop: theme('spacing.7'),
-          marginBottom: theme('spacing.7'),
+          marginTop: theme('spacing.8'),
+          marginBottom: theme('spacing.8'),
         },
 
         // Headings
-        'h2, h3': {
+        'h1, h2, h3': {
           color: 'var(--tw-prose-headings)',
-          fontWeight: theme('fontWeight.normal'),
+          fontWeight: theme('fontWeight.medium'),
+          lineHeight: theme('lineHeight.7'),
         },
         h1: {
+          fontSize: theme('fontSize.xl')[0],
           marginTop: 0,
         },
         h2: {
-          fontSize: theme('fontSize.base')[0],
-          lineHeight: theme('lineHeight.7'),
-          marginTop: theme('spacing.20'),
-          marginBottom: theme('spacing.4'),
+          fontSize: theme('fontSize.xl')[0],
+          marginTop: theme('spacing.16'),
+          marginBottom: theme('spacing.6'),
         },
         h3: {
-          fontSize: theme('fontSize.base')[0],
-          lineHeight: theme('lineHeight.7'),
-          marginTop: theme('spacing.16'),
-          marginBottom: theme('spacing.4'),
+          fontSize: theme('fontSize.lg')[0],
+          marginTop: theme('spacing.12'),
+          marginBottom: theme('spacing.6'),
         },
         ':is(h2, h3) + *': {
           marginTop: 0,
@@ -106,7 +106,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
 
         // Images
         img: {
-          borderRadius: theme('borderRadius.xl'),
+          borderRadius: theme('borderRadius.md'),
         },
 
         // Inline elements
@@ -125,7 +125,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
         },
         strong: {
           color: 'var(--tw-prose-bold)',
-          fontWeight: theme('fontWeight.semibold'),
+          fontWeight: theme('fontWeight.medium'),
         },
         code: {
           display: 'inline-block',
@@ -133,7 +133,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           fontSize: theme('fontSize.sm')[0],
           fontWeight: theme('fontWeight.normal'),
           backgroundColor: 'var(--tw-prose-code-bg)',
-          borderRadius: theme('borderRadius.lg'),
+          borderRadius: theme('borderRadius.md'),
           paddingLeft: theme('spacing.1'),
           paddingRight: theme('spacing.1'),
         },
@@ -141,7 +141,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           color: 'inherit',
         },
         ':is(h2, h3) code': {
-          fontWeight: theme('fontWeight.bold'),
+          fontWeight: theme('fontWeight.medium'),
         },
 
         // Quotes
@@ -174,13 +174,13 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           paddingLeft: theme('spacing.6'),
         },
         li: {
-          marginTop: theme('spacing.6'),
-          marginBottom: theme('spacing.6'),
+          marginTop: theme('spacing.2'),
+          marginBottom: theme('spacing.2'),
           paddingLeft: theme('spacing[3.5]'),
         },
         'li::marker': {
           fontSize: theme('fontSize.sm')[0],
-          fontWeight: theme('fontWeight.semibold'),
+          fontWeight: theme('fontWeight.medium'),
         },
         'ol > li::marker': {
           color: 'var(--tw-prose-counters)',
@@ -189,8 +189,9 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           color: 'var(--tw-prose-bullets)',
         },
         'li :is(ol, ul)': {
-          marginTop: theme('spacing.4'),
-          marginBottom: theme('spacing.4'),
+          marginTop: theme('spacing.2'),
+          marginBottom: theme('spacing.2'),
+          paddingLeft: theme('spacing.2'),
         },
         'li :is(li, p)': {
           marginTop: theme('spacing.3'),
@@ -203,10 +204,10 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           fontSize: theme('fontSize.sm')[0],
           fontWeight: theme('fontWeight.medium'),
           backgroundColor: 'var(--tw-prose-pre-bg)',
-          borderRadius: theme('borderRadius.3xl'),
+          borderRadius: theme('borderRadius.lg'),
           padding: theme('spacing.8'),
           overflowX: 'auto',
-          border: '1px solid',
+          border: '0.5px solid',
           borderColor: 'var(--tw-prose-pre-border)',
         },
         'pre code': {
@@ -244,7 +245,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
         },
         'thead th': {
           color: 'var(--tw-prose-headings)',
-          fontWeight: theme('fontWeight.semibold'),
+          fontWeight: theme('fontWeight.medium'),
           verticalAlign: 'bottom',
           paddingBottom: theme('spacing.2'),
         },
