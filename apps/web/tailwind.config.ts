@@ -53,6 +53,10 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        scrollbar: {
+          DEFAULT: 'hsl(var(--scrollbar))',
+          foreground: 'hsl(var(--scrollbar-foreground))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -77,6 +81,7 @@ export default {
         serif: ['var(--font-inter)', ...defaultTheme.fontFamily.serif],
         sans: ['var(--font-newsreader)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
+        emoji: ['var(--font-noto-emoji)'],
       },
       ringWidth: {
         '0.5': '0.5px',
