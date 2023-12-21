@@ -68,13 +68,13 @@ export const Post = defineDocumentType(() => ({
       description: 'URL to github repository of editable blog content',
       type: 'string',
       resolve: ({ _raw: { sourceFilePath } }) =>
-        `${serverEnv.BLOG_CONTENTS_REPOSITORY_URL}/edit/main/contents/${sourceFilePath}`,
+        `${serverEnv.BLOG_CONTENTS_REPOSITORY_URL}/edit/main/${sourceFilePath}`,
     },
     sourceUrl: {
       description: 'URL to the blog content, without rendering the markdown file',
       type: 'string',
       resolve: ({ _raw: { sourceFilePath } }) =>
-        `${serverEnv.BLOG_CONTENTS_REPOSITORY_URL}/blob/main/contents/${sourceFilePath}?plain=1`,
+        `${serverEnv.BLOG_CONTENTS_REPOSITORY_URL}/blob/main/${sourceFilePath}?plain=1`,
     },
     publishedAtFormatted: {
       description: 'Formatted publication date and time',
