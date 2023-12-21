@@ -85,7 +85,7 @@ export const Default = {
     children: (
       <>
         <div className='flex items-center justify-between space-x-4 px-4'>
-          <h4 className='text-sm font-semibold'>@kkhys starred 3 repositories</h4>
+          <h4 className='text-sm font-medium'>@kkhys starred 3 repositories</h4>
           <CollapsibleTrigger asChild>
             <Button variant='ghost' size='sm'>
               <CaretSortIcon className='h-4 w-4' />

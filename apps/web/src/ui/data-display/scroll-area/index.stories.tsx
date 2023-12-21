@@ -133,7 +133,7 @@ export const HorizontalScrolling = {
                 />
               </div>
               <figcaption className='text-muted-foreground pt-2 text-xs'>
-                Photo by <span className='text-foreground font-semibold'>{artwork.artist}</span>
+                Photo by <span className='text-foreground font-medium'>{artwork.artist}</span>
               </figcaption>
             </figure>
           ))}
