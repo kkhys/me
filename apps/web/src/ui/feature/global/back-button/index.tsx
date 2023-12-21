@@ -29,7 +29,7 @@ export const BackButton = () => {
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          <p>Go back to previous page</p>
+          <p className='font-serif'>Go back to previous page</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

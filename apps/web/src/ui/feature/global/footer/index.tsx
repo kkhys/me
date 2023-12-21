@@ -33,7 +33,7 @@ const NavLink = ({
       </TooltipTrigger>
       <TooltipContent>
         <div className='flex items-center'>
-          <p>{tooltipContent}</p>
+          <p className='font-serif'>{tooltipContent}</p>
           {isExternal && <ArrowTopRightIcon className='ml-1 h-3 w-3' />}
         </div>
       </TooltipContent>
@@ -59,7 +59,7 @@ export const Footer = () => (
                 <GitHubLogoIcon className='h-4 w-4' />
               </NavLink>
             </div>
-            <p className='text-xs text-zinc-400 dark:text-zinc-500'>
+            <p className='font-serif text-xs text-zinc-400 dark:text-zinc-500'>
               CC BY-NC-SA 4.0 2023-PRESENT &copy; Keisuke Hayashi
             </p>
           </div>
