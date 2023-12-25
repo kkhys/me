@@ -25,7 +25,7 @@ export const Default = {
               <div className='p-1'>
                 <Card>
                   <CardContent className='flex aspect-square items-center justify-center p-6'>
-                    <span className='text-4xl font-semibold'>{index + 1}</span>
+                    <span className='text-4xl font-medium'>{index + 1}</span>
                   </CardContent>
                 </Card>
               </div>
@@ -53,7 +53,7 @@ export const Sizes = {
               <div className='p-1'>
                 <Card>
                   <CardContent className='flex aspect-square items-center justify-center p-6'>
-                    <span className='text-3xl font-semibold'>{index + 1}</span>
+                    <span className='text-3xl font-medium'>{index + 1}</span>
                   </CardContent>
                 </Card>
               </div>
@@ -78,7 +78,7 @@ export const Spacing = {
               <div className='p-1'>
                 <Card>
                   <CardContent className='flex aspect-square items-center justify-center p-6'>
-                    <span className='text-2xl font-semibold'>{index + 1}</span>
+                    <span className='text-2xl font-medium'>{index + 1}</span>
                   </CardContent>
                 </Card>
               </div>
@@ -107,7 +107,7 @@ export const Orientation = {
               <div className='p-1'>
                 <Card>
                   <CardContent className='flex items-center justify-center p-6'>
-                    <span className='text-3xl font-semibold'>{index + 1}</span>
+                    <span className='text-3xl font-medium'>{index + 1}</span>
                   </CardContent>
                 </Card>
               </div>
@@ -143,7 +143,7 @@ const CountDemo = () => {
             <CarouselItem key={index}>
               <Card>
                 <CardContent className='flex aspect-square items-center justify-center p-6'>
-                  <span className='text-4xl font-semibold'>{index + 1}</span>
+                  <span className='text-4xl font-medium'>{index + 1}</span>
                 </CardContent>
               </Card>
             </CarouselItem>
@@ -175,7 +175,7 @@ export const AutoPlay = {
               <div className='p-1'>
                 <Card>
                   <CardContent className='flex aspect-square items-center justify-center p-6'>
-                    <span className='text-4xl font-semibold'>{index + 1}</span>
+                    <span className='text-4xl font-medium'>{index + 1}</span>
                   </CardContent>
                 </Card>
               </div>
