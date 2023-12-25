@@ -325,6 +325,12 @@ importers:
       date-fns:
         specifier: 2.30.0
         version: 2.30.0
+      embla-carousel-autoplay:
+        specifier: 8.0.0-rc17
+        version: 8.0.0-rc17(embla-carousel@8.0.0-rc17)
+      embla-carousel-react:
+        specifier: 8.0.0-rc17
+        version: 8.0.0-rc17(react@18.2.0)
       framer-motion:
         specifier: 10.16.16
         version: 10.16.16(react-dom@18.2.0)(react@18.2.0)
@@ -3646,7 +3652,7 @@ packages:
       react-refresh: 0.14.0
       schema-utils: 3.3.0
       source-map: 0.7.4
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /@pnpm/config.env-replace@1.1.0:
@@ -6431,7 +6437,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.3.3)
       tslib: 2.6.2
       typescript: 5.3.3
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -8161,7 +8167,7 @@ packages:
       '@babel/core': 7.23.2
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /babel-plugin-add-react-displayname@0.0.5:
@@ -9260,7 +9266,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.32)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /css-select@4.3.0:
@@ -9823,6 +9829,36 @@ packages:
       minimalistic-assert: 1.0.1
       minimalistic-crypto-utils: 1.0.1
     dev: true
+
+  /embla-carousel-autoplay@8.0.0-rc17(embla-carousel@8.0.0-rc17):
+    resolution: {integrity: sha512-U8YweUZg2DJd3IXxTV3UsjFyJEsQuCHOBRyJxoJZ8r1L/SYbYnk7BbknH6N0yfgzeMn6pL27RPEf0vIz+JtFYw==}
+    peerDependencies:
+      embla-carousel: 8.0.0-rc17
+    dependencies:
+      embla-carousel: 8.0.0-rc17
+    dev: false
+
+  /embla-carousel-react@8.0.0-rc17(react@18.2.0):
+    resolution: {integrity: sha512-x4aFprwFB+PQO9EsHHZsrDxARb0uYNBYn9mr5oDFdBdPez4M8G1r5yidWbUcT9pNUc8AQXC9sGzlfauBfBxVOw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0
+    dependencies:
+      embla-carousel: 8.0.0-rc17
+      embla-carousel-reactive-utils: 8.0.0-rc17(embla-carousel@8.0.0-rc17)
+      react: 18.2.0
+    dev: false
+
+  /embla-carousel-reactive-utils@8.0.0-rc17(embla-carousel@8.0.0-rc17):
+    resolution: {integrity: sha512-eluEOK/u5HdjYaTLC4bUG3iTCnyX7RsYix3il0aH4ZECOKa5fS+pVK2vrM17Mgw6C5Hyjcr3r3lfJtGerVzVsQ==}
+    peerDependencies:
+      embla-carousel: 8.0.0-rc17
+    dependencies:
+      embla-carousel: 8.0.0-rc17
+    dev: false
+
+  /embla-carousel@8.0.0-rc17:
+    resolution: {integrity: sha512-evF49b88VOitvqFtlvhvKVSu96Y8A+QSFdhok87Bfm8R7OYuk95FT+o8+M1GQLi/EhGDUlT193HTVAR0Wt2neQ==}
+    dev: false
 
   /emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
@@ -10856,7 +10892,7 @@ packages:
       semver: 7.5.4
       tapable: 2.2.1
       typescript: 5.3.3
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /form-data-encoder@2.1.4:
@@ -11569,7 +11605,7 @@ packages:
       lodash: 4.17.21
       pretty-error: 4.0.0
       tapable: 2.2.1
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /htmlparser2@6.1.0:
@@ -14242,7 +14278,7 @@ packages:
       url: 0.11.3
       util: 0.12.5
       vm-browserify: 1.1.2
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /node-releases@2.0.13:
@@ -14915,7 +14951,7 @@ packages:
       jiti: 1.20.0
       postcss: 8.4.32
       semver: 7.5.4
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -16071,7 +16107,7 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /saxes@6.0.0:
@@ -16663,7 +16699,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /style-to-object@0.4.4:
@@ -16739,7 +16775,7 @@ packages:
       webpack: '>=2'
     dependencies:
       '@swc/core': 1.3.100
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /symbol-tree@3.2.4:
@@ -17882,7 +17918,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /webpack-hot-middleware@2.25.4:
