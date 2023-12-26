@@ -1,13 +1,15 @@
+import * as React from 'react';
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 
-import { Container } from '#/ui/feature/global';
+import { ArticleLayout } from '#/ui/feature/posts';
 
 export const generateStaticParams = () => allPosts.map(({ slug }) => ({ slug }));
 
 export const generateMetadata = ({ params: { slug } }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post.slug === slug);
   if (!post) return {};
+
   return {
     title: post.title,
   };
@@ -15,13 +17,9 @@ export const generateMetadata = ({ params: { slug } }: { params: { slug: string 
 
 const Page = ({ params: { slug } }: { params: { slug: string } }) => {
   const post = allPosts.find((post) => post.slug === slug);
-  if (!post) return notFound();
+  if (!post) notFound();
 
-  return (
-    <Container>
-      <p>{post.title}</p>
-    </Container>
-  );
+  return <ArticleLayout post={post} />;
 };
 
 export default Page;
