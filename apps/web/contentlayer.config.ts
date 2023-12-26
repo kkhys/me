@@ -1,4 +1,5 @@
 import { makeSource } from 'contentlayer/source-files';
+import remarkGfm from 'remark-gfm';
 
 /**
  * esbuild does not support module path aliases, so relative paths are used
@@ -12,5 +13,7 @@ export default makeSource({
   contentDirPath: 'contents',
   documentTypes: [Post],
   contentDirExclude: ['README.md'],
-  mdx: {},
+  mdx: {
+    remarkPlugins: [[remarkGfm]],
+  },
 });
