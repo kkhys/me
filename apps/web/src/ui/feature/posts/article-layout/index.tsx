@@ -1,0 +1,47 @@
+import * as React from 'react';
+import type { Post } from 'contentlayer/generated';
+import { formatDistanceStrict, parseISO } from 'date-fns';
+
+import { BackButton, Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
+import { EyeCatch, Mdx } from '#/ui/feature/posts';
+import { Prose } from '#/ui/general';
+
+export const ArticleLayout = ({ post }: { post: Post }) => {
+  const {
+    title,
+    emoji,
+    publishedAt,
+    publishedAtFormatted,
+    body: { code },
+  } = post;
+
+  const publishedAtDistanceToNow = (date: string) => formatDistanceStrict(parseISO(date), new Date());
+
+  return (
+    <Container>
+      <BackButton />
+      <FadeInStagger faster>
+        <article>
+          <header>
+            <FadeIn>
+              <EyeCatch emoji={emoji} />
+            </FadeIn>
+            <FadeIn>
+              <h1 className='mt-4 text-lg font-medium'>{title}</h1>
+            </FadeIn>
+            <FadeIn>
+              <time className='mt-3 block font-serif text-sm text-zinc-600 dark:text-zinc-400' dateTime={publishedAt}>
+                {publishedAtFormatted} ({publishedAtDistanceToNow(publishedAt)} ago)
+              </time>
+            </FadeIn>
+          </header>
+          <FadeIn>
+            <Prose>
+              <Mdx code={code} />
+            </Prose>
+          </FadeIn>
+        </article>
+      </FadeInStagger>
+    </Container>
+  );
+};
