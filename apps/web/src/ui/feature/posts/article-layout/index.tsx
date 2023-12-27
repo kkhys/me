@@ -2,8 +2,8 @@ import * as React from 'react';
 import type { Post } from 'contentlayer/generated';
 import { formatDistanceStrict, parseISO } from 'date-fns';
 
-import { BackButton, Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
-import { EyeCatch, Mdx } from '#/ui/feature/posts';
+import { BackButton, Container, FadeIn, FadeInStagger, Mdx } from '#/ui/feature/global';
+import { EyeCatch } from '#/ui/feature/posts';
 import { Prose } from '#/ui/general';
 
 export const ArticleLayout = ({ post }: { post: Post }) => {
