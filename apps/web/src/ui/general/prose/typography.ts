@@ -30,8 +30,8 @@ const typographyStyles = ({ theme }: PluginUtils) => {
       css: {
         '--tw-prose-body': 'var(--foreground)',
         '--tw-prose-headings': 'var(--foreground)',
-        '--tw-prose-links': 'var(--foreground)',
-        '--tw-prose-links-hover': 'var(--foreground)',
+        '--tw-prose-links': theme('colors.zinc.800'),
+        '--tw-prose-links-hover': theme('colors.zinc.900'),
         '--tw-prose-underline': theme('colors.zinc.500 / 0.2'),
         '--tw-prose-underline-hover': 'var(--foreground)',
         '--tw-prose-bold': 'var(--foreground)',
@@ -50,8 +50,8 @@ const typographyStyles = ({ theme }: PluginUtils) => {
 
         '--tw-prose-invert-body': 'var(--foreground)',
         '--tw-prose-invert-headings': 'var(--foreground)',
-        '--tw-prose-invert-links': 'var(--foreground)',
-        '--tw-prose-invert-links-hover': 'var(--foreground)',
+        '--tw-prose-invert-links': theme('colors.zinc.100'),
+        '--tw-prose-invert-links-hover': theme('colors.zinc.100'),
         '--tw-prose-invert-underline': theme('colors.zinc.400 / 0.3'),
         '--tw-prose-invert-underline-hover': 'var(--foreground)',
         '--tw-prose-invert-bold': 'var(--foreground)',
@@ -112,12 +112,15 @@ const typographyStyles = ({ theme }: PluginUtils) => {
         // Inline elements
         a: {
           color: 'var(--tw-prose-links)',
-          fontWeight: theme('fontWeight.normal'),
+          fontWeight: theme('fontWeight.medium'),
           textDecoration: 'underline',
+          textDecorationThickness: '0.05rem',
           textDecorationColor: 'var(--tw-prose-underline)',
           transitionProperty: 'color, text-decoration-color',
           transitionDuration: theme('transitionDuration.150'),
           transitionTimingFunction: theme('transitionTimingFunction.in-out'),
+          cursor: 'pointer',
+          textUnderlineOffset: '0.2rem',
         },
         'a:hover': {
           color: 'var(--tw-prose-links-hover)',
