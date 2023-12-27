@@ -1,34 +1,15 @@
 import * as React from 'react';
 import type { Metadata } from 'next';
-import { clsx } from 'clsx';
-import type { Post } from 'contentlayer/generated';
 import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#/ui/data-display';
 import { Container, FadeIn } from '#/ui/feature/global';
-import { ArticleCard } from '#/ui/feature/posts';
+import { ArticleCards } from '#/ui/feature/posts';
 
 export const metadata = {
   title: 'Blog',
 } satisfies Metadata;
-
-const ArticleCards = ({ posts, className }: { posts: Post[]; className?: string }) => {
-  if (!posts.length)
-    return (
-      <div className={className}>
-        <p className='font-serif'>No posts found.</p>
-      </div>
-    );
-
-  return (
-    <div className={clsx('grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3', className)}>
-      {posts.map((post) => (
-        <ArticleCard key={post._id} post={post} />
-      ))}
-    </div>
-  );
-};
 
 const Page = () => {
   const posts = allPosts.sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)));
