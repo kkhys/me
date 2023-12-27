@@ -40,7 +40,7 @@ const Page = () => {
       <header>
         <h1 className='font-serif text-lg font-medium'>Blog</h1>
       </header>
-      <Tabs defaultValue='all' className='mt-6 space-y-4'>
+      <Tabs defaultValue='all' className='mt-6'>
         <TabsList>
           <TabsTrigger value='all' className='font-serif'>
             All
