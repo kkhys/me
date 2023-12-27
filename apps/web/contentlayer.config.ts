@@ -7,11 +7,11 @@ import remarkGfm from 'remark-gfm';
  * @see: https://github.com/evanw/esbuild/issues/394
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
-import { Post } from './src/lib/contentlayer/definitions';
+import { Legal, Post } from './src/lib/contentlayer/definitions';
 
 export default makeSource({
   contentDirPath: 'contents',
-  documentTypes: [Post],
+  documentTypes: [Post, Legal],
   contentDirExclude: ['README.md'],
   mdx: {
     remarkPlugins: [[remarkGfm]],
