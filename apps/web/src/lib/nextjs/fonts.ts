@@ -7,7 +7,7 @@ export const notoSansJP = Noto_Sans_JP({
   variable: '--font-noto-sans-jp',
 });
 
-export const inter = Inter({ subsets: ['latin'], weight: ['400', '700'], display: 'swap', variable: '--font-inter' });
+export const inter = Inter({ subsets: ['latin'], weight: ['400', '500'], display: 'swap', variable: '--font-inter' });
 
 export const newsreader = Newsreader({
   subsets: ['latin'],
