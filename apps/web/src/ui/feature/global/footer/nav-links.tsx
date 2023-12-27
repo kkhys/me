@@ -10,7 +10,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '#/ui/navigation';
@@ -85,8 +84,6 @@ export const NavLinks = () => (
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='start' className='font-serif'>
-        <DropdownMenuLabel>Dev</DropdownMenuLabel>
-        <DropdownMenuSeparator />
         <NavLink href='https://github.com/users/kkhys/projects/3' isExternal>
           Roadmap
         </NavLink>
@@ -97,6 +94,9 @@ export const NavLinks = () => (
         <NavLink href='https://github.com/kkhys/me' isExternal>
           Source
         </NavLink>
+        <DropdownMenuSeparator />
+        <NavLink href='/legal/privacy-policy'>Privacy Policy</NavLink>
+        <NavLink href='/legal/terms'>Terms of Service</NavLink>
       </DropdownMenuContent>
     </DropdownMenu>
   </>
