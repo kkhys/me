@@ -10,6 +10,11 @@ export const Legal = defineDocumentType(() => ({
       type: 'string',
       required: true,
     },
+    slug: {
+      description: 'Legal document slug',
+      type: 'string',
+      required: true,
+    },
     publishedAt: {
       description: 'Legal document publication date and time',
       type: 'date',
