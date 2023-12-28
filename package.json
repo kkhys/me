@@ -4,7 +4,7 @@
   "scripts": {
     "commit": "cz",
     "build": "turbo build",
-    "clean": "git clean -xdf node_modules",
+    "clean": "git clean -xdf node_modules storybook-static",
     "clean:workspaces": "turbo clean",
     "dev": "turbo dev --parallel",
     "format": "turbo format --continue -- --cache --cache-location='node_modules/.cache/.prettiercache'",
