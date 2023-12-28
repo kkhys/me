@@ -37,6 +37,7 @@ const robots = (): MetadataRoute.Robots => {
       },
     ],
     sitemap: 'https://kkhys.me/sitemap.xml',
+    host: 'https://kkhys.me',
   };
 };
 
