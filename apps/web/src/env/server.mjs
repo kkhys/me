@@ -2,7 +2,6 @@ import { createEnv } from '@t3-oss/env-nextjs';
 import { z } from 'zod';
 
 export const serverEnv = createEnv({
-  shared: {},
   server: {
     ME_REPOSITORY_URL: z.string().url(),
     BLOG_CONTENTS_REPOSITORY_URL: z.string().url(),
