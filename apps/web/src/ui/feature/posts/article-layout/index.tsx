@@ -12,6 +12,7 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
     emoji,
     publishedAt,
     publishedAtFormatted,
+    status,
     body: { code },
   } = post;
 
@@ -23,8 +24,9 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
       <FadeInStagger faster>
         <article>
           <header>
-            <FadeIn>
+            <FadeIn className='flex justify-between'>
               <EyeCatch emoji={emoji} />
+              {status === 'draft' && <span className='font-serif text-xs text-red-400'>Draft</span>}
             </FadeIn>
             <FadeIn>
               <h1 className='mt-4 text-xl font-medium'>{title}</h1>

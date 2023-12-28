@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 
+import { serverEnv } from '#/env/index.mjs';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#/ui/data-display';
 import { Container, FadeIn } from '#/ui/feature/global';
 import { ArticleCards } from '#/ui/feature/posts';
@@ -12,14 +13,16 @@ export const metadata = {
 } satisfies Metadata;
 
 const Page = () => {
-  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)));
+  const posts = allPosts
+    .filter((post) => serverEnv.NODE_ENV === 'development' || post.status === 'published')
+    .sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)));
   const techPosts = posts.filter((post) => post.category.includes('Tech'));
   const lifePosts = posts.filter((post) => post.category.includes('Life'));
 
   return (
     <Container>
       <header>
-        <h1 className='font-serif text-lg font-medium'>Blog</h1>
+        <h1 className='font-serif text-xl font-medium'>Blog</h1>
       </header>
       <Tabs defaultValue='all' className='mt-6'>
         <TabsList>
