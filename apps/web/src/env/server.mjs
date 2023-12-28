@@ -4,11 +4,13 @@ import { z } from 'zod';
 export const serverEnv = createEnv({
   server: {
     NODE_ENV: z.enum(['development', 'test', 'production']),
+    BASE_URL: z.string().url(),
     ME_REPOSITORY_URL: z.string().url(),
     BLOG_CONTENTS_REPOSITORY_URL: z.string().url(),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    BASE_URL: process.env.BASE_URL,
     ME_REPOSITORY_URL: process.env.ME_REPOSITORY_URL,
     BLOG_CONTENTS_REPOSITORY_URL: process.env.BLOG_CONTENTS_REPOSITORY_URL,
   },

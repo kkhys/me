@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 
+import { serverEnv } from '#/env/index.mjs';
+
 const robots = (): MetadataRoute.Robots => {
   return {
     rules: [
@@ -36,8 +38,8 @@ const robots = (): MetadataRoute.Robots => {
         disallow: '/',
       },
     ],
-    sitemap: 'https://kkhys.me/sitemap.xml',
-    host: 'https://kkhys.me',
+    sitemap: `${serverEnv.BASE_URL}/sitemap.xml`,
+    host: serverEnv.BASE_URL,
   };
 };
 
