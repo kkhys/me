@@ -17,10 +17,10 @@ export const LegalLayout = ({ legal }: { legal: Legal }) => {
   return (
     <Container>
       <FadeInStagger>
+        <FadeIn>
+          <h1 className='font-serif text-xl font-medium'>{title}</h1>
+        </FadeIn>
         <Prose>
-          <FadeIn>
-            <h1 className='font-serif'>{title}</h1>
-          </FadeIn>
           <FadeIn>
             <div dangerouslySetInnerHTML={{ __html: html }} />
             <p className='mb-2 flex justify-end'>

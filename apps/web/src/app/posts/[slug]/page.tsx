@@ -2,6 +2,7 @@ import * as React from 'react';
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 
+import { serverEnv } from '#/env/index.mjs';
 import { ArticleLayout } from '#/ui/feature/posts';
 
 export const generateStaticParams = () => allPosts.map(({ slug }) => ({ slug }));
@@ -16,7 +17,9 @@ export const generateMetadata = ({ params: { slug } }: { params: { slug: string 
 };
 
 const Page = ({ params: { slug } }: { params: { slug: string } }) => {
-  const post = allPosts.find((post) => post.slug === slug);
+  const post = allPosts.find(
+    (post) => (serverEnv.NODE_ENV === 'development' || post.status === 'published') && post.slug === slug,
+  );
   if (!post) notFound();
 
   return <ArticleLayout post={post} />;

@@ -27,7 +27,7 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
               <EyeCatch emoji={emoji} />
             </FadeIn>
             <FadeIn>
-              <h1 className='mt-4 text-lg font-medium'>{title}</h1>
+              <h1 className='mt-4 text-xl font-medium'>{title}</h1>
             </FadeIn>
             <FadeIn>
               <time className='mt-3 block font-serif text-sm text-zinc-600 dark:text-zinc-400' dateTime={publishedAt}>

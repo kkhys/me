@@ -15,13 +15,13 @@ const Page = () => {
     <Container>
       <FadeInStagger>
         <FadeIn>
-          <h1 className='font-serif text-lg font-medium'>Keisuke Hayashi</h1>
+          <h1 className='font-serif text-xl font-medium'>Keisuke Hayashi</h1>
         </FadeIn>
         <Prose className='font-serif'>
           <FadeIn>
             <p>
-              <span className='font-sans'>Passion for hacking</span>. Full-stack developer based in Tokyo. Love to make
-              something and make people happy and surprised.
+              <span className='font-sans text-lg'>Passion for hacking</span>. Full-stack developer based in Tokyo. Love
+              to make something and make people happy and surprised.
             </p>
           </FadeIn>
           <FadeIn>
