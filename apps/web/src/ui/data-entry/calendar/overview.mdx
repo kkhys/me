@@ -45,7 +45,7 @@ You can use the `<Calendar>` component to build a date picker. See the [Date Pic
 ```tsx
 'use client';
 
-import { toast } from '@/components/ui/use-toast';
+import { toast } from '#/ui/feedback';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { format } from 'date-fns';
@@ -78,10 +78,9 @@ export default () => {
   });
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    toast({
-      title: 'You submitted the following values:',
+    toast('You submitted the following values:', {
       description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
+        <pre className='mt-2 w-[320px] rounded-md bg-slate-950 p-4'>
           <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),

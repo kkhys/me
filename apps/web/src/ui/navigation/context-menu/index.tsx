@@ -142,7 +142,7 @@ const ContextMenuLabel = React.forwardRef<
 >(({ className, inset, ...props }, ref) => (
   <ContextMenuPrimitive.Label
     ref={ref}
-    className={cn('text-foreground px-2 py-1.5 text-sm font-semibold', inset && 'pl-8', className)}
+    className={cn('text-foreground px-2 py-1.5 text-sm font-medium', inset && 'pl-8', className)}
     {...props}
   />
 ));
