@@ -10,6 +10,24 @@ import { ArticleCards } from '#/ui/feature/posts';
 
 export const metadata = {
   title: 'Blog',
+  description: 'Blog posts of Keisuke Hayashi.',
+  alternates: {
+    canonical: `${serverEnv.BASE_URL}/posts`,
+  },
+  openGraph: {
+    type: 'website',
+    title: 'Blog',
+    url: `${serverEnv.BASE_URL}/posts`,
+    siteName: 'Keisuke Hayashi',
+    locale: 'ja_JP',
+  },
+  twitter: {
+    title: 'Blog',
+    card: 'summary',
+    siteId: '5237731',
+    creator: '@kkhys_',
+    creatorId: '5237731',
+  },
 } satisfies Metadata;
 
 const Page = () => {

@@ -8,7 +8,7 @@ import { LegalLayout } from '#/ui/feature/legal';
 
 export const generateMetadata = () => {
   const terms = allLegals.find((legal) => legal.title === 'Terms of Service');
-  if (!terms) return null;
+  if (!terms) return {};
   const { title, description, slug, publishedAt, updatedAt } = terms;
   const url = `${serverEnv.BASE_URL}/legal/${slug}`;
 

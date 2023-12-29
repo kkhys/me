@@ -8,7 +8,7 @@ import { LegalLayout } from '#/ui/feature/legal';
 
 export const generateMetadata = () => {
   const privacyPolicy = allLegals.find((legal) => legal.title === 'Privacy Policy');
-  if (!privacyPolicy) return null;
+  if (!privacyPolicy) return {};
   const { title, description, slug, publishedAt, updatedAt } = privacyPolicy;
   const url = `${serverEnv.BASE_URL}/legal/${slug}`;
 
