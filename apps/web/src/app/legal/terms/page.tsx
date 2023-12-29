@@ -3,14 +3,14 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { allLegals } from 'contentlayer/generated';
 
-import { serverEnv } from '#/env/index.mjs';
+import { site } from '#/config';
 import { LegalLayout } from '#/ui/feature/legal';
 
 export const generateMetadata = () => {
   const terms = allLegals.find((legal) => legal.title === 'Terms of Service');
   if (!terms) return {};
   const { title, description, slug, publishedAt, updatedAt } = terms;
-  const url = `${serverEnv.BASE_URL}/legal/${slug}`;
+  const url = `${site.url.base}/legal/${slug}`;
 
   return {
     title,
