@@ -20,7 +20,7 @@ export const metadata = {
   description: site.description,
   generator: 'Next.js',
   applicationName: site.title,
-  referrer: 'strict-origin-when-cross-origin',
+  referrer: 'origin-when-cross-origin',
   category: 'blog',
   keywords: ['blog', 'developer'],
   authors: [
