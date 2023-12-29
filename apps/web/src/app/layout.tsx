@@ -4,9 +4,9 @@ import '#/styles/globals.css';
 
 import type { Metadata, Viewport } from 'next';
 import { GoogleTagManager } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/react';
 
 import { me, site } from '#/config';
-import { env } from '#/env.mjs';
 import { inter, jetBrainsMono, newsreader, notoEmoji, notoSansJP } from '#/lib/nextjs/fonts';
 import { Providers } from '#/providers';
 import { Layout } from '#/ui/feature/global';
@@ -71,7 +71,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
         <Toaster />
       </Providers>
     </body>
-    {env.NODE_ENV === 'production' && <GoogleTagManager gtmId={site.google.tagManagerId} />}
+    <GoogleTagManager gtmId={site.google.tagManagerId} />
+    <Analytics />
   </html>
 );
 
