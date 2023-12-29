@@ -3,9 +3,8 @@
   "private": true,
   "scripts": {
     "commit": "cz",
-    "aic": "aicommits",
     "build": "turbo build",
-    "clean": "git clean -xdf node_modules",
+    "clean": "git clean -xdf node_modules storybook-static",
     "clean:workspaces": "turbo clean",
     "dev": "turbo dev --parallel",
     "format": "turbo format --continue -- --cache --cache-location='node_modules/.cache/.prettiercache'",
@@ -46,7 +45,6 @@
     "@manypkg/cli": "0.21.1",
     "@turbo/gen": "1.11.2",
     "@types/node": "20.10.5",
-    "aicommits": "1.11.0",
     "commitizen": "4.3.0",
     "cz-conventional-changelog": "3.3.0",
     "http-server": "14.1.1",

@@ -1,6 +1,10 @@
+import typographyPlugin from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 import baseConfig from '@kkhys/tailwind-config';
+
+import typographyStyles from './src/ui/general/prose/typography';
 
 export default {
   darkMode: ['class'],
@@ -19,6 +23,7 @@ export default {
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
+        'background-lighter': 'hsl(var(--background-lighter))',
         foreground: 'hsl(var(--foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
@@ -48,6 +53,11 @@ export default {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        scrollbar: {
+          DEFAULT: 'hsl(var(--scrollbar))',
+          foreground: 'hsl(var(--scrollbar-foreground))',
+        },
+        selection: 'hsl(var(--selection))',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -68,8 +78,26 @@ export default {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      fontFamily: {
+        serif: ['var(--font-inter)', ...defaultTheme.fontFamily.serif],
+        sans: ['var(--font-newsreader)', ...defaultTheme.fontFamily.sans],
+        mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
+        emoji: ['var(--font-noto-emoji)'],
+      },
+      fontSize: {
+        xs: ['0.75rem', { lineHeight: '1rem' }],
+        sm: ['0.875rem', { lineHeight: '1.25rem' }],
+        base: ['1rem', { lineHeight: '1.5rem' }],
+        lg: ['1.025rem', { lineHeight: '1.75rem' }],
+        xl: ['1.05rem', { lineHeight: '1.75rem' }],
+        '2xl': ['1.1rem', { lineHeight: '2rem' }],
+      },
+      ringWidth: {
+        '0.5': '0.5px',
+      },
     },
+    typography: typographyStyles,
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), typographyPlugin],
   presets: [baseConfig],
 } satisfies Config;
