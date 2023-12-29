@@ -34,7 +34,7 @@ export const generateMetadata = () => {
       creator: '@kkhys_',
       creatorId: '5237731',
     },
-  } as Metadata;
+  } satisfies Metadata;
 };
 
 const Page = () => {
