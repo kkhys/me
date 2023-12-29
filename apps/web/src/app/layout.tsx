@@ -2,6 +2,9 @@ import React from 'react';
 
 import '#/styles/globals.css';
 
+import { GoogleTagManager } from '@next/third-parties/google';
+
+import { serverEnv } from '#/env/index.mjs';
 import { inter, jetBrainsMono, newsreader, notoEmoji, notoSansJP } from '#/lib/nextjs/fonts';
 import { Providers } from '#/providers';
 import { Layout } from '#/ui/feature/global';
@@ -21,6 +24,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
         <Toaster />
       </Providers>
     </body>
+    {serverEnv.NODE_ENV === 'production' && <GoogleTagManager gtmId={serverEnv.GOOGLE_TAG_MANAGER_ID} />}
   </html>
 );
 

@@ -7,12 +7,14 @@ export const serverEnv = createEnv({
     BASE_URL: z.string().url(),
     ME_REPOSITORY_URL: z.string().url(),
     BLOG_CONTENTS_REPOSITORY_URL: z.string().url(),
+    GOOGLE_TAG_MANAGER_ID: z.string(),
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     BASE_URL: process.env.BASE_URL,
     ME_REPOSITORY_URL: process.env.ME_REPOSITORY_URL,
     BLOG_CONTENTS_REPOSITORY_URL: process.env.BLOG_CONTENTS_REPOSITORY_URL,
+    GOOGLE_TAG_MANAGER_ID: process.env.GOOGLE_TAG_MANAGER_ID,
   },
   skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION || process.env.npm_lifecycle_event === 'lint',
 });
