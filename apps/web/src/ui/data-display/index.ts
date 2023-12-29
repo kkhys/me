@@ -3,6 +3,7 @@ export * from './aspect-ratio';
 export * from './avatar';
 export * from './badge';
 export * from './card';
+export * from './carousel';
 export * from './collapsible';
 export * from './hover-card';
 export * from './popover';

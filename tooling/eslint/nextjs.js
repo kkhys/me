@@ -4,6 +4,7 @@ const config = {
   rules: {
     '@next/next/no-html-link-for-pages': 'off',
   },
+  ignorePatterns: ['.next'],
 };
 
 module.exports = config;

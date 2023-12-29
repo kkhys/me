@@ -2,20 +2,78 @@ import React from 'react';
 
 import '#/styles/globals.css';
 
-import { ThemeProvider } from '#/lib/nextjs/theme-provider';
+import type { Metadata, Viewport } from 'next';
+import { GoogleTagManager } from '@next/third-parties/google';
+
+import { serverEnv } from '#/env/index.mjs';
+import { inter, jetBrainsMono, newsreader, notoEmoji, notoSansJP } from '#/lib/nextjs/fonts';
+import { Providers } from '#/providers';
+import { Layout } from '#/ui/feature/global';
 import { Toaster } from '#/ui/feedback';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <html lang='ja'>
-      <body>
-        <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-          {children}
-          <Toaster />
-        </ThemeProvider>
-      </body>
-    </html>
-  );
-};
+const myName = 'Keisuke Hayashi';
 
-export default Layout;
+export const metadata = {
+  title: {
+    template: `%s | ${myName}`,
+    default: myName,
+  },
+  description: 'Personal website of Keisuke Hayashi.',
+  generator: 'Next.js',
+  applicationName: myName,
+  referrer: 'strict-origin-when-cross-origin',
+  category: 'blog',
+  keywords: ['blog', 'developer'],
+  authors: [
+    {
+      name: myName,
+      url: serverEnv.BASE_URL,
+    },
+  ],
+  creator: myName,
+  publisher: myName,
+  formatDetection: {
+    email: false,
+    telephone: false,
+    address: false,
+  },
+  alternates: {
+    canonical: serverEnv.BASE_URL,
+  },
+  openGraph: {
+    type: 'website',
+    url: serverEnv.BASE_URL,
+    siteName: myName,
+    locale: 'ja_JP',
+  },
+  twitter: {
+    card: 'summary',
+    siteId: '5237731',
+    creator: '@kkhys_',
+    creatorId: '5237731',
+  },
+} satisfies Metadata;
+
+export const viewport = {
+  themeColor: '#0a0a0b',
+} satisfies Viewport;
+
+const RootLayout = ({ children }: { children: React.ReactNode }) => (
+  <html
+    lang='ja'
+    className={`h-full antialiased ${notoSansJP.className} ${inter.variable} ${newsreader.variable} ${jetBrainsMono.variable} ${notoEmoji.variable}`}
+    suppressHydrationWarning
+  >
+    <body className='flex h-full'>
+      <Providers>
+        <div className='flex w-full'>
+          <Layout>{children}</Layout>
+        </div>
+        <Toaster />
+      </Providers>
+    </body>
+    {serverEnv.NODE_ENV === 'production' && <GoogleTagManager gtmId={serverEnv.GOOGLE_TAG_MANAGER_ID} />}
+  </html>
+);
+
+export default RootLayout;
