@@ -5,6 +5,7 @@ import '#/styles/globals.css';
 import type { Metadata, Viewport } from 'next';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { me, site } from '#/config';
 import { inter, jetBrainsMono, newsreader, notoEmoji, notoSansJP } from '#/lib/nextjs/fonts';
@@ -70,9 +71,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
         </div>
         <Toaster />
       </Providers>
+      <Analytics />
+      <SpeedInsights />
     </body>
     <GoogleTagManager gtmId={site.google.tagManagerId} />
-    <Analytics />
   </html>
 );
 
