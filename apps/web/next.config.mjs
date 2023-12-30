@@ -1,7 +1,7 @@
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import { withContentlayer } from 'next-contentlayer';
 
-import './src/env/index.mjs';
+import './src/env.mjs';
 
 /** @type { import("next").NextConfig } */
 const config = {

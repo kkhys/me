@@ -3,7 +3,8 @@ import type { Metadata } from 'next';
 import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 
-import { serverEnv } from '#/env/index.mjs';
+import { site } from '#/config';
+import { env } from '#/env.mjs';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#/ui/data-display';
 import { Container, FadeIn } from '#/ui/feature/global';
 import { ArticleCards } from '#/ui/feature/posts';
@@ -12,12 +13,12 @@ export const metadata = {
   title: 'Blog',
   description: 'Blog posts of Keisuke Hayashi.',
   alternates: {
-    canonical: `${serverEnv.BASE_URL}/posts`,
+    canonical: `${site.url.base}/posts`,
   },
   openGraph: {
     type: 'website',
     title: 'Blog',
-    url: `${serverEnv.BASE_URL}/posts`,
+    url: `${site.url.base}/posts`,
     siteName: 'Keisuke Hayashi',
     locale: 'ja_JP',
   },
@@ -32,7 +33,7 @@ export const metadata = {
 
 const Page = () => {
   const posts = allPosts
-    .filter((post) => serverEnv.NODE_ENV === 'development' || post.status === 'published')
+    .filter((post) => env.NODE_ENV === 'development' || post.status === 'published')
     .sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)));
   const techPosts = posts.filter((post) => post.category.includes('Tech'));
   const lifePosts = posts.filter((post) => post.category.includes('Life'));

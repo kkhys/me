@@ -4,52 +4,52 @@ import '#/styles/globals.css';
 
 import type { Metadata, Viewport } from 'next';
 import { GoogleTagManager } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
-import { serverEnv } from '#/env/index.mjs';
+import { me, site } from '#/config';
 import { inter, jetBrainsMono, newsreader, notoEmoji, notoSansJP } from '#/lib/nextjs/fonts';
 import { Providers } from '#/providers';
 import { Layout } from '#/ui/feature/global';
 import { Toaster } from '#/ui/feedback';
 
-const myName = 'Keisuke Hayashi';
-
 export const metadata = {
   title: {
-    template: `%s | ${myName}`,
-    default: myName,
+    template: `%s | ${site.title}`,
+    default: site.title,
   },
-  description: 'Personal website of Keisuke Hayashi.',
+  description: site.description,
   generator: 'Next.js',
-  applicationName: myName,
-  referrer: 'strict-origin-when-cross-origin',
+  applicationName: site.title,
+  referrer: 'origin-when-cross-origin',
   category: 'blog',
   keywords: ['blog', 'developer'],
   authors: [
     {
-      name: myName,
-      url: serverEnv.BASE_URL,
+      name: me.name,
+      url: site.url.base,
     },
   ],
-  creator: myName,
-  publisher: myName,
+  creator: me.name,
+  publisher: me.name,
   formatDetection: {
     email: false,
     telephone: false,
     address: false,
   },
   alternates: {
-    canonical: serverEnv.BASE_URL,
+    canonical: site.url.base,
   },
   openGraph: {
     type: 'website',
-    url: serverEnv.BASE_URL,
-    siteName: myName,
+    url: site.url.base,
+    siteName: site.title,
     locale: 'ja_JP',
   },
   twitter: {
     card: 'summary',
     siteId: '5237731',
-    creator: '@kkhys_',
+    creator: me.social.x.id,
     creatorId: '5237731',
   },
 } satisfies Metadata;
@@ -71,8 +71,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
         </div>
         <Toaster />
       </Providers>
+      <Analytics />
+      <SpeedInsights />
     </body>
-    {serverEnv.NODE_ENV === 'production' && <GoogleTagManager gtmId={serverEnv.GOOGLE_TAG_MANAGER_ID} />}
+    <GoogleTagManager gtmId={site.google.tagManagerId} />
   </html>
 );
 

@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { ArrowTopRightIcon, DotsHorizontalIcon, HomeIcon } from '@radix-ui/react-icons';
 
-import { serverEnv } from '#/env/index.mjs';
+import { site, storybook } from '#/config';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
 import { Button } from '#/ui/general';
 import {
@@ -85,14 +85,14 @@ export const NavLinks = () => (
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='start' className='font-serif'>
-        <NavLink href={serverEnv.ROADMAP_URL} isExternal>
+        <NavLink href={site.url.roadmap} isExternal>
           Roadmap
         </NavLink>
         {/* TODO: change href */}
-        <NavLink href={serverEnv.STORYBOOK_URL} isExternal>
+        <NavLink href={storybook.url.base} isExternal>
           Storybook
         </NavLink>
-        <NavLink href={serverEnv.ME_REPOSITORY_URL} isExternal>
+        <NavLink href={site.url.repository} isExternal>
           Source
         </NavLink>
         <DropdownMenuSeparator />
