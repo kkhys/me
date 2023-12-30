@@ -17,12 +17,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v4
-#        with:
-#            fetch-depth: 0
-#            token: ${{ secrets.SUBMODULE_TOKEN }}
-#            submodules: recursive
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+            token: ${{ secrets.SUBMODULE_TOKEN }}
+            submodules: recursive
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.4.0
@@ -48,8 +48,8 @@ jobs:
       - name: Install deps (with cache)
         run: pnpm install
 
-#      - name: Build
-#        run: pnpm turbo build
+      - name: Build
+        run: pnpm turbo build
 
       - name: Lint and type-check
         run: pnpm turbo lint format typecheck
