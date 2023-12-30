@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import { serverEnv } from '#/env/index.mjs';
+import { site } from '#/config';
 
 const robots = (): MetadataRoute.Robots => {
   return {
@@ -38,8 +38,8 @@ const robots = (): MetadataRoute.Robots => {
         disallow: '/',
       },
     ],
-    sitemap: `${serverEnv.BASE_URL}/sitemap.xml`,
-    host: serverEnv.BASE_URL,
+    sitemap: `${site.url.base}/sitemap.xml`,
+    host: site.url.base,
   };
 };
 

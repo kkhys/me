@@ -1,13 +1,13 @@
 import { defineDocumentType } from 'contentlayer/source-files';
 import { format, parseISO } from 'date-fns';
 
+import { contents } from '../../../config';
 /**
  * esbuild does not support module path aliases, so relative paths are used
  *
  * @see: https://github.com/evanw/esbuild/issues/394
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
-import { serverEnv } from '../../../env/index.mjs';
 import { allTagTitles, categoryTitles } from '../constants';
 import { generateCategoryObject, generateSlug, generateTagObject } from '../utils';
 
@@ -67,14 +67,12 @@ export const Post = defineDocumentType(() => ({
     editUrl: {
       description: 'URL to github repository of editable blog content',
       type: 'string',
-      resolve: ({ _raw: { sourceFilePath } }) =>
-        `${serverEnv.BLOG_CONTENTS_REPOSITORY_URL}/edit/main/${sourceFilePath}`,
+      resolve: ({ _raw: { sourceFilePath } }) => `${contents.url.repository}/edit/main/${sourceFilePath}`,
     },
     sourceUrl: {
       description: 'URL to the blog content, without rendering the markdown file',
       type: 'string',
-      resolve: ({ _raw: { sourceFilePath } }) =>
-        `${serverEnv.BLOG_CONTENTS_REPOSITORY_URL}/blob/main/${sourceFilePath}?plain=1`,
+      resolve: ({ _raw: { sourceFilePath } }) => `${contents.url.repository}/blob/main/${sourceFilePath}?plain=1`,
     },
     publishedAtFormatted: {
       description: 'Formatted publication date and time',
