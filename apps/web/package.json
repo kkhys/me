@@ -13,7 +13,7 @@
     "with-env": "dotenv -e ../../.env --",
     "storybook:dev": "pnpm with-env storybook dev --port 6007 --quiet --no-open",
     "storybook:build": "pnpm with-env storybook build --quiet",
-    "storybook:move": "mv storybook-static ../../storybook-static",
+    "storybook:move": "mv storybook-static ../../storybook-static/web",
     "test": "pnpm with-env jest --passWithNoTests --silent --detectOpenHandles",
     "test:e2e": "pnpm playwright test",
     "test:e2e:report": "pnpm playwright show-report",
