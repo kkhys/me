@@ -4,7 +4,10 @@
   "scripts": {
     "clean": "git clean -xdf .turbo node_modules storybook-static",
     "format": "prettier --check \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path ../../.gitignore",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "storybook:dev": "storybook dev --port 6006 --quiet --no-open",
+    "storybook:build": "storybook build --quiet",
+    "storybook:move": "mv storybook-static ../../storybook-static"
   },
   "dependencies": {
     "react": "18.2.0",
