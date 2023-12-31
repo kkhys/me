@@ -3,14 +3,13 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { allLegals } from 'contentlayer/generated';
 
-import { site } from '#/config';
 import { LegalLayout } from '#/ui/feature/legal';
 
 export const generateMetadata = () => {
   const privacyPolicy = allLegals.find((legal) => legal.title === 'Privacy Policy');
   if (!privacyPolicy) return {};
   const { title, description, slug, publishedAt, updatedAt } = privacyPolicy;
-  const url = `${site.url.base}/legal/${slug}`;
+  const url = `/legal/${slug}`;
 
   return {
     title,
