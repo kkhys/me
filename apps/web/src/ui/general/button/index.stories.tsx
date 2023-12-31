@@ -120,7 +120,7 @@ export const Icon = {
     variant: 'outline',
     size: 'icon',
     'aria-label': 'Next',
-    children: <ChevronRightIcon className='h-4 w-4' />,
+    children: <ChevronRightIcon className='size-4' />,
   },
 } satisfies Story;
 
@@ -128,7 +128,7 @@ export const WithIcon = {
   args: {
     children: (
       <>
-        <EnvelopeOpenIcon className='mr-2 h-4 w-4' /> Login with Email
+        <EnvelopeOpenIcon className='mr-2 size-4' /> Login with Email
       </>
     ),
   },
@@ -139,7 +139,7 @@ export const Loading = {
     disabled: true,
     children: (
       <>
-        <ReloadIcon className='mr-2 h-4 w-4 animate-spin' />
+        <ReloadIcon className='mr-2 size-4 animate-spin' />
         Please wait
       </>
     ),

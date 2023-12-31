@@ -106,7 +106,7 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   args: {
     'aria-label': 'Default',
-    children: <FontBoldIcon className='h-4 w-4' />,
+    children: <FontBoldIcon className='size-4' />,
   },
 } satisfies Story;
 
@@ -114,7 +114,7 @@ export const Outline = {
   args: {
     variant: 'outline',
     'aria-label': 'Outline',
-    children: <FontItalicIcon className='h-4 w-4' />,
+    children: <FontItalicIcon className='size-4' />,
   },
 } satisfies Story;
 
@@ -123,7 +123,7 @@ export const WithText = {
     'aria-label': 'With text',
     children: (
       <>
-        <FontItalicIcon className='mr-2 h-4 w-4' />
+        <FontItalicIcon className='mr-2 size-4' />
         Italic
       </>
     ),
@@ -134,7 +134,7 @@ export const Small = {
   args: {
     size: 'sm',
     'aria-label': 'Small',
-    children: <FontItalicIcon className='h-4 w-4' />,
+    children: <FontItalicIcon className='size-4' />,
   },
 } satisfies Story;
 
@@ -142,7 +142,7 @@ export const Large = {
   args: {
     size: 'lg',
     'aria-label': 'Large',
-    children: <FontItalicIcon className='h-4 w-4' />,
+    children: <FontItalicIcon className='size-4' />,
   },
 } satisfies Story;
 
@@ -150,6 +150,6 @@ export const Disabled = {
   args: {
     disabled: true,
     'aria-label': 'Disabled',
-    children: <UnderlineIcon className='h-4 w-4' />,
+    children: <UnderlineIcon className='size-4' />,
   },
 } satisfies Story;

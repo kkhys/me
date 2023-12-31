@@ -28,7 +28,7 @@ const Page = () => {
           <FadeIn>
             <Link href={{ pathname: '/posts' }} className='inline-flex items-center'>
               Read blog
-              <ArrowRightIcon className='ml-1 h-3.5 w-3.5' />
+              <ArrowRightIcon className='ml-1 size-3.5' />
             </Link>
           </FadeIn>
         </Prose>

@@ -13,7 +13,7 @@ const Icon = () => {
   return new ImageResponse(
     (
       // eslint-disable-next-line react/no-unknown-property
-      <div tw='flex h-full w-full items-center justify-center bg-zinc-900 font-mono text-xl font-bold text-zinc-100 opacity-90'>
+      <div tw='flex size-full items-center justify-center bg-zinc-900 font-mono text-xl font-bold text-zinc-100 opacity-90'>
         K
       </div>
     ),
