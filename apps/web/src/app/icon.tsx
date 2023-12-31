@@ -9,16 +9,40 @@ export const size = {
 
 export const contentType = 'image/png';
 
-const Icon = () => {
+const Icon = async () => {
+  const interMedium = await fetch(new URL('../../assets/fonts/Inter-Medium.ttf', import.meta.url)).then((res) =>
+    res.arrayBuffer(),
+  );
+
   return new ImageResponse(
     (
-      // eslint-disable-next-line react/no-unknown-property
-      <div tw='flex size-full items-center justify-center bg-zinc-900 font-mono text-xl font-bold text-zinc-100 opacity-90'>
+      <div
+        style={{
+          fontSize: 18,
+          background: '#0a0a0b',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontFamily: 'Inter',
+          color: '#e4e4e7',
+          paddingTop: 3,
+        }}
+      >
         K
       </div>
     ),
     {
       ...size,
+      fonts: [
+        {
+          name: 'Inter',
+          data: interMedium,
+          style: 'normal',
+          weight: 500,
+        },
+      ],
     },
   );
 };

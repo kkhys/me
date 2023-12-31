@@ -30,6 +30,6 @@ export const notoEmoji = Noto_Emoji({
   subsets: ['emoji'],
   display: 'swap',
   style: 'normal',
-  weight: '700',
+  weight: '600',
   variable: '--font-noto-emoji',
 });
