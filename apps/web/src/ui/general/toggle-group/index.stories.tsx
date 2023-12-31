@@ -216,13 +216,13 @@ export const Default = {
     children: (
       <>
         <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-          <FontBoldIcon className='h-4 w-4' />
+          <FontBoldIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-          <FontItalicIcon className='h-4 w-4' />
+          <FontItalicIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='strikethrough' aria-label='Toggle strikethrough'>
-          <UnderlineIcon className='h-4 w-4' />
+          <UnderlineIcon className='size-4' />
         </ToggleGroupItem>
       </>
     ),
@@ -236,13 +236,13 @@ export const Outline = {
     children: (
       <>
         <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-          <FontBoldIcon className='h-4 w-4' />
+          <FontBoldIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-          <FontItalicIcon className='h-4 w-4' />
+          <FontItalicIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='strikethrough' aria-label='Toggle strikethrough'>
-          <UnderlineIcon className='h-4 w-4' />
+          <UnderlineIcon className='size-4' />
         </ToggleGroupItem>
       </>
     ),
@@ -255,13 +255,13 @@ export const Single = {
     children: (
       <>
         <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-          <FontBoldIcon className='h-4 w-4' />
+          <FontBoldIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-          <FontItalicIcon className='h-4 w-4' />
+          <FontItalicIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='strikethrough' aria-label='Toggle strikethrough'>
-          <UnderlineIcon className='h-4 w-4' />
+          <UnderlineIcon className='size-4' />
         </ToggleGroupItem>
       </>
     ),
@@ -275,13 +275,13 @@ export const Small = {
     children: (
       <>
         <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-          <FontBoldIcon className='h-4 w-4' />
+          <FontBoldIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-          <FontItalicIcon className='h-4 w-4' />
+          <FontItalicIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='strikethrough' aria-label='Toggle strikethrough'>
-          <UnderlineIcon className='h-4 w-4' />
+          <UnderlineIcon className='size-4' />
         </ToggleGroupItem>
       </>
     ),
@@ -295,13 +295,13 @@ export const Large = {
     children: (
       <>
         <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-          <FontBoldIcon className='h-4 w-4' />
+          <FontBoldIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-          <FontItalicIcon className='h-4 w-4' />
+          <FontItalicIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='strikethrough' aria-label='Toggle strikethrough'>
-          <UnderlineIcon className='h-4 w-4' />
+          <UnderlineIcon className='size-4' />
         </ToggleGroupItem>
       </>
     ),
@@ -315,13 +315,13 @@ export const Disabled = {
     children: (
       <>
         <ToggleGroupItem value='bold' aria-label='Toggle bold'>
-          <FontBoldIcon className='h-4 w-4' />
+          <FontBoldIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='italic' aria-label='Toggle italic'>
-          <FontItalicIcon className='h-4 w-4' />
+          <FontItalicIcon className='size-4' />
         </ToggleGroupItem>
         <ToggleGroupItem value='strikethrough' aria-label='Toggle strikethrough'>
-          <UnderlineIcon className='h-4 w-4' />
+          <UnderlineIcon className='size-4' />
         </ToggleGroupItem>
       </>
     ),

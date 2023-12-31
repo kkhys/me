@@ -32,7 +32,7 @@ const NavLink = ({
       rel={isExternal ? 'noopener noreferrer' : undefined}
     >
       {children}
-      {isExternal && <ArrowTopRightIcon className='ml-1 h-3 w-3' />}
+      {isExternal && <ArrowTopRightIcon className='ml-1 size-3' />}
     </Link>
   </DropdownMenuItem>
 );
@@ -64,7 +64,7 @@ const NavLinkWithTooltip = ({
       <TooltipContent>
         <div className='flex items-center'>
           <p className='font-serif'>{tooltipContent}</p>
-          {isExternal && <ArrowTopRightIcon className='ml-1 h-3 w-3' />}
+          {isExternal && <ArrowTopRightIcon className='ml-1 size-3' />}
         </div>
       </TooltipContent>
     </Tooltip>
@@ -74,13 +74,13 @@ const NavLinkWithTooltip = ({
 export const NavLinks = () => (
   <>
     <NavLinkWithTooltip href='/' tooltipContent='Home'>
-      <HomeIcon className='h-4 w-4' />
+      <HomeIcon className='size-4' />
       <span className='sr-only'>Link to home</span>
     </NavLinkWithTooltip>
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' size='icon'>
-          <DotsHorizontalIcon className='h-4 w-4' />
+          <DotsHorizontalIcon className='size-4' />
           <span className='sr-only'>Links</span>
         </Button>
       </DropdownMenuTrigger>

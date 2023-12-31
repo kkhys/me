@@ -86,11 +86,11 @@ const DefaultDemo = () => {
               <Button
                 variant='outline'
                 size='icon'
-                className='h-8 w-8 shrink-0 rounded-full'
+                className='size-8 shrink-0 rounded-full'
                 onClick={() => onClick(-10)}
                 disabled={goal <= 200}
               >
-                <Minus className='h-4 w-4' />
+                <Minus className='size-4' />
                 <span className='sr-only'>Decrease</span>
               </Button>
               <div className='flex-1 text-center'>
@@ -100,11 +100,11 @@ const DefaultDemo = () => {
               <Button
                 variant='outline'
                 size='icon'
-                className='h-8 w-8 shrink-0 rounded-full'
+                className='size-8 shrink-0 rounded-full'
                 onClick={() => onClick(10)}
                 disabled={goal >= 400}
               >
-                <Plus className='h-4 w-4' />
+                <Plus className='size-4' />
                 <span className='sr-only'>Increase</span>
               </Button>
             </div>

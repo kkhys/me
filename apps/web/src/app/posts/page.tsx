@@ -16,18 +16,7 @@ export const metadata = {
     canonical: `${site.url.base}/posts`,
   },
   openGraph: {
-    type: 'website',
-    title: 'Blog',
     url: `${site.url.base}/posts`,
-    siteName: 'Keisuke Hayashi',
-    locale: 'ja_JP',
-  },
-  twitter: {
-    title: 'Blog',
-    card: 'summary',
-    siteId: '5237731',
-    creator: '@kkhys_',
-    creatorId: '5237731',
   },
 } satisfies Metadata;
 

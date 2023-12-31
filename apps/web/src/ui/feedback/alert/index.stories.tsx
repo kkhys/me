@@ -34,7 +34,7 @@ export const Default = {
   args: {
     children: (
       <>
-        <RocketIcon className='h-4 w-4' />
+        <RocketIcon className='size-4' />
         <AlertTitle>Heads up!</AlertTitle>
         <AlertDescription>You can add components to your app using the cli.</AlertDescription>
       </>
@@ -47,7 +47,7 @@ export const Destructive = {
     variant: 'destructive',
     children: (
       <>
-        <ExclamationTriangleIcon className='h-4 w-4' />
+        <ExclamationTriangleIcon className='size-4' />
         <AlertTitle>Error</AlertTitle>
         <AlertDescription>Your session has expired. Please log in again.</AlertDescription>
       </>

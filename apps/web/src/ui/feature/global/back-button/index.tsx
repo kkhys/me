@@ -25,7 +25,7 @@ export const BackButton = () => {
             aria-label='Go back to previous page'
             className='absolute left-12 top-0 hidden xl:flex'
           >
-            <ResetIcon className='h-4 w-4' />
+            <ResetIcon className='size-4' />
           </Button>
         </TooltipTrigger>
         <TooltipContent>
