@@ -37,12 +37,13 @@ export const metadata = {
     telephone: false,
     address: false,
   },
+  metadataBase: new URL(site.url.base),
   alternates: {
-    canonical: site.url.base,
+    canonical: '/',
   },
   openGraph: {
     type: 'website',
-    url: site.url.base,
+    url: '/',
     siteName: site.title,
     locale: 'ja_JP',
   },
