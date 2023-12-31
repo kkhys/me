@@ -29,7 +29,7 @@ const DefaultDemo = () => {
           variant={'outline'}
           className={cn('w-[240px] justify-start text-left font-normal', !date && 'text-muted-foreground')}
         >
-          <CalendarIcon className='mr-2 h-4 w-4' />
+          <CalendarIcon className='mr-2 size-4' />
           {date ? format(date, 'PPP') : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
@@ -59,7 +59,7 @@ const DateRangePickerDemo = () => {
             variant={'outline'}
             className={cn('w-[300px] justify-start text-left font-normal', !date && 'text-muted-foreground')}
           >
-            <CalendarIcon className='mr-2 h-4 w-4' />
+            <CalendarIcon className='mr-2 size-4' />
             {date?.from ? (
               date.to ? (
                 <>
@@ -102,7 +102,7 @@ const WithPresetsDemo = () => {
           variant={'outline'}
           className={cn('w-[240px] justify-start text-left font-normal', !date && 'text-muted-foreground')}
         >
-          <CalendarIcon className='mr-2 h-4 w-4' />
+          <CalendarIcon className='mr-2 size-4' />
           {date ? format(date, 'PPP') : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>

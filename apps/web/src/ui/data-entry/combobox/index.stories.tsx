@@ -78,7 +78,7 @@ const DefaultDemo = () => {
       <PopoverTrigger asChild>
         <Button variant='outline' role='combobox' aria-expanded={open} className='w-[200px] justify-between'>
           {value ? frameworks.find((framework) => framework.value === value)?.label : 'Select framework...'}
-          <CaretSortIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+          <CaretSortIcon className='ml-2 size-4 shrink-0 opacity-50' />
         </Button>
       </PopoverTrigger>
       <PopoverContent className='w-[200px] p-0'>
@@ -96,7 +96,7 @@ const DefaultDemo = () => {
                 }}
               >
                 {framework.label}
-                <CheckIcon className={cn('ml-auto h-4 w-4', value === framework.value ? 'opacity-100' : 'opacity-0')} />
+                <CheckIcon className={cn('ml-auto size-4', value === framework.value ? 'opacity-100' : 'opacity-0')} />
               </CommandItem>
             ))}
           </CommandGroup>
@@ -302,7 +302,7 @@ const FormDemo = () => {
                       {field.value
                         ? languages.find((language) => language.value === field.value)?.label
                         : 'Select language'}
-                      <CaretSortIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                      <CaretSortIcon className='ml-2 size-4 shrink-0 opacity-50' />
                     </Button>
                   </FormControl>
                 </PopoverTrigger>
@@ -322,7 +322,7 @@ const FormDemo = () => {
                           {language.label}
                           <CheckIcon
                             className={cn(
-                              'ml-auto h-4 w-4',
+                              'ml-auto size-4',
                               language.value === field.value ? 'opacity-100' : 'opacity-0',
                             )}
                           />
