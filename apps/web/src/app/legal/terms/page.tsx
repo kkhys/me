@@ -20,19 +20,9 @@ export const generateMetadata = () => {
     },
     openGraph: {
       type: 'article',
-      title,
       url,
       publishedTime: publishedAt,
       modifiedTime: updatedAt ?? undefined,
-      siteName: 'Keisuke Hayashi',
-      locale: 'ja_JP',
-    },
-    twitter: {
-      title,
-      card: 'summary',
-      siteId: '5237731',
-      creator: '@kkhys_',
-      creatorId: '5237731',
     },
   } satisfies Metadata;
 };
