@@ -7,6 +7,7 @@ import { env } from '#/env.mjs';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '#/ui/data-display';
 import { Container, FadeIn } from '#/ui/feature/global';
 import { ArticleCards } from '#/ui/feature/posts';
+import { JsonLd } from './json-ld';
 
 export const metadata = {
   title: 'Blog',
@@ -27,39 +28,42 @@ const Page = () => {
   const lifePosts = posts.filter((post) => post.category.includes('Life'));
 
   return (
-    <Container>
-      <header>
-        <h1 className='font-serif text-xl font-medium'>Blog</h1>
-      </header>
-      <Tabs defaultValue='all' className='mt-6'>
-        <TabsList>
-          <TabsTrigger value='all' className='font-serif'>
-            All
-          </TabsTrigger>
-          <TabsTrigger value='tech' className='font-serif'>
-            Tech
-          </TabsTrigger>
-          <TabsTrigger value='life' className='font-serif'>
-            Life
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value='all'>
-          <FadeIn>
-            <ArticleCards posts={posts} className='mt-8' />
-          </FadeIn>
-        </TabsContent>
-        <TabsContent value='tech'>
-          <FadeIn>
-            <ArticleCards posts={techPosts} className='mt-8' />
-          </FadeIn>
-        </TabsContent>
-        <TabsContent value='life'>
-          <FadeIn>
-            <ArticleCards posts={lifePosts} className='mt-8' />
-          </FadeIn>
-        </TabsContent>
-      </Tabs>
-    </Container>
+    <>
+      <JsonLd />
+      <Container>
+        <header>
+          <h1 className='font-serif text-xl font-medium'>Blog</h1>
+        </header>
+        <Tabs defaultValue='all' className='mt-6'>
+          <TabsList>
+            <TabsTrigger value='all' className='font-serif'>
+              All
+            </TabsTrigger>
+            <TabsTrigger value='tech' className='font-serif'>
+              Tech
+            </TabsTrigger>
+            <TabsTrigger value='life' className='font-serif'>
+              Life
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value='all'>
+            <FadeIn>
+              <ArticleCards posts={posts} className='mt-8' />
+            </FadeIn>
+          </TabsContent>
+          <TabsContent value='tech'>
+            <FadeIn>
+              <ArticleCards posts={techPosts} className='mt-8' />
+            </FadeIn>
+          </TabsContent>
+          <TabsContent value='life'>
+            <FadeIn>
+              <ArticleCards posts={lifePosts} className='mt-8' />
+            </FadeIn>
+          </TabsContent>
+        </Tabs>
+      </Container>
+    </>
   );
 };
 
