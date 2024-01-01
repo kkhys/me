@@ -1,12 +1,15 @@
 import { redirect } from 'next/navigation';
 import { get } from '@vercel/edge-config';
 
+import { env } from '#/env.mjs';
 import { Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
 import { Prose } from '#/ui/general';
 
 const Page = async () => {
-  const isMaintenance = await get('isMaintenance');
-  if (!isMaintenance) redirect('/');
+  if (!env.CI) {
+    const isMaintenance = await get('isMaintenance');
+    if (!isMaintenance) redirect('/');
+  }
 
   return (
     <Container>
