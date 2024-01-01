@@ -2,9 +2,9 @@ import * as React from 'react';
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 
-import { site } from '#/config';
 import { env } from '#/env.mjs';
 import { ArticleLayout } from '#/ui/feature/posts';
+import { JsonLd } from './json-ld';
 
 /**
  * Retrieves a post object by its slug.
@@ -24,13 +24,13 @@ export const generateMetadata = ({ params: { slug } }: { params: { slug: string 
   const post = getPostBySlug(slug);
   if (!post) return {};
   const { title, description, publishedAt, updatedAt } = post;
-  const url = `${site.url.base}/posts/${slug}`;
+  const url = `/posts/${slug}`;
 
   return {
     title,
     description: description ?? undefined,
     alternates: {
-      canonical: `${site.url.base}/posts/${slug}`,
+      canonical: `/posts/${slug}`,
     },
     openGraph: {
       type: 'article',
@@ -45,7 +45,12 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  return <ArticleLayout post={post} />;
+  return (
+    <>
+      <JsonLd post={post} />
+      <ArticleLayout post={post} />
+    </>
+  );
 };
 
 export default Page;

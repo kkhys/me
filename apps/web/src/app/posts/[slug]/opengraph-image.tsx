@@ -5,19 +5,36 @@ import { env } from '#/env.mjs';
 
 export const runtime = 'edge';
 
-export const alt = 'Blog';
-
-export const size = {
+const size = {
   width: 500,
   height: 500,
 };
 
-export const contentType = 'image/png';
+/**
+ * Retrieves a post object by its slug.
+ *
+ * @param slug - The slug of the post to retrieve.
+ * @returns The post object matching the given slug, or undefined if not found.
+ */
+const getPostBySlug = (slug: string) =>
+  allPosts.find((post) => (env.NODE_ENV === 'development' || post.status === 'published') && post.slug === slug);
+
+export const generateImageMetadata = ({ params: { slug } }: { params: { slug: string } }) => {
+  const post = getPostBySlug(slug);
+  if (!post) return [];
+
+  return [
+    {
+      id: 'default',
+      contentType: 'image/png',
+      alt: post.title,
+      size,
+    },
+  ];
+};
 
 const Image = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const post = allPosts.find(
-    (post) => (env.NODE_ENV === 'development' || post.status === 'published') && post.slug === slug,
-  );
+  const post = getPostBySlug(slug);
   if (!post) return new Response('Not found', { status: 404 });
 
   const notoEmojiSemiBold = await fetch(
