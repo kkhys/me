@@ -4,6 +4,7 @@ import { allPosts } from 'contentlayer/generated';
 
 import { env } from '#/env.mjs';
 import { ArticleLayout } from '#/ui/feature/posts';
+import { JsonLd } from './json-ld';
 
 /**
  * Retrieves a post object by its slug.
@@ -44,7 +45,12 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  return <ArticleLayout post={post} />;
+  return (
+    <>
+      <JsonLd post={post} />
+      <ArticleLayout post={post} />
+    </>
+  );
 };
 
 export default Page;

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { allLegals } from 'contentlayer/generated';
 
 import { LegalLayout } from '#/ui/feature/legal';
+import { JsonLd } from './json-ld';
 
 export const generateMetadata = () => {
   const privacyPolicy = allLegals.find((legal) => legal.title === 'Privacy Policy');
@@ -30,7 +31,12 @@ const Page = () => {
   const privacyPolicy = allLegals.find((legal) => legal.title === 'Privacy Policy');
   if (!privacyPolicy) return notFound();
 
-  return <LegalLayout legal={privacyPolicy} />;
+  return (
+    <>
+      <JsonLd />
+      <LegalLayout legal={privacyPolicy} />
+    </>
+  );
 };
 
 export default Page;
