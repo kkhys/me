@@ -14,7 +14,7 @@ export const metadata = {
 
 const Page = async () => {
   if (!env.CI) {
-    const isMaintenance = await get('isMaintenance');
+    const isMaintenance = await get<boolean>('isMaintenance');
     if (!isMaintenance) redirect('/');
   }
 

@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
+import { get } from '@vercel/edge-config';
 
+import { env } from '#/env.mjs';
 import { Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
 import { Prose } from '#/ui/general';
 
@@ -9,7 +12,12 @@ export const metadata = {
   description: 'You have been denied access for some reason.',
 } satisfies Metadata;
 
-const Page = () => {
+const Page = async () => {
+  if (!env.CI) {
+    const blockIps = await get<string[]>('blockIps');
+    if (!blockIps?.length) redirect('/');
+  }
+
   return (
     <Container>
       <FadeInStagger>
