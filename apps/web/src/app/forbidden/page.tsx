@@ -8,25 +8,25 @@ import { Prose } from '#/ui/general';
 
 export const metadata = {
   robots: 'noindex',
-  title: 'Maintenance',
-  description: 'It will be back up in a while, so please have a cup of coffee and relax.',
+  title: 'Forbidden',
+  description: 'You have been denied access for some reason.',
 } satisfies Metadata;
 
 const Page = async () => {
   if (!env.CI) {
-    const isMaintenance = await get<boolean>('isMaintenance');
-    if (!isMaintenance) redirect('/');
+    const blockIps = await get<string[]>('blockIps');
+    if (!blockIps?.length) redirect('/');
   }
 
   return (
     <Container>
       <FadeInStagger>
         <FadeIn>
-          <h1 className='font-serif text-xl font-medium'>The website under maintenance</h1>
+          <h1 className='font-serif text-xl font-medium'>403 - Forbidden</h1>
         </FadeIn>
         <Prose className='font-serif'>
           <FadeIn>
-            <p>It will be back up in a while, so please have a cup of coffee and relax.</p>
+            <p>You have been denied access for some reason.</p>
           </FadeIn>
         </Prose>
       </FadeInStagger>

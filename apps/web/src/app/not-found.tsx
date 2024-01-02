@@ -8,19 +8,6 @@ export const metadata = {
   robots: 'noindex',
   title: 'Not Found',
   description: 'Sorry, but the page you were trying to view does not exist.',
-  openGraph: {
-    type: 'website',
-    title: 'Not Found',
-    siteName: 'Keisuke Hayashi',
-    locale: 'ja_JP',
-  },
-  twitter: {
-    title: 'Not Found',
-    card: 'summary',
-    siteId: '5237731',
-    creator: '@kkhys_',
-    creatorId: '5237731',
-  },
 } satisfies Metadata;
 
 const NotFound = () => (
