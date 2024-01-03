@@ -1,7 +1,7 @@
 import { defineDocumentType } from 'contentlayer/source-files';
 import { format, parseISO } from 'date-fns';
 
-import { contents } from '../../../config';
+import { content } from '../../../config';
 /**
  * esbuild does not support module path aliases, so relative paths are used
  *
@@ -67,12 +67,12 @@ export const Post = defineDocumentType(() => ({
     editUrl: {
       description: 'URL to github repository of editable blog content',
       type: 'string',
-      resolve: ({ _raw: { sourceFilePath } }) => `${contents.url.repository}/edit/main/${sourceFilePath}`,
+      resolve: ({ _raw: { sourceFilePath } }) => `${content.url.repository}/edit/main/${sourceFilePath}`,
     },
     sourceUrl: {
       description: 'URL to the blog content, without rendering the markdown file',
       type: 'string',
-      resolve: ({ _raw: { sourceFilePath } }) => `${contents.url.repository}/blob/main/${sourceFilePath}?plain=1`,
+      resolve: ({ _raw: { sourceFilePath } }) => `${content.url.repository}/blob/main/${sourceFilePath}?plain=1`,
     },
     publishedAtFormatted: {
       description: 'Formatted publication date and time',
