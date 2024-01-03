@@ -10,7 +10,7 @@ import remarkGfm from 'remark-gfm';
 import { Legal, Post } from './src/lib/contentlayer/definitions';
 
 export default makeSource({
-  contentDirPath: 'contents',
+  contentDirPath: 'content',
   documentTypes: [Post, Legal],
   contentDirExclude: ['README.md'],
   mdx: {
