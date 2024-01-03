@@ -7,7 +7,7 @@ const formatPublishedDate = (publishedDate: Date | string | number) =>
   new Date(publishedDate).toISOString().split('T')[0];
 
 const sitemap = (): MetadataRoute.Sitemap => {
-  const routes = ['', '/posts'].map((route) => ({
+  const routes = ['/', '/posts'].map((route) => ({
     url: `${site.url.base}${route}`,
     lastModified: formatPublishedDate(new Date()),
   })) satisfies MetadataRoute.Sitemap;
