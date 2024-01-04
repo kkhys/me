@@ -1,19 +1,30 @@
 'use client';
 
 import * as React from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
+import { RssIcon } from 'lucide-react';
 
 import { env } from '#/env.mjs';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '#/ui/data-display';
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '#/ui/data-display';
 import { FadeIn } from '#/ui/feature/global';
 import { ArticleCards } from '#/ui/feature/posts';
+import { Button } from '#/ui/general';
 
 export const CategoryTabs = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const pathname = usePathname();
 
   const initialCategory = (categoryParam: string) => {
     switch (categoryParam) {
@@ -38,7 +49,7 @@ export const CategoryTabs = () => {
     }
 
     setCategory(value);
-    router.replace(`${pathname}?${params.toString()}`);
+    router.replace(`/posts?${params.toString()}`);
   };
 
   const posts = allPosts
@@ -49,17 +60,35 @@ export const CategoryTabs = () => {
 
   return (
     <Tabs defaultValue={category} onValueChange={handleValueChange} value={category} className='mt-6'>
-      <TabsList>
-        <TabsTrigger value='all' className='font-serif'>
-          All
-        </TabsTrigger>
-        <TabsTrigger value='tech' className='font-serif'>
-          Tech
-        </TabsTrigger>
-        <TabsTrigger value='life' className='font-serif'>
-          Life
-        </TabsTrigger>
-      </TabsList>
+      <div className='flex gap-4'>
+        <TabsList>
+          <TabsTrigger value='all' className='font-serif'>
+            All
+          </TabsTrigger>
+          <TabsTrigger value='tech' className='font-serif'>
+            Tech
+          </TabsTrigger>
+          <TabsTrigger value='life' className='font-serif'>
+            Life
+          </TabsTrigger>
+        </TabsList>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button asChild variant='outline' size='icon'>
+                <Link href='/atom'>
+                  <RssIcon className='size-4' />
+                </Link>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <div className='flex items-center'>
+                <p className='font-serif'>Atom</p>
+              </div>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
       <TabsContent value='all'>
         <FadeIn>
           <ArticleCards posts={posts} className='mt-8' />
