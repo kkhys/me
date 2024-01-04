@@ -1,4 +1,7 @@
+'use client';
+
 import * as React from 'react';
+import type { Route } from 'next';
 import Link from 'next/link';
 import { clsx } from 'clsx';
 import type { Post } from 'contentlayer/generated';
@@ -12,7 +15,12 @@ const ArticleCard = ({ post }: { post: Post }) => {
   const MotionLink = motion(Link);
 
   return (
-    <MotionLink href={`/posts/${slug}`} whileHover={{ scale: 1.03 }} whileTap={{ scale: 1.01 }} className='h-full'>
+    <MotionLink
+      href={`/posts/${slug}` as Route}
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 1.01 }}
+      className='h-full'
+    >
       <Card className='flex h-full flex-col justify-between'>
         <CardHeader className='flex flex-row justify-between'>
           <EyeCatch emoji={emoji} />

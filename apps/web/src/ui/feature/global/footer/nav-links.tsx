@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import type { Route } from 'next';
 import Link from 'next/link';
 import { ArrowTopRightIcon, DotsHorizontalIcon, HomeIcon } from '@radix-ui/react-icons';
 
@@ -15,12 +16,12 @@ import {
   DropdownMenuTrigger,
 } from '#/ui/navigation';
 
-const NavLink = ({
+const NavLink = <T extends string>({
   href,
   children,
   isExternal = false,
 }: {
-  href: string;
+  href: Route<T>;
   children: React.ReactNode;
   isExternal?: boolean;
 }) => (
@@ -37,13 +38,13 @@ const NavLink = ({
   </DropdownMenuItem>
 );
 
-const NavLinkWithTooltip = ({
+const NavLinkWithTooltip = <T extends string>({
   href,
   tooltipContent,
   children,
   isExternal = false,
 }: {
-  href: string;
+  href: Route<T>;
   tooltipContent: string;
   children: React.ReactNode;
   isExternal?: boolean;

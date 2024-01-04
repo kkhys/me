@@ -16,6 +16,9 @@ const config = {
     };
     return config;
   },
+  experimental: {
+    typedRoutes: true,
+  },
 };
 
 // TODO: install with devDependencies and do not load in production environment
