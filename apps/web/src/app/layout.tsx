@@ -27,7 +27,7 @@ export const metadata = {
   authors: [
     {
       name: me.name,
-      url: site.url.base,
+      url: `${site.url.base}/humans.txt`,
     },
   ],
   creator: me.name,
