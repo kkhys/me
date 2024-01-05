@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 
 import { Container } from '#/ui/feature/global';
@@ -26,7 +27,9 @@ const Page = () => (
       <header>
         <h1 className='font-serif text-xl font-medium'>Blog</h1>
       </header>
-      <CategoryTabs />
+      <Suspense>
+        <CategoryTabs />
+      </Suspense>
     </Container>
   </>
 );
