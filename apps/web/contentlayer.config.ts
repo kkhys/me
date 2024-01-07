@@ -1,4 +1,5 @@
 import { makeSource } from 'contentlayer/source-files';
+import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
 /**
@@ -15,5 +16,6 @@ export default makeSource({
   contentDirExclude: ['README.md'],
   mdx: {
     remarkPlugins: [[remarkGfm]],
+    rehypePlugins: [[rehypeSlug]],
   },
 });
