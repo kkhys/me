@@ -208,7 +208,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           fontWeight: theme('fontWeight.medium'),
           backgroundColor: 'var(--tw-prose-pre-bg)',
           borderRadius: theme('borderRadius.lg'),
-          padding: theme('spacing.8'),
+          padding: theme('spacing.6'),
           overflowX: 'auto',
           border: '0.5px solid',
           borderColor: 'var(--tw-prose-pre-border)',
