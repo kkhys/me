@@ -63,7 +63,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
         '--tw-prose-invert-code': theme('colors.zinc.300'),
         '--tw-prose-invert-code-bg': theme('colors.zinc.200 / 0.05'),
         '--tw-prose-invert-pre-code': theme('colors.zinc.100'),
-        '--tw-prose-invert-pre-bg': 'rgb(0 0 0 / 0.4)',
+        '--tw-prose-invert-pre-bg': theme('colors.zinc.900'),
         '--tw-prose-invert-pre-border': theme('colors.zinc.200 / 0.1'),
         '--tw-prose-invert-th-borders': theme('colors.zinc.700'),
         '--tw-prose-invert-td-borders': theme('colors.zinc.800'),
@@ -204,10 +204,10 @@ const typographyStyles = ({ theme }: PluginUtils) => {
         // Code blocks
         pre: {
           color: 'var(--tw-prose-pre-code)',
-          fontSize: theme('fontSize.sm')[0],
-          fontWeight: theme('fontWeight.medium'),
-          backgroundColor: 'var(--tw-prose-pre-bg)',
-          borderRadius: theme('borderRadius.lg'),
+          fontSize: '13px',
+          fontWeight: theme('fontWeight.normal'),
+          lineHeight: theme('lineHeight.6'),
+          backgroundColor: '#131316',
           padding: theme('spacing.6'),
           overflowX: 'auto',
           border: '0.5px solid',
@@ -221,6 +221,9 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           backgroundColor: 'transparent',
           borderRadius: 0,
           padding: 0,
+        },
+        'pre code > span': {
+          paddingRight: '1.5rem',
         },
 
         // Horizontal rules
