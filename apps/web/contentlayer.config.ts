@@ -10,7 +10,7 @@ import remarkGfm from 'remark-gfm';
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { Legal, Post } from './src/lib/contentlayer/definitions';
-import { rehypePrettyCodeOptions } from './src/lib/mdx/rehype';
+import { afterRehypePrettyCode, beforeRehypePrettyCode, rehypePrettyCodeOptions } from './src/lib/mdx/rehype';
 
 export default makeSource({
   contentDirPath: 'content',
@@ -18,8 +18,13 @@ export default makeSource({
   contentDirExclude: ['README.md'],
   mdx: {
     remarkPlugins: [[remarkGfm]],
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    rehypePlugins: [[rehypeSlug], [rehypePrettyCode, rehypePrettyCodeOptions]],
+    rehypePlugins: [
+      [rehypeSlug],
+      [beforeRehypePrettyCode],
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      [rehypePrettyCode, rehypePrettyCodeOptions],
+      [afterRehypePrettyCode],
+    ],
   },
 });
