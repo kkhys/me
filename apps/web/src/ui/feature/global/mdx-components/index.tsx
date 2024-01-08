@@ -5,6 +5,7 @@ import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
+import { Code } from './code';
 import { Heading } from './heading';
 
 const components = {
@@ -34,6 +35,7 @@ const components = {
       </Link>
     );
   },
+  figure: ({ children, ...props }) => <Code {...props}>{children}</Code>,
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {
