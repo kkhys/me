@@ -6,8 +6,8 @@ import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 import { clsx } from 'clsx';
 
 const CodeHeader = ({ title }: { title: string }) => (
-  <div className='flex flex-wrap items-start rounded-t-md border-b border-transparent bg-zinc-800 px-4 dark:bg-transparent'>
-    <h3 className='my-0 mr-auto py-4 font-mono text-xs font-medium text-zinc-100'>{title}</h3>
+  <div className='flex flex-wrap items-start rounded-t-md border-b border-white/10 bg-zinc-800 px-4 dark:bg-transparent'>
+    <h3 className='my-0 mr-auto py-4 font-mono text-xs font-medium text-zinc-300'>{title}</h3>
   </div>
 );
 

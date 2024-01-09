@@ -27,6 +27,11 @@ export const categories = [
 
 export const techTags = [
   {
+    title: 'Release',
+    slug: 'release',
+    emoji: '🚀',
+  },
+  {
     title: 'TypeScript',
     slug: 'typescript',
     emoji: '📘',
