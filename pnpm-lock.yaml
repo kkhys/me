@@ -338,8 +338,8 @@ importers:
         specifier: 0.3.4
         version: 0.3.4(esbuild@0.19.5)
       date-fns:
-        specifier: 3.1.0
-        version: 3.1.0
+        specifier: 3.2.0
+        version: 3.2.0
       embla-carousel-autoplay:
         specifier: 8.0.0-rc19
         version: 8.0.0-rc19(embla-carousel@8.0.0-rc19)
@@ -369,7 +369,7 @@ importers:
         version: 18.2.0
       react-day-picker:
         specifier: 8.10.0
-        version: 8.10.0(date-fns@3.1.0)(react@18.2.0)
+        version: 8.10.0(date-fns@3.2.0)(react@18.2.0)
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
@@ -10205,8 +10205,8 @@ packages:
       whatwg-url: 11.0.0
     dev: true
 
-  /date-fns@3.1.0:
-    resolution: {integrity: sha512-ZO7yefXV/wCWzd3I9haCHmfzlfA3i1a2HHO7ZXjtJrRjXt8FULKJ2Vl8wji3XYF4dQ0ZJ/tokXDZeYlFvgms9Q==}
+  /date-fns@3.2.0:
+    resolution: {integrity: sha512-E4KWKavANzeuusPi0jUjpuI22SURAznGkx7eZV+4i6x2A+IZxAMcajgkvuDAU1bg40+xuhW1zRdVIIM/4khuIg==}
     dev: false
 
   /debug@2.6.9:
@@ -17688,13 +17688,13 @@ packages:
       tween-functions: 1.2.0
     dev: true
 
-  /react-day-picker@8.10.0(date-fns@3.1.0)(react@18.2.0):
+  /react-day-picker@8.10.0(date-fns@3.2.0)(react@18.2.0):
     resolution: {integrity: sha512-mz+qeyrOM7++1NCb1ARXmkjMkzWVh2GL9YiPbRjKe0zHccvekk4HE+0MPOZOrosn8r8zTHIIeOUXTmXRqmkRmg==}
     peerDependencies:
       date-fns: ^2.28.0 || ^3.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      date-fns: 3.1.0
+      date-fns: 3.2.0
       react: 18.2.0
     dev: false
 
