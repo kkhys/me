@@ -106,7 +106,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
 
         // Images
         img: {
-          borderRadius: theme('borderRadius.md'),
+          borderRadius: theme('borderRadius.2xl'),
         },
 
         // Inline elements
@@ -210,8 +210,6 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           backgroundColor: '#131316',
           padding: theme('spacing.6'),
           overflowX: 'auto',
-          border: '0.5px solid',
-          borderColor: 'var(--tw-prose-pre-border)',
         },
         'pre code': {
           display: 'inline',
