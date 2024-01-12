@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-explicit-any,@typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-return */
+import type { Element, Root } from 'hast';
 import type { Options } from 'rehype-pretty-code';
 import { transformerNotationDiff } from 'shikiji-transformers';
 import { visit } from 'unist-util-visit';
@@ -11,24 +11,32 @@ export const rehypePrettyCodeOptions = {
 } satisfies Options;
 
 export const beforeRehypePrettyCode = () => {
-  return (tree: any) => {
-    visit(
-      tree,
-      (node: any) => node.type === 'element' && node.tagName === 'pre',
-      (node) => (node.raw = node.children[0].children[0].value),
-    );
+  return (tree: Root) => {
+    visit(tree, 'element', (node) => {
+      if (node.tagName === 'pre') {
+        const preElement = node.children[0] as unknown as Element;
+        const codeElement = preElement.children[0] as unknown as Element;
+        node.raw = codeElement.value;
+      }
+    });
   };
 };
 
 export const afterRehypePrettyCode = () => {
-  return (tree: any) => {
-    visit(
-      tree,
-      (node: any) =>
-        node.type === 'element' && node.tagName === 'figure' && 'data-rehype-pretty-code-figure' in node.properties,
-      (node: any) => {
-        node.children.forEach((child: any) => (child.tagName === 'pre' ? (child.properties.raw = node.raw) : null));
-      },
-    );
+  return (tree: Root) => {
+    visit(tree, 'element', (node) => {
+      if (node.tagName === 'figure' && 'data-rehype-pretty-code-figure' in node.properties) {
+        (node.children as Element[]).forEach((child) =>
+          child.tagName === 'pre' ? (child.properties.raw = node.raw) : null,
+        );
+      }
+    });
   };
 };
+
+declare module 'hast' {
+  interface Element {
+    raw?: string;
+    value?: string;
+  }
+}
