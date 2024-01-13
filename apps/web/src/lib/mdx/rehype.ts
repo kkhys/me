@@ -1,4 +1,6 @@
 import type { Element, Root } from 'hast';
+import { hasProperty } from 'hast-util-has-property';
+import { isElement } from 'hast-util-is-element';
 import type { Options } from 'rehype-pretty-code';
 import { transformerNotationDiff } from 'shikiji-transformers';
 import { visit } from 'unist-util-visit';
@@ -13,11 +15,10 @@ export const rehypePrettyCodeOptions = {
 export const beforeRehypePrettyCode = () => {
   return (tree: Root) => {
     visit(tree, 'element', (node) => {
-      if (node.tagName === 'pre') {
-        const preElement = node.children[0] as unknown as Element;
-        const codeElement = preElement.children[0] as unknown as Element;
-        node.raw = codeElement.value;
-      }
+      if (!isElement(node, ['pre'])) return;
+      const preElement = node.children[0] as unknown as Element;
+      const codeElement = preElement.children[0] as unknown as Element;
+      node.raw = codeElement.value;
     });
   };
 };
@@ -25,11 +26,8 @@ export const beforeRehypePrettyCode = () => {
 export const afterRehypePrettyCode = () => {
   return (tree: Root) => {
     visit(tree, 'element', (node) => {
-      if (node.tagName === 'figure' && 'data-rehype-pretty-code-figure' in node.properties) {
-        (node.children as Element[]).forEach((child) =>
-          child.tagName === 'pre' ? (child.properties.raw = node.raw) : null,
-        );
-      }
+      if (!(isElement(node, ['figure']) && hasProperty(node, 'data-rehype-pretty-code-figure'))) return;
+      node.children.forEach((child) => (isElement(child, 'pre') ? (child.properties.raw = node.raw) : null));
     });
   };
 };
