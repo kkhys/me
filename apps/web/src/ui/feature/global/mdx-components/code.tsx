@@ -11,7 +11,7 @@ const CodeHeader = ({ title }: { title: string }) => (
   </div>
 );
 
-const CopyButton = ({ code }: { code: string }) => {
+const CopyButton = ({ value }: { value: string }) => {
   const [copyCount, setCopyCount] = React.useState(0);
   const copied = copyCount > 0;
 
@@ -25,7 +25,7 @@ const CopyButton = ({ code }: { code: string }) => {
   return (
     <button
       className='focus-visible:ring-ring absolute right-4 top-4 flex items-center justify-center rounded-md border border-zinc-700 bg-transparent p-2 opacity-0 shadow-sm backdrop-blur transition hover:bg-zinc-800 hover:text-zinc-400 focus:opacity-100 focus-visible:outline-none focus-visible:ring-1 group-hover:opacity-100'
-      onClick={() => void window.navigator.clipboard.writeText(code).then(() => setCopyCount((count) => count + 1))}
+      onClick={() => void window.navigator.clipboard.writeText(value).then(() => setCopyCount((count) => count + 1))}
       aria-label='Copy code to clipboard'
     >
       <span aria-hidden={copied} className={clsx('transition duration-500', copied && 'scale-0 opacity-0')}>
@@ -44,10 +44,10 @@ const CopyButton = ({ code }: { code: string }) => {
   );
 };
 
-const CodePanel = ({ children, raw }: { children: React.ReactNode; raw?: string }) => {
+const CodePanel = ({ children, __rawString__ }: { children: React.ReactNode; __rawString__?: string }) => {
   const child = React.Children.only(children);
-  if (React.isValidElement(child)) raw = (child.props?.raw as string | undefined) ?? raw;
-  if (!raw) throw new Error('`CodePanel` requires a `code` prop, or a child with a `code` prop.');
+  if (React.isValidElement(child)) __rawString__ = (child.props?.__rawString__ as string | undefined) ?? __rawString__;
+  if (!__rawString__) throw new Error('`CodePanel` requires a `code` prop, or a child with a `code` prop.');
 
   return (
     <div className='group relative'>
@@ -55,7 +55,7 @@ const CodePanel = ({ children, raw }: { children: React.ReactNode; raw?: string 
         {/* @ts-expect-error */}
         <code className='grid'>{child.props.children.props.children}</code>
       </pre>
-      <CopyButton code={raw} />
+      <CopyButton value={__rawString__} />
     </div>
   );
 };

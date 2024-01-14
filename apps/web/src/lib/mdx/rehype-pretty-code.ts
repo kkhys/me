@@ -19,7 +19,7 @@ export const beforeRehypePrettyCode = () => {
       const preElement = node.children[0] as unknown as Element;
       if (!isElement(preElement, ['code'])) return;
       const codeElement = preElement.children[0] as unknown as Element;
-      node.raw = codeElement.value;
+      node.__rawString__ = codeElement.value;
     });
   };
 };
@@ -29,14 +29,16 @@ export const afterRehypePrettyCode = () => {
     visit(tree, 'element', (node) => {
       if (!isElement(node, ['figure'])) return;
       if (!hasProperty(node, 'data-rehype-pretty-code-figure')) return;
-      node.children.forEach((child) => (isElement(child, 'pre') ? (child.properties.raw = node.raw) : null));
+      node.children.forEach((child) =>
+        isElement(child, 'pre') ? (child.properties.__rawString__ = node.__rawString__) : null,
+      );
     });
   };
 };
 
 declare module 'hast' {
   interface Element {
-    raw?: string;
+    __rawString__?: string;
     value?: string;
   }
 }
