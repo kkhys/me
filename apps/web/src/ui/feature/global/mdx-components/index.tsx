@@ -6,20 +6,19 @@ import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
 import { LinkCard } from '#/ui/data-display';
-import { ArticleImage } from '#/ui/feature/posts';
+import { ArticleImage, HeaderWithAnchor } from '#/ui/feature/posts';
 import { Code } from './code';
-import { Heading } from './heading';
 
 const components = {
-  h2: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof Heading>, 'level'>) => (
-    <Heading level={2} {...props}>
+  h2: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof HeaderWithAnchor>, 'level'>) => (
+    <HeaderWithAnchor level={2} {...props}>
       {children}
-    </Heading>
+    </HeaderWithAnchor>
   ),
-  h3: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof Heading>, 'level'>) => (
-    <Heading level={3} {...props}>
+  h3: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof HeaderWithAnchor>, 'level'>) => (
+    <HeaderWithAnchor level={3} {...props}>
       {children}
-    </Heading>
+    </HeaderWithAnchor>
   ),
   a: ({ children, href = '', ...props }: React.ComponentPropsWithoutRef<'a'>) => {
     if (href.startsWith('http')) {

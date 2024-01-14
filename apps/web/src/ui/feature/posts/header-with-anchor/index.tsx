@@ -30,7 +30,7 @@ const Anchor = ({ id, inView, children }: { id: string; inView: boolean; childre
   </Link>
 );
 
-export const Heading = <Level extends 2 | 3>({
+export const HeaderWithAnchor = <Level extends 2 | 3>({
   children,
   level,
   anchor = true,
