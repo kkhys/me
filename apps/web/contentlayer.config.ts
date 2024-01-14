@@ -10,14 +10,19 @@ import remarkGfm from 'remark-gfm';
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { Legal, Post } from './src/lib/contentlayer/definitions';
-import { afterRehypePrettyCode, beforeRehypePrettyCode, rehypePrettyCodeOptions } from './src/lib/mdx/rehype';
+import {
+  afterRehypePrettyCode,
+  beforeRehypePrettyCode,
+  rehypePrettyCodeOptions,
+} from './src/lib/mdx/rehype-pretty-code';
+import { linkCardHandler, remarkLinkCard } from './src/lib/mdx/remark-link-card';
 
 export default makeSource({
   contentDirPath: 'content',
   documentTypes: [Post, Legal],
   contentDirExclude: ['README.md'],
   mdx: {
-    remarkPlugins: [[remarkGfm]],
+    remarkPlugins: [[remarkGfm], [remarkLinkCard]],
     rehypePlugins: [
       [rehypeSlug],
       [beforeRehypePrettyCode],
@@ -26,5 +31,15 @@ export default makeSource({
       [rehypePrettyCode, rehypePrettyCodeOptions],
       [afterRehypePrettyCode],
     ],
+    mdxOptions: (options) => {
+      options.remarkRehypeOptions = {
+        handlers: {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          'link-card': linkCardHandler,
+        },
+      };
+      return options;
+    },
   },
 });
