@@ -2,6 +2,7 @@ import { makeSource } from 'contentlayer/source-files';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
+import remarkUnwrapImages from 'remark-unwrap-images';
 
 /**
  * esbuild does not support module path aliases, so relative paths are used
@@ -16,13 +17,14 @@ import {
   rehypePrettyCodeOptions,
 } from './src/lib/mdx/rehype-pretty-code';
 import { linkCardHandler, remarkLinkCard } from './src/lib/mdx/remark-link-card';
+import { remarkNextImage } from './src/lib/mdx/remark-next-image';
 
 export default makeSource({
   contentDirPath: 'content',
   documentTypes: [Post, Legal],
   contentDirExclude: ['README.md'],
   mdx: {
-    remarkPlugins: [[remarkGfm], [remarkLinkCard]],
+    remarkPlugins: [[remarkGfm], [remarkUnwrapImages], [remarkLinkCard], [remarkNextImage]],
     rehypePlugins: [
       [rehypeSlug],
       [beforeRehypePrettyCode],
