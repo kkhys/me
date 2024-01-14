@@ -17,6 +17,7 @@ export const beforeRehypePrettyCode = () => {
     visit(tree, 'element', (node) => {
       if (!isElement(node, ['pre'])) return;
       const preElement = node.children[0] as unknown as Element;
+      if (!isElement(preElement, ['code'])) return;
       const codeElement = preElement.children[0] as unknown as Element;
       node.raw = codeElement.value;
     });
@@ -26,7 +27,8 @@ export const beforeRehypePrettyCode = () => {
 export const afterRehypePrettyCode = () => {
   return (tree: Root) => {
     visit(tree, 'element', (node) => {
-      if (!(isElement(node, ['figure']) && hasProperty(node, 'data-rehype-pretty-code-figure'))) return;
+      if (!isElement(node, ['figure'])) return;
+      if (!hasProperty(node, 'data-rehype-pretty-code-figure')) return;
       node.children.forEach((child) => (isElement(child, 'pre') ? (child.properties.raw = node.raw) : null));
     });
   };
