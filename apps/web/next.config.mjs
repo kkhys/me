@@ -16,6 +16,17 @@ const config = {
     };
     return config;
   },
+  experimental: {
+    typedRoutes: true,
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/humans.txt',
+        destination: '/humans',
+      },
+    ];
+  },
 };
 
 // TODO: install with devDependencies and do not load in production environment

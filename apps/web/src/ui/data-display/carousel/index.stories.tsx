@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access */
 import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import Autoplay from 'embla-carousel-autoplay';

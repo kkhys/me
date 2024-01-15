@@ -18,8 +18,11 @@ const config = {
   staticDirs: ['../public'],
   webpackFinal: async (config) => {
     config.resolve.alias = {
-      ...config.resolve.alias,
+      ...config.resolve?.alias,
       '#': resolve(__dirname, '..'),
+      // FIXME: I don't know why this is needed, but it is
+      // @see: https://github.com/storybookjs/storybook/issues/24234
+      'contentlayer/generated': 'next/dist/shared/lib/router-context.shared-runtime',
     };
     return config;
   },
