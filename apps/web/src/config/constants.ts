@@ -17,9 +17,9 @@ export const storybook = {
   },
 } as const;
 
-export const contents = {
+export const content = {
   url: {
-    repository: 'https://github.com/kkhys/contents',
+    repository: 'https://github.com/kkhys/content',
   },
 } as const;
 
@@ -27,6 +27,10 @@ export const me = {
   name: 'Keisuke Hayashi',
   email: 'hi@kkhys.me',
   social: {
+    github: {
+      id: 'kkhys',
+      url: 'https://github.com/kkhys',
+    },
     x: {
       id: '@kkhys_',
       url: 'https://x.com/kkhys_',
