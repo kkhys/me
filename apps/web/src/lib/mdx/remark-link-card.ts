@@ -1,6 +1,7 @@
 import fetchSiteMetadata from 'fetch-site-metadata';
 import type { Link, Resource } from 'mdast';
 import type { State } from 'mdast-util-to-hast';
+import { getPlaiceholder } from 'plaiceholder';
 import type { Node, Parent } from 'unist';
 import { is } from 'unist-util-is';
 import { visit } from 'unist-util-visit';
@@ -11,8 +12,14 @@ interface LinkCard extends Parent, Resource {
     url: string;
     title: string;
     description: string;
-    og?: string;
-    icon?: string;
+    ogSrc?: string;
+    ogWidth?: number;
+    ogHeight?: number;
+    ogBlurDataURL?: string;
+    iconSrc?: string;
+    iconWidth?: number;
+    iconHeight?: number;
+    iconBlurDataURL?: string;
   };
 }
 
@@ -25,6 +32,20 @@ const fetchMeta = async (url: string) => {
     description: data.description ?? '',
     og: data.image?.src?.startsWith('https') ? data.image?.src : undefined,
     icon: data.icon?.startsWith('https') ? data.icon : undefined,
+  };
+};
+
+const getImage = async (src: string) => {
+  const buffer = await fetch(src).then(async (res) => Buffer.from(await res.arrayBuffer()));
+
+  const {
+    metadata: { height, width },
+    ...plaiceholder
+  } = await getPlaiceholder(buffer);
+
+  return {
+    ...plaiceholder,
+    img: { src, height, width },
   };
 };
 
@@ -44,10 +65,40 @@ export const remarkLinkCard = () => {
 
       promises.push(async () => {
         const data = await fetchMeta(maybeLink.url);
+        const ogSrc = data.og;
+        const iconSrc = data.icon;
+
+        let og;
+        if (typeof ogSrc === 'string') {
+          const { img, base64 } = await getImage(ogSrc);
+          og = {
+            ogSrc,
+            ogWidth: img.width,
+            ogHeight: img.height,
+            ogBlurDataURL: base64,
+          };
+        }
+
+        let icon;
+        if (typeof iconSrc === 'string') {
+          const { img, base64 } = await getImage(iconSrc);
+          icon = {
+            iconSrc,
+            iconWidth: img.width,
+            iconHeight: img.height,
+            iconBlurDataURL: base64,
+          };
+        }
 
         parent.children[index ?? 0] = {
           type: 'link-card',
-          meta: data,
+          meta: {
+            url: data.url,
+            title: data.title ?? '(No title)',
+            description: data.description ?? '',
+            ...og,
+            ...icon,
+          },
         } as LinkCard;
       });
     });
@@ -64,8 +115,14 @@ export const linkCardHandler = (_: State, node: LinkCard) => {
       url: node.meta.url,
       title: node.meta.title,
       description: node.meta.description,
-      og: node.meta.og,
-      icon: node.meta.icon,
+      ogSrc: node.meta.ogSrc,
+      ogWidth: node.meta.ogWidth,
+      ogHeight: node.meta.ogHeight,
+      ogBlurDataURL: node.meta.ogBlurDataURL,
+      iconSrc: node.meta.iconSrc,
+      iconWidth: node.meta.iconWidth,
+      iconHeight: node.meta.iconHeight,
+      iconBlurDataURL: node.meta.iconBlurDataURL,
     },
     children: [],
   };
