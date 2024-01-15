@@ -2,26 +2,25 @@ import * as React from 'react';
 import type { Route } from 'next';
 import Link from 'next/link';
 import { ArrowTopRightIcon } from '@radix-ui/react-icons';
-import { clsx } from 'clsx';
 import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
+import { LinkCard } from '#/ui/data-display';
+import { ArticleImage, HeaderWithAnchor } from '#/ui/feature/posts';
 import { Code } from './code';
-import { Heading } from './heading';
-import { GrayscaleTransitionImage } from './image';
 
 const components = {
-  h2: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof Heading>, 'level'>) => (
-    <Heading level={2} {...props}>
+  h2: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof HeaderWithAnchor>, 'level'>) => (
+    <HeaderWithAnchor level={2} {...props}>
       {children}
-    </Heading>
+    </HeaderWithAnchor>
   ),
-  h3: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof Heading>, 'level'>) => (
-    <Heading level={3} {...props}>
+  h3: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof HeaderWithAnchor>, 'level'>) => (
+    <HeaderWithAnchor level={3} {...props}>
       {children}
-    </Heading>
+    </HeaderWithAnchor>
   ),
-  a: ({ children, href = '', ...props }) => {
+  a: ({ children, href = '', ...props }: React.ComponentPropsWithoutRef<'a'>) => {
     if (href.startsWith('http')) {
       return (
         <a href={href} target='_blank' rel='noopener noreferrer' className='inline-flex items-center' {...props}>
@@ -38,11 +37,8 @@ const components = {
     );
   },
   figure: ({ children, ...props }) => <Code {...props}>{children}</Code>,
-  Img: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof GrayscaleTransitionImage>) => (
-    <div className={clsx('group isolate overflow-hidden rounded-2xl', className)}>
-      <GrayscaleTransitionImage sizes='(min-width: 768px) 42rem, 100vw' className='w-full' quality={80} {...props} />
-    </div>
-  ),
+  img: (props: React.ComponentPropsWithoutRef<typeof ArticleImage>) => <ArticleImage {...props} />,
+  'link-card': (props: React.ComponentPropsWithoutRef<typeof LinkCard>) => <LinkCard {...props} />,
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {

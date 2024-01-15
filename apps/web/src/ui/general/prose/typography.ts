@@ -104,11 +104,6 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           marginTop: 0,
         },
 
-        // Images
-        img: {
-          borderRadius: theme('borderRadius.2xl'),
-        },
-
         // Inline elements
         a: {
           color: 'var(--tw-prose-links)',
