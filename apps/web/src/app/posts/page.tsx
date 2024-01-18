@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Suspense } from 'react';
 import type { Metadata } from 'next';
 
-import { Container } from '#/ui/feature/global';
+import { BackButton, Container } from '#/ui/feature/global';
 import { CategoryTabs } from '#/ui/feature/posts';
 import { JsonLd } from './json-ld';
 
@@ -24,6 +24,7 @@ const Page = () => (
   <>
     <JsonLd />
     <Container>
+      <BackButton href='/' tooltipContent='Go back to home' />
       <header>
         <h1 className='font-serif text-xl font-medium'>Blog</h1>
       </header>

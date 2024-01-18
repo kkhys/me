@@ -82,7 +82,7 @@ export default {
         serif: ['var(--font-inter)', ...defaultTheme.fontFamily.serif],
         sans: ['var(--font-newsreader)', ...defaultTheme.fontFamily.sans],
         mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
-        emoji: ['var(--font-noto-emoji)'],
+        emoji: ['var(--font-noto-emoji)', 'Apple Color Emoji'],
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1rem' }],

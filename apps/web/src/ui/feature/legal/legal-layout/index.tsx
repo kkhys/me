@@ -3,7 +3,7 @@ import type { Legal } from 'contentlayer/generated';
 import { format, parseISO } from 'date-fns';
 import { ja } from 'date-fns/locale';
 
-import { Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
+import { BackButton, Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
 import { Prose } from '#/ui/general';
 
 export const LegalLayout = ({ legal }: { legal: Legal }) => {
@@ -16,6 +16,7 @@ export const LegalLayout = ({ legal }: { legal: Legal }) => {
 
   return (
     <Container>
+      <BackButton />
       <FadeInStagger>
         <FadeIn>
           <h1 className='font-serif text-xl font-medium'>{title}</h1>
