@@ -20,7 +20,7 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
 
   return (
     <Container>
-      <BackButton />
+      <BackButton href='/posts' tooltipContent='Go back to posts list' />
       <FadeInStagger faster>
         <article>
           <header>

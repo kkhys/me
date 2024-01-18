@@ -1,6 +1,8 @@
 'use client';
 
 import * as React from 'react';
+import type { Route } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ResetIcon } from '@radix-ui/react-icons';
 
@@ -8,11 +10,17 @@ import { AppContext } from '#/providers';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
 import { Button } from '#/ui/general';
 
-export const BackButton = () => {
+export const BackButton = <T extends string>({
+  href,
+  tooltipContent,
+}: {
+  href?: Route<T>;
+  tooltipContent?: string;
+}) => {
   const router = useRouter();
   const { previousPathname } = React.useContext(AppContext);
 
-  if (!previousPathname) return null;
+  if (!href && !previousPathname) return null;
 
   return (
     <TooltipProvider>
@@ -21,15 +29,22 @@ export const BackButton = () => {
           <Button
             variant='ghost'
             size='icon'
-            onClick={() => router.back()}
-            aria-label='Go back to previous page'
+            aria-label={tooltipContent ?? 'Go back to previous page'}
             className='absolute left-12 top-0 hidden xl:flex'
+            onClick={() => !href && router.back()}
+            asChild={href ? true : undefined}
           >
-            <ResetIcon className='size-4' />
+            {href ? (
+              <Link href={href}>
+                <ResetIcon className='size-4' />
+              </Link>
+            ) : (
+              <ResetIcon className='size-4' />
+            )}
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          <p className='font-serif'>Go back to previous page</p>
+          <p className='font-serif'>{tooltipContent ?? 'Go back to previous page'}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
