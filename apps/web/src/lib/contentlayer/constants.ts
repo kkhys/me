@@ -54,6 +54,16 @@ export const lifeTags = [
     slug: 'memorial',
     emoji: '🌸',
   },
+  {
+    title: 'Essay',
+    slug: 'essay',
+    emoji: '📝',
+  },
+  {
+    title: 'Poor writing',
+    slug: 'poor-writing',
+    emoji: '🗑️',
+  },
 ] as const;
 
 export const fashionTags = [
