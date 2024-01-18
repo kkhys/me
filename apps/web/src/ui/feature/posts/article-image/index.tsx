@@ -23,7 +23,7 @@ export const ArticleImage = ({
     sizes='(min-width: 768px) 42rem, 100vw'
     placeholder='blur'
     blurDataURL={blurDataURL}
-    quality={80}
+    quality={90}
     className='w-full rounded-2xl'
   />
 );

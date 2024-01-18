@@ -15,8 +15,8 @@ const Page = () => {
         <Prose className='font-serif'>
           <FadeIn>
             <p>
-              <span className='font-sans text-lg'>Passion for hacking</span>. Full-stack developer based in Tokyo. Love
-              to make something and make people happy and surprised.
+              <span className='font-sans text-lg italic'>Passion for hacking</span>. Full-stack developer based in
+              Tokyo. Love to make something and make people happy and surprised.
             </p>
           </FadeIn>
           <FadeIn>
