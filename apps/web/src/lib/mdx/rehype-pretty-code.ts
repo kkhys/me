@@ -10,6 +10,15 @@ export const rehypePrettyCodeOptions = {
   keepBackground: false,
   grid: false,
   transformers: [transformerNotationDiff()],
+  onVisitLine(node) {
+    visit(node, 'element', (node) => {
+      if (!isElement(node, ['span'])) return;
+      if (node.children.length === 0) node.children = [{ type: 'text', value: ' ' }];
+      const codeTextElement = node.children[0] as unknown as Element;
+      if (!isElement(codeTextElement, ['span'])) return;
+      if (codeTextElement.children.length === 0) node.children = [{ type: 'text', value: ' ' }];
+    });
+  },
 } satisfies Options;
 
 export const beforeRehypePrettyCode = () => {
