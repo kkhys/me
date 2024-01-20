@@ -25,9 +25,7 @@ export const generateSlug = (data: crypto.BinaryLike) => {
   const hashValue = crypto.createHash(hashAlgorithm).update(data).digest(encoding);
   const hashArray = new Uint8Array(hashValue.length);
 
-  for (let i = 0; i < hashValue.length; i++) {
-    hashArray[i] = hashValue.charCodeAt(i);
-  }
+  hashArray.forEach((_, i) => (hashArray[i] = hashValue.charCodeAt(i)));
 
   return bs58.encode(hashArray).slice(0, slugLength);
 };
