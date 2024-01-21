@@ -31,7 +31,7 @@ export const GET = async (): Promise<NextResponse> => {
   Last update: ${format(new Date(), 'yyyy-MM-dd')}
   Language:    ja-JP
   Timezone:    JST
-  Standards:   Next.js, TypeScript, React, Tailwind CSS, Contentful, Vercel
+  Standards:   Next.js, TypeScript, React, Tailwind CSS, Contentlayer, Vercel
   Software:    WebStorm
 `;
 
