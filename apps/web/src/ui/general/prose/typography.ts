@@ -69,7 +69,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
         '--tw-prose-invert-td-borders': theme('colors.zinc.800'),
 
         // Base
-        color: 'var(--foreground)',
+        color: 'var(--tw-prose-body)',
         lineHeight: theme('lineHeight.8'),
         '> *': {
           marginTop: theme('spacing.10'),
@@ -132,8 +132,10 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           fontWeight: theme('fontWeight.normal'),
           backgroundColor: 'var(--tw-prose-code-bg)',
           borderRadius: theme('borderRadius.md'),
-          paddingLeft: theme('spacing.1'),
-          paddingRight: theme('spacing.1'),
+          boxShadow: `inset 0 0 0 0.75px var(--tw-prose-underline)`,
+          lineHeight: theme('lineHeight.6'),
+          paddingLeft: theme('spacing.[1.5]'),
+          paddingRight: theme('spacing.[1.5]'),
         },
         'a code': {
           color: 'inherit',
@@ -212,6 +214,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           fontSize: 'inherit',
           fontWeight: 'inherit',
           backgroundColor: 'transparent',
+          boxShadow: 'none',
           borderRadius: 0,
           padding: 0,
         },
