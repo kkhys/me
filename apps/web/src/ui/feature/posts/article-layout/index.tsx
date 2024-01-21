@@ -32,7 +32,7 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
               <h1 className='mt-4 text-xl font-medium'>{title}</h1>
             </FadeIn>
             <FadeIn>
-              <time className='mt-3 block font-serif text-sm text-zinc-600 dark:text-zinc-400' dateTime={publishedAt}>
+              <time className='text-muted-foreground mt-3 block font-serif text-sm' dateTime={publishedAt}>
                 {publishedAtFormatted} ({publishedAtDistanceToNow(publishedAt)} ago)
               </time>
             </FadeIn>

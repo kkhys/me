@@ -1,7 +1,32 @@
 import * as React from 'react';
-import type { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import type { ImageProps } from 'next/image';
 import Image from 'next/image';
+
+const NextImage = ({
+  src,
+  alt,
+  width,
+  height,
+  blurDataURL,
+}: {
+  src: string;
+  alt?: string;
+  width: number;
+  height: number;
+  blurDataURL?: string;
+}) => (
+  <Image
+    src={src}
+    alt={alt ?? ''}
+    width={width}
+    height={height}
+    sizes='(min-width: 768px) 42rem, 100vw'
+    placeholder='blur'
+    blurDataURL={blurDataURL}
+    quality={90}
+    className='w-full rounded-2xl dark:border'
+  />
+);
 
 export const ArticleImage = ({
   src,
@@ -9,21 +34,22 @@ export const ArticleImage = ({
   blurDataURL,
   width,
   height,
-}: Pick<ImageProps, 'blurDataURL'> & {
+  title,
+}: Pick<ImageProps, 'blurDataURL' | 'title'> & {
   src?: string;
   alt?: string;
   width?: string | number;
   height?: string | number;
-}) => (
-  <Image
-    src={src as string | StaticImport}
-    alt={alt ?? ''}
-    width={width as number}
-    height={height as number}
-    sizes='(min-width: 768px) 42rem, 100vw'
-    placeholder='blur'
-    blurDataURL={blurDataURL}
-    quality={90}
-    className='w-full rounded-2xl'
-  />
-);
+}) => {
+  if (!title)
+    return (
+      <NextImage src={src!} alt={alt} width={width as number} height={height as number} blurDataURL={blurDataURL} />
+    );
+
+  return (
+    <figure>
+      <NextImage src={src!} alt={alt} width={width as number} height={height as number} blurDataURL={blurDataURL} />
+      <figcaption className='text-muted-foreground text-center text-xs'>{title}</figcaption>
+    </figure>
+  );
+};
