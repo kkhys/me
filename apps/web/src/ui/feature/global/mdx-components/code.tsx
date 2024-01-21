@@ -71,7 +71,7 @@ export const Code = ({
 }) => {
   if (typeof props?.['data-rehype-pretty-code-figure'] === 'undefined') return <figure {...props}>{children}</figure>;
 
-  const containerClassName = 'overflow-hidden rounded-md bg-zinc-900 shadow-md dark:ring-1 dark:ring-white/10';
+  const containerClassName = 'overflow-hidden rounded-md bg-zinc-900 shadow-md dark:border';
 
   if (!Array.isArray(children))
     return (
