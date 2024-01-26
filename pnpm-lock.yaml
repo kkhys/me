@@ -319,9 +319,9 @@ importers:
       '@vercel/edge-config':
         specifier: 0.4.1
         version: 0.4.1
-      bs58:
-        specifier: 5.0.0
-        version: 5.0.0
+      bech32:
+        specifier: 2.0.0
+        version: 2.0.0
       class-variance-authority:
         specifier: 0.7.0
         version: 0.7.0
@@ -8763,10 +8763,6 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /base-x@4.0.0:
-    resolution: {integrity: sha512-FuwxlW4H5kh37X/oW59pwTzzTKRzfrrQwhmyspRM7swOEZcHtDZSCt45U6oKgtuFE+WYPblePMVIPR4RZrh/hw==}
-    dev: false
-
   /base32@0.0.6:
     resolution: {integrity: sha512-yLx6Siu9YOKpGvJx3aD/EIEfnpqDkPSm3DG2NbMyra/3wjWVO5D15UBA3jzIWBnxABkcpN+5WUG2sSPuz+8Pgw==}
     engines: {node: '>0.4'}
@@ -8794,6 +8790,10 @@ packages:
     resolution: {integrity: sha512-qeFIXtP4MSoi6NLqO12WfqARWWuCKi2Rn/9hJLEmtB5yTNr9DqFWkJRCf2qShWzPeAMRnOgCrq0sg/KLv5ES9w==}
     dependencies:
       tweetnacl: 0.14.5
+    dev: false
+
+  /bech32@2.0.0:
+    resolution: {integrity: sha512-LcknSilhIGatDAsY1ak2I8VtGaHNhgMSYVxFrGLXv+xLHytaKZKcaUJJUE7qmBr7h33o5YQwP55pMI0xmkpJwg==}
     dev: false
 
   /before-after-hook@2.2.3:
@@ -8998,12 +8998,6 @@ packages:
       electron-to-chromium: 1.4.635
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.22.2)
-
-  /bs58@5.0.0:
-    resolution: {integrity: sha512-r+ihvQJvahgYT50JD05dyJNKlmmSlMoOGwn1lCcEzanPglg7TxYjioQUYehQ9mAR/+hOSd2jRc/Z2y5UxBymvQ==}
-    dependencies:
-      base-x: 4.0.0
-    dev: false
 
   /bser@2.1.1:
     resolution: {integrity: sha512-gQxTNE/GAfIIrmHLUE3oJyp5FO6HRBfhjnw4/wMmA63ZGDJnWBmgY/lyQBpnDUkGmAhbSe39tx2d/iTOAfglwQ==}
