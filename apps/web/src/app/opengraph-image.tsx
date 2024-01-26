@@ -20,7 +20,7 @@ const Image = async () => {
     (
       <div
         style={{
-          fontSize: 300,
+          fontSize: 260,
           background: '#0a0a0b',
           width: '100%',
           height: '100%',

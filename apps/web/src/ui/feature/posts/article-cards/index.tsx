@@ -46,7 +46,7 @@ export const ArticleCards = ({ posts, className }: { posts: Post[]; className?: 
     );
 
   return (
-    <div className={clsx('grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3', className)}>
+    <div className={clsx('grid grid-cols-2 gap-3 xl:grid-cols-3 xl:gap-4', className)}>
       {posts.map((post) => (
         <ArticleCard key={post._id} post={post} />
       ))}
