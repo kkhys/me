@@ -22,9 +22,9 @@ const Page = async () => {
     <Container>
       <FadeInStagger>
         <FadeIn>
-          <h1 className='font-serif text-xl font-medium'>The website under maintenance</h1>
+          <h1 className='font-sans text-xl font-medium'>The website under maintenance</h1>
         </FadeIn>
-        <Prose className='font-serif'>
+        <Prose className='font-sans'>
           <FadeIn>
             <p>It will be back up in a while, so please have a cup of coffee and relax.</p>
           </FadeIn>

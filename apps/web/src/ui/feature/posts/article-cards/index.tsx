@@ -24,13 +24,13 @@ const ArticleCard = ({ post }: { post: Post }) => {
       <Card className='flex h-full flex-col justify-between'>
         <CardHeader className='flex flex-row justify-between'>
           <EyeCatch emoji={emoji} />
-          {status === 'draft' && <span className='!m-0 font-serif text-xs text-red-400'>Draft</span>}
+          {status === 'draft' && <span className='!m-0 font-sans text-xs text-red-400'>Draft</span>}
         </CardHeader>
         <CardContent>
           <CardTitle>{title}</CardTitle>
         </CardContent>
         <CardFooter>
-          <CardDescription className='font-serif'>{publishedAtFormatted}</CardDescription>
+          <CardDescription className='font-sans'>{publishedAtFormatted}</CardDescription>
         </CardFooter>
       </Card>
     </MotionLink>
@@ -41,7 +41,7 @@ export const ArticleCards = ({ posts, className }: { posts: Post[]; className?: 
   if (!posts.length)
     return (
       <div className={className}>
-        <p className='font-serif'>No posts found.</p>
+        <p className='font-sans'>No posts found.</p>
       </div>
     );
 

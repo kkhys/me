@@ -26,7 +26,7 @@ const Page = () => (
     <Container>
       <BackButton href='/' tooltipContent='Go back to home' />
       <header>
-        <h1 className='font-serif text-xl font-medium'>Blog</h1>
+        <h1 className='font-sans text-xl font-medium'>Blog</h1>
       </header>
       <Suspense>
         <CategoryTabs />

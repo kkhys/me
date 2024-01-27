@@ -44,7 +44,7 @@ export const BackButton = <T extends string>({
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          <p className='font-serif'>{tooltipContent ?? 'Go back to previous page'}</p>
+          <p className='font-sans'>{tooltipContent ?? 'Go back to previous page'}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
