@@ -12,7 +12,7 @@ export const Footer = () => (
             <div className='flex flex-wrap justify-center gap-x-1 gap-y-1 text-sm font-medium text-zinc-800 dark:text-zinc-200'>
               <NavLinks />
             </div>
-            <p className='font-serif text-xs text-zinc-400 dark:text-zinc-500'>
+            <p className='font-sans text-xs text-zinc-400 dark:text-zinc-500'>
               CC BY-NC-SA 4.0 2023-PRESENT &copy; Keisuke Hayashi
             </p>
           </div>
