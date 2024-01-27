@@ -11,7 +11,7 @@ export const metadata = {
 } satisfies Metadata;
 
 const NotFound = () => (
-  <Container className='font-serif'>
+  <Container className='font-sans'>
     <FadeInStagger>
       <FadeIn>
         <h1 className='text-xl font-medium'>404 - Page Not Found</h1>

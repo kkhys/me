@@ -79,8 +79,8 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       fontFamily: {
-        serif: ['var(--font-inter)', ...defaultTheme.fontFamily.serif],
-        sans: ['var(--font-newsreader)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
+        serif: ['var(--font-newsreader)', ...defaultTheme.fontFamily.serif],
         mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
         emoji: ['var(--font-noto-emoji)', 'Apple Color Emoji'],
       },
