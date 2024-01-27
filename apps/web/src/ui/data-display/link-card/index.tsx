@@ -61,7 +61,7 @@ export const LinkCard = ({
             ) : (
               <GlobeIcon className='size-3 shrink-0' />
             )}
-            <span className='ml-1 font-serif text-xs'>{new URL(url).hostname}</span>
+            <span className='ml-1 font-sans text-xs'>{new URL(url).hostname}</span>
           </div>
         </div>
         <div className='h-[120px] w-[120px] max-w-[230px] sm:w-auto'>

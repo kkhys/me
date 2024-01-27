@@ -62,13 +62,13 @@ export const CategoryTabs = () => {
     <Tabs defaultValue={category} onValueChange={handleValueChange} value={category} className='mt-6'>
       <div className='flex gap-4'>
         <TabsList>
-          <TabsTrigger value='all' className='font-serif'>
+          <TabsTrigger value='all' className='font-sans'>
             All
           </TabsTrigger>
-          <TabsTrigger value='tech' className='font-serif'>
+          <TabsTrigger value='tech' className='font-sans'>
             Tech
           </TabsTrigger>
-          <TabsTrigger value='life' className='font-serif'>
+          <TabsTrigger value='life' className='font-sans'>
             Life
           </TabsTrigger>
         </TabsList>
@@ -83,7 +83,7 @@ export const CategoryTabs = () => {
             </TooltipTrigger>
             <TooltipContent>
               <div className='flex items-center'>
-                <p className='font-serif'>Atom</p>
+                <p className='font-sans'>Atom</p>
               </div>
             </TooltipContent>
           </Tooltip>
@@ -107,7 +107,7 @@ export const CategoryTabs = () => {
       <TabsContent value='notfound'>
         <FadeIn>
           <div className='mt-8'>
-            <p className='font-serif'>No articles tied to this category.</p>
+            <p className='font-sans'>No articles tied to this category.</p>
           </div>
         </FadeIn>
       </TabsContent>

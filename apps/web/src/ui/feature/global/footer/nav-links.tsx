@@ -64,7 +64,7 @@ const NavLinkWithTooltip = <T extends string>({
       </TooltipTrigger>
       <TooltipContent>
         <div className='flex items-center'>
-          <p className='font-serif'>{tooltipContent}</p>
+          <p className='font-sans'>{tooltipContent}</p>
           {isExternal && <ArrowTopRightIcon className='ml-1 size-3' />}
         </div>
       </TooltipContent>
@@ -85,7 +85,7 @@ export const NavLinks = () => (
           <span className='sr-only'>Links</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='start' className='font-serif'>
+      <DropdownMenuContent align='start' className='font-sans'>
         <NavLink href={site.url.roadmap} isExternal>
           Roadmap
         </NavLink>
