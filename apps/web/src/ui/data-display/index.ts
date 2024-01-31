@@ -7,6 +7,7 @@ export * from './carousel';
 export * from './collapsible';
 export * from './hover-card';
 export * from './link-card';
+export * from './mermaid-block';
 export * from './popover';
 export * from './scroll-area';
 export * from './table';

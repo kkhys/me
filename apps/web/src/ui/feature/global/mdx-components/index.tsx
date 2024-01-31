@@ -5,7 +5,7 @@ import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
-import { LinkCard } from '#/ui/data-display';
+import { LinkCard, MermaidBlock } from '#/ui/data-display';
 import { ArticleImage, HeaderWithAnchor } from '#/ui/feature/posts';
 import { Code } from './code';
 
@@ -39,6 +39,7 @@ const components = {
   figure: ({ children, ...props }) => <Code {...props}>{children}</Code>,
   img: (props: React.ComponentPropsWithoutRef<typeof ArticleImage>) => <ArticleImage {...props} />,
   'link-card': (props: React.ComponentPropsWithoutRef<typeof LinkCard>) => <LinkCard {...props} />,
+  svg: ({ children, ...props }) => <MermaidBlock {...props}>{children}</MermaidBlock>,
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {
