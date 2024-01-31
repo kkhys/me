@@ -1,4 +1,5 @@
 import { makeSource } from 'contentlayer/source-files';
+import rehypeMermaid from 'rehype-mermaid';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
@@ -11,6 +12,7 @@ import remarkUnwrapImages from 'remark-unwrap-images';
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { Legal, Post } from './src/lib/contentlayer/definitions';
+import { rehypeMermaidOptions } from './src/lib/mdx/rehype-mermaid';
 import {
   afterRehypePrettyCode,
   beforeRehypePrettyCode,
@@ -27,6 +29,12 @@ export default makeSource({
     remarkPlugins: [[remarkGfm], [remarkUnwrapImages], [remarkLinkCard], [remarkNextImage]],
     rehypePlugins: [
       [rehypeSlug],
+      [
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        rehypeMermaid,
+        rehypeMermaidOptions,
+      ],
       [beforeRehypePrettyCode],
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-expect-error
