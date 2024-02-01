@@ -23,12 +23,12 @@ export const generateStaticParams = () =>
 export const generateMetadata = ({ params: { slug } }: { params: { slug: string } }) => {
   const post = getPostBySlug(slug);
   if (!post) return {};
-  const { title, description, publishedAt, updatedAt } = post;
+  const { title, excerpt, publishedAt, updatedAt } = post;
   const url = `/posts/${slug}`;
 
   return {
     title,
-    description: description ?? undefined,
+    description: excerpt,
     alternates: {
       canonical: `/posts/${slug}`,
     },

@@ -31,7 +31,7 @@ export const GET = async (): Promise<NextResponse> => {
       title: post.title,
       id: new URL(`posts/${post.slug}`, site.url.base).toString(),
       link: new URL(`posts/${post.slug}`, site.url.base).toString(),
-      description: post.description,
+      description: post.excerpt,
       author: [
         {
           name: me.name,
