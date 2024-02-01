@@ -1,5 +1,7 @@
 import crypto from 'crypto';
 import { bech32m } from 'bech32';
+import { remark } from 'remark';
+import strip from 'strip-markdown';
 
 /**
  * esbuild does not support module path aliases, so relative paths are used
@@ -28,6 +30,25 @@ export const generateSlug = (data: crypto.BinaryLike) => {
   const words = bech32m.toWords(buffer);
 
   return bech32m.encode(prefix, words, 1024).slice(0, slugLength);
+};
+
+/**
+ * Generates an excerpt from a given raw string.
+ *
+ * @param raw - The raw string to generate the excerpt from.
+ * @returns The generated excerpt.
+ */
+export const createExcerpt = async (raw: string) => {
+  const maxWords = 120;
+  const stripped = (await remark().use(strip).process(raw)).toString();
+  const urlWithLineBreakRegex = /^(?:\r\n|\n)(https?:\/\/\S+)(?:\r\n|\n)/gm;
+  const whitespaceRegex = /\s+/g;
+  const excerpt = stripped
+    .trim()
+    .replaceAll(urlWithLineBreakRegex, '')
+    .replaceAll(whitespaceRegex, '')
+    .slice(0, maxWords);
+  return stripped.length > maxWords ? excerpt + '...' : excerpt;
 };
 
 /**
