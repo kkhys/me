@@ -9,7 +9,7 @@ import { content } from '../../../config';
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { allTagTitles, categoryTitles } from '../constants';
-import { generateCategoryObject, generateSlug, generateTagObject } from '../utils';
+import { createExcerpt, generateCategoryObject, generateSlug, generateTagObject } from '../utils';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -38,10 +38,6 @@ export const Post = defineDocumentType(() => ({
       type: 'list',
       of: { type: 'enum', options: allTagTitles },
     },
-    description: {
-      description: 'The description of the post (120 words or less)',
-      type: 'string',
-    },
     status: {
       description: 'Whether to publish the post',
       type: 'enum',
@@ -59,6 +55,11 @@ export const Post = defineDocumentType(() => ({
     },
   },
   computedFields: {
+    excerpt: {
+      description: 'The description of the post (120 words or less)',
+      type: 'string',
+      resolve: async ({ body: { raw } }) => await createExcerpt(raw),
+    },
     url: {
       description: 'Generate post URL from id',
       type: 'string',
