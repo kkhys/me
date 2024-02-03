@@ -48,9 +48,6 @@ jobs:
       - name: Install deps (with cache)
         run: pnpm install
 
-      - name: Install Playwright Browsers
-        run: cd apps/web && pnpm exec playwright install --with-deps
-
       - name: Build
         run: pnpm turbo build
 
