@@ -76,7 +76,7 @@ export const CategoryTabs = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Button asChild variant='outline' size='icon'>
-                <Link href='/atom'>
+                <Link href='/atom' prefetch={false}>
                   <RssIcon className='size-4' />
                 </Link>
               </Button>
