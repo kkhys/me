@@ -364,6 +364,12 @@ importers:
       next-themes:
         specifier: 0.2.1
         version: 0.2.1(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)
+      playwright:
+        specifier: 1.41.2
+        version: 1.41.2
+      playwright-core:
+        specifier: 1.41.2
+        version: 1.41.2
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -3856,7 +3862,7 @@ packages:
       react-refresh: 0.14.0
       schema-utils: 3.3.0
       source-map: 0.7.4
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /@pnpm/config.env-replace@1.1.0:
@@ -6795,7 +6801,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.3.3)
       tslib: 2.6.2
       typescript: 5.3.3
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -8884,7 +8890,7 @@ packages:
       '@babel/core': 7.23.2
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /babel-plugin-add-react-displayname@0.0.5:
@@ -10199,7 +10205,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.33)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /css-select@4.3.0:
@@ -12390,7 +12396,7 @@ packages:
       semver: 7.5.4
       tapable: 2.2.1
       typescript: 5.3.3
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /form-data-encoder@2.1.4:
@@ -12533,7 +12539,6 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /fsevents@2.3.3:
@@ -13357,7 +13362,7 @@ packages:
       lodash: 4.17.21
       pretty-error: 4.0.0
       tapable: 2.2.1
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /htmlparser2@6.1.0:
@@ -15832,7 +15837,7 @@ packages:
     dependencies:
       '@fortawesome/fontawesome-free': 6.5.1
       mermaid: 10.7.0
-      playwright-core: 1.41.1
+      playwright-core: 1.41.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -16857,7 +16862,7 @@ packages:
       url: 0.11.3
       util: 0.12.5
       vm-browserify: 1.1.2
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /node-releases@2.0.14:
@@ -17902,17 +17907,10 @@ packages:
       sharp: 0.32.6
     dev: true
 
-  /playwright-core@1.41.1:
-    resolution: {integrity: sha512-/KPO5DzXSMlxSX77wy+HihKGOunh3hqndhqeo/nMxfigiKzogn8kfL0ZBDu0L1RKgan5XHCPmn6zXd2NUJgjhg==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dev: false
-
   /playwright-core@1.41.2:
     resolution: {integrity: sha512-VaTvwCA4Y8kxEe+kfm2+uUUw5Lubf38RxF7FpBxLPmGe5sdNkSg5e3ChEigaGrX7qdqT3pt2m/98LiyvU2x6CA==}
     engines: {node: '>=16'}
     hasBin: true
-    dev: true
 
   /playwright@1.41.2:
     resolution: {integrity: sha512-v0bOa6H2GJChDL8pAeLa/LZC4feoAMbSQm1/jF/ySsWWoaNItvrMP7GEkvEEFyCTUYKMxjQKaTSg5up7nR6/8A==}
@@ -17922,7 +17920,6 @@ packages:
       playwright-core: 1.41.2
     optionalDependencies:
       fsevents: 2.3.2
-    dev: true
 
   /pnp-webpack-plugin@1.7.0(typescript@5.3.3):
     resolution: {integrity: sha512-2Rb3vm+EXble/sMXNSu6eoBx8e79gKqhNq9F5ZWW6ERNCTE/Q0wQNne5541tE5vKjfM8hpNCYL+LGc1YTfI0dg==}
@@ -17999,7 +17996,7 @@ packages:
       jiti: 1.20.0
       postcss: 8.4.33
       semver: 7.5.4
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -19482,7 +19479,7 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /sax@1.3.0:
@@ -20358,7 +20355,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /style-to-object@0.4.4:
@@ -20446,7 +20443,7 @@ packages:
       webpack: '>=2'
     dependencies:
       '@swc/core': 1.3.100
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /symbol-tree@3.2.4:
@@ -21853,7 +21850,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.100)(esbuild@0.19.5)
     dev: true
 
   /webpack-hot-middleware@2.25.4:
