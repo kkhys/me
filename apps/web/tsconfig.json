@@ -4,15 +4,15 @@
     "baseUrl": ".",
     "paths": {
       "#/*": ["./src/*"],
-      "contentlayer/generated": ["./.contentlayer/generated"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
     },
     "plugins": [
       {
-        "name": "next",
-      },
+        "name": "next"
+      }
     ],
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },
   "include": [".", ".next/types/**/*.ts", ".contentlayer/generated"],
-  "exclude": ["node_modules", "storybook-static", ".contentlayer", "__reports__", "coverage", "playwright-report"],
+  "exclude": ["node_modules", "storybook-static", ".contentlayer", "__reports__", "coverage", "playwright-report"]
 }
