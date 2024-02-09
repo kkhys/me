@@ -6,6 +6,8 @@ import { env } from '#/env.mjs';
 import { ArticleLayout } from '#/ui/feature/posts';
 import { JsonLd } from './json-ld';
 
+import '#/styles/code-block.css';
+
 /**
  * Retrieves a post object by its slug.
  *

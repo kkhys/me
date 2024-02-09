@@ -205,8 +205,8 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           fontWeight: theme('fontWeight.normal'),
           lineHeight: theme('lineHeight.6'),
           backgroundColor: '#131316',
-          padding: theme('spacing.6'),
-          overflowX: 'auto',
+          paddingTop: theme('spacing.6'),
+          paddingBottom: theme('spacing.6'),
         },
         'pre code': {
           display: 'inline',

@@ -1,0 +1,33 @@
+.code-block code {
+  counter-reset: line;
+}
+
+.code-block code .diff {
+  @apply inline-block px-6 before:absolute before:left-2
+}
+
+.code-block code .diff.add {
+  @apply bg-green-900/20 before:content-['+'] before:text-green-500
+}
+
+.code-block code .diff.remove {
+  @apply bg-red-900/20 before:content-['-'] before:text-red-500
+}
+
+.show-line-numbers > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply inline-block w-4 mr-8 text-right text-zinc-500
+}
+
+[data-line] {
+  @apply px-6
+}
+
+[data-highlighted-line] {
+  @apply bg-zinc-800/50;
+}
+
+[data-highlighted-chars] {
+  @apply bg-yellow-900/50;
+}
