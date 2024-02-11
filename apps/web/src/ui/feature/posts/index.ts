@@ -1,3 +1,4 @@
+export * from './action-controller';
 export * from './article-cards';
 export * from './article-list';
 export * from './article-image';

@@ -3,7 +3,7 @@ import type { Post } from 'contentlayer/generated';
 import { formatDistanceStrict, parseISO } from 'date-fns';
 
 import { BackButton, Container, FadeIn, FadeInStagger, Mdx } from '#/ui/feature/global';
-import { EyeCatch } from '#/ui/feature/posts';
+import { ActionController, EyeCatch } from '#/ui/feature/posts';
 import { Prose } from '#/ui/general';
 
 export const ArticleLayout = ({ post }: { post: Post }) => {
@@ -41,6 +41,9 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
             <Prose>
               <Mdx code={code} />
             </Prose>
+          </FadeIn>
+          <FadeIn>
+            <ActionController className='mt-12' post={post} />
           </FadeIn>
         </article>
       </FadeInStagger>

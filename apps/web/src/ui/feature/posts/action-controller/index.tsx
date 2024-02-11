@@ -1,0 +1,83 @@
+'use client';
+
+import * as React from 'react';
+import type { Route } from 'next';
+import Link from 'next/link';
+import { ArrowTopRightIcon, Share1Icon } from '@radix-ui/react-icons';
+import type { Post } from 'contentlayer/generated';
+import { toast } from 'sonner';
+
+import { site } from '#/config';
+import { cn } from '#/lib/shadcn-ui/utils';
+import { Button } from '#/ui/general';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '#/ui/navigation';
+
+const NavLink = <T extends string>({
+  href,
+  children,
+  isExternal = false,
+}: {
+  href: Route<T>;
+  children: React.ReactNode;
+  isExternal?: boolean;
+}) => (
+  <DropdownMenuItem asChild>
+    <Link
+      href={href}
+      className='cursor-pointer'
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
+    >
+      {children}
+      {isExternal && <ArrowTopRightIcon className='ml-1 size-3' />}
+    </Link>
+  </DropdownMenuItem>
+);
+
+const generateXShareLink = (url: string, title: string) =>
+  `https://twitter.com/intent/tweet?url=${encodeURIComponent(`${site.url.base}${url}`)}&title=${encodeURIComponent(`${title} | ${site.title}`)}`;
+
+const generateFacebookShareLink = (url: string) =>
+  `https://www.facebook.com/sharer.php?u=${encodeURIComponent(`${site.url.base}${url}`)}`;
+
+const handleCopyLink = (url: string) =>
+  void window.navigator.clipboard.writeText(`${site.url.base}${url}`).then(() => toast.success('Link copied.', {}));
+
+const SharedAction = ({ post: { url, title } }: { post: Post }) => (
+  <DropdownMenu modal={false}>
+    <DropdownMenuTrigger asChild>
+      <Button variant='ghost' size='icon'>
+        <Share1Icon className='size-4' />
+        <span className='sr-only'>Share</span>
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align='end' className='font-sans'>
+      <DropdownMenuItem asChild>
+        <button className='w-full cursor-pointer' onClick={() => handleCopyLink(url)}>
+          Copy link
+        </button>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <NavLink href={generateXShareLink(url, title) as Route} isExternal>
+        Share on X
+      </NavLink>
+      <NavLink href={generateFacebookShareLink(url) as Route} isExternal>
+        Share on Facebook
+      </NavLink>
+    </DropdownMenuContent>
+  </DropdownMenu>
+);
+
+export const ActionController = ({ post, className }: { post: Post; className?: string }) => {
+  return (
+    <div className={cn('flex justify-end gap-x-8', className)}>
+      <SharedAction post={post} />
+    </div>
+  );
+};
