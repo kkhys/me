@@ -3,7 +3,7 @@
 import * as React from 'react';
 import type { Route } from 'next';
 import Link from 'next/link';
-import { ArrowTopRightIcon, Share1Icon } from '@radix-ui/react-icons';
+import { ArrowTopRightIcon, CodeIcon, Share1Icon } from '@radix-ui/react-icons';
 import type { Post } from 'contentlayer/generated';
 import { toast } from 'sonner';
 
@@ -74,9 +74,36 @@ const SharedAction = ({ post: { url, title } }: { post: Post }) => (
   </DropdownMenu>
 );
 
+const ConfigAction = ({ post: { editUrl, sourceUrl } }: { post: Post }) => (
+  <DropdownMenu modal={false}>
+    <DropdownMenuTrigger asChild>
+      <Button variant='ghost' size='icon'>
+        <CodeIcon className='size-4' />
+        <span className='sr-only'>Config</span>
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align='end' className='font-sans'>
+      <DropdownMenuItem asChild>
+        <button className='w-full cursor-pointer'>Metadata</button>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <NavLink href={editUrl as Route} isExternal>
+        Edit the page on GitHub
+      </NavLink>
+      <NavLink href='https://github.com/kkhys/me/issues/new' isExternal>
+        Report the content issue.
+      </NavLink>
+      <NavLink href={sourceUrl as Route} isExternal>
+        View the source on GitHub.
+      </NavLink>
+    </DropdownMenuContent>
+  </DropdownMenu>
+);
+
 export const ActionController = ({ post, className }: { post: Post; className?: string }) => {
   return (
-    <div className={cn('flex justify-end gap-x-8', className)}>
+    <div className={cn('flex justify-end gap-x-1', className)}>
+      <ConfigAction post={post} />
       <SharedAction post={post} />
     </div>
   );
