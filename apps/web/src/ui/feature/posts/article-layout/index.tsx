@@ -11,7 +11,7 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
     title,
     emoji,
     publishedAt,
-    publishedAtFormatted,
+    publishedAtFormattedUs,
     status,
     body: { code },
   } = post;
@@ -33,7 +33,7 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
             </FadeIn>
             <FadeIn>
               <time className='text-muted-foreground mt-3 block font-sans text-sm' dateTime={publishedAt}>
-                {publishedAtFormatted} ({publishedAtDistanceToNow(publishedAt)} ago)
+                {publishedAtFormattedUs} ({publishedAtDistanceToNow(publishedAt)} ago)
               </time>
             </FadeIn>
           </header>

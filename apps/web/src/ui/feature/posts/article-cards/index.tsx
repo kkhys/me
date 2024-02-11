@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { EyeCatch } from '#/ui/feature/posts';
 
 const ArticleCard = ({ post }: { post: Post }) => {
-  const { slug, title, emoji, publishedAtFormatted, status } = post;
+  const { slug, title, emoji, publishedAtFormattedUs, status } = post;
   const MotionLink = motion(Link);
 
   return (
@@ -30,7 +30,7 @@ const ArticleCard = ({ post }: { post: Post }) => {
           <CardTitle>{title}</CardTitle>
         </CardContent>
         <CardFooter>
-          <CardDescription className='font-sans'>{publishedAtFormatted}</CardDescription>
+          <CardDescription className='font-sans'>{publishedAtFormattedUs}</CardDescription>
         </CardFooter>
       </Card>
     </MotionLink>
