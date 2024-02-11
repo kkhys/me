@@ -75,15 +75,25 @@ export const Post = defineDocumentType(() => ({
       type: 'string',
       resolve: ({ _raw: { sourceFilePath } }) => `${content.url.repository}/blob/main/${sourceFilePath}?plain=1`,
     },
-    publishedAtFormatted: {
+    publishedAtFormattedUs: {
       description: 'Formatted publication date and time',
       type: 'string',
       resolve: ({ publishedAt }) => format(parseISO(publishedAt), 'LLLL d, yyyy'),
     },
-    updatedAtFormatted: {
+    publishedAtFormattedIso: {
+      description: 'Formatted publication date and time',
+      type: 'string',
+      resolve: ({ publishedAt }) => format(parseISO(publishedAt), 'yyyy/MM/dd'),
+    },
+    updatedAtFormattedUs: {
       description: 'Formatted modification date and time',
       type: 'string',
       resolve: ({ updatedAt }) => (updatedAt ? format(parseISO(updatedAt), 'LLLL d, yyyy') : undefined),
+    },
+    updatedAtFormattedIso: {
+      description: 'Formatted modification date and time',
+      type: 'string',
+      resolve: ({ updatedAt }) => (updatedAt ? format(parseISO(updatedAt), 'yyyy/MM/dd') : undefined),
     },
     slug: {
       description: 'Generate post slug from id',
