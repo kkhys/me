@@ -91,10 +91,10 @@ const ConfigAction = ({ post: { editUrl, sourceUrl } }: { post: Post }) => (
         Edit the page on GitHub
       </NavLink>
       <NavLink href='https://github.com/kkhys/me/issues/new' isExternal>
-        Report the content issue.
+        Report the content issue
       </NavLink>
       <NavLink href={sourceUrl as Route} isExternal>
-        View the source on GitHub.
+        View the source on GitHub
       </NavLink>
     </DropdownMenuContent>
   </DropdownMenu>
