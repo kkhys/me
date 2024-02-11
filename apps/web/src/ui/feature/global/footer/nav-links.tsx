@@ -89,7 +89,6 @@ export const NavLinks = () => (
         <NavLink href={site.url.roadmap} isExternal>
           Roadmap
         </NavLink>
-        {/* TODO: change href */}
         <NavLink href={storybook.url.base} isExternal>
           Storybook
         </NavLink>
