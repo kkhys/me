@@ -79,14 +79,10 @@ const ConfigAction = ({ post: { editUrl, sourceUrl } }: { post: Post }) => (
     <DropdownMenuTrigger asChild>
       <Button variant='ghost' size='icon'>
         <CodeIcon className='size-4' />
-        <span className='sr-only'>Config</span>
+        <span className='sr-only'>Report</span>
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align='end' className='font-sans'>
-      <DropdownMenuItem asChild>
-        <button className='w-full cursor-pointer'>Metadata</button>
-      </DropdownMenuItem>
-      <DropdownMenuSeparator />
       <NavLink href={editUrl as Route} isExternal>
         Edit the page on GitHub
       </NavLink>
@@ -100,11 +96,9 @@ const ConfigAction = ({ post: { editUrl, sourceUrl } }: { post: Post }) => (
   </DropdownMenu>
 );
 
-export const ActionController = ({ post, className }: { post: Post; className?: string }) => {
-  return (
-    <div className={cn('flex justify-end gap-x-1', className)}>
-      <ConfigAction post={post} />
-      <SharedAction post={post} />
-    </div>
-  );
-};
+export const ActionController = ({ post, className }: { post: Post; className?: string }) => (
+  <div className={cn('flex justify-end gap-x-1', className)}>
+    <ConfigAction post={post} />
+    <SharedAction post={post} />
+  </div>
+);
