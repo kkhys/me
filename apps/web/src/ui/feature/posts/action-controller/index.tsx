@@ -50,7 +50,7 @@ const generateHatebuSaveLink = (url: string, title: string) =>
   `https://b.hatena.ne.jp/add?mode=confirm&url=${encodeURIComponent(`${site.url.base}${url}`)}&title=${title} | ${site.title}`;
 
 const handleCopyLink = (url: string) =>
-  void window.navigator.clipboard.writeText(`${site.url.base}${url}`).then(() => toast.success('Link copied.', {}));
+  void window.navigator.clipboard.writeText(`${site.url.base}${url}`).then(() => toast.success('Link copied.'));
 
 const SharedAction = ({ post: { url, title } }: { post: Post }) => (
   <DropdownMenu modal={false}>
