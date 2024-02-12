@@ -53,7 +53,7 @@ const handleCopyLink = (url: string) =>
   void window.navigator.clipboard.writeText(`${site.url.base}${url}`).then(() => toast.success('Link copied.'));
 
 const SharedAction = ({ post: { url, title } }: { post: Post }) => (
-  <DropdownMenu modal={false}>
+  <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant='ghost' size='icon'>
         <Share1Icon className='size-4' />
@@ -81,7 +81,7 @@ const SharedAction = ({ post: { url, title } }: { post: Post }) => (
 );
 
 const ConfigAction = ({ post: { editUrl, sourceUrl } }: { post: Post }) => (
-  <DropdownMenu modal={false}>
+  <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant='ghost' size='icon'>
         <CodeIcon className='size-4' />
