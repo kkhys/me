@@ -4,7 +4,7 @@ import { Footer, Header } from '#/ui/feature/global';
 
 const VerticalGradient = () => (
   <div
-    className='pointer-events-none z-10 h-[50px] w-full select-none bg-[linear-gradient(to_top,transparent,hsl(0_0%_8.5%))] opacity-0 backdrop-blur-[2px] dark:opacity-100'
+    className='pointer-events-none z-10 h-[65px] w-full select-none bg-[linear-gradient(to_top,transparent,hsl(0_0%_8.5%))] opacity-0 backdrop-blur-[2px] dark:opacity-100'
     style={{ maskImage: 'linear-gradient(to bottom, hsl(0 0% 8.5%) 25%, transparent)' }}
   />
 );
