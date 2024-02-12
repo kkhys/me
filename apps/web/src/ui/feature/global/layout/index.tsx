@@ -2,6 +2,13 @@ import * as React from 'react';
 
 import { Footer, Header } from '#/ui/feature/global';
 
+// const VerticalGradient = () => (
+//   <div
+//     className='pointer-events-none fixed left-0 top-0 z-10 h-[110px] w-full select-none bg-[linear-gradient(to_top,transparent,hsl(0_0%_8.5%))] opacity-0 backdrop-blur-[2px] dark:opacity-100'
+//     style={{ maskImage: 'linear-gradient(to bottom, hsl(0 0% 8.5%) 25%, transparent)' }}
+//   />
+// );
+
 export const Layout = ({ children }: { children: React.ReactNode }) => (
   <>
     <div className='fixed inset-0 flex justify-center sm:px-8'>
@@ -12,6 +19,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
     <div className='relative flex w-full flex-col'>
       <Header />
       <main className='flex-auto'>
+        {/*<VerticalGradient />*/}
         <div className='mt-4 sm:px-8 md:mt-16'>{children}</div>
       </main>
       <Footer />
