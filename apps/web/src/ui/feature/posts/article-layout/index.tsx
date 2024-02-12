@@ -4,7 +4,7 @@ import { allPosts } from 'contentlayer/generated';
 import { formatDistanceStrict, parseISO } from 'date-fns';
 
 import { BackButton, Container, FadeIn, FadeInStagger, Mdx } from '#/ui/feature/global';
-import { ActionController, EyeCatch, RelatedPosts } from '#/ui/feature/posts';
+import { ActionController, EyeCatch, PrevAndNextPager, RelatedPosts } from '#/ui/feature/posts';
 import { Prose } from '#/ui/general';
 import { fisherYatesShuffle } from '#/utils';
 
@@ -52,6 +52,9 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
           </FadeIn>
           <FadeIn>
             <ActionController className='mt-12' post={post} />
+          </FadeIn>
+          <FadeIn>
+            <PrevAndNextPager id={id} className='mt-8' />
           </FadeIn>
           {relatedPosts.length !== 0 && (
             <FadeIn>

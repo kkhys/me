@@ -10,7 +10,7 @@ export const RelatedPosts = ({ relatedPosts, className }: { relatedPosts: Post[]
     <div className={className}>
       <hr className='mt-12' />
       <span className='mt-12 block font-sans text-xl font-medium'>Related Posts</span>
-      <ArticleList className='mt-8' posts={relatedPosts} showDate={false} />
+      <ArticleList className='mt-6' posts={relatedPosts} showDate={false} />
     </div>
   );
 };

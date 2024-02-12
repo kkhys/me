@@ -6,4 +6,5 @@ export * from './article-layout';
 export * from './category-tabs';
 export * from './eye-catch';
 export * from './header-with-anchor';
+export * from './prev-and-next-pager';
 export * from './related-posts';
