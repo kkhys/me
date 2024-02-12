@@ -6,3 +6,4 @@ export * from './article-layout';
 export * from './category-tabs';
 export * from './eye-catch';
 export * from './header-with-anchor';
+export * from './related-posts';

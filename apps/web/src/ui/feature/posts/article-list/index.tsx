@@ -5,7 +5,13 @@ import type { Post } from 'contentlayer/generated';
 
 import { EyeCatch } from '#/ui/feature/posts';
 
-const ListItem = ({ post: { slug, emoji, title, publishedAt, publishedAtFormattedIso, status } }: { post: Post }) => {
+const ListItem = ({
+  post: { slug, emoji, title, publishedAt, publishedAtFormattedIso, status },
+  showDate,
+}: {
+  post: Post;
+  showDate: boolean;
+}) => {
   return (
     <Link
       href={`/posts/${slug}`}
@@ -15,15 +21,25 @@ const ListItem = ({ post: { slug, emoji, title, publishedAt, publishedAtFormatte
         <EyeCatch emoji={emoji} size='sm' className='shrink-0' />
         <p className='palt'>{title}</p>
       </div>
-      <time className='text-muted-foreground shrink-0 font-sans text-sm tabular-nums' dateTime={publishedAt}>
-        {publishedAtFormattedIso}
-      </time>
+      {showDate && (
+        <time className='text-muted-foreground shrink-0 font-sans text-sm tabular-nums' dateTime={publishedAt}>
+          {publishedAtFormattedIso}
+        </time>
+      )}
       {status === 'draft' && <span className='absolute right-0 top-0 h-1 w-2 bg-red-400/80' />}
     </Link>
   );
 };
 
-export const ArticleList = ({ posts, className }: { posts: Post[]; className?: string }) => {
+export const ArticleList = ({
+  posts,
+  className,
+  showDate = true,
+}: {
+  posts: Post[];
+  className?: string;
+  showDate?: boolean;
+}) => {
   if (!posts.length)
     return (
       <div className={className}>
@@ -34,7 +50,7 @@ export const ArticleList = ({ posts, className }: { posts: Post[]; className?: s
   return (
     <div className={clsx('divide-y border-t', className)}>
       {posts.map((post) => (
-        <ListItem key={post._id} post={post} />
+        <ListItem key={post._id} post={post} showDate={showDate} />
       ))}
     </div>
   );

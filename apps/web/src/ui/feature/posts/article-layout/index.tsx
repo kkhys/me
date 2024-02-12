@@ -1,22 +1,30 @@
 import * as React from 'react';
 import type { Post } from 'contentlayer/generated';
+import { allPosts } from 'contentlayer/generated';
 import { formatDistanceStrict, parseISO } from 'date-fns';
 
 import { BackButton, Container, FadeIn, FadeInStagger, Mdx } from '#/ui/feature/global';
-import { ActionController, EyeCatch } from '#/ui/feature/posts';
+import { ActionController, EyeCatch, RelatedPosts } from '#/ui/feature/posts';
 import { Prose } from '#/ui/general';
+import { fisherYatesShuffle } from '#/utils';
 
 export const ArticleLayout = ({ post }: { post: Post }) => {
   const {
     title,
+    category,
     emoji,
     publishedAt,
     publishedAtFormattedUs,
     status,
+    _id: id,
     body: { code },
   } = post;
 
   const publishedAtDistanceToNow = (date: string) => formatDistanceStrict(parseISO(date), new Date());
+
+  const relatedPosts = fisherYatesShuffle(
+    allPosts.filter((post) => post.status === 'published' && post._id !== id && post.category === category),
+  ).slice(0, 5);
 
   return (
     <Container>
@@ -45,6 +53,11 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
           <FadeIn>
             <ActionController className='mt-12' post={post} />
           </FadeIn>
+          {relatedPosts.length !== 0 && (
+            <FadeIn>
+              <RelatedPosts className='mt-8' relatedPosts={relatedPosts} />
+            </FadeIn>
+          )}
         </article>
       </FadeInStagger>
     </Container>
