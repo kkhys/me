@@ -377,8 +377,8 @@ importers:
         specifier: 7.50.1
         version: 7.50.1(react@18.2.0)
       react-resizable-panels:
-        specifier: 2.0.3
-        version: 2.0.3(react-dom@18.2.0)(react@18.2.0)
+        specifier: 2.0.5
+        version: 2.0.5(react-dom@18.2.0)(react@18.2.0)
       recharts:
         specifier: 2.12.0
         version: 2.12.0(react-dom@18.2.0)(react@18.2.0)
@@ -18581,14 +18581,15 @@ packages:
       use-callback-ref: 1.3.0(@types/react@18.2.55)(react@18.2.0)
       use-sidecar: 1.1.2(@types/react@18.2.55)(react@18.2.0)
 
-  /react-resizable-panels@2.0.3(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-m0upi03cdqCt/g/dUxRQkHiBzo0UDtMIYwcf8qhKM+QG0cnpusOVFKOD2ElpGrtxB/oIxTItuKYsDOeu76JHvg==}
+  /react-resizable-panels@2.0.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-2fX4sx0K48tGWpBRppYaGoG3tpq3Xg4elTQ1s/MbqDgoPrxK6N1SaWSk/wG8fYEYRHg5DEsKbU5jMLQaH72hnw==}
     peerDependencies:
       react: ^16.14.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+      stacking-order: 1.0.1
     dev: false
 
   /react-smooth@4.0.0(react-dom@18.2.0)(react@18.2.0):
@@ -19978,6 +19979,10 @@ packages:
   /stackframe@1.3.4:
     resolution: {integrity: sha512-oeVtt7eWQS+Na6F//S4kJ2K2VbRlS9D43mAlMyVpVWovy9o+jfgH8O9agzANzaiLjclA0oYzUXEM4PurhSUChw==}
     dev: true
+
+  /stacking-order@1.0.1:
+    resolution: {integrity: sha512-IxD2jw+DDiQ3FaXr6QcvSt5uE2vDWBYcC7bbCWfI5R9kEoj8Zgi4rFwPXALOjTtE96iIdZjcJFLQVr7r7xIdAA==}
+    dev: false
 
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
