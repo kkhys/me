@@ -46,6 +46,9 @@ const generateXShareLink = (url: string, title: string) =>
 const generateFacebookShareLink = (url: string) =>
   `https://www.facebook.com/sharer.php?u=${encodeURIComponent(`${site.url.base}${url}`)}`;
 
+const generateHatebuSaveLink = (url: string, title: string) =>
+  `https://b.hatena.ne.jp/add?mode=confirm&url=${encodeURIComponent(`${site.url.base}${url}`)}&title=${title} | ${site.title}`;
+
 const handleCopyLink = (url: string) =>
   void window.navigator.clipboard.writeText(`${site.url.base}${url}`).then(() => toast.success('Link copied.', {}));
 
@@ -69,6 +72,9 @@ const SharedAction = ({ post: { url, title } }: { post: Post }) => (
       </NavLink>
       <NavLink href={generateFacebookShareLink(url) as Route} isExternal>
         Share on Facebook
+      </NavLink>
+      <NavLink href={generateHatebuSaveLink(url, title) as Route} isExternal>
+        Save in Hatena Bookmark
       </NavLink>
     </DropdownMenuContent>
   </DropdownMenu>
