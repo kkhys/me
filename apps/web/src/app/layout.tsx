@@ -69,7 +69,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
         <div className='flex w-full'>
           <Layout>{children}</Layout>
         </div>
-        <Toaster />
+        <Toaster position='top-center' richColors />
       </Providers>
       <Analytics />
     </body>
