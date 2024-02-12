@@ -7,6 +7,7 @@ import { ArrowTopRightIcon, DotsHorizontalIcon, HomeIcon } from '@radix-ui/react
 
 import { site, storybook } from '#/config';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
+import { CommandMenu } from '#/ui/feature/global';
 import { Button } from '#/ui/general';
 import {
   DropdownMenu,
@@ -78,7 +79,7 @@ export const NavLinks = () => (
       <HomeIcon className='size-4' />
       <span className='sr-only'>Link to home</span>
     </NavLinkWithTooltip>
-    <DropdownMenu modal={false}>
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' size='icon'>
           <DotsHorizontalIcon className='size-4' />
@@ -89,7 +90,6 @@ export const NavLinks = () => (
         <NavLink href={site.url.roadmap} isExternal>
           Roadmap
         </NavLink>
-        {/* TODO: change href */}
         <NavLink href={storybook.url.base} isExternal>
           Storybook
         </NavLink>
@@ -101,5 +101,6 @@ export const NavLinks = () => (
         <NavLink href='/legal/terms'>Terms of Service</NavLink>
       </DropdownMenuContent>
     </DropdownMenu>
+    <CommandMenu className='ml-2 hidden md:inline-flex' />
   </>
 );

@@ -1,4 +1,5 @@
 export * from './back-button';
+export * from './command-menu';
 export * from './container';
 export * from './fade-in';
 export * from './footer';

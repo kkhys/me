@@ -19,7 +19,7 @@ import {
   TooltipTrigger,
 } from '#/ui/data-display';
 import { FadeIn } from '#/ui/feature/global';
-import { ArticleCards } from '#/ui/feature/posts';
+import { ArticleList } from '#/ui/feature/posts';
 import { Button } from '#/ui/general';
 
 export const CategoryTabs = () => {
@@ -91,17 +91,17 @@ export const CategoryTabs = () => {
       </div>
       <TabsContent value='all'>
         <FadeIn>
-          <ArticleCards posts={posts} className='mt-8' />
+          <ArticleList posts={posts} className='mt-8' />
         </FadeIn>
       </TabsContent>
       <TabsContent value='tech'>
         <FadeIn>
-          <ArticleCards posts={techPosts} className='mt-8' />
+          <ArticleList posts={techPosts} className='mt-8' />
         </FadeIn>
       </TabsContent>
       <TabsContent value='life'>
         <FadeIn>
-          <ArticleCards posts={lifePosts} className='mt-8' />
+          <ArticleList posts={lifePosts} className='mt-8' />
         </FadeIn>
       </TabsContent>
       <TabsContent value='notfound'>
