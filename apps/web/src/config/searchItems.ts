@@ -47,6 +47,12 @@ export const searchItems = [
         emoji: '🧜',
         category: 'Tech',
       },
+      {
+        title: 'バレンタインデー 2024',
+        href: '/posts/p18vcqd',
+        emoji: '🍫',
+        category: 'Life',
+      },
     ],
   },
 ] satisfies SearchItem[];
