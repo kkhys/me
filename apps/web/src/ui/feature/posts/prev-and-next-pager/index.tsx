@@ -56,7 +56,10 @@ export const PrevAndNextPager = ({ id, className }: { id: string; className?: st
 const getPager = (targetId: string) => {
   const targetPosts = [
     null,
-    ...allPosts.filter((post) => post.status === 'published').filter((post) => post._id),
+    ...allPosts
+      .filter((post) => post.status === 'published')
+      .filter((post) => post._id)
+      .sort((a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()),
     null,
   ];
   const activeIndex = targetPosts.findIndex((post) => targetId === post?._id);
