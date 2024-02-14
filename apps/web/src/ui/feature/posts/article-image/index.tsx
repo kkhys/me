@@ -24,7 +24,7 @@ const NextImage = ({
     placeholder='blur'
     blurDataURL={blurDataURL}
     quality={90}
-    className='w-full rounded-2xl dark:border'
+    className='w-full rounded-2xl border-[#474747] shadow dark:border dark:shadow-none'
   />
 );
 
