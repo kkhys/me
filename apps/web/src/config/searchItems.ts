@@ -53,6 +53,12 @@ export const searchItems = [
         emoji: '🍫',
         category: 'Life',
       },
+      {
+        title: 'セイルチェアの肘掛けを交換した',
+        href: '/posts/p16vfnq',
+        emoji: '💺',
+        category: 'Life',
+      },
     ],
   },
 ] satisfies SearchItem[];
