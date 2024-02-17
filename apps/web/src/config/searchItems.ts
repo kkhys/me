@@ -59,6 +59,13 @@ export const searchItems = [
         emoji: '💺',
         category: 'Life',
       },
+      {
+        title: 'v1.5.0 リリースノート',
+        href: '/posts/p1g6z2d',
+        emoji: '🚀',
+        category: 'Tech',
+        tags: ['Release'],
+      },
     ],
   },
 ] satisfies SearchItem[];
