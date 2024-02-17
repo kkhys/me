@@ -49,6 +49,11 @@ const generateFacebookShareLink = (url: string) =>
 const generateHatebuSaveLink = (url: string, title: string) =>
   `https://b.hatena.ne.jp/add?mode=confirm&url=${encodeURIComponent(`${site.url.base}${url}`)}&title=${title} | ${site.title}`;
 
+/**
+ * Copies a given URL to the clipboard and displays a success toast message.
+ *
+ * @param url - The URL to be copied.
+ */
 const handleCopyLink = (url: string) =>
   void window.navigator.clipboard.writeText(`${site.url.base}${url}`).then(() => toast.success('Link copied.'));
 

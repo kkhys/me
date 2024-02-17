@@ -1,3 +1,10 @@
+/**
+ * Performs Fisher-Yates shuffle on the given array.
+ *
+ * @template T - The type of elements in the array.
+ * @param array - The array to be shuffled.
+ * @returns The shuffled array.
+ */
 export const fisherYatesShuffle = <T>(array: T[]) => {
   const copy = [...array];
 
