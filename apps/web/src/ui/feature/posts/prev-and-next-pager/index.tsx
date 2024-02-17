@@ -53,17 +53,23 @@ export const PrevAndNextPager = ({ id, className }: { id: string; className?: st
   );
 };
 
+/**
+ * Retrieves the previous and next posts based on a target post ID.
+ *
+ * @param targetId - The ID of the target post.
+ * @returns An object containing the previous and next post, or null if there are none.
+ */
 const getPager = (targetId: string) => {
   const targetPosts = [
-    null,
     ...allPosts
       .filter((post) => post.status === 'published')
       .filter((post) => post._id)
       .sort((a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()),
-    null,
   ];
+
   const activeIndex = targetPosts.findIndex((post) => targetId === post?._id);
   const prev = activeIndex !== 0 ? targetPosts[activeIndex - 1] : null;
   const next = activeIndex !== targetPosts.length - 1 ? targetPosts[activeIndex + 1] : null;
+
   return { prev, next };
 };
