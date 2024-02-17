@@ -85,6 +85,7 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           color: 'var(--tw-prose-headings)',
           fontWeight: theme('fontWeight.medium'),
           lineHeight: theme('lineHeight.7'),
+          fontFeatureSettings: "'palt'",
         },
         h1: {
           fontSize: theme('fontSize.xl')[0],
