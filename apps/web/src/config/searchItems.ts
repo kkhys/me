@@ -66,6 +66,13 @@ export const searchItems = [
         category: 'Tech',
         tags: ['Release'],
       },
+      {
+        title: 'Play Framework のコンパイルに TypeScript を組み込む',
+        href: '/posts/p16ceda',
+        emoji: '🔧',
+        category: 'Tech',
+        tags: ['Play Framework', 'TypeScript'],
+      },
     ],
   },
 ] satisfies SearchItem[];

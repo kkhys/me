@@ -41,6 +41,11 @@ export const techTags = [
     slug: 'react',
     emoji: '⚛️',
   },
+  {
+    title: 'Play Framework',
+    slug: 'play-framework',
+    emoji: '▶️',
+  },
 ] as const;
 
 export const lifeTags = [
