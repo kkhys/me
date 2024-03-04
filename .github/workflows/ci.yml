@@ -49,10 +49,10 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright Browser
-        run: cd apps/web && pnpm dlx playwright install --with-deps chromium
+        run: cd apps/web && PLAYWRIGHT_BROWSERS_PATH=/usr/lib/playwright pnpm dlx playwright install --with-deps chromium
 
       - name: Build
-        run: pnpm turbo build
+        run: PLAYWRIGHT_BROWSERS_PATH=/usr/lib/playwright pnpm turbo build
 
       - name: Lint and type-check
         run: pnpm turbo lint format typecheck
