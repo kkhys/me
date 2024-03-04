@@ -49,7 +49,7 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright Browser
-        run: cd apps/web && PLAYWRIGHT_BROWSERS_PATH=/home/runner/.cache/ms-playwright/chromium-1105 pnpm dlx playwright install --with-deps chromium
+        run: cd apps/web && PLAYWRIGHT_BROWSERS_PATH=/home/runner/.cache/ms-playwright/chromium-1105/chrome-linux/chrome pnpm dlx playwright install --with-deps chromium
 
       - name: Build
         run: pnpm turbo build
