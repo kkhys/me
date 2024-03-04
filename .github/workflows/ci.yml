@@ -7,8 +7,7 @@ on:
     branches: ["main"]
   merge_group:
 
-env:
-  PLAYWRIGHT_BROWSERS_PATH: 0
+#env:
 # @link https://turborepo.org/docs/core-concepts/remote-caching#remote-caching-on-vercel-builds
 #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 #  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
@@ -46,11 +45,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: Install deps (with cache)
-        run: pnpm install
-
       - name: Install Playwright Browser
         run: cd apps/web && pnpm dlx playwright install --with-deps chromium
+
+      - name: Install deps (with cache)
+        run: pnpm install
 
       - name: Build
         run: pnpm turbo build
