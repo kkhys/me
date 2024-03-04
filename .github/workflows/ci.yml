@@ -48,11 +48,11 @@ jobs:
       - name: Install deps (with cache)
         run: pnpm install
 
-#      - name: Install Playwright Browser
-#        run: cd apps/web && pnpm dlx playwright install --with-deps chromium
+      - name: Install Playwright Browser
+        run: cd apps/web && pnpm dlx playwright install --with-deps chromium
 
       - name: Build
-        run: cd apps/web && pnpm dlx playwright install --with-deps chromium && cd ../.. && pnpm turbo build
+        run: pnpm turbo build
 
       - name: Lint and type-check
         run: pnpm turbo lint format typecheck
