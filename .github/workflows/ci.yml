@@ -53,7 +53,7 @@ jobs:
         run: cd apps/web && pnpm dlx playwright install --with-deps chromium
 
       - name: Build
-        run: PLAYWRIGHT_BROWSERS_PATH=/home/runner/.cache/ms-playwright/chromium-1105/chrome-linux/chrome pnpm turbo build
+        run: pnpm turbo build
 
       - name: Lint and type-check
         run: pnpm turbo lint format typecheck
