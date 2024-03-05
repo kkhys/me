@@ -20,13 +20,14 @@ import {
 } from './src/lib/mdx/rehype-pretty-code';
 import { linkCardHandler, remarkLinkCard } from './src/lib/mdx/remark-link-card';
 import { remarkNextImage } from './src/lib/mdx/remark-next-image';
+import { remarkYouTubeEmbed, YouTubeEmbedHandler } from './src/lib/mdx/remark-youtube-embed';
 
 export default makeSource({
   contentDirPath: 'content',
   documentTypes: [Post, Legal],
   contentDirExclude: ['README.md'],
   mdx: {
-    remarkPlugins: [[remarkGfm], [remarkUnwrapImages], [remarkLinkCard], [remarkNextImage]],
+    remarkPlugins: [[remarkGfm], [remarkUnwrapImages], [remarkYouTubeEmbed], [remarkLinkCard], [remarkNextImage]],
     rehypePlugins: [
       [rehypeSlug],
       [
@@ -47,6 +48,9 @@ export default makeSource({
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
           'link-card': linkCardHandler,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          'youtube-embed': YouTubeEmbedHandler,
         },
       };
       return options;

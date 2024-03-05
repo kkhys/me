@@ -1,0 +1,10 @@
+import * as React from 'react';
+import { YouTubeEmbed } from '@next/third-parties/google';
+
+export const YouTube = ({ videoId }: { videoId: string }) => {
+  const params = 'mute=1';
+  const styleBackgroundImage = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+  const styles = `background-image: url('${styleBackgroundImage}'); border-radius: 1rem;`;
+
+  return <YouTubeEmbed videoid={videoId} params={params} style={styles} />;
+};
