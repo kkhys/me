@@ -12,7 +12,9 @@ export const env = createEnv({
     PORT: z.coerce.number().default(3000),
     CI: z.boolean().optional(),
   },
-  server: {},
+  server: {
+    GOOGLE_MAPS_API_KEY: z.string(),
+  },
   client: {},
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
@@ -20,6 +22,7 @@ export const env = createEnv({
     VERCEL_URL: process.env.VERCEL_URL,
     PORT: process.env.PORT,
     CI: process.env.CI,
+    GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,
   },
   skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION || process.env.npm_lifecycle_event === 'lint',
 });
