@@ -68,7 +68,9 @@ const components = {
       {...props}
     />
   ),
-  TabsContent,
+  TabsContent: ({ className, ...props }: React.ComponentProps<typeof TabsContent>) => (
+    <TabsContent className={cn('first:[&>*]:mt-0 last:[&>*]:mb-0', className)} {...props} />
+  ),
   Accordion,
   AccordionContent: ({ className, ...props }: React.ComponentProps<typeof AccordionContent>) => (
     <AccordionContent className={cn('first:[&>div>*]:mt-0 last:[&>div>*]:mb-0', className)} {...props} />
