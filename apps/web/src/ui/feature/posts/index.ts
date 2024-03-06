@@ -4,6 +4,7 @@ export * from './article-list';
 export * from './article-image';
 export * from './article-layout';
 export * from './category-tabs';
+export * from './details';
 export * from './eye-catch';
 export * from './google-maps';
 export * from './header-with-anchor';
