@@ -22,6 +22,7 @@ import {
   AlertBlock,
   ArticleImage,
   Details,
+  Footnotes,
   GoogleMaps,
   HeaderWithAnchor,
   Step,
@@ -95,6 +96,10 @@ const components = {
   AlertBlock,
   Step,
   Steps,
+  section: ({ children, ...props }: React.ComponentProps<'section'> & { 'data-footnotes'?: boolean }) => {
+    if (typeof props['data-footnotes'] === 'undefined') return <section {...props} />;
+    return <Footnotes>{children}</Footnotes>;
+  },
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {

@@ -7,6 +7,7 @@ export * from './article-layout';
 export * from './category-tabs';
 export * from './details';
 export * from './eye-catch';
+export * from './footnotes';
 export * from './google-maps';
 export * from './header-with-anchor';
 export * from './prev-and-next-pager';

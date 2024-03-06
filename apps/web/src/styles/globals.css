@@ -123,3 +123,15 @@
     content: counter(step);
   }
 }
+
+[data-footnote-ref] {
+  @apply ml-0.5 scroll-mt-12 font-mono no-underline focus:bg-yellow-200 focus:text-black
+}
+
+[data-footnote-backref] {
+  @apply font-mono
+}
+
+#footnotes > ol > li {
+  @apply scroll-mt-12
+}
