@@ -11,5 +11,6 @@ export * from './google-maps';
 export * from './header-with-anchor';
 export * from './prev-and-next-pager';
 export * from './related-posts';
+export * from './steps';
 export * from './tweet';
 export * from './youtube';

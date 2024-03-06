@@ -18,7 +18,17 @@ import {
   TabsList,
   TabsTrigger,
 } from '#/ui/data-display';
-import { AlertBlock, ArticleImage, Details, GoogleMaps, HeaderWithAnchor, Tweet, YouTube } from '#/ui/feature/posts';
+import {
+  AlertBlock,
+  ArticleImage,
+  Details,
+  GoogleMaps,
+  HeaderWithAnchor,
+  Step,
+  Steps,
+  Tweet,
+  YouTube,
+} from '#/ui/feature/posts';
 import { Code } from './code';
 
 const components = {
@@ -83,6 +93,8 @@ const components = {
   ),
   Details,
   AlertBlock,
+  Step,
+  Steps,
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {
