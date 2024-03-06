@@ -6,8 +6,19 @@ import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
 import { cn } from '#/lib/shadcn-ui/utils';
-import { LinkCard, MermaidBlock, Tabs, TabsContent, TabsList, TabsTrigger } from '#/ui/data-display';
-import { ArticleImage, GoogleMaps, HeaderWithAnchor, Tweet, YouTube } from '#/ui/feature/posts';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  LinkCard,
+  MermaidBlock,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '#/ui/data-display';
+import { ArticleImage, Details, GoogleMaps, HeaderWithAnchor, Tweet, YouTube } from '#/ui/feature/posts';
 import { Code } from './code';
 
 const components = {
@@ -58,6 +69,17 @@ const components = {
     />
   ),
   TabsContent,
+  Accordion,
+  AccordionContent: ({ className, ...props }: React.ComponentProps<typeof AccordionContent>) => (
+    <AccordionContent className={cn('first:[&>div>*]:mt-0 last:[&>div>*]:mb-0', className)} {...props} />
+  ),
+  AccordionItem: ({ className, ...props }: React.ComponentProps<typeof AccordionItem>) => (
+    <AccordionItem className={cn('[&>h3]:m-0', className)} {...props} />
+  ),
+  AccordionTrigger: ({ className, ...props }: React.ComponentProps<typeof AccordionTrigger>) => (
+    <AccordionTrigger className={cn('[&>p]:m-0', className)} {...props} />
+  ),
+  Details,
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {
