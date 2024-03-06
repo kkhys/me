@@ -18,7 +18,7 @@ import {
   TabsList,
   TabsTrigger,
 } from '#/ui/data-display';
-import { ArticleImage, Details, GoogleMaps, HeaderWithAnchor, Tweet, YouTube } from '#/ui/feature/posts';
+import { AlertBlock, ArticleImage, Details, GoogleMaps, HeaderWithAnchor, Tweet, YouTube } from '#/ui/feature/posts';
 import { Code } from './code';
 
 const components = {
@@ -80,6 +80,7 @@ const components = {
     <AccordionTrigger className={cn('[&>p]:m-0', className)} {...props} />
   ),
   Details,
+  AlertBlock,
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {
