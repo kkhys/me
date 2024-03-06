@@ -1,4 +1,5 @@
 export * from './action-controller';
+export * from './alert-block';
 export * from './article-cards';
 export * from './article-list';
 export * from './article-image';
