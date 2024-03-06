@@ -6,7 +6,7 @@ import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
 import { LinkCard, MermaidBlock } from '#/ui/data-display';
-import { ArticleImage, GoogleMaps, HeaderWithAnchor, YouTube } from '#/ui/feature/posts';
+import { ArticleImage, GoogleMaps, HeaderWithAnchor, Tweet, YouTube } from '#/ui/feature/posts';
 import { Code } from './code';
 
 const components = {
@@ -38,9 +38,10 @@ const components = {
   },
   figure: ({ children, ...props }) => <Code {...props}>{children}</Code>,
   img: (props: React.ComponentPropsWithoutRef<typeof ArticleImage>) => <ArticleImage {...props} />,
-  'link-card': (props: React.ComponentPropsWithoutRef<typeof LinkCard>) => <LinkCard {...props} />,
   svg: ({ children, ...props }) => <MermaidBlock {...props}>{children}</MermaidBlock>,
+  'link-card': (props: React.ComponentPropsWithoutRef<typeof LinkCard>) => <LinkCard {...props} />,
   'youtube-embed': (props: React.ComponentPropsWithoutRef<typeof YouTube>) => <YouTube {...props} />,
+  'tweet-embed': (props: React.ComponentPropsWithoutRef<typeof Tweet>) => <Tweet {...props} />,
   GoogleMaps,
 } satisfies MDXComponents;
 
