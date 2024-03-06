@@ -5,7 +5,8 @@ import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
-import { LinkCard, MermaidBlock } from '#/ui/data-display';
+import { cn } from '#/lib/shadcn-ui/utils';
+import { LinkCard, MermaidBlock, Tabs, TabsContent, TabsList, TabsTrigger } from '#/ui/data-display';
 import { ArticleImage, GoogleMaps, HeaderWithAnchor, Tweet, YouTube } from '#/ui/feature/posts';
 import { Code } from './code';
 
@@ -43,6 +44,20 @@ const components = {
   'youtube-embed': (props: React.ComponentPropsWithoutRef<typeof YouTube>) => <YouTube {...props} />,
   'tweet-embed': (props: React.ComponentPropsWithoutRef<typeof Tweet>) => <Tweet {...props} />,
   GoogleMaps,
+  Tabs,
+  TabsList: ({ className, ...props }: React.ComponentProps<typeof TabsList>) => (
+    <TabsList className={cn('w-full justify-start rounded-none border-b bg-transparent p-0', className)} {...props} />
+  ),
+  TabsTrigger: ({ className, ...props }: React.ComponentProps<typeof TabsTrigger>) => (
+    <TabsTrigger
+      className={cn(
+        'text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:bg-background-lighter relative h-9 rounded-none border-b border-b-transparent bg-transparent px-4 pb-3 pt-2 shadow-none transition-none data-[state=active]:shadow-none',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  TabsContent,
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {
