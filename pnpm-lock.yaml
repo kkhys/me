@@ -379,6 +379,9 @@ importers:
       react-resizable-panels:
         specifier: 2.0.12
         version: 2.0.12(react-dom@18.2.0)(react@18.2.0)
+      react-tweet:
+        specifier: 3.2.0
+        version: 3.2.0(react-dom@18.2.0)(react@18.2.0)
       recharts:
         specifier: 2.12.2
         version: 2.12.2(react-dom@18.2.0)(react@18.2.0)
@@ -3855,7 +3858,7 @@ packages:
       react-refresh: 0.14.0
       schema-utils: 3.3.0
       source-map: 0.7.4
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     dev: true
 
   /@pnpm/config.env-replace@1.1.0:
@@ -6798,7 +6801,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.3.3)
       tslib: 2.6.2
       typescript: 5.3.3
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -7071,6 +7074,12 @@ packages:
     resolution: {integrity: sha512-E4KcWTpoLHqwPHLxidpOqQbcrZVgi0rsmmZXUle1jXmJfuIf/UWpczUJ7MZZ5tlxytgJXyp0w4PGkkeLiuIdZw==}
     dependencies:
       tslib: 2.6.2
+
+  /@swc/helpers@0.5.6:
+    resolution: {integrity: sha512-aYX01Ke9hunpoCexYAgQucEpARGQ5w/cqHFrIR+e9gdKb1QWTsVJuTJ2ozQzIAxLyRQe/m+2RqzkyOOGiMKRQA==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
 
   /@swc/types@0.1.5:
     resolution: {integrity: sha512-myfUej5naTBWnqOCc/MdVOLVjXUXtIA+NpDrDBKJtLLg2shUjBu3cZmB/85RyitKc55+lUUyl7oRfLOvkr2hsw==}
@@ -8842,7 +8851,7 @@ packages:
       '@babel/core': 7.23.2
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     dev: true
 
   /babel-plugin-add-react-displayname@0.0.5:
@@ -10183,7 +10192,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.35)
       postcss-value-parser: 4.2.0
       semver: 7.6.0
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     dev: true
 
   /css-select@4.3.0:
@@ -10611,6 +10620,13 @@ packages:
       whatwg-mimetype: 3.0.0
       whatwg-url: 11.0.0
     dev: true
+
+  /date-fns@2.30.0:
+    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
+    engines: {node: '>=0.11'}
+    dependencies:
+      '@babel/runtime': 7.23.8
+    dev: false
 
   /date-fns@3.3.1:
     resolution: {integrity: sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==}
@@ -12461,7 +12477,7 @@ packages:
       semver: 7.6.0
       tapable: 2.2.1
       typescript: 5.3.3
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     dev: true
 
   /form-data-encoder@2.1.4:
@@ -13469,7 +13485,7 @@ packages:
       lodash: 4.17.21
       pretty-error: 4.0.0
       tapable: 2.2.1
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     dev: true
 
   /htmlparser2@6.1.0:
@@ -16972,7 +16988,7 @@ packages:
       url: 0.11.3
       util: 0.12.5
       vm-browserify: 1.1.2
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     dev: true
 
   /node-releases@2.0.14:
@@ -18146,7 +18162,7 @@ packages:
       jiti: 1.20.0
       postcss: 8.4.35
       semver: 7.6.0
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -18851,6 +18867,20 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /react-tweet@3.2.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-eYLAX5ViOICQT/vkte/IzYZZDoBnl7hDO3Ns4++lKEFr/+BohPK5Rg+Lvbfx78Qtn3AjfDG5c6n+rOt7c2J6qg==}
+    peerDependencies:
+      react: '>= 18.0.0'
+      react-dom: '>= 18.0.0'
+    dependencies:
+      '@swc/helpers': 0.5.6
+      clsx: 2.1.0
+      date-fns: 2.30.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      swr: 2.2.5(react@18.2.0)
     dev: false
 
   /react@18.2.0:
@@ -19644,7 +19674,7 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     dev: true
 
   /sax@1.3.0:
@@ -20540,7 +20570,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     dev: true
 
   /style-to-object@0.4.4:
@@ -20628,8 +20658,18 @@ packages:
       webpack: '>=2'
     dependencies:
       '@swc/core': 1.3.107
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     dev: true
+
+  /swr@2.2.5(react@18.2.0):
+    resolution: {integrity: sha512-QtxqyclFeAsxEUeZIYmsaQ0UjimSq1RZ9Un7I68/0ClKK/U3LoyQunwkQfJZr2fc22DfIXLNDc2wFyTEikCUpg==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
 
   /symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
@@ -21781,6 +21821,14 @@ packages:
       react: 18.2.0
       tslib: 2.6.2
 
+  /use-sync-external-store@1.2.0(react@18.2.0):
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /user-home@2.0.0:
     resolution: {integrity: sha512-KMWqdlOcjCYdtIJpicDSFBQ8nFwS2i9sslAd6f4+CBGcU4gist2REnr2fxj2YocvJFxSF3ZOHLYLVZnUxv4BZQ==}
     engines: {node: '>=0.10.0'}
@@ -22087,7 +22135,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.3.107)(esbuild@0.19.5)
     dev: true
 
   /webpack-hot-middleware@2.25.4:

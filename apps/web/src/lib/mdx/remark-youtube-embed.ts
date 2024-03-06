@@ -1,8 +1,9 @@
 import type { Link, Resource } from 'mdast';
 import type { State } from 'mdast-util-to-hast';
 import type { Node, Parent } from 'unist';
-import { is } from 'unist-util-is';
 import { visit } from 'unist-util-visit';
+
+import { isSingleChildLinkWithText } from './utils';
 
 interface YouTubeEmbed extends Parent, Resource {
   type: 'youtube-embed';
@@ -23,17 +24,10 @@ const extractYouTubeVideoId = (url: string) => {
 export const remarkYouTubeEmbed = () => {
   return (tree: Node) => {
     visit(tree, 'paragraph', (node: Parent, index: number, parent: Parent) => {
-      if (node.children.length !== 1) return;
+      const linkNode = node.children[0] as Link;
+      if (!isSingleChildLinkWithText(node, linkNode) || !parent) return;
 
-      const maybeLink = node.children[0] as Link;
-
-      if (!is(maybeLink, 'link')) return;
-      if (maybeLink.children.length !== 1) return;
-      if (!(is(maybeLink.children[0], 'text') && maybeLink.url === maybeLink.children[0].value)) return;
-      if (!parent) return;
-
-      const videoId = extractYouTubeVideoId(maybeLink.url);
-
+      const videoId = extractYouTubeVideoId(linkNode.url);
       if (!videoId) return;
 
       parent.children[index] = {

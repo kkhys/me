@@ -20,6 +20,7 @@ import {
 } from './src/lib/mdx/rehype-pretty-code';
 import { linkCardHandler, remarkLinkCard } from './src/lib/mdx/remark-link-card';
 import { remarkNextImage } from './src/lib/mdx/remark-next-image';
+import { remarkTweetEmbed, TweetEmbedHandler } from './src/lib/mdx/remark-tweet-embed';
 import { remarkYouTubeEmbed, YouTubeEmbedHandler } from './src/lib/mdx/remark-youtube-embed';
 
 export default makeSource({
@@ -27,7 +28,14 @@ export default makeSource({
   documentTypes: [Post, Legal],
   contentDirExclude: ['README.md'],
   mdx: {
-    remarkPlugins: [[remarkGfm], [remarkUnwrapImages], [remarkYouTubeEmbed], [remarkLinkCard], [remarkNextImage]],
+    remarkPlugins: [
+      [remarkGfm],
+      [remarkUnwrapImages],
+      [remarkYouTubeEmbed],
+      [remarkTweetEmbed],
+      [remarkLinkCard],
+      [remarkNextImage],
+    ],
     rehypePlugins: [
       [rehypeSlug],
       [
@@ -51,6 +59,9 @@ export default makeSource({
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
           'youtube-embed': YouTubeEmbedHandler,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          'tweet-embed': TweetEmbedHandler,
         },
       };
       return options;
