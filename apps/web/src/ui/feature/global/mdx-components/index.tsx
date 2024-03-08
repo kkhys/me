@@ -21,6 +21,7 @@ import {
 import {
   AlertBlock,
   ArticleImage,
+  CarouselBlock,
   Details,
   Footnotes,
   GoogleMaps,
@@ -100,6 +101,9 @@ const components = {
     if (typeof props['data-footnotes'] === 'undefined') return <section {...props} />;
     return <Footnotes>{children}</Footnotes>;
   },
+  Carousel: ({ children, ...props }: React.ComponentProps<typeof CarouselBlock>) => (
+    <CarouselBlock {...props}>{children}</CarouselBlock>
+  ),
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {
