@@ -21,7 +21,7 @@ export const CarouselBlock = ({ children, ...props }: React.ComponentProps<typeo
   }, [api]);
 
   return (
-    <figure>
+    <figure className='select-none'>
       <Carousel
         setApi={setApi}
         plugins={[ClassNames()]}
