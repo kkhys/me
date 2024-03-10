@@ -21,12 +21,12 @@ export const CarouselBlock = ({ children, ...props }: React.ComponentProps<typeo
   }, [api]);
 
   return (
-    <figure className='select-none'>
+    <figure>
       <Carousel
         setApi={setApi}
         plugins={[ClassNames()]}
         opts={{ duration: 20 }}
-        className='mx-auto mb-0 w-full max-w-xl'
+        className='mx-auto mb-0 w-full max-w-xl select-none'
         {...props}
       >
         <CarouselContent>
