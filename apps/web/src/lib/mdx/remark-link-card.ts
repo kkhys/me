@@ -3,8 +3,9 @@ import type { Link, Resource } from 'mdast';
 import type { State } from 'mdast-util-to-hast';
 import { getPlaiceholder } from 'plaiceholder';
 import type { Node, Parent } from 'unist';
-import { is } from 'unist-util-is';
 import { visit } from 'unist-util-visit';
+
+import { isSingleChildLinkWithText } from './utils';
 
 interface LinkCard extends Parent, Resource {
   type: 'link-card';
@@ -54,17 +55,11 @@ export const remarkLinkCard = () => {
     const promises: (() => Promise<void>)[] = [];
 
     visit(tree, 'paragraph', (node: Parent, index, parent: Parent) => {
-      if (node.children.length !== 1) return;
-
-      const maybeLink = node.children[0] as Link;
-
-      if (!is(maybeLink, 'link')) return;
-      if (maybeLink.children.length !== 1) return;
-      if (!(is(maybeLink.children[0], 'text') && maybeLink.url === maybeLink.children[0].value)) return;
-      if (!parent) return;
+      const linkNode = node.children[0] as Link;
+      if (!isSingleChildLinkWithText(node, linkNode) || !parent) return;
 
       promises.push(async () => {
-        const data = await fetchMeta(maybeLink.url);
+        const data = await fetchMeta(linkNode.url);
         const ogSrc = data.og;
         const iconSrc = data.icon;
 

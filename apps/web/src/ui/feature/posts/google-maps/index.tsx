@@ -1,0 +1,33 @@
+import * as React from 'react';
+import { GoogleMapsEmbed } from '@next/third-parties/google';
+
+import { env } from '#/env.mjs';
+
+export const GoogleMaps = ({ placeId, caption }: { placeId: string; caption?: string }) => {
+  if (!caption) {
+    return (
+      <GoogleMapsEmbed
+        apiKey={env.GOOGLE_MAPS_API_KEY}
+        width='100%'
+        mode='place'
+        q={`place_id:${placeId}`}
+        region='JP'
+        style='border-radius: 1rem; aspect-ratio: 16 / 9;'
+      />
+    );
+  }
+
+  return (
+    <figure>
+      <GoogleMapsEmbed
+        apiKey={env.GOOGLE_MAPS_API_KEY}
+        width='100%'
+        mode='place'
+        q={`place_id:${placeId}`}
+        region='JP'
+        style='border-radius: 1rem; aspect-ratio: 16 / 9;'
+      />
+      <figcaption className='text-muted-foreground text-center text-xs'>{caption}</figcaption>
+    </figure>
+  );
+};

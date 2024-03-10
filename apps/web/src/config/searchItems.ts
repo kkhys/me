@@ -23,7 +23,7 @@ export const searchItems = [
         tags: ['Memorial'],
       },
       {
-        title: 'v1.4.0 リリースノート',
+        title: 'v1.4.0 リリースノート: 脈絡もない機能追加',
         href: '/posts/p1rklfz',
         emoji: '🚀',
         category: 'Tech',
@@ -60,7 +60,7 @@ export const searchItems = [
         category: 'Life',
       },
       {
-        title: 'v1.5.0 リリースノート',
+        title: 'v1.5.0 リリースノート: 回遊率とシェア率向上のための施策',
         href: '/posts/p1g6z2d',
         emoji: '🚀',
         category: 'Tech',
@@ -72,6 +72,12 @@ export const searchItems = [
         emoji: '🔧',
         category: 'Tech',
         tags: ['Play Framework', 'TypeScript'],
+      },
+      {
+        title: '人生初の陶芸',
+        href: '/posts/p1ys5j8',
+        emoji: '🏺',
+        category: 'Life',
       },
     ],
   },
