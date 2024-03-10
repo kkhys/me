@@ -43,12 +43,16 @@ export const ArticleImage = ({
 }) => {
   if (!title)
     return (
-      <NextImage src={src!} alt={alt} width={width as number} height={height as number} blurDataURL={blurDataURL} />
+      <div className='select-none'>
+        <NextImage src={src!} alt={alt} width={width as number} height={height as number} blurDataURL={blurDataURL} />
+      </div>
     );
 
   return (
     <figure>
-      <NextImage src={src!} alt={alt} width={width as number} height={height as number} blurDataURL={blurDataURL} />
+      <div className='select-none'>
+        <NextImage src={src!} alt={alt} width={width as number} height={height as number} blurDataURL={blurDataURL} />
+      </div>
       <figcaption className='text-muted-foreground text-center text-xs'>{title}</figcaption>
     </figure>
   );

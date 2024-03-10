@@ -5,8 +5,32 @@ import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
-import { LinkCard, MermaidBlock } from '#/ui/data-display';
-import { ArticleImage, HeaderWithAnchor } from '#/ui/feature/posts';
+import { cn } from '#/lib/shadcn-ui/utils';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  LinkCard,
+  MermaidBlock,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from '#/ui/data-display';
+import {
+  AlertBlock,
+  ArticleImage,
+  CarouselBlock,
+  Details,
+  Footnotes,
+  GoogleMaps,
+  HeaderWithAnchor,
+  Step,
+  Steps,
+  Tweet,
+  YouTube,
+} from '#/ui/feature/posts';
 import { Code } from './code';
 
 const components = {
@@ -38,8 +62,48 @@ const components = {
   },
   figure: ({ children, ...props }) => <Code {...props}>{children}</Code>,
   img: (props: React.ComponentPropsWithoutRef<typeof ArticleImage>) => <ArticleImage {...props} />,
-  'link-card': (props: React.ComponentPropsWithoutRef<typeof LinkCard>) => <LinkCard {...props} />,
   svg: ({ children, ...props }) => <MermaidBlock {...props}>{children}</MermaidBlock>,
+  'link-card': (props: React.ComponentPropsWithoutRef<typeof LinkCard>) => <LinkCard {...props} />,
+  'youtube-embed': (props: React.ComponentPropsWithoutRef<typeof YouTube>) => <YouTube {...props} />,
+  'tweet-embed': (props: React.ComponentPropsWithoutRef<typeof Tweet>) => <Tweet {...props} />,
+  GoogleMaps,
+  Tabs,
+  TabsList: ({ className, ...props }: React.ComponentProps<typeof TabsList>) => (
+    <TabsList className={cn('w-full justify-start rounded-none border-b bg-transparent p-0', className)} {...props} />
+  ),
+  TabsTrigger: ({ className, ...props }: React.ComponentProps<typeof TabsTrigger>) => (
+    <TabsTrigger
+      className={cn(
+        'text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:bg-background-lighter relative h-9 rounded-none border-b border-b-transparent bg-transparent px-4 pb-3 pt-2 shadow-none transition-none data-[state=active]:shadow-none',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  TabsContent: ({ className, ...props }: React.ComponentProps<typeof TabsContent>) => (
+    <TabsContent className={cn('first:[&>*]:mt-0 last:[&>*]:mb-0', className)} {...props} />
+  ),
+  Accordion,
+  AccordionContent: ({ className, ...props }: React.ComponentProps<typeof AccordionContent>) => (
+    <AccordionContent className={cn('first:[&>div>*]:mt-0 last:[&>div>*]:mb-0', className)} {...props} />
+  ),
+  AccordionItem: ({ className, ...props }: React.ComponentProps<typeof AccordionItem>) => (
+    <AccordionItem className={cn('[&>h3]:m-0', className)} {...props} />
+  ),
+  AccordionTrigger: ({ className, ...props }: React.ComponentProps<typeof AccordionTrigger>) => (
+    <AccordionTrigger className={cn('[&>p]:m-0', className)} {...props} />
+  ),
+  Details,
+  AlertBlock,
+  Step,
+  Steps,
+  section: ({ children, ...props }: React.ComponentProps<'section'> & { 'data-footnotes'?: boolean }) => {
+    if (typeof props['data-footnotes'] === 'undefined') return <section {...props} />;
+    return <Footnotes>{children}</Footnotes>;
+  },
+  Carousel: ({ children, ...props }: React.ComponentProps<typeof CarouselBlock>) => (
+    <CarouselBlock {...props}>{children}</CarouselBlock>
+  ),
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {
