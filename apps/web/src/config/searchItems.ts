@@ -73,6 +73,12 @@ export const searchItems = [
         category: 'Tech',
         tags: ['Play Framework', 'TypeScript'],
       },
+      {
+        title: '人生初の陶芸',
+        href: '/posts/p1ys5j8',
+        emoji: '🏺',
+        category: 'Life',
+      },
     ],
   },
 ] satisfies SearchItem[];
