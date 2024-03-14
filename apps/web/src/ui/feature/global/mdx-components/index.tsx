@@ -19,7 +19,7 @@ import {
   TabsTrigger,
 } from '#/ui/data-display';
 import {
-  AlertBlock,
+  Alert,
   ArticleImage,
   CarouselBlock,
   Details,
@@ -94,7 +94,7 @@ const components = {
     <AccordionTrigger className={cn('[&>p]:m-0', className)} {...props} />
   ),
   Details,
-  AlertBlock,
+  Alert,
   Step,
   Steps,
   section: ({ children, ...props }: React.ComponentProps<'section'> & { 'data-footnotes'?: boolean }) => {
