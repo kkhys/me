@@ -1,7 +1,7 @@
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { AlertTriangleIcon, LightbulbIcon, SparklesIcon } from 'lucide-react';
 
-import { Alert, AlertDescription, AlertTitle } from '#/ui/feedback';
+import { Alert as _Alert, AlertDescription, AlertTitle } from '#/ui/feedback';
 
 enum AlertType {
   Note = 'note',
@@ -36,7 +36,7 @@ const getIcon = (type: AlertType) => {
   }
 };
 
-export const AlertBlock = ({
+export const Alert = ({
   type,
   description,
   className,
@@ -49,10 +49,10 @@ export const AlertBlock = ({
   const Icon = getIcon(type);
 
   return (
-    <Alert className={className}>
+    <_Alert className={className}>
       {Icon}
       <AlertTitle className='font-sans'>{title}</AlertTitle>
       <AlertDescription>{description}</AlertDescription>
-    </Alert>
+    </_Alert>
   );
 };
