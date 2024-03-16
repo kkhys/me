@@ -79,6 +79,13 @@ export const searchItems = [
         emoji: '🏺',
         category: 'Life',
       },
+      {
+        title: 'v1.6.0 リリースノート: MDX コンポーネントの強化',
+        href: '/posts/p1r60de',
+        emoji: '🚀',
+        category: 'Tech',
+        tags: ['Release'],
+      },
     ],
   },
 ] satisfies SearchItem[];
