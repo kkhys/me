@@ -2,7 +2,10 @@
   "name": "@kkhys/prettier-config",
   "private": true,
   "version": "0.1.0",
-  "main": "index.mjs",
+  "type": "module",
+  "exports": {
+    ".": "./index.mjs"
+  },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
@@ -14,7 +17,7 @@
     "prettier-plugin-tailwindcss": "0.5.12"
   },
   "devDependencies": {
-    "@kkhys/tsconfig": "0.1.0",
+    "@kkhys/tsconfig": "workspace:0.1.0",
     "typescript": "5.4.2"
   },
   "prettier": "@kkhys/prettier-config"
