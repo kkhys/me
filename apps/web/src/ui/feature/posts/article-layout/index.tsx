@@ -37,10 +37,10 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
               {status === 'draft' && <span className='font-sans text-xs text-red-400'>Draft</span>}
             </FadeIn>
             <FadeIn>
-              <h1 className='palt mt-4 text-xl font-medium'>{title}</h1>
+              <h1 className='palt mt-4 font-medium'>{title}</h1>
             </FadeIn>
             <FadeIn>
-              <time className='text-muted-foreground mt-3 block font-sans text-sm' dateTime={publishedAt}>
+              <time className='text-muted-foreground mt-2 block font-sans text-sm' dateTime={publishedAt}>
                 {publishedAtFormattedUs} ({publishedAtDistanceToNow(publishedAt)} ago)
               </time>
             </FadeIn>

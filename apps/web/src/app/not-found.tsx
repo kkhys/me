@@ -14,7 +14,7 @@ const NotFound = () => (
   <Container className='font-sans'>
     <FadeInStagger>
       <FadeIn>
-        <h1 className='text-xl font-medium'>404 - Page Not Found</h1>
+        <h1 className='font-sans font-medium'>404 - Page Not Found</h1>
       </FadeIn>
       <FadeIn>
         <Prose>
