@@ -22,7 +22,7 @@ const Page = async () => {
     <Container>
       <FadeInStagger>
         <FadeIn>
-          <h1 className='font-sans text-xl font-medium'>403 - Forbidden</h1>
+          <h1 className='font-sans font-medium'>403 - Forbidden</h1>
         </FadeIn>
         <Prose className='font-sans'>
           <FadeIn>

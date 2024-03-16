@@ -88,16 +88,13 @@ const typographyStyles = ({ theme }: PluginUtils) => {
           fontFeatureSettings: "'palt'",
         },
         h1: {
-          fontSize: theme('fontSize.xl')[0],
           marginTop: 0,
         },
         h2: {
-          fontSize: theme('fontSize.xl')[0],
           marginTop: theme('spacing.16'),
           marginBottom: theme('spacing.6'),
         },
         h3: {
-          fontSize: theme('fontSize.lg')[0],
           marginTop: theme('spacing.12'),
           marginBottom: theme('spacing.6'),
         },

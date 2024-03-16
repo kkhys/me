@@ -19,7 +19,7 @@ export const LegalLayout = ({ legal }: { legal: Legal }) => {
       <BackButton />
       <FadeInStagger>
         <FadeIn>
-          <h1 className='font-sans text-xl font-medium'>{title}</h1>
+          <h1 className='font-sans font-medium'>{title}</h1>
         </FadeIn>
         <Prose>
           <FadeIn>
