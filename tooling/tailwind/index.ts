@@ -88,7 +88,7 @@ export default {
         '0.5': '0.5px',
       },
     },
+    typography: typographyStyles,
   },
   plugins: [animate, typography],
-  typography: typographyStyles,
 } satisfies Config;
