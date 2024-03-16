@@ -2,15 +2,15 @@
   "name": "@kkhys/tailwind-config",
   "private": true,
   "version": "0.1.0",
-  "main": "index.ts",
-  "files": [
-    "index.ts",
-    "postcss.js"
-  ],
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./postcss": "./postcss.js"
+  },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "lint": "eslint .",
-    "format": "prettier --check \"**/*.{mjs,ts,md,json}\"",
+    "format": "prettier --check \"**/*.{mjs,ts,md,json}\" --ignore-path ../../.gitignore",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
