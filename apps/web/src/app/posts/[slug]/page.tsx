@@ -2,7 +2,7 @@ import * as React from 'react';
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 
-import { env } from '#/env.mjs';
+import { env } from '#/env';
 import { ArticleLayout } from '#/ui/feature/posts';
 import { JsonLd } from './json-ld';
 

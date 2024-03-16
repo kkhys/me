@@ -5,10 +5,6 @@ export const env = createEnv({
   shared: {
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
     VERCEL_ENV: z.enum(['development', 'preview', 'production']).optional(),
-    VERCEL_URL: z
-      .string()
-      .optional()
-      .transform((v) => (v ? `https://${v}` : undefined)),
     PORT: z.coerce.number().default(3000),
     CI: z.boolean().optional(),
   },
@@ -19,7 +15,6 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     VERCEL_ENV: process.env.VERCEL_ENV,
-    VERCEL_URL: process.env.VERCEL_URL,
     PORT: process.env.PORT,
     CI: process.env.CI,
     GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY,

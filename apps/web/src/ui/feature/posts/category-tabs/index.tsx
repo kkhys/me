@@ -7,7 +7,7 @@ import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 import { RssIcon } from 'lucide-react';
 
-import { env } from '#/env.mjs';
+import { env } from '#/env';
 import {
   Tabs,
   TabsContent,

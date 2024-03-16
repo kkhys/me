@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { get } from '@vercel/edge-config';
 
-import { env } from '#/env.mjs';
+import { env } from '#/env';
 import { Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
 import { Prose } from '#/ui/general';
 
