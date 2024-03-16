@@ -10,7 +10,7 @@ const config = {
   singleQuote: true,
   trailingComma: 'all',
   plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss'],
-  tailwindConfig: fileURLToPath(new URL('../../tooling/tailwind', import.meta.url)),
+  tailwindConfig: fileURLToPath(new URL('../../tooling/tailwind/index.ts', import.meta.url)),
   tailwindFunctions: ['cn', 'cva'],
   importOrder: [
     '<TYPES>',
