@@ -1,7 +1,7 @@
 'use client';
 
-import * as React from 'react';
 import type { Route } from 'next';
+import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import { LaptopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';

@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import type { Meta, StoryObj } from '@storybook/react';
+import Image from 'next/image';
 
 import { Separator } from '#/ui/layout';
 import { ScrollArea, ScrollBar } from '.';

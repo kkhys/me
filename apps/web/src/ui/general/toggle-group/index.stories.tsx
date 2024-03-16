@@ -1,5 +1,5 @@
-import { FontBoldIcon, FontItalicIcon, UnderlineIcon } from '@radix-ui/react-icons';
 import type { Meta, StoryObj } from '@storybook/react';
+import { FontBoldIcon, FontItalicIcon, UnderlineIcon } from '@radix-ui/react-icons';
 
 import { ToggleGroup, ToggleGroupItem } from '.';
 

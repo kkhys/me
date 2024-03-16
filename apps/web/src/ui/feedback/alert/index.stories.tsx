@@ -1,5 +1,5 @@
-import { ExclamationTriangleIcon, RocketIcon } from '@radix-ui/react-icons';
 import type { Meta, StoryObj } from '@storybook/react';
+import { ExclamationTriangleIcon, RocketIcon } from '@radix-ui/react-icons';
 
 import { Alert, AlertDescription, AlertTitle } from '.';
 

@@ -1,6 +1,6 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import * as React from 'react';
 import Link from 'next/link';
-import type { Meta, StoryObj } from '@storybook/react';
 
 import { cn } from '#/lib/shadcn-ui/utils';
 import {

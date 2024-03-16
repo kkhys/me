@@ -1,10 +1,10 @@
 'use client';
 
-import * as React from 'react';
+import type { Post } from 'contentlayer/generated';
 import type { Route } from 'next';
+import * as React from 'react';
 import Link from 'next/link';
 import { ArrowTopRightIcon, CodeIcon, Share1Icon } from '@radix-ui/react-icons';
-import type { Post } from 'contentlayer/generated';
 import { toast } from 'sonner';
 
 import { site } from '#/config';

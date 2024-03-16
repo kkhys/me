@@ -1,7 +1,7 @@
+import type { Post } from 'contentlayer/generated';
 import * as React from 'react';
 import Link from 'next/link';
 import { clsx } from 'clsx';
-import type { Post } from 'contentlayer/generated';
 
 import { EyeCatch } from '#/ui/feature/posts';
 

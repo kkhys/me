@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { Post } from 'contentlayer/generated';
+import * as React from 'react';
 import { allPosts } from 'contentlayer/generated';
 import { formatDistanceStrict, parseISO } from 'date-fns';
 

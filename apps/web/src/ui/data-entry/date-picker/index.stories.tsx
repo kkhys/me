@@ -1,8 +1,8 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import type { DateRange } from 'react-day-picker';
 import * as React from 'react';
 import { CalendarIcon } from '@radix-ui/react-icons';
-import type { Meta, StoryObj } from '@storybook/react';
 import { addDays, format } from 'date-fns';
-import type { DateRange } from 'react-day-picker';
 
 import { cn } from '#/lib/shadcn-ui/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '#/ui/data-display';

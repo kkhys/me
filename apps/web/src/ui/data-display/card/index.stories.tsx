@@ -1,5 +1,5 @@
-import { BellIcon, CheckIcon } from '@radix-ui/react-icons';
 import type { Meta, StoryObj } from '@storybook/react';
+import { BellIcon, CheckIcon } from '@radix-ui/react-icons';
 
 import {
   Input,

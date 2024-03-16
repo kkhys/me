@@ -1,8 +1,8 @@
-import * as React from 'react';
+import type { MDXComponents } from 'mdx/types';
 import type { Route } from 'next';
+import * as React from 'react';
 import Link from 'next/link';
 import { ArrowTopRightIcon } from '@radix-ui/react-icons';
-import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
 import { cn } from '#/lib/shadcn-ui/utils';

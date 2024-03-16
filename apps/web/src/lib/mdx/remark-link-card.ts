@@ -1,8 +1,8 @@
-import fetchSiteMetadata from 'fetch-site-metadata';
 import type { Link, Resource } from 'mdast';
 import type { State } from 'mdast-util-to-hast';
-import { getPlaiceholder } from 'plaiceholder';
 import type { Node, Parent } from 'unist';
+import fetchSiteMetadata from 'fetch-site-metadata';
+import { getPlaiceholder } from 'plaiceholder';
 import { visit } from 'unist-util-visit';
 
 import { isSingleChildLinkWithText } from './utils';

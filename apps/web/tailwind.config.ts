@@ -1,5 +1,5 @@
-import typographyPlugin from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
+import typographyPlugin from '@tailwindcss/typography';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 import baseConfig from '@kkhys/tailwind-config';
