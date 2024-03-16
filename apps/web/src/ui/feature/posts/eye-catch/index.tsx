@@ -5,7 +5,7 @@ import { cva } from 'class-variance-authority';
 import { cn } from '#/lib/shadcn-ui/utils';
 
 const eyeCatchVariants = cva(
-  'font-emoji bg-secondary text-secondary-foreground inline-flex select-none items-center justify-center rounded-md shadow-sm',
+  'font-emoji inline-flex select-none items-center justify-center rounded-md bg-secondary text-secondary-foreground shadow-sm',
   {
     variants: {
       size: {

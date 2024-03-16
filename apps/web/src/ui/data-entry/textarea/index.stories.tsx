@@ -96,7 +96,7 @@ export const WithText = {
       <div className='grid w-full max-w-sm items-center gap-1.5'>
         <Label htmlFor={withLabelTextareaIdAndLabel}>Your Message</Label>
         <Story />
-        <p className='text-muted-foreground text-sm'>Your message will be copied to the support team.</p>
+        <p className='text-sm text-muted-foreground'>Your message will be copied to the support team.</p>
       </div>
     ),
   ],

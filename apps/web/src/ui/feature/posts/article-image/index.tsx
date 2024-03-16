@@ -53,7 +53,7 @@ export const ArticleImage = ({
       <div className='select-none'>
         <NextImage src={src!} alt={alt} width={width as number} height={height as number} blurDataURL={blurDataURL} />
       </div>
-      <figcaption className='text-muted-foreground text-center text-xs'>{title}</figcaption>
+      <figcaption className='text-center text-xs text-muted-foreground'>{title}</figcaption>
     </figure>
   );
 };

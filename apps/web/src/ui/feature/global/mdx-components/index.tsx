@@ -74,7 +74,7 @@ const components = {
   TabsTrigger: ({ className, ...props }: React.ComponentProps<typeof TabsTrigger>) => (
     <TabsTrigger
       className={cn(
-        'text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:bg-background-lighter relative h-9 rounded-none border-b border-b-transparent bg-transparent px-4 pb-3 pt-2 shadow-none transition-none data-[state=active]:shadow-none',
+        'relative h-9 rounded-none border-b border-b-transparent bg-transparent px-4 pb-3 pt-2 text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:bg-background-lighter data-[state=active]:text-foreground data-[state=active]:shadow-none',
         className,
       )}
       {...props}

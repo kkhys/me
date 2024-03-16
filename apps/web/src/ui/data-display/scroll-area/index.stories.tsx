@@ -132,8 +132,8 @@ export const HorizontalScrolling = {
                   height={400}
                 />
               </div>
-              <figcaption className='text-muted-foreground pt-2 text-xs'>
-                Photo by <span className='text-foreground font-medium'>{artwork.artist}</span>
+              <figcaption className='pt-2 text-xs text-muted-foreground'>
+                Photo by <span className='font-medium text-foreground'>{artwork.artist}</span>
               </figcaption>
             </figure>
           ))}

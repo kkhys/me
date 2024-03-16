@@ -38,13 +38,13 @@ export const LinkCard = ({
         href={url}
         target='_blank'
         rel='noreferrer noopener'
-        className='text-card-foreground hover:bg-muted/50 flex h-[120px] w-full items-center no-underline shadow transition-colors'
+        className='flex h-[120px] w-full items-center text-card-foreground no-underline shadow transition-colors hover:bg-muted/50'
       >
         <div className='min-w-0 flex-1 px-4 py-2'>
           <span className=' block max-h-12 break-words font-medium leading-relaxed'>
             <span className='line-clamp-2'>{title}</span>
           </span>
-          <span className='text-muted-foreground mt-2 block overflow-hidden text-ellipsis whitespace-nowrap break-words text-xs'>
+          <span className='mt-2 block overflow-hidden text-ellipsis whitespace-nowrap break-words text-xs text-muted-foreground'>
             {description}
           </span>
           <div className='mt-2 flex items-center'>

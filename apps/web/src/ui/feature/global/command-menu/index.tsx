@@ -54,11 +54,11 @@ export const CommandMenu = ({ className }: { className?: string }) => {
     <>
       <Button
         variant='outline'
-        className={cn('bg-background text-muted-foreground relative pr-12 text-xs', className)}
+        className={cn('relative bg-background pr-12 text-xs text-muted-foreground', className)}
         onClick={() => setOpen(true)}
       >
         <span className='inline-block font-sans'>Search ...</span>
-        <kbd className='bg-muted pointer-events-none absolute right-[0.3rem] top-[0.3rem] flex h-6 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100'>
+        <kbd className='pointer-events-none absolute right-[0.3rem] top-[0.3rem] flex h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100'>
           <span>⌘</span>K
         </kbd>
       </Button>

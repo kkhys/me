@@ -13,7 +13,7 @@ export const Details = ({
 }) => (
   <Accordion type='single' collapsible className={className}>
     <AccordionItem value={summary} className='rounded-md border [&>h3]:m-0'>
-      <AccordionTrigger className='hover:bg-accent hover:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground px-4 hover:no-underline [&>p]:m-0'>
+      <AccordionTrigger className='px-4 hover:bg-accent hover:text-accent-foreground hover:no-underline data-[state=open]:bg-accent data-[state=open]:text-accent-foreground [&>p]:m-0'>
         {summary}
       </AccordionTrigger>
       <AccordionContent className='[&>div]:pb-0'>

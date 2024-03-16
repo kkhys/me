@@ -42,7 +42,7 @@ export const CarouselBlock = ({ children, ...props }: React.ComponentProps<typeo
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
-      <figcaption className='text-muted-foreground text-center font-sans text-xs'>
+      <figcaption className='text-center font-sans text-xs text-muted-foreground'>
         {current} / {count}
       </figcaption>
     </figure>

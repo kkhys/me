@@ -167,7 +167,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
         variant={variant}
         size={size}
         className={cn(
-          'bg-primary hover:bg-primary sm:hover:bg-accent absolute size-8 rounded-full border-none sm:border-solid sm:bg-transparent',
+          'absolute size-8 rounded-full border-none bg-primary hover:bg-primary sm:border-solid sm:bg-transparent sm:hover:bg-accent',
           orientation === 'horizontal'
             ? 'left-2 top-1/2 -translate-y-1/2 sm:-left-12'
             : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -177,7 +177,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
         onClick={scrollPrev}
         {...props}
       >
-        <ArrowLeftIcon className='text-background sm:text-foreground size-4' />
+        <ArrowLeftIcon className='size-4 text-background sm:text-foreground' />
         <span className='sr-only'>Previous slide</span>
       </Button>
     );
@@ -195,7 +195,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
         variant={variant}
         size={size}
         className={cn(
-          'bg-primary hover:bg-primary sm:hover:bg-accent absolute size-8 rounded-full border-none sm:border-solid sm:bg-transparent',
+          'absolute size-8 rounded-full border-none bg-primary hover:bg-primary sm:border-solid sm:bg-transparent sm:hover:bg-accent',
           orientation === 'horizontal'
             ? 'right-2 top-1/2 -translate-y-1/2 sm:-right-12'
             : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -205,7 +205,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
         onClick={scrollNext}
         {...props}
       >
-        <ArrowRightIcon className='text-background sm:text-foreground size-4' />
+        <ArrowRightIcon className='size-4 text-background sm:text-foreground' />
         <span className='sr-only'>Next slide</span>
       </Button>
     );

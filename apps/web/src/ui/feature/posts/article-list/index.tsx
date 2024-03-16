@@ -15,14 +15,14 @@ const ListItem = ({
   return (
     <Link
       href={`/posts/${slug}`}
-      className='hover:bg-muted/50 relative flex items-center justify-between gap-x-4 px-2 py-3 transition-colors'
+      className='relative flex items-center justify-between gap-x-4 px-2 py-3 transition-colors hover:bg-muted/50'
     >
       <div className='flex items-center gap-x-4'>
         <EyeCatch emoji={emoji} size='sm' className='shrink-0' />
         <p className='palt'>{title}</p>
       </div>
       {showDate && (
-        <time className='text-muted-foreground shrink-0 font-sans text-sm tabular-nums' dateTime={publishedAt}>
+        <time className='shrink-0 font-sans text-sm tabular-nums text-muted-foreground' dateTime={publishedAt}>
           {publishedAtFormattedIso}
         </time>
       )}

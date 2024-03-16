@@ -16,7 +16,7 @@ const Anchor = ({ id, inView, children }: { id: string; inView: boolean; childre
   <Link href={`#${id}`} className='group no-underline'>
     {inView && (
       <div className='absolute ml-[calc(-1*var(--width))] mt-1 hidden w-[var(--width)] opacity-0 transition [--width:calc(2.625rem+0.5px+50%-min(50%,calc(theme(maxWidth.lg)+theme(spacing.8))))] group-hover:opacity-100 group-focus:opacity-100 md:inline-block 2xl:[--width:theme(spacing.10)]'>
-        <div className='group/anchor bg-secondary ring-0.5 flex size-5 items-center justify-center rounded-lg ring-inset ring-zinc-300 transition hover:ring-zinc-500 dark:ring-zinc-700 dark:hover:bg-zinc-700 dark:hover:ring-zinc-600'>
+        <div className='group/anchor flex size-5 items-center justify-center rounded-lg bg-secondary ring-0.5 ring-inset ring-zinc-300 transition hover:ring-zinc-500 dark:ring-zinc-700 dark:hover:bg-zinc-700 dark:hover:ring-zinc-600'>
           <LinkIcon className='size-3 stroke-zinc-500 transition dark:stroke-zinc-400 dark:group-hover/anchor:stroke-white' />
         </div>
       </div>

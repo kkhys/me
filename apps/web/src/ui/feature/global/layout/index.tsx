@@ -13,7 +13,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
   <>
     <div className='fixed inset-0 flex w-[calc(100%-var(--removed-body-scroll-bar-size,0px))] justify-center sm:px-8'>
       <div className='flex w-full max-w-6xl lg:px-8'>
-        <div className='bg-background-lighter ring-0.5 w-full ring-zinc-100 dark:ring-zinc-300/20' />
+        <div className='w-full bg-background-lighter ring-0.5 ring-zinc-100 dark:ring-zinc-300/20' />
       </div>
     </div>
     <div className='pointer-events-none fixed inset-0 z-10 flex w-[calc(100%-var(--removed-body-scroll-bar-size,0px))] justify-center sm:px-8'>

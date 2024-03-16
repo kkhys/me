@@ -27,7 +27,7 @@ const CopyButton = ({ value, hasTitle }: { value: string; hasTitle: boolean }) =
   return (
     <button
       className={cn(
-        'focus-visible:ring-ring absolute right-4 flex items-center justify-center rounded-md border border-zinc-700 bg-transparent p-2 opacity-0 shadow-sm backdrop-blur transition hover:bg-zinc-800 hover:text-zinc-400 focus:opacity-100 focus-visible:outline-none focus-visible:ring-1 group-hover:opacity-100',
+        'absolute right-4 flex items-center justify-center rounded-md border border-zinc-700 bg-transparent p-2 opacity-0 shadow-sm backdrop-blur transition hover:bg-zinc-800 hover:text-zinc-400 focus:opacity-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring group-hover:opacity-100',
         hasTitle ? 'top-16' : 'top-4',
       )}
       onClick={() => void window.navigator.clipboard.writeText(value).then(() => setCopyCount((count) => count + 1))}
