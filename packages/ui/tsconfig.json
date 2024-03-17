@@ -1,7 +1,14 @@
 {
-  "extends": "@kkhys/tsconfig/base.json",
+  "extends": "@kkhys/tsconfig/vite.json",
   "compilerOptions": {
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "baseUrl": ".",
+//    "paths": {
+//      "#/*": ["src/*"]
+//    }
+    // @see: https://github.com/microsoft/TypeScript/issues/42873
+    "declaration": false,
+    "declarationMap": false
   },
   "include": ["*.ts", "src"],
   "exclude": ["node_modules"]
