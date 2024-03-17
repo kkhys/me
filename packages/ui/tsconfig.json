@@ -3,12 +3,9 @@
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
     "baseUrl": ".",
-//    "paths": {
-//      "#/*": ["src/*"]
-//    }
-    // @see: https://github.com/microsoft/TypeScript/issues/42873
-    "declaration": false,
-    "declarationMap": false
+    "paths": {
+      "#/*": ["src/*"]
+    }
   },
   "include": ["*.ts", "src"],
   "exclude": ["node_modules"]
