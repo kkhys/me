@@ -8,10 +8,13 @@
   },
   "scripts": {
     "add": "pnpm dlx shadcn-ui add",
-    "clean": "rm -rf .turbo node_modules",
+    "clean": "rm -rf .turbo node_modules storybook-static",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "storybook:dev": "storybook dev --port 6007 --quiet --no-open",
+    "storybook:build": "storybook build --quiet",
+    "storybook:move": "mv storybook-static ../../storybook-static/ui"
   },
   "dependencies": {
     "@hookform/resolvers": "3.3.4",
@@ -57,20 +60,32 @@
     "recharts": "2.12.3",
     "sonner": "1.4.3",
     "tailwind-merge": "2.2.1",
-    "vaul": "0.9.0",
-    "tailwindcss-animate": "1.0.7"
+    "tailwindcss-animate": "1.0.7",
+    "vaul": "0.9.0"
   },
   "devDependencies": {
-    "@kkhys/eslint-config": "workspace:0.1.0",
+    "@kkhys/eslint-config": "workspace:*",
     "@kkhys/prettier-config": "workspace:0.1.0",
     "@kkhys/tailwind-config": "workspace:0.1.0",
     "@kkhys/tsconfig": "workspace:0.1.0",
+    "@storybook/addon-a11y": "7.6.17",
+    "@storybook/addon-essentials": "7.6.17",
+    "@storybook/addon-interactions": "7.6.17",
+    "@storybook/addon-links": "7.6.17",
+    "@storybook/blocks": "7.6.17",
+    "@storybook/builder-vite": "8.0.0",
+    "@storybook/react": "7.6.17",
+    "@storybook/react-vite": "7.6.17",
+    "@storybook/testing-library": "0.2.2",
     "@types/react": "18.2.66",
+    "@vitejs/plugin-react-swc": "3.6.0",
     "eslint": "8.57.0",
     "prettier": "3.2.5",
     "react": "18.2.0",
+    "storybook": "7.6.17",
     "tailwindcss": "3.4.1",
     "typescript": "5.4.2",
+    "vite": "5.1.6",
     "zod": "3.22.4"
   },
   "peerDependencies": {
