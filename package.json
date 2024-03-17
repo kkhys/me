@@ -16,6 +16,7 @@
     "storybook:dev": "turbo storybook:dev",
     "storybook:build": "turbo storybook:build",
     "storybook:move": "turbo storybook:move --filter=storybook && turbo run storybook:move --filter=!storybook",
+    "storybook:start": "http-server storybook-static -p 8080",
     "test": "turbo test",
     "prepare": "husky install"
   },
