@@ -9,7 +9,7 @@ import * as ButtonStories from './index.stories';
 <Controls />
 
 ```tsx
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => <Button>Button</Button>;
 ```
@@ -17,7 +17,7 @@ export default () => <Button>Button</Button>;
 ## Anatomy
 
 ```tsx
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => <Button />;
 ```
@@ -29,7 +29,7 @@ You can use the `buttonVariants` helper to create a link that looks like a butto
 ```tsx
 import Link from 'next/link';
 
-import { buttonVariants } from '#/ui/general';
+import { buttonVariants } from '#/general';
 
 export default () => (
   <Link href='/' className={buttonVariants({ variant: 'outline' })}>
@@ -43,7 +43,7 @@ Alternatively, you can set the `asChild` parameter and nest the link component.
 ```tsx
 import Link from 'next/link';
 
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => (
   <Button asChild>
@@ -59,7 +59,7 @@ export default () => (
 <Canvas of={ButtonStories.Secondary} />
 
 ```tsx
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => <Button variant='secondary'>Secondary</Button>;
 ```
@@ -69,7 +69,7 @@ export default () => <Button variant='secondary'>Secondary</Button>;
 <Canvas of={ButtonStories.Destructive} />
 
 ```tsx
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => <Button variant='destructive'>Destructive</Button>;
 ```
@@ -79,7 +79,7 @@ export default () => <Button variant='destructive'>Destructive</Button>;
 <Canvas of={ButtonStories.Outline} />
 
 ```tsx
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => <Button variant='outline'>Outline</Button>;
 ```
@@ -89,7 +89,7 @@ export default () => <Button variant='outline'>Outline</Button>;
 <Canvas of={ButtonStories.Ghost} />
 
 ```tsx
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => <Button variant='ghost'>Ghost</Button>;
 ```
@@ -99,7 +99,7 @@ export default () => <Button variant='ghost'>Ghost</Button>;
 <Canvas of={ButtonStories.Link} />
 
 ```tsx
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => <Button variant='link'>Link</Button>;
 ```
@@ -111,7 +111,7 @@ export default () => <Button variant='link'>Link</Button>;
 ```tsx
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => (
   <Button variant='outline' size='icon'>
@@ -127,7 +127,7 @@ export default () => (
 ```tsx
 import { EnvelopeOpenIcon } from '@radix-ui/react-icons';
 
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => (
   <Button>
@@ -143,7 +143,7 @@ export default () => (
 ```tsx
 import { ReloadIcon } from '@radix-ui/react-icons';
 
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => (
   <Button disabled>
@@ -160,7 +160,7 @@ export default () => (
 ```tsx
 import Link from 'next/link';
 
-import { Button } from '#/ui/general';
+import { Button } from '#/general';
 
 export default () => (
   <Button asChild>

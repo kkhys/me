@@ -1,5 +1,5 @@
 import { dirname, join } from 'path';
-import { StorybookConfig } from '@storybook/react-vite';
+import type { StorybookConfig } from '@storybook/react-vite';
 
 const getAbsolutePath = (value: string): any => dirname(require.resolve(join(value, 'package.json')));
 
