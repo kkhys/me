@@ -4,8 +4,9 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import baseConfig from '@kkhys/tailwind-config';
 
 export default {
-  // content: [...baseConfig.content, '../../packages/ui/**/*.{ts,tsx}'],
-  content: [...baseConfig.content],
+  // I need to append the path to the UI package to the content array so that
+  // those classes are included correctly.
+  content: [...baseConfig.content, '../../packages/ui/**/*.{ts,tsx}'],
   presets: [baseConfig],
   theme: {
     extend: {
