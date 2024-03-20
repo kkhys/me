@@ -45,8 +45,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
       semantic-release:
-        specifier: 23.0.4
-        version: 23.0.4(typescript@5.4.2)
+        specifier: 23.0.5
+        version: 23.0.5(typescript@5.4.2)
       semantic-release-cli:
         specifier: 5.4.6
         version: 5.4.6
@@ -4747,7 +4747,7 @@ packages:
       '@octokit/graphql': 8.0.1
       '@octokit/request': 9.0.1
       '@octokit/request-error': 6.0.2
-      '@octokit/types': 12.4.0
+      '@octokit/types': 12.6.0
       before-after-hook: 3.0.2
       universal-user-agent: 7.0.2
     dev: true
@@ -4756,7 +4756,7 @@ packages:
     resolution: {integrity: sha512-emBcNDxBdC1y3+knJonS5zhUB/CG6TihubxM2U1/pG/Z1y3a4oV0Gzz3lmkCvWWQI6h3tqBAX9MgCBFp+M68Jw==}
     engines: {node: '>= 18'}
     dependencies:
-      '@octokit/types': 12.4.0
+      '@octokit/types': 12.6.0
       universal-user-agent: 7.0.2
     dev: true
 
@@ -4765,12 +4765,8 @@ packages:
     engines: {node: '>= 18'}
     dependencies:
       '@octokit/request': 9.0.1
-      '@octokit/types': 12.4.0
+      '@octokit/types': 12.6.0
       universal-user-agent: 7.0.2
-    dev: true
-
-  /@octokit/openapi-types@19.1.0:
-    resolution: {integrity: sha512-6G+ywGClliGQwRsjvqVYpklIfa7oRPA0vyhPQG/1Feh+B+wU0vGH1JiJ5T25d3g1JZYBHzR2qefLi9x8Gt+cpw==}
     dev: true
 
   /@octokit/openapi-types@20.0.0:
@@ -4795,7 +4791,7 @@ packages:
     dependencies:
       '@octokit/core': 6.0.1
       '@octokit/request-error': 6.0.2
-      '@octokit/types': 12.4.0
+      '@octokit/types': 12.6.0
       bottleneck: 2.19.5
     dev: true
 
@@ -4814,7 +4810,7 @@ packages:
     resolution: {integrity: sha512-WtRVpoHcNXs84+s9s/wqfHaxM68NGMg8Av7h59B50OVO0PwwMx+2GgQ/OliUd0iQBSNWgR6N8afi/KjSHbXHWw==}
     engines: {node: '>= 18'}
     dependencies:
-      '@octokit/types': 12.4.0
+      '@octokit/types': 12.6.0
     dev: true
 
   /@octokit/request@9.0.1:
@@ -4823,14 +4819,8 @@ packages:
     dependencies:
       '@octokit/endpoint': 10.0.0
       '@octokit/request-error': 6.0.2
-      '@octokit/types': 12.4.0
+      '@octokit/types': 12.6.0
       universal-user-agent: 7.0.2
-    dev: true
-
-  /@octokit/types@12.4.0:
-    resolution: {integrity: sha512-FLWs/AvZllw/AGVs+nJ+ELCDZZJk+kY0zMen118xhL2zD0s1etIUHm1odgjP7epxYU1ln7SZxEUWYop5bhsdgQ==}
-    dependencies:
-      '@octokit/openapi-types': 19.1.0
     dev: true
 
   /@octokit/types@12.6.0:
@@ -6942,9 +6932,9 @@ packages:
     dev: true
     optional: true
 
-  /@semantic-release/commit-analyzer@11.1.0(semantic-release@23.0.4):
-    resolution: {integrity: sha512-cXNTbv3nXR2hlzHjAMgbuiQVtvWHTlwwISt60B+4NZv01y/QRY7p2HcJm8Eh2StzcTJoNnflvKjHH/cjFS7d5g==}
-    engines: {node: ^18.17 || >=20.6.1}
+  /@semantic-release/commit-analyzer@12.0.0(semantic-release@23.0.5):
+    resolution: {integrity: sha512-qG+md5gdes+xa8zP7lIo1fWE17zRdO8yMCaxh9lyL65TQleoSv8WHHOqRURfghTytUh+NpkSyBprQ5hrkxOKVQ==}
+    engines: {node: '>=20.8.1'}
     peerDependencies:
       semantic-release: '>=20.1.0'
     dependencies:
@@ -6955,7 +6945,7 @@ packages:
       import-from-esm: 1.3.3
       lodash-es: 4.17.21
       micromatch: 4.0.5
-      semantic-release: 23.0.4(typescript@5.4.2)
+      semantic-release: 23.0.5(typescript@5.4.2)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6965,7 +6955,7 @@ packages:
     engines: {node: '>=18'}
     dev: true
 
-  /@semantic-release/github@10.0.2(semantic-release@23.0.4):
+  /@semantic-release/github@10.0.2(semantic-release@23.0.5):
     resolution: {integrity: sha512-SP5ihhv/uQa8vPuWKmbJrrzfv8lRUkDFC6qwgaWoorrflN1DEW0IGCa9w/PxUp8Ad3dbvXZPmpXdGiP3eyTzhg==}
     engines: {node: '>=20.8.1'}
     peerDependencies:
@@ -6986,13 +6976,13 @@ packages:
       lodash-es: 4.17.21
       mime: 4.0.1
       p-filter: 4.1.0
-      semantic-release: 23.0.4(typescript@5.4.2)
+      semantic-release: 23.0.5(typescript@5.4.2)
       url-join: 5.0.0
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /@semantic-release/npm@12.0.0(semantic-release@23.0.4):
+  /@semantic-release/npm@12.0.0(semantic-release@23.0.5):
     resolution: {integrity: sha512-72TVYQCH9NvVsO/y13eF8vE4bNnfls518+4KcFwJUKi7AtA/ZXoNgSg9gTTfw5eMZMkiH0izUrpGXgZE/cSQhA==}
     engines: {node: '>=20.8.1'}
     peerDependencies:
@@ -7009,12 +6999,12 @@ packages:
       rc: 1.2.8
       read-pkg: 9.0.1
       registry-auth-token: 5.0.2
-      semantic-release: 23.0.4(typescript@5.4.2)
+      semantic-release: 23.0.5(typescript@5.4.2)
       semver: 7.6.0
       tempy: 3.1.0
     dev: true
 
-  /@semantic-release/release-notes-generator@12.1.0(semantic-release@23.0.4):
+  /@semantic-release/release-notes-generator@12.1.0(semantic-release@23.0.5):
     resolution: {integrity: sha512-g6M9AjUKAZUZnxaJZnouNBeDNTCUrJ5Ltj+VJ60gJeDaRRahcHsry9HW8yKrnKkKNkx5lbWiEP1FPMqVNQz8Kg==}
     engines: {node: ^18.17 || >=20.6.1}
     peerDependencies:
@@ -7030,7 +7020,7 @@ packages:
       into-stream: 7.0.0
       lodash-es: 4.17.21
       read-pkg-up: 11.0.0
-      semantic-release: 23.0.4(typescript@5.4.2)
+      semantic-release: 23.0.5(typescript@5.4.2)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -13971,7 +13961,7 @@ packages:
       function-bind: 1.1.2
       has-proto: 1.0.1
       has-symbols: 1.0.3
-      hasown: 2.0.0
+      hasown: 2.0.1
 
   /get-intrinsic@1.2.4:
     resolution: {integrity: sha512-5uYhsJH8VJBTv7oslg4BznJYhDoRI6waYCxMmCdnTrcCrHA/fCFKoTFz2JKKE0HdDFUF7/oQuhzumXJK7paBRQ==}
@@ -13981,7 +13971,7 @@ packages:
       function-bind: 1.1.2
       has-proto: 1.0.1
       has-symbols: 1.0.3
-      hasown: 2.0.0
+      hasown: 2.0.1
 
   /get-nonce@1.0.1:
     resolution: {integrity: sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q==}
@@ -14454,6 +14444,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
+    dev: false
 
   /hasown@2.0.1:
     resolution: {integrity: sha512-1/th4MHjnwncwXsIW6QMzlvYL9kG5e/CpVvLRZe4XPa8TOUNbCELqmvhDmnkNsAjwaG4+I8gJJL0JBvTTLO9qA==}
@@ -15126,7 +15117,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       get-intrinsic: 1.2.2
-      hasown: 2.0.0
+      hasown: 2.0.1
       side-channel: 1.0.4
     dev: true
 
@@ -20935,16 +20926,16 @@ packages:
       - supports-color
     dev: true
 
-  /semantic-release@23.0.4(typescript@5.4.2):
-    resolution: {integrity: sha512-UlcgO6SEcFtwSF/JMVXKswK+4Af2ypu55WRdLL6IhnKHPCZ9Zap7CV8PN2+wmvAdAPTI76CqouJyGZyb1fp9VA==}
+  /semantic-release@23.0.5(typescript@5.4.2):
+    resolution: {integrity: sha512-4eZG/vRTV8E7rw5oHPv2Fht5qx6ITemE/b1vzG42ayYVcffJqXYy40nP4bHEPWX1/kleJWWrlPVDt1hSYVlpKQ==}
     engines: {node: '>=20.8.1'}
     hasBin: true
     dependencies:
-      '@semantic-release/commit-analyzer': 11.1.0(semantic-release@23.0.4)
+      '@semantic-release/commit-analyzer': 12.0.0(semantic-release@23.0.5)
       '@semantic-release/error': 4.0.0
-      '@semantic-release/github': 10.0.2(semantic-release@23.0.4)
-      '@semantic-release/npm': 12.0.0(semantic-release@23.0.4)
-      '@semantic-release/release-notes-generator': 12.1.0(semantic-release@23.0.4)
+      '@semantic-release/github': 10.0.2(semantic-release@23.0.5)
+      '@semantic-release/npm': 12.0.0(semantic-release@23.0.5)
+      '@semantic-release/release-notes-generator': 12.1.0(semantic-release@23.0.5)
       aggregate-error: 5.0.0
       cosmiconfig: 9.0.0(typescript@5.4.2)
       debug: 4.3.4
