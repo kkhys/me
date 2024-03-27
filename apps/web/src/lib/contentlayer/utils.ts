@@ -3,6 +3,7 @@ import { bech32m } from 'bech32';
 import { remark } from 'remark';
 import strip from 'strip-markdown';
 
+import type { AllTagsTitle, Category, CategoryTitle, FashionTags, LifeTags, Tag, TechTags } from './constants';
 /**
  * esbuild does not support module path aliases, so relative paths are used
  *
@@ -10,7 +11,6 @@ import strip from 'strip-markdown';
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { NotFoundError } from '../../exceptions';
-import type { AllTagsTitle, Category, CategoryTitle, FashionTags, LifeTags, Tag, TechTags } from './constants';
 import { allTags, categories, extractTitle, fashionTags, lifeTags, techTags } from './constants';
 
 /**

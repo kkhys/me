@@ -1,0 +1,143 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+
+import * as RadioGroupStories from './index.stories';
+
+<Meta of={RadioGroupStories} name='Overview' />
+<Title />
+<Subtitle>
+  A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.
+</Subtitle>
+<Canvas of={RadioGroupStories.Default} />
+<Controls of={RadioGroupStories.Default} />
+
+```tsx
+import { Label, RadioGroup, RadioGroupItem } from '#/data-entry';
+
+export default () => (
+  <RadioGroup defaultValue='comfortable'>
+    <div className='flex items-center space-x-2'>
+      <RadioGroupItem value='default' id='r1' />
+      <Label htmlFor='r1'>Default</Label>
+    </div>
+    <div className='flex items-center space-x-2'>
+      <RadioGroupItem value='comfortable' id='r2' />
+      <Label htmlFor='r2'>Comfortable</Label>
+    </div>
+    <div className='flex items-center space-x-2'>
+      <RadioGroupItem value='compact' id='r3' />
+      <Label htmlFor='r3'>Compact</Label>
+    </div>
+  </RadioGroup>
+);
+```
+
+## Anatomy
+
+```tsx
+import { RadioGroup, RadioGroupItem } from '#/data-entry';
+
+export default () => (
+  <RadioGroup>
+    <RadioGroupItem />
+  </RadioGroup>
+);
+```
+
+## Examples
+
+### Form
+
+<Canvas of={RadioGroupStories.FormStory} layout='fullscreen' />
+
+```tsx
+'use client';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
+
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  RadioGroup,
+  RadioGroupItem,
+} from '#/data-entry';
+import { toast } from '#/feedback';
+import { Button } from '#/general';
+
+const FormSchema = z.object({
+  type: z.enum(['all', 'mentions', 'none'], {
+    required_error: 'You need to select a notification type.',
+  }),
+});
+
+export default () => {
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+  });
+
+  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+    toast('You submitted the following values:', {
+      description: (
+        <pre className='mt-2 w-[320px] rounded-md bg-slate-950 p-4'>
+          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    });
+  };
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='w-2/3 space-y-6'>
+        <FormField
+          control={form.control}
+          name='type'
+          render={({ field }) => (
+            <FormItem className='space-y-3'>
+              <FormLabel>Notify me about...</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className='flex flex-col space-y-1'
+                >
+                  <FormItem className='flex items-center space-x-3 space-y-0'>
+                    <FormControl>
+                      <RadioGroupItem value='all' />
+                    </FormControl>
+                    <FormLabel className='font-normal'>All new messages</FormLabel>
+                  </FormItem>
+                  <FormItem className='flex items-center space-x-3 space-y-0'>
+                    <FormControl>
+                      <RadioGroupItem value='mentions' />
+                    </FormControl>
+                    <FormLabel className='font-normal'>Direct messages and mentions</FormLabel>
+                  </FormItem>
+                  <FormItem className='flex items-center space-x-3 space-y-0'>
+                    <FormControl>
+                      <RadioGroupItem value='none' />
+                    </FormControl>
+                    <FormLabel className='font-normal'>Nothing</FormLabel>
+                  </FormItem>
+                </RadioGroup>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type='submit'>Submit</Button>
+      </form>
+    </Form>
+  );
+};
+```
+
+## Reference
+
+- [shadcn/ui](https://ui.shadcn.com/docs/components/radio-group)
+- [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/radio-group)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radiobutton)

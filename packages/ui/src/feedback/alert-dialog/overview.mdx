@@ -1,0 +1,82 @@
+import { Canvas, Controls, Meta, Subtitle, Title } from '@storybook/blocks';
+
+import * as AlertDialogStories from './index.stories';
+
+<Meta of={AlertDialogStories} name='Overview' />
+<Title />
+<Subtitle>A modal dialog that interrupts the user with important content and expects a response.</Subtitle>
+<Canvas of={AlertDialogStories.Default} />
+<Controls of={AlertDialogStories.Default} />
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '#/feedback';
+import { Button } from '#/general';
+
+export default () => (
+  <AlertDialog>
+    <AlertDialogTrigger asChild>
+      <Button variant='outline'>Show Dialog</Button>
+    </AlertDialogTrigger>
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+        <AlertDialogDescription>
+          This action cannot be undone. This will permanently delete your account and remove your data from our servers.
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel>Cancel</AlertDialogCancel>
+        <AlertDialogAction>Continue</AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+);
+```
+
+## Anatomy
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '#/feedback';
+
+export default () => (
+  <AlertDialog>
+    <AlertDialogTrigger />
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle />
+        <AlertDialogDescription />
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel />
+        <AlertDialogAction />
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+);
+```
+
+## Reference
+
+- [shadcn/ui](https://ui.shadcn.com/docs/components/alert-dialog)
+- [Radix Primitives](https://www.radix-ui.com/primitives/docs/components/alert-dialog)
+- [ARIA design pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog)

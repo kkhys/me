@@ -1,5 +1,5 @@
-import { CalendarIcon } from '@radix-ui/react-icons';
 import type { Meta, StoryObj } from '@storybook/react';
+import { CalendarIcon } from '@radix-ui/react-icons';
 
 import { Avatar, AvatarFallback, AvatarImage } from '#/ui/data-display';
 import { Button } from '#/ui/general';
@@ -92,7 +92,7 @@ export const Default = {
               <p className='text-sm'>The React Framework – created and maintained by @vercel.</p>
               <div className='flex items-center pt-2'>
                 <CalendarIcon className='mr-2 size-4 opacity-70' />{' '}
-                <span className='text-muted-foreground text-xs'>Joined December 2021</span>
+                <span className='text-xs text-muted-foreground'>Joined December 2021</span>
               </div>
             </div>
           </div>

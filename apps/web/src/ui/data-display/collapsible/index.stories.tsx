@@ -1,6 +1,6 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import * as React from 'react';
 import { CaretSortIcon } from '@radix-ui/react-icons';
-import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '#/ui/general';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '.';

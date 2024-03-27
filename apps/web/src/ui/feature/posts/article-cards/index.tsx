@@ -1,10 +1,10 @@
 'use client';
 
-import * as React from 'react';
+import type { Post } from 'contentlayer/generated';
 import type { Route } from 'next';
+import * as React from 'react';
 import Link from 'next/link';
 import { clsx } from 'clsx';
-import type { Post } from 'contentlayer/generated';
 import { motion } from 'framer-motion';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/ui/data-display';

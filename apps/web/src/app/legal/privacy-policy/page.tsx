@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { Metadata } from 'next';
+import * as React from 'react';
 import { notFound } from 'next/navigation';
 import { allLegals } from 'contentlayer/generated';
 

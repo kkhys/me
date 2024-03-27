@@ -1,12 +1,17 @@
+import { fileURLToPath } from 'url';
 import withBundleAnalyzer from '@next/bundle-analyzer';
+import _jiti from 'jiti';
 import { withContentlayer } from 'next-contentlayer';
 
-import './src/env.mjs';
+const jiti = _jiti(fileURLToPath(import.meta.url));
 
-/** @type { import("next").NextConfig } */
+jiti('./src/env');
+
+/** @type {import("next").NextConfig} */
 const config = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
+  transpilePackages: ['@kkhys/ui'],
   /**
    * @see https://github.com/contentlayerdev/contentlayer/issues/313#issuecomment-1279678289
    */

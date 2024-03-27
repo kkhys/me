@@ -1,8 +1,8 @@
 import { readFile } from 'fs/promises';
 import * as path from 'path';
 import type { Image } from 'mdast';
-import { getPlaiceholder } from 'plaiceholder';
 import type { Node } from 'unist';
+import { getPlaiceholder } from 'plaiceholder';
 import { visit } from 'unist-util-visit';
 
 export const remarkNextImage = () => {

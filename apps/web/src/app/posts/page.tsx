@@ -1,6 +1,6 @@
+import type { Metadata } from 'next';
 import * as React from 'react';
 import { Suspense } from 'react';
-import type { Metadata } from 'next';
 
 import { BackButton, Container } from '#/ui/feature/global';
 import { CategoryTabs } from '#/ui/feature/posts';

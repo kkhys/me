@@ -1,6 +1,6 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { default as NextLink } from 'next/link';
 import { ChevronRightIcon, EnvelopeOpenIcon, ReloadIcon } from '@radix-ui/react-icons';
-import type { Meta, StoryObj } from '@storybook/react';
 
 import { Button } from '.';
 

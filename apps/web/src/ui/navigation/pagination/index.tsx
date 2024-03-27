@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { ChevronLeftIcon, ChevronRightIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
 
-import { cn } from '#/lib/shadcn-ui/utils';
 import type { ButtonProps } from '#/ui/general';
+import { cn } from '#/lib/shadcn-ui/utils';
 import { buttonVariants } from '#/ui/general';
 
 const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (

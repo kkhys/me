@@ -1,7 +1,7 @@
 'use client';
 
-import * as React from 'react';
 import type { Route } from 'next';
+import * as React from 'react';
 import Link from 'next/link';
 import { ArrowTopRightIcon, DotsHorizontalIcon, HomeIcon } from '@radix-ui/react-icons';
 

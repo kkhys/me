@@ -1,9 +1,9 @@
-import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import * as React from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 
-import { Card, CardContent } from '#/ui/data-display';
 import type { CarouselApi } from '.';
+import { Card, CardContent } from '#/ui/data-display';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '.';
 
 const meta = {
@@ -152,7 +152,7 @@ const CountDemo = () => {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
-      <div className='text-muted-foreground py-2 text-center text-sm'>
+      <div className='py-2 text-center text-sm text-muted-foreground'>
         Slide {current} of {count}
       </div>
     </div>

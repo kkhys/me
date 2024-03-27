@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import * as React from 'react';
 import { Minus, Plus } from 'lucide-react';
 import { Bar, BarChart, ResponsiveContainer } from 'recharts';
 
@@ -95,7 +95,7 @@ const DefaultDemo = () => {
               </Button>
               <div className='flex-1 text-center'>
                 <div className='text-7xl font-bold tracking-tighter'>{goal}</div>
-                <div className='text-muted-foreground text-[0.70rem] uppercase'>Calories/day</div>
+                <div className='text-[0.70rem] uppercase text-muted-foreground'>Calories/day</div>
               </div>
               <Button
                 variant='outline'

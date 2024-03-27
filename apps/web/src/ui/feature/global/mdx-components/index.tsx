@@ -1,8 +1,8 @@
-import * as React from 'react';
+import type { MDXComponents } from 'mdx/types';
 import type { Route } from 'next';
+import * as React from 'react';
 import Link from 'next/link';
 import { ArrowTopRightIcon } from '@radix-ui/react-icons';
-import type { MDXComponents } from 'mdx/types';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
 import { cn } from '#/lib/shadcn-ui/utils';
@@ -11,8 +11,6 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  LinkCard,
-  MermaidBlock,
   Tabs,
   TabsContent,
   TabsList,
@@ -26,6 +24,8 @@ import {
   Footnotes,
   GoogleMaps,
   HeaderWithAnchor,
+  LinkCard,
+  MermaidBlock,
   Step,
   Steps,
   Tweet,
@@ -74,7 +74,7 @@ const components = {
   TabsTrigger: ({ className, ...props }: React.ComponentProps<typeof TabsTrigger>) => (
     <TabsTrigger
       className={cn(
-        'text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground data-[state=active]:bg-background-lighter relative h-9 rounded-none border-b border-b-transparent bg-transparent px-4 pb-3 pt-2 shadow-none transition-none data-[state=active]:shadow-none',
+        'relative h-9 rounded-none border-b border-b-transparent bg-transparent px-4 pb-3 pt-2 text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:bg-background-lighter data-[state=active]:text-foreground data-[state=active]:shadow-none',
         className,
       )}
       {...props}

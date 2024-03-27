@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { CaretSortIcon, ChevronDownIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
 import type { Meta, StoryObj } from '@storybook/react';
 import type { ColumnDef, ColumnFiltersState, SortingState, VisibilityState } from '@tanstack/react-table';
+import * as React from 'react';
+import { CaretSortIcon, ChevronDownIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
 import {
   flexRender,
   getCoreRowModel,
@@ -250,7 +250,7 @@ const DataTableDemo = () => {
         </Table>
       </div>
       <div className='flex items-center justify-end space-x-2 py-4'>
-        <div className='text-muted-foreground flex-1 text-sm'>
+        <div className='flex-1 text-sm text-muted-foreground'>
           {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} row(s)
           selected.
         </div>

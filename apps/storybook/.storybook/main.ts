@@ -5,13 +5,21 @@ const config = {
   refs: (_, { configType }) => {
     if (configType === 'DEVELOPMENT') {
       return {
+        ui: {
+          title: 'UI',
+          url: 'http://localhost:6007/',
+        },
         web: {
           title: 'Web',
-          url: 'http://localhost:6007/',
+          url: 'http://localhost:6008/',
         },
       };
     }
     return {
+      ui: {
+        title: 'UI',
+        url: 'ui/',
+      },
       web: {
         title: 'Web',
         url: 'web/',

@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { Legal } from 'contentlayer/generated';
+import * as React from 'react';
 import { format, parseISO } from 'date-fns';
 import { ja } from 'date-fns/locale';
 

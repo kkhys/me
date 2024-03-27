@@ -1,6 +1,6 @@
-import * as React from 'react';
 import type { Post } from 'contentlayer/generated';
 import type { BlogPosting, BreadcrumbList, WithContext } from 'schema-dts';
+import * as React from 'react';
 
 import { me, site } from '#/config';
 

@@ -11,6 +11,8 @@ export * from './eye-catch';
 export * from './footnotes';
 export * from './google-maps';
 export * from './header-with-anchor';
+export * from './link-card';
+export * from './mermaid-block';
 export * from './prev-and-next-pager';
 export * from './related-posts';
 export * from './steps';

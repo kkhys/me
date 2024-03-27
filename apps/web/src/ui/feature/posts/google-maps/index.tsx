@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GoogleMapsEmbed } from '@next/third-parties/google';
 
-import { env } from '#/env.mjs';
+import { env } from '#/env';
 
 export const GoogleMaps = ({ placeId, caption }: { placeId: string; caption?: string }) => {
   if (!caption) {
@@ -27,7 +27,7 @@ export const GoogleMaps = ({ placeId, caption }: { placeId: string; caption?: st
         region='JP'
         style='border-radius: 1rem; aspect-ratio: 16 / 9;'
       />
-      <figcaption className='text-muted-foreground text-center text-xs'>{caption}</figcaption>
+      <figcaption className='text-center text-xs text-muted-foreground'>{caption}</figcaption>
     </figure>
   );
 };

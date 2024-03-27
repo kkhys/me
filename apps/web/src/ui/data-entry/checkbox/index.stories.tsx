@@ -1,6 +1,6 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
-import type { Meta, StoryObj } from '@storybook/react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -150,7 +150,7 @@ export const WithText = {
         <Story />
         <div className='grid gap-1.5 leading-none'>
           <Label htmlFor='with-text-checkbox'>Accept terms and conditions</Label>
-          <p className='text-muted-foreground text-sm'>You agree to our Terms of Service and Privacy Policy.</p>
+          <p className='text-sm text-muted-foreground'>You agree to our Terms of Service and Privacy Policy.</p>
         </div>
       </div>
     ),

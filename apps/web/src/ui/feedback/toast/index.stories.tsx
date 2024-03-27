@@ -1,6 +1,6 @@
-import { Component } from 'react';
 import type { PartialStoryFn } from '@storybook/csf';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { Component } from 'react';
 
 import { Button } from '#/ui/general';
 import { toast, Toaster } from '.';
