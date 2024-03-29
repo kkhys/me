@@ -83,23 +83,25 @@ const DefaultDemo = () => {
       </PopoverTrigger>
       <PopoverContent className='w-[200px] p-0'>
         <Command>
-          <CommandInput placeholder='Search framework...' className='h-9' />
-          <CommandEmpty>No framework found.</CommandEmpty>
-          <CommandGroup>
-            {frameworks.map((framework) => (
-              <CommandItem
-                key={framework.value}
-                value={framework.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === value ? '' : currentValue);
-                  setOpen(false);
-                }}
-              >
-                {framework.label}
-                <CheckIcon className={cn('ml-auto size-4', value === framework.value ? 'opacity-100' : 'opacity-0')} />
-              </CommandItem>
-            ))}
-          </CommandGroup>
+          <CommandList>
+            <CommandInput placeholder='Search framework...' className='h-9' />
+            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandGroup>
+              {frameworks.map((framework) => (
+                  <CommandItem
+                      key={framework.value}
+                      value={framework.value}
+                      onSelect={(currentValue) => {
+                        setValue(currentValue === value ? '' : currentValue);
+                        setOpen(false);
+                      }}
+                  >
+                    {framework.label}
+                    <CheckIcon className={cn('ml-auto size-4', value === framework.value ? 'opacity-100' : 'opacity-0')} />
+                  </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
         </Command>
       </PopoverContent>
     </Popover>
@@ -308,27 +310,29 @@ const FormDemo = () => {
                 </PopoverTrigger>
                 <PopoverContent className='w-[200px] p-0'>
                   <Command>
-                    <CommandInput placeholder='Search framework...' className='h-9' />
-                    <CommandEmpty>No framework found.</CommandEmpty>
-                    <CommandGroup>
-                      {languages.map((language) => (
-                        <CommandItem
-                          value={language.label}
-                          key={language.value}
-                          onSelect={() => {
-                            form.setValue('language', language.value);
-                          }}
-                        >
-                          {language.label}
-                          <CheckIcon
-                            className={cn(
-                              'ml-auto size-4',
-                              language.value === field.value ? 'opacity-100' : 'opacity-0',
-                            )}
-                          />
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
+                    <CommandList>
+                      <CommandInput placeholder='Search framework...' className='h-9' />
+                      <CommandEmpty>No framework found.</CommandEmpty>
+                      <CommandGroup>
+                        {languages.map((language) => (
+                            <CommandItem
+                                value={language.label}
+                                key={language.value}
+                                onSelect={() => {
+                                  form.setValue('language', language.value);
+                                }}
+                            >
+                              {language.label}
+                              <CheckIcon
+                                  className={cn(
+                                      'ml-auto size-4',
+                                      language.value === field.value ? 'opacity-100' : 'opacity-0',
+                                  )}
+                              />
+                            </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
                   </Command>
                 </PopoverContent>
               </Popover>

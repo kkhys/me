@@ -50,7 +50,7 @@ export const Default = {
   },
   decorators: [
     (Story) => (
-      <div className='w-[400px]'>
+      <div className='w-[300px] h-[200px]'>
         <Story />
       </div>
     ),
