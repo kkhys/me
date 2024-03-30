@@ -1,7 +1,7 @@
 import type { Element, Root } from 'hast';
+import type { Options } from 'rehype-pretty-code';
 import { hasProperty } from 'hast-util-has-property';
 import { isElement } from 'hast-util-is-element';
-import type { Options } from 'rehype-pretty-code';
 import { transformerNotationDiff } from 'shikiji-transformers';
 import { visit } from 'unist-util-visit';
 

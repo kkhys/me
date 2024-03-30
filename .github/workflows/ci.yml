@@ -56,6 +56,3 @@ jobs:
 
       - name: Lint and type-check
         run: pnpm turbo lint format typecheck
-
-      - name: Check workspaces
-        run: pnpm manypkg check

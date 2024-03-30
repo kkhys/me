@@ -3,12 +3,6 @@ import type { Config } from 'tailwindcss';
 import baseConfig from '@kkhys/tailwind-config';
 
 export default {
-  darkMode: ['class'],
-  content: ['./src/**/*.{ts,tsx}'],
-  plugins: [require('daisyui')],
+  content: [...baseConfig.content],
   presets: [baseConfig],
-  daisyui: {
-    themes: ['dark'],
-    logs: false,
-  },
 } satisfies Config;

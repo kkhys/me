@@ -1,5 +1,5 @@
-import * as React from 'react';
 import type { BreadcrumbList, WithContext } from 'schema-dts';
+import * as React from 'react';
 
 import { site } from '#/config';
 

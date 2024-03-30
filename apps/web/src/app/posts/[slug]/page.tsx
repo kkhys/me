@@ -2,8 +2,8 @@ import * as React from 'react';
 import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 
-import { env } from '#/env.mjs';
-import { ArticleLayout } from '#/ui/feature/posts';
+import { env } from '#/env';
+import { ArticleLayout } from '#/ui/post';
 import { JsonLd } from './json-ld';
 
 import '#/styles/code-block.css';
