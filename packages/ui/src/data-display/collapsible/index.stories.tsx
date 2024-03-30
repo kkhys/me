@@ -3,7 +3,7 @@ import * as React from 'react';
 import { CaretSortIcon } from '@radix-ui/react-icons';
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '.';
-import { Button } from '../../general';
+import { Button } from '../../';
 
 const meta = {
   title: 'Data Display / Collapsible',

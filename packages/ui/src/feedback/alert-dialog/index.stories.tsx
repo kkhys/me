@@ -11,7 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '.';
-import { Button } from '../../general';
+import { Button } from '../../';
 
 const meta = {
   title: 'Feedback / Alert Dialog',

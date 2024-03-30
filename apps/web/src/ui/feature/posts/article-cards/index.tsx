@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/ui/data-display';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@kkhys/ui';
+
 import { EyeCatch } from '#/ui/feature/posts';
 
 const ArticleCard = ({ post }: { post: Post }) => {

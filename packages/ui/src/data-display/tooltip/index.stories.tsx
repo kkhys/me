@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '.';
-import { Button } from '../../general';
+import { Button } from '../../';
 
 const meta = {
   title: 'Data Display / Tooltip',

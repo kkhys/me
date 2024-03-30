@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react';
 
-import '#/styles/globals.css';
+import '../src/styles/globals.css';
 
 import { androidViewports, ipadViewports, iphoneViewports, tailwindViewports } from './viewports';
 

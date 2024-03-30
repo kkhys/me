@@ -3,7 +3,7 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { Component } from 'react';
 
 import { toast, Toaster } from '.';
-import { Button } from '../../general';
+import { Button } from '../../';
 
 export const ToastDecorator = (Story: PartialStoryFn<ReactRenderer>) => (
   <>

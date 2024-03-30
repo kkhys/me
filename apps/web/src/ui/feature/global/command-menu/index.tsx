@@ -6,11 +6,8 @@ import { useRouter } from 'next/navigation';
 import { LaptopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
 
-import { Button } from '@kkhys/ui';
-
-import { searchItems } from '#/config';
-import { cn } from '#/lib/shadcn-ui/utils';
 import {
+  Button,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -18,7 +15,10 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from '#/ui/data-entry';
+} from '@kkhys/ui';
+
+import { searchItems } from '#/config';
+import { cn } from '#/lib/shadcn-ui/utils';
 
 export const CommandMenu = ({ className }: { className?: string }) => {
   const router = useRouter();

@@ -7,10 +7,19 @@ import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 import { RssIcon } from 'lucide-react';
 
-import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@kkhys/ui';
+import {
+  Button,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@kkhys/ui';
 
 import { env } from '#/env';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '#/ui/data-display';
 import { FadeIn } from '#/ui/feature/global';
 import { ArticleList } from '#/ui/feature/posts';
 

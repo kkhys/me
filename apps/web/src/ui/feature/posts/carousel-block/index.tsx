@@ -3,8 +3,8 @@
 import * as React from 'react';
 import ClassNames from 'embla-carousel-class-names';
 
-import type { CarouselApi } from '#/ui/data-display';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '#/ui/data-display';
+import type { CarouselApi } from '@kkhys/ui';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@kkhys/ui';
 
 export const CarouselBlock = ({ children, ...props }: React.ComponentProps<typeof Carousel>) => {
   const [api, setApi] = React.useState<CarouselApi>();

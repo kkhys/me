@@ -2,7 +2,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import { GlobeIcon } from '@radix-ui/react-icons';
 
-import { cn } from '../../utils';
+import { cn } from '../../';
 
 export const LinkCard = ({
   className,

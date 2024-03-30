@@ -10,7 +10,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '.';
-import { cn } from '../../utils';
+import { cn } from '../../';
 
 const meta = {
   title: 'Navigation / Navigation Menu',

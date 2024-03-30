@@ -13,7 +13,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '.';
-import { Button } from '../../general';
+import { Button } from '../../';
 
 const meta = {
   title: 'Feedback / Drawer',

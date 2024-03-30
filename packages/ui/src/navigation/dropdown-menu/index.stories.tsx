@@ -19,7 +19,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '.';
-import { Button } from '../../general';
+import { Button } from '../../';
 
 const meta = {
   title: 'Navigation / Dropdown Menu',
