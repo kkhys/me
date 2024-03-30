@@ -5,17 +5,10 @@ import Link from 'next/link';
 import { ArrowTopRightIcon } from '@radix-ui/react-icons';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@kkhys/ui';
+
 import { cn } from '#/lib/shadcn-ui/utils';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '#/ui/data-display';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '#/ui/data-display';
 import {
   Alert,
   ArticleImage,

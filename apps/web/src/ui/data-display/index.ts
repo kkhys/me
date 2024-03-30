@@ -1,7 +1,3 @@
-export * from './accordion';
-export * from './aspect-ratio';
-export * from './avatar';
-export * from './badge';
 export * from './card';
 export * from './carousel';
 export * from './collapsible';
