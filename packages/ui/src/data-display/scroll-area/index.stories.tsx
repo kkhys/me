@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Image from 'next/image';
 
 import { ScrollArea, ScrollBar } from '.';
 import { Separator } from '../../';
@@ -124,9 +123,9 @@ export const HorizontalScrolling = {
           {works.map((artwork) => (
             <figure key={artwork.artist} className='shrink-0'>
               <div className='overflow-hidden rounded-md'>
-                <Image
+                <img
                   src={artwork.art}
-                  alt={`Photo by ${artwork.artist}`}
+                  alt={artwork.artist}
                   className='aspect-[3/4] h-fit w-fit object-cover'
                   width={300}
                   height={400}

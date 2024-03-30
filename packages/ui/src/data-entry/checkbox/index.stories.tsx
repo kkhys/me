@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -210,7 +209,7 @@ const FormSingleDemo = () => {
               <div className='space-y-1 leading-none'>
                 <FormLabel>Use different settings for my mobile devices</FormLabel>
                 <FormDescription>
-                  You can manage your mobile notifications in the <Link href='/'>mobile settings</Link> page.
+                  You can manage your mobile notifications in the <a href='/'>mobile settings</a> page.
                 </FormDescription>
               </div>
             </FormItem>
