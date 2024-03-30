@@ -11,11 +11,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { Button } from '@kkhys/ui';
-
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '#/ui/data-display';
-import { Checkbox, Input } from '#/ui/data-entry';
 import {
+  Button,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
@@ -23,7 +20,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '#/ui/navigation';
+} from '@kkhys/ui';
+
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '#/ui/data-display';
+import { Checkbox, Input } from '#/ui/data-entry';
 
 const meta = {
   title: 'Data Display / Data Table',

@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import * as React from 'react';
-import Link from 'next/link';
 
-import { cn } from '#/lib/shadcn-ui/utils';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,6 +10,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '.';
+import { cn } from '../../utils';
 
 const meta = {
   title: 'Navigation / Navigation Menu',
@@ -219,9 +218,9 @@ const DefaultDemo = () => {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <Link href='/' legacyBehavior passHref>
+          <a href='/'>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>Documentation</NavigationMenuLink>
-          </Link>
+          </a>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

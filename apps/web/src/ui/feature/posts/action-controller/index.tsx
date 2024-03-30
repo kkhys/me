@@ -7,17 +7,17 @@ import Link from 'next/link';
 import { ArrowTopRightIcon, CodeIcon, Share1Icon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
 
-import { Button } from '@kkhys/ui';
-
-import { site } from '#/config';
-import { cn } from '#/lib/shadcn-ui/utils';
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '#/ui/navigation';
+} from '@kkhys/ui';
+
+import { site } from '#/config';
+import { cn } from '#/lib/shadcn-ui/utils';
 
 const NavLink = <T extends string>({
   href,
