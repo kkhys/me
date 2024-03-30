@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from '#/lib/shadcn-ui/utils';
+import { cn } from '../../utils';
 
 const Skeleton = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
   <div className={cn('animate-pulse rounded-md bg-primary/10', className)} {...props} />

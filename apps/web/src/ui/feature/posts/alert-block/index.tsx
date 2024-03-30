@@ -1,7 +1,7 @@
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import { AlertTriangleIcon, LightbulbIcon, SparklesIcon } from 'lucide-react';
 
-import { Alert as _Alert, AlertDescription, AlertTitle } from '#/ui/feedback';
+import { Alert as _Alert, AlertDescription, AlertTitle } from '@kkhys/ui';
 
 enum AlertType {
   Note = 'note',

@@ -18,6 +18,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
+  toast,
+  ToastDecorator,
 } from '@kkhys/ui';
 
 import { cn } from '#/lib/shadcn-ui/utils';
@@ -37,7 +39,6 @@ import {
   FormLabel,
   FormMessage,
 } from '#/ui/data-entry';
-import { toast, ToastDecorator } from '#/ui/feedback';
 
 const meta = {
   title: 'Data Entry / Combobox',

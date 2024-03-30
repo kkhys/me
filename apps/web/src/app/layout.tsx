@@ -6,11 +6,12 @@ import type { Metadata, Viewport } from 'next';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/react';
 
+import { Toaster } from '@kkhys/ui';
+
 import { me, site } from '#/config';
 import { inter, jetBrainsMono, newsreader, notoEmoji, notoSansJP } from '#/lib/nextjs/fonts';
 import { Providers } from '#/providers';
 import { Layout } from '#/ui/feature/global';
-import { Toaster } from '#/ui/feedback';
 
 export const metadata = {
   title: {

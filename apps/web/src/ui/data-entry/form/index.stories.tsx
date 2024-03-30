@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { ToastDecorator } from '@kkhys/ui';
+
 import { FormDemo } from '#/ui/data-entry/input/index.stories';
-import { ToastDecorator } from '#/ui/feedback';
 import { Form } from '.';
 
 const meta = {

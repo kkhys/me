@@ -3,8 +3,6 @@ import * as React from 'react';
 import { Minus, Plus } from 'lucide-react';
 import { Bar, BarChart, ResponsiveContainer } from 'recharts';
 
-import { Button } from '@kkhys/ui';
-
 import {
   Drawer,
   DrawerClose,
@@ -15,6 +13,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '.';
+import { Button } from '../../general';
 
 const meta = {
   title: 'Feedback / Drawer',

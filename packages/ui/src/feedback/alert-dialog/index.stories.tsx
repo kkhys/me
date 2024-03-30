@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '@kkhys/ui';
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,6 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '.';
+import { Button } from '../../general';
 
 const meta = {
   title: 'Feedback / Alert Dialog',
