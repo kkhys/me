@@ -21,6 +21,7 @@ import {
   Alert,
   ArticleImage,
   CarouselBlock,
+  CodeBlock,
   Details,
   Footnotes,
   GoogleMaps,
@@ -32,7 +33,8 @@ import {
   Tweet,
   YouTube,
 } from '#/ui/post';
-import { Code } from './code';
+
+// import { Code } from './code';
 
 const components = {
   h2: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof HeaderWithAnchor>, 'level'>) => (
@@ -61,7 +63,7 @@ const components = {
       </Link>
     );
   },
-  figure: ({ children, ...props }) => <Code {...props}>{children}</Code>,
+  figure: ({ children, ...props }) => <CodeBlock {...props}>{children}</CodeBlock>,
   img: (props: React.ComponentPropsWithoutRef<typeof ArticleImage>) => <ArticleImage {...props} />,
   svg: ({ children, ...props }) => <MermaidBlock {...props}>{children}</MermaidBlock>,
   'link-card': (props: React.ComponentPropsWithoutRef<typeof LinkCard>) => <LinkCard {...props} />,
@@ -98,8 +100,8 @@ const components = {
   ),
   Details,
   Alert,
-  Step,
-  Steps,
+  Step: ({ ...props }: React.ComponentProps<typeof Step>) => <Step {...props} />,
+  Steps: ({ ...props }: React.ComponentProps<typeof Steps>) => <Steps {...props} />,
   section: ({ children, ...props }: React.ComponentProps<'section'> & { 'data-footnotes'?: boolean }) => {
     if (typeof props['data-footnotes'] === 'undefined') return <section {...props} />;
     return <Footnotes>{children}</Footnotes>;

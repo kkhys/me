@@ -79,7 +79,7 @@ const CodePanel = ({
   );
 };
 
-export const Code = ({
+export const CodeBlock = ({
   children,
   ...props
 }: {

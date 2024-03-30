@@ -5,8 +5,8 @@ import { formatDistanceStrict, parseISO } from 'date-fns';
 
 import { FadeIn, FadeInStagger, Prose } from '@kkhys/ui';
 
-import { BackButton, Container, Mdx } from '#/ui/global';
-import { ActionController, EyeCatch, PrevAndNextPager, RelatedPosts } from '#/ui/post';
+import { BackButton, Container } from '#/ui/global';
+import { ActionController, EyeCatch, Mdx, PrevAndNextPager, RelatedPosts } from '#/ui/post';
 import { fisherYatesShuffle } from '#/utils';
 
 export const ArticleLayout = ({ post }: { post: Post }) => {
