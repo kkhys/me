@@ -2,8 +2,9 @@ import * as React from 'react';
 import Link from 'next/link';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 
+import { Prose } from '@kkhys/ui';
+
 import { Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
-import { Prose } from '#/ui/general';
 
 const Page = () => {
   return (

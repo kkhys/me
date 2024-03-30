@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { Button } from '@kkhys/ui';
+import { Button, Prose } from '@kkhys/ui';
 
 import { Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
-import { Prose } from '#/ui/general';
 
 export const metadata = {
   robots: 'noindex',

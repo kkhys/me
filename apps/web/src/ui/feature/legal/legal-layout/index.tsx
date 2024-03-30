@@ -3,8 +3,9 @@ import * as React from 'react';
 import { format, parseISO } from 'date-fns';
 import { ja } from 'date-fns/locale';
 
+import { Prose } from '@kkhys/ui';
+
 import { BackButton, Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
-import { Prose } from '#/ui/general';
 
 export const LegalLayout = ({ legal }: { legal: Legal }) => {
   const {
