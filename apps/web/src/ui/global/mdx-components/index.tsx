@@ -10,13 +10,13 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  cn,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '@kkhys/ui';
 
-import { cn } from '#/lib/shadcn-ui/utils';
 import {
   Alert,
   ArticleImage,

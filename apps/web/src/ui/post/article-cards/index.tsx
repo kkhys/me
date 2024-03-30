@@ -4,10 +4,9 @@ import type { Post } from 'contentlayer/generated';
 import type { Route } from 'next';
 import * as React from 'react';
 import Link from 'next/link';
-import { clsx } from 'clsx';
 import { motion } from 'framer-motion';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@kkhys/ui';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, cn } from '@kkhys/ui';
 
 import { EyeCatch } from '#/ui/post';
 
@@ -47,7 +46,7 @@ export const ArticleCards = ({ posts, className }: { posts: Post[]; className?: 
     );
 
   return (
-    <div className={clsx('grid grid-cols-2 gap-3 xl:grid-cols-3 xl:gap-4', className)}>
+    <div className={cn('grid grid-cols-2 gap-3 xl:grid-cols-3 xl:gap-4', className)}>
       {posts.map((post) => (
         <ArticleCard key={post._id} post={post} />
       ))}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { cn } from '#/lib/shadcn-ui/utils';
+import { cn } from '@kkhys/ui';
 
 export const Step = ({ className, children, ...props }: React.ComponentProps<'h3'>) => (
   <h3 className={cn('mt-8', className)} {...props}>

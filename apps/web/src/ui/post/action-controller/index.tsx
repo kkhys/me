@@ -5,19 +5,19 @@ import type { Route } from 'next';
 import * as React from 'react';
 import Link from 'next/link';
 import { ArrowTopRightIcon, CodeIcon, Share1Icon } from '@radix-ui/react-icons';
-import { toast } from 'sonner';
 
 import {
   Button,
+  cn,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  toast,
 } from '@kkhys/ui';
 
 import { site } from '#/config';
-import { cn } from '#/lib/shadcn-ui/utils';
 
 const NavLink = <T extends string>({
   href,

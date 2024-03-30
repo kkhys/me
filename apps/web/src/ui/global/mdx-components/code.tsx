@@ -3,9 +3,8 @@
 
 import * as React from 'react';
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
-import { clsx } from 'clsx';
 
-import { cn } from '#/lib/shadcn-ui/utils';
+import { cn } from '@kkhys/ui';
 
 const CodeHeader = ({ title }: { title: string }) => (
   <div className='flex flex-wrap items-start rounded-t-md border-b border-white/10 bg-zinc-800 px-4 dark:bg-zinc-900'>
@@ -33,12 +32,12 @@ const CopyButton = ({ value, hasTitle }: { value: string; hasTitle: boolean }) =
       onClick={() => void window.navigator.clipboard.writeText(value).then(() => setCopyCount((count) => count + 1))}
       aria-label='Copy code to clipboard'
     >
-      <span aria-hidden={copied} className={clsx('transition duration-500', copied && 'scale-0 opacity-0')}>
+      <span aria-hidden={copied} className={cn('transition duration-500', copied && 'scale-0 opacity-0')}>
         <CopyIcon className='size-4 text-zinc-400' />
       </span>
       <span
         aria-hidden={!copied}
-        className={clsx(
+        className={cn(
           'absolute inset-0 flex items-center justify-center transition duration-500',
           !copied && 'scale-100 opacity-0',
         )}

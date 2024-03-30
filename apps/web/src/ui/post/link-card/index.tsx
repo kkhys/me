@@ -1,7 +1,8 @@
 import * as React from 'react';
 import Image from 'next/image';
 import { GlobeIcon } from '@radix-ui/react-icons';
-import { clsx } from 'clsx';
+
+import { cn } from '@kkhys/ui';
 
 export const LinkCard = ({
   className,
@@ -33,7 +34,7 @@ export const LinkCard = ({
     iconBlurDataURL,
   } = props;
   return (
-    <div className={clsx('select-none overflow-hidden rounded-md border', className)}>
+    <div className={cn('select-none overflow-hidden rounded-md border', className)}>
       <a
         href={url}
         target='_blank'

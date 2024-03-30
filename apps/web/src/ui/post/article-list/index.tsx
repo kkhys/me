@@ -1,7 +1,8 @@
 import type { Post } from 'contentlayer/generated';
 import * as React from 'react';
 import Link from 'next/link';
-import { clsx } from 'clsx';
+
+import { cn } from '@kkhys/ui';
 
 import { EyeCatch } from '#/ui/post';
 
@@ -48,7 +49,7 @@ export const ArticleList = ({
     );
 
   return (
-    <div className={clsx('divide-y border-t', className)}>
+    <div className={cn('divide-y border-t', className)}>
       {posts.map((post) => (
         <ListItem key={post._id} post={post} showDate={showDate} />
       ))}

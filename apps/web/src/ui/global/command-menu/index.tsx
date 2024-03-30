@@ -8,6 +8,7 @@ import { useTheme } from 'next-themes';
 
 import {
   Button,
+  cn,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -18,7 +19,6 @@ import {
 } from '@kkhys/ui';
 
 import { searchItems } from '#/config';
-import { cn } from '#/lib/shadcn-ui/utils';
 
 export const CommandMenu = ({ className }: { className?: string }) => {
   const router = useRouter();

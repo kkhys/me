@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { cn } from '#/lib/shadcn-ui/utils';
+import { cn } from '@kkhys/ui';
 
 export const MermaidBlock = ({
   className,
