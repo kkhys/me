@@ -3,7 +3,7 @@ import { GoogleMapsEmbed } from '@next/third-parties/google';
 
 import { env } from '#/env';
 
-export const GoogleMaps = ({ placeId, caption }: { placeId: string; caption?: string }) => {
+export const GoogleMapsBlock = ({ placeId, caption }: { placeId: string; caption?: string }) => {
   if (!caption) {
     return (
       <GoogleMapsEmbed

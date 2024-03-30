@@ -28,7 +28,7 @@ const NextImage = ({
   />
 );
 
-export const ArticleImage = ({
+export const ImageBlock = ({
   src,
   alt,
   blurDataURL,

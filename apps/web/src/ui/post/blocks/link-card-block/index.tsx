@@ -4,7 +4,7 @@ import { GlobeIcon } from '@radix-ui/react-icons';
 
 import { cn } from '@kkhys/ui';
 
-export const LinkCard = ({
+export const LinkCardBlock = ({
   className,
   ...props
 }: {

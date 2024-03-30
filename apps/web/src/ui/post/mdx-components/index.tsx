@@ -18,23 +18,21 @@ import {
 } from '@kkhys/ui';
 
 import {
-  Alert,
-  ArticleImage,
+  AlertBlock,
   CarouselBlock,
   CodeBlock,
-  Details,
-  Footnotes,
-  GoogleMaps,
+  DetailsBlock,
+  FootnotesBlock,
+  GoogleMapsBlock,
   HeaderWithAnchor,
-  LinkCard,
+  ImageBlock,
+  LinkCardBlock,
   MermaidBlock,
-  Step,
-  Steps,
-  Tweet,
-  YouTube,
+  StepBlock,
+  StepsBlock,
+  TweetBlock,
+  YouTubeBlock,
 } from '#/ui/post';
-
-// import { Code } from './code';
 
 const components = {
   h2: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof HeaderWithAnchor>, 'level'>) => (
@@ -64,17 +62,17 @@ const components = {
     );
   },
   figure: ({ children, ...props }) => <CodeBlock {...props}>{children}</CodeBlock>,
-  img: (props: React.ComponentPropsWithoutRef<typeof ArticleImage>) => <ArticleImage {...props} />,
+  img: (props: React.ComponentPropsWithoutRef<typeof ImageBlock>) => <ImageBlock {...props} />,
   svg: ({ children, ...props }) => <MermaidBlock {...props}>{children}</MermaidBlock>,
-  'link-card': (props: React.ComponentPropsWithoutRef<typeof LinkCard>) => <LinkCard {...props} />,
-  'youtube-embed': (props: React.ComponentPropsWithoutRef<typeof YouTube>) => <YouTube {...props} />,
-  'tweet-embed': (props: React.ComponentPropsWithoutRef<typeof Tweet>) => <Tweet {...props} />,
-  GoogleMaps,
+  'link-card': (props: React.ComponentPropsWithoutRef<typeof LinkCardBlock>) => <LinkCardBlock {...props} />,
+  'youtube-embed': (props: React.ComponentPropsWithoutRef<typeof YouTubeBlock>) => <YouTubeBlock {...props} />,
+  'tweet-embed': (props: React.ComponentPropsWithoutRef<typeof TweetBlock>) => <TweetBlock {...props} />,
+  GoogleMaps: (props: React.ComponentPropsWithoutRef<typeof GoogleMapsBlock>) => <GoogleMapsBlock {...props} />,
   Tabs,
-  TabsList: ({ className, ...props }: React.ComponentProps<typeof TabsList>) => (
+  TabsList: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof TabsList>) => (
     <TabsList className={cn('w-full justify-start rounded-none border-b bg-transparent p-0', className)} {...props} />
   ),
-  TabsTrigger: ({ className, ...props }: React.ComponentProps<typeof TabsTrigger>) => (
+  TabsTrigger: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof TabsTrigger>) => (
     <TabsTrigger
       className={cn(
         'relative h-9 rounded-none border-b border-b-transparent bg-transparent px-4 pb-3 pt-2 text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:bg-background-lighter data-[state=active]:text-foreground data-[state=active]:shadow-none',
@@ -83,30 +81,32 @@ const components = {
       {...props}
     />
   ),
-  TabsContent: ({ className, ...props }: React.ComponentProps<typeof TabsContent>) => (
+  TabsContent: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof TabsContent>) => (
     <TabsContent className={cn('mt-4 first:[&>*]:mt-0 last:[&>*]:mb-0', className)} {...props} />
   ),
-  Accordion: ({ className, ...props }: React.ComponentProps<typeof Accordion>) => (
+  Accordion: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof Accordion>) => (
     <Accordion className={cn('border-t', className)} {...props} />
   ),
-  AccordionContent: ({ className, ...props }: React.ComponentProps<typeof AccordionContent>) => (
+  AccordionContent: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof AccordionContent>) => (
     <AccordionContent className={cn('first:[&>div>*]:mt-0 last:[&>div>*]:mb-0', className)} {...props} />
   ),
-  AccordionItem: ({ className, ...props }: React.ComponentProps<typeof AccordionItem>) => (
+  AccordionItem: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof AccordionItem>) => (
     <AccordionItem className={cn('[&>h3]:m-0', className)} {...props} />
   ),
-  AccordionTrigger: ({ className, ...props }: React.ComponentProps<typeof AccordionTrigger>) => (
+  AccordionTrigger: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof AccordionTrigger>) => (
     <AccordionTrigger className={cn('[&>p]:m-0', className)} {...props} />
   ),
-  Details,
-  Alert,
-  Step: ({ ...props }: React.ComponentProps<typeof Step>) => <Step {...props} />,
-  Steps: ({ ...props }: React.ComponentProps<typeof Steps>) => <Steps {...props} />,
-  section: ({ children, ...props }: React.ComponentProps<'section'> & { 'data-footnotes'?: boolean }) => {
+  Details: ({ children, ...props }: React.ComponentPropsWithoutRef<typeof DetailsBlock>) => (
+    <DetailsBlock {...props}>{children}</DetailsBlock>
+  ),
+  Alert: (props: React.ComponentPropsWithoutRef<typeof AlertBlock>) => <AlertBlock {...props} />,
+  Step: (props: React.ComponentPropsWithoutRef<typeof StepBlock>) => <StepBlock {...props} />,
+  Steps: (props: React.ComponentPropsWithoutRef<typeof StepsBlock>) => <StepsBlock {...props} />,
+  section: ({ children, ...props }: React.ComponentPropsWithoutRef<'section'> & { 'data-footnotes'?: boolean }) => {
     if (typeof props['data-footnotes'] === 'undefined') return <section {...props} />;
-    return <Footnotes>{children}</Footnotes>;
+    return <FootnotesBlock>{children}</FootnotesBlock>;
   },
-  Carousel: ({ children, ...props }: React.ComponentProps<typeof CarouselBlock>) => (
+  Carousel: ({ children, ...props }: React.ComponentPropsWithoutRef<typeof CarouselBlock>) => (
     <CarouselBlock {...props}>{children}</CarouselBlock>
   ),
 } satisfies MDXComponents;

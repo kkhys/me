@@ -8,7 +8,7 @@ const Dots = () => (
   </div>
 );
 
-export const Footnotes = ({ className, children }: { className?: string; children: React.ReactNode }) => (
+export const FootnotesBlock = ({ className, children }: { className?: string; children: React.ReactNode }) => (
   <div id='footnotes' className={className}>
     <Dots />
     {children}

@@ -36,7 +36,7 @@ const getIcon = (type: AlertType) => {
   }
 };
 
-export const Alert = ({
+export const AlertBlock = ({
   type,
   description,
   className,
