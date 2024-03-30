@@ -5,7 +5,7 @@ import { get } from '@vercel/edge-config';
 import { Prose } from '@kkhys/ui';
 
 import { env } from '#/env';
-import { Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
+import { Container, FadeIn, FadeInStagger } from '#/ui/global';
 
 export const metadata = {
   robots: 'noindex',

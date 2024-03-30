@@ -1,4 +1,4 @@
-import { Container, ModeToggle } from '#/ui/feature/global';
+import { Container, ModeToggle } from '#/ui/global';
 
 export const Header = ({ className }: { className?: string }) => (
   <header className={className}>

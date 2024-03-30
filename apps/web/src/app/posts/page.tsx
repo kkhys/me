@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import * as React from 'react';
 import { Suspense } from 'react';
 
-import { BackButton, Container } from '#/ui/feature/global';
-import { CategoryTabs } from '#/ui/feature/posts';
+import { BackButton, Container } from '#/ui/global';
+import { CategoryTabs } from '#/ui/post';
 import { JsonLd } from './json-ld';
 
 export const generateMetadata = ({ searchParams }: { searchParams: Record<string, string | string[] | undefined> }) => {

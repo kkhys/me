@@ -3,7 +3,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { clsx } from 'clsx';
 
-import { EyeCatch } from '#/ui/feature/posts';
+import { EyeCatch } from '#/ui/post';
 
 const ListItem = ({
   post: { slug, emoji, title, publishedAt, publishedAtFormattedIso, status },

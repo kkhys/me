@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Footer, Header } from '#/ui/feature/global';
+import { Footer, Header } from '#/ui/global';
 
 const VerticalGradient = () => (
   <div

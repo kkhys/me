@@ -11,7 +11,7 @@ import { Toaster } from '@kkhys/ui';
 import { me, site } from '#/config';
 import { inter, jetBrainsMono, newsreader, notoEmoji, notoSansJP } from '#/lib/nextjs/fonts';
 import { Providers } from '#/providers';
-import { Layout } from '#/ui/feature/global';
+import { Layout } from '#/ui/global';
 
 export const metadata = {
   title: {

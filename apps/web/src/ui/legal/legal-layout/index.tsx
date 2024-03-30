@@ -5,7 +5,7 @@ import { ja } from 'date-fns/locale';
 
 import { Prose } from '@kkhys/ui';
 
-import { BackButton, Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
+import { BackButton, Container, FadeIn, FadeInStagger } from '#/ui/global';
 
 export const LegalLayout = ({ legal }: { legal: Legal }) => {
   const {

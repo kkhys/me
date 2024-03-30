@@ -1,7 +1,7 @@
 import type { Post } from 'contentlayer/generated';
 import * as React from 'react';
 
-import { ArticleList } from '#/ui/feature/posts';
+import { ArticleList } from '#/ui/post';
 
 export const RelatedPosts = ({ relatedPosts, className }: { relatedPosts: Post[]; className?: string }) => {
   if (!relatedPosts.length) return null;

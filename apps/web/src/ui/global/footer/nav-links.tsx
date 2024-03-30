@@ -19,7 +19,7 @@ import {
 } from '@kkhys/ui';
 
 import { site, storybook } from '#/config';
-import { CommandMenu } from '#/ui/feature/global';
+import { CommandMenu } from '#/ui/global';
 
 const NavLink = <T extends string>({
   href,

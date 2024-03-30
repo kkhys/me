@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ContainerInner, ContainerOuter } from '#/ui/feature/global';
+import { ContainerInner, ContainerOuter } from '#/ui/global';
 import { NavLinks } from './nav-links';
 
 export const Footer = () => (

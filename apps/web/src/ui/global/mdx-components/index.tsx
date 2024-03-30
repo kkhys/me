@@ -31,7 +31,7 @@ import {
   Steps,
   Tweet,
   YouTube,
-} from '#/ui/feature/posts';
+} from '#/ui/post';
 import { Code } from './code';
 
 const components = {

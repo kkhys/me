@@ -4,7 +4,7 @@ import { ArrowRightIcon } from '@radix-ui/react-icons';
 
 import { Prose } from '@kkhys/ui';
 
-import { Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
+import { Container, FadeIn, FadeInStagger } from '#/ui/global';
 
 const Page = () => {
   return (

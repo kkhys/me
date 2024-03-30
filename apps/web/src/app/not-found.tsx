@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { Button, Prose } from '@kkhys/ui';
 
-import { Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
+import { Container, FadeIn, FadeInStagger } from '#/ui/global';
 
 export const metadata = {
   robots: 'noindex',

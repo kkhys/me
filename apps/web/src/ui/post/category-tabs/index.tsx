@@ -20,8 +20,8 @@ import {
 } from '@kkhys/ui';
 
 import { env } from '#/env';
-import { FadeIn } from '#/ui/feature/global';
-import { ArticleList } from '#/ui/feature/posts';
+import { FadeIn } from '#/ui/global';
+import { ArticleList } from '#/ui/post';
 
 export const CategoryTabs = () => {
   const searchParams = useSearchParams();

@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@kkhys/ui';
 
-import { EyeCatch } from '#/ui/feature/posts';
+import { EyeCatch } from '#/ui/post';
 
 const ArticleCard = ({ post }: { post: Post }) => {
   const { slug, title, emoji, publishedAtFormattedUs, status } = post;

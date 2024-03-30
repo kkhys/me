@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 
 import { env } from '#/env';
-import { ArticleLayout } from '#/ui/feature/posts';
+import { ArticleLayout } from '#/ui/post';
 import { JsonLd } from './json-ld';
 
 import '#/styles/code-block.css';
