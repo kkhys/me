@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Image from 'next/image';
 
-import { Separator } from '#/ui/layout';
+import { Separator } from '@kkhys/ui';
+
 import { ScrollArea, ScrollBar } from '.';
 
 const meta = {
