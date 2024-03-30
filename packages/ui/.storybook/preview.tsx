@@ -2,7 +2,7 @@ import type { Preview } from '@storybook/react';
 
 import '../src/styles/globals.css';
 
-import { androidViewports, ipadViewports, iphoneViewports, tailwindViewports } from './viewports';
+import { androidViewports, ipadViewports, iphoneViewports, tailwindViewports } from '@kkhys/storybook-config';
 
 const preview = {
   globalTypes: {
