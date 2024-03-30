@@ -3,9 +3,9 @@ import * as React from 'react';
 import { allPosts } from 'contentlayer/generated';
 import { formatDistanceStrict, parseISO } from 'date-fns';
 
-import { Prose } from '@kkhys/ui';
+import { FadeIn, FadeInStagger, Prose } from '@kkhys/ui';
 
-import { BackButton, Container, FadeIn, FadeInStagger, Mdx } from '#/ui/global';
+import { BackButton, Container, Mdx } from '#/ui/global';
 import { ActionController, EyeCatch, PrevAndNextPager, RelatedPosts } from '#/ui/post';
 import { fisherYatesShuffle } from '#/utils';
 

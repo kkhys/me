@@ -1,3 +1,4 @@
+export * from './animation';
 export * from './data-display';
 export * from './data-entry';
 export * from './feedback';

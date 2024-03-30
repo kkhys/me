@@ -9,6 +9,7 @@ import { RssIcon } from 'lucide-react';
 
 import {
   Button,
+  FadeIn,
   Tabs,
   TabsContent,
   TabsList,
@@ -20,7 +21,6 @@ import {
 } from '@kkhys/ui';
 
 import { env } from '#/env';
-import { FadeIn } from '#/ui/global';
 import { ArticleList } from '#/ui/post';
 
 export const CategoryTabs = () => {
