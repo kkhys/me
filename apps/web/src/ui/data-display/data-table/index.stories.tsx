@@ -20,9 +20,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@kkhys/ui';
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '#/ui/data-display';
 import { Checkbox, Input } from '#/ui/data-entry';
 
 const meta = {

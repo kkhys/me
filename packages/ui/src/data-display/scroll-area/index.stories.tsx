@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Image from 'next/image';
 
-import { Separator } from '@kkhys/ui';
-
 import { ScrollArea, ScrollBar } from '.';
+import { Separator } from '../../layout';
 
 const meta = {
   title: 'Data Display / Scroll Area',

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from '@kkhys/ui';
-
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '.';
+import { Button } from '../../general';
 
 const meta = {
   title: 'Data Display / Tooltip',

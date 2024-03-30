@@ -12,10 +12,13 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from '@kkhys/ui';
 
 import { site, storybook } from '#/config';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
 import { CommandMenu } from '#/ui/feature/global';
 
 const NavLink = <T extends string>({

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { CalendarIcon } from '@radix-ui/react-icons';
 
-import { Avatar, AvatarFallback, AvatarImage, Button } from '@kkhys/ui';
-
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '.';
+import { Button } from '../../general';
+import { Avatar, AvatarFallback, AvatarImage } from '../avatar';
 
 const meta = {
   title: 'Data Display / HoverCard',

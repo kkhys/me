@@ -3,10 +3,9 @@ import Link from 'next/link';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { allPosts } from 'contentlayer/generated';
 
-import { Button } from '@kkhys/ui';
+import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@kkhys/ui';
 
 import { cn } from '#/lib/shadcn-ui/utils';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
 
 export const PrevAndNextPager = ({ id, className }: { id: string; className?: string }) => {
   const pager = getPager(id);

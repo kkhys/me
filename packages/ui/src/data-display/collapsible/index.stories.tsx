@@ -2,9 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import * as React from 'react';
 import { CaretSortIcon } from '@radix-ui/react-icons';
 
-import { Button } from '@kkhys/ui';
-
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '.';
+import { Button } from '../../general';
 
 const meta = {
   title: 'Data Display / Collapsible',

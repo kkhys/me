@@ -6,10 +6,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ResetIcon } from '@radix-ui/react-icons';
 
-import { Button } from '@kkhys/ui';
+import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@kkhys/ui';
 
 import { AppContext } from '#/providers';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
 
 export const BackButton = <T extends string>({
   href,
