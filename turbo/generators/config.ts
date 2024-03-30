@@ -74,9 +74,6 @@ export default function generator(plop: PlopTypes.NodePlopAPI) {
         /**
          * Install deps and format everything
          */
-        execSync('pnpm manypkg fix', {
-          stdio: 'inherit',
-        });
         execSync(`pnpm prettier --write packages/${answers.name}/** --list-different`);
         return 'Package scaffolded';
       },

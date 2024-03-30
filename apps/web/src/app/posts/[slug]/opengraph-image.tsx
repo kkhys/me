@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import { allPosts } from 'contentlayer/generated';
 
-import { env } from '#/env.mjs';
+import { env } from '#/env';
 
 export const runtime = 'edge';
 

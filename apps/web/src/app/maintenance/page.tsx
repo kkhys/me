@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { get } from '@vercel/edge-config';
 
-import { env } from '#/env.mjs';
-import { Container, FadeIn, FadeInStagger } from '#/ui/feature/global';
-import { Prose } from '#/ui/general';
+import { FadeIn, FadeInStagger, Prose } from '@kkhys/ui';
+
+import { env } from '#/env';
+import { Container } from '#/ui/global';
 
 export const metadata = {
   robots: 'noindex',

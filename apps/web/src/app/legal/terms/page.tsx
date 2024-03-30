@@ -1,9 +1,9 @@
-import * as React from 'react';
 import type { Metadata } from 'next';
+import * as React from 'react';
 import { notFound } from 'next/navigation';
 import { allLegals } from 'contentlayer/generated';
 
-import { LegalLayout } from '#/ui/feature/legal';
+import { LegalLayout } from '#/ui/legal';
 import { JsonLd } from './json-ld';
 
 export const generateMetadata = () => {
