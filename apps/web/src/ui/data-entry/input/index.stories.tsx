@@ -4,6 +4,8 @@ import { userEvent, within } from '@storybook/testing-library';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { Button } from '@kkhys/ui';
+
 import {
   Form,
   FormControl,
@@ -15,7 +17,6 @@ import {
   Label,
 } from '#/ui/data-entry';
 import { toast, ToastDecorator } from '#/ui/feedback';
-import { Button } from '#/ui/general';
 import { Input } from '.';
 
 const meta = {

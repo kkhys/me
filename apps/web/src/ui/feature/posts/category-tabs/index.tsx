@@ -7,6 +7,8 @@ import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 import { RssIcon } from 'lucide-react';
 
+import { Button } from '@kkhys/ui';
+
 import { env } from '#/env';
 import {
   Tabs,
@@ -20,7 +22,6 @@ import {
 } from '#/ui/data-display';
 import { FadeIn } from '#/ui/feature/global';
 import { ArticleList } from '#/ui/feature/posts';
-import { Button } from '#/ui/general';
 
 export const CategoryTabs = () => {
   const searchParams = useSearchParams();

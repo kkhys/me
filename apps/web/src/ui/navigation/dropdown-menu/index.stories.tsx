@@ -2,7 +2,8 @@ import type { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-men
 import type { Meta, StoryObj } from '@storybook/react';
 import * as React from 'react';
 
-import { Button } from '#/ui/general';
+import { Button } from '@kkhys/ui';
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,

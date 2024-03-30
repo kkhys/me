@@ -3,9 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { Button } from '@kkhys/ui';
+
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Label } from '#/ui/data-entry';
 import { toast, ToastDecorator } from '#/ui/feedback';
-import { Button } from '#/ui/general';
 import { RadioGroup, RadioGroupItem } from '.';
 
 const meta = {

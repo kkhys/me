@@ -5,6 +5,8 @@ import { CaretSortIcon, CheckIcon, DotsHorizontalIcon } from '@radix-ui/react-ic
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { Button } from '@kkhys/ui';
+
 import { cn } from '#/lib/shadcn-ui/utils';
 import { Popover, PopoverContent, PopoverTrigger } from '#/ui/data-display';
 import {
@@ -23,7 +25,6 @@ import {
   FormMessage,
 } from '#/ui/data-entry';
 import { toast, ToastDecorator } from '#/ui/feedback';
-import { Button } from '#/ui/general';
 import {
   DropdownMenu,
   DropdownMenuContent,

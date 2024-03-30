@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { Button } from '@kkhys/ui';
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/ui/data-display';
 import { Input, Label } from '#/ui/data-entry';
-import { Button } from '#/ui/general';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '.';
 
 const meta = {

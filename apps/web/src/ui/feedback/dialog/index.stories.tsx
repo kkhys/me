@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { Button } from '@kkhys/ui';
+
 import { Input, Label } from '#/ui/data-entry';
-import { Button } from '#/ui/general';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '.';
 
 const meta = {

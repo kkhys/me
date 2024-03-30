@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BellIcon, CheckIcon } from '@radix-ui/react-icons';
 
+import { Button } from '@kkhys/ui';
+
 import {
   Input,
   Label as MyLabel,
@@ -11,7 +13,6 @@ import {
   SelectValue,
   Switch,
 } from '#/ui/data-entry';
-import { Button } from '#/ui/general';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '.';
 
 const meta = {

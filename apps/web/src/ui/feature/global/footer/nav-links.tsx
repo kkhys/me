@@ -5,10 +5,11 @@ import * as React from 'react';
 import Link from 'next/link';
 import { ArrowTopRightIcon, DotsHorizontalIcon, HomeIcon } from '@radix-ui/react-icons';
 
+import { Button } from '@kkhys/ui';
+
 import { site, storybook } from '#/config';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
 import { CommandMenu } from '#/ui/feature/global';
-import { Button } from '#/ui/general';
 import {
   DropdownMenu,
   DropdownMenuContent,

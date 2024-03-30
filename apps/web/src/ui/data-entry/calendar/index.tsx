@@ -4,8 +4,9 @@ import * as React from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { DayPicker } from 'react-day-picker';
 
+import { buttonVariants } from '@kkhys/ui';
+
 import { cn } from '#/lib/shadcn-ui/utils';
-import { buttonVariants } from '#/ui/general';
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
