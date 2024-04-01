@@ -458,12 +458,9 @@ importers:
 
   packages/db:
     dependencies:
-      '@planetscale/database':
-        specifier: 1.16.0
-        version: 1.16.0
       drizzle-orm:
         specifier: 0.30.6
-        version: 0.30.6(@planetscale/database@1.16.0)(mysql2@3.9.3)
+        version: 0.30.6(mysql2@3.9.3)
     devDependencies:
       '@kkhys/eslint-config':
         specifier: workspace:*
@@ -5240,11 +5237,6 @@ packages:
     engines: {node: '>=14'}
     requiresBuild: true
     optional: true
-
-  /@planetscale/database@1.16.0:
-    resolution: {integrity: sha512-HNUrTqrd8aTRZYMDcsoZ62s36sIWkMMmKZBOehoCWR2WrfNPKq+Q1yQef5okl3pSVlldFnu2h/dbHjOsDTHXug==}
-    engines: {node: '>=16'}
-    dev: false
 
   /@playwright/test@1.42.1:
     resolution: {integrity: sha512-Gq9rmS54mjBL/7/MvBaNOBwbfnh7beHvS6oS4srqXFcQHpQCV1+c8JXWE8VLPyRDhgS3H8x8A7hztqI9VnwrAQ==}
@@ -12363,7 +12355,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.30.6(@planetscale/database@1.16.0)(mysql2@3.9.3):
+  /drizzle-orm@0.30.6(mysql2@3.9.3):
     resolution: {integrity: sha512-8RgNUmY7J03GRuRgBV5SaJNbYgLVPjdSWNS/bRkIMIHt2TFCA439lJsNpqYX8asyKMqkw8ceBiamUnCIXZIt9w==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -12443,7 +12435,6 @@ packages:
       sqlite3:
         optional: true
     dependencies:
-      '@planetscale/database': 1.16.0
       mysql2: 3.9.3
     dev: false
 
