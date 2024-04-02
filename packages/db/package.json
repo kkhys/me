@@ -16,7 +16,8 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "drizzle-orm": "0.30.6"
+    "drizzle-orm": "0.30.6",
+    "postgres": "3.4.4"
   },
   "devDependencies": {
     "@kkhys/eslint-config": "workspace:*",
@@ -25,7 +26,6 @@
     "dotenv-cli": "7.4.1",
     "drizzle-kit": "0.20.14",
     "eslint": "8.57.0",
-    "mysql2": "3.9.3",
     "prettier": "3.2.5",
     "typescript": "5.4.3"
   },
