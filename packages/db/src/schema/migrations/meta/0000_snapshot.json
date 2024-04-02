@@ -1,63 +1,65 @@
 {
-  "version": "5",
-  "dialect": "mysql",
-  "id": "db1706c8-943d-4eb0-8f72-46f4f0e1d282",
+  "id": "1ee531a8-704d-4767-9e1f-6f373b1c56da",
   "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "5",
+  "dialect": "pg",
   "tables": {
     "me_post": {
       "name": "me_post",
+      "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
+        "slug": {
+          "name": "slug",
           "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
+          "primaryKey": true,
+          "notNull": true
         },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
+        "views": {
+          "name": "views",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false
+          "default": 0
+        },
+        "likes": {
+          "name": "likes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
         },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "default": "now()"
         },
         "updatedAt": {
           "name": "updatedAt",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "onUpdate": true
+          "notNull": true,
+          "default": "now()"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "slug_idx": {
+          "name": "slug_idx",
+          "columns": ["slug"],
+          "isUnique": true
+        }
+      },
       "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "me_post_id": {
-          "name": "me_post_id",
-          "columns": ["id"]
-        }
-      },
-      "uniqueConstraints": {
-        "me_post_name_unique": {
-          "name": "me_post_name_unique",
-          "columns": ["name"]
-        }
-      }
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
     }
   },
+  "enums": {},
   "schemas": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
+    "tables": {}
   }
 }
