@@ -7,9 +7,8 @@ export const posts = pgTable(
   {
     slug: varchar('slug', { length: 255 }).primaryKey(),
     views: integer('views').default(0).notNull(),
-    likes: integer('likes').default(0).notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
-    updatedAt: timestamp('updatedAt').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
   },
   ({ slug }) => ({
     slugIdx: uniqueIndex('slug_idx').on(slug),

@@ -1,5 +1,5 @@
 {
-  "id": "1ee531a8-704d-4767-9e1f-6f373b1c56da",
+  "id": "d0b14aec-6d05-4376-a77d-b79ff07cf93a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -21,13 +21,6 @@
           "notNull": true,
           "default": 0
         },
-        "likes": {
-          "name": "likes",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -35,8 +28,8 @@
           "notNull": true,
           "default": "now()"
         },
-        "updatedAt": {
-          "name": "updatedAt",
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
@@ -46,7 +39,9 @@
       "indexes": {
         "slug_idx": {
           "name": "slug_idx",
-          "columns": ["slug"],
+          "columns": [
+            "slug"
+          ],
           "isUnique": true
         }
       },
