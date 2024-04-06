@@ -39,5 +39,11 @@
       "outputs": ["coverage/**"],
       "dependsOn": []
     }
-  }
+  },
+  "globalEnv": [
+    "DATABASE_URL",
+    "AUTH_SECRET",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET"
+  ]
 }
