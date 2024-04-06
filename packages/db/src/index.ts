@@ -1,16 +1,20 @@
-import { drizzle } from 'drizzle-orm/postgres-js';
-import postgres from 'postgres';
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
 
-import { post } from './schema';
+import { auth, post } from './schema';
 
-export const schema = { ...post };
+export const schema = { ...auth, ...post };
 
 export { pgTable as tableCreator } from './schema';
 
 export * from 'drizzle-orm';
 
-export const connectionString = process.env.DATABASE_URL!;
+if (!process.env.DATABASE_URL) {
+  throw new Error('DATABASE_URL is not set');
+}
 
-const client = postgres(connectionString, { prepare: false });
+export const connectionString = process.env.DATABASE_URL;
+
+const client = neon(connectionString);
 
 export const db = drizzle(client, { schema });
