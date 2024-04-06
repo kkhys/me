@@ -3,6 +3,12 @@
   "private": "true",
   "version": "0.1.0",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -10,14 +16,15 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
     "generate": "pnpm with-env drizzle-kit generate:pg --config src/config.ts",
-    "push": "pnpm with-env drizzle-kit push:pg --config src/config.ts",
+    "migrate": "pnpm with-env tsx ./src/migrate.ts",
+    "seed": "pnpm with-env tsx ./src/seed.ts",
     "studio": "pnpm with-env drizzle-kit studio --config src/config.ts",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "with-env": "dotenv -e ../../.env --"
   },
   "dependencies": {
-    "drizzle-orm": "0.30.6",
-    "postgres": "3.4.4"
+    "@neondatabase/serverless": "0.9.0",
+    "drizzle-orm": "0.30.6"
   },
   "devDependencies": {
     "@kkhys/eslint-config": "workspace:*",
@@ -26,7 +33,9 @@
     "dotenv-cli": "7.4.1",
     "drizzle-kit": "0.20.14",
     "eslint": "8.57.0",
+    "pg": "8.11.5",
     "prettier": "3.2.5",
+    "tsx": "4.7.2",
     "typescript": "5.4.3"
   },
   "eslintConfig": {
