@@ -20,6 +20,9 @@ importers:
       '@kkhys/prettier-config':
         specifier: workspace:0.1.0
         version: link:tooling/prettier
+      '@playwright/test':
+        specifier: 1.43.0
+        version: 1.43.0
       '@turbo/gen':
         specifier: 1.13.2
         version: 1.13.2(@types/node@20.12.5)(typescript@5.4.4)
@@ -10260,7 +10263,7 @@ packages:
       '@types/junit-report-builder': 3.0.2
       axe-core: 4.8.2
       axe-html-reporter: 2.2.3(axe-core@4.8.2)
-      junit-report-builder: 3.1.0
+      junit-report-builder: 3.2.1
       picocolors: 1.0.0
       playwright: 1.43.0
     dev: true
@@ -16773,8 +16776,8 @@ packages:
       object.values: 1.1.7
     dev: false
 
-  /junit-report-builder@3.1.0:
-    resolution: {integrity: sha512-uKcPKbjl/v3pqQUuQuCehmuObAb9adZiZleKp0JijMmKPpBh5rl9YvyPjVqzaLkA0dROnMnQvjXQF37VbYoofw==}
+  /junit-report-builder@3.2.1:
+    resolution: {integrity: sha512-IMCp5XyDQ4YESDE4Za7im3buM0/7cMnRfe17k2X8B05FnUl9vqnaliX6cgOEmPIeWKfJrEe/gANRq/XgqttCqQ==}
     engines: {node: '>=8'}
     dependencies:
       date-format: 4.0.3
@@ -17630,7 +17633,7 @@ packages:
     dependencies:
       '@fortawesome/fontawesome-free': 6.5.1
       mermaid: 10.7.0
-      playwright-core: 1.42.1
+      playwright-core: 1.43.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -19808,17 +19811,10 @@ packages:
       sharp: 0.32.6
     dev: true
 
-  /playwright-core@1.42.1:
-    resolution: {integrity: sha512-mxz6zclokgrke9p1vtdy/COWBH+eOZgYUVVU34C73M+4j4HLlQJHtfcqiqqxpP0o8HhMkflvfbquLX5dg6wlfA==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dev: false
-
   /playwright-core@1.43.0:
     resolution: {integrity: sha512-iWFjyBUH97+pUFiyTqSLd8cDMMOS0r2ZYz2qEsPjH8/bX++sbIJT35MSwKnp1r/OQBAqC5XO99xFbJ9XClhf4w==}
     engines: {node: '>=16'}
     hasBin: true
-    dev: true
 
   /playwright@1.43.0:
     resolution: {integrity: sha512-SiOKHbVjTSf6wHuGCbqrEyzlm6qvXcv7mENP+OZon1I07brfZLGdfWV0l/efAzVx7TF3Z45ov1gPEkku9q25YQ==}
