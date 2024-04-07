@@ -7,16 +7,16 @@ import { Skeleton } from '@kkhys/ui';
 import { api } from '#/lib/trpc/react';
 
 export const ViewCounter = ({ slug }: { slug: string }) => {
-  const { mutateAsync } = api.post.incrementViews.useMutation();
+  const utils = api.useUtils();
 
-  React.useEffect(() => {
-    void (async () => {
-      await mutateAsync({ slug });
-    })();
-  }, [mutateAsync, slug]);
+  const { mutate } = api.post.incrementViews.useMutation({
+    onSuccess: async () => await utils.post.invalidate(),
+  });
 
   const { data } = api.post.bySlug.useQuery({ slug });
   const views = data?.views;
+
+  React.useEffect(() => mutate({ slug }), [mutate, slug]);
 
   if (!views) return null;
 
