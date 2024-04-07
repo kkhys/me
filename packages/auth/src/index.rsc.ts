@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 import { cache } from 'react';
 import NextAuth from 'next-auth';
 
