@@ -11,9 +11,10 @@ const viewport = { once: true, margin: '0px 0px -200px' };
 export const FadeIn = ({ children, ...props }: React.ComponentPropsWithoutRef<typeof motion.div>) => {
   const shouldReduceMotion = useReducedMotion();
   const isInStaggerGroup = useContext(FadeInStaggerContext);
+  const MotionDiv = motion.div;
 
   return (
-    <motion.div
+    <MotionDiv
       variants={{
         hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 12 },
         visible: { opacity: 1, y: 0 },
@@ -29,7 +30,7 @@ export const FadeIn = ({ children, ...props }: React.ComponentPropsWithoutRef<ty
       {...props}
     >
       {children}
-    </motion.div>
+    </MotionDiv>
   );
 };
 
@@ -38,9 +39,11 @@ export const FadeInStagger = ({
   faster = false,
   ...props
 }: React.ComponentPropsWithoutRef<typeof motion.div> & { faster?: boolean }) => {
+  const MotionDiv = motion.div;
+
   return (
     <FadeInStaggerContext.Provider value={true}>
-      <motion.div
+      <MotionDiv
         initial='hidden'
         whileInView='visible'
         viewport={viewport}
@@ -48,7 +51,7 @@ export const FadeInStagger = ({
         {...props}
       >
         {children}
-      </motion.div>
+      </MotionDiv>
     </FadeInStaggerContext.Provider>
   );
 };
