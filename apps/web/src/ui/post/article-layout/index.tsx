@@ -1,12 +1,21 @@
 import type { Post } from 'contentlayer/generated';
 import * as React from 'react';
+import { Suspense } from 'react';
 import { allPosts } from 'contentlayer/generated';
 import { formatDistanceStrict, parseISO } from 'date-fns';
 
 import { FadeIn, FadeInStagger, Prose } from '@kkhys/ui';
 
 import { BackButton, Container } from '#/ui/global';
-import { ActionController, EyeCatch, Mdx, PrevAndNextPager, RelatedPosts } from '#/ui/post';
+import {
+  ActionController,
+  EyeCatch,
+  Mdx,
+  PrevAndNextPager,
+  RelatedPosts,
+  ViewCounter,
+  ViewCounterSkeleton,
+} from '#/ui/post';
 import { fisherYatesShuffle } from '#/utils';
 
 export const ArticleLayout = ({ post }: { post: Post }) => {
@@ -18,6 +27,7 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
     publishedAtFormattedUs,
     status,
     _id: id,
+    slug,
     body: { code },
   } = post;
 
@@ -41,9 +51,14 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
               <h1 className='palt mt-4 font-medium'>{title}</h1>
             </FadeIn>
             <FadeIn>
-              <time className='mt-2 block font-sans text-sm text-muted-foreground' dateTime={publishedAt}>
-                {publishedAtFormattedUs} ({publishedAtDistanceToNow(publishedAt)} ago)
-              </time>
+              <div className='mt-2 flex items-center justify-between '>
+                <time dateTime={publishedAt} className='font-sans text-sm text-muted-foreground'>
+                  {publishedAtFormattedUs} ({publishedAtDistanceToNow(publishedAt)} ago)
+                </time>
+                <Suspense fallback={<ViewCounterSkeleton />}>
+                  <ViewCounter slug={slug} />
+                </Suspense>
+              </div>
             </FadeIn>
           </header>
           <FadeIn>

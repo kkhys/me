@@ -1,0 +1,46 @@
+{
+  "name": "@kkhys/auth",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "react-server": "./src/index.rsc.ts",
+      "default": "./src/index.ts"
+    },
+    "./env": "./env.ts"
+  },
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@auth/core": "0.28.2",
+    "@auth/drizzle-adapter": "0.8.2",
+    "@kkhys/db": "workspace:*",
+    "@t3-oss/env-nextjs": "0.9.2",
+    "next": "14.1.4",
+    "next-auth": "5.0.0-beta.16",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "zod": "3.22.4"
+  },
+  "devDependencies": {
+    "@kkhys/eslint-config": "workspace:*",
+    "@kkhys/prettier-config": "workspace:*",
+    "@kkhys/tsconfig": "workspace:*",
+    "@types/react": "18.2.73",
+    "eslint": "8.57.0",
+    "prettier": "3.2.5",
+    "typescript": "5.4.4"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@kkhys/eslint-config/base"
+    ]
+  },
+  "prettier": "@kkhys/prettier-config"
+}
