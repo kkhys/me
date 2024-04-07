@@ -53,6 +53,8 @@ jobs:
 
       - name: Build
         run: pnpm turbo build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Lint and type-check
         run: pnpm turbo lint format typecheck
