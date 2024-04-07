@@ -4,6 +4,7 @@ import * as React from 'react';
 import { usePathname } from 'next/navigation';
 
 import { ThemeProvider } from '#/lib/nextjs/theme-provider';
+import { TRPCReactProvider } from '#/lib/trpc/react';
 
 /**
  * A custom hook that returns the previous value of a given variable.
@@ -31,7 +32,7 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <AppContext.Provider value={{ previousPathname }}>
       <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-        {children}
+        <TRPCReactProvider>{children}</TRPCReactProvider>
       </ThemeProvider>
     </AppContext.Provider>
   );

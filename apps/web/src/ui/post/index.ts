@@ -9,3 +9,4 @@ export * from './header-with-anchor';
 export * from './mdx-components';
 export * from './prev-and-next-pager';
 export * from './related-posts';
+export * from './view-counter';

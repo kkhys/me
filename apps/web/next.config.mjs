@@ -11,7 +11,7 @@ jiti('./src/env');
 const config = {
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-  transpilePackages: ['@kkhys/ui'],
+  transpilePackages: ['@kkhys/api', '@kkhys/auth', '@kkhys/db', '@kkhys/ui'],
   /**
    * @see https://github.com/contentlayerdev/contentlayer/issues/313#issuecomment-1279678289
    */
