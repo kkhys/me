@@ -49,10 +49,13 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright Browser
-        run: cd apps/web && pnpm dlx playwright install --with-deps chromium
+        run: pnpm dlx playwright install --with-deps chromium
 
       - name: Build
         run: pnpm turbo build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
 
       - name: Lint and type-check
         run: pnpm turbo lint format typecheck
