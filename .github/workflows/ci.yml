@@ -55,6 +55,7 @@ jobs:
         run: pnpm turbo build
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
 
       - name: Lint and type-check
         run: pnpm turbo lint format typecheck
