@@ -275,8 +275,8 @@ importers:
         specifier: 4.2.2
         version: 4.2.2
       framer-motion:
-        specifier: 11.0.24
-        version: 11.0.24(react-dom@18.2.0)(react@18.2.0)
+        specifier: 11.0.25
+        version: 11.0.25(react-dom@18.2.0)(react@18.2.0)
       lucide-react:
         specifier: 0.365.0
         version: 0.365.0(react@18.2.0)
@@ -424,7 +424,7 @@ importers:
         version: 3.0.2
       axe-playwright:
         specifier: 2.0.1
-        version: 2.0.1(playwright@1.42.1)
+        version: 2.0.1(playwright@1.43.0)
       dotenv-cli:
         specifier: 7.4.1
         version: 7.4.1
@@ -720,8 +720,8 @@ importers:
         specifier: 8.0.1
         version: 8.0.1(react@18.2.0)
       framer-motion:
-        specifier: 11.0.24
-        version: 11.0.24(react-dom@18.2.0)(react@18.2.0)
+        specifier: 11.0.25
+        version: 11.0.25(react-dom@18.2.0)(react@18.2.0)
       input-otp:
         specifier: 1.2.4
         version: 1.2.4(react-dom@18.2.0)(react@18.2.0)
@@ -9155,7 +9155,7 @@ packages:
   /@types/pg@8.6.6:
     resolution: {integrity: sha512-O2xNmXebtwVekJDD+02udOncjVcMZQuTEQEMpKJ0ZRf5E7/9JJX3izhKUcUifBkyKpljyUM6BTgy2trmviKlpw==}
     dependencies:
-      '@types/node': 20.12.2
+      '@types/node': 20.12.5
       pg-protocol: 1.6.1
       pg-types: 2.2.0
     dev: false
@@ -10261,7 +10261,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /axe-playwright@2.0.1(playwright@1.42.1):
+  /axe-playwright@2.0.1(playwright@1.43.0):
     resolution: {integrity: sha512-MHjNjGARulF9XzqSfspmNjw+tpBz4x9o1VlTuLWEUW9fqzhn+xWa1qEpuOIQPbsRWQiLfooDjQAunLeE0PM5AQ==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -10271,7 +10271,7 @@ packages:
       axe-html-reporter: 2.2.3(axe-core@4.8.2)
       junit-report-builder: 3.1.0
       picocolors: 1.0.0
-      playwright: 1.42.1
+      playwright: 1.43.0
     dev: true
 
   /axobject-query@3.2.1:
@@ -14199,8 +14199,8 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: false
 
-  /framer-motion@11.0.24(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-l2iM8NR53qtcujgAqYvGPJJGModPNWEVUaATRDLfnaLvUoFpImovBm0AHalSSsY8tW6knP8mfJTW4WYGbnAe4w==}
+  /framer-motion@11.0.25(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-mRt7vQGzA7++wTgb+PW1TrlXXgndqR6hCiJ48fXr2X9alte2hPQiAq556HRwDCt0Q5X98MNvcSe4KUa27Gm5Lg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -19829,21 +19829,12 @@ packages:
     resolution: {integrity: sha512-mxz6zclokgrke9p1vtdy/COWBH+eOZgYUVVU34C73M+4j4HLlQJHtfcqiqqxpP0o8HhMkflvfbquLX5dg6wlfA==}
     engines: {node: '>=16'}
     hasBin: true
+    dev: false
 
   /playwright-core@1.43.0:
     resolution: {integrity: sha512-iWFjyBUH97+pUFiyTqSLd8cDMMOS0r2ZYz2qEsPjH8/bX++sbIJT35MSwKnp1r/OQBAqC5XO99xFbJ9XClhf4w==}
     engines: {node: '>=16'}
     hasBin: true
-    dev: true
-
-  /playwright@1.42.1:
-    resolution: {integrity: sha512-PgwB03s2DZBcNRoW+1w9E+VkLBxweib6KTXM0M3tkiT4jVxKSi6PmVJ591J+0u10LUrgxB7dLRbiJqO5s2QPMg==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dependencies:
-      playwright-core: 1.42.1
-    optionalDependencies:
-      fsevents: 2.3.2
     dev: true
 
   /playwright@1.43.0:
