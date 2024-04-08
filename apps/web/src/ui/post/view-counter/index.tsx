@@ -18,7 +18,7 @@ export const ViewCounter = ({ slug }: { slug: string }) => {
 
   React.useEffect(() => mutate({ slug }), [mutate, slug]);
 
-  if (!views) return null;
+  if (!views) return <ViewCounterSkeleton />;
 
   return <p className='font-sans text-sm text-muted-foreground'>{views.toLocaleString()} views</p>;
 };
