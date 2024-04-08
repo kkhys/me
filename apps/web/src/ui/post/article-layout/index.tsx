@@ -6,6 +6,7 @@ import { formatDistanceStrict, parseISO } from 'date-fns';
 
 import { FadeIn, FadeInStagger, Prose } from '@kkhys/ui';
 
+import { env } from '#/env';
 import { BackButton, Container } from '#/ui/global';
 import {
   ActionController,
@@ -55,9 +56,13 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
                 <time dateTime={publishedAt} className='font-sans text-sm text-muted-foreground'>
                   {publishedAtFormattedUs} ({publishedAtDistanceToNow(publishedAt)} ago)
                 </time>
-                <Suspense fallback={<ViewCounterSkeleton />}>
-                  <ViewCounter slug={slug} />
-                </Suspense>
+                {env.NODE_ENV !== 'development' ? (
+                  <Suspense fallback={<ViewCounterSkeleton />}>
+                    <ViewCounter slug={slug} />
+                  </Suspense>
+                ) : (
+                  <p className='font-sans text-sm text-muted-foreground'>xxx views</p>
+                )}
               </div>
             </FadeIn>
           </header>
