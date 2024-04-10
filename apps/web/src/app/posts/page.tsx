@@ -6,19 +6,16 @@ import { BackButton, Container } from '#/ui/global';
 import { CategoryTabs } from '#/ui/post';
 import { JsonLd } from './json-ld';
 
-export const generateMetadata = ({ searchParams }: { searchParams: Record<string, string | string[] | undefined> }) => {
-  const category = (searchParams.category as string) ?? 'blog';
-  return {
-    title: `${category.charAt(0).toUpperCase()}${category.slice(1)}`,
-    description: 'Blog posts of Keisuke Hayashi.',
-    alternates: {
-      canonical: '/posts',
-    },
-    openGraph: {
-      url: '/posts',
-    },
-  } satisfies Metadata;
-};
+export const metadata = {
+  title: 'Blog',
+  description: 'Blog posts of Keisuke Hayashi.',
+  alternates: {
+    canonical: '/posts',
+  },
+  openGraph: {
+    url: '/posts',
+  },
+} satisfies Metadata;
 
 const Page = () => (
   <>
