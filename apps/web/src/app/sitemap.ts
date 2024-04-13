@@ -12,16 +12,16 @@ const sitemap = (): MetadataRoute.Sitemap => {
     lastModified: formatPublishedDate(new Date()),
   })) satisfies MetadataRoute.Sitemap;
 
-  const legals = allLegals.map((legal) => ({
-    url: `${site.url.base}/legal/${legal.slug}`,
-    lastModified: formatPublishedDate(legal.publishedAt),
+  const legals = allLegals.map(({ slug, publishedAt }) => ({
+    url: `${site.url.base}/legal/${slug}`,
+    lastModified: formatPublishedDate(publishedAt),
   })) satisfies MetadataRoute.Sitemap;
 
   const posts = allPosts
     .filter((post) => post.status === 'published')
-    .map((post) => ({
-      url: `${site.url.base}/posts/${post.slug}`,
-      lastModified: formatPublishedDate(post.publishedAt),
+    .map(({ url, publishedAt }) => ({
+      url,
+      lastModified: formatPublishedDate(publishedAt),
     })) satisfies MetadataRoute.Sitemap;
 
   return [...routes, ...legals, ...posts];
