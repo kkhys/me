@@ -75,6 +75,11 @@ export const Post = defineDocumentType(() => ({
       type: 'string',
       resolve: ({ _raw: { sourceFilePath } }) => `${content.url.repository}/blob/main/${sourceFilePath}?plain=1`,
     },
+    revisionHistoryUrl: {
+      description: 'URL to the revision history of the blog content',
+      type: 'string',
+      resolve: ({ _raw: { sourceFilePath } }) => `${content.url.repository}/commits/main/${sourceFilePath}`,
+    },
     publishedAtFormattedUs: {
       description: 'Formatted publication date and time',
       type: 'string',

@@ -118,6 +118,7 @@ const MetadataCodeBlock = ({ post }: { post: Post }) => {
     url,
     editUrl,
     sourceUrl,
+    revisionHistoryUrl,
     _id,
     _raw,
     type,
@@ -270,6 +271,7 @@ const MetadataCodeBlock = ({ post }: { post: Post }) => {
           <KeyValuePair propName='url' value={url} />
           <KeyValuePair propName='editUrl' value={editUrl} />
           <KeyValuePair propName='sourceUrl' value={sourceUrl} />
+          <KeyValuePair propName='revisionHistoryUrl' value={revisionHistoryUrl} />
           <KeyValuePairObject keyName='categoryObject' object={categoryObject} />
           <KeyValuePairObjectArray keyName='tagObjectList' objectArray={tagObjectList} />
           <KeyValuePair propName='_id' value={_id} />
@@ -284,7 +286,7 @@ const MetadataCodeBlock = ({ post }: { post: Post }) => {
 
 const ConfigAction = ({ post }: { post: Post }) => {
   const [open, setOpen] = React.useState(false);
-  const { editUrl, sourceUrl } = post;
+  const { editUrl, sourceUrl, revisionHistoryUrl } = post;
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
   if (isDesktop) {
@@ -310,6 +312,9 @@ const ConfigAction = ({ post }: { post: Post }) => {
             </NavLink>
             <NavLink href={sourceUrl as Route} isExternal>
               View the source on GitHub
+            </NavLink>
+            <NavLink href={revisionHistoryUrl as Route} isExternal>
+              View the revision history
             </NavLink>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -349,6 +354,9 @@ const ConfigAction = ({ post }: { post: Post }) => {
           </NavLink>
           <NavLink href={sourceUrl as Route} isExternal>
             View the source on GitHub
+          </NavLink>
+          <NavLink href={revisionHistoryUrl as Route} isExternal>
+            View the revision history
           </NavLink>
         </DropdownMenuContent>
       </DropdownMenu>
