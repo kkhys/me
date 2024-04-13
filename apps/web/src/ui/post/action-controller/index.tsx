@@ -102,9 +102,9 @@ const SharedAction = ({ post: { url, title } }: { post: Post }) => (
 
 const MetadataCodeBlock = ({ post }: { post: Post }) => {
   const {
-    _id,
     title,
     emoji,
+    excerpt,
     category,
     tags,
     status,
@@ -114,13 +114,13 @@ const MetadataCodeBlock = ({ post }: { post: Post }) => {
     updatedAt,
     updatedAtFormattedUs,
     updatedAtFormattedIso,
-    type,
-    excerpt,
     slug,
     url,
     editUrl,
     sourceUrl,
+    _id,
     _raw,
+    type,
   } = post;
 
   const categoryObject = post.categoryObject as (typeof categories)[number];
