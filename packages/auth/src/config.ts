@@ -1,6 +1,6 @@
 import type { DefaultSession, NextAuthConfig } from 'next-auth';
-import Google from '@auth/core/providers/google';
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
+import Google from 'next-auth/providers/google';
 
 import { db, tableCreator } from '@kkhys/db';
 
