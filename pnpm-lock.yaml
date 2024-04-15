@@ -575,11 +575,11 @@ importers:
   packages/db:
     dependencies:
       '@neondatabase/serverless':
-        specifier: 0.9.0
-        version: 0.9.0
+        specifier: 0.9.1
+        version: 0.9.1
       drizzle-orm:
         specifier: 0.30.8
-        version: 0.30.8(@neondatabase/serverless@0.9.0)(pg@8.11.5)
+        version: 0.30.8(@neondatabase/serverless@0.9.1)(pg@8.11.5)
     devDependencies:
       '@kkhys/eslint-config':
         specifier: workspace:*
@@ -4987,8 +4987,8 @@ packages:
       tar-fs: 2.1.1
     dev: true
 
-  /@neondatabase/serverless@0.9.0:
-    resolution: {integrity: sha512-mmJnUAzlzvxNSZuuhI6kgJjH+JgFdBMYUWxihtq/nj0Tjt+Y5UU3W+SvRFoucnd5NObYkuLYQzk+zV5DGFKGJg==}
+  /@neondatabase/serverless@0.9.1:
+    resolution: {integrity: sha512-Xi+tVIXuaeB24BHzhr0W/4vcbb9WwIaB6yK0RsMIteLtzNB86+am6EDFovd3rYCYM1ea7rWcwte2dLOrzW7eqA==}
     dependencies:
       '@types/pg': 8.6.6
     dev: false
@@ -12641,7 +12641,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.30.8(@neondatabase/serverless@0.9.0)(pg@8.11.5):
+  /drizzle-orm@0.30.8(@neondatabase/serverless@0.9.1)(pg@8.11.5):
     resolution: {integrity: sha512-9pBJA0IjnpPpzZ6s9jlS1CQAbKoBmbn2GJesPhXaVblAA/joOJ4AWWevYcqvLGj9SvThBAl7WscN8Zwgg5mnTw==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -12721,7 +12721,7 @@ packages:
       sqlite3:
         optional: true
     dependencies:
-      '@neondatabase/serverless': 0.9.0
+      '@neondatabase/serverless': 0.9.1
       pg: 8.11.5
     dev: false
 
