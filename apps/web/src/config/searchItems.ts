@@ -86,6 +86,13 @@ export const searchItems = [
         category: 'Tech',
         tags: ['Release'],
       },
+      {
+        title: 'バリ島旅行記',
+        href: '/posts/p1v00e8',
+        emoji: '🏝',
+        category: 'Life',
+        tags: ['Travel'],
+      },
     ],
   },
 ] satisfies SearchItem[];
