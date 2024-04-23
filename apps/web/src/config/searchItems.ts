@@ -93,6 +93,13 @@ export const searchItems = [
         category: 'Life',
         tags: ['Travel'],
       },
+      {
+        title: 'v1.7.0 リリースノート: PV カウント',
+        href: '/posts/p1v9jvx',
+        emoji: '🚀',
+        category: 'Tech',
+        tags: ['Release'],
+      },
     ],
   },
 ] satisfies SearchItem[];
