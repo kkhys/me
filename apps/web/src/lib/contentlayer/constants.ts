@@ -46,6 +46,11 @@ export const techTags = [
     slug: 'play-framework',
     emoji: '▶️',
   },
+  {
+    title: 'Next.js',
+    slug: 'next-js',
+    emoji: '🔼',
+  },
 ] as const;
 
 export const lifeTags = [
