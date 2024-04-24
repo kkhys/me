@@ -100,6 +100,13 @@ export const searchItems = [
         category: 'Tech',
         tags: ['Release'],
       },
+      {
+        title: 'Next.js では searchParams の扱いにご用心',
+        href: '/posts/p1srf75',
+        emoji: '🔼',
+        category: 'Tech',
+        tags: ['Next.js'],
+      },
     ],
   },
 ] satisfies SearchItem[];
