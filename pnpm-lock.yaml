@@ -427,7 +427,7 @@ importers:
         version: 3.0.2
       axe-playwright:
         specifier: 2.0.1
-        version: 2.0.1(playwright@1.43.1)
+        version: 2.0.1(playwright@1.44.0)
       dotenv-cli:
         specifier: 7.4.2
         version: 7.4.2
@@ -606,8 +606,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
       tsx:
-        specifier: 4.9.3
-        version: 4.9.3
+        specifier: 4.9.4
+        version: 4.9.4
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -9258,7 +9258,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /axe-playwright@2.0.1(playwright@1.43.1):
+  /axe-playwright@2.0.1(playwright@1.44.0):
     resolution: {integrity: sha512-MHjNjGARulF9XzqSfspmNjw+tpBz4x9o1VlTuLWEUW9fqzhn+xWa1qEpuOIQPbsRWQiLfooDjQAunLeE0PM5AQ==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -9268,7 +9268,7 @@ packages:
       axe-html-reporter: 2.2.3(axe-core@4.8.2)
       junit-report-builder: 3.2.1
       picocolors: 1.0.0
-      playwright: 1.43.1
+      playwright: 1.44.0
     dev: true
 
   /axobject-query@3.2.1:
@@ -18796,26 +18796,10 @@ packages:
     hasBin: true
     dev: false
 
-  /playwright-core@1.43.1:
-    resolution: {integrity: sha512-EI36Mto2Vrx6VF7rm708qSnesVQKbxEWvPrfA1IPY6HgczBplDx7ENtx+K2n4kJ41sLLkuGfmb0ZLSSXlDhqPg==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dev: true
-
   /playwright-core@1.44.0:
     resolution: {integrity: sha512-ZTbkNpFfYcGWohvTTl+xewITm7EOuqIqex0c7dNZ+aXsbrLj0qI8XlGKfPpipjm0Wny/4Lt4CJsWJk1stVS5qQ==}
     engines: {node: '>=16'}
     hasBin: true
-
-  /playwright@1.43.1:
-    resolution: {integrity: sha512-V7SoH0ai2kNt1Md9E3Gwas5B9m8KR2GVvwZnAI6Pg0m3sh7UvgiYhRrhsziCmqMJNouPckiOhk8T+9bSAK0VIA==}
-    engines: {node: '>=16'}
-    hasBin: true
-    dependencies:
-      playwright-core: 1.43.1
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
 
   /playwright@1.44.0:
     resolution: {integrity: sha512-F9b3GUCLQ3Nffrfb6dunPOkE5Mh68tR7zN32L4jCk4FjQamgesGay7/dAAe1WaMEGV04DkdJfcJzjoCKygUaRQ==}
@@ -21942,8 +21926,8 @@ packages:
       typescript: 5.4.5
     dev: true
 
-  /tsx@4.9.3:
-    resolution: {integrity: sha512-czVbetlILiyJZI5zGlj2kw9vFiSeyra9liPD4nG+Thh4pKTi0AmMEQ8zdV/L2xbIVKrIqif4sUNrsMAOksx9Zg==}
+  /tsx@4.9.4:
+    resolution: {integrity: sha512-TlSJTVn2taGGDgdV3jAqCj7WQ/CafCB5p4SbG7W2Bl/0AJWH1ShJlBbc0y2lOFTjQEVAAULSTlmehw/Mwv3S/Q==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
