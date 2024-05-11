@@ -4,8 +4,8 @@ import { connectionString } from '.';
 
 export default {
   schema: './src/schema',
-  driver: 'pg',
-  dbCredentials: { connectionString },
+  dialect: 'postgresql',
+  dbCredentials: { url: connectionString },
   tablesFilter: ['me_*'],
   out: './src/schema/migrations',
 } satisfies Config;
