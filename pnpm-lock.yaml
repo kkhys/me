@@ -20,9 +20,6 @@ importers:
       '@kkhys/prettier-config':
         specifier: workspace:0.1.0
         version: link:tooling/prettier
-      '@playwright/test':
-        specifier: 1.44.0
-        version: 1.44.0
       '@turbo/gen':
         specifier: 1.13.3
         version: 1.13.3(@types/node@20.12.11)(typescript@5.4.5)
@@ -536,7 +533,7 @@ importers:
         version: 0.10.1(typescript@5.4.5)(zod@3.23.8)
       next:
         specifier: 14.2.3
-        version: 14.2.3(@playwright/test@1.44.0)(react-dom@18.3.1)(react@18.3.1)
+        version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
       next-auth:
         specifier: 5.0.0-beta.18
         version: 5.0.0-beta.18(next@14.2.3)(react@18.3.1)
@@ -17447,7 +17444,7 @@ packages:
         optional: true
     dependencies:
       '@auth/core': 0.31.0
-      next: 14.2.3(@playwright/test@1.44.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.3(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
 
@@ -17529,7 +17526,7 @@ packages:
       - '@babel/core'
       - babel-plugin-macros
 
-  /next@14.2.3(@playwright/test@1.44.0)(react-dom@18.3.1)(react@18.3.1):
+  /next@14.2.3(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-dowFkFTR8v79NPJO4QsBUtxv0g9BrS/phluVpMAt2ku7H+cbcBJlopXjkWlwxrk/xGqMemr7JkGPGemPrLLX7A==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -17548,7 +17545,6 @@ packages:
         optional: true
     dependencies:
       '@next/env': 14.2.3
-      '@playwright/test': 1.44.0
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
       caniuse-lite: 1.0.30001599
