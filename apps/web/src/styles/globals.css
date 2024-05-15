@@ -32,7 +32,7 @@
     --scrollbar: 240 5% 84%;
     --scrollbar-foreground: 240 5% 65%;
 
-    --selection: 240 6% 90%;
+    --selection: 56 100% 83%;
 
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
@@ -70,8 +70,6 @@
     --scrollbar: 240 5% 26%;
     --scrollbar-foreground: 240 5% 34%;
 
-    --selection: 240 4% 16%;
-
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 3.7% 15.9%;
@@ -88,7 +86,7 @@
   }
 
   ::selection {
-    @apply shadow-none bg-selection text-foreground;
+    @apply shadow-none bg-selection text-black;
   }
 
   ::-webkit-scrollbar {
