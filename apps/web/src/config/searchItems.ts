@@ -107,6 +107,12 @@ export const searchItems = [
         category: 'Tech',
         tags: ['Next.js'],
       },
+      {
+        title: 'Web API の開発時に最低限覚えておくべきこと',
+        href: '/posts/p1ua4wh',
+        emoji: '🔌',
+        category: 'Tech',
+      },
     ],
   },
 ] satisfies SearchItem[];
