@@ -113,6 +113,12 @@ export const searchItems = [
         emoji: '🔌',
         category: 'Tech',
       },
+      {
+        title: '新しいカメラを買った',
+        href: '/posts/p1a95jw',
+        emoji: '📷',
+        category: 'Life',
+      },
     ],
   },
 ] satisfies SearchItem[];
