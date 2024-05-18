@@ -5,9 +5,9 @@ import { env } from '#/env';
 
 export const runtime = 'edge';
 
-export const size = {
-  width: 1200,
-  height: 630,
+const size = {
+  width: 500,
+  height: 500,
 };
 
 /**
@@ -45,7 +45,7 @@ const Image = async ({ params: { slug } }: { params: { slug: string } }) => {
     (
       <div
         style={{
-          fontSize: 250,
+          fontSize: 230,
           background: '#0a0a0b',
           width: '100%',
           height: '100%',
