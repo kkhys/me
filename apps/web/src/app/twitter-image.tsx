@@ -5,8 +5,8 @@ export const runtime = 'edge';
 export const alt = 'About me';
 
 export const size = {
-  width: 1200,
-  height: 630,
+  width: 500,
+  height: 500,
 };
 
 export const contentType = 'image/png';
@@ -20,7 +20,7 @@ const Image = async () => {
     (
       <div
         style={{
-          fontSize: 280,
+          fontSize: 260,
           background: '#0a0a0b',
           width: '100%',
           height: '100%',
