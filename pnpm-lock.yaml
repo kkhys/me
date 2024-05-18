@@ -209,8 +209,8 @@ importers:
   apps/web:
     dependencies:
       '@hookform/resolvers':
-        specifier: 3.3.4
-        version: 3.3.4(react-hook-form@7.51.4)
+        specifier: 3.4.0
+        version: 3.4.0(react-hook-form@7.51.4)
       '@kkhys/api':
         specifier: workspace:*
         version: link:../../packages/api
@@ -236,20 +236,20 @@ importers:
         specifier: 0.10.1
         version: 0.10.1(typescript@5.4.5)(zod@3.23.8)
       '@tanstack/react-query':
-        specifier: 5.36.0
-        version: 5.36.0(react@18.3.1)
+        specifier: 5.36.2
+        version: 5.36.2(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: 5.36.0
-        version: 5.36.0(@tanstack/react-query@5.36.0)(react@18.3.1)
+        specifier: 5.36.2
+        version: 5.36.2(@tanstack/react-query@5.36.2)(react@18.3.1)
       '@trpc/client':
-        specifier: 11.0.0-rc.370
-        version: 11.0.0-rc.370(@trpc/server@11.0.0-rc.370)
+        specifier: 11.0.0-rc.373
+        version: 11.0.0-rc.373(@trpc/server@11.0.0-rc.373)
       '@trpc/react-query':
-        specifier: 11.0.0-rc.370
-        version: 11.0.0-rc.370(@tanstack/react-query@5.36.0)(@trpc/client@11.0.0-rc.370)(@trpc/server@11.0.0-rc.370)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 11.0.0-rc.373
+        version: 11.0.0-rc.373(@tanstack/react-query@5.36.2)(@trpc/client@11.0.0-rc.373)(@trpc/server@11.0.0-rc.373)(react-dom@18.3.1)(react@18.3.1)
       '@trpc/server':
-        specifier: 11.0.0-rc.370
-        version: 11.0.0-rc.370
+        specifier: 11.0.0-rc.373
+        version: 11.0.0-rc.373
       '@vercel/analytics':
         specifier: 1.2.2
         version: 1.2.2(next@14.2.3)(react@18.3.1)
@@ -269,14 +269,14 @@ importers:
         specifier: 3.6.0
         version: 3.6.0
       embla-carousel-class-names:
-        specifier: 8.0.4
-        version: 8.0.4(embla-carousel@8.0.4)
+        specifier: 8.1.1
+        version: 8.1.1(embla-carousel@8.1.1)
       feed:
         specifier: 4.2.2
         version: 4.2.2
       framer-motion:
-        specifier: 11.1.9
-        version: 11.1.9(react-dom@18.3.1)(react@18.3.1)
+        specifier: 11.2.4
+        version: 11.2.4(react-dom@18.3.1)(react@18.3.1)
       lucide-react:
         specifier: 0.378.0
         version: 0.378.0(react@18.3.1)
@@ -492,8 +492,8 @@ importers:
         specifier: workspace:*
         version: link:../db
       '@trpc/server':
-        specifier: 11.0.0-rc.370
-        version: 11.0.0-rc.370
+        specifier: 11.0.0-rc.373
+        version: 11.0.0-rc.373
       superjson:
         specifier: 2.2.1
         version: 2.2.1
@@ -603,8 +603,8 @@ importers:
         specifier: 3.2.5
         version: 3.2.5
       tsx:
-        specifier: 4.10.2
-        version: 4.10.2
+        specifier: 4.10.4
+        version: 4.10.4
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -612,8 +612,8 @@ importers:
   packages/ui:
     dependencies:
       '@hookform/resolvers':
-        specifier: 3.3.4
-        version: 3.3.4(react-hook-form@7.51.4)
+        specifier: 3.4.0
+        version: 3.4.0(react-hook-form@7.51.4)
       '@radix-ui/react-accordion':
         specifier: 1.1.2
         version: 1.1.2(@types/react@18.3.2)(react-dom@18.3.1)(react@18.3.1)
@@ -708,17 +708,17 @@ importers:
         specifier: 3.6.0
         version: 3.6.0
       embla-carousel-autoplay:
-        specifier: 8.0.4
-        version: 8.0.4(embla-carousel@8.0.4)
+        specifier: 8.1.0
+        version: 8.1.0(embla-carousel@8.1.0)
       embla-carousel-class-names:
-        specifier: 8.0.4
-        version: 8.0.4(embla-carousel@8.0.4)
+        specifier: 8.1.1
+        version: 8.1.1(embla-carousel@8.1.0)
       embla-carousel-react:
-        specifier: 8.0.4
-        version: 8.0.4(react@18.3.1)
+        specifier: 8.1.0
+        version: 8.1.0(react@18.3.1)
       framer-motion:
-        specifier: 11.1.9
-        version: 11.1.9(react-dom@18.3.1)(react@18.3.1)
+        specifier: 11.2.4
+        version: 11.2.4(react-dom@18.3.1)(react@18.3.1)
       input-otp:
         specifier: 1.2.4
         version: 1.2.4(react-dom@18.3.1)(react@18.3.1)
@@ -3524,8 +3524,8 @@ packages:
       yargs: 17.7.2
     dev: false
 
-  /@hookform/resolvers@3.3.4(react-hook-form@7.51.4):
-    resolution: {integrity: sha512-o5cgpGOuJYrd+iMKvkttOclgwRW86EsWJZZRC23prf0uU2i48Htq4PuT73AVb9ionFyZrwYEITuOFGF+BydEtQ==}
+  /@hookform/resolvers@3.4.0(react-hook-form@7.51.4):
+    resolution: {integrity: sha512-+oAqK3okmoEDnvUkJ3N/mvNMeeMv5Apgy1jkoRmlaaAF4vBgcJs9tHvtXU7VE4DvPosvAUUkPOaNFunzt1dbgA==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
@@ -6825,6 +6825,7 @@ packages:
 
   /@storybook/expect@28.1.3-5:
     resolution: {integrity: sha512-lS1oJnY1qTAxnH87C765NdfvGhksA6hBcbUVI5CHiSbNsEtr456wtg/z+dT9XlPriq1D5t2SgfNL9dBAoIGyIA==}
+    deprecated: In Storybook 8, this package functionality has been integrated to a new package called @storybook/test, which uses Vitest APIs for an improved experience. When upgrading to Storybook 8 with 'npx storybook@latest upgrade', you will get prompted and will get an automigration for the new package. Please migrate when you can.
     dependencies:
       '@types/jest': 28.1.3
     dev: true
@@ -7526,31 +7527,31 @@ packages:
       tailwindcss: 3.4.3(ts-node@10.9.2)
     dev: false
 
-  /@tanstack/query-core@5.36.0:
-    resolution: {integrity: sha512-B5BD3pg/mztDR36i77hGcyySKKeYrbM5mnogOROTBi1SUml5ByRK7PGUUl16vvubvQC+mSnqziFG/VIy/DE3FQ==}
+  /@tanstack/query-core@5.36.1:
+    resolution: {integrity: sha512-BteWYEPUcucEu3NBcDAgKuI4U25R9aPrHSP6YSf2NvaD2pSlIQTdqOfLRsxH9WdRYg7k0Uom35Uacb6nvbIMJg==}
     dev: false
 
   /@tanstack/query-devtools@5.32.1:
     resolution: {integrity: sha512-7Xq57Ctopiy/4atpb0uNY5VRuCqRS/1fi/WBCKKX6jHMa6cCgDuV/AQuiwRXcKARbq2OkVAOrW2v4xK9nTbcCA==}
     dev: false
 
-  /@tanstack/react-query-devtools@5.36.0(@tanstack/react-query@5.36.0)(react@18.3.1):
-    resolution: {integrity: sha512-AxZSmM7CmjDQrcY9gceFBS+1DqkfTqAMpDCMltzIxMKvKn+ZhgBsV49aewhVXP1DgZzb+Is4f9HH2EMu//njXw==}
+  /@tanstack/react-query-devtools@5.36.2(@tanstack/react-query@5.36.2)(react@18.3.1):
+    resolution: {integrity: sha512-bkPQrKmKJOa2dNs6rBB9aef8jCG8XAg8QKIhwN8NI+QaXky86IofnO8YjiF6P1mYquLXbQvK0VZ9DnGV0wH/eA==}
     peerDependencies:
-      '@tanstack/react-query': ^5.36.0
+      '@tanstack/react-query': ^5.36.2
       react: ^18.0.0
     dependencies:
       '@tanstack/query-devtools': 5.32.1
-      '@tanstack/react-query': 5.36.0(react@18.3.1)
+      '@tanstack/react-query': 5.36.2(react@18.3.1)
       react: 18.3.1
     dev: false
 
-  /@tanstack/react-query@5.36.0(react@18.3.1):
-    resolution: {integrity: sha512-BATvtM0rohwg7pRHUnxgeDiwLWRGZ8OM/4y8LImHVpecQWoH6Uhytu3Z8YV6V7hQ1sMQBFcUrGE1/e4MxR6YiA==}
+  /@tanstack/react-query@5.36.2(react@18.3.1):
+    resolution: {integrity: sha512-bHNa+5dead+j6SA8WVlEOPxcGfteVFgdyFTCFcxBgjnPf0fFpHUc7aNZBCnvmPXqy/BeQa9zTuU9ectb7i8ZXA==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-core': 5.36.0
+      '@tanstack/query-core': 5.36.1
       react: 18.3.1
     dev: false
 
@@ -7711,32 +7712,32 @@ packages:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
     dev: true
 
-  /@trpc/client@11.0.0-rc.370(@trpc/server@11.0.0-rc.370):
-    resolution: {integrity: sha512-3s3NuJ1wwIod96a2BEXwmCacROfeMnUOhBa9pi/ksQzrr0KkFXeJWsLcHwL8XmZRZ93scPLnX7I7jGTW2ol68w==}
+  /@trpc/client@11.0.0-rc.373(@trpc/server@11.0.0-rc.373):
+    resolution: {integrity: sha512-DSKOFjpQycJjwLrJWCpMqfwuFCP99QUPBZBeCb94WTvZUb6wGzOZWQMdIj7EnsR9jgWHlPll1e0s7OgAWxBKqw==}
     peerDependencies:
-      '@trpc/server': 11.0.0-rc.370+1a920ac81
+      '@trpc/server': 11.0.0-rc.373+db2ec5cae
     dependencies:
-      '@trpc/server': 11.0.0-rc.370
+      '@trpc/server': 11.0.0-rc.373
     dev: false
 
-  /@trpc/react-query@11.0.0-rc.370(@tanstack/react-query@5.36.0)(@trpc/client@11.0.0-rc.370)(@trpc/server@11.0.0-rc.370)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-DGPJdBsjtshHIh2RLLt+GCEAJaSDoRmJ0hmQF8MGru+7BK5qLlR6N7WFmL4wegs3sV6dov/pyoBXatm0qx3p+g==}
+  /@trpc/react-query@11.0.0-rc.373(@tanstack/react-query@5.36.2)(@trpc/client@11.0.0-rc.373)(@trpc/server@11.0.0-rc.373)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-yxHlSiuPkoCnEB0W9yzF5eSX6F09/JFsTpdrwyocTg0Z1TaAYkJ0pUVMP1Gb3bKZEou1x6a8ZJJEqKLZbLPXCA==}
     peerDependencies:
       '@tanstack/react-query': ^5.25.0
-      '@trpc/client': 11.0.0-rc.370+1a920ac81
-      '@trpc/server': 11.0.0-rc.370+1a920ac81
+      '@trpc/client': 11.0.0-rc.373+db2ec5cae
+      '@trpc/server': 11.0.0-rc.373+db2ec5cae
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
     dependencies:
-      '@tanstack/react-query': 5.36.0(react@18.3.1)
-      '@trpc/client': 11.0.0-rc.370(@trpc/server@11.0.0-rc.370)
-      '@trpc/server': 11.0.0-rc.370
+      '@tanstack/react-query': 5.36.2(react@18.3.1)
+      '@trpc/client': 11.0.0-rc.373(@trpc/server@11.0.0-rc.373)
+      '@trpc/server': 11.0.0-rc.373
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@trpc/server@11.0.0-rc.370:
-    resolution: {integrity: sha512-wmAujmM8C21UgSk408436OolK5iOKgLUkMvp1LjON++MRNmZYmFb6JmnjPHn0K9wX0V0qMlME2NGb7v8uTB3lw==}
+  /@trpc/server@11.0.0-rc.373:
+    resolution: {integrity: sha512-i5q1KkQ0fuHqYbEPWMfk2rTp31wde8RKo0jxWfwZU8YsnjaErZ8lFnGCxz252l7mMCqT70IKR6c/N5MEXqChDA==}
     dev: false
 
   /@tsconfig/node10@1.0.9:
@@ -11714,42 +11715,54 @@ packages:
       minimalistic-crypto-utils: 1.0.1
     dev: true
 
-  /embla-carousel-autoplay@8.0.4(embla-carousel@8.0.4):
-    resolution: {integrity: sha512-Ilmgn+d09o2M23yvl4cYwfO8VnZi7YXQl9UGYIflLGhtFaZW9PKU67TaW8teRjaDhS3I+uz3osBFDO407YPjfQ==}
+  /embla-carousel-autoplay@8.1.0(embla-carousel@8.1.0):
+    resolution: {integrity: sha512-Uh5aX193XLSW5vaLWiQQ1uCIEpb14QUFxVI7mQpDAb50kEK0EVv8pTMyVjW9BWfvixj6LXEY/RVMnK8E/YOf5g==}
     peerDependencies:
-      embla-carousel: 8.0.4
+      embla-carousel: 8.1.0
     dependencies:
-      embla-carousel: 8.0.4
+      embla-carousel: 8.1.0
     dev: false
 
-  /embla-carousel-class-names@8.0.4(embla-carousel@8.0.4):
-    resolution: {integrity: sha512-mZV/1W17GzS5oXqnKh8kZwNSQrQyYff/4Vnw1gCgDQUGspWUQSyYgLSHCD02vIyopkfoSr5MAF/4GhyMClrDQQ==}
+  /embla-carousel-class-names@8.1.1(embla-carousel@8.1.0):
+    resolution: {integrity: sha512-1nIBOKETl3nzrKST5qSVG38rrPCPeIpVfeZtF/oIlfrbSnJBWTeJeXcypGP/q9CUQZ+rRctSu31g83r2sbz0kA==}
     peerDependencies:
-      embla-carousel: 8.0.4
+      embla-carousel: 8.1.1
     dependencies:
-      embla-carousel: 8.0.4
+      embla-carousel: 8.1.0
     dev: false
 
-  /embla-carousel-react@8.0.4(react@18.3.1):
-    resolution: {integrity: sha512-3NlOmBmRhaGhtI0It9243yg9fz2wPRML5gGLDIE69Oyb/CuGsJnxpcgG74j905NQBDgReTEfFJwzOtIFAjeBfg==}
+  /embla-carousel-class-names@8.1.1(embla-carousel@8.1.1):
+    resolution: {integrity: sha512-1nIBOKETl3nzrKST5qSVG38rrPCPeIpVfeZtF/oIlfrbSnJBWTeJeXcypGP/q9CUQZ+rRctSu31g83r2sbz0kA==}
+    peerDependencies:
+      embla-carousel: 8.1.1
+    dependencies:
+      embla-carousel: 8.1.1
+    dev: false
+
+  /embla-carousel-react@8.1.0(react@18.3.1):
+    resolution: {integrity: sha512-sSqTG+mz+nnzOGbbjINKlv+2UBrS213dGbUL32x/kkLRRlzqGDxe3dcJzaNBZlg3d8IyEvgcrI9trQwXBCNIug==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.1 || ^18.0.0
     dependencies:
-      embla-carousel: 8.0.4
-      embla-carousel-reactive-utils: 8.0.4(embla-carousel@8.0.4)
+      embla-carousel: 8.1.0
+      embla-carousel-reactive-utils: 8.1.0(embla-carousel@8.1.0)
       react: 18.3.1
     dev: false
 
-  /embla-carousel-reactive-utils@8.0.4(embla-carousel@8.0.4):
-    resolution: {integrity: sha512-7lWM+8hanIF2roTAjxwfqfr0+VTbr9rYVlAs0r5PwPOVpz1G3/+bRelgAYvwcfWVm5Vydo2pKXVfFOPQjznF7w==}
+  /embla-carousel-reactive-utils@8.1.0(embla-carousel@8.1.0):
+    resolution: {integrity: sha512-jiPOa5iT61HATnn6cjym4+0r+VGopJlFTO6MtzDUM435vjZQ1ot995aa7hJJ++ssYOhUlHYt6YJy08Ooigx4hQ==}
     peerDependencies:
-      embla-carousel: 8.0.4
+      embla-carousel: 8.1.0
     dependencies:
-      embla-carousel: 8.0.4
+      embla-carousel: 8.1.0
     dev: false
 
-  /embla-carousel@8.0.4:
-    resolution: {integrity: sha512-INndmilrV9KY4Wnb4F2tI55DuQnFjf3GPOaPDT2LGYiKhIWVNUhv1nz/RI7CZ6WoIZ8MYHP4t6Qm/cqpcGHknA==}
+  /embla-carousel@8.1.0:
+    resolution: {integrity: sha512-s6i450b1cppstIQB0RQ/eHzBGS57twsM09GiAE04w4QyLYzZkuosxpiAGxK6Cez6BIp0Vd/SCmD7yWliEP6XEw==}
+    dev: false
+
+  /embla-carousel@8.1.1:
+    resolution: {integrity: sha512-PfdhNbPoNl7V5YnwuKe2zmKd0+/HY+Q4O59xQcVvinsgv2LkpAVQ1NB/q5STqAde8nZ56U2uQOe6X+9u4IZlhA==}
     dev: false
 
   /emittery@0.13.1:
@@ -13148,8 +13161,8 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: false
 
-  /framer-motion@11.1.9(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-flECDIPV4QDNcOrDafVFiIazp8X01HFpzc01eDKJsdNH/wrATcYydJSH9JbPWMS8UD5lZlw+J1sK8LG2kICgqw==}
+  /framer-motion@11.2.4(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-D+EXd0lspaZijv3BJhAcSsyGz+gnvoEdnf+QWkPZdhoFzbeX/2skrH9XSVFb0osgUnCajW8x1frjhLuKwa/Reg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
@@ -13385,6 +13398,12 @@ packages:
 
   /get-tsconfig@4.7.3:
     resolution: {integrity: sha512-ZvkrzoUA0PQZM6fy6+/Hce561s+faD1rsNwhnO5FelNjyy7EMGJ3Rz1AQ8GYDWjhRs/7dBLOEJvhK8MiEJOAFg==}
+    dependencies:
+      resolve-pkg-maps: 1.0.0
+    dev: true
+
+  /get-tsconfig@4.7.5:
+    resolution: {integrity: sha512-ZCuZCnlqNzjb4QprAzXKdpp/gh6KTxSJuw3IBsPnV/7fV4NxC9ckB+vPTt8w7fJA0TaSD7c55BR47JD6MEDyDw==}
     dependencies:
       resolve-pkg-maps: 1.0.0
     dev: true
@@ -22000,13 +22019,13 @@ packages:
       typescript: 5.4.5
     dev: true
 
-  /tsx@4.10.2:
-    resolution: {integrity: sha512-gOfACgv1ElsIjvt7Fp0rMJKGnMGjox0JfGOfX3kmZCV/yZumaNqtHGKBXt1KgaYS9KjDOmqGeI8gHk/W7kWVZg==}
+  /tsx@4.10.4:
+    resolution: {integrity: sha512-Gtg9qnZWNqC/OtcgiXfoAUdAKx3/cgKOYvEocAsv+m21MV/eKpV/WUjRXe6/sDCaGBl2/v8S6v29BpUnGMCX5A==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
       esbuild: 0.20.2
-      get-tsconfig: 4.7.3
+      get-tsconfig: 4.7.5
     optionalDependencies:
       fsevents: 2.3.3
     dev: true

@@ -119,6 +119,12 @@ export const searchItems = [
         emoji: '📷',
         category: 'Life',
       },
+      {
+        title: 'デスク構成スナップショット 2024',
+        href: '/posts/p1uchql',
+        emoji: '🖥',
+        category: 'Tech',
+      },
     ],
   },
 ] satisfies SearchItem[];
