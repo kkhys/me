@@ -1,12 +1,10 @@
-import { NextResponse } from 'next/server';
 import { allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
 import { Feed } from 'feed';
 
 import { me, site } from '#/config';
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const GET = async (): Promise<NextResponse> => {
+export const GET = () => {
   const posts = allPosts
     .filter((post) => post.status === 'published')
     .sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)));
@@ -46,11 +44,12 @@ export const GET = async (): Promise<NextResponse> => {
 
   const atom = feed.atom1();
 
-  return new NextResponse(atom, {
+  return new Response(atom, {
     status: 200,
     headers: {
-      'Cache-Control': 's-maxage=86400, stale-while-revalidate',
       'Content-Type': 'text/xml',
+      'X-Content-Type-Options': 'nosniff',
+      'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate',
     },
   });
 };
