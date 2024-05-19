@@ -39,12 +39,13 @@ export const EyeCatch = ({
   className,
   size,
 }: { emoji: string; className?: string } & VariantProps<typeof eyeCatchVariants>) => {
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
   const [imageSrc, setImageSrc] = React.useState('');
 
   React.useEffect(() => {
-    setImageSrc(`/api/noto-emoji/${emoji}.svg?theme=${theme === 'dark' ? 'dark' : 'light'}`);
-  }, [theme, emoji]);
+    const selectedTheme = theme === 'system' ? systemTheme : theme;
+    setImageSrc(`/api/noto-emoji/${emoji}.svg?theme=${selectedTheme === 'dark' ? 'dark' : 'light'}`);
+  }, [theme, systemTheme, emoji]);
 
   return (
     <span className={cn(eyeCatchVariants({ size }), className)}>

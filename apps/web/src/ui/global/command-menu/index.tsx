@@ -23,7 +23,8 @@ import { searchItems } from '#/config';
 export const CommandMenu = ({ className }: { className?: string }) => {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, systemTheme, setTheme } = useTheme();
+  const selectedTheme = theme === 'system' ? systemTheme : theme;
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -76,7 +77,7 @@ export const CommandMenu = ({ className }: { className?: string }) => {
                   onSelect={() => runCommand(() => router.push(item.href as Route))}
                 >
                   <img
-                    src={`/api/noto-emoji/${item.emoji}.svg?theme=${theme === 'dark' ? 'dark' : 'light'}`}
+                    src={`/api/noto-emoji/${item.emoji}.svg?theme=${selectedTheme === 'dark' ? 'dark' : 'light'}`}
                     alt={item.emoji}
                     className='mr-3 size-4'
                   />
