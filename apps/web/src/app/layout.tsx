@@ -9,7 +9,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from '@kkhys/ui';
 
 import { me, site } from '#/config';
-import { inter, jetBrainsMono, newsreader, notoEmoji, notoSansJP } from '#/lib/nextjs/fonts';
+import { inter, jetBrainsMono, newsreader, notoSansJP } from '#/lib/nextjs/fonts';
 import { Providers } from '#/providers';
 import { Layout } from '#/ui/global';
 
@@ -62,7 +62,7 @@ export const viewport = {
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html
     lang='ja'
-    className={`h-full antialiased ${notoSansJP.className} ${inter.variable} ${newsreader.variable} ${jetBrainsMono.variable} ${notoEmoji.variable}`}
+    className={`h-full antialiased ${notoSansJP.className} ${inter.variable} ${newsreader.variable} ${jetBrainsMono.variable}`}
     suppressHydrationWarning
   >
     <body className='flex h-full'>
