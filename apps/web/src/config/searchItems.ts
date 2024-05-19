@@ -125,6 +125,12 @@ export const searchItems = [
         emoji: '🖥',
         category: 'Tech',
       },
+      {
+        title: 'Noto Emoji を SVG 化する API を作る',
+        href: '/posts/p15e6x7',
+        emoji: '🔄',
+        category: 'Tech',
+      },
     ],
   },
 ] satisfies SearchItem[];
