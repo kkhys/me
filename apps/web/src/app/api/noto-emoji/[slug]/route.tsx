@@ -7,13 +7,7 @@ export const runtime = 'edge';
 export const GET = async (request: NextRequest, { params: { slug } }: { params: { slug: string } }) => {
   const rawText = slug.endsWith('.svg') ? slug.replace('.svg', '') : '';
 
-  if (!rawText.length) {
-    return new Response('Invalid URL', {
-      status: 400,
-    });
-  }
-
-  if (!isEmoji(rawText)) {
+  if (!rawText.length || !isEmoji(rawText)) {
     return new Response('Invalid URL', {
       status: 400,
     });
@@ -21,7 +15,7 @@ export const GET = async (request: NextRequest, { params: { slug } }: { params: 
 
   const firstEmoji = Array.from(rawText)[0];
 
-  const notoEmojiSemiBold = await fetch(
+  const notoEmojiRegular = await fetch(
     new URL('../../../../../assets/fonts/NotoEmoji-Regular.ttf', import.meta.url),
   ).then((res) => res.arrayBuffer());
 
@@ -50,9 +44,9 @@ export const GET = async (request: NextRequest, { params: { slug } }: { params: 
       fonts: [
         {
           name: 'Noto Emoji',
-          data: notoEmojiSemiBold,
+          data: notoEmojiRegular,
           style: 'normal',
-          weight: 600,
+          weight: 400,
         },
       ],
     },
