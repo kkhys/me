@@ -52,7 +52,7 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
               <h1 className='palt mt-4 font-medium'>{title}</h1>
             </FadeIn>
             <FadeIn>
-              <div className='mt-2 flex items-center justify-between '>
+              <div className='mt-2 flex items-center justify-between'>
                 <time dateTime={publishedAt} className='font-sans text-sm text-muted-foreground'>
                   {publishedAtFormattedUs} ({publishedAtDistanceToNow(publishedAt)} ago)
                 </time>

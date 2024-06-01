@@ -30,7 +30,7 @@ export const BackButton = <T extends string>({
             variant='ghost'
             size='icon'
             aria-label={tooltipContent ?? 'Go back to previous page'}
-            className='absolute left-12 top-0 hidden xl:flex'
+            className='fixed top-0 hidden -translate-x-[160px] translate-y-[120px] xl:flex'
             onClick={() => !href && router.back()}
             asChild={href ? true : undefined}
           >
