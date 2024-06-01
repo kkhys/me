@@ -2,7 +2,6 @@ import type { Post } from 'contentlayer/generated';
 import * as React from 'react';
 import { Suspense } from 'react';
 import { allPosts } from 'contentlayer/generated';
-import { formatDistanceStrict, parseISO } from 'date-fns';
 
 import { FadeIn, FadeInStagger, Prose } from '@kkhys/ui';
 
@@ -14,6 +13,7 @@ import {
   Mdx,
   PrevAndNextPager,
   RelatedPosts,
+  Time,
   ViewCounter,
   ViewCounterSkeleton,
 } from '#/ui/post';
@@ -31,8 +31,6 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
     slug,
     body: { code },
   } = post;
-
-  const publishedAtDistanceToNow = (date: string) => formatDistanceStrict(parseISO(date), new Date());
 
   const relatedPosts = fisherYatesShuffle(
     allPosts.filter((post) => post.status === 'published' && post._id !== id && post.category === category),
@@ -53,9 +51,7 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
             </FadeIn>
             <FadeIn>
               <div className='mt-2 flex items-center justify-between'>
-                <time dateTime={publishedAt} className='font-sans text-sm text-muted-foreground'>
-                  {publishedAtFormattedUs} ({publishedAtDistanceToNow(publishedAt)} ago)
-                </time>
+                <Time publishedAt={publishedAt} publishedAtFormattedUs={publishedAtFormattedUs} />
                 {env.NODE_ENV !== 'development' ? (
                   <Suspense fallback={<ViewCounterSkeleton />}>
                     <ViewCounter slug={slug} />
