@@ -59,6 +59,10 @@ export const CategoryTabs = () => {
   const techPosts = posts.filter((post) => post.category.includes('Tech'));
   const lifePosts = posts.filter((post) => post.category.includes('Life'));
 
+  React.useEffect(() => {
+    setCategory(initialCategory(searchParams.get('category') ?? 'all'));
+  }, [searchParams]);
+
   return (
     <Tabs defaultValue={category} onValueChange={handleValueChange} value={category} className='mt-6'>
       <div className='flex gap-4'>

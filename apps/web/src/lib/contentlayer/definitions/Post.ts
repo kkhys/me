@@ -8,7 +8,7 @@ import { content, site } from '../../../config';
  * @see: https://github.com/evanw/esbuild/issues/394
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
-import { allTagTitles, categoryTitles } from '../constants';
+import { allTagTitles, categoryTitles } from '../../../config/post';
 import { createExcerpt, generateCategoryObject, generateSlug, generateTagObject } from '../utils';
 
 export const Post = defineDocumentType(() => ({

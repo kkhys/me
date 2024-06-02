@@ -30,7 +30,7 @@ import {
   toast,
 } from '@kkhys/ui';
 
-import type { allTags, categories } from '#/lib/contentlayer/constants';
+import type { allTags, categories } from '#/config/post';
 import { site } from '#/config';
 import { useMediaQuery } from '#/hooks';
 

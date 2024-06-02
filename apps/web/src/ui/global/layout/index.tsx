@@ -22,7 +22,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => (
       </div>
     </div>
     <div className='relative flex w-full flex-col'>
-      <Header />
+      <Header className='z-50' />
       <main className='flex-auto'>
         {/*<VerticalGradient/>*/}
         <div className='mt-4 sm:px-8 md:mt-16'>{children}</div>
