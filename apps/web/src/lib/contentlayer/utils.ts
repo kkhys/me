@@ -13,7 +13,7 @@ import type {
   Tag,
   TechTags,
 } from '../../config/post';
-import { allTags, categories, fashionTags, lifeTags, techTags } from '../../config/post';
+import { allTags, categories, lifeTags, techTags } from '../../config/post';
 /**
  * esbuild does not support module path aliases, so relative paths are used
  *
@@ -146,9 +146,9 @@ export const generateTagObject = (tagTitle: AllTagsTitle, category: CategoryTitl
     case 'Life':
       isExistTag(lifeTags, tagTitle);
       break;
-    case 'Fashion':
-      isExistTag(fashionTags, tagTitle);
-      break;
+    // case 'Fashion':
+    //   isExistTag(fashionTags, tagTitle);
+    //   break;
   }
 
   const { slug, emoji } = getTagFromTitle(tagTitle);

@@ -5,4 +5,5 @@ export * from './footer';
 export * from './header';
 export * from './icons';
 export * from './layout';
+export * from './main-navigation';
 export * from './mode-toggle';
