@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { Container, MainNavigation, ModeToggle } from '#/ui/global';
+import { Container, MainNavigation, MobileNavigation, ModeToggle } from '#/ui/global';
 
 export const Header = ({ className }: { className?: string }) => (
   <header className={className}>
@@ -9,6 +9,7 @@ export const Header = ({ className }: { className?: string }) => (
         <Suspense>
           <MainNavigation />
         </Suspense>
+        <MobileNavigation />
         <ModeToggle />
       </div>
     </Container>
