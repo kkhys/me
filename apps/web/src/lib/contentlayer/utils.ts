@@ -3,7 +3,8 @@ import { bech32m } from 'bech32';
 import { remark } from 'remark';
 import strip from 'strip-markdown';
 
-import type { AllTagsTitle, Category, CategoryTitle, FashionTags, LifeTags, Tag, TechTags } from './constants';
+import type { AllTagsTitle, Category, CategoryTitle, FashionTags, LifeTags, Tag, TechTags } from '../../config/post';
+import { allTags, categories, extractTitle, fashionTags, lifeTags, techTags } from '../../config/post';
 /**
  * esbuild does not support module path aliases, so relative paths are used
  *
@@ -11,7 +12,6 @@ import type { AllTagsTitle, Category, CategoryTitle, FashionTags, LifeTags, Tag,
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { NotFoundError } from '../../exceptions';
-import { allTags, categories, extractTitle, fashionTags, lifeTags, techTags } from './constants';
 
 /**
  * Generates a unique slug based on the given data.
