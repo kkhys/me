@@ -39,7 +39,7 @@ export const generateSlug = (data: crypto.BinaryLike) => {
  * @returns The generated excerpt.
  */
 export const createExcerpt = async (raw: string) => {
-  const maxWords = 120;
+  const maxWords = 160;
   const stripped = (await remark().use(strip).process(raw)).toString();
   const urlWithLineBreakRegex = /^(?:\r\n|\n)(https?:\/\/\S+)(?:\r\n|\n)/gm;
   const whitespaceRegex = /\s+/g;
