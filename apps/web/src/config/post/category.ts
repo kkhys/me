@@ -1,5 +1,5 @@
 import type { Base } from '.';
-import { extractTitle } from '.';
+import { extractTitle } from '../../lib/contentlayer/utils';
 
 export type Category = Base;
 export type CategoryTitle = (typeof categories)[number]['title'];

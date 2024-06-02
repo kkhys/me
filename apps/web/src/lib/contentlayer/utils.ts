@@ -3,8 +3,17 @@ import { bech32m } from 'bech32';
 import { remark } from 'remark';
 import strip from 'strip-markdown';
 
-import type { AllTagsTitle, Category, CategoryTitle, FashionTags, LifeTags, Tag, TechTags } from '../../config/post';
-import { allTags, categories, extractTitle, fashionTags, lifeTags, techTags } from '../../config/post';
+import type {
+  AllTagsTitle,
+  Base,
+  Category,
+  CategoryTitle,
+  FashionTags,
+  LifeTags,
+  Tag,
+  TechTags,
+} from '../../config/post';
+import { allTags, categories, fashionTags, lifeTags, techTags } from '../../config/post';
 /**
  * esbuild does not support module path aliases, so relative paths are used
  *
@@ -82,6 +91,15 @@ const getTagFromTitle = (title: AllTagsTitle) => {
 
   return tag;
 };
+
+/**
+ * Extracts the 'title' property from the given object.
+ *
+ * @template T - The type of object containing the 'title' property.
+ * @param item - The object from which to extract the 'title'.
+ * @return The value of the 'title' property.
+ */
+export const extractTitle = <T extends Pick<Base, 'title'>>(item: T) => item.title;
 
 /**
  * Checks if a specific tag exists in a given target tag array.

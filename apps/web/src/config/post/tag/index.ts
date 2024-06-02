@@ -1,5 +1,5 @@
 import type { Base } from '..';
-import { extractTitle } from '..';
+import { extractTitle } from '../../../lib/contentlayer/utils';
 import { fashionTags } from './fashion';
 import { lifeTags } from './life';
 import { techTags } from './tech';
