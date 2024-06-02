@@ -3,7 +3,7 @@
 import type { Route } from 'next';
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import { LaptopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import { LaptopIcon, MagnifyingGlassIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
 
 import {
@@ -56,13 +56,20 @@ export const CommandMenu = ({ className }: { className?: string }) => {
     <>
       <Button
         variant='outline'
-        className={cn('relative bg-background pr-12 text-xs text-muted-foreground', className)}
+        className={cn(
+          'relative hidden w-36 items-center justify-start bg-background pr-12 text-xs text-muted-foreground md:inline-flex',
+          className,
+        )}
         onClick={() => setOpen(true)}
       >
         <span className='inline-block font-sans'>Search ...</span>
         <kbd className='pointer-events-none absolute right-[0.3rem] top-[0.3rem] flex h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100'>
           <span>⌘</span>K
         </kbd>
+      </Button>
+      <Button variant='ghost' size='icon' onClick={() => setOpen(true)} className='md:hidden'>
+        <MagnifyingGlassIcon className='size-4' />
+        <span className='sr-only'>Search</span>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder='Type a command or search...' />

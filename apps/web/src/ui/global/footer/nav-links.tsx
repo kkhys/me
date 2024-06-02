@@ -20,7 +20,6 @@ import {
 } from '@kkhys/ui';
 
 import { site, storybook } from '#/config';
-import { CommandMenu } from '#/ui/global';
 
 const NavLink = ({
   href,
@@ -106,6 +105,5 @@ export const NavLinks = () => (
         <NavLink href='/legal/terms'>Terms of Service</NavLink>
       </DropdownMenuContent>
     </DropdownMenu>
-    <CommandMenu className='ml-2 hidden md:inline-flex' />
   </>
 );
