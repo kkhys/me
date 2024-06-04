@@ -2,6 +2,7 @@
 
 import type { Post } from 'contentlayer/generated';
 import * as React from 'react';
+import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { cn } from '@kkhys/ui';
@@ -62,7 +63,16 @@ export const ArticleList = ({
         ))}
       </div>
       {maxPage > 1 && (
-        <Pagination className='mt-12' next={next} prev={prev} jump={jump} currentPage={currentPage} maxPage={maxPage} />
+        <Suspense fallback={null}>
+          <Pagination
+            className='mt-12'
+            next={next}
+            prev={prev}
+            jump={jump}
+            currentPage={currentPage}
+            maxPage={maxPage}
+          />
+        </Suspense>
       )}
     </>
   );

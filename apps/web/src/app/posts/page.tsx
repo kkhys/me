@@ -25,7 +25,7 @@ const Page = () => (
       <header>
         <h1 className='font-sans font-medium'>Blog</h1>
       </header>
-      <Suspense>
+      <Suspense fallback={null}>
         <CategoryTabs />
       </Suspense>
     </Container>

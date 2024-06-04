@@ -9,7 +9,7 @@ export const Header = ({ className }: { className?: string }) => (
       <div className='border-b border-zinc-100 py-2.5 dark:border-zinc-700/40'>
         <ContainerInner>
           <div className='flex w-full items-center justify-between'>
-            <Suspense>
+            <Suspense fallback={null}>
               <MainNavigation />
             </Suspense>
             <MobileNavigation />
