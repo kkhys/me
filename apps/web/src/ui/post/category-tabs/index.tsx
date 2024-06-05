@@ -23,7 +23,7 @@ import {
 import { env } from '#/env';
 import { ArticleList } from '#/ui/post';
 
-export const CategoryTabs = () => {
+const useCategory = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -49,19 +49,27 @@ export const CategoryTabs = () => {
       params.set('category', value);
     }
 
+    params.delete('page');
+
     setCategory(value);
     router.replace(`/posts?${params.toString()}`);
   };
+
+  React.useEffect(() => {
+    setCategory(initialCategory(searchParams.get('category') ?? 'all'));
+  }, [searchParams]);
+
+  return { category, handleValueChange };
+};
+
+export const CategoryTabs = () => {
+  const { category, handleValueChange } = useCategory();
 
   const posts = allPosts
     .filter((post) => env.NODE_ENV === 'development' || post.status === 'published')
     .sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)));
   const techPosts = posts.filter((post) => post.category.includes('Tech'));
   const lifePosts = posts.filter((post) => post.category.includes('Life'));
-
-  React.useEffect(() => {
-    setCategory(initialCategory(searchParams.get('category') ?? 'all'));
-  }, [searchParams]);
 
   return (
     <Tabs defaultValue={category} onValueChange={handleValueChange} value={category} className='mt-6'>
@@ -83,6 +91,7 @@ export const CategoryTabs = () => {
               <Button asChild variant='outline' size='icon'>
                 <Link href='/atom' prefetch={false}>
                   <RssIcon className='size-4' />
+                  <span className='sr-only'>Atom</span>
                 </Link>
               </Button>
             </TooltipTrigger>

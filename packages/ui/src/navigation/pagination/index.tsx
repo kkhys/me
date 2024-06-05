@@ -27,38 +27,64 @@ PaginationItem.displayName = 'PaginationItem';
 
 type PaginationLinkProps = {
   isActive?: boolean;
+  isDisabled?: boolean;
 } & Pick<ButtonProps, 'size'> &
   React.ComponentProps<'a'>;
 
-const PaginationLink = ({ className, isActive, children, size = 'icon', ...props }: PaginationLinkProps) => (
-  <PaginationItem>
-    <a
-      aria-current={isActive ? 'page' : undefined}
-      className={cn(
-        buttonVariants({
-          variant: isActive ? 'outline' : 'ghost',
-          size,
-        }),
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </a>
-  </PaginationItem>
+const PaginationLink = ({
+  className,
+  isActive,
+  isDisabled,
+  children,
+  size = 'icon',
+  ...props
+}: PaginationLinkProps) => (
+  <a
+    aria-current={isActive ? 'page' : undefined}
+    aria-disabled={isDisabled}
+    className={cn(
+      buttonVariants({
+        variant: isActive ? 'outline' : 'ghost',
+        size,
+      }),
+      isDisabled && 'pointer-events-none text-muted-foreground',
+      isActive && 'pointer-events-none',
+      'cursor-pointer select-none font-sans',
+      className,
+    )}
+    {...props}
+  >
+    {children}
+  </a>
 );
 PaginationLink.displayName = 'PaginationLink';
 
-const PaginationPrevious = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (
-  <PaginationLink aria-label='Go to previous page' size='default' className={cn('gap-1 pl-2.5', className)} {...props}>
+const PaginationPrevious = ({
+  className,
+  isDisabled = false,
+  ...props
+}: React.ComponentProps<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label='Go to previous page'
+    size='default'
+    className={cn('gap-1 pl-2.5', className)}
+    isDisabled={isDisabled}
+    {...props}
+  >
     <ChevronLeftIcon className='size-4' />
     <span>Previous</span>
   </PaginationLink>
 );
 PaginationPrevious.displayName = 'PaginationPrevious';
 
-const PaginationNext = ({ className, ...props }: React.ComponentProps<typeof PaginationLink>) => (
-  <PaginationLink aria-label='Go to next page' size='default' className={cn('gap-1 pr-2.5', className)} {...props}>
+const PaginationNext = ({ className, isDisabled = false, ...props }: React.ComponentProps<typeof PaginationLink>) => (
+  <PaginationLink
+    aria-label='Go to next page'
+    size='default'
+    className={cn('gap-1 pr-2.5', className)}
+    isDisabled={isDisabled}
+    {...props}
+  >
     <span>Next</span>
     <ChevronRightIcon className='size-4' />
   </PaginationLink>

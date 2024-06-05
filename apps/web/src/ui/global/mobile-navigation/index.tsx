@@ -55,7 +55,7 @@ export const MobileNavigation = () => {
       </SheetTrigger>
       <SheetContent side='left' className='pr-0'>
         <MobileLink href='/' className='flex items-center' onOpenChange={setOpen}>
-          <Icons.logo className='mr-2 size-4' />
+          <Icons.logo className='mr-2 size-5 rounded-md' />
           <span className='sr-only'>Keisuke Hayashi</span>
         </MobileLink>
         <ScrollArea className='my-4 h-[calc(100vh-8rem)] pb-10 pl-6'>
