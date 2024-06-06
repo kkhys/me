@@ -16,7 +16,7 @@ export const ContainerInner = React.forwardRef<React.ElementRef<'div'>, React.Co
   function InnerContainer({ className, children, ...props }, ref) {
     return (
       <div ref={ref} className={cn('px-6 sm:px-8 lg:px-12', className)} {...props}>
-        <div className='mx-auto max-w-2xl'>{children}</div>
+        <div className='relative mx-auto max-w-2xl'>{children}</div>
       </div>
     );
   },
