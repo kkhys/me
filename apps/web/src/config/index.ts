@@ -1,2 +1,2 @@
 export * from './constants';
-export * from './searchItems';
+export * from './search-items';

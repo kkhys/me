@@ -1,6 +1,7 @@
 'use client';
 
 import type { Route } from 'next';
+import type { LinkProps } from 'next/link';
 import * as React from 'react';
 import Link from 'next/link';
 import { ArrowTopRightIcon, DotsHorizontalIcon, HomeIcon } from '@radix-ui/react-icons';
@@ -19,23 +20,22 @@ import {
 } from '@kkhys/ui';
 
 import { site, storybook } from '#/config';
-import { CommandMenu } from '#/ui/global';
 
-const NavLink = <T extends string>({
+const NavLink = ({
   href,
   children,
   isExternal = false,
+  ...props
 }: {
-  href: Route<T>;
-  children: React.ReactNode;
   isExternal?: boolean;
-}) => (
+} & LinkProps<string>) => (
   <DropdownMenuItem asChild>
     <Link
       href={href}
       className='cursor-pointer'
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
+      {...props}
     >
       {children}
       {isExternal && <ArrowTopRightIcon className='ml-1 size-3' />}
@@ -105,6 +105,5 @@ export const NavLinks = () => (
         <NavLink href='/legal/terms'>Terms of Service</NavLink>
       </DropdownMenuContent>
     </DropdownMenu>
-    <CommandMenu className='ml-2 hidden md:inline-flex' />
   </>
 );
