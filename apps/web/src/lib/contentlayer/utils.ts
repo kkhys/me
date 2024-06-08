@@ -3,7 +3,17 @@ import { bech32m } from 'bech32';
 import { remark } from 'remark';
 import strip from 'strip-markdown';
 
-import type { AllTagsTitle, Category, CategoryTitle, FashionTags, LifeTags, Tag, TechTags } from './constants';
+import type {
+  AllTagsTitle,
+  Base,
+  Category,
+  CategoryTitle,
+  FashionTags,
+  LifeTags,
+  Tag,
+  TechTags,
+} from '../../config/post';
+import { allTags, categories, lifeTags, techTags } from '../../config/post';
 /**
  * esbuild does not support module path aliases, so relative paths are used
  *
@@ -11,7 +21,6 @@ import type { AllTagsTitle, Category, CategoryTitle, FashionTags, LifeTags, Tag,
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { NotFoundError } from '../../exceptions';
-import { allTags, categories, extractTitle, fashionTags, lifeTags, techTags } from './constants';
 
 /**
  * Generates a unique slug based on the given data.
@@ -39,7 +48,7 @@ export const generateSlug = (data: crypto.BinaryLike) => {
  * @returns The generated excerpt.
  */
 export const createExcerpt = async (raw: string) => {
-  const maxWords = 120;
+  const maxWords = 160;
   const stripped = (await remark().use(strip).process(raw)).toString();
   const urlWithLineBreakRegex = /^(?:\r\n|\n)(https?:\/\/\S+)(?:\r\n|\n)/gm;
   const whitespaceRegex = /\s+/g;
@@ -82,6 +91,15 @@ const getTagFromTitle = (title: AllTagsTitle) => {
 
   return tag;
 };
+
+/**
+ * Extracts the 'title' property from the given object.
+ *
+ * @template T - The type of object containing the 'title' property.
+ * @param item - The object from which to extract the 'title'.
+ * @return The value of the 'title' property.
+ */
+export const extractTitle = <T extends Pick<Base, 'title'>>(item: T) => item.title;
 
 /**
  * Checks if a specific tag exists in a given target tag array.
@@ -128,9 +146,9 @@ export const generateTagObject = (tagTitle: AllTagsTitle, category: CategoryTitl
     case 'Life':
       isExistTag(lifeTags, tagTitle);
       break;
-    case 'Fashion':
-      isExistTag(fashionTags, tagTitle);
-      break;
+    // case 'Fashion':
+    //   isExistTag(fashionTags, tagTitle);
+    //   break;
   }
 
   const { slug, emoji } = getTagFromTitle(tagTitle);

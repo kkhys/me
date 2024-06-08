@@ -1,10 +1,13 @@
+'use client';
+
 import type { Post } from 'contentlayer/generated';
 import * as React from 'react';
+import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { cn } from '@kkhys/ui';
 
-import { EyeCatch } from '#/ui/post';
+import { EyeCatch, Pagination, usePagination } from '#/ui/post';
 
 const ListItem = ({
   post: { slug, emoji, title, publishedAt, publishedAtFormattedIso, status },
@@ -33,7 +36,7 @@ const ListItem = ({
 };
 
 export const ArticleList = ({
-  posts,
+  posts: _posts,
   className,
   showDate = true,
 }: {
@@ -41,6 +44,10 @@ export const ArticleList = ({
   className?: string;
   showDate?: boolean;
 }) => {
+  const { next, prev, jump, currentData, currentPage, maxPage } = usePagination(_posts);
+
+  const posts = currentData();
+
   if (!posts.length)
     return (
       <div className={className}>
@@ -49,10 +56,24 @@ export const ArticleList = ({
     );
 
   return (
-    <div className={cn('divide-y border-t', className)}>
-      {posts.map((post) => (
-        <ListItem key={post._id} post={post} showDate={showDate} />
-      ))}
-    </div>
+    <>
+      <div className={cn('divide-y border-t', className)}>
+        {posts.map((post) => (
+          <ListItem key={post._id} post={post} showDate={showDate} />
+        ))}
+      </div>
+      {maxPage > 1 && (
+        <Suspense fallback={null}>
+          <Pagination
+            className='mt-12'
+            next={next}
+            prev={prev}
+            jump={jump}
+            currentPage={currentPage}
+            maxPage={maxPage}
+          />
+        </Suspense>
+      )}
+    </>
   );
 };

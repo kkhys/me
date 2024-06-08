@@ -8,6 +8,8 @@ import { JsonLd } from './json-ld';
 
 import '#/styles/code-block.css';
 
+import { Suspense } from 'react';
+
 /**
  * Retrieves a post object by its slug.
  *
@@ -50,7 +52,9 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
   return (
     <>
       <JsonLd post={post} />
-      <ArticleLayout post={post} />
+      <Suspense fallback={null}>
+        <ArticleLayout post={post} />
+      </Suspense>
     </>
   );
 };
