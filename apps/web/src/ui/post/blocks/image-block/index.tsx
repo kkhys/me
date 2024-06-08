@@ -49,21 +49,16 @@ export const ImageBlock = ({
   src,
   alt,
   blurDataURL,
-  _width,
-  _height,
+  width,
+  height,
   title,
 }: Pick<ImageProps, 'blurDataURL' | 'title'> & {
   src?: string;
   alt?: string;
-  _width?: string | number;
-  _height?: string | number;
+  width?: string | number;
+  height?: string | number;
 }) => {
   const [isOpen, setOpen] = React.useState(false);
-
-  const parseDimension = (dim?: string | number) => (dim ? (typeof dim === 'string' ? parseFloat(dim) : dim) : 0);
-
-  const width = parseDimension(_width);
-  const height = parseDimension(_height);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -82,8 +77,8 @@ export const ImageBlock = ({
       <NextImage
         src={src}
         alt={alt ?? ''}
-        width={width}
-        height={height}
+        width={width as number}
+        height={height as number}
         blurDataURL={blurDataURL}
         onClick={() => setOpen(!isOpen)}
         layoutId={src}
@@ -100,8 +95,8 @@ export const ImageBlock = ({
           <NextImage
             src={src}
             alt={alt ?? ''}
-            width={width}
-            height={height}
+            width={width as number}
+            height={height as number}
             blurDataURL={blurDataURL}
             onClick={() => setOpen(!isOpen)}
             layoutId={src}
