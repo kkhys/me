@@ -72,7 +72,7 @@ export const ImageBlock = ({
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isOpen]);
+  }, [allowZoom, isOpen]);
 
   if (!src) return null;
 
