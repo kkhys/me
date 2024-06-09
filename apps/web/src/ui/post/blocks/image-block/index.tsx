@@ -60,9 +60,11 @@ export const ImageBlock = ({
 
   const { browser } = useBrowser();
   const isDesktop = useMediaQuery('(min-width: 768px)');
-  const allowTransition = browser === 'chrome' && isDesktop;
+  const allowZoom = browser === 'chrome' && isDesktop;
 
   React.useEffect(() => {
+    if (!allowZoom) return;
+
     const handleScroll = () => {
       if (isOpen) setOpen(false);
     };
@@ -82,11 +84,14 @@ export const ImageBlock = ({
         width={width as number}
         height={height as number}
         blurDataURL={blurDataURL}
-        onClick={() => setOpen(!isOpen)}
-        layoutId={allowTransition ? src : undefined}
-        className={cn(!isOpen && 'cursor-zoom-in')}
+        onClick={() => {
+          if (!allowZoom) return;
+          setOpen(!isOpen);
+        }}
+        layoutId={src}
+        className={cn(!isOpen && allowZoom && 'cursor-zoom-in')}
       />
-      {isOpen && (
+      {isOpen && allowZoom && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -102,7 +107,7 @@ export const ImageBlock = ({
             height={height as number}
             blurDataURL={blurDataURL}
             onClick={() => setOpen(!isOpen)}
-            layoutId={allowTransition ? src : undefined}
+            layoutId={src}
             className={cn('fixed inset-0 z-30 m-auto w-[1100px]', isOpen ? 'cursor-zoom-out' : 'cursor-zoom-in')}
           />
         </motion.div>
