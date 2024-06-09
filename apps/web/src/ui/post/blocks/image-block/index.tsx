@@ -88,7 +88,7 @@ export const ImageBlock = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0 }}
           onClick={() => setOpen(false)}
           className='fixed inset-0 z-20 bg-background/80 backdrop-blur-[2px]'
         >
