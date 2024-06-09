@@ -13,6 +13,7 @@ const NextImage = ({
   width,
   height,
   blurDataURL,
+  loading,
   onClick,
   layoutId,
   className,
@@ -30,6 +31,7 @@ const NextImage = ({
       sizes='(min-width: 768px) 42rem, 100vw'
       placeholder={blurDataURL ? 'blur' : 'empty'}
       blurDataURL={blurDataURL}
+      loading={loading}
       quality={90}
       className={cn('w-full rounded-2xl border-[#474747] shadow dark:border dark:shadow-none', className)}
       onClick={onClick}
@@ -75,7 +77,7 @@ export const ImageBlock = ({
         blurDataURL={blurDataURL}
         onClick={() => setOpen(!isOpen)}
         // I don't like to use it too much, but it causes image flickering, so I specify it.
-        // loading='eager'
+        loading='eager'
         layoutId={src}
         className={cn(!isOpen && 'cursor-zoom-in')}
       />
