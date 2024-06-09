@@ -90,6 +90,8 @@ export const ImageBlock = ({
             alt={alt ?? ''}
             width={width as number}
             height={height as number}
+            blurDataURL={blurDataURL}
+            priority={true}
             onClick={() => setOpen(!isOpen)}
             layoutId={src}
             className={cn('fixed inset-0 z-30 m-auto w-[1100px]', isOpen ? 'cursor-zoom-out' : 'cursor-zoom-in')}
