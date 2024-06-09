@@ -74,6 +74,8 @@ export const ImageBlock = ({
         height={height as number}
         blurDataURL={blurDataURL}
         onClick={() => setOpen(!isOpen)}
+        // I don't like to use it too much, but it causes image flickering, so I specify it.
+        // loading='eager'
         layoutId={src}
         className={cn(!isOpen && 'cursor-zoom-in')}
       />
@@ -90,10 +92,8 @@ export const ImageBlock = ({
             alt={alt ?? ''}
             width={width as number}
             height={height as number}
-            priority={true}
             onClick={() => setOpen(!isOpen)}
             layoutId={src}
-            loading='eager'
             className={cn('fixed inset-0 z-30 m-auto w-[1100px]', isOpen ? 'cursor-zoom-out' : 'cursor-zoom-in')}
           />
         </motion.div>
