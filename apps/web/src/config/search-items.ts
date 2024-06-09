@@ -131,6 +131,13 @@ export const searchItems = [
         emoji: '🔄',
         category: 'Tech',
       },
+      {
+        title: 'v1.8.0 リリースノート: グローバルナビゲーションの追加など',
+        href: '/posts/p1c8jpk',
+        emoji: '🚀',
+        category: 'Tech',
+        tags: ['Release'],
+      },
     ],
   },
 ] satisfies SearchItem[];
