@@ -51,7 +51,7 @@ export const MainNavigation = () => {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className={cn(pathname === '/posts' && 'bg-accent')}>Blog</NavigationMenuTrigger>
+            <NavigationMenuTrigger>Blog</NavigationMenuTrigger>
             <NavigationMenuContent className='min-w-[8rem] p-1'>
               <ListItem href='/posts' className={cn(pathname === '/posts' && !categoryParam && 'bg-accent')}>
                 All Posts
@@ -79,3 +79,19 @@ export const MainNavigation = () => {
     </div>
   );
 };
+
+export const MainNavigationFallback = () => (
+  <div className='mr-4 hidden md:flex'>
+    <Link href='/' className='mr-6 flex flex-shrink-0 items-center'>
+      <Icons.logo className='size-5 rounded-md' />
+      <span className='sr-only'>Keisuke Hayashi</span>
+    </Link>
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>Blog</NavigationMenuTrigger>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  </div>
+);
