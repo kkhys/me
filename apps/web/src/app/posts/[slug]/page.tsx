@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { allPosts } from 'contentlayer/generated';
 
 import { env } from '#/env';
-import { ArticleLayout } from '#/ui/post';
+import { ArticleLayout, ArticleLayoutFallback } from '#/ui/post';
 import { JsonLd } from './json-ld';
 
 import '#/styles/code-block.css';
@@ -52,7 +52,7 @@ const Page = ({ params: { slug } }: { params: { slug: string } }) => {
   return (
     <>
       <JsonLd post={post} />
-      <Suspense fallback={null}>
+      <Suspense fallback={<ArticleLayoutFallback />}>
         <ArticleLayout post={post} />
       </Suspense>
     </>

@@ -13,6 +13,7 @@ const NextImage = ({
   width,
   height,
   blurDataURL,
+  loading,
   onClick,
   layoutId,
   className,
@@ -30,6 +31,7 @@ const NextImage = ({
       sizes='(min-width: 768px) 42rem, 100vw'
       placeholder={blurDataURL ? 'blur' : 'empty'}
       blurDataURL={blurDataURL}
+      loading={loading}
       quality={90}
       className={cn('w-full rounded-2xl border-[#474747] shadow dark:border dark:shadow-none', className)}
       onClick={onClick}
@@ -74,6 +76,8 @@ export const ImageBlock = ({
         height={height as number}
         blurDataURL={blurDataURL}
         onClick={() => setOpen(!isOpen)}
+        // I don't like to use it too much, but it causes image flickering, so I specify it.
+        loading='eager'
         layoutId={src}
         className={cn(!isOpen && 'cursor-zoom-in')}
       />
@@ -85,21 +89,15 @@ export const ImageBlock = ({
           onClick={() => setOpen(false)}
           className='fixed inset-0 z-20 bg-background/80 backdrop-blur-[2px]'
         >
-          {/* Here I use the img tag because of flickering when using next/image. */}
-          <button onClick={() => setOpen(!isOpen)}>
-            <motion.img
-              src={src}
-              alt={alt ?? ''}
-              width={width as number}
-              height={height as number}
-              decoding='async'
-              layoutId={src}
-              className={cn(
-                'fixed inset-0 z-30 m-auto w-full max-w-[1100px] rounded-2xl border-[#474747] shadow dark:border dark:shadow-none',
-                isOpen ? 'cursor-zoom-out' : 'cursor-zoom-in',
-              )}
-            />
-          </button>
+          <NextImage
+            src={src}
+            alt={alt ?? ''}
+            width={width as number}
+            height={height as number}
+            onClick={() => setOpen(!isOpen)}
+            layoutId={src}
+            className={cn('fixed inset-0 z-30 m-auto w-[1100px]', isOpen ? 'cursor-zoom-out' : 'cursor-zoom-in')}
+          />
         </motion.div>
       )}
     </div>

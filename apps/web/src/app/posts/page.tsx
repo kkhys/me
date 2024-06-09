@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Suspense } from 'react';
 
 import { BackButton, Container } from '#/ui/global';
-import { CategoryTabs } from '#/ui/post';
+import { CategoryTabs, CategoryTabsFallback } from '#/ui/post';
 import { JsonLd } from './json-ld';
 
 export const metadata = {
@@ -25,7 +25,7 @@ const Page = () => (
       <header>
         <h1 className='font-sans font-medium'>Blog</h1>
       </header>
-      <Suspense fallback={null}>
+      <Suspense fallback={<CategoryTabsFallback />}>
         <CategoryTabs />
       </Suspense>
     </Container>

@@ -128,3 +128,25 @@ export const CategoryTabs = () => {
     </Tabs>
   );
 };
+
+export const CategoryTabsFallback = () => (
+  <Tabs className='mt-6'>
+    <div className='flex gap-4'>
+      <TabsList>
+        <TabsTrigger value='all' className='font-sans'>
+          All
+        </TabsTrigger>
+        <TabsTrigger value='tech' className='font-sans'>
+          Tech
+        </TabsTrigger>
+        <TabsTrigger value='life' className='font-sans'>
+          Life
+        </TabsTrigger>
+      </TabsList>
+      <Button variant='outline' size='icon'>
+        <RssIcon className='size-4' />
+        <span className='sr-only'>Atom</span>
+      </Button>
+    </div>
+  </Tabs>
+);
