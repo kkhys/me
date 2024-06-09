@@ -16,15 +16,8 @@ const NextImage = ({
   onClick,
   layoutId,
   className,
-}: {
-  src: string;
-  alt?: string;
-  width: number;
-  height: number;
-  blurDataURL?: string;
-  onClick: () => void;
-  layoutId: string;
-  className?: string;
+}: ImageProps & {
+  layoutId?: string;
 }) => {
   const MotionImage = motion(Image);
 
@@ -35,7 +28,7 @@ const NextImage = ({
       width={width}
       height={height}
       sizes='(min-width: 768px) 42rem, 100vw'
-      placeholder='blur'
+      placeholder={blurDataURL ? 'blur' : 'empty'}
       blurDataURL={blurDataURL}
       quality={90}
       className={cn('w-full rounded-2xl border-[#474747] shadow dark:border dark:shadow-none', className)}
@@ -97,14 +90,9 @@ export const ImageBlock = ({
             alt={alt ?? ''}
             width={width as number}
             height={height as number}
-            blurDataURL={blurDataURL}
             onClick={() => setOpen(!isOpen)}
             layoutId={src}
-            className={cn(
-              'fixed inset-0 z-30 m-auto w-[1100px]',
-              !isOpen && 'cursor-zoom-in',
-              isOpen && 'cursor-zoom-out',
-            )}
+            className={cn('fixed inset-0 z-30 m-auto w-[1100px]', isOpen ? 'cursor-zoom-out' : 'cursor-zoom-in')}
           />
         </motion.div>
       )}
