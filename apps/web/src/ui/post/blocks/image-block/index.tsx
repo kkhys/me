@@ -7,13 +7,14 @@ import { motion } from 'framer-motion';
 
 import { cn } from '@kkhys/ui';
 
+import { useBrowser, useMediaQuery } from '#/hooks';
+
 const NextImage = ({
   src,
   alt,
   width,
   height,
   blurDataURL,
-  loading,
   onClick,
   layoutId,
   className,
@@ -31,7 +32,6 @@ const NextImage = ({
       sizes='(min-width: 768px) 42rem, 100vw'
       placeholder={blurDataURL ? 'blur' : 'empty'}
       blurDataURL={blurDataURL}
-      loading={loading}
       quality={90}
       className={cn('w-full rounded-2xl border-[#474747] shadow dark:border dark:shadow-none', className)}
       onClick={onClick}
@@ -55,6 +55,10 @@ export const ImageBlock = ({
 }) => {
   const [isOpen, setOpen] = React.useState(false);
 
+  const { browser } = useBrowser();
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const allowTransition = browser === 'chrome' && isDesktop;
+
   React.useEffect(() => {
     const handleScroll = () => {
       if (isOpen) setOpen(false);
@@ -76,9 +80,7 @@ export const ImageBlock = ({
         height={height as number}
         blurDataURL={blurDataURL}
         onClick={() => setOpen(!isOpen)}
-        // I don't like to use it too much, but it causes image flickering, so I specify it.
-        loading='eager'
-        layoutId={src}
+        layoutId={allowTransition ? src : undefined}
         className={cn(!isOpen && 'cursor-zoom-in')}
       />
       {isOpen && (
@@ -86,6 +88,7 @@ export const ImageBlock = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
           onClick={() => setOpen(false)}
           className='fixed inset-0 z-20 bg-background/80 backdrop-blur-[2px]'
         >
@@ -95,7 +98,7 @@ export const ImageBlock = ({
             width={width as number}
             height={height as number}
             onClick={() => setOpen(!isOpen)}
-            layoutId={src}
+            layoutId={allowTransition ? src : undefined}
             className={cn('fixed inset-0 z-30 m-auto w-[1100px]', isOpen ? 'cursor-zoom-out' : 'cursor-zoom-in')}
           />
         </motion.div>
