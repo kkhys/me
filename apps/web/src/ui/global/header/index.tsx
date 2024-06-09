@@ -7,7 +7,15 @@ import { useDebounce } from 'use-debounce';
 
 import { cn } from '@kkhys/ui';
 
-import { CommandMenu, ContainerInner, ContainerOuter, MainNavigation, MobileNavigation, ModeToggle } from '#/ui/global';
+import {
+  CommandMenu,
+  ContainerInner,
+  ContainerOuter,
+  MainNavigation,
+  MainNavigationFallback,
+  MobileNavigation,
+  ModeToggle,
+} from '#/ui/global';
 
 export const useHeaderAnimation = () => {
   const [animationHeader, setAnimationHeader] = React.useState<boolean | null>(null);
@@ -68,7 +76,7 @@ export const Header = ({ className }: { className?: string }) => {
         <div className='border-b border-border/60 bg-background-lighter/95 py-2.5 backdrop-blur supports-[backdrop-filter]:bg-background-lighter/60'>
           <ContainerInner>
             <div className='flex w-full items-center justify-between'>
-              <Suspense fallback={null}>
+              <Suspense fallback={<MainNavigationFallback />}>
                 <MainNavigation />
               </Suspense>
               <MobileNavigation />

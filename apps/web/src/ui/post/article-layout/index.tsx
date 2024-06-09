@@ -83,3 +83,9 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
     </Container>
   );
 };
+
+export const ArticleLayoutFallback = () => (
+  <Container>
+    <BackButton href='/posts' tooltipContent='Go back to posts list' />
+  </Container>
+);
