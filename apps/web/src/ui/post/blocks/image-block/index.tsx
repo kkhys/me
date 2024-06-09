@@ -90,7 +90,6 @@ export const ImageBlock = ({
             alt={alt ?? ''}
             width={width as number}
             height={height as number}
-            blurDataURL={blurDataURL}
             priority={true}
             onClick={() => setOpen(!isOpen)}
             layoutId={src}
