@@ -138,6 +138,12 @@ export const searchItems = [
         category: 'Tech',
         tags: ['Release'],
       },
+      {
+        title: '月の土地をもらった',
+        href: '/posts/p1n03k6',
+        emoji: '🌜',
+        category: 'Life',
+      },
     ],
   },
 ] satisfies SearchItem[];
