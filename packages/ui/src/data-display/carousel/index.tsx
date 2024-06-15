@@ -14,7 +14,7 @@ type CarouselPlugin = UseCarouselParameters[1];
 
 interface CarouselProps {
   opts?: CarouselOptions;
-  plugins?: CarouselPlugin[];
+  plugins?: CarouselPlugin;
   orientation?: 'horizontal' | 'vertical';
   setApi?: (api: CarouselApi) => void;
 }
@@ -45,8 +45,6 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
         ...opts,
         axis: orientation === 'horizontal' ? 'x' : 'y',
       },
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
       plugins,
     );
 
