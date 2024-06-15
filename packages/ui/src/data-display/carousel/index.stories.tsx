@@ -165,7 +165,6 @@ export const Count = {
 
 export const AutoPlay = {
   args: {
-    // @ts-expect-error: `delay` is not a valid prop for `Carousel`
     plugins: [Autoplay({ delay: 2000 })],
     className: 'w-[250px]',
     children: (

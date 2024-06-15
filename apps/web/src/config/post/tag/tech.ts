@@ -24,6 +24,11 @@ export const techTags = [
     slug: 'next-js',
     emoji: '🔼',
   },
+  {
+    title: 'Security',
+    slug: 'security',
+    emoji: '🔒',
+  },
 ] as const;
 
 export type TechTags = typeof techTags;
