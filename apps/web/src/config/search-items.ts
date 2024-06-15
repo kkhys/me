@@ -144,6 +144,13 @@ export const searchItems = [
         emoji: '🌜',
         category: 'Life',
       },
+      {
+        title: 'OWASP ASVS から考えるパスワード要件',
+        href: '/posts/p164vu8',
+        emoji: '🔑',
+        category: 'Tech',
+        tags: ['Security'],
+      },
     ],
   },
 ] satisfies SearchItem[];
