@@ -151,6 +151,12 @@ export const searchItems = [
         category: 'Tech',
         tags: ['Security'],
       },
+      {
+        title: 'エストニア電子国民として',
+        href: '/posts/p1t6el8',
+        emoji: '🇪🇪',
+        category: 'Life',
+      },
     ],
   },
 ] satisfies SearchItem[];
