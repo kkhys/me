@@ -37,6 +37,8 @@ const Image = async ({ params: { slug } }: { params: { slug: string } }) => {
   const post = getPostBySlug(slug);
   if (!post) return new Response('Not found', { status: 404 });
 
+  const firstEmoji = Array.from(post.emoji)[0];
+
   const notoEmojiSemiBold = await fetch(
     new URL('../../../../assets/fonts/NotoEmoji-SemiBold.ttf', import.meta.url),
   ).then((res) => res.arrayBuffer());
@@ -56,7 +58,7 @@ const Image = async ({ params: { slug } }: { params: { slug: string } }) => {
           color: '#e4e4e7',
         }}
       >
-        {post.emoji}
+        {firstEmoji}
       </div>
     ),
     {
