@@ -157,6 +157,12 @@ export const searchItems = [
         emoji: '🇪🇪',
         category: 'Life',
       },
+      {
+        title: 'Animations on the web に登録した',
+        href: '/posts/p1gvayx',
+        emoji: '🧈',
+        category: 'Tech',
+      },
     ],
   },
 ] satisfies SearchItem[];
