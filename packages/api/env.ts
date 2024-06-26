@@ -7,8 +7,11 @@ export const env = createEnv({
     GCP_CLIENT_EMAIL: z.string().min(1),
     GCP_PRIVATE_KEY: z.string().min(1),
     RESEND_API_KEY: z.string().min(1),
+    NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   },
   client: {},
-  experimental__runtimeEnv: {},
+  experimental__runtimeEnv: {
+    NODE_ENV: process.env.NODE_ENV,
+  },
   skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION,
 });
