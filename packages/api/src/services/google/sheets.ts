@@ -18,7 +18,7 @@ export const appendGoogleSheets = async ({ sheetName, values }: { sheetName: str
     {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${token.accessToken}`,
+        Authorization: `Bearer ${token.access_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },

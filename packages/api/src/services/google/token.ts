@@ -3,13 +3,13 @@ import { importPKCS8, SignJWT } from 'jose';
 import { env } from '../../../env';
 
 interface Token {
-  accessToken: string;
-  expiresIn: number;
-  tokenType: string;
+  access_token: string;
+  expires_in: number;
+  token_type: string;
 }
 
 type TokenWithExpiration = Token & {
-  expiresAt: number;
+  expires_at: number;
 };
 
 const payload = {
@@ -46,7 +46,7 @@ const createToken = async () => {
 
   return {
     ...json,
-    expiresAt: Math.floor(Date.now() / 1000) + json.expiresIn,
+    expires_at: Math.floor(Date.now() / 1000) + json.expires_in,
   };
 };
 
@@ -59,7 +59,7 @@ export const authenticate = async () => {
 
   let resolvedToken = await token;
 
-  if (resolvedToken.expiresAt < Math.floor(Date.now() / 1000)) {
+  if (resolvedToken.expires_at < Math.floor(Date.now() / 1000)) {
     token = createToken();
     resolvedToken = await token;
   }
