@@ -7,6 +7,8 @@ export const env = createEnv({
     GCP_CLIENT_EMAIL: z.string().min(1),
     GCP_PRIVATE_KEY: z.string().min(1),
     RESEND_API_KEY: z.string().min(1),
+    LINE_USER_ID: z.string().min(1),
+    LINE_CHANNEL_ACCESS_TOKEN: z.string().min(1),
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   },
   client: {},

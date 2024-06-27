@@ -2,7 +2,7 @@ import { SendContactSchema } from '@kkhys/validators';
 
 import { env } from '../../env';
 import { contactMail } from '../mail-templates';
-import { appendGoogleSheets, sendEmail } from '../services';
+import { appendGoogleSheets, sendEmail, sendLineMessage } from '../services';
 import { publicProcedure } from '../trpc';
 
 export const contactRouter = {
@@ -16,6 +16,10 @@ export const contactRouter = {
     if (!isProduction) {
       return;
     }
+
+    await sendLineMessage({
+      message: `New contact from ${name} <${email}>: ${content}`,
+    });
 
     await sendEmail({
       to: email,
