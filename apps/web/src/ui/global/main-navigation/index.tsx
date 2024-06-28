@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 import {
   cn,
@@ -13,6 +13,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
   Separator,
 } from '@kkhys/ui';
 
@@ -39,8 +40,6 @@ ListItem.displayName = 'ListItem';
 
 export const MainNavigation = () => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const categoryParam = searchParams.get('category');
 
   return (
     <div className='mr-4 hidden md:flex'>
@@ -51,27 +50,29 @@ export const MainNavigation = () => {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Blog</NavigationMenuTrigger>
+            <NavigationMenuTrigger className={cn(pathname === '/posts' && 'bg-accent')}>Blog</NavigationMenuTrigger>
             <NavigationMenuContent className='min-w-[8rem] p-1'>
-              <ListItem href='/posts' className={cn(pathname === '/posts' && !categoryParam && 'bg-accent')}>
-                All Posts
-              </ListItem>
+              <ListItem href='/posts'>All Posts</ListItem>
               <Separator className='-mx-1 my-1 h-px w-[calc(100%_+_1rem)]' />
               <div className='grid gap-1'>
                 {categories.map((category, index) => (
                   <ListItem
                     key={category.slug}
                     href={`/posts?category=${category.slug}`}
-                    className={cn(
-                      categories.length === index + 1 && 'mb-0.5',
-                      categoryParam === category.slug && 'bg-accent',
-                    )}
+                    className={cn(categories.length === index + 1 && 'mb-0.5')}
                   >
                     {category.title}
                   </ListItem>
                 ))}
               </div>
             </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <Link href='/contact' legacyBehavior passHref>
+              <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), pathname === '/contact' && 'bg-accent')}>
+                Contact
+              </NavigationMenuLink>
+            </Link>
           </NavigationMenuItem>
           <NavigationMenuIndicator />
         </NavigationMenuList>
