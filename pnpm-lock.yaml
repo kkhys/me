@@ -512,6 +512,9 @@ importers:
       '@trpc/server':
         specifier: 11.0.0-rc.417
         version: 11.0.0-rc.417
+      date-fns:
+        specifier: 3.6.0
+        version: 3.6.0
       jose:
         specifier: 5.4.1
         version: 5.4.1
@@ -4885,19 +4888,6 @@ packages:
       '@types/react': 18.3.3
       react: 18.3.1
 
-  /@radix-ui/react-compose-refs@1.0.1(react@18.3.1):
-    resolution: {integrity: sha512-fDSBgd44FKHa1FRMU59qBMPFcl2PZE+2nmqunj+BWFyYYjnhIDWL2ItDs3rrbJDQOtzt5nIebLCQc4QRfz6LJw==}
-    peerDependencies:
-      '@types/react': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.24.1
-      react: 18.3.1
-    dev: false
-
   /@radix-ui/react-compose-refs@1.1.0(@types/react@18.3.3)(react@18.3.1):
     resolution: {integrity: sha512-b4inOtiaOnYf9KWyO3jAeeCG6FeyfY6ldiEPanbUjWd+xIk5wZeHa8yVwmrJ2vderhu/BQvzCrJI0lHd+wIiqw==}
     peerDependencies:
@@ -6001,20 +5991,6 @@ packages:
       '@types/react': 18.3.3
       react: 18.3.1
 
-  /@radix-ui/react-slot@1.0.2(react@18.3.1):
-    resolution: {integrity: sha512-YeTpuq4deV+6DusvVUW4ivBgnkHwECUu0BiN43L5UCDFgdhsRUWAghhTF5MbvNTPzmiFOx90asDSUjWuCNapwg==}
-    peerDependencies:
-      '@types/react': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.24.1
-      '@radix-ui/react-compose-refs': 1.0.1(react@18.3.1)
-      react: 18.3.1
-    dev: false
-
   /@radix-ui/react-slot@1.1.0(@types/react@18.3.3)(react@18.3.1):
     resolution: {integrity: sha512-FUCf5XMfmW4dtYl69pdS4DbxKy8nj4M7SafBgPllysxmdachynNflAdp/gCsnYWNDnge6tI9onzMp5ARYc1KNw==}
     peerDependencies:
@@ -6584,7 +6560,7 @@ packages:
     peerDependencies:
       react: ^18.2.0
     dependencies:
-      '@radix-ui/react-slot': 1.0.2(react@18.3.1)
+      '@radix-ui/react-slot': 1.0.2(@types/react@18.3.3)(react@18.3.1)
       react: 18.3.1
     transitivePeerDependencies:
       - '@types/react'

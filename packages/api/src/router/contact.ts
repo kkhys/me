@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 import { SendContactSchema } from '@kkhys/validators';
 
 import { env } from '../../env';
@@ -10,8 +12,9 @@ export const contactRouter = {
     const { email, name, content } = input;
     const isProduction = env.NODE_ENV === 'production';
     const sheetName = isProduction ? 'contact' : 'contact-dev';
+    const currentDate = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
 
-    await appendGoogleSheets({ sheetName, values: [[email, name, content]] });
+    await appendGoogleSheets({ sheetName, values: [[email, name, content, currentDate]] });
 
     if (!isProduction) {
       return;
