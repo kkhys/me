@@ -83,6 +83,7 @@ export const CommandMenu = ({ className }: { className?: string }) => {
                   value={item.title}
                   onSelect={() => runCommand(() => router.push(item.href as Route))}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/api/noto-emoji/${item.emoji}.svg?theme=${selectedTheme === 'dark' ? 'dark' : 'light'}`}
                     alt={item.emoji}
