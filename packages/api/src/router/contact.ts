@@ -12,7 +12,7 @@ export const contactRouter = {
     const { email, name, content, shouldSendReplyMail, recaptchaToken } = input;
 
     if (!recaptchaToken) {
-        throw new Error('Recaptcha token is required');
+      throw new Error('Recaptcha token is required');
     }
 
     const expectedAction = 'contact';

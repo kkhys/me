@@ -38,29 +38,35 @@ interface RecaptchaResponse {
   name: string;
 }
 
-export const verifyRecaptcha = async ({ recaptchaToken,expectedAction }: {
-    recaptchaToken: string;
-    expectedAction: string;
+export const verifyRecaptcha = async ({
+  recaptchaToken,
+  expectedAction,
+}: {
+  recaptchaToken: string;
+  expectedAction: string;
 }) => {
   const request = {
     event: {
       token: recaptchaToken,
       expectedAction,
       siteKey: env.RECAPTCHA_SITE_KEY,
-    }
+    },
   } satisfies RecaptchaRequest;
 
-  const response = await fetch(`https://recaptchaenterprise.googleapis.com/v1/projects/${env.GCP_PROJECT_ID}/assessments?key=${env.RECAPTCHA_SECRET_KEY}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `https://recaptchaenterprise.googleapis.com/v1/projects/${env.GCP_PROJECT_ID}/assessments?key=${env.RECAPTCHA_SECRET_KEY}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(request),
     },
-    body: JSON.stringify(request),
-  });
+  );
 
   if (!response.ok) {
     throw new Error('Failed to verify recaptcha');
   }
 
-  return await response.json() as RecaptchaResponse;
+  return (await response.json()) as RecaptchaResponse;
 };
