@@ -10,13 +10,16 @@ export const env = createEnv({
     CI: z.boolean().default(false),
   },
   server: {
-    GOOGLE_MAPS_API_KEY: z.string(),
-    DATABASE_URL: z.string(),
+    GOOGLE_MAPS_API_KEY: z.string().min(1),
+    DATABASE_URL: z.string().min(1),
   },
-  client: {},
+  client: {
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: z.string().min(1),
+  },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     CI: process.env.CI,
+    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
   },
   skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION || process.env.npm_lifecycle_event === 'lint',
 });
