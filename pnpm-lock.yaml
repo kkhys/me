@@ -433,7 +433,7 @@ importers:
         version: 3.0.2
       axe-playwright:
         specifier: 2.0.1
-        version: 2.0.1(playwright@1.45.0)
+        version: 2.0.1(playwright@1.45.1)
       dotenv-cli:
         specifier: 7.4.2
         version: 7.4.2
@@ -744,8 +744,8 @@ importers:
         specifier: 7.52.0
         version: 7.52.0(react@18.3.1)
       react-resizable-panels:
-        specifier: 2.0.19
-        version: 2.0.19(react-dom@18.3.1)(react@18.3.1)
+        specifier: 2.0.20
+        version: 2.0.20(react-dom@18.3.1)(react@18.3.1)
       recharts:
         specifier: 2.12.7
         version: 2.12.7(react-dom@18.3.1)(react@18.3.1)
@@ -9939,7 +9939,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /axe-playwright@2.0.1(playwright@1.45.0):
+  /axe-playwright@2.0.1(playwright@1.45.1):
     resolution: {integrity: sha512-MHjNjGARulF9XzqSfspmNjw+tpBz4x9o1VlTuLWEUW9fqzhn+xWa1qEpuOIQPbsRWQiLfooDjQAunLeE0PM5AQ==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -9949,7 +9949,7 @@ packages:
       axe-html-reporter: 2.2.3(axe-core@4.8.2)
       junit-report-builder: 3.2.1
       picocolors: 1.0.0
-      playwright: 1.45.0
+      playwright: 1.45.1
     dev: true
 
   /axobject-query@3.1.1:
@@ -19554,21 +19554,12 @@ packages:
     resolution: {integrity: sha512-lZmHlFQ0VYSpAs43dRq1/nJ9G/6SiTI7VPqidld9TDefL9tX87bTKExWZZUF5PeRyqtXqd8fQi2qmfIedkwsNQ==}
     engines: {node: '>=18'}
     hasBin: true
+    dev: false
 
   /playwright-core@1.45.1:
     resolution: {integrity: sha512-LF4CUUtrUu2TCpDw4mcrAIuYrEjVDfT1cHbJMfwnE2+1b8PZcFzPNgvZCvq2JfQ4aTjRCCHw5EJ2tmr2NSzdPg==}
     engines: {node: '>=18'}
     hasBin: true
-
-  /playwright@1.45.0:
-    resolution: {integrity: sha512-4z3ac3plDfYzGB6r0Q3LF8POPR20Z8D0aXcxbJvmfMgSSq1hkcgvFRXJk9rUq5H/MJ0Ktal869hhOdI/zUTeLA==}
-    engines: {node: '>=18'}
-    hasBin: true
-    dependencies:
-      playwright-core: 1.45.0
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
 
   /playwright@1.45.1:
     resolution: {integrity: sha512-Hjrgae4kpSQBr98nhCj3IScxVeVUixqj+5oyif8TdIn2opTCPEzqAqNMeK42i3cWDCVu9MI+ZsGWw+gVR4ISBg==}
@@ -20386,8 +20377,8 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.3.3)(react@18.3.1)
     dev: false
 
-  /react-resizable-panels@2.0.19(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-v3E41kfKSuCPIvJVb4nL4mIZjjKIn/gh6YqZF/gDfQDolv/8XnhJBek4EiV2gOr3hhc5A3kOGOayk3DhanpaQw==}
+  /react-resizable-panels@2.0.20(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-aMbK3VF8U+VBICG+rwhE0Rr/eFZaRzmNq3akBRL1TrayIpLXz7Rbok0//kYeWj6SQRsjcQ3f4eRplJicM+oL6w==}
     peerDependencies:
       react: ^16.14.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0
