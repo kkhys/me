@@ -1,11 +1,10 @@
-import type { PartialStoryFn } from '@storybook/csf';
-import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import type { Decorator, Meta, StoryObj } from '@storybook/react';
 import { Component } from 'react';
 
 import { toast, Toaster } from '.';
 import { Button } from '../../';
 
-export const ToastDecorator = (Story: PartialStoryFn<ReactRenderer>) => (
+export const ToastDecorator: Decorator = (Story) => (
   <>
     <Story />
     <Toaster />
