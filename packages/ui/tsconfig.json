@@ -2,10 +2,6 @@
   "extends": "@kkhys/tsconfig/vite.json",
   "compilerOptions": {
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
-    //    "baseUrl": ".",
-    //    "paths": {
-    //      "#/*": ["src/*"]
-    //    }
   },
   "include": ["*.ts", "src", "vite.config.mts"],
   "exclude": ["node_modules"]
