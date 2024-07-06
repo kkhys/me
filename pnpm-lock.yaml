@@ -242,14 +242,14 @@ importers:
         specifier: 5.50.1
         version: 5.50.1(@tanstack/react-query@5.50.1)(react@18.3.1)
       '@trpc/client':
-        specifier: 11.0.0-rc.446
-        version: 11.0.0-rc.446(@trpc/server@11.0.0-rc.446)
+        specifier: 11.0.0-rc.449
+        version: 11.0.0-rc.449(@trpc/server@11.0.0-rc.449)
       '@trpc/react-query':
-        specifier: 11.0.0-rc.446
-        version: 11.0.0-rc.446(@tanstack/react-query@5.50.1)(@trpc/client@11.0.0-rc.446)(@trpc/server@11.0.0-rc.446)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 11.0.0-rc.449
+        version: 11.0.0-rc.449(@tanstack/react-query@5.50.1)(@trpc/client@11.0.0-rc.449)(@trpc/server@11.0.0-rc.449)(react-dom@18.3.1)(react@18.3.1)
       '@trpc/server':
-        specifier: 11.0.0-rc.446
-        version: 11.0.0-rc.446
+        specifier: 11.0.0-rc.449
+        version: 11.0.0-rc.449
       '@vercel/analytics':
         specifier: 1.3.1
         version: 1.3.1(next@14.2.4)(react@18.3.1)
@@ -507,8 +507,8 @@ importers:
         specifier: workspace:*
         version: link:../db
       '@trpc/server':
-        specifier: 11.0.0-rc.446
-        version: 11.0.0-rc.446
+        specifier: 11.0.0-rc.449
+        version: 11.0.0-rc.449
       superjson:
         specifier: 2.2.1
         version: 2.2.1
@@ -4440,7 +4440,7 @@ packages:
       react-refresh: 0.14.0
       schema-utils: 3.3.0
       source-map: 0.7.4
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     dev: true
 
   /@pnpm/config.env-replace@1.1.0:
@@ -7678,7 +7678,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -8199,32 +8199,32 @@ packages:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
     dev: true
 
-  /@trpc/client@11.0.0-rc.446(@trpc/server@11.0.0-rc.446):
-    resolution: {integrity: sha512-s/bKw9xTRdm0Ax4+GfkMLreP+WleeUVvY2tFmWmJq2fKcAmOGdT3sXGsStqZZZMxbKYQw5qYj55PmpmrdPiXlA==}
+  /@trpc/client@11.0.0-rc.449(@trpc/server@11.0.0-rc.449):
+    resolution: {integrity: sha512-F/IRYnUJgp3xHsbaWUbOA50IOI3jUkNhBHM3dPpb8pt5IdkwqMzG+u4X45igMvxd387sL14gRk5xU1oz9cH8Lw==}
     peerDependencies:
-      '@trpc/server': 11.0.0-rc.446+c679f5317
+      '@trpc/server': 11.0.0-rc.449+42acce6ac
     dependencies:
-      '@trpc/server': 11.0.0-rc.446
+      '@trpc/server': 11.0.0-rc.449
     dev: false
 
-  /@trpc/react-query@11.0.0-rc.446(@tanstack/react-query@5.50.1)(@trpc/client@11.0.0-rc.446)(@trpc/server@11.0.0-rc.446)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-QPhbCJj5GvtOgLnjNApJFldcIzzubGP735fNVOE70ZvujRp2dKG8q3zILtSZ8L0O9GjqGI3iwT1Ro1CTixPQ2A==}
+  /@trpc/react-query@11.0.0-rc.449(@tanstack/react-query@5.50.1)(@trpc/client@11.0.0-rc.449)(@trpc/server@11.0.0-rc.449)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-CokXudkoIgIYWTjVnDSNuErpo1xpRAcTP0FcINe0IUE9iNt+d2BfnOUKF2YgYPNekta559334/v1PLim7GYGsQ==}
     peerDependencies:
       '@tanstack/react-query': ^5.49.2
-      '@trpc/client': 11.0.0-rc.446+c679f5317
-      '@trpc/server': 11.0.0-rc.446+c679f5317
+      '@trpc/client': 11.0.0-rc.449+42acce6ac
+      '@trpc/server': 11.0.0-rc.449+42acce6ac
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
     dependencies:
       '@tanstack/react-query': 5.50.1(react@18.3.1)
-      '@trpc/client': 11.0.0-rc.446(@trpc/server@11.0.0-rc.446)
-      '@trpc/server': 11.0.0-rc.446
+      '@trpc/client': 11.0.0-rc.449(@trpc/server@11.0.0-rc.449)
+      '@trpc/server': 11.0.0-rc.449
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@trpc/server@11.0.0-rc.446:
-    resolution: {integrity: sha512-RaT7+OPs9bcDiPXVSu+KKygai5riej8wkO2hpLIHdVHiHuwuIBGyhXBNA/o6xqzaGoBeY9Yy77R6qI2X70YSzQ==}
+  /@trpc/server@11.0.0-rc.449:
+    resolution: {integrity: sha512-xM/vQ042wA0FPAFhY18KcNJgiMMjdPk4mG3GXdHx4X9tpBuSlENUMZErEsuBrvbSpqbkIpalz5yY99/cPnHbCw==}
     dev: false
 
   /@tsconfig/node10@1.0.9:
@@ -9797,7 +9797,7 @@ packages:
       '@babel/core': 7.24.0
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     dev: true
 
   /babel-plugin-add-react-displayname@0.0.5:
@@ -11163,7 +11163,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.39)
       postcss-value-parser: 4.2.0
       semver: 7.6.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     dev: true
 
   /css-select@4.3.0:
@@ -13578,7 +13578,7 @@ packages:
       semver: 7.6.0
       tapable: 2.2.1
       typescript: 5.5.3
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     dev: true
 
   /form-data@2.3.3:
@@ -14560,7 +14560,7 @@ packages:
       lodash: 4.17.21
       pretty-error: 4.0.0
       tapable: 2.2.1
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     dev: true
 
   /htmlparser2@6.1.0:
@@ -18153,7 +18153,7 @@ packages:
       url: 0.11.3
       util: 0.12.5
       vm-browserify: 1.1.2
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     dev: true
 
   /node-releases@2.0.14:
@@ -19391,7 +19391,7 @@ packages:
       jiti: 1.21.6
       postcss: 8.4.38
       semver: 7.6.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -20961,7 +20961,7 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     dev: true
 
   /satori@0.10.14:
@@ -21885,7 +21885,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     dev: true
 
   /style-to-object@0.4.4:
@@ -21988,7 +21988,7 @@ packages:
       webpack: '>=2'
     dependencies:
       '@swc/core': 1.5.7
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     dev: true
 
   /swr@2.2.5(react@18.3.1):
@@ -23452,7 +23452,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
     dev: true
 
   /webpack-hot-middleware@2.25.4:
