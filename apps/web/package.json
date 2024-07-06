@@ -20,6 +20,12 @@
     "test:e2e:report": "pnpm playwright show-report",
     "test:e2e:codegen": "pnpm playwright codegen"
   },
+  "engines": {
+    "node": ">=20.15.0",
+    "pnpm": ">=8.9.2",
+    "npm": "use pnpm instead of npm please!",
+    "yarn": "use pnpm instead of yarn please!"
+  },
   "dependencies": {
     "@hookform/resolvers": "3.9.0",
     "@kkhys/api": "workspace:*",
