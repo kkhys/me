@@ -19,6 +19,7 @@ import {
 } from '@kkhys/ui';
 
 import { searchItems } from '#/config';
+import { fisherYatesShuffle } from '#/utils';
 
 export const CommandMenu = ({ className }: { className?: string }) => {
   const router = useRouter();
@@ -52,6 +53,15 @@ export const CommandMenu = ({ className }: { className?: string }) => {
     command();
   }, []);
 
+  const shuffledSearchItems = React.useMemo(
+    () =>
+      searchItems.map((group) => ({
+        ...group,
+        items: fisherYatesShuffle([...group.items]),
+      })),
+    [],
+  );
+
   return (
     <>
       <Button
@@ -75,7 +85,7 @@ export const CommandMenu = ({ className }: { className?: string }) => {
         <CommandInput placeholder='Type a command or search...' />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          {searchItems.map((group) => (
+          {shuffledSearchItems.map((group) => (
             <CommandGroup key={group.title} heading={group.title}>
               {group.items.map((item) => (
                 <CommandItem
@@ -83,6 +93,7 @@ export const CommandMenu = ({ className }: { className?: string }) => {
                   value={item.title}
                   onSelect={() => runCommand(() => router.push(item.href as Route))}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/api/noto-emoji/${item.emoji}.svg?theme=${selectedTheme === 'dark' ? 'dark' : 'light'}`}
                     alt={item.emoji}

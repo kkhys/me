@@ -163,6 +163,12 @@ export const searchItems = [
         emoji: '🧈',
         category: 'Tech',
       },
+      {
+        title: 'Vercel ビルド時に Playwright をインストールする',
+        href: '/posts/p128uug',
+        emoji: '🎭',
+        category: 'Tech',
+      },
     ],
   },
 ] satisfies SearchItem[];
