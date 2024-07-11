@@ -43,7 +43,7 @@ type ModalState = 'LOADED' | 'LOADING' | 'UNLOADED' | 'UNLOADING';
 const CustomZoom = ({ img, _modalState, gap }: { img: React.ReactElement | null; _modalState: any; gap: number }) => {
   const modalState = _modalState as ModalState;
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (modalState === 'LOADING') {
       document.body.style.setProperty('--removed-body-scroll-bar-size', `${gap}px`);
     }
