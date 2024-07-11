@@ -169,6 +169,13 @@ export const searchItems = [
         emoji: '🎭',
         category: 'Tech',
       },
+      {
+        title: 'v1.9.0 リリースノート: Medium 風の画像ズーム機能を追加',
+        href: '/posts/p1kqv7s',
+        emoji: '🚀',
+        category: 'Tech',
+        tags: ['Release'],
+      },
     ],
   },
 ] satisfies SearchItem[];
