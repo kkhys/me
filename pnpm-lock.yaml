@@ -208,6 +208,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@emotion/is-prop-valid':
+        specifier: 1.2.2
+        version: 1.2.2
       '@hookform/resolvers':
         specifier: 3.9.0
         version: 3.9.0(react-hook-form@7.52.1)
@@ -279,10 +282,10 @@ importers:
         version: 4.2.2
       framer-motion:
         specifier: 11.3.2
-        version: 11.3.2(react-dom@18.3.1)(react@18.3.1)
+        version: 11.3.2(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1)(react@18.3.1)
       lucide-react:
-        specifier: 0.407.0
-        version: 0.407.0(react@18.3.1)
+        specifier: 0.408.0
+        version: 0.408.0(react@18.3.1)
       mdast-util-to-hast:
         specifier: 13.2.0
         version: 13.2.0
@@ -733,13 +736,13 @@ importers:
         version: 8.1.6(react@18.3.1)
       framer-motion:
         specifier: 11.3.2
-        version: 11.3.2(react-dom@18.3.1)(react@18.3.1)
+        version: 11.3.2(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1)(react@18.3.1)
       input-otp:
         specifier: 1.2.4
         version: 1.2.4(react-dom@18.3.1)(react@18.3.1)
       lucide-react:
-        specifier: 0.407.0
-        version: 0.407.0(react@18.3.1)
+        specifier: 0.408.0
+        version: 0.408.0(react@18.3.1)
       next-themes:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.3.1)(react@18.3.1)
@@ -896,14 +899,14 @@ importers:
   tooling/prettier:
     dependencies:
       '@ianvs/prettier-plugin-sort-imports':
-        specifier: 4.3.0
-        version: 4.3.0(prettier@3.3.2)
+        specifier: 4.3.1
+        version: 4.3.1(prettier@3.3.2)
       prettier:
         specifier: 3.3.2
         version: 3.3.2
       prettier-plugin-tailwindcss:
         specifier: 0.6.5
-        version: 0.6.5(@ianvs/prettier-plugin-sort-imports@4.3.0)(prettier@3.3.2)
+        version: 0.6.5(@ianvs/prettier-plugin-sort-imports@4.3.1)(prettier@3.3.2)
     devDependencies:
       '@kkhys/tsconfig':
         specifier: workspace:0.1.0
@@ -2822,6 +2825,16 @@ packages:
     resolution: {integrity: sha512-/crHGujo0xnuHIYNc1VgP0HGJGFSoSqq88JFXe6FmFyXPpWt8Xu39LyLg7rchsxfXFeEdA9CrIZvLV5eswXV5g==}
     dev: false
 
+  /@emotion/is-prop-valid@1.2.2:
+    resolution: {integrity: sha512-uNsoYd37AFmaCdXlg6EYD1KaPOaRWRByMCYzbKUX4+hhMfrxdVSelShywL4JVaAeM/eHUOSprYBQls+/neX3pw==}
+    dependencies:
+      '@emotion/memoize': 0.8.1
+    dev: false
+
+  /@emotion/memoize@0.8.1:
+    resolution: {integrity: sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==}
+    dev: false
+
   /@emotion/use-insertion-effect-with-fallbacks@1.0.1(react@18.3.1):
     resolution: {integrity: sha512-jT/qyKZ9rzLErtrjGgdkMBn2OP8wl0G3sQlBb3YPryvKHsjvINUhVaPFfP+fpBcOkmrVOVEEHQFJ7nbj2TH2gw==}
     peerDependencies:
@@ -3557,8 +3570,8 @@ packages:
   /@humanwhocodes/object-schema@2.0.3:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
 
-  /@ianvs/prettier-plugin-sort-imports@4.3.0(prettier@3.3.2):
-    resolution: {integrity: sha512-OOMtUcO4J3LoL63dOKAe7bn+lSRRPeit2DqNHpx+wvBp3Grejo2PMaK4Mp1mwy8pnat64ccSgk/lBZbsAdLErw==}
+  /@ianvs/prettier-plugin-sort-imports@4.3.1(prettier@3.3.2):
+    resolution: {integrity: sha512-ZHwbyjkANZOjaBm3ZosADD2OUYGFzQGxfy67HmGZU94mHqe7g1LCMA7YYKB1Cq+UTPCBqlAYapY0KXAjKEw8Sg==}
     peerDependencies:
       '@vue/compiler-sfc': 2.7.x || 3.x
       prettier: 2 || 3
@@ -4440,7 +4453,7 @@ packages:
       react-refresh: 0.14.0
       schema-utils: 3.3.0
       source-map: 0.7.4
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     dev: true
 
   /@pnpm/config.env-replace@1.1.0:
@@ -7678,7 +7691,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.5.3)
       tslib: 2.6.2
       typescript: 5.5.3
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -9797,7 +9810,7 @@ packages:
       '@babel/core': 7.24.0
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     dev: true
 
   /babel-plugin-add-react-displayname@0.0.5:
@@ -11163,7 +11176,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.39)
       postcss-value-parser: 4.2.0
       semver: 7.6.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     dev: true
 
   /css-select@4.3.0:
@@ -13584,7 +13597,7 @@ packages:
       semver: 7.6.0
       tapable: 2.2.1
       typescript: 5.5.3
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     dev: true
 
   /form-data@2.3.3:
@@ -13626,7 +13639,7 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: false
 
-  /framer-motion@11.3.2(react-dom@18.3.1)(react@18.3.1):
+  /framer-motion@11.3.2(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-RgjSzrNFZmedWcvmW4MMc84A7UcoY37jocadE3Mbg3o+UMofodfyeNnYD/HR15UhP22/bb5KOebNhYOj4mYkpQ==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
@@ -13640,6 +13653,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
+      '@emotion/is-prop-valid': 1.2.2
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       tslib: 2.6.2
@@ -14566,7 +14580,7 @@ packages:
       lodash: 4.17.21
       pretty-error: 4.0.0
       tapable: 2.2.1
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     dev: true
 
   /htmlparser2@6.1.0:
@@ -16609,8 +16623,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /lucide-react@0.407.0(react@18.3.1):
-    resolution: {integrity: sha512-+dRIu9Sry+E8wPF9+sY5eKld2omrU4X5IKXxrgqBt+o11IIHVU0QOfNoVWFuj0ZRDrxr4Wci26o2mKZqLGE0lA==}
+  /lucide-react@0.408.0(react@18.3.1):
+    resolution: {integrity: sha512-8kETAAeWmOvtGIr7HPHm51DXoxlfkNncQ5FZWXR+abX8saQwMYXANWIkUstaYtcKSo/imOe/q+tVFA8ANzdSVA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
     dependencies:
@@ -18159,7 +18173,7 @@ packages:
       url: 0.11.3
       util: 0.12.5
       vm-browserify: 1.1.2
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     dev: true
 
   /node-releases@2.0.14:
@@ -19397,7 +19411,7 @@ packages:
       jiti: 1.21.6
       postcss: 8.4.38
       semver: 7.6.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -19579,7 +19593,7 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /prettier-plugin-tailwindcss@0.6.5(@ianvs/prettier-plugin-sort-imports@4.3.0)(prettier@3.3.2):
+  /prettier-plugin-tailwindcss@0.6.5(@ianvs/prettier-plugin-sort-imports@4.3.1)(prettier@3.3.2):
     resolution: {integrity: sha512-axfeOArc/RiGHjOIy9HytehlC0ZLeMaqY09mm8YCkMzznKiDkwFzOpBvtuhuv3xG5qB73+Mj7OCe2j/L1ryfuQ==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
@@ -19631,7 +19645,7 @@ packages:
       prettier-plugin-svelte:
         optional: true
     dependencies:
-      '@ianvs/prettier-plugin-sort-imports': 4.3.0(prettier@3.3.2)
+      '@ianvs/prettier-plugin-sort-imports': 4.3.1(prettier@3.3.2)
       prettier: 3.3.2
     dev: false
 
@@ -20967,7 +20981,7 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     dev: true
 
   /satori@0.10.14:
@@ -21891,7 +21905,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     dev: true
 
   /style-to-object@0.4.4:
@@ -21994,7 +22008,7 @@ packages:
       webpack: '>=2'
     dependencies:
       '@swc/core': 1.5.7
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     dev: true
 
   /swr@2.2.5(react@18.3.1):
@@ -23456,7 +23470,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.21.5)
     dev: true
 
   /webpack-hot-middleware@2.25.4:
