@@ -1,0 +1,5 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm playwright-install && turbo run build",
+  "installCommand": "pnpm install && dnf install -y nss nspr mesa-libgbm"
+}
