@@ -59,7 +59,8 @@ export const ContactForm = ({ className }: { className?: string }) => {
 
   const handleReCaptchaVerify = async () => {
     if (!executeRecaptcha) {
-      console.log('Execute recaptcha not yet available');
+      console.error('Execute recaptcha not yet available');
+      toast.error('reCAPTCHA が利用できません。しばらくしてから再度お試しください。');
       return;
     }
 
