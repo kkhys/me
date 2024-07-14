@@ -50,7 +50,7 @@ export const MainNavigation = () => {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className={cn(pathname === '/posts' && 'bg-accent')}>Blog</NavigationMenuTrigger>
+            <NavigationMenuTrigger className={cn(pathname.startsWith('/posts') && 'bg-accent')}>Blog</NavigationMenuTrigger>
             <NavigationMenuContent className='min-w-[8rem] p-1'>
               <ListItem href='/posts'>All Posts</ListItem>
               <Separator className='-mx-1 my-1 h-px w-[calc(100%_+_1rem)]' />
