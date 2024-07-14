@@ -176,6 +176,12 @@ export const searchItems = [
         category: 'Tech',
         tags: ['Release'],
       },
+      {
+        title: '技術書にぴったりな文鎮',
+        href: '/posts/p1kc29z',
+        emoji: '📗',
+        category: 'Tech',
+      },
     ],
   },
 ] satisfies SearchItem[];
