@@ -19,6 +19,8 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  RadioGroup,
+  RadioGroupItem,
   Textarea,
   toast,
 } from '@kkhys/ui';
@@ -27,6 +29,29 @@ import { ContactSchema } from '@kkhys/validators';
 import { api } from '#/lib/trpc/react';
 
 type ContactFormValues = z.infer<typeof ContactSchema>;
+
+const typeOptions = [
+  {
+    value: 'jobScouting',
+    label: '転職スカウト',
+  },
+  {
+    value: 'projectConsultation',
+    label: '案件のご相談',
+  },
+  {
+    value: 'feedback',
+    label: '記事のフィードバック',
+  },
+  {
+    value: 'collaboration',
+    label: 'コラボレーションの提案',
+  },
+  {
+    value: 'other',
+    label: 'その他',
+  },
+] as const;
 
 const WordCounter = ({
   name,
@@ -51,6 +76,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
     defaultValues: {
       email: '',
       name: '',
+      type: undefined,
       content: '',
       shouldSendReplyMail: false,
     },
@@ -68,14 +94,13 @@ export const ContactForm = ({ className }: { className?: string }) => {
   };
 
   const onSubmit = async (data: ContactFormValues) => {
-    const { email, name, content, shouldSendReplyMail } = data;
     const recaptchaToken = await handleReCaptchaVerify();
 
     if (!recaptchaToken) {
       return;
     }
 
-    await mutateAsync({ email, name, content, shouldSendReplyMail, recaptchaToken });
+    await mutateAsync({ recaptchaToken, ...data });
 
     form.reset();
 
@@ -114,6 +139,32 @@ export const ContactForm = ({ className }: { className?: string }) => {
                   className='font-sans'
                   {...field}
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name='type'
+          render={({ field }) => (
+            <FormItem className='space-y-3'>
+              <FormLabel required>お問い合わせ種別</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className='flex flex-col space-y-1.5'
+                >
+                  {typeOptions.map(({ value, label }) => (
+                    <FormItem key={value} className='flex items-center space-x-3 space-y-0'>
+                      <FormControl>
+                        <RadioGroupItem value={value} />
+                      </FormControl>
+                      <FormLabel>{label}</FormLabel>
+                    </FormItem>
+                  ))}
+                </RadioGroup>
               </FormControl>
               <FormMessage />
             </FormItem>
