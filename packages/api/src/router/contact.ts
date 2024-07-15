@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { ContactSchema } from '@kkhys/validators';
 
 import { env } from '../../env';
-import { contactMail } from '../mail-templates';
+import { contactMail } from '../emails';
 import { appendGoogleSheets, sendEmail, sendLineMessage, verifyRecaptcha } from '../services';
 import { publicProcedure } from '../trpc';
 
