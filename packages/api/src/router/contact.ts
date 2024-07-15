@@ -8,7 +8,7 @@ import { appendGoogleSheets, sendEmail, sendLineMessage, verifyRecaptcha } from 
 import { publicProcedure } from '../trpc';
 
 export const contactRouter = {
-  send: publicProcedure.input(ContactSchema).mutation(async ({ input }) => {
+  send: publicProcedure.input(ContactSchema).mutation(async ({ input, ctx }) => {
     const { email, name, content, shouldSendReplyMail, recaptchaToken } = input;
 
     if (!recaptchaToken) {
@@ -30,7 +30,7 @@ export const contactRouter = {
     const sheetName = isProduction ? 'contact' : 'contact-dev';
     const currentDate = format(new Date(), 'yyyy/MM/dd HH:mm:ss');
 
-    await appendGoogleSheets({ sheetName, values: [[email, name, content, currentDate]] });
+    await appendGoogleSheets({ sheetName, values: [[email, name, content, currentDate, ctx.ip ?? '']] });
 
     if (!isProduction) {
       return;
