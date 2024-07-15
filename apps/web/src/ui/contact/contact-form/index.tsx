@@ -154,7 +154,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className='flex flex-col space-y-1.5'
+                  className='flex flex-col space-y-2'
                 >
                   {typeOptions.map(({ value, label }) => (
                     <FormItem key={value} className='flex items-center space-x-3 space-y-0'>
