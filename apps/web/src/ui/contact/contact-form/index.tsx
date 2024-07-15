@@ -152,7 +152,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
           )}
         />
         <div>
-          <Button disabled={form.formState.isSubmitting}>送信する</Button>
+          <Button loading={form.formState.isSubmitting}>送信する</Button>
           <div className='prose dark:prose-invert'>
             <p className='mt-3 text-xs text-muted-foreground'>
               このサイトは reCAPTCHA によって保護されており、
