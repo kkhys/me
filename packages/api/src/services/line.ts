@@ -9,7 +9,12 @@ export const sendLineMessage = async ({ message }: { message: string }) => {
     },
     body: JSON.stringify({
       to: env.LINE_USER_ID,
-      messages: [{ type: 'text', text: message }],
+      messages: [
+        {
+          type: 'text',
+          text: message,
+        },
+      ],
     }),
   });
 

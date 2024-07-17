@@ -1,3 +1,4 @@
+import type { z } from 'zod';
 import { format } from 'date-fns';
 
 import { ContactSchema } from '@kkhys/validators';
@@ -40,7 +41,7 @@ export const contactRouter = {
     }
 
     await sendLineMessage({
-      message: `New contact from ${name} <${email}>: ${content}`,
+      message: generateLineMessage(input),
     });
 
     if (shouldSendReplyMail) {
@@ -52,4 +53,22 @@ export const contactRouter = {
       });
     }
   }),
+};
+
+const generateLineMessage = (input: z.infer<typeof ContactSchema>) => {
+  const { email, name, type, content } = input;
+
+  return `New Contact.
+
+# Name
+${name}
+
+# Email
+${email}
+
+# Type
+${type}
+
+# Content
+${content}`;
 };
