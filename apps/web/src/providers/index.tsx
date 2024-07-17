@@ -2,7 +2,9 @@
 
 import * as React from 'react';
 import { usePathname } from 'next/navigation';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
+import { env } from '#/env';
 import { ThemeProvider } from '#/lib/nextjs/theme-provider';
 import { TRPCReactProvider } from '#/lib/trpc/react';
 
@@ -32,7 +34,11 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <AppContext.Provider value={{ previousPathname }}>
       <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <GoogleReCaptchaProvider reCaptchaKey={env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise={true}>
+            {children}
+          </GoogleReCaptchaProvider>
+        </TRPCReactProvider>
       </ThemeProvider>
     </AppContext.Provider>
   );

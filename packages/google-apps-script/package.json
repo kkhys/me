@@ -1,0 +1,35 @@
+{
+  "name": "@kkhys/google-apps-script",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "login": "clasp login",
+    "build": "tsc && vite build",
+    "push": "clasp push",
+    "open": "clasp open",
+    "deploy": "clasp deploy",
+    "clean": "rm -rf .turbo node_modules",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@google/clasp": "2.4.2",
+    "@kkhys/eslint-config": "workspace:*",
+    "@kkhys/prettier-config": "workspace:*",
+    "@kkhys/tsconfig": "workspace:*",
+    "@types/google-apps-script": "1.0.83",
+    "@types/node": "20.14.7",
+    "rollup-plugin-google-apps-script": "1.1.13",
+    "typescript": "5.5.2",
+    "vite": "5.3.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@kkhys/eslint-config/base"
+    ]
+  },
+  "prettier": "@kkhys/prettier-config"
+}
