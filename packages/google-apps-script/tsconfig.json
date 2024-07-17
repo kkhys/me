@@ -1,0 +1,13 @@
+{
+  "extends": "@kkhys/tsconfig/vite.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+    "baseUrl": ".",
+    "paths": {
+      "#/*": ["src/*"]
+    },
+    "types": ["google-apps-script"]
+  },
+  "include": ["src", "vite.config.mts"],
+  "exclude": ["node_modules"]
+}

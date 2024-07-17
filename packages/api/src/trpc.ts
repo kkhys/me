@@ -8,12 +8,14 @@ import { db } from '@kkhys/db';
 export const createTRPCContext = (opts: { headers: Headers; session: Session | null }) => {
   const session = opts.session;
   const source = opts.headers.get('x-trpc-source') ?? 'unknown';
+  const ip = opts.headers.get('X-Forwarded-For');
 
   console.log('>>> tRPC Request from', source, 'by', session?.user);
 
   return {
     session,
     db,
+    ip,
   };
 };
 

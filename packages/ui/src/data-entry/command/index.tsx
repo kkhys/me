@@ -44,6 +44,7 @@ const CommandInput = React.forwardRef<
         'flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:font-sans placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}
+      inputMode='search'
       {...props}
     />
   </div>
