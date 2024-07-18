@@ -31,7 +31,7 @@ export const sendEmail = async ({
   });
 
   if (error) {
-    console.error(`Failed to send email to ${to}. Error: ${JSON.stringify(error)}`);
+    throw new Error(`Failed to send email to ${to}. Error: ${JSON.stringify(error)}`);
   }
 
   console.log(`Successfully sent email to ${to}. Response: ${JSON.stringify(data)}`);
