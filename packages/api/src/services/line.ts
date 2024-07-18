@@ -19,7 +19,7 @@ export const sendLineMessage = async ({ message }: { message: string }) => {
   });
 
   if (!response.ok) {
-    console.error('Failed to send a message to LINE');
+    throw new Error('Failed to send a message to LINE');
   }
 
   console.log('Successfully sent a message to LINE');
