@@ -78,6 +78,11 @@ export const MobileNavigation = () => {
               ))}
             </div>
           </div>
+          <div className='flex flex-col space-y-3 pt-6'>
+            <MobileLink href='/contact' onOpenChange={setOpen}>
+              Contact
+            </MobileLink>
+          </div>
         </ScrollArea>
       </SheetContent>
     </Sheet>

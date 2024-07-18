@@ -27,7 +27,6 @@ export const appendGoogleSheets = async ({ sheetName, values }: { sheetName: str
   );
 
   if (!response.ok) {
-    console.error('Google Sheets API request failed', response.statusText);
     throw new Error('Google Sheets API request failed: ' + response.statusText);
   }
 

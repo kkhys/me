@@ -97,10 +97,18 @@ export const ContactForm = ({ className }: { className?: string }) => {
     const recaptchaToken = await handleReCaptchaVerify();
 
     if (!recaptchaToken) {
+      console.error('Recaptcha token not available');
+      toast.error('reCAPTCHA が利用できません。しばらくしてから再度お試しください。');
       return;
     }
 
-    await mutateAsync({ recaptchaToken, ...data });
+    try {
+      await mutateAsync({ recaptchaToken, ...data });
+    } catch (error) {
+      console.error(error);
+      toast.error('送信に失敗しました。しばらくしてから再度お試しください。');
+      return;
+    }
 
     form.reset();
 
