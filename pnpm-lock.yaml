@@ -515,12 +515,9 @@ importers:
       '@kkhys/db':
         specifier: workspace:*
         version: link:../db
-      '@react-email/components':
-        specifier: 0.0.21
-        version: 0.0.21(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@react-email/render':
-        specifier: 0.0.16
-        version: 0.0.16(react-dom@18.3.1)(react@18.3.1)
+      '@kkhys/email':
+        specifier: workspace:*
+        version: link:../email
       '@t3-oss/env-nextjs':
         specifier: 0.10.1
         version: 0.10.1(typescript@5.5.3)(zod@3.23.8)
@@ -533,12 +530,6 @@ importers:
       jose:
         specifier: 5.6.3
         version: 5.6.3
-      react:
-        specifier: 18.3.1
-        version: 18.3.1
-      react-email:
-        specifier: 2.1.5
-        version: 2.1.5(eslint@8.57.0)
       resend:
         specifier: 3.4.0
         version: 3.4.0
@@ -561,9 +552,6 @@ importers:
       '@kkhys/validators':
         specifier: workspace:*
         version: link:../validators
-      '@types/react':
-        specifier: 18.3.3
-        version: 18.3.3
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -659,6 +647,43 @@ importers:
       tsx:
         specifier: 4.16.2
         version: 4.16.2
+      typescript:
+        specifier: 5.5.3
+        version: 5.5.3
+
+  packages/email:
+    dependencies:
+      '@react-email/components':
+        specifier: 0.0.21
+        version: 0.0.21(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@react-email/render':
+        specifier: 0.0.16
+        version: 0.0.16(react-dom@18.3.1)(react@18.3.1)
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-email:
+        specifier: 2.1.5
+        version: 2.1.5(eslint@8.57.0)
+    devDependencies:
+      '@kkhys/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@kkhys/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@kkhys/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@types/react':
+        specifier: 18.3.3
+        version: 18.3.3
+      eslint:
+        specifier: 8.57.0
+        version: 8.57.0
+      prettier:
+        specifier: 3.3.3
+        version: 3.3.3
       typescript:
         specifier: 5.5.3
         version: 5.5.3
@@ -1200,8 +1225,8 @@ packages:
       '@babel/helper-compilation-targets': 7.23.6
       '@babel/helper-module-transforms': 7.24.8(@babel/core@7.24.5)
       '@babel/helpers': 7.24.8
-      '@babel/parser': 7.24.5
-      '@babel/template': 7.24.0
+      '@babel/parser': 7.24.8
+      '@babel/template': 7.24.7
       '@babel/traverse': 7.24.8
       '@babel/types': 7.24.8
       convert-source-map: 2.0.0
@@ -1548,7 +1573,8 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.8
+    dev: false
 
   /@babel/parser@7.24.8:
     resolution: {integrity: sha512-WzfbgXOkGzZiXXCqk43kKwZjzwx4oulxZi3nq2TYL9mOjQv6kYwul9mz6ID36njuL7Xkp6nJEfok848Zj10j/w==}
@@ -2987,10 +3013,6 @@ packages:
     peerDependencies:
       '@effect-ts/otel-node': '*'
     peerDependenciesMeta:
-      '@effect-ts/core':
-        optional: true
-      '@effect-ts/otel':
-        optional: true
       '@effect-ts/otel-node':
         optional: true
     dependencies:
