@@ -1,10 +1,10 @@
 import type { z } from 'zod';
 import { format } from 'date-fns';
 
+import { contactMail } from '@kkhys/email';
 import { ContactSchema } from '@kkhys/validators';
 
 import { env } from '../../env';
-import { contactMail } from '../emails';
 import { appendGoogleSheets, sendEmail, sendLineMessage, verifyRecaptcha } from '../services';
 import { publicProcedure } from '../trpc';
 
