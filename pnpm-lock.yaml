@@ -817,8 +817,8 @@ importers:
         specifier: 3.6.0
         version: 3.6.0
       embla-carousel-autoplay:
-        specifier: 8.1.6
-        version: 8.1.6(embla-carousel@8.1.6)
+        specifier: 8.1.7
+        version: 8.1.7(embla-carousel@8.1.6)
       embla-carousel-class-names:
         specifier: 8.1.6
         version: 8.1.6(embla-carousel@8.1.6)
@@ -3013,6 +3013,10 @@ packages:
     peerDependencies:
       '@effect-ts/otel-node': '*'
     peerDependenciesMeta:
+      '@effect-ts/core':
+        optional: true
+      '@effect-ts/otel':
+        optional: true
       '@effect-ts/otel-node':
         optional: true
     dependencies:
@@ -13996,10 +14000,10 @@ packages:
       minimalistic-crypto-utils: 1.0.1
     dev: true
 
-  /embla-carousel-autoplay@8.1.6(embla-carousel@8.1.6):
-    resolution: {integrity: sha512-e5n9f4q+DVeBPiPPT3gwzqpiqfae8aP8fQACS4OZkPFvFLdsVhnWcw+cwtewryP7snWJGKPXEMA1GOjieEKv+w==}
+  /embla-carousel-autoplay@8.1.7(embla-carousel@8.1.6):
+    resolution: {integrity: sha512-UXt1XvCNwzC/Sqd7iU8nYd1CjuDLweIwJClfBL3gVTzHQBVwb68GBBfC/oPFsEeIWNUZe8NO5xDQSI9aTnYO7Q==}
     peerDependencies:
-      embla-carousel: 8.1.6
+      embla-carousel: 8.1.7
     dependencies:
       embla-carousel: 8.1.6
     dev: false
