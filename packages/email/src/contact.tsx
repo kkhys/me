@@ -61,11 +61,6 @@ const Email = ({ name, email, type, content }: ContactEmailProps) => {
   );
 };
 
-export const contactMail = ({ email, name, type, content }: ContactEmailProps) =>
-  render(<Email email={email} name={name} type={type} content={content} />, {
-    pretty: true,
-  });
-
 Email.PreviewProps = {
   email: 'kkhys@pm.me',
   name: 'Keisuke Hayashi',
@@ -74,3 +69,8 @@ Email.PreviewProps = {
 } satisfies ContactEmailProps;
 
 export default Email;
+
+export const contactMail = ({ email, name, type, content }: ContactEmailProps) =>
+  render(<Email email={email} name={name} type={type} content={content} />, {
+    pretty: true,
+  });

@@ -248,14 +248,14 @@ importers:
         specifier: 5.51.9
         version: 5.51.9(@tanstack/react-query@5.51.9)(react@18.3.1)
       '@trpc/client':
-        specifier: 11.0.0-rc.465
-        version: 11.0.0-rc.465(@trpc/server@11.0.0-rc.465)
+        specifier: 11.0.0-rc.466
+        version: 11.0.0-rc.466(@trpc/server@11.0.0-rc.466)
       '@trpc/react-query':
-        specifier: 11.0.0-rc.465
-        version: 11.0.0-rc.465(@tanstack/react-query@5.51.9)(@trpc/client@11.0.0-rc.465)(@trpc/server@11.0.0-rc.465)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 11.0.0-rc.466
+        version: 11.0.0-rc.466(@tanstack/react-query@5.51.9)(@trpc/client@11.0.0-rc.466)(@trpc/server@11.0.0-rc.466)(react-dom@18.3.1)(react@18.3.1)
       '@trpc/server':
-        specifier: 11.0.0-rc.465
-        version: 11.0.0-rc.465
+        specifier: 11.0.0-rc.466
+        version: 11.0.0-rc.466
       '@vercel/analytics':
         specifier: 1.3.1
         version: 1.3.1(next@14.2.5)(react@18.3.1)
@@ -284,8 +284,8 @@ importers:
         specifier: 4.2.2
         version: 4.2.2
       framer-motion:
-        specifier: 11.3.6
-        version: 11.3.6(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 11.3.7
+        version: 11.3.7(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1)(react@18.3.1)
       lucide-react:
         specifier: 0.408.0
         version: 0.408.0(react@18.3.1)
@@ -515,30 +515,21 @@ importers:
       '@kkhys/db':
         specifier: workspace:*
         version: link:../db
-      '@react-email/components':
-        specifier: 0.0.21
-        version: 0.0.21(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@react-email/render':
-        specifier: 0.0.16
-        version: 0.0.16(react-dom@18.3.1)(react@18.3.1)
+      '@kkhys/email':
+        specifier: workspace:*
+        version: link:../email
       '@t3-oss/env-nextjs':
         specifier: 0.10.1
         version: 0.10.1(typescript@5.5.3)(zod@3.23.8)
       '@trpc/server':
-        specifier: 11.0.0-rc.465
-        version: 11.0.0-rc.465
+        specifier: 11.0.0-rc.466
+        version: 11.0.0-rc.466
       date-fns:
         specifier: 3.6.0
         version: 3.6.0
       jose:
         specifier: 5.6.3
         version: 5.6.3
-      react:
-        specifier: 18.3.1
-        version: 18.3.1
-      react-email:
-        specifier: 2.1.5
-        version: 2.1.5(eslint@8.57.0)
       resend:
         specifier: 3.4.0
         version: 3.4.0
@@ -561,9 +552,6 @@ importers:
       '@kkhys/validators':
         specifier: workspace:*
         version: link:../validators
-      '@types/react':
-        specifier: 18.3.3
-        version: 18.3.3
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -659,6 +647,43 @@ importers:
       tsx:
         specifier: 4.16.2
         version: 4.16.2
+      typescript:
+        specifier: 5.5.3
+        version: 5.5.3
+
+  packages/email:
+    dependencies:
+      '@react-email/components':
+        specifier: 0.0.21
+        version: 0.0.21(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@react-email/render':
+        specifier: 0.0.16
+        version: 0.0.16(react-dom@18.3.1)(react@18.3.1)
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-email:
+        specifier: 2.1.5
+        version: 2.1.5(eslint@8.57.0)
+    devDependencies:
+      '@kkhys/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@kkhys/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@kkhys/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@types/react':
+        specifier: 18.3.3
+        version: 18.3.3
+      eslint:
+        specifier: 8.57.0
+        version: 8.57.0
+      prettier:
+        specifier: 3.3.3
+        version: 3.3.3
       typescript:
         specifier: 5.5.3
         version: 5.5.3
@@ -801,8 +826,8 @@ importers:
         specifier: 8.1.6
         version: 8.1.6(react@18.3.1)
       framer-motion:
-        specifier: 11.3.6
-        version: 11.3.6(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 11.3.7
+        version: 11.3.7(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1)(react@18.3.1)
       input-otp:
         specifier: 1.2.4
         version: 1.2.4(react-dom@18.3.1)(react@18.3.1)
@@ -1200,8 +1225,8 @@ packages:
       '@babel/helper-compilation-targets': 7.23.6
       '@babel/helper-module-transforms': 7.24.8(@babel/core@7.24.5)
       '@babel/helpers': 7.24.8
-      '@babel/parser': 7.24.5
-      '@babel/template': 7.24.0
+      '@babel/parser': 7.24.8
+      '@babel/template': 7.24.7
       '@babel/traverse': 7.24.8
       '@babel/types': 7.24.8
       convert-source-map: 2.0.0
@@ -1548,7 +1573,8 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.8
+    dev: false
 
   /@babel/parser@7.24.8:
     resolution: {integrity: sha512-WzfbgXOkGzZiXXCqk43kKwZjzwx4oulxZi3nq2TYL9mOjQv6kYwul9mz6ID36njuL7Xkp6nJEfok848Zj10j/w==}
@@ -9737,32 +9763,32 @@ packages:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
     dev: true
 
-  /@trpc/client@11.0.0-rc.465(@trpc/server@11.0.0-rc.465):
-    resolution: {integrity: sha512-SIXn9l8NRp+qoTKkLs30JOQnQ3IWFai7I/M/s/61GOoSctRnQSvq8Bp2nzgm/+/W32bhMYBK86MoOiBKpgW0Yg==}
+  /@trpc/client@11.0.0-rc.466(@trpc/server@11.0.0-rc.466):
+    resolution: {integrity: sha512-8nEYgDPvTrXzn00FgLEOU/BHtH89LVQ0JTiW2efa4wW2XIrj3Nv/QKCRkNXV6yu7VSefwU+p2PulUL6TjNlzAg==}
     peerDependencies:
-      '@trpc/server': 11.0.0-rc.465+461733492
+      '@trpc/server': 11.0.0-rc.466+1e8344ea7
     dependencies:
-      '@trpc/server': 11.0.0-rc.465
+      '@trpc/server': 11.0.0-rc.466
     dev: false
 
-  /@trpc/react-query@11.0.0-rc.465(@tanstack/react-query@5.51.9)(@trpc/client@11.0.0-rc.465)(@trpc/server@11.0.0-rc.465)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-l3ArScRQ0F7HSn2dCyM5LF3p553zZFPlEZbbZ+qAJBAHuK29j+8bRV3HXrmJvk4b9NUkVyHrWvN8diXxDE6RZA==}
+  /@trpc/react-query@11.0.0-rc.466(@tanstack/react-query@5.51.9)(@trpc/client@11.0.0-rc.466)(@trpc/server@11.0.0-rc.466)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-nt0hcskUrr1+kj8kRRhucB6h+VuK55By7ZR1oxaIGdbPygwfXoi2n4+s3t7kjZsJzugKDWtDnwJGfGFaUIP62A==}
     peerDependencies:
       '@tanstack/react-query': ^5.49.2
-      '@trpc/client': 11.0.0-rc.465+461733492
-      '@trpc/server': 11.0.0-rc.465+461733492
+      '@trpc/client': 11.0.0-rc.466+1e8344ea7
+      '@trpc/server': 11.0.0-rc.466+1e8344ea7
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
     dependencies:
       '@tanstack/react-query': 5.51.9(react@18.3.1)
-      '@trpc/client': 11.0.0-rc.465(@trpc/server@11.0.0-rc.465)
-      '@trpc/server': 11.0.0-rc.465
+      '@trpc/client': 11.0.0-rc.466(@trpc/server@11.0.0-rc.466)
+      '@trpc/server': 11.0.0-rc.466
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@trpc/server@11.0.0-rc.465:
-    resolution: {integrity: sha512-810SGzWuUvA+qQvTU8t3IzU7gOPFwXVjczyOlQTI4MkUG1aphrX6IscaybuC1qreg6M7g8LjrOhD1Kiq0Mx8pw==}
+  /@trpc/server@11.0.0-rc.466:
+    resolution: {integrity: sha512-/40QZXyZCc3HvgJbQ2+IqCGm4m+fJs7q7gMp6nLiuPB3FIJJeV0r+w1M/NGcG5avbCJ3A5Qy45s4N1glcMv1ug==}
     dev: false
 
   /@tsconfig/node10@1.0.9:
@@ -15455,8 +15481,8 @@ packages:
       '@emotion/is-prop-valid': 0.8.8
     dev: false
 
-  /framer-motion@11.3.6(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-olpX48qfoSIDjhw0RbolhOGBQmdMAXHHpSI0PFdTj5LeXChcf5F4ApShs0mQ6FPEPOj7dnEvSyB07UgRK5G9Jw==}
+  /framer-motion@11.3.7(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-wolMesg8ruYgZX8nMELY2a/ZgMMpYhggLNIexx1blaYN0yb2+SdQ78sEkGDKde+3LTCeFy/wCi97i5Br4yT0GQ==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0
