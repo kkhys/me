@@ -1,4 +1,5 @@
 import { env } from '../../env';
+import { LineError } from '../exceptions';
 
 export const sendLineMessage = async ({ message }: { message: string }) => {
   const response = await fetch('https://api.line.me/v2/bot/message/push', {
@@ -19,7 +20,7 @@ export const sendLineMessage = async ({ message }: { message: string }) => {
   });
 
   if (!response.ok) {
-    throw new Error('Failed to send a message to LINE');
+    throw new LineError('Failed to send a message to LINE');
   }
 
   console.log('Successfully sent a message to LINE');
