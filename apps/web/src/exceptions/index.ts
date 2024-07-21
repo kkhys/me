@@ -1,7 +1,6 @@
 /**
  * Custom error class for handling base errors.
  *
- * @class
  * @extends Error
  */
 class BaseError extends Error {
@@ -14,7 +13,6 @@ class BaseError extends Error {
 /**
  * Represents an error indicating that a resource was not found.
  *
- * @class
  * @extends BaseError
  */
 export class NotFoundError extends BaseError {
