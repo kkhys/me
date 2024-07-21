@@ -70,7 +70,13 @@ Email.PreviewProps = {
 
 export default Email;
 
-export const contactMail = ({ email, name, type, content }: ContactEmailProps) =>
-  render(<Email email={email} name={name} type={type} content={content} />, {
-    pretty: true,
-  });
+export const contactMail = ({ email, name, type, content }: ContactEmailProps) => {
+  return {
+    html: render(<Email email={email} name={name} type={type} content={content} />, {
+      pretty: true,
+    }),
+    text: render(<Email email={email} name={name} type={type} content={content} />, {
+      plainText: true,
+    }),
+  };
+};
