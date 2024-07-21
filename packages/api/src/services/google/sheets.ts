@@ -1,4 +1,5 @@
 import { env } from '../../../env';
+import { GoogleSheetsError } from '../../exceptions';
 import { authenticate } from './token';
 
 export const appendGoogleSheets = async ({ sheetName, values }: { sheetName: string; values: string[][] }) => {
@@ -27,7 +28,7 @@ export const appendGoogleSheets = async ({ sheetName, values }: { sheetName: str
   );
 
   if (!response.ok) {
-    throw new Error('Google Sheets API request failed: ' + response.statusText);
+    throw new GoogleSheetsError('Google Sheets API request failed: ' + response.statusText);
   }
 
   console.log('Append to Google Sheets was successful');

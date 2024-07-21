@@ -5,6 +5,8 @@ import { ZodError } from 'zod';
 import type { Session } from '@kkhys/auth';
 import { db } from '@kkhys/db';
 
+import { CustomTrpcError } from './exceptions';
+
 export const createTRPCContext = (opts: { headers: Headers; session: Session | null }) => {
   const session = opts.session;
   const source = opts.headers.get('x-trpc-source') ?? 'unknown';
@@ -21,13 +23,16 @@ export const createTRPCContext = (opts: { headers: Headers; session: Session | n
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: superjson,
-  errorFormatter: ({ shape, error }) => ({
-    ...shape,
-    data: {
-      ...shape.data,
-      zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
-    },
-  }),
+  errorFormatter: ({ shape, error }) => {
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
+        customErrorName: error instanceof CustomTrpcError ? error.cause?.name : null,
+      },
+    };
+  },
 });
 
 export const createCallerFactory = t.createCallerFactory;

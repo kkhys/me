@@ -69,7 +69,13 @@ const WordCounter = ({
 
 export const ContactForm = ({ className }: { className?: string }) => {
   const { executeRecaptcha } = useGoogleReCaptcha();
-  const { mutateAsync } = api.contact.send.useMutation();
+  const { mutateAsync } = api.contact.send.useMutation({
+    onError: (error) => {
+      if (error.data?.customErrorName === 'EmailError') {
+        toast.error('お問い合わせを受け付けましたが、メールの送信に失敗しました。');
+      }
+    },
+  });
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(ContactSchema),
@@ -102,13 +108,7 @@ export const ContactForm = ({ className }: { className?: string }) => {
       return;
     }
 
-    try {
-      await mutateAsync({ recaptchaToken, ...data });
-    } catch (error) {
-      console.error(error);
-      toast.error('送信に失敗しました。しばらくしてから再度お試しください。');
-      return;
-    }
+    await mutateAsync({ recaptchaToken, ...data });
 
     form.reset();
 
