@@ -575,7 +575,7 @@ importers:
         version: 0.10.1(typescript@5.5.3)(zod@3.23.8)
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.45.2)(react-dom@18.3.1)(react@18.3.1)
+        version: 14.2.5(@babel/core@7.24.0)(react-dom@18.3.1)(react@18.3.1)
       next-auth:
         specifier: 5.0.0-beta.19
         version: 5.0.0-beta.19(next@14.2.5)(react@18.3.1)
@@ -653,6 +653,9 @@ importers:
 
   packages/email:
     dependencies:
+      '@kkhys/validators':
+        specifier: workspace:*
+        version: link:../validators
       '@react-email/components':
         specifier: 0.0.21
         version: 0.0.21(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -665,6 +668,9 @@ importers:
       react-email:
         specifier: 2.1.5
         version: 2.1.5(eslint@8.57.0)
+      zod:
+        specifier: 3.23.8
+        version: 3.23.8
     devDependencies:
       '@kkhys/eslint-config':
         specifier: workspace:*
@@ -689,6 +695,13 @@ importers:
         version: 5.5.3
 
   packages/google-apps-script:
+    dependencies:
+      '@kkhys/validators':
+        specifier: workspace:*
+        version: link:../validators
+      zod:
+        specifier: 3.23.8
+        version: 3.23.8
     devDependencies:
       '@google/clasp':
         specifier: 2.4.2
@@ -3013,10 +3026,6 @@ packages:
     peerDependencies:
       '@effect-ts/otel-node': '*'
     peerDependenciesMeta:
-      '@effect-ts/core':
-        optional: true
-      '@effect-ts/otel':
-        optional: true
       '@effect-ts/otel-node':
         optional: true
     dependencies:
@@ -20031,7 +20040,7 @@ packages:
         optional: true
     dependencies:
       '@auth/core': 0.32.0
-      next: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.45.2)(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.5(@babel/core@7.24.0)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
 
@@ -24026,6 +24035,7 @@ packages:
   /source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
 
   /source-map@0.7.4:
     resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==}
@@ -24836,7 +24846,7 @@ packages:
       uglify-js:
         optional: true
     dependencies:
-      '@jridgewell/trace-mapping': 0.3.20
+      '@jridgewell/trace-mapping': 0.3.25
       '@swc/core': 1.5.7
       esbuild: 0.18.20
       jest-worker: 27.5.1
