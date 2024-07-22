@@ -18,10 +18,12 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
+    "@kkhys/validators": "workspace:*",
     "@react-email/components": "0.0.21",
     "@react-email/render": "0.0.16",
     "react": "18.3.1",
-    "react-email": "2.1.5"
+    "react-email": "2.1.5",
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@kkhys/eslint-config": "workspace:*",

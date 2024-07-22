@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "login": "clasp login",
+    "clasp:login": "clasp login",
     "build": "tsc && vite build",
     "push": "clasp push",
     "open": "clasp open",
@@ -13,6 +13,10 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kkhys/validators": "workspace:*",
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@google/clasp": "2.4.2",

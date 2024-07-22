@@ -54,7 +54,7 @@ export const contactRouter = {
         await sendEmail({
           to: email,
           subject: 'Thank you for contacting me',
-          html: contactMail(input),
+          body: contactMail(input),
           tags: [{ name: 'category', value: 'contact' }],
         });
       } catch (error) {

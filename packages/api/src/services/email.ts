@@ -12,12 +12,12 @@ const administrator = {
 export const sendEmail = async ({
   to,
   subject,
-  html,
+  body: { html, text },
   tags,
 }: {
   to: string;
   subject: string;
-  html: string;
+  body: Record<'html' | 'text', string>;
   tags?: { name: string; value: string }[];
 }) => {
   const { data, error } = await resend.emails.send({
@@ -25,6 +25,7 @@ export const sendEmail = async ({
     to,
     subject,
     html,
+    text,
     tags,
     headers: {
       'X-Entity-Ref-ID': new Date().getTime().toString(),
