@@ -1,6 +1,7 @@
 {
   "extends": "@kkhys/tsconfig/vite.json",
   "compilerOptions": {
+    "moduleResolution": "bundler",
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
     "baseUrl": ".",
     "paths": {
@@ -8,6 +9,6 @@
     },
     "types": ["google-apps-script"]
   },
-  "include": ["src", "vite.config.mts"],
+  "include": ["src", "vite.config.mts", "vite-env.d.ts"],
   "exclude": ["node_modules"]
 }

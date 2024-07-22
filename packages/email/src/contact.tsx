@@ -1,14 +1,12 @@
+import type { z } from 'zod';
 import * as React from 'react';
 import { Body, Head, Html, Preview, render, Section, Tailwind, Text } from '@react-email/components';
 
+import type { ContactSchema } from '@kkhys/validators';
+
 import { Container, Divider, Heading, Icons, Link, Title } from './_components';
 
-interface ContactEmailProps {
-  name: string;
-  email: string;
-  type: 'jobScouting' | 'projectConsultation' | 'feedback' | 'collaboration' | 'other';
-  content: string;
-}
+type ContactEmailProps = Pick<z.infer<typeof ContactSchema>, 'name' | 'email' | 'type' | 'content'>;
 
 const Email = ({ name, email, type, content }: ContactEmailProps) => {
   const typeLabel = (type: ContactEmailProps['type']) => {
@@ -70,7 +68,13 @@ Email.PreviewProps = {
 
 export default Email;
 
-export const contactMail = ({ email, name, type, content }: ContactEmailProps) =>
-  render(<Email email={email} name={name} type={type} content={content} />, {
-    pretty: true,
-  });
+export const contactMail = ({ email, name, type, content }: ContactEmailProps) => {
+  return {
+    html: render(<Email email={email} name={name} type={type} content={content} />, {
+      pretty: true,
+    }),
+    text: render(<Email email={email} name={name} type={type} content={content} />, {
+      plainText: true,
+    }),
+  };
+};
