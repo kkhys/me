@@ -42,6 +42,10 @@ const createToken = async () => {
     headers: { 'Content-Type': 'application/json' },
   });
 
+  if (!tokenResponse.ok) {
+    throw new Error('Failed to get token');
+  }
+
   const json = (await tokenResponse.json()) as Token;
 
   return {
