@@ -9,7 +9,7 @@ import { env } from '../../env';
 import { CustomTrpcError, EmailError, RecaptchaError } from '../exceptions';
 import { appendGoogleSheets, sendEmail, sendLineMessage, verifyRecaptcha } from '../services';
 import { publicProcedure } from '../trpc';
-import { rateLimiter } from '../utils';
+import { getIpHash, rateLimiter } from '../utils';
 
 export const contactRouter = {
   send: publicProcedure.input(ContactSchema).mutation(async ({ input, ctx }) => {
@@ -17,7 +17,9 @@ export const contactRouter = {
       throw new TRPCError({ code: 'BAD_REQUEST' });
     }
 
-    const { success } = await rateLimiter(1, '1 m').limit(ctx.ip);
+    const ip = ctx.ip;
+    const ipHash = await getIpHash(ip);
+    const { success } = await rateLimiter(1, '1 m').limit(ipHash);
 
     if (!success) {
       throw new TRPCError({ code: 'TOO_MANY_REQUESTS' });
@@ -46,7 +48,7 @@ export const contactRouter = {
 
     await appendGoogleSheets({
       sheetName,
-      values: [[email, name, type as string, content, currentDate, ctx.ip ?? '']],
+      values: [[email, name, type as string, content, currentDate, ip ?? '']],
     });
 
     if (!isProduction) {
