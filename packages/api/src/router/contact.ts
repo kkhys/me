@@ -1,4 +1,5 @@
 import type { z } from 'zod';
+import { TRPCError } from '@trpc/server';
 import { format } from 'date-fns';
 
 import { contactMail } from '@kkhys/email';
@@ -8,9 +9,20 @@ import { env } from '../../env';
 import { CustomTrpcError, EmailError, RecaptchaError } from '../exceptions';
 import { appendGoogleSheets, sendEmail, sendLineMessage, verifyRecaptcha } from '../services';
 import { publicProcedure } from '../trpc';
+import { rateLimiter } from '../utils';
 
 export const contactRouter = {
   send: publicProcedure.input(ContactSchema).mutation(async ({ input, ctx }) => {
+    if (!ctx.ip) {
+      throw new TRPCError({ code: 'BAD_REQUEST' });
+    }
+
+    const { success } = await rateLimiter(1, '1 m').limit(ctx.ip);
+
+    if (!success) {
+      throw new TRPCError({ code: 'TOO_MANY_REQUESTS' });
+    }
+
     const { email, name, type, content, shouldSendReplyMail, recaptchaToken } = input;
 
     if (!recaptchaToken) {
