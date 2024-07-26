@@ -242,17 +242,17 @@ importers:
         specifier: 0.11.0
         version: 0.11.0(typescript@5.5.4)(zod@3.23.8)
       '@tanstack/react-query':
-        specifier: 5.51.11
-        version: 5.51.11(react@18.3.1)
+        specifier: 5.51.15
+        version: 5.51.15(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: 5.51.11
-        version: 5.51.11(@tanstack/react-query@5.51.11)(react@18.3.1)
+        specifier: 5.51.15
+        version: 5.51.15(@tanstack/react-query@5.51.15)(react@18.3.1)
       '@trpc/client':
         specifier: 11.0.0-rc.467
         version: 11.0.0-rc.467(@trpc/server@11.0.0-rc.467)
       '@trpc/react-query':
         specifier: 11.0.0-rc.467
-        version: 11.0.0-rc.467(@tanstack/react-query@5.51.11)(@trpc/client@11.0.0-rc.467)(@trpc/server@11.0.0-rc.467)(react-dom@18.3.1)(react@18.3.1)
+        version: 11.0.0-rc.467(@tanstack/react-query@5.51.15)(@trpc/client@11.0.0-rc.467)(@trpc/server@11.0.0-rc.467)(react-dom@18.3.1)(react@18.3.1)
       '@trpc/server':
         specifier: 11.0.0-rc.467
         version: 11.0.0-rc.467
@@ -3025,6 +3025,10 @@ packages:
     peerDependencies:
       '@effect-ts/otel-node': '*'
     peerDependenciesMeta:
+      '@effect-ts/core':
+        optional: true
+      '@effect-ts/otel':
+        optional: true
       '@effect-ts/otel-node':
         optional: true
     dependencies:
@@ -9573,31 +9577,31 @@ packages:
       tailwindcss: 3.4.7(ts-node@10.9.2)
     dev: false
 
-  /@tanstack/query-core@5.51.9:
-    resolution: {integrity: sha512-HsAwaY5J19MD18ykZDS3aVVh+bAt0i7m6uQlFC2b77DLV9djo+xEN7MWQAQQTR8IM+7r/zbozTQ7P0xr0bHuew==}
+  /@tanstack/query-core@5.51.15:
+    resolution: {integrity: sha512-xyobHDJ0yhPE3+UkSQ2/4X1fLSg7ICJI5J1JyU9yf7F3deQfEwSImCDrB1WSRrauJkMtXW7YIEcC0oA6ZZWt5A==}
     dev: false
 
-  /@tanstack/query-devtools@5.51.9:
-    resolution: {integrity: sha512-FQqJynaEDuwQxoFLP3/i10HQwNYh4wxgs0NeSoL24BLWvpUdstgHqUm2zgwRov8Tmh5kjndPIWaXenwl0D47EA==}
+  /@tanstack/query-devtools@5.51.15:
+    resolution: {integrity: sha512-1oSCl+PsCa/aBCGVM2ZdcQLuQ0QYmKXJJB264twEMVM1M0n5CI40trtywORPF+wLGuZNIZzkKL7j/98mOLAIag==}
     dev: false
 
-  /@tanstack/react-query-devtools@5.51.11(@tanstack/react-query@5.51.11)(react@18.3.1):
-    resolution: {integrity: sha512-8nQRbhdtvl/J9bO+bk/kPQesCOtDgk+oI4AmZJDnkf5OfKTJL3J4tTe+fhuXph7KP4DUOS+ge9o9TGt0OgWFHw==}
+  /@tanstack/react-query-devtools@5.51.15(@tanstack/react-query@5.51.15)(react@18.3.1):
+    resolution: {integrity: sha512-bvGvJoncjZ3irEofoFevptj5BPkDpQrp2+dZhtFqPUZXRT6MAKPmOqtSmZPfacLR5jQLpqw/7d3Zxr173z7WDA==}
     peerDependencies:
-      '@tanstack/react-query': ^5.51.11
+      '@tanstack/react-query': ^5.51.15
       react: ^18 || ^19
     dependencies:
-      '@tanstack/query-devtools': 5.51.9
-      '@tanstack/react-query': 5.51.11(react@18.3.1)
+      '@tanstack/query-devtools': 5.51.15
+      '@tanstack/react-query': 5.51.15(react@18.3.1)
       react: 18.3.1
     dev: false
 
-  /@tanstack/react-query@5.51.11(react@18.3.1):
-    resolution: {integrity: sha512-4Kq2x0XpDlpvSnaLG+8pHNH60zEc3mBvb3B2tOMDjcPCi/o+Du3p/9qpPLwJOTliVxxPJAP27fuIhLrsRdCr7A==}
+  /@tanstack/react-query@5.51.15(react@18.3.1):
+    resolution: {integrity: sha512-UgFg23SrdIYrmfTSxAUn9g+J64VQy11pb9/EefoY/u2+zWuNMeqEOnvpJhf52XQy0yztQoyM9p6x8PFyTNaxXg==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-core': 5.51.9
+      '@tanstack/query-core': 5.51.15
       react: 18.3.1
     dev: false
 
@@ -9718,7 +9722,7 @@ packages:
       '@trpc/server': 11.0.0-rc.467
     dev: false
 
-  /@trpc/react-query@11.0.0-rc.467(@tanstack/react-query@5.51.11)(@trpc/client@11.0.0-rc.467)(@trpc/server@11.0.0-rc.467)(react-dom@18.3.1)(react@18.3.1):
+  /@trpc/react-query@11.0.0-rc.467(@tanstack/react-query@5.51.15)(@trpc/client@11.0.0-rc.467)(@trpc/server@11.0.0-rc.467)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-PNpHgISXJ60s0fJc6JUomKe3iu1wj6pZNFHJgQecAEK0gs1y6VM8Oh8CHgZg8+J/KDP/UtUmBcbpFP9l8Nq48w==}
     peerDependencies:
       '@tanstack/react-query': ^5.49.2
@@ -9727,7 +9731,7 @@ packages:
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
     dependencies:
-      '@tanstack/react-query': 5.51.11(react@18.3.1)
+      '@tanstack/react-query': 5.51.15(react@18.3.1)
       '@trpc/client': 11.0.0-rc.467(@trpc/server@11.0.0-rc.467)
       '@trpc/server': 11.0.0-rc.467
       react: 18.3.1
