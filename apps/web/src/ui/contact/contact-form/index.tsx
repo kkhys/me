@@ -87,6 +87,8 @@ export const ContactForm = ({ className }: { className?: string }) => {
       if (error.data?.customErrorName === 'EmailError') {
         toast.error('お問い合わせを受け付けましたが、メールの送信に失敗しました。');
         form.reset();
+      } else if (error.data?.code === 'TOO_MANY_REQUESTS') {
+        toast.error('お問い合わせの送信回数が上限に達しました。しばらくしてから再度お試しください。');
       } else {
         toast.error('お問い合わせの送信に失敗しました。');
       }
