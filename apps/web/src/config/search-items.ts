@@ -184,7 +184,7 @@ export const searchItems = [
       },
       {
         title: 'v1.10.0 リリースノート: お問い合わせ機能の追加',
-        href: '/posts/p1rvrqd',
+        href: '/posts/p1ydlf6',
         emoji: '🚀',
         category: 'Tech',
         tags: ['Release'],
