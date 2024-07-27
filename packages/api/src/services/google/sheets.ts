@@ -3,7 +3,7 @@ import { GoogleSheetsError } from '../../exceptions';
 import { authenticate } from './token';
 
 export const appendGoogleSheets = async ({ sheetName, values }: { sheetName: string; values: string[][] }) => {
-  const token = await authenticate();
+  const { access_token } = await authenticate();
 
   const params = {
     range: `${sheetName}!A2`,
@@ -19,7 +19,7 @@ export const appendGoogleSheets = async ({ sheetName, values }: { sheetName: str
     {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${token.access_token}`,
+        Authorization: `Bearer ${access_token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },

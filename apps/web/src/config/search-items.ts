@@ -182,6 +182,13 @@ export const searchItems = [
         emoji: '📗',
         category: 'Tech',
       },
+      {
+        title: 'v1.10.0 リリースノート: お問い合わせ機能の追加',
+        href: '/posts/p1rvrqd',
+        emoji: '🚀',
+        category: 'Tech',
+        tags: ['Release'],
+      },
     ],
   },
 ] satisfies SearchItem[];
