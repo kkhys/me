@@ -1,6 +1,16 @@
 import type { z } from 'zod';
 import * as React from 'react';
-import { Body, Head, Html, Preview, render, Section, Tailwind, Text } from '@react-email/components';
+import {
+  Heading as _Heading,
+  Body,
+  Head,
+  Html,
+  Preview,
+  render,
+  Section,
+  Tailwind,
+  Text,
+} from '@react-email/components';
 
 import type { ContactSchema } from '@kkhys/validators';
 
@@ -30,10 +40,8 @@ const Email = ({ name, email, type, content }: ContactEmailProps) => {
       <Preview>お問い合わせありがとうございます。こちらは確認メールです。</Preview>
       <Tailwind>
         <Body className='mx-auto my-auto bg-white px-2 font-sans'>
+          <_Heading className='sr-only'>kkhys.me</_Heading>
           <Container>
-            <Section>
-              <Icons.logo className='h-[20px] w-[20px] rounded-md' />
-            </Section>
             <Title>Contact</Title>
             <Text>お問い合わせありがとうございます。</Text>
             <Text>以下の内容でお問い合わせを受け付けました。</Text>
@@ -49,9 +57,12 @@ const Email = ({ name, email, type, content }: ContactEmailProps) => {
               <Text>{content}</Text>
             </Section>
             <Divider />
-            <Text>
-              <Link href='https://kkhys.me'>kkhys.me</Link> by Keisuke Hayashi
-            </Text>
+            <Section>
+              <Icons.logo />
+              <Text>
+                <Link href='https://kkhys.me'>kkhys.me</Link> by Keisuke Hayashi
+              </Text>
+            </Section>
           </Container>
         </Body>
       </Tailwind>
