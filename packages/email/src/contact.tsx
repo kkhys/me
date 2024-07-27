@@ -71,10 +71,10 @@ const Email = ({ name, email, type, content }: ContactEmailProps) => {
 };
 
 Email.PreviewProps = {
-  email: 'kkhys@pm.me',
+  email: 'kkhys@example.com',
   name: 'Keisuke Hayashi',
-  type: 'jobScouting',
-  content: 'お問い合わせです。',
+  type: 'projectConsultation',
+  content: `吾輩は猫である。名前はまだ無い`,
 } satisfies ContactEmailProps;
 
 export default Email;
