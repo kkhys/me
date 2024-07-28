@@ -189,6 +189,12 @@ export const searchItems = [
         category: 'Tech',
         tags: ['Release'],
       },
+      {
+        title: 'Redis を使った PV カウントに切り替える',
+        href: '/posts/p1ydlf6',
+        emoji: '🛢️',
+        category: 'Tech',
+      },
     ],
   },
 ] satisfies SearchItem[];

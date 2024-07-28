@@ -9,18 +9,17 @@ import { getIpHash, redis } from '../utils';
 export const pageViewRouter = {
   bySlug: publicProcedure
     .input(z.object({ slug: z.string() }))
-    .query(async ({ input }) => (await redis.get<number>(['pageviews', env.NODE_ENV, input.slug].join(':'))) ?? 0),
+    .query(async ({ input: { slug } }) => (await redis.get<number>(['pageviews', env.NODE_ENV, slug].join(':'))) ?? 0),
 
-  incrementViews: publicProcedure.input(z.object({ slug: z.string() })).mutation(async ({ ctx, input }) => {
+  incrementViews: publicProcedure.input(z.object({ slug: z.string() })).mutation(async ({ ctx, input: { slug } }) => {
     if (!ctx.ip) {
       throw new TRPCError({ code: 'BAD_REQUEST' });
     }
 
     const ip = ctx.ip;
     const ipHash = await getIpHash(ip);
-    const { slug } = input;
 
-    const isNew = await redis.set(['deduplicate', ipHash, input.slug].join(':'), true, {
+    const isNew = await redis.set(['deduplicate', ipHash, slug].join(':'), true, {
       nx: true,
       ex: 24 * 60 * 60,
     });
