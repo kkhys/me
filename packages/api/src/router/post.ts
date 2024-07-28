@@ -4,7 +4,6 @@ import { z } from 'zod';
 import { desc, eq, schema } from '@kkhys/db';
 
 import { publicProcedure } from '../trpc';
-import { increment } from '../utils';
 
 export const postRouter = {
   all: publicProcedure.query(({ ctx }) => {
@@ -18,15 +17,5 @@ export const postRouter = {
     return ctx.db.query.posts.findFirst({
       where: eq(schema.posts.slug, input.slug),
     });
-  }),
-
-  incrementViews: publicProcedure.input(z.object({ slug: z.string() })).mutation(({ ctx, input }) => {
-    return ctx.db
-      .insert(schema.posts)
-      .values({ slug: input.slug, views: 1 })
-      .onConflictDoUpdate({
-        target: [schema.posts.slug],
-        set: { views: increment(schema.posts.views), updatedAt: new Date() },
-      });
   }),
 } satisfies TRPCRouterRecord;
