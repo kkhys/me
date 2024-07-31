@@ -639,8 +639,8 @@ importers:
         specifier: 7.4.2
         version: 7.4.2
       drizzle-kit:
-        specifier: 0.23.0
-        version: 0.23.0
+        specifier: 0.23.1
+        version: 0.23.1
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -3062,6 +3062,10 @@ packages:
   /@discoveryjs/json-ext@0.5.7:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
+
+  /@drizzle-team/brocli@0.8.2:
+    resolution: {integrity: sha512-zTrFENsqGvOkBOuHDC1pXCkDXNd2UhP4lI3gYGhQ1R1SPeAAfqzPsV1dcpMy4uNU6kB5VpU5NGhvwxVNETR02A==}
+    dev: true
 
   /@effect-ts/core@0.60.5:
     resolution: {integrity: sha512-qi1WrtJA90XLMnj2hnUszW9Sx4dXP03ZJtCc5DiUBIOhF4Vw7plfb65/bdBySPoC9s7zy995TdUX1XBSxUkl5w==}
@@ -13776,10 +13780,11 @@ packages:
       jsonfile: 6.1.0
     dev: true
 
-  /drizzle-kit@0.23.0:
-    resolution: {integrity: sha512-w9jE97z193dd4jzAyj4Uv2SOh8Ydue70Ki6W0awy4bGM1aPXan6zD6Yv+nNTA6oGgNTDl2MJFxutjHG4fden5g==}
+  /drizzle-kit@0.23.1:
+    resolution: {integrity: sha512-posGQhj8/K4S4CPhk7BO9+IcpNdIh96t0DvcAr/NvMKhPhe5D0MELzmpq9R2MpmSP3fd+Z3upwidtetrw7xnjg==}
     hasBin: true
     dependencies:
+      '@drizzle-team/brocli': 0.8.2
       '@esbuild-kit/esm-loader': 2.6.5
       esbuild: 0.19.12
       esbuild-register: 3.5.0(esbuild@0.19.12)
