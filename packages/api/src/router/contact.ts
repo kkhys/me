@@ -60,7 +60,7 @@ export const contactRouter = {
         message: generateLineMessage(input),
       });
     } catch (error) {
-      console.error('Failed to send a message to LINE');
+      console.error('Failed to send a message to LINE: ', error);
     }
 
     if (shouldSendReplyMail) {
@@ -72,6 +72,7 @@ export const contactRouter = {
           tags: [{ name: 'category', value: 'contact' }],
         });
       } catch (error) {
+        console.error('Failed to send a reply email: ', error);
         const errorMessage = 'Failed to send a reply email';
         throw new CustomTrpcError(errorMessage, new EmailError(errorMessage));
       }
