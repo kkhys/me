@@ -45,7 +45,7 @@ const Email = ({ name, email, type, content }: ContactEmailProps) => {
             <Title>Contact</Title>
             <Text>お問い合わせありがとうございます。</Text>
             <Text>以下の内容でお問い合わせを受け付けました。</Text>
-            <Text>※ 必ずしも返信できるとは限らないことを予めご了承ください。</Text>
+            <Text>※ 必ずしも返信できるとは限りませんのでご了承ください。</Text>
             <Section>
               <Heading>名前</Heading>
               <Text>{name}</Text>

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */
 import type { PluginUtils } from 'tailwindcss/types/config';
 
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const typographyStyles = ({ theme }: PluginUtils) => {
   return {
     invert: {

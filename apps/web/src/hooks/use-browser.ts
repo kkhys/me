@@ -8,14 +8,14 @@ export const useBrowser = () => {
   React.useEffect(() => {
     const userAgent = typeof window.navigator === 'undefined' ? '' : navigator.userAgent;
     const isOpera = !!window.opr;
-    const isEdge = window.navigator.userAgent.indexOf('Edge') > -1;
+    const isEdge = window.navigator.userAgent.includes('Edge');
 
     if (/Trident|MSIE/.test(userAgent)) setBrowser('internet explorer');
     else if (isEdge) setBrowser('edge');
-    else if (/Chrome/.test(userAgent) && !isOpera && !isEdge) setBrowser('chrome');
-    else if (/Safari/.test(userAgent) && !isOpera && !isEdge) setBrowser('safari');
-    else if (/Firefox/.test(userAgent)) setBrowser('firefox');
-    else if (isOpera || /OPR/.test(userAgent)) setBrowser('opera');
+    else if (userAgent.includes('Chrome') && !isOpera && !isEdge) setBrowser('chrome');
+    else if (userAgent.includes('Safari') && !isOpera && !isEdge) setBrowser('safari');
+    else if (userAgent.includes('Firefox')) setBrowser('firefox');
+    else if (isOpera || userAgent.includes('OPR')) setBrowser('opera');
     else setBrowser('other');
   }, []);
 
