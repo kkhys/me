@@ -49,7 +49,7 @@ jobs:
         run: pnpm install
 
       - name: Install Playwright Browser
-        run: pnpm dlx playwright install --with-deps chromium
+        run: pnpx playwright-core install chromium
 
       - name: Build
         run: pnpm turbo build
