@@ -64,7 +64,7 @@ importers:
         version: 0.11.0(typescript@5.5.4)(zod@3.23.8)
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.24.0)(react-dom@18.3.1)(react@18.3.1)
+        version: 14.2.5(@babel/core@7.24.5)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -294,7 +294,7 @@ importers:
         version: 13.2.0
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
+        version: 14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
       next-contentlayer:
         specifier: 0.3.4
         version: 0.3.4(contentlayer@0.3.4)(esbuild@0.23.0)(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
@@ -581,7 +581,7 @@ importers:
         version: 0.11.0(typescript@5.5.4)(zod@3.23.8)
       next:
         specifier: 14.2.5
-        version: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
+        version: 14.2.5(@babel/core@7.24.5)(react-dom@18.3.1)(react@18.3.1)
       next-auth:
         specifier: 5.0.0-beta.20
         version: 5.0.0-beta.20(next@14.2.5)(react@18.3.1)
@@ -4252,10 +4252,9 @@ packages:
   /@floating-ui/utils@0.1.6:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
 
-  /@fortawesome/fontawesome-free@6.5.2:
-    resolution: {integrity: sha512-hRILoInAx8GNT5IMkrtIt9blOdrqHOnPBH+k70aWUAqPZPgopb9G5EQJFpaBx/S8zp2fC+mPW349Bziuk1o28Q==}
+  /@fortawesome/fontawesome-free@6.6.0:
+    resolution: {integrity: sha512-60G28ke/sXdtS9KZCpZSHHkCbdsOGEhIUGlwq6yhY74UpTiToIh8np7A8yphhM4BWsvNFtIvLpi4co+h9Mr9Ow==}
     engines: {node: '>=6'}
-    requiresBuild: true
     dev: false
 
   /@google/clasp@2.4.2:
@@ -4929,7 +4928,7 @@ packages:
       next: ^13.0.0 || ^14.0.0
       react: ^18.2.0
     dependencies:
-      next: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
       third-party-capital: 1.0.20
     dev: false
@@ -5313,7 +5312,7 @@ packages:
       react-refresh: 0.14.0
       schema-utils: 3.3.0
       source-map: 0.7.4
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     dev: true
 
   /@pnpm/config.env-replace@1.1.0:
@@ -9052,7 +9051,7 @@ packages:
       fs-extra: 11.1.1
       image-size: 1.0.2
       loader-utils: 3.2.1
-      next: 14.2.5(@babel/core@7.24.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.5(@babel/core@7.24.5)(react-dom@18.3.1)(react@18.3.1)
       node-polyfill-webpack-plugin: 2.0.1(webpack@5.89.0)
       pnp-webpack-plugin: 1.7.0(typescript@5.5.4)
       postcss: 8.4.38
@@ -9137,7 +9136,7 @@ packages:
       fs-extra: 11.1.1
       image-size: 1.0.2
       loader-utils: 3.2.1
-      next: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
       node-polyfill-webpack-plugin: 2.0.1(webpack@5.89.0)
       pnp-webpack-plugin: 1.7.0(typescript@5.5.4)
       postcss: 8.4.38
@@ -9325,7 +9324,7 @@ packages:
       react-docgen-typescript: 2.2.2(typescript@5.5.4)
       tslib: 2.6.2
       typescript: 5.5.4
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -10756,7 +10755,7 @@ packages:
       react:
         optional: true
     dependencies:
-      next: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
       server-only: 0.0.1
     dev: false
@@ -11617,7 +11616,7 @@ packages:
       '@babel/core': 7.24.0
       find-cache-dir: 4.0.0
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     dev: true
 
   /babel-plugin-add-react-displayname@0.0.5:
@@ -13076,7 +13075,7 @@ packages:
       postcss-modules-values: 4.0.0(postcss@8.4.41)
       postcss-value-parser: 4.2.0
       semver: 7.6.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     dev: true
 
   /css-select@4.3.0:
@@ -13140,17 +13139,17 @@ packages:
     resolution: {integrity: sha512-0sVXIohTfLqVIW3kb/0n6IiWF3Ifj5nm2XaSrLq2DI6fKIGa2fYAZdk917rUneaeLVpYfFcyXE2ft0fe3remsA==}
     dev: true
 
-  /cytoscape-cose-bilkent@4.1.0(cytoscape@3.30.0):
+  /cytoscape-cose-bilkent@4.1.0(cytoscape@3.30.2):
     resolution: {integrity: sha512-wgQlVIUJF13Quxiv5e1gstZ08rnZj2XaLHGoFMYXz7SkNfCDOOteKBE6SYRfA9WxxI/iBc3ajfDoc6hb/MRAHQ==}
     peerDependencies:
       cytoscape: ^3.2.0
     dependencies:
       cose-base: 1.0.3
-      cytoscape: 3.30.0
+      cytoscape: 3.30.2
     dev: false
 
-  /cytoscape@3.30.0:
-    resolution: {integrity: sha512-l590mjTHT6/Cbxp13dGPC2Y7VXdgc+rUeF8AnF/JPzhjNevbDJfObnJgaSjlldOgBQZbue+X6IUZ7r5GAgvauQ==}
+  /cytoscape@3.30.2:
+    resolution: {integrity: sha512-oICxQsjW8uSaRmn4UK/jkczKOqTrVqt5/1WL0POiJUT2EKNc9STM4hYFHv917yu55aTBMFNRzymlJhVAiWPCxw==}
     engines: {node: '>=0.10'}
     dev: false
 
@@ -13520,8 +13519,8 @@ packages:
     engines: {node: '>=4.0'}
     dev: true
 
-  /dayjs@1.11.11:
-    resolution: {integrity: sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==}
+  /dayjs@1.11.12:
+    resolution: {integrity: sha512-Rt2g+nTbLlDWZTwwrIXjy9MeiZmSDI375FvZs72ngxx8PDC6YXOeR3q5LAuPzjZQxhiWdRKac7RKV+YyQYfYIg==}
     dev: false
 
   /debounce@1.2.1:
@@ -15674,7 +15673,7 @@ packages:
       semver: 7.6.0
       tapable: 2.2.1
       typescript: 5.5.4
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     dev: true
 
   /form-data@2.3.3:
@@ -16829,7 +16828,7 @@ packages:
       lodash: 4.17.21
       pretty-error: 4.0.0
       tapable: 2.2.1
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     dev: true
 
   /htmlparser2@6.1.0:
@@ -19450,9 +19449,9 @@ packages:
   /mermaid-isomorphic@2.2.1:
     resolution: {integrity: sha512-OPxQsUL2TIlAfC3ExhI/mORzigTbUOqYtqUGUECSKevGCSf/+QEwq78MRZWG1PpmTkl2ORoK8Yy5WkqqTqywMg==}
     dependencies:
-      '@fortawesome/fontawesome-free': 6.5.2
+      '@fortawesome/fontawesome-free': 6.6.0
       mermaid: 10.9.1
-      playwright-core: 1.45.2
+      playwright-core: 1.46.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -19463,12 +19462,12 @@ packages:
       '@braintree/sanitize-url': 6.0.4
       '@types/d3-scale': 4.0.8
       '@types/d3-scale-chromatic': 3.0.3
-      cytoscape: 3.30.0
-      cytoscape-cose-bilkent: 4.1.0(cytoscape@3.30.0)
+      cytoscape: 3.30.2
+      cytoscape-cose-bilkent: 4.1.0(cytoscape@3.30.2)
       d3: 7.9.0
       d3-sankey: 0.12.3
       dagre-d3-es: 7.0.10
-      dayjs: 1.11.11
+      dayjs: 1.11.12
       dompurify: 3.1.6
       elkjs: 0.9.3
       katex: 0.16.11
@@ -20295,7 +20294,7 @@ packages:
         optional: true
     dependencies:
       '@auth/core': 0.34.2
-      next: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.5(@babel/core@7.24.5)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
 
@@ -20310,7 +20309,7 @@ packages:
       '@contentlayer/core': 0.3.4(esbuild@0.23.0)
       '@contentlayer/utils': 0.3.4
       contentlayer: 0.3.4(esbuild@0.23.0)
-      next: 14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     transitivePeerDependencies:
@@ -20369,7 +20368,7 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /next@14.2.5(@babel/core@7.24.0)(react-dom@18.3.1)(react@18.3.1):
+  /next@14.2.5(@babel/core@7.24.0)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-0f8aRfBVL+mpzfBjYfQuLWh2WyAwtJXCRfkPF4UJ5qd2YwrHczsrSzXU4tRMV0OAxR8ZJZWPFn6uhSC56UTsLA==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -20388,6 +20387,8 @@ packages:
         optional: true
     dependencies:
       '@next/env': 14.2.5
+      '@opentelemetry/api': 1.6.0
+      '@playwright/test': 1.46.0
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
       caniuse-lite: 1.0.30001599
@@ -20410,7 +20411,7 @@ packages:
       - '@babel/core'
       - babel-plugin-macros
 
-  /next@14.2.5(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.46.0)(react-dom@18.3.1)(react@18.3.1):
+  /next@14.2.5(@babel/core@7.24.5)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-0f8aRfBVL+mpzfBjYfQuLWh2WyAwtJXCRfkPF4UJ5qd2YwrHczsrSzXU4tRMV0OAxR8ZJZWPFn6uhSC56UTsLA==}
     engines: {node: '>=18.17.0'}
     hasBin: true
@@ -20429,8 +20430,6 @@ packages:
         optional: true
     dependencies:
       '@next/env': 14.2.5
-      '@opentelemetry/api': 1.6.0
-      '@playwright/test': 1.46.0
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
       caniuse-lite: 1.0.30001599
@@ -20598,7 +20597,7 @@ packages:
       url: 0.11.3
       util: 0.12.5
       vm-browserify: 1.1.2
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     dev: true
 
   /node-releases@2.0.14:
@@ -21835,12 +21834,6 @@ packages:
       sharp: 0.32.6
     dev: true
 
-  /playwright-core@1.45.2:
-    resolution: {integrity: sha512-ha175tAWb0dTK0X4orvBIqi3jGEt701SMxMhyujxNrgd8K0Uy5wMSwwcQHtyB4om7INUkfndx02XnQ2p6dvLDw==}
-    engines: {node: '>=18'}
-    hasBin: true
-    dev: false
-
   /playwright-core@1.46.0:
     resolution: {integrity: sha512-9Y/d5UIwuJk8t3+lhmMSAJyNP1BUC/DqP3cQJDQQL/oWqAiuPTLgy7Q5dzglmTLwcBRdetzgNM/gni7ckfTr6A==}
     engines: {node: '>=18'}
@@ -21934,7 +21927,7 @@ packages:
       jiti: 1.21.6
       postcss: 8.4.38
       semver: 7.6.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     transitivePeerDependencies:
       - typescript
     dev: true
@@ -23742,7 +23735,7 @@ packages:
     dependencies:
       klona: 2.0.6
       neo-async: 2.6.2
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     dev: true
 
   /satori@0.10.14:
@@ -24763,7 +24756,7 @@ packages:
     peerDependencies:
       webpack: ^5.0.0
     dependencies:
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     dev: true
 
   /style-to-object@0.4.4:
@@ -24882,7 +24875,7 @@ packages:
       webpack: '>=2'
     dependencies:
       '@swc/core': 1.5.7
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     dev: true
 
   /swr@2.2.5(react@18.3.1):
@@ -26475,7 +26468,7 @@ packages:
       mime-types: 2.1.35
       range-parser: 1.2.1
       schema-utils: 4.2.0
-      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.18.20)
+      webpack: 5.89.0(@swc/core@1.5.7)(esbuild@0.23.0)
     dev: true
 
   /webpack-hot-middleware@2.25.4:
