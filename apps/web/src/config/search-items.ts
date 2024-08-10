@@ -195,6 +195,12 @@ export const searchItems = [
         emoji: '🛢️',
         category: 'Tech',
       },
+      {
+        title: '星野リゾート「界アンジン」でのんびり',
+        href: '/posts/p15p4yn',
+        emoji: '⛵️',
+        category: 'Life',
+      },
     ],
   },
 ] satisfies SearchItem[];
