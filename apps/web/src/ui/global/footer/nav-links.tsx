@@ -108,5 +108,8 @@ export const NavLinks = () => (
     <a className='hidden' rel='me' href='https://mastodon.kkhys.me/@kkhys'>
       Mastodon
     </a>
+    <a className='hidden' rel='me' href='https://misskey.io/@kkhys'>
+      Misskey.io
+    </a>
   </>
 );
