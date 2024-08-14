@@ -105,5 +105,8 @@ export const NavLinks = () => (
         <NavLink href='/legal/terms'>Terms of Service</NavLink>
       </DropdownMenuContent>
     </DropdownMenu>
+    <a className='hidden' rel='me' href='https://mastodon.kkhys.me/@kkhys'>
+      Mastodon
+    </a>
   </>
 );
