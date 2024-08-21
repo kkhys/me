@@ -447,8 +447,8 @@ importers:
         specifier: 3.0.3
         version: 3.0.3
       axe-playwright:
-        specifier: 2.0.1
-        version: 2.0.1(playwright@1.46.1)
+        specifier: 2.0.2
+        version: 2.0.2(playwright@1.46.1)
       dotenv-cli:
         specifier: 7.4.2
         version: 7.4.2
@@ -11535,36 +11535,31 @@ packages:
     resolution: {integrity: sha512-NmWvPnx0F1SfrQbYwOi7OeaNGokp9XhzNioJ/CSBs8Qa4vxug81mhJEAVZwxXuBmYB5KDRfMq/F3RR0BIU7sWg==}
     dev: true
 
-  /axe-core@4.8.2:
-    resolution: {integrity: sha512-/dlp0fxyM3R8YW7MFzaHWXrf4zzbr0vaYb23VBFCl83R7nWNPg/yaQw2Dc8jzCMmDVLhSdzH8MjrsuIUuvX+6g==}
-    engines: {node: '>=4'}
-    dev: true
-
   /axe-core@4.9.1:
     resolution: {integrity: sha512-QbUdXJVTpvUTHU7871ppZkdOLBeGUKBQWHkHrvN2V9IQWGMt61zf3B45BtzjxEJzYuj0JBjBZP/hmYS/R9pmAw==}
     engines: {node: '>=4'}
 
-  /axe-html-reporter@2.2.3(axe-core@4.8.2):
+  /axe-html-reporter@2.2.3(axe-core@4.9.1):
     resolution: {integrity: sha512-io8aCEt4fJvv43W+33n3zEa8rdplH5Ti2v5fOnth3GBKLhLHarNs7jj46xGfpnGnpaNrz23/tXPHC3HbwTzwwA==}
     engines: {node: '>=8.9.0'}
     peerDependencies:
       axe-core: '>=3'
     dependencies:
-      axe-core: 4.8.2
+      axe-core: 4.9.1
       mustache: 4.2.0
       rimraf: 3.0.2
     dev: true
 
-  /axe-playwright@2.0.1(playwright@1.46.1):
-    resolution: {integrity: sha512-MHjNjGARulF9XzqSfspmNjw+tpBz4x9o1VlTuLWEUW9fqzhn+xWa1qEpuOIQPbsRWQiLfooDjQAunLeE0PM5AQ==}
+  /axe-playwright@2.0.2(playwright@1.46.1):
+    resolution: {integrity: sha512-ti/oyzfxdvoxcidqCIe+YoOoRumU1Vs55WXEmruE2SxyI1ZQ/+mzsB294o2T1b0YdoMKNO9h4S+8CbO1lXqiQw==}
     peerDependencies:
       playwright: '>1.0.0'
     dependencies:
       '@types/junit-report-builder': 3.0.2
-      axe-core: 4.8.2
-      axe-html-reporter: 2.2.3(axe-core@4.8.2)
+      axe-core: 4.9.1
+      axe-html-reporter: 2.2.3(axe-core@4.9.1)
       junit-report-builder: 3.2.1
-      picocolors: 1.0.0
+      picocolors: 1.0.1
       playwright: 1.46.1
     dev: true
 
@@ -21752,10 +21747,6 @@ packages:
     resolution: {integrity: sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug==}
     dependencies:
       split2: 4.2.0
-
-  /picocolors@1.0.0:
-    resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
-    dev: true
 
   /picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
