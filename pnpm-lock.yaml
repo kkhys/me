@@ -448,7 +448,7 @@ importers:
         version: 3.0.3
       axe-playwright:
         specifier: 2.0.2
-        version: 2.0.2(playwright@1.47.0)
+        version: 2.0.2(playwright@1.47.1)
       dotenv-cli:
         specifier: 7.4.2
         version: 7.4.2
@@ -878,8 +878,8 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@3.4.11)
       vaul:
-        specifier: 0.9.2
-        version: 0.9.2(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 0.9.3
+        version: 0.9.3(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@kkhys/eslint-config':
         specifier: workspace:0.1.0
@@ -11852,7 +11852,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /axe-playwright@2.0.2(playwright@1.47.0):
+  /axe-playwright@2.0.2(playwright@1.47.1):
     resolution: {integrity: sha512-ti/oyzfxdvoxcidqCIe+YoOoRumU1Vs55WXEmruE2SxyI1ZQ/+mzsB294o2T1b0YdoMKNO9h4S+8CbO1lXqiQw==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -11862,7 +11862,7 @@ packages:
       axe-html-reporter: 2.2.3(axe-core@4.9.1)
       junit-report-builder: 3.2.1
       picocolors: 1.0.1
-      playwright: 1.47.0
+      playwright: 1.47.1
     dev: true
 
   /axobject-query@4.1.0:
@@ -22103,21 +22103,12 @@ packages:
     resolution: {integrity: sha512-1DyHT8OqkcfCkYUD9zzUTfg7EfTd+6a8MkD/NWOvjo0u/SCNd5YmY/lJwFvUZOxJbWNds+ei7ic2+R/cRz/PDg==}
     engines: {node: '>=18'}
     hasBin: true
+    dev: false
 
   /playwright-core@1.47.1:
     resolution: {integrity: sha512-i1iyJdLftqtt51mEk6AhYFaAJCDx0xQ/O5NU8EKaWFgMjItPVma542Nh/Aq8aLCjIJSzjaiEQGW/nyqLkGF1OQ==}
     engines: {node: '>=18'}
     hasBin: true
-
-  /playwright@1.47.0:
-    resolution: {integrity: sha512-jOWiRq2pdNAX/mwLiwFYnPHpEZ4rM+fRSQpRHwEwZlP2PUANvL3+aJOF/bvISMhFD30rqMxUB4RJx9aQbfh4Ww==}
-    engines: {node: '>=18'}
-    hasBin: true
-    dependencies:
-      playwright-core: 1.47.0
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
 
   /playwright@1.47.1:
     resolution: {integrity: sha512-SUEKi6947IqYbKxRiqnbUobVZY4bF1uu+ZnZNJX9DfU1tlf2UhWfvVjLf01pQx9URsOr18bFVUKXmanYWhbfkw==}
@@ -26354,8 +26345,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  /vaul@0.9.2(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-m2A7UgAU/JMWiwUhmARK8LMvEfXiudA4trJxfZF5AtH2uBTgN855msZ2yjPnUDfa7i5glocMYLSfML8wriBtBA==}
+  /vaul@0.9.3(@types/react@18.3.5)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-VNWuzw37fw6DWptl9PMUc9PH5NJpGqpetcxDMRiH/GzH2inJAEMwo/uZqaONlGseeOG8xDtrrp3nYoiZhyabpw==}
     peerDependencies:
       react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
