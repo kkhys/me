@@ -68,7 +68,7 @@ export const contactRouter = {
         await sendEmail({
           to: email,
           subject: 'Thank you for contacting me',
-          body: contactMail(input),
+          body: contactMail(input) as unknown as Record<'html' | 'text', string>,
           tags: [{ name: 'category', value: 'contact' }],
         });
       } catch (error) {
