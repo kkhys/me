@@ -12,7 +12,7 @@ import { EyeCatch } from '#/ui/post';
 
 const ArticleCard = ({ post }: { post: Post }) => {
   const { slug, title, emoji, publishedAtFormattedUs, status } = post;
-  const MotionLink = motion(Link);
+  const MotionLink = motion(typeof Link);
 
   return (
     <MotionLink
