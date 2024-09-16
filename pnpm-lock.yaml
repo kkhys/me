@@ -583,8 +583,8 @@ importers:
         specifier: 14.2.11
         version: 14.2.11(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.47.1)(react-dom@18.3.1)(react@18.3.1)
       next-auth:
-        specifier: 5.0.0-beta.20
-        version: 5.0.0-beta.20(next@14.2.11)(react@18.3.1)
+        specifier: 5.0.0-beta.21
+        version: 5.0.0-beta.21(next@14.2.11)(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1154,8 +1154,8 @@ packages:
       preact-render-to-string: 5.2.3(preact@10.11.3)
     dev: false
 
-  /@auth/core@0.34.2:
-    resolution: {integrity: sha512-KywHKRgLiF3l7PLyL73fjLSIBe1YNcA6sMeew4yMP6cfCWGXZrkkXd32AjRi1hlJ9nvovUBGZHvbn+LijO6ZeQ==}
+  /@auth/core@0.35.0:
+    resolution: {integrity: sha512-XvMALiYn5ZQd1hVeG1t+jCU89jRrc7ortl/05wkBrPHnRWZScxAK5jKuzBz+AOBQXewDjYcMpzeF5tTqg6rDhQ==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
       '@simplewebauthn/server': ^9.0.2
@@ -20569,8 +20569,8 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: true
 
-  /next-auth@5.0.0-beta.20(next@14.2.11)(react@18.3.1):
-    resolution: {integrity: sha512-+48SjV9k9AtUU3JbEIa4PXNjKIewfFjVGL7Xs2RKkuQ5QqegDNIQiIG8sLk6/qo7RTScQYIGKgeQ5IuQRtrTQg==}
+  /next-auth@5.0.0-beta.21(next@14.2.11)(react@18.3.1):
+    resolution: {integrity: sha512-VrT6LV9u/o5tMuWxRDN5d/K1OgPskrMHy+aITTwasVfIrkIaU/8UVg3TXH8ynJgzhfzlDx/3hLWGhi+eXQw4qg==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
       '@simplewebauthn/server': ^9.0.2
@@ -20585,7 +20585,7 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@auth/core': 0.34.2
+      '@auth/core': 0.35.0
       next: 14.2.11(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.47.1)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
