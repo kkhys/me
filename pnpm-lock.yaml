@@ -209,8 +209,8 @@ importers:
   apps/web:
     dependencies:
       '@emotion/is-prop-valid':
-        specifier: 1.3.0
-        version: 1.3.0
+        specifier: 1.3.1
+        version: 1.3.1
       '@hookform/resolvers':
         specifier: 3.9.0
         version: 3.9.0(react-hook-form@7.53.0)
@@ -285,7 +285,7 @@ importers:
         version: 4.2.2
       framer-motion:
         specifier: 11.5.6
-        version: 11.5.6(@emotion/is-prop-valid@1.3.0)(react-dom@18.3.1)(react@18.3.1)
+        version: 11.5.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1)(react@18.3.1)
       lucide-react:
         specifier: 0.441.0
         version: 0.441.0(react@18.3.1)
@@ -448,7 +448,7 @@ importers:
         version: 3.0.3
       axe-playwright:
         specifier: 2.0.2
-        version: 2.0.2(playwright@1.47.1)
+        version: 2.0.2(playwright@1.47.2)
       dotenv-cli:
         specifier: 7.4.2
         version: 7.4.2
@@ -846,7 +846,7 @@ importers:
         version: 8.3.0(react@18.3.1)
       framer-motion:
         specifier: 11.5.6
-        version: 11.5.6(@emotion/is-prop-valid@1.3.0)(react-dom@18.3.1)(react@18.3.1)
+        version: 11.5.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1)(react@18.3.1)
       input-otp:
         specifier: 1.2.4
         version: 1.2.4(react-dom@18.3.1)(react@18.3.1)
@@ -4108,8 +4108,8 @@ packages:
     resolution: {integrity: sha512-/crHGujo0xnuHIYNc1VgP0HGJGFSoSqq88JFXe6FmFyXPpWt8Xu39LyLg7rchsxfXFeEdA9CrIZvLV5eswXV5g==}
     dev: false
 
-  /@emotion/is-prop-valid@1.3.0:
-    resolution: {integrity: sha512-SHetuSLvJDzuNbOdtPVbq6yMMMlLoW5Q94uDqJZqy50gcmAjxFkVqmzqSGEFq9gT2iMuIeKV1PXVWmvUhuZLlQ==}
+  /@emotion/is-prop-valid@1.3.1:
+    resolution: {integrity: sha512-/ACwoqx7XQi9knQs/G0qKvv5teDMhD7bXYns9N/wM8ah8iNb8jZ2uNO0YOgiq2o2poIvVtJS2YALasQuMSQ7Kw==}
     dependencies:
       '@emotion/memoize': 0.9.0
     dev: false
@@ -11854,7 +11854,7 @@ packages:
       rimraf: 3.0.2
     dev: true
 
-  /axe-playwright@2.0.2(playwright@1.47.1):
+  /axe-playwright@2.0.2(playwright@1.47.2):
     resolution: {integrity: sha512-ti/oyzfxdvoxcidqCIe+YoOoRumU1Vs55WXEmruE2SxyI1ZQ/+mzsB294o2T1b0YdoMKNO9h4S+8CbO1lXqiQw==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -11864,7 +11864,7 @@ packages:
       axe-html-reporter: 2.2.3(axe-core@4.9.1)
       junit-report-builder: 3.2.1
       picocolors: 1.0.1
-      playwright: 1.47.1
+      playwright: 1.47.2
     dev: true
 
   /axobject-query@4.1.0:
@@ -16000,7 +16000,7 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: false
 
-  /framer-motion@11.5.6(@emotion/is-prop-valid@1.3.0)(react-dom@18.3.1)(react@18.3.1):
+  /framer-motion@11.5.6(@emotion/is-prop-valid@1.3.1)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-JMwUpAxv/DWgul9vPgX0ElKn0G66sUc6O9tOXsYwn3zxwvhxFljSXC0XT2QCzuTYBshwC8nyDAa1SYcV0Ldbhw==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
@@ -16014,7 +16014,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      '@emotion/is-prop-valid': 1.3.0
+      '@emotion/is-prop-valid': 1.3.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       tslib: 2.6.2
@@ -22106,21 +22106,12 @@ packages:
     resolution: {integrity: sha512-i1iyJdLftqtt51mEk6AhYFaAJCDx0xQ/O5NU8EKaWFgMjItPVma542Nh/Aq8aLCjIJSzjaiEQGW/nyqLkGF1OQ==}
     engines: {node: '>=18'}
     hasBin: true
+    dev: false
 
   /playwright-core@1.47.2:
     resolution: {integrity: sha512-3JvMfF+9LJfe16l7AbSmU555PaTl2tPyQsVInqm3id16pdDfvZ8TTZ/pyzmkbDrZTQefyzU7AIHlZqQnxpqHVQ==}
     engines: {node: '>=18'}
     hasBin: true
-
-  /playwright@1.47.1:
-    resolution: {integrity: sha512-SUEKi6947IqYbKxRiqnbUobVZY4bF1uu+ZnZNJX9DfU1tlf2UhWfvVjLf01pQx9URsOr18bFVUKXmanYWhbfkw==}
-    engines: {node: '>=18'}
-    hasBin: true
-    dependencies:
-      playwright-core: 1.47.1
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
 
   /playwright@1.47.2:
     resolution: {integrity: sha512-nx1cLMmQWqmA3UsnjaaokyoUpdVaaDhJhMoxX2qj3McpjnsqFHs516QAKYhqHAgOP+oCFTEOCOAaD1RgD/RQfA==}
