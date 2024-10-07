@@ -620,11 +620,11 @@ importers:
   packages/db:
     dependencies:
       '@neondatabase/serverless':
-        specifier: 0.9.5
-        version: 0.9.5
+        specifier: 0.10.1
+        version: 0.10.1
       drizzle-orm:
         specifier: 0.33.0
-        version: 0.33.0(@neondatabase/serverless@0.9.5)(pg@8.13.0)
+        version: 0.33.0(@neondatabase/serverless@0.10.1)(pg@8.13.0)
     devDependencies:
       '@kkhys/eslint-config':
         specifier: workspace:*
@@ -5717,8 +5717,8 @@ packages:
       tar-fs: 2.1.1
     dev: true
 
-  /@neondatabase/serverless@0.9.5:
-    resolution: {integrity: sha512-siFas6gItqv6wD/pZnvdu34wEqgG3nSE6zWZdq5j2DEsa+VvX8i/5HXJOo06qrw5axPXn+lGCxeR+NLaSPIXug==}
+  /@neondatabase/serverless@0.10.1:
+    resolution: {integrity: sha512-Upn555uEYL/q8aqMdPSviggNWeeZLCl5FhCIs7A4hmshfoOAAfML+Sqbcxr+Re2WZN5+hpyM9JClImXnBuhuXw==}
     dependencies:
       '@types/pg': 8.11.6
     dev: false
@@ -10870,7 +10870,7 @@ packages:
     resolution: {integrity: sha512-/2WmmBXHLsfRqzfHW7BNZ8SbYzE8OSk7i3WjFYvfgRHj7S1xj+16Je5fUKv3lVdVzk/zn9TXOqf+avFCFIE0yQ==}
     dependencies:
       '@types/node': 20.16.10
-      pg-protocol: 1.6.1
+      pg-protocol: 1.7.0
       pg-types: 4.0.2
     dev: false
 
@@ -14491,7 +14491,7 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.33.0(@neondatabase/serverless@0.9.5)(pg@8.13.0):
+  /drizzle-orm@0.33.0(@neondatabase/serverless@0.10.1)(pg@8.13.0):
     resolution: {integrity: sha512-SHy72R2Rdkz0LEq0PSG/IdvnT3nGiWuRk+2tXZQ90GVq/XQhpCzu/EFT3V2rox+w8MlkBQxifF8pCStNYnERfA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
@@ -14580,7 +14580,7 @@ packages:
       sqlite3:
         optional: true
     dependencies:
-      '@neondatabase/serverless': 0.9.5
+      '@neondatabase/serverless': 0.10.1
       pg: 8.13.0
     dev: false
 
@@ -22109,10 +22109,6 @@ packages:
       pg: '>=8.0'
     dependencies:
       pg: 8.13.0
-
-  /pg-protocol@1.6.1:
-    resolution: {integrity: sha512-jPIlvgoD63hrEuihvIg+tJhoGjUsLPn6poJY9N5CnlPd91c2T18T/9zBtLxZSb1EhYxBRoZJtzScCaWlYLtktg==}
-    dev: false
 
   /pg-protocol@1.7.0:
     resolution: {integrity: sha512-hTK/mE36i8fDDhgDFjy6xNOG+LCorxLG3WO17tku+ij6sVHXh1jQUJ8hYAnRhNla4QVD2H8er/FOjc/+EgC6yQ==}
