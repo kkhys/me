@@ -324,7 +324,7 @@ importers:
         version: 3.2.1(react-dom@18.3.1)(react@18.3.1)
       rehype-mermaid:
         specifier: 3.0.0
-        version: 3.0.0(playwright@1.48.0)
+        version: 3.0.0(playwright@1.48.1)
       rehype-pretty-code:
         specifier: 0.14.0
         version: 0.14.0(shiki@1.5.2)
@@ -448,7 +448,7 @@ importers:
         version: 3.0.3
       axe-playwright:
         specifier: 2.0.3
-        version: 2.0.3(playwright@1.48.0)
+        version: 2.0.3(playwright@1.48.1)
       dotenv-cli:
         specifier: 7.4.2
         version: 7.4.2
@@ -623,8 +623,8 @@ importers:
         specifier: 0.10.1
         version: 0.10.1
       drizzle-orm:
-        specifier: 0.35.1
-        version: 0.35.1(@neondatabase/serverless@0.10.1)(pg@8.13.0)
+        specifier: 0.35.2
+        version: 0.35.2(@neondatabase/serverless@0.10.1)(pg@8.13.0)
     devDependencies:
       '@kkhys/eslint-config':
         specifier: workspace:*
@@ -12058,7 +12058,7 @@ packages:
       mustache: 4.2.0
     dev: true
 
-  /axe-playwright@2.0.3(playwright@1.48.0):
+  /axe-playwright@2.0.3(playwright@1.48.1):
     resolution: {integrity: sha512-s7iI2okyHHsD3XZK4RMJtTy2UASkNWLQtnzLuaHiK3AWkERf+cqZJqkxb7O4b56fnbib9YnZVRByTl92ME3o6g==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -12068,7 +12068,7 @@ packages:
       axe-html-reporter: 2.2.11(axe-core@4.10.0)
       junit-report-builder: 5.1.1
       picocolors: 1.1.0
-      playwright: 1.48.0
+      playwright: 1.48.1
     dev: true
 
   /axobject-query@4.1.0:
@@ -14596,8 +14596,8 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.35.1(@neondatabase/serverless@0.10.1)(pg@8.13.0):
-    resolution: {integrity: sha512-HQxDdYuXlZFuvDPztlUIzrX8TqWa/Ej6uN6L0hkbuGL4slexOUMc3u4nXVU15RQ5QYbk+uLQnR6v1+OIrdCTXQ==}
+  /drizzle-orm@0.35.2(@neondatabase/serverless@0.10.1)(pg@8.13.0):
+    resolution: {integrity: sha512-bLQtRchl8QvRo2MyG6kcZC90UDzR7Ubir4YwOHV3cZPdJbF+4jU/Yt0QOczsoXe25wLRt6CtCWLXtSDQKft3yg==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -19996,7 +19996,7 @@ packages:
     resolution: {integrity: sha512-jz+Cfrg9GWOZbQAnDQ4hlVnQky+341Yk5ru8bZSe6sIDTCIg8n9i/u7hSQGSVOF3C7lH6mGtqjkiT9G4wFLL0w==}
     dev: true
 
-  /mermaid-isomorphic@3.0.0(playwright@1.48.0):
+  /mermaid-isomorphic@3.0.0(playwright@1.48.1):
     resolution: {integrity: sha512-6RBUQD0ZWzBHO4KZ8JMK3a/lNL7383N6K4nXzOdA2Ylnhz34qC8Nls2ZgOJVjGuB9Iq1bP61XKE0K/fNOD2n6g==}
     peerDependencies:
       playwright: '1'
@@ -20006,7 +20006,7 @@ packages:
     dependencies:
       '@fortawesome/fontawesome-free': 6.6.0
       mermaid: 11.3.0
-      playwright: 1.48.0
+      playwright: 1.48.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -22403,24 +22403,10 @@ packages:
       sharp: 0.32.6
     dev: true
 
-  /playwright-core@1.48.0:
-    resolution: {integrity: sha512-RBvzjM9rdpP7UUFrQzRwR8L/xR4HyC1QXMzGYTbf1vjw25/ya9NRAVnXi/0fvFopjebvyPzsmoK58xxeEOaVvA==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   /playwright-core@1.48.1:
     resolution: {integrity: sha512-Yw/t4VAFX/bBr1OzwCuOMZkY1Cnb4z/doAFSwf4huqAGWmf9eMNjmK7NiOljCdLmxeRYcGPPmcDgU0zOlzP0YA==}
     engines: {node: '>=18'}
     hasBin: true
-
-  /playwright@1.48.0:
-    resolution: {integrity: sha512-qPqFaMEHuY/ug8o0uteYJSRfMGFikhUysk8ZvAtfKmUK3kc/6oNl/y3EczF8OFGYIi/Ex2HspMfzYArk6+XQSA==}
-    engines: {node: '>=18'}
-    hasBin: true
-    dependencies:
-      playwright-core: 1.48.0
-    optionalDependencies:
-      fsevents: 2.3.2
 
   /playwright@1.48.1:
     resolution: {integrity: sha512-j8CiHW/V6HxmbntOfyB4+T/uk08tBy6ph0MpBXwuoofkSnLmlfdYNNkFTYD6ofzzlSqLA1fwH4vwvVFvJgLN0w==}
@@ -23661,7 +23647,7 @@ packages:
       jsesc: 0.5.0
     dev: true
 
-  /rehype-mermaid@3.0.0(playwright@1.48.0):
+  /rehype-mermaid@3.0.0(playwright@1.48.1):
     resolution: {integrity: sha512-fxrD5E4Fa1WXUjmjNDvLOMT4XB1WaxcfycFIWiYU0yEMQhcTDElc9aDFnbDFRLxG1Cfo1I3mfD5kg4sjlWaB+Q==}
     peerDependencies:
       playwright: '1'
@@ -23672,9 +23658,9 @@ packages:
       '@types/hast': 3.0.4
       hast-util-from-html-isomorphic: 2.0.0
       hast-util-to-text: 4.0.2
-      mermaid-isomorphic: 3.0.0(playwright@1.48.0)
+      mermaid-isomorphic: 3.0.0(playwright@1.48.1)
       mini-svg-data-uri: 1.4.4
-      playwright: 1.48.0
+      playwright: 1.48.1
       space-separated-tokens: 2.0.2
       unified: 11.0.5
       unist-util-visit-parents: 6.0.1
