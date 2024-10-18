@@ -324,7 +324,7 @@ importers:
         version: 3.2.1(react-dom@18.3.1)(react@18.3.1)
       rehype-mermaid:
         specifier: 3.0.0
-        version: 3.0.0(playwright@1.48.0)
+        version: 3.0.0(playwright@1.48.1)
       rehype-pretty-code:
         specifier: 0.14.0
         version: 0.14.0(shiki@1.5.2)
@@ -448,7 +448,7 @@ importers:
         version: 3.0.3
       axe-playwright:
         specifier: 2.0.3
-        version: 2.0.3(playwright@1.48.0)
+        version: 2.0.3(playwright@1.48.1)
       dotenv-cli:
         specifier: 7.4.2
         version: 7.4.2
@@ -583,8 +583,8 @@ importers:
         specifier: 14.2.15
         version: 14.2.15(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.1)(react-dom@18.3.1)(react@18.3.1)
       next-auth:
-        specifier: 5.0.0-beta.22
-        version: 5.0.0-beta.22(next@14.2.15)(react@18.3.1)
+        specifier: 5.0.0-beta.23
+        version: 5.0.0-beta.23(next@14.2.15)(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1165,8 +1165,8 @@ packages:
       preact-render-to-string: 5.2.3(preact@10.11.3)
     dev: false
 
-  /@auth/core@0.35.3:
-    resolution: {integrity: sha512-g6qfiqU4OtyvIEZ8J7UoIwAxEnNnLJV0/f/DW41U+4G5nhBlaCrnKhawJIJpU0D3uavXLeDT3B0BkjtiimvMDA==}
+  /@auth/core@0.37.1:
+    resolution: {integrity: sha512-85PosPEZXHKZhEaAH5DVCig2N1Cu5PC8CbWX03Dw9g1JISLHyrRT0RZRcaWlgmz+0Ua4N52sFRX+g9WARQaUlA==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
       '@simplewebauthn/server': ^9.0.2
@@ -1179,11 +1179,11 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@panva/hkdf': 1.1.1
+      '@panva/hkdf': 1.2.1
       '@types/cookie': 0.6.0
-      cookie: 0.6.0
+      cookie: 0.7.1
       jose: 5.9.4
-      oauth4webapi: 2.10.4
+      oauth4webapi: 3.1.1
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
     dev: false
@@ -6311,6 +6311,10 @@ packages:
 
   /@panva/hkdf@1.1.1:
     resolution: {integrity: sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==}
+    dev: false
+
+  /@panva/hkdf@1.2.1:
+    resolution: {integrity: sha512-6oclG6Y3PiDFcoyk8srjLfVKyMfVCKJ27JwNPViuXziFpmdz+MZnZN/aKY0JGXgYuO/VghU0jcOAZgWXZ1Dmrw==}
     dev: false
 
   /@pkgjs/parseargs@0.11.0:
@@ -12058,7 +12062,7 @@ packages:
       mustache: 4.2.0
     dev: true
 
-  /axe-playwright@2.0.3(playwright@1.48.0):
+  /axe-playwright@2.0.3(playwright@1.48.1):
     resolution: {integrity: sha512-s7iI2okyHHsD3XZK4RMJtTy2UASkNWLQtnzLuaHiK3AWkERf+cqZJqkxb7O4b56fnbib9YnZVRByTl92ME3o6g==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -12068,7 +12072,7 @@ packages:
       axe-html-reporter: 2.2.11(axe-core@4.10.0)
       junit-report-builder: 5.1.1
       picocolors: 1.1.0
-      playwright: 1.48.0
+      playwright: 1.48.1
     dev: true
 
   /axobject-query@4.1.0:
@@ -13375,6 +13379,11 @@ packages:
 
   /cookie@0.6.0:
     resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
+    engines: {node: '>= 0.6'}
+    dev: false
+
+  /cookie@0.7.1:
+    resolution: {integrity: sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w==}
     engines: {node: '>= 0.6'}
     dev: false
 
@@ -19996,7 +20005,7 @@ packages:
     resolution: {integrity: sha512-jz+Cfrg9GWOZbQAnDQ4hlVnQky+341Yk5ru8bZSe6sIDTCIg8n9i/u7hSQGSVOF3C7lH6mGtqjkiT9G4wFLL0w==}
     dev: true
 
-  /mermaid-isomorphic@3.0.0(playwright@1.48.0):
+  /mermaid-isomorphic@3.0.0(playwright@1.48.1):
     resolution: {integrity: sha512-6RBUQD0ZWzBHO4KZ8JMK3a/lNL7383N6K4nXzOdA2Ylnhz34qC8Nls2ZgOJVjGuB9Iq1bP61XKE0K/fNOD2n6g==}
     peerDependencies:
       playwright: '1'
@@ -20006,7 +20015,7 @@ packages:
     dependencies:
       '@fortawesome/fontawesome-free': 6.6.0
       mermaid: 11.3.0
-      playwright: 1.48.0
+      playwright: 1.48.1
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -20849,8 +20858,8 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: true
 
-  /next-auth@5.0.0-beta.22(next@14.2.15)(react@18.3.1):
-    resolution: {integrity: sha512-QGBo9HGOjmnJBHGXvtFztl0tM5tL0porDlk74HVoCCzXd986ApOlIW3EmiCuho7YzEopgkFiwwmcXpoCrHAtYw==}
+  /next-auth@5.0.0-beta.23(next@14.2.15)(react@18.3.1):
+    resolution: {integrity: sha512-LhGiXT1l67gnzqIKN181Tr2D0WbkiUREh7pFjWOFkxWuIwd90QCCMfv/858trvixlfYqRarnfbdLXwiw51sGaA==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
       '@simplewebauthn/server': ^9.0.2
@@ -20865,7 +20874,7 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@auth/core': 0.35.3
+      '@auth/core': 0.37.1
       next: 14.2.15(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.1)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
@@ -21545,6 +21554,10 @@ packages:
 
   /oauth4webapi@2.10.4:
     resolution: {integrity: sha512-DSoj8QoChzOCQlJkRmYxAJCIpnXFW32R0Uq7avyghIeB6iJq0XAblOD7pcq3mx4WEBDwMuKr0Y1qveCBleG2Xw==}
+    dev: false
+
+  /oauth4webapi@3.1.1:
+    resolution: {integrity: sha512-0h4FZjsntbKQ5IHGM9mFT7uOwQCRdcTG7YhC0xXlWIcCch24wUa6Vggaipa3Sw6Ab7nEnmO4rctROmyuHBfP7Q==}
     dev: false
 
   /object-assign@4.1.1:
@@ -22403,24 +22416,10 @@ packages:
       sharp: 0.32.6
     dev: true
 
-  /playwright-core@1.48.0:
-    resolution: {integrity: sha512-RBvzjM9rdpP7UUFrQzRwR8L/xR4HyC1QXMzGYTbf1vjw25/ya9NRAVnXi/0fvFopjebvyPzsmoK58xxeEOaVvA==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   /playwright-core@1.48.1:
     resolution: {integrity: sha512-Yw/t4VAFX/bBr1OzwCuOMZkY1Cnb4z/doAFSwf4huqAGWmf9eMNjmK7NiOljCdLmxeRYcGPPmcDgU0zOlzP0YA==}
     engines: {node: '>=18'}
     hasBin: true
-
-  /playwright@1.48.0:
-    resolution: {integrity: sha512-qPqFaMEHuY/ug8o0uteYJSRfMGFikhUysk8ZvAtfKmUK3kc/6oNl/y3EczF8OFGYIi/Ex2HspMfzYArk6+XQSA==}
-    engines: {node: '>=18'}
-    hasBin: true
-    dependencies:
-      playwright-core: 1.48.0
-    optionalDependencies:
-      fsevents: 2.3.2
 
   /playwright@1.48.1:
     resolution: {integrity: sha512-j8CiHW/V6HxmbntOfyB4+T/uk08tBy6ph0MpBXwuoofkSnLmlfdYNNkFTYD6ofzzlSqLA1fwH4vwvVFvJgLN0w==}
@@ -23661,7 +23660,7 @@ packages:
       jsesc: 0.5.0
     dev: true
 
-  /rehype-mermaid@3.0.0(playwright@1.48.0):
+  /rehype-mermaid@3.0.0(playwright@1.48.1):
     resolution: {integrity: sha512-fxrD5E4Fa1WXUjmjNDvLOMT4XB1WaxcfycFIWiYU0yEMQhcTDElc9aDFnbDFRLxG1Cfo1I3mfD5kg4sjlWaB+Q==}
     peerDependencies:
       playwright: '1'
@@ -23672,9 +23671,9 @@ packages:
       '@types/hast': 3.0.4
       hast-util-from-html-isomorphic: 2.0.0
       hast-util-to-text: 4.0.2
-      mermaid-isomorphic: 3.0.0(playwright@1.48.0)
+      mermaid-isomorphic: 3.0.0(playwright@1.48.1)
       mini-svg-data-uri: 1.4.4
-      playwright: 1.48.0
+      playwright: 1.48.1
       space-separated-tokens: 2.0.2
       unified: 11.0.5
       unist-util-visit-parents: 6.0.1
