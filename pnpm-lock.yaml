@@ -583,8 +583,8 @@ importers:
         specifier: 14.2.15
         version: 14.2.15(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.1)(react-dom@18.3.1)(react@18.3.1)
       next-auth:
-        specifier: 5.0.0-beta.23
-        version: 5.0.0-beta.23(next@14.2.15)(react@18.3.1)
+        specifier: 5.0.0-beta.25
+        version: 5.0.0-beta.25(next@14.2.15)(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1156,7 +1156,7 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@panva/hkdf': 1.1.1
+      '@panva/hkdf': 1.2.1
       '@types/cookie': 0.6.0
       cookie: 0.6.0
       jose: 5.9.4
@@ -1165,8 +1165,8 @@ packages:
       preact-render-to-string: 5.2.3(preact@10.11.3)
     dev: false
 
-  /@auth/core@0.37.1:
-    resolution: {integrity: sha512-85PosPEZXHKZhEaAH5DVCig2N1Cu5PC8CbWX03Dw9g1JISLHyrRT0RZRcaWlgmz+0Ua4N52sFRX+g9WARQaUlA==}
+  /@auth/core@0.37.2:
+    resolution: {integrity: sha512-kUvzyvkcd6h1vpeMAojK2y7+PAV5H+0Cc9+ZlKYDFhDY31AlvsB+GW5vNO4qE3Y07KeQgvNO9U0QUx/fN62kBw==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
       '@simplewebauthn/server': ^9.0.2
@@ -6307,10 +6307,6 @@ packages:
   /@opentelemetry/semantic-conventions@1.17.1:
     resolution: {integrity: sha512-xbR2U+2YjauIuo42qmE8XyJK6dYeRMLJuOlUP5SO4auET4VtOHOzgkRVOq+Ik18N+Xf3YPcqJs9dZMiDddz1eQ==}
     engines: {node: '>=14'}
-    dev: false
-
-  /@panva/hkdf@1.1.1:
-    resolution: {integrity: sha512-dhPeilub1NuIG0X5Kvhh9lH4iW3ZsHlnzwgwbOlgwQ2wG1IqFzsgHqmKPk3WzsdWAeaxKJxgM0+W433RmN45GA==}
     dev: false
 
   /@panva/hkdf@1.2.1:
@@ -20858,8 +20854,8 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: true
 
-  /next-auth@5.0.0-beta.23(next@14.2.15)(react@18.3.1):
-    resolution: {integrity: sha512-LhGiXT1l67gnzqIKN181Tr2D0WbkiUREh7pFjWOFkxWuIwd90QCCMfv/858trvixlfYqRarnfbdLXwiw51sGaA==}
+  /next-auth@5.0.0-beta.25(next@14.2.15)(react@18.3.1):
+    resolution: {integrity: sha512-2dJJw1sHQl2qxCrRk+KTQbeH+izFbGFPuJj5eGgBZFYyiYYtvlrBeUw1E/OJJxTRjuxbSYGnCTkUIRsIIW0bog==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
       '@simplewebauthn/server': ^9.0.2
@@ -20874,7 +20870,7 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@auth/core': 0.37.1
+      '@auth/core': 0.37.2
       next: 14.2.15(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.1)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
