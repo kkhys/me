@@ -728,8 +728,8 @@ importers:
         specifier: 20.17.1
         version: 20.17.1
       rollup-plugin-google-apps-script:
-        specifier: 1.1.14
-        version: 1.1.14(vite@5.4.10)
+        specifier: 2.0.1
+        version: 2.0.1(vite@5.4.10)
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -22285,6 +22285,10 @@ packages:
   /picocolors@1.1.0:
     resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
 
+  /picocolors@1.1.1:
+    resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
+    dev: true
+
   /picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
@@ -24042,8 +24046,8 @@ packages:
     resolution: {integrity: sha512-IXgzBWvWQwE6PrDI05OvmXUIruQTcoMDzRsOd5CDvHCVLcLHMTSYvOK5Cm46kWqlV3yAbuSpBZdJ5oP5OUoStg==}
     dev: false
 
-  /rollup-plugin-google-apps-script@1.1.14(vite@5.4.10):
-    resolution: {integrity: sha512-2pUBov8kVUEPHbmzdFl8x64N9FGiuoEGITlDn+ZeUxJcujosUiylulBKds/FbJ6MTsqHj2hZYPkPBVT/o0cchA==}
+  /rollup-plugin-google-apps-script@2.0.1(vite@5.4.10):
+    resolution: {integrity: sha512-wf2FYPxAV/EJIdr2oEH3az4+HozTFAvSYd0fl7tCAvFJplc1jbMoY+Nvh7Ch/Al57+1K6x00uLBqfLqAdGtUog==}
     peerDependencies:
       rollup: ^3.25.0 || ^4.0.0
       vite: ^4.4.9
@@ -24054,7 +24058,7 @@ packages:
         optional: true
     dependencies:
       gas-entry-generator: 2.6.0
-      picocolors: 1.1.0
+      picocolors: 1.1.1
       rollup-pluginutils: 2.8.2
       vite: 5.4.10(@types/node@20.17.1)
     dev: true
