@@ -324,7 +324,7 @@ importers:
         version: 3.2.1(react-dom@18.3.1)(react@18.3.1)
       rehype-mermaid:
         specifier: 3.0.0
-        version: 3.0.0(playwright@1.48.1)
+        version: 3.0.0(playwright@1.48.2)
       rehype-pretty-code:
         specifier: 0.14.0
         version: 0.14.0(shiki@1.5.2)
@@ -448,7 +448,7 @@ importers:
         version: 3.0.3
       axe-playwright:
         specifier: 2.0.3
-        version: 2.0.3(playwright@1.48.1)
+        version: 2.0.3(playwright@1.48.2)
       dotenv-cli:
         specifier: 7.4.2
         version: 7.4.2
@@ -651,8 +651,8 @@ importers:
         specifier: 3.3.3
         version: 3.3.3
       tsx:
-        specifier: 4.19.1
-        version: 4.19.1
+        specifier: 4.19.2
+        version: 4.19.2
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -12000,7 +12000,7 @@ packages:
       mustache: 4.2.0
     dev: true
 
-  /axe-playwright@2.0.3(playwright@1.48.1):
+  /axe-playwright@2.0.3(playwright@1.48.2):
     resolution: {integrity: sha512-s7iI2okyHHsD3XZK4RMJtTy2UASkNWLQtnzLuaHiK3AWkERf+cqZJqkxb7O4b56fnbib9YnZVRByTl92ME3o6g==}
     peerDependencies:
       playwright: '>1.0.0'
@@ -12010,7 +12010,7 @@ packages:
       axe-html-reporter: 2.2.11(axe-core@4.10.0)
       junit-report-builder: 5.1.1
       picocolors: 1.1.0
-      playwright: 1.48.1
+      playwright: 1.48.2
     dev: true
 
   /axobject-query@4.1.0:
@@ -19952,7 +19952,7 @@ packages:
     resolution: {integrity: sha512-jz+Cfrg9GWOZbQAnDQ4hlVnQky+341Yk5ru8bZSe6sIDTCIg8n9i/u7hSQGSVOF3C7lH6mGtqjkiT9G4wFLL0w==}
     dev: true
 
-  /mermaid-isomorphic@3.0.0(playwright@1.48.1):
+  /mermaid-isomorphic@3.0.0(playwright@1.48.2):
     resolution: {integrity: sha512-6RBUQD0ZWzBHO4KZ8JMK3a/lNL7383N6K4nXzOdA2Ylnhz34qC8Nls2ZgOJVjGuB9Iq1bP61XKE0K/fNOD2n6g==}
     peerDependencies:
       playwright: '1'
@@ -19962,7 +19962,7 @@ packages:
     dependencies:
       '@fortawesome/fontawesome-free': 6.6.0
       mermaid: 11.3.0
-      playwright: 1.48.1
+      playwright: 1.48.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -22368,24 +22368,10 @@ packages:
       sharp: 0.32.6
     dev: true
 
-  /playwright-core@1.48.1:
-    resolution: {integrity: sha512-Yw/t4VAFX/bBr1OzwCuOMZkY1Cnb4z/doAFSwf4huqAGWmf9eMNjmK7NiOljCdLmxeRYcGPPmcDgU0zOlzP0YA==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   /playwright-core@1.48.2:
     resolution: {integrity: sha512-sjjw+qrLFlriJo64du+EK0kJgZzoQPsabGF4lBvsid+3CNIZIYLgnMj9V6JY5VhM2Peh20DJWIVpVljLLnlawA==}
     engines: {node: '>=18'}
     hasBin: true
-
-  /playwright@1.48.1:
-    resolution: {integrity: sha512-j8CiHW/V6HxmbntOfyB4+T/uk08tBy6ph0MpBXwuoofkSnLmlfdYNNkFTYD6ofzzlSqLA1fwH4vwvVFvJgLN0w==}
-    engines: {node: '>=18'}
-    hasBin: true
-    dependencies:
-      playwright-core: 1.48.1
-    optionalDependencies:
-      fsevents: 2.3.2
 
   /playwright@1.48.2:
     resolution: {integrity: sha512-NjYvYgp4BPmiwfe31j4gHLa3J7bD2WiBz8Lk2RoSsmX38SVIARZ18VYjxLjAcDsAhA+F4iSEXTSGgjua0rrlgQ==}
@@ -23625,7 +23611,7 @@ packages:
       jsesc: 0.5.0
     dev: true
 
-  /rehype-mermaid@3.0.0(playwright@1.48.1):
+  /rehype-mermaid@3.0.0(playwright@1.48.2):
     resolution: {integrity: sha512-fxrD5E4Fa1WXUjmjNDvLOMT4XB1WaxcfycFIWiYU0yEMQhcTDElc9aDFnbDFRLxG1Cfo1I3mfD5kg4sjlWaB+Q==}
     peerDependencies:
       playwright: '1'
@@ -23636,9 +23622,9 @@ packages:
       '@types/hast': 3.0.4
       hast-util-from-html-isomorphic: 2.0.0
       hast-util-to-text: 4.0.2
-      mermaid-isomorphic: 3.0.0(playwright@1.48.1)
+      mermaid-isomorphic: 3.0.0(playwright@1.48.2)
       mini-svg-data-uri: 1.4.4
-      playwright: 1.48.1
+      playwright: 1.48.2
       space-separated-tokens: 2.0.2
       unified: 11.0.5
       unist-util-visit-parents: 6.0.1
@@ -25847,8 +25833,8 @@ packages:
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
-  /tsx@4.19.1:
-    resolution: {integrity: sha512-0flMz1lh74BR4wOvBjuh9olbnwqCPc35OOlfyzHba0Dc+QNUeWX/Gq2YTbnwcWPO3BMd8fkzRVrHcsR+a7z7rA==}
+  /tsx@4.19.2:
+    resolution: {integrity: sha512-pOUl6Vo2LUq/bSa8S5q7b91cgNSjctn9ugq/+Mvow99qW6x/UZYwzxy/3NmqoT66eHYfCVvFvACC58UBPFf28g==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
