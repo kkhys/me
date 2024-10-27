@@ -201,6 +201,18 @@ export const searchItems = [
         emoji: '⛵️',
         category: 'Life',
       },
+      {
+        title: 'Vultr + Arch Linux で Mastodon を構築する',
+        href: '/posts/p1ffkqq',
+        emoji: '🦣',
+        category: 'Tech',
+      },
+      {
+        title: 'さよなら、My 自作 PC',
+        href: '/posts/p147sdu',
+        emoji: '🖥️',
+        category: 'Tech',
+      },
     ],
   },
 ] satisfies SearchItem[];
