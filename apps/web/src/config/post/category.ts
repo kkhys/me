@@ -15,11 +15,16 @@ export const categories = [
     slug: 'life',
     emoji: '🕯️',
   },
-  // {
-  //   title: 'Fashion',
-  //   slug: 'fashion',
-  //   emoji: '👗',
-  // },
+  {
+    title: 'Object',
+    slug: 'object',
+    emoji: '📦',
+  },
+  {
+    title: 'Build',
+    slug: 'build',
+    emoji: '🏗️',
+  },
 ] as const;
 
 export const categoryTitles = categories.map(extractTitle);

@@ -6,14 +6,15 @@ import strip from 'strip-markdown';
 import type {
   AllTagsTitle,
   Base,
+  BuildTags,
   Category,
   CategoryTitle,
-  FashionTags,
   LifeTags,
+  ObjectTags,
   Tag,
   TechTags,
 } from '../../config/post';
-import { allTags, categories, lifeTags, techTags } from '../../config/post';
+import { allTags, buildTags, categories, lifeTags, techTags } from '../../config/post';
 /**
  * esbuild does not support module path aliases, so relative paths are used
  *
@@ -109,7 +110,7 @@ export const extractTitle = <T extends Pick<Base, 'title'>>(item: T) => item.tit
  * @throws {NotFoundError} if the tag is not found in the target tag array.
  * @returns True if the tag exists, otherwise false.
  */
-const isExistTag = <T extends TechTags | LifeTags | FashionTags>(targetTag: T, tagTitle: AllTagsTitle) => {
+const isExistTag = <T extends TechTags | LifeTags | ObjectTags | BuildTags>(targetTag: T, tagTitle: AllTagsTitle) => {
   if (!targetTag.map(extractTitle).includes(tagTitle)) throw new NotFoundError(`Tag not found: ${tagTitle}`);
 
   return true;
@@ -146,9 +147,12 @@ export const generateTagObject = (tagTitle: AllTagsTitle, category: CategoryTitl
     case 'Life':
       isExistTag(lifeTags, tagTitle);
       break;
-    // case 'Fashion':
-    //   isExistTag(fashionTags, tagTitle);
+    // case 'Object':
+    //   isExistTag(objectTags, tagTitle);
     //   break;
+    case 'Build':
+      isExistTag(buildTags, tagTitle);
+      break;
   }
 
   const { slug, emoji } = getTagFromTitle(tagTitle);
