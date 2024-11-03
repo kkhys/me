@@ -1,15 +1,14 @@
 import type { Base } from '..';
 import { extractTitle } from '../../../lib/contentlayer/utils';
-import { fashionTags } from './fashion';
-import { lifeTags } from './life';
-import { techTags } from './tech';
+import { buildTags, lifeTags, objectTags, techTags } from '../tag';
 
 export type Tag = Base;
 export type AllTagsTitle = (typeof allTags)[number]['title'];
 
-export const allTags = [...techTags, ...lifeTags, ...fashionTags];
+export const allTags = [...buildTags, ...lifeTags, ...objectTags, ...techTags];
 export const allTagTitles = allTags.map(extractTitle);
 
-export * from './tech';
+export * from './build';
 export * from './life';
-export * from './fashion';
+export * from './object';
+export * from './tech';
