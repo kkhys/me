@@ -55,9 +55,10 @@ export const searchItems = [
       },
       {
         title: 'セイルチェアの肘掛けを交換した',
-        href: '/posts/p16vfnq',
+        href: '/posts/p1vdu33',
         emoji: '💺',
-        category: 'Life',
+        category: 'Build',
+        tags: ['Desk'],
       },
       {
         title: 'v1.5.0 リリースノート: 回遊率とシェア率向上のための施策',
@@ -75,9 +76,10 @@ export const searchItems = [
       },
       {
         title: '人生初の陶芸',
-        href: '/posts/p1ys5j8',
+        href: '/posts/p1v00e8',
         emoji: '🏺',
         category: 'Life',
+        tags: ['Pottery'],
       },
       {
         title: 'v1.6.0 リリースノート: MDX コンポーネントの強化',
@@ -115,15 +117,15 @@ export const searchItems = [
       },
       {
         title: '新しいカメラを買った',
-        href: '/posts/p1a95jw',
+        href: '/posts/p1672pu',
         emoji: '📷',
-        category: 'Life',
+        category: 'Object',
       },
       {
         title: 'デスク構成スナップショット 2024',
-        href: '/posts/p1uchql',
+        href: '/posts/p1v6tlh',
         emoji: '🖥',
-        category: 'Tech',
+        category: 'Object',
       },
       {
         title: 'Noto Emoji を SVG 化する API を作る',
@@ -178,9 +180,9 @@ export const searchItems = [
       },
       {
         title: '技術書にぴったりな文鎮',
-        href: '/posts/p1kc29z',
+        href: '/posts/p1qhr64',
         emoji: '📗',
-        category: 'Tech',
+        category: 'Object',
       },
       {
         title: 'v1.10.0 リリースノート: お問い合わせ機能の追加',
@@ -209,9 +211,9 @@ export const searchItems = [
       },
       {
         title: 'さよなら、My 自作 PC',
-        href: '/posts/p147sdu',
+        href: '/posts/p1ppkfs',
         emoji: '🖥️',
-        category: 'Tech',
+        category: 'Object',
       },
     ],
   },
