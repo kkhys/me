@@ -76,7 +76,7 @@ export const searchItems = [
       },
       {
         title: '人生初の陶芸',
-        href: '/posts/p1v00e8',
+        href: '/posts/p1wcla5',
         emoji: '🏺',
         category: 'Life',
         tags: ['Pottery'],
