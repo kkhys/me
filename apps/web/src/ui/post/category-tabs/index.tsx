@@ -32,6 +32,8 @@ const useCategory = () => {
       case 'all':
       case 'tech':
       case 'life':
+      case 'object':
+      case 'build':
         return categoryParam;
       default:
         return 'notfound';
@@ -70,6 +72,8 @@ export const CategoryTabs = () => {
     .sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)));
   const techPosts = posts.filter((post) => post.category.includes('Tech'));
   const lifePosts = posts.filter((post) => post.category.includes('Life'));
+  const objectPosts = posts.filter((post) => post.category.includes('Object'));
+  const buildPosts = posts.filter((post) => post.category.includes('Build'));
 
   return (
     <Tabs defaultValue={category} onValueChange={handleValueChange} value={category} className='mt-6'>
@@ -83,6 +87,12 @@ export const CategoryTabs = () => {
           </TabsTrigger>
           <TabsTrigger value='life' className='font-sans'>
             Life
+          </TabsTrigger>
+          <TabsTrigger value='object' className='font-sans'>
+            Object
+          </TabsTrigger>
+          <TabsTrigger value='build' className='font-sans'>
+            Build
           </TabsTrigger>
         </TabsList>
         <TooltipProvider>
@@ -116,6 +126,16 @@ export const CategoryTabs = () => {
       <TabsContent value='life'>
         <FadeIn>
           <ArticleList posts={lifePosts} className='mt-8' />
+        </FadeIn>
+      </TabsContent>
+      <TabsContent value='object'>
+        <FadeIn>
+          <ArticleList posts={objectPosts} className='mt-8' />
+        </FadeIn>
+      </TabsContent>
+      <TabsContent value='build'>
+        <FadeIn>
+          <ArticleList posts={buildPosts} className='mt-8' />
         </FadeIn>
       </TabsContent>
       <TabsContent value='notfound'>
