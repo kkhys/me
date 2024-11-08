@@ -2,17 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { BellIcon, CheckIcon } from '@radix-ui/react-icons';
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '.';
-import {
-  Button,
-  Input,
-  Label as MyLabel,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Switch,
-} from '../../';
+import { Button, Input, Label as MyLabel } from '../../';
 
 const meta = {
   title: 'Data Display / Card',
@@ -49,20 +39,6 @@ export const Default = {
               <div className='flex flex-col space-y-1.5'>
                 <MyLabel htmlFor='name'>Name</MyLabel>
                 <Input id='name' placeholder='Name of your project' />
-              </div>
-              <div className='flex flex-col space-y-1.5'>
-                <MyLabel htmlFor='framework'>Framework</MyLabel>
-                <Select>
-                  <SelectTrigger id='framework'>
-                    <SelectValue placeholder='Select' />
-                  </SelectTrigger>
-                  <SelectContent position='popper'>
-                    <SelectItem value='next'>Next.js</SelectItem>
-                    <SelectItem value='sveltekit'>SvelteKit</SelectItem>
-                    <SelectItem value='astro'>Astro</SelectItem>
-                    <SelectItem value='nuxt'>Nuxt.js</SelectItem>
-                  </SelectContent>
-                </Select>
               </div>
             </div>
           </form>
@@ -107,7 +83,6 @@ export const Default2 = {
               <p className='text-sm font-medium leading-none'>Push Notifications</p>
               <p className='text-sm text-muted-foreground'>Send notifications to device.</p>
             </div>
-            <Switch />
           </div>
           <div>
             {notifications.map((notification, index) => (
