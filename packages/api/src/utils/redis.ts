@@ -5,14 +5,20 @@ type SlidingWindowProps = Parameters<typeof Ratelimit.slidingWindow>;
 
 export const redis = Redis.fromEnv();
 
-export const rateLimiter = (tokens: SlidingWindowProps[0], windowValue: SlidingWindowProps[1]) =>
+export const rateLimiter = (
+  tokens: SlidingWindowProps[0],
+  windowValue: SlidingWindowProps[1],
+) =>
   new Ratelimit({
     redis,
     limiter: Ratelimit.slidingWindow(tokens, windowValue),
   });
 
 export const getIpHash = async (ip: string) => {
-  const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(ip));
+  const buffer = await crypto.subtle.digest(
+    'SHA-256',
+    new TextEncoder().encode(ip),
+  );
   return Array.from(new Uint8Array(buffer))
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('');

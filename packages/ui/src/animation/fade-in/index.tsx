@@ -8,7 +8,10 @@ const FadeInStaggerContext = createContext(false);
 
 const viewport = { once: true, margin: '0px 0px -200px' };
 
-export const FadeIn = ({ children, ...props }: React.ComponentPropsWithoutRef<typeof motion.div>) => {
+export const FadeIn = ({
+  children,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof motion.div>) => {
   const shouldReduceMotion = useReducedMotion();
   const isInStaggerGroup = useContext(FadeInStaggerContext);
   const MotionDiv = motion.div;
@@ -38,7 +41,9 @@ export const FadeInStagger = ({
   children,
   faster = false,
   ...props
-}: React.ComponentPropsWithoutRef<typeof motion.div> & { faster?: boolean }) => {
+}: React.ComponentPropsWithoutRef<typeof motion.div> & {
+  faster?: boolean;
+}) => {
   const MotionDiv = motion.div;
 
   return (

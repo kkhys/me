@@ -25,11 +25,16 @@ const ListItem = ({
         <p className='palt'>{title}</p>
       </div>
       {showDate && (
-        <time className='shrink-0 font-sans text-sm tabular-nums text-muted-foreground' dateTime={publishedAt}>
+        <time
+          className='shrink-0 font-sans text-sm tabular-nums text-muted-foreground'
+          dateTime={publishedAt}
+        >
           {publishedAtFormattedIso}
         </time>
       )}
-      {status === 'draft' && <span className='absolute right-0 top-0 h-1 w-2 bg-red-400/80' />}
+      {status === 'draft' && (
+        <span className='absolute right-0 top-0 h-1 w-2 bg-red-400/80' />
+      )}
     </Link>
   );
 };
@@ -43,7 +48,8 @@ export const ArticleList = ({
   className?: string;
   showDate?: boolean;
 }) => {
-  const { next, prev, jump, currentData, currentPage, maxPage } = usePagination(_posts);
+  const { next, prev, jump, currentData, currentPage, maxPage } =
+    usePagination(_posts);
 
   const posts = currentData();
 
@@ -62,7 +68,14 @@ export const ArticleList = ({
         ))}
       </div>
       {maxPage > 1 && (
-        <Pagination className='mt-12' next={next} prev={prev} jump={jump} currentPage={currentPage} maxPage={maxPage} />
+        <Pagination
+          className='mt-12'
+          next={next}
+          prev={prev}
+          jump={jump}
+          currentPage={currentPage}
+          maxPage={maxPage}
+        />
       )}
     </>
   );

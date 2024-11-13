@@ -5,14 +5,19 @@ import * as TooltipStories from './index.stories';
 <Meta of={TooltipStories} name='Overview' />
 <Title />
 <Subtitle>
-  A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers
-  over it.
+  A popup that displays information related to an element when the element
+  receives keyboard focus or the mouse hovers over it.
 </Subtitle>
 <Canvas of={TooltipStories.Default} />
 <Controls of={TooltipStories.Default} />
 
 ```tsx
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '#/ui/data-display';
 import { Button } from '#/ui/general';
 
 export default () => (
@@ -32,7 +37,12 @@ export default () => (
 ## Anatomy
 
 ```tsx
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '#/ui/data-display';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '#/ui/data-display';
 
 export default () => (
   <TooltipProvider>

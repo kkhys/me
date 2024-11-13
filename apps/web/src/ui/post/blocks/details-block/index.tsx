@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@kkhys/ui';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@kkhys/ui';
 
 export const DetailsBlock = ({
   summary,

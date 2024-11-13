@@ -10,9 +10,9 @@ export const size = {
 export const contentType = 'image/png';
 
 const Icon = async () => {
-  const interMedium = await fetch(new URL('../../assets/fonts/Inter-Medium.ttf', import.meta.url)).then((res) =>
-    res.arrayBuffer(),
-  );
+  const interMedium = await fetch(
+    new URL('../../assets/fonts/Inter-Medium.ttf', import.meta.url),
+  ).then((res) => res.arrayBuffer());
 
   return new ImageResponse(
     (

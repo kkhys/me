@@ -16,18 +16,22 @@ const Page = () => {
         <Prose className='font-sans'>
           <FadeIn>
             <p>
-              Passion for hacking. Full-stack developer based in Tokyo. Love to make something and make people happy and
-              surprised.
+              Passion for hacking. Full-stack developer based in Tokyo. Love to
+              make something and make people happy and surprised.
             </p>
           </FadeIn>
           <FadeIn>
             <p>
-              I keep a blog to document my interests and my life. If you are interested, please take a look. Currently,
-              only Japanese articles are available.
+              I keep a blog to document my interests and my life. If you are
+              interested, please take a look. Currently, only Japanese articles
+              are available.
             </p>
           </FadeIn>
           <FadeIn>
-            <Link href={{ pathname: '/posts' }} className='inline-flex items-center'>
+            <Link
+              href={{ pathname: '/posts' }}
+              className='inline-flex items-center'
+            >
               Read blog
               <ArrowRightIcon className='ml-1 size-3.5' />
             </Link>

@@ -35,7 +35,15 @@ The `<Form />` component is a wrapper around the `react-hook-form` library. It p
 ## Anatomy
 
 ```tsx
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '#/ui/data-entry';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '#/ui/data-entry';
 
 export default () => (
   <Form>
@@ -153,7 +161,9 @@ export const ProfileForm = () => {
               <FormControl>
                 <Input placeholder='shadcn' {...field} />
               </FormControl>
-              <FormDescription>This is your public display name.</FormDescription>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

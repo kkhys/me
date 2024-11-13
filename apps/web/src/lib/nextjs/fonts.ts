@@ -1,4 +1,9 @@
-import { Inter, JetBrains_Mono, Newsreader, Noto_Sans_JP } from 'next/font/google';
+import {
+  Inter,
+  JetBrains_Mono,
+  Newsreader,
+  Noto_Sans_JP,
+} from 'next/font/google';
 
 export const notoSansJP = Noto_Sans_JP({
   subsets: ['latin'],
@@ -6,7 +11,12 @@ export const notoSansJP = Noto_Sans_JP({
   weight: ['400', '500'],
 });
 
-export const inter = Inter({ subsets: ['latin'], weight: ['400', '500'], display: 'swap', variable: '--font-inter' });
+export const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const newsreader = Newsreader({
   subsets: ['latin'],

@@ -33,7 +33,12 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
   } = post;
 
   const relatedPosts = fisherYatesShuffle(
-    allPosts.filter((post) => post.status === 'published' && post._id !== id && post.category === category),
+    allPosts.filter(
+      (post) =>
+        post.status === 'published' &&
+        post._id !== id &&
+        post.category === category,
+    ),
   ).slice(0, 5);
 
   return (
@@ -44,20 +49,27 @@ export const ArticleLayout = ({ post }: { post: Post }) => {
           <header>
             <FadeIn className='flex justify-between'>
               <EyeCatch emoji={emoji} />
-              {status === 'draft' && <span className='font-sans text-xs text-red-400'>Draft</span>}
+              {status === 'draft' && (
+                <span className='font-sans text-xs text-red-400'>Draft</span>
+              )}
             </FadeIn>
             <FadeIn>
               <h1 className='palt mt-4 font-medium'>{title}</h1>
             </FadeIn>
             <FadeIn>
               <div className='mt-2 flex items-center justify-between'>
-                <Time publishedAt={publishedAt} publishedAtFormattedUs={publishedAtFormattedUs} />
+                <Time
+                  publishedAt={publishedAt}
+                  publishedAtFormattedUs={publishedAtFormattedUs}
+                />
                 {env.NODE_ENV !== 'development' ? (
                   <Suspense fallback={<ViewCounterSkeleton />}>
                     <ViewCounter slug={slug} />
                   </Suspense>
                 ) : (
-                  <p className='font-sans text-sm text-muted-foreground'>xxx views</p>
+                  <p className='font-sans text-sm text-muted-foreground'>
+                    xxx views
+                  </p>
                 )}
               </div>
             </FadeIn>

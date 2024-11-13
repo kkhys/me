@@ -18,10 +18,19 @@ import {
   beforeRehypePrettyCode,
   rehypePrettyCodeOptions,
 } from './src/lib/mdx/rehype-pretty-code';
-import { linkCardHandler, remarkLinkCard } from './src/lib/mdx/remark-link-card';
+import {
+  linkCardHandler,
+  remarkLinkCard,
+} from './src/lib/mdx/remark-link-card';
 import { remarkNextImage } from './src/lib/mdx/remark-next-image';
-import { remarkTweetEmbed, TweetEmbedHandler } from './src/lib/mdx/remark-tweet-embed';
-import { remarkYouTubeEmbed, YouTubeEmbedHandler } from './src/lib/mdx/remark-youtube-embed';
+import {
+  remarkTweetEmbed,
+  TweetEmbedHandler,
+} from './src/lib/mdx/remark-tweet-embed';
+import {
+  remarkYouTubeEmbed,
+  YouTubeEmbedHandler,
+} from './src/lib/mdx/remark-youtube-embed';
 
 export default makeSource({
   contentDirPath: 'content',

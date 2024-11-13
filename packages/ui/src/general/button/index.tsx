@@ -11,10 +11,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
-        destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-        outline: 'border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground',
-        secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+        default:
+          'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+        destructive:
+          'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+        outline:
+          'border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground',
+        secondary:
+          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
       },
@@ -40,14 +44,28 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, disabled, loading = false, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      disabled,
+      loading = false,
+      asChild = false,
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : 'button';
 
     if (loading) {
       return (
         <div className='inline-block cursor-not-allowed'>
           <Comp
-            className={cn(buttonVariants({ variant, size, className }), 'inline-flex gap-1.5')}
+            className={cn(
+              buttonVariants({ variant, size, className }),
+              'inline-flex gap-1.5',
+            )}
             disabled
             ref={ref}
             {...props}
@@ -62,12 +80,23 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (disabled) {
       return (
         <div className='inline-block cursor-not-allowed'>
-          <Comp className={cn(buttonVariants({ variant, size, className }))} disabled ref={ref} {...props} />
+          <Comp
+            className={cn(buttonVariants({ variant, size, className }))}
+            disabled
+            ref={ref}
+            {...props}
+          />
         </div>
       );
     }
 
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    );
   },
 );
 Button.displayName = 'Button';

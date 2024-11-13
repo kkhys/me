@@ -8,8 +8,13 @@ const config = {
   jsxSingleQuote: true,
   singleQuote: true,
   trailingComma: 'all',
-  plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss'],
-  tailwindConfig: fileURLToPath(new URL('../../tooling/tailwind', import.meta.url)),
+  plugins: [
+    '@ianvs/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss',
+  ],
+  tailwindConfig: fileURLToPath(
+    new URL('../../tooling/tailwind', import.meta.url),
+  ),
   tailwindFunctions: ['cn', 'cva'],
   importOrder: [
     '<TYPES>',

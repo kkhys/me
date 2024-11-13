@@ -16,8 +16,7 @@
     "storybook:build": "turbo storybook:build",
     "storybook:move": "turbo storybook:move --filter=storybook && turbo run storybook:move --filter=!storybook",
     "storybook:start": "http-server storybook-static -p 8080",
-    "test": "turbo test",
-    "prepare": "husky install"
+    "test": "turbo test"
   },
   "packageManager": "pnpm@8.14.1",
   "engines": {
@@ -30,9 +29,6 @@
     "node": "20.18.0"
   },
   "prettier": "@kkhys/prettier-config",
-  "lint-staged": {
-    "**/*": "echo 'lint-staged does not execute anything for now.'"
-  },
   "release": {
     "branches": [
       "main"
@@ -43,8 +39,6 @@
     "@turbo/gen": "2.2.3",
     "@types/node": "20.17.6",
     "http-server": "14.1.1",
-    "husky": "9.1.6",
-    "lint-staged": "15.2.10",
     "prettier": "3.3.3",
     "semantic-release": "24.2.0",
     "semantic-release-cli": "5.4.6",

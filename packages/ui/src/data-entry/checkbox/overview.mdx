@@ -4,7 +4,9 @@ import * as CheckboxStories from './index.stories';
 
 <Meta of={CheckboxStories} name='Overview' />
 <Title />
-<Subtitle>A control that allows the user to toggle between checked and not checked.</Subtitle>
+<Subtitle>
+  A control that allows the user to toggle between checked and not checked.
+</Subtitle>
 <Canvas of={CheckboxStories.Default} />
 <Controls of={CheckboxStories.Default} />
 
@@ -45,7 +47,9 @@ export default () => (
     <Checkbox id='terms' aria-label='Accept terms and conditions' />
     <div className='grid gap-1.5 leading-none'>
       <Label htmlFor='terms'>Accept terms and conditions</Label>
-      <p className='text-sm text-muted-foreground'>You agree to our Terms of Service and Privacy Policy.</p>
+      <p className='text-sm text-muted-foreground'>
+        You agree to our Terms of Service and Privacy Policy.
+      </p>
     </div>
   </div>
 );
@@ -80,7 +84,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { Checkbox, Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '#/ui/data-entry';
+import {
+  Checkbox,
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '#/ui/data-entry';
 import { toast } from '#/ui/feedback';
 import { Button } from '#/ui/general';
 
@@ -115,12 +127,18 @@ export default () => {
           render={({ field }) => (
             <FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow'>
               <FormControl>
-                <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
               </FormControl>
               <div className='space-y-1 leading-none'>
-                <FormLabel>Use different settings for my mobile devices</FormLabel>
+                <FormLabel>
+                  Use different settings for my mobile devices
+                </FormLabel>
                 <FormDescription>
-                  You can manage your mobile notifications in the <Link href='/'>mobile settings</Link> page.
+                  You can manage your mobile notifications in the{' '}
+                  <Link href='/'>mobile settings</Link> page.
                 </FormDescription>
               </div>
             </FormItem>
@@ -216,7 +234,9 @@ export default () => {
             <FormItem>
               <div className='mb-4'>
                 <FormLabel className='text-base'>Sidebar</FormLabel>
-                <FormDescription>Select the items you want to display in the sidebar.</FormDescription>
+                <FormDescription>
+                  Select the items you want to display in the sidebar.
+                </FormDescription>
               </div>
               {items.map((item) => (
                 <FormField
@@ -225,18 +245,27 @@ export default () => {
                   name='items'
                   render={({ field }) => {
                     return (
-                      <FormItem key={item.id} className='flex flex-row items-start space-x-3 space-y-0'>
+                      <FormItem
+                        key={item.id}
+                        className='flex flex-row items-start space-x-3 space-y-0'
+                      >
                         <FormControl>
                           <Checkbox
                             checked={field.value?.includes(item.id)}
                             onCheckedChange={(checked) => {
                               return checked
                                 ? field.onChange([...field.value, item.id])
-                                : field.onChange(field.value?.filter((value) => value !== item.id));
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== item.id,
+                                    ),
+                                  );
                             }}
                           />
                         </FormControl>
-                        <FormLabel className='text-sm font-normal'>{item.label}</FormLabel>
+                        <FormLabel className='text-sm font-normal'>
+                          {item.label}
+                        </FormLabel>
                       </FormItem>
                     );
                   }}

@@ -13,9 +13,11 @@ export const postRouter = {
     });
   }),
 
-  bySlug: publicProcedure.input(z.object({ slug: z.string() })).query(({ ctx, input }) => {
-    return ctx.db.query.posts.findFirst({
-      where: eq(schema.posts.slug, input.slug),
-    });
-  }),
+  bySlug: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.query.posts.findFirst({
+        where: eq(schema.posts.slug, input.slug),
+      });
+    }),
 } satisfies TRPCRouterRecord;

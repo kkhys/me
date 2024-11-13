@@ -1,6 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '.';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '.';
 import { Button, Input, Label } from '../../';
 
 const meta = {
@@ -20,7 +28,8 @@ const meta = {
     },
     open: {
       control: 'boolean',
-      description: 'The controlled open state of the dialog. Must be used in conjunction with `onOpenChange`.',
+      description:
+        'The controlled open state of the dialog. Must be used in conjunction with `onOpenChange`.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -30,7 +39,8 @@ const meta = {
     },
     onOpenChange: {
       action: 'changed',
-      description: 'Event handler called when the open state of the dialog changes.',
+      description:
+        'Event handler called when the open state of the dialog changes.',
       table: {
         category: 'Events',
         type: { summary: 'function', detail: '(open: boolean) => void' },
@@ -71,7 +81,10 @@ export const Default = {
         <DialogContent className='sm:max-w-[425px]'>
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>Make changes to your profile here. Click save when you&apos;re done.</DialogDescription>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you&apos;re
+              done.
+            </DialogDescription>
           </DialogHeader>
           <div className='grid gap-4 py-4'>
             <div className='grid grid-cols-4 items-center gap-4'>
