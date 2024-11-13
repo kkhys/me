@@ -1,1 +1,0 @@
-export { contactMail } from './contact';
