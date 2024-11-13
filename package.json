@@ -5,8 +5,8 @@
   "scripts": {
     "format": "bunx biome format .",
     "format:fix": "bunx biome format --write .",
-    "lint": "biome lint .",
-    "lint:fix": "biome check --write ."
+    "lint": "bunx biome lint .",
+    "lint:fix": "bunx biome check --write ."
   },
   "release": {
     "branches": ["main"]
