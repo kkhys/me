@@ -48,7 +48,10 @@ export const Default = {
   decorators: [
     (Story) => (
       <div className='flex items-center space-x-2'>
-        <Checkbox id='default-checkbox' aria-label='Accept terms and conditionsA' />
+        <Checkbox
+          id='default-checkbox'
+          aria-label='Accept terms and conditionsA'
+        />
         <Story />
       </div>
     ),

@@ -6,7 +6,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { MenuIcon } from 'lucide-react';
 
-import { Button, cn, ScrollArea, Sheet, SheetContent, SheetTrigger } from '@kkhys/ui';
+import {
+  Button,
+  cn,
+  ScrollArea,
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from '@kkhys/ui';
 
 import { categories } from '#/config/post';
 import { Icons } from '#/ui/global';
@@ -54,7 +61,11 @@ export const MobileNavigation = () => {
         </Button>
       </SheetTrigger>
       <SheetContent side='left' className='pr-0'>
-        <MobileLink href='/' className='flex items-center' onOpenChange={setOpen}>
+        <MobileLink
+          href='/'
+          className='flex items-center'
+          onOpenChange={setOpen}
+        >
           <Icons.logo className='mr-2 size-5 rounded-md' />
           <span className='sr-only'>Keisuke Hayashi</span>
         </MobileLink>
@@ -62,7 +73,11 @@ export const MobileNavigation = () => {
           <div className='flex flex-col space-y-2'>
             <div className='flex flex-col space-y-3 pt-6'>
               <h4 className='font-sans font-medium'>Blog</h4>
-              <MobileLink href='/posts' className='font-sans text-muted-foreground' onOpenChange={setOpen}>
+              <MobileLink
+                href='/posts'
+                className='font-sans text-muted-foreground'
+                onOpenChange={setOpen}
+              >
                 All Posts
               </MobileLink>
               {categories.map((category) => (

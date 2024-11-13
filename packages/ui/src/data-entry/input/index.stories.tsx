@@ -35,7 +35,8 @@ const meta = {
     },
     disabled: {
       control: 'boolean',
-      description: 'When true, prevents the user from interacting with the checkbox.',
+      description:
+        'When true, prevents the user from interacting with the checkbox.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -154,7 +155,10 @@ export const FormDemo = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='w-[400px] space-y-6'>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='w-[400px] space-y-6'
+      >
         <FormField
           control={form.control}
           name='username'
@@ -164,7 +168,9 @@ export const FormDemo = () => {
               <FormControl>
                 <Input placeholder='shadcn' {...field} />
               </FormControl>
-              <FormDescription>This is your public display name.</FormDescription>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

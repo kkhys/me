@@ -85,10 +85,14 @@ export const ContactForm = ({ className }: { className?: string }) => {
   const { mutateAsync } = api.contact.send.useMutation({
     onError: (error) => {
       if (error.data?.customErrorName === 'EmailError') {
-        toast.error('お問い合わせを受け付けましたが、メールの送信に失敗しました。');
+        toast.error(
+          'お問い合わせを受け付けましたが、メールの送信に失敗しました。',
+        );
         form.reset();
       } else if (error.data?.code === 'TOO_MANY_REQUESTS') {
-        toast.error('お問い合わせの送信回数が上限に達しました。しばらくしてから再度お試しください。');
+        toast.error(
+          'お問い合わせの送信回数が上限に達しました。しばらくしてから再度お試しください。',
+        );
       } else {
         toast.error('お問い合わせの送信に失敗しました。');
       }
@@ -98,7 +102,9 @@ export const ContactForm = ({ className }: { className?: string }) => {
   const handleReCaptchaVerify = async () => {
     if (!executeRecaptcha) {
       console.error('Execute recaptcha not yet available');
-      toast.error('reCAPTCHA が利用できません。しばらくしてから再度お試しください。');
+      toast.error(
+        'reCAPTCHA が利用できません。しばらくしてから再度お試しください。',
+      );
       return;
     }
 
@@ -110,7 +116,9 @@ export const ContactForm = ({ className }: { className?: string }) => {
 
     if (!recaptchaToken) {
       console.error('Recaptcha token not available');
-      toast.error('reCAPTCHA が利用できません。しばらくしてから再度お試しください。');
+      toast.error(
+        'reCAPTCHA が利用できません。しばらくしてから再度お試しください。',
+      );
       return;
     }
 
@@ -123,7 +131,10 @@ export const ContactForm = ({ className }: { className?: string }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={cn('space-y-8', className)}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={cn('space-y-8', className)}
+      >
         <FormField
           control={form.control}
           name='name'
@@ -131,7 +142,13 @@ export const ContactForm = ({ className }: { className?: string }) => {
             <FormItem>
               <FormLabel required>名前</FormLabel>
               <FormControl>
-                <Input autoComplete='name' autoCapitalize='off' spellCheck={false} required {...field} />
+                <Input
+                  autoComplete='name'
+                  autoCapitalize='off'
+                  spellCheck={false}
+                  required
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -171,7 +188,10 @@ export const ContactForm = ({ className }: { className?: string }) => {
                   className='flex flex-col space-y-2'
                 >
                   {typeOptions.map(({ value, label }) => (
-                    <FormItem key={value} className='flex items-center space-x-3 space-y-0'>
+                    <FormItem
+                      key={value}
+                      className='flex items-center space-x-3 space-y-0'
+                    >
                       <FormControl>
                         <RadioGroupItem value={value} />
                       </FormControl>
@@ -191,7 +211,14 @@ export const ContactForm = ({ className }: { className?: string }) => {
             <FormItem>
               <FormLabel required>お問い合わせ内容</FormLabel>
               <FormControl>
-                <Textarea autoComplete='off' autoCapitalize='off' spellCheck={false} required rows={6} {...field} />
+                <Textarea
+                  autoComplete='off'
+                  autoCapitalize='off'
+                  spellCheck={false}
+                  required
+                  rows={6}
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
               <FormDescription>
@@ -208,10 +235,15 @@ export const ContactForm = ({ className }: { className?: string }) => {
           render={({ field }) => (
             <FormItem className='flex flex-row items-start space-x-3 space-y-0'>
               <FormControl>
-                <Checkbox checked={Boolean(field.value)} onCheckedChange={field.onChange} />
+                <Checkbox
+                  checked={Boolean(field.value)}
+                  onCheckedChange={field.onChange}
+                />
               </FormControl>
               <div className='space-y-1 leading-none'>
-                <FormLabel className='block'>入力したメールアドレス宛に回答のコピーを送信する</FormLabel>
+                <FormLabel className='block'>
+                  入力したメールアドレス宛に回答のコピーを送信する
+                </FormLabel>
               </div>
             </FormItem>
           )}
@@ -221,11 +253,19 @@ export const ContactForm = ({ className }: { className?: string }) => {
           <div className='prose dark:prose-invert'>
             <p className='mt-3 text-xs text-muted-foreground'>
               このサイトは reCAPTCHA によって保護されており、
-              <a href='https://policies.google.com/privacy' target='_blank' rel='noopener noreferrer'>
+              <a
+                href='https://policies.google.com/privacy'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 Google プライバシーポリシー
               </a>
               と
-              <a href='https://policies.google.com/terms' target='_blank' rel='noopener noreferrer'>
+              <a
+                href='https://policies.google.com/terms'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 利用規約
               </a>
               が適用されます。

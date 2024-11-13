@@ -4,7 +4,13 @@ type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
   logo: (props: IconProps) => (
-    <svg xmlns='http://www.w3.org/2000/svg' width='256' height='256' viewBox='0 0 256 256' {...props}>
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width='256'
+      height='256'
+      viewBox='0 0 256 256'
+      {...props}
+    >
       <rect x='0' y='0' width='256' height='256' className='fill-foreground' />
       <path
         className='fill-background-lighter'

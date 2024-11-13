@@ -6,7 +6,15 @@ import * as React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, cn } from '@kkhys/ui';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  cn,
+} from '@kkhys/ui';
 
 import { EyeCatch } from '#/ui/post';
 
@@ -24,20 +32,30 @@ const ArticleCard = ({ post }: { post: Post }) => {
       <Card className='flex h-full flex-col justify-between'>
         <CardHeader className='flex flex-row justify-between'>
           <EyeCatch emoji={emoji} />
-          {status === 'draft' && <span className='!m-0 font-sans text-xs text-red-400'>Draft</span>}
+          {status === 'draft' && (
+            <span className='!m-0 font-sans text-xs text-red-400'>Draft</span>
+          )}
         </CardHeader>
         <CardContent>
           <CardTitle>{title}</CardTitle>
         </CardContent>
         <CardFooter>
-          <CardDescription className='font-sans'>{publishedAtFormattedUs}</CardDescription>
+          <CardDescription className='font-sans'>
+            {publishedAtFormattedUs}
+          </CardDescription>
         </CardFooter>
       </Card>
     </MotionLink>
   );
 };
 
-export const ArticleCards = ({ posts, className }: { posts: Post[]; className?: string }) => {
+export const ArticleCards = ({
+  posts,
+  className,
+}: {
+  posts: Post[];
+  className?: string;
+}) => {
   if (!posts.length)
     return (
       <div className={className}>
@@ -46,7 +64,12 @@ export const ArticleCards = ({ posts, className }: { posts: Post[]; className?: 
     );
 
   return (
-    <div className={cn('grid grid-cols-2 gap-3 xl:grid-cols-3 xl:gap-4', className)}>
+    <div
+      className={cn(
+        'grid grid-cols-2 gap-3 xl:grid-cols-3 xl:gap-4',
+        className,
+      )}
+    >
       {posts.map((post) => (
         <ArticleCard key={post._id} post={post} />
       ))}

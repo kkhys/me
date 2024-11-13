@@ -56,7 +56,9 @@ export const JsonLd = ({ post }: { post: Post }) => {
   return (
     <script
       type='application/ld+json'
-      dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLdBlogPosting, jsonLdBreadcrumbList]) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify([jsonLdBlogPosting, jsonLdBreadcrumbList]),
+      }}
     />
   );
 };

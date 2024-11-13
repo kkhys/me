@@ -1,7 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '.';
-import { Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Input, Label } from '../../';
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Input,
+  Label,
+} from '../../';
 
 const meta = {
   title: 'Data Display / Tabs',
@@ -33,7 +43,8 @@ const meta = {
     },
     value: {
       control: 'radio',
-      description: 'The controlled value of the tab to activate. Should be used in conjunction with `onValueChange`.',
+      description:
+        'The controlled value of the tab to activate. Should be used in conjunction with `onValueChange`.',
       options: ['account', 'password'],
       table: {
         type: { summary: 'string' },
@@ -58,7 +69,10 @@ const meta = {
       options: ['horizontal', 'vertical', 'undefined'],
       table: {
         defaultValue: { summary: 'horizontal' },
-        type: { summary: 'enum', detail: '"horizontal" | "vertical" | "undefined"' },
+        type: {
+          summary: 'enum',
+          detail: '"horizontal" | "vertical" | "undefined"',
+        },
       },
       type: {
         name: 'enum',
@@ -122,7 +136,10 @@ export const Default = {
           <Card>
             <CardHeader>
               <CardTitle>Account</CardTitle>
-              <CardDescription>Make changes to your account here. Click save when you&apos;re done.</CardDescription>
+              <CardDescription>
+                Make changes to your account here. Click save when you&apos;re
+                done.
+              </CardDescription>
             </CardHeader>
             <CardContent className='space-y-2'>
               <div className='space-y-1'>
@@ -143,7 +160,10 @@ export const Default = {
           <Card>
             <CardHeader>
               <CardTitle>Password</CardTitle>
-              <CardDescription>Change your password here. After saving, you&apos;ll be logged out.</CardDescription>
+              <CardDescription>
+                Change your password here. After saving, you&apos;ll be logged
+                out.
+              </CardDescription>
             </CardHeader>
             <CardContent className='space-y-2'>
               <div className='space-y-1'>

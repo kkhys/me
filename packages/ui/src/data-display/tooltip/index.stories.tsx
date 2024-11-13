@@ -20,7 +20,8 @@ const meta = {
     },
     open: {
       control: 'boolean',
-      description: 'The controlled open state of the tooltip. Must be used in conjunction with `onOpenChange`.',
+      description:
+        'The controlled open state of the tooltip. Must be used in conjunction with `onOpenChange`.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -30,7 +31,8 @@ const meta = {
     },
     onOpenChange: {
       action: 'changed',
-      description: 'Event handler called when the open state of the tooltip changes.',
+      description:
+        'Event handler called when the open state of the tooltip changes.',
       table: {
         type: { summary: 'function', detail: '(open: boolean) => void' },
       },
@@ -40,7 +42,8 @@ const meta = {
     },
     delayDuration: {
       control: 'number',
-      description: 'Override the duration given to the `Provider` to customise the open delay for a specific tooltip.',
+      description:
+        'Override the duration given to the `Provider` to customise the open delay for a specific tooltip.',
       table: {
         defaultValue: { summary: '700' },
         type: { summary: 'number' },

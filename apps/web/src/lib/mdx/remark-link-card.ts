@@ -37,7 +37,9 @@ const fetchMeta = async (url: string) => {
 };
 
 const getImage = async (src: string) => {
-  const buffer = await fetch(src).then(async (res) => Buffer.from(await res.arrayBuffer()));
+  const buffer = await fetch(src).then(async (res) =>
+    Buffer.from(await res.arrayBuffer()),
+  );
 
   const {
     metadata: { height, width },

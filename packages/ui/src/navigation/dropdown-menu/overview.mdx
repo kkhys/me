@@ -4,7 +4,10 @@ import * as DropdownMenuStories from './index.stories';
 
 <Meta of={DropdownMenuStories} name='Overview' />
 <Title />
-<Subtitle>Displays a menu to the user — such as a set of actions or functions — triggered by a button.</Subtitle>
+<Subtitle>
+  Displays a menu to the user — such as a set of actions or functions —
+  triggered by a button.
+</Subtitle>
 <Canvas of={DropdownMenuStories.Default} />
 <Controls of={DropdownMenuStories.Default} />
 
@@ -145,13 +148,23 @@ export default () => {
       <DropdownMenuContent className='w-56'>
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
+        <DropdownMenuCheckboxItem
+          checked={showStatusBar}
+          onCheckedChange={setShowStatusBar}
+        >
           Status Bar
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={showActivityBar} onCheckedChange={setShowActivityBar} disabled>
+        <DropdownMenuCheckboxItem
+          checked={showActivityBar}
+          onCheckedChange={setShowActivityBar}
+          disabled
+        >
           Activity Bar
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={showPanel} onCheckedChange={setShowPanel}>
+        <DropdownMenuCheckboxItem
+          checked={showPanel}
+          onCheckedChange={setShowPanel}
+        >
           Panel
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>

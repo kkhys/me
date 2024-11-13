@@ -9,7 +9,12 @@ import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from '@kkhys/ui';
 
 import { me, site } from '#/config';
-import { inter, jetBrainsMono, newsreader, notoSansJP } from '#/lib/nextjs/fonts';
+import {
+  inter,
+  jetBrainsMono,
+  newsreader,
+  notoSansJP,
+} from '#/lib/nextjs/fonts';
 import { Providers } from '#/providers';
 import { Layout } from '#/ui/global';
 

@@ -13,7 +13,10 @@ interface TweetEmbed extends Parent, Resource {
 }
 
 const extractTweetId = (url: string) => {
-  const matched = /^https?:\/\/(www\.)?(twitter|x).com\/\w{1,15}\/status\/(?<tweetId>\d+)/.exec(url);
+  const matched =
+    /^https?:\/\/(www\.)?(twitter|x).com\/\w{1,15}\/status\/(?<tweetId>\d+)/.exec(
+      url,
+    );
   return matched?.groups?.tweetId ?? null;
 };
 

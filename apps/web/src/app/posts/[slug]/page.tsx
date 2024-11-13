@@ -17,14 +17,24 @@ import { Suspense } from 'react';
  * @returns The post object matching the given slug, or undefined if not found.
  */
 const getPostBySlug = (slug: string) =>
-  allPosts.find((post) => (env.NODE_ENV === 'development' || post.status === 'published') && post.slug === slug);
+  allPosts.find(
+    (post) =>
+      (env.NODE_ENV === 'development' || post.status === 'published') &&
+      post.slug === slug,
+  );
 
 export const generateStaticParams = () =>
   allPosts
-    .filter((post) => env.NODE_ENV === 'development' || post.status === 'published')
+    .filter(
+      (post) => env.NODE_ENV === 'development' || post.status === 'published',
+    )
     .map(({ slug }) => ({ slug }));
 
-export const generateMetadata = ({ params: { slug } }: { params: { slug: string } }) => {
+export const generateMetadata = ({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) => {
   const post = getPostBySlug(slug);
   if (!post) return {};
   const { title, excerpt, publishedAt, updatedAt } = post;

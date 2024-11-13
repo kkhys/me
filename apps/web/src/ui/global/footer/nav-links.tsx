@@ -4,7 +4,11 @@ import type { Route } from 'next';
 import type { LinkProps } from 'next/link';
 import * as React from 'react';
 import Link from 'next/link';
-import { ArrowTopRightIcon, DotsHorizontalIcon, HomeIcon } from '@radix-ui/react-icons';
+import {
+  ArrowTopRightIcon,
+  DotsHorizontalIcon,
+  HomeIcon,
+} from '@radix-ui/react-icons';
 
 import {
   Button,

@@ -13,10 +13,12 @@ export const rehypePrettyCodeOptions = {
   onVisitLine(node) {
     visit(node, 'element', (node) => {
       if (!isElement(node, ['span'])) return;
-      if (node.children.length === 0) node.children = [{ type: 'text', value: ' ' }];
+      if (node.children.length === 0)
+        node.children = [{ type: 'text', value: ' ' }];
       const codeTextElement = node.children[0] as unknown as Element;
       if (!isElement(codeTextElement, ['span'])) return;
-      if (codeTextElement.children.length === 0) node.children = [{ type: 'text', value: ' ' }];
+      if (codeTextElement.children.length === 0)
+        node.children = [{ type: 'text', value: ' ' }];
     });
   },
 } satisfies Options;
@@ -39,7 +41,9 @@ export const afterRehypePrettyCode = () => {
       if (!isElement(node, ['figure'])) return;
       if (!hasProperty(node, 'data-rehype-pretty-code-figure')) return;
       node.children.forEach((child) =>
-        isElement(child, 'pre') ? (child.properties.__rawString__ = node.__rawString__) : null,
+        isElement(child, 'pre')
+          ? (child.properties.__rawString__ = node.__rawString__)
+          : null,
       );
     });
   };

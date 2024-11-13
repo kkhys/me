@@ -6,7 +6,9 @@ import { env as authEnv } from '@kkhys/auth/env';
 export const env = createEnv({
   extends: [authEnv],
   shared: {
-    NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+    NODE_ENV: z
+      .enum(['development', 'production', 'test'])
+      .default('development'),
     CI: z.boolean().default(false),
   },
   server: {
@@ -21,5 +23,8 @@ export const env = createEnv({
     CI: process.env.CI,
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
   },
-  skipValidation: !!process.env.CI || !!process.env.SKIP_ENV_VALIDATION || process.env.npm_lifecycle_event === 'lint',
+  skipValidation:
+    !!process.env.CI ||
+    !!process.env.SKIP_ENV_VALIDATION ||
+    process.env.npm_lifecycle_event === 'lint',
 });

@@ -14,7 +14,13 @@ import type {
   Tag,
   TechTags,
 } from '../../config/post';
-import { allTags, buildTags, categories, lifeTags, techTags } from '../../config/post';
+import {
+  allTags,
+  buildTags,
+  categories,
+  lifeTags,
+  techTags,
+} from '../../config/post';
 /**
  * esbuild does not support module path aliases, so relative paths are used
  *
@@ -35,7 +41,10 @@ export const generateSlug = (data: crypto.BinaryLike) => {
   const slugLength = 7;
   const prefix = 'p';
 
-  const hashValue = crypto.createHash(hashAlgorithm).update(data).digest(encoding);
+  const hashValue = crypto
+    .createHash(hashAlgorithm)
+    .update(data)
+    .digest(encoding);
   const buffer = Buffer.from(hashValue, encoding);
   const words = bech32m.toWords(buffer);
 
@@ -100,7 +109,8 @@ const getTagFromTitle = (title: AllTagsTitle) => {
  * @param item - The object from which to extract the 'title'.
  * @return The value of the 'title' property.
  */
-export const extractTitle = <T extends Pick<Base, 'title'>>(item: T) => item.title;
+export const extractTitle = <T extends Pick<Base, 'title'>>(item: T) =>
+  item.title;
 
 /**
  * Checks if a specific tag exists in a given target tag array.
@@ -110,8 +120,12 @@ export const extractTitle = <T extends Pick<Base, 'title'>>(item: T) => item.tit
  * @throws {NotFoundError} if the tag is not found in the target tag array.
  * @returns True if the tag exists, otherwise false.
  */
-const isExistTag = <T extends TechTags | LifeTags | ObjectTags | BuildTags>(targetTag: T, tagTitle: AllTagsTitle) => {
-  if (!targetTag.map(extractTitle).includes(tagTitle)) throw new NotFoundError(`Tag not found: ${tagTitle}`);
+const isExistTag = <T extends TechTags | LifeTags | ObjectTags | BuildTags>(
+  targetTag: T,
+  tagTitle: AllTagsTitle,
+) => {
+  if (!targetTag.map(extractTitle).includes(tagTitle))
+    throw new NotFoundError(`Tag not found: ${tagTitle}`);
 
   return true;
 };
@@ -139,7 +153,10 @@ export const generateCategoryObject = (title: CategoryTitle) => {
  * @param category - The category of the tag.
  * @returns The generated tag object.
  */
-export const generateTagObject = (tagTitle: AllTagsTitle, category: CategoryTitle) => {
+export const generateTagObject = (
+  tagTitle: AllTagsTitle,
+  category: CategoryTitle,
+) => {
   switch (category) {
     case 'Tech':
       isExistTag(techTags, tagTitle);

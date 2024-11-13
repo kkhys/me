@@ -29,7 +29,8 @@ const meta = {
     },
     open: {
       control: 'boolean',
-      description: 'The controlled open state of the dialog. Must be used in conjunction with `onOpenChange`.',
+      description:
+        'The controlled open state of the dialog. Must be used in conjunction with `onOpenChange`.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -39,7 +40,8 @@ const meta = {
     },
     onOpenChange: {
       action: 'changed',
-      description: 'Event handler called when the open state of the dialog changes.',
+      description:
+        'Event handler called when the open state of the dialog changes.',
       table: {
         category: 'Events',
         type: { summary: 'function', detail: '(open: boolean) => void' },
@@ -81,7 +83,10 @@ export const Default = {
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Edit profile</SheetTitle>
-            <SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>
+            <SheetDescription>
+              Make changes to your profile here. Click save when you&apos;re
+              done.
+            </SheetDescription>
           </SheetHeader>
           <div className='grid gap-4 py-4'>
             <div className='grid grid-cols-4 items-center gap-4'>
@@ -121,7 +126,10 @@ const SideDemo = () => {
           <SheetContent side={side}>
             <SheetHeader>
               <SheetTitle>Edit profile</SheetTitle>
-              <SheetDescription>Make changes to your profile here. Click save when you&apos;re done.</SheetDescription>
+              <SheetDescription>
+                Make changes to your profile here. Click save when you&apos;re
+                done.
+              </SheetDescription>
             </SheetHeader>
             <div className='grid gap-4 py-4'>
               <div className='grid grid-cols-4 items-center gap-4'>

@@ -1,7 +1,8 @@
 import { dirname, join } from 'path';
 import type { StorybookConfig } from '@storybook/react-vite';
 
-const getAbsolutePath = (value: string): any => dirname(require.resolve(join(value, 'package.json')));
+const getAbsolutePath = (value: string): any =>
+  dirname(require.resolve(join(value, 'package.json')));
 
 const config = {
   stories: ['../src/**/overview.mdx', '../src/**/*.stories.@(ts|tsx|mdx)'],

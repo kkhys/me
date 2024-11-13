@@ -35,20 +35,42 @@ import {
 } from '#/ui/post';
 
 const components = {
-  h2: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof HeaderWithAnchor>, 'level'>) => (
+  h2: ({
+    children,
+    ...props
+  }: Omit<
+    React.ComponentPropsWithoutRef<typeof HeaderWithAnchor>,
+    'level'
+  >) => (
     <HeaderWithAnchor level={2} {...props}>
       {children}
     </HeaderWithAnchor>
   ),
-  h3: ({ children, ...props }: Omit<React.ComponentPropsWithoutRef<typeof HeaderWithAnchor>, 'level'>) => (
+  h3: ({
+    children,
+    ...props
+  }: Omit<
+    React.ComponentPropsWithoutRef<typeof HeaderWithAnchor>,
+    'level'
+  >) => (
     <HeaderWithAnchor level={3} {...props}>
       {children}
     </HeaderWithAnchor>
   ),
-  a: ({ children, href = '', ...props }: React.ComponentPropsWithoutRef<'a'>) => {
+  a: ({
+    children,
+    href = '',
+    ...props
+  }: React.ComponentPropsWithoutRef<'a'>) => {
     if (href.startsWith('http')) {
       return (
-        <a href={href} target='_blank' rel='noopener noreferrer' className='inline-flex items-center' {...props}>
+        <a
+          href={href}
+          target='_blank'
+          rel='noopener noreferrer'
+          className='inline-flex items-center'
+          {...props}
+        >
           {children}
           <ArrowTopRightIcon className='ml-0.5 size-3' />
         </a>
@@ -61,18 +83,44 @@ const components = {
       </Link>
     );
   },
-  figure: ({ children, ...props }) => <CodeBlock {...props}>{children}</CodeBlock>,
-  img: (props: React.ComponentPropsWithoutRef<typeof ImageBlock>) => <ImageBlock {...props} />,
-  svg: ({ children, ...props }) => <MermaidBlock {...props}>{children}</MermaidBlock>,
-  'link-card': (props: React.ComponentPropsWithoutRef<typeof LinkCardBlock>) => <LinkCardBlock {...props} />,
-  'youtube-embed': (props: React.ComponentPropsWithoutRef<typeof YouTubeBlock>) => <YouTubeBlock {...props} />,
-  'tweet-embed': (props: React.ComponentPropsWithoutRef<typeof TweetBlock>) => <TweetBlock {...props} />,
-  GoogleMaps: (props: React.ComponentPropsWithoutRef<typeof GoogleMapsBlock>) => <GoogleMapsBlock {...props} />,
-  Tabs,
-  TabsList: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof TabsList>) => (
-    <TabsList className={cn('w-full justify-start rounded-none border-b bg-transparent p-0', className)} {...props} />
+  figure: ({ children, ...props }) => (
+    <CodeBlock {...props}>{children}</CodeBlock>
   ),
-  TabsTrigger: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof TabsTrigger>) => (
+  img: (props: React.ComponentPropsWithoutRef<typeof ImageBlock>) => (
+    <ImageBlock {...props} />
+  ),
+  svg: ({ children, ...props }) => (
+    <MermaidBlock {...props}>{children}</MermaidBlock>
+  ),
+  'link-card': (
+    props: React.ComponentPropsWithoutRef<typeof LinkCardBlock>,
+  ) => <LinkCardBlock {...props} />,
+  'youtube-embed': (
+    props: React.ComponentPropsWithoutRef<typeof YouTubeBlock>,
+  ) => <YouTubeBlock {...props} />,
+  'tweet-embed': (props: React.ComponentPropsWithoutRef<typeof TweetBlock>) => (
+    <TweetBlock {...props} />
+  ),
+  GoogleMaps: (
+    props: React.ComponentPropsWithoutRef<typeof GoogleMapsBlock>,
+  ) => <GoogleMapsBlock {...props} />,
+  Tabs,
+  TabsList: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof TabsList>) => (
+    <TabsList
+      className={cn(
+        'w-full justify-start rounded-none border-b bg-transparent p-0',
+        className,
+      )}
+      {...props}
+    />
+  ),
+  TabsTrigger: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof TabsTrigger>) => (
     <TabsTrigger
       className={cn(
         'relative h-9 rounded-none border-b border-b-transparent bg-transparent px-4 pb-3 pt-2 text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:bg-background-lighter data-[state=active]:text-foreground data-[state=active]:shadow-none',
@@ -81,32 +129,71 @@ const components = {
       {...props}
     />
   ),
-  TabsContent: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof TabsContent>) => (
-    <TabsContent className={cn('mt-4 first:[&>*]:mt-0 last:[&>*]:mb-0', className)} {...props} />
+  TabsContent: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof TabsContent>) => (
+    <TabsContent
+      className={cn('mt-4 first:[&>*]:mt-0 last:[&>*]:mb-0', className)}
+      {...props}
+    />
   ),
-  Accordion: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof Accordion>) => (
+  Accordion: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof Accordion>) => (
     <Accordion className={cn('border-t', className)} {...props} />
   ),
-  AccordionContent: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof AccordionContent>) => (
-    <AccordionContent className={cn('first:[&>div>*]:mt-0 last:[&>div>*]:mb-0', className)} {...props} />
+  AccordionContent: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof AccordionContent>) => (
+    <AccordionContent
+      className={cn('first:[&>div>*]:mt-0 last:[&>div>*]:mb-0', className)}
+      {...props}
+    />
   ),
-  AccordionItem: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof AccordionItem>) => (
+  AccordionItem: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof AccordionItem>) => (
     <AccordionItem className={cn('[&>h3]:m-0', className)} {...props} />
   ),
-  AccordionTrigger: ({ className, ...props }: React.ComponentPropsWithoutRef<typeof AccordionTrigger>) => (
+  AccordionTrigger: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof AccordionTrigger>) => (
     <AccordionTrigger className={cn('[&>p]:m-0', className)} {...props} />
   ),
-  Details: ({ children, ...props }: React.ComponentPropsWithoutRef<typeof DetailsBlock>) => (
+  Details: ({
+    children,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof DetailsBlock>) => (
     <DetailsBlock {...props}>{children}</DetailsBlock>
   ),
-  Alert: (props: React.ComponentPropsWithoutRef<typeof AlertBlock>) => <AlertBlock {...props} />,
-  Step: (props: React.ComponentPropsWithoutRef<typeof StepBlock>) => <StepBlock {...props} />,
-  Steps: (props: React.ComponentPropsWithoutRef<typeof StepsBlock>) => <StepsBlock {...props} />,
-  section: ({ children, ...props }: React.ComponentPropsWithoutRef<'section'> & { 'data-footnotes'?: boolean }) => {
-    if (typeof props['data-footnotes'] === 'undefined') return <section {...props} />;
+  Alert: (props: React.ComponentPropsWithoutRef<typeof AlertBlock>) => (
+    <AlertBlock {...props} />
+  ),
+  Step: (props: React.ComponentPropsWithoutRef<typeof StepBlock>) => (
+    <StepBlock {...props} />
+  ),
+  Steps: (props: React.ComponentPropsWithoutRef<typeof StepsBlock>) => (
+    <StepsBlock {...props} />
+  ),
+  section: ({
+    children,
+    ...props
+  }: React.ComponentPropsWithoutRef<'section'> & {
+    'data-footnotes'?: boolean;
+  }) => {
+    if (typeof props['data-footnotes'] === 'undefined')
+      return <section {...props} />;
     return <FootnotesBlock>{children}</FootnotesBlock>;
   },
-  Carousel: ({ children, ...props }: React.ComponentPropsWithoutRef<typeof CarouselBlock>) => (
+  Carousel: ({
+    children,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof CarouselBlock>) => (
     <CarouselBlock {...props}>{children}</CarouselBlock>
   ),
 } satisfies MDXComponents;

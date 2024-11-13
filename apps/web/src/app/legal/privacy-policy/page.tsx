@@ -7,7 +7,9 @@ import { LegalLayout } from '#/ui/legal';
 import { JsonLd } from './json-ld';
 
 export const generateMetadata = () => {
-  const privacyPolicy = allLegals.find((legal) => legal.title === 'Privacy Policy');
+  const privacyPolicy = allLegals.find(
+    (legal) => legal.title === 'Privacy Policy',
+  );
   if (!privacyPolicy) return {};
   const { title, description, slug, publishedAt, updatedAt } = privacyPolicy;
   const url = `/legal/${slug}`;
@@ -28,7 +30,9 @@ export const generateMetadata = () => {
 };
 
 const Page = () => {
-  const privacyPolicy = allLegals.find((legal) => legal.title === 'Privacy Policy');
+  const privacyPolicy = allLegals.find(
+    (legal) => legal.title === 'Privacy Policy',
+  );
   if (!privacyPolicy) return notFound();
 
   return (

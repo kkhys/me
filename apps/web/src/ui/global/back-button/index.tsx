@@ -6,7 +6,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ResetIcon } from '@radix-ui/react-icons';
 
-import { Button, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@kkhys/ui';
+import {
+  Button,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@kkhys/ui';
 
 import { AppContext } from '#/providers';
 
@@ -44,7 +50,9 @@ export const BackButton = <T extends string>({
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          <p className='font-sans'>{tooltipContent ?? 'Go back to previous page'}</p>
+          <p className='font-sans'>
+            {tooltipContent ?? 'Go back to previous page'}
+          </p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

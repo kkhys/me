@@ -10,8 +10,23 @@ import * as CardStories from './index.stories';
 ```tsx
 import * as React from 'react';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/ui/data-display';
-import { Input, Label, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '#/ui/data-entry';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '#/ui/data-display';
+import {
+  Input,
+  Label,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '#/ui/data-entry';
 import { Button } from '#/ui/general';
 
 export default () => (
@@ -55,7 +70,14 @@ export default () => (
 ## Anatomy
 
 ```tsx
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/ui/data-display';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '#/ui/data-display';
 
 export default () => (
   <Card>
@@ -78,7 +100,14 @@ export default () => (
 ```tsx
 import { BellIcon, CheckIcon } from '@radix-ui/react-icons';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/ui/data-display';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '#/ui/data-display';
 import { Switch } from '#/ui/data-entry';
 import { Button } from '#/ui/general';
 
@@ -108,17 +137,26 @@ export default () => (
         <BellIcon />
         <div className='flex-1 space-y-1'>
           <p className='text-sm font-medium leading-none'>Push Notifications</p>
-          <p className='text-sm text-muted-foreground'>Send notifications to device.</p>
+          <p className='text-sm text-muted-foreground'>
+            Send notifications to device.
+          </p>
         </div>
         <Switch />
       </div>
       <div>
         {notifications.map((notification, index) => (
-          <div key={index} className='mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0'>
+          <div
+            key={index}
+            className='mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0'
+          >
             <span className='flex size-2 translate-y-1 rounded-full bg-sky-500' />
             <div className='space-y-1'>
-              <p className='text-sm font-medium leading-none'>{notification.title}</p>
-              <p className='text-sm text-muted-foreground'>{notification.description}</p>
+              <p className='text-sm font-medium leading-none'>
+                {notification.title}
+              </p>
+              <p className='text-sm text-muted-foreground'>
+                {notification.description}
+              </p>
             </div>
           </div>
         ))}

@@ -26,11 +26,13 @@ export const LegalLayout = ({ legal }: { legal: Legal }) => {
           <FadeIn>
             <div dangerouslySetInnerHTML={{ __html: html }} />
             <p className='mb-2 flex justify-end'>
-              {format(parseISO(publishedAt), 'yyyy年M月d日', { locale: ja })} 制定
+              {format(parseISO(publishedAt), 'yyyy年M月d日', { locale: ja })}{' '}
+              制定
             </p>
             {updatedAt && (
               <p className='mt-2 flex justify-end'>
-                {format(parseISO(updatedAt), 'yyyy年M月d日', { locale: ja })} 改定
+                {format(parseISO(updatedAt), 'yyyy年M月d日', { locale: ja })}{' '}
+                改定
               </p>
             )}
           </FadeIn>

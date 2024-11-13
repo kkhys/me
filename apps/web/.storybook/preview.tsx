@@ -2,7 +2,12 @@ import type { Preview } from '@storybook/react';
 
 import '#/styles/globals.css';
 
-import { androidViewports, ipadViewports, iphoneViewports, tailwindViewports } from '@kkhys/storybook-config';
+import {
+  androidViewports,
+  ipadViewports,
+  iphoneViewports,
+  tailwindViewports,
+} from '@kkhys/storybook-config';
 
 // import { ThemeProvider } from '#/lib/nextjs/theme-provider';
 

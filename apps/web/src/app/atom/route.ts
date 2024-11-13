@@ -7,7 +7,9 @@ import { me, site } from '#/config';
 export const GET = () => {
   const posts = allPosts
     .filter((post) => post.status === 'published')
-    .sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)));
+    .sort((a, b) =>
+      compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)),
+    );
 
   const feed = new Feed({
     title: site.title,
@@ -38,7 +40,10 @@ export const GET = () => {
         },
       ],
       date: new Date(post.publishedAt),
-      image: new URL(`/posts/${post.slug}/opengraph-image/default`, site.url.base).toString(),
+      image: new URL(
+        `/posts/${post.slug}/opengraph-image/default`,
+        site.url.base,
+      ).toString(),
     });
   });
 

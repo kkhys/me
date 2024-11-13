@@ -4,7 +4,9 @@ import * as InputStories from './index.stories';
 
 <Meta of={InputStories} name='Overview' />
 <Title>Input</Title>
-<Subtitle>Displays a form input field or a component that looks like an input field.</Subtitle>
+<Subtitle>
+  Displays a form input field or a component that looks like an input field.
+</Subtitle>
 <Canvas of={InputStories.Default} />
 <Controls of={InputStories.Default} />
 
@@ -126,7 +128,10 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
 
 export default () => (
   <Form {...form}>
-    <form onSubmit={form.handleSubmit(onSubmit)} className='w-[400px] space-y-6'>
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      className='w-[400px] space-y-6'
+    >
       <FormField
         control={form.control}
         name='username'

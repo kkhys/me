@@ -26,6 +26,11 @@ export const JsonLd = () => {
   } satisfies WithContext<BreadcrumbList>;
 
   return (
-    <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLdBreadcrumbList]) }} />
+    <script
+      type='application/ld+json'
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify([jsonLdBreadcrumbList]),
+      }}
+    />
   );
 };

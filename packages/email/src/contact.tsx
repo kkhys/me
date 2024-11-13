@@ -16,7 +16,10 @@ import type { ContactSchema } from '@kkhys/validators';
 
 import { Container, Divider, Heading, Icons, Link, Title } from './_components';
 
-type ContactEmailProps = Pick<z.infer<typeof ContactSchema>, 'name' | 'email' | 'type' | 'content'>;
+type ContactEmailProps = Pick<
+  z.infer<typeof ContactSchema>,
+  'name' | 'email' | 'type' | 'content'
+>;
 
 const Email = ({ name, email, type, content }: ContactEmailProps) => {
   const typeLabel = (type: ContactEmailProps['type']) => {
@@ -37,7 +40,9 @@ const Email = ({ name, email, type, content }: ContactEmailProps) => {
   return (
     <Html lang='ja' dir='ltr'>
       <Head />
-      <Preview>お問い合わせありがとうございます。こちらは確認メールです。</Preview>
+      <Preview>
+        お問い合わせありがとうございます。こちらは確認メールです。
+      </Preview>
       <Tailwind>
         <Body className='mx-auto my-auto bg-white px-2 font-sans'>
           <_Heading className='sr-only'>kkhys.me</_Heading>
@@ -79,13 +84,24 @@ Email.PreviewProps = {
 
 export default Email;
 
-export const contactMail = ({ email, name, type, content }: ContactEmailProps) => {
+export const contactMail = ({
+  email,
+  name,
+  type,
+  content,
+}: ContactEmailProps) => {
   return {
-    html: render(<Email email={email} name={name} type={type} content={content} />, {
-      pretty: true,
-    }),
-    text: render(<Email email={email} name={name} type={type} content={content} />, {
-      plainText: true,
-    }),
+    html: render(
+      <Email email={email} name={name} type={type} content={content} />,
+      {
+        pretty: true,
+      },
+    ),
+    text: render(
+      <Email email={email} name={name} type={type} content={content} />,
+      {
+        plainText: true,
+      },
+    ),
   };
 };

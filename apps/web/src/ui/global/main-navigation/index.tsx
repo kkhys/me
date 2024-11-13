@@ -20,22 +20,23 @@ import {
 import { categories } from '#/config/post';
 import { Icons } from '#/ui/global';
 
-const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWithoutRef<'a'>>(
-  ({ className, children, ...props }, ref) => (
-    <NavigationMenuLink asChild>
-      <a
-        ref={ref}
-        className={cn(
-          'block w-[calc(100%_-_2px)] select-none rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-          className,
-        )}
-        {...props}
-      >
-        {children}
-      </a>
-    </NavigationMenuLink>
-  ),
-);
+const ListItem = React.forwardRef<
+  React.ElementRef<'a'>,
+  React.ComponentPropsWithoutRef<'a'>
+>(({ className, children, ...props }, ref) => (
+  <NavigationMenuLink asChild>
+    <a
+      ref={ref}
+      className={cn(
+        'block w-[calc(100%_-_2px)] select-none rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </a>
+  </NavigationMenuLink>
+));
 ListItem.displayName = 'ListItem';
 
 export const MainNavigation = () => {
@@ -50,7 +51,9 @@ export const MainNavigation = () => {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className={cn(pathname.startsWith('/posts') && 'bg-accent')}>
+            <NavigationMenuTrigger
+              className={cn(pathname.startsWith('/posts') && 'bg-accent')}
+            >
               Blog
             </NavigationMenuTrigger>
             <NavigationMenuContent className='min-w-[8rem] p-1'>
@@ -71,7 +74,12 @@ export const MainNavigation = () => {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link href='/contact' legacyBehavior passHref>
-              <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), pathname === '/contact' && 'bg-accent')}>
+              <NavigationMenuLink
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  pathname === '/contact' && 'bg-accent',
+                )}
+              >
                 Contact
               </NavigationMenuLink>
             </Link>

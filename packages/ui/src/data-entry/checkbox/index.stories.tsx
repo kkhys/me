@@ -47,7 +47,8 @@ const meta = {
     },
     checked: {
       control: 'boolean',
-      description: 'The controlled checked state of the checkbox. Must be used in conjunction with `onCheckedChange`.',
+      description:
+        'The controlled checked state of the checkbox. Must be used in conjunction with `onCheckedChange`.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -57,10 +58,14 @@ const meta = {
     },
     onCheckedChange: {
       action: 'checked',
-      description: 'Event handler called when the checked state of the checkbox changes.',
+      description:
+        'Event handler called when the checked state of the checkbox changes.',
       table: {
         category: 'Events',
-        type: { summary: 'function', detail: '(checked: boolean | "indeterminate") => void' },
+        type: {
+          summary: 'function',
+          detail: '(checked: boolean | "indeterminate") => void',
+        },
       },
       type: {
         name: 'function',
@@ -68,7 +73,8 @@ const meta = {
     },
     disabled: {
       control: 'boolean',
-      description: 'When true, prevents the user from interacting with the checkbox.',
+      description:
+        'When true, prevents the user from interacting with the checkbox.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -89,7 +95,8 @@ const meta = {
     },
     name: {
       control: 'text',
-      description: 'The name of the checkbox. Submitted with its owning form as part of a name/value pair.',
+      description:
+        'The name of the checkbox. Submitted with its owning form as part of a name/value pair.',
       table: {
         type: { summary: 'string' },
       },
@@ -149,8 +156,12 @@ export const WithText = {
       <div className='items-top flex space-x-2'>
         <Story />
         <div className='grid gap-1.5 leading-none'>
-          <Label htmlFor='with-text-checkbox'>Accept terms and conditions</Label>
-          <p className='text-sm text-muted-foreground'>You agree to our Terms of Service and Privacy Policy.</p>
+          <Label htmlFor='with-text-checkbox'>
+            Accept terms and conditions
+          </Label>
+          <p className='text-sm text-muted-foreground'>
+            You agree to our Terms of Service and Privacy Policy.
+          </p>
         </div>
       </div>
     ),
@@ -204,12 +215,18 @@ const FormSingleDemo = () => {
           render={({ field }) => (
             <FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow'>
               <FormControl>
-                <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
               </FormControl>
               <div className='space-y-1 leading-none'>
-                <FormLabel>Use different settings for my mobile devices</FormLabel>
+                <FormLabel>
+                  Use different settings for my mobile devices
+                </FormLabel>
                 <FormDescription>
-                  You can manage your mobile notifications in the <a href='/'>mobile settings</a> page.
+                  You can manage your mobile notifications in the{' '}
+                  <a href='/'>mobile settings</a> page.
                 </FormDescription>
               </div>
             </FormItem>
@@ -295,7 +312,9 @@ const FormMultipleDemo = () => {
             <FormItem>
               <div className='mb-4'>
                 <FormLabel className='text-base'>Sidebar</FormLabel>
-                <FormDescription>Select the items you want to display in the sidebar.</FormDescription>
+                <FormDescription>
+                  Select the items you want to display in the sidebar.
+                </FormDescription>
               </div>
               {items.map((item) => (
                 <FormField
@@ -304,18 +323,27 @@ const FormMultipleDemo = () => {
                   name='items'
                   render={({ field }) => {
                     return (
-                      <FormItem key={item.id} className='flex flex-row items-start space-x-3 space-y-0'>
+                      <FormItem
+                        key={item.id}
+                        className='flex flex-row items-start space-x-3 space-y-0'
+                      >
                         <FormControl>
                           <Checkbox
                             checked={field.value?.includes(item.id)}
                             onCheckedChange={(checked) => {
                               return checked
                                 ? field.onChange([...field.value, item.id])
-                                : field.onChange(field.value?.filter((value) => value !== item.id));
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== item.id,
+                                    ),
+                                  );
                             }}
                           />
                         </FormControl>
-                        <FormLabel className='text-sm font-normal'>{item.label}</FormLabel>
+                        <FormLabel className='text-sm font-normal'>
+                          {item.label}
+                        </FormLabel>
                       </FormItem>
                     );
                   }}

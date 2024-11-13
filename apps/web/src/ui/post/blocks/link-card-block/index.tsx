@@ -34,7 +34,9 @@ export const LinkCardBlock = ({
     iconBlurDataURL,
   } = props;
   return (
-    <div className={cn('select-none overflow-hidden rounded-md border', className)}>
+    <div
+      className={cn('select-none overflow-hidden rounded-md border', className)}
+    >
       <a
         href={url}
         target='_blank'
@@ -62,7 +64,9 @@ export const LinkCardBlock = ({
             ) : (
               <GlobeIcon className='size-3 shrink-0' />
             )}
-            <span className='ml-1 font-sans text-xs'>{new URL(url).hostname}</span>
+            <span className='ml-1 font-sans text-xs'>
+              {new URL(url).hostname}
+            </span>
           </div>
         </div>
         <div className='h-[120px] w-[120px] max-w-[230px] sm:w-auto'>

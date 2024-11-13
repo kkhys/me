@@ -3,7 +3,13 @@ import { GoogleMapsEmbed } from '@next/third-parties/google';
 
 import { env } from '#/env';
 
-export const GoogleMapsBlock = ({ placeId, caption }: { placeId: string; caption?: string }) => {
+export const GoogleMapsBlock = ({
+  placeId,
+  caption,
+}: {
+  placeId: string;
+  caption?: string;
+}) => {
   if (!caption) {
     return (
       <GoogleMapsEmbed
@@ -27,7 +33,9 @@ export const GoogleMapsBlock = ({ placeId, caption }: { placeId: string; caption
         region='JP'
         style='border-radius: 1rem; aspect-ratio: 16 / 9;'
       />
-      <figcaption className='text-center text-xs text-muted-foreground'>{caption}</figcaption>
+      <figcaption className='text-center text-xs text-muted-foreground'>
+        {caption}
+      </figcaption>
     </figure>
   );
 };

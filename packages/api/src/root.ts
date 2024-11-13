@@ -1,4 +1,9 @@
-import { authRouter, contactRouter, pageViewRouter, postRouter } from './router';
+import {
+  authRouter,
+  contactRouter,
+  pageViewRouter,
+  postRouter,
+} from './router';
 import { createTRPCRouter } from './trpc';
 
 export const appRouter = createTRPCRouter({

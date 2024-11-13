@@ -9,7 +9,12 @@ import { content, site } from '../../../config';
  * @see: https://github.com/contentlayerdev/contentlayer/issues/238
  */
 import { allTagTitles, categoryTitles } from '../../../config/post';
-import { createExcerpt, generateCategoryObject, generateSlug, generateTagObject } from '../utils';
+import {
+  createExcerpt,
+  generateCategoryObject,
+  generateSlug,
+  generateTagObject,
+} from '../utils';
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -68,22 +73,27 @@ export const Post = defineDocumentType(() => ({
     editUrl: {
       description: 'URL to github repository of editable blog content',
       type: 'string',
-      resolve: ({ _raw: { sourceFilePath } }) => `${content.url.repository}/edit/main/${sourceFilePath}`,
+      resolve: ({ _raw: { sourceFilePath } }) =>
+        `${content.url.repository}/edit/main/${sourceFilePath}`,
     },
     sourceUrl: {
-      description: 'URL to the blog content, without rendering the markdown file',
+      description:
+        'URL to the blog content, without rendering the markdown file',
       type: 'string',
-      resolve: ({ _raw: { sourceFilePath } }) => `${content.url.repository}/blob/main/${sourceFilePath}?plain=1`,
+      resolve: ({ _raw: { sourceFilePath } }) =>
+        `${content.url.repository}/blob/main/${sourceFilePath}?plain=1`,
     },
     revisionHistoryUrl: {
       description: 'URL to the revision history of the blog content',
       type: 'string',
-      resolve: ({ _raw: { sourceFilePath } }) => `${content.url.repository}/commits/main/${sourceFilePath}`,
+      resolve: ({ _raw: { sourceFilePath } }) =>
+        `${content.url.repository}/commits/main/${sourceFilePath}`,
     },
     publishedAtFormattedUs: {
       description: 'Formatted publication date and time',
       type: 'string',
-      resolve: ({ publishedAt }) => format(parseISO(publishedAt), 'LLLL d, yyyy'),
+      resolve: ({ publishedAt }) =>
+        format(parseISO(publishedAt), 'LLLL d, yyyy'),
     },
     publishedAtFormattedIso: {
       description: 'Formatted publication date and time',
@@ -93,12 +103,14 @@ export const Post = defineDocumentType(() => ({
     updatedAtFormattedUs: {
       description: 'Formatted modification date and time',
       type: 'string',
-      resolve: ({ updatedAt }) => (updatedAt ? format(parseISO(updatedAt), 'LLLL d, yyyy') : undefined),
+      resolve: ({ updatedAt }) =>
+        updatedAt ? format(parseISO(updatedAt), 'LLLL d, yyyy') : undefined,
     },
     updatedAtFormattedIso: {
       description: 'Formatted modification date and time',
       type: 'string',
-      resolve: ({ updatedAt }) => (updatedAt ? format(parseISO(updatedAt), 'yyyy/MM/dd') : undefined),
+      resolve: ({ updatedAt }) =>
+        updatedAt ? format(parseISO(updatedAt), 'yyyy/MM/dd') : undefined,
     },
     slug: {
       description: 'Generate post slug from id',

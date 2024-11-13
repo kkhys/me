@@ -4,9 +4,9 @@ import satori from 'satori';
 export const runtime = 'edge';
 
 export const GET = async (request: NextRequest) => {
-  const interMedium = await fetch(new URL('../../../../assets/fonts/Inter-Medium.ttf', import.meta.url)).then((res) =>
-    res.arrayBuffer(),
-  );
+  const interMedium = await fetch(
+    new URL('../../../../assets/fonts/Inter-Medium.ttf', import.meta.url),
+  ).then((res) => res.arrayBuffer());
 
   const searchParams = request.nextUrl.searchParams;
   const theme = searchParams.get('theme') ?? 'light';
