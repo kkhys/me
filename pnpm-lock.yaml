@@ -43,7 +43,7 @@ importers:
         version: 0.11.1(typescript@5.6.3)(zod@3.23.8)
       next:
         specifier: 14.2.17
-        version: 14.2.17(@babel/core@7.24.0)(react-dom@18.3.1)(react@18.3.1)
+        version: 14.2.17(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -227,14 +227,14 @@ importers:
         specifier: 5.59.20
         version: 5.59.20(@tanstack/react-query@5.59.20)(react@18.3.1)
       '@trpc/client':
-        specifier: 11.0.0-rc.630
-        version: 11.0.0-rc.630(@trpc/server@11.0.0-rc.630)
+        specifier: 11.0.0-rc.633
+        version: 11.0.0-rc.633(@trpc/server@11.0.0-rc.633)
       '@trpc/react-query':
-        specifier: 11.0.0-rc.630
-        version: 11.0.0-rc.630(@tanstack/react-query@5.59.20)(@trpc/client@11.0.0-rc.630)(@trpc/server@11.0.0-rc.630)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 11.0.0-rc.633
+        version: 11.0.0-rc.633(@tanstack/react-query@5.59.20)(@trpc/client@11.0.0-rc.633)(@trpc/server@11.0.0-rc.633)(react-dom@18.3.1)(react@18.3.1)
       '@trpc/server':
-        specifier: 11.0.0-rc.630
-        version: 11.0.0-rc.630(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 11.0.0-rc.633
+        version: 11.0.0-rc.633(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.4.0
         version: 1.4.0(next@14.2.17)(react@18.3.1)
@@ -501,8 +501,8 @@ importers:
         specifier: 0.11.1
         version: 0.11.1(typescript@5.6.3)(zod@3.23.8)
       '@trpc/server':
-        specifier: 11.0.0-rc.630
-        version: 11.0.0-rc.630(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 11.0.0-rc.633
+        version: 11.0.0-rc.633(react-dom@18.3.1)(react@18.3.1)
       '@upstash/ratelimit':
         specifier: 2.0.4
         version: 2.0.4
@@ -560,7 +560,7 @@ importers:
         version: 0.11.1(typescript@5.6.3)(zod@3.23.8)
       next:
         specifier: 14.2.17
-        version: 14.2.17(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
+        version: 14.2.17(react-dom@18.3.1)(react@18.3.1)
       next-auth:
         specifier: 5.0.0-beta.25
         version: 5.0.0-beta.25(next@14.2.17)(react@18.3.1)
@@ -1175,6 +1175,7 @@ packages:
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@babel/core@7.24.5:
     resolution: {integrity: sha512-tVQRucExLQ02Boi4vdPp49svNGcfL2GhdTCT9aldhXgCJVAI21EtRfBettiuLUwce/7r6bFdgs6JFkcdTiFttA==}
@@ -1206,6 +1207,7 @@ packages:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
       jsesc: 2.5.2
+    dev: true
 
   /@babel/generator@7.24.8:
     resolution: {integrity: sha512-47DG+6F5SzOi0uEvK4wMShmn5yY0mVjVJoWTphdY2B4Rx9wHgjK7Yhtr0ru6nE+sn0v38mzrWOlah0p/YlHHOQ==}
@@ -1344,6 +1346,7 @@ packages:
   /@babel/helper-environment-visitor@7.22.20:
     resolution: {integrity: sha512-zfedSIzFhat/gFhWfHtgWvlec0nqB9YEIVrpuwjruLlXfUSnA8cJB0miHKwqDnQ7d32aKo2xt88/xZptwxbfhA==}
     engines: {node: '>=6.9.0'}
+    dev: true
 
   /@babel/helper-environment-visitor@7.24.7:
     resolution: {integrity: sha512-DoiN84+4Gnd0ncbBOM9AZENV4a5ZiL39HYMyZJGZ/AZEykHYdJw0wW3kdcsh9/Kn+BRXHLkkklZ51ecPKmI1CQ==}
@@ -1357,6 +1360,7 @@ packages:
     dependencies:
       '@babel/template': 7.24.7
       '@babel/types': 7.24.8
+    dev: true
 
   /@babel/helper-function-name@7.24.7:
     resolution: {integrity: sha512-FyoJTsj/PEUWu1/TYRiXTIHc8lbw+TDYkZuoE43opPS5TrI7MyONBE1oNvfguEXAD9yhQRrVBnXdXzSLQl9XnA==}
@@ -1370,6 +1374,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/types': 7.24.8
+    dev: true
 
   /@babel/helper-hoist-variables@7.24.7:
     resolution: {integrity: sha512-MJJwhkoGy5c4ehfoRyrJ/owKeMl19U54h27YYftT0o2teQ3FJ3nQUf/I3LlJsX4l3qlw7WRXUmiyajvHXoTubQ==}
@@ -1414,6 +1419,7 @@ packages:
       '@babel/helper-validator-identifier': 7.24.7
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@babel/helper-module-transforms@7.24.8(@babel/core@7.24.0):
     resolution: {integrity: sha512-m4vWKVqvkVAWLXfHCCfff2luJj86U+J0/x+0N3ArG/tP0Fq7zky2dYwMbtPmkc/oulkkbjdL3uWzuoBwQ8R00Q==}
@@ -1527,6 +1533,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/types': 7.24.8
+    dev: true
 
   /@babel/helper-split-export-declaration@7.24.7:
     resolution: {integrity: sha512-oy5V7pD+UvfkEATUKvIjvIAH/xCzfsFVw7ygW2SI6NClZzquT+mwdTfgfdbUiceh6iQO0CHtCPsyze/MZ2YbAA==}
@@ -1537,6 +1544,7 @@ packages:
   /@babel/helper-string-parser@7.23.4:
     resolution: {integrity: sha512-803gmbQdqwdf4olxrX4AJyFBV/RTr3rSmOj0rKwesmzlfhYNDEs+/iOcznzpNWlJlIlTJC2QfPFcHB6DlzdVLQ==}
     engines: {node: '>=6.9.0'}
+    dev: true
 
   /@babel/helper-string-parser@7.24.8:
     resolution: {integrity: sha512-pO9KhhRcuUyGnJWwyEgnRJTSIZHiT+vMD0kPeD+so0l7mxkMT19g3pjY9GTnHySck/hDzq+dtW/4VgnMkippsQ==}
@@ -1550,6 +1558,7 @@ packages:
   /@babel/helper-validator-identifier@7.22.20:
     resolution: {integrity: sha512-Y4OZ+ytlatR8AI+8KZfKuL5urKp7qey08ha31L8b3BwewJAoJamTzyvxPR/5D+KkdJCGPq/+8TukHBlY10FX9A==}
     engines: {node: '>=6.9.0'}
+    dev: true
 
   /@babel/helper-validator-identifier@7.24.7:
     resolution: {integrity: sha512-rR+PBcQ1SMQDDyF6X0wxtG8QyLCgUB0eRAGguqRLfkCA87l7yAP7ehq8SNj96OOGTO8OBV70KhuFYcIkHXOg0w==}
@@ -1581,6 +1590,7 @@ packages:
       '@babel/types': 7.24.8
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@babel/helpers@7.24.8:
     resolution: {integrity: sha512-gV2265Nkcz7weJJfvDoAEVzC1e2OTDpkGbEsebse8koXUJUXPsCMi7sRo/+SPMuMZ9MtUPnGwITTnQnU5YjyaQ==}
@@ -1604,6 +1614,7 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.24.0
+    dev: true
 
   /@babel/parser@7.24.5:
     resolution: {integrity: sha512-EOv5IK8arwh3LI47dz1b0tKUb/1uhHAnHJOrjgtQMIpu1uXd9mlFrJg9IUgGUgZ41Ch0K8REPTYpO7B76b4vJg==}
@@ -3640,6 +3651,7 @@ packages:
       '@babel/code-frame': 7.24.7
       '@babel/parser': 7.24.8
       '@babel/types': 7.24.8
+    dev: true
 
   /@babel/template@7.24.7:
     resolution: {integrity: sha512-jYqfPrU9JTF0PmPy1tLYHW4Mp4KlgxJD9l2nP9fD6yT/ICi554DmrWBAEYpIelzjHf1msDP3PxJIRt/nFNfBig==}
@@ -3674,6 +3686,7 @@ packages:
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
 
   /@babel/traverse@7.24.8:
     resolution: {integrity: sha512-t0P1xxAPzEDcEPmjprAQq19NWum4K0EQPjMwZQZbHt+GiZqvjCHjj755Weq1YRPVzBI+3zSfvScfpnuIecVFJQ==}
@@ -3714,6 +3727,7 @@ packages:
       '@babel/helper-string-parser': 7.23.4
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
+    dev: true
 
   /@babel/types@7.24.8:
     resolution: {integrity: sha512-SkSBEHwwJRU52QEVZBmMBnE5Ux2/6WU1grdYyOhpbCNxbmJrDuDCphBzKZSO3taf0zztp+qkWlymE5tVL5l0TA==}
@@ -5844,7 +5858,7 @@ packages:
     engines: {node: '>= 8'}
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
-      fastq: 1.15.0
+      fastq: 1.17.1
 
   /@octokit/auth-token@5.0.1:
     resolution: {integrity: sha512-RTmWsLfig8SBoiSdgvCht4BXl1CHU89Co5xiQ5JF19my/sIRDFCQ1RPrmK0exgqUZuNm39C/bV8+/83+MJEjGg==}
@@ -9025,7 +9039,7 @@ packages:
       fs-extra: 11.1.1
       image-size: 1.0.2
       loader-utils: 3.2.1
-      next: 14.2.17(@babel/core@7.24.0)(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.17(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
       node-polyfill-webpack-plugin: 2.0.1(webpack@5.89.0)
       pnp-webpack-plugin: 1.7.0(typescript@5.6.3)
       postcss: 8.4.38
@@ -9877,37 +9891,58 @@ packages:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
     dev: true
 
-  /@trpc/client@11.0.0-rc.630(@trpc/server@11.0.0-rc.630):
-    resolution: {integrity: sha512-kHs2pa6oGiHRgF+hzLerGP4Vqm16t9KUrjunijIXPVco6oiYQ6IYy2vWOEgZk21/KjrwxBIv3Q7bqAZCQ7T3PA==}
+  /@trpc/client@11.0.0-rc.633(@trpc/server@11.0.0-rc.633):
+    resolution: {integrity: sha512-fha4Mix/birOFNMIutHXAhkJuZ8Zob0PGZ5s0NVyt4VbIGIpuvx2DYjFQG9lmyt+LEGZklsi1G0QfY+7rNaSmg==}
     peerDependencies:
-      '@trpc/server': 11.0.0-rc.630+73639524c
+      '@trpc/server': 11.0.0-rc.633+55512768a
     dependencies:
-      '@trpc/server': 11.0.0-rc.630(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
+      '@trpc/server': 11.0.0-rc.633(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
     dev: false
 
-  /@trpc/react-query@11.0.0-rc.630(@tanstack/react-query@5.59.20)(@trpc/client@11.0.0-rc.630)(@trpc/server@11.0.0-rc.630)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-V/1xSfxznRaS+hSKk/B92+WfBqzdjJ4czoQxtlNS3ny+hsMPhhYNZVGa1laQDHTIeJUOBlUf7k+HKj0McK6L9g==}
+  /@trpc/react-query@11.0.0-rc.633(@tanstack/react-query@5.59.20)(@trpc/client@11.0.0-rc.633)(@trpc/server@11.0.0-rc.633)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-qrisejoXkk0l+dWiV3ruP2zVboavkm/WHQIm2eAf4mQhvOD6uKbWd7M37ywZZkvPfiPBQRZDWN9y0d1DOsEgcQ==}
     peerDependencies:
       '@tanstack/react-query': ^5.59.15
-      '@trpc/client': 11.0.0-rc.630+73639524c
-      '@trpc/server': 11.0.0-rc.630+73639524c
+      '@trpc/client': 11.0.0-rc.633+55512768a
+      '@trpc/server': 11.0.0-rc.633+55512768a
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
     dependencies:
       '@tanstack/react-query': 5.59.20(react@18.3.1)
-      '@trpc/client': 11.0.0-rc.630(@trpc/server@11.0.0-rc.630)
-      '@trpc/server': 11.0.0-rc.630(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
+      '@trpc/client': 11.0.0-rc.633(@trpc/server@11.0.0-rc.633)
+      '@trpc/server': 11.0.0-rc.633(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@trpc/server@11.0.0-rc.630(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-4zmlqbLscjJNIsj8VuY38vdaDFxukdmqOOO4y3CoXQBNSLLtcpeecoRUHISpEcImtfvqEAW+gikxAxpoicUNkQ==}
+  /@trpc/server@11.0.0-rc.633(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-R26i5aP7/DvgIp3YbU+0u0nbggqItMLYvPmVBOyTP8rD5+wrifZ9ZKp8p+KMzhQEGeBv5mJ48TjJ2URcKwxg6g==}
     optionalDependencies:
       '@types/aws-lambda': 8.10.145
       express: 4.18.2
       fastify: 5.1.0
       next: 14.2.17(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
+      ws: 8.17.1
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@opentelemetry/api'
+      - '@playwright/test'
+      - babel-plugin-macros
+      - bufferutil
+      - react
+      - react-dom
+      - sass
+      - supports-color
+      - utf-8-validate
+    dev: false
+
+  /@trpc/server@11.0.0-rc.633(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-R26i5aP7/DvgIp3YbU+0u0nbggqItMLYvPmVBOyTP8rD5+wrifZ9ZKp8p+KMzhQEGeBv5mJ48TjJ2URcKwxg6g==}
+    optionalDependencies:
+      '@types/aws-lambda': 8.10.145
+      express: 4.18.2
+      fastify: 5.1.0
+      next: 14.2.17(react-dom@18.3.1)(react@18.3.1)
       ws: 8.17.1
     transitivePeerDependencies:
       - '@babel/core'
@@ -15248,18 +15283,11 @@ packages:
     dev: false
     optional: true
 
-  /fastq@1.15.0:
-    resolution: {integrity: sha512-wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw==}
-    dependencies:
-      reusify: 1.0.4
-
   /fastq@1.17.1:
     resolution: {integrity: sha512-sRVD3lWVIXWg6By68ZN7vho9a1pQcN/WBFaAAsDDFzlJjvoGx0P8z7V1t72grFJfJhu3YPZBuu25f7Kaw2jN1w==}
     requiresBuild: true
     dependencies:
       reusify: 1.0.4
-    dev: false
-    optional: true
 
   /fault@2.0.1:
     resolution: {integrity: sha512-WtySTkS4OKev5JtpHXnib4Gxiurzh5NCGvWrFaZ34m6JehfTUhKZvn9njTfw48t6JumVQOmrKqpmGcdwxnhqBQ==}
@@ -20006,7 +20034,7 @@ packages:
         optional: true
     dependencies:
       '@auth/core': 0.37.2
-      next: 14.2.17(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.17(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
 
@@ -20083,47 +20111,6 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /next@14.2.17(@babel/core@7.24.0)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-hNo/Zy701DDO3nzKkPmsLRlDfNCtb1OJxFUvjGEl04u7SFa3zwC6hqsOUzMajcaEOEV8ey1GjvByvrg0Qr5AiQ==}
-    engines: {node: '>=18.17.0'}
-    hasBin: true
-    peerDependencies:
-      '@opentelemetry/api': ^1.1.0
-      '@playwright/test': ^1.41.2
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      sass: ^1.3.0
-    peerDependenciesMeta:
-      '@opentelemetry/api':
-        optional: true
-      '@playwright/test':
-        optional: true
-      sass:
-        optional: true
-    dependencies:
-      '@next/env': 14.2.17
-      '@swc/helpers': 0.5.5
-      busboy: 1.6.0
-      caniuse-lite: 1.0.30001647
-      graceful-fs: 4.2.11
-      postcss: 8.4.31
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      styled-jsx: 5.1.1(@babel/core@7.24.0)(react@18.3.1)
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 14.2.17
-      '@next/swc-darwin-x64': 14.2.17
-      '@next/swc-linux-arm64-gnu': 14.2.17
-      '@next/swc-linux-arm64-musl': 14.2.17
-      '@next/swc-linux-x64-gnu': 14.2.17
-      '@next/swc-linux-x64-musl': 14.2.17
-      '@next/swc-win32-arm64-msvc': 14.2.17
-      '@next/swc-win32-ia32-msvc': 14.2.17
-      '@next/swc-win32-x64-msvc': 14.2.17
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-
   /next@14.2.17(@babel/core@7.24.5)(@opentelemetry/api@1.6.0)(@playwright/test@1.48.2)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-hNo/Zy701DDO3nzKkPmsLRlDfNCtb1OJxFUvjGEl04u7SFa3zwC6hqsOUzMajcaEOEV8ey1GjvByvrg0Qr5AiQ==}
     engines: {node: '>=18.17.0'}
@@ -20166,6 +20153,48 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+
+  /next@14.2.17(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-hNo/Zy701DDO3nzKkPmsLRlDfNCtb1OJxFUvjGEl04u7SFa3zwC6hqsOUzMajcaEOEV8ey1GjvByvrg0Qr5AiQ==}
+    engines: {node: '>=18.17.0'}
+    hasBin: true
+    peerDependencies:
+      '@opentelemetry/api': ^1.1.0
+      '@playwright/test': ^1.41.2
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+      '@playwright/test':
+        optional: true
+      sass:
+        optional: true
+    dependencies:
+      '@next/env': 14.2.17
+      '@swc/helpers': 0.5.5
+      busboy: 1.6.0
+      caniuse-lite: 1.0.30001647
+      graceful-fs: 4.2.11
+      postcss: 8.4.31
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      styled-jsx: 5.1.1(@babel/core@7.24.5)(react@18.3.1)
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 14.2.17
+      '@next/swc-darwin-x64': 14.2.17
+      '@next/swc-linux-arm64-gnu': 14.2.17
+      '@next/swc-linux-arm64-musl': 14.2.17
+      '@next/swc-linux-x64-gnu': 14.2.17
+      '@next/swc-linux-x64-musl': 14.2.17
+      '@next/swc-win32-arm64-msvc': 14.2.17
+      '@next/swc-win32-ia32-msvc': 14.2.17
+      '@next/swc-win32-x64-msvc': 14.2.17
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+    dev: false
 
   /nice-try@1.0.5:
     resolution: {integrity: sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==}
@@ -23152,6 +23181,7 @@ packages:
   /reusify@1.0.4:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
+    requiresBuild: true
 
   /rfdc@1.4.1:
     resolution: {integrity: sha512-q1b3N5QkRUWUl7iyylaaj3kOpIT0N2i9MqIEQXP73GVsN9cw3fdx8X63cEmWhJGi2PPCF23Ijp7ktmd39rawIA==}
@@ -24376,6 +24406,7 @@ packages:
       '@babel/core': 7.24.0
       client-only: 0.0.1
       react: 18.3.1
+    dev: true
 
   /styled-jsx@5.1.1(@babel/core@7.24.5)(react@18.3.1):
     resolution: {integrity: sha512-pW7uC1l4mBZ8ugbiZrcIsiIvVx1UmTfw7UkC3Um2tmfUq9Bhk8IiyEIPl6F8agHgjzku6j0xQEZbfA5uSgSaCw==}
