@@ -25,7 +25,9 @@ const usePrevious = <T,>(value: T) => {
   return ref.current;
 };
 
-export const AppContext = React.createContext<{ previousPathname?: string }>({});
+export const AppContext = React.createContext<{ previousPathname?: string }>(
+  {},
+);
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -33,9 +35,17 @@ export const Providers = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AppContext.Provider value={{ previousPathname }}>
-      <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+      <ThemeProvider
+        attribute='class'
+        defaultTheme='system'
+        enableSystem
+        disableTransitionOnChange
+      >
         <TRPCReactProvider>
-          <GoogleReCaptchaProvider reCaptchaKey={env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise={true}>
+          <GoogleReCaptchaProvider
+            reCaptchaKey={env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+            useEnterprise={true}
+          >
             {children}
           </GoogleReCaptchaProvider>
         </TRPCReactProvider>

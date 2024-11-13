@@ -7,7 +7,15 @@ import { TRPCError } from '@trpc/server';
  * @extends Error
  */
 class trpcErrorBase extends TRPCError {
-  constructor({ code, message, cause }: { message?: string; code: TRPC_ERROR_CODE_KEY; cause?: Error }) {
+  constructor({
+    code,
+    message,
+    cause,
+  }: {
+    message?: string;
+    code: TRPC_ERROR_CODE_KEY;
+    cause?: Error;
+  }) {
     super({ code, message, cause });
     this.name = this.constructor.name;
   }

@@ -18,7 +18,9 @@ import {
 } from '#/ui/global';
 
 export const useHeaderAnimation = () => {
-  const [animationHeader, setAnimationHeader] = React.useState<boolean | null>(null);
+  const [animationHeader, setAnimationHeader] = React.useState<boolean | null>(
+    null,
+  );
   const [previousYPosition, setPreviousYPosition] = React.useState<number>(
     typeof window !== 'undefined' ? window.scrollY : 0,
   );
@@ -35,7 +37,9 @@ export const useHeaderAnimation = () => {
 
   const animationState = () => {
     if (animationHeader === null || headerRef.current === null) return;
-    return animationHeader ? headerFrom() : headerTo(headerRef.current.offsetHeight);
+    return animationHeader
+      ? headerFrom()
+      : headerTo(headerRef.current.offsetHeight);
   };
 
   React.useEffect(() => {
@@ -47,7 +51,10 @@ export const useHeaderAnimation = () => {
 
       if (currentYPos < previousYPosition) {
         setAnimationHeader(true);
-      } else if (currentYPos > headerHeight && currentYPos > previousYPosition) {
+      } else if (
+        currentYPos > headerHeight &&
+        currentYPos > previousYPosition
+      ) {
         setAnimationHeader(false);
       }
 
@@ -70,7 +77,10 @@ export const Header = ({ className }: { className?: string }) => {
       transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.6 }}
       animate={animationState()}
       ref={headerRef}
-      className={cn('fixed top-0 w-[calc(100%-var(--removed-body-scroll-bar-size,0px))]', className)}
+      className={cn(
+        'fixed top-0 w-[calc(100%-var(--removed-body-scroll-bar-size,0px))]',
+        className,
+      )}
     >
       <ContainerOuter className='flex items-center'>
         <div className='border-b border-border/60 bg-background-lighter/95 py-2.5 backdrop-blur supports-[backdrop-filter]:bg-background-lighter/60'>

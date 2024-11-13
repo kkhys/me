@@ -68,7 +68,8 @@ const meta = {
     },
     disabled: {
       control: 'boolean',
-      description: 'When `true`, prevents the user from interacting with radio items.',
+      description:
+        'When `true`, prevents the user from interacting with radio items.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -78,7 +79,8 @@ const meta = {
     },
     name: {
       control: 'text',
-      description: 'The name of the group. Submitted with its owning form as part of a name/value pair.',
+      description:
+        'The name of the group. Submitted with its owning form as part of a name/value pair.',
       table: {
         type: { summary: 'string' },
       },
@@ -103,7 +105,10 @@ const meta = {
       options: ['horizontal', 'vertical', undefined],
       table: {
         defaultValue: { summary: undefined },
-        type: { summary: 'enum', detail: '"horizontal" | "vertical" | undefined' },
+        type: {
+          summary: 'enum',
+          detail: '"horizontal" | "vertical" | undefined',
+        },
       },
       type: {
         name: 'enum',
@@ -125,7 +130,8 @@ const meta = {
     },
     loop: {
       control: 'boolean',
-      description: 'When `true`, keyboard navigation will loop from last item to first, and vice versa.',
+      description:
+        'When `true`, keyboard navigation will loop from last item to first, and vice versa.',
       table: {
         defaultValue: { summary: true },
         type: { summary: 'boolean' },
@@ -190,7 +196,10 @@ const FormDemo = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='w-[300px] space-y-6'>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='w-[300px] space-y-6'
+      >
         <FormField
           control={form.control}
           name='type'
@@ -207,13 +216,17 @@ const FormDemo = () => {
                     <FormControl>
                       <RadioGroupItem value='all' />
                     </FormControl>
-                    <FormLabel className='font-normal'>All new messages</FormLabel>
+                    <FormLabel className='font-normal'>
+                      All new messages
+                    </FormLabel>
                   </FormItem>
                   <FormItem className='flex items-center space-x-3 space-y-0'>
                     <FormControl>
                       <RadioGroupItem value='mentions' />
                     </FormControl>
-                    <FormLabel className='font-normal'>Direct messages and mentions</FormLabel>
+                    <FormLabel className='font-normal'>
+                      Direct messages and mentions
+                    </FormLabel>
                   </FormItem>
                   <FormItem className='flex items-center space-x-3 space-y-0'>
                     <FormControl>

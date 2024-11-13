@@ -40,7 +40,9 @@ const useCategory = () => {
     }
   };
 
-  const [category, setCategory] = React.useState(initialCategory(searchParams.get('category') ?? 'all'));
+  const [category, setCategory] = React.useState(
+    initialCategory(searchParams.get('category') ?? 'all'),
+  );
 
   const handleValueChange = (value: string) => {
     const params = new URLSearchParams(searchParams);
@@ -68,15 +70,24 @@ export const CategoryTabs = () => {
   const { category, handleValueChange } = useCategory();
 
   const posts = allPosts
-    .filter((post) => env.NODE_ENV === 'development' || post.status === 'published')
-    .sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)));
+    .filter(
+      (post) => env.NODE_ENV === 'development' || post.status === 'published',
+    )
+    .sort((a, b) =>
+      compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)),
+    );
   const techPosts = posts.filter((post) => post.category.includes('Tech'));
   const lifePosts = posts.filter((post) => post.category.includes('Life'));
   const objectPosts = posts.filter((post) => post.category.includes('Object'));
   const buildPosts = posts.filter((post) => post.category.includes('Build'));
 
   return (
-    <Tabs defaultValue={category} onValueChange={handleValueChange} value={category} className='mt-6'>
+    <Tabs
+      defaultValue={category}
+      onValueChange={handleValueChange}
+      value={category}
+      className='mt-6'
+    >
       <div className='flex gap-4'>
         <TabsList>
           <TabsTrigger value='all' className='font-sans'>

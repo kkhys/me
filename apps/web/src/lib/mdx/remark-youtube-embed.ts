@@ -14,7 +14,9 @@ interface YouTubeEmbed extends Parent, Resource {
 
 const extractYouTubeVideoId = (url: string) => {
   const matched =
-    /^https?:\/\/(www\.)?youtube\.com\/watch\?(.*&)?v=(?<videoId>[^&]+)/.exec(url) ??
+    /^https?:\/\/(www\.)?youtube\.com\/watch\?(.*&)?v=(?<videoId>[^&]+)/.exec(
+      url,
+    ) ??
     /^https?:\/\/youtu\.be\/(?<videoId>[^?]+)/.exec(url) ??
     /^https?:\/\/(www\.)?youtube\.com\/embed\/(?<videoId>[^?]+)/.exec(url);
 

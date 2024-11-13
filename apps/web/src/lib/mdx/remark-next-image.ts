@@ -13,7 +13,9 @@ export const remarkNextImage = () => {
 
       const getImage = async (src: string) => {
         const buffer = src.startsWith('http')
-          ? await fetch(src).then(async (res) => Buffer.from(await res.arrayBuffer()))
+          ? await fetch(src).then(async (res) =>
+              Buffer.from(await res.arrayBuffer()),
+            )
           : await readFile(path.join('./public', src));
 
         const {

@@ -14,7 +14,9 @@ import * as React from 'react';
 import { ScrollArea } from '#/ui/data-display';
 import { Separator } from '#/ui/layout';
 
-const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
+const tags = Array.from({ length: 50 }).map(
+  (_, i, a) => `v1.2.0-beta.${a.length - i}`,
+);
 
 export default () => (
   <ScrollArea className='h-72 w-48 rounded-md border'>
@@ -83,7 +85,10 @@ export default () => (
             />
           </div>
           <figcaption className='pt-2 text-xs text-muted-foreground'>
-            Photo by <span className='font-medium text-foreground'>{artwork.artist}</span>
+            Photo by{' '}
+            <span className='font-medium text-foreground'>
+              {artwork.artist}
+            </span>
           </figcaption>
         </figure>
       ))}

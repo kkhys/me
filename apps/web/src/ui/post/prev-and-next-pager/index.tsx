@@ -3,16 +3,31 @@ import Link from 'next/link';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { allPosts } from 'contentlayer/generated';
 
-import { Button, cn, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@kkhys/ui';
+import {
+  Button,
+  cn,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@kkhys/ui';
 
-export const PrevAndNextPager = ({ id, className }: { id: string; className?: string }) => {
+export const PrevAndNextPager = ({
+  id,
+  className,
+}: {
+  id: string;
+  className?: string;
+}) => {
   const pager = getPager(id);
   if (!pager) return null;
 
   const { prev, next } = pager;
 
   return (
-    <div className={cn('flex items-center justify-between font-sans', className)}>
+    <div
+      className={cn('flex items-center justify-between font-sans', className)}
+    >
       {prev?.slug && (
         <TooltipProvider delayDuration={300}>
           <Tooltip>
@@ -62,12 +77,18 @@ const getPager = (targetId: string) => {
     ...allPosts
       .filter((post) => post.status === 'published')
       .filter((post) => post._id)
-      .sort((a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()),
+      .sort(
+        (a, b) =>
+          new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime(),
+      ),
   ];
 
   const activeIndex = targetPosts.findIndex((post) => targetId === post?._id);
   const prev = activeIndex !== 0 ? targetPosts[activeIndex - 1] : null;
-  const next = activeIndex !== targetPosts.length - 1 ? targetPosts[activeIndex + 1] : null;
+  const next =
+    activeIndex !== targetPosts.length - 1
+      ? targetPosts[activeIndex + 1]
+      : null;
 
   return { prev, next };
 };

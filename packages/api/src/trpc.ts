@@ -7,7 +7,10 @@ import { db } from '@kkhys/db';
 
 import { CustomTrpcError } from './exceptions';
 
-export const createTRPCContext = (opts: { headers: Headers; session: Session | null }) => {
+export const createTRPCContext = (opts: {
+  headers: Headers;
+  session: Session | null;
+}) => {
   const session = opts.session;
   const source = opts.headers.get('x-trpc-source') ?? 'unknown';
   const ip = opts.headers.get('X-Forwarded-For');
@@ -28,8 +31,10 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       ...shape,
       data: {
         ...shape.data,
-        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
-        customErrorName: error instanceof CustomTrpcError ? error.cause?.name : null,
+        zodError:
+          error.cause instanceof ZodError ? error.cause.flatten() : null,
+        customErrorName:
+          error instanceof CustomTrpcError ? error.cause?.name : null,
       },
     };
   },

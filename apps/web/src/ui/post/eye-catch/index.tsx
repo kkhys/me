@@ -38,13 +38,17 @@ export const EyeCatch = ({
   emoji,
   className,
   size,
-}: { emoji: string; className?: string } & VariantProps<typeof eyeCatchVariants>) => {
+}: { emoji: string; className?: string } & VariantProps<
+  typeof eyeCatchVariants
+>) => {
   const { theme, systemTheme } = useTheme();
   const [imageSrc, setImageSrc] = React.useState('');
 
   React.useEffect(() => {
     const selectedTheme = theme === 'system' ? systemTheme : theme;
-    setImageSrc(`/api/noto-emoji/${emoji}.svg?theme=${selectedTheme === 'dark' ? 'dark' : 'light'}`);
+    setImageSrc(
+      `/api/noto-emoji/${emoji}.svg?theme=${selectedTheme === 'dark' ? 'dark' : 'light'}`,
+    );
   }, [theme, systemTheme, emoji]);
 
   return (

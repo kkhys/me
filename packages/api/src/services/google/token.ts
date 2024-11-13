@@ -36,11 +36,14 @@ const createToken = async () => {
     assertion: token,
   };
 
-  const tokenResponse = await fetch('https://www.googleapis.com/oauth2/v4/token', {
-    method: 'POST',
-    body: JSON.stringify(form),
-    headers: { 'Content-Type': 'application/json' },
-  });
+  const tokenResponse = await fetch(
+    'https://www.googleapis.com/oauth2/v4/token',
+    {
+      method: 'POST',
+      body: JSON.stringify(form),
+      headers: { 'Content-Type': 'application/json' },
+    },
+  );
 
   if (!tokenResponse.ok) {
     throw new Error('Failed to get token');

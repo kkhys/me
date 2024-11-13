@@ -25,7 +25,8 @@ type Story = StoryObj<typeof meta>;
 const DefaultDemo = () => {
   const [goal, setGoal] = React.useState(350);
 
-  const onClick = (adjustment: number) => setGoal(Math.max(200, Math.min(400, goal + adjustment)));
+  const onClick = (adjustment: number) =>
+    setGoal(Math.max(200, Math.min(400, goal + adjustment)));
 
   return (
     <Drawer>
@@ -51,8 +52,12 @@ const DefaultDemo = () => {
                 <span className='sr-only'>Decrease</span>
               </Button>
               <div className='flex-1 text-center'>
-                <div className='text-7xl font-bold tracking-tighter'>{goal}</div>
-                <div className='text-[0.70rem] uppercase text-muted-foreground'>Calories/day</div>
+                <div className='text-7xl font-bold tracking-tighter'>
+                  {goal}
+                </div>
+                <div className='text-[0.70rem] uppercase text-muted-foreground'>
+                  Calories/day
+                </div>
               </div>
               <Button
                 variant='outline'

@@ -12,7 +12,9 @@ export const env = createEnv({
     LINE_CHANNEL_ACCESS_TOKEN: z.string().min(1),
     RECAPTCHA_SECRET_KEY: z.string().min(1),
     RECAPTCHA_SITE_KEY: z.string().min(1),
-    NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+    NODE_ENV: z
+      .enum(['development', 'production', 'test'])
+      .default('development'),
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,

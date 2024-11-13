@@ -1,7 +1,8 @@
 import { dirname, join, resolve } from 'path';
 import type { StorybookConfig } from '@storybook/nextjs';
 
-const getAbsolutePath = (value: string): any => dirname(require.resolve(join(value, 'package.json')));
+const getAbsolutePath = (value: string): any =>
+  dirname(require.resolve(join(value, 'package.json')));
 
 const config = {
   stories: ['../src/**/overview.mdx', '../src/**/*.stories.@(ts|tsx|mdx)'],
@@ -22,7 +23,8 @@ const config = {
       '#': resolve(__dirname, '..'),
       // FIXME: I don't know why this is needed, but it is
       // @see: https://github.com/storybookjs/storybook/issues/24234
-      'contentlayer/generated': 'next/dist/shared/lib/router-context.shared-runtime',
+      'contentlayer/generated':
+        'next/dist/shared/lib/router-context.shared-runtime',
     };
     return config;
   },

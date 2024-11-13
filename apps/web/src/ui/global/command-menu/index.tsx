@@ -3,7 +3,12 @@
 import type { Route } from 'next';
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-import { LaptopIcon, MagnifyingGlassIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import {
+  LaptopIcon,
+  MagnifyingGlassIcon,
+  MoonIcon,
+  SunIcon,
+} from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
 
 import {
@@ -77,7 +82,12 @@ export const CommandMenu = ({ className }: { className?: string }) => {
           <span>⌘</span>K
         </kbd>
       </Button>
-      <Button variant='ghost' size='icon' onClick={() => setOpen(true)} className='md:hidden'>
+      <Button
+        variant='ghost'
+        size='icon'
+        onClick={() => setOpen(true)}
+        className='md:hidden'
+      >
         <MagnifyingGlassIcon className='size-4' />
         <span className='sr-only'>Search</span>
       </Button>
@@ -91,7 +101,9 @@ export const CommandMenu = ({ className }: { className?: string }) => {
                 <CommandItem
                   key={item.href}
                   value={item.title}
-                  onSelect={() => runCommand(() => router.push(item.href as Route))}
+                  onSelect={() =>
+                    runCommand(() => router.push(item.href as Route))
+                  }
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img

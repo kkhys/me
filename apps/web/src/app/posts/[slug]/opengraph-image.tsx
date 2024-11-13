@@ -17,9 +17,17 @@ export const size = {
  * @returns The post object matching the given slug, or undefined if not found.
  */
 const getPostBySlug = (slug: string) =>
-  allPosts.find((post) => (env.NODE_ENV === 'development' || post.status === 'published') && post.slug === slug);
+  allPosts.find(
+    (post) =>
+      (env.NODE_ENV === 'development' || post.status === 'published') &&
+      post.slug === slug,
+  );
 
-export const generateImageMetadata = ({ params: { slug } }: { params: { slug: string } }) => {
+export const generateImageMetadata = ({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) => {
   const post = getPostBySlug(slug);
   if (!post) return [];
 

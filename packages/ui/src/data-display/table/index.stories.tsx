@@ -1,6 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '.';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '.';
 
 const meta = {
   title: 'Data Display / Table',
@@ -81,7 +90,9 @@ export const Default = {
               <TableCell className='font-medium'>{invoice.invoice}</TableCell>
               <TableCell>{invoice.paymentStatus}</TableCell>
               <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className='text-right'>{invoice.totalAmount}</TableCell>
+              <TableCell className='text-right'>
+                {invoice.totalAmount}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -39,13 +39,24 @@ const NextImage = ({
 
 type ModalState = 'LOADED' | 'LOADING' | 'UNLOADED' | 'UNLOADING';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CustomZoom = ({ img, _modalState, gap }: { img: React.ReactElement | null; _modalState: any; gap: number }) => {
+const CustomZoom = ({
+  img,
+  _modalState,
+  gap,
+}: {
+  img: React.ReactElement | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  _modalState: any;
+  gap: number;
+}) => {
   const modalState = _modalState as ModalState;
 
   React.useEffect(() => {
     if (modalState === 'LOADING') {
-      document.body.style.setProperty('--removed-body-scroll-bar-size', `${gap}px`);
+      document.body.style.setProperty(
+        '--removed-body-scroll-bar-size',
+        `${gap}px`,
+      );
     }
 
     if (modalState === 'UNLOADED') {
@@ -56,7 +67,13 @@ const CustomZoom = ({ img, _modalState, gap }: { img: React.ReactElement | null;
   return <>{img}</>;
 };
 
-const ZoomImage = ({ src, children }: { src: string; children: React.ReactNode }) => {
+const ZoomImage = ({
+  src,
+  children,
+}: {
+  src: string;
+  children: React.ReactNode;
+}) => {
   const isDesktop = useMediaQuery('(min-width: 768px)');
   const { gap } = getGapWidth();
 
@@ -64,7 +81,9 @@ const ZoomImage = ({ src, children }: { src: string; children: React.ReactNode }
     <Zoom
       zoomImg={{ src }}
       zoomMargin={isDesktop ? 45 : 10}
-      ZoomContent={({ img, modalState }) => <CustomZoom img={img} _modalState={modalState} gap={gap} />}
+      ZoomContent={({ img, modalState }) => (
+        <CustomZoom img={img} _modalState={modalState} gap={gap} />
+      )}
     >
       {children}
     </Zoom>
@@ -92,7 +111,13 @@ export const ImageBlock = ({
     return (
       <div className='select-none'>
         <ZoomImage src={src}>
-          <NextImage src={src} alt={alt} width={width as number} height={height as number} blurDataURL={blurDataURL} />
+          <NextImage
+            src={src}
+            alt={alt}
+            width={width as number}
+            height={height as number}
+            blurDataURL={blurDataURL}
+          />
         </ZoomImage>
       </div>
     );
@@ -101,10 +126,18 @@ export const ImageBlock = ({
     <figure>
       <div className='select-none'>
         <ZoomImage src={src}>
-          <NextImage src={src} alt={alt} width={width as number} height={height as number} blurDataURL={blurDataURL} />
+          <NextImage
+            src={src}
+            alt={alt}
+            width={width as number}
+            height={height as number}
+            blurDataURL={blurDataURL}
+          />
         </ZoomImage>
       </div>
-      <figcaption className='text-center text-xs text-muted-foreground'>{title}</figcaption>
+      <figcaption className='text-center text-xs text-muted-foreground'>
+        {title}
+      </figcaption>
     </figure>
   );
 };

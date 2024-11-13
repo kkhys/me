@@ -4,7 +4,10 @@ import satori from 'satori';
 
 export const runtime = 'edge';
 
-export const GET = async (request: NextRequest, { params: { slug } }: { params: { slug: string } }) => {
+export const GET = async (
+  request: NextRequest,
+  { params: { slug } }: { params: { slug: string } },
+) => {
   const rawText = slug.endsWith('.svg') ? slug.replace('.svg', '') : '';
 
   if (!rawText.length || !isEmoji(rawText)) {
@@ -16,7 +19,10 @@ export const GET = async (request: NextRequest, { params: { slug } }: { params: 
   const firstEmoji = Array.from(rawText)[0];
 
   const notoEmojiRegular = await fetch(
-    new URL('../../../../../assets/fonts/NotoEmoji-Regular.ttf', import.meta.url),
+    new URL(
+      '../../../../../assets/fonts/NotoEmoji-Regular.ttf',
+      import.meta.url,
+    ),
   ).then((res) => res.arrayBuffer());
 
   const searchParams = request.nextUrl.searchParams;

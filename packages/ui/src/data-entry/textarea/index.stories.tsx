@@ -97,7 +97,9 @@ export const WithText = {
       <div className='grid w-full max-w-sm items-center gap-1.5'>
         <Label htmlFor={withLabelTextareaIdAndLabel}>Your Message</Label>
         <Story />
-        <p className='text-sm text-muted-foreground'>Your message will be copied to the support team.</p>
+        <p className='text-sm text-muted-foreground'>
+          Your message will be copied to the support team.
+        </p>
       </div>
     ),
   ],
@@ -146,7 +148,10 @@ const FormDemo = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='w-[400px] space-y-6'>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='w-[400px] space-y-6'
+      >
         <FormField
           control={form.control}
           name='bio'
@@ -154,7 +159,11 @@ const FormDemo = () => {
             <FormItem>
               <FormLabel>Bio</FormLabel>
               <FormControl>
-                <Textarea placeholder='Tell us a little bit about yourself' className='resize-none' {...field} />
+                <Textarea
+                  placeholder='Tell us a little bit about yourself'
+                  className='resize-none'
+                  {...field}
+                />
               </FormControl>
               <FormDescription>
                 You can <span>@mention</span> other users and organizations.

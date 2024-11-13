@@ -14,5 +14,12 @@
     "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
   },
   "include": [".", ".next/types/**/*.ts", ".contentlayer/generated"],
-  "exclude": ["node_modules", "storybook-static", ".contentlayer", "__reports__", "coverage", "playwright-report"]
+  "exclude": [
+    "node_modules",
+    "storybook-static",
+    ".contentlayer",
+    "__reports__",
+    "coverage",
+    "playwright-report"
+  ]
 }

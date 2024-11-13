@@ -35,7 +35,15 @@ export const Pagination = ({
   let visiblePages: (number | '...')[];
 
   if (hasLeftEllipsis && hasRightEllipsis) {
-    visiblePages = [leftEdgePage, '...', currentPage - 1, currentPage, currentPage + 1, '...', rightEdgePage];
+    visiblePages = [
+      leftEdgePage,
+      '...',
+      currentPage - 1,
+      currentPage,
+      currentPage + 1,
+      '...',
+      rightEdgePage,
+    ];
   } else if (hasLeftEllipsis && !hasRightEllipsis) {
     visiblePages = [leftEdgePage, '...', ...pages.slice(-3)];
   } else if (!hasLeftEllipsis && hasRightEllipsis) {
@@ -55,7 +63,10 @@ export const Pagination = ({
             {typeof page === 'string' ? (
               <PaginationEllipsis />
             ) : (
-              <PaginationLink onClick={() => jump(page)} isActive={currentPage === page}>
+              <PaginationLink
+                onClick={() => jump(page)}
+                isActive={currentPage === page}
+              >
                 {page}
               </PaginationLink>
             )}

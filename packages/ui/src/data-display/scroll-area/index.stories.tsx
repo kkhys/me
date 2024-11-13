@@ -30,7 +30,10 @@ const meta = {
       options: ['auto', 'always', 'scroll', 'hover'],
       table: {
         defaultValue: { summary: 'hover' },
-        type: { summary: 'enum', detail: '"auto" | "always" | "scroll" | "hover"' },
+        type: {
+          summary: 'enum',
+          detail: '"auto" | "always" | "scroll" | "hover"',
+        },
       },
       type: {
         name: 'enum',
@@ -78,7 +81,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
+const tags = Array.from({ length: 50 }).map(
+  (_, i, a) => `v1.2.0-beta.${a.length - i}`,
+);
 
 export const Default = {
   args: {
@@ -132,7 +137,10 @@ export const HorizontalScrolling = {
                 />
               </div>
               <figcaption className='pt-2 text-xs text-muted-foreground'>
-                Photo by <span className='font-medium text-foreground'>{artwork.artist}</span>
+                Photo by{' '}
+                <span className='font-medium text-foreground'>
+                  {artwork.artist}
+                </span>
               </figcaption>
             </figure>
           ))}

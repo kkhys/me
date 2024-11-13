@@ -1,6 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '.';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '.';
 
 const meta = {
   title: 'Data Display / Accordion',
@@ -20,7 +25,8 @@ const meta = {
     },
     type: {
       control: 'radio',
-      description: 'Determines whether one or multiple items can be opened at the same time.',
+      description:
+        'Determines whether one or multiple items can be opened at the same time.',
       options: ['single', 'multiple'],
       table: {
         type: { summary: 'enum', detail: '"single" | "multiple"' },
@@ -60,7 +66,8 @@ const meta = {
     onValueChange: {
       if: { arg: 'type', eq: 'single' },
       action: 'changed',
-      description: 'Event handler called when the expanded state of an item changes and `type` is `"single"`.',
+      description:
+        'Event handler called when the expanded state of an item changes and `type` is `"single"`.',
       table: {
         category: 'Events',
         type: { summary: 'function', detail: '(value: string) => void' },
@@ -85,7 +92,8 @@ const meta = {
     collapsible: {
       if: { arg: 'type', eq: 'single' },
       control: 'boolean',
-      description: 'When `type` is `"single"`, allows closing content when clicking trigger for an open item.',
+      description:
+        'When `type` is `"single"`, allows closing content when clicking trigger for an open item.',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
@@ -96,7 +104,8 @@ const meta = {
     },
     disabled: {
       control: 'boolean',
-      description: 'When `true`, prevents the user from interacting with the accordion and all its items.',
+      description:
+        'When `true`, prevents the user from interacting with the accordion and all its items.',
       table: {
         defaultValue: { summary: false },
         type: { summary: 'boolean' },
@@ -143,17 +152,22 @@ export const Default = {
       <>
         <AccordionItem value='item-1'>
           <AccordionTrigger>Is it accessible?</AccordionTrigger>
-          <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
+          <AccordionContent>
+            Yes. It adheres to the WAI-ARIA design pattern.
+          </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-2'>
           <AccordionTrigger>Is it unstyled?</AccordionTrigger>
           <AccordionContent>
-            Yes. It&apos;s unstyled by default, giving you freedom over the look and feel.
+            Yes. It&apos;s unstyled by default, giving you freedom over the look
+            and feel.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value='item-3'>
           <AccordionTrigger>Can it be animated?</AccordionTrigger>
-          <AccordionContent>Yes! You can animate the Accordion with CSS or JavaScript.</AccordionContent>
+          <AccordionContent>
+            Yes! You can animate the Accordion with CSS or JavaScript.
+          </AccordionContent>
         </AccordionItem>
       </>
     ),

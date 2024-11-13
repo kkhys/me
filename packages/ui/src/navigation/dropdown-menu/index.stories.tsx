@@ -38,7 +38,8 @@ const meta = {
     },
     open: {
       control: 'boolean',
-      description: 'The controlled open state of the dropdown menu. Must be used in conjunction with `onOpenChange`.',
+      description:
+        'The controlled open state of the dropdown menu. Must be used in conjunction with `onOpenChange`.',
       table: {
         type: { summary: 'boolean' },
       },
@@ -48,7 +49,8 @@ const meta = {
     },
     onOpenChange: {
       action: 'onOpenChange',
-      description: 'Event handler called when the open state of the dropdown menu changes.',
+      description:
+        'Event handler called when the open state of the dropdown menu changes.',
       table: {
         category: 'Events',
         type: { summary: '(open: boolean) => void' },
@@ -169,13 +171,23 @@ const CheckboxesDemo = () => {
       <DropdownMenuContent className='w-56'>
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
+        <DropdownMenuCheckboxItem
+          checked={showStatusBar}
+          onCheckedChange={setShowStatusBar}
+        >
           Status Bar
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={showActivityBar} onCheckedChange={setShowActivityBar} disabled>
+        <DropdownMenuCheckboxItem
+          checked={showActivityBar}
+          onCheckedChange={setShowActivityBar}
+          disabled
+        >
           Activity Bar
         </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem checked={showPanel} onCheckedChange={setShowPanel}>
+        <DropdownMenuCheckboxItem
+          checked={showPanel}
+          onCheckedChange={setShowPanel}
+        >
           Panel
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>

@@ -6,14 +6,20 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 export const usePagination = (data: Post[], itemsPerPage = 10) => {
   const _searchParams = useSearchParams();
-  const searchParams = React.useMemo(() => new URLSearchParams(_searchParams), [_searchParams]);
+  const searchParams = React.useMemo(
+    () => new URLSearchParams(_searchParams),
+    [_searchParams],
+  );
 
   const router = useRouter();
 
   const [currentPage, setCurrentPage] = React.useState(1);
   const [currentCategory, setCurrentCategory] = React.useState('all');
 
-  const maxPage = React.useMemo(() => Math.ceil(data.length / itemsPerPage), [data, itemsPerPage]);
+  const maxPage = React.useMemo(
+    () => Math.ceil(data.length / itemsPerPage),
+    [data, itemsPerPage],
+  );
 
   const currentData = () => {
     const begin = (currentPage - 1) * itemsPerPage;

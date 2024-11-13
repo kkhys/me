@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ChevronRightIcon, EnvelopeOpenIcon, ReloadIcon } from '@radix-ui/react-icons';
+import {
+  ChevronRightIcon,
+  EnvelopeOpenIcon,
+  ReloadIcon,
+} from '@radix-ui/react-icons';
 
 import { Button } from '.';
 
@@ -10,14 +14,32 @@ const meta = {
     variant: {
       control: 'radio',
       description: 'The button variant.',
-      options: ['default', 'secondary', 'outline', 'ghost', 'link', 'destructive'],
+      options: [
+        'default',
+        'secondary',
+        'outline',
+        'ghost',
+        'link',
+        'destructive',
+      ],
       table: {
         defaultValue: { summary: 'default' },
-        type: { summary: 'enum', detail: '"default" | "secondary" | "outline" | "ghost" | "link" | "destructive"' },
+        type: {
+          summary: 'enum',
+          detail:
+            '"default" | "secondary" | "outline" | "ghost" | "link" | "destructive"',
+        },
       },
       type: {
         name: 'enum',
-        value: ['default', 'secondary', 'outline', 'ghost', 'link', 'destructive'],
+        value: [
+          'default',
+          'secondary',
+          'outline',
+          'ghost',
+          'link',
+          'destructive',
+        ],
       },
     },
     size: {
