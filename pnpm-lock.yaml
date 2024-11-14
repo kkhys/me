@@ -602,8 +602,8 @@ importers:
         specifier: 0.10.3
         version: 0.10.3
       drizzle-orm:
-        specifier: 0.36.1
-        version: 0.36.1(@neondatabase/serverless@0.10.3)(pg@8.13.1)
+        specifier: 0.36.2
+        version: 0.36.2(@neondatabase/serverless@0.10.3)(pg@8.13.1)
     devDependencies:
       '@kkhys/eslint-config':
         specifier: workspace:*
@@ -13906,8 +13906,8 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.36.1(@neondatabase/serverless@0.10.3)(pg@8.13.1):
-    resolution: {integrity: sha512-F4hbimnMEhyWzDowQB4xEuVJJWXLHZYD7FYwvo8RImY+N7pStGqsbfmT95jDbec1s4qKmQbiuxEDZY90LRrfIw==}
+  /drizzle-orm@0.36.2(@neondatabase/serverless@0.10.3)(pg@8.13.1):
+    resolution: {integrity: sha512-uVwIdQMo+zwI09hCSNVR29tYn4Vw6F7gga/CsZgDJmTSGDdUdLo+Ur45Qc3gDK7oFTxD/eRANNnPgvPmRY+jSA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -13928,7 +13928,7 @@ packages:
       '@xata.io/client': '*'
       better-sqlite3: '>=7'
       bun-types: '*'
-      expo-sqlite: '>=13.2.0'
+      expo-sqlite: '>=14.0.0'
       knex: '*'
       kysely: '*'
       mysql2: '>=2'
