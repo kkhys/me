@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "me",
+  "name": "root",
   "private": true,
   "scripts": {
     "lint": "bunx biome check .",
@@ -9,9 +9,11 @@
   "release": {
     "branches": ["main"]
   },
+  "packageManager": "bun@1.1.34",
   "engines": {
     "bun": "1.1.34"
   },
+  "workspaces": ["apps/*"],
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/bun": "1.1.13",
