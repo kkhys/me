@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/ui",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "types": "./dist/src/*.d.ts",
+      "default": ["./src/*.ts", "./src/*.tsx"]
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist",
+    "dev": "tsc",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "ui-add": "bunx --bun shadcn@latest add",
+    "ui-diff": "bunx --bun shadcn@latest diff"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "1.1.0",
+    "class-variance-authority": "0.7.0",
+    "lucide-react": "0.460.0",
+    "tailwind-merge": "2.5.4",
+    "tailwindcss-animate": "1.0.7"
+  },
+  "devDependencies": {
+    "@kkhys/tailwind-config": "workspace:*",
+    "@kkhys/tsconfig": "workspace:*",
+    "@types/react": "18.3.12",
+    "react": "19.0.0-rc-66855b96-20241106",
+    "typescript": "5.6.3"
+  }
+}
