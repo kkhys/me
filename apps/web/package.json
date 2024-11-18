@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/web",
+  "private": true,
+  "scripts": {
+    "dev": "bun --bun with-env next dev --port 3000",
+    "build": "bun with-env next build",
+    "start": "bun with-env next start --port 3000",
+    "typecheck": "tsc --noEmit",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "dependencies": {
+    "react": "19.0.0-rc-66855b96-20241106",
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "next": "15.0.3"
+  },
+  "devDependencies": {
+    "@kkhys/tsconfig": "workspace:*",
+    "@types/node": "22.9.0",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "dotenv-cli": "7.4.2",
+    "typescript": "5.6.3"
+  }
+}
