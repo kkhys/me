@@ -11,10 +11,12 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: z.string().min(1),
+    NEXT_PUBLIC_TAG_MANAGER_ID: z.string().min(1),
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+    NEXT_PUBLIC_TAG_MANAGER_ID: process.env.NEXT_PUBLIC_TAG_MANAGER_ID,
   },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",

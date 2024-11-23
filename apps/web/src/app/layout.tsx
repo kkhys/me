@@ -1,7 +1,9 @@
 import "#/styles/globals.css";
 import { cn } from "@kkhys/ui";
+import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata, Viewport } from "next";
 import { META_THEME_COLORS, siteConfig } from "#/config";
+import { env } from "#/env";
 import { inter, jetBrainsMono, newsreader, notoSansJP } from "#/lib/fonts";
 import { Provider } from "#/providers";
 
@@ -38,7 +40,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
         </div>
       </Provider>
     </body>
-    {/*<GoogleTagManager gtmId={site.google.tagManagerId} />*/}
+    <GoogleTagManager gtmId={env.NEXT_PUBLIC_TAG_MANAGER_ID} />
   </html>
 );
 
