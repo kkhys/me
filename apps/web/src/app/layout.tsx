@@ -1,9 +1,11 @@
+import "#/styles/globals.css";
+
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="ja">
       <body>
         <header>
-          <h1>test</h1>
+          <h1 className="text-red-100">test</h1>
         </header>
         <main>{children}</main>
       </body>
