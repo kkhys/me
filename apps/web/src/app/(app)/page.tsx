@@ -1,4 +1,4 @@
-import { Button } from "@kkhys/ui";
+import { Button } from "@kkhys/ui/button";
 
 const Page = () => {
   return (
