@@ -1,3 +1,5 @@
+"use client";
+
 import { ThemeProvider } from "@kkhys/ui/theme";
 import { TooltipProvider } from "@kkhys/ui/tooltip";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
