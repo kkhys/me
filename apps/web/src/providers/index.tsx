@@ -1,5 +1,7 @@
 import { ThemeProvider } from "@kkhys/ui/theme";
 import { TooltipProvider } from "@kkhys/ui/tooltip";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import { env } from "#/env";
 
 export const Provider = ({ children }: { children: React.ReactNode }) => (
   <ThemeProvider
@@ -8,6 +10,13 @@ export const Provider = ({ children }: { children: React.ReactNode }) => (
     enableSystem
     disableTransitionOnChange
   >
-    <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
+    <TooltipProvider delayDuration={0}>
+      <GoogleReCaptchaProvider
+        reCaptchaKey={env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+        useEnterprise={true}
+      >
+        {children}
+      </GoogleReCaptchaProvider>
+    </TooltipProvider>
   </ThemeProvider>
 );
