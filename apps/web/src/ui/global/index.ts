@@ -1,3 +1,4 @@
+export * from "./command-menu";
 export * from "./icons";
 export * from "./main-nav";
 export * from "./mobile-nav";
