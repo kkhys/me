@@ -602,8 +602,8 @@ importers:
         specifier: 0.10.3
         version: 0.10.3
       drizzle-orm:
-        specifier: 0.36.3
-        version: 0.36.3(@neondatabase/serverless@0.10.3)(pg@8.13.1)
+        specifier: 0.36.4
+        version: 0.36.4(@neondatabase/serverless@0.10.3)(pg@8.13.1)
     devDependencies:
       '@kkhys/eslint-config':
         specifier: workspace:*
@@ -13891,15 +13891,15 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.36.3(@neondatabase/serverless@0.10.3)(pg@8.13.1):
-    resolution: {integrity: sha512-ffQB7CcyCTvQBK6xtRLMl/Jsd5xFTBs+UTHrgs1hbk68i5TPkbsoCPbKEwiEsQZfq2I7VH632XJpV1g7LS2H9Q==}
+  /drizzle-orm@0.36.4(@neondatabase/serverless@0.10.3)(pg@8.13.1):
+    resolution: {integrity: sha512-1OZY3PXD7BR00Gl61UUOFihslDldfH4NFRH2MbP54Yxi0G/PKn4HfO65JYZ7c16DeP3SpM3Aw+VXVG9j6CRSXA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
       '@electric-sql/pglite': '>=0.2.0'
       '@libsql/client': '>=0.10.0'
       '@libsql/client-wasm': '>=0.10.0'
-      '@neondatabase/serverless': '>=0.1'
+      '@neondatabase/serverless': '>=0.10.0'
       '@op-engineering/op-sqlite': '>=2'
       '@opentelemetry/api': ^1.4.1
       '@planetscale/database': '>=1'
