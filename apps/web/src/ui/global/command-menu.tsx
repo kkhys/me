@@ -1,6 +1,7 @@
 "use client";
 
-import type { DialogProps } from "@kkhys/ui";
+import { DialogDescription, type DialogProps } from "@kkhys/ui";
+import { DialogTitle } from "@kkhys/ui";
 import { Circle, File, Laptop, Moon, Sun } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
@@ -68,6 +69,10 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
+        <DialogTitle className="sr-only">Search</DialogTitle>
+        <DialogDescription className="sr-only">
+          Search for kkhys.me
+        </DialogDescription>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>

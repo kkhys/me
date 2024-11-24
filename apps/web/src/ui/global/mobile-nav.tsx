@@ -1,6 +1,14 @@
 "use client";
 
-import { Button, Drawer, DrawerContent, DrawerTrigger, cn } from "@kkhys/ui";
+import {
+  Button,
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+  cn,
+} from "@kkhys/ui";
 import type { Route } from "next";
 import Link from "next/link";
 import type { LinkProps } from "next/link";
@@ -36,6 +44,10 @@ export const MobileNav = () => {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </DrawerTrigger>
+      <DrawerTitle className="sr-only">Menu</DrawerTitle>
+      <DrawerDescription className="sr-only">
+        Mobile navigation
+      </DrawerDescription>
       <DrawerContent className="max-h-[60svh] p-0">
         <div className="overflow-auto p-6">
           <div className="flex flex-col space-y-3">
