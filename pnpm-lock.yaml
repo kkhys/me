@@ -372,8 +372,8 @@ importers:
         specifier: 7.6.20
         version: 7.6.20(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1)(react@18.3.1)
       '@storybook/csf':
-        specifier: 0.1.11
-        version: 0.1.11
+        specifier: 0.1.12
+        version: 0.1.12
       '@storybook/jest':
         specifier: 0.2.3
         version: 0.2.3
@@ -837,8 +837,8 @@ importers:
         specifier: 7.6.20
         version: 7.6.20(typescript@5.7.2)(vite@5.4.11)
       '@storybook/csf':
-        specifier: 0.1.11
-        version: 0.1.11
+        specifier: 0.1.12
+        version: 0.1.12
       '@storybook/react':
         specifier: 7.6.20
         version: 7.6.20(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
@@ -8643,7 +8643,7 @@ packages:
       '@babel/core': 7.24.5
       '@babel/preset-env': 7.23.2(@babel/core@7.24.5)
       '@babel/types': 7.24.8
-      '@storybook/csf': 0.1.11
+      '@storybook/csf': 0.1.12
       '@storybook/csf-tools': 7.6.20
       '@storybook/node-logger': 7.6.20
       '@storybook/types': 7.6.20
@@ -8667,7 +8667,7 @@ packages:
       '@radix-ui/react-select': 1.2.2(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-toolbar': 1.0.4(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1)(react@18.3.1)
       '@storybook/client-logger': 7.6.20
-      '@storybook/csf': 0.1.11
+      '@storybook/csf': 0.1.12
       '@storybook/global': 5.0.0
       '@storybook/theming': 7.6.20(react-dom@18.3.1)(react@18.3.1)
       '@storybook/types': 7.6.20
@@ -8771,7 +8771,7 @@ packages:
       '@storybook/channels': 7.6.20
       '@storybook/core-common': 7.6.20
       '@storybook/core-events': 7.6.20
-      '@storybook/csf': 0.1.11
+      '@storybook/csf': 0.1.12
       '@storybook/csf-tools': 7.6.20
       '@storybook/docs-mdx': 0.1.0
       '@storybook/global': 5.0.0
@@ -8841,7 +8841,7 @@ packages:
       '@babel/parser': 7.24.8
       '@babel/traverse': 7.24.8
       '@babel/types': 7.24.8
-      '@storybook/csf': 0.1.11
+      '@storybook/csf': 0.1.12
       '@storybook/types': 7.6.10
       fs-extra: 11.1.1
       recast: 0.23.4
@@ -8857,7 +8857,7 @@ packages:
       '@babel/parser': 7.24.8
       '@babel/traverse': 7.24.8
       '@babel/types': 7.24.8
-      '@storybook/csf': 0.1.11
+      '@storybook/csf': 0.1.12
       '@storybook/types': 7.6.20
       fs-extra: 11.1.1
       recast: 0.23.4
@@ -8868,6 +8868,12 @@ packages:
 
   /@storybook/csf@0.1.11:
     resolution: {integrity: sha512-dHYFQH3mA+EtnCkHXzicbLgsvzYjcDJ1JWsogbItZogkPHgSJM/Wr71uMkcvw8v9mmCyP4NpXJuu6bPoVsOnzg==}
+    dependencies:
+      type-fest: 2.19.0
+    dev: true
+
+  /@storybook/csf@0.1.12:
+    resolution: {integrity: sha512-9/exVhabisyIVL0VxTCxo01Tdm8wefIXKXfltAPTSr8cbLn5JAxGQ6QV3mjdecLGEOucfoVhAKtJfVHxEK1iqw==}
     dependencies:
       type-fest: 2.19.0
     dev: true
@@ -8923,7 +8929,7 @@ packages:
       '@storybook/channels': 7.6.20
       '@storybook/client-logger': 7.6.20
       '@storybook/core-events': 7.6.20
-      '@storybook/csf': 0.1.11
+      '@storybook/csf': 0.1.12
       '@storybook/global': 5.0.0
       '@storybook/router': 7.6.20
       '@storybook/theming': 7.6.20(react-dom@18.3.1)(react@18.3.1)
@@ -9235,7 +9241,7 @@ packages:
       '@storybook/channels': 7.6.20
       '@storybook/client-logger': 7.6.20
       '@storybook/core-events': 7.6.20
-      '@storybook/csf': 0.1.11
+      '@storybook/csf': 0.1.12
       '@storybook/global': 5.0.0
       '@storybook/types': 7.6.20
       '@types/qs': 6.9.9
@@ -14584,7 +14590,7 @@ packages:
     peerDependencies:
       eslint: '>=6'
     dependencies:
-      '@storybook/csf': 0.1.11
+      '@storybook/csf': 0.1.12
       '@typescript-eslint/utils': 8.15.0(eslint@8.57.1)(typescript@5.7.2)
       eslint: 8.57.1
       ts-dedent: 2.2.0
