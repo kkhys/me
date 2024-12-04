@@ -602,8 +602,8 @@ importers:
         specifier: 0.10.4
         version: 0.10.4
       drizzle-orm:
-        specifier: 0.36.4
-        version: 0.36.4(@neondatabase/serverless@0.10.4)(pg@8.13.1)
+        specifier: 0.37.0
+        version: 0.37.0(@neondatabase/serverless@0.10.4)(pg@8.13.1)
     devDependencies:
       '@kkhys/eslint-config':
         specifier: workspace:*
@@ -13727,11 +13727,11 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.36.4(@neondatabase/serverless@0.10.4)(pg@8.13.1):
-    resolution: {integrity: sha512-1OZY3PXD7BR00Gl61UUOFihslDldfH4NFRH2MbP54Yxi0G/PKn4HfO65JYZ7c16DeP3SpM3Aw+VXVG9j6CRSXA==}
+  /drizzle-orm@0.37.0(@neondatabase/serverless@0.10.4)(pg@8.13.1):
+    resolution: {integrity: sha512-AsCNACQ/T2CyZUkrBRUqFT2ibHJ9ZHz3+lzYJFFn3hnj7ylIeItMz5kacRG89uSE74nXYShqehr6u+6ks4JR1A==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
-      '@cloudflare/workers-types': '>=3'
+      '@cloudflare/workers-types': '>=4'
       '@electric-sql/pglite': '>=0.2.0'
       '@libsql/client': '>=0.10.0'
       '@libsql/client-wasm': '>=0.10.0'
