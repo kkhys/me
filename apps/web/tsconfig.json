@@ -6,11 +6,12 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "#/*": ["./src/*"]
+      "#/*": ["./src/*"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
     },
     "plugins": [{ "name": "next" }],
     "module": "esnext"
   },
-  "include": [".", ".next/types/**/*.ts"],
+  "include": [".", ".next/types/**/*.ts", ".contentlayer/generated"],
   "exclude": ["node_modules"]
 }

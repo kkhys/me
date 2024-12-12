@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withContentlayer } from "next-contentlayer2";
 import "#/env";
 
 const nextConfig = {
@@ -7,4 +8,4 @@ const nextConfig = {
   transpilePackages: ["@kkhys/ui"],
 } satisfies NextConfig;
 
-export default nextConfig;
+export default withContentlayer(nextConfig);
