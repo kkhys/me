@@ -10,8 +10,8 @@ import {
   categoryTitles,
   siteConfig,
   tags,
-} from "./src/config";
-import type { AllTagsTitle, Category, CategoryTitle, Tag } from "./src/config";
+} from "#/config";
+import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
 
 const Legal = defineDocumentType(() => ({
   name: "Legal",
