@@ -1,5 +1,9 @@
 const LegalLayout = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
+  return (
+    <div className="container py-12">
+      <section>{children}</section>
+    </div>
+  );
 };
 
 export default LegalLayout;

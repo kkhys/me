@@ -1,6 +1,7 @@
 import typography from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
+import typographyStyles from "./typography";
 
 export default {
   darkMode: ["class"],
@@ -41,6 +42,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        scrollbar: {
+          DEFAULT: "hsl(var(--scrollbar))",
+          foreground: "hsl(var(--scrollbar-foreground))",
+        },
+        selection: "hsl(var(--selection))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -48,6 +54,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
     },
+    typography: typographyStyles,
   },
   plugins: [animate, typography],
 } satisfies Config;
