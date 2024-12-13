@@ -9,6 +9,7 @@ export * from "./button";
 export * from "./command";
 export * from "./dialog";
 export * from "./drawer";
+export * from "./dropdown-menu";
 export * from "./prose";
 export * from "./theme";
 export * from "./tooltip";
