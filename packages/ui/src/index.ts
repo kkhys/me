@@ -11,5 +11,6 @@ export * from "./dialog";
 export * from "./drawer";
 export * from "./dropdown-menu";
 export * from "./prose";
+export * from "./scroll-area";
 export * from "./theme";
 export * from "./tooltip";

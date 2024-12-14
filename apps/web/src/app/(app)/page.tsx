@@ -16,10 +16,7 @@ const Page = () => {
           interested, please take a look. Currently, only Japanese articles are
           available.
         </p>
-        <Link
-          href={{ pathname: "/posts" }}
-          className="inline-flex items-center"
-        >
+        <Link href="/posts" className="inline-flex items-center">
           Read blog
           <MoveRight className="ml-1 size-3.5" />
         </Link>

@@ -2,9 +2,14 @@ import "#/styles/globals.css";
 import { cn } from "@kkhys/ui";
 import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata, Viewport } from "next";
+import {
+  Inter,
+  JetBrains_Mono,
+  Newsreader,
+  Noto_Sans_JP,
+} from "next/font/google";
 import { META_THEME_COLORS, siteConfig } from "#/config";
 import { env } from "#/env";
-import { inter, jetBrainsMono, newsreader, notoSansJP } from "#/lib/fonts";
 import { Provider } from "#/providers";
 
 export const metadata = {
@@ -22,6 +27,36 @@ export const viewport = {
     { media: "(prefers-color-scheme: dark)", color: META_THEME_COLORS.dark },
   ],
 } satisfies Viewport;
+
+const notoSansJP = Noto_Sans_JP({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400"],
+  style: "italic",
+  adjustFontFallback: false,
+  variable: "--font-newsreader",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400"],
+  style: "normal",
+  variable: "--font-jetbrains-mono",
+});
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
   <html lang="ja" suppressHydrationWarning>

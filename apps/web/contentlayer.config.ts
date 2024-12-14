@@ -12,6 +12,7 @@ import {
   tags,
 } from "#/config";
 import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
+import { generateEmojiSvg } from "./src/utils/post"; // don't change this line
 
 const Legal = defineDocumentType(() => ({
   name: "Legal",
@@ -130,10 +131,12 @@ const Post = defineDocumentType(() => ({
         if (!tags) {
           return undefined;
         }
-        return Array.from(tags as string[]).map((tag) =>
-          generateTagObject(tag, category),
-        );
+        return Array.from(tags).map((tag) => generateTagObject(tag, category));
       },
+    },
+    emojiSvg: {
+      type: "string",
+      resolve: async ({ emoji }) => await generateEmojiSvg({ emoji }),
     },
   },
 }));

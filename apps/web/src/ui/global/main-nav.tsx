@@ -15,10 +15,10 @@ export const MainNav = () => {
       </Link>
       <nav className="flex items-center gap-4 text-sm xl:gap-6">
         <Link
-          href="/"
+          href="/posts"
           className={cn(
             "transition-colors hover:text-foreground/80",
-            pathname === "/" ? "text-foreground" : "text-foreground/80",
+            pathname === "/posts" ? "text-foreground" : "text-foreground/80",
           )}
         >
           Blog
@@ -27,7 +27,7 @@ export const MainNav = () => {
           href="/"
           className={cn(
             "transition-colors hover:text-foreground/80",
-            pathname === "/docs" ? "text-foreground" : "text-foreground/80",
+            pathname === "/contact" ? "text-foreground" : "text-foreground/80",
           )}
         >
           Contact
