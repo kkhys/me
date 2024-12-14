@@ -4,10 +4,14 @@ import { ArticleList, CategoryNav } from "#/ui/post";
 import { getPublicPosts } from "#/utils/post";
 
 export const generateStaticParams = async () =>
-  categories.map(({ slug }) => ({ slug }));
+  categories.map(({ slug }) => ({ categorySlug: slug }));
 
-const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const category = categories.find((category) => category.slug === slug);
+const Page = async ({
+  params: { categorySlug },
+}: { params: { categorySlug: string } }) => {
+  const category = categories.find(
+    (category) => category.slug === categorySlug,
+  );
 
   if (!category) {
     notFound();
