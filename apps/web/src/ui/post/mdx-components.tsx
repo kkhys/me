@@ -38,12 +38,12 @@ const components = {
         <a
           href={href}
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noreferrer"
           className="inline-flex items-center"
           {...props}
         >
           {children}
-          <SquareArrowOutUpRight className="ml-0.5 size-3" />
+          <SquareArrowOutUpRight className="ml-1 mt-0.5 size-3" />
         </a>
       );
     }

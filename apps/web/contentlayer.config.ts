@@ -4,6 +4,7 @@ import { defineDocumentType, makeSource } from "contentlayer2/source-files";
 import { format, parseISO } from "date-fns";
 import rehypeSlug from "rehype-slug"; // don't change this line
 import { remark } from "remark";
+import remarkGfm from "remark-gfm";
 import strip from "strip-markdown";
 import {
   allTagTitles,
@@ -234,6 +235,7 @@ export default makeSource({
   documentTypes: [Post, Legal],
   contentDirExclude: ["license.md", "readme.md"],
   mdx: {
+    remarkPlugins: [[remarkGfm]],
     rehypePlugins: [[rehypeSlug]],
   },
 });
