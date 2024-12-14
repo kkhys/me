@@ -29,11 +29,11 @@ export const CategoryNav = ({
           </Link>
           {categories.map((category) => (
             <Link
-              href={`/posts/category/${category.slug}` as Route}
+              href={`/posts/categories/${category.slug}` as Route}
               key={category.title}
               className={cn(
                 "flex h-7 items-center justify-center rounded-full px-4 text-center font-sans text-sm transition-colors hover:text-primary",
-                pathname?.startsWith(`/posts/category/${category.slug}`)
+                pathname?.startsWith(`/posts/categories/${category.slug}`)
                   ? "bg-muted font-medium text-primary"
                   : "text-muted-foreground",
               )}
