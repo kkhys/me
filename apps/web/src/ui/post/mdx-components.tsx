@@ -3,7 +3,7 @@ import type { MDXComponents } from "mdx/types";
 import type { Route } from "next";
 import { useMDXComponent } from "next-contentlayer2/hooks";
 import Link from "next/link";
-import { HeaderWithAnchor } from "#/ui/post";
+import { HeaderWithAnchor, MermaidBlock } from "#/ui/post";
 
 const components = {
   h2: ({
@@ -62,10 +62,12 @@ const components = {
   //     <ImageBlock {...props} />
   // ),
   img: () => null,
-  // svg: ({ children, ...props }) => (
-  //     <MermaidBlock {...props}>{children}</MermaidBlock>
-  // ),
-  svg: () => null,
+  svg: ({ children, ...props }) => {
+    if (!props.id?.includes("mermaid")) {
+      return <svg {...props} />;
+    }
+    return <MermaidBlock {...props}>{children}</MermaidBlock>;
+  },
   // 'link-card': (
   //     props: React.ComponentPropsWithoutRef<typeof LinkCardBlock>,
   // ) => <LinkCardBlock {...props} />,

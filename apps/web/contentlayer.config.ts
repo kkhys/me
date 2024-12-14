@@ -2,6 +2,7 @@ import * as crypto from "node:crypto";
 import { bech32m } from "bech32";
 import { defineDocumentType, makeSource } from "contentlayer2/source-files";
 import { format, parseISO } from "date-fns";
+import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug"; // don't change this line
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
@@ -14,6 +15,7 @@ import {
   tags,
 } from "#/config";
 import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
+import { rehypeMermaidOptions } from "./src/lib/mdx";
 import { generateEmojiSvg } from "./src/utils/emoji";
 
 const Legal = defineDocumentType(() => ({
@@ -236,6 +238,6 @@ export default makeSource({
   contentDirExclude: ["license.md", "readme.md"],
   mdx: {
     remarkPlugins: [[remarkGfm]],
-    rehypePlugins: [[rehypeSlug]],
+    rehypePlugins: [[rehypeSlug], [rehypeMermaid, rehypeMermaidOptions]],
   },
 });
