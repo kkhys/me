@@ -1,3 +1,14 @@
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  cn,
+} from "@kkhys/ui";
 import { SquareArrowOutUpRight } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 import type { Route } from "next";
@@ -87,75 +98,67 @@ const components = {
   GoogleMaps: (
     props: React.ComponentPropsWithoutRef<typeof GoogleMapsBlock>,
   ) => <GoogleMapsBlock {...props} />,
-  // Tabs,
-  // TabsList: ({
-  //              className,
-  //              ...props
-  //            }: React.ComponentPropsWithoutRef<typeof TabsList>) => (
-  //     <TabsList
-  //         className={cn(
-  //             'w-full justify-start rounded-none border-b bg-transparent p-0',
-  //             className,
-  //         )}
-  //         {...props}
-  //     />
-  // ),
-  Tabs: () => null,
-  TabsList: () => null,
-  // TabsTrigger: ({
-  //                 className,
-  //                 ...props
-  //               }: React.ComponentPropsWithoutRef<typeof TabsTrigger>) => (
-  //     <TabsTrigger
-  //         className={cn(
-  //             'relative h-9 rounded-none border-b border-b-transparent bg-transparent px-4 pb-3 pt-2 text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:bg-background-lighter data-[state=active]:text-foreground data-[state=active]:shadow-none',
-  //             className,
-  //         )}
-  //         {...props}
-  //     />
-  // ),
-  TabsTrigger: () => null,
-  // TabsContent: ({
-  //                 className,
-  //                 ...props
-  //               }: React.ComponentPropsWithoutRef<typeof TabsContent>) => (
-  //     <TabsContent
-  //         className={cn('mt-4 first:[&>*]:mt-0 last:[&>*]:mb-0', className)}
-  //         {...props}
-  //     />
-  // ),
-  TabsContent: () => null,
-  // Accordion: ({
-  //               className,
-  //               ...props
-  //             }: React.ComponentPropsWithoutRef<typeof Accordion>) => (
-  //     <Accordion className={cn('border-t', className)} {...props} />
-  // ),
-  Accordion: () => null,
-  // AccordionContent: ({
-  //                      className,
-  //                      ...props
-  //                    }: React.ComponentPropsWithoutRef<typeof AccordionContent>) => (
-  //     <AccordionContent
-  //         className={cn('first:[&>div>*]:mt-0 last:[&>div>*]:mb-0', className)}
-  //         {...props}
-  //     />
-  // ),
-  AccordionContent: () => null,
-  // AccordionItem: ({
-  //                   className,
-  //                   ...props
-  //                 }: React.ComponentPropsWithoutRef<typeof AccordionItem>) => (
-  //     <AccordionItem className={cn('[&>h3]:m-0', className)} {...props} />
-  // ),
-  AccordionItem: () => null,
-  // AccordionTrigger: ({
-  //                      className,
-  //                      ...props
-  //                    }: React.ComponentPropsWithoutRef<typeof AccordionTrigger>) => (
-  //     <AccordionTrigger className={cn('[&>p]:m-0', className)} {...props} />
-  // ),
-  AccordionTrigger: () => null,
+  Tabs,
+  TabsList: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof TabsList>) => (
+    <TabsList
+      className={cn(
+        "w-full justify-start rounded-none border-b bg-transparent p-0",
+        className,
+      )}
+      {...props}
+    />
+  ),
+  TabsTrigger: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof TabsTrigger>) => (
+    <TabsTrigger
+      className={cn(
+        "relative h-9 rounded-none border-b border-b-transparent bg-transparent px-4 pb-3 pt-2 text-muted-foreground shadow-none transition-none data-[state=active]:border-b-primary data-[state=active]:bg-background-lighter data-[state=active]:text-foreground data-[state=active]:shadow-none",
+        className,
+      )}
+      {...props}
+    />
+  ),
+  TabsContent: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof TabsContent>) => (
+    <TabsContent
+      className={cn("mt-4 first:[&>*]:mt-0 last:[&>*]:mb-0", className)}
+      {...props}
+    />
+  ),
+  Accordion: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof Accordion>) => (
+    <Accordion className={cn("border-t", className)} {...props} />
+  ),
+  AccordionContent: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof AccordionContent>) => (
+    <AccordionContent
+      className={cn("first:[&>div>*]:mt-0 last:[&>div>*]:mb-0", className)}
+      {...props}
+    />
+  ),
+  AccordionItem: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof AccordionItem>) => (
+    <AccordionItem className={cn("[&>h3]:m-0", className)} {...props} />
+  ),
+  AccordionTrigger: ({
+    className,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof AccordionTrigger>) => (
+    <AccordionTrigger className={cn("[&>p]:m-0", className)} {...props} />
+  ),
   // Details: ({
   //             children,
   //             ...props
