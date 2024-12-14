@@ -1,3 +1,4 @@
 export * from "./rehype-mermaid";
 export * from "./remark-link-card";
 export * from "./remark-next-image";
+export * from "./remark-youtube-embed";

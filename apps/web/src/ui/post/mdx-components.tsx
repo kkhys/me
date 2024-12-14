@@ -8,6 +8,7 @@ import {
   ImageBlock,
   LinkCardBlock,
   MermaidBlock,
+  YouTubeBlock,
 } from "#/ui/post";
 
 const components = {
@@ -75,10 +76,9 @@ const components = {
   "link-card": (
     props: React.ComponentPropsWithoutRef<typeof LinkCardBlock>,
   ) => <LinkCardBlock {...props} />,
-  // 'youtube-embed': (
-  //     props: React.ComponentPropsWithoutRef<typeof YouTubeBlock>,
-  // ) => <YouTubeBlock {...props} />,
-  "youtube-embed": () => null,
+  "youtube-embed": (
+    props: React.ComponentPropsWithoutRef<typeof YouTubeBlock>,
+  ) => <YouTubeBlock {...props} />,
   // 'tweet-embed': (props: React.ComponentPropsWithoutRef<typeof TweetBlock>) => (
   //     <TweetBlock {...props} />
   // ),

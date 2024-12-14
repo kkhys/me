@@ -18,16 +18,19 @@ import {
 } from "#/config";
 import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
 import {
+  YouTubeEmbedHandler,
   linkCardHandler,
   rehypeMermaidOptions,
   remarkLinkCard,
   remarkNextImage,
+  remarkYouTubeEmbed,
 } from "./src/lib/mdx";
 import { generateEmojiSvg } from "./src/utils/emoji";
 
 type ExtendedRemarkRehypeOptions = RemarkRehypeOptions & {
-  handlers?: {
-    "link-card"?: typeof linkCardHandler;
+  handlers: {
+    "link-card": typeof linkCardHandler;
+    "youtube-embed": typeof YouTubeEmbedHandler;
   };
 };
 
@@ -250,7 +253,12 @@ export default makeSource({
   documentTypes: [Post, Legal],
   contentDirExclude: ["license.md", "readme.md"],
   mdx: {
-    remarkPlugins: [[remarkGfm], [remarkLinkCard], [remarkNextImage]],
+    remarkPlugins: [
+      [remarkGfm],
+      [remarkYouTubeEmbed],
+      [remarkLinkCard],
+      [remarkNextImage],
+    ],
     rehypePlugins: [
       [rehypeSlug],
       [rehypeMermaid, rehypeMermaidOptions],
@@ -260,6 +268,7 @@ export default makeSource({
       options.remarkRehypeOptions = {
         handlers: {
           "link-card": linkCardHandler,
+          "youtube-embed": YouTubeEmbedHandler,
         },
       } as ExtendedRemarkRehypeOptions;
       return options;
