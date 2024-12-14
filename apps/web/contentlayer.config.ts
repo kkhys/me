@@ -3,7 +3,7 @@ import { bech32m } from "bech32";
 import { defineDocumentType, makeSource } from "contentlayer2/source-files";
 import { format, parseISO } from "date-fns";
 import rehypeMermaid from "rehype-mermaid";
-import rehypeSlug from "rehype-slug"; // don't change this line
+import rehypeSlug from "rehype-slug";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
@@ -18,21 +18,16 @@ import {
 } from "#/config";
 import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
 import {
+  TweetEmbedHandler,
   YouTubeEmbedHandler,
   linkCardHandler,
   rehypeMermaidOptions,
   remarkLinkCard,
   remarkNextImage,
+  remarkTweetEmbed,
   remarkYouTubeEmbed,
 } from "./src/lib/mdx";
 import { generateEmojiSvg } from "./src/utils/emoji";
-
-type ExtendedRemarkRehypeOptions = RemarkRehypeOptions & {
-  handlers: {
-    "link-card": typeof linkCardHandler;
-    "youtube-embed": typeof YouTubeEmbedHandler;
-  };
-};
 
 const Legal = defineDocumentType(() => ({
   name: "Legal",
@@ -256,6 +251,7 @@ export default makeSource({
     remarkPlugins: [
       [remarkGfm],
       [remarkYouTubeEmbed],
+      [remarkTweetEmbed],
       [remarkLinkCard],
       [remarkNextImage],
     ],
@@ -269,8 +265,9 @@ export default makeSource({
         handlers: {
           "link-card": linkCardHandler,
           "youtube-embed": YouTubeEmbedHandler,
+          "tweet-embed": TweetEmbedHandler,
         },
-      } as ExtendedRemarkRehypeOptions;
+      } as RemarkRehypeOptions;
       return options;
     },
   },
