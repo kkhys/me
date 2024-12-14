@@ -2,6 +2,7 @@ import * as crypto from "node:crypto";
 import { bech32m } from "bech32";
 import { defineDocumentType, makeSource } from "contentlayer2/source-files";
 import { format, parseISO } from "date-fns";
+import rehypeSlug from "rehype-slug"; // don't change this line
 import { remark } from "remark";
 import strip from "strip-markdown";
 import {
@@ -12,7 +13,7 @@ import {
   tags,
 } from "#/config";
 import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
-import { generateEmojiSvg } from "./src/utils/emoji"; // don't change this line
+import { generateEmojiSvg } from "./src/utils/emoji";
 
 const Legal = defineDocumentType(() => ({
   name: "Legal",
@@ -232,4 +233,7 @@ export default makeSource({
   contentDirPath: "content",
   documentTypes: [Post, Legal],
   contentDirExclude: ["license.md", "readme.md"],
+  mdx: {
+    rehypePlugins: [[rehypeSlug]],
+  },
 });
