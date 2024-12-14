@@ -3,6 +3,7 @@ import { bech32m } from "bech32";
 import { defineDocumentType, makeSource } from "contentlayer2/source-files";
 import { format, parseISO } from "date-fns";
 import rehypeMermaid from "rehype-mermaid";
+import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import { remark } from "remark";
@@ -20,8 +21,11 @@ import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
 import {
   TweetEmbedHandler,
   YouTubeEmbedHandler,
+  afterRehypePrettyCode,
+  beforeRehypePrettyCode,
   linkCardHandler,
   rehypeMermaidOptions,
+  rehypePrettyCodeOptions,
   remarkLinkCard,
   remarkNextImage,
   remarkTweetEmbed,
@@ -259,6 +263,9 @@ export default makeSource({
       [rehypeSlug],
       [rehypeMermaid, rehypeMermaidOptions],
       [rehypeUnwrapImages],
+      [beforeRehypePrettyCode],
+      [rehypePrettyCode, rehypePrettyCodeOptions],
+      [afterRehypePrettyCode],
     ],
     mdxOptions: (options) => {
       options.remarkRehypeOptions = {

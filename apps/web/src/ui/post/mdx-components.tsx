@@ -14,9 +14,11 @@ import type { MDXComponents } from "mdx/types";
 import type { Route } from "next";
 import { useMDXComponent } from "next-contentlayer2/hooks";
 import Link from "next/link";
+import type * as React from "react";
 import {
   AlertBlock,
   CarouselBlock,
+  CodeBlock,
   DetailsBlock,
   FootnotesBlock,
   GoogleMapsBlock,
@@ -79,10 +81,18 @@ const components = {
       </Link>
     );
   },
-  // figure: ({ children, ...props }) => (
-  //     <CodeBlock {...props}>{children}</CodeBlock>
-  // ),
-  figure: () => null,
+  figure: ({
+    children,
+    ...props
+  }: React.HTMLAttributes<HTMLElement> & {
+    "data-rehype-pretty-code-figure"?: string;
+  }) => {
+    if (typeof props?.["data-rehype-pretty-code-figure"] === "undefined") {
+      return <figure {...props}>{children}</figure>;
+    }
+
+    return <CodeBlock {...props}>{children}</CodeBlock>;
+  },
   img: (props: React.ComponentPropsWithoutRef<typeof ImageBlock>) => (
     <ImageBlock {...props} />
   ),

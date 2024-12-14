@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { ArticleList, EyeCatch, Mdx, Time } from "#/ui/post";
 import { getPostBySlug, getPublicPosts, getRelatedPosts } from "#/utils/post";
 
+import "#/styles/code-block.css";
+
 export const generateStaticParams = async () =>
   getPublicPosts().map(({ slug }) => ({ slug }));
 

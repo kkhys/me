@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import * as React from "react";
 import satori from "satori";
@@ -10,7 +10,7 @@ export const generateEmojiSvg = async ({
 }) => {
   const firstEmoji = Array.from(emoji)[0];
 
-  const notoEmojiRegular = fs.readFileSync(
+  const notoEmojiRegular = readFileSync(
     path.resolve(process.cwd(), "assets", "fonts", "NotoEmoji-Regular.ttf"),
   );
 

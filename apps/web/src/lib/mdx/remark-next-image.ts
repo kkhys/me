@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFileSync } from "node:fs";
 import * as path from "node:path";
 import type { Image } from "mdast";
 import { getPlaiceholder } from "plaiceholder";
@@ -16,7 +16,7 @@ export const remarkNextImage = () => {
           ? await fetch(src).then(async (res) =>
               Buffer.from(await res.arrayBuffer()),
             )
-          : await readFile(path.join("./public", src));
+          : readFileSync(path.join("./public", src));
 
         const {
           metadata: { height, width },
