@@ -1,9 +1,8 @@
-import { allPosts } from "contentlayer/generated";
 import { ArticleList, CategoryNav } from "#/ui/post";
 import { getPublicPosts } from "#/utils/post";
 
 const Page = () => {
-  const posts = getPublicPosts(allPosts);
+  const posts = getPublicPosts();
 
   return (
     <>

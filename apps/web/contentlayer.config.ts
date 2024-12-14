@@ -12,7 +12,7 @@ import {
   tags,
 } from "#/config";
 import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
-import { generateEmojiSvg } from "./src/utils/post"; // don't change this line
+import { generateEmojiSvg } from "./src/utils/emoji"; // don't change this line
 
 const Legal = defineDocumentType(() => ({
   name: "Legal",

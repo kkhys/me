@@ -1,13 +1,10 @@
-import * as fs from "node:fs";
-import * as path from "node:path";
+import { allPosts } from "contentlayer/generated";
 import type { Post } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
-import * as React from "react";
-import satori from "satori";
 import { env } from "#/env";
 
-export const getPublicPosts = (posts: Post[]): Post[] =>
-  posts
+export const getPublicPosts = () =>
+  allPosts
     .filter(
       (post) => env.NODE_ENV === "development" || post.status === "published",
     )
@@ -15,43 +12,34 @@ export const getPublicPosts = (posts: Post[]): Post[] =>
       compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)),
     );
 
-export const generateEmojiSvg = async ({
-  emoji,
-}: {
-  emoji: string;
-}) => {
-  const firstEmoji = Array.from(emoji)[0];
-
-  const notoEmojiRegular = fs.readFileSync(
-    path.resolve(process.cwd(), "assets/fonts/NotoEmoji-Regular.ttf"),
+export const getPostBySlug = (slug: string) =>
+  allPosts.find(
+    (post) =>
+      (env.NODE_ENV === "development" || post.status === "published") &&
+      post.slug === slug,
   );
 
-  return await satori(
-    <div
-      style={{
-        fontSize: 21,
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontFamily: "Noto Emoji",
-        fontSmooth: "antialiased",
-      }}
-    >
-      {firstEmoji}
-    </div>,
-    {
-      width: 24,
-      height: 24,
-      fonts: [
-        {
-          name: "Noto Emoji",
-          data: notoEmojiRegular,
-          style: "normal",
-          weight: 400,
-        },
-      ],
-    },
-  );
+export const getRelatedPosts = ({
+  _id: id,
+  category,
+}: Pick<Post, "_id" | "category">) =>
+  fisherYatesShuffle(
+    allPosts.filter(
+      (post) =>
+        post.status === "published" &&
+        post._id !== id &&
+        post.category === category,
+    ),
+  ).slice(0, 5);
+
+const fisherYatesShuffle = (posts: Post[]) => {
+  const copy = [...posts];
+
+  copy.forEach((_, index, arr) => {
+    const i = arr.length - 1 - index;
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j] as Post, arr[i] as Post];
+  });
+
+  return copy;
 };
