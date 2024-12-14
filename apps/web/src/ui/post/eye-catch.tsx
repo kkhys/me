@@ -18,7 +18,7 @@ const eyeCatchVariants = cva(
   },
 );
 
-const svgVariants = cva("", {
+const svgVariants = cva("[&>svg>path]:fill-foreground", {
   variants: {
     size: {
       default: "[&>svg]:size-5",
@@ -42,7 +42,7 @@ export const EyeCatch = ({
       <div
         // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
         dangerouslySetInnerHTML={{ __html: emoji }}
-        className={cn(svgVariants({ size }), "[&>svg>path]:fill-foreground")}
+        className={cn(svgVariants({ size }))}
       />
     </span>
   );
