@@ -15,11 +15,17 @@ import type { Route } from "next";
 import { useMDXComponent } from "next-contentlayer2/hooks";
 import Link from "next/link";
 import {
+  AlertBlock,
+  CarouselBlock,
+  DetailsBlock,
+  FootnotesBlock,
   GoogleMapsBlock,
   HeaderWithAnchor,
   ImageBlock,
   LinkCardBlock,
   MermaidBlock,
+  StepBlock,
+  StepsBlock,
   TweetBlock,
   YouTubeBlock,
 } from "#/ui/post";
@@ -159,43 +165,37 @@ const components = {
   }: React.ComponentPropsWithoutRef<typeof AccordionTrigger>) => (
     <AccordionTrigger className={cn("[&>p]:m-0", className)} {...props} />
   ),
-  // Details: ({
-  //             children,
-  //             ...props
-  //           }: React.ComponentPropsWithoutRef<typeof DetailsBlock>) => (
-  //     <DetailsBlock {...props}>{children}</DetailsBlock>
-  // ),
-  Details: () => null,
-  // Alert: (props: React.ComponentPropsWithoutRef<typeof AlertBlock>) => (
-  //     <AlertBlock {...props} />
-  // ),
-  Alert: () => null,
-  // Step: (props: React.ComponentPropsWithoutRef<typeof StepBlock>) => (
-  //     <StepBlock {...props} />
-  // ),
-  Step: () => null,
-  // Steps: (props: React.ComponentPropsWithoutRef<typeof StepsBlock>) => (
-  //     <StepsBlock {...props} />
-  // ),
-  Steps: () => null,
-  // section: ({
-  //             children,
-  //             ...props
-  //           }: React.ComponentPropsWithoutRef<'section'> & {
-  //   'data-footnotes'?: boolean;
-  // }) => {
-  //   if (typeof props['data-footnotes'] === 'undefined')
-  //     return <section {...props} />;
-  //   return <FootnotesBlock>{children}</FootnotesBlock>;
-  // },
-  section: () => null,
-  // Carousel: ({
-  //              children,
-  //              ...props
-  //            }: React.ComponentPropsWithoutRef<typeof CarouselBlock>) => (
-  //     <CarouselBlock {...props}>{children}</CarouselBlock>
-  // ),
-  Carousel: () => null,
+  Details: ({
+    children,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof DetailsBlock>) => (
+    <DetailsBlock {...props}>{children}</DetailsBlock>
+  ),
+  Alert: (props: React.ComponentPropsWithoutRef<typeof AlertBlock>) => (
+    <AlertBlock {...props} />
+  ),
+  Step: (props: React.ComponentPropsWithoutRef<typeof StepBlock>) => (
+    <StepBlock {...props} />
+  ),
+  Steps: (props: React.ComponentPropsWithoutRef<typeof StepsBlock>) => (
+    <StepsBlock {...props} />
+  ),
+  section: ({
+    children,
+    ...props
+  }: React.ComponentPropsWithoutRef<"section"> & {
+    "data-footnotes"?: boolean;
+  }) => {
+    if (typeof props["data-footnotes"] === "undefined")
+      return <section {...props} />;
+    return <FootnotesBlock>{children}</FootnotesBlock>;
+  },
+  Carousel: ({
+    children,
+    ...props
+  }: React.ComponentPropsWithoutRef<typeof CarouselBlock>) => (
+    <CarouselBlock {...props}>{children}</CarouselBlock>
+  ),
 } satisfies MDXComponents;
 
 export const Mdx = ({ code }: { code: string }) => {

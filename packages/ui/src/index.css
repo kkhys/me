@@ -115,4 +115,14 @@
   .palt {
     font-feature-settings: "palt";
   }
+
+  .step {
+    counter-increment: step;
+  }
+
+  .step:before {
+    @apply absolute size-8 bg-muted rounded-full font-mono font-semibold text-center text-sm inline-flex items-center justify-center -indent-px border-2 border-background;
+    @apply ml-[-48px] mt-[-1px];
+    content: counter(step);
+  }
 }
