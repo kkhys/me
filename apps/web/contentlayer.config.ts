@@ -6,6 +6,7 @@ import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug"; // don't change this line
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
+import type { Options as RemarkRehypeOptions } from "remark-rehype";
 import strip from "strip-markdown";
 import {
   allTagTitles,
@@ -15,8 +16,18 @@ import {
   tags,
 } from "#/config";
 import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
-import { rehypeMermaidOptions } from "./src/lib/mdx";
+import {
+  linkCardHandler,
+  rehypeMermaidOptions,
+  remarkLinkCard,
+} from "./src/lib/mdx";
 import { generateEmojiSvg } from "./src/utils/emoji";
+
+type ExtendedRemarkRehypeOptions = RemarkRehypeOptions & {
+  handlers?: {
+    "link-card"?: typeof linkCardHandler;
+  };
+};
 
 const Legal = defineDocumentType(() => ({
   name: "Legal",
@@ -237,7 +248,15 @@ export default makeSource({
   documentTypes: [Post, Legal],
   contentDirExclude: ["license.md", "readme.md"],
   mdx: {
-    remarkPlugins: [[remarkGfm]],
+    remarkPlugins: [[remarkGfm], [remarkLinkCard]],
     rehypePlugins: [[rehypeSlug], [rehypeMermaid, rehypeMermaidOptions]],
+    mdxOptions: (options) => {
+      options.remarkRehypeOptions = {
+        handlers: {
+          "link-card": linkCardHandler,
+        },
+      } as ExtendedRemarkRehypeOptions;
+      return options;
+    },
   },
 });

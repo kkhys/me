@@ -3,7 +3,7 @@ import type { MDXComponents } from "mdx/types";
 import type { Route } from "next";
 import { useMDXComponent } from "next-contentlayer2/hooks";
 import Link from "next/link";
-import { HeaderWithAnchor, MermaidBlock } from "#/ui/post";
+import { HeaderWithAnchor, LinkCardBlock, MermaidBlock } from "#/ui/post";
 
 const components = {
   h2: ({
@@ -68,10 +68,9 @@ const components = {
     }
     return <MermaidBlock {...props}>{children}</MermaidBlock>;
   },
-  // 'link-card': (
-  //     props: React.ComponentPropsWithoutRef<typeof LinkCardBlock>,
-  // ) => <LinkCardBlock {...props} />,
-  "link-card": () => null,
+  "link-card": (
+    props: React.ComponentPropsWithoutRef<typeof LinkCardBlock>,
+  ) => <LinkCardBlock {...props} />,
   // 'youtube-embed': (
   //     props: React.ComponentPropsWithoutRef<typeof YouTubeBlock>,
   // ) => <YouTubeBlock {...props} />,
