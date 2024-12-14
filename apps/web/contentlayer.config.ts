@@ -4,6 +4,7 @@ import { defineDocumentType, makeSource } from "contentlayer2/source-files";
 import { format, parseISO } from "date-fns";
 import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug"; // don't change this line
+import rehypeUnwrapImages from "rehype-unwrap-images";
 import { remark } from "remark";
 import remarkGfm from "remark-gfm";
 import type { Options as RemarkRehypeOptions } from "remark-rehype";
@@ -20,6 +21,7 @@ import {
   linkCardHandler,
   rehypeMermaidOptions,
   remarkLinkCard,
+  remarkNextImage,
 } from "./src/lib/mdx";
 import { generateEmojiSvg } from "./src/utils/emoji";
 
@@ -248,8 +250,12 @@ export default makeSource({
   documentTypes: [Post, Legal],
   contentDirExclude: ["license.md", "readme.md"],
   mdx: {
-    remarkPlugins: [[remarkGfm], [remarkLinkCard]],
-    rehypePlugins: [[rehypeSlug], [rehypeMermaid, rehypeMermaidOptions]],
+    remarkPlugins: [[remarkGfm], [remarkLinkCard], [remarkNextImage]],
+    rehypePlugins: [
+      [rehypeSlug],
+      [rehypeMermaid, rehypeMermaidOptions],
+      [rehypeUnwrapImages],
+    ],
     mdxOptions: (options) => {
       options.remarkRehypeOptions = {
         handlers: {
