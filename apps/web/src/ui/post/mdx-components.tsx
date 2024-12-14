@@ -4,6 +4,7 @@ import type { Route } from "next";
 import { useMDXComponent } from "next-contentlayer2/hooks";
 import Link from "next/link";
 import {
+  GoogleMapsBlock,
   HeaderWithAnchor,
   ImageBlock,
   LinkCardBlock,
@@ -83,10 +84,9 @@ const components = {
   "tweet-embed": (props: React.ComponentPropsWithoutRef<typeof TweetBlock>) => (
     <TweetBlock {...props} />
   ),
-  // GoogleMaps: (
-  //     props: React.ComponentPropsWithoutRef<typeof GoogleMapsBlock>,
-  // ) => <GoogleMapsBlock {...props} />,
-  GoogleMaps: () => null,
+  GoogleMaps: (
+    props: React.ComponentPropsWithoutRef<typeof GoogleMapsBlock>,
+  ) => <GoogleMapsBlock {...props} />,
   // Tabs,
   // TabsList: ({
   //              className,
