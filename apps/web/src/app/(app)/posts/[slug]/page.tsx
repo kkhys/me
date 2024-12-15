@@ -8,7 +8,8 @@ import "#/styles/code-block.css";
 export const generateStaticParams = async () =>
   getPublicPosts().map(({ slug }) => ({ slug }));
 
-const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
+const Page = async ({ params }: { params: { slug: string } }) => {
+  const { slug } = await params;
   const post = getPostBySlug(slug);
 
   if (!post) {

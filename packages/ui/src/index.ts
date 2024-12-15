@@ -13,6 +13,7 @@ export * from "./command";
 export * from "./dialog";
 export * from "./drawer";
 export * from "./dropdown-menu";
+export * from "./pagination";
 export * from "./prose";
 export * from "./scroll-area";
 export * from "./tabs";
