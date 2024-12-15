@@ -34,7 +34,9 @@ export const generateStaticParams = async () => {
   );
 };
 
-const Page = async ({ params }: { params: { categorySlug?: string[] } }) => {
+const Page = async ({
+  params,
+}: { params: Promise<{ categorySlug?: string[] }> }) => {
   const { categorySlug } = await params;
 
   const category = categories.find(
