@@ -4,13 +4,16 @@ import { format, parseISO } from "date-fns";
 import { ja } from "date-fns/locale";
 import { notFound } from "next/navigation";
 
-const Page = () => {
-  const privacyPolicy = allLegals.find(
-    (legal) => legal.title === "Privacy Policy",
-  );
+export const generateStaticParams = async () =>
+  allLegals.map(({ slug }) => ({ legalSlug: slug }));
 
-  if (!privacyPolicy) {
-    return notFound();
+const Page = async ({ params }: { params: Promise<{ legalSlug: string }> }) => {
+  const { legalSlug } = await params;
+
+  const legal = allLegals.find((legal) => legal.slug === legalSlug);
+
+  if (!legal) {
+    notFound();
   }
 
   const {
@@ -18,7 +21,7 @@ const Page = () => {
     body: { html },
     publishedAt,
     updatedAt,
-  } = privacyPolicy;
+  } = legal;
 
   return (
     <>
