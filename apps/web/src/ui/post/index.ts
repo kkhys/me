@@ -5,4 +5,5 @@ export * from "./eye-catch";
 export * from "./header-with-anchor";
 export * from "./mdx-components";
 export * from "./pagination";
+export * from "./prev-and-next-pager";
 export * from "./time";

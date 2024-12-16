@@ -1,6 +1,6 @@
 import { allPosts } from "contentlayer/generated";
 import type { Post } from "contentlayer/generated";
-import { compareDesc } from "date-fns";
+import { compareAsc, compareDesc } from "date-fns";
 import { env } from "#/env";
 
 export const getPublicPosts = () =>
@@ -10,6 +10,15 @@ export const getPublicPosts = () =>
     )
     .sort((a, b) =>
       compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)),
+    );
+
+export const getPublicPostsAsc = () =>
+  allPosts
+    .filter(
+      (post) => env.NODE_ENV === "development" || post.status === "published",
+    )
+    .sort((a, b) =>
+      compareAsc(new Date(a.publishedAt), new Date(b.publishedAt)),
     );
 
 export const getPostBySlug = (slug: string) =>

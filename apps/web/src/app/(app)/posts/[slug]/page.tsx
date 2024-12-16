@@ -1,6 +1,6 @@
 import { Prose } from "@kkhys/ui";
 import { notFound } from "next/navigation";
-import { ArticleList, EyeCatch, Mdx, Time } from "#/ui/post";
+import { ArticleList, EyeCatch, Mdx, PrevAndNextPager, Time } from "#/ui/post";
 import { getPostBySlug, getPublicPosts, getRelatedPosts } from "#/utils/post";
 
 import "#/styles/code-block.css";
@@ -54,6 +54,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       <Prose>
         <Mdx code={code} />
       </Prose>
+      <PrevAndNextPager id={_id} className="mt-8" />
       {relatedPosts.length !== 0 && (
         <div className="mt-8">
           <hr className="mt-12" />
