@@ -4,6 +4,7 @@ import { ArticleList, EyeCatch, Mdx, PrevAndNextPager, Time } from "#/ui/post";
 import { getPostBySlug, getPublicPosts, getRelatedPosts } from "#/utils/post";
 
 import "#/styles/code-block.css";
+import "#/styles/react-medium-image-zoom.css";
 
 export const generateStaticParams = async () =>
   getPublicPosts().map(({ slug }) => ({ slug }));

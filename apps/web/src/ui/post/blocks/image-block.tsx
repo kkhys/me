@@ -2,8 +2,6 @@ import type { ImageProps } from "next/image";
 import Image from "next/image";
 import Zoom from "react-medium-image-zoom";
 
-import "#/styles/react-medium-image-zoom.css";
-
 const NextImage = ({
   src,
   alt,
@@ -36,7 +34,11 @@ const ZoomImage = ({
 }: {
   src: string;
   children: React.ReactNode;
-}) => <Zoom zoomImg={{ src }}>{children}</Zoom>;
+}) => (
+  <Zoom zoomImg={{ src }} zoomMargin={10}>
+    {children}
+  </Zoom>
+);
 
 export const ImageBlock = ({
   src,
