@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
-import { categories } from "#/config";
+import { categories, itemsPerPage } from "#/config";
 import { ArticleList, CategoryNav, Pagination } from "#/ui/post";
 import { getPublicPosts } from "#/utils/post";
-
-const itemsPerPage = 10;
 
 const categoryPageMap = categories.reduce(
   (map, { slug, title }) => {

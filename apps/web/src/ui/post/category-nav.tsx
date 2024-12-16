@@ -20,7 +20,7 @@ export const CategoryNav = ({
             href="/posts"
             className={cn(
               "flex h-7 items-center justify-center rounded-full px-4 text-center font-sans text-sm transition-colors hover:text-primary",
-              pathname === "/posts"
+              pathname === "/posts" || pathname.startsWith("/posts/page")
                 ? "bg-muted font-medium text-primary"
                 : "text-muted-foreground",
             )}
