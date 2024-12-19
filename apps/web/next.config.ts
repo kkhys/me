@@ -6,6 +6,14 @@ const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   experimental: { typedRoutes: true },
   transpilePackages: ["@kkhys/ui"],
+  async rewrites() {
+    return [
+      {
+        source: "/humans.txt",
+        destination: "/humans",
+      },
+    ];
+  },
 } satisfies NextConfig;
 
 export default withContentlayer(nextConfig);

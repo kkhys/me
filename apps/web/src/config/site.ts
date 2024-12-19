@@ -7,6 +7,12 @@ export const siteConfig = {
   storybook: "https://storybook.kkhys.me",
 } as const;
 
+export const me = {
+  name: "Keisuke Hayashi",
+  github: "https://github.com/kkhys",
+  mastodon: "https://mastodon.kkhys.me",
+};
+
 export const META_THEME_COLORS = {
   light: "#ffffff",
   dark: "#09090b",
