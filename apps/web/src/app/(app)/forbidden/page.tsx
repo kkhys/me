@@ -7,7 +7,7 @@ export const metadata = {
   description: "You have been denied access for some reason.",
 } satisfies Metadata;
 
-const Page = async () => (
+const Page = () => (
   <>
     <h1 className="font-sans font-medium">403 - Forbidden</h1>
     <Prose className="font-sans">

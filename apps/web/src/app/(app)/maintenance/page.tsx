@@ -8,7 +8,7 @@ export const metadata = {
     "It will be back up in a while, so please have a cup of coffee and relax.",
 } satisfies Metadata;
 
-const Page = async () => (
+const Page = () => (
   <>
     <h1 className="font-sans font-medium">The website under maintenance</h1>
     <Prose className="font-sans">
