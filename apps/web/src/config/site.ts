@@ -9,6 +9,7 @@ export const siteConfig = {
 
 export const me = {
   name: "Keisuke Hayashi",
+  email: "hi@kkhys.me",
   github: "https://github.com/kkhys",
   mastodon: "https://mastodon.kkhys.me",
 };
