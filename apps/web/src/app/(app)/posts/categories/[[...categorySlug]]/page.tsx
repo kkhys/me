@@ -1,7 +1,47 @@
 import { notFound } from "next/navigation";
-import { categories, itemsPerPage } from "#/config";
+import type { BreadcrumbList, WithContext } from "schema-dts";
+import { categories, itemsPerPage, siteConfig } from "#/config";
 import { ArticleList, CategoryNav, Pagination } from "#/ui/post";
 import { getPublicPosts } from "#/utils/post";
+
+const JsonLd = ({
+  categoryTitle,
+  categorySlug,
+  currentPage,
+}: {
+  categoryTitle: string;
+  categorySlug: string;
+  currentPage: number;
+}) => {
+  const jsonLdBreadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: siteConfig.name,
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `Blog ${categoryTitle} Page ${currentPage}`,
+        item: `${siteConfig.url}/posts/categories/${categorySlug}/${currentPage}`,
+      },
+    ],
+  } satisfies WithContext<BreadcrumbList>;
+
+  return (
+    <script
+      type="application/ld+json"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(jsonLdBreadcrumb),
+      }}
+    />
+  );
+};
 
 const categoryPageMap = categories.reduce(
   (map, { slug, title }) => {
@@ -61,6 +101,11 @@ const Page = async ({
 
   return (
     <>
+      <JsonLd
+        categoryTitle={category.title}
+        categorySlug={category.slug}
+        currentPage={currentPage}
+      />
       <header>
         <h1 className="font-sans font-medium">Blog</h1>
         <CategoryNav className="mt-6" />

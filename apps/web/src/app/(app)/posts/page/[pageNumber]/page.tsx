@@ -1,7 +1,43 @@
 import { notFound } from "next/navigation";
-import { itemsPerPage } from "#/config";
+import type { BreadcrumbList, WithContext } from "schema-dts";
+import { itemsPerPage, siteConfig } from "#/config";
 import { ArticleList, CategoryNav, Pagination } from "#/ui/post";
 import { getPublicPosts } from "#/utils/post";
+
+const JsonLd = ({
+  currentPage,
+}: {
+  currentPage: number;
+}) => {
+  const jsonLdBreadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: siteConfig.name,
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: `Blog Page ${currentPage}`,
+        item: `${siteConfig.url}/posts/page/${currentPage}`,
+      },
+    ],
+  } satisfies WithContext<BreadcrumbList>;
+
+  return (
+    <script
+      type="application/ld+json"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(jsonLdBreadcrumb),
+      }}
+    />
+  );
+};
 
 const allPosts = getPublicPosts();
 const totalPages = Math.ceil(allPosts.length / itemsPerPage);
@@ -30,6 +66,7 @@ const Page = async ({
 
   return (
     <>
+      <JsonLd currentPage={currentPage} />
       <header>
         <h1 className="font-sans font-medium">Blog</h1>
         <CategoryNav className="mt-6" />

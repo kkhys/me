@@ -12,6 +12,10 @@ export const me = {
   email: "hi@kkhys.me",
   github: "https://github.com/kkhys",
   mastodon: "https://mastodon.kkhys.me",
+  x: {
+    id: "@kkhys_",
+    url: "https://x.com/kkhys_",
+  },
 };
 
 export const META_THEME_COLORS = {

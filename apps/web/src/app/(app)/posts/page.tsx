@@ -1,6 +1,50 @@
-import { itemsPerPage } from "#/config";
+import type { Metadata } from "next";
+import type { BreadcrumbList, WithContext } from "schema-dts";
+import { itemsPerPage, siteConfig } from "#/config";
 import { ArticleList, CategoryNav, Pagination } from "#/ui/post";
 import { getPublicPosts } from "#/utils/post";
+
+const JsonLd = () => {
+  const jsonLdBreadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: siteConfig.name,
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${siteConfig.url}/posts`,
+      },
+    ],
+  } satisfies WithContext<BreadcrumbList>;
+
+  return (
+    <script
+      type="application/ld+json"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(jsonLdBreadcrumb),
+      }}
+    />
+  );
+};
+
+export const metadata = {
+  title: "Blog",
+  description: "Blog posts of Keisuke Hayashi.",
+  alternates: {
+    canonical: "/posts",
+  },
+  openGraph: {
+    url: "/posts",
+  },
+} satisfies Metadata;
 
 const Page = () => {
   const allPosts = getPublicPosts();
@@ -9,6 +53,7 @@ const Page = () => {
 
   return (
     <>
+      <JsonLd />
       <header>
         <h1 className="font-sans font-medium">Blog</h1>
         <CategoryNav className="mt-6" />

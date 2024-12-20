@@ -5,6 +5,64 @@ import { getPostBySlug, getPublicPosts, getRelatedPosts } from "#/utils/post";
 
 import "#/styles/code-block.css";
 import "#/styles/react-medium-image-zoom.css";
+import type { Post } from "contentlayer/generated";
+import type { BlogPosting, BreadcrumbList, WithContext } from "schema-dts";
+import { me, siteConfig } from "#/config";
+
+const JsonLd = ({
+  post: { title, slug, publishedAt, updatedAt },
+}: { post: Post }) => {
+  const jsonLdBlogPosting = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    author: [
+      {
+        "@type": "Person",
+        name: me.name,
+        url: siteConfig.url,
+      },
+    ],
+    dateModified: updatedAt ?? undefined,
+    datePublished: publishedAt,
+    headline: title,
+    image: `${siteConfig.url}/posts/${slug}/opengraph-image/default`,
+  } satisfies WithContext<BlogPosting>;
+
+  const jsonLdBreadcrumbList = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: siteConfig.name,
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${siteConfig.url}/posts`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: `${siteConfig.url}/posts/${slug}`,
+      },
+    ],
+  } satisfies WithContext<BreadcrumbList>;
+
+  return (
+    <script
+      type="application/ld+json"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify([jsonLdBlogPosting, jsonLdBreadcrumbList]),
+      }}
+    />
+  );
+};
 
 export const generateStaticParams = async () =>
   getPublicPosts().map(({ slug }) => ({ slug }));
@@ -32,6 +90,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <>
+      <JsonLd post={post} />
       <header>
         <EyeCatch emoji={emojiSvg} />
         {status === "draft" && (

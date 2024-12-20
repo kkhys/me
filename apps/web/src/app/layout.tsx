@@ -8,17 +8,59 @@ import {
   Newsreader,
   Noto_Sans_JP,
 } from "next/font/google";
-import { META_THEME_COLORS, siteConfig } from "#/config";
+import { META_THEME_COLORS, me, siteConfig } from "#/config";
 import { env } from "#/env";
 import { Provider } from "#/providers";
+
+// export const metadata = {
+//   title: {
+//     default: siteConfig.name,
+//     template: `%s | ${siteConfig.name}`,
+//   },
+//   metadataBase: new URL(siteConfig.url),
+//   description: siteConfig.description,
+// } satisfies Metadata;
 
 export const metadata = {
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
   },
-  metadataBase: new URL(siteConfig.url),
   description: siteConfig.description,
+  generator: "Next.js",
+  applicationName: siteConfig.name,
+  referrer: "origin-when-cross-origin",
+  category: "blog",
+  keywords: ["blog", "developer"],
+  authors: [
+    {
+      name: me.name,
+      url: `${siteConfig.url}/humans.txt`,
+    },
+  ],
+  creator: me.name,
+  publisher: me.name,
+  formatDetection: {
+    email: false,
+    telephone: false,
+    address: false,
+  },
+  metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: siteConfig.name,
+    locale: "ja_JP",
+  },
+  twitter: {
+    card: "summary",
+    siteId: "5237731",
+    creator: me.x.id,
+    creatorId: "5237731",
+  },
 } satisfies Metadata;
 
 export const viewport = {
