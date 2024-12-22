@@ -67,11 +67,12 @@ const JsonLd = ({
 export const generateStaticParams = async () =>
   getPublicPosts().map(({ slug }) => ({ slug }));
 
-export const generateMetadata = ({
-  params: { slug },
+export const generateMetadata = async ({
+  params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) => {
+  const { slug } = await params;
   const post = getPostBySlug(slug);
 
   if (!post) {
