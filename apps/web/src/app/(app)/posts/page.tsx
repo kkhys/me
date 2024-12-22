@@ -39,10 +39,10 @@ export const metadata = {
   title: "Blog",
   description: "Blog posts of Keisuke Hayashi.",
   alternates: {
-    canonical: "/posts",
+    canonical: "/posts/page/1",
   },
   openGraph: {
-    url: "/posts",
+    url: "/posts/page/1",
   },
 } satisfies Metadata;
 

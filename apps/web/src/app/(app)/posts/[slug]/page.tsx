@@ -67,6 +67,35 @@ const JsonLd = ({
 export const generateStaticParams = async () =>
   getPublicPosts().map(({ slug }) => ({ slug }));
 
+export const generateMetadata = ({
+  params: { slug },
+}: {
+  params: { slug: string };
+}) => {
+  const post = getPostBySlug(slug);
+
+  if (!post) {
+    return {};
+  }
+
+  const { title, excerpt, publishedAt, updatedAt } = post;
+  const url = `/posts/${slug}`;
+
+  return {
+    title,
+    description: excerpt,
+    alternates: {
+      canonical: `/posts/${slug}`,
+    },
+    openGraph: {
+      type: "article",
+      url,
+      publishedTime: publishedAt,
+      modifiedTime: updatedAt ?? undefined,
+    },
+  };
+};
+
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
   const post = getPostBySlug(slug);

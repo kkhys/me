@@ -2,6 +2,7 @@ import { Prose } from "@kkhys/ui";
 import { allLegals } from "contentlayer/generated";
 import { format, parseISO } from "date-fns";
 import { ja } from "date-fns/locale";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { siteConfig } from "#/config";
@@ -45,6 +46,32 @@ const JsonLd = ({
 
 export const generateStaticParams = async () =>
   allLegals.map(({ slug }) => ({ legalSlug: slug }));
+
+export const generateMetadata = async ({
+  params,
+}: { params: Promise<{ legalSlug: string }> }) => {
+  const { legalSlug } = await params;
+  const legal = allLegals.find((legal) => legal.slug === legalSlug);
+  if (!legal) {
+    return {};
+  }
+  const { title, description, slug, publishedAt, updatedAt } = legal;
+  const url = `/${slug}`;
+
+  return {
+    title,
+    description: description ?? undefined,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      type: "article",
+      url,
+      publishedTime: publishedAt,
+      modifiedTime: updatedAt ?? undefined,
+    },
+  } satisfies Metadata;
+};
 
 const Page = async ({ params }: { params: Promise<{ legalSlug: string }> }) => {
   const { legalSlug } = await params;

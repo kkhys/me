@@ -1,3 +1,5 @@
+import { allLegals } from "contentlayer/generated";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { itemsPerPage, siteConfig } from "#/config";
@@ -44,6 +46,26 @@ const totalPages = Math.ceil(allPosts.length / itemsPerPage);
 
 const isValidPage = (pageNumber: number): boolean => {
   return pageNumber > 0 && pageNumber <= totalPages;
+};
+
+export const generateMetadata = async ({
+  params,
+}: { params: Promise<{ pageNumber?: string }> }) => {
+  const { pageNumber } = await params;
+
+  const currentPage = pageNumber ? Number(pageNumber) : 1;
+  const url = `/posts/page/${currentPage}`;
+
+  return {
+    title: "Blog",
+    description: "Blog posts of Keisuke Hayashi.",
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      url,
+    },
+  } satisfies Metadata;
 };
 
 export const generateStaticParams = async () =>

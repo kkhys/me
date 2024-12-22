@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { categories, itemsPerPage, siteConfig } from "#/config";
@@ -66,10 +67,42 @@ const isValidPage = (categorySlug: string, pageNumber: number): boolean => {
 export const generateStaticParams = async () => {
   return Object.entries(categoryPageMap).flatMap(([slug, totalPages]) =>
     Array.from({ length: totalPages }, (_, i) => {
-      const pageNumber = i + 1; // ページ番号を 1 から開始
+      const pageNumber = i + 1;
       return { categorySlug: [slug, String(pageNumber)] };
     }),
   );
+};
+
+export const generateMetadata = async ({
+  params,
+}: { params: Promise<{ categorySlug?: string[] }> }) => {
+  const { categorySlug } = await params;
+
+  const category = categories.find(
+    (category) => category.slug === categorySlug?.[0],
+  );
+
+  if (!category) {
+    return {};
+  }
+
+  const currentPage = categorySlug?.[1] ? Number(categorySlug[1]) : 1;
+
+  if (Number.isNaN(currentPage) || !isValidPage(category.slug, currentPage)) {
+    return {};
+  }
+
+  const url = `/posts/categories/${category.slug}/${currentPage}`;
+
+  return {
+    title: category.title,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      url,
+    },
+  } satisfies Metadata;
 };
 
 const Page = async ({
