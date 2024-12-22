@@ -76,7 +76,7 @@ export const generateMetadata = async ({
   const post = getPostBySlug(slug);
 
   if (!post) {
-    return {};
+    return;
   }
 
   const { title, excerpt, publishedAt, updatedAt } = post;

@@ -53,7 +53,7 @@ export const generateMetadata = async ({
   const { legalSlug } = await params;
   const legal = allLegals.find((legal) => legal.slug === legalSlug);
   if (!legal) {
-    return {};
+    return;
   }
   const { title, description, slug, publishedAt, updatedAt } = legal;
   const url = `/${slug}`;

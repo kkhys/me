@@ -64,14 +64,13 @@ const isValidPage = (categorySlug: string, pageNumber: number): boolean => {
   return pageNumber > 0 && pageNumber <= totalPages;
 };
 
-export const generateStaticParams = async () => {
-  return Object.entries(categoryPageMap).flatMap(([slug, totalPages]) =>
+export const generateStaticParams = async () =>
+  Object.entries(categoryPageMap).flatMap(([slug, totalPages]) =>
     Array.from({ length: totalPages }, (_, i) => {
       const pageNumber = i + 1;
       return { categorySlug: [slug, String(pageNumber)] };
     }),
   );
-};
 
 export const generateMetadata = async ({
   params,
@@ -83,13 +82,13 @@ export const generateMetadata = async ({
   );
 
   if (!category) {
-    return {};
+    return;
   }
 
   const currentPage = categorySlug?.[1] ? Number(categorySlug[1]) : 1;
 
   if (Number.isNaN(currentPage) || !isValidPage(category.slug, currentPage)) {
-    return {};
+    return;
   }
 
   const url = `/posts/categories/${category.slug}/${currentPage}`;
