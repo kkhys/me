@@ -6,6 +6,7 @@ import {
   Mdx,
   PrevAndNextPager,
   Time,
+  ViewCounter,
 } from "#/app/(app)/posts/_ui";
 import { getPostBySlug, getPublicPosts, getRelatedPosts } from "#/utils/post";
 
@@ -138,13 +139,9 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             publishedAt={publishedAt}
             publishedAtFormattedUs={publishedAtFormattedUs}
           />
-          {/*{env.NODE_ENV !== 'development' ? (*/}
-          {/*    <Suspense fallback={<ViewCounterSkeleton/>}>*/}
-          {/*      <ViewCounter slug={slug}/>*/}
-          {/*    </Suspense>*/}
-          {/*) : (*/}
-          <p className="font-sans text-sm text-muted-foreground">xxx views</p>
-          {/*)}*/}
+          {/*<Suspense fallback={<ViewCounterSkeleton/>}>*/}
+          <ViewCounter slug={slug} />
+          {/*</Suspense>*/}
         </div>
       </header>
       <Prose>

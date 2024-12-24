@@ -7,3 +7,4 @@ export * from "./mdx-components";
 export * from "./pagination";
 export * from "./prev-and-next-pager";
 export * from "./time";
+export * from "./view-counter";
