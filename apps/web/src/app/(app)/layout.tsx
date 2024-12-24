@@ -1,4 +1,4 @@
-import { SiteFooter, SiteHeader } from "#/ui/global";
+import { SiteFooter, SiteHeader } from "#/ui";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => (
   <div className="mx-auto w-full border-border/40 dark:border-border max-w-6xl border-x flex-1 flex flex-col">

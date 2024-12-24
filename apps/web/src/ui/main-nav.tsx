@@ -3,7 +3,7 @@
 import { cn } from "@kkhys/ui";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Icons } from "#/ui/global";
+import { Icons } from "#/ui";
 
 export const MainNav = () => {
   const pathname = usePathname();

@@ -10,8 +10,8 @@ type FooterLink = {
 };
 
 const footerLinks = [
-  { href: "/terms", title: "Legal" },
-  { href: "/privacy-policy", title: "Privacy" },
+  { href: "/terms" as Route, title: "Legal" },
+  { href: "/privacy-policy" as Route, title: "Privacy" },
   { href: siteConfig.roadmap, title: "Roadmap", external: true },
   { href: siteConfig.storybook, title: "Storybook", external: true },
   { href: siteConfig.github, title: "Source", external: true },

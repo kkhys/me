@@ -12,15 +12,6 @@ import { META_THEME_COLORS, me, siteConfig } from "#/config";
 import { env } from "#/env";
 import { Provider } from "#/providers";
 
-// export const metadata = {
-//   title: {
-//     default: siteConfig.name,
-//     template: `%s | ${siteConfig.name}`,
-//   },
-//   metadataBase: new URL(siteConfig.url),
-//   description: siteConfig.description,
-// } satisfies Metadata;
-
 export const metadata = {
   title: {
     default: siteConfig.name,
