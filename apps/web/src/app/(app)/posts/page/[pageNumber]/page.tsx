@@ -1,9 +1,8 @@
-import { allLegals } from "contentlayer/generated";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
+import { ArticleList, CategoryNav, Pagination } from "#/app/(app)/posts/_ui";
 import { itemsPerPage, siteConfig } from "#/config";
-import { ArticleList, CategoryNav, Pagination } from "#/ui/post";
 import { getPublicPosts } from "#/utils/post";
 
 const JsonLd = ({

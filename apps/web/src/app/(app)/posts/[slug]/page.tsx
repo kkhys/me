@@ -1,6 +1,12 @@
 import { Prose } from "@kkhys/ui";
 import { notFound } from "next/navigation";
-import { ArticleList, EyeCatch, Mdx, PrevAndNextPager, Time } from "#/ui/post";
+import {
+  ArticleList,
+  EyeCatch,
+  Mdx,
+  PrevAndNextPager,
+  Time,
+} from "#/app/(app)/posts/_ui";
 import { getPostBySlug, getPublicPosts, getRelatedPosts } from "#/utils/post";
 
 import "#/styles/code-block.css";
