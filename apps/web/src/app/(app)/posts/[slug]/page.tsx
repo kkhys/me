@@ -7,12 +7,14 @@ import {
   PrevAndNextPager,
   Time,
   ViewCounter,
+  ViewCounterSkeleton,
 } from "#/app/(app)/posts/_ui";
 import { getPostBySlug, getPublicPosts, getRelatedPosts } from "#/utils/post";
 
 import "#/styles/code-block.css";
 import "#/styles/react-medium-image-zoom.css";
 import type { Post } from "contentlayer/generated";
+import { Suspense } from "react";
 import type { BlogPosting, BreadcrumbList, WithContext } from "schema-dts";
 import { me, siteConfig } from "#/config";
 
@@ -139,9 +141,9 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             publishedAt={publishedAt}
             publishedAtFormattedUs={publishedAtFormattedUs}
           />
-          {/*<Suspense fallback={<ViewCounterSkeleton/>}>*/}
-          <ViewCounter slug={slug} />
-          {/*</Suspense>*/}
+          <Suspense fallback={<ViewCounterSkeleton />}>
+            <ViewCounter slug={slug} />
+          </Suspense>
         </div>
       </header>
       <Prose>

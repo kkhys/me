@@ -16,6 +16,7 @@ export * from "./dropdown-menu";
 export * from "./pagination";
 export * from "./prose";
 export * from "./scroll-area";
+export * from "./skeleton";
 export * from "./tabs";
 export * from "./theme";
 export * from "./tooltip";
