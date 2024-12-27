@@ -1,5 +1,5 @@
 import { Skeleton } from "@kkhys/ui";
-import { getPageViews } from "#/app/(app)/posts/_lib";
+import { getPageViews, incrementViews } from "#/app/(app)/posts/_lib";
 import { env } from "#/env";
 
 export const ViewCounter = async ({ slug }: { slug: string }) => {
@@ -8,6 +8,7 @@ export const ViewCounter = async ({ slug }: { slug: string }) => {
   }
 
   const pageViews = await getPageViews({ slug });
+  await incrementViews({ slug });
 
   return (
     <p className="font-sans text-sm text-muted-foreground">
