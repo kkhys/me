@@ -41,10 +41,7 @@ const Image = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const firstEmoji = Array.from(post.emoji)[0];
 
   const notoEmojiSemiBold = await fetch(
-    new URL(
-      "../../../../../assets/fonts/NotoEmoji-SemiBold.ttf",
-      import.meta.url,
-    ),
+    new URL("../../../../assets/fonts/NotoEmoji-SemiBold.ttf", import.meta.url),
   ).then((res) => res.arrayBuffer());
 
   return new ImageResponse(

@@ -1,5 +1,5 @@
 import "#/styles/globals.css";
-import { cn } from "@kkhys/ui";
+import { Toaster, cn } from "@kkhys/ui";
 import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata, Viewport } from "next";
 import {
@@ -11,6 +11,7 @@ import {
 import { META_THEME_COLORS, me, siteConfig } from "#/config";
 import { env } from "#/env";
 import { Provider } from "#/providers";
+import { SiteFooter, SiteHeader } from "#/ui";
 
 export const metadata = {
   title: {
@@ -105,9 +106,16 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
       <Provider>
         <div vaul-drawer-wrapper="">
           <div className="relative flex min-h-screen flex-col bg-background">
-            {children}
+            <div className="mx-auto w-full border-border/40 dark:border-border max-w-6xl border-x flex-1 flex flex-col">
+              <SiteHeader />
+              <main className="w-full max-w-2xl mx-auto flex-1">
+                <div className="container py-12">{children}</div>
+              </main>
+              <SiteFooter />
+            </div>
           </div>
         </div>
+        <Toaster position="top-center" richColors />
       </Provider>
     </body>
     <GoogleTagManager gtmId={env.NEXT_PUBLIC_TAG_MANAGER_ID} />

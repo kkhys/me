@@ -15,6 +15,10 @@ export const docsConfig: DocsConfig = {
       title: "Blog",
       href: "/posts",
     },
+    {
+      title: "Contact",
+      href: "/contact",
+    },
   ],
   sidebarNav: [
     {

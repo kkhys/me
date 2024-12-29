@@ -8,7 +8,7 @@ import {
   Time,
   ViewCounter,
   ViewCounterSkeleton,
-} from "#/app/(app)/posts/_ui";
+} from "#/app/posts/_ui";
 import { getPostBySlug, getPublicPosts, getRelatedPosts } from "#/utils/post";
 
 import "#/styles/code-block.css";
@@ -128,7 +128,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const relatedPosts = getRelatedPosts({ _id, category });
 
   return (
-    <>
+    <article>
       <JsonLd post={post} />
       <header>
         <EyeCatch emoji={emojiSvg} />
@@ -159,7 +159,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <ArticleList className="mt-6" posts={relatedPosts} showDate={false} />
         </div>
       )}
-    </>
+    </article>
   );
 };
 

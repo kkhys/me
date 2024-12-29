@@ -90,7 +90,7 @@ const Page = async ({ params }: { params: Promise<{ legalSlug: string }> }) => {
   } = legal;
 
   return (
-    <>
+    <section>
       <JsonLd name={title} slug={legalSlug} />
       <h1 className="font-sans font-medium">{title}</h1>
       <Prose>
@@ -105,7 +105,7 @@ const Page = async ({ params }: { params: Promise<{ legalSlug: string }> }) => {
           </p>
         )}
       </Prose>
-    </>
+    </section>
   );
 };
 

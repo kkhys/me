@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
-import { ArticleList, CategoryNav, Pagination } from "#/app/(app)/posts/_ui";
+import { ArticleList, CategoryNav, Pagination } from "#/app/posts/_ui";
 import { categories, itemsPerPage, siteConfig } from "#/config";
 import { getPublicPosts } from "#/utils/post";
 
