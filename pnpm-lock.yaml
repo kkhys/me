@@ -227,14 +227,14 @@ importers:
         specifier: 5.62.11
         version: 5.62.11(@tanstack/react-query@5.62.11)(react@18.3.1)
       '@trpc/client':
-        specifier: 11.0.0-rc.677
-        version: 11.0.0-rc.677(@trpc/server@11.0.0-rc.677)(typescript@5.7.2)
+        specifier: 11.0.0-rc.682
+        version: 11.0.0-rc.682(@trpc/server@11.0.0-rc.682)(typescript@5.7.2)
       '@trpc/react-query':
-        specifier: 11.0.0-rc.677
-        version: 11.0.0-rc.677(@tanstack/react-query@5.62.11)(@trpc/client@11.0.0-rc.677)(@trpc/server@11.0.0-rc.677)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
+        specifier: 11.0.0-rc.682
+        version: 11.0.0-rc.682(@tanstack/react-query@5.62.11)(@trpc/client@11.0.0-rc.682)(@trpc/server@11.0.0-rc.682)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2)
       '@trpc/server':
-        specifier: 11.0.0-rc.677
-        version: 11.0.0-rc.677(typescript@5.7.2)
+        specifier: 11.0.0-rc.682
+        version: 11.0.0-rc.682(typescript@5.7.2)
       '@vercel/analytics':
         specifier: 1.4.1
         version: 1.4.1(next@14.2.22)(react@18.3.1)
@@ -501,8 +501,8 @@ importers:
         specifier: 0.11.1
         version: 0.11.1(typescript@5.7.2)(zod@3.24.1)
       '@trpc/server':
-        specifier: 11.0.0-rc.677
-        version: 11.0.0-rc.677(typescript@5.7.2)
+        specifier: 11.0.0-rc.682
+        version: 11.0.0-rc.682(typescript@5.7.2)
       '@upstash/ratelimit':
         specifier: 2.0.5
         version: 2.0.5(@upstash/redis@1.34.3)
@@ -9834,36 +9834,36 @@ packages:
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
     dev: true
 
-  /@trpc/client@11.0.0-rc.677(@trpc/server@11.0.0-rc.677)(typescript@5.7.2):
-    resolution: {integrity: sha512-wmj3uTfiA66fY6bmOhptUQDn+t+ppMTKlHDSN8pzT7kpW0IbU/WJOBrZuuOLt7dOKZWxayZ1Mrj5lesn9/txMg==}
+  /@trpc/client@11.0.0-rc.682(@trpc/server@11.0.0-rc.682)(typescript@5.7.2):
+    resolution: {integrity: sha512-zfM6t4tkbQPm/FHK85jcJjJle7FJTj9U8t/ieDzIe3X6DNo66sg6KqQpjkeTJcaj5u2hga1lmv3rc4uob/7D0g==}
     peerDependencies:
-      '@trpc/server': 11.0.0-rc.677+1032f4880
+      '@trpc/server': 11.0.0-rc.682+8650a22e8
       typescript: '>=5.7.2'
     dependencies:
-      '@trpc/server': 11.0.0-rc.677(typescript@5.7.2)
+      '@trpc/server': 11.0.0-rc.682(typescript@5.7.2)
       typescript: 5.7.2
     dev: false
 
-  /@trpc/react-query@11.0.0-rc.677(@tanstack/react-query@5.62.11)(@trpc/client@11.0.0-rc.677)(@trpc/server@11.0.0-rc.677)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2):
-    resolution: {integrity: sha512-So0y5Z/8a1F5LhKWqikwUuLCA2yyhO031WxtEmzAkxjzJcT/DpXLI6gjIAMyydkReMDTKXoZaALl+QUmLjfurQ==}
+  /@trpc/react-query@11.0.0-rc.682(@tanstack/react-query@5.62.11)(@trpc/client@11.0.0-rc.682)(@trpc/server@11.0.0-rc.682)(react-dom@18.3.1)(react@18.3.1)(typescript@5.7.2):
+    resolution: {integrity: sha512-Ghuk7e7jGRvxOD32X/ImGZTqERZ3R03vaPVzfmdWnBeTyOeqBr0Tb8ylTVyCclqBHpTrRhdM3pWlaXR4M/LKDg==}
     peerDependencies:
       '@tanstack/react-query': ^5.62.8
-      '@trpc/client': 11.0.0-rc.677+1032f4880
-      '@trpc/server': 11.0.0-rc.677+1032f4880
+      '@trpc/client': 11.0.0-rc.682+8650a22e8
+      '@trpc/server': 11.0.0-rc.682+8650a22e8
       react: '>=18.2.0'
       react-dom: '>=18.2.0'
       typescript: '>=5.7.2'
     dependencies:
       '@tanstack/react-query': 5.62.11(react@18.3.1)
-      '@trpc/client': 11.0.0-rc.677(@trpc/server@11.0.0-rc.677)(typescript@5.7.2)
-      '@trpc/server': 11.0.0-rc.677(typescript@5.7.2)
+      '@trpc/client': 11.0.0-rc.682(@trpc/server@11.0.0-rc.682)(typescript@5.7.2)
+      '@trpc/server': 11.0.0-rc.682(typescript@5.7.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       typescript: 5.7.2
     dev: false
 
-  /@trpc/server@11.0.0-rc.677(typescript@5.7.2):
-    resolution: {integrity: sha512-I2b1MCQb1jYxwbpjK3DcCe9eGXvJCQnfQ7dsyXO7uylUq5VoUOY8HB99HocRWMlvS7A1mTVH4qd5Ehkflfv83w==}
+  /@trpc/server@11.0.0-rc.682(typescript@5.7.2):
+    resolution: {integrity: sha512-y8FhLW/UJ8SOyHByvSQW7WvCnbvYioOYhviWD+sRvqkB9f0O8/sEBPJt1mBadWaO/0tygOghkeNC9o1wAsJ8cg==}
     peerDependencies:
       typescript: '>=5.7.2'
     dependencies:
