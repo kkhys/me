@@ -17,5 +17,5 @@ export const ContactSchema = z.object({
     .max(2000, {
       message: "お問い合わせ内容は 2000 文字以内で入力してください",
     }),
-  shouldSendReplyMail: z.boolean().optional(),
+  shouldSendReplyMail: z.boolean().default(false),
 });

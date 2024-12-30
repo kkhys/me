@@ -14,8 +14,10 @@ import {
   RadioGroupConform,
   Textarea,
   cn,
+  toast,
 } from "@kkhys/ui";
 import { useActionState } from "react";
+import * as React from "react";
 import { useFormStatus } from "react-dom";
 import { typeOptions } from "#/app/contact/_config";
 import { sendContract } from "#/app/contact/_lib";
@@ -50,6 +52,12 @@ export const ContactForm = ({
     shouldRevalidate: "onInput",
     constraint: getZodConstraint(ContactSchema),
   });
+
+  React.useEffect(() => {
+    if (form.errors) {
+      toast.error(form.errors);
+    }
+  }, [form.errors]);
 
   return (
     <Form context={form.context}>

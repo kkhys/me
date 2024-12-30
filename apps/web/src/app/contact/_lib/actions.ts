@@ -17,6 +17,13 @@ export const sendContract = async (_prevState: unknown, formData: FormData) => {
   console.log("name: ", submission.value.name);
   console.log("type: ", submission.value.type);
   console.log("content: ", submission.value.content);
+  console.log("shouldSendReplyMail: ", submission.value.shouldSendReplyMail);
+
+  if (submission.value.shouldSendReplyMail) {
+    return submission.reply({
+      formErrors: ["Incorrect username or password"],
+    });
+  }
 
   console.log("send contract");
 
