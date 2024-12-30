@@ -10,7 +10,6 @@ export const env = createEnv({
       .default("development"),
   },
   client: {
-    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: z.string().min(1),
     NEXT_PUBLIC_TAG_MANAGER_ID: z.string().min(1),
   },
   server: {
@@ -18,7 +17,6 @@ export const env = createEnv({
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
     NEXT_PUBLIC_TAG_MANAGER_ID: process.env.NEXT_PUBLIC_TAG_MANAGER_ID,
   },
   skipValidation:

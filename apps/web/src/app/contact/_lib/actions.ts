@@ -14,8 +14,11 @@ export const sendContract = async (_prevState: unknown, formData: FormData) => {
   }
 
   console.log("email:", submission.value.email);
+  console.log("name: ", submission.value.name);
+  console.log("type: ", submission.value.type);
+  console.log("content: ", submission.value.content);
 
   console.log("send contract");
 
-  redirect("/");
+  redirect("/contact");
 };

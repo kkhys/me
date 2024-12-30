@@ -45,16 +45,14 @@ export const metadata = {
   },
 } satisfies Metadata;
 
-const Page = () => {
-  return (
-    <>
-      <JsonLd />
-      <header>
-        <h1 className="font-sans font-medium">Contact</h1>
-      </header>
-      <ContactForm className="mt-6" />
-    </>
-  );
-};
+const Page = () => (
+  <>
+    <JsonLd />
+    <header>
+      <h1 className="font-sans font-medium">Contact</h1>
+    </header>
+    <ContactForm className="mt-6" />
+  </>
+);
 
 export default Page;
