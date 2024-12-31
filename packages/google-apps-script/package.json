@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/google-apps-script",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "clasp:login": "clasp login",
+    "build": "tsc && vite build",
+    "push": "clasp push",
+    "open": "clasp open",
+    "deploy": "clasp deploy",
+    "clean": "git clean -xdf .cache dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kkhys/validators": "workspace:*",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@google/clasp": "2.4.2",
+    "@kkhys/tsconfig": "workspace:*",
+    "@types/google-apps-script": "1.0.89",
+    "@types/node": "22.10.2",
+    "rollup-plugin-google-apps-script": "2.0.1",
+    "typescript": "5.7.2",
+    "vite": "6.0.6"
+  }
+}

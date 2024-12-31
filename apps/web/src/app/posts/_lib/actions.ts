@@ -3,6 +3,7 @@
 import { redis } from "@kkhys/db";
 import { headers } from "next/headers";
 import { env } from "#/env";
+import { getIpHash } from "#/utils/ip";
 
 export const incrementViews = async ({
   slug,
@@ -27,14 +28,4 @@ export const incrementViews = async ({
   }
 
   await redis.incr(["pageviews", env.NODE_ENV, slug].join(":"));
-};
-
-const getIpHash = async (ip: string) => {
-  const buffer = await crypto.subtle.digest(
-    "SHA-256",
-    new TextEncoder().encode(ip),
-  );
-  return Array.from(new Uint8Array(buffer))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
 };

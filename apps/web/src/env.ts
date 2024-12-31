@@ -14,6 +14,9 @@ export const env = createEnv({
   },
   server: {
     GOOGLE_MAPS_API_KEY: z.string().min(1),
+    GOOGLE_SHEETS_ID: z.string().min(1),
+    GCP_CLIENT_EMAIL: z.string().min(1),
+    GCP_PRIVATE_KEY: z.string().min(1),
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,

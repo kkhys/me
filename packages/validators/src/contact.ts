@@ -1,5 +1,29 @@
 import { z } from "zod";
-import { typeValues } from "#/app/contact/_config";
+
+export const contactTypeOptions = [
+  {
+    value: "jobScouting",
+    label: "転職スカウト",
+  },
+  {
+    value: "projectConsultation",
+    label: "案件のご相談",
+  },
+  {
+    value: "feedback",
+    label: "記事のフィードバック",
+  },
+  {
+    value: "collaboration",
+    label: "コラボレーションの提案",
+  },
+  {
+    value: "other",
+    label: "その他",
+  },
+];
+
+const contactTypeValues = contactTypeOptions.map((option) => option.value);
 
 export const ContactSchema = z.object({
   email: z
@@ -9,7 +33,7 @@ export const ContactSchema = z.object({
   name: z
     .string({ required_error: "名前を入力してください" })
     .max(255, { message: "名前は 255 文字以内で入力してください" }),
-  type: z.enum(typeValues as [string, ...string[]], {
+  type: z.enum(contactTypeValues as [string, ...string[]], {
     message: "お問い合わせ種別を選択してください",
   }),
   content: z

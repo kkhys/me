@@ -16,46 +16,39 @@ import {
   cn,
   toast,
 } from "@kkhys/ui";
+import { ContactSchema, contactTypeOptions } from "@kkhys/validators";
 import { useActionState } from "react";
 import * as React from "react";
-import { useFormStatus } from "react-dom";
-import { typeOptions } from "#/app/contact/_config";
 import { sendContract } from "#/app/contact/_lib";
-import { ContactSchema } from "#/app/contact/_validators";
-
-const SubmitButton = ({
-  disabled,
-  ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button type="submit" disabled={pending || disabled} {...props}>
-      送信する
-    </Button>
-  );
-};
 
 export const ContactForm = ({
   className,
 }: {
   className?: string;
 }) => {
-  const [lastResult, action] = useActionState(sendContract, undefined);
+  const [lastResult, action, isPending] = useActionState(
+    sendContract,
+    undefined,
+  );
   const [form, fields] = useForm({
     id: "contact",
     lastResult,
-    onValidate({ formData }) {
-      return parseWithZod(formData, { schema: ContactSchema });
-    },
+    onValidate: ({ formData }) =>
+      parseWithZod(formData, { schema: ContactSchema }),
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
     constraint: getZodConstraint(ContactSchema),
   });
 
   React.useEffect(() => {
+    if (lastResult?.status === "success") {
+      toast.success("お問い合わせを受け付けました。");
+    }
+  }, [lastResult?.status]);
+
+  React.useEffect(() => {
     if (form.errors) {
-      toast.error(form.errors);
+      toast.error(form.errors[0]);
     }
   }, [form.errors]);
 
@@ -104,7 +97,10 @@ export const ContactForm = ({
           render={() => (
             <FormItem className="space-y-3">
               <FormLabel>お問い合わせ種別</FormLabel>
-              <RadioGroupConform meta={fields.type} items={typeOptions} />
+              <RadioGroupConform
+                meta={fields.type}
+                items={contactTypeOptions}
+              />
               <FormMessage />
             </FormItem>
           )}
@@ -139,7 +135,9 @@ export const ContactForm = ({
             </FormItem>
           )}
         />
-        <SubmitButton />
+        <Button type="submit" disabled={isPending}>
+          送信する
+        </Button>
       </form>
     </Form>
   );
