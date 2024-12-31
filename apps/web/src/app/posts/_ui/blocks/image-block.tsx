@@ -1,6 +1,10 @@
+import dynamic from "next/dynamic";
 import type { ImageProps } from "next/image";
 import Image from "next/image";
-import Zoom from "react-medium-image-zoom";
+
+const ZoomImage = dynamic(() =>
+  import("react-medium-image-zoom").then((mod) => mod.default),
+);
 
 const NextImage = ({
   src,
@@ -28,18 +32,6 @@ const NextImage = ({
   />
 );
 
-const ZoomImage = ({
-  src,
-  children,
-}: {
-  src: string;
-  children: React.ReactNode;
-}) => (
-  <Zoom zoomImg={{ src }} zoomMargin={10}>
-    {children}
-  </Zoom>
-);
-
 export const ImageBlock = ({
   src,
   alt,
@@ -57,10 +49,10 @@ export const ImageBlock = ({
     return <p>Failed to load image. alt = {alt}</p>;
   }
 
-  if (!title)
+  if (!title) {
     return (
       <div className="select-none">
-        <ZoomImage src={src}>
+        <ZoomImage zoomImg={{ src }} zoomMargin={10}>
           <NextImage
             src={src}
             alt={alt}
@@ -71,11 +63,12 @@ export const ImageBlock = ({
         </ZoomImage>
       </div>
     );
+  }
 
   return (
     <figure>
       <div className="select-none">
-        <ZoomImage src={src}>
+        <ZoomImage zoomImg={{ src }} zoomMargin={10}>
           <NextImage
             src={src}
             alt={alt}
