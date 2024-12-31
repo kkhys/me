@@ -2,7 +2,7 @@
 
 import { DialogDescription, type DialogProps } from "@kkhys/ui";
 import { DialogTitle } from "@kkhys/ui";
-import { Circle, File, Laptop, Moon, Sun } from "lucide-react";
+import { Laptop, Moon, Sun } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 
@@ -19,7 +19,20 @@ import {
   useTheme,
 } from "@kkhys/ui";
 import type { Route } from "next";
-import { docsConfig } from "#/config";
+import { fisherYatesShuffle, getPublicPosts } from "#/utils/post";
+
+interface NavItem {
+  title: string;
+  href: string;
+  emoji: string;
+  category: string;
+  tags?: string[];
+}
+
+interface SearchItem {
+  title: string;
+  items: NavItem[];
+}
 
 export const CommandMenu = ({ ...props }: DialogProps) => {
   const router = useRouter();
@@ -45,6 +58,23 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
 
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
+  }, []);
+
+  const searchItems = React.useMemo(() => {
+    return [
+      {
+        title: "Posts",
+        items: fisherYatesShuffle(getPublicPosts()).map(
+          ({ title, slug, emojiSvg, category, tags }) => ({
+            title,
+            href: `/posts/${slug}`,
+            emoji: emojiSvg,
+            category: category,
+            tags,
+          }),
+        ) satisfies NavItem[],
+      } satisfies SearchItem,
+    ];
   }, []);
 
   const runCommand = React.useCallback((command: () => unknown) => {
@@ -76,36 +106,22 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Links">
-            {docsConfig.mainNav
-              .filter(({ external }) => !external)
-              .map((navItem) => (
+          {searchItems.map((group) => (
+            <CommandGroup key={group.title} heading={group.title}>
+              {group.items.map((item) => (
                 <CommandItem
-                  key={navItem.href}
-                  value={navItem.title}
+                  key={item.href}
+                  value={item.title}
                   onSelect={() =>
-                    runCommand(() => router.push(navItem.href as Route))
+                    runCommand(() => router.push(item.href as Route))
                   }
                 >
-                  <File />
-                  {navItem.title}
-                </CommandItem>
-              ))}
-          </CommandGroup>
-          {docsConfig.sidebarNav.map((group) => (
-            <CommandGroup key={group.title} heading={group.title}>
-              {group.items.map((navItem) => (
-                <CommandItem
-                  key={navItem.href}
-                  value={navItem.title}
-                  onSelect={() => {
-                    runCommand(() => router.push(navItem.href as Route));
-                  }}
-                >
-                  <div className="mr-2 flex h-4 w-4 items-center justify-center">
-                    <Circle className="h-3 w-3" />
-                  </div>
-                  {navItem.title}
+                  <div
+                    // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+                    dangerouslySetInnerHTML={{ __html: item.emoji }}
+                    className="mr-1.5 [&>svg>path]:fill-foreground"
+                  />
+                  {item.title}
                 </CommandItem>
               ))}
             </CommandGroup>

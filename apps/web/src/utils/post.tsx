@@ -41,7 +41,7 @@ export const getRelatedPosts = ({
     ),
   ).slice(0, 5);
 
-const fisherYatesShuffle = (posts: Post[]) => {
+export const fisherYatesShuffle = (posts: Post[]) => {
   const copy = [...posts];
 
   copy.forEach((_, index, arr) => {
