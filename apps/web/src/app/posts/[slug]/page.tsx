@@ -1,6 +1,7 @@
 import { Prose } from "@kkhys/ui";
 import { notFound } from "next/navigation";
 import {
+  ActionController,
   ArticleList,
   EyeCatch,
   Mdx,
@@ -144,7 +145,6 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             {publishedAtFormattedUs}
           </time>
           <Suspense fallback={<ViewCounterSkeleton />}>
-            {/* @ts-expect-error Server Component */}
             <ViewCounter slug={slug} />
           </Suspense>
         </div>
@@ -152,6 +152,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       <Prose>
         <Mdx code={code} />
       </Prose>
+      <ActionController className="mt-12" post={post} />
       <PrevAndNextPager id={_id} className="mt-8" />
       {relatedPosts.length !== 0 && (
         <div className="mt-8">
