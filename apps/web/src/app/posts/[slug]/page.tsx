@@ -5,7 +5,6 @@ import {
   EyeCatch,
   Mdx,
   PrevAndNextPager,
-  Time,
   ViewCounter,
   ViewCounterSkeleton,
 } from "#/app/posts/_ui";
@@ -15,6 +14,7 @@ import "#/styles/code-block.css";
 import "#/styles/react-medium-image-zoom.css";
 import type { Post } from "contentlayer/generated";
 import { Suspense } from "react";
+import * as React from "react";
 import type { BlogPosting, BreadcrumbList, WithContext } from "schema-dts";
 import { me, siteConfig } from "#/config";
 
@@ -137,11 +137,14 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         )}
         <h1 className="palt mt-4 font-medium">{title}</h1>
         <div className="mt-2 flex items-center justify-between">
-          <Time
-            publishedAt={publishedAt}
-            publishedAtFormattedUs={publishedAtFormattedUs}
-          />
+          <time
+            dateTime={publishedAt}
+            className="font-sans text-sm text-muted-foreground"
+          >
+            {publishedAtFormattedUs}
+          </time>
           <Suspense fallback={<ViewCounterSkeleton />}>
+            {/* @ts-expect-error Server Component */}
             <ViewCounter slug={slug} />
           </Suspense>
         </div>

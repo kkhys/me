@@ -5,7 +5,12 @@ import "#/env";
 const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   experimental: { typedRoutes: true },
-  transpilePackages: ["@kkhys/db", "@kkhys/ui"],
+  transpilePackages: [
+    "@kkhys/db",
+    "@kkhys/email",
+    "@kkhys/ui",
+    "@kkhys/validators",
+  ],
   async rewrites() {
     return [
       {

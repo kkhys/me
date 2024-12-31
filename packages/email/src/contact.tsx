@@ -75,20 +75,20 @@ Email.PreviewProps = {
 
 export default Email;
 
-export const contactMail = ({
+export const contactMail = async ({
   email,
   name,
   type,
   content,
 }: ContactEmailProps) => {
   return {
-    html: render(
+    html: await render(
       <Email email={email} name={name} type={type} content={content} />,
       {
         pretty: true,
       },
     ),
-    text: render(
+    text: await render(
       <Email email={email} name={name} type={type} content={content} />,
       {
         plainText: true,
