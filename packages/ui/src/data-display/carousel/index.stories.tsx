@@ -156,7 +156,7 @@ export const Orientation = {
   },
 } satisfies Story;
 
-const CountDemo = () => {
+const CountDemo = (props: CarouselProps) => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -172,7 +172,7 @@ const CountDemo = () => {
 
   return (
     <div>
-      <Carousel setApi={setApi} className="w-[250px]">
+      <Carousel setApi={setApi} className="w-[250px]" {...props}>
         <CarouselContent>
           {Array.from({ length: 5 }).map((_, index) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>

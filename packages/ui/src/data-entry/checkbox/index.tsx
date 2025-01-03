@@ -15,8 +15,24 @@ const Checkbox = ({
   className,
   ...props
 }: {
-  meta: FieldMetadata<string | boolean | undefined>;
+  meta?: FieldMetadata<string | boolean | undefined>;
 } & React.ComponentProps<typeof CheckboxPrimitive.Root>) => {
+  if (!meta) {
+    return (
+      <CheckboxPrimitive.Root
+        className={cn(
+          "peer size-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground",
+          className,
+        )}
+        {...props}
+      >
+        <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
+          <Check className="size-4" />
+        </CheckboxPrimitive.Indicator>
+      </CheckboxPrimitive.Root>
+    );
+  }
+
   const checkboxRef = React.useRef<React.ComponentRef<typeof Checkbox>>(null);
   const control = useControl(meta);
 
