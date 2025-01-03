@@ -2,7 +2,7 @@ import { cn } from "@kkhys/ui";
 import type { Post } from "contentlayer/generated";
 import type { Route } from "next";
 import Link from "next/link";
-import { EyeCatch } from ".";
+import { EyeCatch } from "#/app/posts/_ui";
 
 const ListItem = ({
   post: { slug, title, publishedAt, publishedAtFormattedIso, status, emojiSvg },

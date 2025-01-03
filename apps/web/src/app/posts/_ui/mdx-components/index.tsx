@@ -30,7 +30,7 @@ import {
   StepsBlock,
   TweetBlock,
   YouTubeBlock,
-} from ".";
+} from "#/app/posts/_ui";
 
 const components = {
   h2: ({
