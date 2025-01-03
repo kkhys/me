@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/storybook",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "clean": "git clean -xdf .turbo node_modules storybook-static",
+    "type-check": "tsc --noEmit",
+    "storybook:dev": "storybook dev --port 6006 --quiet --no-open",
+    "storybook:build": "storybook build --quiet",
+    "storybook:move": "mv storybook-static ../../storybook-static"
+  },
+  "dependencies": {
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "3.2.3",
+    "@kkhys/tsconfig": "workspace:*",
+    "@storybook/addon-essentials": "8.4.7",
+    "@storybook/addon-interactions": "8.4.7",
+    "@storybook/addon-onboarding": "8.4.7",
+    "@storybook/blocks": "8.4.7",
+    "@storybook/react": "8.4.7",
+    "@storybook/react-vite": "8.4.7",
+    "@storybook/test": "8.4.7",
+    "@vitejs/plugin-react-swc": "3.7.2",
+    "storybook": "8.4.7",
+    "vite": "6.0.6"
+  }
+}

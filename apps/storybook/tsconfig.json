@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@kkhys/tsconfig/internal-package.json",
+  "include": ["src", "vite.config.mts", "vite-env.d.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "jsx": "preserve"
+  }
+}

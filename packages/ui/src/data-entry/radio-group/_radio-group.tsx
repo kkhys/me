@@ -5,7 +5,7 @@ import { Circle } from "lucide-react";
 
 import { cn } from "@kkhys/ui";
 
-const RadioGroup = ({
+const _RadioGroup = ({
   className,
   ref,
   ...props
@@ -16,9 +16,9 @@ const RadioGroup = ({
     {...props}
   />
 );
-RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
+_RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 
-const RadioGroupItem = ({
+const _RadioGroupItem = ({
   className,
   ref,
   ...props
@@ -36,6 +36,6 @@ const RadioGroupItem = ({
     </RadioGroupPrimitive.Indicator>
   </RadioGroupPrimitive.Item>
 );
-RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
+_RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
 
-export { RadioGroup, RadioGroupItem };
+export { _RadioGroup, _RadioGroupItem };

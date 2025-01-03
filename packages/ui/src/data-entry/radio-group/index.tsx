@@ -2,19 +2,19 @@ import {
   type FieldMetadata,
   unstable_useControl as useControl,
 } from "@conform-to/react";
+import { FormItem, Label } from "@kkhys/ui";
 import * as React from "react";
-import { FormItem } from "./form";
-import { Label } from "./label";
-import { RadioGroup, RadioGroupItem } from "./radio-group";
+import { _RadioGroup, _RadioGroupItem } from "./_radio-group";
 
-export const RadioGroupConform = ({
+export const RadioGroup = ({
   meta,
   items,
 }: {
   meta: FieldMetadata<string>;
   items: { value: string; label: string }[];
 }) => {
-  const radioGroupRef = React.useRef<React.ElementRef<typeof RadioGroup>>(null);
+  const radioGroupRef =
+    React.useRef<React.ComponentRef<typeof _RadioGroup>>(null);
   const control = useControl(meta);
 
   return (
@@ -27,7 +27,7 @@ export const RadioGroupConform = ({
         className="sr-only"
         onFocus={() => radioGroupRef.current?.focus()}
       />
-      <RadioGroup
+      <_RadioGroup
         ref={radioGroupRef}
         className="flex flex-col space-y-2"
         value={control.value ?? ""}
@@ -39,11 +39,11 @@ export const RadioGroupConform = ({
             className="flex items-center space-x-3 space-y-0"
             key={value}
           >
-            <RadioGroupItem value={value} id={`${meta.id}-${value}`} />
+            <_RadioGroupItem value={value} id={`${meta.id}-${value}`} />
             <Label htmlFor={`${meta.id}-${value}`}>{label}</Label>
           </FormItem>
         ))}
-      </RadioGroup>
+      </_RadioGroup>
     </>
   );
 };

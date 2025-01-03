@@ -11,7 +11,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
-  RadioGroupConform,
+  RadioGroup,
   Textarea,
   cn,
   toast,
@@ -97,10 +97,7 @@ export const ContactForm = ({
           render={() => (
             <FormItem className="space-y-3">
               <FormLabel>お問い合わせ種別</FormLabel>
-              <RadioGroupConform
-                meta={fields.type}
-                items={contactTypeOptions}
-              />
+              <RadioGroup meta={fields.type} items={contactTypeOptions} />
               <FormMessage />
             </FormItem>
           )}

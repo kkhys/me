@@ -9,7 +9,7 @@
       "default": "./src/index.ts"
     },
     "./index.css": {
-      "default": "./src/index.css"
+      "default": "./src/styles/index.css"
     }
   },
   "scripts": {
@@ -18,7 +18,10 @@
     "dev": "tsc",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "ui-add": "bunx --bun shadcn@latest add",
-    "ui-diff": "bunx --bun shadcn@latest diff"
+    "ui-diff": "bunx --bun shadcn@latest diff",
+    "storybook:dev": "storybook dev --port 6007 --quiet --no-open",
+    "storybook:build": "storybook build --quiet",
+    "storybook:move": "mv storybook-static ../../storybook-static/ui"
   },
   "dependencies": {
     "@conform-to/react": "1.2.2",
@@ -31,6 +34,7 @@
     "@radix-ui/react-label": "2.1.1",
     "@radix-ui/react-radio-group": "1.2.2",
     "@radix-ui/react-scroll-area": "1.2.2",
+    "@radix-ui/react-separator": "1.1.1",
     "@radix-ui/react-slot": "1.1.1",
     "@radix-ui/react-tabs": "1.1.2",
     "@radix-ui/react-tooltip": "1.1.4",
@@ -47,10 +51,22 @@
     "zod": "3.24.1"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "3.2.3",
     "@kkhys/tailwind-config": "workspace:*",
     "@kkhys/tsconfig": "workspace:*",
+    "@storybook/addon-essentials": "8.4.7",
+    "@storybook/addon-interactions": "8.4.7",
+    "@storybook/addon-onboarding": "8.4.7",
+    "@storybook/addon-themes": "8.4.7",
+    "@storybook/blocks": "8.4.7",
+    "@storybook/react": "8.4.7",
+    "@storybook/react-vite": "8.4.7",
+    "@storybook/test": "8.4.7",
     "@types/react": "19.0.2",
+    "@vitejs/plugin-react-swc": "3.7.2",
     "react": "19.0.0",
-    "typescript": "5.7.2"
+    "storybook": "8.4.7",
+    "typescript": "5.7.2",
+    "vite": "6.0.6"
   }
 }

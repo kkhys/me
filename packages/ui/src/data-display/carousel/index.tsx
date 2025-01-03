@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import * as React from "react";
 
 import { type ButtonProps, cn } from "@kkhys/ui";
-import { Button } from "./button";
+import { Button } from "@kkhys/ui";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -254,6 +254,7 @@ CarouselNext.displayName = "CarouselNext";
 
 export {
   type CarouselApi,
+  type CarouselProps,
   Carousel,
   CarouselContent,
   CarouselItem,

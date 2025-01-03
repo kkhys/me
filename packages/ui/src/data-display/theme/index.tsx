@@ -1,9 +1,9 @@
 "use client";
 
+import { Button } from "@kkhys/ui";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { ThemeProvider, useTheme } from "next-themes";
 import * as React from "react";
-import { Button } from "./button";
 
 const ModeSwitcher = () => {
   const { setTheme } = useTheme();

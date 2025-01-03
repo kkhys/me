@@ -17,7 +17,7 @@ const Checkbox = ({
 }: {
   meta: FieldMetadata<string | boolean | undefined>;
 } & React.ComponentProps<typeof CheckboxPrimitive.Root>) => {
-  const checkboxRef = React.useRef<React.ElementRef<typeof Checkbox>>(null);
+  const checkboxRef = React.useRef<React.ComponentRef<typeof Checkbox>>(null);
   const control = useControl(meta);
 
   return (
