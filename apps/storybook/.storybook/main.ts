@@ -5,7 +5,7 @@ const getAbsolutePath = (value: string) =>
   dirname(require.resolve(join(value, "package.json")));
 
 const config = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.tsx"],
+  stories: ["../src/**/*.mdx"],
   refs: (_, { configType }) => {
     if (configType === "DEVELOPMENT") {
       return {
@@ -33,7 +33,6 @@ const config = {
   addons: [
     getAbsolutePath("@storybook/addon-onboarding"),
     getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@chromatic-com/storybook"),
     getAbsolutePath("@storybook/addon-interactions"),
   ],
   framework: {
@@ -42,6 +41,7 @@ const config = {
   },
   core: {
     disableTelemetry: true,
+    disableWhatsNewNotifications: true,
   },
 } satisfies StorybookConfig;
 
