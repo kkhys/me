@@ -23,6 +23,7 @@ const CodePanel = ({
   const child = React.Children.only(children);
   if (React.isValidElement(child)) {
     __rawString__ =
+      // @ts-expect-error
       (child.props?.__rawString__ as string | undefined) ?? __rawString__;
   }
 

@@ -1,4 +1,4 @@
-import type { Icons } from "#/ui/global";
+import type { Icons } from "#/ui";
 
 export interface NavItem {
   title: string;
