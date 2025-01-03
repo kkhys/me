@@ -51,7 +51,7 @@ const meta = {
       description:
         "Override the duration given to the `Provider` to customise the open delay for a specific tooltip.",
       table: {
-        defaultValue: { summary: "700" },
+        defaultValue: { summary: "0" },
         type: { summary: "number" },
       },
       type: {

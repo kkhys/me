@@ -1,0 +1,201 @@
+import {ColorItem, ColorPalette, Meta} from '@storybook/blocks';
+
+<Meta title='Colors'/>
+
+## Light theme
+
+<ColorPalette>
+    <ColorItem
+        title="Background"
+        subtitle="Background color"
+        colors={{'--background': 'hsl(0 0% 98%)'}}
+    />
+    <ColorItem
+        title="Foreground"
+        subtitle="Foreground color"
+        colors={{'--foreground': 'hsl(240 5% 4%)'}}
+    />
+    <ColorItem
+        title="Card"
+        subtitle="Card color"
+        colors={{
+            '--card': 'hsl(0 0% 100%)',
+            '--card-foreground': 'hsl(240 5% 4%)',
+        }}
+    />
+    <ColorItem
+        title="Popover"
+        subtitle="Popover color"
+        colors={{
+            '--popover': 'hsl(0 0% 100%)',
+            '--popover-foreground': 'hsl(240 5% 4%)',
+        }}
+    />
+    <ColorItem
+        title="Primary"
+        subtitle="Primary color"
+        colors={{
+            '--primary': 'hsl(240 5.9% 10%)',
+            '--primary-foreground': 'hsl(0 0% 98%)',
+        }}
+    />
+    <ColorItem
+        title="Secondary"
+        subtitle="Secondary color"
+        colors={{
+            '--secondary': 'hsl(240 4.8% 95.9%)',
+            '--secondary-foreground': 'hsl(240 5.9% 10%)',
+        }}
+    />
+    <ColorItem
+        title="Muted"
+        subtitle="Muted color"
+        colors={{
+            '--muted': 'hsl(240 4.8% 95.9%)',
+            '--muted-foreground': 'hsl(240 3.8% 46.1%)',
+        }}
+    />
+    <ColorItem
+        title="Accent"
+        subtitle="Accent color"
+        colors={{
+            '--accent': 'hsl(240 4.8% 95.9%)',
+            '--accent-foreground': 'hsl(240 5.9% 10%)',
+        }}
+    />
+    <ColorItem
+        title="Destructive"
+        subtitle="Destructive color"
+        colors={{
+            '--destructive': 'hsl(353 100% 42%)',
+            '--destructive-foreground': 'hsl(0 0% 98%)',
+        }}
+    />
+    <ColorItem
+        title="Scrollbar"
+        subtitle="Scrollbar color"
+        colors={{
+            '--scrollbar': 'hsl(240 5% 84%)',
+            '--scrollbar-foreground': 'hsl(240 5% 65%)',
+        }}
+    />
+    <ColorItem
+        title="Border"
+        subtitle="Border color"
+        colors={{'--border': 'hsl(240 5.9% 90%)'}}
+    />
+    <ColorItem
+        title="Input"
+        subtitle="Input color"
+        colors={{'--input': 'hsl(240 5.9% 90%)'}}
+    />
+    <ColorItem
+        title="Ring"
+        subtitle="Focus ring color"
+        colors={{'--ring': 'hsl(240 5.9% 90%)'}}
+    />
+</ColorPalette>
+
+## Dark theme
+
+<ColorPalette>
+    <ColorItem
+        title="Background"
+        subtitle="Background color"
+        colors={{'--background': 'hsl(240 5% 4%)'}}
+    />
+    <ColorItem
+        title="Foreground"
+        subtitle="Foreground color"
+        colors={{'--foreground': 'hsl(0 0% 90%)'}}
+    />
+    <ColorItem
+        title="Card"
+        subtitle="Card color"
+        colors={{
+            '--card': 'hsl(240 5% 4%)',
+            '--card-foreground': 'hsl(0 0% 90%)',
+        }}
+    />
+    <ColorItem
+        title="Popover"
+        subtitle="Popover color"
+        colors={{
+            '--popover': 'hsl(240 5% 4%)',
+            '--popover-foreground': 'hsl(0 0% 90%)',
+        }}
+    />
+    <ColorItem
+        title="Primary"
+        subtitle="Primary color"
+        colors={{
+            '--primary': 'hsl(0 0% 98%)',
+            '--primary-foreground': 'hsl(240 5.9% 10%)',
+        }}
+    />
+    <ColorItem
+        title="Secondary"
+        subtitle="Secondary color"
+        colors={{
+            '--secondary': 'hsl(240 3.7% 15.9%)',
+            '--secondary-foreground': 'hsl(0 0% 90%)',
+        }}
+    />
+    <ColorItem
+        title="Muted"
+        subtitle="Muted color"
+        colors={{
+            '--muted': 'hsl(240 3.7% 15.9%)',
+            '--muted-foreground': 'hsl(240 5% 64.9%)',
+        }}
+    />
+    <ColorItem
+        title="Accent"
+        subtitle="Accent color"
+        colors={{
+            '--accent': 'hsl(240 3.7% 15.9%)',
+            '--accent-foreground': 'hsl(0 0% 90%)',
+        }}
+    />
+    <ColorItem
+        title="Destructive"
+        subtitle="Destructive color"
+        colors={{
+            '--destructive': 'hsl(358 100% 67%)',
+            '--destructive-foreground': 'hsl(0 0% 90%)',
+        }}
+    />
+    <ColorItem
+        title="Scrollbar"
+        subtitle="Scrollbar color"
+        colors={{
+            '--scrollbar': 'hsl(240 5% 26%)',
+            '--scrollbar-foreground': 'hsl(240 5% 34%)',
+        }}
+    />
+    <ColorItem
+        title="Border"
+        subtitle="Border color"
+        colors={{'--border': 'hsl(240 3.7% 15.9%)'}}
+    />
+    <ColorItem
+        title="Input"
+        subtitle="Input color"
+        colors={{'--input': 'hsl(240 3.7% 15.9%)'}}
+    />
+    <ColorItem
+        title="Ring"
+        subtitle="Focus ring color"
+        colors={{'--ring': 'hsl(240 3.7% 15.9%)'}}
+    />
+</ColorPalette>
+
+## Common
+
+<ColorPalette>
+    <ColorItem
+        title="Selection"
+        subtitle="Selection highlight color"
+        colors={{'--background': 'hsl(56 100% 83%)'}}
+    />
+</ColorPalette>
