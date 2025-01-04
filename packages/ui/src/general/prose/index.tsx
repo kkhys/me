@@ -1,10 +1,8 @@
-import * as React from 'react';
-
-import { cn } from '../../';
+import { cn } from "@kkhys/ui";
 
 export const Prose = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<'div'>) => (
-  <div className={cn(className, 'prose dark:prose-invert')} {...props} />
+}: React.ComponentPropsWithoutRef<"div">) => (
+  <div className={cn(className, "prose dark:prose-invert")} {...props} />
 );

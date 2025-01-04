@@ -1,45 +1,45 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { Separator } from '.';
+import { Separator } from "@kkhys/ui";
 
 const meta = {
-  title: 'Layout / Separator',
+  title: "Layout / Separator",
   component: Separator,
   argTypes: {
     asChild: {
-      control: 'boolean',
+      control: "boolean",
       description:
         'Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our <a href="https://www.radix-ui.com/primitives/docs/guides/composition" target="_blank" rel="noreferrer noopener">Composition</a> guide for more details.',
       table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
+        defaultValue: { summary: "false" },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     orientation: {
-      control: 'radio',
-      description: 'The orientation of the separator.',
-      options: ['horizontal', 'vertical'],
+      control: "radio",
+      description: "The orientation of the separator.",
+      options: ["horizontal", "vertical"],
       table: {
-        defaultValue: { summary: 'horizontal' },
-        type: { summary: 'enum', detail: '"horizontal" | "vertical"' },
+        defaultValue: { summary: "horizontal" },
+        type: { summary: "enum", detail: '"horizontal" | "vertical"' },
       },
       type: {
-        name: 'enum',
-        value: ['horizontal', 'vertical'],
+        name: "enum",
+        value: ["horizontal", "vertical"],
       },
     },
     decorative: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'When `true`, signifies that it is purely visual, carries no semantic meaning, and ensures it is not present in the accessibility tree.',
+        "When `true`, signifies that it is purely visual, carries no semantic meaning, and ensures it is not present in the accessibility tree.",
       table: {
-        type: { summary: 'boolean' },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
   },
@@ -51,18 +51,18 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
   render: () => (
     <div>
-      <div className='space-y-1'>
-        <h4 className='text-sm font-medium leading-none'>Radix Primitives</h4>
-        <p className='text-sm text-muted-foreground'>
+      <div className="space-y-1">
+        <h4 className="text-sm font-medium leading-none">Radix Primitives</h4>
+        <p className="text-sm text-muted-foreground">
           An open-source UI component library.
         </p>
       </div>
-      <Separator className='my-4' />
-      <div className='flex h-5 items-center space-x-4 text-sm'>
+      <Separator className="my-4" />
+      <div className="flex h-5 items-center space-x-4 text-sm">
         <div>Blog</div>
-        <Separator orientation='vertical' />
+        <Separator orientation="vertical" />
         <div>Docs</div>
-        <Separator orientation='vertical' />
+        <Separator orientation="vertical" />
         <div>Source</div>
       </div>
     </div>

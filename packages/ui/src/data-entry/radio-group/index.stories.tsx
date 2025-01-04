@@ -1,143 +1,30 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-
-import { RadioGroup, RadioGroupItem } from '.';
+import { getFormProps, useForm } from "@conform-to/react";
+import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import {
   Button,
   Form,
-  FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
   Label,
+  RadioGroup,
   toast,
-  ToastDecorator,
-} from '../../';
+} from "@kkhys/ui";
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, within } from "@storybook/test";
+import * as React from "react";
+import { z } from "zod";
+import { ToastDecorator } from "../../feedback/toast/index.stories";
+import { _RadioGroup, _RadioGroupItem } from "./_radio-group";
 
 const meta = {
-  title: 'Data Entry / Radio Group',
-  component: RadioGroup,
+  title: "Data Entry / Radio Group",
+  component: _RadioGroup,
   argTypes: {
-    asChild: {
-      control: 'boolean',
-      description:
-        'Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our <a href="https://www.radix-ui.com/primitives/docs/guides/composition" target="_blank" rel="noreferrer noopener">Composition</a> guide for more details.',
-      table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
-      },
-      type: {
-        name: 'boolean',
-      },
-    },
-    defaultValue: {
-      control: 'text',
-      description:
-        'The value of the radio item that should be checked when initially rendered. Use when you do not need to control the state of the radio items.',
-      table: {
-        type: { summary: 'string' },
-      },
-      type: {
-        name: 'string',
-      },
-    },
-    value: {
-      control: 'text',
-      description:
-        'The controlled value of the radio item to check. Should be used in conjunction with `onValueChange`.',
-      table: {
-        type: { summary: 'string' },
-      },
-      type: {
-        name: 'string',
-      },
-    },
     onValueChange: {
-      action: 'onChanged',
-      description: 'Event handler called when the value changes.',
       table: {
-        category: 'Events',
-        type: { summary: 'function', detail: '(value: string) => void' },
-      },
-      type: {
-        name: 'function',
-      },
-    },
-    disabled: {
-      control: 'boolean',
-      description:
-        'When `true`, prevents the user from interacting with radio items.',
-      table: {
-        type: { summary: 'boolean' },
-      },
-      type: {
-        name: 'boolean',
-      },
-    },
-    name: {
-      control: 'text',
-      description:
-        'The name of the group. Submitted with its owning form as part of a name/value pair.',
-      table: {
-        type: { summary: 'string' },
-      },
-      type: {
-        name: 'string',
-      },
-    },
-    required: {
-      control: 'boolean',
-      description:
-        'When `true`, indicates that the user must check a radio item before the owning form can be submitted.',
-      table: {
-        type: { summary: 'boolean' },
-      },
-      type: {
-        name: 'boolean',
-      },
-    },
-    orientation: {
-      control: 'radio',
-      description: 'The orientation of the component.',
-      options: ['horizontal', 'vertical', undefined],
-      table: {
-        defaultValue: { summary: undefined },
-        type: {
-          summary: 'enum',
-          detail: '"horizontal" | "vertical" | undefined',
-        },
-      },
-      type: {
-        name: 'enum',
-        value: ['horizontal', 'vertical', 'undefined'],
-      },
-    },
-    dir: {
-      control: 'radio',
-      description:
-        'The reading direction of the radio group. If omitted, inherits globally from `DirectionProvider` or assumes LTR (left-to-right) reading mode.',
-      options: ['ltr', 'rtl'],
-      table: {
-        type: { summary: 'enum', detail: '"ltr" | "rtl"' },
-      },
-      type: {
-        name: 'enum',
-        value: ['ltr', 'rtl'],
-      },
-    },
-    loop: {
-      control: 'boolean',
-      description:
-        'When `true`, keyboard navigation will loop from last item to first, and vice versa.',
-      table: {
-        defaultValue: { summary: true },
-        type: { summary: 'boolean' },
-      },
-      type: {
-        name: 'boolean',
+        disable: true,
       },
     },
     children: {
@@ -146,111 +33,138 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof RadioGroup>;
+  args: {
+    onValueChange: fn(),
+  },
+} satisfies Meta<typeof _RadioGroup>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    defaultValue: 'comfortable',
+    defaultValue: "comfortable",
     children: (
       <>
-        <div className='flex items-center space-x-2'>
-          <RadioGroupItem value='default' id='r1' />
-          <Label htmlFor='r1'>Default</Label>
+        <div className="flex items-center space-x-2">
+          <_RadioGroupItem value="default" id="r1" />
+          <Label htmlFor="r1">Default</Label>
         </div>
-        <div className='flex items-center space-x-2'>
-          <RadioGroupItem value='comfortable' id='r2' />
-          <Label htmlFor='r2'>Comfortable</Label>
+        <div className="flex items-center space-x-2">
+          <_RadioGroupItem value="comfortable" id="r2" />
+          <Label htmlFor="r2">Comfortable</Label>
         </div>
-        <div className='flex items-center space-x-2'>
-          <RadioGroupItem value='compact' id='r3' />
-          <Label htmlFor='r3'>Compact</Label>
+        <div className="flex items-center space-x-2">
+          <_RadioGroupItem value="compact" id="r3" />
+          <Label htmlFor="r3">Compact</Label>
         </div>
       </>
     ),
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    const defaultRadio = canvas.getByLabelText("Default");
+    const comfortableRadio = canvas.getByLabelText("Comfortable");
+    const compactRadio = canvas.getByLabelText("Compact");
+
+    await step("Verify the default selected value", async () => {
+      await expect(defaultRadio).not.toBeChecked();
+      await expect(comfortableRadio).toBeChecked();
+      await expect(compactRadio).not.toBeChecked();
+    });
+
+    await step("Select Default option", async () => {
+      await userEvent.click(defaultRadio, { delay: 100 });
+
+      await expect(defaultRadio).toBeChecked();
+      await expect(comfortableRadio).not.toBeChecked();
+      await expect(compactRadio).not.toBeChecked();
+    });
+  },
 } satisfies Story;
 
 const FormDemo = () => {
+  const typeOptions = [
+    {
+      value: "all",
+      label: "All new messages",
+    },
+    {
+      value: "mentions",
+      label: "Direct messages and mentions",
+    },
+    {
+      value: "none",
+      label: "Nothing",
+    },
+  ];
+
   const FormSchema = z.object({
-    type: z.enum(['all', 'mentions', 'none'], {
-      required_error: 'You need to select a notification type.',
-    }),
+    type: z.enum(
+      typeOptions.map((option) => option.value) as [string, ...string[]],
+      {
+        required_error: "You need to select a notification type.",
+      },
+    ),
   });
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
+  const [form, fields] = useForm({
+    id: "form-demo",
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: FormSchema });
+    },
+    onSubmit(e) {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      const result = parseWithZod(formData, { schema: FormSchema });
 
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    toast('You submitted the following values:', {
-      description: (
-        <pre className='mt-2 w-[320px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  };
+      if (result.status === "success") {
+        toast("You submitted the following values:", {
+          description: (
+            <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
+              <code className="text-white">
+                {JSON.stringify(formData.get("type"), null, 2)}
+              </code>
+            </pre>
+          ),
+        });
+      }
+
+      if (result.status === "error") {
+        toast.error(JSON.stringify(result.error, null, 2));
+      }
+    },
+    shouldRevalidate: "onInput",
+    constraint: getZodConstraint(FormSchema),
+  });
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='w-[300px] space-y-6'
-      >
+    <Form context={form.context}>
+      <form className="w-[300px] space-y-6" {...getFormProps(form)}>
         <FormField
-          control={form.control}
-          name='type'
-          render={({ field }) => (
-            <FormItem className='space-y-3'>
+          name={fields.type.name}
+          render={() => (
+            <FormItem className="space-y-3">
               <FormLabel>Notify me about...</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className='flex flex-col space-y-1'
-                >
-                  <FormItem className='flex items-center space-x-3 space-y-0'>
-                    <FormControl>
-                      <RadioGroupItem value='all' />
-                    </FormControl>
-                    <FormLabel className='font-normal'>
-                      All new messages
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center space-x-3 space-y-0'>
-                    <FormControl>
-                      <RadioGroupItem value='mentions' />
-                    </FormControl>
-                    <FormLabel className='font-normal'>
-                      Direct messages and mentions
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center space-x-3 space-y-0'>
-                    <FormControl>
-                      <RadioGroupItem value='none' />
-                    </FormControl>
-                    <FormLabel className='font-normal'>Nothing</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
+              <RadioGroup meta={fields.type} items={typeOptions} />
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type='submit'>Submit</Button>
+        <Button type="submit">Submit</Button>
       </form>
     </Form>
   );
 };
 
 export const FormStory = {
-  name: 'Form',
+  name: "Form",
   render: () => <FormDemo />,
   decorators: [ToastDecorator],
   parameters: {
+    layout: "fullscreen",
     docs: {
       story: {
         inline: false,

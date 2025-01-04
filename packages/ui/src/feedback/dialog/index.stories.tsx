@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
 import {
+  Button,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -8,56 +9,58 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '.';
-import { Button, Input, Label } from '../../';
+  Input,
+  Label,
+} from "@kkhys/ui";
+import { fn } from "@storybook/test";
 
 const meta = {
-  title: 'Feedback / Dialog',
+  title: "Feedback / Dialog",
   component: Dialog,
   argTypes: {
     defaultOpen: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.',
+        "The open state of the dialog when it is initially rendered. Use when you do not need to control its open state.",
       table: {
-        type: { summary: 'boolean' },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     open: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'The controlled open state of the dialog. Must be used in conjunction with `onOpenChange`.',
+        "The controlled open state of the dialog. Must be used in conjunction with `onOpenChange`.",
       table: {
-        type: { summary: 'boolean' },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     onOpenChange: {
-      action: 'changed',
+      action: "changed",
       description:
-        'Event handler called when the open state of the dialog changes.',
+        "Event handler called when the open state of the dialog changes.",
       table: {
-        category: 'Events',
-        type: { summary: 'function', detail: '(open: boolean) => void' },
+        category: "Events",
+        type: { summary: "function", detail: "(open: boolean) => void" },
       },
       type: {
-        name: 'function',
+        name: "function",
       },
     },
     modal: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'The modality of the dialog. When set to `true`, interaction with outside elements will be disabled and only dialog content will be visible to screen readers.',
+        "The modality of the dialog. When set to `true`, interaction with outside elements will be disabled and only dialog content will be visible to screen readers.",
       table: {
-        type: { summary: 'boolean' },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     children: {
@@ -65,6 +68,9 @@ const meta = {
         disable: true,
       },
     },
+  },
+  args: {
+    onOpenChange: fn(),
   },
 } satisfies Meta<typeof Dialog>;
 
@@ -76,9 +82,9 @@ export const Default = {
     children: (
       <>
         <DialogTrigger asChild>
-          <Button variant='outline'>Edit Profile</Button>
+          <Button variant="outline">Edit Profile</Button>
         </DialogTrigger>
-        <DialogContent className='sm:max-w-[425px]'>
+        <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
             <DialogDescription>
@@ -86,22 +92,32 @@ export const Default = {
               done.
             </DialogDescription>
           </DialogHeader>
-          <div className='grid gap-4 py-4'>
-            <div className='grid grid-cols-4 items-center gap-4'>
-              <Label htmlFor='name' className='text-right'>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-right">
                 Name
               </Label>
-              <Input id='name' value='Pedro Duarte' className='col-span-3' />
+              <Input
+                id="name"
+                type="text"
+                value="Pedro Duarte"
+                className="col-span-3"
+              />
             </div>
-            <div className='grid grid-cols-4 items-center gap-4'>
-              <Label htmlFor='username' className='text-right'>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="username" className="text-right">
                 Username
               </Label>
-              <Input id='username' value='@peduarte' className='col-span-3' />
+              <Input
+                id="username"
+                type="text"
+                value="@peduarte"
+                className="col-span-3"
+              />
             </div>
           </div>
           <DialogFooter>
-            <Button type='submit'>Save changes</Button>
+            <Button type="submit">Save changes</Button>
           </DialogFooter>
         </DialogContent>
       </>

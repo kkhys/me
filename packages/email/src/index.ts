@@ -1,1 +1,1 @@
-export { contactMail } from './contact';
+export * from "./contact";

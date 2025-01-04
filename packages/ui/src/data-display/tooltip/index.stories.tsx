@@ -1,66 +1,72 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '.';
-import { Button } from '../../';
+import {
+  Button,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@kkhys/ui";
+import { fn } from "@storybook/test";
 
 const meta = {
-  title: 'Data Display / Tooltip',
+  title: "Data Display / Tooltip",
   component: Tooltip,
   argTypes: {
     defaultOpen: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'The open state of the tooltip when it is initially rendered. Use when you do not need to control its open state.',
+        "The open state of the tooltip when it is initially rendered. Use when you do not need to control its open state.",
       table: {
-        type: { summary: 'boolean' },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     open: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'The controlled open state of the tooltip. Must be used in conjunction with `onOpenChange`.',
+        "The controlled open state of the tooltip. Must be used in conjunction with `onOpenChange`.",
       table: {
-        type: { summary: 'boolean' },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     onOpenChange: {
-      action: 'changed',
+      action: "changed",
       description:
-        'Event handler called when the open state of the tooltip changes.',
+        "Event handler called when the open state of the tooltip changes.",
       table: {
-        type: { summary: 'function', detail: '(open: boolean) => void' },
+        type: { summary: "function", detail: "(open: boolean) => void" },
       },
       type: {
-        name: 'function',
+        name: "function",
       },
     },
     delayDuration: {
-      control: 'number',
+      control: "number",
       description:
-        'Override the duration given to the `Provider` to customise the open delay for a specific tooltip.',
+        "Override the duration given to the `Provider` to customise the open delay for a specific tooltip.",
       table: {
-        defaultValue: { summary: '700' },
-        type: { summary: 'number' },
+        defaultValue: { summary: "0" },
+        type: { summary: "number" },
       },
       type: {
-        name: 'number',
+        name: "number",
       },
     },
     disableHoverableContent: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'Prevents `TooltipContent` from remaining open when hovering. Disabling this has accessibility consequences. Inherits from `TooltipProvider`.',
+        "Prevents `TooltipContent` from remaining open when hovering. Disabling this has accessibility consequences. Inherits from `TooltipProvider`.",
       table: {
-        type: { summary: 'boolean' },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     children: {
@@ -68,6 +74,9 @@ const meta = {
         disable: true,
       },
     },
+  },
+  args: {
+    onOpenChange: fn(),
   },
 } satisfies Meta<typeof Tooltip>;
 
@@ -79,7 +88,7 @@ export const Default = {
     children: (
       <>
         <TooltipTrigger asChild>
-          <Button variant='outline'>Hover</Button>
+          <Button variant="outline">Hover</Button>
         </TooltipTrigger>
         <TooltipContent>
           <p>Add to library</p>
@@ -89,17 +98,9 @@ export const Default = {
   },
   decorators: [
     (Story) => (
-      <TooltipProvider>
+      <TooltipProvider delayDuration={0}>
         <Story />
       </TooltipProvider>
     ),
   ],
-  parameters: {
-    docs: {
-      story: {
-        inline: false,
-        iframeHeight: 200,
-      },
-    },
-  },
 } satisfies Story;

@@ -1,54 +1,38 @@
-import type { Preview } from '@storybook/react';
-
-import '#/styles/globals.css';
-
-import {
-  androidViewports,
-  ipadViewports,
-  iphoneViewports,
-  tailwindViewports,
-} from '@kkhys/storybook-config';
-
-// import { ThemeProvider } from '#/lib/nextjs/theme-provider';
+import { withThemeByClassName } from "@storybook/addon-themes";
+import type { Preview } from "@storybook/react";
+import "#/styles/globals.css";
+import { TooltipProvider, cn } from "@kkhys/ui";
+import { inter, jetBrainsMono, newsreader, notoSansJP } from "#/lib/font";
 
 const preview = {
-  globalTypes: {
-    theme: {
-      name: 'Theme',
-      description: 'Global theme for components',
-      defaultValue: 'light',
-      // toolbar: {
-      //   title: 'Theme',
-      //   icon: 'photo',
-      //   items: ['system', 'light', 'dark'],
-      //   dynamicTitle: true,
-      // },
-    },
-  },
   parameters: {
     backgrounds: { disable: true },
-    layout: 'centered',
-    docs: {
-      canvas: {
-        sourceState: 'none',
-      },
-    },
-    viewport: {
-      viewports: {
-        ...iphoneViewports,
-        ...ipadViewports,
-        ...androidViewports,
-        ...tailwindViewports,
-      },
-    },
   },
-  // decorators: [
-  //   (Story, context) => (
-  //     <ThemeProvider forcedTheme={context.globals.theme} attribute='class' enableSystem disableTransitionOnChange>
-  //       <Story />
-  //     </ThemeProvider>
-  //   ),
-  // ],
+  tags: ["autodocs"],
+  decorators: [
+    withThemeByClassName({
+      themes: {
+        light: "light",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+    }),
+    (Story) => (
+      <TooltipProvider delayDuration={0}>
+        <div
+          className={cn(
+            "mx-auto w-full max-w-6xl",
+            notoSansJP.className,
+            inter.variable,
+            newsreader.variable,
+            jetBrainsMono.variable,
+          )}
+        >
+          <Story />
+        </div>
+      </TooltipProvider>
+    ),
+  ],
 } satisfies Preview;
 
 export default preview;

@@ -1,33 +1,44 @@
-import { dirname, join, resolve } from 'path';
-import type { StorybookConfig } from '@storybook/nextjs';
+import { dirname, join, resolve } from "node:path";
+import type { StorybookConfig } from "@storybook/nextjs";
+import { env } from "#/env";
 
-const getAbsolutePath = (value: string): any =>
-  dirname(require.resolve(join(value, 'package.json')));
+const getAbsolutePath = (value: string) =>
+  dirname(require.resolve(join(value, "package.json")));
 
 const config = {
-  stories: ['../src/**/overview.mdx', '../src/**/*.stories.@(ts|tsx|mdx)'],
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.tsx"],
   addons: [
-    getAbsolutePath('@storybook/addon-links'),
-    getAbsolutePath('@storybook/addon-essentials'),
-    getAbsolutePath('@storybook/addon-interactions'),
-    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath("@storybook/addon-onboarding"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@chromatic-com/storybook"),
+    getAbsolutePath("@storybook/addon-interactions"),
+    getAbsolutePath("@storybook/addon-themes"),
+    getAbsolutePath("@storybook/addon-a11y"),
   ],
   framework: {
-    name: getAbsolutePath('@storybook/nextjs'),
+    name: getAbsolutePath("@storybook/nextjs"),
     options: {},
   },
-  staticDirs: ['../public'],
+  staticDirs: ["../public"],
+  features: {
+    experimentalRSC: true,
+  },
   webpackFinal: async (config) => {
     config.resolve.alias = {
       ...config.resolve?.alias,
-      '#': resolve(__dirname, '..'),
-      // FIXME: I don't know why this is needed, but it is
-      // @see: https://github.com/storybookjs/storybook/issues/24234
-      'contentlayer/generated':
-        'next/dist/shared/lib/router-context.shared-runtime',
+      "contentlayer/generated": resolve(
+        __dirname,
+        "..",
+        ".contentlayer",
+        "generated",
+      ),
     };
     return config;
   },
+  env: (envConfig) => ({
+    ...envConfig,
+    ...env,
+  }),
   core: {
     disableTelemetry: true,
     disableWhatsNewNotifications: true,

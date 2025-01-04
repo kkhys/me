@@ -1,9 +1,30 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": ["**/.env"],
-  "pipeline": {
+  "$schema": "https://turborepo.org/schema.json",
+  "tasks": {
+    "topo": {
+      "dependsOn": ["^topo"]
+    },
     "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        ".cache/tsbuildinfo.json",
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**",
+        ".contentlayer/**"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "//#lint": {},
+    "//#lint:fix": {
       "cache": false
+    },
+    "typecheck": {
+      "dependsOn": ["^topo", "^build"],
+      "outputs": [".cache/tsbuildinfo.json"]
     },
     "clean": {
       "cache": false
@@ -11,39 +32,38 @@
     "//#clean": {
       "cache": false
     },
-    "dev": {
-      "persistent": true,
-      "cache": false
-    },
-    "format": {
-      "outputs": ["node_modules/.cache/.prettiercache"],
-      "outputMode": "new-only"
-    },
-    "lint": {
-      "outputs": ["node_modules/.cache/.eslintcache"]
-    },
-    "typecheck": {
-      "outputs": ["node_modules/.cache/tsbuildinfo.json"]
-    },
     "storybook:dev": {
       "cache": false,
       "persistent": true
     },
     "storybook:build": {
+      "dependsOn": ["^build", "^storybook:build"],
       "outputs": ["storybook-static/**"]
     },
     "storybook:move": {
       "cache": false
-    },
-    "test": {
-      "outputs": ["coverage/**"],
-      "dependsOn": []
     }
   },
   "globalEnv": [
-    "DATABASE_URL",
-    "AUTH_SECRET",
-    "GOOGLE_CLIENT_ID",
-    "GOOGLE_CLIENT_SECRET"
+    "NEXT_PUBLIC_TAG_MANAGER_ID",
+    "NEXT_PUBLIC_GOOGLE_MAPS_API_KEY",
+    "EDGE_CONFIG",
+    "UPSTASH_REDIS_REST_URL",
+    "UPSTASH_REDIS_REST_TOKEN",
+    "GOOGLE_SHEETS_ID",
+    "VITE_GOOGLE_SHEETS_ID",
+    "GCP_CLIENT_EMAIL",
+    "GCP_PRIVATE_KEY",
+    "LINE_USER_ID",
+    "LINE_CHANNEL_ACCESS_TOKEN",
+    "RESEND_API_KEY"
+  ],
+  "globalPassThroughEnv": [
+    "NODE_ENV",
+    "CI",
+    "VERCEL",
+    "VERCEL_ENV",
+    "VERCEL_URL",
+    "npm_lifecycle_event"
   ]
 }

@@ -1,45 +1,23 @@
-import type { Preview } from '@storybook/react';
+import type { Preview } from "@storybook/react";
 
-import '../src/styles/globals.css';
-
-import {
-  androidViewports,
-  ipadViewports,
-  iphoneViewports,
-  tailwindViewports,
-} from '@kkhys/storybook-config';
+import "@kkhys/ui/index.css";
+import { withThemeByClassName } from "@storybook/addon-themes";
 
 const preview = {
-  globalTypes: {
-    theme: {
-      name: 'Theme',
-      description: 'Global theme for components',
-      defaultValue: 'light',
-      // toolbar: {
-      //   title: 'Theme',
-      //   icon: 'photo',
-      //   items: ['system', 'light', 'dark'],
-      //   dynamicTitle: true,
-      // },
-    },
-  },
   parameters: {
+    layout: "centered",
     backgrounds: { disable: true },
-    layout: 'centered',
-    docs: {
-      canvas: {
-        sourceState: 'none',
-      },
-    },
-    viewport: {
-      viewports: {
-        ...iphoneViewports,
-        ...ipadViewports,
-        ...androidViewports,
-        ...tailwindViewports,
-      },
-    },
   },
+  tags: ["autodocs"],
+  decorators: [
+    withThemeByClassName({
+      themes: {
+        light: "light",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+    }),
+  ],
 } satisfies Preview;
 
 export default preview;

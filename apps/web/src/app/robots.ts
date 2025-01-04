@@ -1,45 +1,44 @@
-import type { MetadataRoute } from 'next';
-
-import { site } from '#/config';
+import type { MetadataRoute } from "next";
+import { siteConfig } from "#/config";
 
 const robots = (): MetadataRoute.Robots => {
   return {
     rules: [
       {
-        userAgent: 'Yahoo Pipes 1.0',
-        disallow: '/',
+        userAgent: "Yahoo Pipes 1.0",
+        disallow: "/",
       },
       {
-        userAgent: '008',
-        disallow: '/',
+        userAgent: "008",
+        disallow: "/",
       },
       {
-        userAgent: 'voltron',
-        disallow: '/',
+        userAgent: "voltron",
+        disallow: "/",
       },
       {
-        userAgent: 'Bytespider',
-        disallow: '/',
+        userAgent: "Bytespider",
+        disallow: "/",
       },
       {
-        userAgent: 'Livelapbot',
-        disallow: '/',
+        userAgent: "Livelapbot",
+        disallow: "/",
       },
       {
-        userAgent: 'Megalodon',
-        disallow: '/',
+        userAgent: "Megalodon",
+        disallow: "/",
       },
       {
-        userAgent: 'ia_archiver',
-        disallow: '/',
+        userAgent: "ia_archiver",
+        disallow: "/",
       },
       {
-        userAgent: 'GPTBot',
-        disallow: '/',
+        userAgent: "GPTBot",
+        disallow: "/",
       },
     ],
-    sitemap: `${site.url.base}/sitemap.xml`,
-    host: site.url.base,
+    sitemap: `${siteConfig.url}/sitemap.xml`,
+    host: siteConfig.url,
   };
 };
 

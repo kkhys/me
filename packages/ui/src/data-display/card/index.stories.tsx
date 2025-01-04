@@ -1,18 +1,20 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { BellIcon, CheckIcon } from '@radix-ui/react-icons';
+import type { Meta, StoryObj } from "@storybook/react";
 
 import {
+  Button,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '.';
-import { Button, Input, Label as MyLabel } from '../../';
+  Input,
+  Label,
+} from "@kkhys/ui";
+import { BellIcon, CheckIcon } from "lucide-react";
 
 const meta = {
-  title: 'Data Display / Card',
+  title: "Data Display / Card",
   component: Card,
   argTypes: {
     className: {
@@ -33,7 +35,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    className: 'w-[350px]',
+    className: "w-[350px]",
     children: (
       <>
         <CardHeader>
@@ -44,16 +46,20 @@ export const Default = {
         </CardHeader>
         <CardContent>
           <form>
-            <div className='grid w-full items-center gap-4'>
-              <div className='flex flex-col space-y-1.5'>
-                <MyLabel htmlFor='name'>Name</MyLabel>
-                <Input id='name' placeholder='Name of your project' />
+            <div className="grid w-full items-center gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Name of your project"
+                />
               </div>
             </div>
           </form>
         </CardContent>
-        <CardFooter className='flex justify-between'>
-          <Button variant='outline'>Cancel</Button>
+        <CardFooter className="flex justify-between">
+          <Button variant="outline">Cancel</Button>
           <Button>Deploy</Button>
         </CardFooter>
       </>
@@ -63,36 +69,36 @@ export const Default = {
 
 const notifications = [
   {
-    title: 'Your call has been confirmed.',
-    description: '1 hour ago',
+    title: "Your call has been confirmed.",
+    description: "1 hour ago",
   },
   {
-    title: 'You have a new message!',
-    description: '1 hour ago',
+    title: "You have a new message!",
+    description: "1 hour ago",
   },
   {
-    title: 'Your subscription is expiring soon!',
-    description: '2 hours ago',
+    title: "Your subscription is expiring soon!",
+    description: "2 hours ago",
   },
 ];
 
 export const Default2 = {
   args: {
-    className: 'w-[380px]',
+    className: "w-[380px]",
     children: (
       <>
         <CardHeader>
           <CardTitle>Notifications</CardTitle>
           <CardDescription>You have 3 unread messages.</CardDescription>
         </CardHeader>
-        <CardContent className='grid gap-4'>
-          <div className='flex items-center space-x-4 rounded-md border p-4'>
+        <CardContent className="grid gap-4">
+          <div className="flex items-center space-x-4 rounded-md border p-4">
             <BellIcon />
-            <div className='flex-1 space-y-1'>
-              <p className='text-sm font-medium leading-none'>
+            <div className="flex-1 space-y-1">
+              <p className="text-sm font-medium leading-none">
                 Push Notifications
               </p>
-              <p className='text-sm text-muted-foreground'>
+              <p className="text-sm text-muted-foreground">
                 Send notifications to device.
               </p>
             </div>
@@ -100,15 +106,16 @@ export const Default2 = {
           <div>
             {notifications.map((notification, index) => (
               <div
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                 key={index}
-                className='mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0'
+                className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
               >
-                <span className='flex size-2 translate-y-1 rounded-full bg-sky-500' />
-                <div className='space-y-1'>
-                  <p className='text-sm font-medium leading-none'>
+                <span className="flex size-2 translate-y-1 rounded-full bg-sky-500" />
+                <div className="space-y-1">
+                  <p className="text-sm font-medium leading-none">
                     {notification.title}
                   </p>
-                  <p className='text-sm text-muted-foreground'>
+                  <p className="text-sm text-muted-foreground">
                     {notification.description}
                   </p>
                 </div>
@@ -117,8 +124,8 @@ export const Default2 = {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className='w-full'>
-            <CheckIcon className='mr-2 size-4' /> Mark all as read
+          <Button className="w-full">
+            <CheckIcon className="mr-2 size-4" /> Mark all as read
           </Button>
         </CardFooter>
       </>
