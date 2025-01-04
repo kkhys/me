@@ -51,12 +51,16 @@ jobs:
       - name: Install Playwright Browser
         run: bunx playwright install --with-deps chromium
 
-      - name: Copy env
-        shell: bash
-        run: cp .env.example .env
+#      - name: Copy env
+#        shell: bash
+#        run: cp .env.example .env
 
       - name: Build
         run: bun run build
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
 
       - name: Typecheck
         run: bun typecheck
