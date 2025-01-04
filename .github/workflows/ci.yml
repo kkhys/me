@@ -16,7 +16,8 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Setup Biome
         uses: biomejs/setup-biome@v2
@@ -29,13 +30,15 @@ jobs:
   typecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.SUBMODULE_TOKEN }}
           submodules: recursive
 
-      - uses: oven-sh/setup-bun@v2
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
