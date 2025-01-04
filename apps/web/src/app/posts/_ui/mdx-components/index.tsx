@@ -9,7 +9,7 @@ import {
   TabsTrigger,
   cn,
 } from "@kkhys/ui";
-import { SquareArrowOutUpRight } from "lucide-react";
+import { SquareArrowOutUpRightIcon } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 import type { Route } from "next";
 import { useMDXComponent } from "next-contentlayer2/hooks";
@@ -70,7 +70,7 @@ const components = {
           {...props}
         >
           {children}
-          <SquareArrowOutUpRight className="ml-1 mt-0.5 size-3" />
+          <SquareArrowOutUpRightIcon className="ml-1 mt-0.5 size-3" />
         </a>
       );
     }

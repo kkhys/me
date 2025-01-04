@@ -1,5 +1,5 @@
 import { Prose } from "@kkhys/ui";
-import { MoveRight } from "lucide-react";
+import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
 
 const Page = () => (
@@ -17,7 +17,7 @@ const Page = () => (
       </p>
       <Link href="/posts" className="inline-flex items-center">
         Read blog
-        <MoveRight className="ml-1 size-3.5" />
+        <MoveRightIcon className="ml-1 size-3.5" />
       </Link>
     </Prose>
   </>

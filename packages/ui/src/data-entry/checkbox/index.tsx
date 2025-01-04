@@ -1,7 +1,7 @@
 "use client";
 
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Check } from "lucide-react";
+import { CheckIcon } from "lucide-react";
 
 import {
   type FieldMetadata,
@@ -27,7 +27,7 @@ const Checkbox = ({
         {...props}
       >
         <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
-          <Check className="size-4" />
+          <CheckIcon className="size-4" />
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
     );
@@ -51,7 +51,7 @@ const Checkbox = ({
         {...props}
       >
         <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
-          <Check className="size-4" />
+          <CheckIcon className="size-4" />
         </CheckboxPrimitive.Indicator>
       </CheckboxPrimitive.Root>
       <input

@@ -7,41 +7,36 @@ import {
 
 import { AlertDescription, AlertTitle, Alert as _Alert } from "@kkhys/ui";
 
-enum AlertType {
-  Note = "note",
-  Tip = "tip",
-  Important = "important",
-  Warning = "warning",
-}
+type AlertType = "note" | "tip" | "important" | "warning";
 
 const getTitle = (type: AlertType) => {
   switch (type) {
-    case AlertType.Note:
+    case "note":
       return "Note";
-    case AlertType.Tip:
+    case "tip":
       return "Tip";
-    case AlertType.Important:
+    case "important":
       return "Important";
-    case AlertType.Warning:
+    case "warning":
       return "Warning";
   }
 };
 
 const getIcon = (type: AlertType) => {
   switch (type) {
-    case AlertType.Note:
+    case "note":
       return <InfoIcon className="size-4" />;
-    case AlertType.Tip:
+    case "tip":
       return <LightbulbIcon className="size-4" />;
-    case AlertType.Important:
+    case "important":
       return <SparklesIcon className="size-4" />;
-    case AlertType.Warning:
+    case "warning":
       return <AlertTriangleIcon className="size-4" />;
   }
 };
 
 export const AlertBlock = ({
-  type,
+  type = "note",
   description,
   className,
 }: {

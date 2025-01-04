@@ -8,7 +8,10 @@
     "build": "bun with-env next build",
     "start": "bun with-env next start --port 3000",
     "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "dotenv -e ../../.env --",
+    "storybook:dev": "bun with-env storybook dev --port 6008 --quiet --no-open",
+    "storybook:build": "bun with-env storybook build --quiet",
+    "storybook:move": "mv storybook-static ../../storybook-static/web"
   },
   "dependencies": {
     "@conform-to/react": "1.2.2",
@@ -37,9 +40,19 @@
     "zod": "3.24.1"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "3.2.3",
     "@kkhys/tailwind-config": "workspace:*",
     "@kkhys/tsconfig": "workspace:*",
     "@shikijs/transformers": "1.24.2",
+    "@storybook/addon-a11y": "8.4.7",
+    "@storybook/addon-essentials": "8.4.7",
+    "@storybook/addon-interactions": "8.4.7",
+    "@storybook/addon-onboarding": "8.4.7",
+    "@storybook/addon-themes": "8.4.7",
+    "@storybook/blocks": "8.4.7",
+    "@storybook/nextjs": "8.4.7",
+    "@storybook/react": "8.4.7",
+    "@storybook/test": "8.4.7",
     "@types/mdx": "2.0.13",
     "@types/node": "22.10.2",
     "@types/react": "19.0.2",
@@ -59,6 +72,7 @@
     "remark-gfm": "4.0.0",
     "satori": "0.12.0",
     "schema-dts": "1.1.2",
+    "storybook": "8.4.7",
     "strip-markdown": "6.0.0",
     "tailwindcss": "3.4.15",
     "typescript": "5.7.2"

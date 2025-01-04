@@ -18,11 +18,7 @@ const FormField = <TFieldName extends string>({
 }: {
   name: TFieldName;
   render: () => React.ReactNode;
-}) => (
-  <FormFieldContext.Provider value={{ name }}>
-    {render()}
-  </FormFieldContext.Provider>
-);
+}) => <FormFieldContext value={{ name }}>{render()}</FormFieldContext>;
 
 const FormItem = ({
   className,

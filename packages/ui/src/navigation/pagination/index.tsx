@@ -1,4 +1,8 @@
-import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  MoreHorizontalIcon,
+} from "lucide-react";
 
 import { cn } from "@kkhys/ui";
 import { type ButtonProps, buttonVariants } from "@kkhys/ui";
@@ -69,7 +73,7 @@ const PaginationPrevious = ({
     className={className}
     {...props}
   >
-    <ChevronLeft className="size-4" />
+    <ChevronLeftIcon className="size-4" />
   </PaginationLink>
 );
 PaginationPrevious.displayName = "PaginationPrevious";
@@ -84,7 +88,7 @@ const PaginationNext = ({
     className={className}
     {...props}
   >
-    <ChevronRight className="size-4" />
+    <ChevronRightIcon className="size-4" />
   </PaginationLink>
 );
 PaginationNext.displayName = "PaginationNext";
@@ -98,7 +102,7 @@ const PaginationEllipsis = ({
     className={cn("flex size-9 items-center justify-center", className)}
     {...props}
   >
-    <MoreHorizontal className="size-4" />
+    <MoreHorizontalIcon className="size-4" />
     <span className="sr-only">More pages</span>
   </span>
 );

@@ -1,4 +1,4 @@
-import { Globe } from "lucide-react";
+import { GlobeIcon } from "lucide-react";
 import Image from "next/image";
 
 import { cn } from "@kkhys/ui";
@@ -61,7 +61,7 @@ export const LinkCardBlock = ({
                 className="size-3 shrink-0"
               />
             ) : (
-              <Globe className="size-3 shrink-0" />
+              <GlobeIcon className="size-3 shrink-0" />
             )}
             <span className="ml-1 font-sans text-xs">
               {new URL(url).hostname}

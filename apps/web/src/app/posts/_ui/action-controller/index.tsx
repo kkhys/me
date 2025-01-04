@@ -1,7 +1,7 @@
 "use client";
 
 import type { Post } from "contentlayer/generated";
-import { CodeIcon, Share2, SquareArrowOutUpRight } from "lucide-react";
+import { CodeIcon, Share2Icon, SquareArrowOutUpRightIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
 
@@ -34,7 +34,7 @@ const NavLink = <T extends string>({
       rel={isExternal ? "noreferrer" : undefined}
     >
       {children}
-      {isExternal && <SquareArrowOutUpRight className="size-2" />}
+      {isExternal && <SquareArrowOutUpRightIcon className="size-2" />}
     </Link>
   </DropdownMenuItem>
 );
@@ -57,7 +57,7 @@ const SharedAction = ({ post: { url, title } }: { post: Post }) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="ghost" size="icon">
-        <Share2 className="size-4" />
+        <Share2Icon className="size-4" />
         <span className="sr-only">Share</span>
       </Button>
     </DropdownMenuTrigger>

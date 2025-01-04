@@ -7,7 +7,7 @@ import {
   buttonVariants,
   cn,
 } from "@kkhys/ui";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
 
@@ -53,7 +53,7 @@ const PaginationPrevious = ({
       className={cn("hidden sm:inline-flex", className)}
       {...props}
     >
-      <ChevronLeft className="size-4" />
+      <ChevronLeftIcon className="size-4" />
     </PaginationLink>
     <PaginationLink
       aria-label="Go to previous page"
@@ -62,7 +62,7 @@ const PaginationPrevious = ({
       className={cn("inline-flex sm:hidden gap-1 pl-2.5", className)}
       {...props}
     >
-      <ChevronLeft className="size-4" />
+      <ChevronLeftIcon className="size-4" />
       <span>Previous</span>
     </PaginationLink>
   </>
@@ -81,7 +81,7 @@ const PaginationNext = ({
       className={cn("hidden sm:inline-flex", className)}
       {...props}
     >
-      <ChevronRight className="size-4" />
+      <ChevronRightIcon className="size-4" />
     </PaginationLink>
     <PaginationLink
       aria-label="Go to next page"
@@ -91,7 +91,7 @@ const PaginationNext = ({
       {...props}
     >
       <span>Next</span>
-      <ChevronRight className="size-4" />
+      <ChevronRightIcon className="size-4" />
     </PaginationLink>
   </>
 );

@@ -1,4 +1,4 @@
-import { SquareArrowOutUpRight } from "lucide-react";
+import { SquareArrowOutUpRightIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
 import { siteConfig } from "#/config";
@@ -30,7 +30,7 @@ export const SiteFooter = () => (
             rel={external ? "noreferrer" : undefined}
           >
             {title}
-            {external && <SquareArrowOutUpRight className="size-2.5" />}
+            {external && <SquareArrowOutUpRightIcon className="size-2.5" />}
           </Link>
         ))}
       </nav>

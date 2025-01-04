@@ -11,9 +11,9 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_TAG_MANAGER_ID: z.string().min(1),
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string().min(1),
   },
   server: {
-    GOOGLE_MAPS_API_KEY: z.string().min(1),
     GOOGLE_SHEETS_ID: z.string().min(1),
     GCP_CLIENT_EMAIL: z.string().min(1),
     GCP_PRIVATE_KEY: z.string().min(1),
@@ -23,6 +23,8 @@ export const env = createEnv({
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:
+      process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     NEXT_PUBLIC_TAG_MANAGER_ID: process.env.NEXT_PUBLIC_TAG_MANAGER_ID,
   },
   skipValidation:

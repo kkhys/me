@@ -12,7 +12,7 @@ export const GoogleMapsBlock = ({
   if (!caption) {
     return (
       <GoogleMapsEmbed
-        apiKey={env.GOOGLE_MAPS_API_KEY}
+        apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
         width="100%"
         mode="place"
         q={`place_id:${placeId}`}
@@ -25,7 +25,7 @@ export const GoogleMapsBlock = ({
   return (
     <figure>
       <GoogleMapsEmbed
-        apiKey={env.GOOGLE_MAPS_API_KEY}
+        apiKey={env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
         width="100%"
         mode="place"
         q={`place_id:${placeId}`}

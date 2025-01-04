@@ -2,7 +2,7 @@
 
 import { DialogDescription, type DialogProps } from "@kkhys/ui";
 import { DialogTitle } from "@kkhys/ui";
-import { Laptop, Moon, Sun } from "lucide-react";
+import { LaptopIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 
@@ -129,15 +129,15 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
           <CommandSeparator />
           <CommandGroup heading="Theme">
             <CommandItem onSelect={() => runCommand(() => setTheme("light"))}>
-              <Sun />
+              <SunIcon />
               Light
             </CommandItem>
             <CommandItem onSelect={() => runCommand(() => setTheme("dark"))}>
-              <Moon />
+              <MoonIcon />
               Dark
             </CommandItem>
             <CommandItem onSelect={() => runCommand(() => setTheme("system"))}>
-              <Laptop />
+              <LaptopIcon />
               System
             </CommandItem>
           </CommandGroup>

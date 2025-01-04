@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Minus, Plus } from "lucide-react";
+import { MinusIcon, PlusIcon } from "lucide-react";
 import * as React from "react";
 
 import {
@@ -62,7 +62,7 @@ const DefaultDemo = ({
                 onClick={() => onClick(-10)}
                 disabled={goal <= 200}
               >
-                <Minus className="size-4" />
+                <MinusIcon className="size-4" />
                 <span className="sr-only">Decrease</span>
               </Button>
               <div className="flex-1 text-center">
@@ -80,7 +80,7 @@ const DefaultDemo = ({
                 onClick={() => onClick(10)}
                 disabled={goal >= 400}
               >
-                <Plus className="size-4" />
+                <PlusIcon className="size-4" />
                 <span className="sr-only">Increase</span>
               </Button>
             </div>

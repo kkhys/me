@@ -11,7 +11,7 @@ import {
   Input,
   Label,
 } from "@kkhys/ui";
-import { Bell, Check } from "lucide-react";
+import { BellIcon, CheckIcon } from "lucide-react";
 
 const meta = {
   title: "Data Display / Card",
@@ -93,7 +93,7 @@ export const Default2 = {
         </CardHeader>
         <CardContent className="grid gap-4">
           <div className="flex items-center space-x-4 rounded-md border p-4">
-            <Bell />
+            <BellIcon />
             <div className="flex-1 space-y-1">
               <p className="text-sm font-medium leading-none">
                 Push Notifications
@@ -125,7 +125,7 @@ export const Default2 = {
         </CardContent>
         <CardFooter>
           <Button className="w-full">
-            <Check className="mr-2 size-4" /> Mark all as read
+            <CheckIcon className="mr-2 size-4" /> Mark all as read
           </Button>
         </CardFooter>
       </>
