@@ -10,7 +10,7 @@
     "push": "clasp push",
     "open": "clasp open",
     "deploy": "clasp deploy",
-    "clean": "git clean -xdf .cache dist",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

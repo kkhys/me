@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "clean": "git clean -xdf .cache .contentlayer .next .turbo node_modules storybook-static",
     "dev": "bun with-env next dev --port 3000",
     "build": "bun with-env next build",
     "start": "bun with-env next start --port 3000",

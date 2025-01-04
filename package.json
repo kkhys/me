@@ -3,10 +3,19 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "clean": "git clean -xdf .turbo node_modules storybook-static bun.lockb",
+    "clean:workspaces": "turbo run clean",
+    "dev": "turbo watch dev --continue",
+    "build": "turbo run build",
     "lint": "bun biome check .",
     "lint:fix": "bun biome check --write .",
     "lint:ws": "bunx sherif@latest",
-    "postinstall": "bun lint:ws"
+    "postinstall": "bun lint:ws",
+    "typecheck": "turbo run typecheck",
+    "storybook:dev": "turbo run storybook:dev",
+    "storybook:build": "turbo run storybook:build",
+    "storybook:move": "turbo run storybook:move --filter=@kkhys/storybook && turbo run storybook:move --filter=!@kkhys/storybook",
+    "storybook:start": "bunx http-server storybook-static -p 8080"
   },
   "release": {
     "branches": ["main"]
@@ -20,7 +29,8 @@
     "@biomejs/biome": "1.9.4",
     "@types/bun": "1.1.13",
     "semantic-release": "24.2.0",
-    "semantic-release-cli": "5.4.6"
+    "semantic-release-cli": "5.4.6",
+    "turbo": "2.3.3"
   },
   "peerDependencies": {
     "typescript": "5.7.2"

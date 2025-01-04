@@ -7,7 +7,7 @@
     ".": "./index.ts"
   },
   "scripts": {
-    "clean": "git clean -xdf .cache .turbo",
+    "clean": "git clean -xdf .cache .turbo node_modules",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

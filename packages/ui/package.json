@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "clean": "git clean -xdf .cache .turbo dist",
+    "clean": "git clean -xdf .cache .turbo dist node_modules storybook-static",
     "dev": "tsc",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "ui-add": "bunx --bun shadcn@latest add",
