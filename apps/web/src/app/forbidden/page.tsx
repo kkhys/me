@@ -1,38 +1,19 @@
-import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
-import { get } from '@vercel/edge-config';
-
-import { FadeIn, FadeInStagger, Prose } from '@kkhys/ui';
-
-import { env } from '#/env';
-import { Container } from '#/ui/global';
+import { Prose } from "@kkhys/ui";
+import type { Metadata } from "next";
 
 export const metadata = {
-  robots: 'noindex',
-  title: 'Forbidden',
-  description: 'You have been denied access for some reason.',
+  robots: "noindex",
+  title: "Forbidden",
+  description: "You have been denied access for some reason.",
 } satisfies Metadata;
 
-const Page = async () => {
-  if (!env.CI) {
-    const blockIps = await get<string[]>('blockIps');
-    if (!blockIps?.length) redirect('/');
-  }
-
-  return (
-    <Container>
-      <FadeInStagger>
-        <FadeIn>
-          <h1 className='font-sans font-medium'>403 - Forbidden</h1>
-        </FadeIn>
-        <Prose className='font-sans'>
-          <FadeIn>
-            <p>You have been denied access for some reason.</p>
-          </FadeIn>
-        </Prose>
-      </FadeInStagger>
-    </Container>
-  );
-};
+const Page = () => (
+  <>
+    <h1 className="font-sans font-medium">403 - Forbidden</h1>
+    <Prose className="font-sans">
+      <p>You have been denied access for some reason.</p>
+    </Prose>
+  </>
+);
 
 export default Page;

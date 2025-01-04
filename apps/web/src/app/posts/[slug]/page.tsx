@@ -1,42 +1,94 @@
-import * as React from 'react';
-import { notFound } from 'next/navigation';
-import { allPosts } from 'contentlayer/generated';
+import { Prose } from "@kkhys/ui";
+import { notFound } from "next/navigation";
+import {
+  ActionController,
+  ArticleList,
+  EyeCatch,
+  Mdx,
+  PrevAndNextPager,
+  ViewCounter,
+  ViewCounterSkeleton,
+} from "#/app/posts/_ui";
+import { getPostBySlug, getPublicPosts, getRelatedPosts } from "#/utils/post";
 
-import { env } from '#/env';
-import { ArticleLayout, ArticleLayoutFallback } from '#/ui/post';
-import { JsonLd } from './json-ld';
+import "#/styles/code-block.css";
+import "#/styles/react-medium-image-zoom.css";
+import type { Post } from "contentlayer/generated";
+import { Suspense } from "react";
+import * as React from "react";
+import type { BlogPosting, BreadcrumbList, WithContext } from "schema-dts";
+import { me, siteConfig } from "#/config";
 
-import '#/styles/code-block.css';
+const JsonLd = ({
+  post: { title, slug, publishedAt, updatedAt },
+}: { post: Post }) => {
+  const jsonLdBlogPosting = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    author: [
+      {
+        "@type": "Person",
+        name: me.name,
+        url: siteConfig.url,
+      },
+    ],
+    dateModified: updatedAt ?? undefined,
+    datePublished: publishedAt,
+    headline: title,
+    image: `${siteConfig.url}/posts/${slug}/opengraph-image/default`,
+  } satisfies WithContext<BlogPosting>;
 
-import { Suspense } from 'react';
+  const jsonLdBreadcrumbList = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: siteConfig.name,
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${siteConfig.url}/posts`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: `${siteConfig.url}/posts/${slug}`,
+      },
+    ],
+  } satisfies WithContext<BreadcrumbList>;
 
-/**
- * Retrieves a post object by its slug.
- *
- * @param slug - The slug of the post to retrieve.
- * @returns The post object matching the given slug, or undefined if not found.
- */
-const getPostBySlug = (slug: string) =>
-  allPosts.find(
-    (post) =>
-      (env.NODE_ENV === 'development' || post.status === 'published') &&
-      post.slug === slug,
+  return (
+    <script
+      type="application/ld+json"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify([jsonLdBlogPosting, jsonLdBreadcrumbList]),
+      }}
+    />
   );
+};
 
-export const generateStaticParams = () =>
-  allPosts
-    .filter(
-      (post) => env.NODE_ENV === 'development' || post.status === 'published',
-    )
-    .map(({ slug }) => ({ slug }));
+export const generateStaticParams = async () =>
+  getPublicPosts().map(({ slug }) => ({ slug }));
 
-export const generateMetadata = ({
-  params: { slug },
+export const generateMetadata = async ({
+  params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) => {
+  const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return {};
+
+  if (!post) {
+    return;
+  }
+
   const { title, excerpt, publishedAt, updatedAt } = post;
   const url = `/posts/${slug}`;
 
@@ -47,7 +99,7 @@ export const generateMetadata = ({
       canonical: `/posts/${slug}`,
     },
     openGraph: {
-      type: 'article',
+      type: "article",
       url,
       publishedTime: publishedAt,
       modifiedTime: updatedAt ?? undefined,
@@ -55,17 +107,63 @@ export const generateMetadata = ({
   };
 };
 
-const Page = ({ params: { slug } }: { params: { slug: string } }) => {
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) notFound();
+
+  if (!post) {
+    notFound();
+  }
+
+  const {
+    title,
+    category,
+    publishedAt,
+    publishedAtFormattedUs,
+    status,
+    _id,
+    body: { code },
+    emojiSvg,
+  } = post;
+
+  const relatedPosts = getRelatedPosts({ _id, category });
 
   return (
-    <>
+    <article>
       <JsonLd post={post} />
-      <Suspense fallback={<ArticleLayoutFallback />}>
-        <ArticleLayout post={post} />
-      </Suspense>
-    </>
+      <header>
+        <EyeCatch emoji={emojiSvg} />
+        {status === "draft" && (
+          <span className="font-sans text-xs text-red-400">Draft</span>
+        )}
+        <h1 className="palt mt-4 font-medium">{title}</h1>
+        <div className="mt-2 flex items-center justify-between">
+          <time
+            dateTime={publishedAt}
+            className="font-sans text-sm text-muted-foreground"
+          >
+            {publishedAtFormattedUs}
+          </time>
+          <Suspense fallback={<ViewCounterSkeleton />}>
+            <ViewCounter slug={slug} />
+          </Suspense>
+        </div>
+      </header>
+      <Prose>
+        <Mdx code={code} />
+      </Prose>
+      <ActionController className="mt-12" post={post} />
+      <PrevAndNextPager id={_id} className="mt-8" />
+      {relatedPosts.length !== 0 && (
+        <div className="mt-8">
+          <hr className="mt-12" />
+          <span className="mt-12 block font-sans font-medium">
+            Related Posts
+          </span>
+          <ArticleList className="mt-6" posts={relatedPosts} showDate={false} />
+        </div>
+      )}
+    </article>
   );
 };
 

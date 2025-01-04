@@ -1,38 +1,24 @@
 {
-  "$schema": "https://json.schemastore.org/package.json",
+  "$schema": "https://json.schemastore.org/package",
   "name": "@kkhys/tailwind-config",
   "private": true,
-  "version": "0.1.0",
   "type": "module",
   "exports": {
     ".": "./index.ts"
   },
   "scripts": {
-    "clean": "rm -rf .turbo node_modules",
-    "lint": "eslint .",
-    "format": "prettier --check \"**/*.{mjs,ts,md,json}\" --ignore-path ../../.gitignore",
+    "clean": "git clean -xdf .cache .turbo node_modules",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@tailwindcss/typography": "0.5.15",
     "autoprefixer": "10.4.20",
     "postcss": "8.4.49",
-    "tailwindcss": "3.4.17",
+    "tailwindcss": "3.4.15",
     "tailwindcss-animate": "1.0.7"
   },
   "devDependencies": {
-    "@kkhys/eslint-config": "workspace:0.1.0",
-    "@kkhys/prettier-config": "workspace:0.1.0",
-    "@kkhys/tsconfig": "workspace:0.1.0",
-    "eslint": "8.57.1",
-    "prettier": "3.4.2",
+    "@kkhys/tsconfig": "workspace:*",
     "typescript": "5.7.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "@kkhys/eslint-config/base"
-    ]
-  },
-  "prettier": "@kkhys/prettier-config"
+  }
 }

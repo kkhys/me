@@ -1,44 +1,49 @@
-'use client';
+import {
+  type FieldMetadata,
+  unstable_useControl as useControl,
+} from "@conform-to/react";
+import { FormItem, Label } from "@kkhys/ui";
+import * as React from "react";
+import { _RadioGroup, _RadioGroupItem } from "./_radio-group";
 
-import * as React from 'react';
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { Circle } from 'lucide-react';
+export const RadioGroup = ({
+  meta,
+  items,
+}: {
+  meta: FieldMetadata<string>;
+  items: { value: string; label: string }[];
+}) => {
+  const radioGroupRef =
+    React.useRef<React.ComponentRef<typeof _RadioGroup>>(null);
+  const control = useControl(meta);
 
-import { cn } from '../../';
-
-const RadioGroup = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
->(({ className, ...props }, ref) => {
   return (
-    <RadioGroupPrimitive.Root
-      className={cn('grid gap-2', className)}
-      {...props}
-      ref={ref}
-    />
+    <>
+      <input
+        ref={control.register}
+        name={meta.name}
+        defaultValue={meta.initialValue}
+        tabIndex={-1}
+        className="sr-only"
+        onFocus={() => radioGroupRef.current?.focus()}
+      />
+      <_RadioGroup
+        ref={radioGroupRef}
+        className="flex flex-col space-y-2"
+        value={control.value ?? ""}
+        onValueChange={control.change}
+        onBlur={control.blur}
+      >
+        {items.map(({ value, label }) => (
+          <FormItem
+            className="flex items-center space-x-3 space-y-0"
+            key={value}
+          >
+            <_RadioGroupItem value={value} id={`${meta.id}-${value}`} />
+            <Label htmlFor={`${meta.id}-${value}`}>{label}</Label>
+          </FormItem>
+        ))}
+      </_RadioGroup>
+    </>
   );
-});
-RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
-
-const RadioGroupItem = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->(({ className, ...props }, ref) => {
-  return (
-    <RadioGroupPrimitive.Item
-      ref={ref}
-      className={cn(
-        'aspect-square size-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-        className,
-      )}
-      {...props}
-    >
-      <RadioGroupPrimitive.Indicator className='flex items-center justify-center'>
-        <Circle className='size-2.5 fill-current text-current' />
-      </RadioGroupPrimitive.Indicator>
-    </RadioGroupPrimitive.Item>
-  );
-});
-RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
-
-export { RadioGroup, RadioGroupItem };
+};

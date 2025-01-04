@@ -1,6 +1,4 @@
-import { sendContactEmail } from '#/services';
-
-export {};
+import { sendContactEmail } from "#/services";
 
 declare const global: Record<string, () => void>;
 

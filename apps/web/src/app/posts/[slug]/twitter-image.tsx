@@ -1,81 +1,72 @@
-import { ImageResponse } from 'next/og';
-import { allPosts } from 'contentlayer/generated';
+import { ImageResponse } from "next/og";
+import { getPostBySlug } from "#/utils/post";
 
-import { env } from '#/env';
-
-export const runtime = 'edge';
+export const runtime = "edge";
 
 const size = {
   width: 500,
   height: 500,
 };
 
-/**
- * Retrieves a post object by its slug.
- *
- * @param slug - The slug of the post to retrieve.
- * @returns The post object matching the given slug, or undefined if not found.
- */
-const getPostBySlug = (slug: string) =>
-  allPosts.find(
-    (post) =>
-      (env.NODE_ENV === 'development' || post.status === 'published') &&
-      post.slug === slug,
-  );
-
-export const generateImageMetadata = ({
-  params: { slug },
+export const generateImageMetadata = async ({
+  params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) => {
+  const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return [];
+
+  if (!post) {
+    return [];
+  }
 
   return [
     {
-      id: 'default',
-      contentType: 'image/png',
+      id: "default",
+      contentType: "image/png",
       alt: post.title,
       size,
     },
   ];
 };
 
-const Image = async ({ params: { slug } }: { params: { slug: string } }) => {
+const Image = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return new Response('Not found', { status: 404 });
+
+  if (!post) {
+    return new Response("Not found", { status: 404 });
+  }
 
   const firstEmoji = Array.from(post.emoji)[0];
 
   const notoEmojiSemiBold = await fetch(
-    new URL('../../../../assets/fonts/NotoEmoji-SemiBold.ttf', import.meta.url),
+    new URL("../../../../assets/fonts/NotoEmoji-SemiBold.ttf", import.meta.url),
   ).then((res) => res.arrayBuffer());
 
   return new ImageResponse(
-    (
-      <div
-        style={{
-          fontSize: 230,
-          background: '#0a0a0b',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontFamily: 'Noto Emoji',
-          color: '#e4e4e7',
-        }}
-      >
-        {firstEmoji}
-      </div>
-    ),
+    <div
+      style={{
+        fontSize: 230,
+        background: "#0a0a0b",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "Noto Emoji",
+        color: "#e4e4e7",
+      }}
+    >
+      {firstEmoji}
+    </div>,
     {
       ...size,
       fonts: [
         {
-          name: 'Noto Emoji',
+          name: "Noto Emoji",
           data: notoEmojiSemiBold,
-          style: 'normal',
+          style: "normal",
           weight: 600,
         },
       ],

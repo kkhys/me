@@ -1,9 +1,12 @@
-import { NextResponse } from 'next/server';
-import { format } from 'date-fns';
+import { format } from "date-fns";
+import { NextResponse } from "next/server";
+import { me } from "#/config";
 
-import { me } from '#/config';
+export const revalidate = 86400;
 
-// eslint-disable-next-line @typescript-eslint/require-await
+const lastUpdateDate = new Date();
+const lastUpdate = format(lastUpdateDate, "yyyy-MM-dd");
+
 export const GET = async (): Promise<NextResponse> => {
   const humans = `# TXT for Human Beings
 
@@ -22,13 +25,12 @@ export const GET = async (): Promise<NextResponse> => {
   Publisher,
   Writer:    ${me.name}
   Location:  Tokyo, Japan
-  GitHub:    ${me.social.github.url}
-  X:         ${me.social.x.url}
-  Instagram: ${me.social.instagram.url}
+  GitHub:    ${me.github}
+  Mastodon:  ${me.mastodon}
   
 ## SITE
 
-  Last update: ${format(new Date(), 'yyyy-MM-dd')}
+  Last update: ${lastUpdate}
   Language:    ja-JP
   Timezone:    JST
   Standards:   Next.js, TypeScript, React, Tailwind CSS, Contentlayer, Vercel
@@ -38,8 +40,7 @@ export const GET = async (): Promise<NextResponse> => {
   return new NextResponse(humans, {
     status: 200,
     headers: {
-      'Cache-Control': 's-maxage=86400, stale-while-revalidate',
-      'Content-Type': 'text/plain',
+      "Content-Type": "text/plain",
     },
   });
 };

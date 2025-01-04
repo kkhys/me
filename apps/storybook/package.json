@@ -2,46 +2,29 @@
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@kkhys/storybook",
   "private": true,
+  "type": "module",
   "scripts": {
-    "clean": "git clean -xdf .turbo node_modules storybook-static",
-    "format": "prettier --check \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path ../../.gitignore",
-    "type-check": "tsc --noEmit",
+    "clean": "git clean -xdf .cache .turbo storybook-static",
+    "typecheck": "tsc --noEmit",
     "storybook:dev": "storybook dev --port 6006 --quiet --no-open",
     "storybook:build": "storybook build --quiet",
     "storybook:move": "mv storybook-static ../../storybook-static"
   },
   "dependencies": {
-    "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@kkhys/eslint-config": "workspace:0.1.0",
-    "@kkhys/prettier-config": "workspace:0.1.0",
-    "@kkhys/tsconfig": "workspace:0.1.0",
-    "@storybook/addon-essentials": "7.6.20",
-    "@storybook/addon-interactions": "7.6.20",
-    "@storybook/addon-links": "7.6.20",
-    "@storybook/addon-onboarding": "1.0.11",
-    "@storybook/blocks": "7.6.20",
-    "@storybook/react": "7.6.20",
-    "@storybook/react-vite": "7.6.20",
-    "@storybook/testing-library": "0.2.2",
-    "@types/react": "18.3.18",
-    "@types/react-dom": "18.3.5",
+    "@kkhys/tsconfig": "workspace:*",
+    "@storybook/addon-essentials": "8.4.7",
+    "@storybook/addon-interactions": "8.4.7",
+    "@storybook/addon-onboarding": "8.4.7",
+    "@storybook/blocks": "8.4.7",
+    "@storybook/react": "8.4.7",
+    "@storybook/react-vite": "8.4.7",
+    "@storybook/test": "8.4.7",
     "@vitejs/plugin-react-swc": "3.7.2",
-    "eslint": "8.57.1",
-    "prettier": "3.4.2",
-    "storybook": "7.6.20",
-    "typescript": "5.7.2",
-    "vite": "5.4.11"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "@kkhys/eslint-config/base",
-      "@kkhys/eslint-config/react",
-      "@kkhys/eslint-config/storybook"
-    ]
-  },
-  "prettier": "@kkhys/prettier-config"
+    "storybook": "8.4.7",
+    "vite": "6.0.6"
+  }
 }

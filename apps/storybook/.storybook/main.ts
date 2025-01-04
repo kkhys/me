@@ -1,42 +1,47 @@
-import type { StorybookConfig } from '@storybook/react-vite';
+import { dirname, join } from "node:path";
+import type { StorybookConfig } from "@storybook/react-vite";
+
+const getAbsolutePath = (value: string) =>
+  dirname(require.resolve(join(value, "package.json")));
 
 const config = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(ts|tsx)'],
+  stories: ["../src/**/*.mdx"],
   refs: (_, { configType }) => {
-    if (configType === 'DEVELOPMENT') {
+    if (configType === "DEVELOPMENT") {
       return {
         ui: {
-          title: 'UI',
-          url: 'http://localhost:6007/',
+          title: "UI",
+          url: "http://localhost:6007/",
         },
         web: {
-          title: 'Web',
-          url: 'http://localhost:6008/',
+          title: "Web",
+          url: "http://localhost:6008/",
         },
       };
     }
     return {
       ui: {
-        title: 'UI',
-        url: 'ui/',
+        title: "UI",
+        url: "ui/",
       },
       web: {
-        title: 'Web',
-        url: 'web/',
+        title: "Web",
+        url: "web/",
       },
     };
   },
   addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
+    getAbsolutePath("@storybook/addon-onboarding"),
+    getAbsolutePath("@storybook/addon-essentials"),
+    getAbsolutePath("@storybook/addon-interactions"),
   ],
   framework: {
-    name: '@storybook/react-vite',
+    name: getAbsolutePath("@storybook/react-vite"),
     options: {},
   },
   core: {
     disableTelemetry: true,
+    disableWhatsNewNotifications: true,
   },
 } satisfies StorybookConfig;
 

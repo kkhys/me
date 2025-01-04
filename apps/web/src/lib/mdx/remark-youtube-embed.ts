@@ -1,12 +1,12 @@
-import type { Link, Resource } from 'mdast';
-import type { State } from 'mdast-util-to-hast';
-import type { Node, Parent } from 'unist';
-import { visit } from 'unist-util-visit';
+import type { Link, Resource } from "mdast";
+import type { State } from "mdast-util-to-hast";
+import type { Node, Parent } from "unist";
+import { visit } from "unist-util-visit";
 
-import { isSingleChildLinkWithText } from './utils';
+import { isSingleChildLinkWithText } from "./utils";
 
 interface YouTubeEmbed extends Parent, Resource {
-  type: 'youtube-embed';
+  type: "youtube-embed";
   meta: {
     videoId: string;
   };
@@ -25,7 +25,7 @@ const extractYouTubeVideoId = (url: string) => {
 
 export const remarkYouTubeEmbed = () => {
   return (tree: Node) => {
-    visit(tree, 'paragraph', (node: Parent, index: number, parent: Parent) => {
+    visit(tree, "paragraph", (node: Parent, index: number, parent: Parent) => {
       const linkNode = node.children[0] as Link;
       if (!isSingleChildLinkWithText(node, linkNode) || !parent) return;
 
@@ -33,7 +33,7 @@ export const remarkYouTubeEmbed = () => {
       if (!videoId) return;
 
       parent.children[index] = {
-        type: 'youtube-embed',
+        type: "youtube-embed",
         meta: {
           videoId,
         },
@@ -44,8 +44,8 @@ export const remarkYouTubeEmbed = () => {
 
 export const YouTubeEmbedHandler = (_: State, node: YouTubeEmbed) => {
   return {
-    type: 'element',
-    tagName: 'youtube-embed',
+    type: "element",
+    tagName: "youtube-embed",
     properties: {
       videoId: node.meta.videoId,
     },

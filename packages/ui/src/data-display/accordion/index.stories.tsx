@@ -1,136 +1,119 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '.';
+} from "@kkhys/ui";
+import { fn } from "@storybook/test";
 
 const meta = {
-  title: 'Data Display / Accordion',
+  title: "Data Display / Accordion",
   component: Accordion,
   argTypes: {
     asChild: {
-      control: 'boolean',
+      control: "boolean",
       description:
         'Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our <a href="https://www.radix-ui.com/primitives/docs/guides/composition" target="_blank" rel="noreferrer noopener">Composition</a> guide for more details.',
       table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
+        defaultValue: { summary: "false" },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     type: {
-      control: 'radio',
+      control: "radio",
       description:
-        'Determines whether one or multiple items can be opened at the same time.',
-      options: ['single', 'multiple'],
+        "Determines whether one or multiple items can be opened at the same time.",
+      options: ["single", "multiple"],
       table: {
-        type: { summary: 'enum', detail: '"single" | "multiple"' },
+        type: { summary: "enum", detail: '"single" | "multiple"' },
       },
       type: {
-        name: 'enum',
-        value: ['single', 'multiple'],
+        name: "enum",
+        value: ["single", "multiple"],
         required: true,
       },
     },
     value: {
-      if: { arg: 'type', eq: 'single' },
-      control: 'radio',
+      if: { arg: "type", eq: "single" },
+      control: "radio",
       description:
         'The controlled value of the item to expand when `type` is `"single"`. Must be used in conjunction with `onValueChange`.',
-      options: ['item-1', 'item-2', 'item-3'],
+      options: ["item-1", "item-2", "item-3"],
       table: {
-        type: { summary: 'string' },
+        type: { summary: "string" },
       },
       type: {
-        name: 'string',
+        name: "string",
       },
     },
     defaultValue: {
-      if: { arg: 'type', eq: 'single' },
-      control: 'radio',
+      if: { arg: "type", eq: "single" },
+      control: "radio",
       description:
         'The value of the item to expand when initially rendered and `type` is `"single"`. Use when you do not need to control the state of the items.',
-      options: ['item-1', 'item-2', 'item-3'],
+      options: ["item-1", "item-2", "item-3"],
       table: {
-        type: { summary: 'string' },
+        type: { summary: "string" },
       },
       type: {
-        name: 'string',
+        name: "string",
       },
     },
     onValueChange: {
-      if: { arg: 'type', eq: 'single' },
-      action: 'changed',
+      if: { arg: "type", eq: "single" },
+      action: "changed",
       description:
         'Event handler called when the expanded state of an item changes and `type` is `"single"`.',
       table: {
-        category: 'Events',
-        type: { summary: 'function', detail: '(value: string) => void' },
+        category: "Events",
+        type: { summary: "function", detail: "(value: string) => void" },
       },
       type: {
-        name: 'function',
+        name: "function",
       },
     },
-    // value: {
-    //   if: { arg: 'type', eq: 'multiple' },
-    //   control: 'multi-select',
-    //   description:
-    //     'The controlled value of the item to expand when `type` is `"multiple"`. Must be used in conjunction with `onValueChange`.',
-    //   options: ['item-1', 'item-2', 'item-3'],
-    //   table: {
-    //     type: { summary: 'string[]' },
-    //   },
-    //   type: {
-    //     name: 'string[]',
-    //   },
-    // },
     collapsible: {
-      if: { arg: 'type', eq: 'single' },
-      control: 'boolean',
+      if: { arg: "type", eq: "single" },
+      control: "boolean",
       description:
         'When `type` is `"single"`, allows closing content when clicking trigger for an open item.',
       table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
+        defaultValue: { summary: "false" },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     disabled: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'When `true`, prevents the user from interacting with the accordion and all its items.',
+        "When `true`, prevents the user from interacting with the accordion and all its items.",
       table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
+        defaultValue: { summary: "false" },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     dir: {
-      control: 'radio',
+      control: "radio",
       description:
-        'The reading direction of the accordion when applicable. If omitted, assumes LTR (left-to-right) reading mode.',
-      options: ['ltr', 'rtl'],
+        "The reading direction of the accordion when applicable. If omitted, assumes LTR (left-to-right) reading mode.",
+      options: ["ltr", "rtl"],
       table: {
-        defaultValue: { summary: 'ltr' },
-        type: { summary: 'enum', detail: '"ltr" | "rtl"' },
+        defaultValue: { summary: "ltr" },
+        type: { summary: "enum", detail: '"ltr" | "rtl"' },
       },
       type: {
-        name: 'enum',
-        value: ['ltr', 'rtl'],
-      },
-    },
-    className: {
-      table: {
-        disable: true,
+        name: "enum",
+        value: ["ltr", "rtl"],
       },
     },
     children: {
@@ -138,7 +121,13 @@ const meta = {
         disable: true,
       },
     },
+    className: {
+      table: {
+        disable: true,
+      },
+    },
   },
+  args: { onValueChange: fn() },
 } satisfies Meta<typeof Accordion>;
 
 export default meta;
@@ -146,24 +135,24 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    type: 'single',
-    className: 'w-[450px]',
+    type: "single",
+    className: "w-[450px]",
     children: (
       <>
-        <AccordionItem value='item-1'>
+        <AccordionItem value="item-1">
           <AccordionTrigger>Is it accessible?</AccordionTrigger>
           <AccordionContent>
             Yes. It adheres to the WAI-ARIA design pattern.
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value='item-2'>
+        <AccordionItem value="item-2">
           <AccordionTrigger>Is it unstyled?</AccordionTrigger>
           <AccordionContent>
             Yes. It&apos;s unstyled by default, giving you freedom over the look
             and feel.
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value='item-3'>
+        <AccordionItem value="item-3">
           <AccordionTrigger>Can it be animated?</AccordionTrigger>
           <AccordionContent>
             Yes! You can animate the Accordion with CSS or JavaScript.

@@ -1,32 +1,31 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { Label } from '.';
-import { Checkbox } from '../../';
+import { Checkbox, Label } from "@kkhys/ui";
 
 const meta = {
-  title: 'Data Entry / Label',
+  title: "Data Entry / Label",
   component: Label,
   argTypes: {
     asChild: {
-      control: 'boolean',
+      control: "boolean",
       description:
         'Change the default rendered element for the one passed as a child, merging their props and behavior.\n\nRead our <a href="https://www.radix-ui.com/primitives/docs/guides/composition" target="_blank" rel="noreferrer noopener">Composition</a> guide for more details.',
       table: {
-        defaultValue: { summary: false },
-        type: { summary: 'boolean' },
+        defaultValue: { summary: "false" },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     htmlFor: {
-      control: 'text',
-      description: 'The id of the element the label is associated with.',
+      control: "text",
+      description: "The id of the element the label is associated with.",
       table: {
-        type: { summary: 'string' },
+        type: { summary: "string" },
       },
       type: {
-        name: 'string',
+        name: "string",
       },
     },
     children: {
@@ -42,15 +41,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default = {
   args: {
-    children: 'Accept terms and conditions',
-    htmlFor: 'default-checkbox',
+    children: "Accept terms and conditions",
+    htmlFor: "default-checkbox",
   },
   decorators: [
     (Story) => (
-      <div className='flex items-center space-x-2'>
+      <div className="flex items-center space-x-2">
         <Checkbox
-          id='default-checkbox'
-          aria-label='Accept terms and conditionsA'
+          id="default-checkbox"
+          aria-label="Accept terms and conditions"
         />
         <Story />
       </div>

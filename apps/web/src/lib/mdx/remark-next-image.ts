@@ -1,22 +1,22 @@
-import { readFile } from 'fs/promises';
-import * as path from 'path';
-import type { Image } from 'mdast';
-import type { Node } from 'unist';
-import { getPlaiceholder } from 'plaiceholder';
-import { visit } from 'unist-util-visit';
+import { readFileSync } from "node:fs";
+import * as path from "node:path";
+import type { Image } from "mdast";
+import { getPlaiceholder } from "plaiceholder";
+import type { Node } from "unist";
+import { visit } from "unist-util-visit";
 
 export const remarkNextImage = () => {
   return async (tree: Node) => {
     const promises: (() => Promise<void>)[] = [];
-    visit(tree, 'image', (node: Image) => {
+    visit(tree, "image", (node: Image) => {
       const src = node.url;
 
       const getImage = async (src: string) => {
-        const buffer = src.startsWith('http')
+        const buffer = src.startsWith("http")
           ? await fetch(src).then(async (res) =>
               Buffer.from(await res.arrayBuffer()),
             )
-          : await readFile(path.join('./public', src));
+          : readFileSync(path.join("./public", src));
 
         const {
           metadata: { height, width },

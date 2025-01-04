@@ -1,25 +1,17 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@kkhys/tsconfig/base.json",
   "compilerOptions": {
+    "lib": ["ES2022", "dom", "dom.iterable"],
+    "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
       "#/*": ["./src/*"],
       "contentlayer/generated": ["./.contentlayer/generated"]
     },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json"
+    "plugins": [{ "name": "next" }],
+    "module": "esnext"
   },
   "include": [".", ".next/types/**/*.ts", ".contentlayer/generated"],
-  "exclude": [
-    "node_modules",
-    "storybook-static",
-    ".contentlayer",
-    "__reports__",
-    "coverage",
-    "playwright-report"
-  ]
+  "exclude": ["node_modules"]
 }

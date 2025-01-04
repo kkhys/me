@@ -1,38 +1,58 @@
-import type { Metadata } from 'next';
-import * as React from 'react';
+import type { Metadata } from "next";
+import type { BreadcrumbList, WithContext } from "schema-dts";
+import { ContactForm } from "#/app/contact/_ui";
+import { siteConfig } from "#/config";
 
-import { FadeIn } from '@kkhys/ui';
+const JsonLd = () => {
+  const jsonLdBreadcrumbList = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: siteConfig.name,
+        item: siteConfig.url,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Contact",
+        item: `${siteConfig.url}/contact`,
+      },
+    ],
+  } satisfies WithContext<BreadcrumbList>;
 
-import { ContactForm } from '#/ui/contact';
-import { BackButton, Container } from '#/ui/global';
-import { JsonLd } from './json-ld';
+  return (
+    <script
+      type="application/ld+json"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify([jsonLdBreadcrumbList]),
+      }}
+    />
+  );
+};
 
 export const metadata = {
-  title: 'Contact',
-  description: 'Contact page of Keisuke Hayashi.',
+  title: "Contact",
+  description: "Contact page of Keisuke Hayashi.",
   alternates: {
-    canonical: '/contact',
+    canonical: "/contact",
   },
   openGraph: {
-    url: '/contact',
+    url: "/contact",
   },
 } satisfies Metadata;
 
-const Page = () => {
-  return (
-    <>
-      <JsonLd />
-      <Container>
-        <BackButton href='/' tooltipContent='Go back to home' />
-        <header>
-          <h1 className='font-sans font-medium'>Contact</h1>
-        </header>
-        <FadeIn>
-          <ContactForm className='mt-6' />
-        </FadeIn>
-      </Container>
-    </>
-  );
-};
+const Page = () => (
+  <>
+    <JsonLd />
+    <header>
+      <h1 className="font-sans font-medium">Contact</h1>
+    </header>
+    <ContactForm className="mt-6" />
+  </>
+);
 
 export default Page;
