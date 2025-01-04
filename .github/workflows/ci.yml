@@ -51,6 +51,10 @@ jobs:
       - name: Install Playwright Browser
         run: bunx playwright install --with-deps chromium
 
+      - name: Copy env
+        shell: bash
+        run: cp .env.example .env
+
       - name: Build
         run: bun run build
 
