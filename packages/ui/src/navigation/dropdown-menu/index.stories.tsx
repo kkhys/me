@@ -1,8 +1,9 @@
-import type { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
-import type { Meta, StoryObj } from '@storybook/react';
-import * as React from 'react';
+import type { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
+import type { Meta, StoryObj } from "@storybook/react";
+import * as React from "react";
 
 import {
+  Button,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
@@ -18,69 +19,69 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '.';
-import { Button } from '../../';
+} from "@kkhys/ui";
+import { fn } from "@storybook/test";
 
 const meta = {
-  title: 'Navigation / Dropdown Menu',
+  title: "Navigation / Dropdown Menu",
   component: DropdownMenu,
   argTypes: {
     defaultOpen: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state.',
+        "The open state of the dropdown menu when it is initially rendered. Use when you do not need to control its open state.",
       table: {
-        type: { summary: 'boolean' },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     open: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'The controlled open state of the dropdown menu. Must be used in conjunction with `onOpenChange`.',
+        "The controlled open state of the dropdown menu. Must be used in conjunction with `onOpenChange`.",
       table: {
-        type: { summary: 'boolean' },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     onOpenChange: {
-      action: 'onOpenChange',
+      action: "onOpenChange",
       description:
-        'Event handler called when the open state of the dropdown menu changes.',
+        "Event handler called when the open state of the dropdown menu changes.",
       table: {
-        category: 'Events',
-        type: { summary: '(open: boolean) => void' },
+        category: "Events",
+        type: { summary: "(open: boolean) => void" },
       },
       type: {
-        name: 'function',
+        name: "function",
       },
     },
     modal: {
-      control: 'boolean',
+      control: "boolean",
       description:
-        'The modality of the dropdown menu. When set to `true`, interaction with outside elements will be disabled and only menu content will be visible to screen readers.',
+        "The modality of the dropdown menu. When set to `true`, interaction with outside elements will be disabled and only menu content will be visible to screen readers.",
       table: {
-        defaultValue: { summary: 'true' },
-        type: { summary: 'boolean' },
+        defaultValue: { summary: "true" },
+        type: { summary: "boolean" },
       },
       type: {
-        name: 'boolean',
+        name: "boolean",
       },
     },
     dir: {
-      control: 'radio',
+      control: "radio",
       description:
-        'The reading direction of submenus when applicable. If omitted, inherits globally from `DirectionProvider` or assumes LTR (left-to-right) reading mode.',
-      options: ['ltr', 'rtl'],
+        "The reading direction of submenus when applicable. If omitted, inherits globally from `DirectionProvider` or assumes LTR (left-to-right) reading mode.",
+      options: ["ltr", "rtl"],
       table: {
         type: { summary: '"ltr" | "rtl"' },
       },
       type: {
-        name: 'string',
+        name: "string",
       },
     },
     children: {
@@ -88,6 +89,9 @@ const meta = {
         disable: true,
       },
     },
+  },
+  args: {
+    onOpenChange: fn(),
   },
 } satisfies Meta<typeof DropdownMenu>;
 
@@ -99,9 +103,9 @@ export const Default: Story = {
     children: (
       <>
         <DropdownMenuTrigger asChild>
-          <Button variant='outline'>Open</Button>
+          <Button variant="outline">Open</Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className='w-56'>
+        <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
@@ -157,7 +161,7 @@ export const Default: Story = {
 };
 
 const CheckboxesDemo = () => {
-  type Checked = DropdownMenuCheckboxItemProps['checked'];
+  type Checked = DropdownMenuCheckboxItemProps["checked"];
 
   const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true);
   const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false);
@@ -166,9 +170,9 @@ const CheckboxesDemo = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='outline'>Open</Button>
+        <Button variant="outline">Open</Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-56'>
+      <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Appearance</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuCheckboxItem
@@ -200,20 +204,20 @@ export const Checkboxes: Story = {
 } satisfies Story;
 
 const RadioGroupDemo = () => {
-  const [position, setPosition] = React.useState('bottom');
+  const [position, setPosition] = React.useState("bottom");
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant='outline'>Open</Button>
+        <Button variant="outline">Open</Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='w-56'>
+      <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value='top'>Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value='bottom'>Bottom</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value='right'>Right</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

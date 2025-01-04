@@ -1,38 +1,28 @@
-import React from 'react';
-
-import '#/styles/globals.css';
-
-import type { Metadata, Viewport } from 'next';
-import { GoogleTagManager } from '@next/third-parties/google';
-import { Analytics } from '@vercel/analytics/react';
-
-import { Toaster } from '@kkhys/ui';
-
-import { me, site } from '#/config';
-import {
-  inter,
-  jetBrainsMono,
-  newsreader,
-  notoSansJP,
-} from '#/lib/nextjs/fonts';
-import { Providers } from '#/providers';
-import { Layout } from '#/ui/global';
+import "#/styles/globals.css";
+import { Toaster, cn } from "@kkhys/ui";
+import { GoogleTagManager } from "@next/third-parties/google";
+import type { Metadata, Viewport } from "next";
+import { META_THEME_COLORS, me, siteConfig } from "#/config";
+import { env } from "#/env";
+import { inter, jetBrainsMono, newsreader, notoSansJP } from "#/lib/font";
+import { Provider } from "#/providers";
+import { SiteFooter, SiteHeader } from "#/ui";
 
 export const metadata = {
   title: {
-    template: `%s | ${site.title}`,
-    default: site.title,
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description: site.description,
-  generator: 'Next.js',
-  applicationName: site.title,
-  referrer: 'origin-when-cross-origin',
-  category: 'blog',
-  keywords: ['blog', 'developer'],
+  description: siteConfig.description,
+  generator: "Next.js",
+  applicationName: siteConfig.name,
+  referrer: "origin-when-cross-origin",
+  category: "blog",
+  keywords: ["blog", "developer"],
   authors: [
     {
       name: me.name,
-      url: `${site.url.base}/humans.txt`,
+      url: `${siteConfig.url}/humans.txt`,
     },
   ],
   creator: me.name,
@@ -42,44 +32,58 @@ export const metadata = {
     telephone: false,
     address: false,
   },
-  metadataBase: new URL(site.url.base),
+  metadataBase: new URL(siteConfig.url),
   alternates: {
-    canonical: '/',
+    canonical: "/",
   },
   openGraph: {
-    type: 'website',
-    url: '/',
-    siteName: site.title,
-    locale: 'ja_JP',
+    type: "website",
+    url: "/",
+    siteName: siteConfig.name,
+    locale: "ja_JP",
   },
   twitter: {
-    card: 'summary',
-    siteId: '5237731',
-    creator: me.social.x.id,
-    creatorId: '5237731',
+    card: "summary",
+    siteId: "5237731",
+    creator: me.x.id,
+    creatorId: "5237731",
   },
 } satisfies Metadata;
 
 export const viewport = {
-  themeColor: '#000',
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: META_THEME_COLORS.light },
+    { media: "(prefers-color-scheme: dark)", color: META_THEME_COLORS.dark },
+  ],
 } satisfies Viewport;
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <html
-    lang='ja'
-    className={`h-full antialiased ${notoSansJP.className} ${inter.variable} ${newsreader.variable} ${jetBrainsMono.variable}`}
-    suppressHydrationWarning
-  >
-    <body className='flex h-full'>
-      <Providers>
-        <div className='flex w-full'>
-          <Layout>{children}</Layout>
+  <html lang="ja" suppressHydrationWarning>
+    <body
+      className={cn(
+        "min-h-screen bg-background antialiased",
+        notoSansJP.className,
+        inter.variable,
+        newsreader.variable,
+        jetBrainsMono.variable,
+      )}
+    >
+      <Provider>
+        <div vaul-drawer-wrapper="">
+          <div className="relative flex min-h-screen flex-col bg-background">
+            <div className="mx-auto w-full border-border/40 dark:border-border max-w-6xl border-x flex-1 flex flex-col">
+              <SiteHeader />
+              <main className="w-full max-w-2xl mx-auto flex-1">
+                <div className="container py-12">{children}</div>
+              </main>
+              <SiteFooter />
+            </div>
+          </div>
         </div>
-        <Toaster position='top-center' richColors />
-      </Providers>
-      <Analytics />
+        <Toaster position="top-center" richColors />
+      </Provider>
     </body>
-    <GoogleTagManager gtmId={site.google.tagManagerId} />
+    <GoogleTagManager gtmId={env.NEXT_PUBLIC_TAG_MANAGER_ID} />
   </html>
 );
 

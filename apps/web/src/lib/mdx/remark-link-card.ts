@@ -1,14 +1,14 @@
-import type { Link, Resource } from 'mdast';
-import type { State } from 'mdast-util-to-hast';
-import type { Node, Parent } from 'unist';
-import fetchSiteMetadata from 'fetch-site-metadata';
-import { getPlaiceholder } from 'plaiceholder';
-import { visit } from 'unist-util-visit';
+import fetchSiteMetadata from "fetch-site-metadata";
+import type { Link, Resource } from "mdast";
+import type { State } from "mdast-util-to-hast";
+import { getPlaiceholder } from "plaiceholder";
+import type { Node, Parent } from "unist";
+import { visit } from "unist-util-visit";
 
-import { isSingleChildLinkWithText } from './utils';
+import { isSingleChildLinkWithText } from "./utils";
 
 interface LinkCard extends Parent, Resource {
-  type: 'link-card';
+  type: "link-card";
   meta: {
     url: string;
     title: string;
@@ -24,15 +24,33 @@ interface LinkCard extends Parent, Resource {
   };
 }
 
+type OgType =
+  | {
+      ogSrc: string;
+      ogWidth: number;
+      ogHeight: number;
+      ogBlurDataURL: string;
+    }
+  | undefined;
+
+type IconType =
+  | {
+      iconSrc: string;
+      iconWidth: number;
+      iconHeight: number;
+      iconBlurDataURL: string;
+    }
+  | undefined;
+
 const fetchMeta = async (url: string) => {
   const data = await fetchSiteMetadata(url);
 
   return {
     url,
-    title: data.title ?? '(No title)',
-    description: data.description ?? '',
-    og: data.image?.src?.startsWith('https') ? data.image?.src : undefined,
-    icon: data.icon?.startsWith('https') ? data.icon : undefined,
+    title: data.title ?? "(No title)",
+    description: data.description ?? "",
+    og: data.image?.src?.startsWith("https") ? data.image?.src : undefined,
+    icon: data.icon?.startsWith("https") ? data.icon : undefined,
   };
 };
 
@@ -56,7 +74,7 @@ export const remarkLinkCard = () => {
   return async (tree: Node) => {
     const promises: (() => Promise<void>)[] = [];
 
-    visit(tree, 'paragraph', (node: Parent, index, parent: Parent) => {
+    visit(tree, "paragraph", (node: Parent, index, parent: Parent) => {
       const linkNode = node.children[0] as Link;
       if (!isSingleChildLinkWithText(node, linkNode) || !parent) return;
 
@@ -65,8 +83,8 @@ export const remarkLinkCard = () => {
         const ogSrc = data.og;
         const iconSrc = data.icon;
 
-        let og;
-        if (typeof ogSrc === 'string') {
+        let og: OgType;
+        if (typeof ogSrc === "string") {
           const { img, base64 } = await getImage(ogSrc);
           og = {
             ogSrc,
@@ -76,8 +94,8 @@ export const remarkLinkCard = () => {
           };
         }
 
-        let icon;
-        if (typeof iconSrc === 'string') {
+        let icon: IconType;
+        if (typeof iconSrc === "string") {
           const { img, base64 } = await getImage(iconSrc);
           icon = {
             iconSrc,
@@ -88,11 +106,11 @@ export const remarkLinkCard = () => {
         }
 
         parent.children[index ?? 0] = {
-          type: 'link-card',
+          type: "link-card",
           meta: {
             url: data.url,
-            title: data.title ?? '(No title)',
-            description: data.description ?? '',
+            title: data.title ?? "(No title)",
+            description: data.description ?? "",
             ...og,
             ...icon,
           },
@@ -106,8 +124,8 @@ export const remarkLinkCard = () => {
 
 export const linkCardHandler = (_: State, node: LinkCard) => {
   return {
-    type: 'element',
-    tagName: 'link-card',
+    type: "element",
+    tagName: "link-card",
     properties: {
       url: node.meta.url,
       title: node.meta.title,

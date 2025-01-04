@@ -12,28 +12,15 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsc --watch",
-    "clean": "rm -rf .turbo node_modules",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "eslint",
+    "dev": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
     "zod": "3.24.1"
   },
   "devDependencies": {
-    "@kkhys/eslint-config": "workspace:*",
-    "@kkhys/prettier-config": "workspace:*",
     "@kkhys/tsconfig": "workspace:*",
-    "eslint": "8.57.1",
-    "prettier": "3.4.2",
     "typescript": "5.7.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "@kkhys/eslint-config/base"
-    ]
-  },
-  "prettier": "@kkhys/prettier-config"
+  }
 }

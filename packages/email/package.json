@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "name": "@kkhys/email",
-  "private": "true",
+  "private": true,
   "version": "0.1.0",
   "type": "module",
   "exports": {
@@ -13,34 +13,19 @@
   "scripts": {
     "build": "tsc",
     "dev": "email dev --dir src --port 3002",
-    "clean": "rm -rf .turbo node_modules",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "eslint .",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
     "@kkhys/validators": "workspace:*",
     "@react-email/components": "0.0.31",
     "@react-email/render": "1.0.3",
-    "react": "18.3.1",
+    "react": "19.0.0",
     "react-email": "3.0.4",
     "zod": "3.24.1"
   },
   "devDependencies": {
-    "@kkhys/eslint-config": "workspace:*",
-    "@kkhys/prettier-config": "workspace:*",
-    "@kkhys/tsconfig": "workspace:*",
-    "@types/react": "18.3.18",
-    "eslint": "8.57.1",
-    "prettier": "3.4.2",
+    "@types/react": "19.0.2",
     "typescript": "5.7.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "@kkhys/eslint-config/base",
-      "@kkhys/eslint-config/react"
-    ]
-  },
-  "prettier": "@kkhys/prettier-config"
+  }
 }

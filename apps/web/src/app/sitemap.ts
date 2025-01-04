@@ -1,28 +1,27 @@
-import type { MetadataRoute } from 'next';
-import { allLegals, allPosts } from 'contentlayer/generated';
+import { allLegals } from "contentlayer/generated";
+import type { MetadataRoute } from "next";
 
-import { site } from '#/config';
+import { siteConfig } from "#/config";
+import { getPublicPosts } from "#/utils/post";
 
 const formatPublishedDate = (publishedDate: Date | string | number) =>
-  new Date(publishedDate).toISOString().split('T')[0];
+  new Date(publishedDate).toISOString().split("T")[0];
 
 const sitemap = (): MetadataRoute.Sitemap => {
-  const routes = ['/', '/posts'].map((route) => ({
-    url: `${site.url.base}${route}`,
+  const routes = ["/", "/posts"].map((route) => ({
+    url: `${siteConfig.url}${route}`,
     lastModified: formatPublishedDate(new Date()),
   })) satisfies MetadataRoute.Sitemap;
 
   const legals = allLegals.map(({ slug, publishedAt }) => ({
-    url: `${site.url.base}/legal/${slug}`,
+    url: `${siteConfig.url}/${slug}`,
     lastModified: formatPublishedDate(publishedAt),
   })) satisfies MetadataRoute.Sitemap;
 
-  const posts = allPosts
-    .filter((post) => post.status === 'published')
-    .map(({ url, publishedAt }) => ({
-      url,
-      lastModified: formatPublishedDate(publishedAt),
-    })) satisfies MetadataRoute.Sitemap;
+  const posts = getPublicPosts().map(({ url, publishedAt }) => ({
+    url,
+    lastModified: formatPublishedDate(publishedAt),
+  })) satisfies MetadataRoute.Sitemap;
 
   return [...routes, ...legals, ...posts];
 };

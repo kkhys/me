@@ -1,51 +1,42 @@
-import type { z } from 'zod';
-import * as React from 'react';
 import {
-  Heading as _Heading,
   Body,
   Head,
   Html,
   Preview,
-  render,
   Section,
   Tailwind,
   Text,
-} from '@react-email/components';
+  Heading as _Heading,
+  render,
+} from "@react-email/components";
+import type { z } from "zod";
 
-import type { ContactSchema } from '@kkhys/validators';
+import { type ContactSchema, contactTypeOptions } from "@kkhys/validators";
 
-import { Container, Divider, Heading, Icons, Link, Title } from './_components';
+import { Container, Divider, Heading, Icons, Link, Title } from "./_components";
 
-type ContactEmailProps = Pick<
+type ContactEmailProps = Omit<
   z.infer<typeof ContactSchema>,
-  'name' | 'email' | 'type' | 'content'
+  "shouldSendReplyMail"
 >;
 
 const Email = ({ name, email, type, content }: ContactEmailProps) => {
-  const typeLabel = (type: ContactEmailProps['type']) => {
-    switch (type) {
-      case 'jobScouting':
-        return '転職スカウト';
-      case 'projectConsultation':
-        return '案件のご相談';
-      case 'feedback':
-        return '記事のフィードバック';
-      case 'collaboration':
-        return 'コラボレーションの提案';
-      case 'other':
-        return 'その他';
-    }
+  const typeLabel = (type: ContactEmailProps["type"]) => {
+    const foundOption = contactTypeOptions.find(
+      (option) => option.value === type,
+    );
+    return foundOption ? foundOption.label : "未定義のタイプ";
   };
 
   return (
-    <Html lang='ja' dir='ltr'>
+    <Html lang="ja" dir="ltr">
       <Head />
       <Preview>
         お問い合わせありがとうございます。こちらは確認メールです。
       </Preview>
       <Tailwind>
-        <Body className='mx-auto my-auto bg-white px-2 font-sans'>
-          <_Heading className='sr-only'>kkhys.me</_Heading>
+        <Body className="mx-auto my-auto bg-white px-2 font-sans">
+          <_Heading className="sr-only">kkhys.me</_Heading>
           <Container>
             <Title>Contact</Title>
             <Text>お問い合わせありがとうございます。</Text>
@@ -65,7 +56,7 @@ const Email = ({ name, email, type, content }: ContactEmailProps) => {
             <Section>
               <Icons.logo />
               <Text>
-                <Link href='https://kkhys.me'>kkhys.me</Link> by Keisuke Hayashi
+                <Link href="https://kkhys.me">kkhys.me</Link> by Keisuke Hayashi
               </Text>
             </Section>
           </Container>
@@ -76,28 +67,28 @@ const Email = ({ name, email, type, content }: ContactEmailProps) => {
 };
 
 Email.PreviewProps = {
-  email: 'kkhys@example.com',
-  name: 'Keisuke Hayashi',
-  type: 'projectConsultation',
-  content: `吾輩は猫である。名前はまだ無い`,
+  email: "kkhys@example.com",
+  name: "Keisuke Hayashi",
+  type: "projectConsultation",
+  content: "吾輩は猫である。名前はまだ無い",
 } satisfies ContactEmailProps;
 
 export default Email;
 
-export const contactMail = ({
+export const contactMail = async ({
   email,
   name,
   type,
   content,
 }: ContactEmailProps) => {
   return {
-    html: render(
+    html: await render(
       <Email email={email} name={name} type={type} content={content} />,
       {
         pretty: true,
       },
     ),
-    text: render(
+    text: await render(
       <Email email={email} name={name} type={type} content={content} />,
       {
         plainText: true,

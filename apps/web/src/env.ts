@@ -1,30 +1,32 @@
-import { createEnv } from '@t3-oss/env-nextjs';
-import { z } from 'zod';
-
-import { env as authEnv } from '@kkhys/auth/env';
+import { createEnv } from "@t3-oss/env-nextjs";
+import { vercel } from "@t3-oss/env-nextjs/presets";
+import { z } from "zod";
 
 export const env = createEnv({
-  extends: [authEnv],
+  extends: [vercel()],
   shared: {
     NODE_ENV: z
-      .enum(['development', 'production', 'test'])
-      .default('development'),
-    CI: z.boolean().default(false),
-  },
-  server: {
-    GOOGLE_MAPS_API_KEY: z.string().min(1),
-    DATABASE_URL: z.string().min(1),
+      .enum(["development", "production", "test"])
+      .default("development"),
   },
   client: {
-    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: z.string().min(1),
+    NEXT_PUBLIC_TAG_MANAGER_ID: z.string().min(1),
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string().min(1),
+  },
+  server: {
+    GOOGLE_SHEETS_ID: z.string().min(1),
+    GCP_CLIENT_EMAIL: z.string().min(1),
+    GCP_PRIVATE_KEY: z.string().min(1),
+    LINE_USER_ID: z.string().min(1),
+    LINE_CHANNEL_ACCESS_TOKEN: z.string().min(1),
+    RESEND_API_KEY: z.string().min(1),
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    CI: process.env.CI,
-    NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+    NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:
+      process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    NEXT_PUBLIC_TAG_MANAGER_ID: process.env.NEXT_PUBLIC_TAG_MANAGER_ID,
   },
   skipValidation:
-    !!process.env.CI ||
-    !!process.env.SKIP_ENV_VALIDATION ||
-    process.env.npm_lifecycle_event === 'lint',
+    !!process.env.CI || process.env.npm_lifecycle_event === "lint",
 });
