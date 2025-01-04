@@ -3,8 +3,10 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "lint": "bunx biome check .",
-    "lint:fix": "bunx biome check --write ."
+    "lint": "bun biome check .",
+    "lint:fix": "bun biome check --write .",
+    "lint:ws": "bunx sherif@latest",
+    "postinstall": "bun lint:ws"
   },
   "release": {
     "branches": ["main"]
