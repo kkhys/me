@@ -3,7 +3,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "clean": "git clean -xdf .turbo node_modules storybook-static bun.lockb",
+    "clean": "git clean -xdf .turbo node_modules storybook-static bun.lock",
     "clean:workspaces": "turbo run clean",
     "dev": "turbo watch dev --continue",
     "build": "turbo run build",
