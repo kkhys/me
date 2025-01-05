@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "cd apps/web && bun playwright-install && cd ../.. && bun run build && bun storybook:build && bun storybook:move",
+  "outputDirectory": "storybook-static/",
+  "installCommand": "bun i && dnf install -y nss nspr mesa-libgbm"
+}
