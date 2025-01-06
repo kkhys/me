@@ -23,22 +23,40 @@ const PaginationLink = ({
   isDisabled,
   size = "icon",
   ...props
-}: PaginationLinkProps) => (
-  <Link
-    aria-current={isActive ? "page" : undefined}
-    className={cn(
-      buttonVariants({
-        variant: isActive ? "outline" : "ghost",
-        size,
-      }),
-      isDisabled && "pointer-events-none text-muted-foreground",
-      isActive && "pointer-events-none",
-      "cursor-pointer select-none font-sans",
-      className,
-    )}
-    {...props}
-  />
-);
+}: PaginationLinkProps) => {
+  if (isDisabled) {
+    return (
+      <span
+        className={cn(
+          buttonVariants({
+            variant: "ghost",
+            size,
+          }),
+          "pointer-events-none text-muted-foreground cursor-pointer select-none font-sans",
+          className,
+        )}
+        {...props}
+      />
+    );
+  }
+
+  return (
+    <Link
+      aria-current={isActive ? "page" : undefined}
+      className={cn(
+        buttonVariants({
+          variant: isActive ? "outline" : "ghost",
+          size,
+        }),
+        isDisabled && "pointer-events-none text-muted-foreground",
+        isActive && "pointer-events-none",
+        "cursor-pointer select-none font-sans",
+        className,
+      )}
+      {...props}
+    />
+  );
+};
 
 const PaginationPrevious = ({
   isDisabled,

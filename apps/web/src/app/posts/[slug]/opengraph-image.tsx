@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getPostBySlug } from "#/utils/post";
 
-// export const runtime = "edge";
+export const runtime = "edge";
 
 export const size = {
   width: 1200,
