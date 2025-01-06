@@ -1,5 +1,7 @@
+// import { getPostBySlug } from "#/utils/post";
+import { allPosts } from "contentlayer/generated";
 import { ImageResponse } from "next/og";
-import { getPostBySlug } from "#/utils/post";
+import { env } from "#/env";
 
 export const runtime = "edge";
 
@@ -7,6 +9,13 @@ const size = {
   width: 500,
   height: 500,
 };
+
+const getPostBySlug = (slug: string) =>
+  allPosts.find(
+    (post) =>
+      (env.NODE_ENV === "development" || post.status === "published") &&
+      post.slug === slug,
+  );
 
 export const generateImageMetadata = async ({
   params,
