@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { ArticleList, CategoryNav, Pagination } from "#/app/posts/_ui";
 import { itemsPerPage, siteConfig } from "#/config";
@@ -76,10 +76,6 @@ const Page = async ({
   const { pageNumber } = await params;
 
   const currentPage = pageNumber ? Number(pageNumber) : 1;
-
-  if (currentPage === 0 || currentPage === 1) {
-    redirect("/posts");
-  }
 
   if (Number.isNaN(currentPage) || !isValidPage(currentPage)) {
     notFound();
