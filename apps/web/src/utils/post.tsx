@@ -28,6 +28,12 @@ export const getPostBySlug = (slug: string) =>
       post.slug === slug,
   );
 
+export const getTitleBySlug = (slug: string) =>
+  allPosts.find((post) => post.slug === slug)?.title;
+
+export const getEmojiBySlug = (slug: string) =>
+  allPosts.find((post) => post.slug === slug)?.emoji;
+
 export const getRelatedPosts = ({
   _id: id,
   category,
