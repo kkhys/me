@@ -1,7 +1,5 @@
-// import { getPostBySlug } from "#/utils/post";
-import { allPosts } from "contentlayer/generated";
 import { ImageResponse } from "next/og";
-import { env } from "#/env";
+import { getEmojiBySlug, getPostBySlug, getTitleBySlug } from "#/utils/post";
 
 export const runtime = "edge";
 
@@ -10,22 +8,15 @@ const size = {
   height: 500,
 };
 
-const getPostBySlug = (slug: string) =>
-  allPosts.find(
-    (post) =>
-      (env.NODE_ENV === "development" || post.status === "published") &&
-      post.slug === slug,
-  );
-
 export const generateImageMetadata = async ({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const title = getTitleBySlug(slug);
 
-  if (!post) {
+  if (!title) {
     return [];
   }
 
@@ -33,7 +24,7 @@ export const generateImageMetadata = async ({
     {
       id: "default",
       contentType: "image/png",
-      alt: post.title,
+      alt: title,
       size,
     },
   ];
@@ -41,13 +32,13 @@ export const generateImageMetadata = async ({
 
 const Image = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const emoji = getEmojiBySlug(slug);
 
-  if (!post) {
+  if (!emoji) {
     return new Response("Not found", { status: 404 });
   }
 
-  const firstEmoji = Array.from(post.emoji)[0];
+  const firstEmoji = Array.from(emoji)[0];
 
   const notoEmojiSemiBold = await fetch(
     new URL("../../../../assets/fonts/NotoEmoji-SemiBold.ttf", import.meta.url),
