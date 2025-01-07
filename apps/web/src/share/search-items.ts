@@ -1,5 +1,5 @@
-// This file was automatically generated on 2025-01-07T12:42:18.029Z.
-// Please do not remove or edit this comment.
+// This file was automatically generated on 2025-01-07T12:52:21.079Z.
+// Please do not remove or edit this file.
 
 export const searchItems = [
   {
