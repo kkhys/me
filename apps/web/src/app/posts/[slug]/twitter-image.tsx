@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getEmojiBySlug, getPostBySlug, getTitleBySlug } from "#/utils/post";
+import { postEmojis } from "#/share/post-emojis";
 
 export const runtime = "edge";
 
@@ -14,9 +14,9 @@ export const generateImageMetadata = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const title = getTitleBySlug(slug);
+  const post = postEmojis.find((post) => post.slug === slug);
 
-  if (!title) {
+  if (!post) {
     return [];
   }
 
@@ -24,7 +24,7 @@ export const generateImageMetadata = async ({
     {
       id: "default",
       contentType: "image/png",
-      alt: title,
+      alt: post.title,
       size,
     },
   ];
@@ -32,13 +32,13 @@ export const generateImageMetadata = async ({
 
 const Image = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
-  const emoji = getEmojiBySlug(slug);
+  const post = postEmojis.find((post) => post.slug === slug);
 
-  if (!emoji) {
+  if (!post) {
     return new Response("Not found", { status: 404 });
   }
 
-  const firstEmoji = Array.from(emoji)[0];
+  const firstEmoji = Array.from(post.emoji)[0];
 
   const notoEmojiSemiBold = await fetch(
     new URL("../../../../assets/fonts/NotoEmoji-SemiBold.ttf", import.meta.url),
