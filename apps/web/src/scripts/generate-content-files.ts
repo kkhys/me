@@ -2,6 +2,7 @@ import { writeFileSync } from "node:fs";
 import { allPosts } from "contentlayer/generated";
 
 type PostEmoji = {
+  title: string;
   slug: string;
   emoji: string;
 };
@@ -33,7 +34,8 @@ const writeToFile = (filePath: string, variableName: string, data: unknown) => {
 };
 
 const generatePostEmojis = async (posts: typeof allPosts) => {
-  const postEmojis = posts.map(({ slug, emoji }) => ({
+  const postEmojis = posts.map(({ title, slug, emoji }) => ({
+    title,
     slug,
     emoji,
   })) satisfies PostEmoji[];
