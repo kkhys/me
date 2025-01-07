@@ -1,7 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { type Post, allPosts } from "contentlayer/generated";
 
-type PostEmoji = Pick<Post, "title" | "emoji" | "slug">;
+type PostForEdge = Pick<Post, "title" | "emoji" | "slug">;
 
 type NavItem = {
   title: string;
@@ -22,18 +22,16 @@ type postMetadata = Pick<
 >;
 
 const FILE_PATHS = {
-  POST_EMOJIS: "src/share/post-emojis.ts",
+  POST_FOR_EDGE: "src/share/posts-for-edge.ts",
   SEARCH_ITEMS: "src/share/search-items.ts",
   POST_METADATA: "src/share/post-metadata.ts",
 };
 
-const getPublishedPosts = () =>
-  allPosts
-    .filter((post) => post.status === "published")
-    .sort(
-      (a, b) =>
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-    );
+const getSortedPosts = () =>
+  allPosts.sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
 
 const writeToFile = (filePath: string, variableName: string, data: unknown) => {
   const timestamp = new Date().toISOString();
@@ -41,13 +39,13 @@ const writeToFile = (filePath: string, variableName: string, data: unknown) => {
   writeFileSync(filePath, content);
 };
 
-const generatePostEmojis = async (posts: typeof allPosts) => {
-  const postEmojis = posts.map(({ title, slug, emoji }) => ({
+const generatePostsForEdge = async (posts: typeof allPosts) => {
+  const postsForEdge = posts.map(({ title, emoji, slug }) => ({
     title,
-    slug,
     emoji,
-  })) satisfies PostEmoji[];
-  writeToFile(FILE_PATHS.POST_EMOJIS, "postEmojis", postEmojis);
+    slug,
+  })) satisfies PostForEdge[];
+  writeToFile(FILE_PATHS.POST_FOR_EDGE, "postsForEdge", postsForEdge);
 };
 
 const generateSearchItems = async (posts: typeof allPosts) => {
@@ -81,9 +79,9 @@ const generatePostMetadata = async (posts: typeof allPosts) => {
 };
 
 const main = async () => {
-  const posts = getPublishedPosts();
+  const posts = getSortedPosts();
   await Promise.all([
-    generatePostEmojis(posts),
+    generatePostsForEdge(posts),
     generateSearchItems(posts),
     generatePostMetadata(posts),
   ]);

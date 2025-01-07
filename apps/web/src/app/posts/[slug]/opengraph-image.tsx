@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { postEmojis } from "#/share/post-emojis";
+import { postsForEdge } from "#/share/posts-for-edge";
 
 export const runtime = "edge";
 
@@ -14,7 +14,7 @@ export const generateImageMetadata = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const post = postEmojis.find((post) => post.slug === slug);
+  const post = postsForEdge.find((post) => post.slug === slug);
 
   if (!post) {
     return [];
@@ -32,7 +32,7 @@ export const generateImageMetadata = async ({
 
 const Image = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
-  const post = postEmojis.find((post) => post.slug === slug);
+  const post = postsForEdge.find((post) => post.slug === slug);
 
   if (!post) {
     return new Response("Not found", { status: 404 });

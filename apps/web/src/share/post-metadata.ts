@@ -1,4 +1,4 @@
-// This file was automatically generated on 2025-01-07T12:52:21.079Z.
+// This file was automatically generated on 2025-01-07T12:58:34.001Z.
 // Please do not remove or edit this file.
 
 export const postMetadata = [
