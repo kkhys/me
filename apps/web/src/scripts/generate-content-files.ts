@@ -26,10 +26,16 @@ const FILE_PATHS = {
 };
 
 const getPublishedPosts = () =>
-  allPosts.filter((post) => post.status === "published");
+  allPosts
+    .filter((post) => post.status === "published")
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    );
 
 const writeToFile = (filePath: string, variableName: string, data: unknown) => {
-  const content = `export const ${variableName} = ${JSON.stringify(data, null, 2)};`;
+  const timestamp = new Date().toISOString();
+  const content = `// This file was automatically generated on ${timestamp}.\n// Please do not remove or edit this comment.\n\nexport const ${variableName} = ${JSON.stringify(data, null, 2)};`;
   writeFileSync(filePath, content);
 };
 
