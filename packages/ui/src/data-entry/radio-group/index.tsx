@@ -26,6 +26,7 @@ export const RadioGroup = ({
         tabIndex={-1}
         className="sr-only"
         onFocus={() => radioGroupRef.current?.focus()}
+        id={meta.id}
       />
       <_RadioGroup
         ref={radioGroupRef}
