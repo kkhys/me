@@ -2,7 +2,7 @@ import { allLegals } from "contentlayer/generated";
 import type { MetadataRoute } from "next";
 
 import { siteConfig } from "#/config";
-import { getPublicPosts } from "#/utils/post";
+import { getPublicPostMetadata } from "#/utils/post";
 
 const formatPublishedDate = (publishedDate: Date | string | number) =>
   new Date(publishedDate).toISOString().split("T")[0];
@@ -18,7 +18,7 @@ const sitemap = (): MetadataRoute.Sitemap => {
     lastModified: formatPublishedDate(publishedAt),
   })) satisfies MetadataRoute.Sitemap;
 
-  const posts = getPublicPosts().map(({ url, publishedAt }) => ({
+  const posts = getPublicPostMetadata().map(({ url, publishedAt }) => ({
     url,
     lastModified: formatPublishedDate(publishedAt),
   })) satisfies MetadataRoute.Sitemap;

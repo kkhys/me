@@ -9,7 +9,12 @@ import {
   ViewCounter,
   ViewCounterSkeleton,
 } from "#/app/posts/_ui";
-import { getPostBySlug, getPublicPosts, getRelatedPosts } from "#/utils/post";
+import {
+  getPostBySlug,
+  getPostMetadataBySlug,
+  getPublicPosts,
+  getRelatedPosts,
+} from "#/utils/post";
 
 import "#/styles/code-block.css";
 import "#/styles/react-medium-image-zoom.css";
@@ -83,7 +88,7 @@ export const generateMetadata = async ({
   params: Promise<{ slug: string }>;
 }) => {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getPostMetadataBySlug(slug);
 
   if (!post) {
     return;
@@ -152,7 +157,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       <Prose>
         <Mdx code={code} />
       </Prose>
-      <ActionController className="mt-12" post={post} />
+      <ActionController slug={post.slug} className="mt-12" />
       <PrevAndNextPager id={_id} className="mt-8" />
       {relatedPosts.length !== 0 && (
         <div className="mt-8">

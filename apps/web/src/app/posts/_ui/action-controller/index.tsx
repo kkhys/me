@@ -1,6 +1,5 @@
 "use client";
 
-import type { Post } from "contentlayer/generated";
 import { CodeIcon, Share2Icon, SquareArrowOutUpRightIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
@@ -15,7 +14,9 @@ import {
   cn,
   toast,
 } from "@kkhys/ui";
+import type { PostMetadata } from "#/app/posts/_types";
 import { siteConfig } from "#/config";
+import { getPostMetadataBySlug } from "#/utils/post";
 
 const NavLink = <T extends string>({
   href,
@@ -53,7 +54,7 @@ const handleCopyLink = (url: string) =>
     .writeText(url)
     .then(() => toast.success("Link copied."));
 
-const SharedAction = ({ post: { url, title } }: { post: Post }) => (
+const SharedAction = ({ title, url }: Pick<PostMetadata, "title" | "url">) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="ghost" size="icon">
@@ -86,8 +87,10 @@ const SharedAction = ({ post: { url, title } }: { post: Post }) => (
 );
 
 const ConfigAction = ({
-  post: { editUrl, sourceUrl, revisionHistoryUrl },
-}: { post: Post }) => (
+  editUrl,
+  sourceUrl,
+  revisionHistoryUrl,
+}: Pick<PostMetadata, "editUrl" | "sourceUrl" | "revisionHistoryUrl">) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="ghost" size="icon">
@@ -113,14 +116,22 @@ const ConfigAction = ({
 );
 
 export const ActionController = ({
-  post,
+  slug,
   className,
 }: {
-  post: Post;
+  slug: string;
   className?: string;
-}) => (
-  <div className={cn("flex justify-end gap-x-1", className)}>
-    <ConfigAction post={post} />
-    <SharedAction post={post} />
-  </div>
-);
+}) => {
+  const metadata = getPostMetadataBySlug(slug);
+
+  if (!metadata) {
+    return null;
+  }
+
+  return (
+    <div className={cn("flex justify-end gap-x-1", className)}>
+      <ConfigAction {...metadata} />
+      <SharedAction {...metadata} />
+    </div>
+  );
+};
