@@ -1,72 +1,122 @@
 import { writeFileSync } from "node:fs";
-import { allPosts } from "contentlayer/generated";
-
-type PostEmoji = {
-  title: string;
-  slug: string;
-  emoji: string;
-};
-
-type NavItem = {
-  title: string;
-  href: string;
-  emoji: string;
-  category: string;
-  tags?: string[];
-};
-
-type SearchItem = {
-  title: string;
-  items: NavItem[];
-};
+import { type Post, allPosts } from "contentlayer/generated";
+import type {
+  PostMetadata,
+  PostMetadataForEdge,
+  SearchItem,
+} from "#/app/posts/_types";
 
 const FILE_PATHS = {
-  POST_EMOJIS: "src/share/post-emojis.ts",
+  POST_METADATA_FOR_EDGE: "src/share/post-metadata-for-edge.ts",
   SEARCH_ITEMS: "src/share/search-items.ts",
+  POST_METADATA: "src/share/post-metadata.ts",
 };
 
-const getPublishedPosts = () =>
-  allPosts
-    .filter((post) => post.status === "published")
-    .sort(
-      (a, b) =>
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-    );
+const getSortedPosts = () =>
+  allPosts.sort(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
 
-const writeToFile = (filePath: string, variableName: string, data: unknown) => {
+const writeToFile = <T>(
+  filePath: string,
+  variableName: string,
+  data: T,
+  typeDefinition: string,
+) => {
   const timestamp = new Date().toISOString();
-  const content = `// This file was automatically generated on ${timestamp}.\n// Please do not remove or edit this comment.\n\nexport const ${variableName} = ${JSON.stringify(data, null, 2)};`;
+  const content = `
+// This file was automatically generated on ${timestamp}.
+// Please do not remove or edit this file.
+import type { ${typeDefinition}} from "#/app/posts/_types";
+
+export const ${variableName}: ${typeDefinition}[] = ${JSON.stringify(data, null, 2)};
+`;
   writeFileSync(filePath, content);
 };
 
-const generatePostEmojis = async (posts: typeof allPosts) => {
-  const postEmojis = posts.map(({ title, slug, emoji }) => ({
+const generatePostMetadataForEdge = async (posts: Post[]) => {
+  const postMetadataForEdge = posts.map(({ title, emoji, slug }) => ({
     title,
-    slug,
     emoji,
-  })) satisfies PostEmoji[];
-  writeToFile(FILE_PATHS.POST_EMOJIS, "postEmojis", postEmojis);
+    slug,
+  })) satisfies PostMetadataForEdge[];
+  writeToFile(
+    FILE_PATHS.POST_METADATA_FOR_EDGE,
+    "postMetadataForEdge",
+    postMetadataForEdge,
+    "PostMetadataForEdge",
+  );
 };
 
-const generateSearchItems = async (posts: typeof allPosts) => {
-  const searchItems = [
-    {
-      title: "Posts",
-      items: posts.map(({ title, slug, emoji, category, tags }) => ({
-        title,
-        href: `/posts/${slug}`,
-        emoji,
-        category,
-        tags,
-      })),
-    },
-  ] satisfies SearchItem[];
-  writeToFile(FILE_PATHS.SEARCH_ITEMS, "searchItems", searchItems);
+const generateSearchItems = async (posts: Post[]) => {
+  const searchItems = posts.map(
+    ({ title, slug, emojiSvg, category, tags, status }) => ({
+      title,
+      href: `/posts/${slug}`,
+      emojiSvg,
+      category,
+      tags,
+      status,
+    }),
+  ) satisfies SearchItem[];
+  writeToFile(
+    FILE_PATHS.SEARCH_ITEMS,
+    "searchItems",
+    searchItems,
+    "SearchItem",
+  );
+};
+
+const generatePostMetadata = async (posts: Post[]) => {
+  const postMetadata = posts.map(
+    ({
+      _id,
+      title,
+      slug,
+      emoji,
+      category,
+      tags,
+      status,
+      publishedAt,
+      updatedAt,
+      excerpt,
+      url,
+      editUrl,
+      sourceUrl,
+      revisionHistoryUrl,
+    }) => ({
+      _id,
+      title,
+      slug,
+      emoji,
+      category,
+      tags,
+      status,
+      publishedAt,
+      updatedAt,
+      excerpt,
+      url,
+      editUrl,
+      sourceUrl,
+      revisionHistoryUrl,
+    }),
+  ) satisfies PostMetadata[];
+  writeToFile(
+    FILE_PATHS.POST_METADATA,
+    "postMetadata",
+    postMetadata,
+    "PostMetadata",
+  );
 };
 
 const main = async () => {
-  const posts = getPublishedPosts();
-  await Promise.all([generatePostEmojis(posts), generateSearchItems(posts)]);
+  const posts = getSortedPosts();
+  await Promise.all([
+    generatePostMetadataForEdge(posts),
+    generateSearchItems(posts),
+    generatePostMetadata(posts),
+  ]);
 };
 
 main().catch((error) => console.error(error));

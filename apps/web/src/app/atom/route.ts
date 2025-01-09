@@ -1,7 +1,7 @@
 import { Feed } from "feed";
 
 import { me, siteConfig } from "#/config";
-import { getPublicPosts } from "#/utils/post";
+import { getPublicPostMetadata } from "#/utils/post";
 
 export const revalidate = 86400;
 
@@ -21,12 +21,12 @@ export const GET = () => {
     },
   });
 
-  for (const post of getPublicPosts()) {
+  for (const { title, slug, excerpt, publishedAt } of getPublicPostMetadata()) {
     feed.addItem({
-      title: post.title,
-      id: new URL(`posts/${post.slug}`, siteConfig.url).toString(),
-      link: new URL(`posts/${post.slug}`, siteConfig.url).toString(),
-      description: post.excerpt,
+      title,
+      id: new URL(`posts/${slug}`, siteConfig.url).toString(),
+      link: new URL(`posts/${slug}`, siteConfig.url).toString(),
+      description: excerpt,
       author: [
         {
           name: me.name,
@@ -34,9 +34,9 @@ export const GET = () => {
           link: new URL(siteConfig.url).toString(),
         },
       ],
-      date: new Date(post.publishedAt),
+      date: new Date(publishedAt),
       image: new URL(
-        `/posts/${post.slug}/opengraph-image/default`,
+        `/posts/${slug}/opengraph-image/default`,
         siteConfig.url,
       ).toString(),
     });
