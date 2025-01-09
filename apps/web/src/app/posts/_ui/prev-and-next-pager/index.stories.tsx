@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { PrevAndNextPager } from "#/app/posts/_ui";
-import { getPublicPosts } from "#/utils/post";
+import { getPublicPostMetadata } from "#/utils/post";
+
 const meta = {
   title: "Post / Prev and Next Pager",
   component: PrevAndNextPager,
@@ -29,20 +30,24 @@ const meta = {
     ),
   ],
 } satisfies Meta<typeof PrevAndNextPager>;
+
 export default meta;
 type Story = StoryObj<typeof meta>;
+
 export const Default = {
   args: {
     id: "posts/build/2024-03-10/index.mdx",
   },
 } satisfies Story;
+
 export const FirstPage = {
   args: {
-    id: getPublicPosts().slice(-1)[0]?._id ?? "",
+    id: getPublicPostMetadata().slice(-1)[0]?._id ?? "",
   },
 } satisfies Story;
+
 export const LastPage = {
   args: {
-    id: getPublicPosts()[0]?._id ?? "",
+    id: getPublicPostMetadata()[0]?._id ?? "",
   },
 } satisfies Story;

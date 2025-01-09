@@ -19,20 +19,7 @@ import {
   useTheme,
 } from "@kkhys/ui";
 import type { Route } from "next";
-import { fisherYatesShuffle, getPublicPosts } from "#/utils/post";
-
-interface NavItem {
-  title: string;
-  href: string;
-  emoji: string;
-  category: string;
-  tags?: string[];
-}
-
-interface SearchItem {
-  title: string;
-  items: NavItem[];
-}
+import { fisherYatesShuffle, getPublicSearchItems } from "#/utils/post";
 
 export const CommandMenu = ({ ...props }: DialogProps) => {
   const router = useRouter();
@@ -64,16 +51,8 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
     return [
       {
         title: "Posts",
-        items: fisherYatesShuffle(getPublicPosts()).map(
-          ({ title, slug, emojiSvg, category, tags }) => ({
-            title,
-            href: `/posts/${slug}`,
-            emoji: emojiSvg,
-            category: category,
-            tags,
-          }),
-        ) satisfies NavItem[],
-      } satisfies SearchItem,
+        items: fisherYatesShuffle(getPublicSearchItems()),
+      },
     ];
   }, []);
 
@@ -118,7 +97,7 @@ export const CommandMenu = ({ ...props }: DialogProps) => {
                 >
                   <div
                     // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
-                    dangerouslySetInnerHTML={{ __html: item.emoji }}
+                    dangerouslySetInnerHTML={{ __html: item.emojiSvg }}
                     className="mr-1.5 [&>svg>path]:fill-foreground"
                   />
                   {item.title}

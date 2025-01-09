@@ -1,7 +1,8 @@
-// This file was automatically generated on 2025-01-07T12:58:34.000Z.
+// This file was automatically generated on 2025-01-09T10:54:26.899Z.
 // Please do not remove or edit this file.
+import type { PostMetadataForEdge } from "#/app/posts/_types";
 
-export const postsForEdge = [
+export const postMetadataForEdge: PostMetadataForEdge[] = [
   {
     title: "二代目昇降デスクを作った",
     emoji: "🔩",

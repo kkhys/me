@@ -3,7 +3,7 @@ import type { Route } from "next";
 import Link from "next/link";
 
 import { Button, Tooltip, TooltipContent, TooltipTrigger, cn } from "@kkhys/ui";
-import { getPublicPostsAsc } from "#/utils/post";
+import { getPublicPostMetadata } from "#/utils/post";
 
 export const PrevAndNextPager = ({
   id,
@@ -13,7 +13,10 @@ export const PrevAndNextPager = ({
   className?: string;
 }) => {
   const pager = getPager(id);
-  if (!pager) return null;
+
+  if (!pager) {
+    return null;
+  }
 
   const { prev, next } = pager;
 
@@ -56,7 +59,7 @@ export const PrevAndNextPager = ({
 };
 
 const getPager = (targetId: string) => {
-  const targetPosts = [...getPublicPostsAsc()];
+  const targetPosts = [...getPublicPostMetadata("asc")];
 
   const activeIndex = targetPosts.findIndex((post) => targetId === post?._id);
   const prev = activeIndex !== 0 ? targetPosts[activeIndex - 1] : null;
