@@ -1,8 +1,13 @@
-// This file was automatically generated on 2025-01-09T10:54:26.899Z.
+// This file was automatically generated on 2025-01-10T10:23:33.728Z.
 // Please do not remove or edit this file.
 import type { PostMetadataForEdge } from "#/app/posts/_types";
 
 export const postMetadataForEdge: PostMetadataForEdge[] = [
+  {
+    title: "2025 年が始まったので何か書く",
+    emoji: "🎍",
+    slug: "p18zu2z",
+  },
   {
     title: "二代目昇降デスクを作った",
     emoji: "🔩",
