@@ -105,17 +105,17 @@ const Post = defineDocumentType(() => ({
     editUrl: {
       type: "string",
       resolve: ({ _raw: { sourceFilePath } }) =>
-        `${siteConfig.github}/edit/main/${sourceFilePath}`,
+        `${siteConfig.github.content}/edit/main/${sourceFilePath}`,
     },
     sourceUrl: {
       type: "string",
       resolve: ({ _raw: { sourceFilePath } }) =>
-        `${siteConfig.github}/blob/main/${sourceFilePath}?plain=1`,
+        `${siteConfig.github.content}/blob/main/${sourceFilePath}?plain=1`,
     },
     revisionHistoryUrl: {
       type: "string",
       resolve: ({ _raw: { sourceFilePath } }) =>
-        `${siteConfig.github}/commits/main/${sourceFilePath}`,
+        `${siteConfig.github.content}/commits/main/${sourceFilePath}`,
     },
     publishedAtFormattedUs: {
       type: "string",

@@ -4,7 +4,7 @@ import defaultTheme from "tailwindcss/defaultTheme";
 import baseConfig from "@kkhys/tailwind-config";
 
 export default {
-  content: [...baseConfig.content, "../../packages/ui/**/*.{ts,tsx}"],
+  content: [...baseConfig.content, "../../packages/ui/src/**/*.{ts,tsx}"],
   presets: [baseConfig],
   theme: {
     extend: {
