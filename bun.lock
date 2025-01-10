@@ -97,7 +97,7 @@
         "storybook": "8.4.7",
         "strip-markdown": "6.0.0",
         "tailwindcss": "3.4.17",
-        "typescript": "5.7.2",
+        "typescript": "5.7.3",
       },
     },
     "packages/db": {
@@ -109,7 +109,7 @@
       },
       "devDependencies": {
         "@kkhys/tsconfig": "tooling/tsconfig",
-        "typescript": "5.7.2",
+        "typescript": "5.7.3",
       },
     },
     "packages/email": {
@@ -120,12 +120,12 @@
         "@react-email/components": "0.0.32",
         "@react-email/render": "1.0.4",
         "react": "19.0.0",
-        "react-email": "3.0.5",
+        "react-email": "3.0.6",
         "zod": "3.24.1",
       },
       "devDependencies": {
         "@types/react": "19.0.4",
-        "typescript": "5.7.2",
+        "typescript": "5.7.3",
       },
     },
     "packages/google-apps-script": {
@@ -136,12 +136,12 @@
         "zod": "3.24.1",
       },
       "devDependencies": {
-        "@google/clasp": "2.4.2",
+        "@google/clasp": "2.5.0",
         "@kkhys/tsconfig": "tooling/tsconfig",
         "@types/google-apps-script": "1.0.91",
         "@types/node": "22.10.5",
         "rollup-plugin-google-apps-script": "2.0.1",
-        "typescript": "5.7.2",
+        "typescript": "5.7.3",
         "vite": "6.0.7",
       },
     },
@@ -189,7 +189,7 @@
         "@vitejs/plugin-react-swc": "3.7.2",
         "react": "19.0.0",
         "storybook": "8.4.7",
-        "typescript": "5.7.2",
+        "typescript": "5.7.3",
         "vite": "6.0.7",
       },
     },
@@ -201,7 +201,7 @@
       },
       "devDependencies": {
         "@kkhys/tsconfig": "tooling/tsconfig",
-        "typescript": "5.7.2",
+        "typescript": "5.7.3",
       },
     },
     "tooling/tailwind": {
@@ -215,7 +215,7 @@
       },
       "devDependencies": {
         "@kkhys/tsconfig": "tooling/tsconfig",
-        "typescript": "5.7.2",
+        "typescript": "5.7.3",
       },
     },
     "tooling/tsconfig": {
@@ -559,7 +559,7 @@
 
     "@fortawesome/fontawesome-free": ["@fortawesome/fontawesome-free@6.7.2", "", {}, "sha512-JUOtgFW6k9u4Y+xeIaEiLr3+cjoUPiAuLXoyKOJSia6Duzb7pq+A76P9ZdPDoAoxHdHzq6gE9/jKBGXlZT8FbA=="],
 
-    "@google/clasp": ["@google/clasp@2.4.2", "", { "dependencies": { "@sindresorhus/is": "^4.0.1", "chalk": "^4.1.2", "chokidar": "^3.5.2", "cli-truncate": "^3.0.0", "commander": "^8.1.0", "debounce": "^1.2.1", "dotf": "^2.0.2", "find-up": "^6.0.0", "fs-extra": "^10.0.0", "fuzzy": "^0.1.3", "google-auth-library": "^7.6.2", "googleapis": "^84.0.0", "inquirer": "^8.1.2", "inquirer-autocomplete-prompt-ipt": "^2.0.0", "is-reachable": "^5.0.0", "log-symbols": "^5.0.0", "loud-rejection": "^2.2.0", "make-dir": "^3.1.0", "multimatch": "^5.0.0", "normalize-newline": "^4.1.0", "open": "^8.2.1", "ora": "^6.0.0", "p-map": "^5.1.0", "read-pkg-up": "^8.0.0", "recursive-readdir": "^2.2.2", "server-destroy": "^1.0.1", "split-lines": "^3.0.0", "strip-bom": "^5.0.0", "ts2gas": "^4.2.0", "typescript": "^4.4.2" }, "bin": { "clasp": "build/src/index.js" } }, "sha512-SrHzWSotR8c7mNBVwH81sFCc4HhoDrCevicJehQlvrvgdTvLIiU0Pfb5EYCzWUPBSC4Ez/nvW6wxsgaK7RrPjQ=="],
+    "@google/clasp": ["@google/clasp@2.5.0", "", { "dependencies": { "@sindresorhus/is": "^4.0.1", "chalk": "^4.1.2", "chokidar": "^3.5.2", "cli-truncate": "^3.0.0", "commander": "^8.1.0", "debounce": "^1.2.1", "dotf": "^2.0.2", "find-up": "^6.0.0", "fs-extra": "^10.0.0", "fuzzy": "^0.1.3", "gaxios": "^4.2.1", "google-auth-library": "^7.6.2", "googleapis": "^84.0.0", "inquirer": "^8.1.2", "inquirer-autocomplete-prompt-ipt": "^2.0.0", "is-reachable": "^5.0.0", "log-symbols": "^5.0.0", "loud-rejection": "^2.2.0", "make-dir": "^3.1.0", "multimatch": "^5.0.0", "normalize-newline": "^4.1.0", "open": "^8.2.1", "ora": "^6.0.0", "p-map": "^5.1.0", "read-pkg-up": "^8.0.0", "recursive-readdir": "^2.2.2", "server-destroy": "^1.0.1", "split-lines": "^3.0.0", "strip-bom": "^5.0.0", "ts2gas": "^4.2.0", "typescript": "^4.4.2" }, "bin": { "clasp": "build/src/index.js" } }, "sha512-HkZnUP5UibGEYXpk89HR24pFctb9VBlrpjCrU6sjepkQOtpr/Y9rrSP3N7EVrqUDg4/JQmmPQ8Z2ybN4XtdOxg=="],
 
     "@grpc/grpc-js": ["@grpc/grpc-js@1.12.5", "", { "dependencies": { "@grpc/proto-loader": "^0.7.13", "@js-sdsl/ordered-map": "^4.4.2" } }, "sha512-d3iiHxdpg5+ZcJ6jnDSOT8Z0O0VMVGy34jAnYLUX8yd36b1qn8f1TwOA/Lc7TsOh03IkPJ38eGI5qD2EjNkoEA=="],
 
@@ -639,23 +639,23 @@
 
     "@jsonjoy.com/util": ["@jsonjoy.com/util@1.5.0", "", { "peerDependencies": { "tslib": "2" } }, "sha512-ojoNsrIuPI9g6o8UxhraZQSyF2ByJanAY4cTFbc8Mf2AXEF4aQRGY1dJxyJpuyav8r9FGflEt/Ff3u5Nt6YMPA=="],
 
-    "@kkhys/db": ["@kkhys/db@workspace:packages/db", { "dependencies": { "@upstash/ratelimit": "2.0.5", "@upstash/redis": "1.34.3" }, "devDependencies": { "@kkhys/tsconfig": "tooling/tsconfig", "typescript": "5.7.2" } }],
+    "@kkhys/db": ["@kkhys/db@workspace:packages/db", { "dependencies": { "@upstash/ratelimit": "2.0.5", "@upstash/redis": "1.34.3" }, "devDependencies": { "@kkhys/tsconfig": "tooling/tsconfig", "typescript": "5.7.3" } }],
 
-    "@kkhys/email": ["@kkhys/email@workspace:packages/email", { "dependencies": { "@kkhys/validators": "packages/validators", "@react-email/components": "0.0.32", "@react-email/render": "1.0.4", "react": "19.0.0", "react-email": "3.0.5", "zod": "3.24.1" }, "devDependencies": { "@types/react": "19.0.4", "typescript": "5.7.2" } }],
+    "@kkhys/email": ["@kkhys/email@workspace:packages/email", { "dependencies": { "@kkhys/validators": "packages/validators", "@react-email/components": "0.0.32", "@react-email/render": "1.0.4", "react": "19.0.0", "react-email": "3.0.6", "zod": "3.24.1" }, "devDependencies": { "@types/react": "19.0.4", "typescript": "5.7.3" } }],
 
-    "@kkhys/google-apps-script": ["@kkhys/google-apps-script@workspace:packages/google-apps-script", { "dependencies": { "@kkhys/validators": "packages/validators", "zod": "3.24.1" }, "devDependencies": { "@google/clasp": "2.4.2", "@kkhys/tsconfig": "tooling/tsconfig", "@types/google-apps-script": "1.0.91", "@types/node": "22.10.5", "rollup-plugin-google-apps-script": "2.0.1", "typescript": "5.7.2", "vite": "6.0.7" } }],
+    "@kkhys/google-apps-script": ["@kkhys/google-apps-script@workspace:packages/google-apps-script", { "dependencies": { "@kkhys/validators": "packages/validators", "zod": "3.24.1" }, "devDependencies": { "@google/clasp": "2.5.0", "@kkhys/tsconfig": "tooling/tsconfig", "@types/google-apps-script": "1.0.91", "@types/node": "22.10.5", "rollup-plugin-google-apps-script": "2.0.1", "typescript": "5.7.3", "vite": "6.0.7" } }],
 
     "@kkhys/storybook": ["@kkhys/storybook@workspace:apps/storybook", { "dependencies": { "react": "19.0.0", "react-dom": "19.0.0" }, "devDependencies": { "@kkhys/tsconfig": "tooling/tsconfig", "@storybook/addon-essentials": "8.4.7", "@storybook/addon-interactions": "8.4.7", "@storybook/addon-onboarding": "8.4.7", "@storybook/blocks": "8.4.7", "@storybook/react": "8.4.7", "@storybook/react-vite": "8.4.7", "@storybook/test": "8.4.7", "@vitejs/plugin-react-swc": "3.7.2", "storybook": "8.4.7", "vite": "6.0.7" } }],
 
-    "@kkhys/tailwind-config": ["@kkhys/tailwind-config@workspace:tooling/tailwind", { "dependencies": { "@tailwindcss/typography": "0.5.16", "autoprefixer": "10.4.20", "postcss": "8.4.49", "tailwindcss": "3.4.17", "tailwindcss-animate": "1.0.7" }, "devDependencies": { "@kkhys/tsconfig": "tooling/tsconfig", "typescript": "5.7.2" } }],
+    "@kkhys/tailwind-config": ["@kkhys/tailwind-config@workspace:tooling/tailwind", { "dependencies": { "@tailwindcss/typography": "0.5.16", "autoprefixer": "10.4.20", "postcss": "8.4.49", "tailwindcss": "3.4.17", "tailwindcss-animate": "1.0.7" }, "devDependencies": { "@kkhys/tsconfig": "tooling/tsconfig", "typescript": "5.7.3" } }],
 
     "@kkhys/tsconfig": ["@kkhys/tsconfig@workspace:tooling/tsconfig", {}],
 
-    "@kkhys/ui": ["@kkhys/ui@workspace:packages/ui", { "dependencies": { "@conform-to/react": "1.2.2", "@conform-to/zod": "1.2.2", "@radix-ui/react-accordion": "1.2.2", "@radix-ui/react-checkbox": "1.1.3", "@radix-ui/react-dialog": "1.1.4", "@radix-ui/react-dropdown-menu": "2.1.4", "@radix-ui/react-label": "2.1.1", "@radix-ui/react-radio-group": "1.2.2", "@radix-ui/react-scroll-area": "1.2.2", "@radix-ui/react-separator": "1.1.1", "@radix-ui/react-slot": "1.1.1", "@radix-ui/react-tabs": "1.1.2", "@radix-ui/react-tooltip": "1.1.6", "class-variance-authority": "0.7.1", "cmdk": "1.0.4", "embla-carousel-react": "8.5.2", "lucide-react": "0.469.0", "next-themes": "0.4.4", "sonner": "1.7.1", "tailwind-merge": "2.6.0", "tailwindcss-animate": "1.0.7", "vaul": "1.1.2", "zod": "3.24.1" }, "devDependencies": { "@chromatic-com/storybook": "3.2.3", "@kkhys/tailwind-config": "tooling/tailwind", "@kkhys/tsconfig": "tooling/tsconfig", "@storybook/addon-a11y": "8.4.7", "@storybook/addon-essentials": "8.4.7", "@storybook/addon-interactions": "8.4.7", "@storybook/addon-onboarding": "8.4.7", "@storybook/addon-themes": "8.4.7", "@storybook/blocks": "8.4.7", "@storybook/react": "8.4.7", "@storybook/react-vite": "8.4.7", "@storybook/test": "8.4.7", "@types/react": "19.0.4", "@vitejs/plugin-react-swc": "3.7.2", "react": "19.0.0", "storybook": "8.4.7", "typescript": "5.7.2", "vite": "6.0.7" } }],
+    "@kkhys/ui": ["@kkhys/ui@workspace:packages/ui", { "dependencies": { "@conform-to/react": "1.2.2", "@conform-to/zod": "1.2.2", "@radix-ui/react-accordion": "1.2.2", "@radix-ui/react-checkbox": "1.1.3", "@radix-ui/react-dialog": "1.1.4", "@radix-ui/react-dropdown-menu": "2.1.4", "@radix-ui/react-label": "2.1.1", "@radix-ui/react-radio-group": "1.2.2", "@radix-ui/react-scroll-area": "1.2.2", "@radix-ui/react-separator": "1.1.1", "@radix-ui/react-slot": "1.1.1", "@radix-ui/react-tabs": "1.1.2", "@radix-ui/react-tooltip": "1.1.6", "class-variance-authority": "0.7.1", "cmdk": "1.0.4", "embla-carousel-react": "8.5.2", "lucide-react": "0.469.0", "next-themes": "0.4.4", "sonner": "1.7.1", "tailwind-merge": "2.6.0", "tailwindcss-animate": "1.0.7", "vaul": "1.1.2", "zod": "3.24.1" }, "devDependencies": { "@chromatic-com/storybook": "3.2.3", "@kkhys/tailwind-config": "tooling/tailwind", "@kkhys/tsconfig": "tooling/tsconfig", "@storybook/addon-a11y": "8.4.7", "@storybook/addon-essentials": "8.4.7", "@storybook/addon-interactions": "8.4.7", "@storybook/addon-onboarding": "8.4.7", "@storybook/addon-themes": "8.4.7", "@storybook/blocks": "8.4.7", "@storybook/react": "8.4.7", "@storybook/react-vite": "8.4.7", "@storybook/test": "8.4.7", "@types/react": "19.0.4", "@vitejs/plugin-react-swc": "3.7.2", "react": "19.0.0", "storybook": "8.4.7", "typescript": "5.7.3", "vite": "6.0.7" } }],
 
-    "@kkhys/validators": ["@kkhys/validators@workspace:packages/validators", { "dependencies": { "zod": "3.24.1" }, "devDependencies": { "@kkhys/tsconfig": "tooling/tsconfig", "typescript": "5.7.2" } }],
+    "@kkhys/validators": ["@kkhys/validators@workspace:packages/validators", { "dependencies": { "zod": "3.24.1" }, "devDependencies": { "@kkhys/tsconfig": "tooling/tsconfig", "typescript": "5.7.3" } }],
 
-    "@kkhys/web": ["@kkhys/web@workspace:apps/web", { "dependencies": { "@conform-to/react": "1.2.2", "@conform-to/zod": "1.2.2", "@kkhys/db": "packages/db", "@kkhys/email": "packages/email", "@kkhys/ui": "packages/ui", "@kkhys/validators": "packages/validators", "@line/bot-sdk": "9.5.0", "@next/third-parties": "15.1.4", "@t3-oss/env-nextjs": "0.11.1", "@vercel/edge-config": "1.4.0", "@vercel/functions": "1.5.2", "contentlayer2": "0.5.3", "date-fns": "4.1.0", "embla-carousel-class-names": "8.5.2", "feed": "4.2.2", "googleapis": "144.0.0", "next": "15.1.4", "next-contentlayer2": "0.5.3", "react": "19.0.0", "react-dom": "19.0.0", "react-medium-image-zoom": "5.2.13", "react-tweet": "3.2.1", "resend": "4.0.1", "zod": "3.24.1" }, "devDependencies": { "@chromatic-com/storybook": "3.2.3", "@kkhys/tailwind-config": "tooling/tailwind", "@kkhys/tsconfig": "tooling/tsconfig", "@shikijs/transformers": "1.26.1", "@storybook/addon-a11y": "8.4.7", "@storybook/addon-essentials": "8.4.7", "@storybook/addon-interactions": "8.4.7", "@storybook/addon-onboarding": "8.4.7", "@storybook/addon-themes": "8.4.7", "@storybook/blocks": "8.4.7", "@storybook/nextjs": "8.4.7", "@storybook/react": "8.4.7", "@storybook/test": "8.4.7", "@types/mdx": "2.0.13", "@types/node": "22.10.5", "@types/react": "19.0.4", "@types/react-dom": "19.0.2", "bech32": "2.0.0", "dotenv-cli": "8.0.0", "fetch-site-metadata": "0.2.0", "hast-util-has-property": "3.0.0", "hast-util-is-element": "3.0.0", "plaiceholder": "3.0.0", "playwright": "1.49.1", "rehype-mermaid": "3.0.0", "rehype-pretty-code": "0.14.0", "rehype-slug": "6.0.0", "rehype-unwrap-images": "1.0.0", "remark": "15.0.1", "remark-gfm": "4.0.0", "satori": "0.12.1", "schema-dts": "1.1.2", "storybook": "8.4.7", "strip-markdown": "6.0.0", "tailwindcss": "3.4.17", "typescript": "5.7.2" } }],
+    "@kkhys/web": ["@kkhys/web@workspace:apps/web", { "dependencies": { "@conform-to/react": "1.2.2", "@conform-to/zod": "1.2.2", "@kkhys/db": "packages/db", "@kkhys/email": "packages/email", "@kkhys/ui": "packages/ui", "@kkhys/validators": "packages/validators", "@line/bot-sdk": "9.5.0", "@next/third-parties": "15.1.4", "@t3-oss/env-nextjs": "0.11.1", "@vercel/edge-config": "1.4.0", "@vercel/functions": "1.5.2", "contentlayer2": "0.5.3", "date-fns": "4.1.0", "embla-carousel-class-names": "8.5.2", "feed": "4.2.2", "googleapis": "144.0.0", "next": "15.1.4", "next-contentlayer2": "0.5.3", "react": "19.0.0", "react-dom": "19.0.0", "react-medium-image-zoom": "5.2.13", "react-tweet": "3.2.1", "resend": "4.0.1", "zod": "3.24.1" }, "devDependencies": { "@chromatic-com/storybook": "3.2.3", "@kkhys/tailwind-config": "tooling/tailwind", "@kkhys/tsconfig": "tooling/tsconfig", "@shikijs/transformers": "1.26.1", "@storybook/addon-a11y": "8.4.7", "@storybook/addon-essentials": "8.4.7", "@storybook/addon-interactions": "8.4.7", "@storybook/addon-onboarding": "8.4.7", "@storybook/addon-themes": "8.4.7", "@storybook/blocks": "8.4.7", "@storybook/nextjs": "8.4.7", "@storybook/react": "8.4.7", "@storybook/test": "8.4.7", "@types/mdx": "2.0.13", "@types/node": "22.10.5", "@types/react": "19.0.4", "@types/react-dom": "19.0.2", "bech32": "2.0.0", "dotenv-cli": "8.0.0", "fetch-site-metadata": "0.2.0", "hast-util-has-property": "3.0.0", "hast-util-is-element": "3.0.0", "plaiceholder": "3.0.0", "playwright": "1.49.1", "rehype-mermaid": "3.0.0", "rehype-pretty-code": "0.14.0", "rehype-slug": "6.0.0", "rehype-unwrap-images": "1.0.0", "remark": "15.0.1", "remark-gfm": "4.0.0", "satori": "0.12.1", "schema-dts": "1.1.2", "storybook": "8.4.7", "strip-markdown": "6.0.0", "tailwindcss": "3.4.17", "typescript": "5.7.3" } }],
 
     "@line/bot-sdk": ["@line/bot-sdk@9.5.0", "", { "dependencies": { "@types/node": "^22.0.0" }, "optionalDependencies": { "axios": "^1.7.4" } }, "sha512-PPtul1vzoyZ5HkNqh643YD0TCFqOHI6ld4x69c/prwAxornBxPaeXoHbHcFeK8gaD2W4/666mPQe5K3CmUMepw=="],
 
@@ -3311,7 +3311,7 @@
 
     "react-dom": ["react-dom@19.0.0", "", { "dependencies": { "scheduler": "^0.25.0" }, "peerDependencies": { "react": "^19.0.0" } }, "sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ=="],
 
-    "react-email": ["react-email@3.0.5", "", { "dependencies": { "@babel/core": "7.24.5", "@babel/parser": "7.24.5", "chalk": "4.1.2", "chokidar": "4.0.3", "commander": "11.1.0", "debounce": "2.0.0", "esbuild": "0.19.11", "glob": "10.3.4", "log-symbols": "4.1.0", "mime-types": "2.1.35", "next": "15.1.2", "normalize-path": "3.0.0", "ora": "5.4.1", "socket.io": "4.8.0" }, "bin": { "email": "dist/cli/index.js" } }, "sha512-xi2ruvRL+olrs0h+L65oc4o8m7Cv56ulcgconGqgwKTnUFjesfh7x/zOpAP5X5hSjY1qxZMfsVs837bnaAN9sg=="],
+    "react-email": ["react-email@3.0.6", "", { "dependencies": { "@babel/core": "7.24.5", "@babel/parser": "7.24.5", "chalk": "4.1.2", "chokidar": "4.0.3", "commander": "11.1.0", "debounce": "2.0.0", "esbuild": "0.19.11", "glob": "10.3.4", "log-symbols": "4.1.0", "mime-types": "2.1.35", "next": "15.1.2", "normalize-path": "3.0.0", "ora": "5.4.1", "socket.io": "4.8.0" }, "bin": { "email": "dist/cli/index.js" } }, "sha512-taTvHORG2bCZCvUgVkRV0hTJJ5I40UKcmMuHzEhDOBNVh3/CCvIv4jRuD2EheSU1c4hFxxiUyanphb+qUQWeBw=="],
 
     "react-is": ["react-is@17.0.2", "", {}, "sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w=="],
 
@@ -4114,6 +4114,20 @@
     "@isaacs/cliui/wrap-ansi": ["wrap-ansi@8.1.0", "", { "dependencies": { "ansi-styles": "^6.1.0", "string-width": "^5.0.1", "strip-ansi": "^7.0.1" } }, "sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ=="],
 
     "@joshwooding/vite-plugin-react-docgen-typescript/magic-string": ["magic-string@0.27.0", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.4.13" } }, "sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA=="],
+
+    "@kkhys/db/typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
+
+    "@kkhys/email/typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
+
+    "@kkhys/google-apps-script/typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
+
+    "@kkhys/tailwind-config/typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
+
+    "@kkhys/ui/typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
+
+    "@kkhys/validators/typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
+
+    "@kkhys/web/typescript": ["typescript@5.7.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="],
 
     "@mdx-js/mdx/estree-walker": ["estree-walker@3.0.3", "", { "dependencies": { "@types/estree": "^1.0.0" } }, "sha512-7RUKfXgSMMkzt6ZuXmqapOurLGPPfgj6l9uRZ7lRGolvk0y2yocc35LdcxKC5PQZdn2DMqioAQ2NoWcrTKmm6g=="],
 
