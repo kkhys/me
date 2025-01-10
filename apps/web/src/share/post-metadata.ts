@@ -1,8 +1,27 @@
-// This file was automatically generated on 2025-01-09T10:54:26.901Z.
+// This file was automatically generated on 2025-01-10T10:23:33.729Z.
 // Please do not remove or edit this file.
 import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
+  {
+    _id: "posts/life/2025-01-09/index.mdx",
+    title: "2025 年が始まったので何か書く",
+    slug: "p18zu2z",
+    emoji: "🎍",
+    category: "Life",
+    tags: [],
+    status: "published",
+    publishedAt: "2025-01-09T00:00:00.000Z",
+    excerpt:
+      "ここ2か月、仕事に追われ、さらにブログの内部リニューアルというややこしい作業に没頭していたせいで、更新が止まってしまっていた。気づけば新しい年が始まっている。なんとも言えない焦燥感に背中を押されるように、今こうしてタイピングをしている。この忙しい期間で気づいたのは、日々何かに追われ続けていると、自分の中の判断力や思考力...",
+    url: "https://kkhys.me/posts/p18zu2z",
+    editUrl:
+      "https://github.com/kkhys/me/edit/main/posts/life/2025-01-09/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/me/blob/main/posts/life/2025-01-09/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/me/commits/main/posts/life/2025-01-09/index.mdx",
+  },
   {
     _id: "posts/build/2024-11-03/index.mdx",
     title: "二代目昇降デスクを作った",
