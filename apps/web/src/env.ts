@@ -8,6 +8,7 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),
+    PORT: z.coerce.number().default(3000),
   },
   client: {
     NEXT_PUBLIC_TAG_MANAGER_ID: z.string().min(1),
@@ -23,6 +24,7 @@ export const env = createEnv({
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    PORT: process.env.PORT,
     NEXT_PUBLIC_GOOGLE_MAPS_API_KEY:
       process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     NEXT_PUBLIC_TAG_MANAGER_ID: process.env.NEXT_PUBLIC_TAG_MANAGER_ID,
