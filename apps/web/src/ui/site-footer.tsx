@@ -14,7 +14,7 @@ const footerLinks = [
   { href: "/privacy-policy" as Route, title: "Privacy" },
   { href: siteConfig.roadmap, title: "Roadmap", external: true },
   { href: siteConfig.storybook, title: "Storybook", external: true },
-  { href: siteConfig.github, title: "Source", external: true },
+  { href: siteConfig.github.me, title: "Source", external: true },
 ] satisfies FooterLink[];
 
 export const SiteFooter = () => (
