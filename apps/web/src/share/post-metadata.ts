@@ -1,18 +1,20 @@
-// This file was automatically generated on 2025-01-10T13:23:19.426Z.
+// This file was automatically generated.
 // Please do not remove or edit this file.
+
 import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
     _id: "posts/tech/2025-01-11/index.mdx",
-    title: "v2.0.0 リリースノート: 内部的なリファクタリング",
+    title: "v2.0.0 リリースノート: リファクタリング",
     slug: "p1q5pue",
     emoji: "🚀",
     category: "Tech",
     tags: ["Release"],
     status: "draft",
     publishedAt: "2025-01-11T00:00:00.000Z",
-    excerpt: "test",
+    excerpt:
+      "このブログをリリースしてから約1年が経過したのでリファクタリングを行った。UIはほとんど変わっていないが、各処理を最適化したので読み込みのスピードが向上した。",
     url: "https://kkhys.me/posts/p1q5pue",
     editUrl:
       "https://github.com/kkhys/content/edit/main/posts/tech/2025-01-11/index.mdx",
