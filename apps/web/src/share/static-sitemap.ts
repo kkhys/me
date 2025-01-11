@@ -21,6 +21,10 @@ export const staticSitemap: MetadataRoute.Sitemap = [
     lastModified: "2023-12-27",
   },
   {
+    url: "https://kkhys.me/posts/p1q5pue",
+    lastModified: "2025-01-11",
+  },
+  {
     url: "https://kkhys.me/posts/p18zu2z",
     lastModified: "2025-01-09",
   },
