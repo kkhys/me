@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "git clean -xdf .cache .contentlayer .next .turbo node_modules storybook-static",
     "dev": "bun with-env next dev --port 3000",
-    "generate:files": "bun contentlayer2 build && bun ./src/scripts/generate-content-files.ts && cd ../.. && bun lint:fix && cd apps/web",
+    "prebuild": "bun contentlayer2 build && bun ./src/scripts/pre-build.ts && cd ../.. && bun lint:fix && cd apps/web",
     "build": "bun with-env next build",
     "start": "bun with-env next start --port 3000",
     "typecheck": "tsc --noEmit",
