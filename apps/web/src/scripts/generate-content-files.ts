@@ -24,9 +24,8 @@ const writeToFile = <T>(
   data: T,
   typeDefinition: string,
 ) => {
-  const timestamp = new Date().toISOString();
   const content = `
-// This file was automatically generated on ${timestamp}.
+// This file was automatically generated.
 // Please do not remove or edit this file.
 import type { ${typeDefinition}} from "#/app/posts/_types";
 

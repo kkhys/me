@@ -1,10 +1,10 @@
-// This file was automatically generated on 2025-01-10T13:23:19.426Z.
+// This file was automatically generated.
 // Please do not remove or edit this file.
 import type { PostMetadataForEdge } from "#/app/posts/_types";
 
 export const postMetadataForEdge: PostMetadataForEdge[] = [
   {
-    title: "v2.0.0 リリースノート: 内部的なリファクタリング",
+    title: "v2.0.0 リリースノート: リファクタリング",
     emoji: "🚀",
     slug: "p1q5pue",
   },
