@@ -1,6 +1,12 @@
 import { writeFileSync } from "node:fs";
-import { type Post, allPosts } from "contentlayer/generated";
+import {
+  type Legal,
+  type Post,
+  allLegals,
+  allPosts,
+} from "contentlayer/generated";
 import type {
+  LegalMetadata,
   PostMetadata,
   PostMetadataForEdge,
   SearchItem,
@@ -10,10 +16,11 @@ const FILE_PATHS = {
   POST_METADATA_FOR_EDGE: "src/share/post-metadata-for-edge.ts",
   SEARCH_ITEMS: "src/share/search-items.ts",
   POST_METADATA: "src/share/post-metadata.ts",
+  LEGAL_METADATA: "src/share/legal-metadata.ts",
 };
 
-const getSortedPosts = () =>
-  allPosts.sort(
+const getSortedItems = <T extends { publishedAt: string }>(items: T[]): T[] =>
+  items.sort(
     (a, b) =>
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
@@ -109,12 +116,28 @@ const generatePostMetadata = async (posts: Post[]) => {
   );
 };
 
+const generateLegalMetadata = async (legals: Legal[]) => {
+  const legalMetadata = legals.map(({ title, slug, publishedAt }) => ({
+    title,
+    slug,
+    publishedAt,
+  })) satisfies LegalMetadata[];
+  writeToFile(
+    FILE_PATHS.LEGAL_METADATA,
+    "legalMetadata",
+    legalMetadata,
+    "LegalMetadata",
+  );
+};
+
 const main = async () => {
-  const posts = getSortedPosts();
+  const posts = getSortedItems(allPosts);
+  const legals = getSortedItems(allLegals);
   await Promise.all([
     generatePostMetadataForEdge(posts),
     generateSearchItems(posts),
     generatePostMetadata(posts),
+    generateLegalMetadata(legals),
   ]);
 };
 
