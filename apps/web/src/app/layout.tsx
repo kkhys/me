@@ -32,7 +32,9 @@ export const metadata = {
     telephone: false,
     address: false,
   },
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: env.VERCEL_URL
+    ? new URL(`https://${env.VERCEL_URL}`)
+    : new URL(`http://localhost:${env.PORT ?? "3000"}`),
   alternates: {
     canonical: "/",
   },

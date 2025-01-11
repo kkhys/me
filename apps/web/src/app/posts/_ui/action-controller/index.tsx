@@ -14,9 +14,8 @@ import {
   cn,
   toast,
 } from "@kkhys/ui";
-import type { PostMetadata } from "#/app/posts/_types";
+import type { Post } from "contentlayer/generated";
 import { siteConfig } from "#/config";
-import { getPostMetadataBySlug } from "#/utils/post";
 
 const NavLink = <T extends string>({
   href,
@@ -54,7 +53,7 @@ const handleCopyLink = (url: string) =>
     .writeText(url)
     .then(() => toast.success("Link copied."));
 
-const SharedAction = ({ title, url }: Pick<PostMetadata, "title" | "url">) => (
+const SharedAction = ({ title, url }: Pick<Post, "title" | "url">) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="ghost" size="icon">
@@ -90,7 +89,7 @@ const ConfigAction = ({
   editUrl,
   sourceUrl,
   revisionHistoryUrl,
-}: Pick<PostMetadata, "editUrl" | "sourceUrl" | "revisionHistoryUrl">) => (
+}: Pick<Post, "editUrl" | "sourceUrl" | "revisionHistoryUrl">) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="ghost" size="icon">
@@ -116,22 +115,14 @@ const ConfigAction = ({
 );
 
 export const ActionController = ({
-  slug,
+  post,
   className,
 }: {
-  slug: string;
+  post: Post;
   className?: string;
-}) => {
-  const metadata = getPostMetadataBySlug(slug);
-
-  if (!metadata) {
-    return null;
-  }
-
-  return (
-    <div className={cn("flex justify-end gap-x-1", className)}>
-      <ConfigAction {...metadata} />
-      <SharedAction {...metadata} />
-    </div>
-  );
-};
+}) => (
+  <div className={cn("flex justify-end gap-x-1", className)}>
+    <ConfigAction {...post} />
+    <SharedAction {...post} />
+  </div>
+);
