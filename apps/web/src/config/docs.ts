@@ -1,16 +1,24 @@
-import type { MainNavItem, SidebarNavItem } from "#/types";
+import type { Route } from "next";
+import { categories } from "#/config/category";
 
-interface DocsConfig {
+type MainNavItem = {
+  title: string;
+  href: Route;
+};
+
+type SidebarNavItem = {
+  title: string;
+  href?: Route;
+  items?: SidebarNavItem[];
+};
+
+type DocsConfig = {
   mainNav: MainNavItem[];
   sidebarNav: SidebarNavItem[];
-}
+};
 
-export const docsConfig: DocsConfig = {
+export const docsConfig = {
   mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
     {
       title: "Blog",
       href: "/posts",
@@ -22,14 +30,11 @@ export const docsConfig: DocsConfig = {
   ],
   sidebarNav: [
     {
-      title: "Blog",
-      items: [
-        {
-          title: "Posts",
-          href: "/posts",
-          items: [],
-        },
-      ],
+      title: "Category",
+      items: categories.map(({ title, slug }) => ({
+        title,
+        href: `/posts/categories/${slug}` as Route,
+      })),
     },
   ],
-};
+} satisfies DocsConfig;

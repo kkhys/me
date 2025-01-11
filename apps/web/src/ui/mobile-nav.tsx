@@ -9,6 +9,7 @@ import {
   DrawerTrigger,
   cn,
 } from "@kkhys/ui";
+import { MenuIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
 import type { LinkProps } from "next/link";
@@ -26,21 +27,7 @@ export const MobileNav = () => {
           variant="ghost"
           className="-ml-2 mr-2 size-8 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="!size-6"
-          >
-            <title>Toggle Menu</title>
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 9h16.5m-16.5 6.75h16.5"
-            />
-          </svg>
+          <MenuIcon />
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </DrawerTrigger>
@@ -48,9 +35,12 @@ export const MobileNav = () => {
       <DrawerDescription className="sr-only">
         Mobile navigation
       </DrawerDescription>
-      <DrawerContent className="max-h-[60svh] p-0">
+      <DrawerContent className="max-h-[60svh] p-0 font-sans">
         <div className="overflow-auto p-6">
           <div className="flex flex-col space-y-3">
+            <MobileLink href="/" onOpenChange={setOpen}>
+              Home
+            </MobileLink>
             {docsConfig.mainNav?.map(
               ({ href, title }) =>
                 href && (
@@ -65,33 +55,29 @@ export const MobileNav = () => {
             )}
           </div>
           <div className="flex flex-col space-y-2">
-            {docsConfig.sidebarNav.map(({ title, items }) => (
-              <div key={title} className="flex flex-col space-y-3 pt-6">
-                <h4 className="font-medium">{title}</h4>
-                {items?.length &&
-                  items.map(({ href, disabled, title, label }) => (
-                    <React.Fragment key={href}>
-                      {!disabled &&
-                        (href ? (
+            <div className="flex flex-col space-y-2">
+              {docsConfig.sidebarNav.map(({ title, items }) => (
+                <div key={title} className="flex flex-col space-y-3 pt-6">
+                  <h4 className="font-medium">{title}</h4>
+                  {items?.length &&
+                    items.map(({ title, href }) => (
+                      <React.Fragment key={href}>
+                        {href ? (
                           <MobileLink
-                            href={href as Route}
+                            href={href}
                             onOpenChange={setOpen}
                             className="text-muted-foreground"
                           >
                             {title}
-                            {label && (
-                              <span className="ml-2 rounded-md bg-[#adfa1d] px-1.5 py-0.5 text-xs leading-none text-[#000000] no-underline group-hover:no-underline">
-                                {label}
-                              </span>
-                            )}
                           </MobileLink>
                         ) : (
                           title
-                        ))}
-                    </React.Fragment>
-                  ))}
-              </div>
-            ))}
+                        )}
+                      </React.Fragment>
+                    ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </DrawerContent>
