@@ -1,5 +1,6 @@
 // This file was automatically generated.
 // Please do not remove or edit this file.
+
 import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [

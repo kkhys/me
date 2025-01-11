@@ -5,18 +5,22 @@ import {
   allLegals,
   allPosts,
 } from "contentlayer/generated";
+import type { MetadataRoute } from "next";
 import type {
   LegalMetadata,
   PostMetadata,
   PostMetadataForEdge,
   SearchItem,
 } from "#/app/posts/_types";
+import { categories, itemsPerPage, siteConfig } from "#/config";
+import { formatPublishedDate } from "#/utils/date";
 
 const FILE_PATHS = {
   POST_METADATA_FOR_EDGE: "src/share/post-metadata-for-edge.ts",
   SEARCH_ITEMS: "src/share/search-items.ts",
   POST_METADATA: "src/share/post-metadata.ts",
   LEGAL_METADATA: "src/share/legal-metadata.ts",
+  STATIC_SITEMAP: "src/share/static-sitemap.ts",
 };
 
 const getSortedItems = <T extends { publishedAt: string }>(items: T[]): T[] =>
@@ -34,6 +38,7 @@ const writeToFile = <T>(
   const content = `
 // This file was automatically generated.
 // Please do not remove or edit this file.
+
 import type { ${typeDefinition}} from "#/app/posts/_types";
 
 export const ${variableName}: ${typeDefinition}[] = ${JSON.stringify(data, null, 2)};
@@ -130,6 +135,71 @@ const generateLegalMetadata = async (legals: Legal[]) => {
   );
 };
 
+const generateStaticSitemap = async ({
+  posts,
+  legals,
+}: {
+  posts: Post[];
+  legals: Legal[];
+}) => {
+  const routePaths = ["/", "/contact"];
+  const publishedPosts = posts.filter(({ status }) => status === "published");
+
+  const routesSitemap = routePaths.map((route) => ({
+    url: `${siteConfig.url}${route}`,
+    lastModified: formatPublishedDate(new Date()),
+  })) satisfies MetadataRoute.Sitemap;
+
+  const legalsSitemap = legals.map(({ slug, publishedAt }) => ({
+    url: `${siteConfig.url}/${slug}`,
+    lastModified: formatPublishedDate(publishedAt),
+  })) satisfies MetadataRoute.Sitemap;
+
+  const postsSitemap = publishedPosts.map(({ url, publishedAt }) => ({
+    url,
+    lastModified: formatPublishedDate(publishedAt),
+  })) satisfies MetadataRoute.Sitemap;
+
+  const postTotalPages = Math.ceil(publishedPosts.length / itemsPerPage);
+  const pagedPostSitemap = Array.from(
+    { length: postTotalPages },
+    (_, index) => ({
+      url: `${siteConfig.url}/posts/page/${index + 1}`,
+      lastModified: formatPublishedDate(new Date()),
+    }),
+  ) satisfies MetadataRoute.Sitemap;
+
+  const categorySitemaps = categories.map(({ title, slug }) => {
+    const postsInCategory = publishedPosts.filter(
+      (post) => post.category === title,
+    );
+    const categoryTotalPages = Math.ceil(postsInCategory.length / itemsPerPage);
+
+    return Array.from({ length: categoryTotalPages }, (_, index) => ({
+      url: `${siteConfig.url}/posts/categories/${slug}/${index + 1}`,
+      lastModified: formatPublishedDate(new Date()),
+    })) satisfies MetadataRoute.Sitemap;
+  });
+
+  const staticSiteMap = [
+    ...routesSitemap,
+    ...legalsSitemap,
+    ...postsSitemap,
+    ...pagedPostSitemap,
+    ...categorySitemaps.flat(),
+  ];
+
+  const content = `
+// This file was automatically generated.
+// Please do not remove or edit this file.
+
+import type { MetadataRoute } from "next";
+
+export const staticSitemap: MetadataRoute.Sitemap = ${JSON.stringify(staticSiteMap, null, 2)};
+`;
+  writeFileSync(FILE_PATHS.STATIC_SITEMAP, content);
+};
+
 const main = async () => {
   const posts = getSortedItems(allPosts);
   const legals = getSortedItems(allLegals);
@@ -138,6 +208,7 @@ const main = async () => {
     generateSearchItems(posts),
     generatePostMetadata(posts),
     generateLegalMetadata(legals),
+    generateStaticSitemap({ posts, legals }),
   ]);
 };
 
