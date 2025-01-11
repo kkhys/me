@@ -11,10 +11,10 @@ export const postMetadata: PostMetadata[] = [
     emoji: "🚀",
     category: "Tech",
     tags: ["Release"],
-    status: "draft",
+    status: "published",
     publishedAt: "2025-01-11T00:00:00.000Z",
     excerpt:
-      "このブログをリリースしてから約1年が経過したのでリファクタリングを行った。UIはほとんど変わっていないが、各処理を最適化したので読み込みのスピードが向上した。",
+      "このブログを公開してから約1年が経過した。それに伴い、リファクタリングを実施した。UIはほとんど変更していないものの、各処理を最適化したことでUXの向上が期待される（要検証）。さらに、内部で使用するライブラリを見直すことでビルド時間を短縮し、開発体験の改善も図った。v1は参照用として別のブランチに保存している今回のリフ...",
     url: "https://kkhys.me/posts/p1q5pue",
     editUrl:
       "https://github.com/kkhys/content/edit/main/posts/tech/2025-01-11/index.mdx",
