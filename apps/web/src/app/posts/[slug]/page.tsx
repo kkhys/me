@@ -137,9 +137,13 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     <article>
       <JsonLd post={post} />
       <header>
-        <EyeCatch emoji={emojiSvg} />
-        {status === "draft" && (
-          <span className="font-sans text-xs text-red-400">Draft</span>
+        {status === "draft" ? (
+          <div className="flex justify-between items-center">
+            <EyeCatch emoji={emojiSvg} />
+            <span className="font-sans text-xs text-red-400">Draft</span>
+          </div>
+        ) : (
+          <EyeCatch emoji={emojiSvg} />
         )}
         <h1 className="palt mt-4 font-medium">{title}</h1>
         <div className="mt-2 flex items-center justify-between">
@@ -157,7 +161,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       <Prose>
         <Mdx code={code} />
       </Prose>
-      <ActionController slug={post.slug} className="mt-12" />
+      <ActionController post={post} className="mt-12" />
       <PrevAndNextPager id={_id} className="mt-8" />
       {relatedPosts.length !== 0 && (
         <div className="mt-8">
