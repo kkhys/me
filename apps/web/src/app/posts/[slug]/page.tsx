@@ -161,7 +161,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       <Prose>
         <Mdx code={code} />
       </Prose>
-      <ActionController slug={post.slug} className="mt-12" />
+      <ActionController post={post} className="mt-12" />
       <PrevAndNextPager id={_id} className="mt-8" />
       {relatedPosts.length !== 0 && (
         <div className="mt-8">
