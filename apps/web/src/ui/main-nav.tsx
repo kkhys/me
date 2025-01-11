@@ -3,6 +3,7 @@
 import { cn } from "@kkhys/ui";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { docsConfig } from "#/config";
 import { Icons } from "#/ui";
 
 export const MainNav = () => {
@@ -14,24 +15,18 @@ export const MainNav = () => {
         <Icons.logo className="size-5 rounded-md" />
       </Link>
       <nav className="flex items-center gap-4 text-sm xl:gap-6">
-        <Link
-          href="/posts"
-          className={cn(
-            "transition-colors hover:text-foreground/80",
-            pathname === "/posts" ? "text-foreground" : "text-foreground/80",
-          )}
-        >
-          Blog
-        </Link>
-        <Link
-          href="/contact"
-          className={cn(
-            "transition-colors hover:text-foreground/80",
-            pathname === "/contact" ? "text-foreground" : "text-foreground/80",
-          )}
-        >
-          Contact
-        </Link>
+        {docsConfig.mainNav.map(({ title, href }) => (
+          <Link
+            key={href}
+            href={href}
+            className={cn(
+              "transition-colors hover:text-foreground/80",
+              pathname === href ? "text-foreground" : "text-foreground/80",
+            )}
+          >
+            {title}
+          </Link>
+        ))}
       </nav>
     </div>
   );
