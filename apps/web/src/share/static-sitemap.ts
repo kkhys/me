@@ -6,11 +6,11 @@ import type { MetadataRoute } from "next";
 export const staticSitemap: MetadataRoute.Sitemap = [
   {
     url: "https://kkhys.me/",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/contact",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/privacy-policy",
@@ -19,6 +19,10 @@ export const staticSitemap: MetadataRoute.Sitemap = [
   {
     url: "https://kkhys.me/terms",
     lastModified: "2023-12-27",
+  },
+  {
+    url: "https://kkhys.me/posts/p18c9ew",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/posts/p1q5pue",
@@ -158,38 +162,38 @@ export const staticSitemap: MetadataRoute.Sitemap = [
   },
   {
     url: "https://kkhys.me/posts/page/1",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/posts/page/2",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/posts/page/3",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/posts/page/4",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/posts/categories/tech/1",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/posts/categories/tech/2",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/posts/categories/life/1",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/posts/categories/object/1",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
   {
     url: "https://kkhys.me/posts/categories/build/1",
-    lastModified: "2025-01-11",
+    lastModified: "2025-01-12",
   },
 ];

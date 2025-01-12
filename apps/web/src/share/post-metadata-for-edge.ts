@@ -5,6 +5,11 @@ import type { PostMetadataForEdge } from "#/app/posts/_types";
 
 export const postMetadataForEdge: PostMetadataForEdge[] = [
   {
+    title: "ペンシルストライプのバンドカラーシャツを作った",
+    emoji: "🪡",
+    slug: "p18c9ew",
+  },
+  {
     title: "v2.0.0 リリースノート: リファクタリング",
     emoji: "🚀",
     slug: "p1q5pue",

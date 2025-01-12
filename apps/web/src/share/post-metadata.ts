@@ -5,6 +5,25 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/build/2025-01-12/index.mdx",
+    title: "ペンシルストライプのバンドカラーシャツを作った",
+    slug: "p18c9ew",
+    emoji: "🪡",
+    category: "Build",
+    tags: ["Sewing", "Clothes"],
+    status: "published",
+    publishedAt: "2025-01-12T00:00:00.000Z",
+    excerpt:
+      "最近は服作りからすっかり遠ざかっているが、かつては熱心に取り組んでいたものである。洋裁には、ミシンや作業台をはじめとして、多くの道具と広い作業スペースが必要となる。現在の環境ではそのような条件を整えるのは難しく、再開するのは現実的ではない。しかし、先日ふとした折に、過去に作った服の写真やメモを見つけた。これを機に当時の...",
+    url: "https://kkhys.me/posts/p18c9ew",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/build/2025-01-12/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/build/2025-01-12/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/build/2025-01-12/index.mdx",
+  },
+  {
     _id: "posts/tech/2025-01-11/index.mdx",
     title: "v2.0.0 リリースノート: リファクタリング",
     slug: "p1q5pue",
