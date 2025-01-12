@@ -1,8 +1,6 @@
 import { cn } from "@kkhys/ui";
 import Link from "next/link";
 import type { TagCloudItem as TagCloudItemType } from "#/app/posts/_types";
-import { tagCloudItems } from "#/share/tag-cloud-items";
-import { fisherYatesShuffle } from "#/utils/post";
 
 export const TagCloudItem = ({
   title,
@@ -23,12 +21,14 @@ export const TagCloudItem = ({
 );
 
 export const TagCloud = ({
+  tags,
   className,
 }: {
+  tags: TagCloudItemType[];
   className?: string;
 }) => (
   <div className={cn("flex flex-wrap gap-1.5", className)}>
-    {fisherYatesShuffle(tagCloudItems).map((item) => (
+    {tags.map((item) => (
       <TagCloudItem key={item.slug} {...item} />
     ))}
   </div>
