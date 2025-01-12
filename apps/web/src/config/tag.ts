@@ -92,6 +92,15 @@ export const tags = {
   ],
 } satisfies Record<string, Tag[]>;
 
-export const allTagTitles = Object.values(tags).flatMap((tag) =>
-  tag.map((t) => t.title),
-);
+export const flatTags = Object.values(tags).flat();
+
+export const allTagTitles = flatTags.map((tag) => tag.title);
+
+export const extractCategoryByTagTitle = (title: string) => {
+  for (const [categoryName, tagList] of Object.entries(tags)) {
+    if (tagList.some((tag) => tag.title === title)) {
+      return categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+    }
+  }
+  return undefined;
+};
