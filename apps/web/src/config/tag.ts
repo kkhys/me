@@ -41,27 +41,42 @@ export const tags = {
       emoji: "📝",
     },
     {
-      title: "Poor writing",
-      slug: "poor-writing",
+      title: "Random note",
+      slug: "random-note",
       emoji: "🗑️",
     },
   ],
   object: [
+    // {
+    //   title: "Fashion",
+    //   slug: "fashion",
+    //   emoji: "👗",
+    // },
     {
-      title: "Desk",
-      slug: "desk",
+      title: "Camera",
+      slug: "camera",
+      emoji: "📷",
+    },
+    {
+      title: "Desk setup",
+      slug: "desk-setup",
       emoji: "🪑",
     },
     {
-      title: "Fashion",
-      slug: "fashion",
-      emoji: "👗",
+      title: "Desk goods",
+      slug: "desk-goods",
+      emoji: "✂️",
+    },
+    {
+      title: "Gadget",
+      slug: "gadget",
+      emoji: "📱",
     },
   ],
   tech: [
     {
-      title: "Release",
-      slug: "release",
+      title: "Release note",
+      slug: "release-note",
       emoji: "🚀",
     },
     {
@@ -88,6 +103,36 @@ export const tags = {
       title: "Security",
       slug: "security",
       emoji: "🔒",
+    },
+    {
+      title: "Idea",
+      slug: "idea",
+      emoji: "💡",
+    },
+    {
+      title: "Font",
+      slug: "font",
+      emoji: "🔤",
+    },
+    {
+      title: "Mermaid",
+      slug: "mermaid",
+      emoji: "🧜",
+    },
+    {
+      title: "Tips",
+      slug: "tips",
+      emoji: "📌",
+    },
+    {
+      title: "Mastodon",
+      slug: "mastodon",
+      emoji: "🐘",
+    },
+    {
+      title: "Linux",
+      slug: "linux",
+      emoji: "🐧",
     },
   ],
 } satisfies Record<string, Tag[]>;
