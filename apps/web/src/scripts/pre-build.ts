@@ -184,12 +184,25 @@ const generateStaticSitemap = async ({
     })) satisfies MetadataRoute.Sitemap;
   });
 
+  const tagSitemaps = flatTags.map(({ title, slug }) => {
+    const postsInTag = publishedPosts.filter(({ tags }) =>
+      tags?.includes(title as (typeof tags)[number]),
+    );
+    const tagTotalPages = Math.ceil(postsInTag.length / itemsPerPage);
+
+    return Array.from({ length: tagTotalPages }, (_, index) => ({
+      url: `${siteConfig.url}/posts/tags/${slug}/${index + 1}`,
+      lastModified: formatPublishedDate(new Date()),
+    })) satisfies MetadataRoute.Sitemap;
+  });
+
   const staticSiteMap = [
     ...routesSitemap,
     ...legalsSitemap,
     ...postsSitemap,
     ...pagedPostSitemap,
     ...categorySitemaps.flat(),
+    ...tagSitemaps.flat(),
   ];
 
   const content = `
