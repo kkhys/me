@@ -29,7 +29,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1q5pue",
     emoji: "🚀",
     category: "Tech",
-    tags: ["Release"],
+    tags: ["Release note"],
     status: "published",
     publishedAt: "2025-01-11T00:00:00.000Z",
     excerpt:
@@ -48,7 +48,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p18zu2z",
     emoji: "🎍",
     category: "Life",
-    tags: [],
+    tags: ["Memorial", "Random note"],
     status: "published",
     publishedAt: "2025-01-09T00:00:00.000Z",
     excerpt:
@@ -86,7 +86,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1ppkfs",
     emoji: "🖥️",
     category: "Object",
-    tags: [],
+    tags: ["Gadget"],
     status: "published",
     publishedAt: "2024-10-27T00:00:00.000Z",
     excerpt:
@@ -105,7 +105,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1ffkqq",
     emoji: "🦣",
     category: "Tech",
-    tags: [],
+    tags: ["Mastodon", "Linux"],
     status: "published",
     publishedAt: "2024-10-26T00:00:00.000Z",
     excerpt:
@@ -124,7 +124,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p15p4yn",
     emoji: "⛵️",
     category: "Life",
-    tags: [],
+    tags: ["Travel"],
     status: "published",
     publishedAt: "2024-08-10T00:00:00.000Z",
     excerpt:
@@ -143,7 +143,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1ydlf6",
     emoji: "🛢️",
     category: "Tech",
-    tags: [],
+    tags: ["Tips"],
     status: "published",
     publishedAt: "2024-07-28T00:00:00.000Z",
     updatedAt: "2024-08-05T00:00:00.000Z",
@@ -163,7 +163,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p143t9d",
     emoji: "🚀",
     category: "Tech",
-    tags: ["Release"],
+    tags: ["Release note"],
     status: "published",
     publishedAt: "2024-07-27T00:00:00.000Z",
     excerpt:
@@ -182,7 +182,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1qhr64",
     emoji: "📗",
     category: "Object",
-    tags: [],
+    tags: ["Desk goods"],
     status: "published",
     publishedAt: "2024-07-14T00:00:00.000Z",
     excerpt:
@@ -201,7 +201,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1kqv7s",
     emoji: "🚀",
     category: "Tech",
-    tags: ["Release"],
+    tags: ["Release note"],
     status: "published",
     publishedAt: "2024-07-11T00:00:00.000Z",
     excerpt:
@@ -220,7 +220,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p128uug",
     emoji: "🎭",
     category: "Tech",
-    tags: [],
+    tags: ["Tips"],
     status: "published",
     publishedAt: "2024-07-07T00:00:00.000Z",
     excerpt:
@@ -239,7 +239,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1gvayx",
     emoji: "🧈",
     category: "Tech",
-    tags: [],
+    tags: ["React"],
     status: "published",
     publishedAt: "2024-06-20T00:00:00.000Z",
     excerpt:
@@ -277,7 +277,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p164vu8",
     emoji: "🔑",
     category: "Tech",
-    tags: ["Security"],
+    tags: ["Security", "Tips"],
     status: "published",
     publishedAt: "2024-06-15T00:00:00.000Z",
     excerpt:
@@ -296,7 +296,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1n03k6",
     emoji: "🌜",
     category: "Life",
-    tags: [],
+    tags: ["Essay"],
     status: "published",
     publishedAt: "2024-06-10T00:00:00.000Z",
     excerpt:
@@ -315,7 +315,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1c8jpk",
     emoji: "🚀",
     category: "Tech",
-    tags: ["Release"],
+    tags: ["Release note"],
     status: "published",
     publishedAt: "2024-06-09T00:00:00.000Z",
     updatedAt: "2024-06-16T00:00:00.000Z",
@@ -335,7 +335,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p15e6x7",
     emoji: "🔄",
     category: "Tech",
-    tags: [],
+    tags: ["Tips", "Next.js"],
     status: "published",
     publishedAt: "2024-05-19T00:00:00.000Z",
     updatedAt: "2024-05-30T00:00:00.000Z",
@@ -355,7 +355,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1v6tlh",
     emoji: "🖥️",
     category: "Object",
-    tags: ["Desk"],
+    tags: ["Desk setup"],
     status: "published",
     publishedAt: "2024-05-18T00:00:00.000Z",
     excerpt:
@@ -374,7 +374,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1672pu",
     emoji: "📷",
     category: "Object",
-    tags: [],
+    tags: ["Camera"],
     status: "published",
     publishedAt: "2024-05-15T00:00:00.000Z",
     excerpt:
@@ -393,7 +393,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1ua4wh",
     emoji: "🔌",
     category: "Tech",
-    tags: [],
+    tags: ["Tips"],
     status: "published",
     publishedAt: "2024-05-13T00:00:00.000Z",
     excerpt:
@@ -432,7 +432,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1v9jvx",
     emoji: "🚀",
     category: "Tech",
-    tags: ["Release"],
+    tags: ["Release note"],
     status: "published",
     publishedAt: "2024-04-24T00:00:00.000Z",
     excerpt:
@@ -470,7 +470,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1r60de",
     emoji: "🚀",
     category: "Tech",
-    tags: ["Release"],
+    tags: ["Release note"],
     status: "published",
     publishedAt: "2024-03-16T00:00:00.000Z",
     excerpt:
@@ -528,7 +528,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1g6z2d",
     emoji: "🚀",
     category: "Tech",
-    tags: ["Release"],
+    tags: ["Release note"],
     status: "published",
     publishedAt: "2024-02-17T00:00:00.000Z",
     excerpt:
@@ -566,7 +566,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p18vcqd",
     emoji: "🍫",
     category: "Life",
-    tags: [],
+    tags: ["Memorial"],
     status: "published",
     publishedAt: "2024-02-14T00:00:00.000Z",
     updatedAt: "2024-02-16T00:00:00.000Z",
@@ -586,7 +586,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1eemm6",
     emoji: "🧜‍♀️",
     category: "Tech",
-    tags: [],
+    tags: ["Mermaid", "React"],
     status: "published",
     publishedAt: "2024-02-03T00:00:00.000Z",
     updatedAt: "2024-03-14T00:00:00.000Z",
@@ -606,7 +606,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1fw2ts",
     emoji: "🔠",
     category: "Tech",
-    tags: [],
+    tags: ["Idea"],
     status: "published",
     publishedAt: "2024-01-27T00:00:00.000Z",
     excerpt:
@@ -625,7 +625,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1y4nft",
     emoji: "🔗",
     category: "Tech",
-    tags: [],
+    tags: ["Idea"],
     status: "published",
     publishedAt: "2024-01-26T00:00:00.000Z",
     excerpt:
@@ -644,7 +644,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1rklfz",
     emoji: "🚀",
     category: "Tech",
-    tags: ["Release"],
+    tags: ["Release note"],
     status: "published",
     publishedAt: "2024-01-20T00:00:00.000Z",
     excerpt:
@@ -663,7 +663,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1e0lpm",
     emoji: "🏃",
     category: "Life",
-    tags: ["Memorial"],
+    tags: ["Memorial", "Random note"],
     status: "published",
     publishedAt: "2023-12-31T00:00:00.000Z",
     excerpt:

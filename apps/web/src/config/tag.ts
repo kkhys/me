@@ -41,27 +41,42 @@ export const tags = {
       emoji: "📝",
     },
     {
-      title: "Poor writing",
-      slug: "poor-writing",
+      title: "Random note",
+      slug: "random-note",
       emoji: "🗑️",
     },
   ],
   object: [
+    // {
+    //   title: "Fashion",
+    //   slug: "fashion",
+    //   emoji: "👗",
+    // },
     {
-      title: "Desk",
-      slug: "desk",
+      title: "Camera",
+      slug: "camera",
+      emoji: "📷",
+    },
+    {
+      title: "Desk setup",
+      slug: "desk-setup",
       emoji: "🪑",
     },
     {
-      title: "Fashion",
-      slug: "fashion",
-      emoji: "👗",
+      title: "Desk goods",
+      slug: "desk-goods",
+      emoji: "✂️",
+    },
+    {
+      title: "Gadget",
+      slug: "gadget",
+      emoji: "📱",
     },
   ],
   tech: [
     {
-      title: "Release",
-      slug: "release",
+      title: "Release note",
+      slug: "release-note",
       emoji: "🚀",
     },
     {
@@ -89,9 +104,48 @@ export const tags = {
       slug: "security",
       emoji: "🔒",
     },
+    {
+      title: "Idea",
+      slug: "idea",
+      emoji: "💡",
+    },
+    {
+      title: "Font",
+      slug: "font",
+      emoji: "🔤",
+    },
+    {
+      title: "Mermaid",
+      slug: "mermaid",
+      emoji: "🧜",
+    },
+    {
+      title: "Tips",
+      slug: "tips",
+      emoji: "📌",
+    },
+    {
+      title: "Mastodon",
+      slug: "mastodon",
+      emoji: "🐘",
+    },
+    {
+      title: "Linux",
+      slug: "linux",
+      emoji: "🐧",
+    },
   ],
 } satisfies Record<string, Tag[]>;
 
-export const allTagTitles = Object.values(tags).flatMap((tag) =>
-  tag.map((t) => t.title),
-);
+export const flatTags = Object.values(tags).flat();
+
+export const allTagTitles = flatTags.map((tag) => tag.title);
+
+export const extractCategoryByTagTitle = (title: string) => {
+  for (const [categoryName, tagList] of Object.entries(tags)) {
+    if (tagList.some((tag) => tag.title === title)) {
+      return categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
+    }
+  }
+  return undefined;
+};
