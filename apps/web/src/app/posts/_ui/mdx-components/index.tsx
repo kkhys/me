@@ -159,7 +159,7 @@ const components = {
     ...props
   }: React.ComponentPropsWithoutRef<typeof AccordionContent>) => (
     <AccordionContent
-      className={cn("first:[&>div>*]:mt-0 last:[&>div>*]:mb-0", className)}
+      className={cn("first:[&>p]:mt-0 last:[&>div>*]:mb-0", className)}
       {...props}
     />
   ),
