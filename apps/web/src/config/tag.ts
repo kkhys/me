@@ -18,6 +18,11 @@ export const tags = {
       slug: "clothes",
       emoji: "👗",
     },
+    {
+      title: "Sewing",
+      slug: "sewing",
+      emoji: "🪡",
+    },
   ],
   life: [
     {
