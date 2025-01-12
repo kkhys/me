@@ -196,4 +196,96 @@ export const staticSitemap: MetadataRoute.Sitemap = [
     url: "https://kkhys.me/posts/categories/build/1",
     lastModified: "2025-01-12",
   },
+  {
+    url: "https://kkhys.me/posts/tags/desk/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/pottery/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/clothes/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/sewing/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/travel/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/memorial/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/essay/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/random-note/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/camera/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/desk-setup/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/desk-goods/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/gadget/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/release-note/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/typescript/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/react/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/play-framework/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/next-js/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/security/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/idea/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/mermaid/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/tips/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/mastodon/1",
+    lastModified: "2025-01-12",
+  },
+  {
+    url: "https://kkhys.me/posts/tags/linux/1",
+    lastModified: "2025-01-12",
+  },
 ];

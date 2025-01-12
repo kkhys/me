@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { ArticleList, CategoryNav, Pagination } from "#/app/posts/_ui";
 import { categories, itemsPerPage, siteConfig } from "#/config";
-import { getPublicPosts } from "#/utils/post";
+import { getPublicPostMetadata, getPublicPosts } from "#/utils/post";
 
 const JsonLd = ({
   categoryTitle,
@@ -46,7 +46,7 @@ const JsonLd = ({
 
 const categoryPageMap = categories.reduce(
   (map, { slug, title }) => {
-    const allPosts = getPublicPosts();
+    const allPosts = getPublicPostMetadata();
     const categoryPosts = allPosts.filter((post) => post.category === title);
     map[slug] = Math.ceil(categoryPosts.length / itemsPerPage);
     return map;

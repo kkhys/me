@@ -6,6 +6,7 @@ import {
   EyeCatch,
   Mdx,
   PrevAndNextPager,
+  TagCloud,
   ViewCounter,
   ViewCounterSkeleton,
 } from "#/app/posts/_ui";
@@ -23,6 +24,7 @@ import { Suspense } from "react";
 import * as React from "react";
 import type { BlogPosting, BreadcrumbList, WithContext } from "schema-dts";
 import { me, siteConfig } from "#/config";
+import { tagCloudItems } from "#/share/tag-cloud-items";
 
 const JsonLd = ({
   post: { title, slug, publishedAt, updatedAt },
@@ -129,9 +131,14 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     _id,
     body: { code },
     emojiSvg,
+    tags,
   } = post;
 
   const relatedPosts = getRelatedPosts({ _id, category });
+
+  const postTags = tagCloudItems.filter(({ title }) =>
+    tags?.includes(title as (typeof tags)[number]),
+  );
 
   return (
     <article>
@@ -161,7 +168,8 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       <Prose>
         <Mdx code={code} />
       </Prose>
-      <ActionController post={post} className="mt-12" />
+      <TagCloud tags={postTags} className="mt-12" />
+      <ActionController post={post} className="mt-8" />
       <PrevAndNextPager id={_id} className="mt-8" />
       {relatedPosts.length !== 0 && (
         <div className="mt-8">

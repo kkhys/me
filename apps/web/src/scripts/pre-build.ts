@@ -11,9 +11,11 @@ import type {
   PostMetadata,
   PostMetadataForEdge,
   SearchItem,
+  TagCloudItem,
 } from "#/app/posts/_types";
-import { categories, itemsPerPage, siteConfig } from "#/config";
+import { categories, flatTags, itemsPerPage, siteConfig } from "#/config";
 import { formatPublishedDate } from "#/utils/date";
+import { generateEmojiSvg } from "#/utils/emoji";
 
 const FILE_PATHS = {
   POST_METADATA_FOR_EDGE: "src/share/post-metadata-for-edge.ts",
@@ -21,6 +23,7 @@ const FILE_PATHS = {
   POST_METADATA: "src/share/post-metadata.ts",
   LEGAL_METADATA: "src/share/legal-metadata.ts",
   STATIC_SITEMAP: "src/share/static-sitemap.ts",
+  TAG_COULD_ITEMS: "src/share/tag-cloud-items.ts",
 };
 
 const getSortedItems = <T extends { publishedAt: string }>(items: T[]): T[] =>
@@ -181,12 +184,25 @@ const generateStaticSitemap = async ({
     })) satisfies MetadataRoute.Sitemap;
   });
 
+  const tagSitemaps = flatTags.map(({ title, slug }) => {
+    const postsInTag = publishedPosts.filter(({ tags }) =>
+      tags?.includes(title as (typeof tags)[number]),
+    );
+    const tagTotalPages = Math.ceil(postsInTag.length / itemsPerPage);
+
+    return Array.from({ length: tagTotalPages }, (_, index) => ({
+      url: `${siteConfig.url}/posts/tags/${slug}/${index + 1}`,
+      lastModified: formatPublishedDate(new Date()),
+    })) satisfies MetadataRoute.Sitemap;
+  });
+
   const staticSiteMap = [
     ...routesSitemap,
     ...legalsSitemap,
     ...postsSitemap,
     ...pagedPostSitemap,
     ...categorySitemaps.flat(),
+    ...tagSitemaps.flat(),
   ];
 
   const content = `
@@ -200,6 +216,23 @@ export const staticSitemap: MetadataRoute.Sitemap = ${JSON.stringify(staticSiteM
   writeFileSync(FILE_PATHS.STATIC_SITEMAP, content);
 };
 
+const generateTagCloudItems = async () => {
+  const tagCloudItems = (await Promise.all(
+    flatTags.map(async ({ title, slug, emoji }) => ({
+      title,
+      slug,
+      emoji,
+      emojiSvg: await generateEmojiSvg({ emoji, isColored: true }),
+    })),
+  )) satisfies TagCloudItem[];
+  writeToFile(
+    FILE_PATHS.TAG_COULD_ITEMS,
+    "tagCloudItems",
+    tagCloudItems,
+    "TagCloudItem",
+  );
+};
+
 const main = async () => {
   const posts = getSortedItems(allPosts);
   const legals = getSortedItems(allLegals);
@@ -209,6 +242,7 @@ const main = async () => {
     generatePostMetadata(posts),
     generateLegalMetadata(legals),
     generateStaticSitemap({ posts, legals }),
+    generateTagCloudItems(),
   ]);
 };
 

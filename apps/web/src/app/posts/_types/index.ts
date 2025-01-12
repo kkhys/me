@@ -1,4 +1,5 @@
 import type { Legal, Post } from "contentlayer/generated";
+import type { Tag } from "#/config";
 
 export type PostMetadataForEdge = Pick<Post, "title" | "emoji" | "slug">;
 
@@ -26,3 +27,5 @@ export type PostMetadata = Pick<
 >;
 
 export type LegalMetadata = Pick<Legal, "title" | "slug" | "publishedAt">;
+
+export type TagCloudItem = Tag & { emojiSvg: string };
