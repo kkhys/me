@@ -21,7 +21,7 @@ const Page = () => (
         <MoveRightIcon className="ml-1 size-3.5" />
       </Link>
     </Prose>
-    <Separator className="mt-6" />
+    <Separator className="my-6" />
     <h2 className="font-sans font-medium">Tag cloud</h2>
     <TagCloud className="mt-6" />
   </>
