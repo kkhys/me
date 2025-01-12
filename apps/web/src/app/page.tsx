@@ -1,6 +1,7 @@
-import { Prose } from "@kkhys/ui";
+import { Prose, Separator } from "@kkhys/ui";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
+import { TagCloud } from "#/app/posts/_ui";
 
 const Page = () => (
   <>
@@ -20,6 +21,9 @@ const Page = () => (
         <MoveRightIcon className="ml-1 size-3.5" />
       </Link>
     </Prose>
+    <Separator className="mt-6" />
+    <h2 className="font-sans font-medium">Tag cloud</h2>
+    <TagCloud className="mt-6" />
   </>
 );
 
