@@ -5,6 +5,25 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/tech/2025-01-13/index.mdx",
+    title: "v2.1.0 リリースノート: タグクラウドの追加",
+    slug: "p1vecsr",
+    emoji: "🚀",
+    category: "Tech",
+    tags: ["Release note"],
+    status: "published",
+    publishedAt: "2025-01-13T00:00:00.000Z",
+    excerpt:
+      "先日、v2.0.0をリリースしたばかりであるが、間髪を入れずv2.1.0を公開する運びとなった。ここまでスムーズに実装が進んだのは、ひとえに開発環境を整えたおかげである。目に見えない部分であるがゆえに軽視されがちな開発環境。しかし、その整備がもたらす効果と、ストレスなく作業が進むこの感覚を、コードに触れない人々にどうわ...",
+    url: "https://kkhys.me/posts/p1vecsr",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-01-13/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-01-13/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-01-13/index.mdx",
+  },
+  {
     _id: "posts/build/2025-01-12/index.mdx",
     title: "ペンシルストライプのバンドカラーシャツを作った",
     slug: "p18c9ew",
