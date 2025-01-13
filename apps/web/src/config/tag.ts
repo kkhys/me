@@ -82,7 +82,7 @@ export const tags = {
     {
       title: "TypeScript",
       slug: "typescript",
-      emoji: "📘",
+      emoji: "🧩",
     },
     {
       title: "React",
