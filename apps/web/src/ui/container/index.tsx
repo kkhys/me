@@ -9,7 +9,7 @@ export const Container = ({
 }) => (
   <div
     className={cn(
-      "w-full mx-auto flex-1",
+      "w-full mx-auto",
       width === "narrow" ? "max-w-2xl" : "max-w-5xl",
     )}
   >

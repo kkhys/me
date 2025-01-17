@@ -75,7 +75,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
           <div className="relative flex min-h-screen flex-col bg-background">
             <div className="mx-auto w-full border-border/40 dark:border-border max-w-6xl border-x flex-1 flex flex-col">
               <SiteHeader />
-              <main>{children}</main>
+              <main className="flex-1">{children}</main>
               <SiteFooter />
             </div>
           </div>
