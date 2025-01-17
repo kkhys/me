@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { ArticleList, CategoryNav, Pagination } from "#/app/posts/_ui";
 import { categories, itemsPerPage, siteConfig } from "#/config";
+import { Container } from "#/ui";
 import { getPublicPostMetadata, getPublicPosts } from "#/utils/post";
 
 const JsonLd = ({
@@ -138,19 +139,21 @@ const Page = async ({
         categorySlug={category.slug}
         currentPage={currentPage}
       />
-      <header>
-        <h1 className="font-sans font-medium">Blog</h1>
-        <CategoryNav className="mt-6" />
-      </header>
-      <div className="mt-6">
-        <ArticleList posts={currentPosts} />
-      </div>
-      <Pagination
-        className="mt-12"
-        path={`/posts/categories/${category.slug}`}
-        totalPages={categoryPageMap[category.slug] as number}
-        currentPage={currentPage}
-      />
+      <Container>
+        <header>
+          <h1 className="font-sans font-medium">Blog</h1>
+          <CategoryNav className="mt-6" />
+        </header>
+        <div className="mt-6">
+          <ArticleList posts={currentPosts} />
+        </div>
+        <Pagination
+          className="mt-12"
+          path={`/posts/categories/${category.slug}`}
+          totalPages={categoryPageMap[category.slug] as number}
+          currentPage={currentPage}
+        />
+      </Container>
     </>
   );
 };

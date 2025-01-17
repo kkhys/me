@@ -25,6 +25,7 @@ import * as React from "react";
 import type { BlogPosting, BreadcrumbList, WithContext } from "schema-dts";
 import { me, siteConfig } from "#/config";
 import { tagCloudItems } from "#/share/tag-cloud-items";
+import { Container } from "#/ui";
 
 const JsonLd = ({
   post: { title, slug, publishedAt, updatedAt },
@@ -141,46 +142,54 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   );
 
   return (
-    <article>
+    <>
       <JsonLd post={post} />
-      <header>
-        {status === "draft" ? (
-          <div className="flex justify-between items-center">
-            <EyeCatch emoji={emojiSvg} />
-            <span className="font-sans text-xs text-red-400">Draft</span>
-          </div>
-        ) : (
-          <EyeCatch emoji={emojiSvg} />
-        )}
-        <h1 className="palt mt-4 font-medium">{title}</h1>
-        <div className="mt-2 flex items-center justify-between">
-          <time
-            dateTime={publishedAt}
-            className="font-sans text-sm text-muted-foreground"
-          >
-            {publishedAtFormattedUs}
-          </time>
-          <Suspense fallback={<ViewCounterSkeleton />}>
-            <ViewCounter slug={slug} />
-          </Suspense>
-        </div>
-      </header>
-      <Prose>
-        <Mdx code={code} />
-      </Prose>
-      <TagCloud tags={postTags} className="mt-12" />
-      <ActionController post={post} className="mt-8" />
-      <PrevAndNextPager id={_id} className="mt-8" />
-      {relatedPosts.length !== 0 && (
-        <div className="mt-8">
-          <hr className="mt-12" />
-          <span className="mt-12 block font-sans font-medium">
-            Related Posts
-          </span>
-          <ArticleList className="mt-6" posts={relatedPosts} showDate={false} />
-        </div>
-      )}
-    </article>
+      <Container>
+        <article>
+          <header>
+            {status === "draft" ? (
+              <div className="flex justify-between items-center">
+                <EyeCatch emoji={emojiSvg} />
+                <span className="font-sans text-xs text-red-400">Draft</span>
+              </div>
+            ) : (
+              <EyeCatch emoji={emojiSvg} />
+            )}
+            <h1 className="palt mt-4 font-medium">{title}</h1>
+            <div className="mt-2 flex items-center justify-between">
+              <time
+                dateTime={publishedAt}
+                className="font-sans text-sm text-muted-foreground"
+              >
+                {publishedAtFormattedUs}
+              </time>
+              <Suspense fallback={<ViewCounterSkeleton />}>
+                <ViewCounter slug={slug} />
+              </Suspense>
+            </div>
+          </header>
+          <Prose>
+            <Mdx code={code} />
+          </Prose>
+          <TagCloud tags={postTags} className="mt-12" />
+          <ActionController post={post} className="mt-8" />
+          <PrevAndNextPager id={_id} className="mt-8" />
+          {relatedPosts.length !== 0 && (
+            <div className="mt-8">
+              <hr className="mt-12" />
+              <span className="mt-12 block font-sans font-medium">
+                Related Posts
+              </span>
+              <ArticleList
+                className="mt-6"
+                posts={relatedPosts}
+                showDate={false}
+              />
+            </div>
+          )}
+        </article>
+      </Container>
+    </>
   );
 };
 

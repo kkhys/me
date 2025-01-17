@@ -75,9 +75,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
           <div className="relative flex min-h-screen flex-col bg-background">
             <div className="mx-auto w-full border-border/40 dark:border-border max-w-6xl border-x flex-1 flex flex-col">
               <SiteHeader />
-              <main className="w-full max-w-2xl mx-auto flex-1">
-                <div className="container py-12">{children}</div>
-              </main>
+              <main>{children}</main>
               <SiteFooter />
             </div>
           </div>

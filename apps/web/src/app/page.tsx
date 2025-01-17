@@ -3,13 +3,14 @@ import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
 import { TagCloud } from "#/app/posts/_ui";
 import { tagCloudItems } from "#/share/tag-cloud-items";
+import { Container } from "#/ui";
 import { fisherYatesShuffle } from "#/utils/post";
 
 const Page = () => {
   const tags = fisherYatesShuffle(tagCloudItems);
 
   return (
-    <>
+    <Container>
       <h1 className="font-sans font-medium">Keisuke Hayashi</h1>
       <Prose className="font-sans">
         <p>
@@ -29,7 +30,7 @@ const Page = () => {
       <Separator className="my-6" />
       <h2 className="font-sans font-medium">Tag cloud</h2>
       <TagCloud tags={tags} className="mt-6" />
-    </>
+    </Container>
   );
 };
 

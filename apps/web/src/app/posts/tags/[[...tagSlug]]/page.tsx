@@ -8,6 +8,7 @@ import {
   itemsPerPage,
   siteConfig,
 } from "#/config";
+import { Container } from "#/ui";
 import { getPublicPostMetadata, getPublicPosts } from "#/utils/post";
 
 const JsonLd = ({
@@ -143,21 +144,23 @@ const Page = async ({
         tagSlug={tag.slug}
         currentPage={currentPage}
       />
-      <header>
-        <h1 className="font-sans font-medium">
-          {parentCategory} / {tag.title}
-        </h1>
-        {/*<CategoryNav className="mt-6" />*/}
-      </header>
-      <div className="mt-6">
-        <ArticleList posts={currentPosts} />
-      </div>
-      <Pagination
-        className="mt-12"
-        path={`/posts/tags/${tag.slug}`}
-        totalPages={tagPageMap[tag.slug] as number}
-        currentPage={currentPage}
-      />
+      <Container>
+        <header>
+          <h1 className="font-sans font-medium">
+            {parentCategory} / {tag.title}
+          </h1>
+          {/*<CategoryNav className="mt-6" />*/}
+        </header>
+        <div className="mt-6">
+          <ArticleList posts={currentPosts} />
+        </div>
+        <Pagination
+          className="mt-12"
+          path={`/posts/tags/${tag.slug}`}
+          totalPages={tagPageMap[tag.slug] as number}
+          currentPage={currentPage}
+        />
+      </Container>
     </>
   );
 };
