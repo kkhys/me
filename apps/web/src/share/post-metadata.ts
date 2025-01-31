@@ -5,6 +5,44 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/life/2025-01-31/index.mdx",
+    title: "景色と料理を楽しむ、鹿児島 3 泊 4 日の旅",
+    slug: "p1zn5cl",
+    emoji: "🌋",
+    category: "Life",
+    tags: ["Travel"],
+    status: "published",
+    publishedAt: "2025-01-31T00:00:00.000Z",
+    excerpt:
+      "関東近郊での気軽な旅行も悪くないけれど、たまには飛行機に乗って、ちょっと遠くへ行きたくなるものだ。今回は土日休みに有給を添えて、鹿児島を目指してみた。鹿児島へ、気分転換の旅羽田空港のラウンジ羽田空港のラウンジにも寄ってみたが、人口密度が高めで、どうも落ち着かない。唯一の救いは、野菜ジュースが飲み放題なことくらいか。飛行...",
+    url: "https://kkhys.me/posts/p1zn5cl",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/life/2025-01-31/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/life/2025-01-31/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/life/2025-01-31/index.mdx",
+  },
+  {
+    _id: "posts/tech/2025-01-30/index.mdx",
+    title: "v2.2.0 リリースノート: 写真共有サイトとして",
+    slug: "p1xrqll",
+    emoji: "🚀",
+    category: "Tech",
+    tags: ["Release note"],
+    status: "draft",
+    publishedAt: "2025-01-30T00:00:00.000Z",
+    excerpt:
+      "参考にした写真共有サイト（国内）GANREFPhotohito参考にした写真共有サイト（国外）1X500pxYouPic必要な機能EXIFデータを表示させるモーダル機能使いたい機能InterceptingRoutes",
+    url: "https://kkhys.me/posts/p1xrqll",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-01-30/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-01-30/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-01-30/index.mdx",
+  },
+  {
     _id: "posts/tech/2025-01-13/index.mdx",
     title: "v2.1.0 リリースノート: タグクラウドの追加",
     slug: "p1vecsr",
