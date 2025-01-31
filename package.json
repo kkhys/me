@@ -7,8 +7,8 @@
     "clean:workspaces": "turbo run clean",
     "dev": "turbo watch dev --continue",
     "build": "turbo run build",
-    "lint": "bun biome check .",
-    "lint:fix": "bun biome check --write .",
+    "lint": "bunx biome check .",
+    "lint:fix": "bunx biome check --write .",
     "lint:ws": "bunx sherif@latest",
     "postinstall": "bun lint:ws",
     "typecheck": "turbo run typecheck",
@@ -20,17 +20,17 @@
   "release": {
     "branches": ["main"]
   },
-  "packageManager": "bun@1.1.42",
+  "packageManager": "bun@1.2.1",
   "engines": {
-    "bun": "1.1.42"
+    "bun": "1.2.1"
   },
   "workspaces": ["apps/*", "packages/*", "tooling/*"],
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/bun": "1.1.16",
+    "@types/bun": "1.2.1",
     "semantic-release": "24.2.1",
     "semantic-release-cli": "5.4.6",
-    "turbo": "2.3.3"
+    "turbo": "2.3.4"
   },
   "peerDependencies": {
     "typescript": "5.7.3"
