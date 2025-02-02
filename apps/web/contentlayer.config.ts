@@ -11,13 +11,19 @@ import remarkGfm from "remark-gfm";
 import type { Options as RemarkRehypeOptions } from "remark-rehype";
 import strip from "strip-markdown";
 import {
+  type CameraName,
   allTagTitles,
+  cameraNames,
+  cameras,
   categories,
   categoryTitles,
+  lensNames,
+  lenses,
   siteConfig,
   tags,
 } from "#/config";
 import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
+import { getImage } from "#/utils/image";
 import {
   TweetEmbedHandler,
   YouTubeEmbedHandler,
@@ -160,6 +166,102 @@ const Post = defineDocumentType(() => ({
   },
 }));
 
+const Photo = defineDocumentType(() => ({
+  name: "Photo",
+  filePathPattern: "photos/**/*.md",
+  fields: {
+    path: {
+      type: "string",
+      required: true,
+    },
+    camera: {
+      type: "enum",
+      options: cameraNames,
+      required: true,
+    },
+    lens: {
+      type: "enum",
+      options: lensNames,
+      required: true,
+    },
+    fNumber: {
+      type: "number",
+      required: true,
+    },
+    focalLength: {
+      type: "number",
+      required: true,
+    },
+    shutterSpeed: {
+      type: "string",
+      required: true,
+    },
+    iso: {
+      type: "number",
+      required: true,
+    },
+    status: {
+      type: "enum",
+      options: ["draft", "published"],
+      required: true,
+    },
+    publishedAt: {
+      type: "date",
+      required: true,
+    },
+    updatedAt: {
+      type: "date",
+    },
+  },
+  computedFields: {
+    imageObject: {
+      type: "json",
+      resolve: async ({ path }) => {
+        const {
+          img: { width, height },
+          base64,
+        } = await getImage(path);
+        return {
+          width,
+          height,
+          blurDataURL: base64,
+        };
+      },
+    },
+    publishedAtFormattedUs: {
+      type: "string",
+      resolve: ({ publishedAt }) =>
+        format(parseISO(publishedAt), "LLLL d, yyyy"),
+    },
+    publishedAtFormattedIso: {
+      type: "string",
+      resolve: ({ publishedAt }) => format(parseISO(publishedAt), "yyyy/MM/dd"),
+    },
+    updatedAtFormattedUs: {
+      type: "string",
+      resolve: ({ updatedAt }) =>
+        updatedAt ? format(parseISO(updatedAt), "LLLL d, yyyy") : undefined,
+    },
+    updatedAtFormattedIso: {
+      type: "string",
+      resolve: ({ updatedAt }) =>
+        updatedAt ? format(parseISO(updatedAt), "yyyy/MM/dd") : undefined,
+    },
+    slug: {
+      type: "string",
+      resolve: ({ _id }) => generateSlug(_id),
+    },
+    cameraData: {
+      type: "json",
+      resolve: ({ camera }) => generateCameraObject(camera),
+    },
+    lensData: {
+      type: "json",
+      resolve: ({ lens }) => generateLensObject(lens),
+    },
+  },
+}));
+
 const createExcerpt = async (raw: string) => {
   const maxWords = 160;
   const stripped = (await remark().use(strip).process(raw)).toString();
@@ -196,13 +298,7 @@ const generateCategoryObject = (title: CategoryTitle) => {
     throw new NotFoundError(`Category not found: ${title}`);
   }
 
-  const { slug, emoji } = category;
-
-  return {
-    title,
-    slug,
-    emoji,
-  } satisfies Category;
+  return category;
 };
 
 const generateTagObject = (
@@ -229,15 +325,29 @@ const generateTagObject = (
     throw new NotFoundError(`Tag not found: ${tagTitle}`);
   }
 
-  const { slug, emoji } = Object.values(tags)
+  return Object.values(tags)
     .flat()
     .find((tag) => tag.title === tagTitle) as Tag;
+};
 
-  return {
-    title: tagTitle,
-    slug,
-    emoji,
-  };
+const generateCameraObject = (name: CameraName) => {
+  const camera = cameras.find((camera) => camera.name === name);
+
+  if (!camera) {
+    throw new NotFoundError(`Camera not found: ${name}`);
+  }
+
+  return camera;
+};
+
+const generateLensObject = (name: CameraName) => {
+  const lens = lenses.find((lens) => lens.name === name);
+
+  if (!lens) {
+    throw new NotFoundError(`Lens not found: ${name}`);
+  }
+
+  return lens;
 };
 
 class NotFoundError extends Error {
@@ -249,7 +359,7 @@ class NotFoundError extends Error {
 
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Post, Legal],
+  documentTypes: [Post, Legal, Photo],
   contentDirExclude: ["license.md", "readme.md"],
   mdx: {
     remarkPlugins: [
