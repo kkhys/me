@@ -43,7 +43,7 @@ export const tags = {
     {
       title: "Random note",
       slug: "random-note",
-      emoji: "🗑️",
+      emoji: "🗑",
     },
   ],
   object: [
@@ -65,7 +65,7 @@ export const tags = {
     {
       title: "Desk goods",
       slug: "desk-goods",
-      emoji: "✂️",
+      emoji: "✂",
     },
     {
       title: "Gadget",
@@ -87,12 +87,12 @@ export const tags = {
     {
       title: "React",
       slug: "react",
-      emoji: "⚛️",
+      emoji: "⚛",
     },
     {
       title: "Play Framework",
       slug: "play-framework",
-      emoji: "▶️",
+      emoji: "▶",
     },
     {
       title: "Next.js",
@@ -139,7 +139,7 @@ export const tags = {
 
 export const flatTags = Object.values(tags).flat();
 
-export const allTagTitles = flatTags.map((tag) => tag.title);
+export const allTagTitles = flatTags.map(({ title }) => title);
 
 export const extractCategoryByTagTitle = (title: string) => {
   for (const [categoryName, tagList] of Object.entries(tags)) {
