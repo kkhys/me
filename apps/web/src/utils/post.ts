@@ -57,7 +57,7 @@ export const getRelatedPosts = ({
     ),
   ).slice(0, 5);
 
-export const fisherYatesShuffle = <T,>(items: T[]): T[] => {
+export const fisherYatesShuffle = <T>(items: T[]): T[] => {
   const copy = [...items];
   let i = copy.length;
 

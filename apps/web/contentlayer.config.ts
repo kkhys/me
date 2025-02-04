@@ -228,6 +228,10 @@ const Photo = defineDocumentType(() => ({
         };
       },
     },
+    title: {
+      type: "string",
+      resolve: ({ publishedAt }) => format(parseISO(publishedAt), "yyyyMMdd"),
+    },
     publishedAtFormattedUs: {
       type: "string",
       resolve: ({ publishedAt }) =>
