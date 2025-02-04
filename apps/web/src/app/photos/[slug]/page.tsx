@@ -11,6 +11,7 @@ import { getPhotoBySlug, getPublicPhotos } from "#/utils/photo";
 import "#/styles/react-medium-image-zoom.css";
 import "../_styles/index.css";
 import type { Photo } from "contentlayer/generated";
+import type { Metadata } from "next";
 import * as React from "react";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 
@@ -81,7 +82,10 @@ export const generateMetadata = async ({
       publishedTime: publishedAt,
       modifiedTime: updatedAt ?? undefined,
     },
-  };
+    twitter: {
+      card: "summary_large_image",
+    },
+  } satisfies Metadata;
 };
 
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
