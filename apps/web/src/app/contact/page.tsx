@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { ContactForm } from "#/app/contact/_ui";
 import { siteConfig } from "#/config";
-import { Container } from "#/ui";
 
 const JsonLd = () => {
   const jsonLdBreadcrumbList = {
@@ -49,12 +48,10 @@ export const metadata = {
 const Page = () => (
   <>
     <JsonLd />
-    <Container>
-      <header>
-        <h1 className="font-sans font-medium">Contact</h1>
-      </header>
-      <ContactForm className="mt-6" />
-    </Container>
+    <header>
+      <h1 className="font-sans font-medium">Contact</h1>
+    </header>
+    <ContactForm className="mt-6" />
   </>
 );
 

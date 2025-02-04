@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Button, Prose } from "@kkhys/ui";
-import { Container } from "#/ui";
 
 export const metadata = {
   robots: "noindex",
@@ -11,7 +10,7 @@ export const metadata = {
 } satisfies Metadata;
 
 const NotFound = () => (
-  <Container>
+  <>
     <h1 className="font-sans font-medium">404 - Page Not Found</h1>
     <Prose className="font-sans">
       <p>Sorry, but the page you were trying to view does not exist.</p>
@@ -19,7 +18,7 @@ const NotFound = () => (
     <Button variant="outline" className="font-sans" asChild>
       <Link href="/">Go back home</Link>
     </Button>
-  </Container>
+  </>
 );
 
 export default NotFound;
