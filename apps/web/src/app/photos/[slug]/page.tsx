@@ -14,6 +14,7 @@ import type { Photo } from "contentlayer/generated";
 import type { Metadata } from "next";
 import * as React from "react";
 import type { BreadcrumbList, WithContext } from "schema-dts";
+import { ActionController } from "#/ui";
 
 const JsonLd = ({ photo: { title, slug } }: { photo: Photo }) => {
   const jsonLdBreadcrumbList = {
@@ -145,9 +146,10 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <DescriptionDetails>{shutterSpeed}s</DescriptionDetails>
           <DescriptionTerm>ISO</DescriptionTerm>
           <DescriptionDetails>{iso}</DescriptionDetails>
-          <DescriptionTerm>Shot on</DescriptionTerm>
+          <DescriptionTerm>Shooting date</DescriptionTerm>
           <DescriptionDetails>{publishedAtFormattedIso}</DescriptionDetails>
         </DescriptionList>
+        <ActionController data={photo} className="mt-8" />
       </div>
     </>
   );

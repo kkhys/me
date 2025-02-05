@@ -232,6 +232,25 @@ const Photo = defineDocumentType(() => ({
       type: "string",
       resolve: ({ publishedAt }) => format(parseISO(publishedAt), "yyyyMMdd"),
     },
+    url: {
+      type: "string",
+      resolve: ({ _id }) => `${siteConfig.url}/photos/${generateSlug(_id)}`,
+    },
+    editUrl: {
+      type: "string",
+      resolve: ({ _raw: { sourceFilePath } }) =>
+        `${siteConfig.github.content}/edit/main/${sourceFilePath}`,
+    },
+    sourceUrl: {
+      type: "string",
+      resolve: ({ _raw: { sourceFilePath } }) =>
+        `${siteConfig.github.content}/blob/main/${sourceFilePath}?plain=1`,
+    },
+    revisionHistoryUrl: {
+      type: "string",
+      resolve: ({ _raw: { sourceFilePath } }) =>
+        `${siteConfig.github.content}/commits/main/${sourceFilePath}`,
+    },
     publishedAtFormattedUs: {
       type: "string",
       resolve: ({ publishedAt }) =>
