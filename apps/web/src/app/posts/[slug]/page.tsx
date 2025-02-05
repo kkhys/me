@@ -1,7 +1,6 @@
 import { Prose } from "@kkhys/ui";
 import { notFound } from "next/navigation";
 import {
-  ActionController,
   ArticleList,
   EyeCatch,
   Mdx,
@@ -26,6 +25,7 @@ import * as React from "react";
 import type { BlogPosting, BreadcrumbList, WithContext } from "schema-dts";
 import { me, siteConfig } from "#/config";
 import { tagCloudItems } from "#/share/tag-cloud-items";
+import { ActionController } from "#/ui";
 
 const JsonLd = ({
   post: { title, slug, publishedAt, updatedAt },
@@ -171,7 +171,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <Mdx code={code} />
         </Prose>
         <TagCloud tags={postTags} className="mt-12" />
-        <ActionController post={post} className="mt-8" />
+        <ActionController data={post} className="mt-8" />
         <PrevAndNextPager id={_id} className="mt-8" />
         {relatedPosts.length !== 0 && (
           <div className="mt-8">

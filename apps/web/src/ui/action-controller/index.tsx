@@ -14,7 +14,7 @@ import {
   cn,
   toast,
 } from "@kkhys/ui";
-import type { Post } from "contentlayer/generated";
+import type { Photo, Post } from "contentlayer/generated";
 import { siteConfig } from "#/config";
 
 const NavLink = <T extends string>({
@@ -53,7 +53,10 @@ const handleCopyLink = (url: string) =>
     .writeText(url)
     .then(() => toast.success("Link copied."));
 
-const SharedAction = ({ title, url }: Pick<Post, "title" | "url">) => (
+const SharedAction = <T extends Photo | Post>({
+  title,
+  url,
+}: Pick<T, "title" | "url">) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="ghost" size="icon">
@@ -85,11 +88,11 @@ const SharedAction = ({ title, url }: Pick<Post, "title" | "url">) => (
   </DropdownMenu>
 );
 
-const ConfigAction = ({
+const ConfigAction = <T extends Photo | Post>({
   editUrl,
   sourceUrl,
   revisionHistoryUrl,
-}: Pick<Post, "editUrl" | "sourceUrl" | "revisionHistoryUrl">) => (
+}: Pick<T, "editUrl" | "sourceUrl" | "revisionHistoryUrl">) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="ghost" size="icon">
@@ -115,14 +118,14 @@ const ConfigAction = ({
 );
 
 export const ActionController = ({
-  post,
+  data,
   className,
 }: {
-  post: Post;
+  data: Post | Photo;
   className?: string;
 }) => (
   <div className={cn("flex justify-end gap-x-1", className)}>
-    <ConfigAction {...post} />
-    <SharedAction {...post} />
+    <ConfigAction {...data} />
+    <SharedAction {...data} />
   </div>
 );
