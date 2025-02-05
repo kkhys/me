@@ -11,6 +11,9 @@ const nextConfig = {
     "@kkhys/ui",
     "@kkhys/validators",
   ],
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
   async rewrites() {
     return [
       {

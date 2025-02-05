@@ -663,7 +663,7 @@ export const postMetadata: PostMetadata[] = [
     slug: "p1fw2ts",
     emoji: "🔠",
     category: "Tech",
-    tags: ["Idea"],
+    tags: ["Idea", "Font"],
     status: "published",
     publishedAt: "2024-01-27T00:00:00.000Z",
     excerpt:
