@@ -5,12 +5,12 @@ export const categories = [
   {
     title: "Tech",
     slug: "tech",
-    emoji: "👩🏻‍💻",
+    emoji: "👩",
   },
   {
     title: "Life",
     slug: "life",
-    emoji: "🕯️",
+    emoji: "🕯",
   },
   {
     title: "Object",
@@ -20,8 +20,8 @@ export const categories = [
   {
     title: "Build",
     slug: "build",
-    emoji: "🏗️",
+    emoji: "🏗",
   },
 ] satisfies Category[];
 
-export const categoryTitles = categories.map((category) => category.title);
+export const categoryTitles = categories.map(({ title }) => title);

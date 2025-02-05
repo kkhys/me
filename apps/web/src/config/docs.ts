@@ -24,6 +24,10 @@ export const docsConfig = {
       href: "/posts",
     },
     {
+      title: "Photo",
+      href: "/photos",
+    },
+    {
       title: "Contact",
       href: "/contact",
     },
