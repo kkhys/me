@@ -8,7 +8,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PhotoModal } from "#/app/photos/_ui";
 import type { Camera } from "#/config";
-import { getPhotoBySlug, getPublicPhotos } from "#/utils/photo";
+import { getPhotoBySlug, getPhotoTitle, getPublicPhotos } from "#/utils/photo";
 
 export const generateStaticParams = async () =>
   getPublicPhotos().map(({ slug }) => ({ slug }));
@@ -28,7 +28,6 @@ const Page = async ({
   const cameraData = photo.cameraData as Camera;
 
   const {
-    title,
     path,
     focalLength,
     fNumber,
@@ -36,6 +35,8 @@ const Page = async ({
     iso,
     imageObject: { width, height, blurDataURL },
   } = photo;
+
+  const title = getPhotoTitle(slug);
 
   return (
     <PhotoModal>

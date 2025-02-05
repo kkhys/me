@@ -1,11 +1,15 @@
 import { writeFileSync } from "node:fs";
 import {
   type Legal,
+  type Photo,
   type Post,
   allLegals,
+  allPhotos,
   allPosts,
 } from "contentlayer/generated";
+import { compareAsc, compareDesc, format, parseISO } from "date-fns";
 import type { MetadataRoute } from "next";
+import type { PhotoMetadata } from "#/app/photos/_types";
 import type {
   LegalMetadata,
   PostMetadata,
@@ -24,12 +28,17 @@ const FILE_PATHS = {
   LEGAL_METADATA: "src/share/legal-metadata.ts",
   STATIC_SITEMAP: "src/share/static-sitemap.ts",
   TAG_COULD_ITEMS: "src/share/tag-cloud-items.ts",
+  PHOTO_METADATA: "src/share/photo-metadata.ts",
 };
 
-const getSortedItems = <T extends { publishedAt: string }>(items: T[]): T[] =>
-  items.sort(
-    (a, b) =>
-      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+const getSortedItems = <T extends { publishedAt: string }>(
+  items: T[],
+  sort: "asc" | "desc" = "desc",
+): T[] =>
+  items.sort((a, b) =>
+    sort === "asc"
+      ? compareAsc(new Date(a.publishedAt), new Date(b.publishedAt))
+      : compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)),
   );
 
 const writeToFile = <T>(
@@ -37,12 +46,13 @@ const writeToFile = <T>(
   variableName: string,
   data: T,
   typeDefinition: string,
+  type: "posts" | "photos",
 ) => {
   const content = `
 // This file was automatically generated.
 // Please do not remove or edit this file.
 
-import type { ${typeDefinition}} from "#/app/posts/_types";
+import type { ${typeDefinition}} from "#/app/${type}/_types";
 
 export const ${variableName}: ${typeDefinition}[] = ${JSON.stringify(data, null, 2)};
 `;
@@ -60,6 +70,7 @@ const generatePostMetadataForEdge = async (posts: Post[]) => {
     "postMetadataForEdge",
     postMetadataForEdge,
     "PostMetadataForEdge",
+    "posts",
   );
 };
 
@@ -79,6 +90,7 @@ const generateSearchItems = async (posts: Post[]) => {
     "searchItems",
     searchItems,
     "SearchItem",
+    "posts",
   );
 };
 
@@ -121,6 +133,7 @@ const generatePostMetadata = async (posts: Post[]) => {
     "postMetadata",
     postMetadata,
     "PostMetadata",
+    "posts",
   );
 };
 
@@ -135,6 +148,7 @@ const generateLegalMetadata = async (legals: Legal[]) => {
     "legalMetadata",
     legalMetadata,
     "LegalMetadata",
+    "posts",
   );
 };
 
@@ -230,12 +244,40 @@ const generateTagCloudItems = async () => {
     "tagCloudItems",
     tagCloudItems,
     "TagCloudItem",
+    "posts",
+  );
+};
+
+const generatePhotoMetadata = async (photos: Photo[]) => {
+  const getPhotoIndex = (slug: string) =>
+    photos
+      .sort((a, b) =>
+        compareAsc(new Date(a.publishedAt), new Date(b.publishedAt)),
+      )
+      .findIndex((photo) => photo.slug === slug) + 1 || 0;
+  const generateTitle = ({
+    publishedAt,
+    slug,
+  }: Pick<Photo, "publishedAt" | "slug">) =>
+    `${format(parseISO(publishedAt), "yyyy-MM-dd")} / ${getPhotoIndex(slug)}`;
+  const photoMetadata = photos.map(({ slug, publishedAt }) => ({
+    slug,
+    title: generateTitle({ publishedAt, slug }),
+  })) satisfies PhotoMetadata[];
+  writeToFile(
+    FILE_PATHS.PHOTO_METADATA,
+    "photoMetadata",
+    photoMetadata,
+    "PhotoMetadata",
+    "photos",
   );
 };
 
 const main = async () => {
   const posts = getSortedItems(allPosts);
   const legals = getSortedItems(allLegals);
+  const photos = getSortedItems(allPhotos, "asc");
+
   await Promise.all([
     generatePostMetadataForEdge(posts),
     generateSearchItems(posts),
@@ -243,6 +285,7 @@ const main = async () => {
     generateLegalMetadata(legals),
     generateStaticSitemap({ posts, legals }),
     generateTagCloudItems(),
+    generatePhotoMetadata(photos),
   ]);
 };
 

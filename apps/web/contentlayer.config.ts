@@ -22,7 +22,7 @@ import {
   siteConfig,
   tags,
 } from "#/config";
-import type { AllTagsTitle, Category, CategoryTitle, Tag } from "#/config";
+import type { AllTagsTitle, CategoryTitle, Tag } from "#/config";
 import { getImage } from "#/utils/image";
 import {
   TweetEmbedHandler,
@@ -227,10 +227,6 @@ const Photo = defineDocumentType(() => ({
           blurDataURL: base64,
         };
       },
-    },
-    title: {
-      type: "string",
-      resolve: ({ publishedAt }) => format(parseISO(publishedAt), "yyyyMMdd"),
     },
     url: {
       type: "string",

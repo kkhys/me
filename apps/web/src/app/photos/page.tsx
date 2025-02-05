@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { siteConfig } from "#/config";
-import { getPublicPhotos } from "#/utils/photo";
+import { getPhotoTitle, getPublicPhotos } from "#/utils/photo";
 
 const JsonLd = () => {
   const jsonLdBreadcrumb = {
@@ -53,13 +53,7 @@ const Page = () => (
     <h1 className="font-sans font-medium">Photo</h1>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-6">
       {getPublicPhotos().map(
-        ({
-          _id,
-          slug,
-          path,
-          title,
-          imageObject: { width, height, blurDataURL },
-        }) => (
+        ({ _id, slug, path, imageObject: { width, height, blurDataURL } }) => (
           <Link key={_id} href={`/photos/${slug}` as Route}>
             <div className="overflow-hidden">
               <Image
@@ -67,7 +61,7 @@ const Page = () => (
                 width={width}
                 height={height}
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                alt={title}
+                alt={getPhotoTitle(slug)}
                 placeholder="blur"
                 blurDataURL={blurDataURL}
                 quality={90}

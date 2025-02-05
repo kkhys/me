@@ -7,7 +7,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Zoom from "react-medium-image-zoom";
 import { type Camera, type Lens, siteConfig } from "#/config";
-import { getPhotoBySlug, getPublicPhotos } from "#/utils/photo";
+import { getPhotoBySlug, getPhotoTitle, getPublicPhotos } from "#/utils/photo";
 import "#/styles/react-medium-image-zoom.css";
 import "../_styles/index.css";
 import type { Photo } from "contentlayer/generated";
@@ -16,7 +16,7 @@ import * as React from "react";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { ActionController } from "#/ui";
 
-const JsonLd = ({ photo: { title, slug } }: { photo: Photo }) => {
+const JsonLd = ({ photo: { slug } }: { photo: Photo }) => {
   const jsonLdBreadcrumbList = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -36,7 +36,7 @@ const JsonLd = ({ photo: { title, slug } }: { photo: Photo }) => {
       {
         "@type": "ListItem",
         position: 3,
-        name: title,
+        name: getPhotoTitle(slug),
         item: `${siteConfig.url}/photos/${slug}`,
       },
     ],
@@ -68,11 +68,11 @@ export const generateMetadata = async ({
     return;
   }
 
-  const { title, publishedAt, updatedAt } = photo;
+  const { publishedAt, updatedAt } = photo;
   const url = `/photos/${slug}`;
 
   return {
-    title,
+    title: getPhotoTitle(slug),
     description: "The photo was taken by Keisuke Hayashi.",
     alternates: {
       canonical: `/photos/${slug}`,
@@ -99,18 +99,19 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   }
 
   const {
-    title,
     path,
     fNumber,
     focalLength,
     shutterSpeed,
     iso,
-    publishedAtFormattedIso,
+    publishedAtFormattedUs,
     imageObject: { width, height, blurDataURL },
   } = photo;
 
   const cameraData = photo.cameraData as Camera;
   const lensData = photo.lensData as Lens;
+
+  const title = getPhotoTitle(slug);
 
   return (
     <>
@@ -128,7 +129,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             quality={90}
           />
         </Zoom>
-        <h1 className="font-sans font-medium">{title}</h1>
+        <h1 className="font-sans font-medium text-sm">{title}</h1>
         <DescriptionList className="font-sans">
           <DescriptionTerm>Camera</DescriptionTerm>
           <DescriptionDetails>
@@ -147,9 +148,9 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <DescriptionTerm>ISO</DescriptionTerm>
           <DescriptionDetails>{iso}</DescriptionDetails>
           <DescriptionTerm>Shooting date</DescriptionTerm>
-          <DescriptionDetails>{publishedAtFormattedIso}</DescriptionDetails>
+          <DescriptionDetails>{publishedAtFormattedUs}</DescriptionDetails>
         </DescriptionList>
-        <ActionController data={photo} className="mt-8" />
+        <ActionController data={photo} title={title} className="mt-8" />
       </div>
     </>
   );

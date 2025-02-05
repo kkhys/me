@@ -56,7 +56,7 @@ const handleCopyLink = (url: string) =>
 const SharedAction = <T extends Photo | Post>({
   title,
   url,
-}: Pick<T, "title" | "url">) => (
+}: Pick<T, "url"> & { title: string }) => (
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
       <Button variant="ghost" size="icon">
@@ -119,13 +119,15 @@ const ConfigAction = <T extends Photo | Post>({
 
 export const ActionController = ({
   data,
+  title,
   className,
 }: {
   data: Post | Photo;
+  title: string;
   className?: string;
 }) => (
   <div className={cn("flex justify-end gap-x-1", className)}>
     <ConfigAction {...data} />
-    <SharedAction {...data} />
+    <SharedAction {...data} title={title} />
   </div>
 );

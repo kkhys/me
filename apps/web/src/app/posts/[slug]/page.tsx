@@ -171,7 +171,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
           <Mdx code={code} />
         </Prose>
         <TagCloud tags={postTags} className="mt-12" />
-        <ActionController data={post} className="mt-8" />
+        <ActionController data={post} title={title} className="mt-8" />
         <PrevAndNextPager id={_id} className="mt-8" />
         {relatedPosts.length !== 0 && (
           <div className="mt-8">

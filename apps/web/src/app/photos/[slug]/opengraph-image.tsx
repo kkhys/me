@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { getPhotoBySlug } from "#/utils/photo";
+import { getPhotoBySlug, getPhotoTitle } from "#/utils/photo";
 
 export const size = {
   width: 1200,
@@ -24,7 +24,7 @@ export const generateImageMetadata = async ({
     {
       id: "default",
       contentType: "image/png",
-      alt: photo.title,
+      alt: getPhotoTitle(slug),
       size,
     },
   ];
@@ -38,7 +38,7 @@ const Image = async ({ params }: { params: Promise<{ slug: string }> }) => {
     return new Response("Not found", { status: 404 });
   }
 
-  const { title, path } = photo;
+  const { path } = photo;
 
   const imageData = await readFile(join(process.cwd(), "public", path));
   const imageSrc = Uint8Array.from(imageData).buffer;
@@ -52,7 +52,7 @@ const Image = async ({ params }: { params: Promise<{ slug: string }> }) => {
       }}
     >
       {/* @ts-expect-error */}
-      <img src={imageSrc} alt={title} />
+      <img src={imageSrc} alt={getPhotoTitle(slug)} />
     </div>,
   );
 };
