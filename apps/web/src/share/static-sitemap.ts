@@ -285,6 +285,10 @@ export const staticSitemap: MetadataRoute.Sitemap = [
     lastModified: "2025-02-05",
   },
   {
+    url: "https://kkhys.me/posts/tags/font/1",
+    lastModified: "2025-02-05",
+  },
+  {
     url: "https://kkhys.me/posts/tags/mermaid/1",
     lastModified: "2025-02-05",
   },
