@@ -1,7 +1,8 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { env } from "#/env";
 import { getPhotoBySlug, getPhotoTitle } from "#/utils/photo";
+
+export const runtime = "edge";
 
 export const size = {
   width: 1200,
@@ -40,8 +41,16 @@ const Image = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const { path } = photo;
 
-  const imageData = await readFile(join(process.cwd(), "public", path));
-  const imageSrc = Uint8Array.from(imageData).buffer;
+  const url = `${env.VERCEL_URL || "http://localhost:3000"}${path}`;
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    return new Response("Not found", { status: 404 });
+  }
+
+  const arrayBuffer = await response.arrayBuffer();
+  const imageSrc = new Uint8Array(arrayBuffer).buffer;
 
   return new ImageResponse(
     <div
