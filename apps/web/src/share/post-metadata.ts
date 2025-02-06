@@ -5,6 +5,25 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/tech/2025-02-08/index.mdx",
+    title: "v2.2.0 リリースノート: 写真ポートフォリオとして",
+    slug: "p14p36p",
+    emoji: "🚀",
+    category: "Tech",
+    tags: ["Release note"],
+    status: "draft",
+    publishedAt: "2025-02-08T00:00:00.000Z",
+    excerpt:
+      "突然切り取られた時間の中の空間、それが日の目を浴びずに記憶装置の中に留まり続けるのは参考にした写真共有サイト（国内）GANREFPhotohito参考にした写真共有サイト（国外）1X500pxYouPic必要な機能EXIFデータを表示させるモーダル機能使いたい機能InterceptingRoutes...",
+    url: "https://kkhys.me/posts/p14p36p",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-02-08/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-02-08/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-02-08/index.mdx",
+  },
+  {
     _id: "posts/life/2025-01-31/index.mdx",
     title: "景色と料理を楽しむ、鹿児島 3 泊 4 日の旅",
     slug: "p1zn5cl",
@@ -22,25 +41,6 @@ export const postMetadata: PostMetadata[] = [
       "https://github.com/kkhys/content/blob/main/posts/life/2025-01-31/index.mdx?plain=1",
     revisionHistoryUrl:
       "https://github.com/kkhys/content/commits/main/posts/life/2025-01-31/index.mdx",
-  },
-  {
-    _id: "posts/tech/2025-01-30/index.mdx",
-    title: "v2.2.0 リリースノート: 写真共有サイトとして",
-    slug: "p1xrqll",
-    emoji: "🚀",
-    category: "Tech",
-    tags: ["Release note"],
-    status: "draft",
-    publishedAt: "2025-01-30T00:00:00.000Z",
-    excerpt:
-      "参考にした写真共有サイト（国内）GANREFPhotohito参考にした写真共有サイト（国外）1X500pxYouPic必要な機能EXIFデータを表示させるモーダル機能使いたい機能InterceptingRoutes",
-    url: "https://kkhys.me/posts/p1xrqll",
-    editUrl:
-      "https://github.com/kkhys/content/edit/main/posts/tech/2025-01-30/index.mdx",
-    sourceUrl:
-      "https://github.com/kkhys/content/blob/main/posts/tech/2025-01-30/index.mdx?plain=1",
-    revisionHistoryUrl:
-      "https://github.com/kkhys/content/commits/main/posts/tech/2025-01-30/index.mdx",
   },
   {
     _id: "posts/tech/2025-01-13/index.mdx",
