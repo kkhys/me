@@ -5,14 +5,14 @@ import type { PostMetadataForEdge } from "#/app/posts/_types";
 
 export const postMetadataForEdge: PostMetadataForEdge[] = [
   {
+    title: "v2.2.0 リリースノート: 写真ポートフォリオとして",
+    emoji: "🚀",
+    slug: "p14p36p",
+  },
+  {
     title: "景色と料理を楽しむ、鹿児島 3 泊 4 日の旅",
     emoji: "🌋",
     slug: "p1zn5cl",
-  },
-  {
-    title: "v2.2.0 リリースノート: 写真共有サイトとして",
-    emoji: "🚀",
-    slug: "p1xrqll",
   },
   {
     title: "v2.1.0 リリースノート: タグクラウドの追加",
