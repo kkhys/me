@@ -2,6 +2,7 @@ import type { Metadata, Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import type { BreadcrumbList, WithContext } from "schema-dts";
+import type { ImageObject } from "#/app/photos/_types";
 import { siteConfig } from "#/config";
 import { getPhotoTitle, getPublicPhotos } from "#/utils/photo";
 
@@ -52,8 +53,10 @@ const Page = () => (
     <JsonLd />
     <h1 className="font-sans font-medium">Photo</h1>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-6">
-      {getPublicPhotos().map(
-        ({ _id, slug, path, imageObject: { width, height, blurDataURL } }) => (
+      {getPublicPhotos().map(({ _id, slug, path, imageObject }) => {
+        const { width, height, blurDataURL } = imageObject as ImageObject;
+
+        return (
           <Link key={_id} href={`/photos/${slug}` as Route}>
             <div className="overflow-hidden">
               <Image
@@ -69,8 +72,8 @@ const Page = () => (
               />
             </div>
           </Link>
-        ),
-      )}
+        );
+      })}
     </div>
   </>
 );
