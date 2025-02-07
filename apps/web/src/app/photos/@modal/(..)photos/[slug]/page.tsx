@@ -6,6 +6,7 @@ import {
 } from "@kkhys/ui";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import type { ImageObject } from "#/app/photos/_types";
 import { PhotoModal } from "#/app/photos/_ui";
 import type { Camera } from "#/config";
 import { getPhotoBySlug, getPhotoTitle, getPublicPhotos } from "#/utils/photo";
@@ -27,16 +28,10 @@ const Page = async ({
 
   const cameraData = photo.cameraData as Camera;
 
-  const {
-    path,
-    focalLength,
-    fNumber,
-    shutterSpeed,
-    iso,
-    imageObject: { width, height, blurDataURL },
-  } = photo;
+  const { path, focalLength, fNumber, shutterSpeed, iso, imageObject } = photo;
 
   const title = getPhotoTitle(slug);
+  const { width, height, blurDataURL } = imageObject as ImageObject;
 
   return (
     <PhotoModal>

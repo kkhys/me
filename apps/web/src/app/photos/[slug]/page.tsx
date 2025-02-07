@@ -14,6 +14,7 @@ import type { Photo } from "contentlayer/generated";
 import type { Metadata } from "next";
 import * as React from "react";
 import type { BreadcrumbList, WithContext } from "schema-dts";
+import type { ImageObject } from "#/app/photos/_types";
 import { ActionController } from "#/ui";
 
 const JsonLd = ({ photo: { slug } }: { photo: Photo }) => {
@@ -105,11 +106,12 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     shutterSpeed,
     iso,
     publishedAtFormattedUs,
-    imageObject: { width, height, blurDataURL },
+    imageObject,
   } = photo;
 
   const cameraData = photo.cameraData as Camera;
   const lensData = photo.lensData as Lens;
+  const { width, height, blurDataURL } = imageObject as ImageObject;
 
   const title = getPhotoTitle(slug);
 
