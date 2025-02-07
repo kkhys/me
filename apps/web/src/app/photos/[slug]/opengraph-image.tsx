@@ -41,7 +41,14 @@ const Image = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const { path } = photo;
 
-  const url = `${env.VERCEL_URL || "http://localhost:3000"}${path}`;
+  const baseUrl =
+    env.VERCEL_ENV === "production"
+      ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "http://localhost:3000";
+
+  const url = `${baseUrl}${path}`;
 
   const response = await fetch(url);
 
