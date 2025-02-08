@@ -11,10 +11,10 @@ export const postMetadata: PostMetadata[] = [
     emoji: "🚀",
     category: "Tech",
     tags: ["Release note"],
-    status: "draft",
+    status: "published",
     publishedAt: "2025-02-08T00:00:00.000Z",
     excerpt:
-      "突然切り取られた時間の中の空間、それが日の目を浴びずに記憶装置の中に留まり続けるのは参考にした写真共有サイト（国内）GANREFPhotohito参考にした写真共有サイト（国外）1X500pxYouPic必要な機能EXIFデータを表示させるモーダル機能使いたい機能InterceptingRoutes...",
+      "変形のプロセスを記録するのが習慣になっている。気づけば膨大なデータがストレージの奥深くで眠っている。掘り返すこともなければ、忘れ去られるわけでもなく、ただそこにあり続ける。まあ、それはそれで悪くない。でも、たまには引っ張り出して、改めて日の光を当ててみるのもいいかもしれない。そんなことを思い立ち、日々の記録として残して...",
     url: "https://kkhys.me/posts/p14p36p",
     editUrl:
       "https://github.com/kkhys/content/edit/main/posts/tech/2025-02-08/index.mdx",
