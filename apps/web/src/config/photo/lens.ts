@@ -14,6 +14,6 @@ export const lenses = [
     name: "FE 55mm F1.8 ZA",
     manufacturer: "SONY",
   },
-] satisfies Lens[];
+] as const satisfies Lens[];
 
 export const lensNames = lenses.map(({ name }) => name);
