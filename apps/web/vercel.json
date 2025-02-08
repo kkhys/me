@@ -1,5 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "bun playwright-install && turbo run build",
-  "installCommand": "bun i && dnf install -y nss nspr mesa-libgbm"
+  "installCommand": "bun i && dnf install -y nss nspr mesa-libgbm",
+  "crons": [
+    {
+      "path": "/api/cron/deploy",
+      "schedule": "0 18 * * *"
+    }
+  ]
 }
