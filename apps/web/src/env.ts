@@ -21,6 +21,8 @@ export const env = createEnv({
     LINE_USER_ID: z.string().min(1),
     LINE_CHANNEL_ACCESS_TOKEN: z.string().min(1),
     RESEND_API_KEY: z.string().min(1),
+    VERCEL_DEPLOY_HOOK_URL: z.string().min(1),
+    CRON_SECRET: z.string().min(1),
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
