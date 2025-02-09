@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 
-import { cn } from "@kkhys/ui";
+import { Skeleton, cn } from "@kkhys/ui";
 
 const eyeCatchVariants = cva(
   "inline-flex select-none items-center justify-center rounded-md bg-secondary text-secondary-foreground shadow-sm",
@@ -30,13 +30,12 @@ const svgVariants = cva("[&>svg>path]:fill-foreground", {
   },
 });
 
-export const EyeCatch = ({
-  emoji,
-  className,
-  size,
-}: { emoji: string; className?: string } & VariantProps<
-  typeof eyeCatchVariants
->) => {
+type EyeCatchProps = {
+  emoji: string;
+  className?: string;
+} & VariantProps<typeof eyeCatchVariants>;
+
+export const EyeCatch = ({ emoji, className, size }: EyeCatchProps) => {
   return (
     <span className={cn(eyeCatchVariants({ size }), className)}>
       <div
@@ -47,3 +46,10 @@ export const EyeCatch = ({
     </span>
   );
 };
+
+export const EyeCatchSkeleton = ({
+  size,
+  className,
+}: Omit<EyeCatchProps, "emoji">) => (
+  <Skeleton className={cn(eyeCatchVariants({ size }), className)} />
+);
