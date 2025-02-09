@@ -40,7 +40,7 @@ export const LinkCardBlock = ({
         href={url}
         target="_blank"
         rel="noreferrer noopener"
-        className="flex h-[120px] w-full items-center text-card-foreground no-underline shadow transition-colors hover:bg-muted/50"
+        className="flex h-[120px] w-full items-center text-card-foreground no-underline shadow transition-colors hover:bg-accent/50"
       >
         <div className="min-w-0 flex-1 px-4 py-2">
           <span className="block max-h-12 break-words font-medium leading-relaxed">
