@@ -1,7 +1,9 @@
 import { Prose, Separator } from "@kkhys/ui";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
-import { TagCloud } from "#/app/posts/_ui";
+import * as React from "react";
+import { Suspense } from "react";
+import { PopularPosts, PopularPostsSkeleton, TagCloud } from "#/app/posts/_ui";
 import { tagCloudItems } from "#/share/tag-cloud-items";
 import { fisherYatesShuffle } from "#/utils/post";
 
@@ -26,9 +28,20 @@ const Page = () => {
           <MoveRightIcon className="ml-1 size-3.5" />
         </Link>
       </Prose>
-      <Separator className="my-6" />
-      <h2 className="font-sans font-medium">Tag cloud</h2>
-      <TagCloud tags={tags} className="mt-6" />
+      <div className="mt-6 space-y-6">
+        <Separator />
+        <div className="space-y-6">
+          <h2 className="font-sans font-medium">Popular posts</h2>
+          <Suspense fallback={<PopularPostsSkeleton />}>
+            <PopularPosts />
+          </Suspense>
+        </div>
+        <Separator />
+        <div className="space-y-6">
+          <h2 className="font-sans font-medium">Tag cloud</h2>
+          <TagCloud tags={tags} />
+        </div>
+      </div>
     </>
   );
 };

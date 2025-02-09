@@ -9,7 +9,7 @@ export const TagCloudItem = ({
 }: Omit<TagCloudItemType, "emoji">) => (
   <Link
     href={`/posts/tags/${slug}`}
-    className="inline-flex items-center gap-1.5 bg-muted/50 hover:bg-accent rounded-full border pl-1 pr-2.5 py-1 text-sm font-sans font-medium transition-colors duration-75 focus:outline-none"
+    className="inline-flex items-center gap-1.5 bg-muted/50 hover:bg-accent rounded-full border pl-1 pr-2.5 py-1 text-sm font-sans font-medium focus:outline-none"
   >
     <div
       // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
