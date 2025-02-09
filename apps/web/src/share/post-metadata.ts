@@ -5,6 +5,25 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/tech/2025-02-09/index.mdx",
+    title: "v2.3.0 リリースノート: Cron で毎日自動デプロイ",
+    slug: "p1x2lan",
+    emoji: "🚀",
+    category: "Tech",
+    tags: ["Release note"],
+    status: "published",
+    publishedAt: "2025-02-09T00:00:00.000Z",
+    excerpt:
+      "このサイトは基本的にSSGで静的にページを生成している。そのおかげで、ブラウザに直接HTMLを届けられるため、高速なパフォーマンスを得られる。しかし、その代償としてランダムに表示させたい項目があったとしても、再ビルドしない限り氷漬けのままになってしまう。このサイトでビルドするたびに結果が変わる項目は以下のとおり。タグク...",
+    url: "https://kkhys.me/posts/p1x2lan",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-02-09/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-02-09/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-02-09/index.mdx",
+  },
+  {
     _id: "posts/tech/2025-02-08/index.mdx",
     title: "v2.2.0 リリースノート: 写真ポートフォリオとして",
     slug: "p14p36p",
