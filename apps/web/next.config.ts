@@ -6,6 +6,7 @@ const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   experimental: { typedRoutes: true },
   transpilePackages: [
+    "@kkhys/auth",
     "@kkhys/db",
     "@kkhys/email",
     "@kkhys/ui",
