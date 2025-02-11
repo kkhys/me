@@ -1,5 +1,5 @@
 import "#/styles/globals.css";
-import { ClerkProvider, jaJP } from "@kkhys/auth";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster, cn } from "@kkhys/ui";
 import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata, Viewport } from "next";
@@ -59,7 +59,7 @@ export const viewport = {
 } satisfies Viewport;
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <ClerkProvider localization={jaJP}>
+  <ClerkProvider>
     <html lang="ja" suppressHydrationWarning>
       <body
         className={cn(

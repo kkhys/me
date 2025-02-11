@@ -1,4 +1,4 @@
-import { clerkMiddleware, createRouteMatcher } from "@kkhys/auth";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { get } from "@vercel/edge-config";
 import { ipAddress } from "@vercel/functions";
 import { type NextRequest, NextResponse } from "next/server";
@@ -28,9 +28,14 @@ const defaultMiddleware = async (request: NextRequest) => {
   }
 };
 
+const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)"]);
 const isProtectedRoute = createRouteMatcher(["/secret(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
+  // if (!isPublicRoute(request)) {
+  //   await auth.protect();
+  // }
+
   if (isProtectedRoute(request)) {
     await auth.protect();
   }

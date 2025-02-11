@@ -10,8 +10,10 @@ const ModeSwitcher = () => {
 
   return (
     <Button
+      type="button"
       variant="ghost"
-      className="group/toggle size-8 px-0"
+      size="icon"
+      className="group/toggle size-8"
       onClick={() => setTheme((theme) => (theme === "dark" ? "light" : "dark"))}
     >
       <SunIcon className="hidden [html.dark_&]:block" />
