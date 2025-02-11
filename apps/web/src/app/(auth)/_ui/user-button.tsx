@@ -1,20 +1,20 @@
 "use client";
 
-import { SignIn as ClerkSignIn } from "@clerk/nextjs";
+import { UserButton as ClerkUserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { Skeleton, useTheme } from "@kkhys/ui";
 import React from "react";
 
-export const SignIn = () => {
+export const UserButton = () => {
   const { theme } = useTheme();
 
   return (
-    <ClerkSignIn
+    <ClerkUserButton
       appearance={{
         baseTheme: theme === "dark" ? dark : undefined,
       }}
-      fallback={<Skeleton className="w-[400px] h-[270px] rounded-xl" />}
-      waitlistUrl="/waitlist"
+      userProfileUrl="/user-profile"
+      fallback={<Skeleton className="size-[28px] rounded-full" />}
     />
   );
 };
