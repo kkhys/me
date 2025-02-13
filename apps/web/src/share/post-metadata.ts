@@ -5,6 +5,25 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/tech/2025-02-13/index.mdx",
+    title: "v2.4.0 リリースノート: 人気記事一覧を作成",
+    slug: "p1avm8s",
+    emoji: "🚀",
+    category: "Tech",
+    tags: ["Release note"],
+    status: "published",
+    publishedAt: "2025-02-13T00:00:00.000Z",
+    excerpt:
+      "記事数が増えてきたため、トップページに人気記事一覧を追加した。実装自体はシンプルだが、いくつかポイントがあるので整理しておく。最近はホームページに充てられる自由時間が限られていることもあり、タスクを2~3時間で完了できる単位に細分化し、気が向いたときに進めるようにしている。そのおかげもあって、良い感覚で継続的にリリース...",
+    url: "https://kkhys.me/posts/p1avm8s",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-02-13/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-02-13/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-02-13/index.mdx",
+  },
+  {
     _id: "posts/tech/2025-02-09/index.mdx",
     title: "v2.3.0 リリースノート: Cron で毎日自動デプロイ",
     slug: "p1x2lan",
