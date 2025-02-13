@@ -5,6 +5,11 @@ import type { PostMetadataForEdge } from "#/app/posts/_types";
 
 export const postMetadataForEdge: PostMetadataForEdge[] = [
   {
+    title: "v2.4.0 リリースノート: 人気記事一覧を作成",
+    emoji: "🚀",
+    slug: "p1avm8s",
+  },
+  {
     title: "v2.3.0 リリースノート: Cron で毎日自動デプロイ",
     emoji: "🚀",
     slug: "p1x2lan",
