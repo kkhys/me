@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "git clean -xdf .cache .contentlayer .next .turbo node_modules storybook-static",
     "dev": "bun with-env next dev --port 3000",
+    "dev:inngest": "./scripts/start-inngest.sh",
     "_prebuild": "bun contentlayer2 build && bun ./src/scripts/pre-build.ts && cd ../.. && bun lint:fix && cd apps/web",
     "build": "bun with-env next build",
     "start": "bun with-env next start --port 3000",
@@ -36,6 +37,7 @@
     "embla-carousel-class-names": "8.5.2",
     "feed": "4.2.2",
     "googleapis": "144.0.0",
+    "inngest": "3.31.7",
     "next": "15.1.7",
     "next-contentlayer2": "0.5.4",
     "react": "19.0.0",
@@ -68,6 +70,7 @@
     "fetch-site-metadata": "0.2.0",
     "hast-util-has-property": "3.0.0",
     "hast-util-is-element": "3.0.0",
+    "inngest-cli": "1.4.6",
     "plaiceholder": "3.0.0",
     "playwright": "1.50.1",
     "rehype-mermaid": "3.0.0",
