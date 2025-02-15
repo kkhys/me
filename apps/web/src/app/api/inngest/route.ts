@@ -1,7 +1,12 @@
 import { serve } from "inngest/next";
-import { helloWorld, inngest } from "#/lib/inngest";
+import {
+  syncCreatedUser,
+  syncDeletedUser,
+  syncUpdatedUser,
+} from "#/app/(auth)/_lib";
+import { inngest } from "#/lib/inngest";
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
-  functions: [helloWorld],
+  functions: [syncCreatedUser, syncUpdatedUser, syncDeletedUser],
 });
