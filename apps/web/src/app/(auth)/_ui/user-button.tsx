@@ -6,7 +6,7 @@ import { Skeleton, useTheme } from "@kkhys/ui";
 import React from "react";
 
 export const UserButton = () => {
-  const { theme } = useTheme();
+  const { theme = "system" } = useTheme();
 
   return (
     <ClerkUserButton
