@@ -5,6 +5,25 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/life/2025-02-15/index.mdx",
+    title: "バレンタインデー 2025",
+    slug: "p1x6nt3",
+    emoji: "🍫",
+    category: "Life",
+    tags: ["Memorial"],
+    status: "published",
+    publishedAt: "2025-02-15T00:00:00.000Z",
+    excerpt:
+      "今年もありがたいことに恋人から色んなチョコレートをもらった。去年の記事はこちら。お互いにチョコレートを愛してやまないので、バレンタインデーは「普段なかなか手が出せない高級チョコを堂々と楽しめる日」として定着している。当然ながら、私がすべて独り占めするわけではなく、毎日のコーヒータイムに2人でじっくり味わっている。むしろ...",
+    url: "https://kkhys.me/posts/p1x6nt3",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/life/2025-02-15/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/life/2025-02-15/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/life/2025-02-15/index.mdx",
+  },
+  {
     _id: "posts/tech/2025-02-13/index.mdx",
     title: "v2.4.0 リリースノート: 人気記事一覧を作成",
     slug: "p1avm8s",
