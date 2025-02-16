@@ -1,5 +1,10 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
+import type { Metadata } from "next";
 import { getUserByClerkId } from "#/app/(auth)/_lib/queries";
+
+export const metadata = {
+  robots: "noindex",
+} satisfies Metadata;
 
 const Page = async () => {
   const { userId, redirectToSignIn } = await auth();

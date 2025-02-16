@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { checkRole } from "#/utils/role";
+
+export const metadata = {
+  robots: "noindex",
+} satisfies Metadata;
 
 const Page = async () => {
   const isAdmin = await checkRole("admin");
