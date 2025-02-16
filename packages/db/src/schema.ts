@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import { pgTable } from "drizzle-orm/pg-core";
 
 export const User = pgTable("user", (t) => ({
@@ -8,7 +9,7 @@ export const User = pgTable("user", (t) => ({
   updatedAt: t
     .timestamp()
     .notNull()
-    .$onUpdateFn(() => new Date()),
+    .$onUpdateFn(() => sql`now()`),
 }));
 
 export type InsertUser = typeof User.$inferInsert;
