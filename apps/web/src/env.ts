@@ -18,12 +18,12 @@ export const env = createEnv({
   },
   server: {
     GOOGLE_SHEETS_ID: z.string().min(1),
-    GCP_CLIENT_EMAIL: z.string().min(1),
+    GCP_CLIENT_EMAIL: z.string().email(),
     GCP_PRIVATE_KEY: z.string().min(1),
     LINE_USER_ID: z.string().min(1),
     LINE_CHANNEL_ACCESS_TOKEN: z.string().min(1),
     RESEND_API_KEY: z.string().min(1),
-    VERCEL_DEPLOY_HOOK_URL: z.string().min(1),
+    VERCEL_DEPLOY_HOOK_URL: z.string().url(),
     CRON_SECRET: z.string().min(1),
   },
   experimental__runtimeEnv: {
