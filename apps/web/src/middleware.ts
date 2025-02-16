@@ -31,17 +31,22 @@ const defaultMiddleware = async (request: NextRequest) => {
 const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)"]);
 const isProtectedRoute = createRouteMatcher(["/secret(.*)"]);
 
-export default clerkMiddleware(async (auth, request) => {
-  // if (!isPublicRoute(request)) {
-  //   await auth.protect();
-  // }
+export default clerkMiddleware(
+  async (auth, request) => {
+    // if (!isPublicRoute(request)) {
+    //   await auth.protect();
+    // }
 
-  if (isProtectedRoute(request)) {
-    await auth.protect();
-  }
+    if (isProtectedRoute(request)) {
+      await auth.protect();
+    }
 
-  return defaultMiddleware(request);
-});
+    return defaultMiddleware(request);
+  },
+  {
+    authorizedParties: ["http://localhost:3000", "https://kkhys.me"],
+  },
+);
 
 export const config = {
   matcher: [
