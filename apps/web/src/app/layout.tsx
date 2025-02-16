@@ -1,4 +1,5 @@
 import "#/styles/globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster, cn } from "@kkhys/ui";
 import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata, Viewport } from "next";
@@ -58,33 +59,35 @@ export const viewport = {
 } satisfies Viewport;
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <html lang="ja" suppressHydrationWarning>
-    <body
-      className={cn(
-        "min-h-screen bg-background antialiased",
-        notoSansJP.className,
-        inter.variable,
-        newsreader.variable,
-        jetBrainsMono.variable,
-      )}
-    >
-      <Provider>
-        <div vaul-drawer-wrapper="">
-          <div className="relative flex min-h-screen flex-col bg-background">
-            <div className="mx-auto w-full border-border/40 dark:border-border max-w-6xl border-x flex-1 flex flex-col">
-              <SiteHeader />
-              <main className="w-full max-w-2xl mx-auto flex-1">
-                <div className="container py-12">{children}</div>
-              </main>
-              <SiteFooter />
+  <ClerkProvider>
+    <html lang="ja" suppressHydrationWarning>
+      <body
+        className={cn(
+          "min-h-screen bg-background antialiased",
+          notoSansJP.className,
+          inter.variable,
+          newsreader.variable,
+          jetBrainsMono.variable,
+        )}
+      >
+        <Provider>
+          <div vaul-drawer-wrapper="">
+            <div className="relative flex min-h-screen flex-col bg-background">
+              <div className="mx-auto w-full border-border/40 dark:border-border max-w-6xl border-x flex-1 flex flex-col">
+                <SiteHeader />
+                <main className="w-full max-w-2xl mx-auto flex-1">
+                  <div className="container py-12">{children}</div>
+                </main>
+                <SiteFooter />
+              </div>
             </div>
           </div>
-        </div>
-        <Toaster position="top-center" richColors />
-      </Provider>
-    </body>
-    <GoogleTagManager gtmId={env.NEXT_PUBLIC_TAG_MANAGER_ID} />
-  </html>
+          <Toaster position="top-center" richColors />
+        </Provider>
+      </body>
+      <GoogleTagManager gtmId={env.NEXT_PUBLIC_TAG_MANAGER_ID} />
+    </html>
+  </ClerkProvider>
 );
 
 export default RootLayout;
