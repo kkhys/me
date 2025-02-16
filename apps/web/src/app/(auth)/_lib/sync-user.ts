@@ -1,4 +1,5 @@
 import { createUser, deleteUserByClerkId } from "#/app/(auth)/_lib/actions";
+import { getUserByClerkId } from "#/app/(auth)/_lib/queries";
 import type { ClerkWebhookUser } from "#/app/(auth)/_types";
 import { inngest } from "#/lib/inngest";
 
@@ -27,6 +28,12 @@ export const syncUpdatedUser = inngest.createFunction(
       email_addresses,
       primary_email_address_id,
     });
+
+    const user = await getUserByClerkId(id);
+
+    if (!user) {
+      await createUser({ clerkId: id });
+    }
 
     console.log("Syncing updated user", { id, email });
   },
