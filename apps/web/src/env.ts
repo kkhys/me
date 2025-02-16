@@ -1,9 +1,11 @@
+import { env as authEnv } from "@kkhys/auth/env";
+import { env as dbEnv } from "@kkhys/db/env";
 import { createEnv } from "@t3-oss/env-nextjs";
 import { vercel } from "@t3-oss/env-nextjs/presets-zod";
 import { z } from "zod";
 
 export const env = createEnv({
-  extends: [vercel()],
+  extends: [authEnv, dbEnv, vercel()],
   shared: {
     NODE_ENV: z
       .enum(["development", "production", "test"])
@@ -16,12 +18,12 @@ export const env = createEnv({
   },
   server: {
     GOOGLE_SHEETS_ID: z.string().min(1),
-    GCP_CLIENT_EMAIL: z.string().min(1),
+    GCP_CLIENT_EMAIL: z.string().email(),
     GCP_PRIVATE_KEY: z.string().min(1),
     LINE_USER_ID: z.string().min(1),
     LINE_CHANNEL_ACCESS_TOKEN: z.string().min(1),
     RESEND_API_KEY: z.string().min(1),
-    VERCEL_DEPLOY_HOOK_URL: z.string().min(1),
+    VERCEL_DEPLOY_HOOK_URL: z.string().url(),
     CRON_SECRET: z.string().min(1),
   },
   experimental__runtimeEnv: {
