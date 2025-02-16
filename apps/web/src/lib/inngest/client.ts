@@ -1,22 +1,10 @@
 import { EventSchemas, Inngest } from "inngest";
-
-type ClerkUser = {
-  data: {
-    id: string;
-    first_name: string;
-    last_name: string;
-    email_addresses: {
-      id: string;
-      email_address: string;
-    }[];
-    primary_email_address_id: string;
-  };
-};
+import type { ClerkWebhookUser } from "#/app/(auth)/_types";
 
 type Events = {
-  "clerk/user.created": ClerkUser;
-  "clerk/user.updated": ClerkUser;
-  "clerk/user.deleted": ClerkUser;
+  "clerk/user.created": ClerkWebhookUser;
+  "clerk/user.updated": ClerkWebhookUser;
+  "clerk/user.deleted": ClerkWebhookUser;
 };
 
 export const inngest = new Inngest({
