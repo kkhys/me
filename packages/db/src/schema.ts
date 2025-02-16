@@ -5,7 +5,10 @@ export const User = pgTable("user", (t) => ({
   clerkId: t.varchar({ length: 255 }).notNull().unique(),
   deletedAt: t.timestamp(),
   createdAt: t.timestamp().defaultNow().notNull(),
-  updatedAt: t.timestamp().notNull().$onUpdateFn(() => new Date()),
+  updatedAt: t
+    .timestamp()
+    .notNull()
+    .$onUpdateFn(() => new Date()),
 }));
 
 export type InsertUser = typeof User.$inferInsert;
