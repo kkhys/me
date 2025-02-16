@@ -1,5 +1,5 @@
 {
-  "id": "d21480e5-de23-4fb4-a01f-2db9629ea3a7",
+  "id": "2d67e4e6-a16c-411f-9f84-63d1a090067e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -29,16 +29,16 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "timestamp with time zone",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "timestamp with time zone",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         }
       },
       "indexes": {},
@@ -48,7 +48,9 @@
         "user_clerkId_unique": {
           "name": "user_clerkId_unique",
           "nullsNotDistinct": false,
-          "columns": ["clerk_id"]
+          "columns": [
+            "clerk_id"
+          ]
         }
       },
       "policies": {},
