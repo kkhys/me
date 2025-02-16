@@ -1,4 +1,8 @@
-import { ModeSwitcher } from "@kkhys/ui";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { Button, ModeSwitcher } from "@kkhys/ui";
+import { LockIcon } from "lucide-react";
+import * as React from "react";
+import { UserButton } from "#/app/(auth)/_ui";
 import { CommandMenu, MainNav, MobileNav } from "#/ui";
 
 export const SiteHeader = () => (
@@ -10,8 +14,24 @@ export const SiteHeader = () => (
         <div className="w-full flex-1 md:w-auto md:flex-none">
           <CommandMenu />
         </div>
-        <nav className="flex items-center gap-0.5">
+        <nav className="flex items-center gap-1.5">
           <ModeSwitcher />
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+          <SignedOut>
+            <SignInButton>
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                className="size-8"
+              >
+                <LockIcon />
+                <span className="sr-only">Sign in</span>
+              </Button>
+            </SignInButton>
+          </SignedOut>
         </nav>
       </div>
     </div>
