@@ -7,7 +7,7 @@ import { visit } from "unist-util-visit";
 
 export const rehypePrettyCodeOptions = {
   theme: "poimandres",
-  transformers: [transformerNotationDiff()],
+  transformers: [transformerNotationDiff() as import("shiki").ShikiTransformer],
 } satisfies Options;
 
 export const beforeRehypePrettyCode = () => {

@@ -5,6 +5,25 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/tech/2025-02-22/index.mdx",
+    title: "v2.5.0 リリースノート: 会員登録機能の実装",
+    slug: "p187cwk",
+    emoji: "🚀",
+    category: "Tech",
+    tags: ["Release note"],
+    status: "published",
+    publishedAt: "2025-02-22T00:00:00.000Z",
+    excerpt:
+      "個人のホームページとしては珍しい会員登録機能を実装してみた。なにやら怪しげな機能が追加されたように見えるかもしれないが、現時点では会員になったところで秘密の部屋への入場券が手に入るわけではない。まだまだベータ版の段階で、ごく親しい知人たちにモルモット役をお願いしている状態である。とはいえ、Waitlistだけは密かに一...",
+    url: "https://kkhys.me/posts/p187cwk",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-02-22/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-02-22/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-02-22/index.mdx",
+  },
+  {
     _id: "posts/life/2025-02-15/index.mdx",
     title: "バレンタインデー 2025",
     slug: "p1x6nt3",

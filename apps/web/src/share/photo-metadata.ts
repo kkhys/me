@@ -64,4 +64,16 @@ export const photoMetadata: PhotoMetadata[] = [
     slug: "p1cucay",
     title: "2019-08-14 / 15",
   },
+  {
+    slug: "p192ye4",
+    title: "2024-09-28 / 16",
+  },
+  {
+    slug: "p1jjgr4",
+    title: "2024-11-09 / 17",
+  },
+  {
+    slug: "p12p287",
+    title: "2024-12-22 / 18",
+  },
 ];
