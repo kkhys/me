@@ -5,6 +5,11 @@ import type { PostMetadataForEdge } from "#/app/posts/_types";
 
 export const postMetadataForEdge: PostMetadataForEdge[] = [
   {
+    title: "v2.5.0 リリースノート: 会員登録機能の実装",
+    emoji: "🚀",
+    slug: "p187cwk",
+  },
+  {
     title: "バレンタインデー 2025",
     emoji: "🍫",
     slug: "p1x6nt3",
