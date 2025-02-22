@@ -7,7 +7,7 @@ import { getPostBySlug } from "#/utils/post";
 const popularPostCount = 6;
 
 const RankNumber = ({ rank }: { rank: number }) => (
-  <div className="flex items-center justify-center absolute top-0 right-0 p-1 bg-secondary size-5">
+  <div className="absolute top-1 right-1 size-5">
     <span className="text-xs text-secondary-foreground font-sans tabular-nums">
       {rank}
     </span>
@@ -45,11 +45,13 @@ export const PopularPostsSkeleton = ({ className }: { className?: string }) => (
         className,
       )}
     >
-      {[...Array(popularPostCount)].map((_, index) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-        <div key={index} className="relative">
+      {Array.from({ length: popularPostCount }, (_, i) => (
+        <div
+          key={`popular-post-skeleton-${crypto.randomUUID()}`}
+          className="relative"
+        >
           <ArticleCardSkeleton />
-          <RankNumber rank={index + 1} />
+          <RankNumber rank={i + 1} />
         </div>
       ))}
     </div>
