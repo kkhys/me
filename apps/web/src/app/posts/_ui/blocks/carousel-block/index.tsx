@@ -39,10 +39,9 @@ export const CarouselBlock = ({
         {...props}
       >
         <CarouselContent>
-          {(children as React.ReactNode[])?.map((child, index) => (
+          {(children as React.ReactNode[])?.map((child) => (
             <CarouselItem
-              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-              key={index}
+              key={`carousel-item-${crypto.randomUUID()}`}
               className="basis-full transition-opacity duration-300 sm:basis-[86%] [&:not(.is-snapped)]:opacity-15"
             >
               {child}

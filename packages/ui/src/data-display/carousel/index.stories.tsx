@@ -49,8 +49,7 @@ export const Default = {
       <>
         <CarouselContent>
           {Array.from({ length: 5 }).map((_, index) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            <CarouselItem key={index}>
+            <CarouselItem key={`item-${crypto.randomUUID()}`}>
               <div className="p-1">
                 <Card>
                   <CardContent className="flex aspect-square items-center justify-center p-6">
@@ -78,8 +77,10 @@ export const Sizes = {
       <>
         <CarouselContent>
           {Array.from({ length: 5 }).map((_, index) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+            <CarouselItem
+              key={`item-${crypto.randomUUID()}`}
+              className="md:basis-1/2 lg:basis-1/3"
+            >
               <div className="p-1">
                 <Card>
                   <CardContent className="flex aspect-square items-center justify-center p-6">
@@ -105,8 +106,7 @@ export const Spacing = {
         <CarouselContent className="-ml-1">
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem
-              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-              key={index}
+              key={`item-${crypto.randomUUID()}`}
               className="pl-1 md:basis-1/2 lg:basis-1/3"
             >
               <div className="p-1">
@@ -137,8 +137,10 @@ export const Orientation = {
       <>
         <CarouselContent className="-mt-1 h-[200px]">
           {Array.from({ length: 5 }).map((_, index) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            <CarouselItem key={index} className="pt-1 md:basis-1/2">
+            <CarouselItem
+              key={`item-${crypto.randomUUID()}`}
+              className="pt-1 md:basis-1/2"
+            >
               <div className="p-1">
                 <Card>
                   <CardContent className="flex items-center justify-center p-6">
@@ -175,8 +177,7 @@ const CountDemo = (props: CarouselProps) => {
       <Carousel setApi={setApi} className="w-[250px]" {...props}>
         <CarouselContent>
           {Array.from({ length: 5 }).map((_, index) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-            <CarouselItem key={index}>
+            <CarouselItem key={`item-${crypto.randomUUID()}`}>
               <Card>
                 <CardContent className="flex aspect-square items-center justify-center p-6">
                   <span className="text-4xl font-medium">{index + 1}</span>
