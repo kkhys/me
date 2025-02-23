@@ -7,7 +7,7 @@ import { getPostBySlug } from "#/utils/post";
 const popularPostCount = 6;
 
 const RankNumber = ({ rank }: { rank: number }) => (
-  <div className="absolute top-1 right-1 size-5">
+  <div className="absolute top-1 right-3">
     <span className="text-xs text-secondary-foreground font-sans tabular-nums">
       {rank}
     </span>
