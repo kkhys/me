@@ -181,9 +181,11 @@ export const Pagination = ({
             isDisabled={currentPage === 1}
           />
         </PaginationItem>
-        {visiblePages.map((page, i) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-          <PaginationItem key={i} className="hidden sm:block">
+        {visiblePages.map((page) => (
+          <PaginationItem
+            key={`page-${crypto.randomUUID()}`}
+            className="hidden sm:block"
+          >
             {typeof page === "string" ? (
               <PaginationEllipsis />
             ) : (
