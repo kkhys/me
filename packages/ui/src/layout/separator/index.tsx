@@ -8,11 +8,9 @@ const Separator = ({
   className,
   decorative,
   orientation = "horizontal",
-  ref,
   ...props
 }: React.ComponentProps<typeof SeparatorPrimitive.Root>) => (
   <SeparatorPrimitive.Root
-    ref={ref}
     decorative={decorative}
     orientation={orientation}
     className={cn(

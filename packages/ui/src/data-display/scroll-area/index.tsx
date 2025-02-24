@@ -7,12 +7,10 @@ import { cn } from "@kkhys/ui";
 const ScrollArea = ({
   className,
   children,
-  ref,
   ...props
 }: React.ComponentProps<typeof ScrollAreaPrimitive.Root>) => (
   <ScrollAreaPrimitive.Root
     className={cn("relative overflow-hidden", className)}
-    ref={ref}
     {...props}
   >
     <ScrollAreaPrimitive.Viewport className="size-full rounded-[inherit]">
@@ -27,7 +25,6 @@ ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
 const ScrollBar = ({
   className,
   orientation = "vertical",
-  ref,
   ...props
 }: React.ComponentProps<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>) => (
   <ScrollAreaPrimitive.ScrollAreaScrollbar
@@ -40,7 +37,6 @@ const ScrollBar = ({
         "h-2.5 flex-col border-t border-t-transparent p-[1px]",
       className,
     )}
-    ref={ref}
     {...props}
   >
     <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-border" />
