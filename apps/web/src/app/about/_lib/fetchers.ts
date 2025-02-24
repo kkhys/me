@@ -1,7 +1,8 @@
 import "server-only";
+import type { Summary } from "#/app/about/_types";
 import { env } from "#/env";
 
-export const getWakaTimeData = async () => {
+export const getWakaTimeSummaries = async () => {
   const apiKey = env.WAKATIME_API_KEY;
   const url =
     "https://wakatime.com/api/v1/users/current/summaries?range=last_7_days";
@@ -16,9 +17,9 @@ export const getWakaTimeData = async () => {
       headers: {
         Authorization: `Basic ${Buffer.from(apiKey).toString("base64")}`,
       },
-      next: {
-        revalidate: 60,
-      },
+      // next: {
+      //   revalidate: 60,
+      // },
     });
 
     if (!response.ok) {
@@ -26,8 +27,7 @@ export const getWakaTimeData = async () => {
       return null;
     }
 
-    return await response.json();
-    // return data as WakaTimeData;
+    return (await response.json()) as { data: Summary[] };
   } catch (error) {
     console.error("Error fetching WakaTime data:", error);
     return null;

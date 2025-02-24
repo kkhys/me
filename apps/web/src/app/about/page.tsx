@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import type { BreadcrumbList, WithContext } from "schema-dts";
-import { getMastodonDate, getWakaTimeData } from "#/app/about/_lib";
+import { WakatimeMetrics, WakatimeMetricsSkeleton } from "#/app/about/_ui";
 import { siteConfig } from "#/config";
 
 const JsonLd = () => {
@@ -45,25 +46,19 @@ export const metadata = {
   },
 } satisfies Metadata;
 
-const Page = async () => {
-  await Promise.all([getWakaTimeData(), getMastodonDate()]).then(
-    ([wakaTimeData, mastodonData]) => {
-      console.dir(wakaTimeData);
-      console.dir(mastodonData);
-    },
-  );
-
-  return (
-    <>
-      <JsonLd />
-      <header>
-        <h1 className="font-sans font-medium">About</h1>
-      </header>
-      <div className="mt-6">
-        <p>WIP</p>
-      </div>
-    </>
-  );
-};
+const Page = () => (
+  <>
+    <JsonLd />
+    <header>
+      <h1 className="font-sans font-medium">About</h1>
+    </header>
+    <div className="mt-6 space-y-6">
+      <h2 className="font-sans font-medium">This Week I Spent My Time On</h2>
+      <Suspense fallback={<WakatimeMetricsSkeleton />}>
+        <WakatimeMetrics />
+      </Suspense>
+    </div>
+  </>
+);
 
 export default Page;
