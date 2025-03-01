@@ -15,7 +15,7 @@ export const me = {
   email: "hi@kkhys.me",
   github: {
     id: "kkhys",
-    url: "https://github.com/kkhys"
+    url: "https://github.com/kkhys",
   },
   mastodon: "https://mastodon.kkhys.me",
   x: {

@@ -27,6 +27,7 @@ export const env = createEnv({
     CRON_SECRET: z.string().min(1),
     WAKATIME_API_KEY: z.string().min(1),
     MASTODON_API_KEY: z.string().min(1),
+    GITHUB_ACCESS_TOKEN: z.string().min(1),
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
