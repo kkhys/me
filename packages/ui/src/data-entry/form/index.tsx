@@ -23,10 +23,9 @@ const FormField = <TFieldName extends string>({
 const FormItem = ({
   className,
   children,
-  ref,
   ...props
 }: React.ComponentProps<"div">) => (
-  <div className={cn("space-y-2", className)} ref={ref} {...props}>
+  <div className={cn("space-y-2", className)} {...props}>
     {children}
   </div>
 );
@@ -34,14 +33,13 @@ FormItem.displayName = "FormItem";
 
 const FormLabel = ({
   children,
-  ref,
   ...props
 }: React.ComponentProps<typeof LabelPrimitive.Root>) => {
   const { name } = React.useContext(FormFieldContext);
   const [{ id, required }] = useField(name);
 
   return (
-    <Label htmlFor={id} ref={ref} {...props}>
+    <Label htmlFor={id} {...props}>
       {children}
       {required && (
         <span className="ml-1 text-destructive" aria-label="required">
@@ -55,7 +53,6 @@ FormLabel.displayName = "FormLabel";
 
 const FormDescription = ({
   className,
-  ref,
   ...props
 }: React.ComponentProps<"p">) => {
   const { name } = React.useContext(FormFieldContext);
@@ -65,7 +62,6 @@ const FormDescription = ({
     <p
       id={descriptionId}
       className={cn("text-[0.8rem] text-muted-foreground", className)}
-      ref={ref}
       {...props}
     />
   );
@@ -75,7 +71,6 @@ FormDescription.displayName = "FormDescription";
 const FormMessage = ({
   className,
   children,
-  ref,
   ...props
 }: React.ComponentProps<"p">) => {
   const { name } = React.useContext(FormFieldContext);
@@ -90,7 +85,6 @@ const FormMessage = ({
     <p
       id={errorId}
       className={cn("text-[0.8rem] font-medium text-destructive", className)}
-      ref={ref}
       {...props}
     >
       {body}

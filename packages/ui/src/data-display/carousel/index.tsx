@@ -49,7 +49,6 @@ const Carousel = ({
   plugins,
   className,
   children,
-  ref,
   ...props
 }: React.ComponentProps<"div"> & CarouselProps) => {
   const [carouselRef, api] = useEmblaCarousel(
@@ -132,7 +131,6 @@ const Carousel = ({
         onKeyDownCapture={handleKeyDown}
         className={cn("relative", className)}
         aria-roledescription="carousel"
-        ref={ref}
         {...props}
       >
         {children}
@@ -144,7 +142,6 @@ Carousel.displayName = "Carousel";
 
 const CarouselContent = ({
   className,
-  ref,
   ...props
 }: React.ComponentProps<"div">) => {
   const { carouselRef, orientation } = useCarousel();
@@ -157,7 +154,6 @@ const CarouselContent = ({
           orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
           className,
         )}
-        ref={ref}
         {...props}
       />
     </div>
@@ -165,16 +161,11 @@ const CarouselContent = ({
 };
 CarouselContent.displayName = "CarouselContent";
 
-const CarouselItem = ({
-  className,
-  ref,
-  ...props
-}: React.ComponentProps<"div">) => {
+const CarouselItem = ({ className, ...props }: React.ComponentProps<"div">) => {
   const { orientation } = useCarousel();
 
   return (
     <div
-      ref={ref}
       role="group"
       aria-roledescription="slide"
       className={cn(
@@ -192,7 +183,6 @@ const CarouselPrevious = ({
   className,
   variant = "outline",
   size = "icon",
-  ref,
   ...props
 }: ButtonProps) => {
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
@@ -210,7 +200,6 @@ const CarouselPrevious = ({
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
-      ref={ref}
       {...props}
     >
       <ArrowLeftIcon className="size-4" />
@@ -224,14 +213,12 @@ const CarouselNext = ({
   className,
   variant = "outline",
   size = "icon",
-  ref,
   ...props
 }: ButtonProps) => {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
     <Button
-      ref={ref}
       variant={variant}
       size={size}
       className={cn(
