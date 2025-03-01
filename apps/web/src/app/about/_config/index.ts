@@ -3,4 +3,5 @@ export const excludedLanguage = [
   "Image (svg)",
   "Play 2 Routing",
   "Play2",
+  "Text",
 ];
