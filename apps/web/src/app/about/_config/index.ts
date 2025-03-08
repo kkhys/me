@@ -4,4 +4,5 @@ export const excludedLanguage = [
   "Play 2 Routing",
   "Play2",
   "Text",
+  "JSON",
 ];
