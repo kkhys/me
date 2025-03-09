@@ -5,4 +5,5 @@ export const excludedLanguage = [
   "Play2",
   "Text",
   "JSON",
+  "TSConfig",
 ];
