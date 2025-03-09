@@ -1,6 +1,7 @@
 import "server-only";
 import type { GraphQlQueryResponseData } from "@octokit/graphql";
 import { unstable_cache } from "next/cache";
+import type { CommitNode } from "#/app/about/_types";
 import { me } from "#/config";
 import { graphql } from "#/lib/octokit";
 
@@ -145,10 +146,6 @@ export const getCachedRepositoryBranches = unstable_cache(
   },
 );
 
-type CommitNode = {
-  committedDate: string;
-};
-
 type GetRepositoryCommitsResponse = GraphQlQueryResponseData & {
   repository: {
     ref: {
@@ -177,6 +174,11 @@ export const getRepositoryCommits = async (
                 edges {
                   node {
                     committedDate
+                    author {
+                      user {
+                        login
+                      }
+                    }
                   }
                 }
                 pageInfo {

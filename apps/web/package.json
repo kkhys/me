@@ -15,13 +15,15 @@
     "storybook:dev": "bun with-env storybook dev --port 6008 --quiet --no-open",
     "storybook:build": "bun with-env storybook build --quiet",
     "storybook:move": "mv storybook-static ../../storybook-static/web",
-    "playwright-install": "bunx playwright-core install chromium"
+    "playwright-install": "bunx playwright-core install chromium",
+    "generate:commits-data": "bun with-env bun --conditions=react-server ./src/scripts/calculate-commits-data.ts && cd ../.. && bun lint:fix && cd apps/web"
   },
   "dependencies": {
     "@clerk/nextjs": "6.12.1",
     "@clerk/themes": "2.2.20",
     "@conform-to/react": "1.2.2",
     "@conform-to/zod": "1.2.2",
+    "@date-fns/tz": "1.2.0",
     "@kkhys/auth": "workspace:*",
     "@kkhys/db": "workspace:*",
     "@kkhys/email": "workspace:*",
