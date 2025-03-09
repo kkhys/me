@@ -16,7 +16,7 @@
     "storybook:build": "bun with-env storybook build --quiet",
     "storybook:move": "mv storybook-static ../../storybook-static/web",
     "playwright-install": "bunx playwright-core install chromium",
-    "generate:commits-data": "bun with-env bun --conditions=react-server ./src/scripts/calculate-commits-data.ts && cd ../.. && bun lint:fix && cd apps/web"
+    "generate:commits-data": "bun with-env bun --conditions=react-server ./src/scripts/calculate-commits-data.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "6.12.4",
