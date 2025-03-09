@@ -48,9 +48,11 @@ export const ArticleCardSkeleton = () => (
       <EyeCatchSkeleton size="sm" className="rounded-full" />
     </CardHeader>
     <CardContent className="pb-3 space-y-2">
-      {[...Array(3)].map((_, index) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-        <Skeleton key={index} className="h-[1.27rem] w-full" />
+      {[...Array(3)].map(() => (
+        <Skeleton
+          key={`skeleton-${crypto.randomUUID()}`}
+          className="h-[1.27rem] w-full"
+        />
       ))}
     </CardContent>
     <CardFooter>
