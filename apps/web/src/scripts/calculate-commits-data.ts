@@ -142,21 +142,26 @@ const main = async () => {
     }
   }
 
-  const filteredAllCommits = allCommits
-    .filter(({ author }) => author.user?.login === me.github.id)
-    .sort(
-      (a, b) =>
-        new Date(a.committedDate).getTime() -
-        new Date(b.committedDate).getTime(),
-    );
+  const filteredCommits = allCommits.filter(
+    ({ author }) => author?.user?.login === me.github.id,
+  );
 
-  const commitsData = buildCommitsData(filteredAllCommits);
+  const uniqueCommitsMap = new Map<string, CommitNode>();
+
+  for (const commit of [...cachedCommitsData.commits, ...filteredCommits]) {
+    uniqueCommitsMap.set(commit.committedDate, { ...commit });
+  }
+
+  const mergedCommits = Array.from(uniqueCommitsMap.values()).sort(
+    (a, b) =>
+      new Date(a.committedDate).getTime() - new Date(b.committedDate).getTime(),
+  );
+
+  const commitsData = buildCommitsData(mergedCommits);
 
   writeToFile(commitsData);
 
   console.log("Processing completed:", FILE_PATH);
 };
 
-main().catch((error) => {
-  console.error("An error occurred:", error);
-});
+main().catch((error) => console.error("An error occurred:", error));
