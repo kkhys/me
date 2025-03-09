@@ -1,6 +1,6 @@
 export type CommitNode = {
   committedDate: string;
-  author: {
+  author?: {
     user: {
       login: string;
     } | null;
