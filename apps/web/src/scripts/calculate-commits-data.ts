@@ -11,6 +11,8 @@ import type {
   CommitNode,
   CommitsData,
 } from "#/app/about/_types";
+import { me } from "#/config";
+import { commitsData as cachedCommitsData } from "#/share/commits-data";
 
 const FILE_PATH = "src/share/commits-data.ts";
 
@@ -32,8 +34,7 @@ const timeOfDayRanges = [
 ] as const;
 
 const writeToFile = (data: CommitsData) => {
-  const content = `
-// This file was automatically generated.
+  const content = `// This file was automatically generated.
 // Please do not remove or edit this file.
 
 import type { CommitsData } from '#/app/about/_types';
@@ -98,18 +99,24 @@ const buildCommitsData = (allCommits: CommitNode[]): CommitsData => {
   const total = allCommits.length;
 
   for (const obj of Object.values(initialDaysData)) {
-    obj.percentage = total > 0 ? (obj.commits / total) * 100 : 0;
+    obj.percentage =
+      total > 0
+        ? Number.parseFloat(((obj.commits / total) * 100).toFixed(2))
+        : 0;
   }
 
   for (const obj of Object.values(initialTimeData)) {
-    obj.percentage = total > 0 ? (obj.commits / total) * 100 : 0;
+    obj.percentage =
+      total > 0
+        ? Number.parseFloat(((obj.commits / total) * 100).toFixed(2))
+        : 0;
   }
 
   return {
     totalCommits: total,
     allTimeOfDayData: initialTimeData,
     allDaysOfWeekData: initialDaysData,
-    commits: allCommits,
+    commits: allCommits.map(({ author, ...rest }) => rest),
   };
 };
 
@@ -118,7 +125,8 @@ const main = async () => {
 
   const repositories = await getUserRepositories();
 
-  const sinceDate = "2025-02-01T00:00:00Z";
+  const sinceDate =
+    cachedCommitsData.commits.at(-1)?.committedDate || "2020-07-31T00:00:00Z";
   const allCommits: CommitNode[] = [];
 
   for (const repo of repositories) {
@@ -134,15 +142,15 @@ const main = async () => {
     }
   }
 
-  allCommits
-    .filter(({ author }) => author.user?.login === "kkhys")
+  const filteredAllCommits = allCommits
+    .filter(({ author }) => author.user?.login === me.github.id)
     .sort(
       (a, b) =>
         new Date(a.committedDate).getTime() -
         new Date(b.committedDate).getTime(),
     );
 
-  const commitsData = buildCommitsData(allCommits);
+  const commitsData = buildCommitsData(filteredAllCommits);
 
   writeToFile(commitsData);
 

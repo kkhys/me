@@ -31,5 +31,5 @@ export type CommitsData = {
   totalCommits: number;
   allTimeOfDayData: AllTimeOfDayData;
   allDaysOfWeekData: AllDaysOfWeekData;
-  commits: CommitNode[];
+  commits: Pick<CommitNode, "committedDate">[];
 };
