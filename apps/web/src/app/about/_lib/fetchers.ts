@@ -17,9 +17,7 @@ export const getWakaTimeSummaries = async () => {
       headers: {
         Authorization: `Basic ${Buffer.from(apiKey).toString("base64")}`,
       },
-      next: {
-        revalidate: 60 * 60,
-      },
+      cache: "force-cache",
     });
 
     if (!response.ok) {

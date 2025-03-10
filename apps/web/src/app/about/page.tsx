@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import type { BreadcrumbList, WithContext } from "schema-dts";
-import {
-  GithubMetrics,
-  WakatimeMetrics,
-  WakatimeMetricsSkeleton,
-} from "#/app/about/_ui";
+import { GithubMetrics, WakatimeMetrics } from "#/app/about/_ui";
 import { siteConfig } from "#/config";
 
 const JsonLd = () => {
@@ -58,9 +53,7 @@ const Page = () => (
     </header>
     <div className="mt-6 space-y-6">
       <h2 className="font-sans font-medium">This Week I Spent My Time On</h2>
-      <Suspense fallback={<WakatimeMetricsSkeleton />}>
-        <WakatimeMetrics />
-      </Suspense>
+      <WakatimeMetrics />
       <GithubMetrics />
     </div>
   </>

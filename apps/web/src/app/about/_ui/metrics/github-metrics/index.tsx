@@ -1,31 +1,30 @@
-import {
-  getCachedRepositoryBranches,
-  getCachedRepositoryCommits,
-  getCachedUserRepositories,
-} from "#/app/about/_lib/github";
+import { buildCommitsData, fetchAndMergeCommits } from "#/app/about/_lib";
+import { commitsData as cachedCommitsData } from "#/share/commits-data";
 
-export const GithubMetrics = async ({ className }: { className?: string }) => {
-  const repositories = (await getCachedUserRepositories()) || {};
-
-  for (const { name: repositoryName } of repositories) {
-    const branches = await getCachedRepositoryBranches(repositoryName);
-
-    for (const { name: branchName } of branches) {
-      const commits = await getCachedRepositoryCommits(
-        repositoryName,
-        branchName,
-        "2025-02-20T00:00:00Z",
-      );
-
-      for (const { committedDate } of commits) {
-        console.log(committedDate);
-      }
-    }
+const getGithubMetricsData = async () => {
+  const sinceDate = cachedCommitsData.commits.at(-1)?.committedDate;
+  if (!sinceDate) {
+    throw new Error("No valid sinceDate found.");
   }
 
+  const mergedCommits = await fetchAndMergeCommits(
+    sinceDate,
+    cachedCommitsData.commits,
+  );
+
+  if (!mergedCommits) {
+    throw new Error("Failed to fetch merged commits.");
+  }
+
+  return buildCommitsData(mergedCommits);
+};
+
+export const GithubMetrics = async ({ className }: { className?: string }) => {
+  const commitsData = await getGithubMetricsData();
+
   return (
-    <div>
-      <p>test</p>
+    <div className={className}>
+      <p>Loaded {commitsData.totalCommits} commits!</p>
     </div>
   );
 };

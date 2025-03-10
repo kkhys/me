@@ -1,9 +1,16 @@
 import "server-only";
+import { TZDate } from "@date-fns/tz";
 import type { GraphQlQueryResponseData } from "@octokit/graphql";
 import { unstable_cache } from "next/cache";
-import type { CommitNode } from "#/app/about/_types";
+import type {
+  AllDaysOfWeekData,
+  AllTimeOfDayData,
+  CommitNode,
+  CommitsData,
+} from "#/app/about/_types";
 import { me } from "#/config";
 import { graphql } from "#/lib/octokit";
+import { categorizeDayOfWeek, categorizeTimeOfDay } from "#/utils/date";
 
 const owner = me.github.id;
 
@@ -90,7 +97,7 @@ export const getCachedUserRepositories = unstable_cache(
   async () => getUserRepositories(),
   undefined,
   {
-    revalidate: 60 * 60,
+    revalidate: false,
   },
 );
 
@@ -142,7 +149,7 @@ export const getCachedRepositoryBranches = unstable_cache(
   async (repositoryName: string) => getRepositoryBranches(repositoryName),
   undefined,
   {
-    revalidate: 60 * 60,
+    revalidate: false,
   },
 );
 
@@ -214,6 +221,108 @@ export const getCachedRepositoryCommits = unstable_cache(
     getRepositoryCommits(repositoryName, branch, since),
   undefined,
   {
-    revalidate: 60 * 60,
+    revalidate: false,
   },
 );
+
+export const buildCommitsData = (allCommits: CommitNode[]): CommitsData => {
+  const allDaysOfWeekData: AllDaysOfWeekData = {
+    monday: { commits: 0, percentage: 0 },
+    tuesday: { commits: 0, percentage: 0 },
+    wednesday: { commits: 0, percentage: 0 },
+    thursday: { commits: 0, percentage: 0 },
+    friday: { commits: 0, percentage: 0 },
+    saturday: { commits: 0, percentage: 0 },
+    sunday: { commits: 0, percentage: 0 },
+  };
+
+  const allTimeOfDayData: AllTimeOfDayData = {
+    morning: { commits: 0, percentage: 0 },
+    daytime: { commits: 0, percentage: 0 },
+    evening: { commits: 0, percentage: 0 },
+    night: { commits: 0, percentage: 0 },
+  };
+
+  const commitsWithTokyoDate = allCommits.map((commit) => {
+    const date = new TZDate(commit.committedDate, "Asia/Tokyo");
+
+    return {
+      ...commit,
+      committedDate: date.toISOString(),
+    };
+  });
+
+  for (const { committedDate } of commitsWithTokyoDate) {
+    const date = new TZDate(committedDate, "Asia/Tokyo");
+
+    const dayKey = categorizeDayOfWeek(date);
+    allDaysOfWeekData[dayKey].commits++;
+
+    const timeKey = categorizeTimeOfDay(date);
+    allTimeOfDayData[timeKey].commits++;
+  }
+
+  const totalCommits = commitsWithTokyoDate.length;
+
+  for (const obj of Object.values(allDaysOfWeekData)) {
+    obj.percentage =
+      totalCommits > 0
+        ? Number.parseFloat(((obj.commits / totalCommits) * 100).toFixed(2))
+        : 0;
+  }
+
+  for (const obj of Object.values(allTimeOfDayData)) {
+    obj.percentage =
+      totalCommits > 0
+        ? Number.parseFloat(((obj.commits / totalCommits) * 100).toFixed(2))
+        : 0;
+  }
+
+  return {
+    totalCommits,
+    allTimeOfDayData,
+    allDaysOfWeekData,
+    commits: commitsWithTokyoDate.map(({ author, ...rest }) => rest),
+  };
+};
+
+export const fetchAndMergeCommits = async (
+  sinceDate: string | null,
+  cachedCommits: CommitNode[],
+): Promise<CommitNode[]> => {
+  if (!sinceDate) throw new Error("sinceDate is required");
+
+  const repositories = await getCachedUserRepositories();
+
+  const allCommits: CommitNode[] = [];
+
+  // 各リポジトリの全ブランチに対してコミットを取得
+  for (const { name: repositoryName } of repositories) {
+    const branches = await getCachedRepositoryBranches(repositoryName);
+
+    for (const { name: branchName } of branches) {
+      const commits = await getCachedRepositoryCommits(
+        repositoryName,
+        branchName,
+        sinceDate,
+      );
+      allCommits.push(...commits);
+    }
+  }
+
+  // ログイン中のユーザーのコミットにフィルタリング
+  const filteredCommits = allCommits.filter(
+    ({ author }) => author?.user?.login === me.github.id,
+  );
+
+  // ユニークなコミットをマージ
+  const uniqueCommitsMap = new Map<string, CommitNode>();
+  for (const commit of [...cachedCommits, ...filteredCommits]) {
+    uniqueCommitsMap.set(commit.committedDate, { ...commit });
+  }
+
+  return Array.from(uniqueCommitsMap.values()).sort(
+    (a, b) =>
+      new Date(a.committedDate).getTime() - new Date(b.committedDate).getTime(),
+  );
+};
