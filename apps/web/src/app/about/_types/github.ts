@@ -12,7 +12,7 @@ type TimePeriodData = {
   percentage: number;
 };
 
-type TimeOfDayName = "morning" | "daytime" | "evening" | "night";
+export type TimeOfDayName = "morning" | "daytime" | "evening" | "night";
 
 export type AllTimeOfDayData = Record<TimeOfDayName, TimePeriodData>;
 

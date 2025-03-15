@@ -1,8 +1,15 @@
+import { cn } from "@kkhys/ui";
 import { buildCommitsData, fetchAndMergeCommits } from "#/app/about/_lib";
+import {
+  ChartCard,
+  TimeOfDayCommitsChart,
+  WeeklyCommitsChart,
+} from "#/app/about/_ui";
 import { commitsData as cachedCommitsData } from "#/share/commits-data";
 
 const getGithubMetricsData = async () => {
   const sinceDate = cachedCommitsData.commits.at(-1)?.committedDate;
+
   if (!sinceDate) {
     throw new Error("No valid sinceDate found.");
   }
@@ -22,9 +29,22 @@ const getGithubMetricsData = async () => {
 export const GithubMetrics = async ({ className }: { className?: string }) => {
   const commitsData = await getGithubMetricsData();
 
+  if (!commitsData) {
+    return null;
+  }
+
+  const { allTimeOfDayData, allDaysOfWeekData } = commitsData;
+
   return (
     <div className={className}>
-      <p>Loaded {commitsData.totalCommits} commits!</p>
+      <div className={cn("grid grid-cols-1 sm:grid-cols-1 gap-4", className)}>
+        <ChartCard title="Weekly commits">
+          <WeeklyCommitsChart data={allDaysOfWeekData} />
+        </ChartCard>
+        <ChartCard title="Time of day commits">
+          <TimeOfDayCommitsChart data={allTimeOfDayData} />
+        </ChartCard>
+      </div>
     </div>
   );
 };

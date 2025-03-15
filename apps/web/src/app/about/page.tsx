@@ -54,6 +54,7 @@ const Page = () => (
     <div className="mt-6 space-y-6">
       <h2 className="font-sans font-medium">This Week I Spent My Time On</h2>
       <WakatimeMetrics />
+      <h2 className="font-sans font-medium">Commits Analysis</h2>
       <GithubMetrics />
     </div>
   </>

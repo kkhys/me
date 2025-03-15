@@ -1,6 +1,10 @@
 import { cn } from "@kkhys/ui";
 import { getAggregateData, getWakaTimeSummaries } from "#/app/about/_lib";
-import { WakatimeCard, WakatimeCardSkeleton } from "#/app/about/_ui";
+import {
+  ChartCard,
+  WakatimeChart,
+  WakatimeChartSkeleton,
+} from "#/app/about/_ui";
 
 export const WakatimeMetrics = async ({
   className,
@@ -27,7 +31,9 @@ export const WakatimeMetrics = async ({
   return (
     <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-4", className)}>
       {aggregatedData.map(({ title, data }) => (
-        <WakatimeCard key={title} title={title} chartData={data} />
+        <ChartCard key={title} title={title}>
+          <WakatimeChart chartData={data} />
+        </ChartCard>
       ))}
     </div>
   );
@@ -46,7 +52,9 @@ export const WakatimeMetricsSkeleton = ({
   return (
     <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-4", className)}>
       {titles.map((title) => (
-        <WakatimeCardSkeleton key={title} title={title} />
+        <ChartCard key={title} title={title}>
+          <WakatimeChartSkeleton />
+        </ChartCard>
       ))}
     </div>
   );
