@@ -5,6 +5,80 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/object/2025-03-20/index.mdx",
+    title: "Mac mini という選択",
+    slug: "p1ryq9a",
+    emoji: "🖥",
+    category: "Object",
+    tags: ["Gadget"],
+    status: "draft",
+    publishedAt: "2025-03-20T00:00:00.000Z",
+    excerpt: "test",
+    url: "https://kkhys.me/posts/p1ryq9a",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/object/2025-03-20/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/object/2025-03-20/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/object/2025-03-20/index.mdx",
+  },
+  {
+    _id: "posts/tech/2025-03-19/index.mdx",
+    title: "JetBrains IDE",
+    slug: "p1m7qa7",
+    emoji: "🔌",
+    category: "Tech",
+    tags: [],
+    status: "draft",
+    publishedAt: "2025-03-19T00:00:00.000Z",
+    excerpt:
+      "IdeaVimJetBrainsAIAssistantGitHubCopilotGitLinkGitToolBoxMaterialThemeUIAtomMaterialIconsRainbowBracketsWakatime",
+    url: "https://kkhys.me/posts/p1m7qa7",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-03-19/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-03-19/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-03-19/index.mdx",
+  },
+  {
+    _id: "posts/tech/2025-03-18/index.mdx",
+    title: "Mac を買ったらやっておくべき初期設定（エンジニア向け）",
+    slug: "p19rm7z",
+    emoji: "🚀",
+    category: "Tech",
+    tags: ["Release note"],
+    status: "draft",
+    publishedAt: "2025-03-18T00:00:00.000Z",
+    excerpt:
+      "ドックを必要最小限に壁紙を黒くするロック画面の設定デスクトップとDockキーボードショートカットとマウスショートカットホットコーナーNightShiftネットワーク。ファイアウォールSpotlightコントロールセンター外観。スクロールバー通知サウンド位置情報サービスiCloudキーボードマウスグリッドに沿うFinde...",
+    url: "https://kkhys.me/posts/p19rm7z",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-03-18/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-03-18/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-03-18/index.mdx",
+  },
+  {
+    _id: "posts/tech/2025-03-03/index.mdx",
+    title: "v2.6.0 リリースノート: About ページの追加",
+    slug: "p1hchr3",
+    emoji: "🚀",
+    category: "Tech",
+    tags: ["Release note"],
+    status: "draft",
+    publishedAt: "2025-03-03T00:00:00.000Z",
+    excerpt: "",
+    url: "https://kkhys.me/posts/p1hchr3",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-03-03/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-03-03/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-03-03/index.mdx",
+  },
+  {
     _id: "posts/tech/2025-02-22/index.mdx",
     title: "v2.5.0 リリースノート: 会員登録機能の実装",
     slug: "p187cwk",
