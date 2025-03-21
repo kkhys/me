@@ -5,22 +5,23 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
-    _id: "posts/object/2025-03-20/index.mdx",
+    _id: "posts/object/2025-03-21/index.mdx",
     title: "Mac mini という選択",
-    slug: "p1ryq9a",
-    emoji: "🖥",
+    slug: "p1r3zrr",
+    emoji: "🍎",
     category: "Object",
     tags: ["Gadget"],
-    status: "draft",
-    publishedAt: "2025-03-20T00:00:00.000Z",
-    excerpt: "test",
-    url: "https://kkhys.me/posts/p1ryq9a",
+    status: "published",
+    publishedAt: "2025-03-21T00:00:00.000Z",
+    excerpt:
+      "先日M4チップが搭載されたMacminiを購入したので所感を書いていく。Macminiの箱Macminiのスペック今回購入したMacminiのスペック↓チップ:AppleM4チップメモリ:24GBユニファイドメモリストレージ:512GB価格:約148,000円デフォルトだとメモリは16GBだが、IDEを開きながら作業す...",
+    url: "https://kkhys.me/posts/p1r3zrr",
     editUrl:
-      "https://github.com/kkhys/content/edit/main/posts/object/2025-03-20/index.mdx",
+      "https://github.com/kkhys/content/edit/main/posts/object/2025-03-21/index.mdx",
     sourceUrl:
-      "https://github.com/kkhys/content/blob/main/posts/object/2025-03-20/index.mdx?plain=1",
+      "https://github.com/kkhys/content/blob/main/posts/object/2025-03-21/index.mdx?plain=1",
     revisionHistoryUrl:
-      "https://github.com/kkhys/content/commits/main/posts/object/2025-03-20/index.mdx",
+      "https://github.com/kkhys/content/commits/main/posts/object/2025-03-21/index.mdx",
   },
   {
     _id: "posts/tech/2025-03-19/index.mdx",
