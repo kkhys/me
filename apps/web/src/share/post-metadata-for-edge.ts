@@ -5,6 +5,26 @@ import type { PostMetadataForEdge } from "#/app/posts/_types";
 
 export const postMetadataForEdge: PostMetadataForEdge[] = [
   {
+    title: "Mac mini という選択",
+    emoji: "🍎",
+    slug: "p1r3zrr",
+  },
+  {
+    title: "JetBrains IDE",
+    emoji: "🔌",
+    slug: "p1m7qa7",
+  },
+  {
+    title: "Mac を買ったらやっておくべき初期設定（エンジニア向け）",
+    emoji: "🌳",
+    slug: "p19rm7z",
+  },
+  {
+    title: "v2.6.0 リリースノート: About ページの追加",
+    emoji: "🚀",
+    slug: "p1hchr3",
+  },
+  {
     title: "v2.5.0 リリースノート: 会員登録機能の実装",
     emoji: "🚀",
     slug: "p187cwk",
