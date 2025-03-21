@@ -6,8 +6,8 @@ import type { PostMetadataForEdge } from "#/app/posts/_types";
 export const postMetadataForEdge: PostMetadataForEdge[] = [
   {
     title: "Mac mini という選択",
-    emoji: "🖥",
-    slug: "p1ryq9a",
+    emoji: "🍎",
+    slug: "p1r3zrr",
   },
   {
     title: "JetBrains IDE",
