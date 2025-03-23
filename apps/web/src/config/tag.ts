@@ -72,6 +72,11 @@ export const tags = {
       slug: "gadget",
       emoji: "📱",
     },
+    {
+      title: "Apple",
+      slug: "apple",
+      emoji: "🍎",
+    },
   ],
   tech: [
     {
