@@ -2,7 +2,7 @@
 
 import { Drawer as DrawerPrimitive } from "vaul";
 
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 
 const Drawer = ({
   shouldScaleBackground = true,

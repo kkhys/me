@@ -1,6 +1,6 @@
-import { Prose } from "@kkhys/ui";
+import { Prose } from "@kkhys/ui/prose";
 import type { Meta, StoryObj } from "@storybook/react";
-import { TweetBlock } from "#/app/posts/_ui";
+import { TweetBlock } from "#/app/posts/_ui/blocks/tweet-block";
 
 const meta = {
   title: "Post / Block / Tweet Block",

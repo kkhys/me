@@ -1,4 +1,4 @@
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 
 const Card = ({ className, ref, ...props }: React.ComponentProps<"div">) => (
   <div

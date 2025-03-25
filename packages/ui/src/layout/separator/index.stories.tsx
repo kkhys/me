@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Separator } from "@kkhys/ui";
+import { Separator } from "@kkhys/ui/separator";
 
 const meta = {
   title: "Layout / Separator",

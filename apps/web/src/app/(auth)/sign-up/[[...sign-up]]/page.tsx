@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { BreadcrumbList, WithContext } from "schema-dts";
-import { SignUp } from "#/app/(auth)/_ui";
-import { siteConfig } from "#/config";
+import { SignUp } from "#/app/(auth)/_ui/sign-up";
+import { siteConfig } from "#/config/site";
 
 const JsonLd = () => {
   const jsonLdBreadcrumbList = {

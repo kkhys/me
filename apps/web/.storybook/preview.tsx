@@ -1,7 +1,8 @@
 import { withThemeByClassName } from "@storybook/addon-themes";
 import type { Preview } from "@storybook/react";
 import "#/styles/globals.css";
-import { TooltipProvider, cn } from "@kkhys/ui";
+import { TooltipProvider } from "@kkhys/ui/tooltip";
+import { cn } from "@kkhys/ui/utils";
 import { inter, jetBrainsMono, newsreader, notoSansJP } from "#/lib/font";
 
 const preview = {

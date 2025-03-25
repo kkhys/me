@@ -1,5 +1,6 @@
-import { Skeleton } from "@kkhys/ui";
-import { getPageViews, incrementViews } from "#/app/posts/_lib";
+import { Skeleton } from "@kkhys/ui/skeleton";
+import { incrementViews } from "#/app/posts/_lib/actions";
+import { getPageViews } from "#/app/posts/_lib/queries";
 import { env } from "#/env";
 
 export const ViewCounter = async ({ slug }: { slug: string }) => {

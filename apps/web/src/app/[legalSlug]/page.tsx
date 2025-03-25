@@ -1,11 +1,11 @@
-import { Prose } from "@kkhys/ui";
+import { Prose } from "@kkhys/ui/prose";
 import { allLegals } from "contentlayer/generated";
 import { format, parseISO } from "date-fns";
 import { ja } from "date-fns/locale";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
-import { siteConfig } from "#/config";
+import { siteConfig } from "#/config/site";
 
 const JsonLd = ({
   name,

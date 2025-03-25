@@ -5,7 +5,7 @@ import {
   SparklesIcon,
 } from "lucide-react";
 
-import { AlertDescription, AlertTitle, Alert as _Alert } from "@kkhys/ui";
+import { AlertDescription, AlertTitle, Alert as _Alert } from "@kkhys/ui/alert";
 
 type AlertType = "note" | "tip" | "important" | "warning";
 

@@ -1,13 +1,15 @@
 import "#/styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Toaster, cn } from "@kkhys/ui";
+import { Toaster } from "@kkhys/ui/toast";
+import { cn } from "@kkhys/ui/utils";
 import { GoogleTagManager } from "@next/third-parties/google";
 import type { Metadata, Viewport } from "next";
-import { META_THEME_COLORS, me, siteConfig } from "#/config";
+import { META_THEME_COLORS, me, siteConfig } from "#/config/site";
 import { env } from "#/env";
 import { inter, jetBrainsMono, newsreader, notoSansJP } from "#/lib/font";
 import { Provider } from "#/providers";
-import { SiteFooter, SiteHeader } from "#/ui";
+import { SiteFooter } from "#/ui/site-footer";
+import { SiteHeader } from "#/ui/site-header";
 
 export const metadata = {
   title: {

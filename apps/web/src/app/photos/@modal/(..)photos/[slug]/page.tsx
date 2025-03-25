@@ -3,12 +3,12 @@ import {
   DialogDescription,
   DialogFooter,
   DialogTitle,
-} from "@kkhys/ui";
+} from "@kkhys/ui/dialog";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { ImageObject } from "#/app/photos/_types";
-import { PhotoModal } from "#/app/photos/_ui";
-import type { Camera } from "#/config";
+import { PhotoModal } from "#/app/photos/_ui/photo-modal";
+import type { Camera } from "#/config/photo/camera";
 import { getPhotoBySlug, getPhotoTitle, getPublicPhotos } from "#/utils/photo";
 
 export const generateStaticParams = async () =>

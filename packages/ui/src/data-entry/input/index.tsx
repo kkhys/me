@@ -1,6 +1,6 @@
 import { getInputProps } from "@conform-to/react";
 import type { FieldMetadata } from "@conform-to/react";
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 
 const Input = ({
   meta,

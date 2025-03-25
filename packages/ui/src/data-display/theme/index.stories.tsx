@@ -1,6 +1,6 @@
+import { ModeSwitcher } from "@kkhys/ui/theme";
 import type { Meta, StoryObj } from "@storybook/react";
 import { ThemeProvider } from "next-themes";
-import { ModeSwitcher } from "./index";
 
 const meta = {
   title: "Data Display / Theme",

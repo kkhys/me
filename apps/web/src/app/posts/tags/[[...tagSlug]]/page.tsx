@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
-import { ArticleList, Pagination } from "#/app/posts/_ui";
-import {
-  extractCategoryByTagTitle,
-  flatTags,
-  itemsPerPage,
-  siteConfig,
-} from "#/config";
+import { ArticleList } from "#/app/posts/_ui/article-list";
+import { Pagination } from "#/app/posts/_ui/pagination";
+import { itemsPerPage } from "#/config/constant";
+import { siteConfig } from "#/config/site";
+import { extractCategoryByTagTitle, flatTags } from "#/config/tag";
 import { getPublicPostMetadata, getPublicPosts } from "#/utils/post";
 
 const JsonLd = ({

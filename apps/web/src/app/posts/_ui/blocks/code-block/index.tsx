@@ -1,7 +1,7 @@
-import * as React from "react";
+import React from "react";
 
-import { cn } from "@kkhys/ui";
-import { CopyButton } from "./copy-button";
+import { cn } from "@kkhys/ui/utils";
+import { CopyButton } from "#/app/posts/_ui/blocks/code-block/copy-button";
 
 const CodeHeader = ({ title }: { title: string }) => (
   <div className="flex flex-wrap items-start rounded-t-md border-b border-white/10 bg-zinc-800 px-4 dark:bg-zinc-900">

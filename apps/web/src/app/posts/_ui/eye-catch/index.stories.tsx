@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { EyeCatch } from "#/app/posts/_ui";
+import { EyeCatch } from "#/app/posts/_ui/eye-catch";
 
 const meta = {
   title: "Post / Eye Catch",

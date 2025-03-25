@@ -4,7 +4,8 @@ import type { DialogProps } from "@radix-ui/react-dialog";
 import { Command as CommandPrimitive } from "cmdk";
 import { SearchIcon } from "lucide-react";
 
-import { Dialog, DialogContent, cn } from "@kkhys/ui";
+import { Dialog, DialogContent } from "@kkhys/ui/dialog";
+import { cn } from "@kkhys/ui/utils";
 
 const Command = ({
   className,

@@ -1,4 +1,4 @@
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 
 const DescriptionList = ({
   className,

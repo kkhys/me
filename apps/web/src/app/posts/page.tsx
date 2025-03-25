@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import type { BreadcrumbList, WithContext } from "schema-dts";
-import { ArticleList, CategoryNav, Pagination } from "#/app/posts/_ui";
-import { itemsPerPage, siteConfig } from "#/config";
+import { ArticleList } from "#/app/posts/_ui/article-list";
+import { CategoryNav } from "#/app/posts/_ui/category-nav";
+import { Pagination } from "#/app/posts/_ui/pagination";
+import { itemsPerPage } from "#/config/constant";
+import { siteConfig } from "#/config/site";
 import { getPublicPosts } from "#/utils/post";
 
 const JsonLd = () => {
