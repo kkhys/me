@@ -1,6 +1,6 @@
 "use client";
 
-import { Dialog } from "@kkhys/ui";
+import { Dialog } from "@kkhys/ui/dialog";
 import { useRouter } from "next/navigation";
 
 export const PhotoModal = ({

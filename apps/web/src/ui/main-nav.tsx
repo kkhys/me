@@ -1,10 +1,10 @@
 "use client";
 
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { docsConfig } from "#/config";
-import { Icons } from "#/ui";
+import { docsConfig } from "#/config/docs";
+import { Icons } from "#/ui/icons";
 
 export const MainNav = () => {
   const pathname = usePathname();

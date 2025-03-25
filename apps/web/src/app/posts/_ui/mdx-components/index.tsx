@@ -1,36 +1,32 @@
+"use client";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-  cn,
-} from "@kkhys/ui";
+} from "@kkhys/ui/accordion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@kkhys/ui/tabs";
+import { cn } from "@kkhys/ui/utils";
 import { SquareArrowOutUpRightIcon } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 import type { Route } from "next";
 import { useMDXComponent } from "next-contentlayer2/hooks";
 import Link from "next/link";
-import type * as React from "react";
-import {
-  AlertBlock,
-  CarouselBlock,
-  CodeBlock,
-  DetailsBlock,
-  FootnotesBlock,
-  GoogleMapsBlock,
-  HeaderWithAnchor,
-  ImageBlock,
-  LinkCardBlock,
-  MermaidBlock,
-  StepBlock,
-  StepsBlock,
-  TweetBlock,
-  YouTubeBlock,
-} from "#/app/posts/_ui";
+import type React from "react";
+import { AlertBlock } from "#/app/posts/_ui/blocks/alert-block";
+import { CarouselBlock } from "#/app/posts/_ui/blocks/carousel-block";
+import { CodeBlock } from "#/app/posts/_ui/blocks/code-block";
+import { DetailsBlock } from "#/app/posts/_ui/blocks/details-block";
+import { FootnotesBlock } from "#/app/posts/_ui/blocks/footnotes-block";
+import { GoogleMapsBlock } from "#/app/posts/_ui/blocks/google-maps-block";
+import { ImageBlock } from "#/app/posts/_ui/blocks/image-block";
+import { LinkCardBlock } from "#/app/posts/_ui/blocks/link-card-block";
+import { MermaidBlock } from "#/app/posts/_ui/blocks/mermaid-block";
+import { StepBlock, StepsBlock } from "#/app/posts/_ui/blocks/step-block";
+import { TweetBlock } from "#/app/posts/_ui/blocks/tweet-block";
+import { YouTubeBlock } from "#/app/posts/_ui/blocks/youtube-block";
+import { HeaderWithAnchor } from "#/app/posts/_ui/header-with-anchor";
 
 const components = {
   h2: ({
@@ -210,6 +206,5 @@ const components = {
 
 export const Mdx = ({ code }: { code: string }) => {
   const Component = useMDXComponent(code);
-
-  return <Component components={{ ...components }} />;
+  return <Component components={components} />;
 };

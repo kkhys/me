@@ -1,6 +1,6 @@
 import { Feed } from "feed";
 
-import { me, siteConfig } from "#/config";
+import { me, siteConfig } from "#/config/site";
 import { getPublicPostMetadata } from "#/utils/post";
 
 export const revalidate = 86400;

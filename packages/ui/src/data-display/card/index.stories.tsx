@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Button } from "@kkhys/ui/button";
 import {
-  Button,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-  Input,
-  Label,
-} from "@kkhys/ui";
+} from "@kkhys/ui/card";
+import { Input } from "@kkhys/ui/input";
+import { Label } from "@kkhys/ui/label";
 import { BellIcon, CheckIcon } from "lucide-react";
 
 const meta = {

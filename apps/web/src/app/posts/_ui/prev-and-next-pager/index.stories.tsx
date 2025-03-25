@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { PrevAndNextPager } from "#/app/posts/_ui";
+import { PrevAndNextPager } from "#/app/posts/_ui/prev-and-next-pager";
 import { getPublicPostMetadata } from "#/utils/post";
 
 const meta = {

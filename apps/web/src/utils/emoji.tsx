@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import * as React from "react";
+import React from "react";
 import satori from "satori";
 
 const apis = {

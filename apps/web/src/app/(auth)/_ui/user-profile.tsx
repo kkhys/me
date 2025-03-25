@@ -2,8 +2,8 @@
 
 import { UserProfile as ClerkUserProfile } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import { Skeleton, useTheme } from "@kkhys/ui";
-import React from "react";
+import { Skeleton } from "@kkhys/ui/skeleton";
+import { useTheme } from "@kkhys/ui/theme";
 
 export const UserProfile = () => {
   const { theme = "system" } = useTheme();

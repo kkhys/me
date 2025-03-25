@@ -1,4 +1,4 @@
-import { Button } from "@kkhys/ui";
+import { Button } from "@kkhys/ui/button";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import { ChevronRightIcon, MailOpenIcon, RotateCwIcon } from "lucide-react";

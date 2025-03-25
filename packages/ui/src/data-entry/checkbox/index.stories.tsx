@@ -3,18 +3,18 @@ import * as z from "zod";
 
 import { getFormProps, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
+import { Button } from "@kkhys/ui/button";
+import { Checkbox } from "@kkhys/ui/checkbox";
 import {
-  Button,
   Form,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  Label,
-  toast,
-} from "@kkhys/ui";
+} from "@kkhys/ui/form";
+import { Label } from "@kkhys/ui/label";
+import { toast } from "@kkhys/ui/toast";
 import { fn } from "@storybook/test";
-import { Checkbox } from ".";
 import { ToastDecorator } from "../../feedback/toast/index.stories";
 
 const meta = {

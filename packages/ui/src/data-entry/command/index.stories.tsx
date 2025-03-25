@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import * as React from "react";
+import React from "react";
 
 import {
   Command,
@@ -11,7 +11,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@kkhys/ui";
+} from "@kkhys/ui/command";
 import {
   CalendarIcon,
   CircleUserIcon,

@@ -2,8 +2,8 @@
 
 import { SignIn as ClerkSignIn } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import { Skeleton, useTheme } from "@kkhys/ui";
-import React from "react";
+import { Skeleton } from "@kkhys/ui/skeleton";
+import { useTheme } from "@kkhys/ui/theme";
 
 export const SignIn = () => {
   const { theme = "system" } = useTheme();

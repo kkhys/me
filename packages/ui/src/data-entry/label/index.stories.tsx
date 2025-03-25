@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Checkbox, Label } from "@kkhys/ui";
+import { Checkbox } from "@kkhys/ui/checkbox";
+import { Label } from "@kkhys/ui/label";
 
 const meta = {
   title: "Data Entry / Label",

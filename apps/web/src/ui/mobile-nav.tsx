@@ -1,21 +1,21 @@
 "use client";
 
+import { Button } from "@kkhys/ui/button";
 import {
-  Button,
   Drawer,
   DrawerContent,
   DrawerDescription,
   DrawerTitle,
   DrawerTrigger,
-  cn,
-} from "@kkhys/ui";
+} from "@kkhys/ui/drawer";
+import { cn } from "@kkhys/ui/utils";
 import { MenuIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
 import type { LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
-import * as React from "react";
-import { docsConfig } from "#/config";
+import React from "react";
+import { docsConfig } from "#/config/docs";
 
 export const MobileNav = () => {
   const [open, setOpen] = React.useState(false);

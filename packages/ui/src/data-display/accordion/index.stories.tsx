@@ -5,7 +5,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@kkhys/ui";
+} from "@kkhys/ui/accordion";
 import { fn } from "@storybook/test";
 
 const meta = {

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { Button, Prose } from "@kkhys/ui";
+import { Button } from "@kkhys/ui/button";
+import { Prose } from "@kkhys/ui/prose";
 
 export const metadata = {
   robots: "noindex",

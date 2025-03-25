@@ -1,10 +1,11 @@
 "use client";
 
 import type * as LabelPrimitive from "@radix-ui/react-label";
-import * as React from "react";
+import React from "react";
 
 import { type FieldName, FormProvider, useField } from "@conform-to/react";
-import { Label, cn } from "@kkhys/ui";
+import { Label } from "@kkhys/ui/label";
+import { cn } from "@kkhys/ui/utils";
 
 const Form = FormProvider;
 

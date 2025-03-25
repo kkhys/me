@@ -4,13 +4,33 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/src/index.d.ts",
-      "default": "./src/index.ts"
-    },
-    "./index.css": {
-      "default": "./src/styles/index.css"
-    }
+    "./accordion": "./src/data-display/accordion/index.tsx",
+    "./card": "./src/data-display/card/index.tsx",
+    "./carousel": "./src/data-display/carousel/index.tsx",
+    "./description-list": "./src/data-display/description-list/index.tsx",
+    "./scroll-area": "./src/data-display/scroll-area/index.tsx",
+    "./tabs": "./src/data-display/tabs/index.tsx",
+    "./theme": "./src/data-display/theme/index.tsx",
+    "./tooltip": "./src/data-display/tooltip/index.tsx",
+    "./checkbox": "./src/data-entry/checkbox/index.tsx",
+    "./command": "./src/data-entry/command/index.tsx",
+    "./form": "./src/data-entry/form/index.tsx",
+    "./input": "./src/data-entry/input/index.tsx",
+    "./label": "./src/data-entry/label/index.tsx",
+    "./radio-group": "./src/data-entry/radio-group/index.tsx",
+    "./textarea": "./src/data-entry/textarea/index.tsx",
+    "./alert": "./src/feedback/alert/index.tsx",
+    "./dialog": "./src/feedback/dialog/index.tsx",
+    "./drawer": "./src/feedback/drawer/index.tsx",
+    "./skeleton": "./src/feedback/skeleton/index.tsx",
+    "./toast": "./src/feedback/toast/index.tsx",
+    "./button": "./src/general/button/index.tsx",
+    "./prose": "./src/general/prose/index.tsx",
+    "./separator": "./src/layout/separator/index.tsx",
+    "./dropdown-menu": "./src/navigation/dropdown-menu/index.tsx",
+    "./pagination": "./src/navigation/pagination/index.tsx",
+    "./index.css": "./src/styles/index.css",
+    "./utils": "./src/utils/index.ts"
   },
   "scripts": {
     "build": "tsc",

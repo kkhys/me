@@ -2,8 +2,9 @@ import {
   type FieldMetadata,
   unstable_useControl as useControl,
 } from "@conform-to/react";
-import { FormItem, Label } from "@kkhys/ui";
-import * as React from "react";
+import { FormItem } from "@kkhys/ui/form";
+import { Label } from "@kkhys/ui/label";
+import React from "react";
 import { _RadioGroup, _RadioGroupItem } from "./_radio-group";
 
 export const RadioGroup = ({

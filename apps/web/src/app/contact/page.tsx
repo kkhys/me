@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { BreadcrumbList, WithContext } from "schema-dts";
-import { ContactForm } from "#/app/contact/_ui";
-import { siteConfig } from "#/config";
+import { ContactForm } from "#/app/contact/_ui/contact-form";
+import { siteConfig } from "#/config/site";
 
 const JsonLd = () => {
   const jsonLdBreadcrumbList = {

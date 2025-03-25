@@ -1,9 +1,14 @@
-import { Prose, Separator } from "@kkhys/ui";
+import { Prose } from "@kkhys/ui/prose";
+import { Separator } from "@kkhys/ui/separator";
 import { MoveRightIcon } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
+import React from "react";
 import { Suspense } from "react";
-import { PopularPosts, PopularPostsSkeleton, TagCloud } from "#/app/posts/_ui";
+import {
+  PopularPosts,
+  PopularPostsSkeleton,
+} from "#/app/posts/_ui/popular-posts";
+import { TagCloud } from "#/app/posts/_ui/tag-cloud";
 import { tagCloudItems } from "#/share/tag-cloud-items";
 import { fisherYatesShuffle } from "#/utils/post";
 

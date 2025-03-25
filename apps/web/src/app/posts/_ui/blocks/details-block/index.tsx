@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@kkhys/ui";
+} from "@kkhys/ui/accordion";
 
 export const DetailsBlock = ({
   summary,

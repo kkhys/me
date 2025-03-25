@@ -1,7 +1,7 @@
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 import type { Post } from "contentlayer/generated";
-import { getCachedAllPageViewsSorted } from "#/app/posts/_lib";
-import { ArticleCard, ArticleCardSkeleton } from "#/app/posts/_ui";
+import { getCachedAllPageViewsSorted } from "#/app/posts/_lib/queries";
+import { ArticleCard, ArticleCardSkeleton } from "#/app/posts/_ui/article-card";
 import { getPostBySlug } from "#/utils/post";
 
 const popularPostCount = 6;

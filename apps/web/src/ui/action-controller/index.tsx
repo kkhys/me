@@ -4,18 +4,18 @@ import { CodeIcon, Share2Icon, SquareArrowOutUpRightIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
 
+import { Button } from "@kkhys/ui/button";
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  cn,
-  toast,
-} from "@kkhys/ui";
+} from "@kkhys/ui/dropdown-menu";
+import { toast } from "@kkhys/ui/toast";
+import { cn } from "@kkhys/ui/utils";
 import type { Photo, Post } from "contentlayer/generated";
-import { siteConfig } from "#/config";
+import { siteConfig } from "#/config/site";
 
 const NavLink = <T extends string>({
   href,

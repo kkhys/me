@@ -8,7 +8,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@kkhys/ui";
+} from "@kkhys/ui/pagination";
 
 const meta = {
   title: "Navigation / Pagination",
