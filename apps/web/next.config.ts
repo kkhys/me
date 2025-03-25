@@ -4,7 +4,7 @@ import "#/env";
 
 const nextConfig = {
   typescript: { ignoreBuildErrors: true },
-  experimental: { typedRoutes: true },
+  // experimental: { typedRoutes: true },
   transpilePackages: [
     "@kkhys/auth",
     "@kkhys/db",
