@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import type { ImageObject } from "#/app/photos/_types";
-import { siteConfig } from "#/config";
+import { siteConfig } from "#/config/site";
 import { getPhotoTitle, getPublicPhotos } from "#/utils/photo";
 
 const JsonLd = () => {

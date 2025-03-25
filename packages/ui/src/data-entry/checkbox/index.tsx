@@ -7,8 +7,8 @@ import {
   type FieldMetadata,
   unstable_useControl as useControl,
 } from "@conform-to/react";
-import { cn } from "@kkhys/ui";
-import * as React from "react";
+import { cn } from "@kkhys/ui/utils";
+import React from "react";
 
 const Checkbox = ({
   meta,

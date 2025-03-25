@@ -1,7 +1,7 @@
 import { createUser, deleteUserByClerkId } from "#/app/(auth)/_lib/actions";
 import { getUserByClerkId } from "#/app/(auth)/_lib/queries";
 import type { ClerkWebhookUser } from "#/app/(auth)/_types";
-import { inngest } from "#/lib/inngest";
+import { inngest } from "#/lib/inngest/client";
 
 export const syncCreatedUser = inngest.createFunction(
   { id: "sync-created-user-from-clerk" },

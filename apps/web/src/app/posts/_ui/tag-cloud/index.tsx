@@ -1,4 +1,4 @@
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 import Link from "next/link";
 import type { TagCloudItem as TagCloudItemType } from "#/app/posts/_types";
 

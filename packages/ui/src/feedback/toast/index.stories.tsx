@@ -1,7 +1,8 @@
 import type { Decorator, Meta, StoryObj } from "@storybook/react";
 import { Component } from "react";
 
-import { Button, Toaster, toast } from "@kkhys/ui";
+import { Button } from "@kkhys/ui/button";
+import { Toaster, toast } from "@kkhys/ui/toast";
 
 export const ToastDecorator: Decorator = (Story) => (
   <div className="p-4">

@@ -1,5 +1,5 @@
 import type { Legal, Post } from "contentlayer/generated";
-import type { Tag } from "#/config";
+import type { Tag } from "#/config/tag";
 
 export type PostMetadataForEdge = Pick<Post, "title" | "emoji" | "slug">;
 

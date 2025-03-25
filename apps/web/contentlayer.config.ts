@@ -11,32 +11,34 @@ import remarkGfm from "remark-gfm";
 import type { Options as RemarkRehypeOptions } from "remark-rehype";
 import strip from "strip-markdown";
 import {
-  type CameraName,
-  allTagTitles,
-  cameraNames,
-  cameras,
+  type CategoryTitle,
   categories,
   categoryTitles,
-  lensNames,
-  lenses,
-  siteConfig,
-  tags,
-} from "#/config";
-import type { AllTagsTitle, CategoryTitle, Tag } from "#/config";
+} from "#/config/category";
+import { type CameraName, cameraNames, cameras } from "#/config/photo/camera";
+import { lensNames, lenses } from "#/config/photo/lens";
+import { siteConfig } from "#/config/site";
+import { type AllTagsTitle, type Tag, allTagTitles, tags } from "#/config/tag";
 import { getImage } from "#/utils/image";
+import { rehypeMermaidOptions } from "./src/lib/mdx/rehype-mermaid";
 import {
-  TweetEmbedHandler,
-  YouTubeEmbedHandler,
   afterRehypePrettyCode,
   beforeRehypePrettyCode,
-  linkCardHandler,
-  rehypeMermaidOptions,
   rehypePrettyCodeOptions,
+} from "./src/lib/mdx/rehype-pretty-code";
+import {
+  linkCardHandler,
   remarkLinkCard,
-  remarkNextImage,
+} from "./src/lib/mdx/remark-link-card";
+import { remarkNextImage } from "./src/lib/mdx/remark-next-image";
+import {
+  TweetEmbedHandler,
   remarkTweetEmbed,
+} from "./src/lib/mdx/remark-tweet-embed";
+import {
+  YouTubeEmbedHandler,
   remarkYouTubeEmbed,
-} from "./src/lib/mdx";
+} from "./src/lib/mdx/remark-youtube-embed";
 import { generateEmojiSvg } from "./src/utils/emoji";
 
 const Legal = defineDocumentType(() => ({

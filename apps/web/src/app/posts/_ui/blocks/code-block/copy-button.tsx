@@ -1,8 +1,8 @@
 "use client";
 
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 import { CheckIcon, CopyIcon } from "lucide-react";
-import * as React from "react";
+import React from "react";
 
 export const CopyButton = ({
   value,

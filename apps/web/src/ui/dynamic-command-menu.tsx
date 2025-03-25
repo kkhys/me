@@ -1,11 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import * as React from "react";
-import { CommandMenuButton } from "#/ui";
+import React from "react";
+import { CommandMenuButton } from "#/ui/command-menu";
 
 export const DynamicCommandMenu = dynamic(
-  () => import("#/ui").then(({ CommandMenu }) => CommandMenu),
+  () => import("#/ui/command-menu").then(({ CommandMenu }) => CommandMenu),
   {
     ssr: false,
     loading: () => <CommandMenuButton />,

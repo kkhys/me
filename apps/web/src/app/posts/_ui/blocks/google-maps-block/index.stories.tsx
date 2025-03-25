@@ -1,6 +1,7 @@
-import { Prose } from "@kkhys/ui";
+import { Prose } from "@kkhys/ui/prose";
 import type { Meta, StoryObj } from "@storybook/react";
-import { GoogleMapsBlock } from "#/app/posts/_ui";
+import { GoogleMapsBlock } from "#/app/posts/_ui/blocks/google-maps-block";
+
 const meta = {
   title: "Post / Block / Google Maps Block",
   component: GoogleMapsBlock,

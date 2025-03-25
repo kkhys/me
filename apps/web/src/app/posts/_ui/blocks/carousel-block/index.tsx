@@ -1,16 +1,16 @@
 "use client";
 
 import ClassNames from "embla-carousel-class-names";
-import * as React from "react";
+import React from "react";
 
-import type { CarouselApi } from "@kkhys/ui";
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@kkhys/ui";
+} from "@kkhys/ui/carousel";
 
 export const CarouselBlock = ({
   children,

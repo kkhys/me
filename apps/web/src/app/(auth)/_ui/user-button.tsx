@@ -2,8 +2,8 @@
 
 import { UserButton as ClerkUserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import { Skeleton, useTheme } from "@kkhys/ui";
-import React from "react";
+import { Skeleton } from "@kkhys/ui/skeleton";
+import { useTheme } from "@kkhys/ui/theme";
 
 export const UserButton = () => {
   const { theme = "system" } = useTheme();

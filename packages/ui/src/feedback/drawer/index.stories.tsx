@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { MinusIcon, PlusIcon } from "lucide-react";
-import * as React from "react";
+import React from "react";
 
+import { Button } from "@kkhys/ui/button";
 import {
-  Button,
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -12,7 +12,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@kkhys/ui";
+} from "@kkhys/ui/drawer";
 
 const meta = {
   title: "Feedback / Drawer",

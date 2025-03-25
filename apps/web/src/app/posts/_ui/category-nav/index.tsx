@@ -1,10 +1,11 @@
 "use client";
 
-import { ScrollArea, ScrollBar, cn } from "@kkhys/ui";
+import { ScrollArea, ScrollBar } from "@kkhys/ui/scroll-area";
+import { cn } from "@kkhys/ui/utils";
 import type { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { categories } from "#/config";
+import { categories } from "#/config/category";
 
 export const CategoryNav = ({
   className,

@@ -2,7 +2,7 @@ import {
   DescriptionDetails,
   DescriptionList,
   DescriptionTerm,
-} from "@kkhys/ui";
+} from "@kkhys/ui/description-list";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
