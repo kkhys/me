@@ -1,13 +1,16 @@
 "use client";
 
-import { DialogDescription, type DialogProps } from "@kkhys/ui";
-import { DialogTitle } from "@kkhys/ui";
+import {
+  DialogDescription,
+  type DialogProps,
+  DialogTitle,
+} from "@kkhys/ui/dialog";
 import { LaptopIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import * as React from "react";
+import React from "react";
 
+import { Button } from "@kkhys/ui/button";
 import {
-  Button,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -15,9 +18,9 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  cn,
-  useTheme,
-} from "@kkhys/ui";
+} from "@kkhys/ui/command";
+import { useTheme } from "@kkhys/ui/theme";
+import { cn } from "@kkhys/ui/utils";
 import type { Route } from "next";
 import { fisherYatesShuffle, getPublicSearchItems } from "#/utils/post";
 

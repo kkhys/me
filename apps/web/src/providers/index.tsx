@@ -1,6 +1,7 @@
 "use client";
 
-import { ThemeProvider, TooltipProvider } from "@kkhys/ui";
+import { ThemeProvider } from "@kkhys/ui/theme";
+import { TooltipProvider } from "@kkhys/ui/tooltip";
 
 export const Provider = ({ children }: { children: React.ReactNode }) => (
   <ThemeProvider

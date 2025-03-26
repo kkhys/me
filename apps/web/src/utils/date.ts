@@ -1,5 +1,5 @@
-import type { AllDaysOfWeekData } from "#/app/about/_types";
-import { dayOfWeekNames, timeOfDayRanges } from "#/config";
+import type { AllDaysOfWeekData } from "#/app/about/_types/github";
+import { dayOfWeekNames, timeOfDayRanges } from "#/config/time";
 
 export const formatPublishedDate = (publishedDate: Date | string | number) =>
   new Date(publishedDate).toISOString().split("T")[0];

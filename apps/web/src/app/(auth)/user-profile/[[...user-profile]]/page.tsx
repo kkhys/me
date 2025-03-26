@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import type { Metadata } from "next";
-import { UserProfile } from "#/app/(auth)/_ui";
+import { UserProfile } from "#/app/(auth)/_ui/user-profile";
 
 export const metadata = {
   robots: "noindex",

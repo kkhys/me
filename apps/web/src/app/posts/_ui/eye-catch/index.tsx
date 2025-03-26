@@ -1,7 +1,8 @@
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 
-import { Skeleton, cn } from "@kkhys/ui";
+import { Skeleton } from "@kkhys/ui/skeleton";
+import { cn } from "@kkhys/ui/utils";
 
 const eyeCatchVariants = cva(
   "inline-flex select-none items-center justify-center rounded-md bg-secondary text-secondary-foreground shadow-sm",

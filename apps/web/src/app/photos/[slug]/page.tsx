@@ -2,20 +2,22 @@ import {
   DescriptionDetails,
   DescriptionList,
   DescriptionTerm,
-} from "@kkhys/ui";
+} from "@kkhys/ui/description-list";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Zoom from "react-medium-image-zoom";
-import { type Camera, type Lens, siteConfig } from "#/config";
+import type { Camera } from "#/config/photo/camera";
+import type { Lens } from "#/config/photo/lens";
+import { siteConfig } from "#/config/site";
 import { getPhotoBySlug, getPhotoTitle, getPublicPhotos } from "#/utils/photo";
 import "#/styles/react-medium-image-zoom.css";
 import "../_styles/index.css";
 import type { Photo } from "contentlayer/generated";
 import type { Metadata } from "next";
-import * as React from "react";
+import React from "react";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import type { ImageObject } from "#/app/photos/_types";
-import { ActionController } from "#/ui";
+import { ActionController } from "#/ui/action-controller";
 
 const JsonLd = ({ photo: { slug } }: { photo: Photo }) => {
   const jsonLdBreadcrumbList = {

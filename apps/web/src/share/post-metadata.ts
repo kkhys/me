@@ -5,6 +5,81 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/tech/2025-03-18/index.mdx",
+    title: "Mac を買ったらやっておくべき初期設定（エンジニア向け）",
+    slug: "p19rm7z",
+    emoji: "⚙️",
+    category: "Tech",
+    tags: ["Environment"],
+    status: "published",
+    publishedAt: "2025-03-23T00:00:00.000Z",
+    excerpt:
+      "Macminiを購入した話は、こちらの記事にまとめてある。さて、今回のテーマはMacの設定についてである。工場出荷時のまま使いこなす猛者もいるが、多くの人は自分なりの設定があるはずだ。せっかくの新マシン。ここで一度、自分の設定をまとめておくことにした。自分のベストな設定方法が固まっているのであれば、TimeMachin...",
+    url: "https://kkhys.me/posts/p19rm7z",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-03-18/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-03-18/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-03-18/index.mdx",
+  },
+  {
+    _id: "posts/object/2025-03-21/index.mdx",
+    title: "Mac mini という選択",
+    slug: "p1r3zrr",
+    emoji: "🍎",
+    category: "Object",
+    tags: ["Gadget", "Apple"],
+    status: "published",
+    publishedAt: "2025-03-21T00:00:00.000Z",
+    excerpt:
+      "先日M4チップが搭載されたMacminiを購入したので所感を書いていく。Macminiの箱Macminiのスペック今回購入したMacminiのスペック↓チップ:AppleM4チップメモリ:24GBユニファイドメモリストレージ:512GB価格:約148,000円デフォルトだとメモリは16GBだが、IDEを開きながら作業す...",
+    url: "https://kkhys.me/posts/p1r3zrr",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/object/2025-03-21/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/object/2025-03-21/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/object/2025-03-21/index.mdx",
+  },
+  {
+    _id: "posts/tech/2025-03-19/index.mdx",
+    title: "JetBrains IDE",
+    slug: "p1m7qa7",
+    emoji: "🔌",
+    category: "Tech",
+    tags: [],
+    status: "draft",
+    publishedAt: "2025-03-19T00:00:00.000Z",
+    excerpt:
+      "IdeaVimJetBrainsAIAssistantGitHubCopilotGitLinkGitToolBoxMaterialThemeUIAtomMaterialIconsRainbowBracketsWakatime",
+    url: "https://kkhys.me/posts/p1m7qa7",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-03-19/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-03-19/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-03-19/index.mdx",
+  },
+  {
+    _id: "posts/tech/2025-03-03/index.mdx",
+    title: "v2.6.0 リリースノート: About ページの追加",
+    slug: "p1hchr3",
+    emoji: "🚀",
+    category: "Tech",
+    tags: ["Release note"],
+    status: "draft",
+    publishedAt: "2025-03-03T00:00:00.000Z",
+    excerpt: "",
+    url: "https://kkhys.me/posts/p1hchr3",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-03-03/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-03-03/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-03-03/index.mdx",
+  },
+  {
     _id: "posts/tech/2025-02-22/index.mdx",
     title: "v2.5.0 リリースノート: 会員登録機能の実装",
     slug: "p187cwk",

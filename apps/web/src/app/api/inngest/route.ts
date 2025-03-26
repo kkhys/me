@@ -3,8 +3,8 @@ import {
   syncCreatedUser,
   syncDeletedUser,
   syncUpdatedUser,
-} from "#/app/(auth)/_lib";
-import { inngest } from "#/lib/inngest";
+} from "#/app/(auth)/_lib/sync-user";
+import { inngest } from "#/lib/inngest/client";
 
 export const { GET, POST, PUT } = serve({
   client: inngest,

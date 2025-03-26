@@ -1,8 +1,8 @@
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 import type { Post } from "contentlayer/generated";
 import type { Route } from "next";
 import Link from "next/link";
-import { EyeCatch } from "#/app/posts/_ui";
+import { EyeCatch } from "#/app/posts/_ui/eye-catch";
 
 const ListItem = ({
   post: { slug, title, publishedAt, publishedAtFormattedIso, status, emojiSvg },

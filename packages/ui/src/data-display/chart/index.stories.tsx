@@ -5,11 +5,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+} from "@kkhys/ui/card";
+import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@kkhys/ui";
+} from "@kkhys/ui/chart";
 import type { Meta, StoryObj } from "@storybook/react";
 import { TrendingUpIcon } from "lucide-react";
 import {

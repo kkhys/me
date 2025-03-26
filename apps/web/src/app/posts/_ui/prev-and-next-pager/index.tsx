@@ -2,7 +2,9 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
 
-import { Button, Tooltip, TooltipContent, TooltipTrigger, cn } from "@kkhys/ui";
+import { Button } from "@kkhys/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@kkhys/ui/tooltip";
+import { cn } from "@kkhys/ui/utils";
 import { getPublicPostMetadata } from "#/utils/post";
 
 export const PrevAndNextPager = ({

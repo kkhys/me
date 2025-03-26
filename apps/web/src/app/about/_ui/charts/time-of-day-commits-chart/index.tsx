@@ -6,10 +6,13 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from "@kkhys/ui";
+} from "@kkhys/ui/chart";
 import * as React from "react";
 import { Pie, PieChart } from "recharts";
-import type { AllTimeOfDayData, TimeOfDayName } from "#/app/about/_types";
+import type {
+  AllTimeOfDayData,
+  TimeOfDayName,
+} from "#/app/about/_types/github";
 
 export const TimeOfDayCommitsChart = ({ data }: { data: AllTimeOfDayData }) => {
   const chartData = Object.entries(data).map(([time, timePeriodData]) => ({

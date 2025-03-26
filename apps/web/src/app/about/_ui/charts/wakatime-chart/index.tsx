@@ -5,10 +5,10 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  Skeleton,
-} from "@kkhys/ui";
+} from "@kkhys/ui/chart";
+import { Skeleton } from "@kkhys/ui/skeleton";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-import type { Aggregate } from "#/app/about/_lib";
+import type { Aggregate } from "#/app/about/_lib/wakatime";
 
 const aggregateToChartConfig = (aggregates: Aggregate[]) =>
   aggregates.reduce((config, { id, label, color }) => {

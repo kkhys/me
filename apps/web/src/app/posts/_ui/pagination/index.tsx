@@ -1,12 +1,11 @@
+import { type ButtonProps, buttonVariants } from "@kkhys/ui/button";
 import {
-  type ButtonProps,
   PaginationContent,
   PaginationEllipsis,
   PaginationItem,
   Pagination as _Pagination,
-  buttonVariants,
-  cn,
-} from "@kkhys/ui";
+} from "@kkhys/ui/pagination";
+import { cn } from "@kkhys/ui/utils";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Button } from "@kkhys/ui/button";
 import {
-  Button,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -9,9 +9,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Input,
-  Label,
-} from "@kkhys/ui";
+} from "@kkhys/ui/dialog";
+import { Input } from "@kkhys/ui/input";
+import { Label } from "@kkhys/ui/label";
 import { fn } from "@storybook/test";
 
 const meta = {

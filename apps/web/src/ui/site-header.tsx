@@ -1,9 +1,12 @@
 import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
-import { Button, ModeSwitcher } from "@kkhys/ui";
+import { Button } from "@kkhys/ui/button";
+import { ModeSwitcher } from "@kkhys/ui/theme";
 import { LockIcon } from "lucide-react";
-import * as React from "react";
-import { UserButton } from "#/app/(auth)/_ui";
-import { CommandMenu, MainNav, MobileNav } from "#/ui";
+import React from "react";
+import { UserButton } from "#/app/(auth)/_ui/user-button";
+import { CommandMenu } from "#/ui/command-menu";
+import { MainNav } from "#/ui/main-nav";
+import { MobileNav } from "#/ui/mobile-nav";
 
 export const SiteHeader = () => (
   <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:border-border">

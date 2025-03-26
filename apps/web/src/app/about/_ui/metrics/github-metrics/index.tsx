@@ -1,10 +1,11 @@
-import { cn } from "@kkhys/ui";
-import { buildCommitsData, fetchAndMergeCommits } from "#/app/about/_lib";
+import { cn } from "@kkhys/ui/utils";
 import {
-  ChartCard,
-  TimeOfDayCommitsChart,
-  WeeklyCommitsChart,
-} from "#/app/about/_ui";
+  buildCommitsData,
+  fetchAndMergeCommits,
+} from "#/app/about/_lib/github";
+import { ChartCard } from "#/app/about/_ui/charts/chart-card";
+import { TimeOfDayCommitsChart } from "#/app/about/_ui/charts/time-of-day-commits-chart";
+import { WeeklyCommitsChart } from "#/app/about/_ui/charts/weekly-commits-chart";
 import { commitsData as cachedCommitsData } from "#/share/commits-data";
 
 const getGithubMetricsData = async () => {

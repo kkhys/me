@@ -1,4 +1,4 @@
-import { Prose } from "@kkhys/ui";
+import { Prose } from "@kkhys/ui/prose";
 import type { Metadata } from "next";
 
 export const metadata = {

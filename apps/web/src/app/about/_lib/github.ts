@@ -7,8 +7,8 @@ import type {
   AllTimeOfDayData,
   CommitNode,
   CommitsData,
-} from "#/app/about/_types";
-import { me } from "#/config";
+} from "#/app/about/_types/github";
+import { me } from "#/config/site";
 import { graphql } from "#/lib/octokit";
 import { categorizeDayOfWeek, categorizeTimeOfDay } from "#/utils/date";
 
@@ -256,9 +256,11 @@ export const buildCommitsData = (allCommits: CommitNode[]): CommitsData => {
     const date = new TZDate(committedDate, "Asia/Tokyo");
 
     const dayKey = categorizeDayOfWeek(date);
+    // @ts-ignore
     allDaysOfWeekData[dayKey].commits++;
 
     const timeKey = categorizeTimeOfDay(date);
+    // @ts-ignore
     allTimeOfDayData[timeKey].commits++;
   }
 

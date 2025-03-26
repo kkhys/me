@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@kkhys/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@kkhys/ui/card";
 
 export const ChartCard = ({
   title,

@@ -1,5 +1,5 @@
 import "server-only";
-import type { Summary } from "#/app/about/_types";
+import type { Summary } from "#/app/about/_types/wakatime";
 import { env } from "#/env";
 
 export const getWakaTimeSummaries = async () => {

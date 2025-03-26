@@ -1,6 +1,9 @@
 import { writeFileSync } from "node:fs";
-import { buildCommitsData, fetchAndMergeCommits } from "#/app/about/_lib";
-import type { CommitsData } from "#/app/about/_types";
+import {
+  buildCommitsData,
+  fetchAndMergeCommits,
+} from "#/app/about/_lib/github";
+import type { CommitsData } from "#/app/about/_types/github";
 import { commitsData as cachedCommitsData } from "#/share/commits-data";
 
 const FILE_PATH = "src/share/commits-data.ts";
@@ -9,7 +12,7 @@ const writeToFile = (data: CommitsData) => {
   const content = `// This file was automatically generated.
 // Please do not remove or edit this file.
 
-import type { CommitsData } from '#/app/about/_types';
+import type { CommitsData } from '#/app/about/_types/github';
 
 export const commitsData: CommitsData = ${JSON.stringify(data, null, 2)};
 `;

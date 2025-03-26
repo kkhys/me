@@ -1,5 +1,5 @@
 import { excludedLanguage } from "#/app/about/_config";
-import type { Summary } from "#/app/about/_types";
+import type { Summary } from "#/app/about/_types/wakatime";
 
 type AggregateBase = {
   total_seconds: number;

@@ -4,7 +4,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import type { DialogProps } from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
 
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 
 const Dialog = DialogPrimitive.Root;
 

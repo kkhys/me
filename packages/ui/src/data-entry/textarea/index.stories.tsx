@@ -2,18 +2,18 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { getFormProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
+import { Button } from "@kkhys/ui/button";
 import {
-  Button,
   Form,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Label,
-  Textarea,
-  toast,
-} from "@kkhys/ui";
+} from "@kkhys/ui/form";
+import { Label } from "@kkhys/ui/label";
+import { Textarea } from "@kkhys/ui/textarea";
+import { toast } from "@kkhys/ui/toast";
 import { expect, userEvent, within } from "@storybook/test";
 import { z } from "zod";
 import { ToastDecorator } from "../../feedback/toast/index.stories";

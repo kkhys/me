@@ -1,7 +1,7 @@
 import { SquareArrowOutUpRightIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
-import { siteConfig } from "#/config";
+import { siteConfig } from "#/config/site";
 
 type FooterLink = {
   href: Route;

@@ -1,10 +1,11 @@
-import { cn } from "@kkhys/ui";
-import { getAggregateData, getWakaTimeSummaries } from "#/app/about/_lib";
+import { cn } from "@kkhys/ui/utils";
+import { getWakaTimeSummaries } from "#/app/about/_lib/fetchers";
+import { getAggregateData } from "#/app/about/_lib/wakatime";
+import { ChartCard } from "#/app/about/_ui/charts/chart-card";
 import {
-  ChartCard,
   WakatimeChart,
   WakatimeChartSkeleton,
-} from "#/app/about/_ui";
+} from "#/app/about/_ui/charts/wakatime-chart";
 
 export const WakatimeMetrics = async ({
   className,

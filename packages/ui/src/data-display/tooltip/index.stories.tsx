@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import { Button } from "@kkhys/ui/button";
 import {
-  Button,
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@kkhys/ui";
+} from "@kkhys/ui/tooltip";
 import { fn } from "@storybook/test";
 
 const meta = {

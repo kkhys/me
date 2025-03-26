@@ -17,7 +17,10 @@ import type {
   SearchItem,
   TagCloudItem,
 } from "#/app/posts/_types";
-import { categories, flatTags, itemsPerPage, siteConfig } from "#/config";
+import { categories } from "#/config/category";
+import { itemsPerPage } from "#/config/constant";
+import { siteConfig } from "#/config/site";
+import { flatTags } from "#/config/tag";
 import { formatPublishedDate } from "#/utils/date";
 import { generateEmojiSvg } from "#/utils/emoji";
 

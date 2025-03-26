@@ -4,13 +4,13 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  Skeleton,
-  cn,
-} from "@kkhys/ui";
+} from "@kkhys/ui/card";
+import { Skeleton } from "@kkhys/ui/skeleton";
+import { cn } from "@kkhys/ui/utils";
 import type { Post } from "contentlayer/generated";
 import type { Route } from "next";
 import Link from "next/link";
-import { EyeCatch, EyeCatchSkeleton } from "#/app/posts/_ui";
+import { EyeCatch, EyeCatchSkeleton } from "#/app/posts/_ui/eye-catch";
 
 export const ArticleCard = ({
   post: { slug, title, emojiSvg, publishedAt, publishedAtFormattedIso },

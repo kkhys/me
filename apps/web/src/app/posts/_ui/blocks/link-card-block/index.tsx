@@ -1,7 +1,7 @@
 import { GlobeIcon } from "lucide-react";
 import Image from "next/image";
 
-import { cn } from "@kkhys/ui";
+import { cn } from "@kkhys/ui/utils";
 
 export const LinkCardBlock = ({
   className,

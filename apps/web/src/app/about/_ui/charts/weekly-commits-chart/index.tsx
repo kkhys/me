@@ -5,9 +5,9 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@kkhys/ui";
+} from "@kkhys/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-import type { AllDaysOfWeekData } from "#/app/about/_types";
+import type { AllDaysOfWeekData } from "#/app/about/_types/github";
 
 const chartConfig = {
   commits: {

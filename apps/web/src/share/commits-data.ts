@@ -1,7 +1,7 @@
 // This file was automatically generated.
 // Please do not remove or edit this file.
 
-import type { CommitsData } from '#/app/about/_types';
+import type { CommitsData } from '#/app/about/_types/github';
 
 export const commitsData: CommitsData = {
   "totalCommits": 9677,

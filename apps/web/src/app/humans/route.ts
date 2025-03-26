@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { NextResponse } from "next/server";
-import { me } from "#/config";
+import { me } from "#/config/site";
 
 export const revalidate = 86400;
 

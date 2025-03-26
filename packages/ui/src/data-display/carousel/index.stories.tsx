@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import * as React from "react";
+import React from "react";
 
+import { Card, CardContent } from "@kkhys/ui/card";
 import {
-  Card,
-  CardContent,
   Carousel,
   type CarouselApi,
   CarouselContent,
@@ -11,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
   type CarouselProps,
-} from "@kkhys/ui";
+} from "@kkhys/ui/carousel";
 
 const meta = {
   title: "Data Display / Carousel",

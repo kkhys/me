@@ -72,6 +72,11 @@ export const tags = {
       slug: "gadget",
       emoji: "📱",
     },
+    {
+      title: "Apple",
+      slug: "apple",
+      emoji: "🍎",
+    },
   ],
   tech: [
     {
@@ -133,6 +138,11 @@ export const tags = {
       title: "Linux",
       slug: "linux",
       emoji: "🐧",
+    },
+    {
+      title: "Environment",
+      slug: "environment",
+      emoji: "🌳",
     },
   ],
 } satisfies Record<string, Tag[]>;

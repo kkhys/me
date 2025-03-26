@@ -1,14 +1,12 @@
-import { Prose } from "@kkhys/ui";
+import { Prose } from "@kkhys/ui/prose";
 import { notFound } from "next/navigation";
-import {
-  ArticleList,
-  EyeCatch,
-  Mdx,
-  PrevAndNextPager,
-  TagCloud,
-  ViewCounter,
-  ViewCounterSkeleton,
-} from "#/app/posts/_ui";
+import { ArticleList } from "#/app/posts/_ui/article-list";
+import { EyeCatch } from "#/app/posts/_ui/eye-catch";
+import { Mdx } from "#/app/posts/_ui/mdx-components";
+import { PrevAndNextPager } from "#/app/posts/_ui/prev-and-next-pager";
+import { TagCloud } from "#/app/posts/_ui/tag-cloud";
+import { ViewCounter, ViewCounterSkeleton } from "#/app/posts/_ui/view-counter";
+
 import {
   getPostBySlug,
   getPostMetadataBySlug,
@@ -21,11 +19,11 @@ import "#/styles/react-medium-image-zoom.css";
 import type { Post } from "contentlayer/generated";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import * as React from "react";
+import React from "react";
 import type { BlogPosting, BreadcrumbList, WithContext } from "schema-dts";
-import { me, siteConfig } from "#/config";
+import { me, siteConfig } from "#/config/site";
 import { tagCloudItems } from "#/share/tag-cloud-items";
-import { ActionController } from "#/ui";
+import { ActionController } from "#/ui/action-controller";
 
 const JsonLd = ({
   post: { title, slug, publishedAt, updatedAt },

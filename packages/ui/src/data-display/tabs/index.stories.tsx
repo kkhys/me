@@ -1,18 +1,15 @@
+import { Button } from "@kkhys/ui/button";
 import {
-  Button,
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-  Input,
-  Label,
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@kkhys/ui";
+} from "@kkhys/ui/card";
+import { Input } from "@kkhys/ui/input";
+import { Label } from "@kkhys/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@kkhys/ui/tabs";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import type { BreadcrumbList, WithContext } from "schema-dts";
-import { GithubMetrics, WakatimeMetrics } from "#/app/about/_ui";
-import { siteConfig } from "#/config";
+import { GithubMetrics } from "#/app/about/_ui/metrics/github-metrics";
+import { WakatimeMetrics } from "#/app/about/_ui/metrics/wakatime-metrics";
+import { siteConfig } from "#/config/site";
 
 const JsonLd = () => {
   const jsonLdBreadcrumb = {
