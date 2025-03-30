@@ -6,5 +6,5 @@ export const excludedLanguage = [
   "Text",
   "JSON",
   "TSConfig",
-  "textmate"
+  "textmate",
 ];
