@@ -1,3 +1,4 @@
+import { FadeIn, FadeInStagger } from "@kkhys/ui/fade-in";
 import type { Metadata } from "next";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { GithubMetrics } from "#/app/about/_ui/metrics/github-metrics";
@@ -49,15 +50,19 @@ export const metadata = {
 const Page = () => (
   <>
     <JsonLd />
-    <header>
-      <h1 className="font-sans font-medium">About</h1>
-    </header>
-    <div className="mt-6 space-y-6">
-      <h2 className="font-sans font-medium">This Week I Spent My Time On</h2>
-      <WakatimeMetrics />
-      <h2 className="font-sans font-medium">Commits Analysis</h2>
-      <GithubMetrics />
-    </div>
+    <FadeInStagger>
+      <FadeIn>
+        <header>
+          <h1 className="font-sans font-medium">About</h1>
+        </header>
+      </FadeIn>
+      <FadeIn className="mt-6 space-y-6">
+        <h2 className="font-sans font-medium">This Week I Spent My Time On</h2>
+        <WakatimeMetrics />
+        <h2 className="font-sans font-medium">Commits Analysis</h2>
+        <GithubMetrics />
+      </FadeIn>
+    </FadeInStagger>
   </>
 );
 
