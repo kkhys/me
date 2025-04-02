@@ -7,7 +7,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@kkhys/ui/chart";
-import * as React from "react";
+import React from "react";
 import { Pie, PieChart } from "recharts";
 import type {
   AllTimeOfDayData,
