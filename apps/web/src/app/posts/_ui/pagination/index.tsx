@@ -46,7 +46,7 @@ const DisabledPaginationLink = ({
     extraClassName: string,
   ) => (
     <span
-      aria-disabled
+      aria-disabled={true}
       className={cn(
         buttonVariants({
           variant: "ghost",
