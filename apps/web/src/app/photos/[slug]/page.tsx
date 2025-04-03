@@ -12,6 +12,7 @@ import { siteConfig } from "#/config/site";
 import { getPhotoBySlug, getPhotoTitle, getPublicPhotos } from "#/utils/photo";
 import "#/styles/react-medium-image-zoom.css";
 import "../_styles/index.css";
+import { FadeIn, FadeInStagger } from "@kkhys/ui/fade-in";
 import type { Photo } from "contentlayer/generated";
 import type { Metadata } from "next";
 import React from "react";
@@ -133,28 +134,36 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             quality={90}
           />
         </Zoom>
-        <h1 className="font-sans font-medium text-sm">{title}</h1>
-        <DescriptionList className="font-sans">
-          <DescriptionTerm>Camera</DescriptionTerm>
-          <DescriptionDetails>
-            {cameraData.name} ({cameraData.manufacturer})
-          </DescriptionDetails>
-          <DescriptionTerm>Lens</DescriptionTerm>
-          <DescriptionDetails>
-            {lensData.name} ({lensData.manufacturer})
-          </DescriptionDetails>
-          <DescriptionTerm>F-number</DescriptionTerm>
-          <DescriptionDetails>{fNumber}</DescriptionDetails>
-          <DescriptionTerm>Focal length</DescriptionTerm>
-          <DescriptionDetails>{focalLength}mm</DescriptionDetails>
-          <DescriptionTerm>Shutter speed</DescriptionTerm>
-          <DescriptionDetails>{shutterSpeed}s</DescriptionDetails>
-          <DescriptionTerm>ISO</DescriptionTerm>
-          <DescriptionDetails>{iso}</DescriptionDetails>
-          <DescriptionTerm>Shooting date</DescriptionTerm>
-          <DescriptionDetails>{publishedAtFormattedUs}</DescriptionDetails>
-        </DescriptionList>
-        <ActionController data={photo} title={title} className="mt-8" />
+        <FadeInStagger className="space-y-6">
+          <FadeIn>
+            <h1 className="font-sans font-medium text-sm">{title}</h1>
+          </FadeIn>
+          <FadeIn>
+            <DescriptionList className="font-sans">
+              <DescriptionTerm>Camera</DescriptionTerm>
+              <DescriptionDetails>
+                {cameraData.name} ({cameraData.manufacturer})
+              </DescriptionDetails>
+              <DescriptionTerm>Lens</DescriptionTerm>
+              <DescriptionDetails>
+                {lensData.name} ({lensData.manufacturer})
+              </DescriptionDetails>
+              <DescriptionTerm>F-number</DescriptionTerm>
+              <DescriptionDetails>{fNumber}</DescriptionDetails>
+              <DescriptionTerm>Focal length</DescriptionTerm>
+              <DescriptionDetails>{focalLength}mm</DescriptionDetails>
+              <DescriptionTerm>Shutter speed</DescriptionTerm>
+              <DescriptionDetails>{shutterSpeed}s</DescriptionDetails>
+              <DescriptionTerm>ISO</DescriptionTerm>
+              <DescriptionDetails>{iso}</DescriptionDetails>
+              <DescriptionTerm>Shooting date</DescriptionTerm>
+              <DescriptionDetails>{publishedAtFormattedUs}</DescriptionDetails>
+            </DescriptionList>
+          </FadeIn>
+          <FadeIn>
+            <ActionController data={photo} title={title} className="mt-8" />
+          </FadeIn>
+        </FadeInStagger>
       </div>
     </>
   );

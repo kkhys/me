@@ -1,4 +1,4 @@
-import * as crypto from "node:crypto";
+import { type BinaryLike, createHash } from "node:crypto";
 import { bech32m } from "bech32";
 import { defineDocumentType, makeSource } from "contentlayer2/source-files";
 import { format, parseISO } from "date-fns";
@@ -296,16 +296,13 @@ const createExcerpt = async (raw: string) => {
   return stripped.length > maxWords ? `${excerpt}...` : excerpt;
 };
 
-const generateSlug = (data: crypto.BinaryLike) => {
+const generateSlug = (data: BinaryLike) => {
   const hashAlgorithm = "sha512";
   const encoding = "hex";
   const slugLength = 7;
   const prefix = "p";
 
-  const hashValue = crypto
-    .createHash(hashAlgorithm)
-    .update(data)
-    .digest(encoding);
+  const hashValue = createHash(hashAlgorithm).update(data).digest(encoding);
   const buffer = Buffer.from(hashValue, encoding);
   const words = bech32m.toWords(buffer);
 

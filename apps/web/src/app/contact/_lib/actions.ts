@@ -4,7 +4,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { rateLimiter } from "@kkhys/db";
 import { contactMail } from "@kkhys/email";
 import { ContactSchema } from "@kkhys/validators";
-import * as line from "@line/bot-sdk";
+import { messagingApi } from "@line/bot-sdk";
 import { format } from "date-fns";
 import { google } from "googleapis";
 import { headers } from "next/headers";
@@ -146,7 +146,7 @@ ${type}
 ${content}`;
 
   try {
-    const client = new line.messagingApi.MessagingApiClient({
+    const client = new messagingApi.MessagingApiClient({
       channelAccessToken: env.LINE_CHANNEL_ACCESS_TOKEN,
     });
 

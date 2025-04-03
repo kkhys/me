@@ -25,7 +25,7 @@ export const GET = async (): Promise<NextResponse> => {
   Publisher,
   Writer:    ${me.name}
   Location:  Tokyo, Japan
-  GitHub:    ${me.github}
+  GitHub:    ${me.github.url}
   Mastodon:  ${me.mastodon}
   
 ## SITE
