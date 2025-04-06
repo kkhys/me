@@ -291,23 +291,30 @@ export const buildCommitsData = (allCommits: CommitNode[]): CommitsData => {
 export const fetchAndMergeCommits = async (
   sinceDate: string | null,
   cachedCommits: CommitNode[],
+  useCache = true,
 ): Promise<CommitNode[]> => {
   if (!sinceDate) throw new Error("sinceDate is required");
 
-  const repositories = await getCachedUserRepositories();
+  const repositories = useCache
+    ? await getCachedUserRepositories()
+    : await getUserRepositories();
 
   const allCommits: CommitNode[] = [];
 
   // 各リポジトリの全ブランチに対してコミットを取得
   for (const { name: repositoryName } of repositories) {
-    const branches = await getCachedRepositoryBranches(repositoryName);
+    const branches = useCache
+      ? await getCachedRepositoryBranches(repositoryName)
+      : await getRepositoryBranches(repositoryName);
 
     for (const { name: branchName } of branches) {
-      const commits = await getCachedRepositoryCommits(
-        repositoryName,
-        branchName,
-        sinceDate,
-      );
+      const commits = useCache
+        ? await getCachedRepositoryCommits(
+            repositoryName,
+            branchName,
+            sinceDate,
+          )
+        : await getRepositoryCommits(repositoryName, branchName, sinceDate);
       allCommits.push(...commits);
     }
   }

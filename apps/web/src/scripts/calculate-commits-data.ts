@@ -30,6 +30,7 @@ const main = async () => {
     const mergedCommits = await fetchAndMergeCommits(
       sinceDate,
       cachedCommitsData.commits,
+      false,
     );
 
     const commitsData = buildCommitsData(mergedCommits);
