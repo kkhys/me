@@ -103,7 +103,7 @@
         "storybook": "8.6.12",
         "strip-markdown": "6.0.0",
         "tailwindcss": "3.4.17",
-        "typescript": "5.8.2",
+        "typescript": "5.8.3",
       },
     },
     "packages/auth": {
@@ -115,7 +115,7 @@
       },
       "devDependencies": {
         "@kkhys/tsconfig": "workspace:*",
-        "typescript": "5.8.2",
+        "typescript": "5.8.3",
       },
     },
     "packages/db": {
@@ -134,7 +134,7 @@
         "dotenv-cli": "8.0.0",
         "drizzle-kit": "0.30.6",
         "pg": "8.14.1",
-        "typescript": "5.8.2",
+        "typescript": "5.8.3",
       },
     },
     "packages/email": {
@@ -150,7 +150,7 @@
       },
       "devDependencies": {
         "@types/react": "19.1.0",
-        "typescript": "5.8.2",
+        "typescript": "5.8.3",
       },
     },
     "packages/google-apps-script": {
@@ -166,7 +166,7 @@
         "@types/google-apps-script": "1.0.97",
         "@types/node": "22.14.0",
         "rollup-plugin-google-apps-script": "2.0.2",
-        "typescript": "5.8.2",
+        "typescript": "5.8.3",
         "vite": "6.2.5",
       },
     },
@@ -214,7 +214,7 @@
         "@vitejs/plugin-react-swc": "3.8.1",
         "react": "19.1.0",
         "storybook": "8.6.12",
-        "typescript": "5.8.2",
+        "typescript": "5.8.3",
         "vite": "6.2.5",
       },
     },
@@ -226,7 +226,7 @@
       },
       "devDependencies": {
         "@kkhys/tsconfig": "workspace:*",
-        "typescript": "5.8.2",
+        "typescript": "5.8.3",
       },
     },
     "tooling/tailwind": {
@@ -240,7 +240,7 @@
       },
       "devDependencies": {
         "@kkhys/tsconfig": "workspace:*",
-        "typescript": "5.8.2",
+        "typescript": "5.8.3",
       },
     },
     "tooling/tsconfig": {
@@ -3853,6 +3853,22 @@
     "@isaacs/cliui/wrap-ansi": ["wrap-ansi@8.1.0", "", { "dependencies": { "ansi-styles": "^6.1.0", "string-width": "^5.0.1", "strip-ansi": "^7.0.1" } }, "sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ=="],
 
     "@joshwooding/vite-plugin-react-docgen-typescript/magic-string": ["magic-string@0.27.0", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.4.13" } }, "sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA=="],
+
+    "@kkhys/auth/typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
+
+    "@kkhys/db/typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
+
+    "@kkhys/email/typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
+
+    "@kkhys/google-apps-script/typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
+
+    "@kkhys/tailwind-config/typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
+
+    "@kkhys/ui/typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
+
+    "@kkhys/validators/typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
+
+    "@kkhys/web/typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
 
     "@line/bot-sdk/@types/node": ["@types/node@22.13.14", "", { "dependencies": { "undici-types": "~6.20.0" } }, "sha512-Zs/Ollc1SJ8nKUAgc7ivOEdIBM8JAKgrqqUYi2J997JuKO7/tpQC+WCetQ1sypiKCQWHdvdg9wBNpUPEWZae7w=="],
 
