@@ -12,106 +12,132 @@ import Link from "next/link";
 
 type PaginationLinkProps = {
   isActive?: boolean;
-  isDisabled?: boolean;
 } & Pick<ButtonProps, "size"> &
   React.ComponentProps<typeof Link>;
 
 const PaginationLink = ({
   className,
   isActive,
-  isDisabled,
   size = "icon",
   ...props
-}: PaginationLinkProps) => {
-  if (isDisabled) {
-    return (
-      <span
-        className={cn(
-          buttonVariants({
-            variant: "ghost",
-            size,
-          }),
-          "pointer-events-none text-muted-foreground cursor-pointer select-none font-sans",
-          className,
-        )}
-        {...props}
-      />
-    );
-  }
+}: PaginationLinkProps) => (
+  <Link
+    aria-current={isActive ? "page" : undefined}
+    className={cn(
+      buttonVariants({
+        variant: isActive ? "outline" : "ghost",
+        size,
+      }),
+      isActive && "pointer-events-none",
+      "cursor-pointer select-none font-sans",
+      className,
+    )}
+    {...props}
+  />
+);
 
-  return (
-    <Link
-      aria-current={isActive ? "page" : undefined}
+const DisabledPaginationLink = ({
+  navigation,
+  className,
+  ...props
+}: { navigation: "previous" | "next" } & React.ComponentProps<"span">) => {
+  const renderPaginationLink = (
+    size: "icon" | "default",
+    extraClassName: string,
+  ) => (
+    <span
+      aria-disabled={true}
       className={cn(
         buttonVariants({
-          variant: isActive ? "outline" : "ghost",
+          variant: "ghost",
           size,
         }),
-        isDisabled && "pointer-events-none text-muted-foreground",
-        isActive && "pointer-events-none",
-        "cursor-pointer select-none font-sans",
-        className,
+        extraClassName,
+        "pointer-events-none text-muted-foreground cursor-pointer select-none font-sans",
       )}
       {...props}
-    />
+    >
+      {navigation === "previous" ? (
+        <ChevronLeftIcon className="size-4" />
+      ) : (
+        <ChevronRightIcon className="size-4" />
+      )}
+      {size === "default" &&
+        (navigation === "previous" ? <span>Previous</span> : <span>Next</span>)}
+    </span>
+  );
+
+  return (
+    <>
+      {renderPaginationLink("icon", "hidden sm:inline-flex")}
+      {renderPaginationLink("default", "inline-flex sm:hidden gap-1 pl-2.5")}
+    </>
   );
 };
 
 const PaginationPrevious = ({
-  isDisabled,
   className,
+  isDisabled,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
-  <>
+}: { isDisabled: boolean } & React.ComponentProps<typeof PaginationLink>) => {
+  if (isDisabled) {
+    return <DisabledPaginationLink navigation="previous" />;
+  }
+
+  const renderPaginationLink = (
+    size: "icon" | "default",
+    extraClassName: string,
+  ) => (
     <PaginationLink
       aria-label="Go to previous page"
-      size="icon"
-      isDisabled={isDisabled}
-      className={cn("hidden sm:inline-flex", className)}
+      size={size}
+      className={cn(extraClassName, className)}
       {...props}
     >
       <ChevronLeftIcon className="size-4" />
+      {size === "default" && <span>Previous</span>}
     </PaginationLink>
-    <PaginationLink
-      aria-label="Go to previous page"
-      size="default"
-      isDisabled={isDisabled}
-      className={cn("inline-flex sm:hidden gap-1 pl-2.5", className)}
-      {...props}
-    >
-      <ChevronLeftIcon className="size-4" />
-      <span>Previous</span>
-    </PaginationLink>
-  </>
-);
+  );
+
+  return (
+    <>
+      {renderPaginationLink("icon", "hidden sm:inline-flex")}
+      {renderPaginationLink("default", "inline-flex sm:hidden gap-1 pl-2.5")}
+    </>
+  );
+};
 
 const PaginationNext = ({
   isDisabled,
   className,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
-  <>
-    <PaginationLink
-      aria-label="Go to next page"
-      size="icon"
-      isDisabled={isDisabled}
-      className={cn("hidden sm:inline-flex", className)}
-      {...props}
-    >
-      <ChevronRightIcon className="size-4" />
-    </PaginationLink>
-    <PaginationLink
-      aria-label="Go to next page"
-      size="default"
-      isDisabled={isDisabled}
-      className={cn("inline-flex sm:hidden gap-1 pr-2.5", className)}
-      {...props}
-    >
-      <span>Next</span>
-      <ChevronRightIcon className="size-4" />
-    </PaginationLink>
-  </>
-);
+}: { isDisabled: boolean } & React.ComponentProps<typeof PaginationLink>) => {
+  if (isDisabled) {
+    return <DisabledPaginationLink navigation="next" />;
+  }
+
+  return (
+    <>
+      <PaginationLink
+        aria-label="Go to next page"
+        size="icon"
+        className={cn("hidden sm:inline-flex", className)}
+        {...props}
+      >
+        <ChevronRightIcon className="size-4" />
+      </PaginationLink>
+      <PaginationLink
+        aria-label="Go to next page"
+        size="default"
+        className={cn("inline-flex sm:hidden gap-1 pr-2.5", className)}
+        {...props}
+      >
+        <span>Next</span>
+        <ChevronRightIcon className="size-4" />
+      </PaginationLink>
+    </>
+  );
+};
 
 // Example:
 // Current page: ① → Output: 1 2 ... 10
