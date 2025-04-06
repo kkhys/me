@@ -97,7 +97,7 @@ export const getCachedUserRepositories = unstable_cache(
   async () => getUserRepositories(),
   undefined,
   {
-    revalidate: false,
+    revalidate: 60 * 60 * 24,
   },
 );
 
@@ -149,7 +149,7 @@ export const getCachedRepositoryBranches = unstable_cache(
   async (repositoryName: string) => getRepositoryBranches(repositoryName),
   undefined,
   {
-    revalidate: false,
+    revalidate: 60 * 60 * 24,
   },
 );
 
@@ -221,7 +221,7 @@ export const getCachedRepositoryCommits = unstable_cache(
     getRepositoryCommits(repositoryName, branch, since),
   undefined,
   {
-    revalidate: false,
+    revalidate: 60 * 60 * 24,
   },
 );
 
