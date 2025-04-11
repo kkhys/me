@@ -25,17 +25,13 @@ const CURRENT_BRANCH = (await $`git rev-parse --abbrev-ref HEAD`.text()).trim();
 
 if (!isDryRun) {
   await $`git checkout main`;
-  await $`git pull origin main`;
   await $`git tag -f ${VERSION}`;
-  await $`git push origin main`;
   await $`git push -f origin ${VERSION}`;
   await $`git checkout ${CURRENT_BRANCH}`;
   console.log(`✅ Released tag: ${VERSION} and returned to ${CURRENT_BRANCH}`);
 } else {
   console.log("🚫 Would checkout main");
-  console.log("🚫 Would pull origin main");
   console.log(`🚫 Would tag -f ${VERSION}`);
-  console.log("🚫 Would push origin main");
   console.log(`🚫 Would push -f origin ${VERSION}`);
   console.log(`🚫 Would checkout ${CURRENT_BRANCH}`);
   console.log("✅ Dry run completed");
