@@ -1,6 +1,14 @@
 import { $ } from "bun";
 
 const isDryRun = process.argv.includes("--dry-run");
+const GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
+
+if (!GITHUB_ACCESS_TOKEN) {
+  console.error(
+    "🚨 GitHub token is missing. Set GITHUB_ACCESS_TOKEN in your environment variables.",
+  );
+  process.exit(1);
+}
 
 const now = new Date();
 const BASE_VERSION = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, "0")}.${String(now.getDate()).padStart(2, "0")}`;
@@ -34,5 +42,47 @@ if (!isDryRun) {
   console.log(`🚫 Would tag -f ${VERSION}`);
   console.log(`🚫 Would push -f origin ${VERSION}`);
   console.log(`🚫 Would checkout ${CURRENT_BRANCH}`);
-  console.log("✅ Dry run completed");
+}
+
+const REPO_OWNER = "kkhys";
+const REPO_NAME = "me";
+
+console.log(`🚀 Preparing to create GitHub release for ${VERSION}`);
+
+const createGitHubRelease = async () => {
+  const response = await fetch(
+    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${GITHUB_ACCESS_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tag_name: VERSION,
+        name: VERSION,
+        body: `Automatic release for version ${VERSION}.`,
+        draft: false,
+        prerelease: false,
+      }),
+    },
+  );
+
+  if (response.ok) {
+    const responseData = (await response.json()) as { html_url: string };
+    console.log(`✅ GitHub Release created: ${responseData.html_url}`);
+  } else {
+    console.error("❌ Failed to create GitHub release.");
+    const errorData = (await response.json()) as { message: string };
+    console.error(`Error: ${errorData.message}`);
+  }
+};
+
+if (!isDryRun) {
+  await createGitHubRelease();
+} else {
+  console.log("🚫 Would create GitHub release");
+  console.log(`🚫 Release tag: ${VERSION}`);
+  console.log(`🚫 Release title: Release ${VERSION}`);
+  console.log("✅ Dry run completed for GitHub release process");
 }
