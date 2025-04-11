@@ -15,7 +15,8 @@
     "storybook:dev": "turbo run storybook:dev",
     "storybook:build": "turbo run storybook:build",
     "storybook:move": "turbo run storybook:move --filter=@kkhys/storybook && turbo run storybook:move --filter=!@kkhys/storybook",
-    "storybook:start": "bunx http-server storybook-static -p 8080"
+    "storybook:start": "bunx http-server storybook-static -p 8080",
+    "release": "bun run scripts/release.ts"
   },
   "release": {
     "branches": ["main"]
@@ -27,6 +28,7 @@
   "workspaces": ["apps/*", "packages/*", "tooling/*"],
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@kkhys/tsconfig": "workspace:*",
     "@types/bun": "1.2.9",
     "semantic-release": "24.2.3",
     "semantic-release-cli": "5.4.6",
