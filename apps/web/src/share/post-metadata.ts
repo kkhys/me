@@ -51,6 +51,7 @@ export const postMetadata: PostMetadata[] = [
     tags: ["Gadget", "Apple"],
     status: "published",
     publishedAt: "2025-03-21T00:00:00.000Z",
+    updatedAt: "2025-04-12T00:00:00.000Z",
     excerpt:
       "先日M4チップが搭載されたMacminiを購入したので所感を書いていく。Macminiの箱Macminiのスペック今回購入したMacminiのスペック↓チップ:AppleM4チップメモリ:24GBユニファイドメモリストレージ:512GB価格:約148,000円デフォルトだとメモリは16GBだが、IDEを開きながら作業す...",
     url: "https://kkhys.me/posts/p1r3zrr",
