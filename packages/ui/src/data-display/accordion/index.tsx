@@ -9,21 +9,15 @@ const Accordion = AccordionPrimitive.Root;
 
 const AccordionItem = ({
   className,
-  ref,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Item>) => (
-  <AccordionPrimitive.Item
-    className={cn("border-b", className)}
-    ref={ref}
-    {...props}
-  />
+  <AccordionPrimitive.Item className={cn("border-b", className)} {...props} />
 );
 AccordionItem.displayName = "AccordionItem";
 
 const AccordionTrigger = ({
   className,
   children,
-  ref,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Trigger>) => (
   <AccordionPrimitive.Header className="flex">
@@ -32,7 +26,6 @@ const AccordionTrigger = ({
         "flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline text-left [&[data-state=open]>svg]:rotate-180",
         className,
       )}
-      ref={ref}
       {...props}
     >
       {children}
@@ -45,12 +38,10 @@ AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 const AccordionContent = ({
   className,
   children,
-  ref,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Content>) => (
   <AccordionPrimitive.Content
     className="overflow-hidden text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-    ref={ref}
     {...props}
   >
     <div className={cn("pb-4 pt-0", className)}>{children}</div>

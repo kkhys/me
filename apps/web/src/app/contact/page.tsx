@@ -1,3 +1,4 @@
+import { FadeIn, FadeInStagger } from "@kkhys/ui/fade-in";
 import type { Metadata } from "next";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import { ContactForm } from "#/app/contact/_ui/contact-form";
@@ -48,10 +49,16 @@ export const metadata = {
 const Page = () => (
   <>
     <JsonLd />
-    <header>
-      <h1 className="font-sans font-medium">Contact</h1>
-    </header>
-    <ContactForm className="mt-6" />
+    <FadeInStagger>
+      <FadeIn>
+        <header>
+          <h1 className="font-sans font-medium">Contact</h1>
+        </header>
+      </FadeIn>
+      <FadeIn>
+        <ContactForm className="mt-6" />
+      </FadeIn>
+    </FadeInStagger>
   </>
 );
 

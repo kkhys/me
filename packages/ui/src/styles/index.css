@@ -38,6 +38,29 @@
     --ring: 240 5.9% 90%;
 
     --radius: 0.5rem;
+
+    --javascript: 89% 0.15 102;
+    --typescript: 56% 0.13 253;
+    --html: 62% 0.19 34;
+    --css: 44% 0.16 303;
+    --python: 53% 0.1 246;
+    --java: 60% 0.12 69;
+    --mdx: 81% 0.15 76;
+    --sql: 71% 0.15 67;
+    --rust: 76% 0.08 51;
+    --scala: 53% 0.18 19;
+    --ruby: 35% 0.12 25;
+    --shell: 82% 0.19 135;
+
+    --chart-editors: 67% 0.15 35;
+    --chart-operating-systems: 63% 0.1 183;
+    --chart-categories: 37% 0.04 225;
+
+    --chart-weekly: 78% 0.12 58;
+    --chart-morning: 63% 0.1 183;
+    --chart-daytime: 67% 0.15 35;
+    --chart-evening: 37% 0.04 225;
+    --chart-night: 83% 0.11 88;
   }
 
   .dark {
@@ -71,12 +94,22 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 3.7% 15.9%;
+
+    --chart-editors: 61% 0.2 6.4;
+    --chart-operating-systems: 53% 0.19 262;
+    --chart-categories: 72% 0.15 60;
+
+    --chart-weekly: 69% 0.13 165;
+    --chart-morning: 53% 0.19 262;
+    --chart-daytime: 61% 0.2 6.4;
+    --chart-evening: 72% 0.15 60;
+    --chart-night: 62% 0.2 312;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
 
   body {

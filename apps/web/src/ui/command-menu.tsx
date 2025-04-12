@@ -24,7 +24,7 @@ import { cn } from "@kkhys/ui/utils";
 import type { Route } from "next";
 import { fisherYatesShuffle, getPublicSearchItems } from "#/utils/post";
 
-export const CommandMenuButton = (props: React.ComponentProps<"button">) => (
+const CommandMenuButton = (props: React.ComponentProps<"button">) => (
   <Button
     variant="outline"
     className={cn(
