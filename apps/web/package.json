@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "clean": "git clean -xdf .cache .contentlayer .next .turbo node_modules storybook-static",
-    "dev": "NODE_OPTIONS='--inspect' bun with-env next dev --turbopack --port 3000",
+    "dev": "NODE_OPTIONS='--inspect' bun with-env next dev --port 3000",
     "dev:inngest": "./scripts/start-inngest.sh",
     "_prebuild": "bun contentlayer2 build && bun ./src/scripts/pre-build.ts && cd ../.. && bun lint:fix && cd apps/web",
     "prebuild": "bun contentlayer2 build",
