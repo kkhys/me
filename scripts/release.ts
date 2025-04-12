@@ -49,7 +49,45 @@ const REPO_NAME = "me";
 
 console.log(`🚀 Preparing to create GitHub release for ${VERSION}`);
 
+const getPreviousTag = async (): Promise<string | null> => {
+  const response = await fetch(
+    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${GITHUB_ACCESS_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  if (response.ok) {
+    const releases: { tag_name: string }[] = (await response.json()) as {
+      tag_name: string;
+    }[];
+    if (releases && releases.length > 0 && releases[0]?.tag_name) {
+      return releases[0].tag_name;
+    }
+  } else {
+    console.error("❌ Failed to fetch releases from GitHub.");
+    const errorData = (await response.json()) as { message: string };
+    console.error(`Error: ${errorData.message}`);
+  }
+
+  return null;
+};
+
 const createGitHubRelease = async () => {
+  const previousTag = await getPreviousTag();
+
+  let body = `Automatic release for version ${VERSION}.`;
+  if (previousTag) {
+    const compareUrl = `https://github.com/${REPO_OWNER}/${REPO_NAME}/compare/${previousTag}...${VERSION}`;
+    body += `\n\n[🛠️ View changes since ${previousTag}](${compareUrl})`;
+  } else {
+    body += "\n\n(No previous release found for comparison.)";
+  }
+
   const response = await fetch(
     `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases`,
     {
@@ -61,7 +99,7 @@ const createGitHubRelease = async () => {
       body: JSON.stringify({
         tag_name: VERSION,
         name: VERSION,
-        body: `Automatic release for version ${VERSION}.`,
+        body,
         draft: false,
         prerelease: false,
       }),
@@ -72,8 +110,8 @@ const createGitHubRelease = async () => {
     const responseData = (await response.json()) as { html_url: string };
     console.log(`✅ GitHub Release created: ${responseData.html_url}`);
   } else {
-    console.error("❌ Failed to create GitHub release.");
     const errorData = (await response.json()) as { message: string };
+    console.error("❌ Failed to create GitHub release.");
     console.error(`Error: ${errorData.message}`);
   }
 };
