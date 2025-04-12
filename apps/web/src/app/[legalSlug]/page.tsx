@@ -1,3 +1,4 @@
+import { FadeIn, FadeInStagger } from "@kkhys/ui/fade-in";
 import { Prose } from "@kkhys/ui/prose";
 import { allLegals } from "contentlayer/generated";
 import { format, parseISO } from "date-fns";
@@ -92,19 +93,27 @@ const Page = async ({ params }: { params: Promise<{ legalSlug: string }> }) => {
   return (
     <section>
       <JsonLd name={title} slug={legalSlug} />
-      <h1 className="font-sans font-medium">{title}</h1>
-      <Prose>
-        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-        <p className="mb-2 flex justify-end">
-          {format(parseISO(publishedAt), "yyyy年M月d日", { locale: ja })} 制定
-        </p>
-        {updatedAt && (
-          <p className="mt-2 flex justify-end">
-            {format(parseISO(updatedAt), "yyyy年M月d日", { locale: ja })} 改定
-          </p>
-        )}
-      </Prose>
+      <FadeInStagger>
+        <FadeIn>
+          <h1 className="font-sans font-medium">{title}</h1>
+        </FadeIn>
+        <FadeIn>
+          <Prose>
+            {/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+            <div dangerouslySetInnerHTML={{ __html: html }} />
+            <p className="mb-2 flex justify-end">
+              {format(parseISO(publishedAt), "yyyy年M月d日", { locale: ja })}{" "}
+              制定
+            </p>
+            {updatedAt && (
+              <p className="mt-2 flex justify-end">
+                {format(parseISO(updatedAt), "yyyy年M月d日", { locale: ja })}{" "}
+                改定
+              </p>
+            )}
+          </Prose>
+        </FadeIn>
+      </FadeInStagger>
     </section>
   );
 };

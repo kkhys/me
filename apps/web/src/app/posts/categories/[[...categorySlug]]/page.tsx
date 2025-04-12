@@ -1,3 +1,4 @@
+import { FadeIn } from "@kkhys/ui/fade-in";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { BreadcrumbList, WithContext } from "schema-dts";
@@ -146,9 +147,9 @@ const Page = async ({
         <h1 className="font-sans font-medium">Blog</h1>
         <CategoryNav className="mt-6" />
       </header>
-      <div className="mt-6">
+      <FadeIn className="mt-6">
         <ArticleList posts={currentPosts} />
-      </div>
+      </FadeIn>
       <Pagination
         className="mt-12"
         path={`/posts/categories/${category.slug}`}
