@@ -83,7 +83,7 @@ const createGitHubRelease = async () => {
   let body = `Automatic release for version ${VERSION}.`;
   if (previousTag) {
     const compareUrl = `https://github.com/${REPO_OWNER}/${REPO_NAME}/compare/${previousTag}...${VERSION}`;
-    body += `\n\n[🛠️ View changes since ${previousTag}](${compareUrl})`;
+    body += `\n\n[View changes since ${previousTag}](${compareUrl})`;
   } else {
     body += "\n\n(No previous release found for comparison.)";
   }
