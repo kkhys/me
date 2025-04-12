@@ -121,6 +121,6 @@ if (!isDryRun) {
 } else {
   console.log("🚫 Would create GitHub release");
   console.log(`🚫 Release tag: ${version}`);
-  console.log(`🚫 Release title: Release ${version}`);
+  console.log(`🚫 Release title: ${version}`);
   console.log("✅ Dry run completed for GitHub release process");
 }

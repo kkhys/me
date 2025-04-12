@@ -5,6 +5,25 @@ import type { PostMetadata } from "#/app/posts/_types";
 
 export const postMetadata: PostMetadata[] = [
   {
+    _id: "posts/tech/2025-04-12/index.mdx",
+    title: "Semantic Versioning から Calendar Versioning へ",
+    slug: "p1lqgaq",
+    emoji: "🚀",
+    category: "Tech",
+    tags: ["Release note"],
+    status: "published",
+    publishedAt: "2025-04-12T00:00:00.000Z",
+    excerpt:
+      "当サイトでは、これまでSemanticVersioning（以下SemVer）を採用していたが、今後はCalendarVersioning（以下CalVer）を使っていくことにした。SemverとはSemVerのバージョン番号は、MAJOR.MINOR.PATCHという形式で構成されている。それぞれの役割は以下の通り：...",
+    url: "https://kkhys.me/posts/p1lqgaq",
+    editUrl:
+      "https://github.com/kkhys/content/edit/main/posts/tech/2025-04-12/index.mdx",
+    sourceUrl:
+      "https://github.com/kkhys/content/blob/main/posts/tech/2025-04-12/index.mdx?plain=1",
+    revisionHistoryUrl:
+      "https://github.com/kkhys/content/commits/main/posts/tech/2025-04-12/index.mdx",
+  },
+  {
     _id: "posts/tech/2025-03-18/index.mdx",
     title: "Mac を買ったらやっておくべき初期設定（エンジニア向け）",
     slug: "p19rm7z",
