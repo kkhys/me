@@ -5,6 +5,11 @@ import type { PostMetadataForEdge } from "#/app/posts/_types";
 
 export const postMetadataForEdge: PostMetadataForEdge[] = [
   {
+    title: "Semantic Versioning から Calendar Versioning へ",
+    emoji: "🚀",
+    slug: "p1lqgaq",
+  },
+  {
     title: "Mac を買ったらやっておくべき初期設定（エンジニア向け）",
     emoji: "⚙️",
     slug: "p19rm7z",
