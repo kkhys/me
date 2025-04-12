@@ -31,10 +31,10 @@ export const docsConfig = {
       title: "Contact",
       href: "/contact",
     },
-    {
-      title: "About",
-      href: "/about",
-    },
+    // {
+    //   title: "About",
+    //   href: "/about",
+    // },
   ],
   sidebarNav: [
     {
