@@ -4,53 +4,53 @@
 import type { CommitsData } from '#/app/about/_types/github';
 
 export const commitsData: CommitsData = {
-  "totalCommits": 9895,
+  "totalCommits": 9955,
   "allTimeOfDayData": {
     "morning": {
-      "commits": 3050,
-      "percentage": 30.82
+      "commits": 3075,
+      "percentage": 30.89
     },
     "daytime": {
-      "commits": 1865,
-      "percentage": 18.85
+      "commits": 1869,
+      "percentage": 18.77
     },
     "evening": {
-      "commits": 3500,
-      "percentage": 35.37
+      "commits": 3526,
+      "percentage": 35.42
     },
     "night": {
-      "commits": 1480,
-      "percentage": 14.96
+      "commits": 1485,
+      "percentage": 14.92
     }
   },
   "allDaysOfWeekData": {
     "monday": {
-      "commits": 1467,
-      "percentage": 14.83
+      "commits": 1468,
+      "percentage": 14.75
     },
     "tuesday": {
-      "commits": 1345,
-      "percentage": 13.59
+      "commits": 1346,
+      "percentage": 13.52
     },
     "wednesday": {
-      "commits": 1391,
-      "percentage": 14.06
+      "commits": 1393,
+      "percentage": 13.99
     },
     "thursday": {
-      "commits": 1438,
-      "percentage": 14.53
+      "commits": 1452,
+      "percentage": 14.59
     },
     "friday": {
-      "commits": 1424,
-      "percentage": 14.39
+      "commits": 1441,
+      "percentage": 14.48
     },
     "saturday": {
-      "commits": 1371,
-      "percentage": 13.86
+      "commits": 1393,
+      "percentage": 13.99
     },
     "sunday": {
-      "commits": 1459,
-      "percentage": 14.74
+      "commits": 1462,
+      "percentage": 14.69
     }
   },
   "commits": [
@@ -29086,9 +29086,6 @@ export const commitsData: CommitsData = {
       "committedDate": "2025-03-09T15:54:56.000+09:00"
     },
     {
-      "committedDate": "2025-03-09T15:54:56.000+09:00"
-    },
-    {
       "committedDate": "2025-03-10T03:51:35.000+09:00"
     },
     {
@@ -29738,6 +29735,189 @@ export const commitsData: CommitsData = {
     },
     {
       "committedDate": "2025-04-06T13:05:11.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-06T13:05:11.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-06T18:19:59.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-06T18:20:15.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-06T18:24:42.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-07T03:56:15.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-08T03:58:10.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-09T04:01:27.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-09T22:38:04.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T04:03:03.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:21:34.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:24:44.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:25:00.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:25:19.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:25:38.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:26:07.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:26:32.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:26:54.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:27:10.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:30:02.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:31:07.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T21:35:05.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-10T22:20:23.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T08:34:33.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T08:34:44.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T08:35:07.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T08:35:29.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T08:47:03.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T08:47:15.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T08:49:43.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T08:52:15.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T21:42:36.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T21:49:02.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T21:49:40.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T21:59:35.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T22:46:54.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T22:47:16.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T22:47:21.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T22:51:25.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-11T22:58:41.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T03:59:21.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T08:22:36.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T09:40:13.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T09:41:05.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T09:42:40.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T09:46:35.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T10:11:33.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T10:14:23.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T10:15:32.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T10:21:41.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T10:21:55.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T10:23:12.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T10:41:36.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T11:43:49.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T11:54:24.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T11:54:39.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T11:54:52.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T11:57:40.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T12:05:58.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T12:06:10.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T12:06:30.000+09:00"
+    },
+    {
+      "committedDate": "2025-04-12T12:13:07.000+09:00"
     }
   ]
 };
