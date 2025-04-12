@@ -4,7 +4,7 @@ import { ModeSwitcher } from "@kkhys/ui/theme";
 import { LockIcon } from "lucide-react";
 import React from "react";
 import { UserButton } from "#/app/(auth)/_ui/user-button";
-import { DynamicCommandMenu } from "#/ui/dynamic-command-menu";
+import { CommandMenu } from "#/ui/command-menu";
 import { MainNav } from "#/ui/main-nav";
 import { MobileNav } from "#/ui/mobile-nav";
 
@@ -15,7 +15,7 @@ export const SiteHeader = () => (
       <MobileNav />
       <div className="flex flex-1 items-center justify-between gap-2 md:justify-end">
         <div className="w-full flex-1 md:w-auto md:flex-none">
-          <DynamicCommandMenu />
+          <CommandMenu />
         </div>
         <nav className="flex items-center gap-1.5">
           <ModeSwitcher />

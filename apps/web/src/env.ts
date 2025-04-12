@@ -25,6 +25,9 @@ export const env = createEnv({
     RESEND_API_KEY: z.string().min(1),
     VERCEL_DEPLOY_HOOK_URL: z.string().url(),
     CRON_SECRET: z.string().min(1),
+    WAKATIME_API_KEY: z.string().min(1),
+    MASTODON_API_KEY: z.string().min(1),
+    GITHUB_ACCESS_TOKEN: z.string().min(1),
   },
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
