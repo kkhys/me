@@ -19,11 +19,11 @@ const tags = (await $`git tag`.text())
   .filter((t) => t.startsWith(BASE_VERSION));
 
 if (tags.includes(VERSION)) {
-  let i = 2;
-  while (tags.includes(`${VERSION}-${i}`)) {
-    i++;
+  let suffixCounter = 2;
+  while (tags.includes(`${VERSION}-${suffixCounter}`)) {
+    suffixCounter++;
   }
-  VERSION = `${VERSION}-${i}`;
+  VERSION = `${VERSION}-${suffixCounter}`;
 }
 
 console.log(`🔖 Creating tag: ${VERSION}`);
