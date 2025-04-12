@@ -9,7 +9,7 @@ import { MainNav } from "#/ui/main-nav";
 import { MobileNav } from "#/ui/mobile-nav";
 
 export const SiteHeader = () => (
-  <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:border-border">
+  <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
     <div className="flex h-14 items-center px-4">
       <MainNav />
       <MobileNav />

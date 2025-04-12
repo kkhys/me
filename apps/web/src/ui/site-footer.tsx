@@ -18,7 +18,7 @@ const footerLinks = [
 ] satisfies FooterLink[];
 
 export const SiteFooter = () => (
-  <footer className="border-t border-border/40 py-6 mt-28 dark:border-border md:px-8 md:py-0">
+  <footer className="py-6 mt-28 md:px-8 md:py-0">
     <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row font-sans text-xs text-muted-foreground">
       <nav className="flex divide-x">
         {footerLinks.map(({ href, title, external }) => (
