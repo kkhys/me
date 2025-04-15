@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "sync": "astro sync",
+    "check": "astro check && tsc --noEmit",
+    "lint": "bun biome check .",
+    "lint:fix": "bun biome check --write ."
+  },
+  "dependencies": {
+    "@astrojs/check": "0.9.4",
+    "@tailwindcss/vite": "4.1.4",
+    "astro": "5.6.2",
+    "tailwindcss": "4.1.4"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/bun": "1.2.9",
+    "react": "19.1.0",
+    "typescript": "5.8.3"
+  }
+}
