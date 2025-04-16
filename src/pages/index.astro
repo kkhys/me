@@ -1,9 +1,11 @@
 ---
+import Counter from "#/components/counter.astro";
 import Layout from "#/layouts/layout.astro";
 ---
 
-<Layout>
+<Layout title="Home" description="Home page">
     <h1 class="text-3xl font-bold underline">
         Hello world!
     </h1>
+    <Counter count={100} />
 </Layout>
