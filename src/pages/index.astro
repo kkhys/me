@@ -1,15 +1,28 @@
 ---
-import Counter from "#/components/counter.astro";
-import Button from "#/components/ui/button.astro";
+import Prose from "#/components/ui/prose.astro";
 import Layout from "#/layouts/layout.astro";
 ---
 
 <Layout title="Home" description="Home page">
-    <h1 class="text-3xl font-bold underline">
-        Hello world!
+    <h1 class="animate font-sans font-medium">
+        Keisuke Hayashi
     </h1>
-    <div class="flex flex-col gap-2">
-        <Counter count={100} />
-        <Button>Click me</Button>
-    </div>
+    <Prose>
+        <p class="animate">
+            I am a minimal, seo friendly, accessible portfolio and blog for developers.
+            I am an even more lightweight version of my popular theme
+            I have a lighthouse scores of 100 across the board for performance,
+            accesibility, best practices and SEO.
+        </p>
+        <p class="animate">
+            I come packed with full type safety, a sitemap, an rss feed, markdown
+            and mdx support (use components in your markdown) through astro integrations.
+            I am styled with tailwind and come preconfigured with light, dark and
+            system/os theme preferences out of the box.
+        </p>
+        <p class="animate">
+            Visit
+            to fork the repository, read the docs or one-click deploy on Vercel or Netlify.
+        </p>
+    </Prose>
 </Layout>

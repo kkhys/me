@@ -6,27 +6,42 @@ type Props = {
   description: string;
 };
 
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
 const { title, description } = Astro.props;
 ---
 
 <html lang="ja">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="generator" content={Astro.generator}/>
     <title>{title}</title>
     <meta name="description" content={description}/>
+
+    <link rel="canonical" href={canonicalURL} />
+
+    <script is:inline>
+        const init = () => animate();
+
+        const animate = () => {
+            const animateElements = document.querySelectorAll(".animate");
+            animateElements.forEach((element, index) =>
+                setTimeout(() => element.classList.add("animate-show"), index * 150));
+        }
+
+        document.addEventListener("DOMContentLoaded", () => init());
+    </script>
 </head>
-<body>
-<slot/>
+<body class="min-h-screen bg-background text-foreground antialiased">
+<div class="relative flex min-h-screen flex-col bg-background">
+    <div class="mx-auto w-full max-w-6xl flex-1 flex flex-col">
+        <main class="w-full max-w-2xl mx-auto flex-1">
+            <div class="container py-12">
+                <slot/>
+            </div>
+        </main>
+    </div>
+</div>
 </body>
 </html>
-
-<style>
-    html,
-    body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-    }
-</style>
