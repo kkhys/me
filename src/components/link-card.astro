@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import GlobeIcon from "@lucide/astro/icons/globe";
+import { getMetadata } from "#/lib/api/metadata";
+
+interface Props {
+  href: string;
+}
+
+const props = Astro.props;
+
+const { title, description, image } = await getMetadata(props.href);
+---
+
+<div class="select-none overflow-hidden rounded-md border">
+    <a
+            target="_blank"
+            rel="noreferrer"
+            class="flex h-[120px] w-full items-center text-card-foreground no-underline shadow transition-colors hover:bg-accent/50"
+            {...props}
+    >
+        <div class="min-w-0 flex-1 px-4 py-2">
+          <span class="block max-h-12 break-words font-medium leading-relaxed">
+            <span class="line-clamp-2">{title}</span>
+          </span>
+            <span class="mt-2 block overflow-hidden text-ellipsis whitespace-nowrap break-words text-xs text-muted-foreground">
+            {description}
+          </span>
+            <div class="mt-2 flex items-center">
+                <GlobeIcon class="size-3 shrink-0 mt-[1.5px]" />
+                <span class="ml-1 font-sans text-xs">
+              {new URL(props.href).hostname}
+            </span>
+            </div>
+        </div>
+        <div class="size-[120px] max-w-[230px] sm:w-auto">
+            {image && (
+                    <Image
+                            src={image.src}
+                            alt={`the cover of ${title}`}
+                            width={460}
+                            height={240}
+                            format="avif"
+                            class="size-full object-cover"
+                    />
+            )}
+        </div>
+    </a>
+</div>

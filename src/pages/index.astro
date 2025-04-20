@@ -1,28 +1,14 @@
 ---
-import Prose from "#/components/ui/prose.astro";
 import Layout from "#/layouts/layout.astro";
 ---
 
-<Layout title="Home" description="Home page">
+<Layout title="Home" description="Home page" pagefind>
     <h1 class="animate font-sans font-medium">
         Keisuke Hayashi
     </h1>
-    <Prose>
-        <p class="animate">
-            I am a minimal, seo friendly, accessible portfolio and blog for developers.
-            I am an even more lightweight version of my popular theme
-            I have a lighthouse scores of 100 across the board for performance,
-            accesibility, best practices and SEO.
-        </p>
-        <p class="animate">
-            I come packed with full type safety, a sitemap, an rss feed, markdown
-            and mdx support (use components in your markdown) through astro integrations.
-            I am styled with tailwind and come preconfigured with light, dark and
-            system/os theme preferences out of the box.
-        </p>
-        <p class="animate">
-            Visit
-            to fork the repository, read the docs or one-click deploy on Vercel or Netlify.
-        </p>
-    </Prose>
+    <div class="prose mt-8">
+        <p class="animate">東京を拠点とするフルスタック開発者。何かを作り、人々に喜びと驚きを与えることが大好きです。</p>
+        <p class="animate">自分の興味や生活を記録するためにブログを書いています。ご興味のある方はぜひご覧ください。現在、日本語の記事のみ公開しています。</p>
+        <a href="/posts/aaa" class="animate">test</a>
+    </div>
 </Layout>

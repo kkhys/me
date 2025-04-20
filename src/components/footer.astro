@@ -1,0 +1,37 @@
+---
+import SquareArrowOutUpRightIcon from "@lucide/astro/icons/square-arrow-out-up-right";
+
+type FooterLink = {
+  href: string;
+  title: string;
+  external?: boolean;
+};
+
+const footerLinks = [
+  { href: "/terms", title: "利用規約" },
+  { href: "/privacy-policy", title: "プライバシーポリシー" },
+  { href: "", title: "ロードマップ", external: true },
+  {
+    href: "https://github.com/kkhys/site",
+    title: "ソースコード",
+    external: true,
+  },
+] satisfies FooterLink[];
+---
+
+<footer class="container flex flex-col items-center justify-between gap-4 text-xs text-muted-foreground py-6 mt-28 md:px-8 md:py-0 md:h-24 md:flex-row">
+        <nav class="flex divide-x">
+            {footerLinks.map(({ href, title, external }) => (
+                    <a
+                            href={href}
+                            class="flex items-center gap-0.5 px-2 hover:text-foreground"
+                            target={external ? "_blank" : undefined}
+                            rel={external ? "noreferrer" : undefined}
+                    >
+                        {title}
+                        {external && <SquareArrowOutUpRightIcon class="size-2.5" />}
+                    </a>
+            ))}
+        </nav>
+        <p>&copy; 2025 Keisuke Hayashi</p>
+</footer>

@@ -1,0 +1,56 @@
+---
+import { render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import HeaderWithAnchor from "#/components/header-with-anchor.astro";
+import ImageHandler from "#/components/image-handler.astro";
+import LinkHandler from "#/components/link-handler.astro";
+import ZoomImageContainer from "#/components/zoom-image-container.astro";
+
+interface Props {
+  post: CollectionEntry<"post">;
+}
+
+const { post } = Astro.props;
+
+const { Content } = await render(post);
+
+const components = {
+  a: LinkHandler,
+  img: ImageHandler,
+  h2: HeaderWithAnchor,
+  h3: HeaderWithAnchor,
+};
+---
+
+<ZoomImageContainer>
+    <article class="animate prose">
+        <Content components={components} />
+    </article>
+</ZoomImageContainer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const pageLinks = document.querySelectorAll('a.page-link');
+
+        pageLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                const targetId = link.getAttribute('href')?.slice(1);
+                if (!targetId) return;
+
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    });
+
+                    history.pushState(null, '', `#${targetId}`);
+                }
+            });
+        });
+    });
+</script>
+

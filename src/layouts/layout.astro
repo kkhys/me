@@ -1,17 +1,19 @@
 ---
 import "#/styles/global.css";
+import Footer from "#/components/footer.astro";
 
-type Props = {
+interface Props {
   title: string;
   description: string;
-};
+  pagefind: boolean;
+}
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description } = Astro.props;
+const { title, description, pagefind } = Astro.props;
 ---
 
-<html lang="ja">
+<html lang="ja" class="bg-background text-foreground palt antialiased" data-pagefind-body={pagefind ? "" : null}>
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -22,26 +24,23 @@ const { title, description } = Astro.props;
     <link rel="canonical" href={canonicalURL} />
 
     <script is:inline>
-        const init = () => animate();
-
-        const animate = () => {
-            const animateElements = document.querySelectorAll(".animate");
-            animateElements.forEach((element, index) =>
-                setTimeout(() => element.classList.add("animate-show"), index * 150));
-        }
-
-        document.addEventListener("DOMContentLoaded", () => init());
+        // const init = () => animate();
+        //
+        // const animate = () => {
+        //     const animateElements = document.querySelectorAll(".animate");
+        //     animateElements.forEach((element, index) =>
+        //         setTimeout(() => element.classList.add("animate-show"), index * 150));
+        // }
+        //
+        // document.addEventListener("DOMContentLoaded", () => init());
     </script>
 </head>
-<body class="min-h-screen bg-background text-foreground antialiased">
-<div class="relative flex min-h-screen flex-col bg-background">
-    <div class="mx-auto w-full max-w-6xl flex-1 flex flex-col">
-        <main class="w-full max-w-2xl mx-auto flex-1">
-            <div class="container py-12">
-                <slot/>
-            </div>
-        </main>
+<body class="flex flex-col w-full max-w-6xl min-h-screen mx-auto">
+<main class="flex-1 w-full max-w-2xl mx-auto">
+    <div class="container py-12">
+        <slot/>
     </div>
-</div>
+</main>
+<Footer />
 </body>
 </html>

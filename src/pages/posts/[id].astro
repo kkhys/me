@@ -1,0 +1,35 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Article from "#/components/article.astro";
+import Layout from "#/layouts/layout.astro";
+
+interface Props {
+  post: CollectionEntry<"post">;
+}
+
+export const getStaticPaths = async () => {
+  const posts = await getCollection("post");
+
+  return posts.map((post) => {
+    return {
+      params: {
+        id: post.id,
+      },
+      props: {
+        post,
+      },
+    };
+  });
+};
+
+const { post } = Astro.props;
+const { title, emoji } = post.data;
+---
+
+<Layout title={title} description="" pagefind>
+    <div>
+        <p class="animate">{title}</p>
+        <p class="animate">{emoji}</p>
+        <Article post={post} />
+    </div>   
+</Layout>

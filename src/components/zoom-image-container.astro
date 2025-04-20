@@ -1,0 +1,70 @@
+<slot />
+<div id="overlay" class="fixed inset-0 bg-background/40 backdrop-blur-[3px] z-50 hidden items-center justify-center transition-colors">
+    <img src="" alt="" class="w-[90vw] max-w-[1200px] h-auto m-2 cursor-zoom-out bg-cover bg-center bg-no-repeat rounded-2xl border-[#474747] bg-background shadow dark:border dark:shadow-none" />
+</div>
+
+<script>
+    import { press, animateView } from "motion-dom";
+    import { spring } from "motion";
+
+    const transition = { type: spring, visualDuration: 0.2, bounce: 0.3 };
+    const overlay = document.getElementById("overlay");
+    const overlayImage = overlay?.querySelector("img");
+
+    let selectedImage: HTMLImageElement | null;
+
+    const openLightbox = async (image: HTMLImageElement) => {
+        const { src, alt, width, height, style } = image;
+
+        image.style.viewTransitionName = "selected";
+        selectedImage = image;
+
+        if (!overlay || !overlayImage) return;
+
+        animateView(() => {
+            overlayImage.src = src;
+            overlayImage.alt = alt;
+            overlayImage.style.viewTransitionName = "selected";
+            overlayImage.width = width;
+            overlayImage.height = height;
+            overlayImage.style.backgroundImage = style.backgroundImage;
+
+            document.body.style.overflow = "hidden";
+
+            image.style.viewTransitionName = ""
+            image.style.visibility = "hidden"
+
+            overlay.style.display = "flex"
+            overlay.style.scrollbarGutter = "stable"
+        }, transition).enter({ opacity: 1 })
+
+        press(
+            overlay,
+            () => closeLightbox,
+            { once: true }
+        )
+    }
+
+    const closeLightbox = async () => {
+        if (!overlay || !selectedImage) return;
+
+        const animation = await animateView(() => {
+            if (!selectedImage) return;
+
+            overlay.style.display = "none";
+
+            selectedImage.style.visibility = "visible";
+            selectedImage.style.viewTransitionName = "selected";
+            document.body.style.overflow = "auto";
+        }, transition).enter({ opacity: 1 }) as { finished: Promise<void> };
+
+        await animation.finished;
+
+        selectedImage.style.viewTransitionName = "";
+        selectedImage = null;
+    }
+
+    press(".zoom-image", (element) => {
+        openLightbox(element as HTMLImageElement);
+    });
+</script>
