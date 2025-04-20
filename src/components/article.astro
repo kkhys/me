@@ -1,7 +1,9 @@
 ---
 import { render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import HeaderWithAnchor from "#/components/header-with-anchor.astro";
+import EmojiEyeCatch from "#/components/emoji-eye-catch.astro";
+import Heading2 from "#/components/heading-2.astro";
+import Heading3 from "#/components/heading-3.astro";
 import ImageHandler from "#/components/image-handler.astro";
 import LinkHandler from "#/components/link-handler.astro";
 import ZoomImageContainer from "#/components/zoom-image-container.astro";
@@ -17,14 +19,41 @@ const { Content } = await render(post);
 const components = {
   a: LinkHandler,
   img: ImageHandler,
-  h2: HeaderWithAnchor,
-  h3: HeaderWithAnchor,
+  h2: Heading2,
+  h3: Heading3,
 };
+
+const { title, emoji, status, publishedAt } = post.data;
+
+const publishedAtString = new Intl.DateTimeFormat("ja-JP", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+}).format(publishedAt);
 ---
 
 <ZoomImageContainer>
     <article class="animate prose">
-        <Content components={components} />
+        <header>
+            <div class="animate flex justify-between items-center">
+                <EmojiEyeCatch emoji={emoji} />
+                {status === "draft" && (
+                    <span class="text-xs text-red-400">Draft</span>
+                )}
+            </div>
+            <h1 class="animate mt-4 font-medium">{title}</h1>
+            <div class="animate mt-2 flex items-center justify-between">
+                <time datetime={publishedAt.toISOString()} class="text-sm text-muted-foreground">
+                    {publishedAtString}
+                </time>
+                <!--<Suspense fallback={<ViewCounterSkeleton />}>-->
+                <!--    <ViewCounter slug={slug} />-->
+                <!--</Suspense>-->
+            </div>
+        </header>
+        <div class="animate">
+            <Content components={components} />
+        </div>
     </article>
 </ZoomImageContainer>
 

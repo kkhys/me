@@ -1,0 +1,19 @@
+---
+import { emojiSvg } from "#/components/emoji-svg";
+
+interface Props {
+  emoji: string;
+  isColored?: boolean;
+  size?: "sm" | "md";
+}
+
+const { emoji, isColored = false, size = "md" } = Astro.props;
+
+const rowEmojiSvg = await emojiSvg({ emoji, isColored });
+---
+
+<span class:list={['inline-flex items-center justify-center select-none rounded-md bg-secondary text-secondary-foreground shadow-sm [&>svg>path]:fill-foreground',
+    size === 'sm' ? 'size-8 [&>svg]:size-4' : 'size-10 [&>svg]:size-5',
+]}>
+    <Fragment set:html={rowEmojiSvg} />
+</span>

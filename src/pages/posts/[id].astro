@@ -23,13 +23,9 @@ export const getStaticPaths = async () => {
 };
 
 const { post } = Astro.props;
-const { title, emoji } = post.data;
+const { title, description } = post.data;
 ---
 
-<Layout title={title} description="" pagefind>
-    <div>
-        <p class="animate">{title}</p>
-        <p class="animate">{emoji}</p>
-        <Article post={post} />
-    </div>   
+<Layout title={title} description={description} pagefind>
+    <Article post={post} />
 </Layout>

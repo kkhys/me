@@ -24,15 +24,15 @@ const { title, description, pagefind } = Astro.props;
     <link rel="canonical" href={canonicalURL} />
 
     <script is:inline>
-        // const init = () => animate();
-        //
-        // const animate = () => {
-        //     const animateElements = document.querySelectorAll(".animate");
-        //     animateElements.forEach((element, index) =>
-        //         setTimeout(() => element.classList.add("animate-show"), index * 150));
-        // }
-        //
-        // document.addEventListener("DOMContentLoaded", () => init());
+        const init = () => animate();
+
+        const animate = () => {
+            const animateElements = document.querySelectorAll(".animate");
+            animateElements.forEach((element, index) =>
+                setTimeout(() => element.classList.add("animate-show"), index * 150));
+        }
+
+        document.addEventListener("DOMContentLoaded", () => init());
     </script>
 </head>
 <body class="flex flex-col w-full max-w-6xl min-h-screen mx-auto">

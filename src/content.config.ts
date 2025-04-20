@@ -5,7 +5,11 @@ const post = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./content/post" }),
   schema: z.object({
     title: z.string(),
-    emoji: z.string().optional().default("📝"),
+    description: z.string(),
+    emoji: z.string(),
+    status: z.enum(["draft", "published"]).default("draft"),
+    publishedAt: z.date(),
+    updatedAt: z.date().optional(),
   }),
 });
 
