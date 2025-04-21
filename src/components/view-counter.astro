@@ -1,0 +1,19 @@
+---
+await new Promise((resolve) => setTimeout(resolve, 2000));
+
+const views = 1230;
+---
+
+<div class="text-sm text-muted-foreground">
+    {views.toLocaleString()} views
+</div>
+
+<script>
+    import { actions } from 'astro:actions';
+
+    const button = document.querySelector('div');
+    button?.addEventListener('click', async () => {
+        const { data, error } = await actions.getGreeting({ name: "Houston" });
+        if (!error) alert(data);
+    })
+</script>

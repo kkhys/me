@@ -6,6 +6,8 @@ import Heading2 from "#/components/heading-2.astro";
 import Heading3 from "#/components/heading-3.astro";
 import ImageHandler from "#/components/image-handler.astro";
 import LinkHandler from "#/components/link-handler.astro";
+import Skeleton from "#/components/skeleton.astro";
+import ViewCounter from "#/components/view-counter.astro";
 import ZoomImageContainer from "#/components/zoom-image-container.astro";
 
 interface Props {
@@ -35,7 +37,7 @@ const publishedAtString = new Intl.DateTimeFormat("ja-JP", {
 <ZoomImageContainer>
     <article class="animate prose">
         <header>
-            <div class="animate flex justify-between items-center">
+            <div class:list={['animate', status === 'draft' && 'flex justify-between items-center']}>
                 <EmojiEyeCatch emoji={emoji} />
                 {status === "draft" && (
                     <span class="text-xs text-red-400">Draft</span>
@@ -46,9 +48,9 @@ const publishedAtString = new Intl.DateTimeFormat("ja-JP", {
                 <time datetime={publishedAt.toISOString()} class="text-sm text-muted-foreground">
                     {publishedAtString}
                 </time>
-                <!--<Suspense fallback={<ViewCounterSkeleton />}>-->
-                <!--    <ViewCounter slug={slug} />-->
-                <!--</Suspense>-->
+                <ViewCounter server:defer>
+                    <Skeleton slot="fallback" className="h-4 w-14" />
+                </ViewCounter>
             </div>
         </header>
         <div class="animate">

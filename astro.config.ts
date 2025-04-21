@@ -1,3 +1,4 @@
+import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import tailwindcss from "@tailwindcss/vite";
@@ -14,6 +15,7 @@ import remarkLinkCard from "./src/lib/remark-link-card";
 
 export default defineConfig({
   site: "https://keisukehayashi.com",
+  adapter: cloudflare(),
   integrations: [
     expressiveCode({
       themes: ["github-dark-default", "github-light-default"],
