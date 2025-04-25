@@ -4,8 +4,9 @@
   "scripts": {
     "dev": "bunx --bun astro dev",
     "build": "bunx --bun astro build",
+    "build:node": "bunx --bun astro build --node",
     "postbuild": "pagefind --site dist",
-    "preview": "astro preview",
+    "preview": "astro preview --node",
     "astro": "astro",
     "check": "astro check && tsc --noEmit",
     "lint": "bun biome check .",
@@ -13,8 +14,9 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
-    "@astrojs/cloudflare": "12.5.0",
     "@astrojs/mdx": "4.2.4",
+    "@astrojs/node": "9.2.1",
+    "@astrojs/vercel": "8.1.4",
     "@lucide/astro": "0.501.0",
     "@tailwindcss/vite": "4.1.4",
     "astro": "5.7.4",

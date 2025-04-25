@@ -1,5 +1,6 @@
-import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
+import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import tailwindcss from "@tailwindcss/vite";
 import expressiveCode from "astro-expressive-code";
@@ -15,7 +16,8 @@ import remarkLinkCard from "./src/lib/remark-link-card";
 
 export default defineConfig({
   site: "https://keisukehayashi.com",
-  adapter: cloudflare(),
+  adapter:
+    process.argv[3] === "--node" ? node({ mode: "standalone" }) : vercel(),
   integrations: [
     expressiveCode({
       themes: ["github-dark-default", "github-light-default"],
