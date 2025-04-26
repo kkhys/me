@@ -4,7 +4,7 @@ import vercel from "@astrojs/vercel";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import tailwindcss from "@tailwindcss/vite";
 import expressiveCode from "astro-expressive-code";
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug";
 import rehypeUnwrapImages from "rehype-unwrap-images";
@@ -134,5 +134,41 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+  },
+  env: {
+    schema: {
+      GITHUB_ACCESS_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      SPOTIFY_CLIENT_ID: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      SPOTIFY_CLIENT_SECRET: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      SPOTIFY_REFRESH_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      PUBLIC_VERCEL_ENV: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+        default: "development",
+      }),
+      PUBLIC_VERCEL_PROJECT_PRODUCTION_URL: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+      PUBLIC_VERCEL_URL: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+    },
   },
 });

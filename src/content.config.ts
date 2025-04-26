@@ -9,7 +9,6 @@ const post = defineCollection({
     emoji: z.string(),
     status: z.enum(["draft", "published"]).default("draft"),
     publishedAt: z.date(),
-    updatedAt: z.date().optional(),
   }),
 });
 
@@ -17,6 +16,7 @@ const legal = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./content/legal" }),
   schema: z.object({
     title: z.string(),
+    description: z.string(),
   }),
 });
 

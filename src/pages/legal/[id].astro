@@ -2,31 +2,31 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Layout from "#/layouts/layout.astro";
-import Article from "#/pages/posts/_components/article.astro";
+import Section from "#/pages/legal/_components/section.astro";
 
 interface Props {
-  post: CollectionEntry<"post">;
+  legal: CollectionEntry<"legal">;
 }
 
 export const getStaticPaths = (async () => {
-  const posts = await getCollection("post");
+  const legals = await getCollection("legal");
 
-  return posts.map((post) => {
+  return legals.map((legal) => {
     return {
       params: {
-        id: post.id,
+        id: legal.id,
       },
       props: {
-        post,
+        legal,
       },
     };
   });
 }) satisfies GetStaticPaths;
 
-const { post } = Astro.props;
-const { title, description } = post.data;
+const { legal } = Astro.props;
+const { title, description } = legal.data;
 ---
 
 <Layout title={title} description={description} pagefind>
-    <Article post={post} />
+    <Section legal={legal} />
 </Layout>
