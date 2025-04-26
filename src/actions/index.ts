@@ -1,13 +1,5 @@
-import { defineAction } from "astro:actions";
-import { z } from "astro:schema";
+import { pageView } from "#/actions/page-view";
 
 export const server = {
-  getGreeting: defineAction({
-    input: z.object({
-      name: z.string(),
-    }),
-    handler: async (input) => {
-      return `Hello, ${input.name}!`;
-    },
-  }),
+  pageView,
 };

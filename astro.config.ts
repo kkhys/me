@@ -169,6 +169,11 @@ export default defineConfig({
         access: "public",
         optional: true,
       }),
+      NODE_ENV: envField.enum({
+        context: "client",
+        access: "public",
+        values: ["development", "production"],
+      }),
     },
   },
 });

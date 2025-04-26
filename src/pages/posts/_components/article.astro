@@ -2,14 +2,13 @@
 import { type CollectionEntry, render } from "astro:content";
 import EmojiEyeCatch from "#/components/emoji-eye-catch.astro";
 import Skeleton from "#/components/skeleton.astro";
-import { client } from "#/lib/client";
 import Heading2 from "#/pages/posts/_components/heading-2.astro";
 import Heading3 from "#/pages/posts/_components/heading-3.astro";
 import ImageHandler from "#/pages/posts/_components/image-handler.astro";
 import LinkHandler from "#/pages/posts/_components/link-handler.astro";
 import ViewCounter from "#/pages/posts/_components/view-counter.astro";
 import ZoomImageContainer from "#/pages/posts/_components/zoom-image-container.astro";
-import { convertDateToString, formatDateToYYYYMMDD } from "#/utils/date";
+import { convertDateToString } from "#/utils/date";
 
 interface Props {
   post: CollectionEntry<"post">;
@@ -30,16 +29,16 @@ const { title, emoji, status, publishedAt } = post.data;
 
 const publishedAtString = convertDateToString(publishedAt);
 
-const getLastUpdatedTime = client.api.github["last-updated-file"];
-
-const { lastUpdatedTime } = await getLastUpdatedTime
-  .$get({
-    query: { path: `post/${formatDateToYYYYMMDD(publishedAt)}/index.mdx` },
-  })
-  .then((res) => res.json());
-
-const updatedAtString = convertDateToString(new Date(lastUpdatedTime));
-console.log("updatedAtString", updatedAtString);
+// const getLastUpdatedTime = client.api.github["last-updated-file"];
+//
+// const { lastUpdatedTime } = await getLastUpdatedTime
+//   .$get({
+//     query: { path: `post/${formatDateToYYYYMMDD(publishedAt)}/index.mdx` },
+//   })
+//   .then((res) => res.json());
+//
+// const updatedAtString = convertDateToString(new Date(lastUpdatedTime));
+// console.log("updatedAtString", updatedAtString);
 ---
 
 <ZoomImageContainer>
@@ -56,7 +55,7 @@ console.log("updatedAtString", updatedAtString);
                 <time datetime={publishedAt.toISOString()} class="text-sm text-muted-foreground">
                     {publishedAtString}
                 </time>
-                <ViewCounter server:defer>
+                <ViewCounter slug={post.id} server:defer>
                     <Skeleton slot="fallback" className="h-4 w-14" />
                 </ViewCounter>
             </div>
