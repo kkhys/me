@@ -1,0 +1,27 @@
+---
+import type { InferEntrySchema } from "astro:content";
+import SEO from "#/components/seo.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+
+interface Props extends InferEntrySchema<"legal"> {}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout>
+    <SEO
+            title={title}
+            description={description}
+            type='article'
+            slot='seo'
+    />
+    <slot name='head' slot='head'/>
+    <section class="animate prose">
+        <header>
+            <h1 class="animate mt-4 font-medium">{title}</h1>
+        </header>
+        <div class="animate">
+            <slot />
+        </div>
+    </section>
+</BaseLayout>

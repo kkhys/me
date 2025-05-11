@@ -1,0 +1,77 @@
+---
+import type { InferEntrySchema } from "astro:content";
+import EmojiEyeCatch from "#/components/emoji-eye-catch.astro";
+import SEO from "#/components/seo.astro";
+import Skeleton from "#/components/skeleton.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { BASE_URL } from "#/lib/base-url";
+import ViewCounter from "#/pages/blog/_components/view-counter.astro";
+import { convertDateToString } from "#/utils/date";
+
+interface Props extends InferEntrySchema<"blog"> {
+  id: string;
+}
+
+const { id, title, emoji, publishedAt, description, status } = Astro.props;
+
+const publishedAtString = convertDateToString(publishedAt);
+---
+
+<BaseLayout pagefind>
+    <SEO
+            title={title}
+            description={description}
+            imageUrl={`${BASE_URL}/api/og/${id}`}
+            type='article'
+            slot='seo'
+    />
+    <slot name='head' slot='head'/>
+    <section>
+        <div class:list={['animate', status === 'draft' && 'flex justify-between items-center']}>
+            <EmojiEyeCatch emoji={emoji}/>
+            {status === "draft" && (
+                    <span class="text-xs text-red-400">Draft</span>
+            )}
+        </div>
+        <h1 class="animate mt-4 font-medium">{title}</h1>
+        <div class="animate mt-2 flex items-center justify-between">
+            <time datetime={publishedAt.toISOString()} class="text-sm text-muted-foreground">
+                {publishedAtString}
+            </time>
+            <ViewCounter slug={id} server:defer>
+                <Skeleton slot="fallback" className="h-4 w-14"/>
+            </ViewCounter>
+        </div>
+    </section>
+    <section>
+        <article class="animate prose">
+            <slot />
+        </article>
+    </section>
+</BaseLayout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const pageLinks = document.querySelectorAll('a.page-link');
+
+        pageLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                const targetId = link.getAttribute('href')?.slice(1);
+                if (!targetId) return;
+
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    });
+
+                    history.pushState(null, '', `#${targetId}`);
+                }
+            });
+        });
+    });
+</script>

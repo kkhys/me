@@ -1,0 +1,55 @@
+---
+import { SEO as AstroSEO, type Props as SEOProps } from "astro-seo";
+
+import { BASE_URL } from "#/lib/base-url";
+
+const defaultMetaData = {
+  title: "Keisuke Hayashi",
+  description: "Keisuke Hayashi's personal website.",
+};
+
+interface Props extends SEOProps {
+  imageUrl?: string;
+  type?: "article" | "website" | "profile";
+  slot: "seo";
+}
+
+const { props } = Astro;
+
+const metaData = {
+  title: props.title ?? defaultMetaData.title,
+  description: props.description ?? defaultMetaData.description,
+  image: props.imageUrl ?? `${BASE_URL}/images/og_main.png`,
+};
+
+const defaultProps: SEOProps = {
+  title: metaData.title,
+  titleDefault: metaData.title,
+  description: metaData.description,
+  openGraph: {
+    basic: {
+      image: metaData.image,
+      title: metaData.title,
+      type: props.type ?? "website",
+      ...props.openGraph?.basic,
+    },
+    optional: {
+      siteName: defaultMetaData.title,
+      description: metaData.description,
+      ...props.openGraph?.optional,
+    },
+  },
+  // twitter: {
+  //     title: metaData.title,
+  //     description: metaData.description,
+  //     creator: '@kkhys',
+  //     card: 'summary_large_image',
+  //     image: metaData.image,
+  //     imageAlt: metaData.title
+  // }
+};
+
+const combinedProps = { ...defaultProps, ...props };
+---
+
+<AstroSEO {...combinedProps} />

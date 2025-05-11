@@ -1,14 +1,14 @@
 ---
-import Layout from "#/layouts/layout.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
 ---
 
-<Layout title="Home" description="Home page" pagefind>
+<BaseLayout pagefind>
     <h1 class="animate font-medium">
         Keisuke Hayashi
     </h1>
     <div class="prose mt-8">
         <p class="animate">東京を拠点とするフルスタック開発者。何かを作り、人々に喜びと驚きを与えることが大好きです。</p>
         <p class="animate">自分の興味や生活を記録するためにブログを書いています。ご興味のある方はぜひご覧ください。現在、日本語の記事のみ公開しています。</p>
-        <a href="/posts/p1r3zrr" class="animate">test</a>
+        <a href="/src/pages/blog/p1r3zrr" class="animate">test</a>
     </div>
-</Layout>
+</BaseLayout>

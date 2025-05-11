@@ -1,8 +1,8 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
-import Layout from "#/layouts/layout.astro";
-import Section from "#/pages/legal/_components/section.astro";
+import LegalLayout from "#/layouts/legal-layout.astro";
+import ContentWrapper from "#/pages/legal/_components/content-wrapper.astro";
 
 interface Props {
   legal: CollectionEntry<"legal">;
@@ -24,9 +24,9 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { legal } = Astro.props;
-const { title, description } = legal.data;
+const { Content } = await render(legal);
 ---
 
-<Layout title={title} description={description} pagefind>
-    <Section legal={legal} />
-</Layout>
+<LegalLayout {...legal.data}>
+    <ContentWrapper content={Content} />
+</LegalLayout>
