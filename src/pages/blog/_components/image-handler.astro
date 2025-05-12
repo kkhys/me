@@ -1,5 +1,5 @@
 ---
-import Image from "#/pages/blog/_components/image.astro";
+import MarkdownImage from "#/components/image/markdown-image.astro";
 
 interface Props {
   src: ImageMetadata | string;
@@ -14,6 +14,6 @@ const { src, alt, ...props } = Astro.props;
     typeof src === "string" ? (
       <img src={src} alt={alt} {...props} />
     ) : (
-      <Image src={src} alt={alt} {...props} />
+      <MarkdownImage src={src} alt={alt} canZoom {...props} />
     )
 }

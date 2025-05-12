@@ -7,11 +7,9 @@ import expressiveCode from "astro-expressive-code";
 import { defineConfig, envField } from "astro/config";
 import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug";
-import rehypeUnwrapImages from "rehype-unwrap-images";
 import rehypeBudoux from "./src/lib/rehype-budoux";
 import rehypePagefind from "./src/lib/rehype-pagefind";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
-import remarkImagePlaceholder from "./src/lib/remark-image-placeholder";
 import remarkLinkCard from "./src/lib/remark-link-card";
 
 export default defineConfig({
@@ -35,11 +33,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false,
     smartypants: false,
-    remarkPlugins: [
-      remarkLinkCard,
-      remarkFootnoteTitle,
-      remarkImagePlaceholder,
-    ],
+    remarkPlugins: [remarkLinkCard, remarkFootnoteTitle],
     remarkRehype: {
       footnoteLabel: " ",
       footnoteBackLabel: "戻る",
@@ -47,7 +41,6 @@ export default defineConfig({
     },
     rehypePlugins: [
       rehypeSlug,
-      rehypeUnwrapImages,
       [
         rehypeMermaid,
         {

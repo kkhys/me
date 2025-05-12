@@ -1,0 +1,136 @@
+---
+import { Picture, getImage } from "astro:assets";
+import type { UnresolvedImageTransform } from "astro";
+
+import { type CustomImageProps, alignClass } from "./types";
+
+type Props = CustomImageProps;
+
+const {
+  class: className,
+  wrapperProps,
+  ambientMode,
+  title,
+  align = "top",
+  canZoom = false,
+  ...rest
+} = Astro.props;
+
+const blurryImage = await getImage({
+  ...(rest as UnresolvedImageTransform),
+  width: 20,
+});
+
+const { class: wrapperClass, ...restWrapperProps } = wrapperProps ?? {};
+---
+
+{title ? (
+<figure>
+    <div
+            class:list={[
+                'blur-load size-fit bg-cover select-none rounded-2xl border-[#474747] shadow dark:border dark:shadow-none',
+                alignClass[align].wrapper,
+                { 'ambient-mode': ambientMode },
+                { 'cursor-zoom-in': canZoom },
+                wrapperClass
+            ]}
+            {...restWrapperProps}
+    >
+        <Picture
+                class:list={[
+                    'object-cover',
+                    alignClass[align].image,
+                    'h-[inherit] max-h-[inherit] rounded-2xl',
+                    { 'zoom-image': canZoom },
+                    className
+                ]}
+                formats={['avif']}
+                {...rest}
+        />
+    </div>
+    <figcaption class="text-center text-xs text-muted-foreground mt-3">{title}</figcaption>
+</figure>
+    ) : (
+<div
+        class:list={[
+            'blur-load size-fit bg-cover select-none rounded-2xl border-[#474747] shadow dark:border dark:shadow-none',
+            alignClass[align].wrapper,
+            { 'ambient-mode': ambientMode },
+            { 'cursor-zoom-in': canZoom },
+            wrapperClass
+        ]}
+        {...restWrapperProps}
+>
+    <Picture
+            class:list={[
+                'object-cover',
+                alignClass[align].image,
+                'h-[inherit] max-h-[inherit] rounded-2xl',
+                { 'zoom-image': canZoom },
+                className
+            ]}
+            formats={['avif']}
+            {...rest}
+    />
+</div>
+    )}
+
+<style define:vars={{ 'bg-image': `url(${blurryImage.src})` }}>
+    .blur-load {
+        background-image: var(--bg-image);
+        filter: blur(36px);
+        transition: filter 300ms ease-in-out;
+    }
+
+    .blur-load.image-loaded {
+        filter: blur(0);
+    }
+
+    .blur-load.image-loaded > img {
+        opacity: 1;
+    }
+
+    .blur-load > img {
+        opacity: 0;
+        transition: all 300ms ease-in-out;
+    }
+
+    .ambient-mode {
+        position: relative;
+    }
+
+    .ambient-mode::before {
+        position: absolute;
+        max-width: 100vw;
+        overflow-x: hidden;
+        width: 105%;
+        height: 105%;
+
+        background-image: var(--bg-image);
+        background-size: cover;
+        filter: blur(64px);
+        opacity: 25%;
+        z-index: -10;
+
+        content: '';
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const blurDivs = document.querySelectorAll('.blur-load');
+        blurDivs.forEach((div) => {
+            const image = div.querySelector('img');
+            const handleLoadedImage = () => div.classList.add('image-loaded');
+
+            if (image?.complete) {
+                return handleLoadedImage();
+            }
+
+            image?.addEventListener('load', handleLoadedImage);
+        });
+    })
+</script>

@@ -1,5 +1,6 @@
 ---
 import "#/styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import Footer from "#/components/footer.astro";
 import SEO from "#/components/seo.astro";
 
@@ -38,6 +39,7 @@ const { pagefind, class: className } = Astro.props;
 
         document.addEventListener("DOMContentLoaded", () => init());
     </script>
+    <ClientRouter fallback='swap' />
 </head>
 <body class="flex flex-col w-full max-w-6xl min-h-screen mx-auto">
 <main class:list={['flex-1 w-full max-w-2xl mx-auto', className]}>
