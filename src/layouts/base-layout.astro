@@ -37,7 +37,7 @@ const { pagefind, class: className } = Astro.props;
                 setTimeout(() => element.classList.add("animate-show"), index * 150));
         }
 
-        document.addEventListener("DOMContentLoaded", () => init());
+        document.addEventListener("astro:page-load", () => init());
     </script>
     <ClientRouter fallback='swap' />
 </head>
@@ -50,3 +50,44 @@ const { pagefind, class: className } = Astro.props;
 <Footer />
 </body>
 </html>
+
+<script>
+    const scrollOptions: ScrollIntoViewOptions = {
+        behavior: 'smooth',
+        block: 'start'
+    }
+
+    document.addEventListener('astro:page-load', () => {
+        if (window.location.hash) {
+            window.scrollTo({ top: 0, behavior: 'instant' })
+
+            const targetId = window.location.hash.substring(1)
+            const targetElement = document.getElementById(targetId)
+            targetElement?.scrollIntoView(scrollOptions)
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault()
+
+                const currentTarget = event.currentTarget as HTMLAnchorElement
+                const targetId = currentTarget.getAttribute('href')?.substring(1)
+
+                if (!targetId) return
+
+                const targetElement = document.getElementById(targetId)
+                const block = currentTarget.dataset['block'] as ScrollLogicalPosition
+                targetElement?.scrollIntoView({ ...scrollOptions, block })
+
+                history.pushState(null, '', `#${targetId}`)
+            })
+        })
+
+        window.addEventListener('hashchange', () => {
+            const targetId = window.location.hash.substring(1)
+            const targetElement = document.getElementById(targetId)
+
+            targetElement?.scrollIntoView(scrollOptions)
+        })
+    })
+</script>

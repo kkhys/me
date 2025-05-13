@@ -1,15 +1,16 @@
 ---
 import LinkIcon from "@lucide/astro/icons/link";
+import type { HTMLAttributes } from "astro/types";
 
-interface Props {
+interface Props extends HTMLAttributes<"h2"> {
   id: string;
 }
 
-const { id } = Astro.props;
+const { id, ...rest } = Astro.props;
 ---
 
-<h2 id={id} class="relative scroll-mt-12 budoux">
-    <a href={`#${id}`} class="page-link group no-underline">
+<h2 id={id} class="relative scroll-mt-12 budoux" {...rest}>
+    <a href={`#${id}`} class="custom-link group no-underline">
         <div class="absolute w-8 mt-[4px] -ml-8 hidden opacity-0 transition group-hover:opacity-100 group-focus:opacity-100 md:block">
             <div class="group/anchor flex items-center justify-center size-5 rounded-md bg-zinc-50 ring-1 ring-zinc-300 transition ring-inset hover:ring-zinc-500 dark:bg-zinc-800 dark:ring-zinc-700 dark:hover:bg-zinc-700 dark:hover:ring-zinc-600">
                 <LinkIcon class="size-3 stroke-zinc-500 transition dark:stroke-zinc-400 dark:group-hover/anchor:stroke-white" />
@@ -18,3 +19,55 @@ const { id } = Astro.props;
         <slot />
     </a>
 </h2>
+
+<script>
+    import { navigate } from 'astro:transitions/client'
+
+    const generateCustomEvent = (path: string) => {
+        return new CustomEvent('local-navigation', {
+            bubbles: true,
+            detail: { path }
+        })
+    }
+
+    const eventHandler = (event: Event) => {
+        if (!event.currentTarget) return
+
+        const href = (event.currentTarget as HTMLAnchorElement).href
+
+        if (!href.startsWith(location.origin)) return
+
+        const customEvent = generateCustomEvent(href.replace(location.origin, ''))
+
+        event.currentTarget.dispatchEvent(customEvent)
+    }
+
+    let { pathname: previousPath } = window.location
+    let isNavigating = false
+
+    document.addEventListener('astro:page-load', () => {
+        const links = document.querySelectorAll('a.custom-link')
+        links.forEach((link) => {
+            link.addEventListener('click', eventHandler)
+        })
+
+        previousPath = window.location.pathname
+        isNavigating = false
+    })
+
+    window.addEventListener('popstate', async () => {
+        if (window.location.origin !== location.origin) return
+
+        const currentPath = window.location.pathname
+        const currentHash = window.location.hash
+
+        if (!isNavigating && currentPath !== previousPath && currentHash) {
+            isNavigating = true
+            await navigate(currentPath + currentHash, { history: 'replace' })
+        }
+
+        const customEvent = generateCustomEvent(window.location.pathname)
+
+        document.dispatchEvent(customEvent)
+    })
+</script>

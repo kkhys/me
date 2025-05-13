@@ -1,9 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import GlobeIcon from "@lucide/astro/icons/globe";
+import type { HTMLAttributes } from "astro/types";
 import { getMetadata } from "#/lib/api/metadata";
 
-interface Props {
+interface Props extends HTMLAttributes<"a"> {
   href: string;
 }
 

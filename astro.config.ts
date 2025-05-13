@@ -9,6 +9,7 @@ import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug";
 import rehypeBudoux from "./src/lib/rehype-budoux";
 import rehypePagefind from "./src/lib/rehype-pagefind";
+import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
 import remarkLinkCard from "./src/lib/remark-link-card";
 
@@ -41,6 +42,7 @@ export default defineConfig({
     },
     rehypePlugins: [
       rehypeSlug,
+      rehypeSlugWithCustomId,
       [
         rehypeMermaid,
         {
