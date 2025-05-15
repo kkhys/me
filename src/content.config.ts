@@ -9,6 +9,7 @@ const blog = defineCollection({
     emoji: z.string(),
     status: z.enum(["draft", "published"]).default("draft"),
     publishedAt: z.date(),
+    publishedAtString: z.string().optional(),
   }),
 });
 

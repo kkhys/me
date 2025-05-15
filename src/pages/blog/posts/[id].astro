@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import BlogLayout from "#/layouts/blog-layout.astro";
+import { convertDateToString } from "#/lib/date";
 import ContentWrapper from "#/pages/blog/_components/content-wrapper.astro";
 import ZoomImageContainer from "#/pages/blog/_components/zoom-image-container.astro";
 
@@ -22,10 +23,11 @@ export const getStaticPaths = (async () => {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+const publishedAtString = convertDateToString(entry.data.publishedAt);
 ---
 
 <ZoomImageContainer>
-    <BlogLayout id={entry.id} {...entry.data}>
+    <BlogLayout id={entry.id} publishedAtString={publishedAtString} {...entry.data}>
         <ContentWrapper content={Content} />
     </BlogLayout>
 </ZoomImageContainer>

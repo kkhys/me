@@ -5,7 +5,6 @@ import SEO from "#/components/seo.astro";
 import Skeleton from "#/components/skeleton.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
-import { convertDateToString } from "#/lib/date";
 import { cn } from "#/lib/ui";
 import ViewCounter from "#/pages/blog/_components/view-counter.astro";
 
@@ -13,9 +12,15 @@ interface Props extends InferEntrySchema<"blog"> {
   id: string;
 }
 
-const { id, title, emoji, publishedAt, description, status } = Astro.props;
-
-const publishedAtString = convertDateToString(publishedAt);
+const {
+  id,
+  title,
+  emoji,
+  publishedAt,
+  publishedAtString,
+  description,
+  status,
+} = Astro.props;
 ---
 
 <BaseLayout pagefind>
