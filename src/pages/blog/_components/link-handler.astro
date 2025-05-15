@@ -1,7 +1,8 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 import LinkCard from "#/pages/blog/_components/link-card.astro";
 
-interface Props {
+interface Props extends HTMLAttributes<"a"> {
   href: string;
   "data-link-card"?: string;
 }

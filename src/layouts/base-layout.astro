@@ -3,6 +3,7 @@ import "#/styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import Footer from "#/components/footer.astro";
 import SEO from "#/components/seo.astro";
+import { cn } from "#/lib/ui";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
@@ -42,7 +43,7 @@ const { pagefind, class: className } = Astro.props;
     <ClientRouter fallback='swap' />
 </head>
 <body class="flex flex-col w-full max-w-6xl min-h-screen mx-auto">
-<main class:list={['flex-1 w-full max-w-2xl mx-auto', className]}>
+<main class={cn('flex-1 w-full max-w-2xl mx-auto', className)}>
     <div class="container py-12">
         <slot/>
     </div>

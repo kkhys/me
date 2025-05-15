@@ -1,19 +1,49 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+import { type VariantProps, cva } from "class-variance-authority";
 import { emojiSvg } from "#/components/emoji-svg";
+import { cn } from "#/lib/ui";
 
-interface Props {
+interface Props
+  extends VariantProps<typeof eyeCatchVariants>,
+    VariantProps<typeof svgVariants>,
+    HTMLAttributes<"span"> {
   emoji: string;
   isColored?: boolean;
-  size?: "sm" | "md";
 }
 
-const { emoji, isColored = false, size = "md" } = Astro.props;
+const eyeCatchVariants = cva(
+  "inline-flex select-none items-center justify-center rounded-md bg-secondary text-secondary-foreground shadow-sm",
+  {
+    variants: {
+      size: {
+        default: "size-10",
+        sm: "size-8",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
+
+const svgVariants = cva("[&>svg>path]:fill-foreground", {
+  variants: {
+    size: {
+      default: "[&>svg]:size-5",
+      sm: "[&>svg]:size-4",
+    },
+  },
+  defaultVariants: {
+    size: "default",
+  },
+});
+
+const { emoji, isColored = false, size, class: className } = Astro.props;
 
 const rowEmojiSvg = await emojiSvg({ emoji, isColored });
 ---
 
-<span class:list={['inline-flex items-center justify-center select-none rounded-md bg-secondary text-secondary-foreground shadow-sm [&>svg>path]:fill-foreground',
-    size === 'sm' ? 'size-8 [&>svg]:size-4' : 'size-10 [&>svg]:size-5',
-]}>
+<span class={cn(eyeCatchVariants({ size }), svgVariants({ size }), className)}>
     <Fragment set:html={rowEmojiSvg} />
 </span>

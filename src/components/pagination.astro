@@ -1,0 +1,139 @@
+---
+import type { CollectionEntry, DataEntryMap } from "astro:content";
+import type { Page } from "astro";
+import { buttonVariants } from "#/components/button.astro";
+import { cn } from "#/lib/ui";
+
+import ChevronLeftIcon from "@lucide/astro/icons/chevron-left";
+import ChevronRightIcon from "@lucide/astro/icons/chevron-right";
+import EllipsisIcon from "@lucide/astro/icons/ellipsis";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props<T extends keyof DataEntryMap> extends HTMLAttributes<"nav"> {
+  page?: Page<CollectionEntry<T>>;
+}
+
+const { page, class: className } = Astro.props;
+
+const generateVisiblePages = (totalPages: number, currentPage: number) => {
+  const pages: Array<number | "..."> = [];
+  const delta = 1;
+  const leftEdge = 1;
+  const rightEdge = totalPages;
+
+  pages.push(leftEdge);
+
+  if (currentPage > delta + 2) {
+    pages.push("...");
+  }
+
+  for (
+    let i = Math.max(currentPage - delta, leftEdge + 1);
+    i <= Math.min(currentPage + delta, rightEdge - 1);
+    i++
+  ) {
+    pages.push(i);
+  }
+
+  if (currentPage < rightEdge - (delta + 1)) {
+    pages.push("...");
+  }
+
+  if (totalPages > leftEdge) {
+    pages.push(rightEdge);
+  }
+
+  return pages;
+};
+
+const { total, currentPage, url, ...rest } = page;
+
+const visiblePages = generateVisiblePages(total, currentPage);
+
+const getPageHref = (pageNumber: number) => `blog/${pageNumber}`;
+---
+
+<nav aria-label="pagination" class={cn("mx-auto flex w-full justify-center", className)} {...rest}>
+    <ul class="flex flex-row items-center gap-1">
+        <li>
+            {currentPage > 1 ? (
+                    <a
+                            href={url.prev}
+                            aria-label="前のページへ"
+                            class={cn(
+                                buttonVariants({ variant: "ghost", size: "icon" })
+                            )}
+                    >
+                        <ChevronLeftIcon class="size-4" />
+                    </a>
+            ) : (
+                    <span
+                            aria-disabled="true"
+                            class={cn(
+                                buttonVariants({ variant: "ghost", size: "icon" }),
+                                "opacity-50 pointer-events-none"
+                            )}
+                    >
+          <ChevronLeftIcon class="size-4" />
+        </span>
+            )}
+        </li>
+        {visiblePages.map(page =>
+            page === "..." ? (
+                    <li>
+          <span
+                  aria-hidden="true"
+                  class={cn("flex size-9 items-center justify-center")}
+          >
+            <EllipsisIcon class="size-4" />
+            <span class="sr-only">More pages</span>
+          </span>
+                    </li>
+            ) : (
+                    <li>
+                        {currentPage === page ? (
+                                <span
+                                        aria-current="page"
+                                        class={cn(
+                                            buttonVariants({ variant: "outline", size: "icon" }),
+                                            "pointer-events-none"
+                                        )}
+                                >
+              {page}
+            </span>
+                        ) : (
+                                <a
+                                        href={getPageHref(page)}
+                                        class={buttonVariants({ variant: "ghost", size: "icon" })}
+                                >
+                                    {page}
+                                </a>
+                        )}
+                    </li>
+            )
+        )}
+        <li>
+            {currentPage < total ? (
+                    <a
+                            href={getPageHref(currentPage + 1)}
+                            aria-label="Go to next page"
+                            class={cn(
+                                buttonVariants({ variant: "ghost", size: "icon" })
+                            )}
+                    >
+                        <ChevronRightIcon class="size-4" />
+                    </a>
+            ) : (
+                    <span
+                            aria-disabled="true"
+                            class={cn(
+                                buttonVariants({ variant: "ghost", size: "icon" }),
+                                "opacity-50 pointer-events-none"
+                            )}
+                    >
+          <ChevronRightIcon class="size-4" />
+        </span>
+            )}
+        </li>
+    </ul>
+</nav>

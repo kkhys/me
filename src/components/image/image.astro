@@ -2,6 +2,7 @@
 import { Picture, getImage } from "astro:assets";
 import type { UnresolvedImageTransform } from "astro";
 
+import { cn } from "#/lib/ui";
 import { type CustomImageProps, alignClass } from "./types";
 
 type Props = CustomImageProps;
@@ -27,23 +28,20 @@ const { class: wrapperClass, ...restWrapperProps } = wrapperProps ?? {};
 {title ? (
 <figure>
     <div
-            class:list={[
-                'blur-load size-fit bg-cover select-none rounded-2xl border-[#474747] shadow dark:border dark:shadow-none',
+            class={cn('blur-load size-fit bg-cover select-none rounded-2xl border-[#474747] shadow dark:border dark:shadow-none',
                 alignClass[align].wrapper,
                 { 'ambient-mode': ambientMode },
                 { 'cursor-zoom-in': canZoom },
                 wrapperClass
-            ]}
+            )}
             {...restWrapperProps}
     >
         <Picture
-                class:list={[
-                    'object-cover',
+                class={cn('object-cover h-[inherit] max-h-[inherit] rounded-2xl',
                     alignClass[align].image,
-                    'h-[inherit] max-h-[inherit] rounded-2xl',
                     { 'zoom-image': canZoom },
                     className
-                ]}
+                )}
                 formats={['avif']}
                 {...rest}
         />
@@ -52,23 +50,20 @@ const { class: wrapperClass, ...restWrapperProps } = wrapperProps ?? {};
 </figure>
     ) : (
 <div
-        class:list={[
-            'blur-load size-fit bg-cover select-none rounded-2xl border-[#474747] shadow dark:border dark:shadow-none',
+        class={cn('blur-load size-fit bg-cover select-none rounded-2xl border-[#474747] shadow dark:border dark:shadow-none',
             alignClass[align].wrapper,
             { 'ambient-mode': ambientMode },
             { 'cursor-zoom-in': canZoom },
             wrapperClass
-        ]}
+        )}
         {...restWrapperProps}
 >
     <Picture
-            class:list={[
-                'object-cover',
+            class={cn('object-cover h-[inherit] max-h-[inherit] rounded-2xl',
                 alignClass[align].image,
-                'h-[inherit] max-h-[inherit] rounded-2xl',
                 { 'zoom-image': canZoom },
                 className
-            ]}
+            )}
             formats={['avif']}
             {...rest}
     />

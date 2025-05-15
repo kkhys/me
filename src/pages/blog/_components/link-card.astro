@@ -38,7 +38,7 @@ const { title, description, image } = await getMetadata(props.href);
             {image && (
                     <Image
                             src={image.src}
-                            alt={`the cover of ${title}`}
+                            alt={`${title}のカバー画像`}
                             width={460}
                             height={240}
                             format="avif"

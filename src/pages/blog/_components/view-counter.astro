@@ -1,11 +1,13 @@
 ---
 import { actions } from "astro:actions";
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "#/lib/ui";
 
-interface Props {
+interface Props extends HTMLAttributes<"div"> {
   slug: string;
 }
 
-const { slug } = Astro.props;
+const { slug, class: className } = Astro.props;
 
 const [pageViewData] = await Promise.all([
   Astro.callAction(actions.pageView.getPageViews, { slug }),
@@ -15,6 +17,6 @@ const [pageViewData] = await Promise.all([
 const views = pageViewData.data ?? 0;
 ---
 
-<div class="text-sm text-muted-foreground">
+<div class={cn('text-sm text-muted-foreground', className)}>
     {views.toLocaleString()} views
 </div>

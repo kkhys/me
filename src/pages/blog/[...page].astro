@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import type { PaginateFunction } from "astro";
+import Pagination from "#/components/pagination.astro";
+import SEO from "#/components/seo.astro";
+import { countPerPage } from "#/config/constant";
+import BaseLayout from "#/layouts/base-layout.astro";
+
+export const getStaticPaths = async ({
+  paginate,
+}: {
+  paginate: PaginateFunction;
+}) => {
+  const blogEntries = (await getCollection("blog"))
+    .sort((a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime())
+    .reverse();
+  return paginate(blogEntries, { pageSize: countPerPage });
+};
+
+const { page } = Astro.props;
+---
+
+<BaseLayout>
+    <SEO
+            title='Blog'
+            description='Keisuke Hayashi のブログ'
+            slot='seo'
+    />
+    <section class='mt-12 sm:mt-16'>
+        {page.data.map((item) => <a href={`/blog/posts/${item.id}`}>{item.data.title}</a>)}
+    </section>
+    <Pagination page={page} />
+</BaseLayout>

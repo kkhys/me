@@ -1,4 +1,5 @@
 import type { LocalImageProps, RemoteImageProps } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
 
 export const alignClass = {
   top: {
@@ -12,7 +13,7 @@ export const alignClass = {
 };
 
 export type CustomImageProps = {
-  wrapperProps?: astroHTML.JSX.HTMLAttributes;
+  wrapperProps?: HTMLAttributes<"div">;
   ambientMode?: boolean;
   align?: keyof typeof alignClass;
   canZoom?: boolean;

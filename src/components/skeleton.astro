@@ -1,9 +1,10 @@
 ---
-interface Props {
-  className?: string;
-}
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "#/lib/ui";
 
-const { className } = Astro.props;
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className } = Astro.props;
 ---
 
-<div class:list={['animate-pulse rounded-md bg-primary/10', className]} />
+<div class={cn('animate-pulse rounded-md bg-primary/10', className)} />

@@ -1,12 +1,8 @@
 ---
 import { SEO as AstroSEO, type Props as SEOProps } from "astro-seo";
 
+import { siteConfig } from "#/config/site";
 import { BASE_URL } from "#/lib/base-url";
-
-const defaultMetaData = {
-  title: "Keisuke Hayashi",
-  description: "Keisuke Hayashi's personal website.",
-};
 
 interface Props extends SEOProps {
   imageUrl?: string;
@@ -14,15 +10,15 @@ interface Props extends SEOProps {
   slot: "seo";
 }
 
-const { props } = Astro;
+const { title, description, imageUrl, type, ...rest } = Astro.props;
 
 const metaData = {
-  title: props.title ?? defaultMetaData.title,
-  description: props.description ?? defaultMetaData.description,
-  image: props.imageUrl ?? `${BASE_URL}/images/og_main.png`,
+  title: title ? `${title} | ${siteConfig.title}` : siteConfig.title,
+  description: description ?? siteConfig.description,
+  image: imageUrl ?? `${BASE_URL}/images/og_main.png`,
 };
 
-const defaultProps: SEOProps = {
+const defaultProps = {
   title: metaData.title,
   titleDefault: metaData.title,
   description: metaData.description,
@@ -30,13 +26,13 @@ const defaultProps: SEOProps = {
     basic: {
       image: metaData.image,
       title: metaData.title,
-      type: props.type ?? "website",
-      ...props.openGraph?.basic,
+      type: type ?? "website",
+      ...rest.openGraph?.basic,
     },
     optional: {
-      siteName: defaultMetaData.title,
+      siteName: siteConfig.title,
       description: metaData.description,
-      ...props.openGraph?.optional,
+      ...rest.openGraph?.optional,
     },
   },
   // twitter: {
@@ -47,9 +43,9 @@ const defaultProps: SEOProps = {
   //     image: metaData.image,
   //     imageAlt: metaData.title
   // }
-};
+} satisfies SEOProps;
 
-const combinedProps = { ...defaultProps, ...props };
+const combinedProps = { ...defaultProps, ...rest };
 ---
 
 <AstroSEO {...combinedProps} />

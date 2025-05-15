@@ -5,8 +5,9 @@ import SEO from "#/components/seo.astro";
 import Skeleton from "#/components/skeleton.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
+import { convertDateToString } from "#/lib/date";
+import { cn } from "#/lib/ui";
 import ViewCounter from "#/pages/blog/_components/view-counter.astro";
-import { convertDateToString } from "#/utils/date";
 
 interface Props extends InferEntrySchema<"blog"> {
   id: string;
@@ -27,7 +28,7 @@ const publishedAtString = convertDateToString(publishedAt);
     />
     <slot name='head' slot='head'/>
     <section>
-        <div class:list={['animate', status === 'draft' && 'flex justify-between items-center']}>
+        <div class={cn('animate', status === 'draft' && 'flex justify-between items-center')}>
             <EmojiEyeCatch emoji={emoji}/>
             {status === "draft" && (
                     <span class="text-xs text-red-400">Draft</span>
@@ -39,7 +40,7 @@ const publishedAtString = convertDateToString(publishedAt);
                 {publishedAtString}
             </time>
             <ViewCounter slug={id} server:defer>
-                <Skeleton slot="fallback" className="h-4 w-14"/>
+                <Skeleton slot="fallback" class="h-4 w-14"/>
             </ViewCounter>
         </div>
     </section>
