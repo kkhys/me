@@ -194,3 +194,6 @@ export const tagsTitlesByCategory: Record<CategoryTitle, string[]> = {
   Object: tags.object.map((t) => t.title),
   Build: tags.build.map((t) => t.title),
 };
+
+export const getTagBySlug = (slug: string) =>
+  flatTags.find((tag) => tag.slug === slug);
