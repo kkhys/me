@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { HTMLAttributes } from "astro/types";
+import EmojiEyeCatch from "#/components/emoji-eye-catch.astro";
+import { convertDateToString } from "#/lib/date";
+import { cn } from "#/lib/ui";
+
+interface Props extends HTMLAttributes<"div"> {
+  blogEntries: CollectionEntry<"blog">[];
+  showDate?: boolean;
+}
+
+const {
+  blogEntries,
+  class: className,
+  showDate = false,
+  ...rest
+} = Astro.props;
+---
+
+{
+    blogEntries.length ? (
+    <div class={cn("divide-y border-t", className)} {...rest}>
+        {blogEntries.map(({ id, data: { title, emoji, status, publishedAt }}) => {
+            const publishedAtString = convertDateToString(publishedAt);
+            return (
+                    <a href={`/blog/posts/${id}`} class="relative flex items-center justify-between gap-x-4 px-2 py-3 transition-colors hover:bg-muted/50">
+                        <div class="flex items-center gap-x-4">
+                            <EmojiEyeCatch emoji={emoji} size="sm" class="shrink-0" />
+                            <p class="palt">{title}</p>
+                        </div>
+                        {showDate && (
+                                <time
+                                        class="shrink-0 text-sm tabular-nums text-muted-foreground"
+                                        datetime={publishedAt.toISOString()}
+                                >
+                                    {publishedAtString}
+                                </time>
+                        )}
+                        {status === "draft" && (
+                                <span class="absolute right-0 top-0 h-1 w-2 bg-red-400/80" />
+                        )}
+                    </a>
+            )
+        })}
+    </div>
+    ) : (
+    <div class={className} {...rest}>
+        <p>ブログ記事がありません。</p>
+    </div>
+    )
+}

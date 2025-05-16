@@ -5,6 +5,7 @@ import Pagination from "#/components/pagination.astro";
 import SEO from "#/components/seo.astro";
 import { countPerPage } from "#/config/constant";
 import BaseLayout from "#/layouts/base-layout.astro";
+import EntryList from "#/pages/blog/_components/entry-list.astro";
 
 export const getStaticPaths = async ({
   paginate,
@@ -20,14 +21,17 @@ export const getStaticPaths = async ({
 const { page } = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout class="space-y-6">
     <SEO
             title='Blog'
             description='Keisuke Hayashi のブログ'
             slot='seo'
     />
-    <section class='mt-12 sm:mt-16'>
-        {page.data.map((item) => <a href={`/blog/posts/${item.id}`}>{item.data.title}</a>)}
+    <section>
+        <h1 class="font-medium">ブログ</h1>
+    </section>
+    <section>
+        <EntryList blogEntries={page.data} showDate />
     </section>
     <Pagination page={page} />
 </BaseLayout>
