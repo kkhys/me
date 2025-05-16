@@ -1,11 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import type { PaginateFunction } from "astro";
-import Pagination from "#/components/pagination.astro";
 import SEO from "#/components/seo.astro";
 import { countPerPage } from "#/config/constant";
 import BaseLayout from "#/layouts/base-layout.astro";
 import EntryList from "#/pages/blog/_components/entry-list.astro";
+import Pagination from "#/pages/blog/_components/pagination.astro";
 
 export const getStaticPaths = async ({
   paginate,
@@ -33,5 +33,5 @@ const { page } = Astro.props;
     <section>
         <EntryList blogEntries={page.data} showDate />
     </section>
-    <Pagination page={page} />
+    <Pagination page={page} baseUrl="/blog" />
 </BaseLayout>

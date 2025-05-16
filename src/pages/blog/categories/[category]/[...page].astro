@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import type { PaginateFunction } from "astro";
+import SEO from "#/components/seo.astro";
+import { countPerPage } from "#/config/constant";
+import BaseLayout from "#/layouts/base-layout.astro";
+import EntryList from "#/pages/blog/_components/entry-list.astro";
+import Pagination from "#/pages/blog/_components/pagination.astro";
+import { getCategoryBySlug } from "#/pages/blog/_config/category";
+
+export const getStaticPaths = async ({
+  paginate,
+}: {
+  paginate: PaginateFunction;
+}) => {
+  const blogEntries = await getCollection("blog");
+  const categories = [
+    ...new Set(blogEntries.flatMap((entry) => entry.data.category ?? [])),
+  ];
+  return categories.flatMap((category) => {
+    const filteredEntries = blogEntries
+      .filter((post) => post.data.category.includes(category))
+      .sort(
+        (a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime(),
+      )
+      .reverse();
+    return paginate(filteredEntries, {
+      pageSize: countPerPage,
+      params: { category: category.toLowerCase() },
+    });
+  });
+};
+
+const { page } = Astro.props;
+const { category: categorySlug } = Astro.params;
+
+const category = getCategoryBySlug(categorySlug);
+
+if (!category) {
+  throw new Error(`Category "${categorySlug}" not found`);
+}
+---
+
+<BaseLayout class="space-y-6">
+    <SEO
+            title={category.label}
+            description=''
+            slot='seo'
+    />
+    <section>
+        <h1 class="font-medium">{category.label}</h1>
+    </section>
+    <section>
+        <EntryList blogEntries={page.data} showDate />
+    </section>
+    <Pagination page={page} baseUrl={`/blog/categories/${categorySlug}`} />
+</BaseLayout>

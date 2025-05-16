@@ -29,3 +29,6 @@ export const categories = [
 ] as const satisfies Category[];
 
 export const categoryTitles = categories.map(({ title }) => title);
+
+export const getCategoryBySlug = (slug: string) =>
+  categories.find((category) => category.slug === slug);

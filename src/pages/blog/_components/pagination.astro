@@ -11,9 +11,10 @@ import type { HTMLAttributes } from "astro/types";
 
 interface Props<T extends keyof DataEntryMap> extends HTMLAttributes<"nav"> {
   page?: Page<CollectionEntry<T>>;
+  baseUrl: string;
 }
 
-const { page, class: className } = Astro.props;
+const { page, baseUrl, class: className } = Astro.props;
 
 const generateVisiblePages = (totalPages: number, currentPage: number) => {
   const pages: Array<number | "..."> = [];
@@ -50,7 +51,8 @@ const { total, currentPage, url, ...rest } = page;
 
 const visiblePages = generateVisiblePages(total, currentPage);
 
-const getPageHref = (pageNumber: number) => `blog/${pageNumber}`;
+const getPageHref = (pageNumber: number) =>
+  pageNumber === 1 ? baseUrl : `${baseUrl}/${pageNumber}`;
 ---
 
 <nav aria-label="pagination" class={cn("mx-auto flex w-full justify-center", className)} {...rest}>
