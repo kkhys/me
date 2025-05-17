@@ -5,7 +5,6 @@ import SEO from "#/components/seo.astro";
 import Skeleton from "#/components/skeleton.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
-import { cn } from "#/lib/ui";
 import ViewCounter from "#/pages/blog/_components/view-counter.astro";
 
 interface Props extends InferEntrySchema<"blog"> {
@@ -33,14 +32,14 @@ const {
     />
     <slot name='head' slot='head'/>
     <section>
-        <div class={cn('animate', status === 'draft' && 'flex justify-between items-center')}>
+        <div class:list={[status === 'draft' && 'flex justify-between items-center']}>
             <EmojiEyeCatch emoji={emoji}/>
             {status === "draft" && (
                     <span class="text-xs text-red-400">Draft</span>
             )}
         </div>
-        <h1 class="animate mt-4 font-medium">{title}</h1>
-        <div class="animate mt-2 flex items-center justify-between">
+        <h1 class="mt-4 font-medium">{title}</h1>
+        <div class="mt-2 flex items-center justify-between">
             <time datetime={publishedAt.toISOString()} class="text-sm text-muted-foreground">
                 {publishedAtString}
             </time>
@@ -50,7 +49,7 @@ const {
         </div>
     </section>
     <section>
-        <article class="animate prose">
+        <article class="prose">
             <slot />
         </article>
     </section>

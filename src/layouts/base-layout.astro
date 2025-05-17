@@ -25,17 +25,6 @@ const { pagefind, class: className } = Astro.props;
         <SEO />
     </slot>
 
-    <script is:inline>
-        const init = () => animate();
-
-        const animate = () => {
-            const animateElements = document.querySelectorAll(".animate");
-            animateElements.forEach((element, index) =>
-                setTimeout(() => element.classList.add("animate-show"), index * 150));
-        }
-
-        document.addEventListener("astro:page-load", () => init());
-    </script>
     <ClientRouter fallback='swap' />
 </head>
 <body class="flex flex-col w-full max-w-6xl min-h-screen mx-auto">

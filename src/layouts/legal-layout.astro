@@ -16,11 +16,11 @@ const { title, description } = Astro.props;
             slot='seo'
     />
     <slot name='head' slot='head'/>
-    <section class="animate prose">
+    <section class="prose">
         <header>
-            <h1 class="animate mt-4 font-medium">{title}</h1>
+            <h1 class="mt-4 font-medium">{title}</h1>
         </header>
-        <div class="animate">
+        <div>
             <slot />
         </div>
     </section>

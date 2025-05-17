@@ -4,6 +4,7 @@ import type { PaginateFunction } from "astro";
 import SEO from "#/components/seo.astro";
 import { countPerPage } from "#/config/constant";
 import BaseLayout from "#/layouts/base-layout.astro";
+import { getCustomTransition } from "#/lib/custom-transition";
 import EntryList from "#/pages/blog/_components/entry-list.astro";
 import Pagination from "#/pages/blog/_components/pagination.astro";
 
@@ -27,10 +28,10 @@ const { page } = Astro.props;
             description='Keisuke Hayashi のブログ'
             slot='seo'
     />
-    <section>
+    <section transition:animate={getCustomTransition()}>
         <h1 class="font-medium">ブログ</h1>
     </section>
-    <section>
+    <section transition:animate={getCustomTransition(0.15)}>
         <EntryList blogEntries={page.data} showDate />
     </section>
     <Pagination page={page} baseUrl="/blog" />

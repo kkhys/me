@@ -4,6 +4,7 @@ import type { PaginateFunction } from "astro";
 import SEO from "#/components/seo.astro";
 import { countPerPage } from "#/config/constant";
 import BaseLayout from "#/layouts/base-layout.astro";
+import { getCustomTransition } from "#/lib/custom-transition";
 import EntryList from "#/pages/blog/_components/entry-list.astro";
 import Pagination from "#/pages/blog/_components/pagination.astro";
 import { getCategoryBySlug } from "#/pages/blog/_config/category";
@@ -48,9 +49,9 @@ if (!category) {
             slot='seo'
     />
     <section>
-        <h1 class="font-medium">{category.label}</h1>
+        <h1 class="font-medium" transition:animate={getCustomTransition()}>{category.label}</h1>
     </section>
-    <section>
+    <section transition:animate={getCustomTransition(0.15)}>
         <EntryList blogEntries={page.data} showDate />
     </section>
     <Pagination page={page} baseUrl={`/blog/categories/${categorySlug}`} />
