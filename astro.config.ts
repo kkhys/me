@@ -1,5 +1,6 @@
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
+import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import tailwindcss from "@tailwindcss/vite";
@@ -12,7 +13,6 @@ import rehypePagefind from "./src/lib/rehype-pagefind";
 import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
 import remarkLinkCard from "./src/lib/remark-link-card";
-import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: "https://keisuke.site",
@@ -27,7 +27,7 @@ export default defineConfig({
       },
     }),
     mdx(),
-      sitemap()
+    sitemap(),
   ],
   prefetch: {
     defaultStrategy: "viewport",
