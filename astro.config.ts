@@ -12,9 +12,10 @@ import rehypePagefind from "./src/lib/rehype-pagefind";
 import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
 import remarkLinkCard from "./src/lib/remark-link-card";
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: "https://keisukehayashi.com",
+  site: "https://keisuke.site",
   adapter:
     process.argv[3] === "--node" ? node({ mode: "standalone" }) : vercel(),
   integrations: [
@@ -26,6 +27,7 @@ export default defineConfig({
       },
     }),
     mdx(),
+      sitemap()
   ],
   prefetch: {
     defaultStrategy: "viewport",
