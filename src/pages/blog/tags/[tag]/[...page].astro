@@ -1,9 +1,9 @@
 ---
-import { getCollection } from "astro:content";
 import type { PaginateFunction } from "astro";
 import SEO from "#/components/seo.astro";
 import { countPerPage } from "#/config/constant";
 import BaseLayout from "#/layouts/base-layout.astro";
+import { getPublicBlogEntries } from "#/lib/blog";
 import EntryList from "#/pages/blog/_components/entry-list.astro";
 import Pagination from "#/pages/blog/_components/pagination.astro";
 import { getTagBySlug } from "#/pages/blog/_config/tag";
@@ -13,7 +13,7 @@ export const getStaticPaths = async ({
 }: {
   paginate: PaginateFunction;
 }) => {
-  const blogEntries = await getCollection("blog");
+  const blogEntries = await getPublicBlogEntries();
   const tags = [
     ...new Set(blogEntries.flatMap((entry) => entry.data.tags ?? [])),
   ];

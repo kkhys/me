@@ -1,9 +1,9 @@
 ---
-import { getCollection } from "astro:content";
 import type { PaginateFunction } from "astro";
 import SEO from "#/components/seo.astro";
 import { countPerPage } from "#/config/constant";
 import BaseLayout from "#/layouts/base-layout.astro";
+import { getPublicBlogEntries } from "#/lib/blog";
 import { getCustomTransition } from "#/lib/custom-transition";
 import EntryList from "#/pages/blog/_components/entry-list.astro";
 import Pagination from "#/pages/blog/_components/pagination.astro";
@@ -13,7 +13,7 @@ export const getStaticPaths = async ({
 }: {
   paginate: PaginateFunction;
 }) => {
-  const blogEntries = (await getCollection("blog"))
+  const blogEntries = (await getPublicBlogEntries())
     .sort((a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime())
     .reverse();
   return paginate(blogEntries, { pageSize: countPerPage });

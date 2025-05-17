@@ -1,15 +1,14 @@
 ---
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import BlogLayout from "#/layouts/blog-layout.astro";
+import { getPublicBlogEntries } from "#/lib/blog";
 import { convertDateToString } from "#/lib/date";
 import ContentWrapper from "#/pages/blog/_components/content-wrapper.astro";
 import ZoomImageContainer from "#/pages/blog/_components/zoom-image-container.astro";
 
-export const getStaticPaths = (async () => {
-  const blogEntries = await getCollection("blog");
-
-  return blogEntries.map((entry) => {
+export const getStaticPaths = (async () =>
+  (await getPublicBlogEntries()).map((entry) => {
     return {
       params: {
         id: entry.id,
@@ -18,8 +17,7 @@ export const getStaticPaths = (async () => {
         entry,
       },
     };
-  });
-}) satisfies GetStaticPaths;
+  })) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
