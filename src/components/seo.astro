@@ -13,7 +13,7 @@ interface Props extends SEOProps {
 const { title, description, imageUrl, type, ...rest } = Astro.props;
 
 const metaData = {
-  title: title ? `${title} | ${siteConfig.title}` : siteConfig.title,
+  title: title ? `${title}｜${siteConfig.title}` : siteConfig.title,
   description: description ?? siteConfig.description,
   image: imageUrl ?? `${BASE_URL}/images/og_main.png`,
 };
