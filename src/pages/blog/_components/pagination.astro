@@ -46,10 +46,8 @@ const generateVisiblePages = (totalPages: number, currentPage: number) => {
 
   return pages;
 };
-
-const { total, currentPage, url, ...rest } = page;
-
-const visiblePages = generateVisiblePages(total, currentPage);
+const { currentPage, url, lastPage, ...rest } = page;
+const visiblePages = generateVisiblePages(lastPage, currentPage);
 
 const getPageHref = (pageNumber: number) =>
   pageNumber === 1 ? baseUrl : `${baseUrl}/${pageNumber}`;
@@ -115,7 +113,7 @@ const getPageHref = (pageNumber: number) =>
             )
         )}
         <li>
-            {currentPage < total ? (
+            {currentPage < lastPage ? (
                     <a
                             href={getPageHref(currentPage + 1)}
                             aria-label="Go to next page"

@@ -13,9 +13,7 @@ export const getStaticPaths = async ({
 }: {
   paginate: PaginateFunction;
 }) => {
-  const blogEntries = (await getPublicBlogEntries())
-    .sort((a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime())
-    .reverse();
+  const blogEntries = await getPublicBlogEntries();
   return paginate(blogEntries, { pageSize: countPerPage });
 };
 
