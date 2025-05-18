@@ -28,6 +28,13 @@ export default defineConfig({
     }),
     mdx(),
     sitemap(),
+    (await import('@playform/compress')).default({
+      HTML: {
+        'html-minifier-terser': {
+          collapseWhitespace: false
+        }
+      }
+    }),
   ],
   prefetch: {
     defaultStrategy: "viewport",
