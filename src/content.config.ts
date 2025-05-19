@@ -18,6 +18,9 @@ const blog = defineCollection({
       status: z.enum(["draft", "published"]).default("draft"),
       publishedAt: z.date(),
       publishedAtString: z.string().optional(),
+      editUrl: z.string().optional(),
+      sourceUrl: z.string().optional(),
+      revisionHistoryUrl: z.string().optional(),
     })
     .refine(
       ({ category, tags }) => {
@@ -27,7 +30,7 @@ const blog = defineCollection({
         return tags.every((tag) => validTags.includes(tag));
       },
       {
-        message: "category の選択に対応した tags のみ選択できます。",
+        message: "category に対応した tags のみ選択できます。",
         path: ["tags"],
       },
     ),

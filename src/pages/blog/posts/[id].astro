@@ -1,6 +1,7 @@
 ---
 import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
+import { siteConfig } from "#/config/site";
 import BlogLayout from "#/layouts/blog-layout.astro";
 import { getPublicBlogEntries } from "#/lib/blog";
 import { convertDateToString } from "#/lib/date";
@@ -22,10 +23,13 @@ export const getStaticPaths = (async () =>
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
+const editUrl = `${siteConfig.github.site}/edit/main/${entry.filePath}`;
+const sourceUrl = `${siteConfig.github.site}/blob/main/${entry.filePath}?plain=1`;
+const revisionHistoryUrl = `${siteConfig.github.site}/commits/main/${entry.filePath}`;
 ---
 
 <ZoomImageContainer>
-    <BlogLayout id={entry.id} publishedAtString={publishedAtString} {...entry.data}>
+    <BlogLayout id={entry.id} publishedAtString={publishedAtString} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} {...entry.data}>
         <ContentWrapper content={Content} />
     </BlogLayout>
 </ZoomImageContainer>
