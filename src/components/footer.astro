@@ -1,5 +1,5 @@
 ---
-import SquareArrowOutUpRightIcon from "@lucide/astro/icons/square-arrow-out-up-right";
+import MoveUpRightIcon from "@lucide/astro/icons/move-up-right";
 
 type FooterLink = {
   href: string;
@@ -8,9 +8,8 @@ type FooterLink = {
 };
 
 const footerLinks = [
-  { href: "/legal/terms", title: "利用規約" },
   { href: "/legal/privacy-policy", title: "プライバシーポリシー" },
-  { href: "", title: "ロードマップ", external: true },
+  { href: "/", title: "ロードマップ", external: true },
   {
     href: "https://github.com/kkhys/site",
     title: "ソースコード",
@@ -29,7 +28,7 @@ const footerLinks = [
                             rel={external ? "noreferrer" : undefined}
                     >
                         {title}
-                        {external && <SquareArrowOutUpRightIcon class="size-2.5" />}
+                        {external && <MoveUpRightIcon class="size-2.5" />}
                     </a>
             ))}
         </nav>

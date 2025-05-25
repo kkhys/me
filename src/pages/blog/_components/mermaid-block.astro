@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"picture"> {}
+
+const props = Astro.props;
+---
+
+<picture class="flex justify-center rounded-md bg-code-block-background p-6 shadow-md border" {...props}>
+    <slot />
+</picture>

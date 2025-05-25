@@ -1,0 +1,18 @@
+---
+import CheckIcon from "@lucide/astro/icons/check";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"input"> {}
+
+const { type, checked, ...rest } = Astro.props;
+---
+
+{type === "checkbox" && (
+    <button role="checkbox" aria-checked={checked ? 'true' : 'false'} class="size-4 rounded-sm border border-primary shadow disabled:cursor-not-allowed disabled:opacity-50 aria-checked:bg-primary aria-checked:text-primary-foreground" {...rest}>
+        <span class="flex items-center justify-center">
+            {checked && (
+                <CheckIcon class="size-4" />
+            )}
+        </span>
+    </button>
+)}

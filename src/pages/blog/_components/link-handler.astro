@@ -1,4 +1,5 @@
 ---
+import MoveUpRightIcon from "@lucide/astro/icons/move-up-right";
 import type { HTMLAttributes } from "astro/types";
 import LinkCard from "#/pages/blog/_components/link-card.astro";
 
@@ -7,15 +8,22 @@ interface Props extends HTMLAttributes<"a"> {
   "data-link-card"?: string;
 }
 
-const props = Astro.props;
+const { href, ...rest } = Astro.props;
 ---
 
 {
-    Object.hasOwn(props, "data-link-card") ? (
-    <LinkCard {...props} />
+    Object.hasOwn(rest, "data-link-card") ? (
+        <LinkCard href={href} {...rest} />
+    ) : (
+        href.startsWith('http') ? (
+            <a href={href} target="_blank" rel="noreferrer" class="inline-flex items-center" {...rest}>
+                <slot />
+                <MoveUpRightIcon class="ml-1 mt-0.5 size-3" />
+            </a>
         ) : (
-    <a {...props}>
-        <slot />
-    </a>
+            <a href={href} {...rest}>
+                <slot />
+            </a>
         )
-    }
+    )
+}
