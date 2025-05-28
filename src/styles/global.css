@@ -196,7 +196,7 @@
   }
 
   ::selection {
-    @apply shadow-none bg-selection;
+    @apply shadow-none bg-selection text-foreground;
   }
 
   ::-webkit-scrollbar {
@@ -315,7 +315,7 @@
     }
 
     li {
-      @apply my-2 pl-2;
+      @apply my-2 pl-2.5;
     }
 
     li::marker {
