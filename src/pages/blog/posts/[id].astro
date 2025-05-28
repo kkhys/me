@@ -21,7 +21,7 @@ export const getStaticPaths = (async () =>
   })) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
 const editUrl = `${siteConfig.github.site}/edit/main/${entry.filePath}`;
 const sourceUrl = `${siteConfig.github.site}/blob/main/${entry.filePath}?plain=1`;
@@ -29,7 +29,7 @@ const revisionHistoryUrl = `${siteConfig.github.site}/commits/main/${entry.fileP
 ---
 
 <ZoomImageContainer>
-    <BlogLayout id={entry.id} publishedAtString={publishedAtString} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} {...entry.data}>
+    <BlogLayout headings={headings} id={entry.id} publishedAtString={publishedAtString} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} {...entry.data}>
         <ContentWrapper content={Content} />
     </BlogLayout>
 </ZoomImageContainer>

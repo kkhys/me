@@ -1,0 +1,92 @@
+---
+import type { MarkdownHeading } from "astro";
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "#/lib/ui";
+
+interface Props extends HTMLAttributes<"div"> {
+  headings: MarkdownHeading[];
+}
+
+const { headings, class: className } = Astro.props;
+---
+
+<div class="toc group fixed top-40 right-0 max-lg:hidden">
+    <div class="flex flex-col justify-center gap-3 w-14 h-full max-h-96 pb-3 pl-5 pr-2 overflow-y-hidden group-hover:opacity-0 transition-opacity duration-200">
+        {headings.map(({ depth, slug }) => (
+                <div data-toc={slug} class={cn('toc-bar h-0.5 rounded-xs bg-toc-bar transition duration-200', depth === 2 ? 'w-4 ml-0' : 'w-3 ml-1')}/>
+        ))}
+    </div>
+    <nav class={cn('pointer-events-none absolute top-0 right-0 rounded-2xl border p-5 w-[250px] mr-2.5 shadow-xs overflow-x-auto opacity-0 transform translate-x-6 transition-all duration-200 ease-in-out group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto\n', className)}>
+        <ul class="text-sm text-muted-foreground">
+            {headings.map(({ depth, slug, text }) => (
+                    <li class={cn('my-1 select-none whitespace-nowrap', depth === 3 && 'pl-4')}>
+                        <a
+                                href={`#${slug}`}
+                                class="toc-link block p-1 rounded-sm transition-colors hover:text-foreground hover:bg-accent"
+                        >
+                            {text}
+                        </a>
+                    </li>
+            ))}
+        </ul>
+    </nav>
+</div>
+
+<style>
+    .toc-bar.active {
+        background: var(--accent-foreground);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .toc-bar.active {
+            box-shadow: oklch(0.87 0 0) 0 0 3px;
+        }
+    }
+
+    .toc-link.active {
+        color: var(--accent-foreground) !important;
+    }
+</style>
+
+<script>
+    const highlightElement = (element: HTMLElement) => {
+        const tempBgColor = "var(--selection)";
+        const origColor = element.style.backgroundColor;
+
+        if (origColor === tempBgColor) {
+            return;
+        }
+
+        element.style.backgroundColor = tempBgColor;
+        setTimeout(() => element.style.backgroundColor = origColor, 1000);
+    }
+
+    document.addEventListener("astro:page-load", () => {
+        const links = document.querySelectorAll(".toc-link");
+        links.forEach(link => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                const href = link.getAttribute("href");
+                if (!href || !href.startsWith("#")) return;
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    highlightElement(targetElement);
+                }
+            });
+        });
+    });
+
+    const tocGroup = document.querySelector('.toc');
+
+    if (tocGroup) {
+        let originalBodyOverflow: string;
+
+        tocGroup.addEventListener('mouseenter', () => {
+            originalBodyOverflow = document.body.style.overflow;
+            document.body.style.overflow = 'hidden';
+        });
+
+        tocGroup.addEventListener('mouseleave', () => document.body.style.overflow = originalBodyOverflow);
+    }
+</script>

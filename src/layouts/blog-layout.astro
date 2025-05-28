@@ -1,14 +1,17 @@
 ---
 import type { InferEntrySchema } from "astro:content";
+import type { MarkdownHeading } from "astro";
 import EmojiEyeCatch from "#/components/emoji-eye-catch.astro";
 import SEO from "#/components/seo.astro";
 import Skeleton from "#/components/skeleton.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
+import TableOfContent from "#/pages/blog/_components/table-of-content.astro";
 import ViewCounter from "#/pages/blog/_components/view-counter.astro";
 
 interface Props extends InferEntrySchema<"blog"> {
   id: string;
+  headings: MarkdownHeading[];
 }
 
 const {
@@ -19,6 +22,7 @@ const {
   publishedAtString,
   description,
   status,
+  headings,
 } = Astro.props;
 ---
 
@@ -51,8 +55,57 @@ const {
         </div>
     </section>
     <section>
+        {headings.length > 1 && (
+                <TableOfContent headings={headings} />
+        )}
         <article class="prose">
             <slot />
         </article>
     </section>
 </BaseLayout>
+
+<script>
+    const handleHeadingIntersection = () => {
+        const observerOptions: IntersectionObserverInit = {
+            root: null,
+            rootMargin: '0px 0px -85% 0px',
+            threshold: 0
+        };
+
+        const activeClass = 'active';
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+
+                const id = entry.target.getAttribute('id');
+
+                document.querySelectorAll(`.${activeClass}`)
+                    .forEach((item) => item.classList.remove(activeClass));
+
+                const link = document.querySelector(`li > a[href="#${id}"]`);
+                const toc = document.querySelector(`div[data-toc="${id}"]`);
+
+                link?.classList.add(activeClass);
+                toc?.classList.add(activeClass);
+            })
+        }, observerOptions);
+
+        const headings = document.querySelectorAll('h2[id], h3[id]');
+        headings.forEach((heading) => observer.observe(heading));
+
+        if (headings.length > 1) {
+            const firstHeadingId = headings[0]?.getAttribute('id');
+            if (firstHeadingId) {
+                const firstLink = document.querySelector(`li > a[href="#${firstHeadingId}"]`);
+                const firstToc = document.querySelector(`div[data-toc="${firstHeadingId}"]`);
+
+                firstLink?.classList.add(activeClass);
+                firstToc?.classList.add(activeClass);
+            }
+        }
+
+    }
+
+    document.addEventListener('astro:page-load', handleHeadingIntersection)
+</script>

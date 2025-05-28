@@ -57,6 +57,10 @@
   --color-hr-via: var(--hr-via);
   --color-hr-to: var(--hr-to);
 
+  --color-toc: var(--foreground);
+  --color-toc-bar: var(--toc-bar);
+  --color-toc-bar-active: var(--toc-bar-active);
+
   --color-scrollbar: var(--scrollbar);
   --color-scrollbar-foreground: var(--scrollbar-foreground);
 
@@ -111,10 +115,13 @@
   --hr-via: oklch(0.95 0 0);
   --hr-to: oklch(0.96 0 0);
 
-  --scrollbar: oklch(0.87 0.005 286.28);
-  --scrollbar-foreground: oklch(0.71 0.012 286.07);
+  --toc-bar: oklch(0.92 0 0);
+  --toc-bar-active: oklch(0.87 0 0);
 
-  --selection: oklch(0.97 0.101 104.64);
+  --scrollbar: oklch(0.87 0 286.28);
+  --scrollbar-foreground: oklch(0.71 0 286.07);
+
+  --selection: oklch(0.95 0.05 86.11);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -164,8 +171,13 @@
     --hr-via: oklch(27.4% 0.006 286.033);
     --hr-to: oklch(21% 0.006 285.885);
 
+    --toc-bar: oklch(37% 0.013 285.805);
+    --toc-bar-active: oklch(0.21 0.006 285.885);
+
     --scrollbar: oklch(0.37 0.0113 285.84);
     --scrollbar-foreground: oklch(0.44 0.0141 285.81);
+
+    --selection: oklch(0.62 0.06 85.89);
   }
 }
 
@@ -184,7 +196,7 @@
   }
 
   ::selection {
-    @apply shadow-none bg-selection text-black;
+    @apply shadow-none bg-selection;
   }
 
   ::-webkit-scrollbar {
@@ -258,7 +270,7 @@
     h1,
     h2,
     h3 {
-      @apply text-lg font-medium leading-7;
+      @apply text-lg font-medium leading-7 transition-colors duration-1000;
     }
 
     h1 {
