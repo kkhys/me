@@ -6,7 +6,7 @@ import BlogLayout from "#/layouts/blog-layout.astro";
 import { getPublicBlogEntries } from "#/lib/blog";
 import { convertDateToString } from "#/lib/date";
 import ContentWrapper from "#/pages/blog/_components/content-wrapper.astro";
-import ZoomImageContainer from "#/pages/blog/_components/zoom-image-container.astro";
+// import ZoomImageContainer from "#/pages/blog/_components/zoom-image-container.astro";
 
 export const getStaticPaths = (async () =>
   (await getPublicBlogEntries()).map((entry) => {
@@ -28,8 +28,8 @@ const sourceUrl = `${siteConfig.github.site}/blob/main/${entry.filePath}?plain=1
 const revisionHistoryUrl = `${siteConfig.github.site}/commits/main/${entry.filePath}`;
 ---
 
-<ZoomImageContainer>
+<!--<ZoomImageContainer>-->
     <BlogLayout headings={headings} id={entry.id} publishedAtString={publishedAtString} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} {...entry.data}>
         <ContentWrapper content={Content} />
     </BlogLayout>
-</ZoomImageContainer>
+<!--</ZoomImageContainer>-->
