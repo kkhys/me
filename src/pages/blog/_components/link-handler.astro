@@ -18,7 +18,7 @@ const { href, ...rest } = Astro.props;
         href.startsWith('http') ? (
             <a href={href} target="_blank" rel="noreferrer" class="inline-flex items-center" {...rest}>
                 <slot />
-                <MoveUpRightIcon class="ml-1 mt-0.5 size-3" />
+                <MoveUpRightIcon class="mx-1 mt-0.5 size-3" />
             </a>
         ) : (
             <a href={href} {...rest}>
