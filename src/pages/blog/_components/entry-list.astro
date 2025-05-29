@@ -26,9 +26,7 @@ const {
             return (
                     <a href={`/blog/posts/${id}`} class="relative flex items-center justify-between gap-x-4 px-2 py-3 transition-colors hover:bg-muted/50">
                         <div class="flex items-center gap-x-4">
-                            <div transition:name={`${id}-emoji`}>
                             <EmojiEyeCatch emoji={emoji} size="sm" class="shrink-0" />
-                            </div>
                             <p>{title}</p>
                         </div>
                         {showDate && (

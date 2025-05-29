@@ -37,9 +37,7 @@ const {
     <slot name='head' slot='head'/>
     <section>
         <div class:list={[status === 'draft' && 'flex justify-between items-center']}>
-            <div transition:name={`${id}-emoji`}>
-                <EmojiEyeCatch emoji={emoji} />
-            </div>
+            <EmojiEyeCatch emoji={emoji} />
             {status === "draft" && (
                     <span class="text-xs text-red-400">Draft</span>
             )}
