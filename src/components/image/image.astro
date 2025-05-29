@@ -28,7 +28,7 @@ const { class: wrapperClass, ...restWrapperProps } = wrapperProps ?? {};
 {title ? (
 <figure>
     <div
-            class={cn('blur-load size-fit bg-cover select-none rounded-2xl border-[#474747] shadow dark:border dark:shadow-none',
+            class={cn('blur-load size-fit bg-cover select-none rounded-2xl border-[#474747] shadow-md dark:border dark:shadow-none',
                 alignClass[align].wrapper,
                 { 'ambient-mode': ambientMode },
                 { 'cursor-zoom-in': canZoom },
@@ -78,6 +78,7 @@ const { class: wrapperClass, ...restWrapperProps } = wrapperProps ?? {};
     }
 
     .blur-load.image-loaded {
+        background-image: none;
         filter: blur(0);
     }
 
