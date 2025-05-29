@@ -3,6 +3,7 @@ import "#/styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import Footer from "#/components/footer.astro";
 import SEO from "#/components/seo.astro";
+import { siteConfig } from "#/config/site";
 import { cn } from "#/lib/ui";
 
 interface Props {
@@ -17,6 +18,14 @@ const { pagefind, class: className } = Astro.props;
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/meta/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/meta/favicon.svg" />
+    <link rel="shortcut icon" href="/meta/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/meta/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content={siteConfig.title} />
+    <link rel="manifest" href="/meta/site.webmanifest" />
+
     <meta name="generator" content={Astro.generator}/>
     <link rel='sitemap' href='/sitemap-index.xml' />
 

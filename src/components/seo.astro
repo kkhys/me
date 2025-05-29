@@ -35,14 +35,14 @@ const defaultProps = {
       ...rest.openGraph?.optional,
     },
   },
-  // twitter: {
-  //     title: metaData.title,
-  //     description: metaData.description,
-  //     creator: '@kkhys',
-  //     card: 'summary_large_image',
-  //     image: metaData.image,
-  //     imageAlt: metaData.title
-  // }
+  twitter: {
+    title: metaData.title,
+    description: metaData.description,
+    // creator: '@kkhys',
+    card: "summary_large_image",
+    image: metaData.image,
+    imageAlt: metaData.title,
+  },
 } satisfies SEOProps;
 
 const combinedProps = { ...defaultProps, ...rest };
