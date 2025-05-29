@@ -289,7 +289,8 @@
       @apply mt-0;
     }
 
-    p > a {
+    p > a,
+    td > a {
       @apply text-link font-medium decoration-1 underline-offset-4 hover:underline transition visited:text-link-visited visited:[&>svg]:stroke-inherit;
     }
 
