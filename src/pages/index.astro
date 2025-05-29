@@ -1,4 +1,5 @@
 ---
+import MoveRightIcon from "@lucide/astro/icons/move-right";
 import Budoux from "#/components/budoux.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { getCustomTransition } from "#/lib/custom-transition";
@@ -10,7 +11,9 @@ import { getCustomTransition } from "#/lib/custom-transition";
     </h1>
     <div class="prose mt-8">
         <Budoux><p transition:animate={getCustomTransition(0.15)}>東京を拠点とするフルスタック開発者。何かを作り、人々に喜びと驚きを与えることが大好きです。</p></Budoux>
-        <Budoux><p transition:animate={getCustomTransition(0.3)}>自分の興味や生活を記録するためにブログを書いています。ご興味のある方はぜひご覧ください。現在、日本語の記事のみ公開しています。</p></Budoux>
-        <a href="/blog" transition:animate={getCustomTransition(0.45)}>test</a>
+        <Budoux><p transition:animate={getCustomTransition(0.3)}>自分の興味や生活を記録するためにブログを書いています。ご興味のある方はぜひご覧ください。</p></Budoux>
+        <a href="/blog" transition:animate={getCustomTransition(0.45)} class="inline-flex items-center hover:underline">
+            ブログを見る<MoveRightIcon class="ml-1 mt-0.5 size-3" />
+        </a>
     </div>
 </BaseLayout>
