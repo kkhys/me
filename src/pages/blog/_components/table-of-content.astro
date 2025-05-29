@@ -11,12 +11,12 @@ const { headings, class: className } = Astro.props;
 ---
 
 <div class="toc group fixed top-40 right-0 max-lg:hidden">
-    <div class="flex flex-col justify-center gap-3 w-14 h-full max-h-96 pb-3 pl-5 pr-2 overflow-y-hidden group-hover:opacity-0 transition-opacity duration-200">
+    <div class="flex flex-col justify-center gap-3 w-14 h-full pb-3 pl-5 pr-2 overflow-y-hidden group-hover:opacity-0 transition-opacity duration-200">
         {headings.map(({ depth, slug }) => (
                 <div data-toc={slug} class={cn('toc-bar h-0.5 rounded-xs bg-toc-bar transition duration-200', depth === 2 ? 'w-4 ml-0' : 'w-3 ml-1')}/>
         ))}
     </div>
-    <nav class={cn('pointer-events-none absolute top-0 right-0 rounded-2xl border p-5 w-[250px] mr-2.5 shadow-xs overflow-x-auto opacity-0 transform translate-x-6 transition-all duration-200 ease-in-out group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto\n', className)}>
+    <nav class={cn('pointer-events-none absolute top-0 right-0 rounded-2xl border p-5 w-[250px] max-h-[600px] mr-2.5 shadow-xs overflow-x-auto opacity-0 transform translate-x-6 transition-all duration-200 ease-in-out group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto\n', className)}>
         <ul class="text-sm text-muted-foreground">
             {headings.map(({ depth, slug, text }) => (
                     <li class={cn('my-1 select-none whitespace-nowrap', depth === 3 && 'pl-4')}>
