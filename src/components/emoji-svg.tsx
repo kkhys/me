@@ -2,6 +2,7 @@
 /** @jsxRuntime automatic */
 
 import satori from "satori";
+import { getIconCode, loadEmoji } from "#/lib/api/emoji";
 
 export const emojiSvg = async ({
   emoji,

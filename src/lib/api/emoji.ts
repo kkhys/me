@@ -30,7 +30,7 @@ const toCodePoint = (unicodeSurrogates: string) => {
   return r.join("-");
 };
 
-const getIconCode = (char: string) => {
+export const getIconCode = (char: string) => {
   const U200D = String.fromCharCode(8205);
   const UFE0Fg = /\uFE0F/g;
   return toCodePoint(!char.includes(U200D) ? char.replace(UFE0Fg, "") : char);
@@ -38,7 +38,7 @@ const getIconCode = (char: string) => {
 
 const emojiCache: Record<string, Promise<string>> = {};
 
-const loadEmoji = async (type: keyof typeof apis, code: string) => {
+export const loadEmoji = async (type: keyof typeof apis, code: string) => {
   const key = `${type}:${code}`;
 
   if (key in emojiCache) {
