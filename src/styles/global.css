@@ -290,7 +290,8 @@
     }
 
     p > a,
-    td > a {
+    td > a,
+    li > a {
       @apply text-link font-medium decoration-1 underline-offset-4 hover:underline transition visited:text-link-visited visited:[&>svg]:stroke-inherit;
     }
 
