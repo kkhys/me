@@ -30,13 +30,6 @@ jobs:
   typecheck:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository with submodules
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.SUBMODULE_TOKEN }}
-          submodules: recursive
-
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
