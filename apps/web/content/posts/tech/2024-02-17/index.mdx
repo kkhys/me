@@ -9,7 +9,7 @@ publishedAt: 2024-02-17
 
 前回のリリースから 1 ヶ月ほど経過して少しずつ記事が増えてきたので回遊率やシェア率を高めるための施策を行い、それらを v1.5.0 としてリリースした。
 
-https://github.com/kkhys/me/releases/tag/v1.5.0
+https://github.com/kkhys/me.v2/releases/tag/v1.5.0
 
 ## SNS シェア機能
 
@@ -100,7 +100,7 @@ Contentlayer で記事オブジェクトを作成しているが、ローカル�
 本番環境にデプロイして初めて気がついたので焦って修正した経緯がある。
 勝手な思い込みでコードを書いてしまうことはけっこうあるので反省。
 
-https://github.com/kkhys/me/issues/318
+https://github.com/kkhys/me.v2/issues/318
 
 ## 関連記事の提案
 
@@ -142,7 +142,7 @@ const fisherYatesShuffle = <T>(array: T[]) => {
 
 [Fisher–Yates shuffle](https://w.wiki/3WJQ) というアルゴリズムで同じカテゴリの記事をランダムにシャッフルして、それを 5 つに切り出している。
 
-https://github.com/kkhys/me/issues/319
+https://github.com/kkhys/me.v2/issues/319
 
 ## 検索機能
 
@@ -182,7 +182,7 @@ React.useEffect(() => {
 
 ただ、検索条件を細かく設定できたり、AI を使ったサジェストなど魅力的な機能があるため、そのうち乗り換えたい気持ちもある。
 
-https://github.com/kkhys/me/issues/311
+https://github.com/kkhys/me.v2/issues/311
 
 ## その他の細々とした修正
 
@@ -205,7 +205,7 @@ https://github.com/kkhys/me/issues/311
 また、記事タイトルを文字詰めするために `font-feature-settings: "palt"` を指定している（[参考](https://ics.media/entry/14087)）。
 これをするだけで文体が引き締まり美しくなる。
 
-https://github.com/kkhys/me/issues/566
+https://github.com/kkhys/me.v2/issues/566
 
 ### 画面上部にシャドーを追加
 
@@ -254,7 +254,7 @@ const createExcerpt = async (raw: string) => {
 
 Contentlayer でのビルド時に上記の処理が行われて、抜粋した文字列がメタデータとして登録されるので各コードで扱えるようになる。
 
-https://github.com/kkhys/me/issues/494
+https://github.com/kkhys/me.v2/issues/494
 
 ### Atom のプリフェッチで 404 エラー
 
@@ -262,7 +262,7 @@ Next.js の Link コンポーネントはデフォルトでリンク先をプリ
 
 プリフェッチをオフにするためのプロパティがあったので追加した。
 
-https://github.com/kkhys/me/issues/535
+https://github.com/kkhys/me.v2/issues/535
 
 ### コードブロックの強化
 
@@ -305,7 +305,7 @@ export const isNoteCreatableFromMagazine = (noteText: string, magazineText: stri
 };
 ```
 
-https://github.com/kkhys/me/pull/561
+https://github.com/kkhys/me.v2/pull/561
 
 ## さいごに
 
