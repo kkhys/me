@@ -22,7 +22,7 @@ updatedAt: 2024-06-16
 
 このサイトではそこまで攻めたことはしない方針なので [ヤコブの法則](https://soiya.co.jp/soiya-post-0001) を参考に、世間一般に広く使われているデザインを落とし込んでみた。
 
-https://github.com/kkhys/me/releases/tag/v1.8.0
+https://github.com/kkhys/me.v2/releases/tag/v1.8.0
 
 ## グローバルナビゲーション（とヘッダ）
 
@@ -186,7 +186,7 @@ export const Header = ({ className }: { className?: string }) => {
 ページをリロードした際のチラつきを防止するためにちゃんとフォールバックを設定する。
 当初は `Blog` という文字列も `pathname` が `/posts` であればハイライトするようにしていたが、チラつきの問題を解決できなかったので止めた。
 
-https://github.com/kkhys/me/issues/1076
+https://github.com/kkhys/me.v2/issues/1076
 
 ### スクロールに応じてヘッダを表示・非表示させる
 
@@ -278,7 +278,7 @@ export const Header = ({ className }: { className?: string }) => {
 `[0.1, 0.25, 0.3, 1]` はカスタムのイージング関数を示している。
 この辺は少しずつ微調整しながら良い感じの（としか言いようがない）数値を探していく。
 
-https://github.com/kkhys/me/issues/1113
+https://github.com/kkhys/me.v2/issues/1113
 
 ヘッダに関してはこれで終わり。
 
@@ -454,7 +454,7 @@ export const ArticleList = ({
 };
 ```
 
-https://github.com/kkhys/me/issues/315
+https://github.com/kkhys/me.v2/issues/315
 
 ### 画像のズーム機能
 
@@ -481,7 +481,7 @@ View Transition についての根本的な理解を深めてから再度リリ�
 
 View Transition API が安定版になれば今後の Web のトレンドになると思うので習得して積極的に使っていきたいところだ。
 
-https://github.com/kkhys/me/issues/1115
+https://github.com/kkhys/me.v2/issues/1115
 
 <Alert type='warning' description='後から見返すとやっぱり許容できない挙動があったため一旦 revert する。' />
 

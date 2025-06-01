@@ -101,16 +101,16 @@ const ConfigAction = <T extends Photo | Post>({
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end" className="font-sans">
-      <NavLink href={editUrl as Route} isExternal>
+      <NavLink href={editUrl} isExternal>
         Edit the page on GitHub
       </NavLink>
-      <NavLink href="https://github.com/kkhys/me/issues/new" isExternal>
+      <NavLink href={`${siteConfig.github.me}/issues/new`} isExternal>
         Report the content issue
       </NavLink>
-      <NavLink href={sourceUrl as Route} isExternal>
+      <NavLink href={sourceUrl} isExternal>
         View the source on GitHub
       </NavLink>
-      <NavLink href={revisionHistoryUrl as Route} isExternal>
+      <NavLink href={revisionHistoryUrl} isExternal>
         View the revision history
       </NavLink>
     </DropdownMenuContent>
