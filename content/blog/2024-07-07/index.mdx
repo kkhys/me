@@ -1,0 +1,189 @@
+---
+title: Vercel ビルド時に Playwright をインストールする
+description: Vercel で Node.js 20 にアップグレード時に Playwright の Mermaid 描画でエラー発生、dnf で依存パッケージインストールして解決した技術メモ。
+emoji: 🎭
+category: Tech
+tags: [Tips]
+status: published
+publishedAt: 2024-07-07
+slug: b128uug
+---
+
+当ブログではシーケンス図やフローチャートの描画に [Mermaid](https://mermaid.js.org) を使用している。
+変換方法として、MDX のビルド時に rehype を使い JavaScript オブジェクトに変換する処理の中で [rehype-mermaid](https://github.com/remcohaszing/rehype-mermaid) を使うことで Mermaid に変換している。
+
+https://kkhys.me/posts/p1eemm6
+
+rehype-mermaid が Mermaid の構文を SVG にレンダリングする際にはヘッドレスブラウザの [Playwright](https://playwright.dev) を内部的に利用する。
+この Playwright がなかなかの曲者である。
+
+今回は Vercel ビルド時の Node.js のバージョンを 20 にアップグレードする過程で詰まったので備忘録として残しておく。
+
+## 開発環境
+
+- Node.js: v20.15.0（Vercel では v20 を指定）
+- @playwright/test: v1.45.1
+
+## Node18 から Node20 にアップグレードする
+
+Vercel ビルド時は Node.js のバージョンを 16, 18, 20 の中から選べる。
+デフォルトでは 20 になっているが、当プロジェクトでは Playwright のインストールに失敗するため仕方なく 18 を使用していた。
+ただ、基本的に最新のバージョンを使って運用したいので今回エラーの原因を調査することにしたというわけである。
+
+Vercel ビルド時の Node.js のバージョンは Vercel の管理画面から変更できるが `package.json` の `engines#node` を読み取ってオーバーライドする機能[^1]もあるため IaC 的な考えから `package.json` に記載する方法がおすすめ。
+そうすることで他の人がこのリポジトリをビルドするときに Node.js のバージョンを合わせられるので一石二鳥だ。
+
+[^1]: [Vercel: Version overrides in package.json](https://vercel.com/docs/functions/runtimes/node-js#version-overrides-in-package.json)
+
+```json title="apps/web/package.json"
+{
+  "name": "@kkhys/web",
+  // ...
+  "engines": {
+    "node": ">=20.15.0"
+  },
+  // ...
+}
+```
+
+ちなみに Node.js の他にパッケージマネージャのバージョンを指定したい場合は実験的な機能だが [Corepack](https://nodejs.org/docs/v20.15.0/api/corepack.html#corepack) を使うと良い。
+Vercel でもサポートされている[^2]。
+
+[^2]: [Vercel: Corepack](https://vercel.com/docs/deployments/configure-a-build#corepack)
+
+```json title="package.json"
+{
+  "name": "root",
+  // ...
+  "packageManager": "pnpm@8.14.1",
+  // ...
+}
+```
+
+これで次回以降のビルドステップでは Node20 が使われるようになる（マイナーバージョン以下は自動的に決定される）。
+
+## ビルド時に Playwright をインストールする
+
+Vercel ビルド時は Turborepo を使っている場合、デフォルトでは `turbo run build` が実行される。
+そのコマンドが実行される前に Playwright をインストールしたいので、デフォルトの設定をオーバーライドするためにまずは以下のコードを追加する。
+
+```json title="apps/web/package.json"
+{
+  "name": "@kkhys/web",
+  // ...
+  "scripts": {
+    "playwright-install": "pnpx playwright-core install chromium",
+  },
+  // ...
+}
+```
+
+`package.json` の scripts フィールドに `playwright-install` というコマンドラインスクリプトを追加する。
+このスクリプトを実行すると Playwright のコアライブラリを通じて Chromium ブラウザバイナリをインストールする。
+
+Playwright の [公式ドキュメント](https://playwright.dev/docs/browsers#install-system-dependencies) にもあるとおり `--with-deps` を付ければ Playwright の実行に必要なシステムの依存関係をインストールできるが、Vercel ビルド時に使用するコンテナイメージが対応していないためこのオプションは使えない。
+以下のエラーが発生する。
+
+```text
+sh: apt-get: command not found
+Failed to install browsers
+Error: Installation process exited with code: 127
+ELIFECYCLE Command failed with exit code 1.
+Error: Command "pnpm playwright-install && turbo run build" exited with 1
+```
+
+仕方なくオプションは付けずに進めていく（後で問題が起こるが）。
+
+Vercel ビルド時のビルドスクリプトをオーバーライドするには Vercel の管理画面から変更する方法と `vercel.json` で定義する方法がある。
+可能な限りコードで環境を管理したいので `vercel.json` を使用していく。
+
+```json title="vercel.json" showLineNumbers
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm playwright-install && turbo run build"
+}
+```
+
+`vercel.json` は [JSON Schema](https://json-schema.org) に対応しているため 2 行目で定義している。
+JSON Schema を使えばコードの補完が効くのでできれば設定しておきたい。
+
+3 行目で `package.json` に定義したスクリプトをビルドコマンドに追加する。
+これを Vercel にデプロイすればビルド時に Playwright がインストールされる。
+
+## ビルドコンテナに追加のパッケージをインストールする
+
+上述した設定を追加した上で Vercel にデプロイすると以下のエラーが発生する。
+
+```text
+╔══════════════════════════════════════════════════════╗
+║ Host system is missing dependencies to run browsers. ║
+║ Please install them with the following command:      ║
+║                                                      ║
+║     pnpm exec playwright install-deps                ║
+║                                                      ║
+║ Alternatively, use apt:                              ║
+║     apt-get install libnss3\                         ║
+║         libnspr4\                                    ║
+║         libgbm1                                      ║
+║                                                      ║
+║ <3 Playwright Team                                   ║
+╚══════════════════════════════════════════════════════╝
+```
+
+Playwright インストール時に `--with-deps` オプションを使えなかったのでそれが原因で実行に必要な依存関係が不足しているっぽい。
+Vercel は Docker デプロイに対応していないため万事休すかと思われたが、幸いにもインストールコマンドを使うことでビルドイメージにパッケージを追加できる[^3]。
+
+[^3]: [Vercel: Installing additional packages](https://vercel.com/docs/deployments/build-image/build-image#installing-additional-packages)
+
+ちなみに Node20 ではベースイメージに [Amazon Linux 2023](https://aws.amazon.com/jp/linux/amazon-linux-2023) が使われている。
+Amazon Linux 2023 のパッケージマネージャは dnf（Dandified Yum）なので注意が必要（ただ、一応 yum は使える）。
+
+Vercel デプロイ時のエラーでは以下のパッケージを `apt-get` を使ってインストールするように言われたが、APT は Debian ベースのパッケージマネージャなのでここでは `dnf install` を使うようにする。
+システムによってパッケージ名が異なるのでそれぞれ置換する。
+
+- libnss3 → nss
+- libnspr4 → nspr
+- libgbm1 → mesa-libgbm
+
+念の為、ビルドイメージをローカル環境で実行して確かめてみる。
+
+```bash
+# Docker コンテナを作成して実行する
+docker run --rm -it amazonlinux:2023.2.20231011.0 sh
+
+# nss があるかチェック -> ある
+dnf search nss
+
+# nspr があるかチェック -> ある
+dnf search nspr
+
+# mesa-libgbm があるかチェック -> ある
+dnf search mesa-libgbm
+
+# それぞれインストールする
+dnf install -y nss nspr mesa-libgbm
+
+exit
+```
+
+問題なくインストールできたのでビルドコマンドと同じように `vercel.json` にインストールコマンドを追加する。
+
+```json title="vercel.json"
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm playwright-install && turbo run build",
+  "installCommand": "pnpm install && dnf install -y nss nspr mesa-libgbm" // [!code ++]
+}
+```
+
+これで完了。
+Node20 にアップグレードして Mermaid を SSG でレンダリングすることに成功した。
+
+## さいごに
+
+そもそも Mermaid をレンダリングするためにわざわざヘッドレスブラウザをインストールするのは Playwright のサイズ的に考えてやり過ぎな気もするが、Mermaid は Node.js 上で動く DOM ライブラリではレンダリングできないため仕方なく使っている[^4]。
+
+[^4]: [GitHub Issue: server side mermaid with jsdom](https://github.com/mermaid-js/mermaid/issues/559)
+
+Mermaid が jsdom に対応してくれれば良いのだがブラウザで使われることを想定されているためそうなることは当分の間なさそう。
+ビルド時に毎回 Playwright をインストールするのは処理的に重いので、すでに Playwright をインストール済みの別環境で Mermaid をレンダリングする API を作るなど他の方法がないか模索中である。
