@@ -1,0 +1,316 @@
+---
+title: "v1.5.0 リリースノート: 回遊率とシェア率向上のための施策"
+emoji: 🚀
+category: Tech
+tags: ["Release note"]
+status: published
+publishedAt: 2024-02-17
+---
+
+前回のリリースから 1 ヶ月ほど経過して少しずつ記事が増えてきたので回遊率やシェア率を高めるための施策を行い、それらを v1.5.0 としてリリースした。
+
+https://github.com/kkhys/me/releases/tag/v1.5.0
+
+## SNS シェア機能
+
+![SNS シェア機能](/images/tech/2024-02-17/01.jpg "記事下部にあるよ")
+
+記事下部にシェアボタンをまとめたドロップダウンメニューを追加した。
+
+とりあえず X と Facebook、はてなブックマークのシェアボタンを追加してみた。
+他にも色々な SNS があるけど、とりあえずこれだけ載せておけば大丈夫だろう。
+
+各 SNS のシェアボタン生成ロジックは以下のようになっている。
+
+```ts
+// X
+const generateXShareLink = (url: string, title: string) =>
+  `https://twitter.com/intent/tweet?url=${encodeURIComponent(`${site.url.base}${url}`)}&title=${encodeURIComponent(`${title} | ${site.title}`)}`;
+
+// Facebook
+const generateFacebookShareLink = (url: string) =>
+  `https://www.facebook.com/sharer.php?u=${encodeURIComponent(`${site.url.base}${url}`)}`;
+
+// Hatena Bookmark
+const generateHatebuSaveLink = (url: string, title: string) =>
+  `https://b.hatena.ne.jp/add?mode=confirm&url=${encodeURIComponent(`${site.url.base}${url}`)}&title=${title} | ${site.title}`;
+```
+
+`encodeURIComponent` を使ってパラメータの文字列をエンコードするのがポイント。
+しかし、はてなブックマークの場合はタイトルをエンコードすると反映されないので注意が必要になる。
+日本のサービスと外国のサービスの違いを感じた実装だった。
+
+## コピーリンク
+
+上述したように SNS シェアボタンを設定することで主要な SNS でのシェアを簡単に行えるようになった。
+しかし、対応していない SNS や単にリンクをコピーしたい場合も想定されるのでコピーリンクボタンを追加した。
+
+コピーボタンを押下すると以下の関数が呼び出される。
+
+```ts
+/**
+ * Copies a given URL to the clipboard and displays a success toast message.
+ *
+ * @param url - The URL to be copied.
+ */
+const handleCopyLink = (url: string) =>
+  void window.navigator.clipboard.writeText(`${site.url.base}${url}`).then(() => toast.success('Link copied.'));
+```
+
+Clipboard API を使ってシステムのクリップボードに書き込んでいるだけの処理。
+処理が終わると別に実装してあるトーストメッセージの発行が行われる。
+
+## 前の記事・次の記事
+
+![前の記事・次の記事](/images/tech/2024-02-17/02.jpg "ホバーすると記事タイトルが表示されるよ")
+
+記事下部に前後記事へのリンクボタンを追加した。
+これは本当に必要な機能かと言われると確信を持ってうんとは言えないが、実装してみたかったので追加した。
+
+単純に記事作成日の前か後に記事が存在するかどうかを確認して、あれば記事オブジェクトを、なければ `null` を返す関数を実装した。
+
+```ts showLineNumbers {13}
+/**
+ * Retrieves the previous and next posts based on a target post ID.
+ *
+ * @param targetId - The ID of the target post.
+ * @returns An object containing the previous and next post, or null if there are none.
+ */
+const getPager = (targetId: string) => {
+  const targetPosts = [
+    null,
+    ...allPosts
+      .filter((post) => post.status === 'published')
+      .filter((post) => post._id)
+      .sort((a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()),
+    null,
+  ];
+
+  const activeIndex = targetPosts.findIndex((post) => targetId === post?._id);
+  const prev = activeIndex !== 0 ? targetPosts[activeIndex - 1] : null;
+  const next = activeIndex !== targetPosts.length - 1 ? targetPosts[activeIndex + 1] : null;
+
+  return { prev, next };
+};
+```
+
+ここでのポイントは 13 行目で配列を作成日の昇順でソートすることである。
+Contentlayer で記事オブジェクトを作成しているが、ローカル環境ではちゃんと作成日の昇順になっているが、ビルドして本番環境にあげると順不同になってしまう。
+
+本番環境にデプロイして初めて気がついたので焦って修正した経緯がある。
+勝手な思い込みでコードを書いてしまうことはけっこうあるので反省。
+
+https://github.com/kkhys/me/issues/318
+
+## 関連記事の提案
+
+![関連記事](/images/tech/2024-02-17/03.jpg "同じカテゴリの記事が表示されるよ")
+
+同じカテゴリの記事をランダムに表示するセクションを追加した。
+
+まだ記事数も少ないのでシンプルな実装だが、そのうち同じタグであるとか閲覧数に応じて最適な記事を表示できるようにしたい。
+
+オライリーの [推薦システム実践入門](https://amzn.to/42tUj3P) を読んでからこの分野には興味があるので実験してみたいところだ。
+そのためには早いうちからしっかりデータ収集をしておかなければ。
+
+一応、今の実装は以下のようになっている。
+
+```tsx showLineNumbers
+const relatedPosts = fisherYatesShuffle(
+    allPosts.filter((post) => post.status === 'published' && post._id !== id && post.category === category),
+  ).slice(0, 5);
+
+/**
+ * Performs Fisher-Yates shuffle on the given array.
+ *
+ * @template T - The type of elements in the array.
+ * @param array - The array to be shuffled.
+ * @returns The shuffled array.
+ */
+const fisherYatesShuffle = <T>(array: T[]) => {
+  const copy = [...array];
+
+  copy.forEach((_, index, arr) => {
+    const i = arr.length - 1 - index;
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j] as T, arr[i] as T];
+  });
+
+  return copy;
+};
+```
+
+[Fisher–Yates shuffle](https://w.wiki/3WJQ) というアルゴリズムで同じカテゴリの記事をランダムにシャッフルして、それを 5 つに切り出している。
+
+https://github.com/kkhys/me/issues/319
+
+## 検索機能
+
+![検索](/images/tech/2024-02-17/04.jpg "⌘ + K で開くよ")
+
+フッターに検索ボタンを追加した。
+ひとまず追加したかったので PC 限定の機能として追加してある。SP 対応はそのうちする予定。
+
+`⌘ + K` or `^ + K` でもモーダルを開けるようにしてある。
+以下のようなコードを書くことでキーダウンを検知してアクションを起こせる。
+
+```tsx showLineNumbers
+React.useEffect(() => {
+  const down = (e: KeyboardEvent) => {
+    if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || e.key === '/') {
+      if (
+          (e.target instanceof HTMLElement && e.target.isContentEditable) ||
+          e.target instanceof HTMLInputElement ||
+          e.target instanceof HTMLTextAreaElement ||
+          e.target instanceof HTMLSelectElement
+      ) {
+        return;
+      }
+
+      e.preventDefault();
+      setOpen((open) => !open);
+    }
+  };
+
+  document.addEventListener('keydown', down);
+  return () => document.removeEventListener('keydown', down);
+}, []);
+```
+
+検索全般は内部的に [cmdk](https://cmdk.paco.me) というライブラリを使っている。
+全文検索サービスには [Algolia](https://www.algolia.com) や [Elasticsearch](https://www.elastic.co/jp/elasticsearch) などの有名どころがあるが、今回は SSG でなるべくシンプルに実装したかったのでそれらのサービスは使っていない。
+
+ただ、検索条件を細かく設定できたり、AI を使ったサジェストなど魅力的な機能があるため、そのうち乗り換えたい気持ちもある。
+
+https://github.com/kkhys/me/issues/311
+
+## その他の細々とした修正
+
+マイナーアップデート以外にも特筆すべき変更があったので紹介する。
+
+### 記事一覧をリスト型に
+
+![カード型の記事一覧](/images/tech/2024-02-17/05.jpg "以前の記事一覧ページ")
+
+以前は記事一覧をカード型で表示していた。
+見た目的には可愛げもあり気に入っていたのだが、タイトルの文字数が多くなると改行が入ってしまい一気にダサくなる欠点があった。
+そのため、無理やり 1 行に入れようとしてタイトルを決めるのに難儀していた。
+
+それはよくないということで長めのタイトルを入れても違和感がないリスト型に変更した。
+
+小さいこだわりだが、右端に表示されている記事作成日時の両端を合わせるために `font-variant-numeric: tabular-nums;` を CSS にセットしてある（Tailwind だと `tabular-nums`）。
+
+デフォルトだと各数字の幅が異なるため不揃いになるが、このプロパティを設定することで各文字幅が均一になる。
+
+また、記事タイトルを文字詰めするために `font-feature-settings: "palt"` を指定している（[参考](https://ics.media/entry/14087)）。
+これをするだけで文体が引き締まり美しくなる。
+
+https://github.com/kkhys/me/issues/566
+
+### 画面上部にシャドーを追加
+
+ダークモード限定の機能。
+画面上部をよく見るとグラデーションで影がついていることがわかると思う。
+
+視覚的な効果を狙ったものだが、個人的に気に入っている。
+
+### 投稿の抜粋を自動生成
+
+OGP の description や Atom の summary など記事本文の抜粋が必要な箇所がいくつかあり、そのために毎回 120 文字程度の要約文を書いていた。
+
+さすがに面倒くさすぎるので本文の先頭からビルド時に抜き出す処理を追加した。
+
+```tsx showLineNumbers
+const Post = defineDocumentType(() => ({
+  ...
+  computedFields: {
+    excerpt: {
+      description: 'The description of the post (120 words or less)',
+      type: 'string',
+      resolve: async ({ body: { raw } }) => await createExcerpt(raw),
+    },
+  },
+}));
+
+/**
+ * Generates an excerpt from a given raw string.
+ *
+ * @param raw - The raw string to generate the excerpt from.
+ * @returns The generated excerpt.
+ */
+const createExcerpt = async (raw: string) => {
+  const maxWords = 120;
+  const stripped = (await remark().use(strip).process(raw)).toString();
+  const urlWithLineBreakRegex = /^(?:\r\n|\n)(https?:\/\/\S+)(?:\r\n|\n)/gm;
+  const whitespaceRegex = /\s+/g;
+  const excerpt = stripped
+    .trim()
+    .replaceAll(urlWithLineBreakRegex, '')
+    .replaceAll(whitespaceRegex, '')
+    .slice(0, maxWords);
+  return stripped.length > maxWords ? excerpt + '...' : excerpt;
+};
+```
+
+Contentlayer でのビルド時に上記の処理が行われて、抜粋した文字列がメタデータとして登録されるので各コードで扱えるようになる。
+
+https://github.com/kkhys/me/issues/494
+
+### Atom のプリフェッチで 404 エラー
+
+Next.js の Link コンポーネントはデフォルトでリンク先をプリフェッチするため、Route Handlers で作成したリンクを指定しているとコンソールにエラーが表示される。
+
+プリフェッチをオフにするためのプロパティがあったので追加した。
+
+https://github.com/kkhys/me/issues/535
+
+### コードブロックの強化
+
+すでに何度かコードブロックを使っているが、以下の機能を追加した。
+
+- コード行数を追加（するかしないかは選べる）
+- diff 機能を追加（他の言語のハイライトと併せて使える。コード行数と併用不可）
+- 単語のハイライト機能を追加
+- 行のハイライト機能を追加
+
+全部乗せにすると以下のようになる。
+
+```ts {3, 5} "wordCountMap" showLineNumbers
+const convertTextToWordFrequency = (text: string): Map<string, number> => {
+  const arr = text.split(' ');
+  const wordCountMap = new Map<string, number>();
+
+  arr.forEach((word) => wordCountMap.set(word, (wordCountMap.get(word) ?? 0) + 1));
+
+  return wordCountMap;
+};
+```
+
+```ts
+export const isNoteCreatableFromMagazine = (noteText: string, magazineText: string): boolean => {
+  let noteWordsArray = noteText.split(' '); // [!code --]
+  const noteWordsArray = noteText.split(' '); // [!code ++]
+  const magazineWordCountMap = convertTextToWordFrequency(magazineText);
+
+  for (const word of noteWordsArray) {
+    const magazineWordCount = magazineWordCountMap.get(word) ?? 0;
+    if (magazineWordCount > 0) {
+      magazineWordCountMap.set(word, magazineWordCountMap.get(word) - 1);
+    } else {
+      return false;
+    }
+  }
+
+  return true;
+};
+```
+
+https://github.com/kkhys/me/pull/561
+
+## さいごに
+
+ひとまずブログに最低限の機能を付けられた。
+それでも、まだまだ追加したい機能が山ほどあるので時間があるときに追加していきたい。
+
+次の v1.6.0 では何を行うかは決めないでおく。
+v1.5.0 はボリュームが大きかったので、今回の半分くらいでリリースしたい。

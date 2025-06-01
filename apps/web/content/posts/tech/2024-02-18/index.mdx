@@ -1,0 +1,700 @@
+---
+title: Play Framework のコンパイルに TypeScript を組み込む
+emoji: 🔨
+category: Tech
+tags: ["Play Framework", "TypeScript"]
+status: published
+publishedAt: 2024-02-18
+---
+
+Scala / Java 向けの Web フレームワークである [Play Framework](https://www.playframework.com) を仕事で使っており、いくつか知見が溜まってきたのでこのブログで書いていこうと思う。
+
+Play Framework といえば一般的には Scala で使うイメージがあるかもしれない。
+ただ、私の場合は Java の方が慣れているので基本的には Java でコーディングしていく。
+
+さて、タイトルの通りだが、Play Framework をコンパイル・ビルドするときに TypeScript を組み込む処理を書き留めていく。
+
+## モチベーション
+
+前提として、今から新たにフロントエンド開発をするのであれば TypeScript は必須という認識を私は持っている。
+型がない素の JavaScript はどうしても開発効率が落ちる。
+
+[Ruby on Rails](https://rubyonrails.org) であれば `rails new` するときに esbuild をオプションに追加するだけで TypeScript が使えるようになる。
+Ruby が動的型付け言語なのを除けば最高の環境である。
+
+一方、Play Framework（Ruby on Rails の影響を受けて作られた）はいまだに [CoffeeScript](https://coffeescript.org) や [RequireJS](https://requirejs.org) のトランスパイルにしか対応していない。
+今どき CoffeeScript を使う人がいるのかは甚だ疑問だが、それらが流行っていた頃からフロントエンドを扱う機構が変わっていないためこのようなことになっているようだ。
+
+Play Framework が公式に TypeScript 対応してくれれば良いのだが当分対応しないし、CoffeeScript サポートを廃止する気もないらしい（[ソース](https://github.com/playframework/playframework/issues/12045)）。
+
+そこで、その処理を自分で組み込んで開発を楽にしたいというのがモチベーションだ。
+Play Framework とは別に TypeScript のビルドツールを起動させてというのは面倒なので `sbt run` だけで全てが完結するようにしたい。
+
+また、ついでと言っては何だが、テンプレートエンジン内で Tailwind CSS を使ったスタイリングができるようにする。
+リロードすると変更が反映されているイメージ。
+
+## このページで実現すること
+
+- TypeScript で書いたコードがトランスパイルされて `puclic/javascripts` ディレクトリ以下に配置される
+- テンプレートエンジン内で書いた Tailwind CSS のクラスがコンパイルされて `puclic/stylesheets` ディレクトリ以下に配置される
+- `sbt run` を実行すると TypeScript トランスパイラと Tailwind CSS のコンパイラが起動する（コンソールから別途立ち上げなくていい）
+- 画面をリロードすると通常のコンパイルに加えて TypeScript と Tailwind CSS もコンパイルされ変更が反映される（ホットリロード対応）
+- Cache Busting のために生成した静的ファイルにフィンガープリントを付与する
+- `sbt dist` でビルドしたバイナリファイルに TypeScript と Tailwind CSS のコンパイルで生成されたファイルを同梱する
+
+## 開発環境
+
+- Play Framework: 3.0.1
+- Java: 21.0.1
+- Scala: 3.3.1
+- sbt: 1.9.6
+- Vite: 5.1.1
+- TypeScript: 5.3.3
+
+## sbt-web で実装できないか
+
+https://ancozerticht.hatenablog.com/entry/2023/03/20/013910
+
+こちらの記事にある方法で TypeScript のトランスパイルを組み込めたら楽だろうなあと思ってやってみたが、`tsconfig.json` を自由に記載できなかったり、内部でどのようにトランスパイルされているのか分からずにデバッグに苦労する未来が見えたので導入を見送った。
+
+結局 Vite でトランスパイルしてから生成されたファイルを `public` ディレクトリ以下に配置してパッケージ化してもらう方法が良さそう。
+
+## ディレクトリ構造
+
+ディレクトリ構造は以下のとおり。
+ノイズになりそうな部分は記載していない。
+
+```text
+.
+|-- app
+|   |-- controllers
+|   |   `-- HomeController.java
+|   `-- views
+|       |-- index.scala.html
+|       `-- main.scala.html
+|-- build.sbt
+|-- conf
+|   |-- application.conf
+|   `-- routes
+|-- frontend
+|   |-- package.json
+|   |-- src
+|   |   |-- entries
+|   |   |   `-- main.ts
+|   |   `-- styles
+|   |       `-- input.css
+|   |-- tailwind.config.ts
+|   |-- tsconfig.json
+|   `-- vite.config.mts
+`-- public
+    |-- javascripts
+    |   `-- main.js
+    `-- stylesheets
+        `-- main.css
+```
+
+フロントエンドのコードは `frontend` 以下で管理する。
+
+`frontend/src/entries/main.ts` がトランスパイルする際のエントリポイントになる。
+そこに書かれたコードがトランスパイルされた後に `public/javascripts` 以下に出力される。
+
+Tailwind CSS にコンパイルされたスタイルシートは `public/main.css` に出力される。
+
+## Vite の環境構築
+
+何はともあれ、まずは Vite をインストールする。ついでに TypeScript も。
+今回パッケージマネージャには pnpm を使っているが Yarn でも Bun でも何を使っても問題ない。
+
+```shell
+pnpm add -D vite typescript @types/node
+```
+
+次に Vite の設定ファイルを追加する。
+
+```ts title="frontend/vite.config.mts" showLineNumbers
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  build: {
+    emptyOutDir: true,
+    lib: {
+      entry: [resolve(__dirname, 'src', 'entries', 'main.ts')],
+      formats: ['es'],
+      fileName: (_, entryName) => `${entryName}.js`,
+    },
+    outDir: resolve(__dirname, '..', 'public', 'javascripts'),
+  },
+});
+```
+
+今回は SPA を作ることが目的ではないので Vite のライブラリモードを使用する。
+`lib` を設定することでライブラリモードが使える。
+
+ここで重要なのでエントリポイントの設定とビルドされたデータの出力先である。
+JavaScript では `path.resolve()` メソッドを使って絶対パスに変換する。
+
+ここではエントリポイントを `frontend/src/entries/main.ts`、アウトプット先ディレクトリを `public/javascripts` としている。
+
+実際にトランスパイルされるか確認してみる。
+
+エントリポイントに TypeScript で書かれたコードを配置する。
+例として、実行するとブラウザ上にプロンプトを開いて、入力した文字を [シーザー暗号](https://w.wiki/6iYC) に変換する処理を書いてみた。
+
+```ts title="frontend/src/entries/main.ts" showLineNumbers
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+/**
+ * Calculates the shifted index based on the current index and shift amount.
+ *
+ * @param currentIndex - The current index.
+ * @param shiftAmount - The amount to shift the index.
+ * @returns The shifted index.
+ */
+const getShiftedIndex = (currentIndex: number, shiftAmount: number): number => {
+  let newIndex = currentIndex + shiftAmount;
+  if (newIndex > 25) newIndex = newIndex - 26;
+  if (newIndex < 0) newIndex = 26 + newIndex;
+  return newIndex;
+};
+
+/**
+ * Converts a string using the Caesar cipher algorithm.
+ *
+ * @returns The converted string.
+ */
+window.convertCaesarCipher = () => {
+  const inputString = prompt('Enter a string to be shifted') || '';
+  if (!inputString) return alert('You must enter a string to be shifted');
+
+  let shiftAmount = parseInt(prompt('Enter a shift amount') || '');
+  if (isNaN(shiftAmount)) return alert('You must enter a valid shift amount');
+
+  shiftAmount = shiftAmount % 26;
+  const lowerCaseString = inputString.toLowerCase();
+  let shiftedString = '';
+
+  Array.from(lowerCaseString).forEach((currentLetter, i) => {
+    if (currentLetter === ' ') {
+      shiftedString += currentLetter;
+      return;
+    }
+
+    const currentIndex = ALPHABET.indexOf(currentLetter);
+    const shiftedIndex = getShiftedIndex(currentIndex, shiftAmount);
+
+    if (inputString[i] === inputString[i].toUpperCase()) {
+      shiftedString += ALPHABET[shiftedIndex].toUpperCase();
+    } else shiftedString += ALPHABET[shiftedIndex];
+  });
+
+  return alert(shiftedString);
+};
+```
+
+毎回 Vite のビルドスクリプトを打ち込むのは面倒なので `package.json` に npm スクリプトとして追加する。
+
+```json title="frontend/package.json"
+{
+  "name": "play-framework-java-playground",
+  "private": true,
+  "scripts": {
+    "vite:dev": "vite build --watch",
+    "vite:build": "vite build"
+  }
+}
+```
+
+`vite:dev` は開発用のスクリプトで、変更が監視されておりホットリロードに対応している。
+`vite:build` は本番環境へのデプロイ前に実行するスクリプトで、コードを minify する。
+ここでは `vite:build` を実行してみる。
+
+すると、`public/javascripts/main.js` に以下のファイルが出力される。
+
+```js title="public/javascripts/main.js" showLineNumbers
+const i = "abcdefghijklmnopqrstuvwxyz".split(""), d = (e, n) => {
+  let t = e + n;
+  return t > 25 && (t = t - 26), t < 0 && (t = 26 + t), t;
+};
+window.convertCaesarCipher = () => {
+  const e = prompt("Enter a string to be shifted") || "";
+  if (!e)
+    return alert("You must enter a string to be shifted");
+  let n = parseInt(prompt("Enter a shift amount") || "");
+  if (isNaN(n))
+    return alert("You must enter a valid shift amount");
+  n = n % 26;
+  const t = e.toLowerCase();
+  let r = "";
+  return Array.from(t).forEach((s, o) => {
+    if (s === " ") {
+      r += s;
+      return;
+    }
+    const f = i.indexOf(s), a = d(f, n);
+    e[o] === e[o].toUpperCase() ? r += i[a].toUpperCase() : r += i[a];
+  }), alert(r);
+};
+```
+
+問題なくトランスパイルに成功していることがわかる。
+
+## public リソースの操作
+
+次にトランスパイルした JavaScript を Play Framework の View で使えるようにする。
+今回は動作確認なので最低限の準備をする。
+
+```text title="conf/routes"
+GET        /                    controllers.HomeController.index()
+```
+
+```java title="app/controllers/HomeController.java" showLineNumbers
+package controllers;
+
+import play.mvc.Controller;
+import play.mvc.Http.Request;
+import play.mvc.Result;
+
+public class HomeController extends Controller {
+    public Result index() {
+        return ok(views.html.index.render());
+    }
+}
+```
+
+```html title="app/views/main.scala.html" showLineNumbers
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>@title</title>
+    </head>
+    <body>
+        @content
+    </body>
+</html>
+```
+
+```html title="app/views/index.scala.html" showLineNumbers
+@()
+
+@main("Welcome to Play") {
+  <h1>Welcome to Play!</h1>
+}
+```
+
+上記のコードを書くことで `http://localhost:9000` にアクセスすると画面が描画される。
+
+`public` ディレクトリに配置したファイルを Play Framework のアセットコントローラとして使うためには `routes` ファイルに以下の設定を追加する。
+この操作を経ることで Reverse routing（リソースの URL を取得できる）が使用可能になる。
+
+```text title="conf/routes"
+GET        /                    controllers.HomeController.index()
+
+GET        /assets/*file        controllers.Assets.versioned(path="/public", file: Asset) // [!code ++]
+```
+
+`versioned` としているのは後々フィンガープリントに使用するためである。
+
+上記で `puclic` をルーティングに追加したことで View ファイル内で以下のように `puclic` ディレクトリ以下の静的ファイルを呼び出せるようになった。
+
+```html title="app/views/main.scala.html"
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>@title</title>
+        <script type="module" src="@routes.Assets.versioned("javascripts/main.js")" async></script> // [!code ++]
+    </head>
+    <body>
+        @content
+    </body>
+</html>
+```
+
+早速 JavaScript を呼び出せるか確認してみる。
+
+```html title="app/views/index.scala.html" showLineNumbers
+@()
+
+@main("Welcome to Play") {
+  <h1>Welcome to Play!</h1>
+  <button onclick="convertCaesarCipher()">
+    Convert to Caesar cipher
+  </button>
+}
+```
+
+ボタンをクリックするとプロンプトが表示され、問題なくシーザー暗号に変換できた。
+
+## Tailwind CSS の環境構築
+
+TypeScript のトランスパイルは完了したので、次に Tailwind CSS のコンパイルを行えるように設定を追加していく。
+
+まずはライブラリのインストールから。
+
+```shell
+pnpm add -D tailwindcss
+```
+
+次に Tailwind CSS の設定ファイルを追加する。
+
+```ts title="frontend/tailwind.config.ts" showLineNumbers
+import type { Config } from 'tailwindcss';
+
+export default {
+  content: ['../app/views/*.scala.html'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+} satisfies Config;
+```
+
+ここで大事なのはどのファイルをコンパイル対象にするかということである。
+上記では `app/views` 以下のテンプレートエンジン（Twirl）の拡張子を指定している。
+最初は、純粋な HTML ではないのでうまくコンパイルできるか心配だったが、特に問題なく必要なスタイルのみ出力された。
+
+設定ファイルの追加が終わったら Tailwind ディレクティブを置くための CSS ファイルを作成する。
+
+```css title="frontend/src/styles/input.css" showLineNumbers
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+続いて npm スクリプトを追加する。
+
+```json title="frontend/package.json"
+{
+  "name": "play-framework-java-playground",
+  "private": true,
+  "scripts": {
+    "vite:dev": "vite build --watch",
+    "vite:build": "vite build",
+    "tailwind:dev": "tailwindcss -i src/styles/input.css -o ../public/stylesheets/main.css --watch=always", // [!code ++]
+    "tailwind:build": "tailwindcss -i src/styles/input.css -o ../public/stylesheets/main.css --minify" // [!code ++]
+  }
+}
+```
+
+最後に CSS ファイルをインポートする。
+
+```html title="app/views/main.scala.html"
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")"> // [!code ++]
+        <script type="module" src="@routes.Assets.versioned("javascripts/main.js")" async></script>
+    </head>
+    <body>
+        @content
+    </body>
+</html>
+```
+
+`tailwind:build` を実行後、ちゃんとスタイルが効くか確認してみる。
+
+```html title="app/views/index.scala.html" showLineNumbers
+@()
+
+@main("Welcome to Play") {
+  <h1 class="text-xl text-neutral-500">Welcome to Play!</h1>
+  <button class="rounded-lg border-amber-200 bg-amber-200 p-2 text-amber-900 transition-colors hover:bg-amber-300" onclick="convertCaesarCipher()">
+    Convert to Caesar cipher
+  </button>
+}
+```
+
+`tailwind:build` を実行すると `public/stylesheets/main.css` に以下のコードが追加される。
+
+```css title="public/stylesheets/main.css" showLineNumbers
+/*! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:initial}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button;background-color:initial;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:initial}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]{display:none}*,::backdrop,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:#3b82f680;--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: }.rounded-lg{border-radius:.5rem}.border-amber-200{--tw-border-opacity:1;border-color:rgb(253 230 138/var(--tw-border-opacity))}.bg-amber-200{--tw-bg-opacity:1;background-color:rgb(253 230 138/var(--tw-bg-opacity))}.p-2{padding:.5rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-amber-900{--tw-text-opacity:1;color:rgb(120 53 15/var(--tw-text-opacity))}.text-neutral-500{--tw-text-opacity:1;color:rgb(115 115 115/var(--tw-text-opacity))}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:bg-amber-300:hover{--tw-bg-opacity:1;background-color:rgb(252 211 77/var(--tw-bg-opacity))}
+```
+
+`http://localhost:9000` を開いて確認するとスタイルが適用されていることが確認できた。
+
+## PlayRunHook を使って sbt run を拡張する
+
+PlayRunHook を利用することで、コマンド実行時の処理を変更できる。
+ここでは通常の Play Framework のコンパイルに加えて、Vite と Tailwind のコンパイルを同時に行えるようにする（[参考](https://www.playframework.com/documentation/2.7.1/SBTCookbook)）。
+
+`project/PlayDevRunHook.scala` に以下のコードを追加する。
+
+```scala title="project/PlayDevRunHook.scala" showLineNumbers
+import java.io.PrintWriter
+import play.sbt.PlayRunHook
+import sbt.*
+
+import scala.io.Source
+import scala.language.reflectiveCalls
+import scala.sys.process.Process
+
+object PlayDevRunHook {
+
+  object FrontendCommands {
+    val install = "pnpm install"
+    val viteDev = "pnpm vite:dev"
+    val tailwindDev = "pnpm tailwind:dev"
+  }
+
+  object Shell {
+    /**
+     * Execute a command in the shell
+     *
+     * @param cmd  command to execute
+     * @param cwd  working directory
+     * @param envs environment variables
+     * @return exit code
+     */
+    def execute(cmd: String, cwd: File, envs: (String, String)*): Int = {
+      Process(cmd, cwd, envs *).!
+    }
+
+    /**
+     * Invoke a command in the shell
+     *
+     * @param cmd  command to execute
+     * @param cwd  working directory
+     * @param envs environment variables
+     * @return process
+     */
+    def invoke(cmd: String, cwd: File, envs: (String, String)*): Process = {
+      Process(cmd, cwd, envs *).run
+    }
+  }
+
+  /**
+   * Create a PlayRunHook to watch frontend changes
+   *
+   * @param base base directory
+   * @return PlayRunHook
+   */
+  def apply(base: File): PlayRunHook = {
+
+    val frontendBase = base / "frontend"
+    val packageJsonPath = frontendBase / "package.json"
+
+    val frontEndTarget = base / "target" / "frontend"
+    val packageJsonHashPath = frontEndTarget / "package.json.hash"
+
+    object FrontendBuildProcess extends PlayRunHook {
+      var processes: List[Process] = Nil
+
+      /**
+       * Invoked before the Play application starts
+       */
+      override def beforeStarted(): Unit = {
+        def using[A <: { def close(): Unit }, B](resource: A)(file: A => B): B =
+          try {
+            file(resource)
+          } finally {
+            resource.close()
+          }
+
+        println("Hook to Play Framework dev run -- beforeStarted")
+
+        val currPackageJsonHash = using(Source.fromFile(packageJsonPath)) { source =>
+          source.getLines().mkString.hashCode().toString
+        }
+
+        val oldPackageJsonHash = getStoredPackageJsonHash
+
+        if (!oldPackageJsonHash.contains(currPackageJsonHash)) {
+          println(s"Found new/changed package.json. Run '${FrontendCommands.install}'...")
+
+          Shell.execute(FrontendCommands.install, frontendBase)
+
+          updateStoredPackageJsonHash(currPackageJsonHash)
+        }
+      }
+
+      /**
+       * Invoked after the Play application has been started
+       */
+      override def afterStarted(): Unit = {
+        println(s"> Watching frontend changes in $frontendBase")
+        processes = List(
+          Shell.invoke(FrontendCommands.viteDev, frontendBase),
+          Shell.invoke(FrontendCommands.tailwindDev, frontendBase)
+        )
+      }
+
+      /**
+       * Invoked after the Play application has been stopped
+       */
+      override def afterStopped(): Unit = {
+        processes.foreach(_.destroy())
+        processes = Nil
+      }
+
+      /**
+       * Get the stored package.json hash
+       *
+       * @return hash
+       */
+      private def getStoredPackageJsonHash: Option[String] = {
+        def using[A <: { def close(): Unit }, B](resource: A)(file: A => B): B =
+          try {
+            file(resource)
+          } finally {
+            resource.close()
+          }
+
+        if (packageJsonHashPath.exists()) {
+          using(Source.fromFile(packageJsonHashPath)) { source =>
+            Some(source.getLines().mkString)
+          }
+        } else {
+          None
+        }
+      }
+
+      /**
+       * Update the stored package.json hash
+       *
+       * @param hash hash
+       */
+      private def updateStoredPackageJsonHash(hash: String): Unit = {
+        val dir = frontEndTarget
+
+        if (!dir.exists) dir.mkdirs
+
+        val pw = new PrintWriter(packageJsonHashPath)
+
+        try {
+          pw.write(hash)
+        } finally {
+          pw.close()
+        }
+      }
+    }
+
+    FrontendBuildProcess
+  }
+}
+```
+
+次に `build.sbt` に以下のコードを追記する。
+
+```text title="build.sbt"
+import scala.sys.process.Process
+
+name := """play-framework-java-playground"""
+organization := "me.kkhys"
+maintainer := "hi@kkhys.me"
+
+ThisBuild / scalaVersion := "3.3.1"
+
+ThisBuild / version := "1.0.0-SNAPSHOT"
+
+lazy val root = (project in file("."))
+  .enablePlugins(PlayJava)
+  .settings(
+    libraryDependencies ++= Seq(
+      guice,
+      "com.google.inject" % "guice" % "5.1.0",
+      "com.google.inject.extensions" % "guice-assistedinject" % "5.1.0"
+    )
+  )
+
+PlayKeys.playRunHooks += baseDirectory.map(PlayDevRunHook.apply).value // [!code ++]
+```
+
+`sbt run` を実行すると同時に Vite と Tailwind のコンパイルも行われ、変更した際にもホットリロードが有効になっていることを確認できた。
+
+## dist 時に静的ファイルを同梱する
+
+`sbt run` を実行したときの対応は完了したので、次は `sbt dist` で実行可能なバイナリを生成する際に、フロントエンドの静的ファイルを同梱する処理を追加する。
+
+こちらはシンプルに以下のコードを `build.sbt` に追加するだけで良い。
+
+```text title="build.sbt"
+import scala.sys.process.Process // [!code ++]
+
+...
+
+lazy val frontEndBuild = taskKey[Unit]("Execute frontend build command") // [!code ++]
+
+val frontendPath = "frontend" // [!code ++]
+val frontEndFile = file(frontendPath) // [!code ++]
+
+frontEndBuild := { // [!code ++]
+  println(Process("pnpm install", frontEndFile).!!) // [!code ++]
+  println(Process("pnpm vite:build", frontEndFile).!!) // [!code ++]
+  println(Process("pnpm tailwind:build", frontEndFile).!!) // [!code ++]
+} // [!code ++]
+
+dist := (dist dependsOn frontEndBuild).value // [!code ++]
+stage := (stage dependsOn dist).value // [!code ++]
+```
+
+## フィンガープリントを静的ファイルに付与する
+
+最後にファイル名にフィンガープリントとなる文字列を追加していく。
+
+フィンガープリントを付けることでコードを変更したのにブラウザでは変更が反映されないといった問題を解決できる。
+この手法のことを Cache Busting という。
+
+`puclic` ディレクトリ以下のファイルにフィンガープリントを付与するためには [sbt-digest](https://github.com/sbt/sbt-digest) が必要なので追加する。
+
+```text title="project/plugins.sbt"
+addSbtPlugin("org.playframework" % "sbt-plugin" % "3.0.1")
+addSbtPlugin("com.github.sbt" % "sbt-digest" % "2.0.0") // [!code ++]
+
+ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % VersionScheme.Always
+```
+
+次に `build.sbt` に以下の設定を追加する。
+
+```text title="build.sbt"
+...
+
+lazy val root = (project in file("."))
+  .enablePlugins(PlayJava)
+  .enablePlugins(SbtWeb) // [!code ++]
+  .settings(
+    libraryDependencies ++= Seq(
+      guice,
+      "com.google.inject" % "guice" % "5.1.0",
+      "com.google.inject.extensions" % "guice-assistedinject" % "5.1.0"
+    )
+  )
+
+Assets / pipelineStages := Seq(digest) // [!code ++]
+```
+
+`Assets / pipelineStages` の処理を追加しているのはローカル環境でもフィンガープリントを追加するためである。
+
+開発環境でインポートされているファイルパスを確認するとフィンガープリントが追加されていることを確認した。
+
+```text
+/assets/stylesheets/b993b456bf80af0695501c8acd69ab8c-main.css
+```
+
+何も変更せずにブラウザをリロードするとフィンガープリントは変わらないが、少しでもファイルの対象となるコードを変更するとフィンガープリントが変化する。
+ちなみに sbt を再起動してもフィンガープリントの値は変化する。
+
+```text
+/assets/stylesheets/58c0961b8f2d1f3b0837dd4fe7c8c86b-main.css
+```
+
+## さいごに
+
+TypeScript があるだけでフロントエンド開発の安心度はすごく高まる。
+どんどんコードを書いてブラウザをリロードして変更を確認すればモダンな SPA と同等の開発体験を得られる。
+
+と言いたいところだが、あくまでメインの処理はテンプレートエンジンに書いていく形になるので、リロードのたびに退屈な時間を過ごさないといけない点はあまり変わりない（Play Framework のコンパイルはすごく遅い）。
+
+テンプレートエンジンの上に SPA を載せればフロントエンド側のトランスパイルだけ待てばよくなりひとまず開発体験はよくなるが、それなら Next.js などの Web フレームワークを初めから使って API のみ Play Framework で書けば良いからそもそもの目的が曖昧になる。
+
+もし、SPA を使うのであればテンプレートエンジン内の一部分だけ適用するといったように補助的に使う方法が現実的かもしれない。
+
+もっとも、個人的には Play Framework では SPA や JavaScript は極力使わずに純粋に SSR だけでサイト構築していく方が好みではある。
+本当に必要な箇所だけ JavaScript を使えば不要なファイルの待ち時間や実行にかかる時間を短縮できるのでパフォーマンスが向上するし、構造的にシンプルになる。
+この辺は常にトレードオフになるので選定が難しい。

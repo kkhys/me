@@ -1,0 +1,111 @@
+---
+title: "v2.1.0 リリースノート: タグクラウドの追加"
+emoji: 🚀
+category: Tech
+tags: ["Release note"]
+status: published
+publishedAt: 2025-01-13
+---
+
+先日、v2.0.0 をリリースしたばかりであるが、間髪を入れず v2.1.0 を公開する運びとなった。
+ここまでスムーズに実装が進んだのは、ひとえに開発環境を整えたおかげである。
+
+https://github.com/kkhys/me/releases/tag/v2.1.0
+
+目に見えない部分であるがゆえに軽視されがちな開発環境。
+しかし、その整備がもたらす効果と、ストレスなく作業が進むこの感覚を、コードに触れない人々にどうわかりやすく伝えるかが今後の課題だ。
+
+さて、今回のリリースではタグページとタグクラウドを作成した。
+これらはすべて SSG（静的サイト生成）で Frozen してあるため、表示速度と安定性に優れる点が特徴である。
+
+以下に、いくつかのポイントをまとめておく。
+
+## タグクラウドの生成方法
+
+このブログの記事は [Contentlayer](https://contentlayer.dev)（正確にはフォーク版の [Contentlayer2](https://github.com/timlrx/contentlayer2)）を使い、MDX 形式で書かれている。
+MDX は柔軟性が高く、拡張することで Frontmatter と呼ばれるメタデータを定義できるため、そこに tags を仕込んでいる。
+
+以下はその例。
+
+```markdown title="index.mdx"
+---
+title: "v2.1.0 リリースノート: タグクラウドの追加"
+emoji: 🚀
+category: Tech
+tags: ["Release note"]
+status: draft
+publishedAt: 2025-01-13
+---
+
+[//]: # (記事について...)
+```
+
+[タグ一覧用のオブジェクト](https://github.com/kkhys/me/blob/7764caf5f3a4e3b7514103af7eabf442f31c0ef1/apps/web/src/config/tag.ts) は別に定義してあるため、そのデータを使ってタグクラウドを生成していく。
+
+ここで少し背景の話をしておこう。
+Contentlayer では、すべての記事データを 1 つのオブジェクトにまとめてくれる便利機能がある（たとえば post であれば `allPosts` というオブジェクトに）。
+
+だが、その内部にはトランスパイルされた MDX データが詰め込まれており、驚くほど重い。
+これをそのまま利用すれば、ビルド時間が増大するし、Client Components で扱えば、Lighthouseのスコアは悪化する。
+ゆえに、記事データを扱う際には細心の注意が必要だ。
+
+話を戻すと、`allPosts` を生成する前にはバリデーションを行い、間違ったタグが紛れ込まないよう対策している（[ソースはこちら](https://github.com/kkhys/me/blob/7764caf5f3a4e3b7514103af7eabf442f31c0ef1/apps/web/contentlayer.config.ts#L224-L230)）。
+これにより、正確なデータを元にタグページを生成することが可能になる。
+
+そして、記事追加時に以下のコード（抜粋）を npm スクリプトで実行し、タグクラウド用のデータを生成してキャッシュしておく。
+
+```ts title="pre-build.ts" showLineNumbers
+const generateTagCloudItems = async () => {
+  const tagCloudItems = (await Promise.all(
+    flatTags.map(async ({ title, slug, emoji }) => ({
+      title,
+      slug,
+      emoji,
+      emojiSvg: await generateEmojiSvg({ emoji, isColored: true }),
+    })),
+  )) satisfies TagCloudItem[];
+  writeToFile(
+    FILE_PATHS.TAG_COULD_ITEMS,
+    "tagCloudItems",
+    tagCloudItems,
+    "TagCloudItem",
+  );
+};
+```
+
+## 絵文字の SVG 化
+
+前述の `generateEmojiSvg` 関数は、今回のタグクラウド生成の中核となる処理である。
+絵文字を SVG に変換するという見た目に関わる大事な部分を担っているが、この処理が意外と重い。
+そのため、頻繁に実行するのは避け、生成されたデータをキャッシュすることで効率化を図っている。
+
+絵文字を SVG 化する際は [Satori](https://github.com/vercel/satori) というライブラリを使用している。
+[以前の記事](/posts/p15e6x7) では Satori を使って同様に絵文字（Noto Emoji）を SVG に変換していたが、今回使用するのはカラーフォントなので、前回のように簡単にはいかなかった。
+
+このプロセスの肝は `loadAdditionalAsset` 関数である。
+この関数を使い、必要なデータを API 経由で取得し、それを元に絵文字を SVG 化している。
+
+具体的な実装は以下のコードを参照いただきたい。
+
+https://github.com/kkhys/me/blob/main/apps/web/src/utils/emoji.tsx
+
+今回は Microsoft の [Fluent Emoji](https://fluentemoji.com) という絵文字に変換しているが、他にも以下の絵文字に変換することも可能。
+
+- [Twemoji](https://github.com/twitter/twemoji)
+- [OpenMoji](https://openmoji.org)
+- Blobmoji
+- [Noto Color Emoji](https://fonts.google.com/noto/specimen/Noto+Color+Emoji)
+- Fluent Emoji Flat
+
+1 つ注意しなければならないのは、絵文字の SVG 化を支える API の URL が変更された場合である。
+このような事態が発生すると、当然ながら絵文字が正しく表示されなくなる。
+その際は手動で修正する必要があるが、問題に気づくタイミングはおそらく「なんか絵文字が表示されない…」という状況になってからだろう。
+
+これを未然に防ぐため、特定の部分に Visual Regression Testing を導入するのも一つの手かもしれない。
+
+## さいごに
+
+今まで面倒で避けていたが、実装してみると意外と便利なものだ。
+
+これまで記事を書くときにタグを深く考えていなかったが、これを機にちゃんと分類することにした。
+制約は創作の幅を広げると言うし、タグを活用すれば記事も書きやすくなりそうだ。
