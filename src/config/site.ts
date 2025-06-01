@@ -3,7 +3,7 @@ export const siteConfig = {
   description: "Keisuke Hayashi の個人サイト",
   url: "https://kkhys.me",
   github: {
-    site: "https://github.com/kkhys/site",
+    me: "https://github.com/kkhys/me",
     content: "https://github.com/kkhys/content",
   },
   roadmap: "https://github.com/users/kkhys/projects/3",
@@ -17,8 +17,4 @@ export const me = {
     url: "https://github.com/kkhys",
   },
   mastodon: "https://mastodon.kkhys.me",
-  x: {
-    id: "@kkhys_",
-    url: "https://x.com/kkhys_",
-  },
 };

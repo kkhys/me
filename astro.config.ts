@@ -15,7 +15,7 @@ import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
 import remarkLinkCard from "./src/lib/remark-link-card";
 
 export default defineConfig({
-  site: "https://keisuke.site",
+  site: "https://kkhys.me",
   adapter:
     process.argv[3] === "--node" ? node({ mode: "standalone" }) : vercel(),
   integrations: [

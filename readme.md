@@ -1,6 +1,6 @@
-**[keisukehayashi.com](https://kkhys.me)**
+**[kkhys.me](https://kkhys.me)**
 
-My personal website powered by [Astro](https://astro.build)
+My personal website powered by [Astro](https://astro.build).
 
 <br>
 
