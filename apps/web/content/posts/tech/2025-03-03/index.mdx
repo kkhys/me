@@ -1,0 +1,80 @@
+---
+title: "v2.6.0 リリースノート: About ページの追加"
+emoji: 🚀
+category: Tech
+tags: ["Release note"]
+status: draft
+publishedAt: 2025-03-03
+---
+
+```graphql
+query GetUserRepositories($username: String!, $after: String) {
+  user(login: $username) {
+    repositories(first: 100, after: $after) {
+      edges {
+        node {
+          name
+          description
+          url
+          isPrivate
+          createdAt
+          updatedAt
+        }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+}
+```
+
+```graphql
+query GetRepositoryBranches($owner: String!, $name: String!, $after: String) {
+  repository(owner: $owner, name: $name) {
+    refs(refPrefix: "refs/heads/", first: 100, after: $after) {
+      edges {
+        node {
+          name
+        }
+      }
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+    }
+  }
+}
+```
+
+```graphql
+query GetRepositoryCommits($owner: String!, $name: String!, $branch: String!, $after: String) {
+  repository(owner: $owner, name: $name) {
+    ref(qualifiedName: $branch) {
+      target {
+        ... on Commit {
+          history(first: 100, after: $after) {
+            edges {
+              node {
+                committedDate
+                author {
+                  name
+                  email
+                  date
+                }
+                url
+                oid
+              }
+            }
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```

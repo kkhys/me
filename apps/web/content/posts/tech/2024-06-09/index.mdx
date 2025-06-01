@@ -1,0 +1,495 @@
+---
+title: "v1.8.0 リリースノート: グローバルナビゲーションの追加など"
+emoji: 🚀
+category: Tech
+tags: ["Release note"]
+status: published
+publishedAt: 2024-06-09
+updatedAt: 2024-06-16
+---
+
+最近、知り合いにこの Web サイトを見てもらう機会があった。
+その際にサイトの回遊がしにくいという率直なフィードバックをもらったので早速改善することにした。
+
+以前のバージョンではグローバルナビゲーション[^1]は設置していなかった。
+というのも、[KISS の原則](https://w.wiki/48rd) に則って、可能な限りシンプルにサイトを構築していきたいと考えていたからである。
+
+[^1]: 全ページに共通して表示するメニューのこと
+
+だが、機能をシンプルにし過ぎて使い勝手が悪いのは本末転倒だ。
+やっぱり、サイトのデザインにおいてシンプルであっても多くの人が慣れ親しんだパターンから外れると途端に違和感を感じさせてしまう。
+そのギリギリを攻めるのが UI/UX デザイナーの腕の見せどころなのだろうなあ。
+
+このサイトではそこまで攻めたことはしない方針なので [ヤコブの法則](https://soiya.co.jp/soiya-post-0001) を参考に、世間一般に広く使われているデザインを落とし込んでみた。
+
+https://github.com/kkhys/me/releases/tag/v1.8.0
+
+## グローバルナビゲーション（とヘッダ）
+
+ヘッダに表示されているメニューがいわゆるグローバルナビゲーションである。
+今のところメニューにはブログしかないのでシンプルだが、時間があるときにお問い合わせフォームや vlog などを追加していく予定である。
+
+基本的にはシンプルな実装だが、いくつかポイントがあるのでメモ書き程度にまとめてみる。
+ここではついでにヘッダの実装についての説明も含む。
+
+### サイトロゴをコードで生成する
+
+サイトロゴは Illustrator や Canva で作るのが一般的だと思うが、意外と手間なのと、ちょっとした変更が履歴として残らない点がイマイチに感じているのでコードで生成することにした。
+今後オリジナリティ溢れるロゴを作る機会があれば変えるかもしれない。
+
+基本的な考え方は [前回の記事](/posts/p15e6x7) と同じである。
+以下のコードを Next.js の Route Handlers に設置することで画像を生成できる。
+
+```ts title="apps/web/src/app/api/site-logo/route.tsx" showLineNumbers
+import type { NextRequest } from 'next/server';
+import satori from 'satori';
+
+export const runtime = 'edge';
+
+export const GET = async (request: NextRequest) => {
+  const interMedium = await fetch(new URL('../../../../assets/fonts/Inter-Medium.ttf', import.meta.url)).then((res) =>
+    res.arrayBuffer(),
+  );
+
+  const searchParams = request.nextUrl.searchParams;
+  const theme = searchParams.get('theme') ?? 'light';
+
+  const svg = await satori(
+    <div
+      style={{
+        fontSize: 130,
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'Inter',
+        fontSmooth: 'antialiased',
+        color: theme === 'dark' ? '#111113' : '#e6e5e5',
+        backgroundColor: theme === 'dark' ? '#e6e5e5' : '#111113',
+      }}
+    >
+      K
+    </div>,
+    {
+      width: 256,
+      height: 256,
+      fonts: [
+        {
+          name: 'Inter',
+          data: interMedium,
+          style: 'normal',
+          weight: 500,
+        },
+      ],
+    },
+  );
+
+  return new Response(svg, {
+    status: 200,
+    headers: {
+      'Content-Type': 'image/svg+xml',
+      'X-Content-Type-Options': 'nosniff',
+      'cache-control': 'public, immutable, no-transform, max-age=31536000',
+    },
+  });
+};
+```
+
+当初はこれをそのまま img タグから呼び出せば大丈夫だろうと思っていたが、このサイトはダークモードに対応しているため、うまくロゴの色が反転しないという問題が発生した。
+そこで生成された SVG をコンポーネント化して呼び出すことにした。
+
+```tsx title="apps/web/src/ui/global/icons/index.tsx" showLineNumbers
+type IconProps = React.HTMLAttributes<SVGElement>;
+
+export const Icons = {
+  logo: (props: IconProps) => (
+    <svg xmlns='http://www.w3.org/2000/svg' width='256' height='256' viewBox='0 0 256 256' {...props}>
+      <rect x='0' y='0' width='256' height='256' className='fill-foreground' />
+      <path
+        className='fill-background-lighter'
+        d='M108.7 170.8L94.4 170.8L94.4 76.3L108.7 76.3L108.7 121.4L109.8 121.4L149.5 76.3L167.4 76.3L129.3 118.9L167.6 170.8L150.4 170.8L119.8 128.6L108.7 141.4L108.7 170.8Z '
+      />
+    </svg>
+  ),
+};
+```
+
+サイトロゴ自体は静的なので API から呼び出すよりも上記のようにコンポーネントする方が結局は良かった。
+
+### 選択中のカテゴリにアクセントカラーを
+
+記事一覧ページにおいてブログメニュー内の選択中のカテゴリを色付けするようにした（PC 限定の機能。モバイルはドロワーメニューにした）。
+これは URL に含まれるクエリパラメータを読み取ることで実現している機能である。
+
+Next.js ではクエリパラメータの取り扱いについては注意が必要で、そのことは以前記事にまとめた（[こちら](/posts/p1srf75)）。
+今回は `useSearchParams` を使うことでカテゴリを取得している。
+以下がそのコード。
+
+```tsx title="apps/web/src/ui/global/main-navigation/index.tsx" showLineNumbers
+export const MainNavigation = () => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get('category');
+
+  return (
+    <div className='mr-4 hidden md:flex'>
+      ...
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Blog</NavigationMenuTrigger>
+            <NavigationMenuContent className='min-w-[8rem] p-1'>
+              <ListItem href='/posts' className={cn(pathname === '/posts' && !categoryParam && 'bg-accent')}>
+                All Posts
+              </ListItem>
+              <Separator className='-mx-1 my-1 h-px w-[calc(100%_+_1rem)]' />
+              <div className='grid gap-1'>
+                {categories.map((category, index) => (
+                  <ListItem
+                    key={category.slug}
+                    href={`/posts?category=${category.slug}`}
+                    className={cn(
+                      categories.length === index + 1 && 'mb-0.5',
+                      categoryParam === category.slug && 'bg-accent',
+                    )}
+                  >
+                    {category.title}
+                  </ListItem>
+                ))}
+              </div>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuIndicator />
+        </NavigationMenuList>
+      </NavigationMenu>
+    </div>
+  );
+};
+```
+
+もし `pathname` が `/posts` でカテゴリが見つからない場合は即ち All Posts ということになる。
+`useSearchParams` を使う場合は以下のように親要素から `Suspense` でラップしなければならない点に注意が必要（[参考](https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout)）
+
+```tsx title="apps/web/src/ui/global/header/index.tsx" showLineNumbers
+export const Header = ({ className }: { className?: string }) => {
+  return (
+    ...
+    <Suspense fallback={<MainNavigationFallback />}>
+      <MainNavigation />
+    </Suspense>
+    ...
+  );
+};
+```
+
+ページをリロードした際のチラつきを防止するためにちゃんとフォールバックを設定する。
+当初は `Blog` という文字列も `pathname` が `/posts` であればハイライトするようにしていたが、チラつきの問題を解決できなかったので止めた。
+
+https://github.com/kkhys/me/issues/1076
+
+### スクロールに応じてヘッダを表示・非表示させる
+
+ヘッダをページ上部に固定しているサイトを多く見かけるが、ブログのようなコンテンツがメインのサイトにおいては没入感を妨げる要素になり得てしまう。
+とはいえ、記事の途中までスクロールしたときに別のページが見たくなることも考えられる。
+
+何か良い方法がないか考えるときにまずすることは同様のサービスがどのような UI をしているか調査することである。
+Medium や Note を見てみると、両方とも下にスクロールしたときはヘッダが隠れて、上にスクロールしたときはヘッダが現れるような仕様になっていた。
+
+この方法は記事を読むときの人間の動きを考えた良いデザインだと思う。
+ヤコブの法則的に考えてもそこまで違和感を感じさせることもなさそうなので実装してみた。
+
+動きになめらかさを持たせるために [Framer Motion](https://www.framer.com/motion) を使用している。
+
+まずはロジック部分。
+カスタムフックとして切り出してある。
+
+```tsx title="apps/web/src/ui/global/header/index.tsx" showLineNumbers
+export const useHeaderAnimation = () => {
+  const [animationHeader, setAnimationHeader] = React.useState<boolean | null>(null);
+  const [previousYPosition, setPreviousYPosition] = React.useState<number>(
+    typeof window !== 'undefined' ? window.scrollY : 0,
+  );
+  const [debouncePreviousYPosition] = useDebounce(previousYPosition, 50);
+  const headerRef = React.useRef<HTMLElement | null>(null);
+
+  const headerFrom = () => ({
+    y: 0,
+  });
+
+  const headerTo = (headerHeight: number) => ({
+    y: -headerHeight,
+  });
+
+  const animationState = () => {
+    if (animationHeader === null || headerRef.current === null) return;
+    return animationHeader ? headerFrom() : headerTo(headerRef.current.offsetHeight);
+  };
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (headerRef.current === null) return;
+
+      const currentYPos = window.scrollY;
+      const headerHeight = headerRef.current.offsetHeight / 2;
+
+      if (currentYPos < previousYPosition) {
+        setAnimationHeader(true);
+      } else if (currentYPos > headerHeight && currentYPos > previousYPosition) {
+        setAnimationHeader(false);
+      }
+
+      setPreviousYPosition(currentYPos);
+    };
+
+    window.addEventListener('scroll', handleScroll, false);
+
+    return () => window.removeEventListener('scroll', handleScroll, false);
+  }, [debouncePreviousYPosition, previousYPosition]);
+
+  return { animationState, headerRef };
+};
+```
+
+`animationState` は `headerFrom` または `headerTo` であり、ヘッダがどの位置に移動するべきかの情報を返す。
+`headerRef` は React の ref でヘッダ要素の参照を保持している。
+この ref を使ってヘッダ要素の高さを取得したり、他の DOM 操作を行ったりしている。
+
+続いて、カスタムフック化したロジックを見た目部分の実装に落とし込んでいく。
+
+```tsx title="apps/web/src/ui/global/header/index.tsx" showLineNumbers
+export const Header = ({ className }: { className?: string }) => {
+  const { animationState, headerRef } = useHeaderAnimation();
+
+  return (
+    <motion.header
+      transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.6 }}
+      animate={animationState()}
+      ref={headerRef}
+      className={cn('fixed top-0 w-[calc(100%-var(--removed-body-scroll-bar-size,0px))]', className)}
+    >
+      ...
+    </motion.header>
+  );
+};
+```
+
+ここでは motion コンポーネントを使ってアニメーションの動きを制御している。
+`[0.1, 0.25, 0.3, 1]` はカスタムのイージング関数を示している。
+この辺は少しずつ微調整しながら良い感じの（としか言いようがない）数値を探していく。
+
+https://github.com/kkhys/me/issues/1113
+
+ヘッダに関してはこれで終わり。
+
+## ページネーション
+
+次にページネーションを追加したのでその説明を書き留めていく。
+
+今までは記事数が少なかったのもあり、ページネーションは必要なかった。
+だが、この記事を書く前の時点で 18 記事あるためそろそろ追加することにした。
+
+ページネーションの他に X のような無限スクロールを実装するという選択肢もあったが、ある程度探したいコンテンツが決まっているブログのようなサービスには向いていないため今回は見送った。
+
+ページネーションと言ってもただ単に分割すれば良いというわけではなく意外と考えることが多い。
+今回は Amazon の商品一覧ページのような ellipsis（`...`）付きのページネーションを作っていく。
+以下がその例。
+
+```text
+// 前提としてページ数は 10
+
+// 現在のページ = 1
+<Previous ① 2 3 ... 10 Next>
+
+// 現在のページ = 4
+<Previous 1 ... 3 ④ 5 ... 10 Next>
+
+// 現在のページ = 10
+<Previous 1 ... 8 9 ⑩ Next>
+```
+
+ロジック部分はカスタムフックに切り出した。
+
+```ts title="apps/web/src/ui/post/pagination/use-pagination.ts" showLineNumbers
+export const usePagination = (data: Post[], itemsPerPage = 10) => {
+  const _searchParams = useSearchParams();
+  const searchParams = React.useMemo(() => new URLSearchParams(_searchParams), [_searchParams]);
+
+  const router = useRouter();
+
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [currentCategory, setCurrentCategory] = React.useState('all');
+
+  const maxPage = React.useMemo(() => Math.ceil(data.length / itemsPerPage), [data, itemsPerPage]);
+
+  const currentData = () => {
+    const begin = (currentPage - 1) * itemsPerPage;
+    const end = begin + itemsPerPage;
+    return data.slice(begin, end);
+  };
+
+  const changePage = (newPage: number) => {
+    const pageNumber = Math.max(1, newPage);
+    setCurrentPage(() => Math.min(pageNumber, maxPage));
+    searchParams.set('page', String(pageNumber));
+    router.replace(`/posts?${searchParams.toString()}`);
+  };
+
+  const next = () => changePage(currentPage + 1);
+
+  const prev = () => changePage(currentPage - 1);
+
+  const jump = (page: number) => changePage(page);
+
+  React.useEffect(() => {
+    const category = searchParams.get('category') ?? 'all';
+
+    if (currentCategory !== category) {
+      setCurrentCategory(category ?? 'all');
+      setCurrentPage(1);
+      return;
+    }
+
+    const page = Number(searchParams.get('page'));
+
+    if (page && page > 0 && page <= maxPage) {
+      setCurrentPage(page);
+    }
+  }, [currentCategory, maxPage, searchParams]);
+
+  return { next, prev, jump, currentData, currentPage, maxPage };
+};
+```
+
+SNS でシェアされることも考えてクエリパラメータにページ数を保持できるようにしてある。
+例えば `https://kkhys.me/posts?category=tech&page=2` のような URL であれば Tech カテゴリの 2 ページ目が表示される。
+
+次にページネーションの UI コンポーネントを作成していく。
+
+```tsx title="apps/web/src/ui/post/pagination/index.tsx" showLineNumbers
+export const Pagination = ({
+  className,
+  next,
+  prev,
+  jump,
+  currentPage,
+  maxPage,
+}: {
+  className?: string;
+  next: () => void;
+  prev: () => void;
+  jump: (page: number) => void;
+  currentPage: number;
+  maxPage: number;
+}) => {
+  const pages = [...Array(maxPage).keys()].map((i) => i + 1);
+
+  const hasLeftEllipsis = currentPage > 3;
+  const hasRightEllipsis = currentPage < maxPage - 2;
+
+  const leftEdgePage = 1;
+  const rightEdgePage = maxPage;
+  let visiblePages: (number | '...')[];
+
+  if (hasLeftEllipsis && hasRightEllipsis) {
+    visiblePages = [leftEdgePage, '...', currentPage - 1, currentPage, currentPage + 1, '...', rightEdgePage];
+  } else if (hasLeftEllipsis && !hasRightEllipsis) {
+    visiblePages = [leftEdgePage, '...', ...pages.slice(-3)];
+  } else if (!hasLeftEllipsis && hasRightEllipsis) {
+    visiblePages = [...pages.slice(0, 3), '...', rightEdgePage];
+  } else {
+    visiblePages = pages;
+  }
+
+  return (
+    <_Pagination className={className}>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious onClick={prev} isDisabled={currentPage === 1} />
+        </PaginationItem>
+        {visiblePages.map((page, i) => (
+          <PaginationItem key={i} className='hidden sm:block'>
+            {typeof page === 'string' ? (
+              <PaginationEllipsis />
+            ) : (
+              <PaginationLink onClick={() => jump(page)} isActive={currentPage === page}>
+                {page}
+              </PaginationLink>
+            )}
+          </PaginationItem>
+        ))}
+        <PaginationItem>
+          <PaginationNext onClick={next} isDisabled={currentPage === maxPage} />
+        </PaginationItem>
+      </PaginationContent>
+    </_Pagination>
+  );
+};
+```
+
+表示するページや ellipsis は配列で管理するのがポイント。
+ページネーション自体のスタイリングは [shadcn/ui](https://ui.shadcn.com) を使っている。
+ここではコンポーネント名を見れば大体何が書いてあるのかわかると思うので割愛する（そこが shadcn/ui の優れている点でもある）。
+
+最後にカスタムフックと UI コンポーネントを呼び出せば完成。
+
+```tsx title="apps/web/src/ui/post/article-list/index.tsx" showLineNumbers
+export const ArticleList = ({
+  posts: _posts,
+}: {
+  posts: Post[];
+}) => {
+  const { next, prev, jump, currentData, currentPage, maxPage } = usePagination(_posts);
+
+  const posts = currentData();
+
+  return (
+    <>
+      ...
+      {maxPage > 1 && (
+        <Pagination className='mt-12' next={next} prev={prev} jump={jump} currentPage={currentPage} maxPage={maxPage} />
+      )}
+    </>
+  );
+};
+```
+
+https://github.com/kkhys/me/issues/315
+
+### 画像のズーム機能
+
+v1.8.0 最後の機能追加として画像のズーム機能を条件付きで追加した。
+ブラウザが Chrome かつディスプレイの横幅が 768px 以上の場合のみ以下の画像がズームできる。
+
+![スペースマウンテン](/images/tech/2024-06-09/01.jpg)
+
+Framer Motion の [Shared layout animations](https://www.framer.com/motion/layout-animations/#shared-layout-animations) を使うことで状態を変える際に連続性のある画面遷移アニメーションを行える。
+Web 標準の機能で実装する場合は [View Transitions API](https://developer.mozilla.org/ja/docs/Web/API/View_Transitions_API) を使えば同様のことができるが Chrome と Edge にしか対応していないなど、まだ実験段階なので様子を見ている。
+
+Next.js でも Astro のように公式で View Transition をサポートしてくれれば良いのだが（[動作例](https://astro-records.pages.dev)）しばらくは代わりの方法で実装するしかないということで Framer Motion を使ったというわけである[^2]。
+
+[^2]: 近い将来 Next.js でも View Transition はサポートされそう？（[ソース](https://github.com/vercel/next.js/discussions/46300#discussioncomment-6836049)）
+
+一応実装してみたのだが、画像をクリックやタップしたときに一瞬 Blur 画像が表示されてちょっと許容できなかったので唯一影響の少なかった Chrome の PC 版のみリリースした（Chrome でも若干 flickering があるけど）。
+推測だが、Framer Motion には関係ない next/image が原因のような気がしている。
+修正に時間がかかりそうなので他のブラウザについては一旦 Pending としている。
+View Transition についての根本的な理解を深めてから再度リリースしようと思う。
+その際に原因について書ければ。
+
+ちなみにただ画像をズームするだけならすぐにリリースできるが、ここはせっかくだから View Transition にこだわりたい。
+このアイデア自体は Medium から持ってきている。
+
+View Transition API が安定版になれば今後の Web のトレンドになると思うので習得して積極的に使っていきたいところだ。
+
+https://github.com/kkhys/me/issues/1115
+
+<Alert type='warning' description='後から見返すとやっぱり許容できない挙動があったため一旦 revert する。' />
+
+## さいごに
+
+今は日曜日の夜なので取り急ぎまとめてみた。
+ちょっと雑になってしまったかも。
+それぞれの機能についてはまるまる 1 本記事にかけるくらいこだわれば奥が深い部分である。
+まだ UX の部分で満足はできていないのでちょっとずつ修正していく予定。
+
+文中にも書いたが窓口として早いうちにコンタクトフォームと About ページは追加したい。
