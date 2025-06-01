@@ -8,7 +8,6 @@ import { getCategoryBySlug } from "#/pages/blog/_config/category.ts";
 export const GET = async (context: APIContext) =>
   rss({
     trailingSlash: false,
-    stylesheet: "/rss/styles.xsl",
     title: siteConfig.title,
     description: siteConfig.description,
     site: context.site ?? context.url.origin,
