@@ -1,0 +1,297 @@
+---
+title: "Redis を使った PV カウントに切り替える"
+emoji: 🛢️
+category: Tech
+tags: [Tips]
+status: published
+publishedAt: 2024-07-28
+updatedAt: 2024-08-05
+---
+
+v1.7.0 で PV カウント機能を実装した。
+
+https://kkhys.me/posts/p1v9jvx
+
+リリースしてから 3 ヶ月ほど経過したが、以下の問題が気になるようになってきた。
+
+1. 初期表示が遅い
+2. 1 人のユーザが短時間に PV を増やせる（重複計測）
+
+上記の問題を解決するために [Upstash](https://upstash.com) の Redis を使った実装に切り替えることにした。
+
+## なぜ Redis を使うのか
+
+まず 1 つ目の問題は DB のリージョンに起因している。
+利用しているサーバレス DB サービス [Neon](https://neon.tech) の日本から最も近いリージョンはシンガポールである。
+シンガポールから日本までのレイテンシは 50ms ~ 100ms ほどなのでどうしても初期表示はそれ以上かかってしまう。
+
+Upstash はリージョンに日本（AWS の ap-northeast-1）を選択できるのでレイテンシを低く抑えられる。
+また、Redis はインメモリデータベースであるため、ディスク I/O のオーバーヘッドがなく高速な R/W を行えるという利点がある。
+
+2 つ目の問題は RDBMS でも対応可能だが、定期的に重複排除のためのレコードを削除していく必要がある。
+でないと、DB のサイズがどんどん膨れ上がってしまう。
+Redis であれば Key-Value Pair の有効期限を設定可能で、その期限を経過すると自動的に揮発するのでストレージを圧迫することもない。
+
+以上のことから PV カウントの計測に Redis を使うのは有効と判断した。
+
+## 実装方法
+
+### Upstash のセットアップ
+
+まずは Upstash の管理画面から API キーを取得して `.env` ファイルに設定する。
+
+```text title=".env"
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+```
+
+次にライブラリをインストールする。
+
+```shell
+pnpm add @upstash/redis
+```
+
+最後に Redis クライアントを作成すればセットアップは完了。
+`fromEnv` を使えば特に環境変数を読み取る処理を書かなくて良いのは楽だ。
+
+```ts title="packages/api/src/utils/redis.ts"
+import { Redis } from '@upstash/redis';
+
+export const redis = Redis.fromEnv();
+```
+
+### API の作成
+
+当サイトは API 作成に tRPC を使っている。
+tRPC を使っていない場合は適宜読み替えていただきたい。
+
+まずは重複防止（デバウンス）のために IP アドレスをキーにした有効期限付きの Key-Value Pair を登録する。
+そして、重複がないことを確認できた場合のみ `incr` コマンドを使って PV をインクリメントする。
+
+```ts title="packages/api/src/router/page-view.ts" showLineNumbers
+import type { TRPCRouterRecord } from '@trpc/server';
+import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
+
+import { env } from '../../env';
+import { publicProcedure } from '../trpc';
+import { getIpHash, redis } from '../utils';
+
+export const pageViewRouter = {
+  incrementViews: publicProcedure.input(z.object({ slug: z.string() })).mutation(async ({ ctx, input: { slug } }) => {
+    if (!ctx.ip) {
+      throw new TRPCError({ code: 'BAD_REQUEST' });
+    }
+
+    const ip = ctx.ip;
+    const ipHash = await getIpHash(ip);
+
+    const isNew = await redis.set(['deduplicate', ipHash, slug].join(':'), true, {
+      nx: true,
+      ex: 24 * 60 * 60,
+    });
+
+    if (!isNew) {
+      return 'Deduplicated';
+    }
+
+    await redis.incr(['pageviews', env.NODE_ENV, slug].join(':'));
+
+    return 'Incremented';
+  }),
+} satisfies TRPCRouterRecord;
+```
+
+お問い合わせ機能のレートリミットを設定したとき（[記事](/posts/p143t9d)）と同様にセキュリティ対策として IP アドレスは SHA-256 でハッシュ化してから Redis に保存する。
+デバウンス用の Key-Value Pair の有効期限は 1 日にしている。
+つまり、1IP アドレスあたり 1 つの記事に対して 1 日に 1 回のみしか PV をインクリメントできないということになる。
+また、`nx: true` を設定することで、キーがすでに存在する場合は登録されない。
+
+すでに PV をインクリメント済みの場合は `'Deduplicated'` を返し、インクリメントに成功した場合は `'Incremented'` を返す。
+tRPC の良いところは API の型をクライアント側で定義しなくても良いところだ。
+上記の場合だと `incrementViews` の返り値の型は `'Deduplicated' | 'Incremented'` のユニオン型になる。
+この値は次の章で使用する。
+
+### クライアント側から呼び出す
+
+PV カウントをインクリメントする API を作成したので次は PV カウントを取得する API を作成していく。
+
+```ts title="packages/api/src/router/page-view.ts" showLineNumbers
+import type { TRPCRouterRecord } from '@trpc/server';
+import { z } from 'zod';
+
+import { env } from '../../env';
+import { publicProcedure } from '../trpc';
+import { redis } from '../utils';
+
+export const pageViewRouter = {
+  bySlug: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ input: { slug } }) => (await redis.get<number>(['pageviews', env.NODE_ENV, slug].join(':'))) ?? 0),
+} satisfies TRPCRouterRecord;
+```
+
+セットしたときのキーと同じ値を get することで PV を取得できる。
+クライアント側から以下のように API を呼び出す。
+
+```tsx title="apps/web/src/ui/post/view-counter/index.tsx" showLineNumbers
+'use client';
+
+import * as React from 'react';
+
+import { Skeleton } from '@kkhys/ui';
+
+import { api } from '#/lib/trpc/react';
+
+export const ViewCounter = ({ slug }: { slug: string }) => {
+  const utils = api.useUtils();
+
+  const { mutate } = api.pageView.incrementViews.useMutation({
+    onSuccess: async (status) => {
+      if (status === 'Incremented') {
+        await utils.pageView.bySlug.invalidate({ slug });
+      }
+    },
+  });
+
+  const { data } = api.pageView.bySlug.useQuery({ slug }, { staleTime: 60 * 1000 });
+
+  React.useEffect(() => mutate({ slug }), [mutate, slug]);
+
+  if (!data) return <ViewCounterSkeleton />;
+
+  return <p className='font-sans text-sm text-muted-foreground'>{data.toLocaleString()} views</p>;
+};
+
+export const ViewCounterSkeleton = () => <Skeleton className='h-4 w-14' />;
+```
+
+ポイントは 2 点ある。
+
+まず 1 つ目は `useMutation` に成功した場合（`onSuccess`）、PV を更新したときのみ PV カウントを invalidate するということである。
+デバウンスの対象となるリクエストであっても `onSuccess` の処理が走るため、何もしなければ無駄に API がリクエストされてしまう。
+それを防ぐために `incrementViews` の返り値が `Incremented` の場合のみ PV を更新する。
+
+2 つ目のポイントは `useQuery` に `staleTime` を設定することである。
+`staleTime` を設定しないと何度もリロードが行われた場合、その回数分だけリクエストが送られてしまう。
+Upstash は従量課金制なので不要なリクエストは送られないようにする[^1]。
+
+[^1]: 従量課金制とはいっても 1 日 10,000 コマンドまでは無料なのでそこまで心配はいらない。
+仮にオーバーしてしまっても 100,000 コマンドあたり 0.2 ドルしか支払いは発生しない（[ソース](https://upstash.com/pricing)）
+
+## データベースの移行
+
+今までは Neon の PostgreSQL に PV カウントのデータを保存していた。
+Upstash の Redis に移行するにあたり、PostgreSQL に保存されているデータを移さなければならない。
+
+Next.js に Ruby on Rails の Rake タスクみたいな機能があれば良いのだが、残念ながら無いので API として定義してそれをクライアント側から呼び出すことにした。
+
+```ts title="apps/web/src/ui/post/view-counter/index.tsx" showLineNumbers
+import type { TRPCRouterRecord } from '@trpc/server';
+
+import { publicProcedure } from '../trpc';
+import { redis } from '../utils';
+
+export const pageViewRouter = {
+  import: publicProcedure.mutation(async ({ ctx }) => {
+    const posts = await ctx.db.query.posts.findMany();
+    posts.forEach((post) => void redis.setnx(['pageviews', 'production', post.slug].join(':'), post.views));
+  }),
+} satisfies TRPCRouterRecord;
+```
+
+本番用のデータベースに接続して全ての PV カウントを取得する。
+そして、それを `forEach` で回して Redis にセットしていけば完了である。
+
+冪等性（サービスを停止させた状態で）が保たれるように `setnx` を使っている。
+
+念の為、ちゃんと登録されたか確認してみる。
+
+まずは PostgreSQL 側のデータ。
+
+```sql
+SELECT * FROM me_post ORDER BY slug;
+
++-------+-----+--------------------------+--------------------------+
+|slug   |views|created_at                |updated_at                |
++-------+-----+--------------------------+--------------------------+
+|p128uug|47   |2024-07-07 06:05:55.569318|2024-07-27 00:10:42.336000|
+|p143t9d|8    |2024-07-27 07:44:32.707432|2024-07-27 08:21:13.394000|
+|p15e6x7|105  |2024-05-19 12:40:25.512419|2024-07-27 00:10:11.409000|
+|p164vu8|45   |2024-06-15 13:50:02.707545|2024-07-27 00:10:30.951000|
+|p16ceda|38   |2024-04-07 04:04:19.174891|2024-07-27 08:01:10.329000|
+|p16vfnq|59   |2024-04-07 04:04:31.853837|2024-07-27 03:29:25.920000|
+|p18vcqd|43   |2024-04-07 04:04:33.979543|2024-07-27 03:28:57.797000|
+|p1a95jw|118  |2024-05-15 14:00:43.888764|2024-07-22 04:34:23.322000|
+|p1c8jpk|58   |2024-06-09 15:00:00.573275|2024-07-27 00:10:16.745000|
+|p1e0lpm|37   |2024-04-07 04:04:58.937393|2024-07-27 03:29:37.042000|
+|p1eemm6|64   |2024-04-07 04:04:37.635623|2024-07-27 06:07:07.161000|
+|p1fw2ts|54   |2024-04-07 04:04:39.854620|2024-07-27 03:03:01.710000|
+|p1g6z2d|26   |2024-04-07 04:04:25.338530|2024-07-07 03:52:33.672000|
+|p1gvayx|48   |2024-06-20 14:18:37.999824|2024-07-27 00:10:39.531000|
+|p1kc29z|32   |2024-07-14 10:23:41.045142|2024-07-26 12:58:25.458000|
+|p1kqv7s|48   |2024-07-12 10:42:57.077724|2024-07-24 15:32:21.075000|
+|p1n03k6|58   |2024-06-10 14:42:21.595135|2024-07-27 03:17:41.104000|
+|p1r60de|157  |2024-04-07 04:03:58.912900|2024-07-27 08:16:17.285000|
+|p1rklfz|31   |2024-04-07 04:04:47.664132|2024-07-24 14:27:28.827000|
+|p1srf75|55   |2024-04-24 15:19:48.949461|2024-07-06 08:29:28.758000|
+|p1t6el8|83   |2024-06-16 13:03:18.070267|2024-07-27 03:15:35.024000|
+|p1ua4wh|40   |2024-05-14 15:17:23.575571|2024-07-25 10:40:58.893000|
+|p1uchql|203  |2024-05-18 06:53:17.430213|2024-07-27 00:09:55.951000|
+|p1v00e8|136  |2024-04-20 13:28:10.858223|2024-07-27 03:21:25.136000|
+|p1v9jvx|72   |2024-04-23 15:11:34.886525|2024-07-27 09:19:21.205000|
+|p1y4nft|52   |2024-04-07 04:04:42.417156|2024-07-22 04:33:42.593000|
+|p1ys5j8|93   |2024-04-07 04:04:03.583977|2024-07-27 03:28:49.794000|
++-------+-----+--------------------------+--------------------------+
+```
+
+次に Redis 側のデータ。
+
+```shell
+redis-cli --tls -u redis://default:password@hostname:port "pageviews:production:*" | sort -n | while read key; do echo "$key: $(redis-cli --tls -u redis://default:password@hostname:port get $key)"; done
+
+pageviews:production:p128uug: 47
+pageviews:production:p143t9d: 8
+pageviews:production:p15e6x7: 105
+pageviews:production:p164vu8: 45
+pageviews:production:p16ceda: 38
+pageviews:production:p16vfnq: 59
+pageviews:production:p18vcqd: 43
+pageviews:production:p1a95jw: 118
+pageviews:production:p1c8jpk: 58
+pageviews:production:p1e0lpm: 37
+pageviews:production:p1eemm6: 64
+pageviews:production:p1fw2ts: 54
+pageviews:production:p1g6z2d: 26
+pageviews:production:p1gvayx: 48
+pageviews:production:p1kc29z: 32
+pageviews:production:p1kqv7s: 48
+pageviews:production:p1n03k6: 58
+pageviews:production:p1r60de: 157
+pageviews:production:p1rklfz: 31
+pageviews:production:p1srf75: 55
+pageviews:production:p1t6el8: 83
+pageviews:production:p1ua4wh: 40
+pageviews:production:p1uchql: 203
+pageviews:production:p1v00e8: 136
+pageviews:production:p1v9jvx: 72
+pageviews:production:p1y4nft: 52
+pageviews:production:p1ys5j8: 93
+```
+
+PV が一致しているため問題なし。
+
+## バックアップ
+
+Upstash は毎日バックアップをとってくれるオプションがあるため有効化している。
+リストアもワンクリックで行えるため簡単。
+
+![Upstash の管理画面](/images/tech/2024-07-28/01.png "Upstash の管理画面")
+
+## さいごに
+
+Upstash を使うと面倒な Redis のセットアップも一瞬で終わった。
+便利すぎる。
+
+PV をデバウンスさせることで全体的に PV は減るだろうが多くなれば良いというわけでもないので問題ない。
+正確な PV 数を算出できるので楽しみだ。

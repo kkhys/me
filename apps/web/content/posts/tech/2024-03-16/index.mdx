@@ -1,0 +1,503 @@
+---
+title: "v1.6.0 リリースノート: MDX コンポーネントの強化"
+emoji: 🚀
+category: Tech
+tags: ["Release note"]
+status: published
+publishedAt: 2024-03-16
+---
+
+今回のアップデートではなくても良いけど、あったら嬉しい機能を追加した。
+
+このブログは [MDX](https://mdxjs.com) を使って書かれており、いくらでも JavaScript のコードを埋め込める。
+便利な機能ではあるのだが、GitHub でコンテンツを保存しているという背景もあり、できるだけ素のマークダウンファイルか [GFM](https://github.github.com/gfm) の形式を崩さない程度に実装してきた。
+そうすればいつの日かホスティングを止めても GitHub から自然言語に近い形で記事を閲覧できる。
+
+GitHub で見ると [このような感じ](https://github.com/kkhys/content/blob/main/posts/tech/2024-03-16/index.mdx?plain=1) で表示される。
+
+ただ、それらの形式で表現するには限界があるので JSX コンポーネントを意味的に理解しやすい形で実装することにした。
+意味的に理解しやすいの定義はコンポーネント名と属性を見るだけで何をしているのかがレンダリングされる前の状態でも推測できるということ。
+
+https://github.com/kkhys/me/releases/tag/v1.6.0
+
+## Google Maps
+
+<Tabs defaultValue='component'>
+  <TabsList>
+    <TabsTrigger value='component'>Component</TabsTrigger>
+    <TabsTrigger value='code'>Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value='component'>
+    <GoogleMaps placeId='ChIJ2-L1uEhbFkcR-Zek84Ap7zI' caption='Google Maps の下にはキャプションを付けられる' />
+  </TabsContent>
+  <TabsContent value='code'>
+    ```tsx title="index.mdx"
+    <GoogleMaps placeId='ChIJ2-L1uEhbFkcR-Zek84Ap7zI' caption='Google Maps の下にはキャプションを付けられる' />
+    ```
+  </TabsContent>
+</Tabs>
+
+これから旅行関係の記事も記録として書いていきたいので一目で場所を理解できる Google Maps は取り入れたかった。
+
+幸いにも Next.js が Google Maps の埋め込みをサポートする [ライブラリ](https://nextjs.org/docs/app/building-your-application/optimizing/third-party-libraries#google-maps-embed) を作成していたためそれをラップする形で利用した。
+
+GCP の API キーが必要とのことで、もしかして API の呼び出し制限がある？と思ったが、Maps Embed API は無料かつ無制限で呼び出せた（[ソース](https://mapsplatform.google.com/intl/ja/pricing)）。
+他の API はリクエスト数に応じた従量課金制であるため、もし API キーが流出した場合を考えて他の API は使えないように設定した。
+
+地図のマーカーを一意に設定するために `placeId` という Google Maps 固有の ID を使用している。
+`旧オスカー・シンドラーのホーロー工場` のように名称を入れてもマーカーを設定できるが、それがユニークである保証はないため、少し面倒だが `placeId` を入れるようにしてある。
+
+`placeId` の取得は下記のページから行える。
+
+https://developers.google.com/maps/documentation/places/web-service/place-id?hl=ja#find-id
+
+また、`caption` プロパティに文字列を入れるとコンポーネントの下に説明文を挿入できる。
+もちろん設定しなくてもよし。
+
+https://github.com/kkhys/me/issues/683
+
+## YouTube
+
+<Tabs defaultValue='component'>
+  <TabsList>
+    <TabsTrigger value='component'>Component</TabsTrigger>
+    <TabsTrigger value='code'>Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value='component'>
+    https://www.youtube.com/watch?v=eZCSOdi19jQ
+  </TabsContent>
+  <TabsContent value='code'>
+    ```md title="index.mdx"
+    https://www.youtube.com/watch?v=eZCSOdi19jQ
+    ````
+  </TabsContent>
+</Tabs>
+
+YouTube を記事に埋め込むことで、文章だけでは伝えきれない内容を視覚的に訴えられるので好きだ。
+また、読者が動画を再生したら必然的に滞在時間が長くなり検索エンジンからの評価も上がる。
+基本的にメリットしかないので実装するしかない。
+
+これも Google Maps と同様に Next.js の [便利なライブラリ](https://nextjs.org/docs/app/building-your-application/optimizing/third-party-libraries#youtube-embed) があったためラップして使用している。
+本来 YouTube の埋め込みは大量のデータを読み込むため、かなり LCP スコアを悪化させてしまう。
+
+Next.js のライブラリでは内部的に [lite-youtube-embed](https://github.com/paulirish/lite-youtube-embed) を使うことで通常の画像読み込みと遜色ないパフォーマンスを実現している。
+
+lite-youtube-embed がやっていることは非常にシンプルで、動画の代わりにサムネイル画像を最初に読み込む。
+動画の再生はユーザがサムネイル画像をクリックしたときのみ開始されるため余計なリクエストが行われないという訳だ。
+
+ただ、デメリットとしてはサムネイル画像が角丸だったりすると UI と合わずに違和感が出てしまう。
+これは避けようがない問題なので、そういった動画に当たらないことを願うしかない。
+
+MDX 内では YouTube の URL を入力するだけでビルド時に `videoId` を抜き出してコンポーネントに属性として渡している。
+便利な方法なのだが、キャプションを追加できないのが少し引っかかっているため Google Maps と同じように `<YouTube />` のようなコンポーネントに変えるかもしれない。
+
+あと、動画再生時は必ずミュートでスタートするようにしてある（大事なポイント）。
+
+https://github.com/kkhys/me/issues/685
+
+## X (Twitter)
+
+<Tabs defaultValue='component'>
+  <TabsList>
+    <TabsTrigger value='component'>Component</TabsTrigger>
+    <TabsTrigger value='code'>Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value='component'>
+    https://twitter.com/jack/status/20
+  </TabsContent>
+  <TabsContent value='code'>
+    ```md title="index.mdx"
+    https://twitter.com/jack/status/20
+    ```
+  </TabsContent>
+</Tabs>
+
+X（前 Twitter）ではよく IT 技術関係のポストを見ており、稀に興味深くて記事で言及したいものがあったりする。
+そのときに引用する形で埋め込めたら便利だなと思ったため実装してみた。
+
+内部的には [react-tweet](https://github.com/vercel/react-tweet) という Vercel 製のライブラリを使用している。
+Vercel が作っているだけあって非常に使い勝手が良く、ポストを埋め込みたい場合はおすすめだ。
+
+特にライトモードとダークモードのスタイリングの切り替えを勝手にしてくれたのは驚いた。
+
+
+https://github.com/kkhys/me/issues/691
+
+## 脚注
+
+<Tabs defaultValue='component'>
+  <TabsList>
+    <TabsTrigger value='component'>Component</TabsTrigger>
+    <TabsTrigger value='code'>Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value='component'>
+    Here is a simple footnote[^1].
+
+    A footnote can also have multiple lines[^2].
+
+    [^1]: My reference.
+    [^2]: To add line breaks within a footnote, add `<br />`.<br />This is a second line.
+  </TabsContent>
+  <TabsContent value='code'>
+    ```md title="index.mdx"
+    Here is a simple footnote[^1].
+
+    A footnote can also have multiple lines[^2].
+
+    [^1]: My reference.
+    [^2]: To add line breaks within a footnote, add `<br />`.<br />This is a second line.
+    ```
+  </TabsContent>
+</Tabs>
+
+技術記事ではソースが非常に重要になってくる。
+そのときに本文内で言及すると冗長な印象を与えてしまうため脚注を追加できるようにした。
+
+この書き方自体は GitHub のマークダウンファイルでサポートされている[^3]。
+[remark-gfm](https://github.com/remarkjs/remark-gfm) で脚注の HTML は生成されているため、今回はそのスタイリングのみ行った。
+
+[^3]: [基本的な書き方とフォーマットの構文: 脚注](https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#footnotes) に記載。
+ただし、GitHub では半角スペースを 2 つ入れることで改行できたが `remark-gfm` では対応していないため `<br />` タグの追加が必要になる。
+
+https://github.com/kkhys/me/issues/630
+
+## アコーディオン
+
+###  マルチプル
+
+<Tabs defaultValue='component'>
+  <TabsList>
+    <TabsTrigger value='component'>Component</TabsTrigger>
+    <TabsTrigger value='code'>Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value='component'>
+    <Accordion collapsible>
+      <AccordionItem value='faq-1'>
+        <AccordionTrigger>
+          グレン・グールドはどのような病気で亡くなりましたか？
+        </AccordionTrigger>
+        <AccordionContent>
+          グールドはカナダのピアニスト（クラシック）。
+          1932 年に生まれ、1982 年に 50 才で亡くなった。
+          なので今年 2012 年はグレン・グールド生誕 80 年で没後 30 年にあたる。
+          彼は生前に発達障害と診断されることはなかったが、英文の Wikipedia にもあるように自閉スペクトラム症ではないかといわれている。
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value='faq-2'>
+        <AccordionTrigger>
+          グレングールドの特徴は？
+        </AccordionTrigger>
+        <AccordionContent>
+          グールドを語るうえで欠かせないのが、奇人とでも言えそうな存在感だ。
+          その特徴は、ピアノを聴きながら口ずさむ鼻歌（録音でもはっきり聴こえる）を筆頭に、父親手作りの極端に低い骨組みだけのピアノ椅子。
+          こちらは折りたたみ式で4本の足の長さが調整可能というキワモノだ。
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value='faq-3'>
+        <AccordionTrigger>
+          グレン・グールドが使用したピアノは？
+        </AccordionTrigger>
+        <AccordionContent>
+          グールドは一九八一年四月、三〇丁目の録音スタジオで「ゴルトベルク変奏曲」を録音した。
+          演奏に使ったピアノはスタインウエイ社のピアノであるはず。
+          これは疑う余地もないと思っていた。
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value='faq-4'>
+        <AccordionTrigger>
+          グールドの最後の録音は？
+        </AccordionTrigger>
+        <AccordionContent>
+          最後のピアノ録音は、リヒャルト・シュトラウス「ピアノ・ソナタOp.5」（録音日時 1982 年 7 月 2 日及び 9 月 1-3 日）であり、その後同年 9 月 8 日にはリヒャルト・ワーグナーのジークフリート牧歌をトロント交響楽団で指揮・録音しており、グールドはスタジオ録音においてピアノ奏者としてではなく、指揮者として人生を終えている。
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  </TabsContent>
+  <TabsContent value='code'>
+    ```tsx title="index.mdx"
+    <Accordion collapsible>
+      <AccordionItem value='faq-1'>
+        <AccordionTrigger>
+          グレン・グールドはどのような病気で亡くなりましたか？
+        </AccordionTrigger>
+        <AccordionContent>
+          グールドはカナダのピアニスト（クラシック）。
+          1932 年に生まれ、1982 年に 50 才で亡くなった。
+          なので今年 2012 年はグレン・グールド生誕 80 年で没後 30 年にあたる。
+          彼は生前に発達障害と診断されることはなかったが、英文の Wikipedia にもあるように自閉スペクトラム症ではないかといわれている。
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value='faq-2'>
+        <AccordionTrigger>
+          グレングールドの特徴は？
+        </AccordionTrigger>
+        <AccordionContent>
+          グールドを語るうえで欠かせないのが、奇人とでも言えそうな存在感だ。
+          その特徴は、ピアノを聴きながら口ずさむ鼻歌（録音でもはっきり聴こえる）を筆頭に、父親手作りの極端に低い骨組みだけのピアノ椅子。
+          こちらは折りたたみ式で4本の足の長さが調整可能というキワモノだ。
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value='faq-3'>
+        <AccordionTrigger>
+          グレン・グールドが使用したピアノは？
+        </AccordionTrigger>
+        <AccordionContent>
+          グールドは一九八一年四月、三〇丁目の録音スタジオで「ゴルトベルク変奏曲」を録音した。
+          演奏に使ったピアノはスタインウエイ社のピアノであるはず。
+          これは疑う余地もないと思っていた。
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value='faq-4'>
+        <AccordionTrigger>
+          グールドの最後の録音は？
+        </AccordionTrigger>
+        <AccordionContent>
+          最後のピアノ録音は、リヒャルト・シュトラウス「ピアノ・ソナタOp.5」（録音日時 1982 年 7 月 2 日及び 9 月 1-3 日）であり、その後同年 9 月 8 日にはリヒャルト・ワーグナーのジークフリート牧歌をトロント交響楽団で指揮・録音しており、グールドはスタジオ録音においてピアノ奏者としてではなく、指揮者として人生を終えている。
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+    ```
+  </TabsContent>
+</Tabs>
+
+記事内のレイアウトを整理するのに便利そうなアコーディオンコンポーネントを実装した。
+複数か単数かで UI を分けている。
+
+### シングル
+
+<Tabs defaultValue='component'>
+  <TabsList>
+    <TabsTrigger value='component'>Component</TabsTrigger>
+    <TabsTrigger value='code'>Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value='component'>
+    <Details summary='バルトークの曲の特徴は？'>
+      バルトークは管弦楽曲、ピアノ曲、歌曲などに多くの作品を残しているが、最も有名なのは 43 年作の「管弦楽のための協奏曲」と、6 曲から成る「弦楽四重奏曲」である。
+      作風は異国旋法、原始主義、民族主義、新古典主義を豊かな情感でまとめ、不協和音の中にマジャール（ハンガリー）民族の民謡とリズムが感じとれる革新的な音楽になっている。
+    </Details>
+  </TabsContent>
+  <TabsContent value='code'>
+    ````tsx title="index.mdx"
+    <Details summary='バルトークの曲の特徴は？'>
+      バルトークは管弦楽曲、ピアノ曲、歌曲などに多くの作品を残しているが、最も有名なのは 43 年作の「管弦楽のための協奏曲」と、6 曲から成る「弦楽四重奏曲」である。
+      作風は異国旋法、原始主義、民族主義、新古典主義を豊かな情感でまとめ、不協和音の中にマジャール（ハンガリー）民族の民謡とリズムが感じとれる革新的な音楽になっている。
+    </Details>
+    ````
+  </TabsContent>
+</Tabs>
+
+どちらかというとシングルの方が使う頻度は高そう。
+
+HTML には `details` [^4]というタグがあり、JavaScript を使わずともブラウザ側で折りたたみウィジェットを作成できる。
+以下のように使用する。
+
+[^4]: [MDN ドキュメント: 詳細折りたたみ要素](https://developer.mozilla.org/ja/docs/Web/HTML/Element/details)
+
+````md
+<details>
+  <summary>バルトークの曲の特徴は？</summary>
+
+  バルトークは管弦楽曲、ピアノ曲、歌曲などに多くの作品を残しているが、最も有名なのは 43 年作の「管弦楽のための協奏曲」と、6 曲から成る「弦楽四重奏曲」である。
+  作風は異国旋法、原始主義、民族主義、新古典主義を豊かな情感でまとめ、不協和音の中にマジャール（ハンガリー）民族の民謡とリズムが感じとれる革新的な音楽になっている。
+</details>
+````
+
+ただ、デフォルトだといまいち見た目が好きではないため独自のコンポーネントを実装した。
+コンポーネント名と属性名は `<details>` タグに基づいている。
+
+https://github.com/kkhys/me/issues/626
+
+## アラート
+
+<Tabs defaultValue='component'>
+  <TabsList>
+    <TabsTrigger value='component'>Component</TabsTrigger>
+    <TabsTrigger value='code'>Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value='component'>
+    <div style={{ display: 'flex', 'flexDirection': 'column', 'gap': '16px' }}>
+      <Alert type='note' description='情報量の多いページで、ユーザが重要な情報を見逃さないようにするために使用する。記事全体の概要を簡単に伝えたい場合にも使用できる。' />
+
+      <Alert type='tip' description='ユーザが役立つと感じる情報を提供するために使用する。記事の内容をより深く理解するためのヒントやコツなどを提供する。' />
+
+      <Alert type='important' description='ユーザが絶対に知っておくべき重要な情報を伝えるために使用する。警告や注意喚起などにも使用できる。' />
+
+      <Alert type='warning' description='ユーザが危険な状況を回避するために必要な情報を伝えるために使用する。緊急性の高い警告などにも使用できる。' />
+    </div>
+  </TabsContent>
+  <TabsContent value='code'>
+    ```tsx title="index.mdx"
+    <Alert type='note' description='情報量の多いページで、ユーザが重要な情報を見逃さないようにするために使用する。記事全体の概要を簡単に伝えたい場合にも使用できる。' />
+
+    <Alert type='tip' description='ユーザが役立つと感じる情報を提供するために使用する。記事の内容をより深く理解するためのヒントやコツなどを提供する。' />
+
+    <Alert type='important' description='ユーザが絶対に知っておくべき重要な情報を伝えるために使用する。警告や注意喚起などにも使用できる。' />
+
+    <Alert type='warning' description='ユーザが危険な状況を回避するために必要な情報を伝えるために使用する。緊急性の高い警告などにも使用できる。' />
+    ````
+  </TabsContent>
+</Tabs>
+
+とりあえず 4 種類のアラートを実装した。
+これから増える可能性もある。
+
+GitHub がドキュメントでアラートの Markdown 拡張を最近追加した[^5]が、最初はその構文に基づいた書き方にしようとしていた。
+しかし、ブロッククォートを解析してコンポーネントに変換するのはけっこう面倒なのでシンプルに JSX で書けるようにした。
+
+それに転載・引用元を示す構文でアラートを表示するのは意味論的に微妙な実装だと思う。
+
+[^5]: [New Markdown extension: Alerts provide distinctive styling for significant content](https://github.blog/changelog/2023-12-14-new-markdown-extension-alerts-provide-distinctive-styling-for-significant-content)
+
+https://github.com/kkhys/me/issues/627
+
+## タブ
+
+<Tabs defaultValue='component'>
+  <TabsList>
+    <TabsTrigger value='component'>Component</TabsTrigger>
+    <TabsTrigger value='code'>Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value='component'>
+    <Tabs defaultValue='tab-1'>
+      <TabsList>
+        <TabsTrigger value='tab-1'>タブ 1</TabsTrigger>
+        <TabsTrigger value='tab-2'>タブ 2</TabsTrigger>
+      </TabsList>
+      <TabsContent value='tab-1'>
+        コンテンツ 1
+      </TabsContent>
+      <TabsContent value='tab-2'>
+        コンテンツ 2
+      </TabsContent>
+    </Tabs>
+  </TabsContent>
+  <TabsContent value='code'>
+    ```tsx title="index.mdx"
+    <Tabs defaultValue='tab-1'>
+      <TabsList>
+        <TabsTrigger value='tab-1'>タブ 1</TabsTrigger>
+        <TabsTrigger value='tab-2'>タブ 2</TabsTrigger>
+      </TabsList>
+      <TabsContent value='tab-1'>
+        コンテンツ 1
+      </TabsContent>
+      <TabsContent value='tab-2'>
+        コンテンツ 2
+      </TabsContent>
+    </Tabs>
+    ````
+  </TabsContent>
+</Tabs>
+
+この記事でも多用しているが、要素を 1 画面で表示してしまいたいときにタブは便利だ。
+
+https://github.com/kkhys/me/issues/631
+
+## ステップ
+
+<Tabs defaultValue='component'>
+  <TabsList>
+    <TabsTrigger value='component'>Component</TabsTrigger>
+    <TabsTrigger value='code'>Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value='component'>
+    <Steps>
+      <Step>野菜を炒める</Step>
+
+      1. 玉ねぎはみじん切り、じゃがいもは大きめの一口大、人参は乱切りにする
+      2. 鍋にサラダ油を熱し、玉ねぎを炒める
+      3. 玉ねぎがしんなりしたら、豚肉を加えて炒める
+      4. 豚肉に火が通ったら、じゃがいも、人参を加えて炒める
+
+      <Step>煮込む</Step>
+
+      1. 水を加えて、沸騰したらアクを取り除く
+      2. 弱火で 20 分ほど煮込み、野菜が柔らかくなったら火を止める
+
+      <Step>ルーを入れる</Step>
+
+      1. カレールーを割り入れて溶かし、弱火で5分ほど煮込む
+      2. 塩こしょうで味を調えて完成
+    </Steps>
+  </TabsContent>
+  <TabsContent value='code'>
+    ```tsx title="index.mdx"
+    <Steps>
+      <Step>野菜を炒める</Step>
+
+      1. 玉ねぎはみじん切り、じゃがいもは大きめの一口大、人参は乱切りにする
+      2. 鍋にサラダ油を熱し、玉ねぎを炒める
+      3. 玉ねぎがしんなりしたら、豚肉を加えて炒める
+      4. 豚肉に火が通ったら、じゃがいも、人参を加えて炒める
+
+      <Step>煮込む</Step>
+
+      1. 水を加えて、沸騰したらアクを取り除く
+      2. 弱火で 20 分ほど煮込み、野菜が柔らかくなったら火を止める
+
+      <Step>ルーを入れる</Step>
+
+      1. カレールーを割り入れて溶かし、弱火で5分ほど煮込む
+      2. 塩こしょうで味を調えて完成
+    </Steps>
+    ```
+  </TabsContent>
+</Tabs>
+
+何かを作るときは必ずステップが存在する。
+そのプロセスを説明するときに便利なコンポーネントを追加した。
+
+`<Step>` タグで囲んだ文字列は `<h3>` タグとしてレンダリングされる点に注意が必要。
+
+
+https://github.com/kkhys/me/issues/632
+
+## カルーセル
+
+<Tabs defaultValue='component'>
+  <TabsList>
+    <TabsTrigger value='component'>Component</TabsTrigger>
+    <TabsTrigger value='code'>Code</TabsTrigger>
+  </TabsList>
+  <TabsContent value='component'>
+    <Carousel>
+      ![干潮時の厳島神社](/images/tech/2024-03-16/01.jpg)
+
+      ![久住高原](/images/tech/2024-03-16/02.jpg)
+
+      ![桜島からの風景](/images/tech/2024-03-16/03.jpg)
+    </Carousel>
+  </TabsContent>
+  <TabsContent value='code'>
+    ```tsx title="index.mdx"
+    <Carousel>
+      ![干潮時の厳島神社](/images/tech/2024-03-16/01.jpg)
+
+      ![久住高原](/images/tech/2024-03-16/02.jpg)
+
+      ![桜島からの風景](/images/tech/2024-03-16/03.jpg)
+    </Carousel>
+    ```
+  </TabsContent>
+</Tabs>
+
+最後にカルーセルコンポーネントを追加した。
+今のところ以下の制約がある。
+
+- 画像のみ対応している
+- 全ての画像を同じ比率に揃える必要がある
+
+コードでこれらの制約を表現できていないため、まだ WIP の機能となる。
+とはいえ、カルーセルにこれ以上の機能を求めるべきかというのは疑問だし、ビルド時にバリデーションを追加して違反していれば例外を投げる対応が現実的かもしれない。
+
+表示されている画像以外の不透明度を 15% にしているのと現在のページ数を表示しているのがポイント。
+通常の画像に比べてカルーセルだと画像サイズが小さくなるのはデメリットだが、画像の拡大表示をこれから実装すれば問題なさそう。
+
+https://github.com/kkhys/me/issues/624
+
+## さいごに
+
+独自コンポーネント満載のこのページを見返してみたら雑多な感じがしてちょっと微妙に感じてしまった。
+1 つ 1 つのコンポーネントのレイアウトやデザインを修正することで対応できれば一番良いが、研究が必要なのでしばらく時間がかかる。
+
+そのため、記事を書く際はこれらのコンポーネントにできるだけ頼ることなくシンプルに書いていきたい。

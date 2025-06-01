@@ -1,0 +1,236 @@
+---
+title: "v2.5.0 リリースノート: 会員登録機能の実装"
+emoji: 🚀
+category: Tech
+tags: ["Release note"]
+status: published
+publishedAt: 2025-02-22
+---
+
+個人のホームページとしては珍しい会員登録機能を実装してみた。
+なにやら怪しげな機能が追加されたように見えるかもしれないが、現時点では会員になったところで秘密の部屋への入場券が手に入るわけではない。
+まだまだベータ版の段階で、ごく親しい知人たちにモルモット役をお願いしている状態である。
+
+とはいえ、[Waitlist](/waitlist) だけは密かに一般公開している。
+メールアドレスを登録しておいてくれれば、気が向いたときに招待メールを送るかもしれない。
+ただし、実際に会員登録を行う際には Google アカウントが必要であることに注意が必要（現時点で他のログイン方法を用意する予定はない）。
+
+この静かに始まった会員登録機能だが、以下のような展開を予定している。
+
+- 会員だけが閲覧できるブログ記事の公開
+- 有料記事の公開（会員だけ購入可能）
+- 今後コメント機能を実装するので、そのときにユーザ名とプロフィール画像を表示
+- スポンサー機能
+- UI のカスタマイズを可能にする（何が良いかは考え中）
+
+## Clerk を選んだ理由
+
+認証・認可の実装において、Redis や DB でセッション管理をする原始的な手法は少々骨が折れる。
+そこで IDaaS の導入を決意したのだが、個人的に馴染み深い [Firebase Authentication](https://firebase.google.com/docs/auth) ではなく、
+密かに気になっていた [Clerk](https://clerk.com) を使って構築することにした。
+
+決め手となったのは、ドキュメントから感じられる設計思想の美しさである。
+使う前からこれほど楽しみが膨らむサービスも珍しいものだ。
+
+そして、提供されているコンポーネントがこれまた素晴らしい。
+私が知る限り、IDaaS のライブラリに組み込まれたコンポーネントで、満足のいく UI に出会ったことはない。
+そのため、これまでは毎度自前で UI を組み立てる羽目になっていた。
+
+ところが、Clerk のコンポーネントは見事な出来栄えで、本サイトのデザインとも相性が良い。
+当面はこのまま採用することにした。
+とはいえ、知る人が見れば一目で Clerk とわかってしまうので、いずれ手を入れるつもりである。
+
+なお、Clerk でカスタムコンポーネントを作る際は [Clerk Elements](https://clerk.com/docs/customization/elements/overview) という機能を使うことになるのだが、この機能はまだベータ版で、サインインとサインアップにしか対応していない。
+正式リリースを待って、がらりと UI を変えてみようと目論んでいる。
+
+## 実装方法
+
+具体例として、[サインインページ](/sign-in)の作成手順を紹介しよう。
+
+[公式ドキュメント](https://clerk.com/docs/references/nextjs/custom-sign-in-or-up-page)に記載されている通り、`<SignIn />` コンポーネントを `page.tsx` に配置するだけで、サインインページの完成である。
+リダイレクト URL をパラメータに取るため、Next.js を使っている場合は [Optional Catch-all Segments](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes#optional-catch-all-segments) でルーティングを作成する必要がある。
+
+```tsx title="apps/web/src/app/(auth)/sign-in/[[...sign-in]]/page.tsx" showLineNumbers
+import { SignIn } from "@clerk/nextjs";
+
+const Page = () => (
+  <SignIn />
+);
+
+export default Page;
+```
+
+これでも事足りるのだが、本サイトはダークモードに対応しているため、黒背景に真っ白なコンポーネントでは目が疲れてしまう。
+そこで [@clerk/themes](https://clerk.com/docs/customization/themes) を導入し、選択中のモードに応じて UI を切り替えることにした。
+
+```tsx title="apps/web/src/app/(auth)/_ui/sign-in.tsx" showLineNumbers
+"use client";
+
+import { SignIn as ClerkSignIn } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
+import { useTheme } from "@kkhys/ui";
+import React from "react";
+
+export const SignIn = () => {
+  const { theme = "system" } = useTheme();
+
+  return (
+    <ClerkSignIn
+      appearance={{
+        baseTheme: theme === "dark" ? dark : undefined,
+      }}
+    />
+  );
+};
+```
+
+余談だが、Appearance prop の [elements](https://clerk.com/docs/customization/overview#customize-elements-of-a-clerk-component) を活用すれば、Hooks やテーマのインストールなしで CSS のみでダークモード対応が可能である。
+当初はこのアプローチを検討したものの、予想以上に手間取りそうだったため断念した（CSS 難しい）。
+UI の刷新時には、先ほど触れた Clerk Elements でスタイリングを試みる予定である。
+
+なお、サインイン以外のサインアップ、Waitlist、ユーザプロフィール画面についても、同様のアプローチで実装を済ませている。
+
+## Inngest で Webhook を処理する
+
+Clerk では登録済みユーザの情報（メールアドレス、ユーザネーム、電話番号など）を保存できるが、アプリケーション側でもデータを持っておきたい場合は Webhook を使うことになる。
+
+Clerk ではバックエンドワークフローの構築に便利な SaaS である、[Inngest](https://www.inngest.com) との連携に対応しているため、試しに使ってみた。
+まずは Vercel と Inngest の連携を[公式ドキュメント](https://www.inngest.com/docs/deploy/vercel)に従って設定する。
+
+その後、Webhook のイベント別に実行する処理を書いていく。
+
+```ts title="apps/web/src/app/(auth)/_lib/sync-user.ts" showLineNumbers
+import { createUser, deleteUserByClerkId } from "#/app/(auth)/_lib/actions";
+import { getUserByClerkId } from "#/app/(auth)/_lib/queries";
+import type { ClerkWebhookUser } from "#/app/(auth)/_types";
+import { inngest } from "#/lib/inngest";
+
+export const syncCreatedUser = inngest.createFunction(
+  { id: "sync-created-user-from-clerk" },
+  { event: "clerk/user.created" },
+  async ({ event }) => {
+    const { id, email_addresses, primary_email_address_id } = event.data;
+    const email = getPrimaryEmailAddress({
+      email_addresses,
+      primary_email_address_id,
+    });
+
+    console.log("Syncing created user", { id, email });
+
+    await createUser({ clerkId: id });
+  },
+);
+
+export const syncUpdatedUser = inngest.createFunction(
+  { id: "sync-updated-user-from-clerk" },
+  { event: "clerk/user.updated" },
+  async ({ event }) => {
+    const { id, email_addresses, primary_email_address_id } = event.data;
+    const email = getPrimaryEmailAddress({
+      email_addresses,
+      primary_email_address_id,
+    });
+
+    const user = await getUserByClerkId(id);
+
+    if (!user) {
+      await createUser({ clerkId: id });
+    }
+
+    console.log("Syncing updated user", { id, email });
+  },
+);
+
+export const syncDeletedUser = inngest.createFunction(
+  { id: "sync-deleted-user-from-clerk" },
+  { event: "clerk/user.deleted" },
+  async ({ event }) => {
+    const { id, email_addresses, primary_email_address_id } = event.data;
+    const email = getPrimaryEmailAddress({
+      email_addresses,
+      primary_email_address_id,
+    });
+
+    console.log("Syncing deleted user", { id, email });
+
+    await deleteUserByClerkId(id);
+  },
+);
+
+const getPrimaryEmailAddress = ({
+  email_addresses,
+  primary_email_address_id,
+}: Pick<
+  ClerkWebhookUser["data"],
+  "email_addresses" | "primary_email_address_id"
+>) =>
+  email_addresses.find(({ id }) => id === primary_email_address_id)
+    ?.email_address ?? "no email";
+```
+
+具体的には次の 3 つの処理を実装した。
+
+- `syncCreatedUser`: user テーブルに新規レコードを追加
+- `syncUpdatedUser`: user テーブルに対象ユーザのレコードがなければ追加。現状は更新項目がないため処理なし
+- `syncDeletedUser`: user テーブルの `deletedAt` に実行日時を記録（論理削除）
+
+DB は[以前の記事](/posts/p1v9jvx)で紹介した [Neon](https://neon.tech) のインスタンスを復活させて使用している（PV カウントを Redis に移行してからは放置していた）。
+ORM は [Drizzle](https://orm.drizzle.team)。
+
+`user` テーブルのスキーマは、以下のように最低限のカラムで構成している。
+
+```ts title="packages/db/src/schema.ts" showLineNumbers
+import { sql } from "drizzle-orm";
+import { pgTable } from "drizzle-orm/pg-core";
+
+export const User = pgTable("user", (t) => ({
+  id: t.uuid().notNull().primaryKey().defaultRandom(),
+  clerkId: t.varchar({ length: 255 }).notNull().unique(),
+  deletedAt: t.timestamp(),
+  createdAt: t.timestamp().defaultNow().notNull(),
+  updatedAt: t
+    .timestamp()
+    .notNull()
+    .$onUpdateFn(() => sql`now()`),
+}));
+```
+
+最後に Inngest 用の API エンドポイントを作成すれば完了。
+
+```ts title="apps/web/src/app/api/inngest/route.ts" showLineNumbers
+import { serve } from "inngest/next";
+import {
+  syncCreatedUser,
+  syncDeletedUser,
+  syncUpdatedUser,
+} from "#/app/(auth)/_lib";
+import { inngest } from "#/lib/inngest";
+
+export const { GET, POST, PUT } = serve({
+  client: inngest,
+  functions: [syncCreatedUser, syncUpdatedUser, syncDeletedUser],
+});
+```
+
+一見すると、Webhook を直接リッスンすれば十分と思えるかもしれない。
+その考えには納得できるが、実は Inngest を選んだ理由には、今後の運用をより快適にする可能性が秘められている。
+主な利点を以下に挙げてみる。
+
+- 並行性（Concurrency）を制御し、イベントが急増した際も API やデータベースへの負担を効果的に抑えることができる
+- 単一のイベントから複数の処理を同時に開始する機能（ファンアウト）を備えているため、ワークフローの柔軟性が向上する
+- 特定の処理を一定時間後に実行する仕組みを簡単に構築できる
+- 同じイベントの重複実行を防ぐデバウンス機能がある
+
+こういった機能を簡単に実装できるので、Webhook 以外にも活用していきたいところだ。
+
+## さいごに
+
+ここまで簡単に認証・認可機能を実装できるようになると、アプリケーション開発のハードルがぐっと下がったと感じる。
+昔なら手間のかかった部分が、今やあっという間に形になるのは純粋に楽しい。
+
+とはいえ、メリットばかりではなく、見落とせないポイントもある。
+今回は触れなかったが、MAU の無料枠は Firebase Authentication や Supabase に比べて控えめで、もしサービスがバズったら料金がなかなかスリリングなことになる可能性がある。
+夢と一緒に請求書まで膨らんでしまうのは、できれば避けたいところ。
+
+もっとも、そんな未来を心配しすぎても仕方がない。
+このブログは新サービスのプロトタイプを兼ねているので、あれこれ試せるうちに試しておきたい。

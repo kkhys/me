@@ -1,0 +1,269 @@
+---
+title: "v2.2.0 リリースノート: 写真ポートフォリオとして"
+emoji: 🚀
+category: Tech
+tags: ["Release note"]
+status: published
+publishedAt: 2025-02-08
+---
+
+変形のプロセスを記録するのが習慣になっている。
+気づけば膨大なデータがストレージの奥深くで眠っている。
+掘り返すこともなければ、忘れ去られるわけでもなく、ただそこにあり続ける。
+まあ、それはそれで悪くない。
+
+でも、たまには引っ張り出して、改めて日の光を当ててみるのもいいかもしれない。
+そんなことを思い立ち、日々の記録として残していこうと考えた。
+
+というわけで、今回は写真ポートフォリオ機能を作ってみたので、その過程を記しておく。
+
+https://kkhys.me/photos
+
+## 必要な機能
+
+写真ポートフォリオを作るにあたって、国内外の写真共有サイトをひと通り眺めてみた。
+良い意味でも悪い意味でも、参考になったのが以下のサイト群。
+
+参考にした写真共有サイト（国内）
+
+- [GANREF](https://ganref.jp)
+- [Photohito](https://photohito.com)
+
+参考にした写真共有サイト（国外）
+
+- [1X](https://1x.com)
+- [500px](https://500px.com)
+- [YouPic](https://youpic.com)
+
+この中でも 1X の UI が、イメージしているものに最も近かった。
+写真のレベルが異次元に高いのも、インスピレーションを刺激された理由の一つかもしれない。
+
+必要な機能をまとめると以下のようになる。
+
+- EXIF データを表示する
+- モーダルで画面いっぱいに画像を表示する
+- GitHub で画像、メタデータを管理する
+
+あくまで写真が主役なので、無駄な情報は表示させない。
+
+## 機能の実装
+
+### 画像の管理方法
+
+画像やメタデータ（EXIF）は GitHub で管理する設計にした。
+具体的には、以下のリポジトリに保存している。
+
+https://github.com/kkhys/content
+
+このリポジトリには記事も保存している。
+つまり、サイトのコンテンツだけを疎結合に保存する方針を取った。
+シンプルで、メンテナンス性も高い。
+
+画像のメタデータは、Markdown の Frontmatter に記載する。
+例えば、こんな感じ。
+
+```md title="photos/2019-08-14/01.md"
+---
+path: "/photos/2019-08-14/01.jpg"
+camera: "Canon EOS 60D"
+lens: "EF-S18-55mm f/3.5-5.6 IS II"
+fNumber: 8
+focalLength: 55
+shutterSpeed: "1/160"
+iso: 100
+status: published
+publishedAt: 2019-08-14
+---
+```
+
+基本的に Frontmatter のみ を使用して、画像のメタデータを管理している。
+画像へのパスも記載しているため、これだけで情報が完結する。
+
+写真にタイトルを付けるのは個人的に好きではないし、考える時間ももったいない。
+そこで、タイトルは自動生成するようにした。
+
+フォーマットは以下のようなシンプルな形式。
+
+```text
+# 「撮影日 / 作成日時の古い順にカウントした番号」
+2019-08-14 / 10
+```
+
+これなら、無駄な頭脳的コストをかけずに済む。
+
+上述したメタデータを元に、ページを Next.js の SSG（Static Site Generation）で生成する。
+記事のメタデータをオブジェクト化する際は [Contentlayer](https://contentlayer.dev) を使用。
+記事生成のプロセスと統一することで、シンプルな管理を維持している。
+
+カメラ名やレンズ名のように値が定数化しているものは、Enum を使って入力を制限する。
+例えば、以下のようなレンズオブジェクトを定義する。
+
+```ts title="apps/web/src/config/photo/lens.ts"
+export type Lens = Record<"name" | "manufacturer", string>;
+
+export const lenses = [
+  {
+    name: "EF-S18-55mm f/3.5-5.6 IS II",
+    manufacturer: "Canon",
+  },
+  {
+    name: "EF-S55-250mm f/4-5.6 IS II",
+    manufacturer: "Canon",
+  },
+  {
+    name: "FE 55mm F1.8 ZA",
+    manufacturer: "SONY",
+  },
+] as const satisfies Lens[];
+
+export const lensNames = lenses.map(({ name }) => name);
+```
+
+こうすることで、存在しないカメラ名やレンズ名を入力するとビルド時にエラーが発生する。
+人間はミスをするもの。
+人間を信用しない設計こそが、長期的な安定性を生む。
+
+```ts title="apps/web/contentlayer.config.ts"
+const Photo = defineDocumentType(() => ({
+  name: "Photo",
+  filePathPattern: "photos/**/*.md",
+  fields: {
+    path: {
+      type: "string",
+      required: true,
+    },
+    camera: {
+      type: "enum",
+      options: cameraNames,
+      required: true,
+    },
+    lens: {
+      type: "enum",
+      options: lensNames,
+      required: true,
+    },
+  // ...
+  },
+}));
+```
+
+この方法の他のメリットは ビルド時に型が保証されることである。
+enum を指定すると、Contentlayer が自動的にユニオン型を付与してくれるので、型安全なコードが書きやすくなる。
+結果として、不要なバグを減らせるので一石二鳥というわけだ。
+
+ビルド時には、以下の処理も行っている。
+
+- 画像の横幅・縦幅の取得
+- ページのレイアウトを崩さないために、事前に画像サイズを取得
+- [Plaiceholder](https://plaiceholder.co/docs) を使った Blur 画像の生成
+  - 高解像度の写真を表示する前に、ぼかし画像を一瞬挟むことでスムーズな UX を提供
+
+ただし、これらの詳細な処理については割愛する。
+
+### モーダル機能の実装
+
+普通のモーダルでは面白くないので、Next.js の [Intercepting Routes](https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes) を使ってみた。
+文字どおりルーティングを Intercept（途中で捕まえる）することで、ユーザが別のコンテキストに切り替えることなく、ルーティング先のコンテンツを表示できる。
+
+具体的な動作は以下のとおり。
+
+<Steps>
+    <Step>画像をクリックするとモーダルが開く</Step>
+
+    通常なら URL に変化はないが、Intercepting Routes を使うと URL が遷移先のものに変わる。
+    ただし、見た目上はモーダルが開いているだけ。
+
+    <Step>ページをリロードすると…</Step>
+
+    モーダルではなく写真ページ全体がレンダリングされる
+
+    <Step>直接 URL を開くと…</Step>
+
+    Intercept されずに写真ページがそのまま表示される
+</Steps>
+
+言葉だけでは少し分かりにくいかもしれないので、実際に[画像一覧ページ](https://kkhys.me/photos)を触ってもらうのが一番。
+また、Web 版の Instagram も同じような動作をするので、参考になるかもしれない（Instagram は Next.js で作られてはいない点に注意）。
+
+Intercepting Routes を使うことで以下のメリットがある。
+
+- モーダルコンテンツが URL 経由で共有可能になる
+- ページを更新してもモーダルのコンテキストが保持される
+- ブラウザバックで前のページに戻るのではなくモーダルが閉じる
+- ブラウザフォワードでモーダルを再度開ける
+
+今回は写真のモーダルに使ってみたが、ログインモーダルやショッピングカートのモーダルなどにも応用できそう。
+
+なお、[react-medium-image-zoom](https://github.com/rpearce/react-medium-image-zoom) を使って、Medium っぽい画像ズーム機能とモーダルを組み合わせて実装しようとしたが、うまくいかなかった。
+これが実装できれば、さらに良かったんだけど。
+そもそも仕組み的に可能なのかを調査しないといけない（[Motion](https://motion.dev) を使うことになるだろうか。JS はあまり使いたくないが）。
+
+### OGP 画像の生成で詰まった
+
+写真詳細ページの OGP 画像は [next/og](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/opengraph-image#generate-images-using-code-js-ts-tsx) を使って生成した。
+Next.js では `opengraph-image.tsx` を定義することで、OGP 画像を自動生成してくれるので、毎回手動で用意する手間が省ける。
+
+ローカルで開発サーバを立ち上げたときは問題なく動作していた。
+しかし、本番環境にデプロイして OGP 画像の URL にアクセスすると 500 エラーが。
+
+OGP 画像の URL にアクセスしたときの処理の大まかな流れは以下のとおり。
+
+1. リクエストされた `slug` に基づき、該当する写真データを取得する
+2. 環境変数を基に画像のフル URL を作成し、その画像データを外部から `fetch` する
+3. フェッチが成功した場合、その画像をカスタムデザインに埋め込み OGP 画像として返す
+4. フェッチが失敗した場合や該当画像が存在しない場合は 404 エラーを返す
+
+今回問題だったのは 2 である。
+最初は以下のように環境変数 `VERCEL_URL` を使って URL を作成していた。
+
+```ts
+const url = `https://${env.VERCEL_URL || "http://localhost:3000"}${path}`;
+```
+
+デプロイ先の Vercel にはシステム環境変数を自動で設定してくれる便利な機能がある（[参考](https://vercel.com/docs/projects/environment-variables/system-environment-variables)）。
+この中に `VERCEL_URL` という環境変数があり、これが本番環境の URL だと思っていた（ `https://kkhys.me` のような）。
+
+しかし、実際は「デプロイメント URL」であり、デプロイごとに生成される URL だった（`https://xxx.vercel.app` というような）。
+別オリジンの URL を `fetch` していたため、CORS ポリシー違反でエラーが発生したというわけである。
+
+つまり、本番環境では `VERCEL_URL` を使わないようにすれば解決する。
+
+```ts
+const baseUrl =
+  env.VERCEL_ENV === "production"
+    ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+```
+
+`VERCEL_ENV` で実行環境を識別し、本番環境であれば `VERCEL_PROJECT_PRODUCTION_URL` でカスタムドメインを取得する。
+
+これで、
+
+- 本番環境 → `https://kkhys.me`
+- プレビュー環境 → `https://xxx.vercel.app`
+- ローカル環境 → `http://localhost:3000`
+
+が 正しくベース URL として定義される。
+
+結果、OGP 画像も問題なく取得可能になった。
+
+https://kkhys.me/photos/p10qvj7
+
+## 今後追加したい機能
+
+写真の追加は選別も含めると意外と手間がかかるため、段階的に進める予定。
+それとは別に、以下の機能を実装していきたい。
+
+- トップページに写真のカルーセルを表示させる
+- 写真詳細ページに他の写真のカルーセルを表示させる
+- モーダルをリロードせずとも、写真詳細ページに飛べるようにする（良い感じの UI が思い付かない）
+- 画像枚数が増えてきたら、無限スクロール的な UI にする
+- タグ付け機能を追加する
+- カメラやレンズなどのフィルタリング機能を追加する
+- 撮影日時でソートできるようにする
+- EXIF データを入力するのが面倒すぎるので、写真をアップロードしたらフォーマットされた EXIF データが出力されるジェネレータを作る
+- 表示方法を選択可能にする（Flow or Thumbs）
+- （コメント機能を追加する）
+- （Good ボタンを追加する）

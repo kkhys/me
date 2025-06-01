@@ -1,0 +1,229 @@
+---
+title: "v1.7.0 リリースノート: PV カウント"
+emoji: 🚀
+category: Tech
+tags: ["Release note"]
+status: published
+publishedAt: 2024-04-24
+---
+
+今回のマイナーアップデートでは PV（ページビュー）カウント機能を追加した。
+表示場所は記事上部のタイトルの右下。リロードすると PV が更新されると思う。
+
+本当であればこういった機能はリリース時点で出さないといけない。
+なぜならリリースした時点から現在までの PV に計測漏れが出てしまうから。
+
+ちょっとした文字列を追加しただけのシンプルな機能追加であるが、少し実験的な実装をしようと思ったのでリリースまでに時間がかかってしまった。
+
+https://github.com/kkhys/me/releases/tag/v1.7.0
+
+## どのデータベースを使うべきか
+
+まず考えなければならないのはデータベースである。
+
+自前でサーバを用意して RDBMS をセットアップしてというのは管理コストがかかるため、メンテナンス不要で手軽に環境構築できるサーバレスで利用したい。
+
+そこで前々から評判の良かった MySQL 互換データベースの [PlanetScale](https://planetscale.com) を使おうとセットアップしていた。
+セットアップが終わる頃にダッシュボードを確認するとなんと、Hobby プラン（無料）は 2024 年 4 月 8 日に撤廃されるということだった（[ソース](https://planetscale.com/blog/planetscale-forever)）。
+
+がっくりした。まあ、サービス提供側は慈善事業でしている訳でもないし、今までタダで使わせてくれてありがとうという気持ちだ。
+今のところ一番使いやすいデータベースプラットフォームであるのは間違いないと思うのでお金さえあれば利用したい。
+
+さて、PlanetScale の代替を探すことにしたが、正直なところ特別な機能は必要ない。
+ただ日本にリージョンがあることと PostgreSQL か MySQL がそのまま使えれば良い。
+
+そうなると消去法から [Supabase](https://supabase.com) が導かれた。
+意外と日本リージョンを設置してあるサービスは少なく、まだまだ実際のプロダクトで使うには時期尚早だなと改めて思った。
+
+早速、Supabase を使ってマイグレーションからデータ更新まで一通り実装した。
+しかし、ここで新たな落とし穴にハマってしまった。
+Next.js の Edge Runtime を使って Supabase に接続しようとするとうまくいかないケースがあった（[おそらくこの事象](https://www.reddit.com/r/nextjs/comments/18d4tqv/direct_postgres_connection_to_supabase_from)）。
+
+どうしても Supabase を使いたいという訳でもなかったので最終的に Edge Runtime でも問題なく使えた [Neon](https://neon.tech) を使うことにした。
+リージョンがシンガポールなのはデメリットだが、[新規リージョンを検討中](https://neon.tech/docs/introduction/roadmap#more-regions) らしく東京リージョン（ap-northeast-1）が追加されるのは時間の問題な気がしている。
+
+## どの ORM を使うか
+
+TypeScript の ORM としてデファクトスタンダートなのは [Prisma](https://www.prisma.io) だが、~~Edge Runtime ではそのまま使用できないという欠点がある~~ 現在はプレビュー機能でサポートされているらしい（[参考](https://github.com/prisma/prisma/issues/18763#issuecomment-1992318263)）。
+積極的に Edge Runtime を使っていきたいので Prisma ではなく、[Drizzle](https://orm.drizzle.team) を選択した。
+
+Prisma の制約を差し置いても Drizzle を選択するメリットは他にもある。
+Prisma だとスキーマファイルは独自言語で定義しなければならない。これがあまり好きではない。
+Drizzle だと完全に TypeScript で定義できるため型安全に開発を進められる。
+
+また、公式ドキュメントに “If you know SQL — you know Drizzle” と書いてあるとおり、SQL の文法に倣った形でクエリを発行できる。
+SQL さえ知っておけば TypeScript でも直感的に書けるのは大きい。
+
+例えば、以下のコード。
+
+```ts title="country.ts"
+const findById = async ({ id }: { id: number }) =>
+  await db.select().from(countries).leftJoin(cities, eq(cities.countryId, countries.id)).where(eq(countries.id, id));
+
+const country = findById({ id: 10 });
+```
+
+<p className='text-center'>↓</p>
+
+```sql title="country.sql"
+SELECT *
+FROM countries
+LEFT JOIN cities ON cities.countryId = countries.id
+WHERE countries.id = 10;
+```
+
+ほぼ SQL を書いているような感覚でコードを書ける[^1]
+
+[^1]: ただし、後述する tRPC ではまた違った書き方となる。
+
+SQL は覚えておけば言語やフレームワークが違っても必ず役に立つので言語学習といった目的のためにも選択するのはありだと思う（もちろん個人プロジェクトで）。
+
+## tRPC を使った API リクエスト
+
+データ取得・更新を行う際には [tRPC](https://trpc.io) を使った API リクエストを行っている。
+tRPC を使うことでバックエンドとフロントエンドで型情報を共有できる。そのため、バックエンドを実装後にフロントエンド用の型定義ファイルを作成する手間が省ける。
+
+今回初めて tRPC を使ってみたが、型補完がハマっていく様が気持ちよく、コードを書いてて楽しかった。
+型定義ファイルを出力したりする手間が省けるので時間短縮になるのと何より開発体験が良くなるのを実感した。
+
+例えば、PV を取得したり PV をインクリメントする API エンドポイントを定義すると以下のようなコードになる。
+
+```ts title="post.ts" showLineNumbers
+export const postRouter = {
+  bySlug: publicProcedure.input(z.object({ slug: z.string() })).query(({ ctx, input }) => {
+    return ctx.db.query.posts.findFirst({
+      where: eq(schema.posts.slug, input.slug),
+    });
+  }),
+
+  incrementViews: publicProcedure.input(z.object({ slug: z.string() })).mutation(({ ctx, input }) => {
+    return ctx.db
+      .insert(schema.posts)
+      .values({ slug: input.slug, views: 1 })
+      .onConflictDoUpdate({
+        target: [schema.posts.slug],
+        set: { views: increment(schema.posts.views), updatedAt: new Date() },
+      });
+  }),
+} satisfies TRPCRouterRecord;
+```
+
+それぞれが異なるデータベース操作を実行していることがわかると思うが、返り値には型がしっかりと付けられている（以下の型はイメージ）。
+
+```ts
+type PostRouter = {
+  bySlug: QueryProcedure<{
+    input: { slug: string };
+    output: { slug: string; views: number; createdAt: Date; updatedAt: Date } | undefined;
+  }>;
+  incrementViews: MutationProcedure<{ input: { slug: string }; output: NeonHttpQueryResult<never> }>;
+};
+```
+
+## Auth.js を使って保護されたプロシージャを定義する
+
+tRPC では認証・認可によって保護されたプロシージャを定義できる（[参考](https://trpc.io/docs/server/procedures#reusable-base-procedures)）。
+そうすることでサインインしているユーザのみ API リクエストを送信可能にできたり、権限によってはエラーを返すようにできたりと便利だ。
+
+色々試してみたかったので [Auth.js](https://authjs.dev) を使って最低限の認証機能を追加した。
+`@auth/drizzle-adapter` を使って Neon 側でユーザの認証情報を保存している。
+
+ただ、ユーザの個人情報をデータベースに保存するのは何かあった時に怖いのでできるだけ持ちたくはない。
+そう遠くないうちに IDaaS に移行する予定。個人的に [Clerk](https://clerk.com) が気になっている。
+
+さて、サインイン状態を作り出せたので認証が完了していないと送信できない名前付きプロシージャ（Base Procedures）を作成してみた。
+
+```ts title="trpc.ts" showLineNumbers
+export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
+  if (!ctx.session?.user) {
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
+  }
+  return next({
+    ctx: {
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
+});
+```
+
+上記の場合だとセッションにユーザ情報がある = サインイン状態として扱い、もしユーザ情報がなければ 401 エラーを返す。
+他にもユーザ情報に Firebase でいうところのカスタムクレームを持たせればその値によって認可を行える（管理者権限を持たせたりなど）。
+
+使い方は簡単で API エンドポイントを作成する際に先ほど作成した名前付きプロシージャを挟むだけである。
+以下の場合だと `publicProcedure` は誰でもアクセス可能だが、`protectedProcedure` はサインイン状態でないとエラーが返される。
+
+```ts title="auth.ts" showLineNumbers
+export const authRouter = createTRPCRouter({
+  getSession: publicProcedure.query(({ ctx }) => {
+    return ctx.session;
+  }),
+
+  getSecretMessage: protectedProcedure.query(() => {
+    return 'you can see this secret message!';
+  }),
+});
+```
+
+## コンポーネント側の処理
+
+API エンドポイントの作成は完了したので最後にコンポーネントを作っていく。
+このコンポーネントは PV の取得と PV のインクリメント、スタイリングされた JSX をカプセル化したものだ。
+
+Next.js は RSC（React Server Components）をサポートしているため、用途に合わせて適切な方法を選択する必要がある。
+Server Component を使えば JS ファイルをブラウザに送信しないため、その分パフォーマンスを高められる。
+
+当初は Server Component を使って PV の表示・更新を行っていたが、以下の問題が気になったので最終的には Client Component として実装した。
+
+- 戻るボタン等のリロードが発生しないページ遷移では PV がインクリメントしない
+- 別タブから戻ってきた時に最新の PV に更新されない
+
+Client Component にすることでインタラクティブにデータを扱える。
+
+以下が今回追加したコンポーネントである。
+
+```ts title="view-counter.tsx" showLineNumbers
+export const ViewCounter = ({ slug }: { slug: string }) => {
+  const utils = api.useUtils();
+
+  const { mutate } = api.post.incrementViews.useMutation({
+    onSuccess: async () => await utils.post.bySlug.invalidate({ slug }),
+  });
+
+  const { data } = api.post.bySlug.useQuery({ slug });
+  const views = data?.views;
+
+  React.useEffect(() => mutate({ slug }), [mutate, slug]);
+
+  if (!views) return <ViewCounterSkeleton />;
+
+  return <p className='font-sans text-sm text-muted-foreground'>{views.toLocaleString()} views</p>;
+};
+
+export const ViewCounterSkeleton = () => <Skeleton className='h-4 w-14' />;
+```
+
+tRPC には [React Query](https://tanstack.com/query/latest) のラッパーが存在するため、楽々とデータの取得・更新を行える。
+ページにアクセスした段階で `useEffect` から `mutate` 関数が呼び出させて DB 上の PV をインクリメントする。更新に成功した場合は PV の取得を行い、表示に反映させている。
+
+こういったデータ更新では Optimistic Update（楽観的更新）すると UI へのフィードバックが高速になるためよく用いられるが（[実装例](https://tanstack.com/query/latest/docs/framework/react/guides/optimistic-updates#optimistic-updates)）、このコンポーネントは初期表示でしかミューテーションされない前提なのでメリットが特にないため使用していない。
+
+データが返ってくるまではスケルトンスクリーンを表示させている。
+PV 程度なら一瞬しか表示されないか全く表示されないかだろうと思っていたが、Neon からのレスポンスが案外遅く、意外と表示されている。
+やっぱり地理的な要因は大きいのだな（シンガポールからのレスポンスなので）。
+もしくは Next.js の [Full Route Cache](https://nextjs.org/docs/app/building-your-application/caching#full-route-cache) が優秀で TTFB が早過ぎるのか。
+
+## もう一つの選択肢
+
+PV の実装方法は以上だが、もう 1 つ面白そうな実装方法があって最後まで悩んだ。
+
+https://upstash.com/blog/nextjs13-approuter-view-counter
+
+[Upstash](https://upstash.com) の Redis を使っても同様の実装が可能。
+しかも、面倒な IP アドレスを使った重複排除も簡単に行える（~~今回は見送った機能~~ → [実装した](/posts/p1ydlf6)）。
+
+ただし、Upstash は 1 日あたり 10,000 件のリクエストまでしか無料でないためそこが少し気になった。
+とはいえ、オーバーしても従量課金制で大した金額にはならないので、Upstash 使ってみたいし気が向いたときに移行しようかな。
+
+Redis のライセンスが変更になったため Upstash にも影響があるかと思ったが、まさかの自前で実装していたらしくこれからも問題なく使えるらしい。
+
+https://twitter.com/upstash/status/1770863905142604166
