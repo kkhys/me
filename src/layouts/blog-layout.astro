@@ -1,13 +1,16 @@
 ---
 import type { InferEntrySchema } from "astro:content";
+import ArrowLeftIcon from "@lucide/astro/icons/arrow-left";
 import type { MarkdownHeading } from "astro";
 import SEO from "#/components/seo.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Skeleton from "#/components/ui/skeleton.astro";
 import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
 import ViewCounter from "#/features/blog/components/ui/view-counter.astro";
+import { getCategoryBySlug } from "#/features/blog/config/category";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
+import { cn } from "#/lib/ui";
 
 interface Props extends InferEntrySchema<"blog"> {
   id: string;
@@ -18,12 +21,20 @@ const {
   id,
   title,
   emoji,
+  category,
   publishedAt,
   publishedAtString,
   description,
   status,
   headings,
 } = Astro.props;
+
+const categorySlug = category.toLowerCase();
+const categoryObject = getCategoryBySlug(categorySlug);
+
+if (!categoryObject) {
+  throw new Error(`Category "${categorySlug}" not found`);
+}
 ---
 
 <BaseLayout pagefind>
@@ -34,9 +45,22 @@ const {
             type='article'
             slot='seo'
     />
-    <slot name='head' slot='head'/>
     <section>
-        <div class:list={[status === 'draft' && 'flex justify-between items-center']}>
+        <div>
+            <span class="inline-flex gap-1.5 items-center text-xs">
+                <a href="/blog" class="inline-flex gap-1 items-center text-muted-foreground hover:underline">
+                    <ArrowLeftIcon class="size-3.5" />
+                    ブログ
+                </a>
+                <span class="text-muted-foreground">/</span>
+                <b class="font-semibold">
+                    <a href={`/blog/categories/${categorySlug}`} class="hover:underline">
+                        {categoryObject.label}
+                    </a>
+                </b>
+            </span>
+        </div>
+        <div class={cn('mt-8', status === 'draft' && 'flex justify-between items-center')}>
             <EmojiEyeCatch emoji={emoji} />
             {status === "draft" && (
                     <span class="text-xs text-red-400">Draft</span>
@@ -52,7 +76,7 @@ const {
             </ViewCounter>
         </div>
     </section>
-    <section>
+    <section class="mt-16">
         {headings.length > 1 && (
                 <TableOfContent headings={headings} />
         )}

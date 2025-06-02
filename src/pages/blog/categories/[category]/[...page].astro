@@ -7,7 +7,6 @@ import Pagination from "#/features/blog/components/ui/pagination.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
-import { getCustomTransition } from "#/lib/custom-transition";
 
 export const getStaticPaths = async ({
   paginate,
@@ -49,9 +48,9 @@ if (!category) {
             slot='seo'
     />
     <section>
-        <h1 class="font-medium" transition:animate={getCustomTransition()}>{category.label}</h1>
+        <h1 class="font-medium">{category.label}</h1>
     </section>
-    <section transition:animate={getCustomTransition(0.15)}>
+    <section>
         <EntryList blogEntries={page.data} showDate />
     </section>
     <Pagination page={page} baseUrl={`/blog/categories/${categorySlug}`} />
