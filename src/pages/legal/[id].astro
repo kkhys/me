@@ -1,8 +1,8 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import type { GetStaticPaths } from "astro";
+import ContentWrapper from "#/features/legal/components/content-wrapper.astro";
 import LegalLayout from "#/layouts/legal-layout.astro";
-import ContentWrapper from "#/pages/legal/_components/content-wrapper.astro";
 
 interface Props {
   legal: CollectionEntry<"legal">;

@@ -1,10 +1,7 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
-import { categoryTitles } from "#/pages/blog/_config/category";
-import {
-  allTagTitles,
-  tagsTitlesByCategory,
-} from "#/pages/blog/_config/tag.ts";
+import { categoryTitles } from "#/features/blog/config/category";
+import { allTagTitles, tagsTitlesByCategory } from "#/features/blog/config/tag";
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./content/blog" }),

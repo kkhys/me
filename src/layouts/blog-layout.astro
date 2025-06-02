@@ -1,13 +1,13 @@
 ---
 import type { InferEntrySchema } from "astro:content";
 import type { MarkdownHeading } from "astro";
-import EmojiEyeCatch from "#/components/emoji-eye-catch.astro";
 import SEO from "#/components/seo.astro";
-import Skeleton from "#/components/skeleton.astro";
+import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
+import Skeleton from "#/components/ui/skeleton.astro";
+import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
+import ViewCounter from "#/features/blog/components/ui/view-counter.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
-import TableOfContent from "#/pages/blog/_components/table-of-content.astro";
-import ViewCounter from "#/pages/blog/_components/view-counter.astro";
 
 interface Props extends InferEntrySchema<"blog"> {
   id: string;

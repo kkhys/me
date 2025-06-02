@@ -1,6 +1,6 @@
 import type { APIRoute, GetStaticPaths } from "astro";
 import { opengraphImage } from "#/components/opengraph-image.tsx";
-import { getPublicBlogEntries } from "#/lib/blog";
+import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 
 export const getStaticPaths = (async () =>
   (await getPublicBlogEntries()).map((entry) => {

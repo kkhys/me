@@ -2,12 +2,12 @@
 import type { PaginateFunction } from "astro";
 import SEO from "#/components/seo.astro";
 import { countPerPage } from "#/config/constant";
+import EntryList from "#/features/blog/components/ui/entry-list.astro";
+import Pagination from "#/features/blog/components/ui/pagination.astro";
+import { getCategoryBySlug } from "#/features/blog/config/category";
+import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
-import { getPublicBlogEntries } from "#/lib/blog";
 import { getCustomTransition } from "#/lib/custom-transition";
-import EntryList from "#/pages/blog/_components/entry-list.astro";
-import Pagination from "#/pages/blog/_components/pagination.astro";
-import { getCategoryBySlug } from "#/pages/blog/_config/category";
 
 export const getStaticPaths = async ({
   paginate,

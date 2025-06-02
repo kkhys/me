@@ -2,11 +2,10 @@
 import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import { siteConfig } from "#/config/site";
+import ContentWrapper from "#/features/blog/components/content-wrapper.astro";
+import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BlogLayout from "#/layouts/blog-layout.astro";
-import { getPublicBlogEntries } from "#/lib/blog";
 import { convertDateToString } from "#/lib/date";
-import ContentWrapper from "#/pages/blog/_components/content-wrapper.astro";
-// import ZoomImageContainer from "#/pages/blog/_components/zoom-image-container.astro";
 
 export const getStaticPaths = (async () =>
   (await getPublicBlogEntries()).map((entry) => {
@@ -28,8 +27,6 @@ const sourceUrl = `${siteConfig.github.me}/blob/main/${entry.filePath}?plain=1`;
 const revisionHistoryUrl = `${siteConfig.github.me}/commits/main/${entry.filePath}`;
 ---
 
-<!--<ZoomImageContainer>-->
-    <BlogLayout headings={headings} id={entry.id} publishedAtString={publishedAtString} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} {...entry.data}>
-        <ContentWrapper content={Content} />
-    </BlogLayout>
-<!--</ZoomImageContainer>-->
+<BlogLayout headings={headings} id={entry.id} publishedAtString={publishedAtString} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} {...entry.data}>
+    <ContentWrapper content={Content} />
+</BlogLayout>
