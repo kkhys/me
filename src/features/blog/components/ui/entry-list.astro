@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { HTMLAttributes } from "astro/types";
+import Budoux from "#/components/budoux.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import { convertDateToString } from "#/lib/date";
 import { cn } from "#/lib/ui";
@@ -27,7 +28,9 @@ const {
                     <a href={`/blog/posts/${id}`} class="relative flex items-center justify-between gap-x-4 px-2 py-3 transition-colors hover:bg-muted/50">
                         <div class="flex items-center gap-x-4">
                             <EmojiEyeCatch emoji={emoji} size="sm" class="shrink-0" />
-                            <p>{title}</p>
+                            <Budoux>
+                                <p>{title}</p>
+                            </Budoux>
                         </div>
                         {showDate && (
                                 <time
