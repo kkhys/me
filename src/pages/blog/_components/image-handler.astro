@@ -1,5 +1,5 @@
 ---
-import MarkdownImage from "#/components/image/markdown-image.astro";
+import Image from "#/components/image/image.astro";
 
 interface Props {
   src: ImageMetadata | string;
@@ -14,6 +14,6 @@ const { src, alt, ...props } = Astro.props;
     typeof src === "string" ? (
       <img src={src} alt={alt} {...props} />
     ) : (
-      <MarkdownImage src={src} alt={alt} {...props} />
+      <Image src={src} alt={alt} ambientMode {...props} />
     )
 }

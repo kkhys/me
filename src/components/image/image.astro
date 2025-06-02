@@ -1,74 +1,47 @@
 ---
-import { Picture, getImage } from "astro:assets";
+import { Picture as AstroPicture, type Picture, getImage } from "astro:assets";
 import type { UnresolvedImageTransform } from "astro";
 
 import { cn } from "#/lib/ui";
-import { type CustomImageProps, alignClass } from "./types";
+import type { CustomImageProps } from "./types";
 
 type Props = CustomImageProps;
 
-const {
-  class: className,
-  wrapperProps,
-  ambientMode,
-  title,
-  align = "top",
-  canZoom = false,
-  ...rest
-} = Astro.props;
+const { class: className, ambientMode, title, ...rest } = Astro.props;
 
 const blurryImage = await getImage({
   ...(rest as UnresolvedImageTransform),
   width: 20,
 });
 
-const { class: wrapperClass, ...restWrapperProps } = wrapperProps ?? {};
+const divClass = cn(
+  "blur-load select-none rounded-2xl border-[#474747] dark:border",
+  ambientMode && "ambient-mode",
+  className,
+);
+
+const pictureProps = {
+  class: cn("rounded-2xl", className),
+  formats: ["avif"],
+  widths: [330, 640, 670, 1200],
+  sizes:
+    "(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 670px, 1200px",
+  ...rest,
+} as Parameters<typeof Picture>[0];
 ---
 
 {title ? (
-<figure>
-    <div
-            class={cn('blur-load size-fit bg-cover select-none rounded-2xl border-[#474747] shadow-md dark:border dark:shadow-none',
-                alignClass[align].wrapper,
-                { 'ambient-mode': ambientMode },
-                { 'cursor-zoom-in': canZoom },
-                wrapperClass
-            )}
-            {...restWrapperProps}
-    >
-        <Picture
-                class={cn('object-cover h-[inherit] max-h-[inherit] rounded-2xl',
-                    alignClass[align].image,
-                    { 'zoom-image': canZoom },
-                    className
-                )}
-                formats={['avif']}
-                {...rest}
-        />
-    </div>
-    <figcaption class="text-center text-xs text-muted-foreground mt-2 leading-6">{title}</figcaption>
-</figure>
+    <figure>
+        <div class={divClass}>
+            <AstroPicture {...pictureProps} />
+        </div>
+        <figcaption class="text-center text-xs text-muted-foreground mt-2 leading-6">{title}</figcaption>
+    </figure>
     ) : (
-<div
-        class={cn('blur-load size-fit bg-cover select-none rounded-2xl border-[#474747] shadow dark:border dark:shadow-none',
-            alignClass[align].wrapper,
-            { 'ambient-mode': ambientMode },
-            { 'cursor-zoom-in': canZoom },
-            wrapperClass
-        )}
-        {...restWrapperProps}
->
-    <Picture
-            class={cn('object-cover h-[inherit] max-h-[inherit] rounded-2xl',
-                alignClass[align].image,
-                { 'zoom-image': canZoom },
-                className
-            )}
-            formats={['avif']}
-            {...rest}
-    />
-</div>
-    )}
+    <div class={divClass}>
+        <AstroPicture {...pictureProps} />
+    </div>
+)}
 
 <style define:vars={{ 'bg-image': `url(${blurryImage.src})` }}>
     .blur-load {
@@ -111,7 +84,7 @@ const { class: wrapperClass, ...restWrapperProps } = wrapperProps ?? {};
         content: '';
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) translate3d(0, 0, 0);
     }
 </style>
 
