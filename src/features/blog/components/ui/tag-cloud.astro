@@ -1,0 +1,28 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { Tag } from "#/features/blog/config/tag";
+import { cn } from "#/lib/ui";
+
+interface Props extends HTMLAttributes<"div"> {
+  tags: (Tag & {
+    emojiSvg: string;
+  })[];
+}
+
+const { tags, class: className, ...rest } = Astro.props;
+---
+
+<div class={cn("flex flex-wrap gap-1.5", className)} {...rest}>
+    {tags.map(({ slug, label, emojiSvg }) => (
+            <a
+                    href={`/blog/tags/${slug}`}
+                    class="inline-flex items-center gap-1.5 text-sm font-medium bg-muted/50 rounded-full border pl-1 pr-2.5 py-1 hover:bg-accent focus:outline-none"
+            >
+                <div
+                        set:html={emojiSvg}
+                        class="[&>svg]:size-4 rounded-full bg-muted/95 p-0.5"
+                />
+                <p class="whitespace-nowrap">{label}</p>
+            </a>
+    ))}
+</div>

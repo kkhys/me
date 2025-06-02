@@ -2,12 +2,15 @@
 import type { InferEntrySchema } from "astro:content";
 import ArrowLeftIcon from "@lucide/astro/icons/arrow-left";
 import type { MarkdownHeading } from "astro";
+import { emojiSvg } from "#/components/emoji-svg";
 import SEO from "#/components/seo.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Skeleton from "#/components/ui/skeleton.astro";
 import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
+import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
 import ViewCounter from "#/features/blog/components/ui/view-counter.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
+import { flatTags } from "#/features/blog/config/tag";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
 import { cn } from "#/lib/ui";
@@ -22,6 +25,7 @@ const {
   title,
   emoji,
   category,
+  tags,
   publishedAt,
   publishedAtString,
   description,
@@ -35,6 +39,17 @@ const categoryObject = getCategoryBySlug(categorySlug);
 if (!categoryObject) {
   throw new Error(`Category "${categorySlug}" not found`);
 }
+
+const allTagCloudItems = await Promise.all(
+  flatTags?.map(async (flatTag) => ({
+    ...flatTag,
+    emojiSvg: await emojiSvg({ emoji: flatTag.emoji, isColored: true }),
+  })) || [],
+);
+
+const tagCloudItems = allTagCloudItems.filter(({ title }) =>
+  tags?.includes(title as (typeof tags)[number]),
+);
 ---
 
 <BaseLayout pagefind>
@@ -83,6 +98,9 @@ if (!categoryObject) {
         <article class="prose">
             <slot />
         </article>
+        {tagCloudItems && (
+                <TagCloud tags={tagCloudItems} class="mt-12" />
+        )}
     </section>
 </BaseLayout>
 
