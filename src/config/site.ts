@@ -6,7 +6,7 @@ export const siteConfig = {
     me: "https://github.com/kkhys/me",
     content: "https://github.com/kkhys/content",
   },
-  roadmap: "https://github.com/users/kkhys/projects/3",
+  roadmap: "https://github.com/users/kkhys/projects/5",
 } as const;
 
 export const me = {

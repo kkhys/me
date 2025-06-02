@@ -1,5 +1,6 @@
 ---
 import MoveUpRightIcon from "@lucide/astro/icons/move-up-right";
+import { siteConfig } from "#/config/site";
 
 type FooterLink = {
   href: string;
@@ -9,9 +10,9 @@ type FooterLink = {
 
 const footerLinks = [
   { href: "/legal/privacy-policy", title: "プライバシーポリシー" },
-  { href: "/", title: "ロードマップ", external: true },
+  { href: siteConfig.roadmap, title: "ロードマップ", external: true },
   {
-    href: "https://github.com/kkhys/me",
+    href: siteConfig.github.me,
     title: "ソースコード",
     external: true,
   },
