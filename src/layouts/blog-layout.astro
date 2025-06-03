@@ -8,12 +8,14 @@ import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Separator from "#/components/ui/separator.astro";
 import Skeleton from "#/components/ui/skeleton.astro";
 import Comment from "#/features/blog/components/ui/comment.astro";
+import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import PrevAndNextPager from "#/features/blog/components/ui/prev-and-next-pager.astro";
 import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
 import ViewCounter from "#/features/blog/components/ui/view-counter.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { flatTags } from "#/features/blog/config/tag";
+import { getRelatedPosts } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
 import { cn } from "#/lib/ui";
@@ -53,6 +55,8 @@ const allTagCloudItems = await Promise.all(
 const tagCloudItems = allTagCloudItems.filter(({ title }) =>
   tags?.includes(title as (typeof tags)[number]),
 );
+
+const relatedPosts = await getRelatedPosts({ id, category });
 ---
 
 <BaseLayout pagefind>
@@ -107,6 +111,13 @@ const tagCloudItems = allTagCloudItems.filter(({ title }) =>
         <Separator class="mt-12" />
         <PrevAndNextPager id={id} class="mt-8" />
         <Separator class="mt-8" />
+        {relatedPosts?.length > 0 && (
+            <div class="mt-12 space-y-6">
+                <div class="font-medium leading-7">こちらもおすすめ</div>
+                <EntryList blogEntries={relatedPosts} />
+                <Separator class="mt-8" />
+            </div>
+        )}
         <Comment class="mt-12" />
     </section>
 </BaseLayout>
