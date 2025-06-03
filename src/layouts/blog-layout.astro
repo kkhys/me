@@ -6,6 +6,7 @@ import { emojiSvg } from "#/components/emoji-svg";
 import SEO from "#/components/seo.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Skeleton from "#/components/ui/skeleton.astro";
+import Comment from "#/features/blog/components/ui/comment.astro";
 import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
 import ViewCounter from "#/features/blog/components/ui/view-counter.astro";
@@ -101,6 +102,7 @@ const tagCloudItems = allTagCloudItems.filter(({ title }) =>
         {tagCloudItems && (
                 <TagCloud tags={tagCloudItems} class="mt-12" />
         )}
+        <Comment class="mt-12" />
     </section>
 </BaseLayout>
 
