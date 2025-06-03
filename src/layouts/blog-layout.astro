@@ -15,6 +15,7 @@ import { flatTags } from "#/features/blog/config/tag";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
 import { cn } from "#/lib/ui";
+import Separator from "#/components/ui/separator.astro";
 
 interface Props extends InferEntrySchema<"blog"> {
   id: string;
@@ -102,6 +103,7 @@ const tagCloudItems = allTagCloudItems.filter(({ title }) =>
         {tagCloudItems && (
                 <TagCloud tags={tagCloudItems} class="mt-12" />
         )}
+        <Separator class="mt-12" />
         <Comment class="mt-12" />
     </section>
 </BaseLayout>
