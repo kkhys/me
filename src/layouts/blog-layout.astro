@@ -5,8 +5,10 @@ import type { MarkdownHeading } from "astro";
 import { emojiSvg } from "#/components/emoji-svg";
 import SEO from "#/components/seo.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
+import Separator from "#/components/ui/separator.astro";
 import Skeleton from "#/components/ui/skeleton.astro";
 import Comment from "#/features/blog/components/ui/comment.astro";
+import PrevAndNextPager from "#/features/blog/components/ui/prev-and-next-pager.astro";
 import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
 import ViewCounter from "#/features/blog/components/ui/view-counter.astro";
@@ -15,7 +17,6 @@ import { flatTags } from "#/features/blog/config/tag";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
 import { cn } from "#/lib/ui";
-import Separator from "#/components/ui/separator.astro";
 
 interface Props extends InferEntrySchema<"blog"> {
   id: string;
@@ -104,6 +105,8 @@ const tagCloudItems = allTagCloudItems.filter(({ title }) =>
                 <TagCloud tags={tagCloudItems} class="mt-12" />
         )}
         <Separator class="mt-12" />
+        <PrevAndNextPager id={id} class="mt-8" />
+        <Separator class="mt-8" />
         <Comment class="mt-12" />
     </section>
 </BaseLayout>

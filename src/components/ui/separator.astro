@@ -1,10 +1,10 @@
 ---
-import {cn} from "#/lib/ui";
-import type {HTMLAttributes} from "astro/types";
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "#/lib/ui";
 
-interface Props extends HTMLAttributes<'hr'>{}
+interface Props extends HTMLAttributes<"hr"> {}
 
-const {class: className, ...rest} = Astro.props;
+const { class: className, ...rest } = Astro.props;
 ---
 
 <hr class={cn('h-[1px] w-full bg-gradient-to-r from-hr-from via-hr-via to-hr-to border-none', className)} {...rest} />
