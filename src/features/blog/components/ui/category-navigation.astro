@@ -1,0 +1,37 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { categories } from "#/features/blog/config/category";
+import { cn } from "#/lib/ui";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className, ...rest } = Astro.props;
+
+const pathname = Astro.url.pathname;
+
+const linkClass =
+  "flex h-7 items-center justify-center rounded-full px-4 text-center text-sm transition-colors whitespace-nowrap";
+---
+
+<div class={cn('flex items-center overflow-x-auto', className)} {...rest}>
+    {/^\/blog(\/\d+)?\/?$/.test(pathname) ? (
+            <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
+                すべて
+            </span>
+    ) : (
+            <a href="/blog" class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
+                すべて
+            </a>
+    )}
+    {categories.map(({ slug, label }) => (
+        pathname?.startsWith(`/blog/categories/${slug}`) ? (
+                <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
+                {label}
+            </span>
+        ) : (
+                <a href={`/blog/categories/${slug}`} class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
+                    {label}
+                </a>
+        )
+    ))}
+</div>

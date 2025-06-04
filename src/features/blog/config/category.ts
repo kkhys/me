@@ -22,7 +22,7 @@ export const categories = [
   },
   {
     title: "Build",
-    label: "作る",
+    label: "DIY",
     slug: "build",
     emoji: "🏗",
   },
