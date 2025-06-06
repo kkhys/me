@@ -70,8 +70,8 @@
 :root {
   --radius: 0.625rem;
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.2 0 0);
 
   --primary: oklch(0.21 0.006 285.885);
   --primary-foreground: oklch(0.985 0 0);
@@ -80,7 +80,7 @@
   --secondary-foreground: oklch(0.21 0.006 285.885);
 
   --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
+  --muted-foreground: oklch(0.54 0 0);
 
   --accent: oklch(0.967 0.001 286.375);
   --accent-foreground: oklch(0.21 0.006 285.885);
@@ -118,6 +118,8 @@
   --toc-bar: oklch(0.92 0 0);
   --toc-bar-active: oklch(0.87 0 0);
 
+  --footer-mask: oklch(0.9924 0 0);
+
   --scrollbar: oklch(0.87 0 286.28);
   --scrollbar-foreground: oklch(0.71 0 286.07);
 
@@ -126,8 +128,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: oklch(0.141 0.005 285.823);
-    --foreground: oklch(0.985 0 0);
+    --background: oklch(0.2 0 0);
+    --foreground: oklch(0.95 0 0);
 
     --primary: oklch(0.92 0.004 286.32);
     --primary-foreground: oklch(0.21 0.006 285.885);
@@ -136,7 +138,7 @@
     --secondary-foreground: oklch(0.985 0 0);
 
     --muted: oklch(0.274 0.006 286.033);
-    --muted-foreground: oklch(0.705 0.015 286.067);
+    --muted-foreground: oklch(0.71 0 0);
 
     --accent: oklch(0.274 0.006 286.033);
     --accent-foreground: oklch(0.985 0 0);
@@ -173,6 +175,8 @@
 
     --toc-bar: oklch(37% 0.013 285.805);
     --toc-bar-active: oklch(0.21 0.006 285.885);
+
+    --footer-mask: oklch(0.1987 0 0);
 
     --scrollbar: oklch(0.37 0.0113 285.84);
     --scrollbar-foreground: oklch(0.44 0.0141 285.81);

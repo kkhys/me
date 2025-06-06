@@ -1,5 +1,6 @@
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
@@ -59,15 +60,16 @@ export default defineConfig({
         },
       },
     }),
+    react(),
     mdx(),
     sitemap(),
-    (await import("@playform/compress")).default({
-      HTML: {
-        "html-minifier-terser": {
-          collapseWhitespace: false,
-        },
-      },
-    }),
+    // (await import("@playform/compress")).default({
+    //   HTML: {
+    //     "html-minifier-terser": {
+    //       collapseWhitespace: false,
+    //     },
+    //   },
+    // }),
   ],
   prefetch: {
     defaultStrategy: "viewport",
