@@ -1,4 +1,5 @@
 import { Share2Icon } from "lucide-react";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,8 +22,9 @@ const generateHatebuSaveLink = (url: string, title: string) =>
   `https://b.hatena.ne.jp/add?mode=confirm&url=${encodeURIComponent(url)}&title=${title} | ${siteConfig.title}`;
 
 const handleCopyLink = (url: string) =>
-  void window.navigator.clipboard.writeText(url);
-// .then(() => toast.success("Link copied."));
+  void window.navigator.clipboard
+    .writeText(url)
+    .then(() => toast.success("クリップボードに URL をコピーしました"));
 
 export const SharedMenu = ({ title, url }: { title: string; url: string }) => (
   <DropdownMenu>
