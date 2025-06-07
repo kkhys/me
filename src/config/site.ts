@@ -17,4 +17,4 @@ export const me = {
     url: "https://github.com/kkhys",
   },
   mastodon: "https://mastodon.kkhys.me",
-};
+} as const;

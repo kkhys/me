@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark {
   @media (prefers-color-scheme: dark) {
@@ -14,6 +15,9 @@
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -73,6 +77,9 @@
   --background: oklch(0.99 0 0);
   --foreground: oklch(0.2 0 0);
 
+  --popover: oklch(0.99 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
   --primary: oklch(0.21 0.006 285.885);
   --primary-foreground: oklch(0.985 0 0);
 
@@ -82,8 +89,8 @@
   --muted: oklch(0.967 0.001 286.375);
   --muted-foreground: oklch(0.54 0 0);
 
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
+  --accent: oklch(0.96 0 0);
+  --accent-foreground: oklch(0.205 0 0);
 
   --destructive: oklch(0.577 0.245 27.325);
 
@@ -131,6 +138,9 @@
     --background: oklch(0.2 0 0);
     --foreground: oklch(0.95 0 0);
 
+    --popover: oklch(0.26 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+
     --primary: oklch(0.92 0.004 286.32);
     --primary-foreground: oklch(0.21 0.006 285.885);
 
@@ -140,7 +150,7 @@
     --muted: oklch(0.274 0.006 286.033);
     --muted-foreground: oklch(0.71 0 0);
 
-    --accent: oklch(0.274 0.006 286.033);
+    --accent: oklch(0.31 0 0);
     --accent-foreground: oklch(0.985 0 0);
 
     --destructive: oklch(0.704 0.191 22.216);

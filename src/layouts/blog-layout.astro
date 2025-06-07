@@ -7,8 +7,10 @@ import SEO from "#/components/seo.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Separator from "#/components/ui/separator.astro";
 import Skeleton from "#/components/ui/skeleton.astro";
+import { siteConfig } from "#/config/site";
 import Comment from "#/features/blog/components/ui/comment.astro";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
+import ActionController from "#/features/blog/components/ui/menu/action-controller.astro";
 import PrevAndNextPager from "#/features/blog/components/ui/prev-and-next-pager.astro";
 import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
@@ -35,6 +37,9 @@ const {
   publishedAtString,
   description,
   status,
+  editUrl,
+  sourceUrl,
+  revisionHistoryUrl,
   headings,
 } = Astro.props;
 
@@ -108,6 +113,7 @@ const relatedPosts = await getRelatedPosts({ id, category });
         {tagCloudItems && (
                 <TagCloud tags={tagCloudItems} class="mt-12" />
         )}
+        <ActionController class="mt-8" title={title} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} url={`${siteConfig.url}/blog/posts/${id}`} />
         <Separator class="mt-12" />
         <PrevAndNextPager id={id} class="mt-8" />
         <Separator class="mt-8" />

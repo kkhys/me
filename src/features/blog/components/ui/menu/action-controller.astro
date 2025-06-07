@@ -1,0 +1,31 @@
+---
+import type { InferEntrySchema } from "astro:content";
+import type { HTMLAttributes } from "astro/types";
+import { ConfigMenu } from "#/features/blog/components/ui/menu/config-menu";
+import { SharedMenu } from "#/features/blog/components/ui/menu/shared-menu";
+import { cn } from "#/lib/ui";
+
+interface Props
+  extends Omit<HTMLAttributes<"div">, "title">,
+    Pick<
+      InferEntrySchema<"blog">,
+      "title" | "editUrl" | "sourceUrl" | "revisionHistoryUrl"
+    > {
+  url: string;
+}
+
+const {
+  title,
+  editUrl,
+  sourceUrl,
+  revisionHistoryUrl,
+  url,
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+<div class={cn('flex justify-end gap-x-1', className)} {...rest} >
+    <ConfigMenu editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} client:visible />
+    <SharedMenu title={title} url={url} client:visible />
+</div>
