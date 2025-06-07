@@ -115,18 +115,3 @@ export const BottomNavigationBar = () => {
     </div>
   );
 };
-
-export const BottomNavigationBarFallback = () => (
-  <div className="fixed z-10 bottom-[4lvh] inset-x-0 flex items-end justify-center">
-    <button
-      type="button"
-      className={cn(
-        "relative w-28 h-9 pl-3.5 pr-2.5 text-sm rounded-[19px] cursor-pointer outline-none",
-        wrapperBaseStyle,
-      )}
-    >
-      <span>メニュー</span>
-      <ArrowUpFromLineIcon className="size-4" />
-    </button>
-  </div>
-);
