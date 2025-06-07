@@ -1,6 +1,7 @@
 ---
 import { actions } from "astro:actions";
 import type { HTMLAttributes } from "astro/types";
+import { AnimateNumber } from "#/components/ui/animate-number";
 import { cn } from "#/lib/ui";
 
 interface Props extends HTMLAttributes<"div"> {
@@ -18,5 +19,5 @@ const views = pageViewData.data ?? 0;
 ---
 
 <div class={cn('text-sm text-muted-foreground', className)}>
-    {views.toLocaleString()} views
+    <AnimateNumber count={views} client:load /> views
 </div>
