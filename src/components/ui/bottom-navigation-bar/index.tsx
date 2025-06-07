@@ -7,8 +7,8 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { type RefObject, useEffect, useRef, useState } from "react";
-import { useOnClickOutside } from "usehooks-ts";
-import { cn } from "#/lib/ui.ts";
+import { cn } from "#/lib/ui";
+import { useOnClickOutside } from "./use-on-click-outside";
 
 const wrapperBaseStyle =
   "flex justify-between items-center bg-background text-foreground border shadow-xl";
