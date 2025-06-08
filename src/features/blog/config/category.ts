@@ -1,3 +1,5 @@
+import { tags } from "#/features/blog/config/tag";
+
 export type Category = Record<"title" | "label" | "slug" | "emoji", string>;
 export type CategoryTitle = (typeof categories)[number]["title"];
 
@@ -32,3 +34,10 @@ export const categoryTitles = categories.map(({ title }) => title);
 
 export const getCategoryBySlug = (slug: string) =>
   categories.find((category) => category.slug === slug);
+
+export const getCategoryByTagSlug = (tagSlug: string) =>
+  categories.find((category) =>
+    tags[category.slug as keyof typeof tags]?.some(
+      (tag) => tag.slug === tagSlug,
+    ),
+  );

@@ -1,9 +1,11 @@
 ---
+import ArrowLeftIcon from "@lucide/astro/icons/arrow-left";
 import type { PaginateFunction } from "astro";
 import SEO from "#/components/seo.astro";
 import { countPerPage } from "#/config/constant";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import Pagination from "#/features/blog/components/ui/pagination.astro";
+import { getCategoryByTagSlug } from "#/features/blog/config/category";
 import { getTagBySlug } from "#/features/blog/config/tag";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
@@ -39,6 +41,12 @@ const tag = getTagBySlug(tagSlug);
 if (!tag) {
   throw new Error(`Tag "${tagSlug}" not found`);
 }
+
+const category = getCategoryByTagSlug(tagSlug);
+
+if (!category) {
+  throw new Error(`Category for tag "${tagSlug}" not found`);
+}
 ---
 
 <BaseLayout class="space-y-6">
@@ -48,7 +56,16 @@ if (!tag) {
             slot='seo'
     />
     <section>
-        <h1 class="font-medium">{tag.label}</h1>
+        <div class="inline-flex gap-1.5 items-center text-xs">
+            <a href={`/blog/categories/${category.slug}`} class="inline-flex gap-1 items-center text-muted-foreground hover:underline">
+                <ArrowLeftIcon class="size-3.5" />
+                {category.label}
+            </a>
+            <span class="text-muted-foreground">/</span>
+            <h1 class="font-semibold">
+                {tag.label}
+            </h1>
+        </div>
     </section>
     <section>
         <EntryList blogEntries={page.data} showDate />
