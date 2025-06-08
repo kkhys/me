@@ -1,5 +1,6 @@
 import type { InferEntrySchema } from "astro:content";
 import { CodeIcon } from "lucide-react";
+import { Button } from "#/components/ui/button/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,7 +9,6 @@ import {
   DropdownMenuTrigger,
 } from "#/components/ui/dropdown-menu";
 import { siteConfig } from "#/config/site";
-import { Button } from "./button";
 import { NavLink } from "./nav-link";
 
 export const ConfigMenu = ({

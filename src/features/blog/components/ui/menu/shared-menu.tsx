@@ -1,5 +1,6 @@
 import { Share2Icon } from "lucide-react";
 import { toast } from "sonner";
+import { Button } from "#/components/ui/button/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +10,6 @@ import {
   DropdownMenuTrigger,
 } from "#/components/ui/dropdown-menu";
 import { siteConfig } from "#/config/site";
-import { Button } from "./button";
 import { NavLink } from "./nav-link";
 
 const generateXShareLink = (url: string, title: string) =>
