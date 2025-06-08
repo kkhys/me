@@ -87,7 +87,7 @@ const relatedPosts = await getRelatedPosts({ id, category });
                 </b>
             </span>
         </div>
-        <div class={cn('mt-8', status === 'draft' && 'flex justify-between items-center')}>
+        <div class={cn(status === 'draft' && 'flex justify-between items-center')}>
             <EmojiEyeCatch emoji={emoji} />
             {status === "draft" && (
                     <span class="text-xs text-red-400">Draft</span>

@@ -1,5 +1,7 @@
 ---
+import RssIcon from "@lucide/astro/icons/rss";
 import type { HTMLAttributes } from "astro/types";
+import { buttonVariants } from "#/components/ui/button/button.astro";
 import { categories } from "#/features/blog/config/category";
 import { cn } from "#/lib/ui";
 import { SpCategoryNavigation } from "./sp-category-navigation";
@@ -14,26 +16,31 @@ const linkClass =
   "flex h-7 items-center justify-center rounded-full px-4 text-center text-sm transition-colors whitespace-nowrap";
 ---
 
-<nav class={cn('flex items-center overflow-x-auto max-sm:hidden', className)} {...rest}>
-    {/^\/blog(\/\d+)?\/?$/.test(pathname) ? (
-            <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
-                すべて
-            </span>
-    ) : (
-            <a href="/blog" class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
-                すべて
-            </a>
-    )}
-    {categories.map(({ slug, label }) => (
-        pathname?.startsWith(`/blog/categories/${slug}`) ? (
+<nav class={cn('flex items-center justify-between', className)} {...rest}>
+    <div class="flex items-center max-sm:hidden">
+        {/^\/blog(\/\d+)?\/?$/.test(pathname) ? (
                 <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
-                {label}
+                すべて
             </span>
         ) : (
-                <a href={`/blog/categories/${slug}`} class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
-                    {label}
+                <a href="/blog" class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
+                    すべて
                 </a>
-        )
-    ))}
+        )}
+        {categories.map(({ slug, label }) => (
+            pathname?.startsWith(`/blog/categories/${slug}`) ? (
+                    <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
+                {label}
+            </span>
+            ) : (
+                    <a href={`/blog/categories/${slug}`} class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
+                        {label}
+                    </a>
+            )
+        ))}
+    </div>
+    <SpCategoryNavigation pathname={pathname} className="sm:hidden" client:media="(max-width: 40rem)" transition:persist="sp-category-navigation" />
+    <a class={cn('rounded-full!', buttonVariants({ variant: "outline", size: "icon" }))} href="/rss.xml">
+        <RssIcon class="size-4" />
+    </a>
 </nav>
-<SpCategoryNavigation pathname={pathname} className="mt-4 sm:hidden" client:media="(max-width: 40rem)" transition:persist="sp-category-navigation" />
