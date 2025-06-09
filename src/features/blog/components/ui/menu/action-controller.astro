@@ -1,6 +1,8 @@
 ---
 import type { InferEntrySchema } from "astro:content";
+import MessageCircleIcon from "@lucide/astro/icons/message-circle";
 import type { HTMLAttributes } from "astro/types";
+import { buttonVariants } from "#/components/ui/button/button.astro";
 import { ConfigMenu } from "#/features/blog/components/ui/menu/config-menu";
 import { SharedMenu } from "#/features/blog/components/ui/menu/shared-menu";
 import { cn } from "#/lib/ui";
@@ -26,6 +28,10 @@ const {
 ---
 
 <div class={cn('flex justify-end gap-x-1', className)} {...rest} >
+    <a href="#comment" class={buttonVariants({ variant: 'ghost', size: 'icon' })}>
+        <MessageCircleIcon class="size-4" />
+        <span class="sr-only">開発者用メニュー</span>
+    </a>
     <ConfigMenu editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} client:visible />
     <SharedMenu title={title} url={url} client:visible />
 </div>
