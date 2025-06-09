@@ -1,9 +1,11 @@
 ---
 import type { InferEntrySchema } from "astro:content";
 import ArrowLeftIcon from "@lucide/astro/icons/arrow-left";
+import MoveUpRightIcon from "@lucide/astro/icons/move-up-right";
 import type { MarkdownHeading } from "astro";
 import { emojiSvg } from "#/components/emoji-svg";
 import SEO from "#/components/seo.astro";
+import { buttonVariants } from "#/components/ui/button/button.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Separator from "#/components/ui/separator.astro";
 import Skeleton from "#/components/ui/skeleton.astro";
@@ -110,6 +112,38 @@ const relatedPosts = await getRelatedPosts({ id, category });
         <article class="prose">
             <slot />
         </article>
+        <div class="my-16">
+            <div class="rounded-[24px] border border-white/60 bg-gradient-to-b from-zinc-50 to-white/70 dark:from-zinc-800 dark:to-zinc-900 dark:border-zinc-800/60">
+                <div class="rounded-[23px] border border-black/10 dark:border-zinc-900/80">
+                    <div class="rounded-[22px] border border-white/50 dark:border-zinc-950">
+                        <div class="rounded-[21px] border border-zinc-950/20 dark:border-zinc-900/70">
+                            <div class="w-full rounded-[20px] border border-white/50 dark:border-zinc-700/50">
+                                <div class="flex flex-col gap-1 p-6">
+                                    <h3 class="font-semibold text-foreground">
+                                        お読みいただき、ありがとうございます
+                                    </h3>
+                                    <p class="text-sm text-muted-foreground">
+                                        コーヒー代をサポートしていただけると励みになります！
+                                    </p>
+                                </div>
+                                <div class="border border-t-zinc-50 border-b-zinc-300/50 dark:border-t-zinc-950 dark:border-b-zinc-700/50 border-l-transparent border-r-transparent" />
+                                <div class="flex flex-col sm:flex-row gap-3 p-6">
+                                    <a
+                                            href={siteConfig.support}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            class={cn(buttonVariants())}
+                                    >
+                                        サポートする
+                                        <MoveUpRightIcon class="size-3.5" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         {tagCloudItems && (
                 <TagCloud tags={tagCloudItems} class="mt-12" />
         )}
