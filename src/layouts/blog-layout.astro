@@ -3,6 +3,7 @@ import type { InferEntrySchema } from "astro:content";
 import ArrowLeftIcon from "@lucide/astro/icons/arrow-left";
 import MoveUpRightIcon from "@lucide/astro/icons/move-up-right";
 import type { MarkdownHeading } from "astro";
+import Budoux from "#/components/budoux.astro";
 import { emojiSvg } from "#/components/emoji-svg";
 import SEO from "#/components/seo.astro";
 import { buttonVariants } from "#/components/ui/button/button.astro";
@@ -119,12 +120,16 @@ const relatedPosts = await getRelatedPosts({ id, category });
                         <div class="rounded-[21px] border border-zinc-950/20 dark:border-zinc-900/70">
                             <div class="w-full rounded-[20px] border border-white/50 dark:border-zinc-700/50">
                                 <div class="flex flex-col gap-1 p-6">
-                                    <h3 class="font-semibold text-foreground">
-                                        お読みいただき、ありがとうございます
-                                    </h3>
-                                    <p class="text-sm text-muted-foreground">
-                                        コーヒー代をサポートしていただけると励みになります！
-                                    </p>
+                                    <Budoux>
+                                        <h3 class="font-semibold text-foreground">
+                                            最後までお読みいただき、ありがとうございます
+                                        </h3>
+                                    </Budoux>
+                                    <Budoux>
+                                        <p class="text-sm text-muted-foreground">
+                                            コーヒー代をサポートしていただけると励みになります！
+                                        </p>
+                                    </Budoux>
                                 </div>
                                 <div class="border border-t-zinc-50 border-b-zinc-300/50 dark:border-t-zinc-950 dark:border-b-zinc-700/50 border-l-transparent border-r-transparent" />
                                 <div class="flex flex-col sm:flex-row gap-3 p-6">

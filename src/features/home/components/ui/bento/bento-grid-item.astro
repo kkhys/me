@@ -1,0 +1,50 @@
+
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "#/lib/ui";
+
+interface Props extends HTMLAttributes<"div"> {
+  bentoTitle: string;
+  bentoDescription: string;
+  size?: "1x1" | "1x2" | "2x1" | "2x2";
+}
+
+const {
+  bentoTitle,
+  bentoDescription,
+  size = "1x1",
+  class: className,
+} = Astro.props;
+
+const getSizeClasses = (size: string) => {
+  switch (size) {
+    case "1x1":
+      return "col-span-1 row-span-1 md:col-span-2 aspect-square";
+    case "1x2":
+      return "col-span-1 row-span-2 md:col-span-2 aspect-[1/2]";
+    case "2x1":
+      return "col-span-1 row-span-1 md:col-span-4 aspect-[2/1]";
+    case "2x2":
+      return "col-span-1 row-span-2 md:col-span-4 aspect-square";
+    default:
+      return "col-span-1 row-span-1 md:col-span-2 aspect-square";
+  }
+};
+---
+
+<div
+        class={cn(
+            "group/bento size-full shadow-input flex flex-col justify-between shadow-sm space-y-4 rounded-xl border bg-background p-4 transition duration-200 active:scale-95 dark:shadow-none",
+            getSizeClasses(size),
+            className,
+        )}
+>
+    <div class="transition duration-200 group-hover/bento:translate-x-0">
+        <div class="my-2 font-semibold">
+            {bentoTitle}
+        </div>
+        <div class="text-xs text-muted-foreground">
+            {bentoDescription}
+        </div>
+    </div>
+</div>

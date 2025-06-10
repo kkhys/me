@@ -35,7 +35,7 @@ export const ConfigMenu = ({
           </NavLink>
         )}
         <NavLink href={`${siteConfig.github.content}/issues/new`} isExternal>
-          問題を報告する
+          記事の問題を報告する
         </NavLink>
         {sourceUrl && (
           <NavLink href={sourceUrl} isExternal>

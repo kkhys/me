@@ -1,0 +1,18 @@
+---
+import { client } from "#/lib/client";
+
+import { GithubActivityChart } from "./github-activity-chart";
+
+const response = await client.api.github.contributions.$get();
+const data = response.status === 200 ? await response.json() : null;
+
+Astro.response.headers.set("Cache-Control", "public, max-age=86400");
+---
+
+{
+    data ? (
+        <GithubActivityChart {...data} client:only='react' />
+    ) : (
+        <p class="text-muted-foreground text-sm p-1.5">データの取得に失敗しました。</p>
+    )
+}
