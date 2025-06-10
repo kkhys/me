@@ -27,7 +27,7 @@ const eyeCatchVariants = cva(
   },
 );
 
-const svgVariants = cva("[&>svg>path]:fill-foreground", {
+const svgVariants = cva("[&>svg>g>path]:fill-foreground", {
   variants: {
     size: {
       default: "[&>svg]:size-5",
