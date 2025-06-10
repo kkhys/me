@@ -2,12 +2,12 @@
 import { Picture } from "astro:assets";
 import Budoux from "#/components/budoux.astro";
 import { me, siteConfig } from "#/config/site";
-import BentoGridItem from "#/features/home/components/ui/bento/bento-grid-item.astro";
 import BentoGrid from "#/features/home/components/ui/bento/bento-grid.astro";
 import GithubActivityFallback from "#/features/home/components/ui/bento/github-activity/github-activity-fallback.astro";
 import GithubActivity from "#/features/home/components/ui/bento/github-activity/github-activity.astro";
 import NowPlayingFallback from "#/features/home/components/ui/bento/now-playing/now-playing-fallback.astro";
 import NowPlaying from "#/features/home/components/ui/bento/now-playing/now-playing.astro";
+import { TechBlogSlider } from "#/features/home/components/ui/bento/tech-blog-slider";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { getCustomTransition } from "#/lib/custom-transition";
 import { cn } from "#/lib/ui";
@@ -173,11 +173,23 @@ import { cn } from "#/lib/ui";
             <NowPlaying server:defer>
                 <NowPlayingFallback slot="fallback" />
             </NowPlaying>
-            <BentoGridItem
-                    bentoTitle="test title"
-                    bentoDescription="test description"
-                    size="1x1"
-            />
+            <a
+                    href="/blog/categories/tech"
+                    class={cn(
+                        "overflow-hidden group/bento size-full shadow-input flex flex-col justify-between shadow-sm rounded-xl border bg-background transition duration-200 active:scale-95 dark:shadow-none",
+                        "col-span-1 row-span-1 md:col-span-2 aspect-square"
+                    )}
+            >
+                <div class="transition duration-200 group-hover/bento:translate-x-0 pt-4 px-4">
+                    <div class="my-2 text-sm font-semibold">
+                        技術ブログ
+                    </div>
+                    <div class="text-xs text-muted-foreground">
+                        フロントエンドが多めです。
+                    </div>
+                </div>
+                <TechBlogSlider client:idle />
+            </a>
         </BentoGrid>
     </div>
 </BaseLayout>
