@@ -1,15 +1,16 @@
 /** @jsxImportSource react */
 /** @jsxRuntime automatic */
 
+import { readFile } from "node:fs/promises";
 import satori from "satori";
 import sharp from "sharp";
 
 export const opengraphImage = async ({ emoji }: { emoji: string }) => {
   const firstEmoji = Array.from(emoji)[0];
 
-  const notoEmojiSemiBold = await Bun.file(
+  const notoEmojiSemiBold = await readFile(
     "./src/assets/NotoEmoji-SemiBold.ttf",
-  ).arrayBuffer();
+  );
 
   const svg = await satori(
     <div

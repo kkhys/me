@@ -1,6 +1,7 @@
 /** @jsxImportSource react */
 /** @jsxRuntime automatic */
 
+import { readFile } from "node:fs/promises";
 import satori from "satori";
 import { getIconCode, loadEmoji } from "#/lib/api/emoji";
 
@@ -14,8 +15,8 @@ export const emojiSvg = async ({
   const firstEmoji = Array.from(emoji)[0];
 
   const selectedFont = isColored
-    ? await Bun.file("./src/assets/Inter-Medium.ttf").arrayBuffer()
-    : await Bun.file("./src/assets/NotoEmoji-Regular.ttf").arrayBuffer();
+    ? await readFile("./src/assets/Inter-Medium.ttf")
+    : await readFile("./src/assets/NotoEmoji-Regular.ttf");
 
   return await satori(
     <div
@@ -49,7 +50,7 @@ export const emojiSvg = async ({
           if (!result) {
             throw new Error(`Failed to load emoji for segment: ${segment}`);
           }
-          return `data:image/svg+xml;base64,${btoa(result)}`;
+          return `data:image/svg+xml;base64,${Buffer.from(result, "utf8").toString("base64")}`;
         }
         return code;
       },
