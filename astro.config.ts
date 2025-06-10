@@ -15,10 +15,15 @@ import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
 import remarkLinkCard from "./src/lib/remark-link-card";
 
+let adapter = vercel()
+
+if (process.argv[3] === '--node' || process.argv[4] === '--node') {
+  adapter = node({ mode: 'standalone' })
+}
+
 export default defineConfig({
   site: "https://kkhys.me",
-  adapter:
-    process.argv[3] === "--node" ? node({ mode: "standalone" }) : vercel(),
+  adapter,
   integrations: [
     expressiveCode({
       themes: ["poimandres", "min-light"],
@@ -191,6 +196,14 @@ export default defineConfig({
       SPOTIFY_REFRESH_TOKEN: envField.string({
         context: "server",
         access: "secret",
+      }),
+      UPSTASH_REDIS_REST_URL: envField.string({
+        context: "server",
+        access: "secret"
+      }),
+      UPSTASH_REDIS_REST_TOKEN: envField.string({
+        context: "server",
+        access: "secret"
       }),
       PUBLIC_VERCEL_ENV: envField.string({
         context: "client",
