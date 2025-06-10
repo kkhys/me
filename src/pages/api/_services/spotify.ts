@@ -9,6 +9,10 @@ const BASE_URL = "https://api.spotify.com/v1/me/player";
 
 type AccessToken = { access_token: string };
 
+export type SpotifyData = ReturnType<typeof mapSpotifyData> & {
+  isPlaying: boolean;
+};
+
 const getAccessToken = async (): Promise<AccessToken> => {
   const clientId = SPOTIFY_CLIENT_ID;
   const clientSecret = SPOTIFY_CLIENT_SECRET;
@@ -51,7 +55,7 @@ type SpotifyTrack = {
 
 const mapSpotifyData = (track: SpotifyTrack) => {
   return {
-    songUrl: track.external_urls.spotify,
+    songUrl: track.external_urls?.spotify,
     title: track.name,
     albumImageUrl: track.album.images[0]?.url ?? "",
     artist: track.artists.map((artist) => artist.name).join(", ") as string,
@@ -85,8 +89,4 @@ export const getSpotifyData = async () => {
   const { item: track } = await nowPlayingResponse.json();
 
   return { isPlaying: true, ...mapSpotifyData(track) };
-};
-
-export type SpotifyData = ReturnType<typeof mapSpotifyData> & {
-  isPlaying: boolean;
 };

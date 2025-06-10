@@ -44,9 +44,7 @@ export const GithubActivityChart = (props: Props) => {
   const [hoveredTile, setHoveredTile] = useState<string | null>(defaultValue);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
+  useEffect(() => setIsLoaded(true), []);
 
   const heatMapProps = {
     ...getDateProps(),
