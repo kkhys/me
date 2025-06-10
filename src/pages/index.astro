@@ -23,7 +23,8 @@ import { cn } from "#/lib/ui";
         <!--    ブログを見る<MoveRightIcon class="ml-1 mt-0.5 size-3" />-->
         <!--</a>-->
         <BentoGrid>
-            <div
+            <a
+                    href="/about"
                     class={cn(
                         "group/bento size-full shadow-input flex flex-col justify-between shadow-sm space-y-4 rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
                         "col-span-1 row-span-1 md:col-span-2 aspect-square"
@@ -44,7 +45,7 @@ import { cn } from "#/lib/ui";
                         About me
                     </div>
                 </div>
-            </div>
+            </a>
             <a
                     href={me.mastodon}
                     target="_blank"

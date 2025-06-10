@@ -1,0 +1,28 @@
+---
+import ArrowLeftIcon from "@lucide/astro/icons/arrow-left";
+import SEO from "#/components/seo.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { getCustomTransition } from "#/lib/custom-transition";
+---
+
+<BaseLayout pagefind>
+    <SEO
+            title='私について'
+            description='Keisuke Hayashi のブログ'
+            slot='seo'
+    />
+    <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[138px] xl:-translate-x-[260px]">
+        <a href="/" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
+            <ArrowLeftIcon class="size-3.5" />
+            ホーム
+        </a>
+    </div>
+    <h1 class="font-medium" transition:animate={getCustomTransition()}>
+        わたしについて
+    </h1>
+    <section class="mt-8">
+        <p class="text-muted-foreground text-sm">
+            準備中です。
+        </p>
+    </section>
+</BaseLayout>
