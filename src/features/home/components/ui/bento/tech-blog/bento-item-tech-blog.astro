@@ -1,0 +1,23 @@
+---
+import { TechBlogSlider } from "#/features/home/components/ui/bento/tech-blog/tech-blog-slider";
+import { cn } from "#/lib/ui";
+---
+
+<a
+        href="/blog/categories/tech"
+        class={cn(
+            "relative flex flex-col justify-between shadow-sm rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
+            "col-span-1 row-span-1 md:col-span-2 aspect-square"
+        )}
+>
+    <div class="pt-4 px-4">
+        <div class="my-2 text-sm font-semibold">
+            技術ブログ
+        </div>
+        <div class="text-xs text-muted-foreground">
+            フロントエンドが多めです。
+        </div>
+    </div>
+    <TechBlogSlider client:idle />
+    <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
+</a>

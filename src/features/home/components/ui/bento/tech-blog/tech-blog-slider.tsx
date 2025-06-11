@@ -1,17 +1,17 @@
-import { AstroIcon } from "#/components/ui/icons/astro";
-import { DockerIcon } from "#/components/ui/icons/docker";
-import { GatsbyIcon } from "#/components/ui/icons/gatsby";
-import { JavaIcon } from "#/components/ui/icons/java";
-import { NextJsIcon } from "#/components/ui/icons/next-js";
-import { PlayFrameworkIcon } from "#/components/ui/icons/play-framework";
-import { ReactIcon } from "#/components/ui/icons/react";
-import { RubyIcon } from "#/components/ui/icons/ruby";
-import { RubyOnRailsIcon } from "#/components/ui/icons/ruby-on-rails";
-import { ScalaIcon } from "#/components/ui/icons/scala";
-import { TailwindCssIcon } from "#/components/ui/icons/tailwind-css";
-import { TypeScriptIcon } from "#/components/ui/icons/type-script";
-import { InfiniteSlider } from "#/components/ui/infinite-slider";
-import { ProgressiveBlur } from "#/components/ui/progressive-blur";
+import { AstroIcon } from "#/components/ui/icons/astro.tsx";
+import { DockerIcon } from "#/components/ui/icons/docker.tsx";
+import { GatsbyIcon } from "#/components/ui/icons/gatsby.tsx";
+import { JavaIcon } from "#/components/ui/icons/java.tsx";
+import { NextJsIcon } from "#/components/ui/icons/next-js.tsx";
+import { PlayFrameworkIcon } from "#/components/ui/icons/play-framework.tsx";
+import { ReactIcon } from "#/components/ui/icons/react.tsx";
+import { RubyOnRailsIcon } from "#/components/ui/icons/ruby-on-rails.tsx";
+import { RubyIcon } from "#/components/ui/icons/ruby.tsx";
+import { ScalaIcon } from "#/components/ui/icons/scala.tsx";
+import { TailwindCssIcon } from "#/components/ui/icons/tailwind-css.tsx";
+import { TypeScriptIcon } from "#/components/ui/icons/type-script.tsx";
+import { InfiniteSlider } from "#/components/ui/infinite-slider.tsx";
+import { ProgressiveBlur } from "#/components/ui/progressive-blur.tsx";
 
 export const TechBlogSlider = () => (
   <div className="relative size-full overflow-hidden">

@@ -1,0 +1,64 @@
+---
+import { Picture } from "astro:assets";
+import mapDarkImage from "#/assets/images/map_dark.png";
+import mapLightImage from "#/assets/images/map_light.png";
+import NeumorphEyebrow from "#/components/ui/neumorph-eyebrow.astro";
+import { cn } from "#/lib/ui";
+---
+
+<a
+        href="https://www.google.com/maps/@35.682146268219824,139.79876900698156,15.375054950824978z"
+        target="_blank"
+        rel="noreferrer"
+        class={cn(
+            "relative shadow-sm rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
+            "col-span-1 row-span-1 md:col-span-2 aspect-square"
+        )}
+>
+    <Picture
+            src={mapLightImage}
+            alt="マップ"
+            class="size-full dark:hidden"
+            formats={['avif']}
+            widths={[330, 640, 670, 850]}
+            sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 220px, 850px"
+            width={850}
+            height={850}
+    />
+    <Picture
+            src={mapDarkImage}
+            alt="マップ"
+            class="size-full hidden dark:block"
+            formats={['avif']}
+            widths={[330, 640, 670, 850]}
+            sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 220px, 850px"
+            width={850}
+            height={850}
+    />
+    <div class="absolute top-0 left-0 translate-x-[83px] translate-y-[48px]">
+           <span class="relative grid place-content-center size-12">
+               <span class="absolute inline-flex size-full map-pulse rounded-full bg-[#679bff] opacity-75"></span>
+               <span class="inline-flex size-7 rounded-full bg-[#679bff] border-3 border-white map-shadow"></span>
+           </span>
+    </div>
+    <NeumorphEyebrow class="absolute bottom-2 left-2">
+        Tokyo, Japan
+    </NeumorphEyebrow>
+</a>
+
+<style>
+    .map-pulse {
+        animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    .map-shadow {
+        box-shadow: 0 16px 31px rgba(0,0,0,.13), 0 10px 18px rgba(0,0,0,.099), 0 6px 10px rgba(0,0,0,.079), 0 3px 5px rgba(0,0,0,.065), 0 1px 3px rgba(0,0,0,.051), 0 0 1px rgba(0,0,0,.031);
+    }
+
+    @keyframes ping {
+        75%, 100% {
+            transform: scale(2);
+            opacity: 0;
+        }
+    }
+</style>

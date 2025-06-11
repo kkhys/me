@@ -103,7 +103,7 @@ export const BottomNavigationBar = () => {
             <motion.button
               type="button"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-center w-full h-10 cursor-pointer mt-2 rounded-[13px] bg-secondary border"
+              className="grid place-content-center w-full h-10 cursor-pointer mt-2 rounded-[13px] bg-secondary border"
               whileTap={{ scale: 0.95 }}
             >
               <ArrowDownToLineIcon className="size-5" />

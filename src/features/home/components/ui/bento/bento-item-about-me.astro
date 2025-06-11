@@ -1,0 +1,32 @@
+---
+import { Picture } from "astro:assets";
+import profileImage from "#/assets/images/profile.jpg";
+import NeumorphEyebrow from "#/components/ui/neumorph-eyebrow.astro";
+import { ProgressiveBlur } from "#/components/ui/progressive-blur";
+import { cn } from "#/lib/ui";
+---
+
+<a
+        href="/about"
+        class={cn(
+            "relative shadow-sm rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
+            "col-span-1 row-span-1 md:col-span-2 aspect-square"
+        )}
+>
+    <Picture
+            src={profileImage}
+            alt="Keisuke Hayashi"
+            formats={['avif']}
+            widths={[330, 640, 670, 1000]}
+            sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 220px, 1000px"
+            width={1000}
+            height={1000}
+    />
+    <ProgressiveBlur
+            className='pointer-events-none absolute bottom-0 left-0 h-[40%] w-full'
+            blurIntensity={1.5}
+            blurLayers={3}
+    />
+    <NeumorphEyebrow class="absolute bottom-2 left-2">About me</NeumorphEyebrow>
+    <div class="absolute inset-0 bg-background/8 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-background/16" />
+</a>

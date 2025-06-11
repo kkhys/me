@@ -9,7 +9,7 @@ const { type, checked, ...rest } = Astro.props;
 
 {type === "checkbox" && (
     <button role="checkbox" aria-checked={checked ? 'true' : 'false'} class="size-4 rounded-sm border border-primary shadow disabled:cursor-not-allowed disabled:opacity-50 aria-checked:bg-primary aria-checked:text-primary-foreground" {...rest}>
-        <span class="flex items-center justify-center">
+        <span class="grid place-content-center">
             {checked && (
                 <CheckIcon class="size-4" />
             )}

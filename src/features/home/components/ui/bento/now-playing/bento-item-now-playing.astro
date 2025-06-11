@@ -1,0 +1,8 @@
+---
+import NowPlayingFallback from "#/features/home/components/ui/bento/now-playing/now-playing-fallback.astro";
+import NowPlaying from "#/features/home/components/ui/bento/now-playing/now-playing.astro";
+---
+
+<NowPlaying server:defer>
+    <NowPlayingFallback slot="fallback" />
+</NowPlaying>

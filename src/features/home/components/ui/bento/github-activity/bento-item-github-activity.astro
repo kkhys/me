@@ -1,0 +1,29 @@
+---
+import Github from "#/components/ui/icons/github.astro";
+import GithubActivityFallback from "#/features/home/components/ui/bento/github-activity/github-activity-fallback.astro";
+import GithubActivity from "#/features/home/components/ui/bento/github-activity/github-activity.astro";
+import { cn } from "#/lib/ui";
+---
+
+<div
+        class={cn(
+            "shadow-sm rounded-xl border bg-background p-4 transition duration-200 dark:shadow-none",
+            "col-span-1 row-span-1 md:col-span-4 aspect-[2/1]",
+            "flex justify-between h-full"
+        )}
+>
+    <div>
+        <div class="grid place-content-center size-10 shadow-sm rounded-[8px] bg-[#171515] border">
+            <Github class="size-6" />
+        </div>
+        <div class="my-2 font-semibold">
+            GitHub
+        </div>
+        <div class="text-xs text-muted-foreground">
+            kkhys
+        </div>
+    </div>
+    <GithubActivity server:defer>
+        <GithubActivityFallback slot="fallback"  />
+    </GithubActivity>
+</div>

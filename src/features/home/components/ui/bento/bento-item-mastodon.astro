@@ -1,0 +1,26 @@
+---
+import Mastodon from "#/components/ui/icons/mastodon.astro";
+import { me } from "#/config/site";
+import { cn } from "#/lib/ui";
+---
+
+<a
+        href={me.mastodon}
+        target="_blank"
+        rel="noreferrer"
+        class={cn(
+            "relative shadow-sm rounded-xl border bg-background p-4 overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
+            "col-span-1 row-span-1 md:col-span-2 aspect-square"
+        )}
+>
+    <div class="grid place-content-center size-10 shadow-sm rounded-[8px] bg-gradient-to-b from-[#6364ff] to-[#563acc] border border-[#5348cc]">
+        <Mastodon class="size-5 fill-white" />
+    </div>
+    <div class="my-2 font-semibold">
+        Mastodon
+    </div>
+    <div class="text-xs text-muted-foreground">
+        mastodon.kkhys.me
+    </div>
+    <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
+</a>
