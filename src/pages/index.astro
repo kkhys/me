@@ -1,5 +1,8 @@
 ---
 import { Picture } from "astro:assets";
+import mapDarkImage from "#/assets/images/map_dark.png";
+import mapLightImage from "#/assets/images/map_light.png";
+import profileImage from "#/assets/images/profile.jpg";
 import Budoux from "#/components/budoux.astro";
 import { me, siteConfig } from "#/config/site";
 import BentoGrid from "#/features/home/components/ui/bento/bento-grid.astro";
@@ -20,8 +23,7 @@ import { cn } from "#/lib/ui";
     <Budoux>
         <p class="text-sm text-muted-foreground mt-2" transition:animate={getCustomTransition(0.15)}>東京を拠点とするフルスタック開発者。何かを作り、人々に喜びと驚きを与えることが大好きです。</p>
     </Budoux>
-    <div class="mt-10">
-        <BentoGrid>
+        <BentoGrid class="mt-10">
             <a
                     href="/about"
                     class={cn(
@@ -31,7 +33,7 @@ import { cn } from "#/lib/ui";
             >
                 <div class="relative transition duration-200 group-hover/bento:translate-x-0">
                     <Picture
-                        src="/images/profile.jpg"
+                        src={profileImage}
                         alt="Keisuke Hayashi"
                         class=""
                         formats={['avif']}
@@ -115,7 +117,7 @@ import { cn } from "#/lib/ui";
             >
                 <div class="relative size-full transition duration-200 group-hover/bento:translate-x-0">
                     <Picture
-                            src="/images/map_light.png"
+                            src={mapLightImage}
                             alt="マップ"
                             class="size-full dark:hidden"
                             formats={['avif']}
@@ -125,7 +127,7 @@ import { cn } from "#/lib/ui";
                             height={850}
                     />
                     <Picture
-                            src="/images/map_dark.png"
+                            src={mapDarkImage}
                             alt="マップ"
                             class="size-full hidden dark:block"
                             formats={['avif']}
@@ -190,6 +192,29 @@ import { cn } from "#/lib/ui";
                 </div>
                 <TechBlogSlider client:idle />
             </a>
+        </BentoGrid>
+    <div class="mt-10">
+        <h2 class="font-medium" transition:animate={getCustomTransition()}>
+            ブログ
+        </h2>
+        <BentoGrid class="mt-10">
+            <div
+                    class={cn(
+                        "group/bento size-full shadow-input flex flex-col justify-between shadow-sm space-y-4 rounded-xl border bg-background p-4 transition duration-200 active:scale-95 dark:shadow-none",
+                        "col-span-1 row-span-1 md:col-span-2 aspect-square"
+                    )}
+            >
+                header
+                <div class="transition duration-200 group-hover/bento:translate-x-0">
+                    icon
+                    <div class="my-2 font-semibold">
+                        title
+                    </div>
+                    <div class="text-xs text-muted-foreground">
+                        description
+                    </div>
+                </div>
+            </div>
         </BentoGrid>
     </div>
 </BaseLayout>
