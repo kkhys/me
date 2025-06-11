@@ -56,15 +56,7 @@ export const NowPlaying = ({ initialData }: Props) => {
   }
 
   return (
-    <a
-      href={data?.songUrl}
-      target="_blank"
-      rel="noreferrer"
-      className={cn(
-        "relative size-full flex justify-between gap-4 shadow-sm rounded-xl border bg-background p-4 overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
-        "col-span-1 row-span-1 md:col-span-4 aspect-[2/1]",
-      )}
-    >
+    <>
       <div className="flex flex-col justify-between w-full">
         <div>
           <div className="grid place-content-center size-10 shadow-sm rounded-[8px] bg-background border">
@@ -93,14 +85,18 @@ export const NowPlaying = ({ initialData }: Props) => {
           </div>
         )}
       </div>
-      <div className="aspect-square h-full p-4">
+      <a
+        href={data?.songUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="aspect-square h-full p-4 hover:bg-foreground/2 rounded-md active:bg-foreground/6 transition duration-200 active:scale-95"
+      >
         <img
           src={data?.albumImageUrl}
           alt={data?.isPlaying ? "Now Playing Song" : "Last Played Song"}
           className="aspect-square rounded-sm size-full object-cover shadow-sm"
         />
-      </div>
-      <div className="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
-    </a>
+      </a>
+    </>
   );
 };

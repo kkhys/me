@@ -3,6 +3,7 @@ import { Picture } from "astro:assets";
 import mapDarkImage from "#/assets/images/map_dark.png";
 import mapLightImage from "#/assets/images/map_light.png";
 import NeumorphEyebrow from "#/components/ui/neumorph-eyebrow.astro";
+import { getCustomTransition } from "#/lib/custom-transition";
 import { cn } from "#/lib/ui";
 ---
 
@@ -14,6 +15,7 @@ import { cn } from "#/lib/ui";
             "relative size-full shadow-sm rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
             "col-span-1 row-span-1 md:col-span-2 aspect-square"
         )}
+        transition:animate={getCustomTransition(0.45)}
 >
     <Picture
             src={mapLightImage}

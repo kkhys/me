@@ -1,6 +1,7 @@
 ---
 import Mastodon from "#/components/ui/icons/mastodon.astro";
 import { me } from "#/config/site";
+import { getCustomTransition } from "#/lib/custom-transition";
 import { cn } from "#/lib/ui";
 ---
 
@@ -12,6 +13,7 @@ import { cn } from "#/lib/ui";
             "relative size-full shadow-sm rounded-xl border bg-background p-4 overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
             "col-span-1 row-span-1 md:col-span-2 aspect-square"
         )}
+        transition:animate={getCustomTransition(0.35)}
 >
     <div class="grid place-content-center size-10 shadow-sm rounded-[8px] bg-gradient-to-b from-[#6364ff] to-[#563acc] border border-[#5348cc]">
         <Mastodon class="size-5 fill-white" />

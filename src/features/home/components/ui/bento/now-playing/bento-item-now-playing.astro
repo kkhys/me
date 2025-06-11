@@ -1,8 +1,18 @@
 ---
 import NowPlayingFallback from "#/features/home/components/ui/bento/now-playing/now-playing-fallback.astro";
 import NowPlaying from "#/features/home/components/ui/bento/now-playing/now-playing.astro";
+import { getCustomTransition } from "#/lib/custom-transition";
+import { cn } from "#/lib/ui";
 ---
 
-<NowPlaying server:defer>
-    <NowPlayingFallback slot="fallback" />
-</NowPlaying>
+<div
+        class={cn(
+            "size-full flex justify-between gap-4 shadow-sm rounded-xl border bg-background p-4 overflow-hidden dark:shadow-none",
+            "col-span-1 row-span-1 md:col-span-4 aspect-[2/1]",
+        )}
+        transition:animate={getCustomTransition(0.55)}
+>
+    <NowPlaying server:defer>
+        <NowPlayingFallback slot="fallback" />
+    </NowPlaying>
+</div>

@@ -3,6 +3,7 @@ import { Picture } from "astro:assets";
 import profileImage from "#/assets/images/profile.jpg";
 import NeumorphEyebrow from "#/components/ui/neumorph-eyebrow.astro";
 import { ProgressiveBlur } from "#/components/ui/progressive-blur";
+import { getCustomTransition } from "#/lib/custom-transition";
 import { cn } from "#/lib/ui";
 ---
 
@@ -12,6 +13,7 @@ import { cn } from "#/lib/ui";
             "relative size-full shadow-sm rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
             "col-span-1 row-span-1 md:col-span-2 aspect-square"
         )}
+        transition:animate={getCustomTransition(0.30)}
 >
     <Picture
             src={profileImage}

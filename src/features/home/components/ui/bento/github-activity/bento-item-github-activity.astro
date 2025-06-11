@@ -2,6 +2,7 @@
 import Github from "#/components/ui/icons/github.astro";
 import GithubActivityFallback from "#/features/home/components/ui/bento/github-activity/github-activity-fallback.astro";
 import GithubActivity from "#/features/home/components/ui/bento/github-activity/github-activity.astro";
+import { getCustomTransition } from "#/lib/custom-transition";
 import { cn } from "#/lib/ui";
 ---
 
@@ -11,6 +12,7 @@ import { cn } from "#/lib/ui";
             "col-span-1 row-span-1 md:col-span-4 aspect-[2/1]",
             "flex justify-between h-full"
         )}
+        transition:animate={getCustomTransition(0.50)}
 >
     <div>
         <div class="grid place-content-center size-10 shadow-sm rounded-[8px] bg-[#171515] border">
