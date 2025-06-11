@@ -5,6 +5,7 @@ import { siteConfig } from "#/config/site";
 import ContentWrapper from "#/features/blog/components/content-wrapper.astro";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BlogLayout from "#/layouts/blog-layout.astro";
+// import { client } from "#/lib/client";
 import { convertDateToString } from "#/lib/date";
 
 export const getStaticPaths = (async () =>
@@ -22,6 +23,13 @@ export const getStaticPaths = (async () =>
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
+
+// const { lastUpdatedTime } = await client.api.github["last-updated-file"]
+//   .$get({ query: { path: `/${entry.filePath?.replace(/^content\//, "")}` } })
+//   .then((res) => res.json());
+//
+// const updatedAt = new Date(lastUpdatedTime);
+// const updatedAtString = updatedAt && convertDateToString(updatedAt);
 
 const contentPath = entry.filePath?.replace("content/", "");
 const editUrl = `${siteConfig.github.content}/edit/main/${contentPath}`;

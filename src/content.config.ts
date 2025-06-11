@@ -15,6 +15,8 @@ const blog = defineCollection({
       status: z.enum(["draft", "published"]).default("draft"),
       publishedAt: z.date(),
       publishedAtString: z.string().optional(),
+      updatedAt: z.date().optional(),
+      updatedAtString: z.string().optional(),
       editUrl: z.string().optional(),
       sourceUrl: z.string().optional(),
       revisionHistoryUrl: z.string().optional(),

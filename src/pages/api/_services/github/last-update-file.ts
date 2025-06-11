@@ -7,10 +7,10 @@ type LastUpdatedTimeData = {
 export const getLastUpdatedTimeByFile = async (
   filePath: string,
 ): Promise<LastUpdatedTimeData> => {
-  const API_URL = "https://api.github.com/repos/kkhys/me/commits?";
+  const API_URL = "https://api.github.com/repos/kkhys/content/commits?";
 
   const params = new URLSearchParams({
-    path: `content/${filePath}`,
+    path: filePath,
     per_page: "1",
   }).toString();
 
