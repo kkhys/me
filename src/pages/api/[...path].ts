@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { Hono } from "hono";
 
 import { github } from "#/pages/api/_services/github";
-import { getSpotifyData } from "#/pages/api/_services/spotify.ts";
+import { getSpotifyData } from "#/pages/api/_services/spotify";
 
 const app = new Hono()
   .basePath("/api")

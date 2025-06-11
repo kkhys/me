@@ -1,6 +1,6 @@
 import HeatMap, { type SVGProps } from "@uiw/react-heat-map";
 import { useEffect, useState } from "react";
-import { cn } from "#/lib/ui.ts";
+import { cn } from "#/lib/ui";
 import type { GithubContributionData } from "#/pages/api/_services/github/contributions";
 
 interface Props extends GithubContributionData {}
@@ -68,13 +68,13 @@ export const GithubActivityChart = (props: Props) => {
   };
 
   return (
-    <div className="flex flex-col justify-between p-1.5">
+    <div className="flex flex-col justify-between gap-1 p-1.5">
       <p className="line-clamp-1 text-[13px] text-muted-foreground">
         {hoveredTile}
       </p>
       <div
         className={cn(
-          "flex justify-end transition-all duration-300 ease-in-out",
+          "flex justify-start md:justify-end transition-all duration-300 ease-in-out",
           isLoaded ? "blur-0 opacity-100" : "blur-sm opacity-70",
         )}
       >

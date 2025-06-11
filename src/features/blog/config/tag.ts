@@ -1,4 +1,4 @@
-import type { CategoryTitle } from "#/features/blog/config/category.ts";
+import type { CategoryTitle } from "#/features/blog/config/category";
 
 export type Tag = Record<"title" | "label" | "slug" | "emoji", string>;
 export type AllTagsTitle = (typeof tags)[keyof typeof tags][number]["title"];

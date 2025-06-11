@@ -21,7 +21,7 @@ const { class: className } = Astro.props;
             href="/blog/posts/b1v6tlh"
             class={cn(
                 "relative size-full flex flex-col justify-around shadow-sm rounded-xl border bg-background p-6 overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
-                "col-span-1 row-span-2 md:col-span-4 aspect-square"
+                "col-span-2 row-span-2 md:col-span-4 aspect-square"
             )}
     >
         <div class="mb-4">
@@ -150,7 +150,7 @@ const { class: className } = Astro.props;
                 sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
                 width={1200}
                 height={1200}
-                class="rounded-lg object-cover object-bottom aspect-[2/1] shadow-sm"
+                class="rounded-lg object-cover object-bottom aspect-square md:aspect-[2/1] shadow-sm"
         />
         <ProgressiveBlur
                 className='pointer-events-none absolute -bottom-1 left-0 h-[40%] w-full'

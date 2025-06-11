@@ -1,7 +1,7 @@
 import rss from "@astrojs/rss";
 
 import type { APIContext } from "astro";
-import { siteConfig } from "#/config/site.ts";
+import { siteConfig } from "#/config/site";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 
