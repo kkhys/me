@@ -1,0 +1,169 @@
+---
+import { Picture } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+import featuredBlog01 from "#/assets/images/featured-blog-01.jpg";
+import featuredBlog02 from "#/assets/images/featured-blog-02.jpg";
+import featuredBlog03 from "#/assets/images/featured-blog-03.jpg";
+import featuredBlog04 from "#/assets/images/featured-blog-04.jpg";
+import featuredBlog05 from "#/assets/images/featured-blog-05.jpg";
+import Budoux from "#/components/budoux.astro";
+import { ProgressiveBlur } from "#/components/ui/progressive-blur";
+import BentoGrid from "#/features/home/components/ui/bento/bento-grid.astro";
+import { cn } from "#/lib/ui";
+
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className } = Astro.props;
+---
+
+<BentoGrid class={className}>
+    <a
+            href="/blog/posts/b1v6tlh"
+            class={cn(
+                "relative size-full flex flex-col justify-around shadow-sm rounded-xl border bg-background p-6 overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
+                "col-span-1 row-span-2 md:col-span-4 aspect-square"
+            )}
+    >
+        <div class="mb-4">
+            <div class="mb-2 line-clamp-2">
+                デスク構成スナップショット 2024
+            </div>
+            <Budoux>
+                <p class="text-xs text-muted-foreground line-clamp-3">
+                    フルリモートで 1 日 10 時間デスクワークする筆者が、作業効率を追求して構築したデスク環境を詳しく紹介。FlexiSpot 昇降デスク、Dell 4K モニター、HHKB、自作 PC など愛用ガジェットから休憩スペースまで。
+                </p>
+            </Budoux>
+        </div>
+        <Picture
+                src={featuredBlog01}
+                alt="デスク構成スナップショット 2024"
+                formats={['avif']}
+                widths={[330, 640, 670, 1200]}
+                sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
+                width={1200}
+                height={1200}
+                class="rounded-lg object-cover aspect-[3/2] shadow-sm"
+        />
+        <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
+    </a>
+    <a
+            href="/blog/posts/b1r3zrr"
+            class={cn(
+                "relative size-full flex flex-col justify-between shadow-sm rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
+                "col-span-1 row-span-1 md:col-span-2 aspect-square"
+            )}
+    >
+        <Picture
+                src={featuredBlog02}
+                alt="Mac mini という選択"
+                formats={['avif']}
+                widths={[330, 640, 670, 1200]}
+                sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
+                width={1200}
+                height={1200}
+                class="rounded-lg object-cover aspect-square shadow-sm"
+        />
+        <ProgressiveBlur
+                className='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
+                blurIntensity={8}
+                blurLayers={4}
+        />
+        <div class='absolute bottom-0 left-0'>
+            <div class='p-4'>
+                <p class='text-sm text-white line-clamp-1'>Mac mini という選択</p>
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-background/8 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-background/16" />
+    </a>
+    <a
+            href="/blog/posts/b1ppkfs"
+            class={cn(
+                "relative size-full flex flex-col justify-between shadow-sm rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
+                "col-span-1 row-span-1 md:col-span-2 aspect-square"
+            )}
+    >
+        <Picture
+                src={featuredBlog03}
+                alt="さよなら、My 自作 PC"
+                formats={['avif']}
+                widths={[330, 640, 670, 1200]}
+                sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
+                width={1200}
+                height={1200}
+                class="rounded-lg object-cover object-right aspect-square shadow-sm"
+        />
+        <ProgressiveBlur
+                className='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
+                blurIntensity={8}
+                blurLayers={4}
+        />
+        <div class='absolute bottom-0 left-0'>
+            <div class='p-4'>
+                <p class='text-sm text-white line-clamp-1'>さよなら、My 自作 PC</p>
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-background/8 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-background/16" />
+    </a>
+    <a
+            href="/blog/posts/b1zn5cl"
+            class={cn(
+                "relative size-full flex flex-col justify-between shadow-sm rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
+                "col-span-1 row-span-1 md:col-span-2 aspect-square"
+            )}
+    >
+        <Picture
+                src={featuredBlog04}
+                alt="景色と料理を楽しむ、鹿児島 3 泊 4 日の旅"
+                formats={['avif']}
+                widths={[330, 640, 670, 1200]}
+                sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
+                width={1200}
+                height={1200}
+                class="rounded-lg object-cover object-left aspect-square shadow-sm"
+        />
+        <ProgressiveBlur
+                className='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
+                blurIntensity={8}
+                blurLayers={4}
+        />
+        <div class='absolute bottom-0 left-0'>
+            <div class='p-4'>
+                <Budoux>
+                    <p class='text-sm text-white line-clamp-2'>景色と料理を楽しむ、鹿児島 3 泊 4 日の旅</p>
+                </Budoux>
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-background/8 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-background/16" />
+    </a>
+    <a
+            href="/blog/posts/b1v00e8"
+            class={cn(
+                "relative size-full flex flex-col justify-between shadow-sm rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
+                "col-span-1 row-span-1 md:col-span-4 aspect-[2/1]"
+            )}
+    >
+        <Picture
+                src={featuredBlog05}
+                alt="バリ島旅行記"
+                formats={['avif']}
+                widths={[330, 640, 670, 1200]}
+                sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
+                width={1200}
+                height={1200}
+                class="rounded-lg object-cover object-bottom aspect-[2/1] shadow-sm"
+        />
+        <ProgressiveBlur
+                className='pointer-events-none absolute -bottom-1 left-0 h-[40%] w-full'
+                blurIntensity={6}
+                blurLayers={4}
+        />
+        <div class='absolute bottom-0 left-0'>
+            <div class='p-4'>
+                <Budoux>
+                    <p class='text-sm text-white line-clamp-2'>バリ島旅行記</p>
+                </Budoux>
+            </div>
+        </div>
+        <div class="absolute inset-0 bg-background/8 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-background/16" />
+    </a>
+</BentoGrid>

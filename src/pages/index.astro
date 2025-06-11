@@ -1,10 +1,13 @@
 ---
+import MoveRightIcon from "@lucide/astro/icons/move-right";
 import Budoux from "#/components/budoux.astro";
+import { buttonVariants } from "#/components/ui/button/button.astro";
 import BentoGrid from "#/features/home/components/ui/bento/bento-grid.astro";
 import BentoItemAboutMe from "#/features/home/components/ui/bento/bento-item-about-me.astro";
 import BentoItemMap from "#/features/home/components/ui/bento/bento-item-map.astro";
 import BentoItemMastodon from "#/features/home/components/ui/bento/bento-item-mastodon.astro";
 import BentoItemSupport from "#/features/home/components/ui/bento/bento-item-support.astro";
+import FeaturedEntry from "#/features/home/components/ui/bento/featured-entry.astro";
 import BentoItemGithubActivity from "#/features/home/components/ui/bento/github-activity/bento-item-github-activity.astro";
 import BentoItemNowPlaying from "#/features/home/components/ui/bento/now-playing/bento-item-now-playing.astro";
 import BentoItemTechBlog from "#/features/home/components/ui/bento/tech-blog/bento-item-tech-blog.astro";
@@ -29,28 +32,14 @@ import { cn } from "#/lib/ui";
             <BentoItemNowPlaying />
             <BentoItemTechBlog />
         </BentoGrid>
-    <div class="mt-10">
+    <div class="mt-24">
         <h2 class="font-medium" transition:animate={getCustomTransition()}>
-            ブログ
+            おすすめの記事
         </h2>
-        <BentoGrid class="mt-10">
-            <div
-                    class={cn(
-                        "group/bento size-full shadow-input flex flex-col justify-between shadow-sm space-y-4 rounded-xl border bg-background p-4 transition duration-200 active:scale-95 dark:shadow-none",
-                        "col-span-1 row-span-1 md:col-span-2 aspect-square"
-                    )}
-            >
-                header
-                <div class="transition duration-200 group-hover/bento:translate-x-0">
-                    icon
-                    <div class="my-2 font-semibold">
-                        title
-                    </div>
-                    <div class="text-xs text-muted-foreground">
-                        description
-                    </div>
-                </div>
-            </div>
-        </BentoGrid>
+        <FeaturedEntry class="mt-10" />
+        <a href="/blog" class={cn('mt-8', buttonVariants({ variant: 'link'}))}>
+            すべての記事を見る
+            <MoveRightIcon class="size-4" />
+        </a>
     </div>
 </BaseLayout>

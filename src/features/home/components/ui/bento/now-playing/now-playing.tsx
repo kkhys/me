@@ -61,7 +61,7 @@ export const NowPlaying = ({ initialData }: Props) => {
       target="_blank"
       rel="noreferrer"
       className={cn(
-        "relative flex justify-between gap-4 shadow-sm rounded-xl border bg-background p-4 transition duration-200 active:scale-95 dark:shadow-none",
+        "relative size-full flex justify-between gap-4 shadow-sm rounded-xl border bg-background p-4 overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
         "col-span-1 row-span-1 md:col-span-4 aspect-[2/1]",
       )}
     >
