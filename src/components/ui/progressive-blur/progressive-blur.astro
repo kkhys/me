@@ -1,0 +1,43 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "#/lib/ui";
+import { type GRADIENT_ANGLES, generateLayers } from "./utils";
+
+export interface Props extends HTMLAttributes<"div"> {
+  direction?: keyof typeof GRADIENT_ANGLES;
+  blurLayers?: number;
+  blurIntensity?: number;
+}
+
+const {
+  direction = "bottom",
+  blurLayers = 8,
+  blurIntensity = 0.25,
+  class: className,
+  ...props
+} = Astro.props;
+
+const layers = Math.max(blurLayers, 2);
+const segmentSize = 1 / (blurLayers + 1);
+
+const layerData = generateLayers({
+  direction,
+  layers,
+  segmentSize,
+  blurIntensity,
+});
+---
+
+<div class={cn("relative", className)} {...props}>
+    {layerData.map(({ gradient, blurAmount }) => (
+            <div
+                    class="pointer-events-none absolute inset-0 rounded-[inherit]"
+                    style={`
+        mask-image: ${gradient};
+        -webkit-mask-image: ${gradient};
+        backdrop-filter: blur(${blurAmount}px);
+        -webkit-backdrop-filter: blur(${blurAmount}px);
+      `}
+            />
+    ))}
+</div>

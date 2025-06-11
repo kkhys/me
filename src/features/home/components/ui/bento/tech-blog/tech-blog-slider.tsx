@@ -11,7 +11,7 @@ import { ScalaIcon } from "#/components/ui/icons/scala.tsx";
 import { TailwindCssIcon } from "#/components/ui/icons/tailwind-css.tsx";
 import { TypeScriptIcon } from "#/components/ui/icons/type-script.tsx";
 import { InfiniteSlider } from "#/components/ui/infinite-slider.tsx";
-import { ProgressiveBlur } from "#/components/ui/progressive-blur.tsx";
+import { ProgressiveBlurReact } from "#/components/ui/progressive-blur";
 
 export const TechBlogSlider = () => (
   <div className="relative size-full overflow-hidden">
@@ -37,12 +37,12 @@ export const TechBlogSlider = () => (
         <RubyOnRailsIcon className="size-8" />
       </div>
     </InfiniteSlider>
-    <ProgressiveBlur
+    <ProgressiveBlurReact
       className="pointer-events-none absolute top-0 left-0 h-full w-[50px]"
       direction="left"
       blurIntensity={1}
     />
-    <ProgressiveBlur
+    <ProgressiveBlurReact
       className="pointer-events-none absolute top-0 right-0 h-full w-[50px]"
       direction="right"
       blurIntensity={1}

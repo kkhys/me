@@ -7,7 +7,7 @@ import featuredBlog03 from "#/assets/images/featured-blog-03.jpg";
 import featuredBlog04 from "#/assets/images/featured-blog-04.jpg";
 import featuredBlog05 from "#/assets/images/featured-blog-05.jpg";
 import Budoux from "#/components/budoux.astro";
-import { ProgressiveBlur } from "#/components/ui/progressive-blur";
+import ProgressiveBlur from "#/components/ui/progressive-blur/progressive-blur.astro";
 import BentoGrid from "#/features/home/components/ui/bento/bento-grid.astro";
 import { cn } from "#/lib/ui";
 
@@ -64,7 +64,7 @@ const { class: className } = Astro.props;
                 class="rounded-lg object-cover aspect-square shadow-sm"
         />
         <ProgressiveBlur
-                className='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
+                class='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
                 blurIntensity={8}
                 blurLayers={4}
         />
@@ -93,7 +93,7 @@ const { class: className } = Astro.props;
                 class="rounded-lg object-cover object-right aspect-square shadow-sm"
         />
         <ProgressiveBlur
-                className='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
+                class='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
                 blurIntensity={8}
                 blurLayers={4}
         />
@@ -122,7 +122,7 @@ const { class: className } = Astro.props;
                 class="rounded-lg object-cover object-left aspect-square shadow-sm"
         />
         <ProgressiveBlur
-                className='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
+                class='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
                 blurIntensity={8}
                 blurLayers={4}
         />
@@ -153,7 +153,7 @@ const { class: className } = Astro.props;
                 class="rounded-lg object-cover object-bottom aspect-square md:aspect-[2/1] shadow-sm"
         />
         <ProgressiveBlur
-                className='pointer-events-none absolute -bottom-1 left-0 h-[40%] w-full'
+                class='pointer-events-none absolute -bottom-1 left-0 h-[40%] w-full'
                 blurIntensity={6}
                 blurLayers={4}
         />
