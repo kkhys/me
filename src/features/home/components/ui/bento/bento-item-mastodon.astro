@@ -1,4 +1,5 @@
 ---
+import Budoux from "#/components/budoux.astro";
 import Mastodon from "#/components/ui/icons/mastodon.astro";
 import { me } from "#/config/site";
 import { getCustomTransition } from "#/lib/custom-transition";
@@ -21,8 +22,10 @@ import { cn } from "#/lib/ui";
     <div class="my-2 font-semibold">
         Mastodon
     </div>
-    <div class="text-xs text-muted-foreground">
-        mastodon.kkhys.me
-    </div>
+    <Budoux>
+        <div class="text-xs text-muted-foreground">
+            日々のつぶやき
+        </div>
+    </Budoux>
     <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
 </a>

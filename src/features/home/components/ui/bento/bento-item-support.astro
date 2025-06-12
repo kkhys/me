@@ -1,4 +1,5 @@
 ---
+import Budoux from "#/components/budoux.astro";
 import BuyMeACoffee from "#/components/ui/icons/buy-me-a-coffee.astro";
 import { siteConfig } from "#/config/site";
 import { getCustomTransition } from "#/lib/custom-transition";
@@ -21,8 +22,10 @@ import { cn } from "#/lib/ui";
     <div class="my-2 font-semibold">
         Buy Me a Coffee
     </div>
-    <div class="text-xs text-muted-foreground">
-        coff.ee/kkhys
-    </div>
+    <Budoux>
+        <div class="text-xs text-muted-foreground">
+            カフェイン補給にご協力を
+        </div>
+    </Budoux>
     <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
 </a>

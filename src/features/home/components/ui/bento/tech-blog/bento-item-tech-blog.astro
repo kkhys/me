@@ -1,4 +1,5 @@
 ---
+import Budoux from "#/components/budoux.astro";
 import { TechBlogSlider } from "#/features/home/components/ui/bento/tech-blog/tech-blog-slider";
 import { getCustomTransition } from "#/lib/custom-transition";
 import { cn } from "#/lib/ui";
@@ -16,9 +17,11 @@ import { cn } from "#/lib/ui";
         <div class="my-2 text-sm font-semibold">
             技術ブログ
         </div>
-        <div class="text-xs text-muted-foreground">
-            日々の学びをまとめています。
-        </div>
+        <Budoux>
+            <div class="text-xs text-muted-foreground">
+                日々の学びをまとめています
+            </div>
+        </Budoux>
     </div>
     <TechBlogSlider client:idle />
     <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
