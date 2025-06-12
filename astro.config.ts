@@ -175,6 +175,9 @@ export default defineConfig({
   },
   image: {
     remotePatterns: [{ protocol: "https" }],
+    service: process.env.CI
+      ? { entrypoint: "astro/assets/services/noop" }
+      : { entrypoint: "astro/assets/services/sharp" },
   },
   vite: {
     plugins: [tailwindcss()],
