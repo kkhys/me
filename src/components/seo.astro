@@ -27,7 +27,7 @@ const {
 const buildMetaData = () => ({
   title: title ? `${title}｜${siteConfig.title}` : siteConfig.title,
   description: description ?? siteConfig.description,
-  image: imageUrl ?? `${BASE_URL}/images/opengraph-image.png`,
+  image: imageUrl ?? `${BASE_URL}/api/og/default.png`,
 });
 
 const buildArticleData = () => {

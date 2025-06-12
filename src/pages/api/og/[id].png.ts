@@ -17,14 +17,19 @@ export const getStaticPaths = (async () =>
 export const GET: APIRoute = async ({ props }) => {
   const {
     entry: {
-      data: { emoji },
+      data: { title },
     },
   } = props;
 
-  if (!emoji) {
+  if (!title) {
     return new Response("Not found", { status: 404 });
   }
 
-  const image = await opengraphImage({ emoji });
-  return new Response(image);
+  const image = await opengraphImage({ title });
+  return new Response(image, {
+    headers: {
+      "Content-Type": "image/png",
+      "Cache-Control": "public, max-age=31536000, immutable",
+    },
+  });
 };
