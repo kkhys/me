@@ -13,10 +13,17 @@ import BentoItemNowPlaying from "#/features/home/components/ui/bento/now-playing
 import BentoItemTechBlog from "#/features/home/components/ui/bento/tech-blog/bento-item-tech-blog.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { getCustomTransition } from "#/lib/custom-transition";
+import { websiteSchema } from "#/lib/json-ld";
 import { cn } from "#/lib/ui";
 ---
 
 <BaseLayout pagefind>
+    <script
+            is:inline
+            type='application/ld+json'
+            set:html={JSON.stringify(websiteSchema)}
+            slot='head'
+    />
     <h1 class="font-medium" transition:animate={getCustomTransition()}>
         Keisuke Hayashi
     </h1>

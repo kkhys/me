@@ -1,7 +1,6 @@
 export const siteConfig = {
   title: "Keisuke Hayashi",
   description: "Keisuke Hayashi の個人サイト",
-  url: "https://kkhys.me",
   support: "https://coff.ee/kkhys",
   github: {
     me: "https://github.com/kkhys/me",

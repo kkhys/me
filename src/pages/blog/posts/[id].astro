@@ -1,12 +1,15 @@
 ---
 import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
+import type { BreadcrumbList, WithContext } from "schema-dts";
 import { siteConfig } from "#/config/site";
 import ContentWrapper from "#/features/blog/components/content-wrapper.astro";
+import { getCategoryByTitle } from "#/features/blog/config/category";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BlogLayout from "#/layouts/blog-layout.astro";
 // import { client } from "#/lib/client";
 import { convertDateToString } from "#/lib/date";
+import { getBlogPostingSchema } from "#/lib/json-ld";
 
 export const getStaticPaths = (async () =>
   (await getPublicBlogEntries()).map((entry) => {
@@ -24,19 +27,64 @@ const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
 
+// FIXME: dev では動くが、build すると動かない
 // const { lastUpdatedTime } = await client.api.github["last-updated-file"]
 //   .$get({ query: { path: `/${entry.filePath?.replace(/^content\//, "")}` } })
 //   .then((res) => res.json());
 //
 // const updatedAt = new Date(lastUpdatedTime);
 // const updatedAtString = updatedAt && convertDateToString(updatedAt);
+// entry.data.updatedAt = updatedAt;
 
 const contentPath = entry.filePath?.replace("content/", "");
 const editUrl = `${siteConfig.github.content}/edit/main/${contentPath}`;
 const sourceUrl = `${siteConfig.github.content}/blob/main/${contentPath}?plain=1`;
 const revisionHistoryUrl = `${siteConfig.github.content}/commits/main/${contentPath}`;
+
+const blogPostingSchema = getBlogPostingSchema(entry);
+const categoryObject = getCategoryByTitle(entry.data.category);
+
+if (!categoryObject) {
+  throw new Error(`Category "${entry.data.category}" not found`);
+}
+
+const breadcrumbSchema: WithContext<BreadcrumbList> = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Blog",
+      item: `${import.meta.env.SITE}/blog`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: categoryObject.label,
+      item: `${import.meta.env.SITE}/blog/categories/${categoryObject.slug}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: entry.data.title,
+      item: `${import.meta.env.SITE}/blog/posts/${entry.id}`,
+    },
+  ],
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [blogPostingSchema, breadcrumbSchema],
+};
 ---
 
 <BlogLayout headings={headings} id={entry.id} publishedAtString={publishedAtString} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} {...entry.data}>
+    <script
+            is:inline
+            type='application/ld+json'
+            set:html={JSON.stringify(jsonLd)}
+            slot='head'
+    />
     <ContentWrapper content={Content} />
 </BlogLayout>

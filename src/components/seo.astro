@@ -1,51 +1,91 @@
 ---
 import { SEO as AstroSEO, type Props as SEOProps } from "astro-seo";
-
-import { siteConfig } from "#/config/site";
+import { me, siteConfig } from "#/config/site";
 import { BASE_URL } from "#/lib/base-url";
 
 interface Props extends SEOProps {
   imageUrl?: string;
   type?: "article" | "website" | "profile";
   slot: "seo";
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  category?: string;
+  tags?: string[];
 }
 
-const { title, description, imageUrl, type, ...rest } = Astro.props;
+const {
+  title,
+  description,
+  imageUrl,
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  category,
+  tags,
+} = Astro.props;
 
-const metaData = {
+const buildMetaData = () => ({
   title: title ? `${title}｜${siteConfig.title}` : siteConfig.title,
   description: description ?? siteConfig.description,
   image: imageUrl ?? `${BASE_URL}/images/opengraph-image.png`,
+});
+
+const buildArticleData = () => {
+  if (type !== "article") return {};
+
+  const currentDate = new Date();
+  return {
+    article: {
+      publishedTime: (publishedTime ?? currentDate).toISOString(),
+      modifiedTime: (
+        modifiedTime ??
+        publishedTime ??
+        currentDate
+      ).toISOString(),
+      authors: [me.name],
+      section: category ?? "未分類",
+      tags: tags ?? [],
+    },
+  };
 };
 
-const defaultProps = {
-  title: metaData.title,
-  titleDefault: metaData.title,
-  description: metaData.description,
-  openGraph: {
-    basic: {
-      image: metaData.image,
-      title: metaData.title,
-      type: type ?? "website",
-      ...rest.openGraph?.basic,
-    },
-    optional: {
-      siteName: siteConfig.title,
-      description: metaData.description,
-      ...rest.openGraph?.optional,
-    },
-  },
-  twitter: {
-    title: metaData.title,
-    description: metaData.description,
-    // creator: '@kkhys',
-    card: "summary_large_image",
-    image: metaData.image,
-    imageAlt: metaData.title,
-  },
-} satisfies SEOProps;
+const buildSEOProps = (): SEOProps => {
+  const metaData = buildMetaData();
 
-const combinedProps = { ...defaultProps, ...rest };
+  return {
+    title: metaData.title,
+    titleDefault: metaData.title,
+    description: metaData.description,
+    openGraph: {
+      basic: {
+        image: metaData.image,
+        title: metaData.title,
+        type,
+      },
+      optional: {
+        siteName: siteConfig.title,
+        description: metaData.description,
+        locale: "ja_JP",
+      },
+      image: {
+        type: "image/png",
+        width: 1200,
+        height: 630,
+        alt: metaData.title,
+      },
+      ...buildArticleData(),
+    },
+    twitter: {
+      title: metaData.title,
+      description: metaData.description,
+      card: "summary_large_image",
+      image: metaData.image,
+      imageAlt: metaData.title,
+    },
+  };
+};
+
+const seoProps = buildSEOProps();
 ---
 
-<AstroSEO {...combinedProps} />
+<AstroSEO {...seoProps} />

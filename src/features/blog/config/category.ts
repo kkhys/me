@@ -35,6 +35,9 @@ export const categoryTitles = categories.map(({ title }) => title);
 export const getCategoryBySlug = (slug: string) =>
   categories.find((category) => category.slug === slug);
 
+export const getCategoryByTitle = (title: string) =>
+  categories.find((category) => category.title === title);
+
 export const getCategoryByTagSlug = (tagSlug: string) =>
   categories.find((category) =>
     tags[category.slug as keyof typeof tags]?.some(
