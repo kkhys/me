@@ -111,6 +111,9 @@ importers:
       '@playform/compress':
         specifier: 0.2.0
         version: 0.2.0(@types/node@24.0.0)(@upstash/redis@1.35.0)(jiti@2.4.2)(rollup@4.42.0)(typescript@5.8.3)(yaml@2.8.0)
+      '@types/bun':
+        specifier: 1.2.16
+        version: 1.2.16
       '@types/hast':
         specifier: 3.0.4
         version: 3.0.4
@@ -1490,6 +1493,9 @@ packages:
   '@types/babel__traverse@7.20.7':
     resolution: {integrity: sha512-dkO5fhS7+/oos4ciWxyEyjWe48zmG6wbCheo/G2ZnHx4fs3EU6YC6UM8rk56gAjNJ9P3MTH2jo5jb92/K6wbng==}
 
+  '@types/bun@1.2.16':
+    resolution: {integrity: sha512-1aCZJ/6nSiViw339RsaNhkNoEloLaPzZhxMOYEa7OzRzO41IGg5n/7I43/ZIAW/c+Q6cT12Vf7fOZOoVIzb5BQ==}
+
   '@types/css-tree@2.3.10':
     resolution: {integrity: sha512-WcaBazJ84RxABvRttQjjFWgTcHvZR9jGr0Y3hccPkHjFyk/a3N8EuxjKr+QfrwjoM5b1yI1Uj1i7EzOAAwBwag==}
 
@@ -1889,6 +1895,9 @@ packages:
 
   buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
+
+  bun-types@1.2.16:
+    resolution: {integrity: sha512-ciXLrHV4PXax9vHvUrkvun9VPVGOVwbbbBF/Ev1cXz12lyEZMoJpIJABOfPcN9gDJRaiKF9MVbSygLg4NXu3/A==}
 
   camel-case@4.1.2:
     resolution: {integrity: sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==}
@@ -5685,6 +5694,10 @@ snapshots:
     dependencies:
       '@babel/types': 7.27.6
 
+  '@types/bun@1.2.16':
+    dependencies:
+      bun-types: 1.2.16
+
   '@types/css-tree@2.3.10': {}
 
   '@types/csso@5.0.4':
@@ -6218,6 +6231,10 @@ snapshots:
       linkedom: 0.18.11
 
   buffer-from@1.1.2: {}
+
+  bun-types@1.2.16:
+    dependencies:
+      '@types/node': 24.0.0
 
   camel-case@4.1.2:
     dependencies:
