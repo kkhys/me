@@ -1,5 +1,6 @@
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
+import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
@@ -68,6 +69,7 @@ export default defineConfig({
     react(),
     mdx(),
     sitemap(),
+    partytown(),
     (await import("@playform/compress")).default({
       Image: false,
     }),

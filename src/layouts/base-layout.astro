@@ -36,6 +36,14 @@ const { pagefind, class: className } = Astro.props;
         <SEO />
     </slot>
 
+    {import.meta.env.PROD && (
+        <script
+            is:inline
+            type='text/partytown'
+            src='https://analytics.kkhys.me/script.js'
+            data-website-id='0e7df23c-24a9-4db7-9bed-a064aa9ac48e'/>
+    )}
+
     <ClientRouter fallback='swap' />
 </head>
 <body class="flex flex-col w-full max-w-6xl min-h-screen min-w-full mx-auto">
