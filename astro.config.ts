@@ -68,13 +68,9 @@ export default defineConfig({
     react(),
     mdx(),
     sitemap(),
-    // (await import("@playform/compress")).default({
-    //   HTML: {
-    //     "html-minifier-terser": {
-    //       collapseWhitespace: false,
-    //     },
-    //   },
-    // }),
+    (await import("@playform/compress")).default({
+      Image: false,
+    }),
   ],
   prefetch: {
     defaultStrategy: "viewport",
