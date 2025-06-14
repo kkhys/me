@@ -8,8 +8,7 @@ interface Props extends HTMLAttributes<"div"> {
   "data-alert-type"?: AlertType;
 }
 
-const props = Astro.props;
-const { "data-alert-type": alertType, ...rest } = props;
+const { "data-alert-type": alertType, ...rest } = Astro.props;
 ---
 
 {
@@ -18,7 +17,7 @@ const { "data-alert-type": alertType, ...rest } = props;
             <slot />
         </AlertBlock>
     ) : (
-        <div {...props}>
+        <div {...rest}>
             <slot />
         </div>
     )
