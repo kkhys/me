@@ -4,7 +4,7 @@ export type Tag = Record<"title" | "label" | "slug" | "emoji", string>;
 export type AllTagsTitle = (typeof tags)[keyof typeof tags][number]["title"];
 
 export const tags = {
-  build: [
+  diy: [
     {
       title: "Desk",
       label: "デスク",
@@ -192,7 +192,7 @@ export const tagsTitlesByCategory: Record<CategoryTitle, string[]> = {
   Tech: tags.tech.map((t) => t.title),
   Life: tags.life.map((t) => t.title),
   Object: tags.object.map((t) => t.title),
-  Build: tags.build.map((t) => t.title),
+  DIY: tags.diy.map((t) => t.title),
 };
 
 export const getTagBySlug = (slug: string) =>

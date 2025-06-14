@@ -23,10 +23,10 @@ export const categories = [
     emoji: "📦",
   },
   {
-    title: "Build",
+    title: "DIY",
     label: "DIY",
-    slug: "build",
-    emoji: "🏗",
+    slug: "diy",
+    emoji: "🔨",
   },
 ] as const satisfies Category[];
 
