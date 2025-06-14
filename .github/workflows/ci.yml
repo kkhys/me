@@ -28,6 +28,10 @@ jobs:
 
       - run: pnpm install
 
+      - name: Copy env
+        shell: bash
+        run: cp .env.example .env
+
       - name: Lint
         run: pnpm lint
 
