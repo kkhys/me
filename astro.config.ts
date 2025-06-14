@@ -163,9 +163,6 @@ export default defineConfig({
               specialStateColor: "#4c4c53",
             },
           },
-          launchOptions: {
-            channel: "chrome",
-          },
         },
       ],
       rehypeBudoux,
