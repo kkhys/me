@@ -33,12 +33,14 @@ if (!contentPath) {
   throw new Error("Content path is not defined");
 }
 
-const { lastUpdatedTime } = await getLastUpdatedTimeByFile(contentPath);
+if (!import.meta.env.GITHUB_ACTIONS) {
+  const { lastUpdatedTime } = await getLastUpdatedTimeByFile(contentPath);
 
-const updatedAt = new Date(lastUpdatedTime);
-const updatedAtString = updatedAt && convertDateToString(updatedAt);
-entry.data.updatedAt = updatedAt;
-entry.data.updatedAtString = updatedAtString;
+  const updatedAt = new Date(lastUpdatedTime);
+  const updatedAtString = updatedAt && convertDateToString(updatedAt);
+  entry.data.updatedAt = updatedAt;
+  entry.data.updatedAtString = updatedAtString;
+}
 
 const editUrl = `${siteConfig.github.content}/edit/main/${contentPath}`;
 const sourceUrl = `${siteConfig.github.content}/blob/main/${contentPath}?plain=1`;
