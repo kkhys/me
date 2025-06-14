@@ -6,6 +6,7 @@ import CheckBox from "#/features/blog/components/ui/blocks/checkbox.astro";
 import Heading2 from "#/features/blog/components/ui/blocks/heading-2.astro";
 import Heading3 from "#/features/blog/components/ui/blocks/heading-3.astro";
 import MermaidBlock from "#/features/blog/components/ui/blocks/mermaid-block.astro";
+import DivHandler from "#/features/blog/components/ui/div-handler.astro";
 
 interface Props {
   content: AstroComponentFactory;
@@ -21,5 +22,6 @@ const { content: Content } = Astro.props;
     h2: Heading2,
     h3: Heading3,
     input: CheckBox,
-    picture: MermaidBlock }}
+    picture: MermaidBlock,
+    div: DivHandler }}
 />
