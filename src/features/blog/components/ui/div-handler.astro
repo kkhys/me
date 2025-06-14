@@ -1,0 +1,25 @@
+
+---
+import type { HTMLAttributes } from "astro/types";
+import type { AlertType } from "#/features/blog/components/ui/blocks/alert-block.astro";
+import AlertBlock from "#/features/blog/components/ui/blocks/alert-block.astro";
+
+interface Props extends HTMLAttributes<"div"> {
+  "data-alert-type"?: AlertType;
+}
+
+const props = Astro.props;
+const { "data-alert-type": alertType, ...rest } = props;
+---
+
+{
+    alertType ? (
+        <AlertBlock data-alert-type={alertType} {...rest} >
+            <slot />
+        </AlertBlock>
+    ) : (
+        <div {...props}>
+            <slot />
+        </div>
+    )
+}
