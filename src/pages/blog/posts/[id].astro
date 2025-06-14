@@ -33,7 +33,7 @@ if (!contentPath) {
   throw new Error("Content path is not defined");
 }
 
-if (!process.env.GITHUB_ACTIONS) {
+if (process.env.VERCEL) {
   const { lastUpdatedTime } = await getLastUpdatedTimeByFile(contentPath);
 
   const updatedAt = new Date(lastUpdatedTime);
