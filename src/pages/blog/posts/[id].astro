@@ -33,7 +33,7 @@ if (!contentPath) {
   throw new Error("Content path is not defined");
 }
 
-if (!import.meta.env.GITHUB_ACTIONS) {
+if (!process.env.GITHUB_ACTIONS) {
   const { lastUpdatedTime } = await getLastUpdatedTimeByFile(contentPath);
 
   const updatedAt = new Date(lastUpdatedTime);
