@@ -13,6 +13,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeBudoux from "./src/lib/rehype-budoux";
 import rehypePagefind from "./src/lib/rehype-pagefind";
 import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
+import remarkBlockQuoteAlert from "./src/lib/remark-blockquote-alert";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
 import remarkLinkCard from "./src/lib/remark-link-card";
 
@@ -81,7 +82,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false,
     smartypants: false,
-    remarkPlugins: [remarkLinkCard, remarkFootnoteTitle],
+    remarkPlugins: [remarkLinkCard, remarkFootnoteTitle, remarkBlockQuoteAlert],
     remarkRehype: {
       footnoteLabel: " ",
       footnoteBackLabel: "戻る",
