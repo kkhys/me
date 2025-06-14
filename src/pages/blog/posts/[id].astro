@@ -7,9 +7,9 @@ import ContentWrapper from "#/features/blog/components/content-wrapper.astro";
 import { getCategoryByTitle } from "#/features/blog/config/category";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BlogLayout from "#/layouts/blog-layout.astro";
-// import { client } from "#/lib/client";
 import { convertDateToString } from "#/lib/date";
 import { getBlogPostingSchema } from "#/lib/json-ld";
+import { getLastUpdatedTimeByFile } from "#/pages/api/_services/github/last-update-file";
 
 export const getStaticPaths = (async () =>
   (await getPublicBlogEntries()).map((entry) => {
@@ -27,16 +27,19 @@ const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
 
-// FIXME: dev では動くが、build すると動かない
-// const { lastUpdatedTime } = await client.api.github["last-updated-file"]
-//   .$get({ query: { path: `/${entry.filePath?.replace(/^content\//, "")}` } })
-//   .then((res) => res.json());
-//
-// const updatedAt = new Date(lastUpdatedTime);
-// const updatedAtString = updatedAt && convertDateToString(updatedAt);
-// entry.data.updatedAt = updatedAt;
-
 const contentPath = entry.filePath?.replace("content/", "");
+
+if (!contentPath) {
+  throw new Error("Content path is not defined");
+}
+
+const { lastUpdatedTime } = await getLastUpdatedTimeByFile(contentPath);
+
+const updatedAt = new Date(lastUpdatedTime);
+const updatedAtString = updatedAt && convertDateToString(updatedAt);
+entry.data.updatedAt = updatedAt;
+entry.data.updatedAtString = updatedAtString;
+
 const editUrl = `${siteConfig.github.content}/edit/main/${contentPath}`;
 const sourceUrl = `${siteConfig.github.content}/blob/main/${contentPath}?plain=1`;
 const revisionHistoryUrl = `${siteConfig.github.content}/commits/main/${contentPath}`;
