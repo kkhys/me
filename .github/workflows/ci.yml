@@ -38,5 +38,8 @@ jobs:
       - name: Type check
         run: pnpm check
 
+      - name: Install Playwright Browser
+        run: pnpx playwright install --with-deps chromium
+
       - name: Build
         run: pnpm build
