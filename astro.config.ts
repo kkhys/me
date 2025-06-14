@@ -175,7 +175,7 @@ export default defineConfig({
   image: {
     remotePatterns: [{ protocol: "https" }],
     service:
-      process.env.GITHUB_ACTIONS === "true"
+      import.meta.env.GITHUB_ACTIONS === "true"
         ? { entrypoint: "astro/assets/services/noop" }
         : { entrypoint: "astro/assets/services/sharp" },
   },
