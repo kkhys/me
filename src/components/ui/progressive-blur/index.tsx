@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from "react";
+import { type HTMLMotionProps, motion } from "motion/react";
 import { cn } from "#/lib/ui";
 import { type GRADIENT_ANGLES, generateLayers } from "./utils";
 
@@ -7,7 +7,7 @@ type ProgressiveBlurProps = {
   blurLayers?: number;
   className?: string;
   blurIntensity?: number;
-} & HTMLAttributes<HTMLDivElement>;
+} & HTMLMotionProps<"div">;
 
 export const ProgressiveBlurReact = ({
   direction = "bottom",
@@ -29,7 +29,7 @@ export const ProgressiveBlurReact = ({
   return (
     <div className={cn("relative", className)}>
       {layerData.map(({ gradient, blurAmount }) => (
-        <div
+        <motion.div
           key={gradient}
           className="pointer-events-none absolute inset-0 rounded-[inherit]"
           style={{
