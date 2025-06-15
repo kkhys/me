@@ -15,7 +15,7 @@ import { ProgressiveBlurReact } from "#/components/ui/progressive-blur";
 
 export const TechBlogSlider = () => (
   <div className="relative size-full overflow-hidden">
-    <InfiniteSlider className="flex size-full items-center" speed={50}>
+    <InfiniteSlider className="flex size-full items-center" speed={60}>
       <TypeScriptIcon className="size-10" />
       <ReactIcon className="size-10" />
       <AstroIcon className="size-10" />
@@ -38,12 +38,12 @@ export const TechBlogSlider = () => (
       </div>
     </InfiniteSlider>
     <ProgressiveBlurReact
-      className="pointer-events-none absolute top-0 left-0 h-full w-[50px]"
+      className="pointer-events-none absolute top-0 left-0 h-full w-[100px] md:w-[50px]"
       direction="left"
       blurIntensity={1}
     />
     <ProgressiveBlurReact
-      className="pointer-events-none absolute top-0 right-0 h-full w-[50px]"
+      className="pointer-events-none absolute top-0 right-0 h-full w-[100px] md:w-[50px]"
       direction="right"
       blurIntensity={1}
     />
