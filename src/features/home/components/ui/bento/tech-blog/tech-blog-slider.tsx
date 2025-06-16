@@ -16,24 +16,24 @@ import { ProgressiveBlurReact } from "#/components/ui/progressive-blur";
 export const TechBlogSlider = () => (
   <div className="relative size-full overflow-hidden">
     <InfiniteSlider className="flex size-full items-center" speed={50}>
-      <TypeScriptIcon className="size-10 w-12" />
-      <ReactIcon className="size-10 w-12" />
-      <AstroIcon className="size-10 w-12" />
-      <div className="grid place-items-center w-12">
+      <TypeScriptIcon className="size-10" />
+      <ReactIcon className="size-10" />
+      <AstroIcon className="size-10" />
+      <div className="grid place-items-center">
         <NextJsIcon className="size-9" />
       </div>
-      <GatsbyIcon className="size-10 w-12" />
-      <TailwindCssIcon className="size-10 w-12" />
-      <DockerIcon className="size-10 w-12" />
-      <JavaIcon className="size-10 w-12" />
-      <ScalaIcon className="size-10 w-12" />
-      <div className="grid place-items-center w-12">
+      <GatsbyIcon className="size-10" />
+      <TailwindCssIcon className="size-10" />
+      <DockerIcon className="size-10" />
+      <JavaIcon className="size-10" />
+      <ScalaIcon className="size-10" />
+      <div className="grid place-items-center">
         <PlayFrameworkIcon className="size-9" />
       </div>
-      <div className="grid place-items-center w-12">
+      <div className="grid place-items-center">
         <RubyIcon className="size-8" />
       </div>
-      <div className="grid place-items-center w-12">
+      <div className="grid place-items-center">
         <RubyOnRailsIcon className="size-8" />
       </div>
     </InfiniteSlider>
