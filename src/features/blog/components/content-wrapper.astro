@@ -6,6 +6,7 @@ import CheckBox from "#/features/blog/components/ui/blocks/checkbox.astro";
 import Heading2 from "#/features/blog/components/ui/blocks/heading-2.astro";
 import Heading3 from "#/features/blog/components/ui/blocks/heading-3.astro";
 import MermaidBlock from "#/features/blog/components/ui/blocks/mermaid-block.astro";
+import VideoBlock from "#/features/blog/components/ui/blocks/video-block.astro";
 import DivHandler from "#/features/blog/components/ui/div-handler.astro";
 
 interface Props {
@@ -15,7 +16,6 @@ interface Props {
 const { content: Content } = Astro.props;
 ---
 
-
 <Content components={{
     a: LinkHandler,
     img: ImageHandler,
@@ -23,5 +23,6 @@ const { content: Content } = Astro.props;
     h3: Heading3,
     input: CheckBox,
     picture: MermaidBlock,
-    div: DivHandler }}
+    div: DivHandler,
+    'video-block': VideoBlock }}
 />

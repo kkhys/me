@@ -1,0 +1,116 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"video"> {}
+
+const { src, title, ...rest } = Astro.props;
+---
+
+<video-player src={src} title={title} {...rest}></video-player>
+
+<style>
+    video-player {
+        display: block;
+        margin-block: 2.5rem;
+    }
+</style>
+
+<script>
+    class VideoPlayer extends HTMLElement {
+        private video: HTMLVideoElement | null = null;
+        private playButton: HTMLButtonElement | null = null;
+
+        connectedCallback() {
+            this.render();
+            this.setupEventListeners();
+        }
+
+        attributeChangedCallback() {
+            this.render();
+            this.setupEventListeners();
+        }
+
+        private render() {
+            const src = this.getAttribute('src') || '';
+            const title = this.getAttribute('title');
+            const autoplay = this.hasAttribute('autoplay');
+            const controls = this.hasAttribute('controls');
+
+            const shouldShowControls = autoplay ? controls : false;
+
+            const videoElement = this.createVideoElement(src, autoplay, shouldShowControls);
+            const playButtonElement = autoplay ? '' : this.createPlayButton();
+            const wrapperDiv = this.createWrapper(videoElement + playButtonElement);
+
+            this.innerHTML = title
+                ? `<figure>${wrapperDiv}${this.createCaption(title)}</figure>`
+                : wrapperDiv;
+        }
+
+        private createVideoElement(src: string, autoplay: boolean, controls: boolean) {
+            let attributes = 'playsinline muted preload="metadata"';
+            if (autoplay) attributes += ' autoplay';
+            if (controls) attributes += ' controls';
+
+            return `
+        <video ${attributes}>
+          <source src="${src}" type="video/mp4" />
+          お使いのブラウザはビデオをサポートしていません。
+        </video>
+      `;
+        }
+
+        private createPlayButton() {
+            return `
+        <button
+          type="button" 
+          class="play-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/40 cursor-pointer p-4 z-10 transition-all duration-300 active:scale-95 rounded-full border opacity-100" 
+          aria-label="ビデオを再生"
+        >
+          <svg class="size-8 fill-white" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+      `;
+        }
+
+        private createWrapper(content: string) {
+            const wrapperClass = "relative blur-load select-none rounded-2xl border-[#474747] overflow-hidden dark:border";
+            return `<div class="${wrapperClass}">${content}</div>`;
+        }
+
+        private createCaption(title: string) {
+            return `<figcaption class="text-center text-xs text-muted-foreground mt-2 leading-6">${title}</figcaption>`;
+        }
+
+        private setupEventListeners() {
+            this.video = this.querySelector('video');
+            this.playButton = this.querySelector('.play-button');
+
+            if (this.playButton && this.video) {
+                this.playButton.removeEventListener('click', this.handlePlayClick);
+                this.playButton.addEventListener('click', this.handlePlayClick);
+            }
+        }
+
+        private handlePlayClick = (e: Event) => {
+            e.preventDefault();
+
+            if (this.playButton && this.video) {
+                this.playButton.style.opacity = '0';
+                this.playButton.style.pointerEvents = 'none';
+
+                setTimeout(() => {
+                    if (this.playButton && this.video) {
+                        this.playButton.style.display = 'none';
+                        this.video.controls = true;
+                        this.video.play();
+                        this.video.focus();
+                    }
+                }, 300);
+            }
+        };
+    }
+
+    customElements.define('video-player', VideoPlayer);
+</script>
