@@ -39,12 +39,11 @@ const getAccessTokenHeader = (accessToken: string) => {
   return { headers: { Authorization: `Bearer ${accessToken}` } };
 };
 
-const getNowPlayingResponse = async (accessToken: string) => {
-  return fetch(
-    `${BASE_URL}/currently-playing`,
+const getNowPlayingResponse = async (accessToken: string) =>
+  fetch(
+    `${BASE_URL}/currently-playing?additional_types=track,episode`,
     getAccessTokenHeader(accessToken),
   );
-};
 
 type SpotifyTrack = {
   external_urls: { spotify: string };
@@ -53,12 +52,33 @@ type SpotifyTrack = {
   artists: { name: string }[];
 };
 
-const mapSpotifyData = (track: SpotifyTrack) => {
+type SpotifyEpisode = {
+  external_urls: { spotify: string };
+  name: string;
+  images: { url: string }[];
+  show: { name: string };
+};
+
+type SpotifyItem = SpotifyTrack | SpotifyEpisode;
+
+const isTrack = (item: SpotifyItem): item is SpotifyTrack =>
+  "album" in item && "artists" in item;
+
+const mapSpotifyData = (item: SpotifyItem) => {
+  if (isTrack(item)) {
+    return {
+      songUrl: item.external_urls?.spotify,
+      title: item.name,
+      albumImageUrl: item.album.images[0]?.url ?? "",
+      artist: item.artists.map((artist) => artist.name).join(", ") as string,
+    };
+  }
+
   return {
-    songUrl: track.external_urls?.spotify,
-    title: track.name,
-    albumImageUrl: track.album.images[0]?.url ?? "",
-    artist: track.artists.map((artist) => artist.name).join(", ") as string,
+    songUrl: item.external_urls?.spotify,
+    title: item.name,
+    albumImageUrl: item.images[0]?.url ?? "",
+    artist: item.show.name,
   };
 };
 
@@ -86,7 +106,7 @@ export const getSpotifyData = async () => {
     return getRecentlyPlayed(access_token);
   }
 
-  const { item: track } = await nowPlayingResponse.json();
+  const { item } = await nowPlayingResponse.json();
 
-  return { isPlaying: true, ...mapSpotifyData(track) };
+  return { isPlaying: true, ...mapSpotifyData(item) };
 };
