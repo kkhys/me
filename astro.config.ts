@@ -16,6 +16,7 @@ import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
 import remarkBlockQuoteAlert from "./src/lib/remark-blockquote-alert";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
 import remarkLinkCard from "./src/lib/remark-link-card";
+import remarkVideoBlock from "./src/lib/remark-video-block";
 
 let adapter = vercel();
 
@@ -82,7 +83,12 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false,
     smartypants: false,
-    remarkPlugins: [remarkLinkCard, remarkFootnoteTitle, remarkBlockQuoteAlert],
+    remarkPlugins: [
+      remarkVideoBlock,
+      remarkLinkCard,
+      remarkFootnoteTitle,
+      remarkBlockQuoteAlert,
+    ],
     remarkRehype: {
       footnoteLabel: " ",
       footnoteBackLabel: "戻る",
