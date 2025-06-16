@@ -51,3 +51,6 @@ export const isVideo = (
   isNode(node) &&
   node.type === "mdxJsxFlowElement" &&
   (node as MdxJsxFlowElement).name === "video";
+
+export const hasChildren = (node: Node) =>
+  isParent(node) && node.children.length > 0;
