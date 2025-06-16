@@ -37,13 +37,14 @@ export const TechBlogSlider = () => (
         <RubyOnRailsIcon className="size-8" />
       </div>
     </InfiniteSlider>
+    {/* NOTE: SP 表示だと Blur でスライダーが固定されてしまう不具合があるため、SP では非表示にしている。 */}
     <ProgressiveBlurReact
-      className="pointer-events-none absolute top-0 left-0 h-full w-[50px]"
+      className="hidden pointer-events-none absolute top-0 left-0 h-full w-[50px] md:block"
       direction="left"
       blurIntensity={1}
     />
     <ProgressiveBlurReact
-      className="pointer-events-none absolute top-0 right-0 h-full w-[50px]"
+      className="hidden pointer-events-none absolute top-0 right-0 h-full w-[50px] md:block"
       direction="right"
       blurIntensity={1}
     />
