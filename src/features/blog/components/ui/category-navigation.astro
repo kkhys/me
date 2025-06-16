@@ -41,6 +41,7 @@ const linkClass =
     </div>
     <SpCategoryNavigation pathname={pathname} className="sm:hidden" client:media="(max-width: 40rem)" transition:persist="sp-category-navigation" />
     <a class={cn('rounded-full!', buttonVariants({ variant: "outline", size: "icon" }))} href="/rss.xml">
-        <RssIcon class="size-4" />
+        <RssIcon class="size-4" aria-hidden="true" />
+        <span class="sr-only">RSS フィード</span>
     </a>
 </nav>
