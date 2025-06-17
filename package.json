@@ -11,7 +11,9 @@
     "check": "astro check && tsc --noEmit",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "playwright-install": "pnpx playwright-core install chromium"
+    "playwright-install": "pnpx playwright-core install chromium",
+    "release": "bun run scripts/release.ts",
+    "create:entry": "bun run scripts/create-entry.ts"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
