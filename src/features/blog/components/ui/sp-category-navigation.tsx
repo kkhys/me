@@ -15,7 +15,10 @@ import { cn } from "#/lib/ui";
 export const SpCategoryNavigation = ({
   pathname,
   className,
-}: { pathname: string; className?: string }) => {
+}: {
+  pathname: string;
+  className?: string;
+}) => {
   const [open, setOpen] = useState(false);
 
   /**
@@ -26,7 +29,7 @@ export const SpCategoryNavigation = ({
    * @return カテゴリー名または 'all'
    */
   const extractCategoryFromPath = (pathname: string): string => {
-    const match = pathname.match(/\/blog\/categories\/([^\/]+)/);
+    const match = pathname.match(/\/blog\/categories\/([^/]+)/);
     return match?.[1] ?? "all";
   };
 

@@ -53,7 +53,7 @@ export const NowPlaying = ({ initialData }: Props) => {
           <div className="hidden md:flex items-end gap-[1px] h-8 w-full pb-4 pr-4">
             {Array.from({ length: 60 }, (_, index) => (
               <div
-                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                // biome-ignore lint/suspicious/noArrayIndexKey: Static array with fixed length
                 key={index}
                 className="w-[2px] bg-green-500 rounded-sm flex-1 dark:bg-green-400"
                 style={{

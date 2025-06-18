@@ -1,6 +1,5 @@
-import { visit } from "unist-util-visit";
-
 import type { Element, Root } from "hast";
+import { visit } from "unist-util-visit";
 
 const shouldNotIndexed = (node: Element) =>
   node.tagName === "a" && Object.hasOwn(node.properties, "dataLinkCard");

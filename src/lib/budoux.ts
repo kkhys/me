@@ -1,7 +1,6 @@
+import type { HTMLProcessingParser as HTMLProcessingParserType } from "budoux";
 import { HTMLProcessingParser, jaModel } from "budoux";
 import { parseHTML } from "linkedom";
-
-import type { HTMLProcessingParser as HTMLProcessingParserType } from "budoux";
 
 let cachedParser: HTMLProcessingParserType | null = null;
 

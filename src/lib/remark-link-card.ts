@@ -1,8 +1,6 @@
-import { SKIP, visit } from "unist-util-visit";
-
-import { isBareExternalLink } from "./mdast-util-node-is";
-
 import type { Root } from "mdast";
+import { SKIP, visit } from "unist-util-visit";
+import { isBareExternalLink } from "./mdast-util-node-is";
 
 const remarkLinkCard = () => (tree: Root) => {
   visit(tree, "paragraph", (node, index, parent) => {

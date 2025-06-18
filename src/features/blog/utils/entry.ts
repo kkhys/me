@@ -1,4 +1,4 @@
-import { type InferEntrySchema, getCollection } from "astro:content";
+import { getCollection, type InferEntrySchema } from "astro:content";
 import { NODE_ENV } from "astro:env/client";
 import { relatedEntriesCount } from "#/config/constant";
 

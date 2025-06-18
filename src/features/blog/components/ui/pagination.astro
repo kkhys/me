@@ -1,13 +1,12 @@
 ---
 import type { CollectionEntry, DataEntryMap } from "astro:content";
-import type { Page } from "astro";
-import { buttonVariants } from "#/components/ui/button/button.astro";
-import { cn } from "#/lib/ui";
-
 import ChevronLeftIcon from "@lucide/astro/icons/chevron-left";
 import ChevronRightIcon from "@lucide/astro/icons/chevron-right";
 import EllipsisIcon from "@lucide/astro/icons/ellipsis";
+import type { Page } from "astro";
 import type { HTMLAttributes } from "astro/types";
+import { buttonVariants } from "#/components/ui/button/button.astro";
+import { cn } from "#/lib/ui";
 
 interface Props<T extends keyof DataEntryMap> extends HTMLAttributes<"nav"> {
   page?: Page<CollectionEntry<T>>;
