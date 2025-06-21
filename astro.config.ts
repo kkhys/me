@@ -183,6 +183,7 @@ export default defineConfig({
         ? { entrypoint: "astro/assets/services/noop" }
         : { entrypoint: "astro/assets/services/sharp" },
     responsiveStyles: true,
+    layout: "constrained",
   },
   vite: {
     plugins: [tailwindcss()],
