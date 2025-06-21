@@ -23,9 +23,7 @@ const divClass = cn(
 const pictureProps = {
   class: cn("rounded-2xl", className),
   formats: ["avif"],
-  widths: [330, 640, 670, 1200],
-  sizes:
-    "(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 670px, 1200px",
+  layout: "constrained",
   ...rest,
 } as Parameters<typeof Picture>[0];
 ---

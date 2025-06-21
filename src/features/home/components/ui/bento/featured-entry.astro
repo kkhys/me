@@ -38,11 +38,8 @@ const { class: className } = Astro.props;
                 src={featuredBlog01}
                 alt="「デスク構成スナップショット 2024」の画像"
                 formats={['avif']}
-                widths={[330, 640, 670, 1200]}
-                sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
-                width={1200}
-                height={1200}
-                class="rounded-lg object-cover aspect-[3/2] shadow-sm"
+                layout="constrained"
+                class="rounded-lg object-cover! aspect-[3/2]! shadow-sm"
         />
         <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
     </a>
@@ -57,11 +54,8 @@ const { class: className } = Astro.props;
                 src={featuredBlog02}
                 alt="「Mac mini という選択」の画像"
                 formats={['avif']}
-                widths={[330, 640, 670, 1200]}
-                sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
-                width={1200}
-                height={1200}
-                class="rounded-lg object-cover aspect-square shadow-sm"
+                layout="constrained"
+                class="rounded-lg object-cover! aspect-square! shadow-sm"
         />
         <ProgressiveBlur
                 class='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
@@ -86,11 +80,8 @@ const { class: className } = Astro.props;
                 src={featuredBlog03}
                 alt="「さよなら、My 自作 PC」の画像"
                 formats={['avif']}
-                widths={[330, 640, 670, 1200]}
-                sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
-                width={1200}
-                height={1200}
-                class="rounded-lg object-cover object-right aspect-square shadow-sm"
+                layout="constrained"
+                class="rounded-lg object-cover! object-right! aspect-square! shadow-sm"
         />
         <ProgressiveBlur
                 class='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
@@ -115,11 +106,8 @@ const { class: className } = Astro.props;
                 src={featuredBlog04}
                 alt="「景色と料理を楽しむ、鹿児島 3 泊 4 日の旅」の画像"
                 formats={['avif']}
-                widths={[330, 640, 670, 1200]}
-                sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
-                width={1200}
-                height={1200}
-                class="rounded-lg object-cover object-left aspect-square shadow-sm"
+                layout="constrained"
+                class="rounded-lg object-cover! object-left! aspect-square! shadow-sm"
         />
         <ProgressiveBlur
                 class='pointer-events-none absolute -bottom-1 left-0 h-[50%] w-full'
@@ -146,11 +134,8 @@ const { class: className } = Astro.props;
                 src={featuredBlog05}
                 alt="「バリ島旅行記」の画像"
                 formats={['avif']}
-                widths={[330, 640, 670, 1200]}
-                sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 640px, 1200px"
-                width={1200}
-                height={1200}
-                class="rounded-lg object-cover object-bottom aspect-square md:aspect-[2/1] shadow-sm"
+                layout="constrained"
+                class="rounded-lg object-cover! object-bottom! aspect-square! md:aspect-[2/1]! shadow-sm"
         />
         <ProgressiveBlur
                 class='pointer-events-none absolute -bottom-1 left-0 h-[40%] w-full'
