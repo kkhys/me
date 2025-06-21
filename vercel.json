@@ -1,5 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "git": {
+    "deploymentEnabled": {
+      "renovate/*": false
+    }
+  },
   "installCommand": "pnpm install && dnf install -y nss nspr mesa-libgbm",
   "buildCommand": "pnpm playwright-install && astro build"
 }
