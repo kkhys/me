@@ -22,20 +22,14 @@ import { cn } from "#/lib/ui";
             alt="マップ"
             class="size-full dark:hidden"
             formats={['avif']}
-            widths={[330, 640, 670, 850]}
-            sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 220px, 850px"
-            width={850}
-            height={850}
+            priority={true}
     />
     <Picture
             src={mapDarkImage}
             alt="マップ"
             class="size-full hidden dark:block"
             formats={['avif']}
-            widths={[330, 640, 670, 850]}
-            sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 220px, 850px"
-            width={850}
-            height={850}
+            priority={true}
     />
     <div class="absolute top-0 left-0 translate-x-[83px] translate-y-[48px]">
            <span class="relative grid place-content-center size-12">

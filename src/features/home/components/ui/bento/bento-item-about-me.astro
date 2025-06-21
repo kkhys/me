@@ -19,10 +19,7 @@ import { cn } from "#/lib/ui";
             src={profileImage}
             alt="Keisuke Hayashi"
             formats={['avif']}
-            widths={[330, 640, 670, 1000]}
-            sizes="(max-width: 360px) 330px, (max-width: 720px) 640px, (max-width: 1600px) 220px, 1000px"
-            width={1000}
-            height={1000}
+            priority={true}
     />
     <ProgressiveBlur
             class='pointer-events-none absolute bottom-0 left-0 h-[40%] w-full'
