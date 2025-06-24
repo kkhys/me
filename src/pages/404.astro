@@ -1,0 +1,18 @@
+---
+import SEO from "#/components/seo.astro";
+import { buttonVariants } from "#/components/ui/button/button.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { getCustomTransition } from "#/lib/custom-transition";
+---
+
+<BaseLayout class="flex flex-col items-start justify-center gap-4">
+    <SEO
+            title='見つかりませんでした'
+            noindex
+            slot='seo'
+    />
+    <h1 class="font-medium" transition:animate={getCustomTransition()}>
+        ページが見つかりませんでした
+    </h1>
+    <a href="/" class={buttonVariants({ variant: 'outline' })} transition:animate={getCustomTransition(0.15)}>ホームに戻る</a>
+</BaseLayout>
