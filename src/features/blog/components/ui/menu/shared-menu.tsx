@@ -40,19 +40,36 @@ export const SharedMenu = ({ title, url }: { title: string; url: string }) => (
           type="button"
           className="w-full cursor-pointer"
           onClick={() => handleCopyLink(url)}
+          data-umami-event="copy-url-click"
+          data-umami-event-location="blog-share-menu"
         >
           URL をコピー
         </button>
       </DropdownMenuItem>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <NavLink href={generateXShareLink(url, title)} isExternal>
+        <NavLink
+          href={generateXShareLink(url, title)}
+          isExternal
+          umamiEvent="x-share-click"
+          umamiLocation="blog-share-menu"
+        >
           X で共有
         </NavLink>
-        <NavLink href={generateFacebookShareLink(url)} isExternal>
+        <NavLink
+          href={generateFacebookShareLink(url)}
+          isExternal
+          umamiEvent="facebook-share-click"
+          umamiLocation="blog-share-menu"
+        >
           Facebook で共有
         </NavLink>
-        <NavLink href={generateHatebuSaveLink(url, title)} isExternal>
+        <NavLink
+          href={generateHatebuSaveLink(url, title)}
+          isExternal
+          umamiEvent="hatebu-share-click"
+          umamiLocation="blog-share-menu"
+        >
           はてなブックマークに保存
         </NavLink>
       </DropdownMenuGroup>

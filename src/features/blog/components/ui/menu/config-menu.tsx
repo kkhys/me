@@ -30,20 +30,40 @@ export const ConfigMenu = ({
       <DropdownMenuLabel>開発者向け</DropdownMenuLabel>
       <DropdownMenuGroup>
         {editUrl && (
-          <NavLink href={editUrl} isExternal>
+          <NavLink
+            href={editUrl}
+            isExternal
+            umamiEvent="github-edit-click"
+            umamiLocation="blog-developer-menu"
+          >
             GitHub で編集する
           </NavLink>
         )}
-        <NavLink href={`${siteConfig.github.content}/issues/new`} isExternal>
+        <NavLink
+          href={`${siteConfig.github.content}/issues/new`}
+          isExternal
+          umamiEvent="github-issue-click"
+          umamiLocation="blog-developer-menu"
+        >
           記事の問題を報告する
         </NavLink>
         {sourceUrl && (
-          <NavLink href={sourceUrl} isExternal>
+          <NavLink
+            href={sourceUrl}
+            isExternal
+            umamiEvent="github-source-click"
+            umamiLocation="blog-developer-menu"
+          >
             ソースコードを表示する
           </NavLink>
         )}
         {revisionHistoryUrl && (
-          <NavLink href={revisionHistoryUrl} isExternal>
+          <NavLink
+            href={revisionHistoryUrl}
+            isExternal
+            umamiEvent="github-history-click"
+            umamiLocation="blog-developer-menu"
+          >
             変更履歴を表示する
           </NavLink>
         )}
