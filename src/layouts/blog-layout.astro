@@ -144,6 +144,8 @@ const relatedPosts = await getRelatedPosts({ id, category });
                                             target="_blank"
                                             rel="noreferrer"
                                             class={cn(buttonVariants())}
+                                            data-umami-event="buy-me-coffee-click"
+                                            data-umami-event-location="blog-cta"
                                     >
                                         サポートする
                                         <MoveUpRightIcon class="size-3.5" />
