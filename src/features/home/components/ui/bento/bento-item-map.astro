@@ -33,11 +33,13 @@ import { cn } from "#/lib/ui";
             formats={['avif']}
             priority={true}
     />
-    <div class="absolute top-0 left-0 translate-x-[83px] translate-y-[48px]">
-           <span class="relative grid place-content-center size-12">
-               <span class="absolute inline-flex size-full map-pulse rounded-full bg-[#679bff] opacity-75"></span>
-               <span class="inline-flex size-7 rounded-full bg-[#679bff] border-3 border-white map-shadow"></span>
-           </span>
+    <div class="absolute top-0 left-0 w-full h-full">
+        <div class="absolute map-marker">
+            <span class="relative grid place-content-center size-12">
+                <span class="absolute inline-flex size-full map-pulse rounded-full bg-[#679bff] opacity-75"></span>
+                <span class="inline-flex size-7 rounded-full bg-[#679bff] border-3 border-white map-shadow"></span>
+            </span>
+        </div>
     </div>
     <NeumorphEyebrow class="absolute bottom-2 left-2">
         Tokyo, Japan
@@ -45,6 +47,13 @@ import { cn } from "#/lib/ui";
 </a>
 
 <style>
+    .map-marker {
+        /* 地図画像上の相対位置（中央寄り） */
+        left: 50%;
+        top: 45%;
+        transform: translate(-50%, -50%);
+    }
+
     .map-pulse {
         animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
     }
