@@ -3,7 +3,9 @@ import {
   ArrowDownToLineIcon,
   ArrowUpFromLineIcon,
   HouseIcon,
+  PaintBucketIcon,
   SquarePenIcon,
+  UserIcon,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { type RefObject, useEffect, useRef, useState } from "react";
@@ -51,11 +53,14 @@ export const BottomNavigationBar = () => {
         key="button"
         onClick={() => setOpen(true)}
         className={cn(
-          "relative w-28 h-9 pl-3.5 pr-2.5 text-sm rounded-[19px] cursor-pointer outline-none",
+          "relative w-28 h-10 pl-3.5 pr-2.5 text-sm rounded-[19px] cursor-pointer outline-none",
           wrapperBaseStyle,
         )}
         style={{ borderRadius: 19 }}
         whileTap={{ scale: 0.95 }}
+        initial={{ filter: "blur(0px)" }}
+        animate={{ filter: open ? "blur(4px)" : "blur(0px)" }}
+        transition={{ duration: 0.2, ease: "easeInOut" }}
       >
         <span>メニュー</span>
         <motion.div
@@ -99,6 +104,22 @@ export const BottomNavigationBar = () => {
             >
               ブログ
               <SquarePenIcon className="size-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => handleTransition("/about")}
+              className={buttonBaseStyle}
+            >
+              プロフィール
+              <UserIcon className="size-5" />
+            </button>
+            <button
+              type="button"
+              onClick={() => handleTransition("/bucket-list")}
+              className={buttonBaseStyle}
+            >
+              バケットリスト
+              <PaintBucketIcon className="size-5" />
             </button>
             <motion.button
               type="button"
