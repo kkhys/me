@@ -1,5 +1,5 @@
 import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 import { categoryTitles } from "#/features/blog/config/category";
 import { allTagTitles, tagsTitlesByCategory } from "#/features/blog/config/tag";
 
@@ -43,4 +43,20 @@ const legal = defineCollection({
   }),
 });
 
-export const collections = { blog, legal };
+const bucketList = defineCollection({
+  loader: file("content/bucket-list/data.yaml"),
+  schema: z.array(
+    z.record(
+      z.string(),
+      z.array(
+        z.object({
+          title: z.string(),
+          description: z.string().optional(),
+          completedAt: z.date().optional(),
+        }),
+      ),
+    ),
+  ),
+});
+
+export const collections = { blog, legal, bucketList };

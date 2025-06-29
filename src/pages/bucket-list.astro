@@ -1,0 +1,123 @@
+---
+import { getEntry } from "astro:content";
+import ArrowLeftIcon from "@lucide/astro/icons/arrow-left";
+import CheckIcon from "@lucide/astro/icons/check";
+import MoveUpRightIcon from "@lucide/astro/icons/move-up-right";
+import Budoux from "#/components/budoux.astro";
+import SEO from "#/components/seo.astro";
+import Separator from "#/components/ui/separator.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { getCustomTransition } from "#/lib/custom-transition";
+import { convertDateToString } from "#/lib/date";
+import { getLastUpdatedTimeByFile } from "#/pages/api/_services/github/last-update-file";
+
+const bucketList = await getEntry("bucketList", "data");
+
+if (!bucketList) {
+  throw new Error("Bucket list not found");
+}
+
+let updatedAtString = null;
+
+if (!process.env.VERCEL) {
+  const filePath = "bucket-list/data.yaml";
+  const { lastUpdatedTime } = await getLastUpdatedTimeByFile(filePath);
+
+  const updatedAt = new Date(lastUpdatedTime);
+  updatedAtString = updatedAt && convertDateToString(updatedAt);
+}
+
+const totalItems = bucketList.data.reduce(
+  (total, categoryObj) =>
+    total +
+    Object.values(categoryObj).reduce(
+      (catTotal, items) => catTotal + items.length,
+      0,
+    ),
+  0,
+);
+
+const completedItems = bucketList.data.reduce(
+  (total, categoryObj) =>
+    total +
+    Object.values(categoryObj).reduce(
+      (catTotal, items) =>
+        catTotal + items.filter((item) => item.completedAt).length,
+      0,
+    ),
+  0,
+);
+---
+
+<BaseLayout pagefind>
+    <SEO
+            title='バケットリスト'
+            description='これは僕がこの人生で達成したいこと、手に入れたいことのリストです。'
+            slot='seo'
+    />
+    <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[138px] xl:-translate-x-[260px]">
+        <a href="/" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
+            <ArrowLeftIcon class="size-3.5"/>
+            ホーム
+        </a>
+    </div>
+    <h1 class="font-medium" transition:animate={getCustomTransition()}>
+        バケットリスト
+    </h1>
+    <Budoux>
+        <p class="text-sm text-muted-foreground mt-2" transition:animate={getCustomTransition(0.15)}>これは僕がこの人生で達成したいこと、手に入れたいことのリストです。</p>
+    </Budoux>
+    <section class="mt-8">
+        <ul class="space-y-2.5 ml-6 sm:ml-0">
+            {(() => {
+                let globalIndex = 0;
+                return bucketList.data.map((categoryObj) =>
+                    Object.entries(categoryObj).map(([, items]) =>
+                        items.map(({ title, description, completedAt }) => (
+                            <li class="flex items-start relative" transition:animate={getCustomTransition(0.3 + globalIndex * 0.05)}>
+                                <div class="absolute -left-6 mt-1 w-4 text-right">
+                                    <span class="block text-[0.65rem] text-muted-foreground tabular-nums">
+                                        {++globalIndex}
+                                    </span>
+                                </div>
+                                <div aria-checked={completedAt ? 'true' : 'false'} class="mr-2 size-4 rounded-xs border border-primary shadow opacity-50 aria-checked:bg-primary aria-checked:text-primary-foreground mt-1">
+                                    <span class="grid place-content-center">
+                                        {!!completedAt && (
+                                                <CheckIcon class="size-4" />
+                                        )}
+                                 </span>
+                                </div>
+                                {description ? (
+                                        <div class="grid gap-1">
+                                            <Budoux><p>{title}</p></Budoux>
+                                            <Budoux><p class="text-xs text-muted-foreground">{description}</p></Budoux>
+                                        </div>
+                                ) : (
+                                    <Budoux>
+                                        <p>{title}</p>
+                                    </Budoux>
+                                )}
+                        </li>
+                    ))
+                )
+                ).flat(2);
+            })()}
+        </ul>
+    </section>
+    <div class="mt-6">
+        <p class="text-right text-xs text-muted-foreground">
+            {totalItems}個中{completedItems}個完了しました。
+        </p>
+    </div>
+    <Separator class="mt-8" />
+    <div class="mt-8 text-xs text-muted-foreground space-y-1.5">
+        <p>初回作成日: 2025年6月29日（満30歳）</p>
+        {updatedAtString && (
+                <p>最終更新日: {updatedAtString}</p>
+        )}
+        <a href="https://github.com/kkhys/content/commits/main/bucket-list/data.yaml" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center gap-0.5 underline-offset-4 hover:underline">
+            変更履歴
+            <MoveUpRightIcon class="size-2.5" />
+        </a>
+    </div>
+</BaseLayout>
