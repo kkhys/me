@@ -2,7 +2,6 @@
 import ArrowLeftIcon from "@lucide/astro/icons/arrow-left";
 import SEO from "#/components/seo.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
-import { getCustomTransition } from "#/lib/custom-transition";
 ---
 
 <BaseLayout pagefind>
@@ -17,11 +16,11 @@ import { getCustomTransition } from "#/lib/custom-transition";
             ホーム
         </a>
     </div>
-    <h1 class="font-medium" transition:animate={getCustomTransition()}>
+    <h1 class="font-medium">
         わたしについて
     </h1>
     <section class="mt-8">
-        <p class="text-muted-foreground text-sm" transition:animate={getCustomTransition(0.15)}>
+        <p class="text-muted-foreground text-sm">
             準備中です。
         </p>
     </section>

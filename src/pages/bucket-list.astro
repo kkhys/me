@@ -7,7 +7,6 @@ import Budoux from "#/components/budoux.astro";
 import SEO from "#/components/seo.astro";
 import Separator from "#/components/ui/separator.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
-import { getCustomTransition } from "#/lib/custom-transition";
 import { convertDateToString } from "#/lib/date";
 import { getLastUpdatedTimeByFile } from "#/pages/api/_services/github/last-update-file";
 
@@ -61,11 +60,11 @@ const completedItems = bucketList.data.reduce(
             ホーム
         </a>
     </div>
-    <h1 class="font-medium" transition:animate={getCustomTransition()}>
+    <h1 class="font-medium">
         バケットリスト
     </h1>
     <Budoux>
-        <p class="text-sm text-muted-foreground mt-2" transition:animate={getCustomTransition(0.15)}>これは僕がこの人生で達成したいこと、手に入れたいことのリストです。</p>
+        <p class="text-sm text-muted-foreground mt-2">これは僕がこの人生で達成したいこと、手に入れたいことのリストです。</p>
     </Budoux>
     <section class="mt-8">
         <ul class="space-y-2.5 ml-6 sm:ml-0">
@@ -74,7 +73,7 @@ const completedItems = bucketList.data.reduce(
                 return bucketList.data.map((categoryObj) =>
                     Object.entries(categoryObj).map(([, items]) =>
                         items.map(({ title, description, completedAt }) => (
-                            <li class="flex items-start relative" transition:animate={getCustomTransition(0.3 + globalIndex * 0.05)}>
+                            <li class="flex items-start relative">
                                 <div class="absolute -left-6 mt-1 w-4 text-right">
                                     <span class="block text-[0.65rem] text-muted-foreground tabular-nums">
                                         {++globalIndex}
