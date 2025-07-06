@@ -120,6 +120,9 @@ importers:
       '@types/hast':
         specifier: 3.0.4
         version: 3.0.4
+      '@types/k6':
+        specifier: 1.1.0
+        version: 1.1.0
       '@types/mdast':
         specifier: 4.0.4
         version: 4.0.4
@@ -1632,6 +1635,9 @@ packages:
 
   '@types/html-minifier-terser@7.0.2':
     resolution: {integrity: sha512-mm2HqV22l8lFQh4r2oSsOEVea+m0qqxEmwpc9kC1p/XzmjLWrReR9D/GRs8Pex2NX/imyEH9c5IU/7tMBQCHOA==}
+
+  '@types/k6@1.1.0':
+    resolution: {integrity: sha512-PsC9JBjp93WUxfbKzA3qc8zltkY+ulnc8lVcFcUpAk/MQAP44XJ3U/OYx6qGvOR++v8HYxTsJmBqAr5MpFRZvQ==}
 
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
@@ -5875,6 +5881,8 @@ snapshots:
       '@types/unist': 3.0.3
 
   '@types/html-minifier-terser@7.0.2': {}
+
+  '@types/k6@1.1.0': {}
 
   '@types/mdast@4.0.4':
     dependencies:

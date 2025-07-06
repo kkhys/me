@@ -13,7 +13,11 @@
     "lint:fix": "biome check --write .",
     "playwright-install": "pnpx playwright-core install chromium",
     "release": "bun run scripts/release.ts",
-    "create:entry": "bun run scripts/create-entry.ts"
+    "create:entry": "bun run scripts/create-entry.ts",
+    "load-test": "k6 run load-testing/basic-load-test.ts",
+    "load-test:api": "k6 run load-testing/api-load-test.ts",
+    "load-test:stress": "k6 run load-testing/stress-test.ts",
+    "load-test:all": "k6 run load-testing/basic-load-test.ts && k6 run load-testing/api-load-test.ts"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
@@ -55,6 +59,7 @@
     "@playform/compress": "0.2.0",
     "@types/bun": "1.2.18",
     "@types/hast": "3.0.4",
+    "@types/k6": "1.1.0",
     "@types/mdast": "4.0.4",
     "@types/react": "19.1.8",
     "@types/unist": "3.0.3",
