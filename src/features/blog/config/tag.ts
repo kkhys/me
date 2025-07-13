@@ -172,6 +172,18 @@ export const tags = {
       slug: "environment",
       emoji: "🌳",
     },
+    {
+      title: "Event",
+      label: "イベント",
+      slug: "event",
+      emoji: "🎉",
+    },
+    {
+      title: "AI",
+      label: "AI",
+      slug: "ai",
+      emoji: "🧠",
+    },
   ],
 } as const satisfies Record<string, Tag[]>;
 
