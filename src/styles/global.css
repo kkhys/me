@@ -240,12 +240,20 @@
     @apply bg-transparent;
   }
 
+  li {
+    @apply my-2 pl-2.5;
+  }
+
   [data-footnotes]::before {
     @apply content-[""] block h-[1px] w-full bg-gradient-to-r from-hr-from via-hr-via to-hr-to;
   }
 
   [data-footnotes] > ol {
     @apply mt-6;
+  }
+
+  [data-footnotes] > ol > li {
+    @apply scroll-mt-12;
   }
 
   [data-footnote-ref] {
@@ -340,12 +348,16 @@
       @apply list-decimal pl-4;
     }
 
-    li {
-      @apply my-2 pl-2.5;
-    }
-
     li::marker {
       @apply text-sm font-medium;
+    }
+
+    li :is(ol, ul) {
+      @apply my-1 pl-2;
+    }
+
+    li :is(li, p) {
+      @apply my-1;
     }
 
     ol > li::marker {
@@ -355,14 +367,6 @@
     ul > li::marker,
     ol > li::marker {
       @apply text-muted-foreground;
-    }
-
-    li :is(ol, ul) {
-      @apply my-1 pl-2;
-    }
-
-    li :is(li, p) {
-      @apply my-1;
     }
 
     .contains-task-list {
