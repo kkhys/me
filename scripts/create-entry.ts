@@ -118,7 +118,7 @@ const main = async () => {
     const title = await prompt("タイトルを入力してください: ");
     const description =
       (await prompt('説明を入力してください (空白で"xxx"): ')) || "xxx";
-    const emoji = await prompt("絵文字を入力してください: ");
+    const emoji = (await prompt("絵文字を入力してください (空白で☑️): ")) || "☑️";
     const category = await selectCategory();
     const publishedAt = await inputPublishedDate();
 
