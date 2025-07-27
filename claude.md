@@ -1,130 +1,71 @@
 # CLAUDE.md
 
-このファイルは、このリポジトリでコードを扱う際のClaude Code (claude.ai/code) へのガイダンスを提供します。
+This file provides guidance for Claude Code when working with this repository.
 
-## 開発コマンド
+## Development Commands
 
-**コア開発:**
 ```bash
-pnpm dev                   # 開発サーバーを起動
-pnpm build                 # 本番用ビルド (Vercel)
-pnpm build:node            # Node.js デプロイ用ビルド
-pnpm preview               # 本番ビルドをローカルでプレビュー
-pnpm check                 # Astro チェック + TypeScript 検証実行
+pnpm dev                   # Start development server
+pnpm build                 # Production build (Vercel)
+pnpm build:node            # Node.js standalone build
+pnpm preview               # Preview production build locally
+pnpm check                 # Run Astro check + TypeScript validation
+pnpm lint                  # Check code with Biome
+pnpm lint:fix              # Auto-fix Biome issues
+pnpm create:entry          # Interactive blog post creation script
+pnpm release               # Release automation script
 ```
 
-**コード品質:**
-```bash
-pnpm lint                  # Biome でコードチェック
-pnpm lint:fix              # 自動修正可能な Biome の問題を修正
-```
+## Architecture Overview
 
-**コンテンツ管理:**
-```bash
-pnpm create:entry          # インタラクティブなブログ記事作成スクリプト
-pnpm release               # リリース自動化スクリプト
-```
+- **Astro 5.12.3** with React islands for interactive components
+- **TailwindCSS v4** with CSS-first configuration using `@theme` directive
+- **TypeScript** with strictest configuration and `#/*` path aliases
+- **Feature-based structure**: Each feature in `src/features/` contains its own components, utilities, and configurations
+- **File-based CMS**: Astro Content Collections with strict Zod schemas
+- **Date-based content**: `/content/blog/YYYY-MM-DD/index.mdx`
 
-**ビルドプロセス:**
-- `postbuild` はビルド後に自動的に Pagefind のインデックス作成を実行
-- プレビューコマンドは `.env` から環境変数を読み込み
+## Content System
 
-## アーキテクチャ概要
+### Categories & Tags
+- **4 Categories**: Tech, Life, Object, DIY
+- **Hierarchical tagging**: Tags are scoped to specific categories
+- **Build-time validation**: Invalid category-tag combinations cause build failures
 
-### コアフレームワーク
-- **Astro 5.10.0** とインタラクティブ機能のための React islands
-- **デュアルデプロイ戦略**: Vercel (デフォルト) または `--node` フラグによる Node.js スタンドアロン
-- **TailwindCSS v4** と `@theme` ディレクティブを使用した CSS ファースト設定
-- **TypeScript** 最厳格設定と `#/*` パスエイリアス（`./src/*` へ）
+### Frontmatter Requirements
+- **Required**: title, description, emoji, category, publishedAt
+- **Optional**: tags, status, updatedAt, sourceUrl, editUrl
 
-### 機能ベース構成
-```
-src/features/
-├── blog/           # ブログ機能 (コンポーネント、アクション、ユーティリティ)
-├── home/           # ホームページ Bento グリッドコンポーネント
-└── legal/          # 法的ページ
-```
+### Japanese Language Features
+- **BudouX integration** for natural Japanese line breaking
+- **Bilingual support**: English titles/slugs with Japanese labels
 
-**重要な原則**: 各機能は共有のグローバルフォルダではなく、独自のコンポーネント、ユーティリティ、設定を含む。
+## Custom Markdown Plugins
 
-### コンテンツシステム
-- **ファイルベース CMS** 厳密な Zod スキーマを持つ Astro Content Collections を使用
-- **日付ベース構造**: `/content/blog/YYYY-MM-DD/index.mdx`
-- **コロケーション資産**: 画像はコンテンツファイルと同じ場所に保存
-- **カテゴリ-タグ検証**: タグは特定のカテゴリにスコープされ、ビルド時に検証
-- **コンテンツライフサイクル**: 投稿は `draft`/`published` ステータスとリビジョン追跡を持つ
+Located in `/src/lib/`:
+- `remark-link-card`: Converts bare URLs to rich preview cards
+- `remark-video-block`: Custom video embedding syntax
+- `rehype-budoux`: Japanese text processing
+- `rehype-pagefind`: Search index integration
 
-### 日本語サポート
-日本語に特化したサイトで、以下の最適化を実装:
-- **BudouX 統合** 自然な日本語改行のため
-- **日本語タイポグラフィ** TailwindCSS で `palt` フォント機能
-- **バイリンガルコンテンツ** (日本語ラベル、英語技術用語)
+## Key Files
 
-### カスタム Markdown 処理パイプライン
-```
-Remark plugins → Rehype plugins → Final HTML
-```
+- `astro.config.ts` - Central configuration
+- `src/content.config.ts` - Content schema definitions
+- `src/features/blog/config/` - Category and tag definitions
+- `biome.json` - Code quality configuration
+- `scripts/create-entry.ts` - Blog post creation automation
 
-**主要プラグイン** (すべて `/src/lib/` でカスタム構築):
-- `remark-link-card`: 生の URL をリッチプレビューカードに変換
-- `remark-video-block`: カスタム動画埋め込み構文
-- `rehype-budoux`: 日本語テキスト処理
-- `rehype-pagefind`: 検索インデックス統合
+## Development Workflow
 
-### API アーキテクチャ
-- **Hono ベース API** `/api/[...path].ts` でキャッチオールルート
-- **サービスモジュール** `/src/pages/api/_services/` 内:
-  - GitHub 統合 (コントリビューション、ファイルメタデータ)
-  - Spotify "現在再生中" ウィジェット
-- **適切なキャッシュヘッダー** と型安全なレスポンス
+1. Use `pnpm create:entry` for new blog posts
+2. Place images in the same directory as content files
+3. Run `pnpm check` before committing
+4. Run `pnpm lint:fix` to auto-format code
 
-### スタイリングシステム
-- **TailwindCSS v4** テーマ用の CSS カスタムプロパティと
-- **デザインシステム** `@theme` ディレクティブを使用して `global.css` で定義
-- **ダークモード** `prefers-color-scheme` 経由
-- **コンポーネント固有のスタイル** コンポーネントと同じ場所に配置
+## External Integrations
 
-## 重要な開発パターン
-
-### コンテンツ作成
-- 新しいブログ投稿には `pnpm create:entry` を使用 - ディレクトリ作成、フロントマター生成、スラッグ作成を処理
-- ブログ投稿に必要: title, description, emoji, category, publishedAt
-- 画像はコンテンツファイルと同じディレクトリに配置
-
-### コンポーネントパターン
-- **Astro コンポーネント** 静的コンテンツとレイアウト用 (`.astro`)
-- **React コンポーネント** インタラクティブ機能用 (`.tsx`)
-- **共有 UI コンポーネント** `/src/components/ui/` 内
-- **機能固有コンポーネント** 機能ディレクトリ内
-
-### 環境設定
-アプリは Astro の型付き環境変数を使用:
-- サーバーシークレット (GitHub トークン、Spotify 認証情報、Redis)
-- パブリック変数 (Vercel デプロイ情報)
-- 環境条件付き動作 (画像最適化、デプロイメントアダプター)
-
-### リント設定
-- **Biome** カスタムルールでのフォーマットとリント
-- 一般コードには**厳格なルール**、`.astro` ファイルには**緩和されたルール**
-- スペースインデント、Git 統合有効
-
-### 検索統合
-- **Pagefind** ビルド時に自動的に検索インデックスを生成
-- **カスタム rehype プラグイン** コンテンツに検索属性を追加
-- JavaScript 不要でフロントエンドで検索利用可能
-
-## 理解すべき重要ファイル
-
-- `astro.config.ts` - 広範なプラグイン設定を持つ中央設定
-- `src/content.config.ts` - コンテンツスキーマ定義と検証
-- `src/features/blog/config/` - カテゴリとタグ定義
-- `src/lib/` - カスタム markdown プラグインとユーティリティ
-- `biome.json` - コード品質設定
-- `src/styles/global.css` - デザインシステム定義
-
-## テストと品質保証
-
-- コミット前に `pnpm check` を実行して TypeScript と Astro を検証
-- `pnpm lint:fix` を使用してコードを自動フォーマット
-- コンテンツ検証は Zod スキーマ経由でビルド時に実行
-- デプロイ前に `pnpm preview` でローカルでビルドをプレビュー
+- **GitHub**: Contribution data via GraphQL API
+- **Spotify**: Now playing widget
+- **Redis**: API response caching via Upstash
+- **Pagefind**: Automatic search index generation
