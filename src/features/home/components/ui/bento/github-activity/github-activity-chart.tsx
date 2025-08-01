@@ -34,6 +34,7 @@ const renderRect =
       <rect
         className="transition-all hover:brightness-125 focus:outline-none"
         onMouseEnter={() => handleMouseEnter(tileInfo)}
+        onFocus={() => handleMouseEnter(tileInfo)}
         role="button"
         tabIndex={0}
         aria-label={tileInfo}
