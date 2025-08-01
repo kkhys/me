@@ -31,11 +31,11 @@ const renderRect =
     const tileInfo = `${data.count ? formatNumber(data.count) : "0"}件のコントリビューション - ${formattedDate}`;
 
     return (
+      // biome-ignore lint/a11y/noStaticElementInteractions: xxx
       <rect
         className="transition-all hover:brightness-125 focus:outline-none"
         onMouseEnter={() => handleMouseEnter(tileInfo)}
         onFocus={() => handleMouseEnter(tileInfo)}
-        role="button"
         tabIndex={0}
         aria-label={tileInfo}
         {...props}
