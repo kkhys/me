@@ -32,7 +32,7 @@ const renderRect =
 
     return (
       <rect
-        className="transition-all hover:brightness-125"
+        className="transition-all hover:brightness-125 focus:outline-none"
         onMouseEnter={() => handleMouseEnter(tileInfo)}
         role="button"
         tabIndex={0}
