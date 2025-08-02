@@ -34,7 +34,7 @@ importers:
         version: 8.2.5(astro@5.12.8(@types/node@24.0.0)(@upstash/redis@1.35.3)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.42.0)(terser@5.42.0)(typescript@5.9.2)(yaml@2.8.0))(react@19.1.1)(rollup@4.42.0)
       '@hono/zod-validator':
         specifier: 0.7.2
-        version: 0.7.2(hono@4.8.10)(zod@3.25.61)
+        version: 0.7.2(hono@4.8.12)(zod@3.25.61)
       '@lucide/astro':
         specifier: 0.536.0
         version: 0.536.0(astro@5.12.8(@types/node@24.0.0)(@upstash/redis@1.35.3)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.42.0)(terser@5.42.0)(typescript@5.9.2)(yaml@2.8.0))
@@ -66,8 +66,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(graphql@16.11.0)
       hono:
-        specifier: 4.8.10
-        version: 4.8.10
+        specifier: 4.8.12
+        version: 4.8.12
       lucide-react:
         specifier: 0.536.0
         version: 0.536.0(react@19.1.1)
@@ -90,8 +90,8 @@ importers:
         specifier: 0.34.3
         version: 0.34.3
       sonner:
-        specifier: 2.0.6
-        version: 2.0.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+        specifier: 2.0.7
+        version: 2.0.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       swr:
         specifier: 2.3.4
         version: 2.3.4(react@19.1.1)
@@ -2846,8 +2846,8 @@ packages:
     resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
     engines: {node: '>=6'}
 
-  hono@4.8.10:
-    resolution: {integrity: sha512-DRMYbR3aFk6YET1FCSAFbgF2cWYTz5j0YAFYPECx9fmrbKBDAYnWU+YCgRTpOaatxMYN6e68U/2IG39zRP4W/A==}
+  hono@4.8.12:
+    resolution: {integrity: sha512-MQSKk1Mg7b74k8l+A025LfysnLtXDKkE4pLaSsYRQC5iy85lgZnuyeQ1Wynair9mmECzoLu+FtJtqNZSoogBDQ==}
     engines: {node: '>=16.9.0'}
 
   html-escaper@3.0.3:
@@ -3910,8 +3910,8 @@ packages:
     resolution: {integrity: sha512-UOPtVuYkzYGee0Bd2Szz8d2G3RfMfJ2t3qVdZUAozZyAk+a0Sxa+QKix0YCwjL/A1RR0ar44nCxaoN9FxdJGwA==}
     engines: {node: '>= 18'}
 
-  sonner@2.0.6:
-    resolution: {integrity: sha512-yHFhk8T/DK3YxjFQXIrcHT1rGEeTLliVzWbO0xN8GberVun2RiBnxAjXAYpZrqwEVHBG9asI/Li8TAAhN9m59Q==}
+  sonner@2.0.7:
+    resolution: {integrity: sha512-W6ZN4p58k8aDKA4XPcx2hpIQXBRAgyiWVkYhT7CvK6D3iAu7xjvVyhQHg2/iaKJZ1XVJ4r7XuwGL+WGEK37i9w==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
       react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
@@ -5053,9 +5053,9 @@ snapshots:
     dependencies:
       graphql: 16.11.0
 
-  '@hono/zod-validator@0.7.2(hono@4.8.10)(zod@3.25.61)':
+  '@hono/zod-validator@0.7.2(hono@4.8.12)(zod@3.25.61)':
     dependencies:
-      hono: 4.8.10
+      hono: 4.8.12
       zod: 3.25.61
 
   '@iconify/types@2.0.0': {}
@@ -7420,7 +7420,7 @@ snapshots:
 
   hex-rgb@4.3.0: {}
 
-  hono@4.8.10: {}
+  hono@4.8.12: {}
 
   html-escaper@3.0.3: {}
 
@@ -8913,7 +8913,7 @@ snapshots:
 
   smol-toml@1.3.4: {}
 
-  sonner@2.0.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+  sonner@2.0.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
       react: 19.1.1
       react-dom: 19.1.1(react@19.1.1)
