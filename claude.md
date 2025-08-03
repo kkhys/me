@@ -69,3 +69,54 @@ Located in `/src/lib/`:
 - **Spotify**: Now playing widget
 - **Redis**: API response caching via Upstash
 - **Pagefind**: Automatic search index generation
+
+## Content Review System
+
+### Comprehensive Review System
+
+**Important**: When instructed with "この記事のレビューを行なってください" or similar comprehensive review requests, **automatically execute all 4 specialized agents in parallel**:
+
+#### Auto-Execution Process
+
+When receiving comprehensive review requests, execute:
+
+1. Launch `content-reviewer` agent using `Task` tool for structural and logical analysis
+2. Launch `language-editor` agent using `Task` tool for language and style editing
+3. Launch `readability-enhancer` agent using `Task` tool for readability improvement
+4. Launch `technical-writer` agent using `Task` tool for technical accuracy verification
+5. Integrate all agent results into a comprehensive review report
+
+#### Review Agent Configuration
+
+1. **content-reviewer** (Purple) - Structural & logical analysis
+2. **language-editor** (Green) - Language & style editing
+3. **readability-enhancer** (Orange) - Readability enhancement
+4. **technical-writer** (Blue) - Technical accuracy verification
+
+#### Integrated Review Output Format
+
+```markdown
+# 📝 Comprehensive Content Review Results
+
+## 🔍 Structural & Logical Analysis (Content Review)
+[content-reviewer analysis results]
+
+## ✏️ Language & Style Editing (Language Editing)
+[language-editor analysis results]
+
+## 📖 Readability Enhancement (Readability Enhancement)
+[readability-enhancer analysis results]
+
+## 🔧 Technical Accuracy Verification (Technical Writing)
+[technical-writer analysis results]
+
+## 📋 Overall Assessment & Improvement Proposals
+- High Priority: [Critical improvement points]
+- Medium Priority: [Important improvement points]
+- Low Priority: [Recommended improvement points]
+
+## ✅ Actionable Implementation Steps
+1. [Immediately executable improvements]
+2. [Phased improvement plans]
+3. [Long-term quality enhancement strategies]
+```
