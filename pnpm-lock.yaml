@@ -34,7 +34,7 @@ importers:
         version: 8.2.7(astro@5.13.5(@types/node@24.0.0)(@upstash/redis@1.35.3)(jiti@2.5.1)(lightningcss@1.30.1)(rollup@4.42.0)(terser@5.42.0)(typescript@5.9.2)(yaml@2.8.0))(react@19.1.1)(rollup@4.42.0)
       '@hono/zod-validator':
         specifier: 0.7.2
-        version: 0.7.2(hono@4.9.5)(zod@3.25.61)
+        version: 0.7.2(hono@4.9.6)(zod@3.25.61)
       '@lucide/astro':
         specifier: 0.542.0
         version: 0.542.0(astro@5.13.5(@types/node@24.0.0)(@upstash/redis@1.35.3)(jiti@2.5.1)(lightningcss@1.30.1)(rollup@4.42.0)(terser@5.42.0)(typescript@5.9.2)(yaml@2.8.0))
@@ -66,8 +66,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(graphql@16.11.0)
       hono:
-        specifier: 4.9.5
-        version: 4.9.5
+        specifier: 4.9.6
+        version: 4.9.6
       lucide-react:
         specifier: 0.542.0
         version: 0.542.0(react@19.1.1)
@@ -2892,8 +2892,8 @@ packages:
     resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
     engines: {node: '>=6'}
 
-  hono@4.9.5:
-    resolution: {integrity: sha512-aLAVl5/67ifNnoFVxnhR89dpmSLsgwBprw/PT671ASwUpJqmd7Ne8KPTQo37DbRZfgpHaHeZ4bPVUvbOkeedMw==}
+  hono@4.9.6:
+    resolution: {integrity: sha512-doVjXhSFvYZ7y0dNokjwwSahcrAfdz+/BCLvAMa/vHLzjj8+CFyV5xteThGUsKdkaasgN+gF2mUxao+SGLpUeA==}
     engines: {node: '>=16.9.0'}
 
   html-escaper@3.0.3:
@@ -5105,9 +5105,9 @@ snapshots:
     dependencies:
       graphql: 16.11.0
 
-  '@hono/zod-validator@0.7.2(hono@4.9.5)(zod@3.25.61)':
+  '@hono/zod-validator@0.7.2(hono@4.9.6)(zod@3.25.61)':
     dependencies:
-      hono: 4.9.5
+      hono: 4.9.6
       zod: 3.25.61
 
   '@iconify/types@2.0.0': {}
@@ -7513,7 +7513,7 @@ snapshots:
 
   hex-rgb@4.3.0: {}
 
-  hono@4.9.5: {}
+  hono@4.9.6: {}
 
   html-escaper@3.0.3: {}
 
