@@ -1,16 +1,19 @@
-import { type RefObject, useEffect } from "react";
+import { type RefObject, useEffect, useEffectEvent } from "react";
 
 export const useOnClickOutside = <T extends HTMLElement>(
   ref: RefObject<T>,
   handler: (event: MouseEvent | TouchEvent) => void,
 ) => {
+  const onClickOutside = useEffectEvent(handler);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: onClickOutside is an Effect Event and should not be in dependencies
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (!ref || !ref.current || ref.current.contains(event.target as Node)) {
         return;
       }
 
-      handler(event);
+      onClickOutside(event);
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -20,5 +23,5 @@ export const useOnClickOutside = <T extends HTMLElement>(
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("touchstart", handleClickOutside);
     };
-  }, [ref, handler]);
+  }, [ref]);
 };
