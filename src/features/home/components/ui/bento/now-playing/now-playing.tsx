@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import useSWR from "swr";
 import { SpotifyIcon } from "#/components/ui/icons/spotify";
 import { client } from "#/lib/client";
@@ -16,6 +17,22 @@ export const NowPlaying = ({ initialData }: Props) => {
       refreshInterval: 10000,
       ...(initialData && { fallbackData: initialData }),
     },
+  );
+
+  const animationBars = useMemo(
+    () =>
+      Array.from({ length: 60 }, (_, index) => (
+        <div
+          // biome-ignore lint/suspicious/noArrayIndexKey: Static array with fixed length
+          key={index}
+          className="w-[2px] bg-green-500 rounded-sm flex-1 dark:bg-green-400"
+          style={{
+            height: "2px",
+            animation: `sound-bar ${800 + Math.random() * 400}ms ${Math.random() * -2000}ms linear infinite alternate`,
+          }}
+        />
+      )),
+    [],
   );
 
   if (error && !data) {
@@ -51,17 +68,7 @@ export const NowPlaying = ({ initialData }: Props) => {
         </div>
         {data?.isPlaying && (
           <div className="hidden md:flex items-end gap-[1px] h-8 w-full pb-4 pr-4">
-            {Array.from({ length: 60 }, (_, index) => (
-              <div
-                // biome-ignore lint/suspicious/noArrayIndexKey: Static array with fixed length
-                key={index}
-                className="w-[2px] bg-green-500 rounded-sm flex-1 dark:bg-green-400"
-                style={{
-                  height: "2px",
-                  animation: `sound-bar ${800 + Math.random() * 400}ms ${Math.random() * -2000}ms linear infinite alternate`,
-                }}
-              />
-            ))}
+            {animationBars}
           </div>
         )}
       </div>

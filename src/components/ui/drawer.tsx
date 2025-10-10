@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import { type ComponentProps, memo } from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "#/lib/ui";
 
@@ -24,18 +24,17 @@ const DrawerClose = ({
   <DrawerPrimitive.Close data-slot="drawer-close" {...props} />
 );
 
-const DrawerOverlay = ({
-  className,
-  ...props
-}: ComponentProps<typeof DrawerPrimitive.Overlay>) => (
-  <DrawerPrimitive.Overlay
-    data-slot="drawer-overlay"
-    className={cn(
-      "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
-      className,
-    )}
-    {...props}
-  />
+const DrawerOverlay = memo(
+  ({ className, ...props }: ComponentProps<typeof DrawerPrimitive.Overlay>) => (
+    <DrawerPrimitive.Overlay
+      data-slot="drawer-overlay"
+      className={cn(
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
+        className,
+      )}
+      {...props}
+    />
+  ),
 );
 
 const DrawerContent = ({
@@ -63,42 +62,43 @@ const DrawerContent = ({
   </DrawerPortal>
 );
 
-const DrawerHeader = ({ className, ...props }: ComponentProps<"div">) => (
+const DrawerHeader = memo(({ className, ...props }: ComponentProps<"div">) => (
   <div
     data-slot="drawer-header"
     className={cn("flex flex-col gap-1.5 p-4", className)}
     {...props}
   />
-);
+));
 
-const DrawerFooter = ({ className, ...props }: ComponentProps<"div">) => (
+const DrawerFooter = memo(({ className, ...props }: ComponentProps<"div">) => (
   <div
     data-slot="drawer-footer"
     className={cn("mt-auto flex flex-col gap-2 p-4", className)}
     {...props}
   />
+));
+
+const DrawerTitle = memo(
+  ({ className, ...props }: ComponentProps<typeof DrawerPrimitive.Title>) => (
+    <DrawerPrimitive.Title
+      data-slot="drawer-title"
+      className={cn("text-foreground font-semibold", className)}
+      {...props}
+    />
+  ),
 );
 
-const DrawerTitle = ({
-  className,
-  ...props
-}: ComponentProps<typeof DrawerPrimitive.Title>) => (
-  <DrawerPrimitive.Title
-    data-slot="drawer-title"
-    className={cn("text-foreground font-semibold", className)}
-    {...props}
-  />
-);
-
-const DrawerDescription = ({
-  className,
-  ...props
-}: ComponentProps<typeof DrawerPrimitive.Description>) => (
-  <DrawerPrimitive.Description
-    data-slot="drawer-description"
-    className={cn("text-muted-foreground text-sm", className)}
-    {...props}
-  />
+const DrawerDescription = memo(
+  ({
+    className,
+    ...props
+  }: ComponentProps<typeof DrawerPrimitive.Description>) => (
+    <DrawerPrimitive.Description
+      data-slot="drawer-description"
+      className={cn("text-muted-foreground text-sm", className)}
+      {...props}
+    />
+  ),
 );
 
 export {

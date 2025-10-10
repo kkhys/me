@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import type { ComponentProps } from "react";
+import { type ComponentProps, memo } from "react";
 import { cn } from "#/lib/ui";
 
 const buttonVariants = cva(
@@ -36,11 +36,11 @@ interface ButtonProps
   extends ComponentProps<"button">,
     VariantProps<typeof buttonVariants> {}
 
-const Button = ({ className, variant, size, ...props }: ButtonProps) => (
+const Button = memo(({ className, variant, size, ...props }: ButtonProps) => (
   <button
     className={cn(buttonVariants({ variant, size, className }))}
     {...props}
   />
-);
+));
 
 export { type ButtonProps, Button, buttonVariants };

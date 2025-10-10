@@ -16,7 +16,7 @@ import {
   Trigger,
 } from "@radix-ui/react-dropdown-menu";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
-import type { ComponentProps } from "react";
+import { type ComponentProps, memo } from "react";
 import { cn } from "#/lib/ui";
 
 const DropdownMenu = ({ ...props }: ComponentProps<typeof Root>) => (
@@ -126,47 +126,47 @@ const DropdownMenuRadioItem = ({
   </RadioItem>
 );
 
-const DropdownMenuLabel = ({
-  className,
-  inset,
-  ...props
-}: ComponentProps<typeof Label> & {
-  inset?: boolean;
-}) => (
-  <Label
-    data-slot="dropdown-menu-label"
-    data-inset={inset}
-    className={cn(
-      "px-2 py-1.5 text-sm font-medium data-[inset]:pl-8",
-      className,
-    )}
-    {...props}
-  />
+const DropdownMenuLabel = memo(
+  ({
+    className,
+    inset,
+    ...props
+  }: ComponentProps<typeof Label> & {
+    inset?: boolean;
+  }) => (
+    <Label
+      data-slot="dropdown-menu-label"
+      data-inset={inset}
+      className={cn(
+        "px-2 py-1.5 text-sm font-medium data-[inset]:pl-8",
+        className,
+      )}
+      {...props}
+    />
+  ),
 );
 
-const DropdownMenuSeparator = ({
-  className,
-  ...props
-}: ComponentProps<typeof Separator>) => (
-  <Separator
-    data-slot="dropdown-menu-separator"
-    className={cn("bg-border -mx-1 my-1 h-px", className)}
-    {...props}
-  />
+const DropdownMenuSeparator = memo(
+  ({ className, ...props }: ComponentProps<typeof Separator>) => (
+    <Separator
+      data-slot="dropdown-menu-separator"
+      className={cn("bg-border -mx-1 my-1 h-px", className)}
+      {...props}
+    />
+  ),
 );
 
-const DropdownMenuShortcut = ({
-  className,
-  ...props
-}: ComponentProps<"span">) => (
-  <span
-    data-slot="dropdown-menu-shortcut"
-    className={cn(
-      "text-muted-foreground ml-auto text-xs tracking-widest",
-      className,
-    )}
-    {...props}
-  />
+const DropdownMenuShortcut = memo(
+  ({ className, ...props }: ComponentProps<"span">) => (
+    <span
+      data-slot="dropdown-menu-shortcut"
+      className={cn(
+        "text-muted-foreground ml-auto text-xs tracking-widest",
+        className,
+      )}
+      {...props}
+    />
+  ),
 );
 
 const DropdownMenuSub = ({ ...props }: ComponentProps<typeof Sub>) => (

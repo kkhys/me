@@ -1,5 +1,5 @@
 import HeatMap, { type SVGProps } from "@uiw/react-heat-map";
-import { useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { cn } from "#/lib/ui";
 import type { GithubContributionData } from "#/pages/api/_services/github/contributions";
 
@@ -43,33 +43,59 @@ const renderRect =
     );
   };
 
-export const GithubActivityChart = (props: Props) => {
+export const GithubActivityChart = memo((props: Props) => {
   const defaultValue = `過去1年間で${formatNumber(props.totalContributions)}件のコントリビューション`;
   const [hoveredTile, setHoveredTile] = useState<string | null>(defaultValue);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => setIsLoaded(true), []);
 
-  const heatMapProps = {
-    ...getDateProps(),
-    onMouseLeave: () => setHoveredTile(defaultValue),
-    value: props.contributions ?? [],
-    weekLabels: false as const,
-    monthLabels: false as const,
-    legendCellSize: 0,
-    space: 8,
-    style: { color: "#fff" as const },
-    rectProps: { rx: 2 },
-    rectSize: 12,
-    rectRender: renderRect((date) => setHoveredTile(date)),
-    panelColors: {
+  const dateProps = useMemo(() => getDateProps(), []);
+
+  const panelColors = useMemo(
+    () => ({
       1: "var(--github-heatmap-level-1)",
       4: "var(--github-heatmap-level-2)",
       8: "var(--github-heatmap-level-3)",
       12: "var(--github-heatmap-level-4)",
-    },
-    className: "w-[265px] h-[139px]",
-  };
+    }),
+    [],
+  );
+
+  const handleMouseLeave = useCallback(
+    () => setHoveredTile(defaultValue),
+    [defaultValue],
+  );
+
+  const handleMouseEnter = useCallback(
+    (date: string) => setHoveredTile(date),
+    [],
+  );
+
+  const heatMapProps = useMemo(
+    () => ({
+      ...dateProps,
+      onMouseLeave: handleMouseLeave,
+      value: props.contributions ?? [],
+      weekLabels: false as const,
+      monthLabels: false as const,
+      legendCellSize: 0,
+      space: 8,
+      style: { color: "#fff" as const },
+      rectProps: { rx: 2 },
+      rectSize: 12,
+      rectRender: renderRect(handleMouseEnter),
+      panelColors,
+      className: "w-[265px] h-[139px]",
+    }),
+    [
+      dateProps,
+      handleMouseLeave,
+      props.contributions,
+      handleMouseEnter,
+      panelColors,
+    ],
+  );
 
   return (
     <div className="flex flex-col justify-between gap-1 p-1.5">
@@ -86,4 +112,4 @@ export const GithubActivityChart = (props: Props) => {
       </div>
     </div>
   );
-};
+});
