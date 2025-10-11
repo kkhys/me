@@ -69,15 +69,15 @@ const {
   {...(umamiEventLocation && { umamiEventLocation })}
 >
   <div class={`grid place-content-center size-10 shadow-sm rounded-[8px] border ${iconBgClass}`}>
-    <slot name="icon" />
+  <slot name="icon" />
   </div>
   <div class="my-2 font-semibold">
-    {title}
+  {title}
   </div>
   <Budoux>
-    <div class="text-xs text-muted-foreground">
-      {description}
-    </div>
+  <div class="text-xs text-muted-foreground">
+    {description}
+  </div>
   </Budoux>
   <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
 </BentoItemBase>

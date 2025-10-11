@@ -18,35 +18,35 @@ import { cn } from "#/lib/ui";
 ---
 
 <BaseLayout pagefind>
-    <script
-            is:inline
-            type='application/ld+json'
-            set:html={JSON.stringify(websiteSchema)}
-            slot='head'
-    />
-    <h1 class="font-medium" transition:animate={getCustomTransition()}>
-        Keisuke Hayashi
-    </h1>
-    <Budoux>
-        <p class="text-sm text-muted-foreground mt-2" transition:animate={getCustomTransition(0.15)}>東京を拠点とするフルスタック開発者。何かを作り、人々に喜びと驚きを与えることが大好きです。</p>
-    </Budoux>
-        <BentoGrid class="mt-10">
-            <BentoItemAboutMe />
-            <BentoItemMastodon />
-            <BentoItemSupport />
-            <BentoItemMap />
-            <BentoItemGithubActivity />
-            <BentoItemNowPlaying />
-            <BentoItemTechBlog />
-        </BentoGrid>
-    <div class="mt-24">
-        <h2 class="font-medium" transition:animate={getCustomTransition(0.65)}>
-            おすすめの記事
-        </h2>
-        <FeaturedEntry class="mt-10" />
-        <a href="/blog" class={cn('mt-8', buttonVariants({ variant: 'link'}))}>
-            すべての記事を見る
-            <MoveRightIcon class="size-4" />
-        </a>
-    </div>
+  <script
+      is:inline
+      type='application/ld+json'
+      set:html={JSON.stringify(websiteSchema)}
+      slot='head'
+  />
+  <h1 class="font-medium" transition:animate={getCustomTransition()}>
+    Keisuke Hayashi
+  </h1>
+  <Budoux>
+    <p class="text-sm text-muted-foreground mt-2" transition:animate={getCustomTransition(0.15)}>東京を拠点とするフルスタック開発者。何かを作り、人々に喜びと驚きを与えることが大好きです。</p>
+  </Budoux>
+    <BentoGrid class="mt-10">
+      <BentoItemAboutMe />
+      <BentoItemMastodon />
+      <BentoItemSupport />
+      <BentoItemMap />
+      <BentoItemGithubActivity />
+      <BentoItemNowPlaying />
+      <BentoItemTechBlog />
+    </BentoGrid>
+  <div class="mt-24">
+    <h2 class="font-medium" transition:animate={getCustomTransition(0.65)}>
+      おすすめの記事
+    </h2>
+    <FeaturedEntry class="mt-10" />
+    <a href="/blog" class={cn('mt-8', buttonVariants({ variant: 'link'}))}>
+      すべての記事を見る
+      <MoveRightIcon class="size-4" />
+    </a>
+  </div>
 </BaseLayout>

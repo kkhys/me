@@ -17,31 +17,31 @@ const linkClass =
 ---
 
 <nav class={cn('flex items-center justify-between', className)} {...rest}>
-    <div class="flex items-center max-sm:hidden">
-        {/^\/blog(\/\d+)?\/?$/.test(pathname) ? (
-                <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
-                すべて
-            </span>
-        ) : (
-                <a href="/blog" class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
-                    すべて
-                </a>
-        )}
-        {categories.map(({ slug, label }) => (
-            pathname?.startsWith(`/blog/categories/${slug}`) ? (
-                    <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
-                {label}
-            </span>
-            ) : (
-                    <a href={`/blog/categories/${slug}`} class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
-                        {label}
-                    </a>
-            )
-        ))}
-    </div>
-    <SpCategoryNavigation pathname={pathname} className="sm:hidden" client:media="(max-width: 40rem)" transition:persist="sp-category-navigation" />
-    <a class={cn('rounded-full!', buttonVariants({ variant: "outline", size: "icon" }))} href="/rss.xml">
-        <RssIcon class="size-4" aria-hidden="true" />
-        <span class="sr-only">RSS フィード</span>
-    </a>
+  <div class="flex items-center max-sm:hidden">
+    {/^\/blog(\/\d+)?\/?$/.test(pathname) ? (
+        <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
+        すべて
+      </span>
+    ) : (
+        <a href="/blog" class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
+          すべて
+        </a>
+    )}
+    {categories.map(({ slug, label }) => (
+      pathname?.startsWith(`/blog/categories/${slug}`) ? (
+          <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
+        {label}
+      </span>
+      ) : (
+          <a href={`/blog/categories/${slug}`} class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
+            {label}
+          </a>
+      )
+    ))}
+  </div>
+  <SpCategoryNavigation pathname={pathname} className="sm:hidden" client:media="(max-width: 40rem)" transition:persist="sp-category-navigation" />
+  <a class={cn('rounded-full!', buttonVariants({ variant: "outline", size: "icon" }))} href="/rss.xml">
+    <RssIcon class="size-4" aria-hidden="true" />
+    <span class="sr-only">RSS フィード</span>
+  </a>
 </nav>

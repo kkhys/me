@@ -28,11 +28,11 @@ const alertStyles: Record<AlertType, string> = {
   note: "border-blue-500/50 text-blue-600 dark:border-blue-400/50 dark:text-blue-400",
   tip: "border-emerald-500/50 text-emerald-600 dark:border-emerald-400/50 dark:text-emerald-500",
   important:
-    "border-purple-500/50 text-purple-600 dark:border-purple-400/50 dark:text-purple-400",
+  "border-purple-500/50 text-purple-600 dark:border-purple-400/50 dark:text-purple-400",
   warning:
-    "border-amber-500/50 text-amber-600 dark:border-amber-400/50 dark:text-amber-500",
+  "border-amber-500/50 text-amber-600 dark:border-amber-400/50 dark:text-amber-500",
   caution:
-    "border-red-500/50 text-red-600 dark:border-red-400/50 dark:text-red-400",
+  "border-red-500/50 text-red-600 dark:border-red-400/50 dark:text-red-400",
 };
 
 const IconComponent = alertIcons[alertType];
@@ -40,9 +40,9 @@ const styleClasses = alertStyles[alertType];
 ---
 
 <div class={cn("flex flex-col md:flex-row gap-3 items-start md:items-center rounded-md border px-4 py-4 md:py-3 [&>p]:m-0 [&>p]:text-sm [&>p]:leading-6 [&>p>a]:underline [&>p>a]:text-current [&>p>a]:leading-6", styleClasses)} {...rest}>
-    <IconComponent
-            class="size-4 opacity-70 shrink-0"
-            aria-hidden="true"
-    />
-    <slot />
+  <IconComponent
+      class="size-4 opacity-70 shrink-0"
+      aria-hidden="true"
+  />
+  <slot />
 </div>

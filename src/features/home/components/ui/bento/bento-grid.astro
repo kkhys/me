@@ -8,10 +8,10 @@ const { class: className } = Astro.props;
 ---
 
 <div
-        class={cn(
-            "mx-auto grid grid-cols-2 gap-4 md:grid-cols-6",
-            className,
-        )}
+    class={cn(
+      "mx-auto grid grid-cols-2 gap-4 md:grid-cols-6",
+      className,
+    )}
 >
-    <slot />
+  <slot />
 </div>

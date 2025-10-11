@@ -17,19 +17,19 @@ export const getStaticPaths = async ({
 }) => {
   const blogEntries = await getPublicBlogEntries();
   const categories = [
-    ...new Set(blogEntries.flatMap((entry) => entry.data.category ?? [])),
+  ...new Set(blogEntries.flatMap((entry) => entry.data.category ?? [])),
   ];
   return categories.flatMap((category) => {
-    const filteredEntries = blogEntries
-      .filter((post) => post.data.category.includes(category))
-      .sort(
-        (a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime(),
-      )
-      .reverse();
-    return paginate(filteredEntries, {
-      pageSize: countPerPage,
-      params: { category: category.toLowerCase() },
-    });
+  const filteredEntries = blogEntries
+    .filter((post) => post.data.category.includes(category))
+    .sort(
+    (a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime(),
+    )
+    .reverse();
+  return paginate(filteredEntries, {
+    pageSize: countPerPage,
+    params: { category: category.toLowerCase() },
+  });
   });
 };
 
@@ -44,23 +44,23 @@ if (!category) {
 ---
 
 <BaseLayout class="space-y-6">
-    <SEO
-            title={category.label}
-            description=`「${category.label}」カテゴリーの記事一覧`
-            slot='seo'
-    />
-    <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[138px] xl:-translate-x-[260px]">
-        <a href="/" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
-            <ArrowLeftIcon class="size-3.5" />
-            ホーム
-        </a>
-    </div>
-    <section>
-        <h1 class="font-medium">ブログ</h1>
-        <CategoryNavigation class="mt-8" />
-    </section>
-    <section>
-        <EntryList blogEntries={page.data} showDate />
-    </section>
-    <Pagination page={page} baseUrl={`/blog/categories/${categorySlug}`} />
+  <SEO
+      title={category.label}
+      description=`「${category.label}」カテゴリーの記事一覧`
+      slot='seo'
+  />
+  <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[138px] xl:-translate-x-[260px]">
+    <a href="/" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
+      <ArrowLeftIcon class="size-3.5" />
+      ホーム
+    </a>
+  </div>
+  <section>
+    <h1 class="font-medium">ブログ</h1>
+    <CategoryNavigation class="mt-8" />
+  </section>
+  <section>
+    <EntryList blogEntries={page.data} showDate />
+  </section>
+  <Pagination page={page} baseUrl={`/blog/categories/${categorySlug}`} />
 </BaseLayout>

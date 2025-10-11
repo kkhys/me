@@ -67,112 +67,112 @@ const {
 
 {variant === "text-first" ? (
   transition !== undefined ? (
-    <BentoItemBase
-      {size}
-      {href}
-      {transition}
-      className="relative flex flex-col justify-around p-6 overflow-hidden"
-    >
-    <div class="mb-4">
-      <div class="mb-2 line-clamp-2">
-        {title}
-      </div>
-      {description && (
-        <Budoux>
-          <p class="text-xs text-muted-foreground line-clamp-3">
-            {description}
-          </p>
-        </Budoux>
-      )}
+  <BentoItemBase
+    {size}
+    {href}
+    {transition}
+    className="relative flex flex-col justify-around p-6 overflow-hidden"
+  >
+  <div class="mb-4">
+    <div class="mb-2 line-clamp-2">
+    {title}
     </div>
-    <Picture
-      src={image}
-      alt={imageAlt}
-      formats={['avif']}
-      class={`rounded-lg object-cover! aspect-[3/2]! shadow-sm ${imageClass || ''}`}
-    />
-    <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
+    {description && (
+    <Budoux>
+      <p class="text-xs text-muted-foreground line-clamp-3">
+      {description}
+      </p>
+    </Budoux>
+    )}
+  </div>
+  <Picture
+    src={image}
+    alt={imageAlt}
+    formats={['avif']}
+    class={`rounded-lg object-cover! aspect-[3/2]! shadow-sm ${imageClass || ''}`}
+  />
+  <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
   </BentoItemBase>
   ) : (
-    <BentoItemBase
-      {size}
-      {href}
-      className="relative flex flex-col justify-around p-6 overflow-hidden"
-    >
-    <div class="mb-4">
-      <div class="mb-2 line-clamp-2">
-        {title}
-      </div>
-      {description && (
-        <Budoux>
-          <p class="text-xs text-muted-foreground line-clamp-3">
-            {description}
-          </p>
-        </Budoux>
-      )}
+  <BentoItemBase
+    {size}
+    {href}
+    className="relative flex flex-col justify-around p-6 overflow-hidden"
+  >
+  <div class="mb-4">
+    <div class="mb-2 line-clamp-2">
+    {title}
     </div>
-    <Picture
-      src={image}
-      alt={imageAlt}
-      formats={['avif']}
-      class={`rounded-lg object-cover! aspect-[3/2]! shadow-sm ${imageClass || ''}`}
-    />
-    <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
+    {description && (
+    <Budoux>
+      <p class="text-xs text-muted-foreground line-clamp-3">
+      {description}
+      </p>
+    </Budoux>
+    )}
+  </div>
+  <Picture
+    src={image}
+    alt={imageAlt}
+    formats={['avif']}
+    class={`rounded-lg object-cover! aspect-[3/2]! shadow-sm ${imageClass || ''}`}
+  />
+  <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
   </BentoItemBase>
   )
 ) : (
   transition !== undefined ? (
-    <BentoItemBase
-      {size}
-      {href}
-      {transition}
-      className="relative flex flex-col justify-between overflow-hidden"
-    >
-    <Picture
-      src={image}
-      alt={imageAlt}
-      formats={['avif']}
-      class={`rounded-lg object-cover! aspect-square! shadow-sm ${imageClass || ''}`}
-    />
-    <ProgressiveBlur
-      class={`pointer-events-none absolute -bottom-1 left-0 h-[${blurHeight}] w-full`}
-      blurIntensity={blurIntensity}
-      blurLayers={4}
-    />
-    <div class='absolute bottom-0 left-0'>
-      <div class='p-4'>
-        <Budoux>
-          <p class='text-sm text-white line-clamp-2'>{title}</p>
-        </Budoux>
-      </div>
+  <BentoItemBase
+    {size}
+    {href}
+    {transition}
+    className="relative flex flex-col justify-between overflow-hidden"
+  >
+  <Picture
+    src={image}
+    alt={imageAlt}
+    formats={['avif']}
+    class={`rounded-lg object-cover! aspect-square! shadow-sm ${imageClass || ''}`}
+  />
+  <ProgressiveBlur
+    class={`pointer-events-none absolute -bottom-1 left-0 h-[${blurHeight}] w-full`}
+    blurIntensity={blurIntensity}
+    blurLayers={4}
+  />
+  <div class='absolute bottom-0 left-0'>
+    <div class='p-4'>
+    <Budoux>
+      <p class='text-sm text-white line-clamp-2'>{title}</p>
+    </Budoux>
     </div>
-    <div class="absolute inset-0 bg-background/8 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-background/16" />
+  </div>
+  <div class="absolute inset-0 bg-background/8 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-background/16" />
   </BentoItemBase>
   ) : (
-    <BentoItemBase
-      {size}
-      {href}
-      className="relative flex flex-col justify-between overflow-hidden"
-    >
-    <Picture
-      src={image}
-      alt={imageAlt}
-      formats={['avif']}
-      class={`rounded-lg object-cover! aspect-square! shadow-sm ${imageClass || ''}`}
-    />
-    <ProgressiveBlur
-      class={`pointer-events-none absolute -bottom-1 left-0 h-[${blurHeight}] w-full`}
-      blurIntensity={blurIntensity}
-      blurLayers={4}
-    />
-    <div class='absolute bottom-0 left-0'>
-      <div class='p-4'>
-        <Budoux>
-          <p class='text-sm text-white line-clamp-2'>{title}</p>
-        </Budoux>
-      </div>
+  <BentoItemBase
+    {size}
+    {href}
+    className="relative flex flex-col justify-between overflow-hidden"
+  >
+  <Picture
+    src={image}
+    alt={imageAlt}
+    formats={['avif']}
+    class={`rounded-lg object-cover! aspect-square! shadow-sm ${imageClass || ''}`}
+  />
+  <ProgressiveBlur
+    class={`pointer-events-none absolute -bottom-1 left-0 h-[${blurHeight}] w-full`}
+    blurIntensity={blurIntensity}
+    blurLayers={4}
+  />
+  <div class='absolute bottom-0 left-0'>
+    <div class='p-4'>
+    <Budoux>
+      <p class='text-sm text-white line-clamp-2'>{title}</p>
+    </Budoux>
     </div>
-    <div class="absolute inset-0 bg-background/8 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-background/16" />
+  </div>
+  <div class="absolute inset-0 bg-background/8 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-background/16" />
   </BentoItemBase>
   )
 )}

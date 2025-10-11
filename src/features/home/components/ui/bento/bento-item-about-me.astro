@@ -13,15 +13,15 @@ import BentoItemBase from "./bento-item-base.astro";
   className="relative overflow-hidden"
 >
   <Picture
-    src={profileImage}
-    alt="Keisuke Hayashi"
-    formats={['avif']}
-    priority={true}
+  src={profileImage}
+  alt="Keisuke Hayashi"
+  formats={['avif']}
+  priority={true}
   />
   <ProgressiveBlur
-    class='pointer-events-none absolute bottom-0 left-0 h-[40%] w-full'
-    blurIntensity={1.5}
-    blurLayers={3}
+  class='pointer-events-none absolute bottom-0 left-0 h-[40%] w-full'
+  blurIntensity={1.5}
+  blurLayers={3}
   />
   <NeumorphEyebrow class="absolute bottom-2 left-2">About me</NeumorphEyebrow>
   <div class="absolute inset-0 bg-background/8 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-background/16" />

@@ -15,8 +15,8 @@ const getPager = async (targetId: string) => {
   const activeIndex = targetEntries.findIndex(({ id }) => targetId === id);
 
   return {
-    prev: targetEntries[activeIndex - 1] || null,
-    next: targetEntries[activeIndex + 1] || null,
+  prev: targetEntries[activeIndex - 1] || null,
+  next: targetEntries[activeIndex + 1] || null,
   };
 };
 
@@ -26,20 +26,20 @@ const linkClass = "group flex flex-col gap-1 text-sm";
 ---
 
 <div class={cn('flex justify-between items-stretch flex-nowrap gap-2', className)} {...rest}>
-    {prev && (
-            <a href={`/blog/posts/${prev.id}`} class={linkClass}>
-                <div class="text-muted-foreground">前の記事</div>
-                <Budoux>
-                    <span class="group-hover:underline">{prev.data.title}</span>
-                </Budoux>
-            </a>
-    )}
-    {next && (
-            <a href={`/blog/posts/${next.id}`} class={cn(linkClass, 'ml-auto')}>
-                <div class="text-muted-foreground ml-auto">次の記事</div>
-                <Budoux>
-                    <span class="inline-block text-right group-hover:underline">{next.data.title}</span>
-                </Budoux>
-            </a>
-    )}
+  {prev && (
+      <a href={`/blog/posts/${prev.id}`} class={linkClass}>
+        <div class="text-muted-foreground">前の記事</div>
+        <Budoux>
+          <span class="group-hover:underline">{prev.data.title}</span>
+        </Budoux>
+      </a>
+  )}
+  {next && (
+      <a href={`/blog/posts/${next.id}`} class={cn(linkClass, 'ml-auto')}>
+        <div class="text-muted-foreground ml-auto">次の記事</div>
+        <Budoux>
+          <span class="inline-block text-right group-hover:underline">{next.data.title}</span>
+        </Budoux>
+      </a>
+  )}
 </div>

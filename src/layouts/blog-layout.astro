@@ -56,8 +56,8 @@ if (!categoryObject) {
 
 const allTagCloudItems = await Promise.all(
   flatTags?.map(async (flatTag) => ({
-    ...flatTag,
-    emojiSvg: await emojiSvg({ emoji: flatTag.emoji, isColored: true }),
+  ...flatTag,
+  emojiSvg: await emojiSvg({ emoji: flatTag.emoji, isColored: true }),
   })) || [],
 );
 
@@ -69,154 +69,154 @@ const relatedPosts = await getRelatedPosts({ id, category });
 ---
 
 <BaseLayout pagefind>
-    <SEO
-            title={title}
-            description={description}
-            imageUrl={`${BASE_URL}/api/og/${id}.png`}
-            type='article'
-            publishedTime={publishedAt}
-            modifiedTime={updatedAt ?? publishedAt}
-            category={categoryObject.label}
-            tags={tagCloudItems.map((tag) => tag.label)}
-            slot='seo'
-    />
-    <slot name='head' slot='head' />
-    <section>
-        <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[138px] xl:-translate-x-[260px]">
-            <span class="inline-flex gap-1.5 items-center text-xs">
-                <a href="/blog" class="inline-flex gap-1 items-center text-muted-foreground hover:underline">
-                    <ArrowLeftIcon class="size-3.5" />
-                    ブログ
-                </a>
-                <span class="text-muted-foreground">/</span>
-                <b class="font-semibold">
-                    <a href={`/blog/categories/${categorySlug}`} class="hover:underline">
-                        {categoryObject.label}
-                    </a>
-                </b>
-            </span>
-        </div>
-        <div class={cn(status === 'draft' && 'flex justify-between items-center')}>
-            <EmojiEyeCatch emoji={emoji} />
-            {status === "draft" && (
-                    <span class="text-xs text-red-400">Draft</span>
-            )}
-        </div>
-        <h1 class="mt-4 font-semibold">{title}</h1>
-        <div class="mt-2 flex items-center justify-between">
-            <time datetime={publishedAt.toISOString()} class="text-sm text-muted-foreground">
-                {publishedAtString}
-            </time>
-            <ViewCounter slug={id} server:defer>
-                <Skeleton slot="fallback" class="h-4 w-14"/>
-            </ViewCounter>
-        </div>
-    </section>
-    <section class="mt-16">
-        {headings.length > 1 && (
-                <TableOfContent headings={headings} />
-        )}
-        <article class="prose">
-            <slot />
-        </article>
-        <div class="my-16">
-            <div class="rounded-[24px] border border-white/60 bg-gradient-to-b from-zinc-50 to-white/70 dark:from-zinc-800 dark:to-zinc-900 dark:border-zinc-800/60">
-                <div class="rounded-[23px] border border-black/10 dark:border-zinc-900/80">
-                    <div class="rounded-[22px] border border-white/50 dark:border-zinc-950">
-                        <div class="rounded-[21px] border border-zinc-950/20 dark:border-zinc-900/70">
-                            <div class="w-full rounded-[20px] border border-white/50 dark:border-zinc-700/50">
-                                <div class="flex flex-col gap-1 p-6">
-                                    <Budoux>
-                                        <h3 class="font-semibold text-foreground">
-                                            最後までお読みいただき、ありがとうございます
-                                        </h3>
-                                    </Budoux>
-                                    <Budoux>
-                                        <p class="text-sm text-muted-foreground">
-                                            コーヒー代をサポートしていただけると励みになります！
-                                        </p>
-                                    </Budoux>
-                                </div>
-                                <div class="border border-t-zinc-50 border-b-zinc-300/50 dark:border-t-zinc-950 dark:border-b-zinc-700/50 border-l-transparent border-r-transparent" />
-                                <div class="flex flex-col sm:flex-row gap-3 p-6">
-                                    <a
-                                            href={siteConfig.support}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            class={cn(buttonVariants())}
-                                            data-umami-event="buy-me-coffee-click"
-                                            data-umami-event-location="blog-cta"
-                                    >
-                                        サポートする
-                                        <MoveUpRightIcon class="size-3.5" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <SEO
+      title={title}
+      description={description}
+      imageUrl={`${BASE_URL}/api/og/${id}.png`}
+      type='article'
+      publishedTime={publishedAt}
+      modifiedTime={updatedAt ?? publishedAt}
+      category={categoryObject.label}
+      tags={tagCloudItems.map((tag) => tag.label)}
+      slot='seo'
+  />
+  <slot name='head' slot='head' />
+  <section>
+    <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[138px] xl:-translate-x-[260px]">
+      <span class="inline-flex gap-1.5 items-center text-xs">
+        <a href="/blog" class="inline-flex gap-1 items-center text-muted-foreground hover:underline">
+          <ArrowLeftIcon class="size-3.5" />
+          ブログ
+        </a>
+        <span class="text-muted-foreground">/</span>
+        <b class="font-semibold">
+          <a href={`/blog/categories/${categorySlug}`} class="hover:underline">
+            {categoryObject.label}
+          </a>
+        </b>
+      </span>
+    </div>
+    <div class={cn(status === 'draft' && 'flex justify-between items-center')}>
+      <EmojiEyeCatch emoji={emoji} />
+      {status === "draft" && (
+          <span class="text-xs text-red-400">Draft</span>
+      )}
+    </div>
+    <h1 class="mt-4 font-semibold">{title}</h1>
+    <div class="mt-2 flex items-center justify-between">
+      <time datetime={publishedAt.toISOString()} class="text-sm text-muted-foreground">
+        {publishedAtString}
+      </time>
+      <ViewCounter slug={id} server:defer>
+        <Skeleton slot="fallback" class="h-4 w-14"/>
+      </ViewCounter>
+    </div>
+  </section>
+  <section class="mt-16">
+    {headings.length > 1 && (
+        <TableOfContent headings={headings} />
+    )}
+    <article class="prose">
+      <slot />
+    </article>
+    <div class="my-16">
+      <div class="rounded-[24px] border border-white/60 bg-gradient-to-b from-zinc-50 to-white/70 dark:from-zinc-800 dark:to-zinc-900 dark:border-zinc-800/60">
+        <div class="rounded-[23px] border border-black/10 dark:border-zinc-900/80">
+          <div class="rounded-[22px] border border-white/50 dark:border-zinc-950">
+            <div class="rounded-[21px] border border-zinc-950/20 dark:border-zinc-900/70">
+              <div class="w-full rounded-[20px] border border-white/50 dark:border-zinc-700/50">
+                <div class="flex flex-col gap-1 p-6">
+                  <Budoux>
+                    <h3 class="font-semibold text-foreground">
+                      最後までお読みいただき、ありがとうございます
+                    </h3>
+                  </Budoux>
+                  <Budoux>
+                    <p class="text-sm text-muted-foreground">
+                      コーヒー代をサポートしていただけると励みになります！
+                    </p>
+                  </Budoux>
                 </div>
+                <div class="border border-t-zinc-50 border-b-zinc-300/50 dark:border-t-zinc-950 dark:border-b-zinc-700/50 border-l-transparent border-r-transparent" />
+                <div class="flex flex-col sm:flex-row gap-3 p-6">
+                  <a
+                      href={siteConfig.support}
+                      target="_blank"
+                      rel="noreferrer"
+                      class={cn(buttonVariants())}
+                      data-umami-event="buy-me-coffee-click"
+                      data-umami-event-location="blog-cta"
+                  >
+                    サポートする
+                    <MoveUpRightIcon class="size-3.5" />
+                  </a>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        {tagCloudItems && (
-                <TagCloud tags={tagCloudItems} class="mt-12" />
-        )}
-        <ActionController class="mt-8" title={title} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} url={`${import.meta.env.SITE}/blog/posts/${id}`} />
-        <Separator class="mt-12" />
-        <PrevAndNextPager id={id} class="mt-8" />
+      </div>
+    </div>
+    {tagCloudItems && (
+        <TagCloud tags={tagCloudItems} class="mt-12" />
+    )}
+    <ActionController class="mt-8" title={title} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} url={`${import.meta.env.SITE}/blog/posts/${id}`} />
+    <Separator class="mt-12" />
+    <PrevAndNextPager id={id} class="mt-8" />
+    <Separator class="mt-8" />
+    {relatedPosts?.length > 0 && (
+      <div class="mt-12 space-y-6">
+        <div class="font-medium leading-7">こちらもおすすめ</div>
+        <EntryList blogEntries={relatedPosts} />
         <Separator class="mt-8" />
-        {relatedPosts?.length > 0 && (
-            <div class="mt-12 space-y-6">
-                <div class="font-medium leading-7">こちらもおすすめ</div>
-                <EntryList blogEntries={relatedPosts} />
-                <Separator class="mt-8" />
-            </div>
-        )}
-        <Comment id="comment" class="mt-12" />
-    </section>
+      </div>
+    )}
+    <Comment id="comment" class="mt-12" />
+  </section>
 </BaseLayout>
 
 <script>
-    const handleHeadingIntersection = () => {
-        const observerOptions: IntersectionObserverInit = {
-            root: null,
-            rootMargin: '0px 0px -85% 0px',
-            threshold: 0
-        };
+  const handleHeadingIntersection = () => {
+    const observerOptions: IntersectionObserverInit = {
+      root: null,
+      rootMargin: '0px 0px -85% 0px',
+      threshold: 0
+    };
 
-        const activeClass = 'active';
+    const activeClass = 'active';
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
 
-                const id = entry.target.getAttribute('id');
+        const id = entry.target.getAttribute('id');
 
-                document.querySelectorAll(`.${activeClass}`)
-                    .forEach((item) => item.classList.remove(activeClass));
+        document.querySelectorAll(`.${activeClass}`)
+          .forEach((item) => item.classList.remove(activeClass));
 
-                const link = document.querySelector(`li > a[href="#${id}"]`);
-                const toc = document.querySelector(`div[data-toc="${id}"]`);
+        const link = document.querySelector(`li > a[href="#${id}"]`);
+        const toc = document.querySelector(`div[data-toc="${id}"]`);
 
-                link?.classList.add(activeClass);
-                toc?.classList.add(activeClass);
-            })
-        }, observerOptions);
+        link?.classList.add(activeClass);
+        toc?.classList.add(activeClass);
+      })
+    }, observerOptions);
 
-        const headings = document.querySelectorAll('h2[id], h3[id]');
-        headings.forEach((heading) => observer.observe(heading));
+    const headings = document.querySelectorAll('h2[id], h3[id]');
+    headings.forEach((heading) => observer.observe(heading));
 
-        if (headings.length > 1) {
-            const firstHeadingId = headings[0]?.getAttribute('id');
-            if (firstHeadingId) {
-                const firstLink = document.querySelector(`li > a[href="#${firstHeadingId}"]`);
-                const firstToc = document.querySelector(`div[data-toc="${firstHeadingId}"]`);
+    if (headings.length > 1) {
+      const firstHeadingId = headings[0]?.getAttribute('id');
+      if (firstHeadingId) {
+        const firstLink = document.querySelector(`li > a[href="#${firstHeadingId}"]`);
+        const firstToc = document.querySelector(`div[data-toc="${firstHeadingId}"]`);
 
-                firstLink?.classList.add(activeClass);
-                firstToc?.classList.add(activeClass);
-            }
-        }
-
+        firstLink?.classList.add(activeClass);
+        firstToc?.classList.add(activeClass);
+      }
     }
 
-    document.addEventListener('astro:page-load', handleHeadingIntersection)
+  }
+
+  document.addEventListener('astro:page-load', handleHeadingIntersection)
 </script>

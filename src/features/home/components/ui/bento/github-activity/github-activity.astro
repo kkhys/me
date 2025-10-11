@@ -10,9 +10,9 @@ Astro.response.headers.set("Cache-Control", "public, max-age=86400");
 ---
 
 {
-    data ? (
-        <GithubActivityChart {...data} client:only='react' />
-    ) : (
-        <p class="text-muted-foreground text-sm p-1.5">データの取得に失敗しました。</p>
-    )
+  data ? (
+    <GithubActivityChart {...data} client:only='react' />
+  ) : (
+    <p class="text-muted-foreground text-sm p-1.5">データの取得に失敗しました。</p>
+  )
 }

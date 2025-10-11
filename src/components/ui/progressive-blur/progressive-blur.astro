@@ -29,15 +29,15 @@ const layerData = generateLayers({
 ---
 
 <div class={cn("relative", className)} {...props}>
-    {layerData.map(({ gradient, blurAmount }) => (
-            <div
-                    class="pointer-events-none absolute inset-0 rounded-[inherit]"
-                    style={`
-        mask-image: ${gradient};
-        -webkit-mask-image: ${gradient};
-        backdrop-filter: blur(${blurAmount}px);
-        -webkit-backdrop-filter: blur(${blurAmount}px);
-      `}
-            />
-    ))}
+  {layerData.map(({ gradient, blurAmount }) => (
+      <div
+          class="pointer-events-none absolute inset-0 rounded-[inherit]"
+          style={`
+    mask-image: ${gradient};
+    -webkit-mask-image: ${gradient};
+    backdrop-filter: blur(${blurAmount}px);
+    -webkit-backdrop-filter: blur(${blurAmount}px);
+    `}
+      />
+  ))}
 </div>

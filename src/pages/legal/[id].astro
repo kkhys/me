@@ -12,14 +12,14 @@ export const getStaticPaths = (async () => {
   const legals = await getCollection("legal");
 
   return legals.map((legal) => {
-    return {
-      params: {
-        id: legal.id,
-      },
-      props: {
-        legal,
-      },
-    };
+  return {
+    params: {
+    id: legal.id,
+    },
+    props: {
+    legal,
+    },
+  };
   });
 }) satisfies GetStaticPaths;
 
@@ -28,5 +28,5 @@ const { Content } = await render(legal);
 ---
 
 <LegalLayout {...legal.data}>
-    <ContentWrapper content={Content} />
+  <ContentWrapper content={Content} />
 </LegalLayout>

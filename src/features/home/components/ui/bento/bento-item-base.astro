@@ -69,46 +69,46 @@ const baseClasses = cn(
 
 {href ? (
   transition !== undefined ? (
-    <a
-      href={href}
-      target={target}
-      rel={rel}
-      class={baseClasses}
-      transition:animate={getCustomTransition(transition)}
-      data-umami-event={umamiEvent}
-      data-umami-event-location={umamiEventLocation}
-    >
-      <slot />
-    </a>
+  <a
+    href={href}
+    target={target}
+    rel={rel}
+    class={baseClasses}
+    transition:animate={getCustomTransition(transition)}
+    data-umami-event={umamiEvent}
+    data-umami-event-location={umamiEventLocation}
+  >
+    <slot />
+  </a>
   ) : (
-    <a
-      href={href}
-      target={target}
-      rel={rel}
-      class={baseClasses}
-      data-umami-event={umamiEvent}
-      data-umami-event-location={umamiEventLocation}
-    >
-      <slot />
-    </a>
+  <a
+    href={href}
+    target={target}
+    rel={rel}
+    class={baseClasses}
+    data-umami-event={umamiEvent}
+    data-umami-event-location={umamiEventLocation}
+  >
+    <slot />
+  </a>
   )
 ) : (
   transition !== undefined ? (
-    <div
-      class={baseClasses}
-      transition:animate={getCustomTransition(transition)}
-      data-umami-event={umamiEvent}
-      data-umami-event-location={umamiEventLocation}
-    >
-      <slot />
-    </div>
+  <div
+    class={baseClasses}
+    transition:animate={getCustomTransition(transition)}
+    data-umami-event={umamiEvent}
+    data-umami-event-location={umamiEventLocation}
+  >
+    <slot />
+  </div>
   ) : (
-    <div
-      class={baseClasses}
-      data-umami-event={umamiEvent}
-      data-umami-event-location={umamiEventLocation}
-    >
-      <slot />
-    </div>
+  <div
+    class={baseClasses}
+    data-umami-event={umamiEvent}
+    data-umami-event-location={umamiEventLocation}
+  >
+    <slot />
+  </div>
   )
 )}

@@ -12,13 +12,13 @@ const { "data-alert-type": alertType, ...rest } = Astro.props;
 ---
 
 {
-    alertType ? (
-        <AlertBlock data-alert-type={alertType} {...rest} >
-            <slot />
-        </AlertBlock>
-    ) : (
-        <div {...rest}>
-            <slot />
-        </div>
-    )
+  alertType ? (
+    <AlertBlock data-alert-type={alertType} {...rest} >
+      <slot />
+    </AlertBlock>
+  ) : (
+    <div {...rest}>
+      <slot />
+    </div>
+  )
 }

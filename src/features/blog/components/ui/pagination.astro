@@ -24,23 +24,23 @@ const generateVisiblePages = (totalPages: number, currentPage: number) => {
   pages.push(leftEdge);
 
   if (currentPage > delta + 2) {
-    pages.push("...");
+  pages.push("...");
   }
 
   for (
-    let i = Math.max(currentPage - delta, leftEdge + 1);
-    i <= Math.min(currentPage + delta, rightEdge - 1);
-    i++
+  let i = Math.max(currentPage - delta, leftEdge + 1);
+  i <= Math.min(currentPage + delta, rightEdge - 1);
+  i++
   ) {
-    pages.push(i);
+  pages.push(i);
   }
 
   if (currentPage < rightEdge - (delta + 1)) {
-    pages.push("...");
+  pages.push("...");
   }
 
   if (totalPages > leftEdge) {
-    pages.push(rightEdge);
+  pages.push(rightEdge);
   }
 
   return pages;
@@ -53,86 +53,86 @@ const getPageHref = (pageNumber: number) =>
 ---
 
 <nav aria-label="pagination" class={cn("mx-auto flex w-full justify-center", className)} {...rest}>
-    <ul class="flex flex-row items-center gap-1">
-        <li>
-            {currentPage > 1 ? (
-                    <a
-                            href={url.prev}
-                            aria-label="前のページへ"
-                            class={cn(
-                                buttonVariants({ variant: "ghost", size: "icon" })
-                            )}
-                    >
-                        <ChevronLeftIcon class="size-4" />
-                    </a>
-            ) : (
-                    <span
-                            aria-disabled="true"
-                            class={cn(
-                                buttonVariants({ variant: "ghost", size: "icon" }),
-                                "opacity-50 pointer-events-none"
-                            )}
-                    >
-          <ChevronLeftIcon class="size-4" />
-        </span>
-            )}
-        </li>
-        {visiblePages.map(page =>
-            page === "..." ? (
-                    <li>
-          <span
-                  aria-hidden="true"
-                  class={cn("flex size-9 items-center justify-center")}
+  <ul class="flex flex-row items-center gap-1">
+    <li>
+      {currentPage > 1 ? (
+          <a
+              href={url.prev}
+              aria-label="前のページへ"
+              class={cn(
+                buttonVariants({ variant: "ghost", size: "icon" })
+              )}
           >
-            <EllipsisIcon class="size-4" />
-            <span class="sr-only">More pages</span>
-          </span>
-                    </li>
+            <ChevronLeftIcon class="size-4" />
+          </a>
+      ) : (
+          <span
+              aria-disabled="true"
+              class={cn(
+                buttonVariants({ variant: "ghost", size: "icon" }),
+                "opacity-50 pointer-events-none"
+              )}
+          >
+      <ChevronLeftIcon class="size-4" />
+    </span>
+      )}
+    </li>
+    {visiblePages.map(page =>
+      page === "..." ? (
+          <li>
+      <span
+          aria-hidden="true"
+          class={cn("flex size-9 items-center justify-center")}
+      >
+      <EllipsisIcon class="size-4" />
+      <span class="sr-only">More pages</span>
+      </span>
+          </li>
+      ) : (
+          <li>
+            {currentPage === page ? (
+                <span
+                    aria-current="page"
+                    class={cn(
+                      buttonVariants({ variant: "outline", size: "icon" }),
+                      "pointer-events-none"
+                    )}
+                >
+        {page}
+      </span>
             ) : (
-                    <li>
-                        {currentPage === page ? (
-                                <span
-                                        aria-current="page"
-                                        class={cn(
-                                            buttonVariants({ variant: "outline", size: "icon" }),
-                                            "pointer-events-none"
-                                        )}
-                                >
-              {page}
-            </span>
-                        ) : (
-                                <a
-                                        href={getPageHref(page)}
-                                        class={buttonVariants({ variant: "ghost", size: "icon" })}
-                                >
-                                    {page}
-                                </a>
-                        )}
-                    </li>
-            )
-        )}
-        <li>
-            {currentPage < lastPage ? (
-                    <a
-                            href={getPageHref(currentPage + 1)}
-                            aria-label="Go to next page"
-                            class={cn(
-                                buttonVariants({ variant: "ghost", size: "icon" })
-                            )}
-                    >
-                        <ChevronRightIcon class="size-4" />
-                    </a>
-            ) : (
-                    <span
-                            aria-disabled="true"
-                            class={cn(
-                                buttonVariants({ variant: "ghost", size: "icon" }),
-                                "opacity-50 pointer-events-none"
-                            )}
-                    >
-          <ChevronRightIcon class="size-4" />
-        </span>
+                <a
+                    href={getPageHref(page)}
+                    class={buttonVariants({ variant: "ghost", size: "icon" })}
+                >
+                  {page}
+                </a>
             )}
-        </li>
-    </ul>
+          </li>
+      )
+    )}
+    <li>
+      {currentPage < lastPage ? (
+          <a
+              href={getPageHref(currentPage + 1)}
+              aria-label="Go to next page"
+              class={cn(
+                buttonVariants({ variant: "ghost", size: "icon" })
+              )}
+          >
+            <ChevronRightIcon class="size-4" />
+          </a>
+      ) : (
+          <span
+              aria-disabled="true"
+              class={cn(
+                buttonVariants({ variant: "ghost", size: "icon" }),
+                "opacity-50 pointer-events-none"
+              )}
+          >
+      <ChevronRightIcon class="size-4" />
+    </span>
+      )}
+    </li>
+  </ul>
 </nav>
