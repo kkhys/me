@@ -189,6 +189,9 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ["react-tweet"],
+    },
   },
   env: {
     schema: {
