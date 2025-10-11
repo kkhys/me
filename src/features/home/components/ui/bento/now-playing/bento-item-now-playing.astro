@@ -1,18 +1,16 @@
 ---
 import NowPlaying from "#/features/home/components/ui/bento/now-playing/now-playing.astro";
 import NowPlayingFallback from "#/features/home/components/ui/bento/now-playing/now-playing-fallback.astro";
-import { getCustomTransition } from "#/lib/custom-transition";
-import { cn } from "#/lib/ui";
+import BentoItemBase from "../bento-item-base.astro";
 ---
 
-<div
-        class={cn(
-            "size-full flex justify-between gap-4 shadow-sm rounded-xl border bg-background p-4 overflow-hidden dark:shadow-none",
-            "col-span-2 row-span-1 md:col-span-4 aspect-[2/1]",
-        )}
-        transition:animate={getCustomTransition(0.55)}
+<BentoItemBase
+  size="col-span-2 row-span-1 md:col-span-4 aspect-[2/1]"
+  transition={0.55}
+  isClickable={false}
+  className="flex justify-between gap-4 p-4 overflow-hidden"
 >
-    <NowPlaying server:defer>
-        <NowPlayingFallback slot="fallback" />
-    </NowPlaying>
-</div>
+  <NowPlaying server:defer>
+    <NowPlayingFallback slot="fallback" />
+  </NowPlaying>
+</BentoItemBase>

@@ -1,0 +1,83 @@
+---
+import Budoux from "#/components/budoux.astro";
+import type { BentoSizeOrCustom } from "#/features/home/config/bento-sizes";
+import BentoItemBase from "./bento-item-base.astro";
+
+/**
+ * Icon and text type Bento card component
+ *
+ * @description Standard Bento card with icon box, title, description, and hover effect
+ * @param iconBgClass - CSS classes for icon box background and border
+ * @param title - Card title
+ * @param description - Card description (processed with Budoux for Japanese line breaks)
+ * @param href - Link URL
+ * @param target - Link target attribute
+ * @param rel - Link rel attribute
+ * @param transition - Animation delay value
+ * @param umamiEvent - Umami tracking event name
+ * @param umamiEventLocation - Umami tracking location
+ * @param size - Grid size (default: "1x1")
+ * @example
+ * ```astro
+ * <BentoItemIconCard
+ *   iconBgClass="bg-gradient-to-b from-[#6364ff] to-[#563acc] border-[#5348cc]"
+ *   title="Mastodon"
+ *   description="Daily musings"
+ *   href="https://example.com"
+ *   transition={0.35}
+ * >
+ *   <Mastodon slot="icon" class="size-5 fill-white" />
+ * </BentoItemIconCard>
+ * ```
+ */
+
+interface Props {
+  iconBgClass: string;
+  title: string;
+  description: string;
+  href: string;
+  target?: string;
+  rel?: string;
+  transition: number;
+  umamiEvent?: string;
+  umamiEventLocation?: string;
+  size?: BentoSizeOrCustom;
+}
+
+const {
+  iconBgClass,
+  title,
+  description,
+  href,
+  target,
+  rel,
+  transition,
+  umamiEvent,
+  umamiEventLocation,
+  size = "1x1",
+} = Astro.props;
+---
+
+<BentoItemBase
+  {size}
+  {href}
+  {transition}
+  className="relative p-4 overflow-hidden"
+  {...(target && { target })}
+  {...(rel && { rel })}
+  {...(umamiEvent && { umamiEvent })}
+  {...(umamiEventLocation && { umamiEventLocation })}
+>
+  <div class={`grid place-content-center size-10 shadow-sm rounded-[8px] border ${iconBgClass}`}>
+    <slot name="icon" />
+  </div>
+  <div class="my-2 font-semibold">
+    {title}
+  </div>
+  <Budoux>
+    <div class="text-xs text-muted-foreground">
+      {description}
+    </div>
+  </Budoux>
+  <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
+</BentoItemBase>

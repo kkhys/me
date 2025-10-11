@@ -1,33 +1,19 @@
 ---
-import Budoux from "#/components/budoux.astro";
 import Mastodon from "#/components/ui/icons/mastodon.astro";
 import { me } from "#/config/site";
-import { getCustomTransition } from "#/lib/custom-transition";
-import { cn } from "#/lib/ui";
+import BentoItemIconCard from "./bento-item-icon-card.astro";
 ---
 
-<a
-        href={me.mastodon}
-        target="_blank"
-        rel="noreferrer me"
-        class={cn(
-            "relative size-full shadow-sm rounded-xl border bg-background p-4 overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
-            "col-span-1 row-span-1 md:col-span-2 aspect-square"
-        )}
-        transition:animate={getCustomTransition(0.35)}
-        data-umami-event="mastodon-click"
-        data-umami-event-location="home-bento"
+<BentoItemIconCard
+  iconBgClass="bg-gradient-to-b from-[#6364ff] to-[#563acc] border-[#5348cc]"
+  title="Mastodon"
+  description="日々のつぶやき"
+  href={me.mastodon}
+  target="_blank"
+  rel="noreferrer me"
+  transition={0.35}
+  umamiEvent="mastodon-click"
+  umamiEventLocation="home-bento"
 >
-    <div class="grid place-content-center size-10 shadow-sm rounded-[8px] bg-gradient-to-b from-[#6364ff] to-[#563acc] border border-[#5348cc]">
-        <Mastodon class="size-5 fill-white" />
-    </div>
-    <div class="my-2 font-semibold">
-        Mastodon
-    </div>
-    <Budoux>
-        <div class="text-xs text-muted-foreground">
-            日々のつぶやき
-        </div>
-    </Budoux>
-    <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
-</a>
+  <Mastodon slot="icon" class="size-5 fill-white" />
+</BentoItemIconCard>

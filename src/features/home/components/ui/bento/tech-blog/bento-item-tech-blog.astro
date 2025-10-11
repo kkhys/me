@@ -1,28 +1,25 @@
 ---
 import Budoux from "#/components/budoux.astro";
 import { TechBlogSlider } from "#/features/home/components/ui/bento/tech-blog/tech-blog-slider";
-import { getCustomTransition } from "#/lib/custom-transition";
-import { cn } from "#/lib/ui";
+import BentoItemBase from "../bento-item-base.astro";
 ---
 
-<a
-        href="/blog/categories/tech"
-        class={cn(
-            "relative size-full flex flex-col justify-between shadow-sm rounded-xl border bg-background overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
-            "col-span-2 row-span-1 md:col-span-2 aspect-[2/1] md:aspect-square"
-        )}
-        transition:animate={getCustomTransition(0.60)}
+<BentoItemBase
+  size="col-span-2 row-span-1 md:col-span-2 aspect-[2/1] md:aspect-square"
+  href="/blog/categories/tech"
+  transition={0.60}
+  className="relative flex flex-col justify-between overflow-hidden"
 >
-    <div class="pt-4 px-4">
-        <div class="my-2 text-sm font-semibold">
-            技術ブログ
-        </div>
-        <Budoux>
-            <div class="text-xs text-muted-foreground">
-                日々の学びをまとめています
-            </div>
-        </Budoux>
+  <div class="pt-4 px-4">
+    <div class="my-2 text-sm font-semibold">
+      技術ブログ
     </div>
-    <TechBlogSlider client:idle />
-    <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
-</a>
+    <Budoux>
+      <div class="text-xs text-muted-foreground">
+        日々の学びをまとめています
+      </div>
+    </Budoux>
+  </div>
+  <TechBlogSlider client:idle />
+  <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
+</BentoItemBase>

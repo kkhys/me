@@ -1,33 +1,19 @@
 ---
-import Budoux from "#/components/budoux.astro";
 import BuyMeACoffee from "#/components/ui/icons/buy-me-a-coffee.astro";
 import { siteConfig } from "#/config/site";
-import { getCustomTransition } from "#/lib/custom-transition";
-import { cn } from "#/lib/ui";
+import BentoItemIconCard from "./bento-item-icon-card.astro";
 ---
 
-<a
-        href={siteConfig.support}
-        target="_blank"
-        rel="noreferrer"
-        class={cn(
-            "relative size-full shadow-sm rounded-xl border bg-background p-4 overflow-hidden transition duration-200 active:scale-95 dark:shadow-none",
-            "col-span-1 row-span-1 md:col-span-2 aspect-square"
-        )}
-        transition:animate={getCustomTransition(0.40)}
-        data-umami-event="buy-me-coffee-click"
-        data-umami-event-location="home-bento"
+<BentoItemIconCard
+  iconBgClass="bg-[#ffdd00] border-[#e2c400]"
+  title="Buy Me a Coffee"
+  description="カフェイン補給にご協力を"
+  href={siteConfig.support}
+  target="_blank"
+  rel="noreferrer"
+  transition={0.40}
+  umamiEvent="buy-me-coffee-click"
+  umamiEventLocation="home-bento"
 >
-    <div class="grid place-content-center size-10 shadow-sm rounded-[8px] bg-[#ffdd00] border border-[#e2c400]">
-        <BuyMeACoffee class="size-6" />
-    </div>
-    <div class="my-2 font-semibold">
-        Buy Me a Coffee
-    </div>
-    <Budoux>
-        <div class="text-xs text-muted-foreground">
-            カフェイン補給にご協力を
-        </div>
-    </Budoux>
-    <div class="absolute inset-0 bg-foreground/2 opacity-0 hover:opacity-100 transition-opacity z-10 active:bg-foreground/6" />
-</a>
+  <BuyMeACoffee slot="icon" class="size-6" />
+</BentoItemIconCard>
