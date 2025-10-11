@@ -3,7 +3,6 @@ import { Hono } from "hono";
 
 import { github } from "#/pages/api/_services/github";
 import { getSpotifyData } from "#/pages/api/_services/spotify";
-import { getTweetData } from "#/pages/api/_services/tweet";
 
 const app = new Hono()
   .basePath("/api")
@@ -16,13 +15,7 @@ const app = new Hono()
     c.json(await getSpotifyData(), 200, {
       "Cache-Control": "s-maxage=8, stale-while-revalidate=2",
     }),
-  )
-  .get("/tweet/:id", async (c) => {
-    const id = c.req.param("id");
-    return c.json(await getTweetData(id), 200, {
-      "Cache-Control": "s-maxage=86400, stale-while-revalidate=43200",
-    });
-  });
+  );
 
 export const ALL: APIRoute = (context) => app.fetch(context.request);
 
