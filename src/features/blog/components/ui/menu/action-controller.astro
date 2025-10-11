@@ -9,10 +9,10 @@ import { cn } from "#/lib/ui";
 
 interface Props
   extends Omit<HTMLAttributes<"div">, "title">,
-  Pick<
-    InferEntrySchema<"blog">,
-    "title" | "editUrl" | "sourceUrl" | "revisionHistoryUrl"
-  > {
+    Pick<
+      InferEntrySchema<"blog">,
+      "title" | "editUrl" | "sourceUrl" | "revisionHistoryUrl"
+    > {
   url: string;
 }
 

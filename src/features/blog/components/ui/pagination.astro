@@ -24,23 +24,23 @@ const generateVisiblePages = (totalPages: number, currentPage: number) => {
   pages.push(leftEdge);
 
   if (currentPage > delta + 2) {
-  pages.push("...");
+    pages.push("...");
   }
 
   for (
-  let i = Math.max(currentPage - delta, leftEdge + 1);
-  i <= Math.min(currentPage + delta, rightEdge - 1);
-  i++
+    let i = Math.max(currentPage - delta, leftEdge + 1);
+    i <= Math.min(currentPage + delta, rightEdge - 1);
+    i++
   ) {
-  pages.push(i);
+    pages.push(i);
   }
 
   if (currentPage < rightEdge - (delta + 1)) {
-  pages.push("...");
+    pages.push("...");
   }
 
   if (totalPages > leftEdge) {
-  pages.push(rightEdge);
+    pages.push(rightEdge);
   }
 
   return pages;

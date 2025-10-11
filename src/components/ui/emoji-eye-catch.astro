@@ -6,8 +6,8 @@ import { cn } from "#/lib/ui";
 
 interface Props
   extends VariantProps<typeof eyeCatchVariants>,
-  VariantProps<typeof svgVariants>,
-  HTMLAttributes<"span"> {
+    VariantProps<typeof svgVariants>,
+    HTMLAttributes<"span"> {
   emoji: string;
   isColored?: boolean;
 }
@@ -15,27 +15,27 @@ interface Props
 const eyeCatchVariants = cva(
   "inline-flex select-none items-center justify-center rounded-md bg-secondary text-secondary-foreground shadow-xs",
   {
-  variants: {
-    size: {
-    default: "size-10",
-    sm: "size-8",
+    variants: {
+      size: {
+        default: "size-10",
+        sm: "size-8",
+      },
     },
-  },
-  defaultVariants: {
-    size: "default",
-  },
+    defaultVariants: {
+      size: "default",
+    },
   },
 );
 
 const svgVariants = cva("[&>svg>g>path]:fill-foreground", {
   variants: {
-  size: {
-    default: "[&>svg]:size-5",
-    sm: "[&>svg]:size-4",
-  },
+    size: {
+      default: "[&>svg]:size-5",
+      sm: "[&>svg]:size-4",
+    },
   },
   defaultVariants: {
-  size: "default",
+    size: "default",
   },
 });
 

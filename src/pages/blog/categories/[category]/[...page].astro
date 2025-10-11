@@ -17,19 +17,19 @@ export const getStaticPaths = async ({
 }) => {
   const blogEntries = await getPublicBlogEntries();
   const categories = [
-  ...new Set(blogEntries.flatMap((entry) => entry.data.category ?? [])),
+    ...new Set(blogEntries.flatMap((entry) => entry.data.category ?? [])),
   ];
   return categories.flatMap((category) => {
-  const filteredEntries = blogEntries
-    .filter((post) => post.data.category.includes(category))
-    .sort(
-    (a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime(),
-    )
-    .reverse();
-  return paginate(filteredEntries, {
-    pageSize: countPerPage,
-    params: { category: category.toLowerCase() },
-  });
+    const filteredEntries = blogEntries
+      .filter((post) => post.data.category.includes(category))
+      .sort(
+        (a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime(),
+      )
+      .reverse();
+    return paginate(filteredEntries, {
+      pageSize: countPerPage,
+      params: { category: category.toLowerCase() },
+    });
   });
 };
 

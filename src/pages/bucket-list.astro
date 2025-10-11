@@ -28,22 +28,22 @@ if (process.env.VERCEL) {
 
 const totalItems = bucketList.data.reduce(
   (total, categoryObj) =>
-  total +
-  Object.values(categoryObj).reduce(
-    (catTotal, items) => catTotal + items.length,
-    0,
-  ),
+    total +
+    Object.values(categoryObj).reduce(
+      (catTotal, items) => catTotal + items.length,
+      0,
+    ),
   0,
 );
 
 const completedItems = bucketList.data.reduce(
   (total, categoryObj) =>
-  total +
-  Object.values(categoryObj).reduce(
-    (catTotal, items) =>
-    catTotal + items.filter((item) => item.completedAt).length,
-    0,
-  ),
+    total +
+    Object.values(categoryObj).reduce(
+      (catTotal, items) =>
+        catTotal + items.filter((item) => item.completedAt).length,
+      0,
+    ),
   0,
 );
 ---

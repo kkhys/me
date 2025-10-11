@@ -56,8 +56,8 @@ if (!categoryObject) {
 
 const allTagCloudItems = await Promise.all(
   flatTags?.map(async (flatTag) => ({
-  ...flatTag,
-  emojiSvg: await emojiSvg({ emoji: flatTag.emoji, isColored: true }),
+    ...flatTag,
+    emojiSvg: await emojiSvg({ emoji: flatTag.emoji, isColored: true }),
   })) || [],
 );
 
