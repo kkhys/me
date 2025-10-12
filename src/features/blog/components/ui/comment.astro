@@ -2,12 +2,14 @@
 import type { HTMLAttributes } from "astro/types";
 import { cn } from "#/lib/ui";
 
-interface Props extends HTMLAttributes<"div"> {}
+interface Props extends HTMLAttributes<"div"> {
+  reactionsEnabled?: boolean;
+}
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, reactionsEnabled = true, ...rest } = Astro.props;
 ---
 
-<div class={cn('giscus-container min-h-[370px]', className)} {...rest} />
+<div class={cn('giscus-container min-h-[370px]', className)} data-reactions-enabled={reactionsEnabled ? '1' : '0'} {...rest} />
 
 <script>
   const initGiscus = () => {
@@ -27,6 +29,8 @@ const { class: className, ...rest } = Astro.props;
       existingScript.remove();
     }
 
+    const reactionsEnabled = container.getAttribute('data-reactions-enabled') || '1';
+
     const script = document.createElement('script');
     script.src = 'https://giscus.app/client.js';
     script.setAttribute('data-repo', 'kkhys/content');
@@ -35,7 +39,7 @@ const { class: className, ...rest } = Astro.props;
     script.setAttribute('data-category-id', 'DIC_kwDOKgamBs4CaJE6');
     script.setAttribute('data-mapping', 'pathname');
     script.setAttribute('data-strict', '1');
-    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-reactions-enabled', reactionsEnabled);
     script.setAttribute('data-emit-metadata', '0');
     script.setAttribute('data-input-position', 'bottom');
     script.setAttribute('data-theme', 'preferred_color_scheme');
