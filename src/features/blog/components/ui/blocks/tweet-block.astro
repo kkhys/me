@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 import type { EnrichedTweet } from "react-tweet";
 import Budoux from "#/components/budoux.astro";
@@ -31,6 +31,20 @@ const cleanText = (text: string) => {
 };
 
 const firstPhoto = tweet.photos?.[0];
+
+// Generate blurry images for lazy loading
+const blurryPhotos = tweet.photos
+  ? await Promise.all(
+      tweet.photos.map((photo) =>
+        getImage({
+          src: photo.url,
+          width: 20,
+          height: Math.round((20 * photo.height) / photo.width),
+          format: "webp",
+        }),
+      ),
+    )
+  : [];
 ---
 
 <div class="grid place-items-center">
@@ -127,15 +141,17 @@ const firstPhoto = tweet.photos?.[0];
     {
       firstPhoto && tweet.photos?.length === 1 && (
         <div class="flex flex-1 items-center justify-center">
-          <Image
-            src={firstPhoto.url}
-            alt={tweet.text}
-            title={`Photo by ${tweet.user.name}`}
-            width={firstPhoto.width}
-            height={firstPhoto.height}
-            format="webp"
-            class="rounded-xl border object-cover shadow-sm"
-          />
+          <div class="tweet-photo-blur">
+            <Image
+              src={firstPhoto.url}
+              alt={tweet.text}
+              title={`Photo by ${tweet.user.name}`}
+              width={firstPhoto.width}
+              height={firstPhoto.height}
+              format="webp"
+              class="rounded-xl border object-cover shadow-sm"
+            />
+          </div>
         </div>
       )
     }
@@ -145,15 +161,17 @@ const firstPhoto = tweet.photos?.[0];
           <div class="relative flex transform-gpu snap-x snap-mandatory gap-4 overflow-x-auto">
             <div class="shrink-0 snap-center sm:w-2" />
             {tweet.photos.map((photo) => (
-              <Image
-                src={photo.url}
-                title={`Photo by ${tweet.user.name}`}
-                alt={tweet.text}
-                width={photo.width}
-                height={photo.height}
-                format="webp"
-                class="h-64 w-5/6 shrink-0 snap-center snap-always rounded-xl border object-cover shadow-sm"
-              />
+              <div class="tweet-photo-blur h-64 w-5/6 shrink-0 snap-center snap-always">
+                <Image
+                  src={photo.url}
+                  title={`Photo by ${tweet.user.name}`}
+                  alt={tweet.text}
+                  width={photo.width}
+                  height={photo.height}
+                  format="webp"
+                  class="h-full w-full rounded-xl border object-cover shadow-sm"
+                />
+              </div>
             ))}
             <div class="shrink-0 snap-center sm:w-2" />
           </div>
@@ -163,14 +181,57 @@ const firstPhoto = tweet.photos?.[0];
   </div>
 </div>
 
-<style>
+<style define:vars={{
+  'photo-bg-0': blurryPhotos[0] ? `url(${blurryPhotos[0].src})` : 'none',
+}}>
 	tweet-video {
 		display: block;
 		position: relative;
 	}
+
+  .tweet-photo-blur {
+    background-size: cover;
+    filter: blur(16px);
+    transition: filter 300ms ease-in-out;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .tweet-photo-blur:nth-of-type(1) {
+    background-image: var(--photo-bg-0);
+  }
+
+  .tweet-photo-blur.image-loaded {
+    background-image: none;
+    filter: blur(0);
+  }
+
+  .tweet-photo-blur > img {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+  }
+
+  .tweet-photo-blur.image-loaded > img {
+    opacity: 1;
+  }
 </style>
 
 <script>
+  // Handle blur image loading
+  document.addEventListener('astro:page-load', () => {
+    const blurDivs = document.querySelectorAll('.tweet-photo-blur');
+    blurDivs.forEach((div) => {
+      const image = div.querySelector('img');
+      const handleLoadedImage = () => div.classList.add('image-loaded');
+
+      if (image?.complete) {
+        return handleLoadedImage();
+      }
+
+      image?.addEventListener('load', handleLoadedImage);
+    });
+  });
+
 	class TweetVideo extends HTMLElement {
 		private video: HTMLVideoElement | null = null;
 		private playButton: HTMLButtonElement | null = null;
