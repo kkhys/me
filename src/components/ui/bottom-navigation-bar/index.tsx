@@ -13,7 +13,7 @@ import { cn } from "#/lib/ui";
 import { useOnClickOutside } from "./use-on-click-outside";
 
 const wrapperBaseStyle =
-  "flex justify-between items-center bg-background text-foreground border shadow-xl";
+  "flex justify-between items-center backdrop-blur-2xl bg-background/70 text-foreground border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] before:absolute before:inset-0 before:rounded-[inherit] before:bg-gradient-to-b before:from-white/10 before:to-transparent before:pointer-events-none";
 
 export const BottomNavigationBar = () => {
   const [open, setOpen] = useState(false);
@@ -43,7 +43,7 @@ export const BottomNavigationBar = () => {
   };
 
   const buttonBaseStyle =
-    "flex items-center justify-between w-full h-11 cursor-pointer px-4 font-medium";
+    "flex items-center justify-between w-full h-11 cursor-pointer px-4 font-medium rounded-lg transition-colors hover:bg-white/10 active:bg-white/5";
 
   return (
     <div className="fixed z-10 bottom-[4lvh] inset-x-0 flex items-end justify-center">
@@ -53,11 +53,15 @@ export const BottomNavigationBar = () => {
         key="button"
         onClick={() => setOpen(true)}
         className={cn(
-          "relative w-28 h-10 pl-3.5 pr-2.5 text-sm rounded-[19px] cursor-pointer outline-none",
+          "relative w-28 h-10 pl-3.5 pr-2.5 text-sm rounded-[19px] cursor-pointer outline-none overflow-hidden",
           wrapperBaseStyle,
         )}
         style={{ borderRadius: 19 }}
         whileTap={{ scale: 0.95 }}
+        whileHover={{
+          boxShadow: "0 12px 40px 0 rgba(0,0,0,0.15)",
+          borderColor: "rgba(255,255,255,0.3)"
+        }}
         initial={{ filter: "blur(0px)" }}
         animate={{ filter: open ? "blur(4px)" : "blur(0px)" }}
         transition={{ duration: 0.2, ease: "easeInOut" }}
@@ -76,13 +80,13 @@ export const BottomNavigationBar = () => {
             ref={ref}
             layoutId="wrapper"
             className={cn(
-              "absolute flex-col w-56 rounded-[20px] p-2",
+              "absolute flex-col w-56 rounded-[20px] p-2 overflow-hidden",
               wrapperBaseStyle,
             )}
             style={{ borderRadius: 20 }}
-            initial={{ filter: "blur(8px)" }}
-            animate={{ filter: "blur(0px)" }}
-            exit={{ filter: "blur(8px)" }}
+            initial={{ filter: "blur(8px)", opacity: 0, scale: 0.95 }}
+            animate={{ filter: "blur(0px)", opacity: 1, scale: 1 }}
+            exit={{ filter: "blur(8px)", opacity: 0, scale: 0.95 }}
             transition={{
               type: "spring",
               duration: 0.35,
@@ -124,7 +128,7 @@ export const BottomNavigationBar = () => {
             <motion.button
               type="button"
               onClick={() => setOpen(false)}
-              className="grid place-content-center w-full h-10 cursor-pointer mt-2 rounded-[13px] bg-secondary border"
+              className="grid place-content-center w-full h-10 cursor-pointer mt-2 rounded-[13px] bg-white/5 border border-white/10 backdrop-blur-sm transition-colors hover:bg-white/10 active:bg-white/5"
               whileTap={{ scale: 0.95 }}
             >
               <ArrowDownToLineIcon className="size-5" />
