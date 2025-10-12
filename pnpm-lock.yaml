@@ -35,6 +35,9 @@ importers:
       '@hono/zod-validator':
         specifier: 0.7.4
         version: 0.7.4(hono@4.9.11)(zod@3.25.76)
+      '@justinribeiro/lite-youtube':
+        specifier: 1.8.2
+        version: 1.8.2
       '@lucide/astro':
         specifier: 0.545.0
         version: 0.545.0(astro@5.14.4(@types/node@24.0.0)(@upstash/redis@1.35.5)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.1)(rollup@4.42.0)(terser@5.42.0)(typescript@5.9.3)(yaml@2.8.0))
@@ -952,6 +955,9 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.30':
     resolution: {integrity: sha512-GQ7Nw5G2lTu/BtHTKfXhKHok2WGetd4XYcVKGx00SjAk8GMwgJM3zr6zORiPGuOE+/vkc90KtTosSSvaCjKb2Q==}
+
+  '@justinribeiro/lite-youtube@1.8.2':
+    resolution: {integrity: sha512-wayU5sYA/e5J/1j7zFk8Hoi72Hk67Axy7Za2OFRzsytd9gvtv7ZeWhmdi2lOGbnXwMZHkeMsqxRGFxH60lo5bg==}
 
   '@lucide/astro@0.545.0':
     resolution: {integrity: sha512-uhBiJCVXH+YmZdiTncV3I8e2gA4iqA/YLCKyMfxl1pWLleyrJWrQY5Avmt1qKjtYEMah0uJiQzaYtaeekaCdCw==}
@@ -5242,6 +5248,8 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@justinribeiro/lite-youtube@1.8.2': {}
 
   '@lucide/astro@0.545.0(astro@5.14.4(@types/node@24.0.0)(@upstash/redis@1.35.5)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.1)(rollup@4.42.0)(terser@5.42.0)(typescript@5.9.3)(yaml@2.8.0))':
     dependencies:

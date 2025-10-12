@@ -8,6 +8,7 @@ import Heading3 from "#/features/blog/components/ui/blocks/heading-3.astro";
 import MermaidBlock from "#/features/blog/components/ui/blocks/mermaid-block.astro";
 import TweetBlock from "#/features/blog/components/ui/blocks/tweet-block.astro";
 import VideoBlock from "#/features/blog/components/ui/blocks/video-block.astro";
+import YoutubeBlock from "#/features/blog/components/ui/blocks/youtube-block.astro";
 import DivHandler from "#/features/blog/components/ui/div-handler.astro";
 
 interface Props {
@@ -26,5 +27,6 @@ const { content: Content } = Astro.props;
   picture: MermaidBlock,
   div: DivHandler,
   'tweet-block': TweetBlock,
-  'video-block': VideoBlock }}
+  'video-block': VideoBlock,
+  'youtube-block': YoutubeBlock }}
 />

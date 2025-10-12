@@ -18,6 +18,7 @@ import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
 import remarkLinkCard from "./src/lib/remark-link-card";
 import remarkTweetBlock from "./src/lib/remark-tweet-block";
 import remarkVideoBlock from "./src/lib/remark-video-block";
+import remarkYoutubeBlock from "./src/lib/remark-youtube-block";
 
 let adapter = vercel();
 
@@ -87,6 +88,7 @@ export default defineConfig({
     remarkPlugins: [
       remarkTweetBlock,
       remarkVideoBlock,
+      remarkYoutubeBlock,
       remarkLinkCard,
       remarkFootnoteTitle,
       remarkBlockQuoteAlert,
