@@ -60,7 +60,7 @@ export const BottomNavigationBar = () => {
         whileTap={{ scale: 0.95 }}
         whileHover={{
           boxShadow: "0 12px 40px 0 rgba(0,0,0,0.15)",
-          borderColor: "rgba(255,255,255,0.3)"
+          borderColor: "rgba(255,255,255,0.3)",
         }}
         initial={{ filter: "blur(0px)" }}
         animate={{ filter: open ? "blur(4px)" : "blur(0px)" }}
