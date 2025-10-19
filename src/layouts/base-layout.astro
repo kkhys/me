@@ -1,6 +1,7 @@
 ---
 import "#/styles/global.css";
 import { ClientRouter } from "astro:transitions";
+import Search from "#/components/search.astro";
 import SEO from "#/components/seo.astro";
 import { BottomNavigationBar } from "#/components/ui/bottom-navigation-bar";
 import Footer from "#/components/ui/footer.astro";
@@ -53,6 +54,7 @@ const { pagefind, class: className } = Astro.props;
     <slot/>
   </div>
 </main>
+<Search />
 <BottomNavigationBar client:load transition:persist="bottom-navigation-bar" />
 <Footer />
 <FooterMask />
