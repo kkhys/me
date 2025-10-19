@@ -162,12 +162,12 @@ const relatedPosts = await getRelatedPosts({ id, category });
     )}
     <ActionController class="mt-8" title={title} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} url={`${import.meta.env.SITE}/blog/posts/${id}`} />
     <Separator class="mt-12" />
-    <PrevAndNextPager id={id} class="mt-8" />
+    <PrevAndNextPager id={id} class="mt-8" data-pagefind-ignore="all" />
     <Separator class="mt-8" />
     {relatedPosts?.length > 0 && (
       <div class="mt-12 space-y-6">
         <div class="font-medium leading-7">こちらもおすすめ</div>
-        <EntryList blogEntries={relatedPosts} />
+        <EntryList blogEntries={relatedPosts} data-pagefind-ignore="all" />
         <Separator class="mt-8" />
       </div>
     )}
