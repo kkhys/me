@@ -226,7 +226,7 @@ import { SearchIcon } from "lucide-react";
 
 <script>
   // @ts-expect-error: Pagefind modular ui doesn't have types yet
-  import { Instance, Input, Summary } from "@pagefind/modular-ui";
+  import { Instance, Input } from "@pagefind/modular-ui";
 
   interface PagefindResultData {
       url: string;
@@ -251,6 +251,7 @@ import { SearchIcon } from "lucide-react";
     private allResults: PagefindResult[] = [];
     private isLoading = false;
     private observer: IntersectionObserver | null = null;
+    private currentSearchTerm = "";
 
     connectedCallback() {
       this.instance = new Instance({
@@ -262,15 +263,16 @@ import { SearchIcon } from "lucide-react";
         debounceTimeoutMs: 300,
       }));
 
-      this.instance.add(new Summary({
-        containerElement: "#search-summary",
-      }));
+      this.instance.on("search", (term: string) => {
+        this.currentSearchTerm = term;
+      });
 
       this.instance.on("results", (results: PagefindResults) => {
         this.allResults = results.results || [];
         this.currentPage = 0;
         this.renderResults();
         this.setupInfiniteScroll();
+        this.renderSummary();
       });
 
       setTimeout(() => {
@@ -357,6 +359,23 @@ import { SearchIcon } from "lucide-react";
       const lastResult = container.lastElementChild;
       if (lastResult) {
         this.observer.observe(lastResult);
+      }
+    }
+
+    renderSummary() {
+      const summaryElement = document.querySelector("#search-summary");
+      if (!summaryElement) return;
+
+      if (!this.currentSearchTerm) {
+        summaryElement.textContent = "";
+        return;
+      }
+
+      const count = this.allResults.length;
+      if (count > 0) {
+        summaryElement.textContent = `${count} 件の結果`;
+      } else {
+        summaryElement.textContent = "結果が見つかりませんでした";
       }
     }
 
