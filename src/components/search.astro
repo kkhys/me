@@ -264,11 +264,7 @@ import { SearchIcon } from "lucide-react";
         this.currentSearchTerm = term;
         const searchInputContainer = document.querySelector("#search-input");
         if (searchInputContainer) {
-          if (term.length > 0) {
-            searchInputContainer.classList.add("has-input");
-          } else {
-            searchInputContainer.classList.remove("has-input");
-          }
+          searchInputContainer.classList.toggle("has-input", term.length > 0);
         }
       });
 
