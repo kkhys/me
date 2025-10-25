@@ -117,7 +117,7 @@ import { SearchIcon } from "lucide-react";
     }
   }
 
-  #search-input {
+  #search-input:has(~ #search-results:not(:empty)) {
     border-bottom: 1px solid var(--border);
   }
 
