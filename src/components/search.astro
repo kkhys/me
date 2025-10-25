@@ -116,7 +116,7 @@ import { SearchIcon } from "lucide-react";
     }
   }
 
-  #search-input:has(~ #search-results:not(:empty)) {
+  #search-input.has-input {
     border-bottom: 1px solid var(--border);
   }
 
@@ -263,6 +263,14 @@ import { SearchIcon } from "lucide-react";
 
       this.instance.on("search", (term: string) => {
         this.currentSearchTerm = term;
+        const searchInputContainer = document.querySelector("#search-input");
+        if (searchInputContainer) {
+          if (term.length > 0) {
+            searchInputContainer.classList.add("has-input");
+          } else {
+            searchInputContainer.classList.remove("has-input");
+          }
+        }
       });
 
       this.instance.on("results", (results: PagefindResults) => {
