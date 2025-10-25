@@ -6,5 +6,5 @@
     }
   },
   "installCommand": "pnpm install && dnf install -y nss nspr mesa-libgbm",
-  "buildCommand": "pnpm playwright-install && astro build && pnpm pagefind --site dist"
+  "buildCommand": "pnpm playwright-install && pnpm build"
 }
