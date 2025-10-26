@@ -3,11 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "dev:search": "pnpm build:search && astro dev",
+    "dev:search": "astro build && pagefind --site dist/client && rm -rf public/pagefind && cp -r dist/client/pagefind public/ && astro dev",
     "build": "astro build",
     "build:node": "astro build --node",
-    "build:search": "astro build && pagefind && pnpm copy:pagefind",
-    "copy:pagefind": "rm -rf public/pagefind && cp -r dist/client/pagefind public/",
     "preview": "export $(cat .env) && astro build --node && pagefind && astro preview --node",
     "astro": "astro",
     "check": "astro check && tsc --noEmit",

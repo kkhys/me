@@ -77,7 +77,11 @@ export default defineConfig({
     (await import("@playform/compress")).default({
       Image: false,
     }),
-    pagefind(),
+    pagefind({
+      indexConfig: {
+        excludeSelectors: [".expressive-code"],
+      },
+    }),
   ],
   prefetch: {
     defaultStrategy: "viewport",
