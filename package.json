@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "astro dev",
     "dev:search": "pnpm build:search && astro dev",
-    "build": "astro build",
+    "build": "astro build && pagefind",
     "build:node": "astro build --node",
     "build:search": "astro build && pagefind && pnpm copy:pagefind",
     "copy:pagefind": "rm -rf public/pagefind && cp -r dist/client/pagefind public/",
