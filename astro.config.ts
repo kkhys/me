@@ -12,7 +12,6 @@ import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug";
 import pagefind from "./src/lib/pagefind";
 import rehypeBudoux from "./src/lib/rehype-budoux";
-import rehypePagefind from "./src/lib/rehype-pagefind";
 import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
 import remarkBlockQuoteAlert from "./src/lib/remark-blockquote-alert";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
@@ -178,7 +177,6 @@ export default defineConfig({
         },
       ],
       rehypeBudoux,
-      rehypePagefind,
     ],
   },
   image: {
