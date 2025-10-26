@@ -6,7 +6,6 @@ export const useOnClickOutside = <T extends HTMLElement>(
 ) => {
   const onClickOutside = useEffectEvent(handler);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: onClickOutside is an Effect Event and should not be in dependencies
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (!ref || !ref.current || ref.current.contains(event.target as Node)) {
