@@ -10,7 +10,6 @@ import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug";
-import { pagefindCopier } from "./src/lib/pagefind-copier";
 import rehypeBudoux from "./src/lib/rehype-budoux";
 import rehypePagefind from "./src/lib/rehype-pagefind";
 import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
@@ -78,7 +77,6 @@ export default defineConfig({
     (await import("@playform/compress")).default({
       Image: false,
     }),
-    pagefindCopier(),
   ],
   prefetch: {
     defaultStrategy: "viewport",
