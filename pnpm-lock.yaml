@@ -33,8 +33,8 @@ importers:
         specifier: 9.0.1
         version: 9.0.1(astro@5.15.9(@types/node@24.0.0)(@upstash/redis@1.35.6)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.42.0)(terser@5.42.0)(typescript@5.9.3)(yaml@2.8.0))(react@19.2.0)(rollup@4.42.0)
       '@hono/zod-validator':
-        specifier: 0.7.4
-        version: 0.7.4(hono@4.10.6)(zod@3.25.76)
+        specifier: 0.7.5
+        version: 0.7.5(hono@4.10.6)(zod@3.25.76)
       '@justinribeiro/lite-youtube':
         specifier: 1.9.0
         version: 1.9.0
@@ -667,8 +667,8 @@ packages:
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@hono/zod-validator@0.7.4':
-    resolution: {integrity: sha512-biKGn3BRJVaftZlIPMyK+HCe/UHAjJ6sH0UyXe3+v0OcgVr9xfImDROTJFLtn9e3XEEAHGZIM9U6evu85abm8Q==}
+  '@hono/zod-validator@0.7.5':
+    resolution: {integrity: sha512-n4l4hutkfYU07PzRUHBOVzUEn38VSfrh+UVE5d0w4lyfWDOEhzxIupqo5iakRiJL44c3vTuFJBvcmUl8b9agIA==}
     peerDependencies:
       hono: '>=3.9.0'
       zod: ^3.25.0 || ^4.0.0
@@ -5121,7 +5121,7 @@ snapshots:
     dependencies:
       graphql: 16.11.0
 
-  '@hono/zod-validator@0.7.4(hono@4.10.6)(zod@3.25.76)':
+  '@hono/zod-validator@0.7.5(hono@4.10.6)(zod@3.25.76)':
     dependencies:
       hono: 4.10.6
       zod: 3.25.76
