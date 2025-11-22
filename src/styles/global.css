@@ -4,6 +4,10 @@
   --c-base-bg: var(--uchu-yang);
   --c-gray-bg: var(--uchu-yin-1);
   --c-base-text: var(--uchu-yin-9);
+
+  --t-xs: 0.75rem;
+  --t-sm: 0.875rem;
+  --t-base: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,7 +20,6 @@
 
 html {
   font-size: 16px;
-  font-feature-settings: "palt";
   line-height: 1.75;
   background: var(--c-base-bg);
   color: var(--c-base-text);
