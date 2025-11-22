@@ -2,28 +2,35 @@
 @import "kiso.css";
 
 :root {
-  --c-base-bg: var(--uchu-yang);
-  --c-gray-bg: var(--uchu-yin-1);
-  --c-base-text: var(--uchu-yin-9);
+  --c-bg: var(--uchu-yang);
+  --c-gray: var(--uchu-yin-1);
+  --c-text: var(--uchu-yin-9);
+  --c-sub-text: var(--uchu-yin-5);
 
-  --t-xs: 0.75rem;
-  --t-sm: 0.875rem;
-  --t-base: 1rem;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+
+  --fw-semibold: 600;
+
+  --lh-sm: 1.5;
+  --lh-base: 1.75;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --c-base-bg: var(--uchu-yin);
-    --c-gray-bg: var(--uchu-yin-9);
-    --c-base-text: var(--uchu-yin-1);
+    --c-bg: var(--uchu-yin);
+    --c-gray: var(--uchu-yin-9);
+    --c-text: var(--uchu-yin-1);
+    --c-sub-text: var(--uchu-yin-5);
   }
 }
 
 html {
   font-size: 16px;
-  line-height: 1.75;
-  background: var(--c-base-bg);
-  color: var(--c-base-text);
+  line-height: var(--lh-base);
+  background: var(--c-bg);
+  color: var(--c-text);
 }
 
 body {
