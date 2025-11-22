@@ -1,10 +1,18 @@
 ---
-import BaseLayout from "#/layouts/base-layout.astro";
+import { getPublishedMemos } from "#/features/memo/utils";
+import Layout from "#/layouts/layout.astro";
+
+const memos = await getPublishedMemos();
 ---
 
-<BaseLayout>
+<Layout>
     <p class="title">test</p>
-</BaseLayout>
+    <ul>
+        {memos.map(memo => {
+            return <li>{memo.data.createdAt.toISOString()}</li>;
+        })}
+    </ul>
+</Layout>
 
 <style>
     .title {
