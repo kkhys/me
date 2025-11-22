@@ -7,6 +7,7 @@ const memo = defineCollection({
     images: z.array(z.string()).max(4).optional(),
     createdAt: z.date(),
     createdAtString: z.string().optional(),
+    isPublished: z.boolean().default(true),
   }),
 });
 
