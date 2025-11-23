@@ -1,23 +1,27 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { getPublishedMemos } from "#/utils/memo";
+import FeedLayout from "#/components/feed-layout.astro";
+import ThreadPost from "#/components/thread-post.astro";
 import Layout from "#/layouts/layout.astro";
+import { getPublishedMemos } from "#/utils/memo";
 
 export const getStaticPaths = (async () =>
-    (await getPublishedMemos()).map((memo) => {
-        return {
-            params: {
-                id: memo.data.id,
-            },
-            props: {
-                memo,
-            },
-        };
-    })) satisfies GetStaticPaths;
+  (await getPublishedMemos()).map((memo) => {
+    return {
+      params: {
+        id: memo.data.id,
+      },
+      props: {
+        memo,
+      },
+    };
+  })) satisfies GetStaticPaths;
 
 const { memo } = Astro.props;
 ---
 
 <Layout>
-    <p>{memo.data.id}</p>
+    <FeedLayout>
+        <ThreadPost memo={memo} asLink={false} />
+    </FeedLayout>
 </Layout>

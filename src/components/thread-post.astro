@@ -4,16 +4,18 @@ import profileImage from "#/assets/profile.jpg";
 import Avatar from "#/components/avatar.astro";
 import PostHeader from "#/components/post-header.astro";
 
-export interface Props {
+interface Props {
   memo: CollectionEntry<"memo">;
+  asLink?: boolean;
 }
 
-const { memo } = Astro.props;
+const { memo, asLink = true } = Astro.props;
 const { id, author, createdAt } = memo.data;
 const { Content } = await render(memo);
+const Tag = asLink ? "a" : "div";
 ---
 
-<a href={`/${id}`} class="thread-post">
+<Tag href={asLink ? `/${id}` : undefined} class="thread-post">
     <div class="post-avatar">
         <Avatar src={profileImage} alt={author} />
     </div>
@@ -23,7 +25,7 @@ const { Content } = await render(memo);
             <Content />
         </div>
     </div>
-</a>
+</Tag>
 
 <style>
     .thread-post {

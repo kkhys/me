@@ -1,4 +1,6 @@
 ---
+import Footer from "#/components/footer.astro";
+import Header from "#/components/header.astro";
 import "#/styles/global.css";
 ---
 
@@ -9,8 +11,10 @@ import "#/styles/global.css";
         <meta name="generator" content={Astro.generator} />
     </head>
     <body>
+        <Header />
         <main>
             <slot />
         </main>
+        <Footer />
     </body>
 </html>

@@ -1,4 +1,5 @@
 ---
+import FeedLayout from "#/components/feed-layout.astro";
 import ThreadPost from "#/components/thread-post.astro";
 import Layout from "#/layouts/layout.astro";
 import { getPublishedMemos } from "#/utils/memo";
@@ -7,21 +8,9 @@ const memos = await getPublishedMemos();
 ---
 
 <Layout>
-  <div class="feed-container">
-    <div class="feed">
-      {memos.map(memo => (
-        <ThreadPost memo={memo} />
-      ))}
-    </div>
-  </div>
+  <FeedLayout>
+    {memos.map(memo => (
+      <ThreadPost memo={memo} />
+    ))}
+  </FeedLayout>
 </Layout>
-
-<style>
-  .feed-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .feed {}
-</style>

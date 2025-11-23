@@ -1,0 +1,22 @@
+---
+/**
+ * フィード表示用の共通レイアウトコンポーネント
+ * 中央揃えでmax-width制限を適用
+ */
+---
+
+<div class="feed-container">
+  <div class="feed">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .feed-container {
+    width: 100%;
+    max-width: 37rem;
+    margin: 0 auto;
+  }
+
+  .feed {}
+</style>
