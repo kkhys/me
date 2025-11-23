@@ -1,22 +1,27 @@
 ---
-import { getPublishedMemos } from "#/features/memo/utils";
+import ThreadPost from "#/components/thread-post.astro";
 import Layout from "#/layouts/layout.astro";
+import { getPublishedMemos } from "#/utils/memo";
 
 const memos = await getPublishedMemos();
 ---
 
 <Layout>
-    <p class="title">test</p>
-    <ul>
-        {memos.map(memo => {
-            return <li>{memo.data.createdAt.toISOString()}</li>;
-        })}
-    </ul>
+  <div class="feed-container">
+    <div class="feed">
+      {memos.map(memo => (
+        <ThreadPost memo={memo} />
+      ))}
+    </div>
+  </div>
 </Layout>
 
 <style>
-    .title {
-        font-size: 24px;
-        font-weight: bold;
-    }
+  .feed-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .feed {}
 </style>
