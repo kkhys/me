@@ -4,6 +4,7 @@ import { glob } from "astro/loaders";
 const memo = defineCollection({
   loader: glob({ pattern: "**/index.md", base: "./private_content/memo" }),
   schema: z.object({
+    id: z.string().ulid(),
     images: z.array(z.string()).max(4).optional(),
     createdAt: z.date(),
     isPublished: z.boolean().default(true),
