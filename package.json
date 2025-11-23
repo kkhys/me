@@ -7,7 +7,7 @@
     "check": "astro check && tsc --noEmit",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "vercel-install": "./vercel-submodule-workaround.sh && pnpm install"
+    "vercel-install": ".scripts/vercel-submodule-workaround.sh && pnpm install"
   },
   "dependencies": {
     "astro": "5.16.0",
