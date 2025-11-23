@@ -2,7 +2,6 @@
 import { type CollectionEntry, render } from "astro:content";
 import profileImage from "#/assets/profile.jpg";
 import Avatar from "#/components/avatar.astro";
-import PostActions from "#/components/post-actions.astro";
 import PostHeader from "#/components/post-header.astro";
 
 export interface Props {
@@ -23,7 +22,6 @@ const { Content } = await render(memo);
         <div class="post-text">
             <Content />
         </div>
-        <PostActions />
     </div>
 </article>
 
