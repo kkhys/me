@@ -2,7 +2,7 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const memo = defineCollection({
-  loader: glob({ pattern: "**/index.md", base: "./private_content/memo" }),
+  loader: glob({ pattern: "**/index.md", base: "./private-content/memo" }),
   schema: z.object({
     id: z.string().ulid(),
     images: z.array(z.string()).max(4).optional(),
