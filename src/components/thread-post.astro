@@ -9,11 +9,11 @@ export interface Props {
 }
 
 const { memo } = Astro.props;
-const { author, createdAt } = memo.data;
+const { id, author, createdAt } = memo.data;
 const { Content } = await render(memo);
 ---
 
-<article class="thread-post">
+<a href={`/${id}`} class="thread-post">
     <div class="post-avatar">
         <Avatar src={profileImage} alt={author} />
     </div>
@@ -23,7 +23,7 @@ const { Content } = await render(memo);
             <Content />
         </div>
     </div>
-</article>
+</a>
 
 <style>
     .thread-post {

@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getPublishedMemos } from "#/utils/memo";
+import Layout from "#/layouts/layout.astro";
+
+export const getStaticPaths = (async () =>
+    (await getPublishedMemos()).map((memo) => {
+        return {
+            params: {
+                id: memo.data.id,
+            },
+            props: {
+                memo,
+            },
+        };
+    })) satisfies GetStaticPaths;
+
+const { memo } = Astro.props;
+---
+
+<Layout>
+    <p>{memo.data.id}</p>
+</Layout>
