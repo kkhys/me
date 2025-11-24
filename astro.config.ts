@@ -1,4 +1,5 @@
 import { defineConfig, envField } from "astro/config";
+import remarkWordLimit from "./src/lib/remark-word-limit";
 
 export default defineConfig({
   site: "https://memo.kkhys.me",
@@ -6,6 +7,7 @@ export default defineConfig({
     gfm: false,
     syntaxHighlight: false,
     smartypants: false,
+    remarkPlugins: [remarkWordLimit],
   },
   env: {
     schema: {
