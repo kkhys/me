@@ -5,9 +5,9 @@ const remarkWordLimit = () => (tree: Root) => {
   const text = mdastToString(tree);
   const totalLength = text.length;
 
-  if (totalLength >= 140) {
+  if (totalLength >= 400) {
     throw new Error(
-      `Character count exceeds the limit: ${totalLength} characters (limit: 140 characters)`,
+      `Character count exceeds the limit: ${totalLength} characters (limit: 400 characters)`,
     );
   }
 };

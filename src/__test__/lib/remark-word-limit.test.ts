@@ -19,7 +19,7 @@ describe("remarkWordLimit", () => {
       await expect(processContent(shortContent)).resolves.toBeDefined();
     });
 
-    test("should accept content at boundary minus one (139 characters)", async () => {
+    test("should accept content at boundary minus one (399 characters)", async () => {
       await expect(processContent(boundaryUnderContent)).resolves.toBeDefined();
     });
 
@@ -29,15 +29,15 @@ describe("remarkWordLimit", () => {
   });
 
   describe("content at or over the limit", () => {
-    test("should reject content exactly at the limit (140 characters)", async () => {
+    test("should reject content exactly at the limit (400 characters)", async () => {
       await expect(processContent(boundaryAtContent)).rejects.toThrow(
-        "Character count exceeds the limit: 140 characters (limit: 140 characters)",
+        "Character count exceeds the limit: 400 characters (limit: 400 characters)",
       );
     });
 
-    test("should reject content over the limit (200 characters)", async () => {
+    test("should reject content over the limit (500 characters)", async () => {
       await expect(processContent(overLimitContent)).rejects.toThrow(
-        "Character count exceeds the limit: 200 characters (limit: 140 characters)",
+        "Character count exceeds the limit: 500 characters (limit: 400 characters)",
       );
     });
   });
@@ -51,8 +51,8 @@ describe("remarkWordLimit", () => {
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
         if (error instanceof Error) {
-          expect(error.message).toContain("200 characters");
-          expect(error.message).toContain("limit: 140 characters");
+          expect(error.message).toContain("500 characters");
+          expect(error.message).toContain("limit: 400 characters");
         }
       }
     });
