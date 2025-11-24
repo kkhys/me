@@ -45,4 +45,15 @@ export const mockMemos: CollectionEntry<"memo">[] = [
       author: "Keisuke Hayashi",
     },
   },
+  {
+    id: "memo-5.md",
+    body: "",
+    collection: "memo",
+    data: {
+      id: "memo-5",
+      isPublished: true,
+      createdAt: new Date("2025-11-25T00:00:00Z"),
+      author: "Keisuke Hayashi",
+    },
+  },
 ];

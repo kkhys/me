@@ -83,6 +83,18 @@ describe("getPublishedMemos", () => {
 
       expect(result).toHaveLength(0);
     });
+
+    test("should filter out memos with empty body", async () => {
+      const { getCollection } = await import("astro:content");
+      vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+      const { getPublishedMemos } = await import("#/utils/memo");
+      const result = await getPublishedMemos();
+
+      expect(result.every((memo) => memo.body)).toBe(true);
+      const emptyBodyMemo = result.find((memo) => memo.data.id === "memo-5");
+      expect(emptyBodyMemo).toBeUndefined();
+    });
   });
 
   describe("development environment", () => {
@@ -124,6 +136,22 @@ describe("getPublishedMemos", () => {
       if (draftMemo) {
         expect(draftMemo.data.isPublished).toBe(false);
       }
+    });
+
+    test("should filter out memos with empty body even in development", async () => {
+      vi.doMock("astro:env/client", () => ({
+        NODE_ENV: "development",
+      }));
+
+      const { getCollection } = await import("astro:content");
+      vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+      const { getPublishedMemos } = await import("#/utils/memo");
+      const result = await getPublishedMemos();
+
+      expect(result.every((memo) => memo.body)).toBe(true);
+      const emptyBodyMemo = result.find((memo) => memo.data.id === "memo-5");
+      expect(emptyBodyMemo).toBeUndefined();
     });
   });
 });
