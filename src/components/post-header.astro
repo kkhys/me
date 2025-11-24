@@ -1,16 +1,18 @@
 ---
 import type { InferEntrySchema } from "astro:content";
+import { formatDate, formatDateTime } from "../utils/date";
 
 interface Props
   extends Pick<InferEntrySchema<"memo">, "author" | "createdAt"> {}
 
 const { author, createdAt } = Astro.props;
-const createdAtString = createdAt.toLocaleDateString();
+const createdAtString = formatDate(createdAt);
+const fullDateTimeString = formatDateTime(createdAt);
 ---
 
 <div class="post-header">
     <span class="post-username">{author}</span>
-    <time class="post-time" datetime={createdAt.toISOString()}
+    <time class="post-time" datetime={createdAt.toISOString()} title={fullDateTimeString}
         >{createdAtString}</time
     >
 </div>
