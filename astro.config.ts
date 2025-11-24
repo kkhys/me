@@ -16,6 +16,13 @@ export default defineConfig({
         access: "public",
         values: ["development", "production"],
       }),
+      CI: envField.enum({
+        context: "client",
+        access: "public",
+        values: ["true", "false"],
+        optional: true,
+        default: "false",
+      }),
     },
   },
 });
