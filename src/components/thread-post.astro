@@ -22,7 +22,7 @@ const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
 
 <Tag href={asLink ? `/${id}` : undefined} class="thread-post">
     <div class="post-avatar">
-        <Avatar src={profileImage} alt={author} />
+        <Avatar src={profileImage} alt={author} size={27} />
     </div>
     <div class="post-content">
         <PostHeader author={author} createdAt={createdAt} />
