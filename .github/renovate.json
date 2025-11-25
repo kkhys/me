@@ -11,5 +11,18 @@
   "dependencyDashboard": true,
   "assignees": ["kkhys"],
   "labels": ["type: bump-version"],
-  "assignAutomerge": true
+  "assignAutomerge": true,
+  "packageRules": [
+    {
+      "groupName": "DevDependencies",
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    },
+    {
+      "groupName": "Dependencies (minor update)",
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
 }
