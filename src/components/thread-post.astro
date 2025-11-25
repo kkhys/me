@@ -74,7 +74,6 @@ const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
         display: grid;
         gap: 0.5rem;
         margin-top: 0.75rem;
-        
     }
 
     :global(.post-image) {
@@ -88,7 +87,8 @@ const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
     }
 
     .post-images:has(:only-child) :global(.post-image) {
-        aspect-ratio: auto;
+        width: auto;
+        height: auto;
         max-height: 430px;
     }
 </style>
