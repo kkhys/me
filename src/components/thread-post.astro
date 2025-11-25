@@ -9,9 +9,10 @@ import { getImages } from "#/utils/image";
 interface Props {
   memo: CollectionEntry<"memo">;
   asLink?: boolean;
+  shouldUsePriority?: boolean;
 }
 
-const { memo, asLink = true } = Astro.props;
+const { memo, asLink = true, shouldUsePriority = false } = Astro.props;
 const { id, author, createdAt, images: imageFilenames } = memo.data;
 const { Content } = await render(memo);
 const Tag = asLink ? "a" : "div";
@@ -38,6 +39,7 @@ const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
                         widths={[320, 640, 1280]}
                         sizes="(min-width: 640px) 640px, 100vw"
                         class="post-image"
+                        {...(shouldUsePriority && { priority: true })}
                     />
                 ))}
             </div>
