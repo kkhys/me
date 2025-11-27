@@ -20,7 +20,7 @@ const Tag = asLink ? "a" : "div";
 const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
 ---
 
-<Tag href={asLink ? `/${id}` : undefined} class="thread-post">
+<Tag href={asLink ? `/post/${id}` : undefined} class="thread-post">
     <div class="post-avatar">
         <Avatar src={profileImage} alt={author} size={27} />
     </div>
