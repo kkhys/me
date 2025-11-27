@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is an Astro-based memo posting site that displays short memos (max 400 characters) in a social media thread-like layout. Content is managed separately via a Git submodule in the `private-content/` directory.
+This is an Astro-based memo posting site that displays short memos (max 500 characters) in a social media thread-like layout. Content is managed separately via a Git submodule in the `private-content/` directory.
 
 ## Development Commands
 
@@ -55,7 +55,7 @@ pnpm all                # Runs build + check + lint:fix + test + coverage
 ```
 private-content/memo/
 └── <timestamp_id>/       # e.g., 20251001_204021
-    ├── index.md          # Frontmatter + content (max 400 chars)
+    ├── index.md          # Frontmatter + content (max 500 chars)
     ├── 01.jpg            # Optional images (max 4)
     └── 02.jpg
 ```
@@ -97,7 +97,7 @@ private-content/memo/
 ### Content Validation
 
 **Character Limit** (src/lib/remark-word-limit.ts):
-- Remark plugin enforces 400 character limit
+- Remark plugin enforces 500 character limit
 - Throws error during build if exceeded
 - Counts all text content (strips markdown syntax)
 
@@ -113,7 +113,7 @@ private-content/memo/
 
 ## Key Constraints
 
-1. **Character Limit**: Memo content must be ≤399 characters (enforced at build time)
+1. **Character Limit**: Memo content must be ≤499 characters (enforced at build time)
 2. **Image Limit**: Maximum 4 images per memo
 3. **Image Formats**: JPG and PNG only (defined in src/utils/image.ts:4)
 4. **Content Separation**: All memo content lives in `private-content/` submodule, not in main repo

@@ -1,12 +1,12 @@
 # Memo
 
-A simple memo posting site that displays short memos (max 400 characters) in a social media thread-like layout.
+A simple memo posting site that displays short memos (max 500 characters) in a social media thread-like layout.
 
 **Live Site**: [memo.kkhys.me](https://memo.kkhys.me)
 
 ## Features
 
-- Short memo posts (up to 400 characters)
+- Short memo posts (up to 500 characters)
 - Up to 4 images per post
 - Light/dark mode support
 - Responsive design
@@ -105,12 +105,12 @@ isPublished: true                # Publication status
 author: Keisuke Hayashi
 ---
 
-Write your memo content here (max 400 characters)
+Write your memo content here (max 500 characters)
 ```
 
 ### Constraints
 
-- **Character Limit**: Max **399 characters** (validated at build time)
+- **Character Limit**: Max **499 characters** (validated at build time)
 - **Image Limit**: Max **4 images** per post
 - **Image Formats**: JPG and PNG only
 
