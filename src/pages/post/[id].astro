@@ -2,6 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import Feed from "#/components/feed.astro";
 import ThreadPost from "#/components/thread-post.astro";
+import { TITLE } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 import { getPublishedMemos } from "#/utils/memo";
 
@@ -20,7 +21,7 @@ export const getStaticPaths = (async () =>
 const { memo } = Astro.props;
 ---
 
-<Layout>
+<Layout title={`Thread | ${TITLE}`}>
     <Feed>
         <ThreadPost memo={memo} asLink={false} shouldUsePriority />
     </Feed>

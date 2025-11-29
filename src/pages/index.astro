@@ -1,16 +1,19 @@
 ---
 import Feed from "#/components/feed.astro";
 import ThreadPost from "#/components/thread-post.astro";
+import { TITLE } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 import { getPublishedMemos } from "#/utils/memo";
 
 const memos = await getPublishedMemos();
 ---
 
-<Layout>
-  <Feed>
-    {memos.map((memo, index) => (
-      <ThreadPost memo={memo} shouldUsePriority={index < 6} />
-    ))}
-  </Feed>
+<Layout title={TITLE}>
+    <Feed>
+        {
+            memos.map((memo, index) => (
+                <ThreadPost memo={memo} shouldUsePriority={index < 6} />
+            ))
+        }
+    </Feed>
 </Layout>
