@@ -77,6 +77,15 @@ const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
         margin-top: 0.5rem;
     }
 
+    :global(.post-text .external-link) {
+        color: var(--c-link);
+        text-decoration: none;
+    }
+
+    :global(.post-text .external-link:hover) {
+        text-decoration: underline;
+    }
+
     .post-images {
         display: grid;
         gap: 0.5rem;
