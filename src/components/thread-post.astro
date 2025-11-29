@@ -14,7 +14,13 @@ interface Props {
 }
 
 const { memo, asLink = true, shouldUsePriority = false } = Astro.props;
-const { id, author, createdAt, images: imageFilenames } = memo.data;
+const {
+  id,
+  author,
+  createdAt,
+  images: imageFilenames,
+  hideLinkCard,
+} = memo.data;
 const { Content, remarkPluginFrontmatter } = await render(memo);
 
 const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
@@ -50,7 +56,7 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
                 ))}
             </div>
         )}
-        {firstExternalLink && (
+        {!hideLinkCard && firstExternalLink && (
             <div class="post-link-card">
                 <LinkCard href={firstExternalLink} />
             </div>

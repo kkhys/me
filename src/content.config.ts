@@ -14,6 +14,7 @@ const memo = defineCollection({
     createdAt: z.date(),
     isPublished: z.boolean().default(true),
     author: z.string().default("Keisuke Hayashi"),
+    hideLinkCard: z.boolean().default(false),
   }),
 });
 

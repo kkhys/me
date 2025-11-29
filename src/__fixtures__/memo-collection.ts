@@ -10,6 +10,7 @@ export const mockMemos: CollectionEntry<"memo">[] = [
       isPublished: true,
       createdAt: new Date("2025-01-01T00:00:00Z"),
       author: "Keisuke Hayashi",
+      hideLinkCard: false,
     },
   },
   {
@@ -21,6 +22,7 @@ export const mockMemos: CollectionEntry<"memo">[] = [
       isPublished: true,
       createdAt: new Date("2025-11-20T00:00:00Z"),
       author: "Keisuke Hayashi",
+      hideLinkCard: false,
     },
   },
   {
@@ -32,6 +34,7 @@ export const mockMemos: CollectionEntry<"memo">[] = [
       isPublished: false,
       createdAt: new Date("2025-11-22T00:00:00Z"),
       author: "Keisuke Hayashi",
+      hideLinkCard: false,
     },
   },
   {
@@ -43,6 +46,7 @@ export const mockMemos: CollectionEntry<"memo">[] = [
       isPublished: true,
       createdAt: new Date("2025-11-24T00:00:00Z"),
       author: "Keisuke Hayashi",
+      hideLinkCard: false,
     },
   },
   {
@@ -54,6 +58,7 @@ export const mockMemos: CollectionEntry<"memo">[] = [
       isPublished: true,
       createdAt: new Date("2025-11-25T00:00:00Z"),
       author: "Keisuke Hayashi",
+      hideLinkCard: false,
     },
   },
 ];
