@@ -1,0 +1,43 @@
+<div class="feed-container">
+  <slot />
+</div>
+
+<style>
+  .feed-container {
+    width: 100%;
+    max-width: 37rem;
+    margin: 0 auto;
+  }
+</style>
+
+<script>
+  const setupClickableFeed = () => {
+    const feedContainer = document.querySelector('.feed-container');
+    if (!feedContainer) return;
+
+    const handleFeedClick = (event: Event) => {
+      const target = event.target as HTMLElement;
+
+      if (target.closest('a')) {
+        return;
+      }
+
+      const selection = window.getSelection();
+      if (selection && selection.toString().length > 0) {
+        return;
+      }
+
+      const card = target.closest<HTMLElement>('.thread-post[data-clickable="true"]');
+      if (!card) return;
+
+      const href = card.dataset.href;
+      if (href) {
+        window.location.href = href;
+      }
+    }
+
+    feedContainer.addEventListener('click', handleFeedClick);
+  }
+
+  setupClickableFeed();
+</script>

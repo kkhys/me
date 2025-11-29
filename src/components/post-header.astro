@@ -2,16 +2,23 @@
 import type { InferEntrySchema } from "astro:content";
 import { formatDate, formatDateTime } from "../utils/date";
 
-interface Props
-  extends Pick<InferEntrySchema<"memo">, "author" | "createdAt"> {}
+interface Props extends Pick<InferEntrySchema<"memo">, "author" | "createdAt"> {
+  authorLink?: string;
+}
 
-const { author, createdAt } = Astro.props;
+const { author, createdAt, authorLink } = Astro.props;
 const createdAtString = formatDate(createdAt);
 const fullDateTimeString = formatDateTime(createdAt);
 ---
 
 <div class="post-header">
-    <span class="post-username">{author}</span>
+    {authorLink ? (
+        <a href={authorLink} class="post-username-link">
+            {author}
+        </a>
+    ) : (
+        <span class="post-username">{author}</span>
+    )}
     <time class="post-time" datetime={createdAt.toISOString()} title={fullDateTimeString}
         >{createdAtString}</time
     >
@@ -25,7 +32,16 @@ const fullDateTimeString = formatDateTime(createdAt);
         margin-bottom: 0.15rem;
     }
 
-    .post-username {
+    .post-username-link {
+        /*text-decoration: none;*/
+        /*color: inherit;*/
+    }
+
+    .post-username-link:hover {
+        text-decoration: underline;
+    }
+
+    .post-username, .post-username-link {
         font-size: var(--fs-xs);
         font-weight: var(--fw-semibold);
         color: var(--c-text);
