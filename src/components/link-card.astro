@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+import { getMetadata } from "#/lib/metadata";
+
+interface Props extends HTMLAttributes<"a"> {
+  href: string;
+}
+
+const { href, ...props } = Astro.props;
+
+const { title, image } = await getMetadata(href);
+---
+
+<div class="link-card-container">
+  <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      {...props}
+  >
+    {image && (
+      <div class="link-card-image-wrapper">
+        <Image
+            src={image.src}
+            alt={`Cover image of ${title}`}
+            width={800}
+            height={420}
+            format="avif"
+        />
+      </div>
+    )}
+    <div class="link-card-content">
+      <span class="link-card-hostname">
+        {new URL(href).hostname}
+      </span>
+      <span class="link-card-title">
+        {title}
+      </span>
+    </div>
+  </a>
+</div>
+
+<style>
+  .link-card-container {
+    user-select: none;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 1px solid var(--c-gray);
+    max-width: 400px;
+    transition: transform 0.1s;
+  }
+
+  .link-card-container:active {
+    transform: scale(0.98);
+  }
+
+  .link-card-image-wrapper {
+    background-color: var(--c-gray);
+  }
+
+  .link-card-content {
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .link-card-image-wrapper + .link-card-content {
+    border-top: 1px solid var(--c-gray);
+  }
+
+  .link-card-hostname {
+    font-size: var(--fs-xs);
+    line-height: var(--lh-xs);
+    color: var(--c-sub-text);
+  }
+
+  .link-card-title {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-sm);
+    color: var(--c-text);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+  }
+</style>
