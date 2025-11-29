@@ -1,5 +1,7 @@
 import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
+import remarkExtractLink from "./src/lib/remark-extract-link";
+import remarkTruncateLinkText from "./src/lib/remark-truncate-link-text";
 import remarkWordLimit from "./src/lib/remark-word-limit";
 
 export default defineConfig({
@@ -7,7 +9,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false,
     smartypants: false,
-    remarkPlugins: [remarkWordLimit],
+    remarkPlugins: [remarkWordLimit, remarkExtractLink, remarkTruncateLinkText],
     rehypePlugins: [
       [
         rehypeExternalLinks,
@@ -31,6 +33,11 @@ export default defineConfig({
         access: "public",
         optional: true,
         default: false,
+      }),
+      PUBLIC_VERCEL_ENV: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
       }),
     },
   },
