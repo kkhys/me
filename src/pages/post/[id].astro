@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from "astro";
-import FeedLayout from "#/components/feed-layout.astro";
+import Feed from "#/components/feed.astro";
 import ThreadPost from "#/components/thread-post.astro";
 import Layout from "#/layouts/layout.astro";
 import { getPublishedMemos } from "#/utils/memo";
@@ -21,7 +21,7 @@ const { memo } = Astro.props;
 ---
 
 <Layout>
-    <FeedLayout>
+    <Feed>
         <ThreadPost memo={memo} asLink={false} shouldUsePriority />
-    </FeedLayout>
+    </Feed>
 </Layout>

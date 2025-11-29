@@ -15,12 +15,15 @@ interface Props {
 const { memo, asLink = true, shouldUsePriority = false } = Astro.props;
 const { id, author, createdAt, images: imageFilenames } = memo.data;
 const { Content } = await render(memo);
-const Tag = asLink ? "a" : "div";
 
 const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
 ---
 
-<Tag href={asLink ? `/post/${id}` : undefined} class="thread-post">
+<article
+    class="thread-post"
+    data-clickable={asLink ? "true" : undefined}
+    data-href={asLink ? `/post/${id}` : undefined}
+>
     <div class="post-avatar">
         <Avatar src={profileImage} alt={author} size={27} />
     </div>
@@ -45,7 +48,7 @@ const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
             </div>
         )}
     </div>
-</Tag>
+</article>
 
 <style>
     .thread-post {
@@ -53,6 +56,10 @@ const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
         gap: 0.65rem;
         padding: 1rem 0;
         border-bottom: 1px solid var(--c-gray);
+    }
+
+    .thread-post[data-clickable="true"] {
+        cursor: pointer;
     }
 
     .post-content {

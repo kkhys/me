@@ -6,24 +6,47 @@ interface Props {
   src: ImageMetadata;
   alt: string;
   size: number;
+  link?: string;
 }
 
-const { src, alt, size } = Astro.props;
+const { src, alt, size, link } = Astro.props;
 ---
 
-<Image
-  src={src}
-  alt={alt}
-  width={size}
-  height={size}
-  densities={[1.5, 2]}
-  class="avatar"
-/>
+{link ? (
+  <a href={link} class="avatar-link">
+    <Image
+      src={src}
+      alt={alt}
+      width={size}
+      height={size}
+      densities={[1.5, 2]}
+      class="avatar"
+    />
+  </a>
+) : (
+  <Image
+    src={src}
+    alt={alt}
+    width={size}
+    height={size}
+    densities={[1.5, 2]}
+    class="avatar"
+  />
+)}
 
 <style>
+  .avatar-link {
+    transition: opacity 0.15s ease;
+  }
+
+  .avatar-link:hover {
+    opacity: 0.8;
+  }
+
   .avatar {
     border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 0 0 1px var(--c-gray);
+    outline: 1px solid var(--c-gray);
+    outline-offset: -0.5px;
   }
 </style>
