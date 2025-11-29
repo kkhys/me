@@ -1,13 +1,7 @@
 import { remark } from "remark";
 import { describe, expect, test } from "vitest";
+import { createVFile } from "#/__fixtures__/vfile-helpers";
 import remarkExtractLink from "#/lib/remark-extract-link";
-
-const createVFile = (content: string, data: Record<string, unknown> = {}) => {
-  return {
-    value: content,
-    data,
-  };
-};
 
 describe("remarkExtractLink", () => {
   const processContent = async (content: string) => {

@@ -1,5 +1,11 @@
 import type { Metadata } from "fetch-site-metadata";
 import { beforeEach, describe, expect, test, vi } from "vitest";
+import {
+  errorFallbackMetadata,
+  fallbackMetadata,
+  mockMetadata,
+  mockMetadataMinimal,
+} from "#/__fixtures__/metadata";
 
 vi.mock("fetch-site-metadata", () => ({
   default: vi.fn(),
@@ -24,12 +30,7 @@ describe("getMetadata", () => {
       const { getMetadata } = await import("#/lib/metadata");
       const result = await getMetadata("https://example.com");
 
-      expect(result).toEqual({
-        title: "Link",
-        description: "External link",
-        image: undefined,
-        icon: undefined,
-      });
+      expect(result).toEqual(fallbackMetadata);
     });
 
     test("should cache fallback metadata for same URL", async () => {
@@ -62,18 +63,6 @@ describe("getMetadata", () => {
     });
 
     test("should fetch and return site metadata", async () => {
-      const mockMetadata: Metadata = {
-        title: "Example Site",
-        description: "This is an example",
-        image: {
-          src: "https://example.com/image.jpg",
-          width: undefined,
-          height: undefined,
-          alt: undefined,
-        },
-        icon: "https://example.com/favicon.ico",
-      };
-
       const fetchSiteMetadata = (await import("fetch-site-metadata")).default;
       vi.mocked(fetchSiteMetadata).mockResolvedValue(mockMetadata);
 
@@ -91,18 +80,6 @@ describe("getMetadata", () => {
     });
 
     test("should cache fetched metadata", async () => {
-      const mockMetadata: Metadata = {
-        title: "Example Site",
-        description: "This is an example",
-        image: {
-          src: "https://example.com/image.jpg",
-          width: undefined,
-          height: undefined,
-          alt: undefined,
-        },
-        icon: "https://example.com/favicon.ico",
-      };
-
       const fetchSiteMetadata = (await import("fetch-site-metadata")).default;
       vi.mocked(fetchSiteMetadata).mockResolvedValue(mockMetadata);
 
@@ -124,12 +101,7 @@ describe("getMetadata", () => {
       const { getMetadata } = await import("#/lib/metadata");
       const result = await getMetadata("https://example.com");
 
-      expect(result).toEqual({
-        title: "Not Found",
-        description: "Page not found",
-        image: undefined,
-        icon: undefined,
-      });
+      expect(result).toEqual(errorFallbackMetadata);
     });
 
     test("should not cache fallback metadata when fetch fails", async () => {
@@ -177,30 +149,18 @@ describe("getMetadata", () => {
     });
 
     test("should handle fetch success after previous failure for different URL", async () => {
-      const mockMetadata: Metadata = {
-        title: "Success Site",
-        description: "This works",
-        image: undefined,
-        icon: undefined,
-      };
-
       const fetchSiteMetadata = (await import("fetch-site-metadata")).default;
       vi.mocked(fetchSiteMetadata)
         .mockRejectedValueOnce(new Error("Network error"))
-        .mockResolvedValueOnce(mockMetadata);
+        .mockResolvedValueOnce(mockMetadataMinimal);
 
       const { getMetadata } = await import("#/lib/metadata");
 
       const failResult = await getMetadata("https://fail.com");
       const successResult = await getMetadata("https://success.com");
 
-      expect(failResult).toEqual({
-        title: "Not Found",
-        description: "Page not found",
-        image: undefined,
-        icon: undefined,
-      });
-      expect(successResult).toEqual(mockMetadata);
+      expect(failResult).toEqual(errorFallbackMetadata);
+      expect(successResult).toEqual(mockMetadataMinimal);
     });
   });
 
@@ -215,12 +175,7 @@ describe("getMetadata", () => {
       const { getMetadata } = await import("#/lib/metadata");
       const result = await getMetadata("https://example.com");
 
-      expect(result).toEqual({
-        title: "Link",
-        description: "External link",
-        image: undefined,
-        icon: undefined,
-      });
+      expect(result).toEqual(fallbackMetadata);
     });
 
     test("should handle NODE_ENV=development with production PUBLIC_VERCEL_ENV", async () => {
@@ -233,12 +188,7 @@ describe("getMetadata", () => {
       const { getMetadata } = await import("#/lib/metadata");
       const result = await getMetadata("https://example.com");
 
-      expect(result).toEqual({
-        title: "Link",
-        description: "External link",
-        image: undefined,
-        icon: undefined,
-      });
+      expect(result).toEqual(fallbackMetadata);
     });
   });
 });
