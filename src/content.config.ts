@@ -11,6 +11,11 @@ const memo = defineCollection({
   schema: z.object({
     id: z.string().ulid(),
     createdAt: z.date(),
+    tag: z
+      .string()
+      .min(1)
+      .regex(/^[a-z0-9_]+$/)
+      .optional(),
     images: z.array(z.string()).max(4).optional(),
     isDraft: z.boolean().default(false),
     author: z.string().default("Keisuke Hayashi"),

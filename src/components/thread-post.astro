@@ -18,6 +18,7 @@ const {
   id,
   author,
   createdAt,
+  tag,
   images: imageFilenames,
   hideLinkCard,
 } = memo.data;
@@ -41,6 +42,11 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
         <div class="post-text">
             <Content />
         </div>
+        {tag && (
+            <div class="post-tags">
+                <a href={`/tag/${tag}`} class="tag-link">#{tag}</a>
+            </div>
+        )}
         {images.length > 0 && (
             <div class="post-images">
                 {images.map((image, index) => (
@@ -79,6 +85,20 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
     .post-content {
         flex: 1;
         min-width: 0;
+    }
+
+    .post-tags {
+        margin-top: 0.5rem;
+    }
+
+    .tag-link {
+        font-size: var(--fs-xs);
+        color: var(--c-link);
+        text-decoration: none;
+    }
+
+    .tag-link:hover {
+        text-decoration: underline;
     }
 
     :global(.post-text p) {
