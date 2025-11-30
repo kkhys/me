@@ -1,8 +1,22 @@
 ---
 const currentPath = Astro.url.pathname;
 
-const isHome = currentPath === "/";
-const headerTitle = isHome ? "Memo" : "Thread";
+const PATH_RULES = [
+  { match: (p: string) => p === "/", getTitle: () => "Memo" },
+  {
+    match: (p: string) => p.startsWith("/tag/"),
+    getTitle: (p: string) => {
+      const tagName = p.replace("/tag/", "").replace(/\/$/, "");
+      return tagName ? `#${tagName}` : "Tag";
+    },
+  },
+  { match: (p: string) => p.startsWith("/post/"), getTitle: () => "Thread" },
+] as const;
+
+const getHeaderTitle = (path: string) =>
+  PATH_RULES.find((r) => r.match(path))?.getTitle(path) ?? "Memo";
+
+const headerTitle = getHeaderTitle(currentPath);
 ---
 
 <header>
