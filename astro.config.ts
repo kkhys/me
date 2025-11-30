@@ -21,9 +21,6 @@ export default defineConfig({
       ],
     ],
   },
-  image: {
-    remotePatterns: [{ protocol: "https" }],
-  },
   env: {
     schema: {
       NODE_ENV: envField.enum({
