@@ -1,0 +1,53 @@
+---
+import type { GetStaticPaths } from "astro";
+import Feed from "#/components/feed.astro";
+import ThreadPost from "#/components/thread-post.astro";
+import { TITLE } from "#/config/constants";
+import Layout from "#/layouts/layout.astro";
+import { getAllTags, getMemosByTag } from "#/utils/memo";
+
+export const getStaticPaths = (async () => {
+  const tags = await getAllTags();
+  return Promise.all(
+    tags.map(async (tag) => {
+      const memos = await getMemosByTag(tag);
+      return {
+        params: {
+          tag,
+        },
+        props: {
+          tag,
+          memos,
+        },
+      };
+    }),
+  );
+}) satisfies GetStaticPaths;
+
+const { memos, tag } = Astro.props;
+---
+
+<Layout title={`Tag: ${tag} | ${TITLE}`}>
+    <Feed>
+        <div class="tag-header">
+            <p>{memos.length} {memos.length === 1 ? "post" : "posts"}</p>
+        </div>
+        {
+            memos.map((memo, index) => (
+                <ThreadPost memo={memo} shouldUsePriority={index < 6} />
+            ))
+        }
+    </Feed>
+</Layout>
+
+<style>
+    .tag-header {
+        margin: 1rem 0;
+    }
+
+    .tag-header p {
+        margin: 0;
+        color: var(--c-sub-text);
+        font-size: var(--fs-xs);
+    }
+</style>
