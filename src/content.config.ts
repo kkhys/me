@@ -12,7 +12,7 @@ const memo = defineCollection({
     id: z.string().ulid(),
     images: z.array(z.string()).max(4).optional(),
     createdAt: z.date(),
-    isPublished: z.boolean().default(true),
+    isDraft: z.boolean().default(false),
     author: z.string().default("Keisuke Hayashi"),
     hideLinkCard: z.boolean().default(false),
   }),

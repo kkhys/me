@@ -23,7 +23,7 @@ describe("getPublishedMemos", () => {
       const result = await getPublishedMemos();
 
       expect(result).toHaveLength(3);
-      expect(result.every((memo) => memo.data.isPublished)).toBe(true);
+      expect(result.every((memo) => !memo.data.isDraft)).toBe(true);
     });
 
     test("should sort memos by createdAt in descending order (newest first)", async () => {
@@ -75,7 +75,7 @@ describe("getPublishedMemos", () => {
 
     test("should handle collection with only draft memos", async () => {
       const { getCollection } = await import("astro:content");
-      const draftOnlyMemos = mockMemos.filter((memo) => !memo.data.isPublished);
+      const draftOnlyMemos = mockMemos.filter((memo) => memo.data.isDraft);
       vi.mocked(getCollection).mockResolvedValue(draftOnlyMemos);
 
       const { getPublishedMemos } = await import("#/utils/memo");
@@ -117,7 +117,7 @@ describe("getPublishedMemos", () => {
       const result = await getPublishedMemos();
 
       expect(result).toHaveLength(4);
-      expect(result.some((memo) => !memo.data.isPublished)).toBe(true);
+      expect(result.some((memo) => memo.data.isDraft)).toBe(true);
     });
 
     test("should include draft memo in results", async () => {
@@ -134,7 +134,7 @@ describe("getPublishedMemos", () => {
       const draftMemo = result.find((memo) => memo.data.id === "memo-3");
       expect(draftMemo).toBeDefined();
       if (draftMemo) {
-        expect(draftMemo.data.isPublished).toBe(false);
+        expect(draftMemo.data.isDraft).toBe(true);
       }
     });
 

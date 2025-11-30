@@ -7,7 +7,7 @@ export const mockMemos: CollectionEntry<"memo">[] = [
     collection: "memo",
     data: {
       id: "memo-1",
-      isPublished: true,
+      isDraft: false,
       createdAt: new Date("2025-01-01T00:00:00Z"),
       author: "Keisuke Hayashi",
       hideLinkCard: false,
@@ -19,7 +19,7 @@ export const mockMemos: CollectionEntry<"memo">[] = [
     collection: "memo",
     data: {
       id: "memo-2",
-      isPublished: true,
+      isDraft: false,
       createdAt: new Date("2025-11-20T00:00:00Z"),
       author: "Keisuke Hayashi",
       hideLinkCard: false,
@@ -31,7 +31,7 @@ export const mockMemos: CollectionEntry<"memo">[] = [
     collection: "memo",
     data: {
       id: "memo-3",
-      isPublished: false,
+      isDraft: true,
       createdAt: new Date("2025-11-22T00:00:00Z"),
       author: "Keisuke Hayashi",
       hideLinkCard: false,
@@ -43,7 +43,7 @@ export const mockMemos: CollectionEntry<"memo">[] = [
     collection: "memo",
     data: {
       id: "memo-4",
-      isPublished: true,
+      isDraft: false,
       createdAt: new Date("2025-11-24T00:00:00Z"),
       author: "Keisuke Hayashi",
       hideLinkCard: false,
@@ -55,7 +55,7 @@ export const mockMemos: CollectionEntry<"memo">[] = [
     collection: "memo",
     data: {
       id: "memo-5",
-      isPublished: true,
+      isDraft: false,
       createdAt: new Date("2025-11-25T00:00:00Z"),
       author: "Keisuke Hayashi",
       hideLinkCard: false,
