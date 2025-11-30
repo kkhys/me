@@ -10,8 +10,8 @@ const memo = defineCollection({
   loader: glob({ pattern: "**/index.md", base: memoBasePath }),
   schema: z.object({
     id: z.string().ulid(),
-    images: z.array(z.string()).max(4).optional(),
     createdAt: z.date(),
+    images: z.array(z.string()).max(4).optional(),
     isDraft: z.boolean().default(false),
     author: z.string().default("Keisuke Hayashi"),
     hideLinkCard: z.boolean().default(false),
