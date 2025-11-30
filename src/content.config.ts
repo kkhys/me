@@ -14,7 +14,7 @@ const memo = defineCollection({
     tag: z
       .string()
       .min(1)
-      .regex(/^[a-z0-9\x20]+$/)
+      .regex(/^[a-z0-9_]+$/)
       .optional(),
     images: z.array(z.string()).max(4).optional(),
     isDraft: z.boolean().default(false),

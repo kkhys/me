@@ -26,7 +26,3 @@ export const getAllTags = async () => {
     .filter((tag) => tag !== undefined);
   return Array.from(new Set(tags)).sort();
 };
-
-export const tagToPath = (tag: string) => tag.replace(/\s+/g, "-");
-
-export const pathToTag = (path: string) => path.replace(/-/g, " ");
