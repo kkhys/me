@@ -17,6 +17,7 @@ const memo = defineCollection({
       .regex(/^[a-z0-9_]+$/)
       .optional(),
     images: z.array(z.string()).max(4).optional(),
+    comment: z.string().ulid().optional(),
     isDraft: z.boolean().default(false),
     author: z.string().default("Keisuke Hayashi"),
     hideLinkCard: z.boolean().default(false),
