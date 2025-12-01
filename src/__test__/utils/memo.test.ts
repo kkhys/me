@@ -22,7 +22,8 @@ describe("getPublishedMemos", () => {
       const { getPublishedMemos } = await import("#/utils/memo");
       const result = await getPublishedMemos();
 
-      expect(result).toHaveLength(3);
+      // 3 main memos + 3 published comments = 6
+      expect(result).toHaveLength(6);
       expect(result.every((memo) => !memo.data.isDraft)).toBe(true);
     });
 
@@ -116,7 +117,8 @@ describe("getPublishedMemos", () => {
       const { getPublishedMemos } = await import("#/utils/memo");
       const result = await getPublishedMemos();
 
-      expect(result).toHaveLength(4);
+      // 4 main memos (including 1 draft) + 4 comments (including 1 draft) = 8
+      expect(result).toHaveLength(8);
       expect(result.some((memo) => memo.data.isDraft)).toBe(true);
     });
 
@@ -175,7 +177,7 @@ describe("getMemosByTag", () => {
     const result = await getMemosByTag("tech");
 
     expect(result).toHaveLength(1);
-    expect(result.every((memo) => memo.data.tag === "tech")).toBe(true);
+    expect(result[0]?.main.data.tag).toBe("tech");
   });
 
   test("should return empty array when no memos have the specified tag", async () => {
@@ -195,8 +197,8 @@ describe("getMemosByTag", () => {
     const { getMemosByTag } = await import("#/utils/memo");
     const result = await getMemosByTag("tech");
 
-    expect(result.every((memo) => !memo.data.isDraft)).toBe(true);
-    expect(result.every((memo) => memo.data.tag === "tech")).toBe(true);
+    expect(result.every(({ main }) => !main.data.isDraft)).toBe(true);
+    expect(result.every(({ main }) => main.data.tag === "tech")).toBe(true);
   });
 
   test("should handle empty collection", async () => {
@@ -287,5 +289,157 @@ describe("getAllTags", () => {
 
     // memo-5 has no tag but is handled without error
     expect(result).toHaveLength(3);
+  });
+});
+
+describe("getMainMemos", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+    vi.doUnmock("#/utils/memo");
+    vi.doUnmock("astro:env/client");
+    vi.doMock("astro:env/client", () => ({
+      NODE_ENV: "production",
+    }));
+  });
+
+  test("should return only main memos (not comments)", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMainMemos } = await import("#/utils/memo");
+    const result = await getMainMemos();
+
+    expect(result).toHaveLength(3);
+    expect(result.every((memo) => !memo.data.comment)).toBe(true);
+  });
+
+  test("should return memos sorted by createdAt in descending order", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMainMemos } = await import("#/utils/memo");
+    const result = await getMainMemos();
+
+    expect(result[0]?.data.id).toBe("memo-4");
+    expect(result[1]?.data.id).toBe("memo-2");
+    expect(result[2]?.data.id).toBe("memo-1");
+  });
+
+  test("should not include draft memos in production", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMainMemos } = await import("#/utils/memo");
+    const result = await getMainMemos();
+
+    expect(result.every((memo) => !memo.data.isDraft)).toBe(true);
+  });
+});
+
+describe("getCommentsByMemoId", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+    vi.doUnmock("#/utils/memo");
+    vi.doUnmock("astro:env/client");
+    vi.doMock("astro:env/client", () => ({
+      NODE_ENV: "production",
+    }));
+  });
+
+  test("should return comments for a specific memo", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getCommentsByMemoId } = await import("#/utils/memo");
+    const result = await getCommentsByMemoId("memo-1");
+
+    expect(result).toHaveLength(2);
+    expect(result.every((comment) => comment.data.comment === "memo-1")).toBe(
+      true,
+    );
+  });
+
+  test("should return comments sorted by createdAt in ascending order (oldest first)", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getCommentsByMemoId } = await import("#/utils/memo");
+    const result = await getCommentsByMemoId("memo-1");
+
+    expect(result[0]?.data.id).toBe("comment-1");
+    expect(result[1]?.data.id).toBe("comment-2");
+  });
+
+  test("should return empty array when memo has no comments", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getCommentsByMemoId } = await import("#/utils/memo");
+    const result = await getCommentsByMemoId("memo-4");
+
+    expect(result).toHaveLength(0);
+  });
+
+  test("should not include draft comments in production", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getCommentsByMemoId } = await import("#/utils/memo");
+    const result = await getCommentsByMemoId("memo-1");
+
+    expect(result.every((comment) => !comment.data.isDraft)).toBe(true);
+  });
+});
+
+describe("getMemosWithComments", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+    vi.doUnmock("#/utils/memo");
+    vi.doUnmock("astro:env/client");
+    vi.doMock("astro:env/client", () => ({
+      NODE_ENV: "production",
+    }));
+  });
+
+  test("should return main memos with their comments", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosWithComments } = await import("#/utils/memo");
+    const result = await getMemosWithComments();
+
+    expect(result).toHaveLength(3);
+    expect(result[0]?.main.data.id).toBe("memo-4");
+    expect(result[0]?.comments).toHaveLength(0);
+    expect(result[1]?.main.data.id).toBe("memo-2");
+    expect(result[1]?.comments).toHaveLength(1);
+    expect(result[2]?.main.data.id).toBe("memo-1");
+    expect(result[2]?.comments).toHaveLength(2);
+  });
+
+  test("should return comments sorted by createdAt in ascending order", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosWithComments } = await import("#/utils/memo");
+    const result = await getMemosWithComments();
+
+    const memo1Result = result.find(({ main }) => main.data.id === "memo-1");
+    expect(memo1Result?.comments[0]?.data.id).toBe("comment-1");
+    expect(memo1Result?.comments[1]?.data.id).toBe("comment-2");
+  });
+
+  test("should not include draft comments in production", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosWithComments } = await import("#/utils/memo");
+    const result = await getMemosWithComments();
+
+    const allComments = result.flatMap(({ comments }) => comments);
+    expect(allComments.every((comment) => !comment.data.isDraft)).toBe(true);
   });
 });
