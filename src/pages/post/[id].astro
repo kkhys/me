@@ -4,25 +4,31 @@ import Feed from "#/components/feed.astro";
 import ThreadPost from "#/components/thread-post.astro";
 import { TITLE } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
-import { getPublishedMemos } from "#/utils/memo";
+import { getCommentsByMemoId, getPublishedMemos } from "#/utils/memo";
 
-export const getStaticPaths = (async () =>
-  (await getPublishedMemos()).map((memo) => {
-    return {
-      params: {
-        id: memo.data.id,
-      },
-      props: {
-        memo,
-      },
-    };
-  })) satisfies GetStaticPaths;
+export const getStaticPaths = (async () => {
+  const allMemos = await getPublishedMemos();
+  return allMemos.map((memo) => ({
+    params: {
+      id: memo.data.id,
+    },
+    props: {
+      memo,
+    },
+  }));
+}) satisfies GetStaticPaths;
 
 const { memo } = Astro.props;
+const comments = await getCommentsByMemoId(memo.data.id);
 ---
 
 <Layout title={`Thread | ${TITLE}`}>
     <Feed>
-        <ThreadPost memo={memo} asLink={false} shouldUsePriority />
+        <ThreadPost
+            memo={memo}
+            comments={comments}
+            asLink={false}
+            shouldUsePriority
+        />
     </Feed>
 </Layout>
