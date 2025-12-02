@@ -356,9 +356,9 @@ describe("getCommentsByMemoId", () => {
     const result = await getCommentsByMemoId("memo-1");
 
     expect(result).toHaveLength(2);
-    expect(result.every((comment) => comment.data.comment === "memo-1")).toBe(
-      true,
-    );
+    expect(
+      result.every((comment) => comment.memo.data.comment === "memo-1"),
+    ).toBe(true);
   });
 
   test("should return comments sorted by createdAt in ascending order (oldest first)", async () => {
@@ -368,8 +368,8 @@ describe("getCommentsByMemoId", () => {
     const { getCommentsByMemoId } = await import("#/utils/memo");
     const result = await getCommentsByMemoId("memo-1");
 
-    expect(result[0]?.data.id).toBe("comment-1");
-    expect(result[1]?.data.id).toBe("comment-2");
+    expect(result[0]?.memo.data.id).toBe("comment-1");
+    expect(result[1]?.memo.data.id).toBe("comment-2");
   });
 
   test("should return empty array when memo has no comments", async () => {
@@ -389,7 +389,7 @@ describe("getCommentsByMemoId", () => {
     const { getCommentsByMemoId } = await import("#/utils/memo");
     const result = await getCommentsByMemoId("memo-1");
 
-    expect(result.every((comment) => !comment.data.isDraft)).toBe(true);
+    expect(result.every((comment) => !comment.memo.data.isDraft)).toBe(true);
   });
 });
 
@@ -428,8 +428,8 @@ describe("getMemosWithComments", () => {
     const result = await getMemosWithComments();
 
     const memo1Result = result.find(({ main }) => main.data.id === "memo-1");
-    expect(memo1Result?.comments[0]?.data.id).toBe("comment-1");
-    expect(memo1Result?.comments[1]?.data.id).toBe("comment-2");
+    expect(memo1Result?.comments[0]?.memo.data.id).toBe("comment-1");
+    expect(memo1Result?.comments[1]?.memo.data.id).toBe("comment-2");
   });
 
   test("should not include draft comments in production", async () => {
@@ -440,6 +440,8 @@ describe("getMemosWithComments", () => {
     const result = await getMemosWithComments();
 
     const allComments = result.flatMap(({ comments }) => comments);
-    expect(allComments.every((comment) => !comment.data.isDraft)).toBe(true);
+    expect(allComments.every((comment) => !comment.memo.data.isDraft)).toBe(
+      true,
+    );
   });
 });

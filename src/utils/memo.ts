@@ -4,6 +4,11 @@ import { NODE_ENV } from "astro:env/client";
 
 type Memo = CollectionEntry<"memo">;
 
+export type MemoWithComments = {
+  memo: Memo;
+  comments: MemoWithComments[];
+};
+
 const sortByDate = (memos: Memo[], order: "desc" | "asc" = "desc"): Memo[] => {
   return [...memos].sort((a, b) => {
     const dateA = new Date(a.data.createdAt).getTime();
@@ -45,32 +50,44 @@ const buildCommentMap = (memos: Memo[]): Map<string, Memo[]> => {
   return commentMap;
 };
 
-export const getCommentsByMemoId = async (memoId: string) => {
-  const memos = await getPublishedMemos();
-  const commentMap = buildCommentMap(memos);
-  return commentMap.get(memoId) ?? [];
+const buildNestedComments = (
+  memoId: string,
+  commentMap: Map<string, Memo[]>,
+): MemoWithComments[] => {
+  const directComments = commentMap.get(memoId) ?? [];
+
+  return directComments.map((comment) => ({
+    memo: comment,
+    comments: buildNestedComments(comment.data.id, commentMap),
+  }));
 };
 
-const attachComments = (mainMemos: Memo[], allMemos: Memo[]) => {
-  const commentMap = buildCommentMap(allMemos);
-
+const attachComments = (mainMemos: Memo[], commentMap: Map<string, Memo[]>) => {
   return mainMemos.map((mainMemo) => ({
     main: mainMemo,
-    comments: commentMap.get(mainMemo.data.id) ?? [],
+    comments: buildNestedComments(mainMemo.data.id, commentMap),
   }));
+};
+
+export const getCommentsByMemoId = async (memoId: string) => {
+  const allMemos = await getPublishedMemos();
+  const commentMap = buildCommentMap(allMemos);
+  return buildNestedComments(memoId, commentMap);
 };
 
 export const getMemosWithComments = async () => {
   const allMemos = await getPublishedMemos();
   const mainMemos = allMemos.filter(({ data }) => !data.comment);
-  return attachComments(mainMemos, allMemos);
+  const commentMap = buildCommentMap(allMemos);
+  return attachComments(mainMemos, commentMap);
 };
 
 export const getMemosByTag = async (tag: string) => {
   const allMemos = await getPublishedMemos();
   const mainMemos = allMemos.filter(({ data }) => !data.comment);
   const taggedMainMemos = mainMemos.filter(({ data }) => data.tag === tag);
-  return attachComments(taggedMainMemos, allMemos);
+  const commentMap = buildCommentMap(allMemos);
+  return attachComments(taggedMainMemos, commentMap);
 };
 
 export const getAllTags = async () => {
