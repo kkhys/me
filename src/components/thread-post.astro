@@ -6,14 +6,23 @@ import Avatar from "#/components/avatar.astro";
 import LinkCard from "#/components/link-card.astro";
 import PostHeader from "#/components/post-header.astro";
 import { getImages } from "#/utils/image";
+import type { MemoWithComments } from "#/utils/memo";
 
 interface Props {
   memo: CollectionEntry<"memo">;
   asLink?: boolean;
   shouldUsePriority?: boolean;
+  comments?: MemoWithComments[];
 }
 
-const { memo, asLink = true, shouldUsePriority = false } = Astro.props;
+const {
+  memo,
+  asLink = true,
+  shouldUsePriority = false,
+  comments = [],
+} = Astro.props;
+
+const isComment = !!memo.data.comment;
 const {
   id,
   author,
@@ -29,53 +38,115 @@ const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
 const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
 ---
 
-<article
-    class="thread-post"
-    data-clickable={asLink ? "true" : undefined}
-    data-href={asLink ? `/post/${id}` : undefined}
->
-    <div class="post-avatar">
-        <Avatar src={profileImage} alt={author} size={27} />
-    </div>
-    <div class="post-content">
-        <PostHeader author={author} createdAt={createdAt} />
-        <div class="post-text">
-            <Content />
+<div class:list={["post-container", { "is-comment": isComment }]}>
+    <div class:list={["thread-wrapper", { "has-comments": comments.length > 0 }]}>
+        {comments.length > 0 && (
+            <span aria-hidden="true" class="avatar-line"></span>
+        )}
+        <div class="thread-avatar-column">
+            <div class="post-avatar">
+                <Avatar src={profileImage} alt={author} size={27} />
+            </div>
         </div>
-        {tag && (
-            <div class="post-tags">
-                <a href={`/tag/${tag}`} class="tag-link">#{tag}</a>
-            </div>
-        )}
-        {images.length > 0 && (
-            <div class="post-images">
-                {images.map((image, index) => (
-                    <Picture
-                        src={image}
-                        alt={`Image ${index + 1}`}
-                        formats={['avif']}
-                        widths={[320, 640, 1280]}
-                        sizes="(min-width: 640px) 640px, 100vw"
-                        class="post-image"
-                        {...(shouldUsePriority && { priority: true })}
-                    />
-                ))}
-            </div>
-        )}
-        {!hideLinkCard && firstExternalLink && (
-            <div class="post-link-card">
-                <LinkCard href={firstExternalLink} />
-            </div>
-        )}
+
+        <div class="thread-content-column">
+            <article
+                class="thread-post"
+                data-clickable={asLink ? "true" : undefined}
+                data-href={asLink ? `/post/${id}` : undefined}
+            >
+                <div class="post-content">
+                    <PostHeader author={author} createdAt={createdAt} />
+                    <div class="post-text">
+                        <Content />
+                    </div>
+                    {tag && (
+                        <div class="post-tags">
+                            <a href={`/tag/${tag}`} class="tag-link">#{tag}</a>
+                        </div>
+                    )}
+                    {images.length > 0 && (
+                        <div class="post-images">
+                            {images.map((image, index) => (
+                                <Picture
+                                    src={image}
+                                    alt={`Image ${index + 1}`}
+                                    formats={['avif']}
+                                    widths={[320, 640, 1280]}
+                                    sizes="(min-width: 640px) 640px, 100vw"
+                                    class="post-image"
+                                    {...(shouldUsePriority && { priority: true })}
+                                />
+                            ))}
+                        </div>
+                    )}
+                    {!hideLinkCard && firstExternalLink && (
+                        <div class="post-link-card">
+                            <LinkCard href={firstExternalLink} />
+                        </div>
+                    )}
+                </div>
+            </article>
+        </div>
     </div>
-</article>
+
+    {comments.length > 0 && (
+        <div class="comments-container">
+            {comments.map((commentWithChildren) => (
+                <Astro.self
+                    memo={commentWithChildren.memo}
+                    comments={commentWithChildren.comments}
+                />
+            ))}
+        </div>
+    )}
+</div>
 
 <style>
-    .thread-post {
+    .post-container {
+        border-bottom: 1px solid var(--c-gray);
+    }
+
+    .post-container.is-comment {
+        border-bottom: none;
+    }
+
+    .thread-wrapper {
+        position: relative;
         display: flex;
         gap: 0.65rem;
         padding: 1rem 0;
-        border-bottom: 1px solid var(--c-gray);
+    }
+
+    .thread-wrapper.has-comments {
+        padding-bottom: 2rem;
+    }
+
+    .avatar-line {
+        position: absolute;
+        top: calc(1rem + 27px + 0.7rem);
+        bottom: 1.5rem;
+        left: 13.5px;
+        margin-left: -1px;
+        width: 2px;
+        background-color: var(--c-gray);
+        border-radius: 1px;
+    }
+
+    .comments-container {
+        margin-top: -2rem;
+    }
+
+    .thread-avatar-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .thread-content-column {
+        flex: 1;
+        min-width: 0;
     }
 
     .thread-post[data-clickable="true"] {
@@ -83,8 +154,7 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
     }
 
     .post-content {
-        flex: 1;
-        min-width: 0;
+        width: 100%;
     }
 
     .post-tags {
@@ -92,7 +162,7 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
     }
 
     .tag-link {
-        font-size: var(--fs-xs);
+        font-size: var(--fs-sm);
         color: var(--c-link);
         text-decoration: none;
     }

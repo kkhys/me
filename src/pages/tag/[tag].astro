@@ -10,31 +10,35 @@ export const getStaticPaths = (async () => {
   const tags = await getAllTags();
   return Promise.all(
     tags.map(async (tag) => {
-      const memos = await getMemosByTag(tag);
+      const memosWithComments = await getMemosByTag(tag);
       return {
         params: {
           tag,
         },
         props: {
           tag,
-          memos,
+          memosWithComments,
         },
       };
     }),
   );
 }) satisfies GetStaticPaths;
 
-const { memos, tag } = Astro.props;
+const { memosWithComments, tag } = Astro.props;
 ---
 
 <Layout title={`Tag: ${tag} | ${TITLE}`}>
     <Feed>
         <div class="tag-header">
-            <p>{memos.length} {memos.length === 1 ? "post" : "posts"}</p>
+            <p>{memosWithComments.length} {memosWithComments.length === 1 ? "post" : "posts"}</p>
         </div>
         {
-            memos.map((memo, index) => (
-                <ThreadPost memo={memo} shouldUsePriority={index < 6} />
+            memosWithComments.map(({ main, comments }, index) => (
+                <ThreadPost
+                    memo={main}
+                    comments={comments}
+                    shouldUsePriority={index < 6}
+                />
             ))
         }
     </Feed>
