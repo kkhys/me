@@ -27,7 +27,7 @@
         return;
       }
 
-      const card = target.closest<HTMLElement>('.thread-post[data-clickable="true"]');
+      const card = target.closest<HTMLElement>('.post-container[data-clickable="true"]');
       if (!card) return;
 
       const href = card.dataset.href;

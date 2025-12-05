@@ -38,7 +38,11 @@ const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
 const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
 ---
 
-<div class:list={["post-container", { "is-comment": isComment }]}>
+<article
+    class:list={["post-container", { "is-comment": isComment }]}
+    data-clickable={asLink ? "true" : undefined}
+    data-href={asLink ? `/post/${id}` : undefined}
+>
     <div class:list={["thread-wrapper", { "has-comments": comments.length > 0 }]}>
         {comments.length > 0 && (
             <span aria-hidden="true" class="avatar-line"></span>
@@ -50,11 +54,7 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
         </div>
 
         <div class="thread-content-column">
-            <article
-                class="thread-post"
-                data-clickable={asLink ? "true" : undefined}
-                data-href={asLink ? `/post/${id}` : undefined}
-            >
+            <div class="thread-post">
                 <div class="post-content">
                     <PostHeader author={author} createdAt={createdAt} />
                     <div class="post-text">
@@ -86,7 +86,7 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
                         </div>
                     )}
                 </div>
-            </article>
+            </div>
         </div>
     </div>
 
@@ -100,11 +100,15 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
             ))}
         </div>
     )}
-</div>
+</article>
 
 <style>
     .post-container {
         border-bottom: 1px solid var(--c-gray);
+    }
+
+    .post-container[data-clickable="true"] {
+        cursor: pointer;
     }
 
     .post-container.is-comment {
@@ -147,10 +151,6 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
     .thread-content-column {
         flex: 1;
         min-width: 0;
-    }
-
-    .thread-post[data-clickable="true"] {
-        cursor: pointer;
     }
 
     .post-content {
