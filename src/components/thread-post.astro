@@ -13,6 +13,7 @@ interface Props {
   asLink?: boolean;
   shouldUsePriority?: boolean;
   comments?: MemoWithComments[];
+  hideTag?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   asLink = true,
   shouldUsePriority = false,
   comments = [],
+  hideTag = false,
 } = Astro.props;
 
 const isComment = !!memo.data.comment;
@@ -60,7 +62,7 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
                     <div class="post-text">
                         <Content />
                     </div>
-                    {tag && (
+                    {!hideTag && tag && (
                         <div class="post-tags">
                             <a href={`/tag/${tag}`} class="tag-link">#{tag}</a>
                         </div>
@@ -96,6 +98,7 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
                 <Astro.self
                     memo={commentWithChildren.memo}
                     comments={commentWithChildren.comments}
+                    hideTag={hideTag}
                 />
             ))}
         </div>
