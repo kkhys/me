@@ -47,7 +47,7 @@ const isFirstPage = page.currentPage === 1;
   {page.currentPage < page.lastPage && (
     <>
       <div id="scroll-trigger"></div>
-      <div id="loading-indicator" class="loading-indicator hidden">
+      <div id="loading-indicator" class="loading-indicator hidden" aria-live="polite" aria-busy="false">
         <Spinner />
       </div>
     </>
@@ -71,14 +71,28 @@ const isFirstPage = page.currentPage === 1;
       const totalPages = Number.parseInt(container.dataset.totalPages || "1", 10);
       let isLoading = false;
 
-      const showLoading = () => loadingIndicator.classList.remove("hidden");
-      const hideLoading = () => loadingIndicator.classList.add("hidden");
+      const showLoading = () => {
+        loadingIndicator.classList.remove("hidden");
+        loadingIndicator.setAttribute("aria-busy", "true");
+      };
+
+      const hideLoading = () => {
+        loadingIndicator.classList.add("hidden");
+        loadingIndicator.setAttribute("aria-busy", "false");
+      };
 
       const showEndMessage = () => {
         trigger.remove();
-        loadingIndicator.innerHTML = "You've reached the end 🎉";
+        loadingIndicator.innerHTML = "<span role=\"status\">You've reached the end 🎉</span>";
+        loadingIndicator.setAttribute("aria-busy", "false");
         loadingIndicator.classList.remove("hidden");
-      }
+      };
+
+      const showErrorMessage = () => {
+        loadingIndicator.innerHTML = "<span role=\"alert\">Failed to load more posts 😢</span>";
+        loadingIndicator.setAttribute("aria-busy", "false");
+        loadingIndicator.classList.remove("hidden");
+      };
 
       const loadMoreMemos = async () => {
         const nextPage = currentPage + 1;
@@ -138,11 +152,10 @@ const isFirstPage = page.currentPage === 1;
           if (remainingTime > 0) {
             await new Promise((resolve) => setTimeout(resolve, remainingTime));
           }
+
+          showErrorMessage();
         } finally {
           isLoading = false;
-          if (currentPage < totalPages) {
-            hideLoading();
-          }
         }
       }
 
