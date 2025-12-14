@@ -1,4 +1,23 @@
-<div class="feed-container">
+---
+interface Props {
+  id?: string;
+  "data-current-page"?: number;
+  "data-total-pages"?: number;
+}
+
+const {
+  id,
+  "data-current-page": currentPage,
+  "data-total-pages": totalPages,
+} = Astro.props;
+---
+
+<div
+  class="feed-container"
+  id={id}
+  data-current-page={currentPage}
+  data-total-pages={totalPages}
+>
   <slot />
 </div>
 
