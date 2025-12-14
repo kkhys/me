@@ -21,6 +21,7 @@ const { src, alt, size, link } = Astro.props;
       height={size}
       densities={[1.5, 2]}
       class="avatar"
+      priority
     />
   </a>
 ) : (
@@ -31,6 +32,7 @@ const { src, alt, size, link } = Astro.props;
     height={size}
     densities={[1.5, 2]}
     class="avatar"
+    priority
   />
 )}
 
