@@ -137,7 +137,7 @@ const isFirstPage = page.currentPage === 1;
           console.error("Failed to load more memos:", error);
 
           const elapsed = Date.now() - startTime;
-          const remainingTime = Math.max(0, 1000 - elapsed);
+          const remainingTime = Math.max(0, 500 - elapsed);
           if (remainingTime > 0) {
             await new Promise((resolve) => setTimeout(resolve, remainingTime));
           }
