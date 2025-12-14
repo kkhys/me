@@ -19,6 +19,14 @@ const { page } = Astro.props;
 const isFirstPage = page.currentPage === 1;
 ---
 
+{!isFirstPage && (
+  <script is:inline>
+    if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
+      window.location.replace("/");
+    }
+  </script>
+)}
+
 <Layout title={TITLE} noindex={!isFirstPage}>
   <Feed
     id="memo-container"
@@ -61,17 +69,6 @@ const isFirstPage = page.currentPage === 1;
 
       let currentPage = Number.parseInt(container.dataset.currentPage || "1", 10);
       const totalPages = Number.parseInt(container.dataset.totalPages || "1", 10);
-
-      if (currentPage > 1) {
-        const referrer = document.referrer;
-        const currentOrigin = window.location.origin;
-
-        if (!referrer || !referrer.startsWith(currentOrigin)) {
-          window.location.href = "/";
-          return;
-        }
-      }
-
       let isLoading = false;
 
       const showLoading = () => loadingIndicator.classList.remove("hidden");
