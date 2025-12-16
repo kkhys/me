@@ -1,13 +1,11 @@
 ---
-import { DESCRIPTION, TITLE } from "#/config/constants";
-
 interface Props {
   title: string;
-  description?: string;
+  description: string;
   noindex?: boolean;
 }
 
-const { title = TITLE, description = DESCRIPTION, noindex = false } = Astro.props;
+const { title, description, noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 
 const truncatedDescription =
