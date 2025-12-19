@@ -1,8 +1,12 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Feed from "#/components/feed.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import JsonLd from "#/components/seo/json-ld.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
 import ThreadPost from "#/components/thread-post.astro";
-import { TITLE } from "#/config/constants";
+import { DESCRIPTION, TITLE, USERNAME } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 import { getCommentsByMemoId, getPublishedMemos } from "#/utils/memo";
 
@@ -20,9 +24,51 @@ export const getStaticPaths = (async () => {
 
 const { memo } = Astro.props;
 const comments = await getCommentsByMemoId(memo.data.id);
+
+const memoContent = memo.body?.replace(/\n/g, " ").trim() || "";
+const pageTitle = memoContent ? `${memoContent} | ${TITLE}` : TITLE;
 ---
 
-<Layout title={`Thread | ${TITLE}`}>
+<Layout>
+  <Fragment slot="seo">
+    <BaseSEO title={pageTitle} description={DESCRIPTION} />
+    <OpenGraph
+      title={memoContent}
+      description={DESCRIPTION}
+      image="/api/og/default.png"
+      imageAlt={TITLE}
+      type="article"
+      article={{
+        publishedTime: memo.data.createdAt.toISOString(),
+        modifiedTime: memo.data.createdAt.toISOString(),
+        author: memo.data.author,
+        ...(memo.data.tag && { tag: memo.data.tag })
+      }}
+    />
+    <TwitterCard
+      title={memoContent}
+      description={DESCRIPTION}
+      image="/api/og/default.png"
+      imageAlt={TITLE}
+    />
+  </Fragment>
+
+  <Fragment slot="structured-data">
+    <JsonLd
+      type="BlogPosting"
+      data={{
+        headline: memoContent,
+        description: memoContent,
+        datePublished: memo.data.createdAt.toISOString(),
+        author: {
+          "@type": "Person",
+          name: memo.data.author || USERNAME,
+        },
+        ...(memo.data.tag && { keywords: memo.data.tag }),
+      }}
+    />
+  </Fragment>
+
     <Feed>
         <ThreadPost
             memo={memo}

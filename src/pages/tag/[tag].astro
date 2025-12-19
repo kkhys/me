@@ -1,8 +1,12 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Feed from "#/components/feed.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import JsonLd from "#/components/seo/json-ld.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
 import ThreadPost from "#/components/thread-post.astro";
-import { TITLE } from "#/config/constants";
+import { TITLE, USERNAME } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 import { getAllTags, getMemosByTag } from "#/utils/memo";
 
@@ -25,9 +29,44 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { memosWithComments, tag } = Astro.props;
+const pageTitle = `Tag: ${tag} | ${TITLE}`;
+const description = `「${tag}」タグが付けられた${memosWithComments.length}件のメモを表示しています。`;
 ---
 
-<Layout title={`Tag: ${tag} | ${TITLE}`}>
+<Layout>
+  <Fragment slot="seo">
+    <BaseSEO
+      title={pageTitle}
+      description={description}
+    />
+    <OpenGraph
+      title={pageTitle}
+      description={description}
+      image="/og-image.png"
+      imageAlt="test"
+      type="website"
+    />
+    <TwitterCard
+      title={pageTitle}
+      description={description}
+      image="/og-image.png"
+      imageAlt="test"
+    />
+  </Fragment>
+
+  <Fragment slot="structured-data">
+    <JsonLd
+      type="WebSite"
+      data={{
+        name: pageTitle,
+        description: description,
+        author: {
+          "@type": "Person",
+          name: USERNAME,
+        },
+      }}
+    />
+  </Fragment>
     <Feed>
         <div class="tag-header">
             <p>{memosWithComments.length} {memosWithComments.length === 1 ? "post" : "posts"}</p>

@@ -1,9 +1,13 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Feed from "#/components/feed.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import JsonLd from "#/components/seo/json-ld.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
 import Spinner from "#/components/spinner.astro";
 import ThreadPost from "#/components/thread-post.astro";
-import { PAGE_SIZE, TITLE } from "#/config/constants";
+import { DESCRIPTION, PAGE_SIZE, TITLE, USERNAME } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 import { getMemosWithComments } from "#/utils/memo";
 
@@ -27,7 +31,26 @@ const isFirstPage = page.currentPage === 1;
   </script>
 )}
 
-<Layout title={TITLE} noindex={!isFirstPage}>
+<Layout>
+  <Fragment slot="seo">
+    <BaseSEO title={TITLE} description={DESCRIPTION} noindex={!isFirstPage} />
+    <OpenGraph title={TITLE} description={DESCRIPTION} type="website" image="/api/og/default.png" imageAlt={TITLE} />
+    <TwitterCard title={TITLE} description={DESCRIPTION} image="/api/og/default.png" imageAlt={TITLE} />
+  </Fragment>
+
+  <Fragment slot="structured-data">
+    <JsonLd
+      type="WebSite"
+      data={{
+        name: TITLE,
+        description: DESCRIPTION,
+        author: {
+          "@type": "Person",
+          name: USERNAME,
+        },
+      }}
+    />
+  </Fragment>
   <Feed
     id="memo-container"
     data-current-page={page.currentPage}
