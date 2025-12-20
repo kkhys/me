@@ -1,3 +1,6 @@
+/** @jsxImportSource react */
+/** @jsxRuntime automatic */
+
 import type { ReactElement } from "react";
 import satori from "satori";
 import sharp from "sharp";
