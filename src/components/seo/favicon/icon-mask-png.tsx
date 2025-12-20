@@ -1,36 +1,9 @@
-/** @jsxImportSource react */
-/** @jsxRuntime automatic */
-
-import satori from "satori";
-import sharp from "sharp";
+import { generateIcon } from "./utils";
 
 export const IconMaskPng = async () => {
-  const svg = await satori(
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <div
-        style={{
-          width: 409,
-          height: 409,
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle at 35% 35%, #ffffff 0%, #d0d0d0 40%, #808080 100%)",
-        }}
-      />
-    </div>,
-    {
-      width: 512,
-      height: 512,
-      fonts: [],
-    },
-  );
-
-  return sharp(Buffer.from(svg)).png().toBuffer();
+  return (await generateIcon(
+    { width: 512, height: 512 },
+    { width: 409, height: 409 },
+    "png",
+  )) as Buffer;
 };
