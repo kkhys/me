@@ -1,10 +1,10 @@
 /** @jsxImportSource react */
 /** @jsxRuntime automatic */
 
-import { TITLE } from "#/config/constants";
 import { readFile } from "node:fs/promises";
 import satori from "satori";
 import sharp from "sharp";
+import { TITLE } from "#/config/constants";
 
 export const OpengraphImage = async () => {
   const interSemiBold = await readFile("./src/assets/Inter_28pt-SemiBold.ttf");
