@@ -162,7 +162,7 @@ describe("remarkTruncateLinkText", () => {
 [https://second.com/another/path](https://second.com/another/path)
       `.trim();
       const result = await processContent(content);
-      expect(result).toContain("[first.com/path…](https://first.com/path)");
+      expect(result).toContain("[first.com/path](https://first.com/path)");
       expect(result).toContain(
         "[second.com/another…](https://second.com/another/path)",
       );
@@ -176,7 +176,7 @@ describe("remarkTruncateLinkText", () => {
       const result = await processContent(content);
       expect(result).toContain("[/internal](/internal)");
       expect(result).toContain(
-        "[external.com/path…](https://external.com/path)",
+        "[external.com/path](https://external.com/path)",
       );
     });
 
@@ -184,13 +184,13 @@ describe("remarkTruncateLinkText", () => {
       const content = "[HTTPS://EXAMPLE.COM/PATH](HTTPS://EXAMPLE.COM/PATH)";
       const result = await processContent(content);
       // URL() normalizes hostname to lowercase
-      expect(result).toBe("[example.com/PATH…](HTTPS://EXAMPLE.COM/PATH)");
+      expect(result).toBe("[example.com/PATH](HTTPS://EXAMPLE.COM/PATH)");
     });
 
     test("should handle mixed case protocol", async () => {
       const content = "[HtTpS://example.com/path](HtTpS://example.com/path)";
       const result = await processContent(content);
-      expect(result).toBe("[example.com/path…](HtTpS://example.com/path)");
+      expect(result).toBe("[example.com/path](HtTpS://example.com/path)");
     });
   });
 
@@ -225,8 +225,8 @@ First paragraph with [https://first.com/path](https://first.com/path).
 Second paragraph with [https://second.com/path](https://second.com/path).
       `.trim();
       const result = await processContent(content);
-      expect(result).toContain("[first.com/path…](https://first.com/path)");
-      expect(result).toContain("[second.com/path…](https://second.com/path)");
+      expect(result).toContain("[first.com/path](https://first.com/path)");
+      expect(result).toContain("[second.com/path](https://second.com/path)");
     });
   });
 
