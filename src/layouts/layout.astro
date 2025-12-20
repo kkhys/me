@@ -1,25 +1,16 @@
 ---
 import Footer from "#/components/footer.astro";
 import Header from "#/components/header.astro";
+import HeadMeta from "#/components/seo/head-meta.astro";
 import "#/styles/global.css";
-
-interface Props {
-  title: string;
-  noindex?: boolean;
-}
-
-const { title, noindex = false } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <html lang="ja">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{title}</title>
-        <link rel="canonical" href={canonicalURL} />
-        <meta name="generator" content={Astro.generator} />
-        {noindex && <meta name="robots" content="noindex, nofollow" />}
+        <HeadMeta />
+        <slot name="head" />
+        <slot name="seo" />
+        <slot name="structured-data" />
     </head>
     <body>
         <Header />
