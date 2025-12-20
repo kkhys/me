@@ -11,7 +11,8 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "all": "pnpm build && pnpm check && pnpm lint:fix && pnpm test && pnpm coverage",
-    "vercel-install": "scripts/vercel-submodule-workaround.sh && pnpm install"
+    "vercel-install": "scripts/vercel-submodule-workaround.sh && pnpm install",
+    "release": "bun run scripts/release.ts"
   },
   "dependencies": {
     "@astrojs/partytown": "2.1.4",
