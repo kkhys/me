@@ -1,14 +1,16 @@
 ---
 import Footer from "#/components/footer.astro";
 import Header from "#/components/header.astro";
+import HeadMeta from "#/components/seo/head-meta.astro";
 import "#/styles/global.css";
 ---
 
 <html lang="ja">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="generator" content={Astro.generator} />
+        <HeadMeta />
+        <slot name="head" />
+        <slot name="seo" />
+        <slot name="structured-data" />
     </head>
     <body>
         <Header />
