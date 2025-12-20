@@ -1,3 +1,4 @@
+import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
@@ -7,7 +8,7 @@ import remarkWordLimit from "./src/lib/remark-word-limit";
 
 export default defineConfig({
   site: "https://memo.kkhys.me",
-  integrations: [sitemap()],
+  integrations: [sitemap(), partytown()],
   markdown: {
     syntaxHighlight: false,
     smartypants: false,
