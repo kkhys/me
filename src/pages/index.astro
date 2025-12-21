@@ -1,6 +1,8 @@
 ---
-import { getCollection } from "astro:content";
 import { Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+import CheckIcon from "#/components/icon/check-icon.astro";
+import CopyIcon from "#/components/icon/copy-icon.astro";
 import BaseSeo from "#/components/seo/base-seo.astro";
 import JsonLd from "#/components/seo/json-ld.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
@@ -61,17 +63,26 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
       {
         lgtmEntries.map((entry) => (
           <article class="lgtm-item">
-            <a href={`/${entry.id}.png`} class="lgtm-link">
+            <a href={`/${entry.id}`} class="lgtm-link">
               <Picture
-                src={`/${entry.id}.png`}
+                src={`/${entry.id}-1000.png`}
                 formats={["avif", "webp"]}
                 alt="LGTM Image"
-                width={600}
-                height={400}
+                width={515}
+                height={343}
                 densities={[1, 2]}
                 class="lgtm-image"
               />
             </a>
+            <button
+              class="copy-button"
+              data-id={entry.id}
+              title="Copy Markdown"
+              aria-label="Copy Markdown"
+            >
+              <CopyIcon class="copy-icon" />
+              <CheckIcon class="check-icon" />
+            </button>
           </article>
         ))
       }
@@ -105,7 +116,61 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     aspect-ratio: 3 / 2;
     overflow: hidden;
     border-radius: 0.5rem;
-    background-color: oklch(95% 0 0);
+    background-color: var(--c-bg-image);
+  }
+
+  .copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    background-color: var(--c-bg);
+    color: var(--c-text-emphasis);
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 1;
+  }
+
+  .lgtm-item:hover .copy-button {
+    opacity: 1;
+  }
+
+  .copy-button:hover {
+    background-color: var(--c-bg-hover);
+    color: var(--c-text);
+  }
+
+  .copy-button:active {
+    transform: scale(0.9);
+  }
+
+  .copy-button svg {
+    transition: opacity 0.1s ease;
+  }
+
+  .copy-button.copied {
+    border: 1px solid var(--c-text-emphasis);
+  }
+
+  .copy-button.copied .copy-icon {
+    opacity: 0;
+  }
+
+  .copy-button .check-icon {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+
+  .copy-button.copied .check-icon {
+    opacity: 1;
   }
 
   .lgtm-link {
@@ -126,6 +191,10 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1rem;
     }
+
+    .copy-button {
+      opacity: 1;
+    }
   }
 
   @media (max-width: 480px) {
@@ -137,8 +206,40 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
       padding: 1.5rem 1rem;
     }
 
+    .copy-button {
+      opacity: 1;
+    }
+
     .page-description {
       margin-bottom: 2rem;
     }
   }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const copyButtons = document.querySelectorAll(".copy-button");
+
+    copyButtons.forEach((button) => {
+      button.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const id = (button as HTMLElement).dataset.id;
+        if (!id) return;
+
+        const markdown = `[![LGTM!!](https://lgtm.kkhys.me/${id}.avif)](https://lgtm.kkhys.me/${id})`;
+
+        try {
+          await navigator.clipboard.writeText(markdown);
+          button.classList.add("copied");
+          setTimeout(() => {
+            button.classList.remove("copied");
+          }, 1000);
+        } catch (err) {
+          console.error("Failed to copy:", err);
+        }
+      });
+    });
+  });
+</script>
