@@ -137,6 +137,11 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     overflow: hidden;
     border-radius: 0.5rem;
     background-color: var(--c-bg-image);
+    transition: transform 0.1s ease;
+  }
+
+  .lgtm-item:has(.lgtm-link:active) {
+    transform: scale(0.98);
   }
 
   .copy-button {
@@ -197,11 +202,8 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     display: block;
     width: 100%;
     height: 100%;
-    transition: transform 0.1s ease;
-  }
-
-  .lgtm-link:active {
-    transform: scale(0.98);
+    position: relative;
+    z-index: 0;
   }
 
   .blur-load {
