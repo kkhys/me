@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
-import { LgtmImage } from "#/components/lgtm/lgtm-image";
+import { LgtmImage } from "#/components/lgtm-image";
 
 type ImageFormat = "png" | "avif" | "webp";
 
