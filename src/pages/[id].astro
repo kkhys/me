@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { getImage, Picture } from "astro:assets";
 import { type CollectionEntry, getCollection } from "astro:content";
 import ArrowLeftIcon from "#/components/icon/arrow-left-icon.astro";
 import CheckIcon from "#/components/icon/check-icon.astro";
@@ -27,6 +27,13 @@ const { id } = Astro.params;
 if (!id) {
   return Astro.redirect("/404");
 }
+
+const blurryImage = await getImage({
+  src: `/${id}-400.png`,
+  width: 20,
+  height: 13,
+  format: "webp",
+});
 
 const title = `LGTM Image - ${TITLE}`;
 const description = "Perfect LGTM image for your GitHub Pull Request reviews.";
@@ -64,16 +71,21 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
   <div class="container">
     <div class="detail-wrapper">
       <div class="image-container">
-        <Picture
-          src={`/${id}-1200.png`}
-          formats={["avif", "webp"]}
-          alt="LGTM Image"
-          width={1200}
-          height={800}
-          densities={[1, 2]}
-          loading="eager"
-          class="detail-image"
-        />
+        <div
+          class="blur-load"
+          style={`background-image: url(${blurryImage.src}); background-size: cover; background-position: center;`}
+        >
+          <Picture
+            src={`/${id}-1200.png`}
+            formats={["avif", "webp"]}
+            alt="LGTM Image"
+            width={1200}
+            height={800}
+            densities={[1, 2]}
+            loading="eager"
+            class="detail-image"
+          />
+        </div>
       </div>
 
       <div class="info-bar">
@@ -133,6 +145,26 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
 
   .image-container:active {
     transform: scale(0.99);
+  }
+
+  .blur-load {
+    width: 100%;
+    filter: blur(20px);
+    transition: filter 300ms ease-in-out;
+  }
+
+  .blur-load.image-loaded {
+    background-image: none !important;
+    filter: blur(0);
+  }
+
+  .blur-load.image-loaded > picture > img {
+    opacity: 1;
+  }
+
+  .blur-load > picture > img {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
   }
 
   .detail-image {
@@ -303,6 +335,18 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    const blurDivs = document.querySelectorAll(".blur-load");
+    blurDivs.forEach((div) => {
+      const image = div.querySelector("img");
+      const handleLoadedImage = () => div.classList.add("image-loaded");
+
+      if (image?.complete) {
+        return handleLoadedImage();
+      }
+
+      image?.addEventListener("load", handleLoadedImage);
+    });
+
     const copyButtons = document.querySelectorAll(".copy-format-button");
 
     copyButtons.forEach((button) => {

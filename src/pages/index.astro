@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { getImage, Picture } from "astro:assets";
 import { getCollection } from "astro:content";
 import CheckIcon from "#/components/icon/check-icon.astro";
 import CopyIcon from "#/components/icon/copy-icon.astro";
@@ -23,6 +23,18 @@ function shuffleArray<T>(array: T[]): T[] {
 
 const lgtmEntries = shuffleArray(
   (await getCollection("lgtm")).filter((entry) => !entry.data.isDraft),
+);
+
+const blurryImages = await Promise.all(
+  lgtmEntries.map(async (entry) => {
+    const blurryImage = await getImage({
+      src: `/${entry.id}-400.png`,
+      width: 20,
+      height: 13,
+      format: "webp",
+    });
+    return { id: entry.id, src: blurryImage.src };
+  }),
 );
 
 const title = `${TITLE} by Keisuke Hayashi`;
@@ -61,30 +73,38 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
   <div class="container">
     <div class="lgtm-grid">
       {
-        lgtmEntries.map((entry) => (
-          <article class="lgtm-item">
-            <a href={`/${entry.id}`} class="lgtm-link">
-              <Picture
-                src={`/${entry.id}-1000.png`}
-                formats={["avif", "webp"]}
-                alt="LGTM Image"
-                width={515}
-                height={343}
-                densities={[1, 2]}
-                class="lgtm-image"
-              />
-            </a>
-            <button
-              class="copy-button"
-              data-id={entry.id}
-              title="Copy Markdown"
-              aria-label="Copy Markdown"
-            >
-              <CopyIcon class="copy-icon" />
-              <CheckIcon class="check-icon" />
-            </button>
-          </article>
-        ))
+        lgtmEntries.map((entry, index) => {
+          const blurImage = blurryImages[index];
+          return (
+            <article class="lgtm-item">
+              <a href={`/${entry.id}`} class="lgtm-link">
+                <div
+                  class="blur-load"
+                  style={`background-image: url(${blurImage?.src}); background-size: cover; background-position: center;`}
+                >
+                  <Picture
+                    src={`/${entry.id}-1000.png`}
+                    formats={["avif", "webp"]}
+                    alt="LGTM Image"
+                    width={515}
+                    height={343}
+                    densities={[1, 2]}
+                    class="lgtm-image"
+                  />
+                </div>
+              </a>
+              <button
+                class="copy-button"
+                data-id={entry.id}
+                title="Copy Markdown"
+                aria-label="Copy Markdown"
+              >
+                <CopyIcon class="copy-icon" />
+                <CheckIcon class="check-icon" />
+              </button>
+            </article>
+          );
+        })
       }
     </div>
   </div>
@@ -184,6 +204,27 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     transform: scale(0.98);
   }
 
+  .blur-load {
+    width: 100%;
+    height: 100%;
+    filter: blur(20px);
+    transition: filter 300ms ease-in-out;
+  }
+
+  .blur-load.image-loaded {
+    background-image: none !important;
+    filter: blur(0);
+  }
+
+  .blur-load.image-loaded > picture > img {
+    opacity: 1;
+  }
+
+  .blur-load > picture > img {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+  }
+
   .lgtm-image {
     width: 100%;
     height: 100%;
@@ -223,6 +264,18 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    const blurDivs = document.querySelectorAll(".blur-load");
+    blurDivs.forEach((div) => {
+      const image = div.querySelector("img");
+      const handleLoadedImage = () => div.classList.add("image-loaded");
+
+      if (image?.complete) {
+        return handleLoadedImage();
+      }
+
+      image?.addEventListener("load", handleLoadedImage);
+    });
+
     const copyButtons = document.querySelectorAll(".copy-button");
 
     copyButtons.forEach((button) => {
