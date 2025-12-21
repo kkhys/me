@@ -1,0 +1,144 @@
+---
+import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
+import BaseSeo from "#/components/seo/base-seo.astro";
+import JsonLd from "#/components/seo/json-ld.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
+import { TITLE } from "#/config/constants";
+import Layout from "#/layouts/layout.astro";
+
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = shuffled[i] as T;
+    shuffled[i] = shuffled[j] as T;
+    shuffled[j] = temp;
+  }
+  return shuffled;
+}
+
+const lgtmEntries = shuffleArray(
+  (await getCollection("lgtm")).filter((entry) => !entry.data.isDraft),
+);
+
+const title = `${TITLE} by Keisuke Hayashi`;
+const description =
+  "A curated collection of LGTM images for GitHub Pull Requests. Perfect for code reviews and approvals.";
+const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
+---
+
+<Layout>
+  <BaseSeo slot="seo" title={title} description={description} />
+  <OpenGraph
+    slot="seo"
+    title={title}
+    description={description}
+    image={ogImageUrl}
+    imageAlt="LGTM Image Collection"
+    type="website"
+  />
+  <TwitterCard
+    slot="seo"
+    title={title}
+    description={description}
+    image={ogImageUrl}
+    imageAlt="LGTM Image Collection"
+  />
+  <JsonLd
+    slot="structured-data"
+    type="WebSite"
+    data={{
+      name: TITLE,
+      description: description,
+      url: Astro.site?.href,
+      inLanguage: "en-US",
+    }}
+  />
+  <div class="container">
+    <div class="lgtm-grid">
+      {
+        lgtmEntries.map((entry) => (
+          <article class="lgtm-item">
+            <a href={`/${entry.id}.png`} class="lgtm-link">
+              <Picture
+                src={`/${entry.id}.png`}
+                formats={["avif", "webp"]}
+                alt="LGTM Image"
+                width={600}
+                height={400}
+                densities={[1, 2]}
+                class="lgtm-image"
+              />
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .lgtm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 100%;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .lgtm-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .lgtm-item {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: oklch(95% 0 0);
+  }
+
+  .lgtm-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .lgtm-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .lgtm-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .lgtm-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .container {
+      padding: 1.5rem 1rem;
+    }
+
+    .page-description {
+      margin-bottom: 2rem;
+    }
+  }
+</style>
