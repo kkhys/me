@@ -19,6 +19,12 @@ export default defineConfig({
         access: "public",
         values: ["development", "production"],
       }),
+      GITHUB_ACTIONS: envField.boolean({
+        context: "client",
+        access: "public",
+        optional: true,
+        default: false,
+      }),
     },
   },
 });
