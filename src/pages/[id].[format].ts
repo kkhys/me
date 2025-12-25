@@ -30,7 +30,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response("Not found", { status: 404 });
   }
 
-  const image = await LgtmImage(entry, 400, imageFormat);
+  const image = await LgtmImage(entry, 800, imageFormat);
 
   const contentTypes = {
     png: "image/png",
