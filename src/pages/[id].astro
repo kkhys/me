@@ -373,7 +373,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
         const format = (button as HTMLElement).dataset.format;
         if (!id || !format) return;
 
-        const html = `<a href="https://lgtm.kkhys.me/${id}" target="_blank" rel="noopener noreferrer"><img src="https://lgtm.kkhys.me/${id}.${format}" alt="LGTM!!" style="max-width: 400px; width: 100%;" /></a>`;
+        const html = `<a href="https://lgtm.kkhys.me/${id}" target="_blank" rel="noopener noreferrer"><img src="https://lgtm.kkhys.me/${id}.${format}" alt="LGTM!!" width="400" /></a>`;
 
         try {
           await navigator.clipboard.writeText(html);
