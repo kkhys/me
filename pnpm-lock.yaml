@@ -34,7 +34,7 @@ importers:
         version: 9.0.2(astro@5.16.6(@types/node@24.0.0)(@upstash/redis@1.36.0)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.42.0)(terser@5.42.0)(typescript@5.9.3)(yaml@2.8.0))(react@19.2.3)(rollup@4.42.0)
       '@hono/zod-validator':
         specifier: 0.7.6
-        version: 0.7.6(hono@4.11.2)(zod@3.25.76)
+        version: 0.7.6(hono@4.11.3)(zod@3.25.76)
       '@justinribeiro/lite-youtube':
         specifier: 1.9.0
         version: 1.9.0
@@ -72,8 +72,8 @@ importers:
         specifier: 7.4.0
         version: 7.4.0(graphql@16.11.0)
       hono:
-        specifier: 4.11.2
-        version: 4.11.2
+        specifier: 4.11.3
+        version: 4.11.3
       lucide-react:
         specifier: 0.562.0
         version: 0.562.0(react@19.2.3)
@@ -2859,8 +2859,8 @@ packages:
     resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
     engines: {node: '>=6'}
 
-  hono@4.11.2:
-    resolution: {integrity: sha512-o+avdUAD1v94oHkjGBhiMhBV4WBHxhbu0+CUVH78hhphKy/OKQLxtKjkmmNcrMlbYAhAbsM/9F+l3KnYxyD3Lg==}
+  hono@4.11.3:
+    resolution: {integrity: sha512-PmQi306+M/ct/m5s66Hrg+adPnkD5jiO6IjA7WhWw0gSBSo1EcRegwuI1deZ+wd5pzCGynCcn2DprnE4/yEV4w==}
     engines: {node: '>=16.9.0'}
 
   html-escaper@3.0.3:
@@ -5260,9 +5260,9 @@ snapshots:
     dependencies:
       graphql: 16.11.0
 
-  '@hono/zod-validator@0.7.6(hono@4.11.2)(zod@3.25.76)':
+  '@hono/zod-validator@0.7.6(hono@4.11.3)(zod@3.25.76)':
     dependencies:
-      hono: 4.11.2
+      hono: 4.11.3
       zod: 3.25.76
 
   '@iconify/types@2.0.0': {}
@@ -7753,7 +7753,7 @@ snapshots:
 
   hex-rgb@4.3.0: {}
 
-  hono@4.11.2: {}
+  hono@4.11.3: {}
 
   html-escaper@3.0.3: {}
 
