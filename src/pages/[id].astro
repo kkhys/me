@@ -138,7 +138,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     width: 100%;
     border-radius: 0.5rem;
     overflow: hidden;
-    background-color: var(--c-bg-image);
+    background-color: var(--c-bg-light-gray);
   }
 
   .blur-load {
@@ -214,14 +214,14 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     border: 1px solid var(--c-border);
     border-radius: 0.25rem;
     background-color: transparent;
-    color: var(--c-text-secondary);
+    color: var(--c-sub-text);
     cursor: pointer;
     transition: all 0.1s ease;
   }
 
   .copy-format-button:hover {
-    border-color: var(--c-text-secondary);
-    background-color: var(--c-bg-hover);
+    border-color: var(--c-sub-text);
+    background-color: var(--c-bg-gray);
     color: var(--c-text);
   }
 
@@ -269,7 +269,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
   }
 
   .icon-button:hover {
-    background-color: var(--c-bg-hover);
+    background-color: var(--c-bg-gray);
     color: var(--c-text);
   }
 
