@@ -1,0 +1,516 @@
+---
+import { getImage, Picture } from "astro:assets";
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import CheckIcon from "#/components/icon/check-icon.astro";
+import CopyIcon from "#/components/icon/copy-icon.astro";
+import BaseSeo from "#/components/seo/base-seo.astro";
+import JsonLd from "#/components/seo/json-ld.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
+import Spinner from "#/components/spinner.astro";
+import { IMAGES_PER_PAGE, TITLE } from "#/config/constants";
+import Layout from "#/layouts/layout.astro";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = shuffled[i] as T;
+      shuffled[i] = shuffled[j] as T;
+      shuffled[j] = temp;
+    }
+    return shuffled;
+  }
+
+  const lgtmEntries = shuffleArray(
+    (await getCollection("lgtm")).filter((entry) => !entry.data.isDraft),
+  );
+
+  return paginate(lgtmEntries, {
+    pageSize: IMAGES_PER_PAGE,
+  });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const isFirstPage = page.currentPage === 1;
+
+const blurryImages = await Promise.all(
+  page.data.map(async (entry) => {
+    const blurryImage = await getImage({
+      src: `/${entry.id}-400.png`,
+      width: 20,
+      height: 13,
+      format: "webp",
+    });
+    return { id: entry.id, src: blurryImage.src };
+  }),
+);
+
+const title = `${TITLE} by Keisuke Hayashi`;
+const description =
+  "A curated collection of LGTM images for GitHub Pull Requests. Perfect for code reviews and approvals.";
+const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
+---
+
+{!isFirstPage && (
+  <script is:inline>
+    if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
+      window.location.replace("/");
+    }
+  </script>
+)}
+
+<Layout>
+  <BaseSeo slot="seo" title={title} description={description} noindex={!isFirstPage} />
+  <OpenGraph
+    slot="seo"
+    title={title}
+    description={description}
+    image={ogImageUrl}
+    imageAlt="LGTM Image Collection"
+    type="website"
+  />
+  <TwitterCard
+    slot="seo"
+    title={title}
+    description={description}
+    image={ogImageUrl}
+    imageAlt="LGTM Image Collection"
+  />
+  <JsonLd
+    slot="structured-data"
+    type="WebSite"
+    data={{
+      name: TITLE,
+      description: description,
+      url: Astro.site?.href,
+      inLanguage: "en-US",
+    }}
+  />
+  <div class="container">
+    <div
+      class="lgtm-grid"
+      id="lgtm-container"
+      data-current-page={page.currentPage}
+      data-total-pages={page.lastPage}
+    >
+      {
+        page.data.map((entry, index) => {
+          const blurImage = blurryImages[index];
+          return (
+            <article class="lgtm-item">
+              <a href={`/${entry.id}`} class="lgtm-link">
+                <div
+                  class="blur-load"
+                  style={`background-image: url(${blurImage?.src}); background-size: cover; background-position: center;`}
+                >
+                  <Picture
+                    src={`/${entry.id}-1000.png`}
+                    formats={["avif", "webp"]}
+                    alt="LGTM Image"
+                    width={515}
+                    height={343}
+                    densities={[1, 2]}
+                    class="lgtm-image"
+                  />
+                </div>
+              </a>
+              <button
+                class="copy-button"
+                data-id={entry.id}
+                title="Copy embed code"
+                aria-label="Copy embed code"
+              >
+                <CopyIcon class="copy-icon" />
+                <CheckIcon class="check-icon" />
+              </button>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+
+  {page.currentPage < page.lastPage && (
+    <>
+      <div id="scroll-trigger"></div>
+      <div id="loading-indicator" class="loading-indicator hidden" aria-live="polite" aria-busy="false">
+        <Spinner />
+      </div>
+    </>
+  )}
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .lgtm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    max-width: 100%;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .lgtm-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .lgtm-item {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: var(--c-bg-light-gray);
+    transition: transform 0.1s ease;
+  }
+
+  .lgtm-item:has(.lgtm-link:active) {
+    transform: scale(0.98);
+  }
+
+  .copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.25rem;
+    background-color: var(--c-bg);
+    color: var(--c-text-emphasis);
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 1;
+  }
+
+  .lgtm-item:hover .copy-button {
+    opacity: 1;
+  }
+
+  .copy-button:hover {
+    background-color: var(--c-bg-gray);
+    color: var(--c-text);
+  }
+
+  .copy-button:active {
+    transform: scale(0.9);
+  }
+
+  .copy-button svg {
+    transition: opacity 0.1s ease;
+  }
+
+  .copy-button.copied {
+    border: 1px solid var(--c-text-emphasis);
+  }
+
+  .copy-button.copied .copy-icon {
+    opacity: 0;
+  }
+
+  .copy-button .check-icon {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+
+  .copy-button.copied .check-icon {
+    opacity: 1;
+  }
+
+  .lgtm-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 0;
+  }
+
+  .blur-load {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blur-load::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: inherit;
+    filter: blur(20px);
+    transform: scale(1.1);
+    transition: opacity 400ms ease-out;
+    z-index: 1;
+  }
+
+  .blur-load.image-loaded::before {
+    opacity: 0;
+  }
+
+  .blur-load > picture {
+    position: relative;
+    z-index: 2;
+  }
+
+  .blur-load > picture > img {
+    opacity: 0;
+    transition: opacity 400ms ease-in;
+  }
+
+  .blur-load.image-loaded > picture > img {
+    opacity: 1;
+  }
+
+  .lgtm-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .loading-indicator {
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    font-size: var(--fs-xs);
+  }
+
+  .loading-indicator.hidden {
+    display: none;
+  }
+
+  #scroll-trigger {
+    height: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .lgtm-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .copy-button {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .lgtm-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .container {
+      padding: 1.5rem 1rem;
+    }
+
+    .copy-button {
+      opacity: 1;
+    }
+
+    .page-description {
+      margin-bottom: 2rem;
+    }
+  }
+</style>
+
+<script>
+  const initImageLoading = (container?: HTMLElement) => {
+    const root = container || document;
+    const blurDivs = root.querySelectorAll(".blur-load:not([data-initialized])");
+
+    blurDivs.forEach((div) => {
+      const image = div.querySelector("img");
+      const handleLoadedImage = () => {
+        requestAnimationFrame(() => {
+          div.classList.add("image-loaded");
+        });
+      };
+
+      if (image?.complete && image.naturalHeight !== 0) {
+        handleLoadedImage();
+      } else {
+        image?.addEventListener("load", handleLoadedImage);
+      }
+
+      div.setAttribute("data-initialized", "true");
+    });
+  };
+
+  const initCopyButtons = () => {
+    const container = document.getElementById("lgtm-container");
+    if (!container) return;
+
+    container.addEventListener("click", async (e) => {
+      const target = e.target as HTMLElement;
+      const button = target.closest(".copy-button");
+
+      if (!button) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const id = (button as HTMLElement).dataset.id;
+      if (!id) return;
+
+      const html = `<a href="https://lgtm.kkhys.me/${id}"><img src="https://lgtm.kkhys.me/${id}.avif" alt="LGTM!!" width="400" /></a>`;
+
+      try {
+        await navigator.clipboard.writeText(html);
+        button.classList.add("copied");
+        setTimeout(() => {
+          button.classList.remove("copied");
+        }, 1000);
+      } catch (err) {
+        console.error("Failed to copy:", err);
+      }
+    });
+  };
+
+  const initInfiniteScroll = () => {
+    const containerEl = document.getElementById("lgtm-container");
+    const triggerEl = document.getElementById("scroll-trigger");
+    const loadingIndicatorEl = document.getElementById("loading-indicator");
+
+    if (!containerEl || !triggerEl || !loadingIndicatorEl) {
+      return;
+    }
+
+    const container: HTMLElement = containerEl;
+    const trigger: HTMLElement = triggerEl;
+    const loadingIndicator: HTMLElement = loadingIndicatorEl;
+
+    let currentPage = Number.parseInt(container.dataset.currentPage || "1", 10);
+    const totalPages = Number.parseInt(container.dataset.totalPages || "1", 10);
+    let isLoading = false;
+
+    const parser = new DOMParser();
+
+    const showLoading = () => {
+      loadingIndicator.classList.remove("hidden");
+      loadingIndicator.setAttribute("aria-busy", "true");
+    };
+
+    const hideLoading = () => {
+      loadingIndicator.classList.add("hidden");
+      loadingIndicator.setAttribute("aria-busy", "false");
+    };
+
+    const showEndMessage = () => {
+      trigger.remove();
+      loadingIndicator.innerHTML = "<span role=\"status\">You've reached the end 🎉</span>";
+      loadingIndicator.setAttribute("aria-busy", "false");
+      loadingIndicator.classList.remove("hidden");
+    };
+
+    const showErrorMessage = () => {
+      loadingIndicator.innerHTML = "<span role=\"alert\">Failed to load more images 😢</span>";
+      loadingIndicator.setAttribute("aria-busy", "false");
+      loadingIndicator.classList.remove("hidden");
+    };
+
+    const loadMoreImages = async () => {
+      const nextPage = currentPage + 1;
+
+      if (nextPage > totalPages) {
+        observer.unobserve(trigger);
+        showEndMessage();
+        return;
+      }
+
+      isLoading = true;
+      showLoading();
+
+      const startTime = Date.now();
+      let reachedEnd = false;
+
+      try {
+        const url = nextPage === 1 ? "/" : `/${nextPage}`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch page ${nextPage}`);
+        }
+
+        const html = await response.text();
+        const doc = parser.parseFromString(html, "text/html");
+
+        const nextContainer = doc.getElementById("lgtm-container");
+        if (!nextContainer) {
+          throw new Error("lgtm-container not found in fetched page");
+        }
+
+        const elapsed = Date.now() - startTime;
+        const remainingTime = Math.max(0, 500 - elapsed);
+        if (remainingTime > 0) {
+          await new Promise((resolve) => setTimeout(resolve, remainingTime));
+        }
+
+        const lgtmItems = nextContainer.children;
+        for (const item of Array.from(lgtmItems)) {
+          container.appendChild(item);
+        }
+
+        currentPage = nextPage;
+
+        initImageLoading();
+
+        if (currentPage >= totalPages) {
+          observer.unobserve(trigger);
+          reachedEnd = true;
+        }
+      } catch (error) {
+        console.error("Failed to load more images:", error);
+        showErrorMessage();
+        return;
+      } finally {
+        if (reachedEnd) {
+          showEndMessage();
+        } else {
+          hideLoading();
+        }
+        isLoading = false;
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const firstEntry = entries[0];
+        if (
+          firstEntry &&
+          firstEntry.isIntersecting &&
+          !isLoading &&
+          currentPage < totalPages
+        ) {
+          loadMoreImages();
+        }
+      },
+      { rootMargin: "200px" },
+    );
+
+    observer.observe(trigger);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initImageLoading();
+    initCopyButtons();
+    initInfiniteScroll();
+  });
+</script>
