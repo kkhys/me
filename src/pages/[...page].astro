@@ -13,7 +13,7 @@ import { IMAGES_PER_PAGE, TITLE } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const shuffleArray = <T,>(array: T[]): T[] => {
+  function shuffleArray<T>(array: T[]): T[] {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -39,10 +39,9 @@ const isFirstPage = page.currentPage === 1;
 const blurryImages = await Promise.all(
   page.data.map(async (entry) => {
     const blurryImage = await getImage({
-      src: `/${entry.id}-400.png`,
+      src: `/${entry.id}-400.webp`,
       width: 20,
       height: 13,
-      format: "webp",
     });
     return { id: entry.id, src: blurryImage.src };
   }),
@@ -243,36 +242,18 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     height: 100%;
     position: relative;
     overflow: hidden;
+    filter: blur(36px);
+    transition: filter 300ms ease-in-out;
   }
 
-  .blur-load::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-image: inherit;
-    filter: blur(20px);
-    transform: scale(1.1);
-    transition: opacity 400ms ease-out;
-    z-index: 1;
-  }
-
-  .blur-load.image-loaded::before {
-    opacity: 0;
-  }
-
-  .blur-load > picture {
-    position: relative;
-    z-index: 2;
+  .blur-load.image-loaded {
+    background-image: none;
+    filter: blur(0);
   }
 
   .blur-load > picture > img {
     opacity: 0;
-    transition: opacity 400ms ease-in;
+    transition: opacity 300ms ease-in-out;
   }
 
   .blur-load.image-loaded > picture > img {
@@ -334,23 +315,17 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
 <script>
   const initImageLoading = (container?: HTMLElement) => {
     const root = container || document;
-    const blurDivs = root.querySelectorAll(".blur-load:not([data-initialized])");
+    const blurDivs = root.querySelectorAll(".blur-load");
 
     blurDivs.forEach((div) => {
       const image = div.querySelector("img");
-      const handleLoadedImage = () => {
-        requestAnimationFrame(() => {
-          div.classList.add("image-loaded");
-        });
-      };
+      const handleLoadedImage = () => div.classList.add("image-loaded");
 
-      if (image?.complete && image.naturalHeight !== 0) {
+      if (image?.complete) {
         handleLoadedImage();
       } else {
         image?.addEventListener("load", handleLoadedImage);
       }
-
-      div.setAttribute("data-initialized", "true");
     });
   };
 
