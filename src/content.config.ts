@@ -15,4 +15,21 @@ const lgtm = defineCollection({
   }),
 });
 
-export const collections = { lgtm };
+const legalPageSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  lang: z.enum(["en", "ja"]),
+  lastUpdated: z.coerce.date(),
+});
+
+const privacy = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/privacy" }),
+  schema: legalPageSchema,
+});
+
+const copyright = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/copyright" }),
+  schema: legalPageSchema,
+});
+
+export const collections = { lgtm, privacy, copyright };
