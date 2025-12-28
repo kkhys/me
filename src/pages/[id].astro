@@ -37,7 +37,7 @@ const blurryImage = await getImage({
 
 const title = `LGTM Image - ${TITLE}`;
 const description = "Perfect LGTM image for your GitHub Pull Request reviews.";
-const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
+const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
 ---
 
 <Layout>
