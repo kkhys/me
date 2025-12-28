@@ -1,6 +1,8 @@
 # LGTM
 
-A curated collection of LGTM images for GitHub Pull Requests. High-performance image delivery with multiple formats and progressive loading.
+<a href="https://lgtm.kkhys.me/01kdg0h1dnmjgpqw8rxwmbakeh"><img src="https://lgtm.kkhys.me/01kdg0h1dnmjgpqw8rxwmbakeh.avif" alt="LGTM!!" width="400" /></a>
+
+A curated collection of LGTM images for GitHub Pull Requests. High-performance image delivery with multiple formats, progressive loading, and infinite scroll pagination.
 
 **Live**: [lgtm.kkhys.me](https://lgtm.kkhys.me)
 
@@ -12,54 +14,82 @@ LGTM generates and serves optimized review approval images with dynamic text ove
 
 - **Dynamic Image Generation** – Server-rendered text overlays using Satori + Sharp
 - **Multi-Format Delivery** – AVIF, WebP, PNG with automatic format negotiation
-- **Progressive Loading** – Low-res placeholder blur with smooth transitions
+- **Progressive Loading** – Low-res WebP placeholder blur with smooth transitions
+- **Infinite Scroll** – Paginated gallery with IntersectionObserver-based loading
 - **Responsive Images** – Multiple size variants (400/1000/1200px) with 2x density support
-- **One-Click Markdown** – Copy-to-clipboard with format selection
-- **SEO Optimized** – Complete Open Graph, JSON-LD, PWA manifest
+- **One-Click Markdown** – Copy-to-clipboard with format selection (AVIF/WebP/PNG)
+- **SEO Optimized** – Complete Open Graph, Twitter Card, JSON-LD, PWA manifest
 - **Edge Cached** – Immutable responses with max-age 1 year
 
 ## Tech Stack
 
 **Core**
-- Astro 5.16 – Static site generation with Content Collections
-- TypeScript – Strictest compiler mode
-- React 19 – Image generation components
+- Astro 5.16 – Static site generation with Content Collections and pagination
+- TypeScript 5.9 – Strictest compiler mode
+- React 19 – Image generation components (JSX for Satori)
 
 **Image Processing**
-- Satori 0.18 – SVG/text rendering with custom fonts
+- Satori 0.18 – SVG/text rendering with custom fonts (BBHBartle-Regular)
 - Sharp 0.34 – High-performance image manipulation (libvips)
 
 **Styling**
-- kiso.css – Minimal CSS framework
+- kiso.css 1.2 – Minimal CSS framework
 - Custom design system with light/dark mode
 
 **Infrastructure**
 - Vercel – Edge deployment
-- pnpm – Workspace monorepo
-- Biome – Linting + formatting
+- pnpm 10.26 – Workspace monorepo
+- Biome 2.3 – Linting + formatting
 
 ## Architecture
 
 ### Image Generation Pipeline
 
 ```
-1. Load source image from private-content
+1. Load source image from private-content submodule
 2. Resize to target width (Sharp)
 3. Render "LGTM" text as SVG (Satori, 2x resolution)
-4. Composite text overlay with 85% opacity
+4. Composite text overlay with 85% opacity (blend mode: over)
 5. Convert to AVIF/WebP/PNG
 6. Serve with immutable cache headers
 ```
 
+**Implementation**: `src/components/lgtm-image.tsx`
+
 ### URL Structure
 
 ```
-/{id}.{format}           → 400px image (default)
-/{id}-{size}.{format}    → Custom size (400|1000|1200)
+/                        → Gallery (paginated, 20 images per page)
+/{page}                  → Gallery page N (infinite scroll target)
 /{id}                    → Detail page with format selector
+/{id}.{format}           → 800px image (default endpoint)
+/{id}-{size}.{format}    → Custom size (400|1000|1200)
+/api/og/default.png      → Default Open Graph image
+/api/og/{id}.png         → Per-image Open Graph image
+/api/favicon/*           → Dynamic favicon generation
 ```
 
-### Content Management
+### Content Collections
+
+Astro Content Collections with environment-based loader:
+
+```typescript
+// src/content.config.ts
+const lgtmBasePath = GITHUB_ACTIONS
+  ? "./src/__fixtures__/lgtm-sample"
+  : "./private-content/lgtm";
+
+const lgtm = defineCollection({
+  loader: glob({ pattern: "**/index.md", base: lgtmBasePath }),
+  schema: z.object({
+    color: z.enum(["white", "black"]),  // Text color
+    image: z.string(),                   // Source image filename
+    isDraft: z.boolean().default(false), // Publishing control
+  }),
+});
+```
+
+### Private Content Submodule
 
 Images stored in private Git submodule with ULID-based identifiers:
 
@@ -69,13 +99,21 @@ private-content/lgtm/{ulid}/
   └── {filename}.jpg     # Source image
 ```
 
+### Pagination & Infinite Scroll
+
+- Gallery shows 20 images per page (IMAGES_PER_PAGE constant)
+- Fisher-Yates shuffle on build for randomized display order
+- IntersectionObserver triggers next page load 200px before scroll end
+- Minimum 500ms loading indicator for better UX
+- Non-first pages redirect to home if accessed directly
+
 ## Development
 
 ### Prerequisites
 
 - Node.js 24.12 (via Volta)
 - pnpm 10.26
-- Bun (for utility scripts)
+- Bun (for utility scripts in private-content/)
 
 ### Setup
 
@@ -86,33 +124,33 @@ git clone --recursive https://github.com/kkhys/lgtm.git
 # Install dependencies
 pnpm install
 
-# Set environment variables
-cp .env.example .env
-# Add GITHUB_ACCESS_TOKEN for private-content access
+# For private-content access, set:
+export GITHUB_ACCESS_TOKEN=ghp_xxx
 ```
 
 ### Commands
 
 ```bash
-pnpm dev          # Start dev server
-pnpm build        # Production build
+pnpm dev          # Start dev server (localhost:4321)
+pnpm build        # Production build to ./dist
+pnpm preview      # Preview production build
 pnpm check        # Type checking (Astro + tsc)
 pnpm lint         # Biome linting
 pnpm lint:fix     # Auto-fix issues
 pnpm all          # Full validation pipeline
 ```
 
-### Scripts
+### Utility Scripts
 
 ```bash
-# Generate ULID for new images
+# Generate lowercase ULID for new images
 cd private-content
 pnpm id
 
 # Create timestamped memo
 pnpm memo
 
-# Create release tag
+# Create release tag (date-based versioning)
 pnpm release [--dry-run]
 ```
 
@@ -121,22 +159,29 @@ pnpm release [--dry-run]
 ### Optimization Strategies
 
 1. **Progressive Enhancement**
-   - 20x13px WebP placeholder with blur filter
-   - Full image fades in on load
+   - 20x13px WebP placeholder with CSS blur filter (36px)
+   - Full image fades in on load (300ms transition)
+   - `loading="eager"` on detail page, lazy on gallery
 
-2. **Format Priorities**
+2. **Format Priorities** (via `<Picture>` component)
    - AVIF: Best compression (~50% smaller than WebP)
    - WebP: Broad browser support
    - PNG: Lossless fallback
 
 3. **Build-Time Processing**
-   - Static generation of all image variants
-   - Pre-rendered text overlays
-   - Compressed output via @playform/compress
+   - Static generation of all image variants at build time
+   - Pre-rendered text overlays with Satori
+   - HTML/CSS/JS compression via @playform/compress
 
 4. **Runtime Caching**
    - `Cache-Control: public, max-age=31536000, immutable`
    - CDN edge caching on Vercel
+   - Static assets served from Vercel Edge Network
+
+5. **Infinite Scroll**
+   - Fetch next page in background
+   - Pre-connect and load images on demand
+   - Smooth transition with loading states
 
 ## Deployment
 
@@ -153,22 +198,46 @@ pnpm release [--dry-run]
 }
 ```
 
-Custom install script handles private submodule authentication using `GITHUB_ACCESS_TOKEN`.
+Custom install script (`scripts/vercel-submodule-workaround.sh`) handles private submodule authentication.
 
 ### Environment Variables
 
 ```bash
-GITHUB_ACCESS_TOKEN    # Private submodule access
-NODE_ENV              # development | production
-GITHUB_ACTIONS        # CI detection (uses fixtures)
+GITHUB_ACCESS_TOKEN    # Required: Private submodule access
+NODE_ENV              # development | production (auto-set)
+GITHUB_ACTIONS        # CI detection (auto-set, switches to fixtures)
 ```
 
-## Project Stats
+### CI/CD
 
-- **Total Lines**: ~1,570 (TypeScript + Astro)
-- **Image Variants**: 3 formats × 3 sizes × N images
-- **Bundle Size**: Optimized with Astro's zero-JS default
-- **Lighthouse**: 100/100/100/100 (Performance/Accessibility/Best Practices/SEO)
+GitHub Actions uses fixture data (`src/__fixtures__/lgtm-sample/`) to avoid private submodule dependency in public CI.
+
+## Project Structure
+
+```
+lgtm/
+├── src/
+│   ├── assets/               # Static assets (fonts, images)
+│   ├── components/
+│   │   ├── icon/            # SVG icon components
+│   │   ├── seo/             # SEO meta components
+│   │   ├── lgtm-image.tsx   # Image generation logic
+│   │   └── *.astro          # UI components
+│   ├── config/              # Constants and configuration
+│   ├── layouts/             # Page layouts
+│   ├── pages/
+│   │   ├── [...page].astro  # Paginated gallery
+│   │   ├── [id].astro       # Detail page
+│   │   ├── [id].[format].ts # Default image API
+│   │   ├── [id]-[size].[format].ts # Sized image API
+│   │   └── api/             # OG images and favicons
+│   ├── styles/              # Global CSS
+│   ├── content.config.ts    # Content Collections config
+│   └── __fixtures__/        # Test fixtures for CI
+├── private-content/         # Git submodule (private)
+├── scripts/                 # Build and release scripts
+└── public/                  # Static public assets
+```
 
 ## Release Management
 
@@ -179,6 +248,13 @@ pnpm release
 # Creates tag: YYYY.MM.DD[-N]
 # Generates GitHub release with changelog comparison
 ```
+
+**Process**:
+1. Generate version from current date
+2. Check for existing tags, increment suffix if needed
+3. Create and force-push Git tag
+4. Generate GitHub Release via API
+5. Return to original branch
 
 ## License
 

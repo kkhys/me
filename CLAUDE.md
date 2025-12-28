@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-LGTM is an Astro-based static site that generates and serves optimized "LGTM" images for GitHub Pull Requests. The core functionality centers around server-side image processing using Satori for text rendering and Sharp for image manipulation.
+LGTM is an Astro-based static site that generates and serves optimized "LGTM" images for GitHub Pull Requests. The core functionality centers around server-side image processing using Satori for text rendering and Sharp for image manipulation, with paginated gallery and infinite scroll.
 
 **Live Site**: https://lgtm.kkhys.me
 
@@ -43,41 +43,64 @@ The core innovation is **dynamic text overlay generation** on user-provided imag
 
 1. **Source Images**: Stored in `private-content/lgtm/{ulid}/` with frontmatter metadata
 2. **Text Rendering**: Satori generates SVG "LGTM" text at 2x resolution with custom font (BBHBartle-Regular)
-3. **Compositing**: Sharp blends text overlay (85% opacity) onto resized source image
-4. **Multi-Format Output**: Generates PNG/AVIF/WebP variants at multiple sizes (400/1000/1200px)
+3. **Compositing**: Sharp blends text overlay (85% opacity, blend mode: "over") onto resized source image
+4. **Multi-Format Output**: Generates PNG/AVIF/WebP variants at multiple widths (400/1000/1200px)
 
 **Key Implementation**: `src/components/lgtm-image.tsx:13-117`
 
 ### Content Collections System
 
-Astro Content Collections manages LGTM image metadata:
+Astro Content Collections manages LGTM image metadata with environment-based loader:
 
 ```typescript
 // src/content.config.ts
-schema: {
-  color: "white" | "black",  // Text color for overlay
-  image: string,             // Source image filename
-  isDraft: boolean           // Publishing control
-}
+const lgtmBasePath = GITHUB_ACTIONS
+  ? "./src/__fixtures__/lgtm-sample"
+  : "./private-content/lgtm";
+
+const lgtm = defineCollection({
+  loader: glob({ pattern: "**/index.md", base: lgtmBasePath }),
+  schema: z.object({
+    color: z.enum(["white", "black"]),  // Text color for overlay
+    image: z.string(),                   // Source image filename
+    isDraft: z.boolean().default(false), // Publishing control
+  }),
+});
 ```
 
 **Environment-Based Loading**:
 - **Production**: Loads from `private-content/lgtm/` (Git submodule)
-- **CI/Testing**: Loads from `src/__fixtures__/lgtm-sample/` (GITHUB_ACTIONS env var)
+- **CI/Testing**: Loads from `src/__fixtures__/lgtm-sample/` when `GITHUB_ACTIONS=true`
 
 ### URL Structure & API Routes
 
 **Static Pages**:
-- `/` - Gallery with randomized order (Fisher-Yates shuffle)
-- `/{id}` - Detail page with format selector
+- `/` (src/pages/[...page].astro) - Paginated gallery with infinite scroll (20 images per page)
+- `/{page}` - Gallery page N (loaded via fetch for infinite scroll)
+- `/{id}` (src/pages/[id].astro) - Detail page with format selector buttons
 
 **Image APIs**:
-- `/{id}.{format}` - Default 400px image (src/pages/[id].[format].ts)
-- `/{id}-{size}.{format}` - Custom size: 400|1000|1200 (src/pages/[id]-[size].[format].ts)
-- `/api/og/default.png` - Open Graph image
-- `/api/favicon/*` - Dynamic favicon generation (dev only)
+- `/{id}.{format}` (src/pages/[id].[format].ts) - Default 800px image
+- `/{id}-{size}.{format}` (src/pages/[id]-[size].[format].ts) - Custom size: 400|1000|1200
+- `/api/og/default.png` - Default Open Graph image
+- `/api/og/{id}.png` - Per-image Open Graph image
+- `/api/favicon/*` - Dynamic favicon generation
 
 All image responses include: `Cache-Control: public, max-age=31536000, immutable`
+
+### Pagination & Infinite Scroll
+
+**Implementation** (src/pages/[...page].astro):
+- **Pagination**: Astro's `paginate()` function with `IMAGES_PER_PAGE = 20`
+- **Shuffle**: Fisher-Yates shuffle applied to all entries at build time
+- **Infinite Scroll**:
+  - IntersectionObserver watches `#scroll-trigger` element
+  - Triggers fetch 200px before reaching trigger (`rootMargin: "200px"`)
+  - Minimum 500ms loading indicator for better UX
+  - DOMParser parses fetched HTML, appends items to container
+  - Non-first pages redirect to home if accessed directly (prevents broken deep links)
+
+**Key Code**: src/pages/[...page].astro:362-484
 
 ### Private Content Submodule
 
@@ -96,22 +119,36 @@ private-content/
 
 ### Progressive Image Loading
 
-**Implementation Pattern** (src/pages/index.astro:28-38, 207-254):
-1. Generate 20x13px WebP placeholder using `getImage()`
-2. Render as blurred background via inline style
-3. Load full-resolution image with `<Picture>` component
-4. Fade transition controlled by `.blur-load` CSS class
+**Implementation Pattern**:
+1. Generate 20x13px WebP placeholder using `getImage()` at build time
+2. Render as blurred background (`filter: blur(36px)`) via inline style
+3. Load full-resolution image with `<Picture>` component (AVIF → WebP → PNG fallback)
+4. Fade transition (300ms) controlled by `.blur-load` CSS class
 5. JavaScript detects image load and adds `.image-loaded` class
 
-This pattern appears on both gallery (index.astro) and detail ([id].astro) pages.
+**Code Locations**:
+- Gallery: src/pages/[...page].astro:39-48 (placeholder generation), 240-261 (CSS), 316-330 (JS)
+- Detail: src/pages/[id].astro:31-36 (placeholder generation), 144-164 (CSS), 333-345 (JS)
 
 ### Design System
 
-**Color Scheme**: Custom `uchu.css` system with CSS variables
+**CSS Framework**: kiso.css 1.2.3 - Minimal CSS framework
 - Automatic light/dark mode via `prefers-color-scheme`
-- Variables: `--c-bg`, `--c-text`, `--c-border`, etc.
+- Variables: `--c-bg`, `--c-text`, `--c-border`, `--c-text-emphasis`, etc.
 
-**Layout**: Body uses CSS Grid with three rows: `[top] header [main-start] content [main-end] footer [bottom]`
+**Layout**: Simple structure with Header, Main, Footer (src/layouts/layout.astro)
+
+### Copy-to-Clipboard Feature
+
+**Gallery** (src/pages/[...page].astro):
+- Copy button on each image (hidden on desktop, visible on mobile)
+- Event delegation: Container listens for `.copy-button` clicks
+- Copies HTML with AVIF format: `<a href=".../{id}"><img src=".../{id}.avif" alt="LGTM!!" width="400" /></a>`
+
+**Detail Page** (src/pages/[id].astro):
+- Three format buttons: AVIF, WebP, PNG
+- Each button copies HTML with selected format
+- Visual feedback: Checkmark icon replaces text for 1 second
 
 ## TypeScript Configuration
 
@@ -122,7 +159,7 @@ This pattern appears on both gallery (index.astro) and detail ([id].astro) pages
 ## Testing & Fixtures
 
 For CI environments where private-content is unavailable:
-1. Set `GITHUB_ACTIONS=true` environment variable
+1. Set `GITHUB_ACTIONS=true` environment variable (auto-set in GitHub Actions)
 2. System automatically switches to `src/__fixtures__/lgtm-sample/`
 3. Contains minimal sample image for build validation
 
@@ -130,15 +167,15 @@ For CI environments where private-content is unavailable:
 
 **Key Overrides** (biome.json):
 - `**/*.astro` files: Disabled `useConst`, `useImportType`, `noUnusedVariables`, `noUnusedImports`
-- Reason: Astro's frontmatter script handling conflicts with standard linting
+- Reason: Astro's frontmatter script handling conflicts with standard linting rules
 
 ## Release Workflow
 
 **Versioning Scheme**: `YYYY.MM.DD[-N]` (date-based with optional suffix)
 
-Process (scripts/release.ts):
-1. Generate version from current date
-2. Check for existing tags, increment suffix if needed
+**Process** (scripts/release.ts):
+1. Generate version from current date (`2025.12.28`)
+2. Check for existing tags, increment suffix if needed (`2025.12.28-2`)
 3. Create and force-push Git tag
 4. Generate GitHub Release with comparison link to previous version
 5. Return to original branch
@@ -147,20 +184,27 @@ Process (scripts/release.ts):
 
 ### Environment Variables
 ```bash
-GITHUB_ACCESS_TOKEN   # Required: Private submodule access
-NODE_ENV             # development | production
+GITHUB_ACCESS_TOKEN   # Required for private submodule access
+NODE_ENV             # development | production (auto-set)
 GITHUB_ACTIONS       # Auto-set in CI, triggers fixture mode
 ```
 
 ### Image Processing Performance
-- Sharp is configured with `ignoredBuiltDependencies` in pnpm-workspace.yaml
-- Uses native libvips for high-performance image processing
-- Text rendering at 2x resolution then downscaled for anti-aliasing
+- Sharp configured with native libvips for high-performance processing
+- Text rendering at 2x resolution (scale = 2) then downscaled with lanczos3 kernel for anti-aliasing
+- Font size calculated dynamically: `Math.floor((renderWidth / 800) * 90)`
 
 ### Monorepo Structure
 - pnpm workspace with root and `private-content` packages
 - `private-content/` has its own package.json with Bun scripts
 - Root project uses pnpm, utilities use Bun for speed
+
+### Image Size Details
+The image generation pipeline uses specific widths:
+- **Default API** (`/{id}.{format}`): 800px width
+- **Sized API** (`/{id}-{size}.{format}`): 400/1000/1200px width
+- Gallery uses 1000px images (515px display width, 2x density)
+- Detail page uses 1200px images
 
 ## Common Gotchas
 
@@ -169,3 +213,5 @@ GITHUB_ACTIONS       # Auto-set in CI, triggers fixture mode
 3. **Font Loading Errors**: BBHBartle-Regular.ttf must exist in `src/assets/`
 4. **Build Failures on Vercel**: Verify `GITHUB_ACCESS_TOKEN` is set in environment variables
 5. **ULID Case Sensitivity**: Always use lowercase ULIDs (enforced by `pnpm id` script)
+6. **Infinite Scroll on Build**: Pagination routes are pre-rendered at build time; infinite scroll fetches static HTML
+7. **Default Image Size**: `/{id}.{format}` returns 800px, not 400px (common misconception)
