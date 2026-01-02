@@ -1,0 +1,22 @@
+---
+import Footer from "#/components/footer.astro";
+import Header from "#/components/header.astro";
+import HeadMeta from "#/components/seo/head-meta.astro";
+import "#/styles/global.css";
+---
+
+<html lang="ja">
+    <head>
+        <HeadMeta />
+        <slot name="head" />
+        <slot name="seo" />
+        <slot name="structured-data" />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>
