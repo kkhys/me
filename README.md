@@ -41,6 +41,10 @@ LGTM generates and serves optimized review approval images with dynamic text ove
 - pnpm 10.26 – Workspace monorepo
 - Biome 2.3 – Linting + formatting
 
+**Testing**
+- Vitest 4.0 – Unit testing framework
+- Coverage: 100% statements, 88% branch, 100% functions
+
 ## Architecture
 
 ### Image Generation Pipeline
@@ -137,7 +141,9 @@ pnpm preview      # Preview production build
 pnpm check        # Type checking (Astro + tsc)
 pnpm lint         # Biome linting
 pnpm lint:fix     # Auto-fix issues
-pnpm all          # Full validation pipeline
+pnpm test         # Run unit tests (Vitest)
+pnpm coverage     # Test coverage report
+pnpm all          # Full validation (build + check + lint:fix + test + coverage)
 ```
 
 ### Utility Scripts
@@ -233,9 +239,14 @@ lgtm/
 │   │   └── api/             # OG images and favicons
 │   ├── styles/              # Global CSS
 │   ├── content.config.ts    # Content Collections config
-│   └── __fixtures__/        # Test fixtures for CI
+│   ├── __fixtures__/        # Test fixtures for CI
+│   └── __tests__/           # Unit tests (Vitest)
+│       ├── components/      # Component tests
+│       ├── pages/           # API route tests
+│       └── config/          # Configuration tests
 ├── private-content/         # Git submodule (private)
 ├── scripts/                 # Build and release scripts
+├── vitest.config.ts         # Vitest configuration
 └── public/                  # Static public assets
 ```
 

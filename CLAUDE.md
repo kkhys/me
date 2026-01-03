@@ -18,7 +18,9 @@ pnpm preview      # Preview production build
 pnpm check        # Astro check + TypeScript validation
 pnpm lint         # Biome linting
 pnpm lint:fix     # Auto-fix Biome issues
-pnpm all          # Run build + check + lint:fix (full validation)
+pnpm test         # Run unit tests (Vitest)
+pnpm coverage     # Test coverage report
+pnpm all          # Run build + check + lint:fix + test + coverage
 ```
 
 ### Deployment & Release
@@ -156,12 +158,54 @@ private-content/
 - **Path Alias**: `#/*` maps to `./src/*`
 - **Module Resolution**: Astro handles `.astro` files with auto-generated types in `.astro/types.d.ts`
 
-## Testing & Fixtures
+## Testing & Coverage
+
+### Test Infrastructure
+
+**Framework**: Vitest 4.0 with v8 coverage provider
+
+**Test Files**:
+- `src/__tests__/components/lgtm-image.test.tsx` - Image generation component tests
+- `src/__tests__/pages/api-id-format.test.ts` - Default image API tests
+- `src/__tests__/pages/api-id-size-format.test.ts` - Sized image API tests
+- `src/__tests__/config/content.config.test.ts` - Content Collections config tests
+
+**Coverage Results**:
+```
+File               | % Stmts | % Branch | % Funcs | % Lines
+-------------------|---------|----------|---------|--------
+All files          |     100 |       88 |     100 |     100
+ components        |     100 |       80 |     100 |     100
+  lgtm-image.tsx   |     100 |       80 |     100 |     100
+ pages             |     100 |      100 |     100 |     100
+  [id].[format].ts |     100 |      100 |     100 |     100
+  [id]-[size].[format].ts | 100 | 100 | 100 | 100
+```
+
+**Coverage Configuration** (vitest.config.ts):
+- Includes: `src/components/**/*.{ts,tsx}`, `src/pages/**/*.ts`, `scripts/**/*.ts`
+- Excludes: Config files, fixtures, auxiliary features (SEO, favicon, OG images)
+- Branch coverage 80% in lgtm-image.tsx due to:
+  - Environment variable path switching (GITHUB_ACTIONS true/false)
+  - Nullish coalescing fallbacks for Sharp metadata (defensive programming)
+
+### Test Fixtures
 
 For CI environments where private-content is unavailable:
 1. Set `GITHUB_ACTIONS=true` environment variable (auto-set in GitHub Actions)
 2. System automatically switches to `src/__fixtures__/lgtm-sample/`
 3. Contains minimal sample image for build validation
+
+### Type Safety in Tests
+
+Tests use double type assertion for partial APIContext mocks:
+```typescript
+const context = {
+  params: { id: "...", format: "png" },
+} as unknown as APIContext;
+```
+
+This pattern allows testing with minimal mock objects while maintaining type safety.
 
 ## Biome Configuration
 
@@ -215,3 +259,4 @@ The image generation pipeline uses specific widths:
 5. **ULID Case Sensitivity**: Always use lowercase ULIDs (enforced by `pnpm id` script)
 6. **Infinite Scroll on Build**: Pagination routes are pre-rendered at build time; infinite scroll fetches static HTML
 7. **Default Image Size**: `/{id}.{format}` returns 800px, not 400px (common misconception)
+8. **Test Coverage**: Branch coverage at 80-88% is acceptable; uncovered branches are defensive edge cases that rarely occur in practice
