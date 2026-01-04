@@ -2,13 +2,13 @@ import type { Root } from "mdast";
 import type { Plugin, Processor } from "unified";
 
 /**
- * Plugin to disable Markdown syntax with backslash escaping
+ * Plugin to escape Markdown syntax with backslash escaping
  *
  * @description
  * Adds backslashes before Markdown syntax symbols before parsing.
  * Since remark doesn't recognize them as syntax, they are displayed as plain text.
  *
- * **Syntax that can be disabled**:
+ * **Syntax that can be escaped**:
  * - Headings (#, ##, ...)
  * - Lists (-, *, +, 1.)
  * - Inline code (`)
@@ -16,26 +16,26 @@ import type { Plugin, Processor } from "unified";
  * - Blockquotes (>)
  * - Horizontal rules (---, ***, ___)
  *
- * **Syntax that cannot be disabled** (due to remark interpreting backslashes multiple times):
+ * **Syntax that cannot be escaped** (due to remark interpreting backslashes multiple times):
  * - Bold (**, __)
  * - Italic (*, _)
  * - Strikethrough (~~) - Not supported by default remark
  *
- * **Links**: Not disabled (intentionally left enabled)
+ * **Links**: Not escaped (intentionally left enabled)
  *
  * @returns unified transformation plugin
  * @example
  * ```typescript
  * import { remark } from 'remark';
- * import remarkDisableSyntax from './remark-disable-syntax';
+ * import remarkEscapeSyntax from './remark-escape-syntax';
  *
  * const result = await remark()
- *   .use(remarkDisableSyntax)
+ *   .use(remarkEscapeSyntax)
  *   .process('# Heading');
  * // Output: \# Heading
  * ```
  */
-const remarkDisableSyntax: Plugin<[], Root> = function (this: Processor) {
+const remarkEscapeSyntax: Plugin<[], Root> = function (this: Processor) {
   const parser = this.parser;
   const originalParse = parser?.prototype?.parse || parser;
 
@@ -73,7 +73,7 @@ const remarkDisableSyntax: Plugin<[], Root> = function (this: Processor) {
     // 8. Escape ordered lists
     text = text.replace(/^(\s*)(\d+)\.\s/gm, "$1$2\\. ");
 
-    // Note: Bold (**, __), italic (*, _), and strikethrough (~~) cannot be disabled
+    // Note: Bold (**, __), italic (*, _), and strikethrough (~~) cannot be escaped
     // because remark interprets backslashes multiple times
 
     // Parse with escaped text
@@ -81,4 +81,4 @@ const remarkDisableSyntax: Plugin<[], Root> = function (this: Processor) {
   };
 };
 
-export default remarkDisableSyntax;
+export default remarkEscapeSyntax;

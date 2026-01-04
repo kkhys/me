@@ -1,14 +1,14 @@
 import { remark } from "remark";
 import { describe, expect, test } from "vitest";
-import remarkDisableSyntax from "#/lib/remark-disable-syntax";
+import remarkEscapeSyntax from "#/lib/remark-escape-syntax";
 
-describe("remark-disable-syntax", () => {
+describe("remark-escape-syntax", () => {
   const processMarkdown = async (markdown: string) => {
-    const result = await remark().use(remarkDisableSyntax).process(markdown);
+    const result = await remark().use(remarkEscapeSyntax).process(markdown);
     return result.toString();
   };
 
-  describe("Heading disabling", () => {
+  describe("Heading escaping", () => {
     test("should convert H1 heading to paragraph with # prefix", async () => {
       const input = "# Title";
       const result = await processMarkdown(input);
@@ -36,8 +36,8 @@ describe("remark-disable-syntax", () => {
     });
   });
 
-  describe("List disabling", () => {
-    test("should disable unordered lists and preserve list markers", async () => {
+  describe("List escaping", () => {
+    test("should escape unordered lists and preserve list markers", async () => {
       const input = `- Item 1
 - Item 2
 - Item 3`;
@@ -51,7 +51,7 @@ describe("remark-disable-syntax", () => {
       expect(result).toContain("- Item 3");
     });
 
-    test("should disable ordered lists and preserve numbers", async () => {
+    test("should escape ordered lists and preserve numbers", async () => {
       const input = `1. Item 1
 2. Item 2
 3. Item 3`;
@@ -68,7 +68,7 @@ describe("remark-disable-syntax", () => {
       expect(result).toContain("Item 3");
     });
 
-    test("should disable nested lists and preserve markers", async () => {
+    test("should escape nested lists and preserve markers", async () => {
       const input = `- Parent item
   - Child item 1
   - Child item 2`;
@@ -146,7 +146,7 @@ describe("remark-disable-syntax", () => {
     });
   });
 
-  describe("Code disabling", () => {
+  describe("Code escaping", () => {
     test("should preserve inline code backticks", async () => {
       const input = "This is `code`";
       const result = await processMarkdown(input);
@@ -228,12 +228,12 @@ Line 3`;
     expect(result).toContain("Second");
   });
 
-  describe("Code block disabling", () => {
-    test("should disable code block syntax", async () => {
+  describe("Code block escaping", () => {
+    test("should escape code block syntax", async () => {
       const input = "```javascript\nconst x = 1;\n```";
       const result = await processMarkdown(input);
 
-      // Code blocks are disabled
+      // Code blocks are escaped
       expect(result).not.toContain("<pre>");
       expect(result).not.toContain("<code>");
       // Backticks are escaped in remark output
@@ -241,11 +241,11 @@ Line 3`;
       expect(result).toContain("const x = 1;");
     });
 
-    test("should disable simple code block", async () => {
+    test("should escape simple code block", async () => {
       const input = "```\ncode\n```";
       const result = await processMarkdown(input);
 
-      // Code blocks are disabled
+      // Code blocks are escaped
       expect(result).not.toContain("<pre>");
       expect(result).not.toContain("<code>");
       // Backticks are escaped in remark output
@@ -255,24 +255,24 @@ Line 3`;
   });
 
   describe("Known limitations", () => {
-    test("cannot disable bold syntax - it will be rendered as <strong>", async () => {
+    test("cannot escape bold syntax - it will be rendered as <strong>", async () => {
       const input = "This is **bold** text";
       const result = await processMarkdown(input);
 
-      // Bold cannot be disabled (due to remark interpreting backslashes multiple times)
+      // Bold cannot be escaped (due to remark interpreting backslashes multiple times)
       expect(result).toContain("bold");
     });
 
-    test("cannot disable italic syntax - it will be rendered as <em>", async () => {
+    test("cannot escape italic syntax - it will be rendered as <em>", async () => {
       const input = "This is *italic* text";
       const result = await processMarkdown(input);
 
-      // Italic cannot be disabled (due to remark interpreting backslashes multiple times)
+      // Italic cannot be escaped (due to remark interpreting backslashes multiple times)
       expect(result).toContain("italic");
     });
   });
 
-  describe("Other syntax disabling", () => {
+  describe("Other syntax escaping", () => {
     test("should escape blockquote syntax", async () => {
       const input = "> This is a quote";
       const result = await processMarkdown(input);

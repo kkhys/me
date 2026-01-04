@@ -2,7 +2,7 @@ import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
-import remarkDisableSyntax from "./src/lib/remark-disable-syntax";
+import remarkEscapeSyntax from "./src/lib/remark-escape-syntax";
 import remarkExtractLink from "./src/lib/remark-extract-link";
 import remarkTruncateLinkText from "./src/lib/remark-truncate-link-text";
 import remarkWordLimit from "./src/lib/remark-word-limit";
@@ -21,7 +21,7 @@ export default defineConfig({
     syntaxHighlight: false,
     smartypants: false,
     remarkPlugins: [
-      remarkDisableSyntax,
+      remarkEscapeSyntax,
       remarkWordLimit,
       remarkExtractLink,
       remarkTruncateLinkText,
