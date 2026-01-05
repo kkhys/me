@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"svg"> {}
+
+const { class: className } = Astro.props;
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 500 500" class={className}>
+  <defs>
+    <pattern id="c" width="1" height="1" x="0" y="0" patternUnits="objectBoundingBox">
+      <radialGradient id="a" spreadMethod="pad">
+        <stop offset="0" stop-color="#fff"/>
+        <stop offset=".4" stop-color="#d0d0d0"/>
+        <stop offset="1" stop-color="gray"/>
+      </radialGradient>
+      <mask id="b">
+        <path fill="#fff" d="M0 0h500v500H0z"/>
+      </mask>
+      <path fill="gray" d="M0 0h500v500H0z"/>
+      <circle cx="175" cy="175" r="459.619" fill="url(#a)" mask="url(#b)"/>
+    </pattern>
+  </defs>
+  <path fill="url(#c)" d="M250 0a250 250 0 0 1 250 250 250 250 0 0 1-250 250A250 250 0 0 1 0 250 250 250 0 0 1 250 0"/>
+</svg>
