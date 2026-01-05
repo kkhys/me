@@ -1,0 +1,19 @@
+---
+import Memo from "#/components/ui/icons/memo.astro";
+import { me } from "#/config/site";
+import BentoItemIconCard from "./bento-item-icon-card.astro";
+---
+
+<BentoItemIconCard
+  iconBgClass="bg-transparent border-border"
+  title="Memo"
+  description="日々の記録"
+  href={me.memo}
+  target="_blank"
+  rel="noreferrer me"
+  transition={0.35}
+  umamiEvent="memo-click"
+  umamiEventLocation="home-bento"
+>
+  <Memo slot="icon" class="size-5 fill-white" />
+</BentoItemIconCard>

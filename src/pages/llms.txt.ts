@@ -17,7 +17,7 @@ ${blogEntries.map((entry) => `- [${entry.data.title}](${import.meta.env.SITE}/bl
 
 - **Email**: hi@kkhys.me
 - **GitHub**: https://github.com/kkhys
-- **Mastodon**: https://mastodon.kkhys.me/@kkhys
+- **Memo**: https://memo.kkhys.me
 - **Website**: https://kkhys.me
 - **Support**: https://coff.ee/kkhys
 `;
