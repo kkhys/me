@@ -58,7 +58,7 @@ The content management system is built around file-based storage with strict sch
 - **GitHub GraphQL API** - Real-time contribution activity visualization
 - **Spotify Web API** - Current playing track and listening history display
 - **Upstash Redis** - Distributed caching for API responses
-- **Mastodon** - Social media feed integration
+- **Memo** - Personal note and memo integration
 
 ## Development
 

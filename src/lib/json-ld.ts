@@ -11,7 +11,7 @@ const personSchema: WithContext<Person> = {
   name: me.name,
   url: import.meta.env.SITE,
   image: `${import.meta.env.SITE}/images/avatar.jpg`,
-  sameAs: [me.mastodon],
+  sameAs: [me.memo],
   jobTitle: "Software engineer",
   worksFor: {
     "@type": "Organization",
