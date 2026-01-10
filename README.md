@@ -10,6 +10,23 @@ A curated collection of LGTM images for GitHub Pull Requests. High-performance i
 
 LGTM generates and serves optimized review approval images with dynamic text overlay rendering. Built on Astro with server-side image processing, delivering AVIF/WebP/PNG formats with aggressive caching strategies.
 
+## Browser Extension
+
+**[LGTM Chrome Extension](https://github.com/kkhys/lgtm-chrome-extension)** – One-click LGTM image insertion for GitHub code reviews.
+
+Simply click the extension icon while browsing GitHub, and a random LGTM image is automatically copied to your clipboard as ready-to-paste HTML. The extension activates exclusively on GitHub domains with visual feedback (checkmark badge) and requires minimal permissions for privacy.
+
+**Key Features:**
+- One-click operation with GitHub-only activation
+- Random image selection from the full gallery
+- Instant clipboard copy with AVIF format
+- Privacy-focused with minimal required permissions
+- Lightweight design (< 50KB total)
+
+**Status:** Currently available via manual installation. Chrome Web Store publication coming soon.
+
+**Get it:** [GitHub Repository](https://github.com/kkhys/lgtm-chrome-extension) | [Releases](https://github.com/kkhys/lgtm-chrome-extension/releases)
+
 ## Features
 
 - **Dynamic Image Generation** – Server-rendered text overlays using Satori + Sharp
