@@ -1,0 +1,79 @@
+name: Update Submodule
+
+on:
+  schedule:
+    # Run daily at 02:00 JST (17:00 UTC previous day)
+    - cron: "0 17 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-submodule:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update submodule
+        id: update
+        run: |
+          cd private-content
+
+          BEFORE_HASH=$(git rev-parse HEAD)
+
+          git fetch origin main
+          git reset --hard origin/main
+
+          AFTER_HASH=$(git rev-parse HEAD)
+
+          if [ "$BEFORE_HASH" = "$AFTER_HASH" ]; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes in submodule"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+
+            COMMIT_COUNT=$(git rev-list --count ${BEFORE_HASH}..${AFTER_HASH})
+            echo "commit_count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
+
+            TIMESTAMP=$(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M JST')
+            echo "timestamp=$TIMESTAMP" >> $GITHUB_OUTPUT
+
+            echo "Found $COMMIT_COUNT new commit(s)"
+          fi
+
+      - name: Create PR and auto-merge
+        if: steps.update.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "kkhys"
+          git config user.email "kkhys@pm.me"
+
+          COMMIT_COUNT="${{ steps.update.outputs.commit_count }}"
+          TIMESTAMP="${{ steps.update.outputs.timestamp }}"
+
+          if [ "$COMMIT_COUNT" = "1" ]; then
+            TITLE="chore(memo): update submodule - 1 commit"
+            COMMIT_MSG="chore(memo): update submodule - 1 commit at $TIMESTAMP"
+          else
+            TITLE="chore(memo): update submodule - $COMMIT_COUNT commits"
+            COMMIT_MSG="chore(memo): update submodule - $COMMIT_COUNT commits at $TIMESTAMP"
+          fi
+
+          BRANCH="update-submodule-$(date +%Y%m%d-%H%M%S)"
+          git checkout -b "$BRANCH"
+          git add private-content
+          git commit -m "$COMMIT_MSG"
+          git push origin "$BRANCH"
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "$TITLE" \
+            --body "Automated submodule update at $TIMESTAMP" \
+            --assignee kkhys
+
+          gh pr merge --auto --squash --delete-branch
