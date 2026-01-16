@@ -66,7 +66,7 @@ jobs:
             COMMIT_MSG="chore(memo): update submodule - $COMMIT_COUNT commits at $TIMESTAMP"
           fi
 
-          BRANCH="update-submodule-$(date +%Y%m%d-%H%M%S)"
+          BRANCH="update-submodule-$(TZ=Asia/Tokyo date +%Y%m%d-%H%M%S)"
           git checkout -b "$BRANCH"
           git add private-content
           git commit -m "$COMMIT_MSG"
