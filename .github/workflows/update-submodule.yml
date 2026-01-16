@@ -58,11 +58,10 @@ jobs:
           COMMIT_COUNT="${{ steps.update.outputs.commit_count }}"
           TIMESTAMP="${{ steps.update.outputs.timestamp }}"
 
+          TITLE="[main] chore update submodule"
           if [ "$COMMIT_COUNT" = "1" ]; then
-            TITLE="chore(memo): update submodule - 1 commit"
             COMMIT_MSG="chore(memo): update submodule - 1 commit at $TIMESTAMP"
           else
-            TITLE="chore(memo): update submodule - $COMMIT_COUNT commits"
             COMMIT_MSG="chore(memo): update submodule - $COMMIT_COUNT commits at $TIMESTAMP"
           fi
 
