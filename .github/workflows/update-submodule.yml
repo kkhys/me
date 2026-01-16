@@ -60,8 +60,10 @@ jobs:
 
           TITLE="[main] chore update submodule"
           if [ "$COMMIT_COUNT" = "1" ]; then
+            TITLE="[main] chore: update submodule - 1 commit"
             COMMIT_MSG="chore(memo): update submodule - 1 commit at $TIMESTAMP"
           else
+            TITLE="[main] chore: update submodule - $COMMIT_COUNT commits"
             COMMIT_MSG="chore(memo): update submodule - $COMMIT_COUNT commits at $TIMESTAMP"
           fi
 
