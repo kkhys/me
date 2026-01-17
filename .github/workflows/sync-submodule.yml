@@ -23,14 +23,14 @@ jobs:
       - name: Update submodule
         id: update
         run: |
+          BEFORE_HASH=$(git -C private-content rev-parse HEAD)
+
           cd private-content
-
-          BEFORE_HASH=$(git rev-parse HEAD)
-
           git fetch origin main
           git reset --hard origin/main
+          cd ..
 
-          AFTER_HASH=$(git rev-parse HEAD)
+          AFTER_HASH=$(git -C private-content rev-parse HEAD)
 
           if [ "$BEFORE_HASH" = "$AFTER_HASH" ]; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
@@ -38,13 +38,13 @@ jobs:
           else
             echo "has_changes=true" >> $GITHUB_OUTPUT
 
-            COMMIT_COUNT=$(git rev-list --count ${BEFORE_HASH}..${AFTER_HASH})
+            COMMIT_COUNT=$(git -C private-content rev-list --count ${BEFORE_HASH}..${AFTER_HASH})
             echo "commit_count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
 
             TIMESTAMP=$(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M JST')
             echo "timestamp=$TIMESTAMP" >> $GITHUB_OUTPUT
 
-            echo "Found $COMMIT_COUNT new commit(s)"
+            echo "Found $COMMIT_COUNT new commit(s) in submodule"
           fi
 
       - name: Create PR and auto-merge
