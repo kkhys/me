@@ -12,7 +12,8 @@
     "coverage": "vitest run --coverage",
     "all": "pnpm build && pnpm check && pnpm lint:fix && pnpm test && pnpm coverage",
     "vercel-install": "scripts/vercel-submodule-workaround.sh && pnpm install",
-    "release": "bun run scripts/release.ts"
+    "release": "bun run scripts/release.ts",
+    "sync-submodule": "gh workflow run sync-submodule.yml"
   },
   "dependencies": {
     "@astrojs/partytown": "2.1.4",
