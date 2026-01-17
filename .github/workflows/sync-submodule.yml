@@ -38,13 +38,10 @@ jobs:
           else
             echo "has_changes=true" >> $GITHUB_OUTPUT
 
-            COMMIT_COUNT=$(git -C private-content rev-list --count ${BEFORE_HASH}..${AFTER_HASH})
-            echo "commit_count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
-
             TIMESTAMP=$(TZ=Asia/Tokyo date '+%Y-%m-%d %H:%M JST')
             echo "timestamp=$TIMESTAMP" >> $GITHUB_OUTPUT
 
-            echo "Found $COMMIT_COUNT new commit(s) in submodule"
+            echo "Submodule updated"
           fi
 
       - name: Create PR and auto-merge
@@ -55,17 +52,10 @@ jobs:
           git config user.name "kkhys"
           git config user.email "kkhys@pm.me"
 
-          COMMIT_COUNT="${{ steps.update.outputs.commit_count }}"
           TIMESTAMP="${{ steps.update.outputs.timestamp }}"
 
-          TITLE="[main] chore update submodule"
-          if [ "$COMMIT_COUNT" = "1" ]; then
-            TITLE="[main] chore: update submodule - 1 commit"
-            COMMIT_MSG="chore(memo): update submodule - 1 commit at $TIMESTAMP"
-          else
-            TITLE="[main] chore: update submodule - $COMMIT_COUNT commits"
-            COMMIT_MSG="chore(memo): update submodule - $COMMIT_COUNT commits at $TIMESTAMP"
-          fi
+          TITLE="[main] chore: update submodule"
+          COMMIT_MSG="chore(memo): update submodule at $TIMESTAMP"
 
           BRANCH="update-submodule-$(TZ=Asia/Tokyo date +%Y%m%d-%H%M%S)"
           git checkout -b "$BRANCH"
