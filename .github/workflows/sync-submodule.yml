@@ -78,6 +78,7 @@ jobs:
             --head "$BRANCH" \
             --title "$TITLE" \
             --body "Automated submodule update at $TIMESTAMP" \
+            --label "type: submodule" \
             --assignee kkhys
 
           gh pr merge --auto --squash --delete-branch
