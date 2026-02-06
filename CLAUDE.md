@@ -44,11 +44,9 @@ Entry point: `src/pages/api/[...path].ts` routes to services in `src/pages/api/_
 - `spotify` — Now playing (OAuth)
 - `og/[id].png`, `og/default.png` — Dynamic OG images (Satori)
 
-API responses are cached with Upstash Redis.
-
 ### Environment Variables
 
-Defined via `astro:env` in `astro.config.ts` (type-safe access). Server secrets: `GITHUB_ACCESS_TOKEN`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`. Copy `.env.example` to `.env` for local development.
+Defined via `astro:env` in `astro.config.ts` (type-safe access). Server secrets: `GITHUB_ACCESS_TOKEN`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN`. Copy `.env.example` to `.env` for local development.
 
 ## Content System
 
