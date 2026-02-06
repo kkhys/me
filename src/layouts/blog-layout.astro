@@ -11,7 +11,6 @@ import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Separator from "#/components/ui/separator.astro";
 import Skeleton from "#/components/ui/skeleton.astro";
 import { siteConfig } from "#/config/site";
-import Comment from "#/features/blog/components/ui/comment.astro";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import ActionController from "#/features/blog/components/ui/menu/action-controller.astro";
 import PrevAndNextPager from "#/features/blog/components/ui/prev-and-next-pager.astro";
@@ -171,7 +170,6 @@ const relatedPosts = await getRelatedPosts({ id, category });
         <Separator class="mt-8" />
       </div>
     )}
-    <Comment id="comment" class="mt-12" />
   </section>
 </BaseLayout>
 
