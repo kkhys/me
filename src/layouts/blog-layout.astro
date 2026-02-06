@@ -9,14 +9,12 @@ import SEO from "#/components/seo.astro";
 import { buttonVariants } from "#/components/ui/button/button.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Separator from "#/components/ui/separator.astro";
-import Skeleton from "#/components/ui/skeleton.astro";
 import { siteConfig } from "#/config/site";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import ActionController from "#/features/blog/components/ui/menu/action-controller.astro";
 import PrevAndNextPager from "#/features/blog/components/ui/prev-and-next-pager.astro";
 import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
-import ViewCounter from "#/features/blog/components/ui/view-counter.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { flatTags } from "#/features/blog/config/tag";
 import { getRelatedPosts } from "#/features/blog/utils/entry";
@@ -106,9 +104,6 @@ const relatedPosts = await getRelatedPosts({ id, category });
       <time datetime={publishedAt.toISOString()} class="text-sm text-muted-foreground">
         {publishedAtString}
       </time>
-      <ViewCounter slug={id} server:defer>
-        <Skeleton slot="fallback" class="h-4 w-14"/>
-      </ViewCounter>
     </div>
   </section>
   <section class="mt-16">
