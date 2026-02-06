@@ -46,7 +46,6 @@ Located in `/src/lib/`:
 - `remark-link-card`: Converts bare URLs to rich preview cards
 - `remark-video-block`: Custom video embedding syntax
 - `rehype-budoux`: Japanese text processing
-- `rehype-pagefind`: Search index integration
 
 ## Key Files
 
@@ -68,7 +67,6 @@ Located in `/src/lib/`:
 - **GitHub**: Contribution data via GraphQL API
 - **Spotify**: Now playing widget
 - **Redis**: API response caching via Upstash
-- **Pagefind**: Automatic search index generation
 
 ## Content Review System
 
