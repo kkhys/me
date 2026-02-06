@@ -13,7 +13,7 @@ import { cn } from "#/lib/ui";
 import { useOnClickOutside } from "./use-on-click-outside";
 
 const wrapperBaseStyle =
-  "flex justify-between items-center backdrop-blur-2xl bg-background/70 text-foreground border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] before:absolute before:inset-0 before:rounded-[inherit] before:bg-gradient-to-b before:from-white/10 before:to-transparent before:pointer-events-none";
+  "flex justify-between items-center backdrop-blur-2xl bg-background/70 text-foreground border border-white/20 shadow-[0_8px_32px_0_oklch(var(--uchu-yin-raw)_/_0.12)] before:absolute before:inset-0 before:rounded-[inherit] before:bg-gradient-to-b before:from-white/10 before:to-transparent before:pointer-events-none";
 
 export const BottomNavigationBar = () => {
   const [open, setOpen] = useState(false);

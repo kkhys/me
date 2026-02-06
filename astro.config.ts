@@ -115,61 +115,62 @@ export default defineConfig({
             theme: "base",
             fontFamily: "monospace",
             themeVariables: {
-              primaryColor: "#b0b0b0",
+              // Colors mapped to uchu palette hex approximations
+              primaryColor: "#b2b2b1", // uchu-gray-5 (80.73%)
               secondaryColor: "#545480",
-              primaryBorderColor: "#4c4c53",
-              primaryTextColor: "#f4f4f5",
-              secondaryTextColor: "#f4f4f5",
-              lineColor: "#4c4c53",
-              textColor: "#f4f4f5",
-              mainBkg: "#27272a",
+              primaryBorderColor: "#5a5c63", // uchu-yin-7 (43.87%)
+              primaryTextColor: "#f0f0f1", // uchu-gray-1 (95.57%)
+              secondaryTextColor: "#f0f0f1", // uchu-gray-1
+              lineColor: "#5a5c63", // uchu-yin-7
+              textColor: "#f0f0f1", // uchu-gray-1
+              mainBkg: "#2b2d33", // uchu-yin-9 (25.11%)
               fontSize: "13px",
-              nodeBorder: "#4c4c53",
-              clusterBkg: "#2e2d37",
-              clusterBorder: "#6e6580",
-              titleColor: "#d4b8ef",
+              nodeBorder: "#5a5c63", // uchu-yin-7
+              clusterBkg: "#2b2d33", // uchu-yin-9
+              clusterBorder: "#5a4d6f", // uchu-purple-7 (42.77%)
+              titleColor: "#c8a8e8", // uchu-purple-2 (78.68%)
               edgeLabelBackground: "#544c00",
-              actorBorder: "#4c4c53",
-              actorBkg: "#27272a",
-              actorTextColor: "#f4f4f5",
-              signalColor: "#f4f4f5",
-              signalTextColor: "#f4f4f5",
-              labelBoxBkgColor: "#27272a",
-              labelBoxBorderColor: "#4c4c53",
-              labelTextColor: "#f4f4f5",
-              loopTextColor: "#faf#f4d701afa",
-              noteBorderColor: "#7b731a",
-              noteBkgColor: "#484826",
-              noteTextColor: "#f4d701",
-              sequenceNumberColor: "#27272a",
+              actorBorder: "#5a5c63", // uchu-yin-7
+              actorBkg: "#2b2d33", // uchu-yin-9
+              actorTextColor: "#f0f0f1", // uchu-gray-1
+              signalColor: "#f0f0f1", // uchu-gray-1
+              signalTextColor: "#f0f0f1", // uchu-gray-1
+              labelBoxBkgColor: "#2b2d33", // uchu-yin-9
+              labelBoxBorderColor: "#5a5c63", // uchu-yin-7
+              labelTextColor: "#f0f0f1", // uchu-gray-1
+              loopTextColor: "#f0f0f1", // uchu-gray-1 (fixed typo)
+              noteBorderColor: "#7b731a", // uchu-yellow-8 (69.14%)
+              noteBkgColor: "#484826", // uchu-yellow-9 (62.29%)
+              noteTextColor: "#f4d701", // uchu-yellow-5 (89%)
+              sequenceNumberColor: "#2b2d33", // uchu-yin-9
               git0: "#808080",
-              git1: "#4c4c53",
+              git1: "#5a5c63", // uchu-yin-7
               git2: "#545480",
               git3: "#867d80",
               git4: "#54806f",
               git5: "#75807d",
-              git6: "#b0b0b0",
+              git6: "#b2b2b1", // uchu-gray-5
               git7: "#80547c",
-              gitBranchLabel0: "#f4f4f5",
-              gitBranchLabel1: "#f4f4f5",
-              gitBranchLabel2: "#f4f4f5",
-              gitBranchLabel3: "#f4f4f5",
-              gitBranchLabel4: "#f4f4f5",
-              gitBranchLabel5: "#f4f4f5",
-              gitBranchLabel6: "#f4f4f5",
-              gitBranchLabel7: "#f4f4f5",
-              tagLabelColor: "#f4d701",
-              tagLabelBackground: "#484826",
-              tagLabelBorder: "#7b731a",
+              gitBranchLabel0: "#f0f0f1", // uchu-gray-1
+              gitBranchLabel1: "#f0f0f1",
+              gitBranchLabel2: "#f0f0f1",
+              gitBranchLabel3: "#f0f0f1",
+              gitBranchLabel4: "#f0f0f1",
+              gitBranchLabel5: "#f0f0f1",
+              gitBranchLabel6: "#f0f0f1",
+              gitBranchLabel7: "#f0f0f1",
+              tagLabelColor: "#f4d701", // uchu-yellow-5
+              tagLabelBackground: "#484826", // uchu-yellow-9
+              tagLabelBorder: "#7b731a", // uchu-yellow-8
               tagLabelFontSize: "10px",
-              commitLabelColor: "#f4f4f5",
+              commitLabelColor: "#f0f0f1", // uchu-gray-1
               commitLabelBackground: "#62626a",
               commitLabelFontSize: "10px",
-              transitionColor: "#4c4c53",
-              stateLabelColor: "#f4f4f5",
-              stateBkg: "#27272a",
-              innerEndBackground: "#27272a",
-              specialStateColor: "#4c4c53",
+              transitionColor: "#5a5c63", // uchu-yin-7
+              stateLabelColor: "#f0f0f1", // uchu-gray-1
+              stateBkg: "#2b2d33", // uchu-yin-9
+              innerEndBackground: "#2b2d33", // uchu-yin-9
+              specialStateColor: "#5a5c63", // uchu-yin-7
             },
           },
         },

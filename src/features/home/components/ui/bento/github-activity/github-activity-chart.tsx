@@ -81,7 +81,7 @@ export const GithubActivityChart = memo((props: Props) => {
       monthLabels: false as const,
       legendCellSize: 0,
       space: 8,
-      style: { color: "#fff" as const },
+      style: { color: "var(--uchu-yang)" as const },
       rectProps: { rx: 2 },
       rectSize: 12,
       rectRender: renderRect(handleMouseEnter),
