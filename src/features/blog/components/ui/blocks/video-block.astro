@@ -75,7 +75,7 @@ const { src, title, ...rest } = Astro.props;
     }
 
     private createWrapper(content: string) {
-      const wrapperClass = "relative blur-load select-none rounded-2xl border-[#474747] overflow-hidden dark:border";
+      const wrapperClass = "relative blur-load select-none rounded-2xl border-[var(--uchu-yin-8)] overflow-hidden dark:border";
       return `<div class="${wrapperClass}">${content}</div>`;
     }
 
