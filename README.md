@@ -1,0 +1,83 @@
+# kkhys.me
+
+Source code for [kkhys.me](https://kkhys.me) — a personal website and blog built with Astro.
+
+## Tech Stack
+
+- [Astro](https://astro.build/) — Static site generator with React islands
+- [React](https://react.dev/) — Interactive UI components
+- [TailwindCSS v4](https://tailwindcss.com/) — Styling
+- [TypeScript](https://www.typescriptlang.org/) — Type safety
+- [Hono](https://hono.dev/) — API routes
+- [Biome](https://biomejs.dev/) — Linting and formatting
+- [Vercel](https://vercel.com/) — Hosting and deployment
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v24.13.0+
+- [pnpm](https://pnpm.io/) v10.28.2+
+
+### Setup
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Open [http://localhost:4321](http://localhost:4321) to view the site.
+
+## Scripts
+
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Start development server |
+| `pnpm build` | Production build (Vercel) |
+| `pnpm build:node` | Node.js standalone build |
+| `pnpm preview` | Preview production build locally |
+| `pnpm check` | Run Astro check + TypeScript validation |
+| `pnpm lint` | Check code with Biome |
+| `pnpm lint:fix` | Auto-fix Biome issues |
+| `pnpm create:entry` | Create a new blog post |
+
+## Project Structure
+
+```
+src/
+├── actions/          # Server actions
+├── assets/           # Static assets
+├── components/       # Shared UI components
+├── config/           # Site configuration
+├── features/         # Feature modules
+│   ├── blog/         # Blog system
+│   ├── home/         # Home page
+│   └── legal/        # Legal pages
+├── layouts/          # Page layouts
+├── lib/              # Utilities and custom plugins
+│   ├── remark-*      # Custom remark plugins
+│   └── rehype-*      # Custom rehype plugins
+├── pages/            # File-based routing
+├── styles/           # Global styles
+└── content.config.ts # Content schema definitions
+content/
+├── blog/             # Blog posts (MDX)
+├── bucket-list/      # Bucket list data (YAML)
+└── legal/            # Legal pages (Markdown)
+scripts/
+├── create-entry.ts   # Blog post scaffolding
+└── release.ts        # Release automation
+```
+
+## Content
+
+Blog posts are organized by date (`content/blog/YYYY-MM-DD/index.mdx`) and categorized into 4 groups:
+
+- **Tech** — Technology and programming
+- **Life** — Daily life and experiences
+- **Object** — Product reviews and things
+- **DIY** — Do-it-yourself projects
+
+## License
+
+Code is licensed under [MIT](./LICENSE). Content and images are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
