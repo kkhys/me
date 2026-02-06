@@ -10,7 +10,6 @@ import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug";
-import pagefind from "./src/lib/pagefind";
 import rehypeBudoux from "./src/lib/rehype-budoux";
 import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
 import remarkBlockQuoteAlert from "./src/lib/remark-blockquote-alert";
@@ -76,11 +75,6 @@ export default defineConfig({
     partytown(),
     (await import("@playform/compress")).default({
       Image: false,
-    }),
-    pagefind({
-      indexConfig: {
-        excludeSelectors: [".expressive-code"],
-      },
     }),
   ],
   prefetch: {
