@@ -11,7 +11,7 @@ export const siteOpengraphImage = async () => {
   const svg = await satori(
     <div
       style={{
-        background: "#fff",
+        background: "#fcfcfc", // uchu-yang (oklch(99.4% 0 0))
         width: "100%",
         height: "100%",
         display: "flex",
@@ -23,9 +23,9 @@ export const siteOpengraphImage = async () => {
       <div
         style={{
           fontSize: "70px",
-          background: "#fdfdfc",
+          background: "#fcfcfc", // uchu-yang (oklch(99.4% 0 0))
           fontFamily: "Inter",
-          color: "#21201c",
+          color: "#0e1117", // uchu-yin (oklch(14.38% 0.007 256.88))
         }}
       >
         Keisuke Hayashi

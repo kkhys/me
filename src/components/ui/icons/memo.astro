@@ -10,14 +10,14 @@ const { class: className } = Astro.props;
   <defs>
     <pattern id="c" width="1" height="1" x="0" y="0" patternUnits="objectBoundingBox">
       <radialGradient id="a" spreadMethod="pad">
-        <stop offset="0" stop-color="#fff"/>
-        <stop offset=".4" stop-color="#d0d0d0"/>
-        <stop offset="1" stop-color="gray"/>
+        <stop offset="0" style="stop-color: var(--uchu-yang)"/>
+        <stop offset=".4" style="stop-color: var(--uchu-gray-4)"/>
+        <stop offset="1" style="stop-color: var(--uchu-gray-9)"/>
       </radialGradient>
       <mask id="b">
-        <path fill="#fff" d="M0 0h500v500H0z"/>
+        <path style="fill: var(--uchu-yang)" d="M0 0h500v500H0z"/>
       </mask>
-      <path fill="gray" d="M0 0h500v500H0z"/>
+      <path style="fill: var(--uchu-gray-9)" d="M0 0h500v500H0z"/>
       <circle cx="175" cy="175" r="459.619" fill="url(#a)" mask="url(#b)"/>
     </pattern>
   </defs>
