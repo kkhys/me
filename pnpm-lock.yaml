@@ -38,9 +38,6 @@ importers:
       astro-expressive-code:
         specifier: 0.41.6
         version: 0.41.6(astro@5.17.1(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.42.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.0))
-      astro-seo:
-        specifier: 1.1.0
-        version: 1.1.0(prettier@3.6.2)(typescript@5.9.3)
       class-variance-authority:
         specifier: 0.7.1
         version: 0.7.1
@@ -1319,9 +1316,6 @@ packages:
     resolution: {integrity: sha512-l47tb1uhmVIebHUkw+HEPtU/av0G4O8Q34g2cbkPvC7/e9ZhANcjUUciKt9Hp6gSVDdIuXBBLwJQn2LkeGMOAw==}
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0 || ^6.0.0-beta
-
-  astro-seo@1.1.0:
-    resolution: {integrity: sha512-G6LDNDyga30o+52v58jU7C35n3cORUzk7RSuY+xf/ZRbW6JiNplyaOO1VoYVKO+xzYNaBcxqNln2RFRR/wgJNQ==}
 
   astro@5.16.8:
     resolution: {integrity: sha512-gzZE+epuCrNuxOa8/F1dzkllDOFvxWhGeobQKeBRIAef5sUpUKMHZo/8clse+02rYnKJCgwXBgjW4uTu9mqUUw==}
@@ -4654,14 +4648,6 @@ snapshots:
     dependencies:
       astro: 5.17.1(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.42.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.0)
       rehype-expressive-code: 0.41.6
-
-  astro-seo@1.1.0(prettier@3.6.2)(typescript@5.9.3):
-    dependencies:
-      '@astrojs/check': 0.9.6(prettier@3.6.2)(typescript@5.9.3)
-    transitivePeerDependencies:
-      - prettier
-      - prettier-plugin-astro
-      - typescript
 
   astro@5.16.8(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.42.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.0):
     dependencies:

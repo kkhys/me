@@ -1,11 +1,11 @@
 ---
-import SEO from "#/components/seo.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
 import { buttonVariants } from "#/components/ui/button/button.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 ---
 
 <BaseLayout class="flex flex-col items-start justify-center gap-4">
-  <SEO
+  <BaseSEO
       title='見つかりませんでした'
       noindex
       slot='seo'

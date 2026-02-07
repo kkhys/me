@@ -2,13 +2,17 @@
 import type { PaginateFunction } from "astro";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
-import SEO from "#/components/seo.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
 import { countPerPage } from "#/config/constant";
+import { siteConfig } from "#/config/site";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import Pagination from "#/features/blog/components/ui/pagination.astro";
 import { getTagBySlug } from "#/features/blog/config/tag";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
+import { BASE_URL } from "#/lib/base-url";
 
 export const getStaticPaths = async ({
   paginate,
@@ -42,6 +46,10 @@ if (!tag) {
   throw new Error(`Tag "${tagSlug}" not found`);
 }
 
+const seoTitle = `${tag.label}｜${siteConfig.title}`;
+const seoDescription = `「${tag.label}」のタグがついた記事一覧`;
+const seoImage = `${BASE_URL}/api/og/default.png`;
+
 const breadcrumbSchema: WithContext<BreadcrumbList> = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -63,11 +71,21 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
 ---
 
 <BaseLayout>
-  <SEO
-      title={tag.label}
-      description={`「${tag.label}」のタグがついた記事一覧`}
-      slot='seo'
-  />
+  <Fragment slot='seo'>
+    <BaseSEO title={tag.label} description={seoDescription} />
+    <OpenGraph
+      title={seoTitle}
+      description={seoDescription}
+      image={seoImage}
+      imageAlt={seoTitle}
+    />
+    <TwitterCard
+      title={seoTitle}
+      description={seoDescription}
+      image={seoImage}
+      imageAlt={seoTitle}
+    />
+  </Fragment>
   <script
       is:inline
       type='application/ld+json'

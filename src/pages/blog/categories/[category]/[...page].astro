@@ -1,14 +1,18 @@
 ---
 import type { PaginateFunction } from "astro";
 import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
-import SEO from "#/components/seo.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
 import { countPerPage } from "#/config/constant";
+import { siteConfig } from "#/config/site";
 import CategoryNavigation from "#/features/blog/components/ui/category-navigation.astro";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import Pagination from "#/features/blog/components/ui/pagination.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
+import { BASE_URL } from "#/lib/base-url";
 
 export const getStaticPaths = async ({
   paginate,
@@ -41,14 +45,28 @@ const category = getCategoryBySlug(categorySlug);
 if (!category) {
   throw new Error(`Category "${categorySlug}" not found`);
 }
+
+const seoTitle = `${category.label}｜${siteConfig.title}`;
+const seoDescription = `「${category.label}」カテゴリーの記事一覧`;
+const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
 <BaseLayout>
-  <SEO
-      title={category.label}
-      description=`「${category.label}」カテゴリーの記事一覧`
-      slot='seo'
-  />
+  <Fragment slot='seo'>
+    <BaseSEO title={category.label} description={seoDescription} />
+    <OpenGraph
+      title={seoTitle}
+      description={seoDescription}
+      image={seoImage}
+      imageAlt={seoTitle}
+    />
+    <TwitterCard
+      title={seoTitle}
+      description={seoDescription}
+      image={seoImage}
+      imageAlt={seoTitle}
+    />
+  </Fragment>
   <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[170px] xl:-translate-x-[260px]">
     <a href="/" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
       <ArrowLeftIcon class="size-3.5" />

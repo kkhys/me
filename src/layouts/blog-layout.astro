@@ -3,9 +3,12 @@ import type { InferEntrySchema } from "astro:content";
 import type { MarkdownHeading } from "astro";
 import { emojiSvg } from "#/components/emoji-svg";
 import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
-import SEO from "#/components/seo.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Separator from "#/components/ui/separator.astro";
+import { me, siteConfig } from "#/config/site";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
@@ -54,20 +57,36 @@ const tagCloudItems = allTagCloudItems.filter(({ title }) =>
 );
 
 const relatedPosts = await getRelatedPosts({ id, category });
+
+const seoTitle = `${title}｜${siteConfig.title}`;
+const seoImage = `${BASE_URL}/api/og/${id}.png`;
+const currentDate = new Date();
 ---
 
 <BaseLayout>
-  <SEO
-      title={title}
+  <Fragment slot='seo'>
+    <BaseSEO title={title} description={description} />
+    <OpenGraph
+      title={seoTitle}
       description={description}
-      imageUrl={`${BASE_URL}/api/og/${id}.png`}
-      type='article'
-      publishedTime={publishedAt}
-      modifiedTime={updatedAt ?? publishedAt}
-      category={categoryObject.label}
-      tags={tagCloudItems.map((tag) => tag.label)}
-      slot='seo'
-  />
+      image={seoImage}
+      imageAlt={seoTitle}
+      type="article"
+      article={{
+        publishedTime: (publishedAt ?? currentDate).toISOString(),
+        modifiedTime: (updatedAt ?? publishedAt ?? currentDate).toISOString(),
+        authors: [me.name],
+        section: categoryObject.label,
+        tags: tagCloudItems.map((tag) => tag.label),
+      }}
+    />
+    <TwitterCard
+      title={seoTitle}
+      description={description}
+      image={seoImage}
+      imageAlt={seoTitle}
+    />
+  </Fragment>
   <slot name='head' slot='head' />
   <section>
     <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[170px] xl:-translate-x-[260px]">

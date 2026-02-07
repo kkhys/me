@@ -4,10 +4,14 @@ import Budoux from "#/components/budoux.astro";
 import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
 import CheckIcon from "#/components/icons/check.svg";
 import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
-import SEO from "#/components/seo.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
 import Separator from "#/components/ui/separator.astro";
+import { siteConfig } from "#/config/site";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { getLastUpdatedTimeByFile } from "#/lib/api/github";
+import { BASE_URL } from "#/lib/base-url";
 import { convertDateToString } from "#/lib/date";
 
 const bucketList = await getEntry("bucketList", "data");
@@ -46,14 +50,29 @@ const completedItems = bucketList.data.reduce(
     ),
   0,
 );
+
+const seoTitle = `バケットリスト｜${siteConfig.title}`;
+const seoDescription =
+  "これは僕がこの人生で達成したいこと、手に入れたいことのリストです。";
+const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
 <BaseLayout>
-  <SEO
-      title='バケットリスト'
-      description='これは僕がこの人生で達成したいこと、手に入れたいことのリストです。'
-      slot='seo'
-  />
+  <Fragment slot='seo'>
+    <BaseSEO title="バケットリスト" description={seoDescription} />
+    <OpenGraph
+      title={seoTitle}
+      description={seoDescription}
+      image={seoImage}
+      imageAlt={seoTitle}
+    />
+    <TwitterCard
+      title={seoTitle}
+      description={seoDescription}
+      image={seoImage}
+      imageAlt={seoTitle}
+    />
+  </Fragment>
   <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[170px] xl:-translate-x-[260px]">
     <a href="/" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
       <ArrowLeftIcon class="size-3.5"/>
