@@ -23,6 +23,10 @@ const divClass = cn(
 const pictureProps = {
   class: cn("rounded-2xl", className),
   formats: ["avif"],
+  quality: 80,
+  widths: [640, 750, 828, 1080, 1344],
+  sizes: `(min-width: 672px) 672px, 100vw`,
+  onload: "this.closest('.blur-load')?.classList.add('image-loaded')",
   ...rest,
 } as Parameters<typeof Picture>[0];
 ---
@@ -34,7 +38,7 @@ const pictureProps = {
     </div>
     <figcaption class="text-center text-xs text-muted-foreground mt-2 leading-6">{title}</figcaption>
   </figure>
-  ) : (
+) : (
   <div class={divClass}>
     <AstroPicture {...pictureProps} />
   </div>
@@ -42,67 +46,28 @@ const pictureProps = {
 
 <style define:vars={{ 'bg-image': `url(${blurryImage.src})` }}>
   .blur-load {
-    background-image: var(--bg-image);
+    background: var(--bg-image) center / cover no-repeat;
     filter: blur(36px);
-    transition: filter 300ms ease-in-out;
-  }
+    transition: filter 250ms ease-in-out;
 
-  .blur-load.image-loaded {
-    background-image: none;
-    filter: blur(0);
-  }
-
-  .blur-load.image-loaded > img {
-    opacity: 1;
-  }
-
-  .blur-load > img {
-    opacity: 0;
-    transition: all 300ms ease-in-out;
+    &.image-loaded {
+      background: none;
+      filter: blur(0);
+    }
   }
 
   .ambient-mode {
     position: relative;
-  }
 
-  .ambient-mode::before {
-    position: absolute;
-    max-width: 100vw;
-    overflow-x: hidden;
-    width: 105%;
-    height: 105%;
-
-    background-image: var(--bg-image);
-    background-size: cover;
-    filter: blur(64px);
-    opacity: 25%;
-    z-index: -10;
-
-    content: '';
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) translate3d(0, 0, 0);
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -1.5%;
+      max-width: 100vw;
+      background: var(--bg-image) center / cover no-repeat;
+      filter: blur(64px);
+      opacity: 0.25;
+      z-index: -10;
+    }
   }
 </style>
-
-<script is:inline>
-  const handleBlurImages = () => {
-    const blurDivs = document.querySelectorAll('.blur-load');
-    blurDivs.forEach((div) => {
-      const image = div.querySelector('img');
-      const handleLoadedImage = () => div.classList.add('image-loaded');
-
-      if (image?.complete) {
-        return handleLoadedImage();
-      }
-
-      image?.addEventListener('load', handleLoadedImage);
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', handleBlurImages);
-  } else {
-    handleBlurImages();
-  }
-</script>
