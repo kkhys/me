@@ -6,8 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 pnpm dev                   # Start development server (localhost:4321)
-pnpm build                 # Production build (Vercel adapter)
-pnpm build:node            # Node.js standalone build
+pnpm build                 # Production build (Node.js adapter)
 pnpm preview               # Preview production build locally
 pnpm check                 # Run Astro check + TypeScript validation
 pnpm lint                  # Check code with Biome

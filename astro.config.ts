@@ -3,7 +3,6 @@ import node from "@astrojs/node";
 import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import vercel from "@astrojs/vercel";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
@@ -19,15 +18,9 @@ import remarkTweetBlock from "./src/lib/remark-tweet-block";
 import remarkVideoBlock from "./src/lib/remark-video-block";
 import remarkYoutubeBlock from "./src/lib/remark-youtube-block";
 
-let adapter = vercel();
-
-if (process.argv[3] === "--node" || process.argv[4] === "--node") {
-  adapter = node({ mode: "standalone" });
-}
-
 export default defineConfig({
   site: "https://kkhys.me",
-  adapter,
+  adapter: node({ mode: "standalone" }),
   integrations: [
     expressiveCode({
       themes: ["poimandres", "min-light"],

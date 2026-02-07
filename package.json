@@ -4,8 +4,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "build:node": "astro build --node",
-    "preview": "export $(cat .env) && astro build --node && astro preview --node",
+    "preview": "astro preview",
     "astro": "astro",
     "check": "astro check && tsc --noEmit",
     "lint": "biome check .",
@@ -22,7 +21,6 @@
     "@astrojs/react": "4.4.2",
     "@astrojs/rss": "4.0.15",
     "@astrojs/sitemap": "3.7.0",
-    "@astrojs/vercel": "9.0.4",
     "@hono/zod-validator": "0.7.6",
     "@justinribeiro/lite-youtube": "1.9.0",
     "@tailwindcss/vite": "4.1.18",
