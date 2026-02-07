@@ -1,10 +1,10 @@
 ---
-import InfoIcon from "@lucide/astro/icons/info";
-import LightbulbIcon from "@lucide/astro/icons/lightbulb";
-import MessageSquareWarningIcon from "@lucide/astro/icons/message-square-warning";
-import OctagonAlertIcon from "@lucide/astro/icons/octagon-alert";
-import TriangleAlertIcon from "@lucide/astro/icons/triangle-alert";
-import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import InfoIcon from "#/components/icons/info.svg";
+import LightbulbIcon from "#/components/icons/lightbulb.svg";
+import MessageSquareWarningIcon from "#/components/icons/message-square-warning.svg";
+import OctagonAlertIcon from "#/components/icons/octagon-alert.svg";
+import TriangleAlertIcon from "#/components/icons/triangle-alert.svg";
+import type { SvgComponent } from "astro/types";
 import type { HTMLAttributes } from "astro/types";
 import { cn } from "#/lib/ui";
 
@@ -16,7 +16,7 @@ interface Props extends HTMLAttributes<"div"> {
 
 const { "data-alert-type": alertType, ...rest } = Astro.props;
 
-const alertIcons: Record<AlertType, AstroComponentFactory> = {
+const alertIcons: Record<AlertType, SvgComponent> = {
   note: InfoIcon,
   tip: LightbulbIcon,
   important: MessageSquareWarningIcon,
