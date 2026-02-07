@@ -33,8 +33,7 @@ Open [http://localhost:4321](http://localhost:4321) to view the site.
 | Command | Description |
 | --- | --- |
 | `pnpm dev` | Start development server |
-| `pnpm build` | Production build (Vercel) |
-| `pnpm build:node` | Node.js standalone build |
+| `pnpm build` | Production build (Node.js) |
 | `pnpm preview` | Preview production build locally |
 | `pnpm check` | Run Astro check + TypeScript validation |
 | `pnpm lint` | Check code with Biome |
