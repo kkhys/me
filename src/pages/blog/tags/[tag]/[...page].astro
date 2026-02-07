@@ -74,17 +74,14 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
       set:html={JSON.stringify(breadcrumbSchema)}
       slot='head'
   />
+  <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[170px] xl:-translate-x-[260px]">
+    <a href="/blog" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
+      <ArrowLeftIcon class="size-3.5" />
+      ブログ
+    </a>
+  </div>
   <section>
-    <div class="inline-flex gap-1.5 items-center text-xs">
-      <a href="/blog" class="inline-flex gap-1 items-center text-muted-foreground hover:underline">
-        <ArrowLeftIcon class="size-3.5" />
-        ブログ
-      </a>
-      <span class="text-muted-foreground">/</span>
-      <h1 class="font-semibold">
-        {tag.label}
-      </h1>
-    </div>
+    <h1 class="font-medium">#{tag.label}</h1>
   </section>
   <section class="mt-6">
     <EntryList blogEntries={page.data} showDate />
