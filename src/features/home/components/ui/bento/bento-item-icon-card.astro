@@ -13,7 +13,6 @@ import BentoItemBase from "./bento-item-base.astro";
  * @param href - Link URL
  * @param target - Link target attribute
  * @param rel - Link rel attribute
- * @param transition - Animation delay value
  * @param umamiEvent - Umami tracking event name
  * @param umamiEventLocation - Umami tracking location
  * @param size - Grid size (default: "1x1")
@@ -24,7 +23,6 @@ import BentoItemBase from "./bento-item-base.astro";
  *   title="Memo"
  *   description="Daily notes"
  *   href="https://example.com"
- *   transition={0.35}
  * >
  *   <Memo slot="icon" class="size-5 fill-white" />
  * </BentoItemIconCard>
@@ -38,7 +36,6 @@ interface Props {
   href: string;
   target?: string;
   rel?: string;
-  transition: number;
   umamiEvent?: string;
   umamiEventLocation?: string;
   size?: BentoSizeOrCustom;
@@ -51,7 +48,6 @@ const {
   href,
   target,
   rel,
-  transition,
   umamiEvent,
   umamiEventLocation,
   size = "1x1",
@@ -61,7 +57,6 @@ const {
 <BentoItemBase
   {size}
   {href}
-  {transition}
   className="relative p-4 overflow-hidden"
   {...(target && { target })}
   {...(rel && { rel })}
