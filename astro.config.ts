@@ -200,18 +200,6 @@ export default defineConfig({
         context: "server",
         access: "secret",
       }),
-      SPOTIFY_CLIENT_ID: envField.string({
-        context: "server",
-        access: "secret",
-      }),
-      SPOTIFY_CLIENT_SECRET: envField.string({
-        context: "server",
-        access: "secret",
-      }),
-      SPOTIFY_REFRESH_TOKEN: envField.string({
-        context: "server",
-        access: "secret",
-      }),
       PUBLIC_VERCEL_ENV: envField.string({
         context: "client",
         access: "public",
