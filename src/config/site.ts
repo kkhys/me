@@ -15,5 +15,6 @@ export const me = {
     id: "kkhys",
     url: "https://github.com/kkhys",
   },
+  twitter: "@kkhys_",
   memo: "https://memo.kkhys.me",
 } as const;
