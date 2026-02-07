@@ -6,9 +6,9 @@ import ContentWrapper from "#/features/blog/components/content-wrapper.astro";
 import { getCategoryByTitle } from "#/features/blog/config/category";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BlogLayout from "#/layouts/blog-layout.astro";
+import { getLastUpdatedTimeByFile } from "#/lib/api/github";
 import { convertDateToString } from "#/lib/date";
 import { getBlogPostingSchema } from "#/lib/json-ld";
-import { getLastUpdatedTimeByFile } from "#/lib/api/github";
 
 export const getStaticPaths = (async () =>
   (await getPublicBlogEntries()).map((entry) => {
