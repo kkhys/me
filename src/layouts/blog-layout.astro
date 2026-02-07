@@ -10,7 +10,7 @@ import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
-import { flatTags } from "#/features/blog/config/tag";
+import { tags as allTags } from "#/features/blog/config/tag";
 import { getRelatedPosts } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
@@ -43,9 +43,9 @@ if (!categoryObject) {
 }
 
 const allTagCloudItems = await Promise.all(
-  flatTags?.map(async (flatTag) => ({
-    ...flatTag,
-    emojiSvg: await emojiSvg({ emoji: flatTag.emoji, isColored: true }),
+  allTags?.map(async (tag) => ({
+    ...tag,
+    emojiSvg: await emojiSvg({ emoji: tag.emoji, isColored: true }),
   })) || [],
 );
 
