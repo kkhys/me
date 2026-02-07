@@ -17,7 +17,7 @@ const { title, description } = Astro.props;
       slot='seo'
   />
   <slot name='head' slot='head'/>
-  <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[138px] xl:-translate-x-[260px]">
+  <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[170px] xl:-translate-x-[260px]">
     <a href="/" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
       <ArrowLeftIcon class="size-3.5" />
       ホーム
@@ -25,7 +25,7 @@ const { title, description } = Astro.props;
   </div>
   <section class="prose">
     <header>
-      <h1 class="mt-4 font-medium">{title}</h1>
+      <h1 class="font-medium">{title}</h1>
     </header>
     <div>
       <slot />
