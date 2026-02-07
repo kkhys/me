@@ -13,7 +13,7 @@ const linkClass =
   "flex h-6 items-center justify-center rounded-full px-2 text-center text-xs transition-colors whitespace-nowrap";
 ---
 
-<nav class={cn('category-scroll', className)} {...rest}>
+<nav class={cn('category-scroll palt', className)} {...rest}>
   {/^\/blog(\/\d+)?\/?$/.test(pathname) ? (
       <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
       すべて
