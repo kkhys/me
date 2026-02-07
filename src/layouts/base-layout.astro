@@ -1,9 +1,7 @@
 ---
 import "#/styles/global.css";
 import SEO from "#/components/seo.astro";
-import { BottomNavigationBar } from "#/components/ui/bottom-navigation-bar";
 import Footer from "#/components/ui/footer.astro";
-import FooterMask from "#/components/ui/footer-mask.astro";
 import { cn } from "#/lib/ui";
 import "node_modules/vaul/style.css";
 
@@ -49,8 +47,6 @@ const { class: className } = Astro.props;
     <slot/>
   </div>
 </main>
-<BottomNavigationBar client:load />
 <Footer />
-<FooterMask />
 </body>
 </html>
