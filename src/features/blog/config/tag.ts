@@ -1,7 +1,6 @@
 import type { CategoryTitle } from "#/features/blog/config/category";
 
 export type Tag = Record<"title" | "label" | "slug" | "emoji", string>;
-export type AllTagsTitle = (typeof tags)[keyof typeof tags][number]["title"];
 
 export const tags = {
   diy: [
@@ -190,15 +189,6 @@ export const tags = {
 export const flatTags = Object.values(tags).flat();
 
 export const allTagTitles = flatTags.map(({ title }) => title);
-
-export const extractCategoryByTagTitle = (title: string) => {
-  for (const [categoryName, tagList] of Object.entries(tags)) {
-    if (tagList.some((tag) => tag.title === title)) {
-      return categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
-    }
-  }
-  return undefined;
-};
 
 export const tagsTitlesByCategory: Record<CategoryTitle, string[]> = {
   Tech: tags.tech.map((t) => t.title),
