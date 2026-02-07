@@ -1,5 +1,4 @@
 import mdx from "@astrojs/mdx";
-import node from "@astrojs/node";
 import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
@@ -20,7 +19,6 @@ import remarkYoutubeBlock from "./src/lib/remark-youtube-block";
 
 export default defineConfig({
   site: "https://kkhys.me",
-  adapter: node({ mode: "standalone" }),
   integrations: [
     expressiveCode({
       themes: ["poimandres", "min-light"],
