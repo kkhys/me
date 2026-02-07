@@ -49,32 +49,6 @@ const { headings, class: className } = Astro.props;
 </style>
 
 <script>
-  const highlightElement = (element: HTMLElement) => {
-    const tempBgColor = "var(--selection)";
-    const origColor = element.style.backgroundColor;
-
-    if (origColor === tempBgColor) {
-      return;
-    }
-
-    element.style.backgroundColor = tempBgColor;
-    setTimeout(() => element.style.backgroundColor = origColor, 1000);
-  }
-
-  const links = document.querySelectorAll(".toc-link");
-  links.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const href = link.getAttribute("href");
-      if (!href || !href.startsWith("#")) return;
-      const targetId = href.substring(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        highlightElement(targetElement);
-      }
-    });
-  });
-
   const tocGroup = document.querySelector('.toc');
 
   if (tocGroup) {
