@@ -218,18 +218,16 @@ const blurryPhotos = tweet.photos
 
 <script>
   // Handle blur image loading
-  document.addEventListener('astro:page-load', () => {
-    const blurDivs = document.querySelectorAll('.tweet-photo-blur');
-    blurDivs.forEach((div) => {
-      const image = div.querySelector('img');
-      const handleLoadedImage = () => div.classList.add('image-loaded');
+  const blurDivs = document.querySelectorAll('.tweet-photo-blur');
+  blurDivs.forEach((div) => {
+    const image = div.querySelector('img');
+    const handleLoadedImage = () => div.classList.add('image-loaded');
 
-      if (image?.complete) {
-        return handleLoadedImage();
-      }
+    if (image?.complete) {
+      return handleLoadedImage();
+    }
 
-      image?.addEventListener('load', handleLoadedImage);
-    });
+    image?.addEventListener('load', handleLoadedImage);
   });
 
 	class TweetVideo extends HTMLElement {
