@@ -1,9 +1,0 @@
----
-import { client } from "#/lib/client";
-
-import { NowPlaying as NowPlayingReact } from "./now-playing";
-
-const initialData = await client.api.spotify.$get().then((res) => res.json());
----
-
-<NowPlayingReact initialData={initialData} client:only='react' />
