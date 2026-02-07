@@ -62,7 +62,7 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
 };
 ---
 
-<BaseLayout class="space-y-6">
+<BaseLayout>
   <SEO
       title={tag.label}
       description={`「${tag.label}」のタグがついた記事一覧`}
@@ -86,8 +86,8 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
       </h1>
     </div>
   </section>
-  <section>
+  <section class="mt-6">
     <EntryList blogEntries={page.data} showDate />
   </section>
-  <Pagination page={page} baseUrl={`/blog/tags/${tag.slug}`} />
+  <Pagination page={page} baseUrl={`/blog/tags/${tag.slug}`} class="mt-6" />
 </BaseLayout>
