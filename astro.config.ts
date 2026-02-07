@@ -7,7 +7,9 @@ import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug";
+import { expressiveCodeOptions } from "./src/lib/expressive-code";
 import rehypeBudoux from "./src/lib/rehype-budoux";
+import { rehypeMermaidOptions } from "./src/lib/rehype-mermaid-options";
 import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
 import remarkBlockQuoteAlert from "./src/lib/remark-blockquote-alert";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
@@ -15,8 +17,6 @@ import remarkLinkCard from "./src/lib/remark-link-card";
 import remarkTweetBlock from "./src/lib/remark-tweet-block";
 import remarkVideoBlock from "./src/lib/remark-video-block";
 import remarkYoutubeBlock from "./src/lib/remark-youtube-block";
-import { expressiveCodeOptions } from "./src/lib/expressive-code";
-import { rehypeMermaidOptions } from "./src/lib/rehype-mermaid-options";
 
 export default defineConfig({
   site: "https://kkhys.me",
