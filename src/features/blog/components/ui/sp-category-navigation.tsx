@@ -1,4 +1,3 @@
-import { navigate } from "astro:transitions/client";
 import { ChevronDownIcon } from "lucide-react";
 import { type MouseEvent, useState } from "react";
 import { Button } from "#/components/ui/button/button";
@@ -33,13 +32,10 @@ export const SpCategoryNavigation = ({
     return match?.[1] ?? "all";
   };
 
-  const handleTransition = async (
-    e: MouseEvent<HTMLAnchorElement>,
-    href: string,
-  ) => {
+  const handleTransition = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setOpen(false);
-    await navigate(href);
+    window.location.href = href;
   };
 
   const category = getCategoryBySlug(extractCategoryFromPath(pathname)) || {
