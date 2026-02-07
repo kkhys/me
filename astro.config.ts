@@ -178,8 +178,6 @@ export default defineConfig({
       process.env.GITHUB_ACTIONS === "true"
         ? { entrypoint: "astro/assets/services/noop" }
         : { entrypoint: "astro/assets/services/sharp" },
-    responsiveStyles: true,
-    layout: "constrained",
   },
   vite: {
     plugins: [tailwindcss()],
