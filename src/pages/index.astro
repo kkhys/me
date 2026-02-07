@@ -1,19 +1,9 @@
 ---
-import MoveRightIcon from "@lucide/astro/icons/move-right";
 import Budoux from "#/components/budoux.astro";
-import { buttonVariants } from "#/components/ui/button/button.astro";
-import BentoGrid from "#/features/home/components/ui/bento/bento-grid.astro";
-import BentoItemAboutMe from "#/features/home/components/ui/bento/bento-item-about-me.astro";
-import BentoItemMap from "#/features/home/components/ui/bento/bento-item-map.astro";
-import BentoItemMemo from "#/features/home/components/ui/bento/bento-item-memo.astro";
-import BentoItemSupport from "#/features/home/components/ui/bento/bento-item-support.astro";
-import FeaturedEntry from "#/features/home/components/ui/bento/featured-entry.astro";
-import BentoItemGithubActivity from "#/features/home/components/ui/bento/github-activity/bento-item-github-activity.astro";
-import BentoItemNowPlaying from "#/features/home/components/ui/bento/now-playing/bento-item-now-playing.astro";
-import BentoItemTechBlog from "#/features/home/components/ui/bento/tech-blog/bento-item-tech-blog.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { websiteSchema } from "#/lib/json-ld";
-import { cn } from "#/lib/ui";
+
+const linkClass = "text-foreground underline underline-offset-4 decoration-muted-foreground/50 hover:decoration-foreground";
 ---
 
 <BaseLayout>
@@ -23,29 +13,24 @@ import { cn } from "#/lib/ui";
       set:html={JSON.stringify(websiteSchema)}
       slot='head'
   />
-  <h1 class="font-medium">
-    Keisuke Hayashi
-  </h1>
-  <Budoux>
-    <p class="text-sm text-muted-foreground mt-2">東京を拠点とするフルスタック開発者。何かを作り、人々に喜びと驚きを与えることが大好きです。</p>
-  </Budoux>
-    <BentoGrid class="mt-10">
-      <BentoItemAboutMe />
-      <BentoItemMemo />
-      <BentoItemSupport />
-      <BentoItemMap />
-      <BentoItemGithubActivity />
-      <BentoItemNowPlaying />
-      <BentoItemTechBlog />
-    </BentoGrid>
-  <div class="mt-24">
-    <h2 class="font-medium">
-      おすすめの記事
-    </h2>
-    <FeaturedEntry class="mt-10" />
-    <a href="/blog" class={cn('mt-8', buttonVariants({ variant: 'link'}))}>
-      すべての記事を見る
-      <MoveRightIcon class="size-4" />
-    </a>
+  <div class="mt-0 md:mt-16">
+    <h1 class="font-medium">
+      Keisuke Hayashi
+    </h1>
+    <Budoux>
+      <div class="mt-5 space-y-5 prose">
+        <p>コードを書いて暮らしています。色々なものを作ることが好きです。<a href="/blog/categories/tech" class={linkClass}>プログラミング</a>のことから<a href="/blog/tags/sewing" class={linkClass}>手縫いの服づくり</a>まで、<a href="/blog/categories/life" class={linkClass}>日々のこと</a>や<a href="/blog/categories/object" class={linkClass}>手に馴染む道具</a>の話をブログに残しています。</p>
+        <p>コードを書いていないときは、珈琲を淹れたりチョコレートを食べたりジムで体を動かしたりしています。日々考えたことは<a href="https://memo.kkhys.me" class={linkClass}>メモ</a>に書き留めて、いつかやりたいことは<a href="/bucket-list" class={linkClass}>バケットリスト</a>にまとめています。</p>
+        <p>私の好きな文章には次のようなものがあります。</p>
+        <ul class="mt-5">
+          <li><a href="/blog/posts/b1ty460" class={linkClass}>デスク構成スナップショット 2025</a></li>
+          <li><a href="/blog/posts/b1r3zrr" class={linkClass}>Mac mini という選択</a></li>
+          <li><a href="/blog/posts/b1ppkfs" class={linkClass}>さよなら、My 自作 PC</a></li>
+          <li><a href="/blog/posts/b1zn5cl" class={linkClass}>景色と料理を楽しむ、鹿児島 3 泊 4 日の旅</a></li>
+          <li><a href="/blog/posts/b17ruev" class={linkClass}>7 日間のマレーシア放浪記</a></li>
+        </ul>
+        <p><a href="/blog" class={linkClass}>私の文章</a>を読んだり <a href="https://github.com/kkhys" class={linkClass}>GitHub</a> でコードを見ることができます。何かあれば<a href="mailto:hi@kkhys.me" class={linkClass}>ご連絡ください</a>。</p>
+      </div>
+    </Budoux>
   </div>
 </BaseLayout>
