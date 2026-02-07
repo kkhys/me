@@ -4,10 +4,10 @@
  * @description Type-safe management of grid layout size variations
  * @example
  * ```typescript
- * import { BENTO_SIZES, type BentoSize } from "./bento-sizes";
+ * import { BENTO_SIZES, type BentoSizeOrCustom } from "./bento-sizes";
  *
- * const size: BentoSize = "1x1";
- * const sizeClasses = BENTO_SIZES[size];
+ * const size: BentoSizeOrCustom = "1x1";
+ * const sizeClasses = BENTO_SIZES[size as keyof typeof BENTO_SIZES];
  * ```
  */
 
@@ -18,7 +18,7 @@ export const BENTO_SIZES = {
   "2x2": "col-span-1 row-span-2 md:col-span-4 aspect-square",
 } as const;
 
-export type BentoSize = keyof typeof BENTO_SIZES;
+type BentoSize = keyof typeof BENTO_SIZES;
 
 /**
  * Type that accepts either a custom size class or a predefined size key

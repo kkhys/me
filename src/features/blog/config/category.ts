@@ -1,6 +1,6 @@
 import { tags } from "#/features/blog/config/tag";
 
-export type Category = Record<"title" | "label" | "slug" | "emoji", string>;
+type Category = Record<"title" | "label" | "slug" | "emoji", string>;
 export type CategoryTitle = (typeof categories)[number]["title"];
 
 export const categories = [
