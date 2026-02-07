@@ -1,13 +1,35 @@
 ---
 import Budoux from "#/components/budoux.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
+import { siteConfig } from "#/config/site";
 import BaseLayout from "#/layouts/base-layout.astro";
+import { BASE_URL } from "#/lib/base-url";
 import { websiteSchema } from "#/lib/json-ld";
+
+const seoImage = `${BASE_URL}/api/og/default.png`;
 
 const linkClass =
   "text-foreground underline underline-offset-4 decoration-muted-foreground/50 hover:decoration-foreground";
 ---
 
 <BaseLayout>
+  <Fragment slot='seo'>
+    <BaseSEO />
+    <OpenGraph
+      title={siteConfig.title}
+      description={siteConfig.description}
+      image={seoImage}
+      imageAlt={siteConfig.title}
+    />
+    <TwitterCard
+      title={siteConfig.title}
+      description={siteConfig.description}
+      image={seoImage}
+      imageAlt={siteConfig.title}
+    />
+  </Fragment>
   <script
       is:inline
       type='application/ld+json'
