@@ -1,6 +1,5 @@
 ---
 import "#/styles/global.css";
-import { ClientRouter } from "astro:transitions";
 import SEO from "#/components/seo.astro";
 import { BottomNavigationBar } from "#/components/ui/bottom-navigation-bar";
 import Footer from "#/components/ui/footer.astro";
@@ -42,7 +41,7 @@ const { class: className } = Astro.props;
       data-website-id='0e7df23c-24a9-4db7-9bed-a064aa9ac48e'/>
   )}
 
-  <ClientRouter fallback='swap' />
+
 </head>
 <body class="flex flex-col w-full max-w-6xl min-h-screen min-w-full mx-auto">
 <main class='flex-1 w-full max-w-2xl mx-auto'>
@@ -50,7 +49,7 @@ const { class: className } = Astro.props;
     <slot/>
   </div>
 </main>
-<BottomNavigationBar client:load transition:persist="bottom-navigation-bar" />
+<BottomNavigationBar client:load />
 <Footer />
 <FooterMask />
 </body>
@@ -62,37 +61,35 @@ const { class: className } = Astro.props;
     block: 'start'
   }
 
-  document.addEventListener('astro:page-load', () => {
-    if (window.location.hash) {
-      window.scrollTo({ top: 0, behavior: 'instant' })
+  if (window.location.hash) {
+    window.scrollTo({ top: 0, behavior: 'instant' })
 
-      const targetId = window.location.hash.substring(1)
+    const targetId = window.location.hash.substring(1)
+    const targetElement = document.getElementById(targetId)
+    targetElement?.scrollIntoView(scrollOptions)
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault()
+
+      const currentTarget = event.currentTarget as HTMLAnchorElement
+      const targetId = currentTarget.getAttribute('href')?.substring(1)
+
+      if (!targetId) return
+
       const targetElement = document.getElementById(targetId)
-      targetElement?.scrollIntoView(scrollOptions)
-    }
+      const block = currentTarget.dataset['block'] as ScrollLogicalPosition
+      targetElement?.scrollIntoView({ ...scrollOptions, block })
 
-    document.querySelectorAll('a[href^="#"]').forEach((link) => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault()
-
-        const currentTarget = event.currentTarget as HTMLAnchorElement
-        const targetId = currentTarget.getAttribute('href')?.substring(1)
-
-        if (!targetId) return
-
-        const targetElement = document.getElementById(targetId)
-        const block = currentTarget.dataset['block'] as ScrollLogicalPosition
-        targetElement?.scrollIntoView({ ...scrollOptions, block })
-
-        history.pushState(null, '', `#${targetId}`)
-      })
+      history.pushState(null, '', `#${targetId}`)
     })
+  })
 
-    window.addEventListener('hashchange', () => {
-      const targetId = window.location.hash.substring(1)
-      const targetElement = document.getElementById(targetId)
+  window.addEventListener('hashchange', () => {
+    const targetId = window.location.hash.substring(1)
+    const targetElement = document.getElementById(targetId)
 
-      targetElement?.scrollIntoView(scrollOptions)
-    })
+    targetElement?.scrollIntoView(scrollOptions)
   })
 </script>
