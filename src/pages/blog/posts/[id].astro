@@ -8,7 +8,7 @@ import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BlogLayout from "#/layouts/blog-layout.astro";
 import { convertDateToString } from "#/lib/date";
 import { getBlogPostingSchema } from "#/lib/json-ld";
-import { getLastUpdatedTimeByFile } from "#/pages/api/_services/github/last-update-file";
+import { getLastUpdatedTimeByFile } from "#/lib/api/github";
 
 export const getStaticPaths = (async () =>
   (await getPublicBlogEntries()).map((entry) => {
