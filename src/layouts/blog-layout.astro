@@ -115,7 +115,6 @@ const relatedPosts = await getRelatedPosts({ id, category });
       <div class="mt-12 space-y-6">
         <div class="font-medium leading-7">こちらもおすすめ</div>
         <EntryList blogEntries={relatedPosts} />
-        <Separator class="mt-8" />
       </div>
     )}
   </section>
