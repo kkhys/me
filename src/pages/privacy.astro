@@ -1,0 +1,17 @@
+---
+import { getEntry, render } from "astro:content";
+import ContentWrapper from "#/features/legal/components/content-wrapper.astro";
+import LegalLayout from "#/layouts/legal-layout.astro";
+
+const legal = await getEntry("legal", "policy");
+
+if (!legal) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(legal);
+---
+
+<LegalLayout {...legal.data}>
+  <ContentWrapper content={Content} />
+</LegalLayout>
