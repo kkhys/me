@@ -1,4 +1,3 @@
-import { navigate } from "astro:transitions/client";
 import {
   ArrowDownToLineIcon,
   ArrowUpFromLineIcon,
@@ -37,9 +36,9 @@ export const BottomNavigationBar = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const handleTransition = async (href: string) => {
+  const handleTransition = (href: string) => {
     setOpen(false);
-    await navigate(href);
+    window.location.href = href;
   };
 
   const buttonBaseStyle =

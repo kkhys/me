@@ -3,7 +3,6 @@ import {
   BENTO_SIZES,
   type BentoSizeOrCustom,
 } from "#/features/home/config/bento-sizes.ts";
-import { getCustomTransition } from "#/lib/custom-transition";
 import { cn } from "#/lib/ui";
 
 /**
@@ -14,7 +13,6 @@ import { cn } from "#/lib/ui";
  * @param href - Link URL (renders as <a> if specified, <div> otherwise)
  * @param target - Link target attribute
  * @param rel - Link rel attribute
- * @param transition - Animation delay value passed to getCustomTransition
  * @param umamiEvent - Umami tracking event name
  * @param umamiEventLocation - Umami tracking location
  * @param className - Additional CSS classes
@@ -24,7 +22,6 @@ import { cn } from "#/lib/ui";
  * <BentoItemBase
  *   size="1x1"
  *   href="/about"
- *   transition={0.3}
  * >
  *   <div>Content</div>
  * </BentoItemBase>
@@ -36,7 +33,6 @@ interface Props {
   href?: string;
   target?: string;
   rel?: string;
-  transition?: number;
   umamiEvent?: string;
   umamiEventLocation?: string;
   className?: string;
@@ -48,7 +44,6 @@ const {
   href,
   target,
   rel,
-  transition,
   umamiEvent,
   umamiEventLocation,
   className,
@@ -68,19 +63,6 @@ const baseClasses = cn(
 ---
 
 {href ? (
-  transition !== undefined ? (
-  <a
-    href={href}
-    target={target}
-    rel={rel}
-    class={baseClasses}
-    transition:animate={getCustomTransition(transition)}
-    data-umami-event={umamiEvent}
-    data-umami-event-location={umamiEventLocation}
-  >
-    <slot />
-  </a>
-  ) : (
   <a
     href={href}
     target={target}
@@ -91,18 +73,7 @@ const baseClasses = cn(
   >
     <slot />
   </a>
-  )
 ) : (
-  transition !== undefined ? (
-  <div
-    class={baseClasses}
-    transition:animate={getCustomTransition(transition)}
-    data-umami-event={umamiEvent}
-    data-umami-event-location={umamiEventLocation}
-  >
-    <slot />
-  </div>
-  ) : (
   <div
     class={baseClasses}
     data-umami-event={umamiEvent}
@@ -110,5 +81,4 @@ const baseClasses = cn(
   >
     <slot />
   </div>
-  )
 )}

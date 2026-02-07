@@ -61,19 +61,17 @@ const { headings, class: className } = Astro.props;
     setTimeout(() => element.style.backgroundColor = origColor, 1000);
   }
 
-  document.addEventListener("astro:page-load", () => {
-    const links = document.querySelectorAll(".toc-link");
-    links.forEach(link => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const href = link.getAttribute("href");
-        if (!href || !href.startsWith("#")) return;
-        const targetId = href.substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          highlightElement(targetElement);
-        }
-      });
+  const links = document.querySelectorAll(".toc-link");
+  links.forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const href = link.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        highlightElement(targetElement);
+      }
     });
   });
 
