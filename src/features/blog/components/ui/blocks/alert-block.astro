@@ -1,11 +1,10 @@
 ---
+import type { HTMLAttributes, SvgComponent } from "astro/types";
 import InfoIcon from "#/components/icons/info.svg";
 import LightbulbIcon from "#/components/icons/lightbulb.svg";
 import MessageSquareWarningIcon from "#/components/icons/message-square-warning.svg";
 import OctagonAlertIcon from "#/components/icons/octagon-alert.svg";
 import TriangleAlertIcon from "#/components/icons/triangle-alert.svg";
-import type { SvgComponent } from "astro/types";
-import type { HTMLAttributes } from "astro/types";
 import { cn } from "#/lib/ui";
 
 export type AlertType = "note" | "tip" | "important" | "warning" | "caution";
