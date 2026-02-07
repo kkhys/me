@@ -17,9 +17,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
 
@@ -53,18 +50,12 @@
   --color-td-borders: var(--td-borders);
 
   --color-code-block-background: var(--code-block-background);
-  --color-code-block-header-background: var(--code-block-header-background);
-  --color-code-block-header-foreground: var(--code-block-header-foreground);
-  --color-code-block-border: var(--code-block-border);
-  --color-code-block-gutter: var(--code-block-gutter);
 
   --color-hr-from: var(--hr-from);
   --color-hr-via: var(--hr-via);
   --color-hr-to: var(--hr-to);
 
-  --color-toc: var(--foreground);
   --color-toc-bar: var(--toc-bar);
-  --color-toc-bar-active: var(--toc-bar-active);
 
   --color-scrollbar: var(--scrollbar);
   --color-scrollbar-foreground: var(--scrollbar-foreground);
@@ -77,9 +68,6 @@
 
   --background: var(--uchu-yang);
   --foreground: var(--uchu-yin);
-
-  --popover: var(--uchu-yang);
-  --popover-foreground: var(--uchu-yin);
 
   --primary: var(--uchu-yin-9);
   --primary-foreground: var(--uchu-yang);
@@ -124,12 +112,6 @@
   --hr-to: var(--uchu-gray-1);
 
   --toc-bar: var(--uchu-gray-2);
-  --toc-bar-active: var(--uchu-gray-3);
-
-  --github-heatmap-level-1: var(--uchu-gray-1);
-  --github-heatmap-level-2: var(--uchu-green-2);
-  --github-heatmap-level-3: var(--uchu-green-5);
-  --github-heatmap-level-4: var(--uchu-green-9);
 
   --scrollbar: var(--uchu-gray-3);
   --scrollbar-foreground: var(--uchu-gray-7);
@@ -141,9 +123,6 @@
   :root {
     --background: var(--uchu-yin);
     --foreground: var(--uchu-gray-1);
-
-    --popover: var(--uchu-yin-9);
-    --popover-foreground: var(--uchu-yang);
 
     --primary: var(--uchu-gray-2);
     --primary-foreground: var(--uchu-yin-9);
@@ -188,12 +167,6 @@
     --hr-to: var(--uchu-yin-9);
 
     --toc-bar: var(--uchu-yin-8);
-    --toc-bar-active: var(--uchu-yin-9);
-
-    --github-heatmap-level-1: var(--uchu-yin-9);
-    --github-heatmap-level-2: var(--uchu-yin-8);
-    --github-heatmap-level-3: var(--uchu-green-8);
-    --github-heatmap-level-4: var(--uchu-green-3);
 
     --scrollbar: var(--uchu-yin-8);
     --scrollbar-foreground: var(--uchu-yin-7);
@@ -448,15 +421,4 @@
 
 @utility container {
   @apply px-4 sm:px-0;
-}
-
-@keyframes sound-bar {
-  0% {
-    opacity: 0.35;
-    height: 3px;
-  }
-  100% {
-    opacity: 1;
-    height: 26px;
-  }
 }
