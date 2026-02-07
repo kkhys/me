@@ -1,18 +1,45 @@
----
-const footerLinks = [
-  { href: "/legal/privacy-policy", title: "プライバシーポリシー" },
-];
----
-
-<footer class="container flex flex-col items-center justify-between gap-4 max-w-6xl mx-auto text-xs text-muted-foreground py-6 mt-28 md:px-8 md:py-0 md:h-24 md:flex-row">
-    <nav class="flex divide-x">
-      {footerLinks.map(({ href, title }) => (
-          <a
-              href={href}
-              class="px-2 hover:text-foreground"
-          >
-            {title}
-          </a>
-      ))}
+<footer>
+    <nav>
+        <a href="/privacy">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="/copyright">Copyright</a>
     </nav>
 </footer>
+
+<style>
+    footer {
+        grid-row: main-end / bottom;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 2rem 1rem;
+    }
+
+    footer nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    footer a {
+        font-size: var(--text-xs);
+        color: var(--color-muted-foreground);
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+    }
+
+    footer span {
+        font-size: var(--text-xs);
+        color: var(--color-muted-foreground);
+    }
+
+    footer .separator {
+        font-size: var(--text-xs);
+        color: var(--color-muted-foreground);
+    }
+</style>
