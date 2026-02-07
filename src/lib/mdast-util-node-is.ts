@@ -1,10 +1,4 @@
-import type {
-  FootnoteDefinition,
-  FootnoteReference,
-  Link,
-  Paragraph,
-  Text,
-} from "mdast";
+import type { FootnoteDefinition, FootnoteReference, Link, Text } from "mdast";
 import type { MdxJsxFlowElement } from "mdast-util-mdx-jsx";
 import type { Literal, Node, Parent } from "unist";
 
@@ -19,9 +13,6 @@ export const isParent = (node: unknown): node is Parent =>
 
 export const isLiteral = (node: unknown): node is Literal =>
   isObject(node) && "value" in node;
-
-export const isParagraph = (node: unknown): node is Paragraph =>
-  isNode(node) && node.type === "paragraph";
 
 export const isText = (node: unknown): node is Text =>
   isLiteral(node) && node.type === "text" && typeof node.value === "string";
