@@ -17,9 +17,6 @@ const blog = defineCollection({
       publishedAtString: z.string().optional(),
       updatedAt: z.date().optional(),
       updatedAtString: z.string().optional(),
-      editUrl: z.string().optional(),
-      sourceUrl: z.string().optional(),
-      revisionHistoryUrl: z.string().optional(),
     })
     .refine(
       ({ category, tags }) => {
