@@ -2,7 +2,6 @@
 import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import type { BreadcrumbList, WithContext } from "schema-dts";
-import { siteConfig } from "#/config/site";
 import ContentWrapper from "#/features/blog/components/content-wrapper.astro";
 import { getCategoryByTitle } from "#/features/blog/config/category";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
@@ -42,10 +41,6 @@ if (process.env.VERCEL) {
   entry.data.updatedAtString = updatedAtString;
 }
 
-const editUrl = `${siteConfig.github.content}/edit/main/${contentPath}`;
-const sourceUrl = `${siteConfig.github.content}/blob/main/${contentPath}?plain=1`;
-const revisionHistoryUrl = `${siteConfig.github.content}/commits/main/${contentPath}`;
-
 const blogPostingSchema = getBlogPostingSchema(entry);
 const categoryObject = getCategoryByTitle(entry.data.category);
 
@@ -84,7 +79,7 @@ const jsonLd = {
 };
 ---
 
-<BlogLayout headings={headings} id={entry.id} publishedAtString={publishedAtString} editUrl={editUrl} sourceUrl={sourceUrl} revisionHistoryUrl={revisionHistoryUrl} {...entry.data}>
+<BlogLayout headings={headings} id={entry.id} publishedAtString={publishedAtString} {...entry.data}>
   <script
       is:inline
       type='application/ld+json'
