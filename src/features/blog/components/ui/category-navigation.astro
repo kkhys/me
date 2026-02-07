@@ -1,10 +1,7 @@
 ---
-import RssIcon from "@lucide/astro/icons/rss";
 import type { HTMLAttributes } from "astro/types";
-import { buttonVariants } from "#/components/ui/button/button.astro";
 import { categories } from "#/features/blog/config/category";
 import { cn } from "#/lib/ui";
-import { SpCategoryNavigation } from "./sp-category-navigation";
 
 interface Props extends HTMLAttributes<"div"> {}
 
@@ -13,35 +10,58 @@ const { class: className, ...rest } = Astro.props;
 const pathname = Astro.url.pathname;
 
 const linkClass =
-  "flex h-7 items-center justify-center rounded-full px-4 text-center text-sm transition-colors whitespace-nowrap";
+  "flex h-6 items-center justify-center rounded-full px-2 text-center text-xs transition-colors whitespace-nowrap";
 ---
 
-<nav class={cn('flex items-center justify-between', className)} {...rest}>
-  <div class="flex items-center max-sm:hidden">
-    {/^\/blog(\/\d+)?\/?$/.test(pathname) ? (
-        <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
+<nav class={cn('category-scroll', className)} {...rest}>
+  {/^\/blog(\/\d+)?\/?$/.test(pathname) ? (
+      <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
+      すべて
+    </span>
+  ) : (
+      <a href="/blog" class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
         すべて
-      </span>
+      </a>
+  )}
+  {categories.map(({ slug, label }) => (
+    pathname?.startsWith(`/blog/categories/${slug}`) ? (
+        <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
+      {label}
+    </span>
     ) : (
-        <a href="/blog" class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
-          すべて
+        <a href={`/blog/categories/${slug}`} class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
+          {label}
         </a>
-    )}
-    {categories.map(({ slug, label }) => (
-      pathname?.startsWith(`/blog/categories/${slug}`) ? (
-          <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
-        {label}
-      </span>
-      ) : (
-          <a href={`/blog/categories/${slug}`} class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
-            {label}
-          </a>
-      )
-    ))}
-  </div>
-  <SpCategoryNavigation pathname={pathname} className="sm:hidden" client:media="(max-width: 40rem)" />
-  <a class={cn('rounded-full!', buttonVariants({ variant: "outline", size: "icon" }))} href="/rss.xml">
-    <RssIcon class="size-4" aria-hidden="true" />
-    <span class="sr-only">RSS フィード</span>
-  </a>
+    )
+  ))}
 </nav>
+
+<style>
+  .category-scroll {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    scroll-timeline: --category-scroll inline;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    animation: scroll-mask linear both;
+    animation-timeline: --category-scroll;
+  }
+
+  .category-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes scroll-mask {
+    0% {
+      mask-image: linear-gradient(to right, var(--uchu-yin) calc(100% - 2rem), transparent);
+    }
+    1%, 99% {
+      mask-image: linear-gradient(to right, transparent, var(--uchu-yin) 2rem, var(--uchu-yin) calc(100% - 2rem), transparent);
+    }
+    100% {
+      mask-image: linear-gradient(to right, transparent, var(--uchu-yin) 2rem, var(--uchu-yin) 100%);
+    }
+  }
+</style>
