@@ -23,23 +23,16 @@
         gap: 0.5rem;
     }
 
+    footer :is(a, span, .separator) {
+        font-size: var(--fs-xs);
+        color: var(--c-sub);
+    }
+
     footer a {
-        font-size: var(--fs-xs);
-        color: var(--c-sub);
         text-decoration: none;
-    }
 
-    footer a:hover {
-        text-decoration: underline;
-    }
-
-    footer span {
-        font-size: var(--fs-xs);
-        color: var(--c-sub);
-    }
-
-    footer .separator {
-        font-size: var(--fs-xs);
-        color: var(--c-sub);
+        &:hover {
+            text-decoration: underline;
+        }
     }
 </style>

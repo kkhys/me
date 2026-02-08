@@ -72,54 +72,27 @@ const IconComponent = alertIcons[alertType];
   }
 
   .alert--note {
-    border-color: oklch(from var(--uchu-blue-5) l c h / 50%);
-    color: var(--uchu-blue-6);
+    border-color: oklch(from light-dark(var(--uchu-blue-5), var(--uchu-blue-4)) l c h / 50%);
+    color: light-dark(var(--uchu-blue-6), var(--uchu-blue-4));
   }
 
   .alert--tip {
     border-color: oklch(from var(--uchu-green-5) l c h / 50%);
-    color: var(--uchu-green-6);
+    color: light-dark(var(--uchu-green-6), var(--uchu-green-5));
   }
 
   .alert--important {
-    border-color: oklch(from var(--uchu-purple-5) l c h / 50%);
-    color: var(--uchu-purple-6);
+    border-color: oklch(from light-dark(var(--uchu-purple-5), var(--uchu-purple-4)) l c h / 50%);
+    color: light-dark(var(--uchu-purple-6), var(--uchu-purple-4));
   }
 
   .alert--warning {
     border-color: oklch(from var(--uchu-orange-5) l c h / 50%);
-    color: var(--uchu-orange-6);
+    color: light-dark(var(--uchu-orange-6), var(--uchu-orange-5));
   }
 
   .alert--caution {
-    border-color: oklch(from var(--uchu-red-5) l c h / 50%);
-    color: var(--uchu-red-6);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .alert--note {
-      border-color: oklch(from var(--uchu-blue-4) l c h / 50%);
-      color: var(--uchu-blue-4);
-    }
-
-    .alert--tip {
-      border-color: oklch(from var(--uchu-green-5) l c h / 50%);
-      color: var(--uchu-green-5);
-    }
-
-    .alert--important {
-      border-color: oklch(from var(--uchu-purple-4) l c h / 50%);
-      color: var(--uchu-purple-4);
-    }
-
-    .alert--warning {
-      border-color: oklch(from var(--uchu-orange-5) l c h / 50%);
-      color: var(--uchu-orange-5);
-    }
-
-    .alert--caution {
-      border-color: oklch(from var(--uchu-red-4) l c h / 50%);
-      color: var(--uchu-red-4);
-    }
+    border-color: oklch(from light-dark(var(--uchu-red-5), var(--uchu-red-4)) l c h / 50%);
+    color: light-dark(var(--uchu-red-6), var(--uchu-red-4));
   }
 </style>

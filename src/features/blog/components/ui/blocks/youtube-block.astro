@@ -45,7 +45,7 @@ const {
     display: block;
     max-width: 100%;
     border-radius: 1rem;
-    border-color: var(--uchu-yin-8);
+    border: 1px solid light-dark(transparent, var(--c-border));
     background-color: black;
     position: relative;
     cursor: pointer;
@@ -53,12 +53,6 @@ const {
     contain: content;
     background-position: center center;
     background-size: cover;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .youtube-embed {
-      border: 1px solid var(--c-border);
-    }
   }
 
   .youtube-embed::before {

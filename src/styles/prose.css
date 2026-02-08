@@ -42,32 +42,24 @@
   margin-top: 0;
 }
 
-.prose p > a,
-.prose td > a,
-.prose li > a {
+.prose :is(p, td, li) > a {
   color: var(--c-link);
   font-weight: var(--fw-medium);
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
   transition: text-decoration 0.2s;
-}
 
-.prose p > a:hover,
-.prose td > a:hover,
-.prose li > a:hover {
-  text-decoration: underline;
-}
+  &:hover {
+    text-decoration: underline;
+  }
 
-.prose p > a:visited,
-.prose td > a:visited,
-.prose li > a:visited {
-  color: var(--c-link-visited);
-}
+  &:visited {
+    color: var(--c-link-visited);
 
-.prose p > a:visited svg,
-.prose td > a:visited svg,
-.prose li > a:visited svg {
-  stroke: inherit;
+    & svg {
+      stroke: inherit;
+    }
+  }
 }
 
 .prose strong {
@@ -118,25 +110,20 @@
   margin-block: 0.25rem;
 }
 
-.prose ol > li::marker {
-  color: var(--c-text);
-}
-
-.prose ul > li::marker,
-.prose ol > li::marker {
+.prose :is(ul, ol) > li::marker {
   color: var(--c-sub);
 }
 
 .prose .contains-task-list {
   list-style: none;
   padding-left: 0;
-}
 
-.prose .contains-task-list > li {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding-left: 0;
+  & > li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-left: 0;
+  }
 }
 
 .prose hr {
@@ -174,10 +161,10 @@
 
 .prose tbody tr {
   border-bottom: 1px solid light-dark(var(--uchu-gray-1), var(--uchu-yin-9));
-}
 
-.prose tbody tr:last-child {
-  border-bottom: 0;
+  &:last-child {
+    border-bottom: 0;
+  }
 }
 
 .prose tbody td {

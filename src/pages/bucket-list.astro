@@ -143,40 +143,6 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
 </BaseLayout>
 
 <style>
-  .back-link-wrapper {
-    margin-bottom: 1rem;
-  }
-
-  @media (width >= 1280px) {
-    .back-link-wrapper {
-      position: fixed;
-      top: 0;
-      transform: translateY(170px) translateX(-260px);
-    }
-  }
-
-  .back-link {
-    display: inline-flex;
-    gap: 0.25rem;
-    align-items: center;
-    color: var(--c-sub);
-    font-size: var(--fs-xs);
-    text-decoration: none;
-  }
-
-  .back-link:hover {
-    text-decoration: underline;
-  }
-
-  .back-icon {
-    width: 0.875rem;
-    height: 0.875rem;
-  }
-
-  .page-title {
-    font-weight: var(--fw-medium);
-  }
-
   .page-description {
     font-size: var(--fs-sm);
     color: var(--c-sub);
@@ -230,7 +196,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     height: 1rem;
     border-radius: 2px;
     border: 1px solid var(--c-primary);
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    box-shadow: var(--shadow-sm);
     opacity: 0.5;
     margin-top: 0.25rem;
     flex-shrink: 0;
