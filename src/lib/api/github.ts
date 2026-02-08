@@ -4,7 +4,9 @@ type LastUpdatedTimeData = {
   lastUpdatedTime: string | undefined;
 };
 
-export const getLastUpdatedTimeByFile = async (
+const cache = new Map<string, Promise<LastUpdatedTimeData>>();
+
+const fetchLastUpdatedTime = async (
   filePath: string,
 ): Promise<LastUpdatedTimeData> => {
   const API_URL = "https://api.github.com/repos/kkhys/content/commits?";
@@ -35,4 +37,14 @@ export const getLastUpdatedTimeByFile = async (
   return {
     lastUpdatedTime: json[0].commit.committer.date,
   };
+};
+
+export const getLastUpdatedTimeByFile = (
+  filePath: string,
+): Promise<LastUpdatedTimeData> => {
+  const cached = cache.get(filePath);
+  if (cached) return cached;
+  const promise = fetchLastUpdatedTime(filePath);
+  cache.set(filePath, promise);
+  return promise;
 };

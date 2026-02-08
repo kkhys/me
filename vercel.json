@@ -2,10 +2,9 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
     "deploymentEnabled": {
-      "renovate/*": false,
-      "feature/v2-development": false
+      "renovate/*": false
     }
   },
-  "installCommand": "pnpm install && dnf install -y nss nspr mesa-libgbm",
-  "buildCommand": "pnpm playwright-install && pnpm build"
+  "installCommand": "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 pnpm install",
+  "buildCommand": "pnpm build"
 }

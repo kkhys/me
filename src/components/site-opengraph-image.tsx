@@ -1,12 +1,12 @@
 /** @jsxImportSource react */
 /** @jsxRuntime automatic */
 
-import { readFile } from "node:fs/promises";
 import satori from "satori";
 import sharp from "sharp";
+import { loadFont } from "#/lib/font-loader";
 
 export const siteOpengraphImage = async () => {
-  const interSemiBold = await readFile("./src/assets/Inter_28pt-SemiBold.ttf");
+  const interSemiBold = await loadFont("./src/assets/Inter_28pt-SemiBold.ttf");
 
   const svg = await satori(
     <div

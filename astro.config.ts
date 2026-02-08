@@ -4,11 +4,10 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
-import rehypeMermaid from "rehype-mermaid";
 import rehypeSlug from "rehype-slug";
 import { expressiveCodeOptions } from "./src/lib/expressive-code";
 import rehypeBudoux from "./src/lib/rehype-budoux";
-import { rehypeMermaidOptions } from "./src/lib/rehype-mermaid-options";
+import rehypeMermaidCached from "./src/lib/rehype-mermaid-cached";
 import rehypeSlugWithCustomId from "./src/lib/rehype-slug-with-custom-id";
 import remarkBlockQuoteAlert from "./src/lib/remark-blockquote-alert";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
@@ -25,9 +24,6 @@ export default defineConfig({
     mdx(),
     sitemap(),
     partytown(),
-    (await import("@playform/compress")).default({
-      Image: false,
-    }),
   ],
   prefetch: {
     defaultStrategy: "viewport",
@@ -52,7 +48,7 @@ export default defineConfig({
     rehypePlugins: [
       rehypeSlug,
       rehypeSlugWithCustomId,
-      [rehypeMermaid, rehypeMermaidOptions],
+      rehypeMermaidCached,
       rehypeBudoux,
     ],
   },

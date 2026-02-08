@@ -1,9 +1,9 @@
 /** @jsxImportSource react */
 /** @jsxRuntime automatic */
 
-import { readFile } from "node:fs/promises";
 import satori from "satori";
 import { getIconCode, loadEmoji } from "#/lib/api/emoji";
+import { loadFont } from "#/lib/font-loader";
 
 export const emojiSvg = async ({
   emoji,
@@ -15,8 +15,8 @@ export const emojiSvg = async ({
   const firstEmoji = Array.from(emoji)[0];
 
   const selectedFont = isColored
-    ? await readFile("./src/assets/Inter-Medium.ttf")
-    : await readFile("./src/assets/NotoEmoji-Regular.ttf");
+    ? await loadFont("./src/assets/Inter-Medium.ttf")
+    : await loadFont("./src/assets/NotoEmoji-Regular.ttf");
 
   return await satori(
     <div
