@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import LinkIcon from "#/components/icons/link.svg";
+import Heading from "./heading.astro";
 
 interface Props extends HTMLAttributes<"h2"> {
   id: string;
@@ -9,90 +9,4 @@ interface Props extends HTMLAttributes<"h2"> {
 const { id, ...rest } = Astro.props;
 ---
 
-<h2 id={id} class="heading budoux" {...rest}>
-  <a href={`#${id}`} class="heading-link">
-    <div class="anchor-wrapper">
-      <div class="anchor-box">
-        <LinkIcon class="anchor-icon" />
-      </div>
-    </div>
-    <slot />
-  </a>
-</h2>
-
-<style>
-  .heading {
-    position: relative;
-    scroll-margin-top: 3rem;
-  }
-
-  .heading-link {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .anchor-wrapper {
-    position: absolute;
-    width: 2rem;
-    margin-top: 4px;
-    margin-left: -2rem;
-    display: none;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  @media (width >= 768px) {
-    .anchor-wrapper {
-      display: block;
-    }
-  }
-
-  .heading-link:hover .anchor-wrapper,
-  .heading-link:focus .anchor-wrapper {
-    opacity: 1;
-  }
-
-  .anchor-box {
-    display: grid;
-    place-content: center;
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: var(--radius-md);
-    background-color: var(--uchu-gray-1);
-    box-shadow: inset 0 0 0 1px var(--uchu-gray-3);
-    transition: box-shadow 0.2s;
-  }
-
-  .anchor-box:hover {
-    box-shadow: inset 0 0 0 1px var(--uchu-gray-5);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .anchor-box {
-      background-color: var(--uchu-yin-8);
-      box-shadow: inset 0 0 0 1px var(--uchu-gray-7);
-    }
-
-    .anchor-box:hover {
-      background-color: var(--uchu-yin-7);
-      box-shadow: inset 0 0 0 1px var(--uchu-gray-6);
-    }
-  }
-
-  .anchor-icon {
-    width: 0.75rem;
-    height: 0.75rem;
-    stroke: var(--uchu-gray-5);
-    transition: stroke 0.2s;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .anchor-icon {
-      stroke: var(--uchu-gray-4);
-    }
-
-    .anchor-box:hover .anchor-icon {
-      stroke: white;
-    }
-  }
-</style>
+<Heading as="h2" id={id} {...rest}><slot /></Heading>
