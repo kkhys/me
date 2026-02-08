@@ -1,4 +1,4 @@
-import { NODE_ENV, PUBLIC_VERCEL_ENV } from "astro:env/client";
+import { NODE_ENV } from "astro:env/client";
 import fetchSiteMetadata, { type Metadata } from "fetch-site-metadata";
 
 const metadataCache = new Map<string, Metadata>();
@@ -7,10 +7,7 @@ export const getMetadata = async (url: string) => {
   const cachedMetadata = metadataCache.get(url);
   if (cachedMetadata) return cachedMetadata;
 
-  const isProduction =
-    NODE_ENV === "production" && PUBLIC_VERCEL_ENV === "production";
-
-  if (!isProduction) {
+  if (NODE_ENV !== "production" || process.env.CI) {
     const fallbackMetadata = {
       title: "リンク",
       description: "外部リンク",

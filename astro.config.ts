@@ -55,7 +55,6 @@ export default defineConfig({
   image: {
     remotePatterns: [{ protocol: "https" }],
     service:
-      process.env.VERCEL_ENV === "preview" ||
       process.env.GITHUB_ACTIONS === "true"
         ? { entrypoint: "astro/assets/services/noop" }
         : { entrypoint: "astro/assets/services/sharp" },
@@ -71,22 +70,6 @@ export default defineConfig({
       GITHUB_ACCESS_TOKEN: envField.string({
         context: "server",
         access: "secret",
-      }),
-      PUBLIC_VERCEL_ENV: envField.string({
-        context: "client",
-        access: "public",
-        optional: true,
-        default: "development",
-      }),
-      PUBLIC_VERCEL_PROJECT_PRODUCTION_URL: envField.string({
-        context: "client",
-        access: "public",
-        optional: true,
-      }),
-      PUBLIC_VERCEL_URL: envField.string({
-        context: "client",
-        access: "public",
-        optional: true,
       }),
       NODE_ENV: envField.enum({
         context: "client",
