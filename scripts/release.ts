@@ -33,7 +33,7 @@ const CURRENT_BRANCH = (await $`git rev-parse --abbrev-ref HEAD`.text()).trim();
 
 if (!isDryRun) {
   await $`git checkout main`;
-  await $`git tag -f ${version}`;
+  await $`git tag -f -m ${version} ${version}`;
   await $`git push -f origin ${version}`;
   await $`git checkout ${CURRENT_BRANCH}`;
   console.log(`✅ Released tag: ${version} and returned to ${CURRENT_BRANCH}`);
