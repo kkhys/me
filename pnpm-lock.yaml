@@ -94,8 +94,8 @@ importers:
         specifier: 3.2.0
         version: 3.2.0
       mermaid-isomorphic:
-        specifier: 3.0.1
-        version: 3.0.1(playwright@1.58.2)
+        specifier: 3.0.4
+        version: 3.0.4(playwright@1.58.2)
       mini-svg-data-uri:
         specifier: 1.4.4
         version: 1.4.4
@@ -2335,8 +2335,8 @@ packages:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
 
-  mermaid-isomorphic@3.0.1:
-    resolution: {integrity: sha512-F5gGI+CAu8qpZL1bsh585rxfXhu+rA6Txyg0AXXzxnfHOAkcO90f34tkQZZGMT98m9o+MzUR5+3ao/G8JiO5Mw==}
+  mermaid-isomorphic@3.0.4:
+    resolution: {integrity: sha512-XQTy7H1XwHK3DPEHf+ZNWiqUEd9BwX3Xws38R9Fj2gx718srmgjlZoUzHr+Tca+O+dqJOJsAJaKzCoP65QDfDg==}
     peerDependencies:
       playwright: '1'
     peerDependenciesMeta:
@@ -3970,7 +3970,7 @@ snapshots:
   '@jridgewell/source-map@0.3.6':
     dependencies:
       '@jridgewell/gen-mapping': 0.3.13
-      '@jridgewell/trace-mapping': 0.3.30
+      '@jridgewell/trace-mapping': 0.3.31
     optional: true
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
@@ -5876,7 +5876,7 @@ snapshots:
 
   merge2@1.4.1: {}
 
-  mermaid-isomorphic@3.0.1(playwright@1.58.2):
+  mermaid-isomorphic@3.0.4(playwright@1.58.2):
     dependencies:
       '@fortawesome/fontawesome-free': 6.7.2
       mermaid: 11.6.0
