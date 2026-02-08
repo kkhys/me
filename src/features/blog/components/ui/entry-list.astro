@@ -4,7 +4,6 @@ import type { HTMLAttributes } from "astro/types";
 import Budoux from "#/components/budoux.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import { convertDateToString } from "#/lib/date";
-import { cn } from "#/lib/ui";
 
 interface Props extends HTMLAttributes<"div"> {
   blogEntries: CollectionEntry<"blog">[];
@@ -21,27 +20,27 @@ const {
 
 {
   blogEntries.length ? (
-  <div class={cn("divide-y border-t", className)} {...rest}>
+  <div class:list={["entry-list", className]} {...rest}>
     {blogEntries.map(({ id, data: { title, emoji, status, publishedAt }}) => {
       const publishedAtString = convertDateToString(publishedAt);
       return (
-          <a href={`/blog/posts/${id}`} class="relative flex items-center justify-between gap-x-4 px-2 py-3 transition-colors hover:bg-muted/50">
-            <div class="flex items-center gap-x-4">
-              <EmojiEyeCatch emoji={emoji} size="sm" class="shrink-0" />
+          <a href={`/blog/posts/${id}`} class="entry-item">
+            <div class="entry-left">
+              <EmojiEyeCatch emoji={emoji} size="sm" class="entry-emoji" />
               <Budoux>
                 <p class="palt">{title}</p>
               </Budoux>
             </div>
             {showDate && (
                 <time
-                    class="shrink-0 text-sm tabular-nums text-muted-foreground palt"
+                    class="entry-date palt"
                     datetime={publishedAt.toISOString()}
                 >
                   {publishedAtString}
                 </time>
             )}
             {status === "draft" && (
-                <span class="absolute right-0 top-0 h-1 w-2 bg-red-400/80" />
+                <span class="entry-draft" />
             )}
           </a>
       )
@@ -53,3 +52,55 @@ const {
   </div>
   )
 }
+
+<style>
+  .entry-list {
+    border-top: 1px solid var(--c-border);
+  }
+
+  .entry-list > :global(* + *) {
+    border-top: 1px solid var(--c-border);
+  }
+
+  .entry-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0.5rem;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .entry-item:hover {
+    background-color: oklch(from var(--c-surface) l c h / 50%);
+  }
+
+  .entry-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .entry-emoji {
+    flex-shrink: 0;
+  }
+
+  .entry-date {
+    flex-shrink: 0;
+    font-size: var(--fs-sm);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-sub);
+  }
+
+  .entry-draft {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 0.25rem;
+    width: 0.5rem;
+    background-color: oklch(from var(--uchu-red-4) l c h / 80%);
+  }
+</style>

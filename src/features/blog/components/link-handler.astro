@@ -16,9 +16,9 @@ const { href, ...rest } = Astro.props;
     <LinkCard href={href} {...rest} />
   ) : (
     href.startsWith('http') ? (
-      <a href={href} target="_blank" rel="noreferrer" class="inline-flex items-center" {...rest}>
+      <a href={href} target="_blank" rel="noreferrer" class="external-link" {...rest}>
         <slot />
-        <MoveUpRightIcon class="mx-1 mt-0.5 size-3" />
+        <MoveUpRightIcon class="external-icon" />
       </a>
     ) : (
       <a href={href} {...rest}>
@@ -27,3 +27,17 @@ const { href, ...rest } = Astro.props;
     )
   )
 }
+
+<style>
+  .external-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .external-icon {
+    margin-inline: 0.25rem;
+    margin-top: 0.125rem;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+</style>

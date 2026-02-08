@@ -1,35 +1,31 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { categories } from "#/features/blog/config/category";
-import { cn } from "#/lib/ui";
 
 interface Props extends HTMLAttributes<"div"> {}
 
 const { class: className, ...rest } = Astro.props;
 
 const pathname = Astro.url.pathname;
-
-const linkClass =
-  "flex h-6 items-center justify-center rounded-full px-2 text-center text-xs transition-colors whitespace-nowrap";
 ---
 
-<nav class={cn('category-scroll palt', className)} {...rest}>
+<nav class:list={['category-scroll palt', className]} {...rest}>
   {/^\/blog(\/\d+)?\/?$/.test(pathname) ? (
-      <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
+      <span class="cat-link cat-link--active">
       すべて
     </span>
   ) : (
-      <a href="/blog" class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
+      <a href="/blog" class="cat-link">
         すべて
       </a>
   )}
   {categories.map(({ slug, label }) => (
     pathname?.startsWith(`/blog/categories/${slug}`) ? (
-        <span class={cn(linkClass, "bg-primary/95 text-primary-foreground font-medium")}>
+        <span class="cat-link cat-link--active">
       {label}
     </span>
     ) : (
-        <a href={`/blog/categories/${slug}`} class={cn(linkClass, "text-muted-foreground hover:text-primary")}>
+        <a href={`/blog/categories/${slug}`} class="cat-link">
           {label}
         </a>
     )
@@ -63,5 +59,34 @@ const linkClass =
     100% {
       mask-image: linear-gradient(to right, transparent, var(--uchu-yin) 2rem, var(--uchu-yin) 100%);
     }
+  }
+
+  .cat-link {
+    display: flex;
+    height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    padding-inline: 0.5rem;
+    text-align: center;
+    font-size: var(--fs-xs);
+    transition: color 0.2s;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--c-sub);
+  }
+
+  .cat-link:hover {
+    color: var(--c-primary);
+  }
+
+  .cat-link--active {
+    background-color: oklch(from var(--c-primary) l c h / 95%);
+    color: var(--c-primary-text);
+    font-weight: var(--fw-medium);
+  }
+
+  .cat-link--active:hover {
+    color: var(--c-primary-text);
   }
 </style>

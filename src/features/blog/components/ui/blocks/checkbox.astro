@@ -8,11 +8,41 @@ const { type, checked, ...rest } = Astro.props;
 ---
 
 {type === "checkbox" && (
-  <button role="checkbox" aria-checked={checked ? 'true' : 'false'} class="size-4 rounded-sm border border-primary shadow disabled:cursor-not-allowed disabled:opacity-50 aria-checked:bg-primary aria-checked:text-primary-foreground" {...rest}>
-    <span class="grid place-content-center">
+  <button role="checkbox" aria-checked={checked ? 'true' : 'false'} class="checkbox" {...rest}>
+    <span class="checkbox-inner">
       {checked && (
-        <CheckIcon class="size-4" />
+        <CheckIcon class="checkbox-icon" />
       )}
     </span>
   </button>
 )}
+
+<style>
+  .checkbox {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.125rem;
+    border: 1px solid var(--c-primary);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+
+  .checkbox:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .checkbox[aria-checked="true"] {
+    background-color: var(--c-primary);
+    color: var(--c-primary-text);
+  }
+
+  .checkbox-inner {
+    display: grid;
+    place-content: center;
+  }
+
+  .checkbox-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+</style>
