@@ -1,6 +1,18 @@
-import type { RehypeMermaidOptions } from "rehype-mermaid";
+type ThemeVariables = Record<string, string>;
 
-export const rehypeMermaidOptions: RehypeMermaidOptions = {
+type MermaidThemeConfig = {
+  theme?: string;
+  fontFamily?: string;
+  themeVariables?: ThemeVariables;
+};
+
+export type MermaidOptions = {
+  strategy: string;
+  mermaidConfig: MermaidThemeConfig;
+  dark: MermaidThemeConfig;
+};
+
+export const rehypeMermaidOptions: MermaidOptions = {
   strategy: "img-svg",
   mermaidConfig: {
     theme: "base",
