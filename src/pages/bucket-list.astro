@@ -11,8 +11,8 @@ import Separator from "#/components/ui/separator.astro";
 import { siteConfig } from "#/config/site";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { getLastUpdatedTimeByFile } from "#/lib/api/github";
-import { BASE_URL } from "#/lib/base-url";
-import { convertDateToString } from "#/lib/date";
+import { BASE_URL } from "#/utils/base-url";
+import { convertDateToString } from "#/utils/date";
 
 const bucketList = await getEntry("bucketList", "data");
 

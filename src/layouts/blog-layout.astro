@@ -16,7 +16,7 @@ import { getCategoryBySlug } from "#/features/blog/config/category";
 import { tags as allTags } from "#/features/blog/config/tag";
 import { getRelatedPosts } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
-import { BASE_URL } from "#/lib/base-url";
+import { BASE_URL } from "#/utils/base-url";
 
 interface Props extends InferEntrySchema<"blog"> {
   id: string;

@@ -3,7 +3,7 @@
 
 import satori from "satori";
 import sharp from "sharp";
-import { loadFont } from "#/lib/font-loader";
+import { loadFont } from "#/utils/font-loader";
 
 export const siteOpengraphImage = async () => {
   const interSemiBold = await loadFont("./src/assets/Inter_28pt-SemiBold.ttf");
