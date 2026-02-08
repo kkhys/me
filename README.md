@@ -6,9 +6,9 @@ Source code for [kkhys.me](https://kkhys.me) — a personal website and blog bui
 
 - [Astro](https://astro.build/) — Static site generator with React islands
 - [React](https://react.dev/) — Interactive UI components
-- [TailwindCSS v4](https://tailwindcss.com/) — Styling
-- [TypeScript](https://www.typescriptlang.org/) — Type safety
-- [Hono](https://hono.dev/) — API routes
+- [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) — Styling with [kiso.css](https://github.com/build-trust/kiso.css) reset + [uchu.css](https://github.com/kkhys/uchu.css) color palette (OKLCH)
+- [TypeScript](https://www.typescriptlang.org/) — Strictest mode type safety
+- [Vitest](https://vitest.dev/) — Unit testing
 - [Biome](https://biomejs.dev/) — Linting and formatting
 - [Vercel](https://vercel.com/) — Hosting and deployment
 
@@ -23,6 +23,7 @@ Source code for [kkhys.me](https://kkhys.me) — a personal website and blog bui
 
 ```bash
 pnpm install
+cp .env.example .env
 pnpm dev
 ```
 
@@ -38,13 +39,18 @@ Open [http://localhost:4321](http://localhost:4321) to view the site.
 | `pnpm check` | Run Astro check + TypeScript validation |
 | `pnpm lint` | Check code with Biome |
 | `pnpm lint:fix` | Auto-fix Biome issues |
+| `pnpm test` | Run unit tests |
+| `pnpm coverage` | Run tests with coverage report |
+| `pnpm render:mermaid` | Pre-render Mermaid diagrams to SVG cache |
 | `pnpm create:entry` | Create a new blog post |
+| `pnpm release` | Release automation (date-based versioning) |
 
 ## Project Structure
 
 ```
 src/
-├── actions/          # Server actions
+├── __fixtures__/     # Test fixtures
+├── __tests__/        # Unit tests (Vitest)
 ├── assets/           # Static assets
 ├── components/       # Shared UI components
 ├── config/           # Site configuration
@@ -53,11 +59,13 @@ src/
 │   ├── home/         # Home page
 │   └── legal/        # Legal pages
 ├── layouts/          # Page layouts
-├── lib/              # Utilities and custom plugins
+├── lib/              # Libraries and custom plugins
+│   ├── api/          # API wrappers (GitHub, Twitter, emoji, metadata)
 │   ├── remark-*      # Custom remark plugins
 │   └── rehype-*      # Custom rehype plugins
 ├── pages/            # File-based routing
-├── styles/           # Global styles
+├── styles/           # Global styles (kiso.css, uchu.css, prose.css)
+├── utils/            # Pure helper functions
 └── content.config.ts # Content schema definitions
 content/
 ├── blog/             # Blog posts (MDX)
@@ -65,6 +73,7 @@ content/
 └── legal/            # Legal pages (Markdown)
 scripts/
 ├── create-entry.ts   # Blog post scaffolding
+├── render-mermaid.ts # Mermaid SVG pre-rendering
 └── release.ts        # Release automation
 ```
 
