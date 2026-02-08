@@ -35,10 +35,12 @@ if (!contentPath) {
 if (process.env.VERCEL) {
   const { lastUpdatedTime } = await getLastUpdatedTimeByFile(contentPath);
 
-  const updatedAt = new Date(lastUpdatedTime);
-  const updatedAtString = updatedAt && convertDateToString(updatedAt);
-  entry.data.updatedAt = updatedAt;
-  entry.data.updatedAtString = updatedAtString;
+  if (lastUpdatedTime) {
+    const updatedAt = new Date(lastUpdatedTime);
+    const updatedAtString = convertDateToString(updatedAt);
+    entry.data.updatedAt = updatedAt;
+    entry.data.updatedAtString = updatedAtString;
+  }
 }
 
 const blogPostingSchema = getBlogPostingSchema(entry);

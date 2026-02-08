@@ -1,7 +1,7 @@
 import { GITHUB_ACCESS_TOKEN } from "astro:env/server";
 
 type LastUpdatedTimeData = {
-  lastUpdatedTime: string;
+  lastUpdatedTime: string | undefined;
 };
 
 export const getLastUpdatedTimeByFile = async (
@@ -18,9 +18,21 @@ export const getLastUpdatedTimeByFile = async (
     headers: { Authorization: `Bearer ${GITHUB_ACCESS_TOKEN}` },
   });
 
-  const [data] = await response.json();
+  if (!response.ok) {
+    console.warn(
+      `Failed to fetch last updated time for ${filePath}: ${response.status}`,
+    );
+    return { lastUpdatedTime: undefined };
+  }
+
+  const json: unknown = await response.json();
+
+  if (!Array.isArray(json) || json.length === 0) {
+    console.warn(`No commit data found for ${filePath}`);
+    return { lastUpdatedTime: undefined };
+  }
 
   return {
-    lastUpdatedTime: data.commit.committer.date,
+    lastUpdatedTime: json[0].commit.committer.date,
   };
 };
