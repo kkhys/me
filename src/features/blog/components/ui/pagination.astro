@@ -5,7 +5,6 @@ import type { HTMLAttributes } from "astro/types";
 import ChevronLeftIcon from "#/components/icons/chevron-left.svg";
 import ChevronRightIcon from "#/components/icons/chevron-right.svg";
 import EllipsisIcon from "#/components/icons/ellipsis.svg";
-import { buttonVariants } from "#/components/ui/button/variants";
 
 interface Props<T extends keyof DataEntryMap> extends HTMLAttributes<"nav"> {
   page?: Page<CollectionEntry<T>>;
@@ -58,14 +57,14 @@ const getPageHref = (pageNumber: number) =>
           <a
               href={url.prev}
               aria-label="前のページへ"
-              class={buttonVariants({ variant: "ghost", size: "icon" })}
+              class="btn btn--ghost btn--size-icon"
           >
             <ChevronLeftIcon class="pagination-icon" />
           </a>
       ) : (
           <span
               aria-disabled="true"
-              class={`${buttonVariants({ variant: "ghost", size: "icon" })} pagination-disabled`}
+              class="btn btn--ghost btn--size-icon pagination-disabled"
           >
       <ChevronLeftIcon class="pagination-icon" />
     </span>
@@ -87,14 +86,14 @@ const getPageHref = (pageNumber: number) =>
             {currentPage === page ? (
                 <span
                     aria-current="page"
-                    class={`${buttonVariants({ variant: "outline", size: "icon" })} pagination-current`}
+                    class="btn btn--outline btn--size-icon pagination-current"
                 >
         {page}
       </span>
             ) : (
                 <a
                     href={getPageHref(page)}
-                    class={buttonVariants({ variant: "ghost", size: "icon" })}
+                    class="btn btn--ghost btn--size-icon"
                 >
                   {page}
                 </a>
@@ -107,14 +106,14 @@ const getPageHref = (pageNumber: number) =>
           <a
               href={getPageHref(currentPage + 1)}
               aria-label="Go to next page"
-              class={buttonVariants({ variant: "ghost", size: "icon" })}
+              class="btn btn--ghost btn--size-icon"
           >
             <ChevronRightIcon class="pagination-icon" />
           </a>
       ) : (
           <span
               aria-disabled="true"
-              class={`${buttonVariants({ variant: "ghost", size: "icon" })} pagination-disabled`}
+              class="btn btn--ghost btn--size-icon pagination-disabled"
           >
       <ChevronRightIcon class="pagination-icon" />
     </span>

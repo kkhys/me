@@ -1,12 +1,9 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { buttonVariants } from "./variants";
-
-export { buttonVariants };
 
 export interface Props extends HTMLAttributes<"button"> {
   variant?: "default" | "outline" | "ghost";
-  size?: "default" | "sm" | "lg" | "icon";
+  size?: "default" | "icon";
 }
 
 const {
@@ -17,6 +14,14 @@ const {
 } = Astro.props;
 ---
 
-<button class={buttonVariants({ variant, size, className: className ?? undefined })} {...rest}>
+<button
+  class:list={[
+    "btn",
+    variant !== "default" && `btn--${variant}`,
+    size !== "default" && `btn--size-${size}`,
+    className,
+  ]}
+  {...rest}
+>
   <slot />
 </button>
