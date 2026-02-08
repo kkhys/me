@@ -14,7 +14,8 @@
     "playwright-install": "pnpm dlx playwright-core install chromium",
     "render:mermaid": "bun run scripts/render-mermaid.ts",
     "release": "bun run scripts/release.ts",
-    "create:entry": "bun run scripts/create-entry.ts"
+    "create:entry": "bun run scripts/create-entry.ts",
+    "deploy": "vercel build --prod && vercel deploy --prebuilt --prod"
   },
   "dependencies": {
     "@astrojs/check": "0.9.6",
