@@ -28,18 +28,63 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
       imageAlt={seoTitle}
     />
   </Fragment>
-  <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[170px] xl:-translate-x-[260px]">
-    <a href="/" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
-      <ArrowLeftIcon class="size-3.5" />
+  <div class="back-link-wrapper">
+    <a href="/" class="back-link">
+      <ArrowLeftIcon class="back-icon" />
       ホーム
     </a>
   </div>
-  <h1 class="font-medium">
+  <h1 class="page-title">
     わたしについて
   </h1>
-  <section class="mt-8">
-    <p class="text-muted-foreground text-sm">
+  <section class="about-body">
+    <p class="about-text">
       準備中です。
     </p>
   </section>
 </BaseLayout>
+
+<style>
+  .back-link-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  @media (width >= 1280px) {
+    .back-link-wrapper {
+      position: fixed;
+      top: 0;
+      transform: translateY(170px) translateX(-260px);
+    }
+  }
+
+  .back-link {
+    display: inline-flex;
+    gap: 0.25rem;
+    align-items: center;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .back-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .page-title {
+    font-weight: var(--fw-medium);
+  }
+
+  .about-body {
+    margin-top: 2rem;
+  }
+
+  .about-text {
+    color: var(--c-sub);
+    font-size: var(--fs-sm);
+  }
+</style>

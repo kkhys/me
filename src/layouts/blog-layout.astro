@@ -17,7 +17,6 @@ import { tags as allTags } from "#/features/blog/config/tag";
 import { getRelatedPosts } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/lib/base-url";
-import { cn } from "#/lib/ui";
 
 interface Props extends InferEntrySchema<"blog"> {
   id: string;
@@ -89,34 +88,34 @@ const currentDate = new Date();
   </Fragment>
   <slot name='head' slot='head' />
   <section>
-    <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[170px] xl:-translate-x-[260px]">
-      <span class="inline-flex gap-1.5 items-center text-xs">
-        <a href="/blog" class="inline-flex gap-1 items-center text-muted-foreground hover:underline">
-          <ArrowLeftIcon class="size-3.5" />
+    <div class="breadcrumb">
+      <span class="breadcrumb-inner">
+        <a href="/blog" class="breadcrumb-link">
+          <ArrowLeftIcon class="breadcrumb-icon" />
           ブログ
         </a>
-        <span class="text-muted-foreground">/</span>
-        <b class="font-semibold">
-          <a href={`/blog/categories/${categorySlug}`} class="hover:underline">
+        <span class="breadcrumb-sep">/</span>
+        <b class="breadcrumb-category">
+          <a href={`/blog/categories/${categorySlug}`} class="breadcrumb-category-link">
             {categoryObject.label}
           </a>
         </b>
       </span>
     </div>
-    <div class={cn(status === 'draft' && 'flex justify-between items-center')}>
+    <div class:list={[status === 'draft' && 'draft-header']}>
       <EmojiEyeCatch emoji={emoji} />
       {status === "draft" && (
-          <span class="text-xs text-red-400">Draft</span>
+          <span class="draft-badge">Draft</span>
       )}
     </div>
-    <h1 class="mt-4 font-semibold">{title}</h1>
-    <div class="mt-2 flex items-center justify-between">
-      <time datetime={publishedAt.toISOString()} class="text-sm text-muted-foreground palt">
+    <h1 class="post-title">{title}</h1>
+    <div class="post-meta">
+      <time datetime={publishedAt.toISOString()} class="post-date palt">
         {publishedAtString}
       </time>
     </div>
   </section>
-  <section class="mt-16">
+  <section class="post-body">
     {headings.length > 1 && (
         <TableOfContent headings={headings} />
     )}
@@ -124,17 +123,123 @@ const currentDate = new Date();
       <slot />
     </article>
     {tagCloudItems && (
-        <TagCloud tags={tagCloudItems} class="mt-12" />
+        <TagCloud tags={tagCloudItems} class="post-tags" />
     )}
-    <Separator class="mt-12" />
+    <Separator class="post-separator" />
     {relatedPosts?.length > 0 && (
-      <div class="mt-12 space-y-6">
-        <div class="font-medium leading-7">こちらもおすすめ</div>
+      <div class="related-posts">
+        <div class="related-posts-title">こちらもおすすめ</div>
         <EntryList blogEntries={relatedPosts} />
       </div>
     )}
   </section>
 </BaseLayout>
+
+<style>
+  .breadcrumb {
+    margin-bottom: 1rem;
+  }
+
+  @media (width >= 1280px) {
+    .breadcrumb {
+      position: fixed;
+      top: 0;
+      transform: translateY(170px) translateX(-260px);
+    }
+  }
+
+  .breadcrumb-inner {
+    display: inline-flex;
+    gap: 0.375rem;
+    align-items: center;
+    font-size: var(--fs-xs);
+  }
+
+  .breadcrumb-link {
+    display: inline-flex;
+    gap: 0.25rem;
+    align-items: center;
+    color: var(--c-sub);
+    text-decoration: none;
+  }
+
+  .breadcrumb-link:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .breadcrumb-sep {
+    color: var(--c-sub);
+  }
+
+  .breadcrumb-category {
+    font-weight: var(--fw-semibold);
+  }
+
+  .breadcrumb-category-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .breadcrumb-category-link:hover {
+    text-decoration: underline;
+  }
+
+  .draft-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .draft-badge {
+    font-size: var(--fs-xs);
+    color: var(--uchu-red-4);
+  }
+
+  .post-title {
+    margin-top: 1rem;
+    font-weight: var(--fw-semibold);
+  }
+
+  .post-meta {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .post-date {
+    font-size: var(--fs-sm);
+    color: var(--c-sub);
+  }
+
+  .post-body {
+    margin-top: 4rem;
+  }
+
+  .post-tags {
+    margin-top: 3rem;
+  }
+
+  .post-separator {
+    margin-top: 3rem;
+  }
+
+  .related-posts {
+    margin-top: 3rem;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .related-posts-title {
+    font-weight: var(--fw-medium);
+    line-height: 1.75;
+  }
+</style>
 
 <script>
   const handleHeadingIntersection = () => {

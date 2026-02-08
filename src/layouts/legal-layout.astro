@@ -35,18 +35,54 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     />
   </Fragment>
   <slot name='head' slot='head'/>
-  <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[170px] xl:-translate-x-[260px]">
-    <a href="/" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
-      <ArrowLeftIcon class="size-3.5" />
+  <div class="back-link-wrapper">
+    <a href="/" class="back-link">
+      <ArrowLeftIcon class="back-icon" />
       ホーム
     </a>
   </div>
-  <section class="prose">
-    <header>
-      <h1 class="font-medium">{title}</h1>
-    </header>
-    <div>
-      <slot />
-    </div>
+  <h1 class="legal-title">{title}</h1>
+  <section class="prose legal-body">
+    <slot />
   </section>
 </BaseLayout>
+
+<style>
+  .back-link-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  @media (width >= 1280px) {
+    .back-link-wrapper {
+      position: fixed;
+      top: 0;
+      transform: translateY(170px) translateX(-260px);
+    }
+  }
+
+  .back-link {
+    display: inline-flex;
+    gap: 0.25rem;
+    align-items: center;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .back-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .legal-title {
+    font-weight: var(--fw-medium);
+  }
+
+  .legal-body {
+    margin-top: 2rem;
+  }
+</style>
