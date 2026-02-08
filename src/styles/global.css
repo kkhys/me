@@ -58,6 +58,8 @@
   --fw-normal: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
 /* ===== Base Styles ===== */
@@ -114,20 +116,22 @@ li {
   padding-inline-start: 0.625rem;
 }
 
-[data-footnotes]::before {
-  content: "";
-  display: block;
-  height: 1px;
-  width: 100%;
-  background-color: var(--c-hr);
-}
+[data-footnotes] {
+  &::before {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 100%;
+    background-color: var(--c-hr);
+  }
 
-[data-footnotes] > ol {
-  margin-top: 1.5rem;
-}
+  & > ol {
+    margin-top: 1.5rem;
 
-[data-footnotes] > ol > li {
-  scroll-margin-top: 3rem;
+    & > li {
+      scroll-margin-top: 3rem;
+    }
+  }
 }
 
 [data-footnote-ref] {
@@ -142,17 +146,53 @@ li {
   margin-left: 0.25rem;
 }
 
-.expressive-code pre {
-  max-height: 650px !important;
+.expressive-code {
+  & pre {
+    max-height: 650px !important;
+  }
+
+  & .copy button {
+    border-radius: var(--radius-md) !important;
+
+    &::after {
+      mask-size: 0.8rem;
+      margin: 0.6rem !important;
+    }
+  }
 }
 
-.expressive-code .copy button {
-  border-radius: var(--radius-md) !important;
+/* ===== Common Layout Patterns ===== */
+
+.back-link-wrapper {
+  margin-bottom: 1rem;
+
+  @media (width >= 1280px) {
+    position: fixed;
+    top: 0;
+    transform: translateY(170px) translateX(-260px);
+  }
 }
 
-.expressive-code .copy button::after {
-  mask-size: 0.8rem;
-  margin: 0.6rem !important;
+.back-link {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+  color: var(--c-sub);
+  font-size: var(--fs-xs);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.back-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.page-title {
+  font-weight: var(--fw-medium);
 }
 
 /* ===== Button Components ===== */
@@ -179,60 +219,60 @@ li {
   padding: 0.5rem 1rem;
   background-color: var(--c-primary);
   color: var(--c-primary-text);
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-}
+  box-shadow: var(--shadow-sm);
 
-.btn:hover {
-  opacity: 0.9;
-}
+  &:hover {
+    opacity: 0.9;
+  }
 
-.btn:active:not(:disabled) {
-  transform: scale(0.95);
-}
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
 
-.btn:disabled {
-  pointer-events: none;
-  opacity: 0.5;
-}
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 
-.btn:focus-visible {
-  border-color: var(--c-ring);
-  box-shadow: 0 0 0 3px oklch(from var(--c-ring) l c h / 50%);
-}
+  &:focus-visible {
+    border-color: var(--c-ring);
+    box-shadow: 0 0 0 3px oklch(from var(--c-ring) l c h / 50%);
+  }
 
-.btn svg {
-  pointer-events: none;
-  flex-shrink: 0;
-}
+  & svg {
+    pointer-events: none;
+    flex-shrink: 0;
 
-.btn svg:not([class*="size-"]) {
-  width: 1rem;
-  height: 1rem;
+    &:not([class*="size-"]) {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
 }
 
 .btn--outline {
   border: 1px solid var(--c-border);
   background-color: var(--c-bg);
   color: inherit;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-}
+  box-shadow: var(--shadow-sm);
 
-.btn--outline:hover {
-  background-color: var(--c-surface);
-  color: var(--c-surface-text);
-  opacity: 1;
+  &:hover {
+    background-color: var(--c-surface);
+    color: var(--c-surface-text);
+    opacity: 1;
+  }
 }
 
 .btn--ghost {
   background-color: transparent;
   color: inherit;
   box-shadow: none;
-}
 
-.btn--ghost:hover {
-  background-color: var(--c-surface);
-  color: var(--c-surface-text);
-  opacity: 1;
+  &:hover {
+    background-color: var(--c-surface);
+    color: var(--c-surface-text);
+    opacity: 1;
+  }
 }
 
 .btn--size-icon {
@@ -258,20 +298,20 @@ li {
   border-radius: 9999px;
   border: 1px solid var(--c-border);
   opacity: 1;
-}
 
-.play-button:hover {
-  background-color: rgb(0 0 0 / 0.4);
-}
+  &:hover {
+    background-color: rgb(0 0 0 / 0.4);
+  }
 
-.play-button:active {
-  transform: translate(-50%, -50%) scale(0.95);
-}
+  &:active {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
 
-.play-button svg {
-  width: 2rem;
-  height: 2rem;
-  fill: white;
+  & svg {
+    width: 2rem;
+    height: 2rem;
+    fill: white;
+  }
 }
 
 /* ===== Utility Classes ===== */
