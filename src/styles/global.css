@@ -10,9 +10,7 @@
   --radius: 0.625rem;
   --radius-md: calc(var(--radius) - 2px);
 
-  --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+  --font-mono: ui-monospace, monospace;
 
   --c-bg: light-dark(var(--uchu-yang), var(--uchu-yin));
   --c-text: light-dark(var(--uchu-yin), var(--uchu-gray-1));
@@ -70,9 +68,7 @@
 }
 
 html {
-  font-family:
-    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: system-ui, sans-serif;
   scrollbar-gutter: stable both-edges;
   scrollbar-color: light-dark(var(--uchu-gray-3), var(--uchu-yin-8)) transparent;
   scrollbar-width: thin;
