@@ -9,6 +9,8 @@
     "check": "astro check && tsc --noEmit",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
     "playwright-install": "pnpm dlx playwright-core install chromium",
     "render:mermaid": "bun run scripts/render-mermaid.ts",
     "release": "bun run scripts/release.ts",
@@ -37,6 +39,7 @@
     "@types/mdast": "4.0.4",
     "@types/react": "19.2.13",
     "@types/unist": "3.0.3",
+    "@vitest/coverage-v8": "4.0.18",
     "bech32": "2.0.0",
     "budoux": "0.7.0",
     "fetch-site-metadata": "0.2.0",
@@ -53,7 +56,8 @@
     "satori": "0.19.1",
     "schema-dts": "1.1.5",
     "typescript": "5.9.3",
-    "unist-util-visit": "5.1.0"
+    "unist-util-visit": "5.1.0",
+    "vitest": "4.0.18"
   },
   "packageManager": "pnpm@10.28.2"
 }
