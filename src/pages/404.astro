@@ -1,6 +1,5 @@
 ---
 import BaseSEO from "#/components/seo/base-seo.astro";
-import { buttonVariants } from "#/components/ui/button/variants";
 import BaseLayout from "#/layouts/base-layout.astro";
 ---
 
@@ -13,7 +12,7 @@ import BaseLayout from "#/layouts/base-layout.astro";
   <h1 class="error-title">
     ページが見つかりませんでした
   </h1>
-  <a href="/" class={buttonVariants({ variant: 'outline' })}>ホームに戻る</a>
+  <a href="/" class="btn btn--outline">ホームに戻る</a>
 </BaseLayout>
 
 <style>
