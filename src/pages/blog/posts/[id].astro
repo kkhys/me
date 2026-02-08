@@ -23,7 +23,7 @@ export const getStaticPaths = (async () =>
   })) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { Content, headings } = await render(entry);
+const { Content } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
 
 const contentPath = entry.filePath?.replace("content/", "");
@@ -81,7 +81,7 @@ const jsonLd = {
 };
 ---
 
-<BlogLayout headings={headings} id={entry.id} publishedAtString={publishedAtString} {...entry.data}>
+<BlogLayout id={entry.id} publishedAtString={publishedAtString} {...entry.data}>
   <script
       is:inline
       type='application/ld+json'
