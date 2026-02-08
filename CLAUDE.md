@@ -11,15 +11,18 @@ pnpm preview               # Preview production build locally
 pnpm check                 # Run Astro check + TypeScript validation
 pnpm lint                  # Check code with Biome
 pnpm lint:fix              # Auto-fix Biome issues
+pnpm test                  # Run unit tests (Vitest)
+pnpm coverage              # Run tests with coverage report
+pnpm render:mermaid        # Pre-render Mermaid diagrams to SVG cache
 pnpm create:entry          # Interactive blog post creation (runs with Bun)
 pnpm release               # Release automation (date-based versioning, runs with Bun)
 ```
 
-CI runs: lint → type check → build. Add `skip-ci` label to PRs to skip.
+CI runs: lint → test → type check → build. Add `skip-ci` label to PRs to skip.
 
 ## Architecture Overview
 
-Astro 5 static site with React islands, deployed on Vercel. Hono handles API routes. TailwindCSS v4 with CSS-first `@theme` configuration. TypeScript strictest mode.
+Astro 5 static site with React islands, deployed on Vercel. Vanilla CSS with kiso.css reset + uchu.css color palette (OKLCH). TypeScript strictest mode.
 
 ### Path Aliases
 
@@ -28,19 +31,22 @@ All imports use `#/*` which maps to `./src/*`:
 import { categories } from "#/features/blog/config/category";
 ```
 
-### Feature-Based Structure
+### Directory Structure
 
-Each feature in `src/features/` is self-contained with its own components, utilities, and config:
-- `blog/` — Blog system (config, components, utils, actions)
-- `home/` — Home page
-- `legal/` — Legal pages
+- `src/features/` — Feature modules, each self-contained with its own components, utilities, and config:
+  - `blog/` — Blog system (config, components, utils, actions)
+  - `home/` — Home page
+  - `legal/` — Legal pages
+- `src/lib/` — Libraries (remark/rehype plugins, API wrappers, structured modules)
+  - `src/lib/api/` — API wrappers (GitHub, Twitter, emoji, metadata) with in-memory caching
+- `src/utils/` — Pure helper functions (date.ts, font-loader.ts, base-url.ts, hash.ts)
+- `src/styles/` — Global CSS (kiso.css reset, uchu.css OKLCH palette, prose styles)
+- `src/__tests__/` — Unit tests (mirrors src/utils/ and src/lib/ structure)
+- `src/__fixtures__/` — Test fixtures
 
-### API Routes (Hono)
+### API Routes
 
-Entry point: `src/pages/api/[...path].ts` routes to services in `src/pages/api/_services/`:
-- `github/contributions` — GitHub contribution data (GraphQL)
-- `github/last-update-file` — Last file update info
-- `spotify` — Now playing (OAuth)
+Astro file-based API routes in `src/pages/api/`:
 - `og/[id].png`, `og/default.png` — Dynamic OG images (Satori)
 
 ### Environment Variables
@@ -66,18 +72,30 @@ Required: `title`, `description`, `emoji`, `category`, `publishedAt`. Optional: 
 
 ### Slugs
 
-Auto-generated using Bech32m hashing (7 chars) via `src/lib/hash.ts`.
+Auto-generated using Bech32m hashing (7 chars) via `src/utils/hash.ts`.
 
 ## Custom Markdown Plugins (`src/lib/`)
 
 **Remark**: `remark-link-card` (bare URLs → rich previews), `remark-video-block`, `remark-youtube-block` (→ lite-youtube-embed), `remark-tweet-block` (→ react-tweet), `remark-footnote-title`, `remark-blockquote-alert` (GitHub-style `[!NOTE]` etc.)
 
-**Rehype**: `rehype-budoux` (Japanese natural line breaking with `<wbr>`), `rehype-slug`, `rehype-slug-with-custom-id`, `rehype-mermaid` (build-time SVG generation)
+**Rehype**: `rehype-budoux` (Japanese natural line breaking with `<wbr>`), `rehype-slug-with-custom-id` (Bech32m heading IDs), `rehype-mermaid-cached` (pre-rendered SVG embedding with light/dark theme support)
+
+## Testing
+
+Unit tests use Vitest. Test files are in `src/__tests__/` mirroring the source structure. Fixtures in `src/__fixtures__/`.
+
+```bash
+pnpm test       # Run all tests
+pnpm coverage   # Generate coverage report
+```
+
+Coverage targets: `src/utils/*.ts`, `src/lib/*.ts`, `src/lib/api/*.ts` (excluding static config files `expressive-code.ts` and `rehype-mermaid-options.ts`).
 
 ## Code Style
 
 - **Formatter/Linter**: Biome (space indentation). Some rules disabled for `.astro` files.
 - **Astro files**: `useConst`, `useImportType`, `noUnusedVariables`, `noUnusedImports` are off.
+- **CSS**: Vanilla CSS with `light-dark()` for theme switching, scoped `<style>` blocks, `class:list` directive for conditional classes.
 - **Japanese content**: BudouX for line breaking, bilingual support (English titles/slugs, Japanese labels).
 
 ## Content Review System

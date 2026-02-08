@@ -1,6 +1,6 @@
 import type { Root } from "hast";
 import { visit } from "unist-util-visit";
-import { generateBech32m } from "../lib/hash";
+import { generateBech32m } from "../utils/hash";
 
 const rehypeSlugWithCustomId = () => (tree: Root) => {
   visit(tree, "element", (node) => {

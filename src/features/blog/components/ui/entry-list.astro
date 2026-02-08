@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import type { HTMLAttributes } from "astro/types";
 import Budoux from "#/components/budoux.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
-import { convertDateToString } from "#/lib/date";
+import { convertDateToString } from "#/utils/date";
 
 interface Props extends HTMLAttributes<"div"> {
   blogEntries: CollectionEntry<"blog">[];

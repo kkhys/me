@@ -4,7 +4,7 @@
 import satori from "satori";
 import sharp from "sharp";
 import { getBudouxParser } from "#/lib/budoux";
-import { loadFont } from "#/lib/font-loader";
+import { loadFont } from "#/utils/font-loader";
 
 const parser = getBudouxParser();
 

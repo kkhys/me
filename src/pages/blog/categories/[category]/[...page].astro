@@ -12,7 +12,7 @@ import Pagination from "#/features/blog/components/ui/pagination.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
-import { BASE_URL } from "#/lib/base-url";
+import { BASE_URL } from "#/utils/base-url";
 
 export const getStaticPaths = async ({
   paginate,

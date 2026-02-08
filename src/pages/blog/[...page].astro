@@ -11,7 +11,7 @@ import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import Pagination from "#/features/blog/components/ui/pagination.astro";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
-import { BASE_URL } from "#/lib/base-url";
+import { BASE_URL } from "#/utils/base-url";
 
 export const getStaticPaths = async ({
   paginate,

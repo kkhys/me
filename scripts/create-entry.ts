@@ -4,7 +4,7 @@ import {
   type CategoryTitle,
   categories,
 } from "#/features/blog/config/category";
-import { generateBech32m } from "#/lib/hash";
+import { generateBech32m } from "#/utils/hash";
 
 interface Frontmatter {
   title: string;

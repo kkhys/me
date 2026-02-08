@@ -3,7 +3,7 @@
 
 import satori from "satori";
 import { getIconCode, loadEmoji } from "#/lib/api/emoji";
-import { loadFont } from "#/lib/font-loader";
+import { loadFont } from "#/utils/font-loader";
 
 export const emojiSvg = async ({
   emoji,
