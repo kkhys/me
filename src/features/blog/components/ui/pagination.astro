@@ -5,15 +5,14 @@ import type { HTMLAttributes } from "astro/types";
 import ChevronLeftIcon from "#/components/icons/chevron-left.svg";
 import ChevronRightIcon from "#/components/icons/chevron-right.svg";
 import EllipsisIcon from "#/components/icons/ellipsis.svg";
-import { buttonVariants } from "#/components/ui/button/button.astro";
-import { cn } from "#/lib/ui";
+import { buttonVariants } from "#/components/ui/button/variants";
 
 interface Props<T extends keyof DataEntryMap> extends HTMLAttributes<"nav"> {
   page?: Page<CollectionEntry<T>>;
   baseUrl: string;
 }
 
-const { page, baseUrl, class: className } = Astro.props;
+const { page, baseUrl, class: className, ...attrs } = Astro.props;
 
 const generateVisiblePages = (totalPages: number, currentPage: number) => {
   const pages: Array<number | "..."> = [];
@@ -45,35 +44,30 @@ const generateVisiblePages = (totalPages: number, currentPage: number) => {
 
   return pages;
 };
-const { currentPage, url, lastPage, ...rest } = page;
+const { currentPage, url, lastPage } = page;
 const visiblePages = generateVisiblePages(lastPage, currentPage);
 
 const getPageHref = (pageNumber: number) =>
   pageNumber === 1 ? baseUrl : `${baseUrl}/${pageNumber}`;
 ---
 
-<nav aria-label="pagination" class={cn("mx-auto flex w-full justify-center", className)} {...rest}>
-  <ul class="flex flex-row items-center gap-1">
+<nav aria-label="pagination" class:list={["pagination", className]} {...attrs}>
+  <ul class="pagination-list">
     <li>
       {currentPage > 1 ? (
           <a
               href={url.prev}
               aria-label="前のページへ"
-              class={cn(
-                buttonVariants({ variant: "ghost", size: "icon" })
-              )}
+              class={buttonVariants({ variant: "ghost", size: "icon" })}
           >
-            <ChevronLeftIcon class="size-4" />
+            <ChevronLeftIcon class="pagination-icon" />
           </a>
       ) : (
           <span
               aria-disabled="true"
-              class={cn(
-                buttonVariants({ variant: "ghost", size: "icon" }),
-                "opacity-50 pointer-events-none"
-              )}
+              class={`${buttonVariants({ variant: "ghost", size: "icon" })} pagination-disabled`}
           >
-      <ChevronLeftIcon class="size-4" />
+      <ChevronLeftIcon class="pagination-icon" />
     </span>
       )}
     </li>
@@ -82,9 +76,9 @@ const getPageHref = (pageNumber: number) =>
           <li>
       <span
           aria-hidden="true"
-          class={cn("flex size-9 items-center justify-center")}
+          class="pagination-ellipsis"
       >
-      <EllipsisIcon class="size-4" />
+      <EllipsisIcon class="pagination-icon" />
       <span class="sr-only">More pages</span>
       </span>
           </li>
@@ -93,10 +87,7 @@ const getPageHref = (pageNumber: number) =>
             {currentPage === page ? (
                 <span
                     aria-current="page"
-                    class={cn(
-                      buttonVariants({ variant: "outline", size: "icon" }),
-                      "pointer-events-none"
-                    )}
+                    class={`${buttonVariants({ variant: "outline", size: "icon" })} pagination-current`}
                 >
         {page}
       </span>
@@ -116,23 +107,58 @@ const getPageHref = (pageNumber: number) =>
           <a
               href={getPageHref(currentPage + 1)}
               aria-label="Go to next page"
-              class={cn(
-                buttonVariants({ variant: "ghost", size: "icon" })
-              )}
+              class={buttonVariants({ variant: "ghost", size: "icon" })}
           >
-            <ChevronRightIcon class="size-4" />
+            <ChevronRightIcon class="pagination-icon" />
           </a>
       ) : (
           <span
               aria-disabled="true"
-              class={cn(
-                buttonVariants({ variant: "ghost", size: "icon" }),
-                "opacity-50 pointer-events-none"
-              )}
+              class={`${buttonVariants({ variant: "ghost", size: "icon" })} pagination-disabled`}
           >
-      <ChevronRightIcon class="size-4" />
+      <ChevronRightIcon class="pagination-icon" />
     </span>
       )}
     </li>
   </ul>
 </nav>
+
+<style>
+  .pagination {
+    margin-inline: auto;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pagination-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .pagination-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .pagination-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .pagination-current {
+    pointer-events: none;
+  }
+
+  .pagination-ellipsis {
+    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

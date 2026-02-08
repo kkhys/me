@@ -36,18 +36,32 @@ const {
   playlistid={playlistId}
   videotitle={title}
   params={params}
-  class:list={["block max-w-full rounded-2xl border-[var(--uchu-yin-8)] dark:border bg-black relative cursor-pointer overflow-hidden", className]}
+  class:list={["youtube-embed", className]}
   {...rest}
 ></lite-youtube>
 
 <style>
-  lite-youtube {
+  .youtube-embed {
+    display: block;
+    max-width: 100%;
+    border-radius: 1rem;
+    border-color: var(--uchu-yin-8);
+    background-color: black;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
     contain: content;
     background-position: center center;
     background-size: cover;
   }
 
-  lite-youtube::before {
+  @media (prefers-color-scheme: dark) {
+    .youtube-embed {
+      border: 1px solid var(--c-border);
+    }
+  }
+
+  .youtube-embed::before {
     content: "";
     display: block;
     position: absolute;
@@ -61,13 +75,13 @@ const {
     transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
   }
 
-  lite-youtube::after {
+  .youtube-embed::after {
     content: "";
     display: block;
     padding-bottom: calc(100% / (16 / 9));
   }
 
-  lite-youtube > iframe {
+  .youtube-embed :global(iframe) {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -76,7 +90,7 @@ const {
     border: 0;
   }
 
-  lite-youtube > .lty-playbtn {
+  .youtube-embed :global(.lty-playbtn) {
     width: 68px;
     height: 48px;
     position: absolute;
@@ -92,22 +106,22 @@ const {
     border: none;
   }
 
-  lite-youtube:hover > .lty-playbtn,
-  lite-youtube .lty-playbtn:focus {
+  .youtube-embed:hover :global(.lty-playbtn),
+  .youtube-embed :global(.lty-playbtn:focus) {
     filter: none;
   }
 
-  lite-youtube.lyt-activated {
+  .youtube-embed :global(.lyt-activated) {
     cursor: unset;
   }
 
-  lite-youtube.lyt-activated::before,
-  lite-youtube.lyt-activated > .lty-playbtn {
+  .youtube-embed:global(.lyt-activated)::before,
+  .youtube-embed:global(.lyt-activated) :global(.lty-playbtn) {
     opacity: 0;
     pointer-events: none;
   }
 
-  .lyt-visually-hidden {
+  :global(.lyt-visually-hidden) {
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
     height: 1px;

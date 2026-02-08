@@ -47,17 +47,17 @@ const blurryPhotos = tweet.photos
   : [];
 ---
 
-<div class="grid place-items-center">
+<div class="tweet-container">
   <div
     class:list={[
-      "relative flex h-fit w-full max-w-lg flex-col gap-2 overflow-hidden rounded-lg border p-4 backdrop-blur-md",
+      "tweet-card",
       className,
     ]}
     {...props}
   >
     <!-- Header -->
-    <div class="flex flex-row justify-between tracking-tight">
-      <div class="flex items-center space-x-2">
+    <div class="tweet-header">
+      <div class="tweet-user">
         <a href={tweet.url} target="_blank" rel="noreferrer">
           <Image
             src={tweet.user.profile_image_url_https}
@@ -66,7 +66,7 @@ const blurryPhotos = tweet.photos
             width={48}
             height={48}
             format="webp"
-            class="size-12 overflow-hidden rounded-full border border-transparent"
+            class="tweet-avatar"
           />
         </a>
         <div>
@@ -74,7 +74,7 @@ const blurryPhotos = tweet.photos
             href={tweet.url}
             target="_blank"
             rel="noreferrer"
-            class="flex items-center whitespace-nowrap font-semibold"
+            class="tweet-name"
           >
             {truncate(tweet.user.name, 20)}
             {
@@ -82,7 +82,7 @@ const blurryPhotos = tweet.photos
                 <svg
                   aria-label="Verified Account"
                   viewBox="0 0 24 24"
-                  class="ml-1 inline size-4 text-blue-500"
+                  class="verified-badge"
                 >
                   <g fill="currentColor">
                     <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z" />
@@ -91,12 +91,12 @@ const blurryPhotos = tweet.photos
               )
             }
           </a>
-          <div class="flex items-center space-x-1">
+          <div class="tweet-handle-wrapper">
             <a
               href={tweet.url}
               target="_blank"
               rel="noreferrer"
-              class="text-sm text-muted-foreground transition-all duration-75"
+              class="tweet-handle"
             >
               @{truncate(tweet.user.screen_name, 16)}
             </a>
@@ -109,7 +109,7 @@ const blurryPhotos = tweet.photos
           viewBox="0 0 24 24"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
-          class="size-4 items-start transition-all ease-in-out hover:scale-105"
+          class="x-icon"
         >
           <path
             fill="currentColor"
@@ -120,8 +120,8 @@ const blurryPhotos = tweet.photos
     </div>
 
     <!-- Tweet Body -->
-    <div class="break-words leading-normal tracking-tighter">
-      <span class="text-sm font-normal">
+    <div class="tweet-body">
+      <span class="tweet-text">
         <Budoux>{cleanText(tweet.text)}</Budoux>
       </span>
     </div>
@@ -129,7 +129,7 @@ const blurryPhotos = tweet.photos
     <!-- Media -->
     {
       tweet.video && (
-        <div class="flex flex-1 items-center justify-center">
+        <div class="tweet-media">
           <tweet-video poster={tweet.video.poster}>
             {tweet.video.variants.map((variant) => (
               <source src={variant.src} type={variant.type} />
@@ -140,7 +140,7 @@ const blurryPhotos = tweet.photos
     }
     {
       firstPhoto && tweet.photos?.length === 1 && (
-        <div class="flex flex-1 items-center justify-center">
+        <div class="tweet-media">
           <div class="tweet-photo-blur">
             <Image
               src={firstPhoto.url}
@@ -149,7 +149,7 @@ const blurryPhotos = tweet.photos
               width={firstPhoto.width}
               height={firstPhoto.height}
               format="webp"
-              class="rounded-xl border object-cover shadow-sm"
+              class="tweet-photo"
             />
           </div>
         </div>
@@ -157,11 +157,11 @@ const blurryPhotos = tweet.photos
     }
     {
       tweet.photos && tweet.photos.length > 1 && (
-        <div class="flex flex-1 items-center justify-center">
-          <div class="relative flex transform-gpu snap-x snap-mandatory gap-4 overflow-x-auto">
-            <div class="shrink-0 snap-center sm:w-2" />
+        <div class="tweet-media">
+          <div class="tweet-carousel">
+            <div class="carousel-spacer" />
             {tweet.photos.map((photo) => (
-              <div class="tweet-photo-blur h-64 w-5/6 shrink-0 snap-center snap-always">
+              <div class="tweet-photo-blur carousel-item">
                 <Image
                   src={photo.url}
                   title={`Photo by ${tweet.user.name}`}
@@ -169,11 +169,11 @@ const blurryPhotos = tweet.photos
                   width={photo.width}
                   height={photo.height}
                   format="webp"
-                  class="h-full w-full rounded-xl border object-cover shadow-sm"
+                  class="carousel-photo"
                 />
               </div>
             ))}
-            <div class="shrink-0 snap-center sm:w-2" />
+            <div class="carousel-spacer" />
           </div>
         </div>
       )
@@ -184,10 +184,110 @@ const blurryPhotos = tweet.photos
 <style define:vars={{
   'photo-bg-0': blurryPhotos[0] ? `url(${blurryPhotos[0].src})` : 'none',
 }}>
-	tweet-video {
-		display: block;
-		position: relative;
-	}
+  .tweet-container {
+    display: grid;
+    place-items: center;
+  }
+
+  .tweet-card {
+    position: relative;
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    max-width: 32rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow: hidden;
+    border-radius: var(--radius);
+    border: 1px solid var(--c-border);
+    padding: 1rem;
+    backdrop-filter: blur(12px);
+  }
+
+  .tweet-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    letter-spacing: -0.025em;
+  }
+
+  .tweet-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .tweet-avatar {
+    width: 3rem;
+    height: 3rem;
+    overflow: hidden;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+  }
+
+  .tweet-name {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-weight: var(--fw-semibold);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .verified-badge {
+    margin-left: 0.25rem;
+    display: inline;
+    width: 1rem;
+    height: 1rem;
+    color: var(--uchu-blue-5);
+  }
+
+  .tweet-handle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .tweet-handle {
+    font-size: var(--fs-sm);
+    color: var(--c-sub);
+    transition: all 75ms;
+    text-decoration: none;
+  }
+
+  .x-icon {
+    width: 1rem;
+    height: 1rem;
+    align-items: flex-start;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .x-icon:hover {
+    transform: scale(1.05);
+  }
+
+  .tweet-body {
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    letter-spacing: -0.025em;
+  }
+
+  .tweet-text {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-normal);
+  }
+
+  .tweet-media {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  tweet-video {
+    display: block;
+    position: relative;
+  }
 
   .tweet-photo-blur {
     background-size: cover;
@@ -201,18 +301,53 @@ const blurryPhotos = tweet.photos
     background-image: var(--photo-bg-0);
   }
 
-  .tweet-photo-blur.image-loaded {
+  .tweet-photo-blur :global(.image-loaded) {
     background-image: none;
     filter: blur(0);
   }
 
-  .tweet-photo-blur > img {
-    opacity: 0;
-    transition: opacity 300ms ease-in-out;
+  .tweet-photo {
+    border-radius: 0.75rem;
+    border: 1px solid var(--c-border);
+    object-fit: cover;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   }
 
-  .tweet-photo-blur.image-loaded > img {
-    opacity: 1;
+  .tweet-carousel {
+    position: relative;
+    display: flex;
+    transform: translateZ(0);
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    overflow-x: auto;
+  }
+
+  .carousel-spacer {
+    flex-shrink: 0;
+    scroll-snap-align: center;
+  }
+
+  @media (width >= 640px) {
+    .carousel-spacer {
+      width: 0.5rem;
+    }
+  }
+
+  .carousel-item {
+    height: 16rem;
+    width: 83.333%;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .carousel-photo {
+    height: 100%;
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--c-border);
+    object-fit: cover;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   }
 </style>
 
@@ -246,17 +381,17 @@ const blurryPhotos = tweet.photos
 				.join("");
 
 			this.innerHTML = `
-				<div class="relative select-none rounded-xl border overflow-hidden">
-					<video playsinline muted loop preload="metadata" poster="${poster}" class="w-full">
+				<div class="tweet-video-wrapper">
+					<video playsinline muted loop preload="metadata" poster="${poster}" class="tweet-video-el">
 						${sources}
 						お使いのブラウザはビデオをサポートしていません。
 					</video>
 					<button
 						type="button"
-						class="play-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/40 cursor-pointer p-4 z-10 transition-all duration-300 active:scale-95 rounded-full border opacity-100"
+						class="play-button"
 						aria-label="ビデオを再生"
 					>
-						<svg class="size-8 fill-white" viewBox="0 0 24 24">
+						<svg viewBox="0 0 24 24">
 							<path d="M8 5v14l11-7z"/>
 						</svg>
 					</button>

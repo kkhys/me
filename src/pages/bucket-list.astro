@@ -73,42 +73,42 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
       imageAlt={seoTitle}
     />
   </Fragment>
-  <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[170px] xl:-translate-x-[260px]">
-    <a href="/" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
-      <ArrowLeftIcon class="size-3.5"/>
+  <div class="back-link-wrapper">
+    <a href="/" class="back-link">
+      <ArrowLeftIcon class="back-icon"/>
       ホーム
     </a>
   </div>
-  <h1 class="font-medium">
+  <h1 class="page-title">
     バケットリスト
   </h1>
   <Budoux>
-    <p class="text-sm text-muted-foreground mt-2">これは僕がこの人生で達成したいこと、手に入れたいことのリストです。</p>
+    <p class="page-description">これは僕がこの人生で達成したいこと、手に入れたいことのリストです。</p>
   </Budoux>
-  <section class="mt-8">
-    <ul class="space-y-2.5 ml-6 sm:ml-0">
+  <section class="bucket-section">
+    <ul class="bucket-list">
       {(() => {
         let globalIndex = 0;
         return bucketList.data.map((categoryObj) =>
           Object.entries(categoryObj).map(([, items]) =>
             items.map(({ title, description, completedAt }) => (
-              <li class="flex items-start relative">
-                <div class="absolute -left-6 mt-1 w-4 text-right">
-                  <span class="block text-[0.65rem] text-muted-foreground tabular-nums">
+              <li class="bucket-item">
+                <div class="bucket-index">
+                  <span class="bucket-index-num">
                     {++globalIndex}
                   </span>
                 </div>
-                <div aria-checked={completedAt ? 'true' : 'false'} class="mr-2 size-4 rounded-xs border border-primary shadow opacity-50 aria-checked:bg-primary aria-checked:text-primary-foreground mt-1">
-                  <span class="grid place-content-center">
+                <div aria-checked={completedAt ? 'true' : 'false'} class="bucket-check">
+                  <span class="bucket-check-inner">
                     {!!completedAt && (
-                        <CheckIcon class="size-4" />
+                        <CheckIcon class="bucket-check-icon" />
                     )}
                  </span>
                 </div>
                 {description ? (
-                    <div class="grid gap-1">
+                    <div class="bucket-content">
                       <Budoux><p>{title}</p></Budoux>
-                      <Budoux><p class="text-xs text-muted-foreground">{description}</p></Budoux>
+                      <Budoux><p class="bucket-desc">{description}</p></Budoux>
                     </div>
                 ) : (
                   <Budoux>
@@ -122,20 +122,183 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
       })()}
     </ul>
   </section>
-  <div class="mt-6">
-    <p class="text-right text-xs text-muted-foreground">
+  <div class="bucket-summary">
+    <p class="bucket-summary-text">
       {totalItems}個中{completedItems}個完了しました。
     </p>
   </div>
-  <Separator class="mt-8" />
-  <div class="mt-8 text-xs text-muted-foreground space-y-1.5">
+  <Separator class="bucket-separator" />
+  <div class="bucket-footer">
     <p>初回作成日: 2025年6月29日（満30歳）</p>
     {updatedAtString && (
         <p>最終更新日: {updatedAtString}</p>
     )}
-    <a href="https://github.com/kkhys/content/commits/main/bucket-list/data.yaml" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center gap-0.5 underline-offset-4 hover:underline">
+    <a href="https://github.com/kkhys/content/commits/main/bucket-list/data.yaml" target="_blank" rel="noreferrer" class="bucket-history-link">
       変更履歴
-      <MoveUpRightIcon class="size-2.5" />
+      <MoveUpRightIcon class="bucket-history-icon" />
     </a>
   </div>
 </BaseLayout>
+
+<style>
+  .back-link-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  @media (width >= 1280px) {
+    .back-link-wrapper {
+      position: fixed;
+      top: 0;
+      transform: translateY(170px) translateX(-260px);
+    }
+  }
+
+  .back-link {
+    display: inline-flex;
+    gap: 0.25rem;
+    align-items: center;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .back-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .page-title {
+    font-weight: var(--fw-medium);
+  }
+
+  .page-description {
+    font-size: var(--fs-sm);
+    color: var(--c-sub);
+    margin-top: 0.5rem;
+  }
+
+  .bucket-section {
+    margin-top: 2rem;
+  }
+
+  .bucket-list {
+    list-style: none;
+    padding: 0;
+    margin-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  @media (width >= 640px) {
+    .bucket-list {
+      margin-left: 0;
+    }
+  }
+
+  .bucket-item {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    margin: 0;
+  }
+
+  .bucket-index {
+    position: absolute;
+    left: -1.5rem;
+    margin-top: 0.25rem;
+    width: 1rem;
+    text-align: right;
+  }
+
+  .bucket-index-num {
+    display: block;
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bucket-check {
+    margin-right: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 2px;
+    border: 1px solid var(--c-primary);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    opacity: 0.5;
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .bucket-check[aria-checked="true"] {
+    background-color: var(--c-primary);
+    color: var(--c-primary-text);
+  }
+
+  .bucket-check-inner {
+    display: grid;
+    place-content: center;
+  }
+
+  .bucket-check-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .bucket-content {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .bucket-desc {
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .bucket-summary {
+    margin-top: 1.5rem;
+  }
+
+  .bucket-summary-text {
+    text-align: right;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .bucket-separator {
+    margin-top: 2rem;
+  }
+
+  .bucket-footer {
+    margin-top: 2rem;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+  }
+
+  .bucket-history-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.125rem;
+    text-underline-offset: 4px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .bucket-history-link:hover {
+    text-decoration: underline;
+  }
+
+  .bucket-history-icon {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+</style>

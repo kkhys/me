@@ -1,7 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import type { Tag } from "#/features/blog/config/tag";
-import { cn } from "#/lib/ui";
 
 interface Props extends HTMLAttributes<"div"> {
   tags: (Tag & {
@@ -12,17 +11,67 @@ interface Props extends HTMLAttributes<"div"> {
 const { tags, class: className, ...rest } = Astro.props;
 ---
 
-<div class={cn("flex flex-wrap gap-1.5", className)} {...rest}>
+<div class:list={["tag-cloud", className]} {...rest}>
   {tags.map(({ slug, label, emojiSvg }) => (
       <a
           href={`/blog/tags/${slug}`}
-          class="inline-flex items-center gap-1.5 text-sm font-medium bg-muted/50 rounded-full border pl-1 pr-2.5 py-1 hover:bg-accent focus:outline-none"
+          class="tag"
       >
         <div
             set:html={emojiSvg}
-            class="[&>svg]:size-4 rounded-full bg-muted/95 p-0.5"
+            class="tag-emoji"
         />
-        <p class="whitespace-nowrap">{label}</p>
+        <p class="tag-label">{label}</p>
       </a>
   ))}
 </div>
+
+<style>
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: var(--fs-sm);
+    line-height: 1.25rem;
+    font-weight: var(--fw-medium);
+    background-color: oklch(from var(--c-surface) l c h / 50%);
+    border-radius: 9999px;
+    border: 1px solid var(--c-border);
+    padding-left: 0.25rem;
+    padding-right: 0.625rem;
+    padding-block: 0.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s;
+  }
+
+  .tag:hover {
+    background-color: var(--c-surface);
+  }
+
+  .tag:focus {
+    outline: none;
+  }
+
+  .tag-emoji {
+    border-radius: 9999px;
+    background-color: oklch(from var(--c-surface) l c h / 95%);
+    padding: 0.125rem;
+  }
+
+  .tag-emoji :global(svg) {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .tag-label {
+    white-space: nowrap;
+  }
+</style>

@@ -5,7 +5,6 @@ import LightbulbIcon from "#/components/icons/lightbulb.svg";
 import MessageSquareWarningIcon from "#/components/icons/message-square-warning.svg";
 import OctagonAlertIcon from "#/components/icons/octagon-alert.svg";
 import TriangleAlertIcon from "#/components/icons/triangle-alert.svg";
-import { cn } from "#/lib/ui";
 
 export type AlertType = "note" | "tip" | "important" | "warning" | "caution";
 
@@ -23,25 +22,104 @@ const alertIcons: Record<AlertType, SvgComponent> = {
   caution: OctagonAlertIcon,
 };
 
-const alertStyles: Record<AlertType, string> = {
-  note: "border-blue-500/50 text-blue-600 dark:border-blue-400/50 dark:text-blue-400",
-  tip: "border-emerald-500/50 text-emerald-600 dark:border-emerald-400/50 dark:text-emerald-500",
-  important:
-    "border-purple-500/50 text-purple-600 dark:border-purple-400/50 dark:text-purple-400",
-  warning:
-    "border-amber-500/50 text-amber-600 dark:border-amber-400/50 dark:text-amber-500",
-  caution:
-    "border-red-500/50 text-red-600 dark:border-red-400/50 dark:text-red-400",
-};
-
 const IconComponent = alertIcons[alertType];
-const styleClasses = alertStyles[alertType];
 ---
 
-<div class={cn("flex flex-col md:flex-row gap-3 items-start md:items-center rounded-md border px-4 py-4 md:py-3 [&>p]:m-0 [&>p]:text-sm [&>p]:leading-6 [&>p>a]:underline [&>p>a]:text-current [&>p>a]:leading-6", styleClasses)} {...rest}>
+<div class:list={["alert", `alert--${alertType}`]} {...rest}>
   <IconComponent
-      class="size-4 opacity-70 shrink-0"
+      class="alert-icon"
       aria-hidden="true"
   />
   <slot />
 </div>
+
+<style>
+  .alert {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+    border-radius: var(--radius-md);
+    border: 1px solid;
+    padding: 1rem;
+  }
+
+  @media (width >= 768px) {
+    .alert {
+      flex-direction: row;
+      align-items: center;
+      padding-block: 0.75rem;
+    }
+  }
+
+  .alert :global(p) {
+    margin: 0;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+  }
+
+  .alert :global(p > a) {
+    text-decoration: underline;
+    color: currentColor;
+    line-height: 1.5;
+  }
+
+  .alert-icon {
+    width: 1rem;
+    height: 1rem;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .alert--note {
+    border-color: oklch(from var(--uchu-blue-5) l c h / 50%);
+    color: var(--uchu-blue-6);
+  }
+
+  .alert--tip {
+    border-color: oklch(from var(--uchu-green-5) l c h / 50%);
+    color: var(--uchu-green-6);
+  }
+
+  .alert--important {
+    border-color: oklch(from var(--uchu-purple-5) l c h / 50%);
+    color: var(--uchu-purple-6);
+  }
+
+  .alert--warning {
+    border-color: oklch(from var(--uchu-orange-5) l c h / 50%);
+    color: var(--uchu-orange-6);
+  }
+
+  .alert--caution {
+    border-color: oklch(from var(--uchu-red-5) l c h / 50%);
+    color: var(--uchu-red-6);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .alert--note {
+      border-color: oklch(from var(--uchu-blue-4) l c h / 50%);
+      color: var(--uchu-blue-4);
+    }
+
+    .alert--tip {
+      border-color: oklch(from var(--uchu-green-5) l c h / 50%);
+      color: var(--uchu-green-5);
+    }
+
+    .alert--important {
+      border-color: oklch(from var(--uchu-purple-4) l c h / 50%);
+      color: var(--uchu-purple-4);
+    }
+
+    .alert--warning {
+      border-color: oklch(from var(--uchu-orange-5) l c h / 50%);
+      color: var(--uchu-orange-5);
+    }
+
+    .alert--caution {
+      border-color: oklch(from var(--uchu-red-4) l c h / 50%);
+      color: var(--uchu-red-4);
+    }
+  }
+</style>

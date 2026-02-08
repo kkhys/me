@@ -2,7 +2,6 @@
 import "#/styles/global.css";
 import BaseSEO from "#/components/seo/base-seo.astro";
 import Footer from "#/components/ui/footer.astro";
-import { cn } from "#/lib/ui";
 
 interface Props {
   class?: string;
@@ -11,7 +10,7 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<html lang="ja" class="bg-background text-foreground antialiased">
+<html lang="ja">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -38,12 +37,49 @@ const { class: className } = Astro.props;
 
 
 </head>
-<body class="flex flex-col w-full max-w-6xl min-h-screen min-w-full mx-auto">
-<main class='flex-1 w-full max-w-2xl mx-auto'>
-  <div class={cn('container pt-20 pb-12 md:pt-28', className)}>
+<body>
+<main>
+  <div class:list={["content", className]}>
     <slot/>
   </div>
 </main>
 <Footer />
 </body>
 </html>
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 72rem;
+    min-height: 100vh;
+    min-width: 100%;
+    margin-inline: auto;
+  }
+
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: 42rem;
+    margin-inline: auto;
+  }
+
+  .content {
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+    padding-inline: 1rem;
+  }
+
+  @media (width >= 640px) {
+    .content {
+      padding-inline: 0;
+    }
+  }
+
+  @media (width >= 768px) {
+    .content {
+      padding-top: 7rem;
+    }
+  }
+</style>

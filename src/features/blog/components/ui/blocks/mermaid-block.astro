@@ -6,6 +6,18 @@ interface Props extends HTMLAttributes<"picture"> {}
 const props = Astro.props;
 ---
 
-<picture class="flex justify-center rounded-md bg-code-block-background p-6 shadow-md border" {...props}>
+<picture class="mermaid-block" {...props}>
   <slot />
 </picture>
+
+<style>
+  .mermaid-block {
+    display: flex;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background-color: var(--c-codeblock-bg);
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border: 1px solid var(--c-border);
+  }
+</style>

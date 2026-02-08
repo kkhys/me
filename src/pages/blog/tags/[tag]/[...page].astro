@@ -92,17 +92,61 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
       set:html={JSON.stringify(breadcrumbSchema)}
       slot='head'
   />
-  <div class="mb-4 xl:fixed xl:top-0 xl:translate-y-[170px] xl:-translate-x-[260px]">
-    <a href="/blog" class="inline-flex gap-1 items-center text-muted-foreground text-xs hover:underline">
-      <ArrowLeftIcon class="size-3.5" />
+  <div class="back-link-wrapper">
+    <a href="/blog" class="back-link">
+      <ArrowLeftIcon class="back-icon" />
       ブログ
     </a>
   </div>
   <section>
-    <h1 class="font-medium">#{tag.label}</h1>
+    <h1 class="page-title">#{tag.label}</h1>
   </section>
-  <section class="mt-6">
+  <section class="blog-entries">
     <EntryList blogEntries={page.data} showDate />
   </section>
-  <Pagination page={page} baseUrl={`/blog/tags/${tag.slug}`} class="mt-6" />
+  <Pagination page={page} baseUrl={`/blog/tags/${tag.slug}`} class="blog-pagination" />
 </BaseLayout>
+
+<style>
+  .back-link-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  @media (width >= 1280px) {
+    .back-link-wrapper {
+      position: fixed;
+      top: 0;
+      transform: translateY(170px) translateX(-260px);
+    }
+  }
+
+  .back-link {
+    display: inline-flex;
+    gap: 0.25rem;
+    align-items: center;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .back-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .page-title {
+    font-weight: var(--fw-medium);
+  }
+
+  .blog-entries {
+    margin-top: 1.5rem;
+  }
+
+  .blog-pagination {
+    margin-top: 1.5rem;
+  }
+</style>

@@ -53,7 +53,7 @@ const { src, title, ...rest } = Astro.props;
       if (controls) attributes += ' controls';
 
       return `
-    <video ${attributes}>
+    <video ${attributes} style="width:100%">
       <source src="${src}" type="video/mp4" />
       お使いのブラウザはビデオをサポートしていません。
     </video>
@@ -63,11 +63,11 @@ const { src, title, ...rest } = Astro.props;
     private createPlayButton() {
       return `
     <button
-      type="button" 
-      class="play-button absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/40 cursor-pointer p-4 z-10 transition-all duration-300 active:scale-95 rounded-full border opacity-100" 
+      type="button"
+      class="play-button"
       aria-label="ビデオを再生"
     >
-      <svg class="size-8 fill-white" viewBox="0 0 24 24">
+      <svg viewBox="0 0 24 24">
       <path d="M8 5v14l11-7z"/>
       </svg>
     </button>
@@ -75,12 +75,11 @@ const { src, title, ...rest } = Astro.props;
     }
 
     private createWrapper(content: string) {
-      const wrapperClass = "relative blur-load select-none rounded-2xl border-[var(--uchu-yin-8)] overflow-hidden dark:border";
-      return `<div class="${wrapperClass}">${content}</div>`;
+      return `<div style="position:relative;user-select:none;border-radius:1rem;border-color:var(--uchu-yin-8);overflow:hidden" class="video-wrapper">${content}</div>`;
     }
 
     private createCaption(title: string) {
-      return `<figcaption class="text-center text-xs text-muted-foreground mt-2 leading-6">${title}</figcaption>`;
+      return `<figcaption style="text-align:center;font-size:var(--fs-xs);color:var(--c-sub);margin-top:0.5rem;line-height:1.5">${title}</figcaption>`;
     }
 
     private setupEventListeners() {

@@ -2,7 +2,6 @@ import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import rehypeMermaid from "rehype-mermaid";
@@ -66,7 +65,7 @@ export default defineConfig({
         : { entrypoint: "astro/assets/services/sharp" },
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [],
     ssr: {
       noExternal: ["react-tweet"],
     },

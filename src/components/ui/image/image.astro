@@ -2,7 +2,6 @@
 import { Picture as AstroPicture, getImage, type Picture } from "astro:assets";
 import type { UnresolvedImageTransform } from "astro";
 
-import { cn } from "#/lib/ui";
 import type { CustomImageProps } from "./types";
 
 type Props = CustomImageProps;
@@ -14,14 +13,8 @@ const blurryImage = await getImage({
   width: 20,
 });
 
-const divClass = cn(
-  "blur-load select-none rounded-2xl border-[var(--uchu-yin-8)] dark:border",
-  ambientMode && "ambient-mode",
-  className,
-);
-
 const pictureProps = {
-  class: cn("rounded-2xl", className),
+  class: `image-rounded ${className ?? ""}`.trim(),
   formats: ["avif"],
   quality: 80,
   widths: [640, 750, 828, 1080, 1344],
@@ -33,18 +26,41 @@ const pictureProps = {
 
 {title ? (
   <figure>
-    <div class={divClass}>
+    <div class:list={["blur-load", "image-rounded", "image-border", ambientMode && "ambient-mode", className]}>
       <AstroPicture {...pictureProps} />
     </div>
-    <figcaption class="text-center text-xs text-muted-foreground mt-2 leading-6">{title}</figcaption>
+    <figcaption class="image-caption">{title}</figcaption>
   </figure>
 ) : (
-  <div class={divClass}>
+  <div class:list={["blur-load", "image-rounded", "image-border", ambientMode && "ambient-mode", className]}>
     <AstroPicture {...pictureProps} />
   </div>
 )}
 
 <style define:vars={{ 'bg-image': `url(${blurryImage.src})` }}>
+  .image-rounded {
+    border-radius: 1rem;
+    user-select: none;
+  }
+
+  .image-border {
+    border-color: var(--uchu-yin-8);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .image-border {
+      border: 1px solid var(--c-border);
+    }
+  }
+
+  .image-caption {
+    text-align: center;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+
   .blur-load {
     background: var(--bg-image) center / cover no-repeat;
     filter: blur(36px);
