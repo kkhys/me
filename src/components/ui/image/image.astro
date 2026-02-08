@@ -44,13 +44,7 @@ const pictureProps = {
   }
 
   .image-border {
-    border-color: var(--uchu-yin-8);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .image-border {
-      border: 1px solid var(--c-border);
-    }
+    border: 1px solid light-dark(transparent, var(--c-border));
   }
 
   .image-caption {

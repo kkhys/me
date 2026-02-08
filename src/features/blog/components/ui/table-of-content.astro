@@ -64,16 +64,10 @@ const { headings, class: className } = Astro.props;
   .toc-bar {
     height: 2px;
     border-radius: 1px;
-    background-color: var(--uchu-gray-2);
+    background-color: light-dark(var(--uchu-gray-2), var(--uchu-yin-8));
     transition: background-color 0.2s;
     width: 1rem;
     margin-left: 0;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .toc-bar {
-      background-color: var(--uchu-yin-8);
-    }
   }
 
   .toc-bar--indent {
@@ -83,10 +77,8 @@ const { headings, class: className } = Astro.props;
 
   .toc-bar :global(.active) {
     background: var(--c-surface-text);
-  }
 
-  @media (prefers-color-scheme: dark) {
-    .toc-bar :global(.active) {
+    @media (prefers-color-scheme: dark) {
       box-shadow: var(--uchu-gray-3) 0 0 3px;
     }
   }
@@ -102,7 +94,7 @@ const { headings, class: className } = Astro.props;
     width: 250px;
     max-height: 600px;
     margin-right: 0.625rem;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    box-shadow: var(--shadow-sm);
     overflow-x: auto;
     opacity: 0;
     transform: translateX(1.5rem);
