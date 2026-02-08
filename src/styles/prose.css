@@ -29,15 +29,13 @@
 }
 
 .prose h2 {
-  margin-top: 4rem;
-  margin-bottom: 1.5rem;
+  margin-block: 4rem 1rem;
   border-bottom: 1px solid var(--c-border);
   padding-block: 0.625rem;
 }
 
 .prose h3 {
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
+  margin-block: 3rem 1rem;
 }
 
 .prose :is(h2, h3) + * {
@@ -79,9 +77,7 @@
 
 .prose code {
   display: inline-block;
-  font-family:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+  font-family: var(--font-mono);
   font-size: var(--fs-sm);
   color: var(--c-code-text);
   background-color: var(--c-code-bg);
@@ -93,15 +89,9 @@
 }
 
 .prose blockquote {
-  border-left: 2px solid var(--uchu-gray-2);
+  border-left: 2px solid light-dark(var(--uchu-gray-2), var(--uchu-gray-9));
   padding-left: 1.5rem;
   font-style: italic;
-}
-
-@media (prefers-color-scheme: dark) {
-  .prose blockquote {
-    border-left-color: var(--uchu-gray-9);
-  }
 }
 
 .prose ul {
@@ -153,7 +143,7 @@
   margin-block: 5rem;
   height: 1px;
   width: 100%;
-  background: linear-gradient(to right, var(--c-hr), var(--c-hr), var(--c-hr));
+  background-color: var(--c-hr);
   border: none;
 }
 
@@ -165,7 +155,7 @@
 }
 
 .prose thead {
-  border-bottom: 1px solid var(--uchu-gray-2);
+  border-bottom: 1px solid light-dark(var(--uchu-gray-2), var(--uchu-yin-8));
 }
 
 .prose thead th {
@@ -183,7 +173,7 @@
 }
 
 .prose tbody tr {
-  border-bottom: 1px solid var(--uchu-gray-1);
+  border-bottom: 1px solid light-dark(var(--uchu-gray-1), var(--uchu-yin-9));
 }
 
 .prose tbody tr:last-child {
@@ -195,7 +185,7 @@
 }
 
 .prose tfoot {
-  border-top: 1px solid var(--uchu-gray-2);
+  border-top: 1px solid light-dark(var(--uchu-gray-2), var(--uchu-yin-8));
 }
 
 .prose tfoot td {
@@ -212,18 +202,4 @@
 
 .prose :is(tbody, tfoot) td:not(:last-child) {
   padding-right: 0.5rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  .prose thead {
-    border-bottom-color: var(--uchu-yin-8);
-  }
-
-  .prose tbody tr {
-    border-bottom-color: var(--uchu-yin-9);
-  }
-
-  .prose tfoot {
-    border-top-color: var(--uchu-yin-8);
-  }
 }
