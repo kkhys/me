@@ -26,8 +26,10 @@ if (process.env.VERCEL) {
   const filePath = "bucket-list/data.yaml";
   const { lastUpdatedTime } = await getLastUpdatedTimeByFile(filePath);
 
-  const updatedAt = new Date(lastUpdatedTime);
-  updatedAtString = updatedAt && convertDateToString(updatedAt);
+  if (lastUpdatedTime) {
+    const updatedAt = new Date(lastUpdatedTime);
+    updatedAtString = convertDateToString(updatedAt);
+  }
 }
 
 const totalItems = bucketList.data.reduce(
