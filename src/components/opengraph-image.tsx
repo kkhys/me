@@ -1,15 +1,15 @@
 /** @jsxImportSource react */
 /** @jsxRuntime automatic */
 
-import { readFile } from "node:fs/promises";
 import satori from "satori";
 import sharp from "sharp";
 import { getBudouxParser } from "#/lib/budoux";
+import { loadFont } from "#/lib/font-loader";
 
 const parser = getBudouxParser();
 
 export const opengraphImage = async ({ title }: { title: string }) => {
-  const interSemiBold = await readFile("./src/assets/NotoSerifJP-SemiBold.ttf");
+  const interSemiBold = await loadFont("./src/assets/NotoSerifJP-SemiBold.ttf");
 
   const svg = await satori(
     <div
