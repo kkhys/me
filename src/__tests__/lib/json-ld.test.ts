@@ -43,10 +43,11 @@ describe("getBlogPostingSchema", () => {
   });
 
   it("throws error for invalid category", () => {
+    const invalidData = { ...baseData, category: "Invalid" };
     expect(() =>
       getBlogPostingSchema({
         id: "test123",
-        data: { ...baseData, category: "Invalid" as any },
+        data: invalidData,
       }),
     ).toThrow("Category not found: Invalid");
   });

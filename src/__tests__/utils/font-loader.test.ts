@@ -52,7 +52,9 @@ describe("loadFont", () => {
   });
 
   it("throws when file does not exist", async () => {
-    const mockReadFile = vi.fn().mockRejectedValue(new Error("ENOENT: no such file or directory"));
+    const mockReadFile = vi
+      .fn()
+      .mockRejectedValue(new Error("ENOENT: no such file or directory"));
 
     vi.doMock("node:fs/promises", () => ({
       readFile: mockReadFile,

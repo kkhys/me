@@ -84,7 +84,8 @@ describe("rehypeSlugWithCustomId", () => {
       {
         type: "element",
         tagName: "h2",
-        properties: undefined as any,
+        // @ts-expect-error -- testing falsy properties
+        properties: undefined,
         children: [{ type: "text", value: "No Props" } as Text],
       },
     ]);

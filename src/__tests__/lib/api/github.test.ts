@@ -5,7 +5,9 @@ vi.mock("astro:env/server", () => ({
 }));
 
 describe("getLastUpdatedTimeByFile", () => {
-  let getLastUpdatedTimeByFile: (filePath: string) => Promise<{ lastUpdatedTime: string | undefined }>;
+  let getLastUpdatedTimeByFile: (
+    filePath: string,
+  ) => Promise<{ lastUpdatedTime: string | undefined }>;
 
   beforeEach(async () => {
     vi.resetModules();
@@ -24,7 +26,10 @@ describe("getLastUpdatedTimeByFile", () => {
   it("returns lastUpdatedTime from successful response", async () => {
     vi.mocked(fetch).mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve([{ commit: { committer: { date: "2024-01-15T00:00:00Z" } } }]),
+      json: () =>
+        Promise.resolve([
+          { commit: { committer: { date: "2024-01-15T00:00:00Z" } } },
+        ]),
     } as Response);
 
     const result = await getLastUpdatedTimeByFile("content/blog/test.mdx");
@@ -59,16 +64,19 @@ describe("getLastUpdatedTimeByFile", () => {
   it("caches results (fetch called once for same path)", async () => {
     vi.mocked(fetch).mockResolvedValue({
       ok: true,
-      json: () => Promise.resolve([{ commit: { committer: { date: "2024-01-15T00:00:00Z" } } }]),
+      json: () =>
+        Promise.resolve([
+          { commit: { committer: { date: "2024-01-15T00:00:00Z" } } },
+        ]),
     } as Response);
 
     await getLastUpdatedTimeByFile("content/blog/cached.mdx");
     await getLastUpdatedTimeByFile("content/blog/cached.mdx");
 
     // fetch is called once for this path
-    const calls = vi.mocked(fetch).mock.calls.filter((call) =>
-      (call[0] as string).includes("cached.mdx"),
-    );
+    const calls = vi
+      .mocked(fetch)
+      .mock.calls.filter((call) => (call[0] as string).includes("cached.mdx"));
     expect(calls).toHaveLength(1);
   });
 });

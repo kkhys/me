@@ -92,13 +92,14 @@ describe("remarkLinkCard", () => {
 
   it("preserves existing data properties", () => {
     const link = makeBareLink("https://example.com");
-    link.data = { existing: true };
+    Object.assign(link, { data: { existing: true } });
     const tree = makeTree([makeParagraph([link])]);
 
     remarkLinkCard()(tree);
 
     const node = tree.children[0] as Link;
-    expect(node.data?.existing).toBe(true);
-    expect(node.data?.hProperties).toEqual({ dataLinkCard: true });
+    const data = node.data as Record<string, unknown> | undefined;
+    expect(data?.existing).toBe(true);
+    expect(data?.hProperties).toEqual({ dataLinkCard: true });
   });
 });

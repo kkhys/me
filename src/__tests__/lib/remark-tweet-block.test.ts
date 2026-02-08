@@ -1,4 +1,5 @@
 import type { Link, Paragraph, Root, Text } from "mdast";
+import type { MdxJsxAttribute, MdxJsxFlowElement } from "mdast-util-mdx-jsx";
 import { describe, expect, it } from "vitest";
 import remarkTweetBlock from "#/lib/remark-tweet-block";
 
@@ -25,10 +26,12 @@ describe("remarkTweetBlock", () => {
 
     remarkTweetBlock()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as MdxJsxFlowElement;
     expect(node.type).toBe("mdxJsxFlowElement");
     expect(node.name).toBe("tweet-block");
-    expect(node.attributes[0].value).toBe("1234567890123456789");
+    expect((node.attributes[0] as MdxJsxAttribute).value).toBe(
+      "1234567890123456789",
+    );
   });
 
   it("converts x.com URL to tweet-block", () => {
@@ -37,10 +40,12 @@ describe("remarkTweetBlock", () => {
 
     remarkTweetBlock()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as MdxJsxFlowElement;
     expect(node.type).toBe("mdxJsxFlowElement");
     expect(node.name).toBe("tweet-block");
-    expect(node.attributes[0].value).toBe("9876543210987654321");
+    expect((node.attributes[0] as MdxJsxAttribute).value).toBe(
+      "9876543210987654321",
+    );
   });
 
   it("does not convert non-Twitter URLs", () => {
@@ -91,7 +96,9 @@ describe("remarkTweetBlock", () => {
 
     remarkTweetBlock()(tree);
 
-    const node = tree.children[0] as any;
-    expect(node.attributes[0].value).toBe("1580661436132757506");
+    const node = tree.children[0] as MdxJsxFlowElement;
+    expect((node.attributes[0] as MdxJsxAttribute).value).toBe(
+      "1580661436132757506",
+    );
   });
 });

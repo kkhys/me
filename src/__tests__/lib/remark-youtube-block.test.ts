@@ -1,4 +1,5 @@
 import type { Link, Paragraph, Root, Text } from "mdast";
+import type { MdxJsxAttribute, MdxJsxFlowElement } from "mdast-util-mdx-jsx";
 import { describe, expect, it } from "vitest";
 import remarkYoutubeBlock from "#/lib/remark-youtube-block";
 
@@ -25,10 +26,10 @@ describe("remarkYoutubeBlock", () => {
 
     remarkYoutubeBlock()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as MdxJsxFlowElement;
     expect(node.type).toBe("mdxJsxFlowElement");
     expect(node.name).toBe("youtube-block");
-    expect(node.attributes[0].value).toBe("kpz_U8wHpa8");
+    expect((node.attributes[0] as MdxJsxAttribute).value).toBe("kpz_U8wHpa8");
   });
 
   it("converts youtu.be/ID URL", () => {
@@ -37,10 +38,10 @@ describe("remarkYoutubeBlock", () => {
 
     remarkYoutubeBlock()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as MdxJsxFlowElement;
     expect(node.type).toBe("mdxJsxFlowElement");
     expect(node.name).toBe("youtube-block");
-    expect(node.attributes[0].value).toBe("kpz_U8wHpa8");
+    expect((node.attributes[0] as MdxJsxAttribute).value).toBe("kpz_U8wHpa8");
   });
 
   it("converts youtube.com/embed/ID URL", () => {
@@ -49,9 +50,8 @@ describe("remarkYoutubeBlock", () => {
 
     remarkYoutubeBlock()(tree);
 
-    const node = tree.children[0] as any;
-    expect(node.type).toBe("mdxJsxFlowElement");
-    expect(node.attributes[0].value).toBe("kpz_U8wHpa8");
+    const node = tree.children[0] as MdxJsxFlowElement;
+    expect((node.attributes[0] as MdxJsxAttribute).value).toBe("kpz_U8wHpa8");
   });
 
   it("converts m.youtube.com/watch?v=ID URL", () => {
@@ -60,9 +60,9 @@ describe("remarkYoutubeBlock", () => {
 
     remarkYoutubeBlock()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as MdxJsxFlowElement;
     expect(node.type).toBe("mdxJsxFlowElement");
-    expect(node.attributes[0].value).toBe("kpz_U8wHpa8");
+    expect((node.attributes[0] as MdxJsxAttribute).value).toBe("kpz_U8wHpa8");
   });
 
   it("does not convert non-YouTube URLs", () => {
@@ -91,9 +91,9 @@ describe("remarkYoutubeBlock", () => {
 
     remarkYoutubeBlock()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as MdxJsxFlowElement;
     expect(node.type).toBe("mdxJsxFlowElement");
-    expect(node.attributes[0].value).toBe("kpz_U8wHpa8");
+    expect((node.attributes[0] as MdxJsxAttribute).value).toBe("kpz_U8wHpa8");
   });
 
   it("skips paragraphs with multiple children", () => {

@@ -1,6 +1,10 @@
-import type { Root } from "mdast";
+import type { FootnoteReference, Paragraph, Root } from "mdast";
 import { describe, expect, it } from "vitest";
 import remarkFootnoteTitle from "#/lib/remark-footnote-title";
+
+interface FootnoteReferenceWithTitle extends FootnoteReference {
+  data: { hProperties: { title: string } };
+}
 
 const makeTree = (children: Root["children"]): Root => ({
   type: "root",
@@ -28,8 +32,8 @@ describe("remarkFootnoteTitle", () => {
 
     remarkFootnoteTitle()(tree);
 
-    const paragraph = tree.children[1] as any;
-    const ref = paragraph.children[0];
+    const paragraph = tree.children[1] as Paragraph;
+    const ref = paragraph.children[0] as FootnoteReferenceWithTitle;
     expect(ref.data.hProperties.title).toBe("Footnote content");
   });
 
@@ -66,9 +70,11 @@ describe("remarkFootnoteTitle", () => {
 
     remarkFootnoteTitle()(tree);
 
-    const paragraph = tree.children[2] as any;
-    expect(paragraph.children[0].data.hProperties.title).toBe("First footnote");
-    expect(paragraph.children[1].data.hProperties.title).toBe("Second footnote");
+    const paragraph = tree.children[2] as Paragraph;
+    const ref1 = paragraph.children[0] as FootnoteReferenceWithTitle;
+    const ref2 = paragraph.children[1] as FootnoteReferenceWithTitle;
+    expect(ref1.data.hProperties.title).toBe("First footnote");
+    expect(ref2.data.hProperties.title).toBe("Second footnote");
   });
 
   it("concatenates text from inlineCode nodes", () => {
@@ -95,8 +101,8 @@ describe("remarkFootnoteTitle", () => {
 
     remarkFootnoteTitle()(tree);
 
-    const paragraph = tree.children[1] as any;
-    const ref = paragraph.children[0];
+    const paragraph = tree.children[1] as Paragraph;
+    const ref = paragraph.children[0] as FootnoteReferenceWithTitle;
     expect(ref.data.hProperties.title).toBe("Using console.log for debugging");
   });
 
@@ -110,8 +116,8 @@ describe("remarkFootnoteTitle", () => {
 
     remarkFootnoteTitle()(tree);
 
-    const paragraph = tree.children[0] as any;
-    const ref = paragraph.children[0];
+    const paragraph = tree.children[0] as Paragraph;
+    const ref = paragraph.children[0] as FootnoteReference;
     expect(ref.data).toBeUndefined();
   });
 });

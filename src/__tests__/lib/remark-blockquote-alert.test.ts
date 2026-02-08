@@ -1,6 +1,13 @@
-import type { Blockquote, Paragraph, Root, Text } from "mdast";
+import type { Blockquote, Break, Emphasis, Paragraph, Root, Text } from "mdast";
 import { describe, expect, it } from "vitest";
 import remarkBlockQuoteAlert from "#/lib/remark-blockquote-alert";
+
+interface AlertBlockquote extends Blockquote {
+  data: {
+    hName: string;
+    hProperties: { dataAlertType: string };
+  };
+}
 
 const makeAlertBlockquote = (
   alertText: string,
@@ -29,7 +36,7 @@ describe("remarkBlockQuoteAlert", () => {
 
     remarkBlockQuoteAlert()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as AlertBlockquote;
     expect(node.data.hName).toBe("div");
     expect(node.data.hProperties.dataAlertType).toBe("note");
   });
@@ -39,34 +46,40 @@ describe("remarkBlockQuoteAlert", () => {
 
     remarkBlockQuoteAlert()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as AlertBlockquote;
     expect(node.data.hProperties.dataAlertType).toBe("tip");
   });
 
   it("converts [!IMPORTANT] to alert with type important", () => {
-    const tree = makeTree([makeAlertBlockquote("[!IMPORTANT]", "Important content")]);
+    const tree = makeTree([
+      makeAlertBlockquote("[!IMPORTANT]", "Important content"),
+    ]);
 
     remarkBlockQuoteAlert()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as AlertBlockquote;
     expect(node.data.hProperties.dataAlertType).toBe("important");
   });
 
   it("converts [!WARNING] to alert with type warning", () => {
-    const tree = makeTree([makeAlertBlockquote("[!WARNING]", "Warning content")]);
+    const tree = makeTree([
+      makeAlertBlockquote("[!WARNING]", "Warning content"),
+    ]);
 
     remarkBlockQuoteAlert()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as AlertBlockquote;
     expect(node.data.hProperties.dataAlertType).toBe("warning");
   });
 
   it("converts [!CAUTION] to alert with type caution", () => {
-    const tree = makeTree([makeAlertBlockquote("[!CAUTION]", "Caution content")]);
+    const tree = makeTree([
+      makeAlertBlockquote("[!CAUTION]", "Caution content"),
+    ]);
 
     remarkBlockQuoteAlert()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as AlertBlockquote;
     expect(node.data.hProperties.dataAlertType).toBe("caution");
   });
 
@@ -75,7 +88,7 @@ describe("remarkBlockQuoteAlert", () => {
 
     remarkBlockQuoteAlert()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as AlertBlockquote;
     expect(node.data.hProperties.dataAlertType).toBe("note");
   });
 
@@ -84,7 +97,7 @@ describe("remarkBlockQuoteAlert", () => {
 
     remarkBlockQuoteAlert()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as AlertBlockquote;
     expect(node.data.hProperties.dataAlertType).toBe("note");
     const paragraph = node.children[0] as Paragraph;
     const text = paragraph.children[0] as Text;
@@ -99,7 +112,7 @@ describe("remarkBlockQuoteAlert", () => {
           type: "paragraph",
           children: [
             { type: "text", value: "[!NOTE]" } as Text,
-            { type: "break" } as any,
+            { type: "break" } as Break,
             { type: "text", value: "Content after break" } as Text,
           ],
         } as Paragraph,
@@ -109,7 +122,7 @@ describe("remarkBlockQuoteAlert", () => {
 
     remarkBlockQuoteAlert()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as AlertBlockquote;
     expect(node.data.hProperties.dataAlertType).toBe("note");
   });
 
@@ -140,7 +153,10 @@ describe("remarkBlockQuoteAlert", () => {
           {
             type: "paragraph",
             children: [
-              { type: "emphasis", children: [{ type: "text", value: "[!NOTE]" }] } as any,
+              {
+                type: "emphasis",
+                children: [{ type: "text", value: "[!NOTE]" } as Text],
+              } as Emphasis,
             ],
           } as Paragraph,
         ],
@@ -160,11 +176,15 @@ describe("remarkBlockQuoteAlert", () => {
         children: [
           {
             type: "paragraph",
-            children: [{ type: "text", value: "[!NOTE]\nFirst paragraph" } as Text],
+            children: [
+              { type: "text", value: "[!NOTE]\nFirst paragraph" } as Text,
+            ],
           } as Paragraph,
           {
             type: "paragraph",
-            children: [{ type: "text", value: "[!WARNING]\nSecond paragraph" } as Text],
+            children: [
+              { type: "text", value: "[!WARNING]\nSecond paragraph" } as Text,
+            ],
           } as Paragraph,
         ],
       } as Blockquote,
@@ -172,7 +192,7 @@ describe("remarkBlockQuoteAlert", () => {
 
     remarkBlockQuoteAlert()(tree);
 
-    const node = tree.children[0] as any;
+    const node = tree.children[0] as AlertBlockquote;
     expect(node.data.hProperties.dataAlertType).toBe("note");
   });
 });

@@ -49,7 +49,9 @@ describe("rehypeBudoux", () => {
   });
 
   it("processes nested elements", () => {
-    const result = process("<p><strong>太字の日本語テキスト</strong>を含む段落</p>");
+    const result = process(
+      "<p><strong>太字の日本語テキスト</strong>を含む段落</p>",
+    );
     expect(result).toContain("<wbr>");
   });
 });

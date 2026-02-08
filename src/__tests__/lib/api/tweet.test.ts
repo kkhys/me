@@ -1,13 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const mockEnrichedTweet = { id: "123", text: "Hello world" };
-
 vi.mock("react-tweet", () => ({
-  enrichTweet: vi.fn((data: any) => ({ ...data, enriched: true })),
+  enrichTweet: vi.fn((data: Record<string, unknown>) => ({
+    ...data,
+    enriched: true,
+  })),
 }));
 
 describe("getTweetData", () => {
-  let getTweetData: (id: string) => Promise<any>;
+  let getTweetData: (id: string) => Promise<Record<string, unknown>>;
 
   beforeEach(async () => {
     vi.resetModules();
@@ -23,7 +24,10 @@ describe("getTweetData", () => {
       }),
     );
     vi.mock("react-tweet", () => ({
-      enrichTweet: vi.fn((data: any) => ({ ...data, enriched: true })),
+      enrichTweet: vi.fn((data: Record<string, unknown>) => ({
+        ...data,
+        enriched: true,
+      })),
     }));
     const mod = await import("#/lib/api/tweet");
     getTweetData = mod.getTweetData;
@@ -42,7 +46,9 @@ describe("getTweetData", () => {
   it("calls fetch with correct syndication URL and token params", async () => {
     await getTweetData("1580661436132757506");
 
-    const url = vi.mocked(fetch).mock.calls[0][0] as string;
+    const firstCallArgs = vi.mocked(fetch).mock.calls[0];
+    expect(firstCallArgs).toBeDefined();
+    const url = String(firstCallArgs?.[0]);
     expect(url).toContain("https://cdn.syndication.twimg.com/tweet-result?");
     expect(url).toContain("id=1580661436132757506");
     expect(url).toContain("lang=en");
@@ -53,9 +59,9 @@ describe("getTweetData", () => {
     await getTweetData("same-id-123");
     await getTweetData("same-id-123");
 
-    const calls = vi.mocked(fetch).mock.calls.filter((call) =>
-      (call[0] as string).includes("same-id-123"),
-    );
+    const calls = vi
+      .mocked(fetch)
+      .mock.calls.filter((call) => (call[0] as string).includes("same-id-123"));
     expect(calls).toHaveLength(1);
   });
 });

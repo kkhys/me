@@ -1,7 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+interface SiteMetadata {
+  title: string | undefined;
+  description: string | undefined;
+  icon?: string | null | undefined;
+  image?: unknown;
+}
+
 describe("getMetadata", () => {
-  let getMetadata: (url: string) => Promise<any>;
+  let getMetadata: (url: string) => Promise<SiteMetadata>;
 
   describe("non-production environment", () => {
     beforeEach(async () => {

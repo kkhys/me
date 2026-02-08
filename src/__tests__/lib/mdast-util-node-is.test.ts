@@ -1,3 +1,4 @@
+import type { Node } from "unist";
 import { describe, expect, it } from "vitest";
 import {
   hasChildren,
@@ -75,7 +76,9 @@ describe("isText", () => {
 
 describe("isLink", () => {
   it("returns true for link nodes", () => {
-    expect(isLink({ type: "link", url: "https://example.com", children: [] })).toBe(true);
+    expect(
+      isLink({ type: "link", url: "https://example.com", children: [] }),
+    ).toBe(true);
   });
 
   it("returns false for non-link nodes", () => {
@@ -118,17 +121,27 @@ describe("isBareExternalLink", () => {
 
 describe("isFootnoteDefinition", () => {
   it("returns true for footnote definition nodes", () => {
-    expect(isFootnoteDefinition({ type: "footnoteDefinition", identifier: "1", children: [] })).toBe(true);
+    expect(
+      isFootnoteDefinition({
+        type: "footnoteDefinition",
+        identifier: "1",
+        children: [],
+      }),
+    ).toBe(true);
   });
 
   it("returns false for other nodes", () => {
-    expect(isFootnoteDefinition({ type: "paragraph", children: [] })).toBe(false);
+    expect(isFootnoteDefinition({ type: "paragraph", children: [] })).toBe(
+      false,
+    );
   });
 });
 
 describe("isFootnoteReference", () => {
   it("returns true for footnote reference nodes", () => {
-    expect(isFootnoteReference({ type: "footnoteReference", identifier: "1" })).toBe(true);
+    expect(
+      isFootnoteReference({ type: "footnoteReference", identifier: "1" }),
+    ).toBe(true);
   });
 
   it("returns false for other nodes", () => {
@@ -138,11 +151,25 @@ describe("isFootnoteReference", () => {
 
 describe("isVideo", () => {
   it("returns true for video mdxJsxFlowElement", () => {
-    expect(isVideo({ type: "mdxJsxFlowElement", name: "video", attributes: [], children: [] })).toBe(true);
+    expect(
+      isVideo({
+        type: "mdxJsxFlowElement",
+        name: "video",
+        attributes: [],
+        children: [],
+      }),
+    ).toBe(true);
   });
 
   it("returns false for non-video mdxJsxFlowElement", () => {
-    expect(isVideo({ type: "mdxJsxFlowElement", name: "img", attributes: [], children: [] })).toBe(false);
+    expect(
+      isVideo({
+        type: "mdxJsxFlowElement",
+        name: "img",
+        attributes: [],
+        children: [],
+      }),
+    ).toBe(false);
   });
 
   it("returns false for non-mdxJsxFlowElement", () => {
@@ -152,14 +179,19 @@ describe("isVideo", () => {
 
 describe("hasChildren", () => {
   it("returns true for nodes with children", () => {
-    expect(hasChildren({ type: "paragraph", children: [{ type: "text", value: "hi" }] })).toBe(true);
+    const node = {
+      type: "paragraph",
+      children: [{ type: "text", value: "hi" }],
+    };
+    expect(hasChildren(node as Node)).toBe(true);
   });
 
   it("returns false for nodes with empty children", () => {
-    expect(hasChildren({ type: "paragraph", children: [] })).toBe(false);
+    const node = { type: "paragraph", children: [] };
+    expect(hasChildren(node as Node)).toBe(false);
   });
 
   it("returns false for nodes without children property", () => {
-    expect(hasChildren({ type: "text" } as any)).toBe(false);
+    expect(hasChildren({ type: "text" } as Node)).toBe(false);
   });
 });
