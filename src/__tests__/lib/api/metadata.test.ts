@@ -15,7 +15,6 @@ describe("getMetadata", () => {
       vi.resetModules();
       vi.doMock("astro:env/client", () => ({
         NODE_ENV: "development",
-        PUBLIC_VERCEL_ENV: "development",
       }));
       vi.doMock("fetch-site-metadata", () => ({
         default: vi.fn(),
@@ -41,11 +40,38 @@ describe("getMetadata", () => {
     });
   });
 
+  describe("CI environment", () => {
+    beforeEach(async () => {
+      vi.resetModules();
+      vi.stubEnv("CI", "true");
+      vi.doMock("astro:env/client", () => ({
+        NODE_ENV: "production",
+      }));
+      vi.doMock("fetch-site-metadata", () => ({
+        default: vi.fn(),
+      }));
+      const mod = await import("#/lib/api/metadata");
+      getMetadata = mod.getMetadata;
+    });
+
+    afterEach(() => {
+      vi.unstubAllEnvs();
+      vi.resetModules();
+    });
+
+    it("returns fallback metadata even in production when CI is set", async () => {
+      const result = await getMetadata("https://ci-example.com");
+      expect(result.title).toBe("リンク");
+      expect(result.description).toBe("外部リンク");
+    });
+  });
+
   describe("production environment", () => {
     let mockFetchSiteMetadata: ReturnType<typeof vi.fn>;
 
     beforeEach(async () => {
       vi.resetModules();
+      vi.stubEnv("CI", "");
       mockFetchSiteMetadata = vi.fn().mockResolvedValue({
         title: "Example",
         description: "Example description",
@@ -54,7 +80,6 @@ describe("getMetadata", () => {
       });
       vi.doMock("astro:env/client", () => ({
         NODE_ENV: "production",
-        PUBLIC_VERCEL_ENV: "production",
       }));
       vi.doMock("fetch-site-metadata", () => ({
         default: mockFetchSiteMetadata,
@@ -64,6 +89,7 @@ describe("getMetadata", () => {
     });
 
     afterEach(() => {
+      vi.unstubAllEnvs();
       vi.resetModules();
     });
 
