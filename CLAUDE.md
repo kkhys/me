@@ -22,7 +22,7 @@ CI runs: lint → test → type check → build. Add `skip-ci` label to PRs to s
 
 ## Architecture Overview
 
-Astro 5 static site with React islands, deployed on Vercel. Vanilla CSS with kiso.css reset + uchu.css color palette (OKLCH). TypeScript strictest mode.
+Astro 5 static site deployed on Vercel. React is used only for server-side OG image generation (Satori), not as client-side islands. Vanilla CSS with kiso.css reset + uchu.css color palette (OKLCH). TypeScript strictest mode.
 
 ### Path Aliases
 

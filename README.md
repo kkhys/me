@@ -4,8 +4,8 @@ Source code for [kkhys.me](https://kkhys.me) — a personal website and blog bui
 
 ## Tech Stack
 
-- [Astro](https://astro.build/) — Static site generator with React islands
-- [React](https://react.dev/) — Interactive UI components
+- [Astro](https://astro.build/) — Static site generator
+- [React](https://react.dev/) — Server-side OG image generation (via Satori)
 - [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) — Styling with [kiso.css](https://github.com/build-trust/kiso.css) reset + [uchu.css](https://github.com/kkhys/uchu.css) color palette (OKLCH)
 - [TypeScript](https://www.typescriptlang.org/) — Strictest mode type safety
 - [Vitest](https://vitest.dev/) — Unit testing
