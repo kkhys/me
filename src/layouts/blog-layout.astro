@@ -1,6 +1,5 @@
 ---
 import type { InferEntrySchema } from "astro:content";
-import type { MarkdownHeading } from "astro";
 import { emojiSvg } from "#/components/emoji-svg";
 import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
 import BaseSEO from "#/components/seo/base-seo.astro";
@@ -10,7 +9,6 @@ import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Separator from "#/components/ui/separator.astro";
 import { me, siteConfig } from "#/config/site";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
-import TableOfContent from "#/features/blog/components/ui/table-of-content.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { tags as allTags } from "#/features/blog/config/tag";
@@ -20,7 +18,6 @@ import { BASE_URL } from "#/utils/base-url";
 
 interface Props extends InferEntrySchema<"blog"> {
   id: string;
-  headings: MarkdownHeading[];
 }
 
 const {
@@ -34,7 +31,6 @@ const {
   updatedAt,
   description,
   status,
-  headings,
 } = Astro.props;
 
 const categorySlug = category.toLowerCase();
@@ -116,9 +112,6 @@ const currentDate = new Date();
     </div>
   </section>
   <section class="post-body">
-    {headings.length > 1 && (
-        <TableOfContent headings={headings} />
-    )}
     <article class="prose">
       <slot />
     </article>
@@ -241,48 +234,3 @@ const currentDate = new Date();
   }
 </style>
 
-<script>
-  const handleHeadingIntersection = () => {
-    const observerOptions: IntersectionObserverInit = {
-      root: null,
-      rootMargin: '0px 0px -85% 0px',
-      threshold: 0
-    };
-
-    const activeClass = 'active';
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-
-        const id = entry.target.getAttribute('id');
-
-        document.querySelectorAll(`.${activeClass}`)
-          .forEach((item) => item.classList.remove(activeClass));
-
-        const link = document.querySelector(`li > a[href="#${id}"]`);
-        const toc = document.querySelector(`div[data-toc="${id}"]`);
-
-        link?.classList.add(activeClass);
-        toc?.classList.add(activeClass);
-      })
-    }, observerOptions);
-
-    const headings = document.querySelectorAll('h2[id], h3[id]');
-    headings.forEach((heading) => observer.observe(heading));
-
-    if (headings.length > 1) {
-      const firstHeadingId = headings[0]?.getAttribute('id');
-      if (firstHeadingId) {
-        const firstLink = document.querySelector(`li > a[href="#${firstHeadingId}"]`);
-        const firstToc = document.querySelector(`div[data-toc="${firstHeadingId}"]`);
-
-        firstLink?.classList.add(activeClass);
-        firstToc?.classList.add(activeClass);
-      }
-    }
-
-  }
-
-  handleHeadingIntersection()
-</script>
