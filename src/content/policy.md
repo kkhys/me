@@ -31,10 +31,6 @@ description: kkhys.meのプライバシーポリシー
 - YouTube — ブログ記事には [lite-youtube-embed](https://github.com/nicorevin/lite-youtube-embed) を介してYouTube動画が埋め込まれている場合があります。埋め込み動画を操作すると、YouTubeにデータが送信される場合があります。詳細は [Googleのプライバシーポリシー](https://policies.google.com/privacy)をご参照ください。
 - X（Twitter） — ブログ記事にはツイートが埋め込まれている場合があります。表示時にXにデータが送信される場合があります。詳細は [Xのプライバシーポリシー](https://x.com/en/privacy)をご参照ください。
 
-### API
-
-- GitHub API — コントリビューションデータの表示に使用しています。訪問者の個人データはGitHubに送信されません。
-
 ## Cookie
 
 本サイトでは、アナリティクスやトラッキングの目的でCookieを使用していません。第三者の埋め込みコンテンツ（YouTube、Xなど）は、操作時に独自のCookieを設定する場合があります。
@@ -64,4 +60,4 @@ Email: hi@kkhys.me
 ---
 
 - 制定日: 2023年12月27日
-- 最終更新日: 2026年2月7日
+- 最終更新日: 2026年2月9日
