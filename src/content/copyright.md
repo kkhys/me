@@ -1,6 +1,6 @@
 ---
 title: Copyright
-description: kkhys.me の著作権情報
+description: kkhys.meの著作権情報
 ---
 
 当サイトのコンテンツおよび画像は、特に記載がない限り [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) のもとでライセンスされています。

@@ -9,7 +9,7 @@ const remarkVideoBlock = () => (tree: Root) => {
     }
 
     if (hasChildren(node)) {
-      throw new Error("video-block は子要素を持つことができません。");
+      throw new Error("video-blockは子要素を持つことができません。");
     }
 
     parent.children[index] = {
