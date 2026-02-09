@@ -6,7 +6,7 @@ import type { CustomImageProps } from "./types";
 
 type Props = CustomImageProps;
 
-const { class: className, ambientMode, title, ...rest } = Astro.props;
+const { class: className, title, ...rest } = Astro.props;
 
 const blurryImage = await getImage({
   ...(rest as UnresolvedImageTransform),
@@ -26,13 +26,13 @@ const pictureProps = {
 
 {title ? (
   <figure>
-    <div class:list={["blur-load", "image-rounded", "image-border", ambientMode && "ambient-mode", className]}>
+    <div class:list={["blur-load", "image-rounded", "image-border", className]}>
       <AstroPicture {...pictureProps} />
     </div>
     <figcaption class="image-caption">{title}</figcaption>
   </figure>
 ) : (
-  <div class:list={["blur-load", "image-rounded", "image-border", ambientMode && "ambient-mode", className]}>
+  <div class:list={["blur-load", "image-rounded", "image-border", className]}>
     <AstroPicture {...pictureProps} />
   </div>
 )}
@@ -63,21 +63,6 @@ const pictureProps = {
     &.image-loaded {
       background: none;
       filter: blur(0);
-    }
-  }
-
-  .ambient-mode {
-    position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      inset: -1.5%;
-      max-width: 100vw;
-      background: var(--bg-image) center / cover no-repeat;
-      filter: blur(64px);
-      opacity: 0.25;
-      z-index: -10;
     }
   }
 </style>
