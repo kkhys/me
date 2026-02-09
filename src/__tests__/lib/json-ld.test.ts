@@ -16,7 +16,7 @@ describe("websiteSchema", () => {
 
   it("has name and description", () => {
     expect(websiteSchema.name).toBe("Keisuke Hayashi");
-    expect(websiteSchema.description).toBe("Keisuke Hayashi の個人サイト");
+    expect(websiteSchema.description).toBe("Keisuke Hayashiの個人サイト");
   });
 });
 

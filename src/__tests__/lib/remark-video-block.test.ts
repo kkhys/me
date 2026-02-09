@@ -51,7 +51,7 @@ describe("remarkVideoBlock", () => {
     ]);
 
     expect(() => remarkVideoBlock()(tree)).toThrow(
-      "video-block は子要素を持つことができません",
+      "video-blockは子要素を持つことができません",
     );
   });
 
