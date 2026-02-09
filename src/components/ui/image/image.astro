@@ -26,14 +26,18 @@ const pictureProps = {
 
 {title ? (
   <figure>
-    <div class:list={["blur-load", "image-rounded", "image-border", className]}>
-      <AstroPicture {...pictureProps} />
+    <div class:list={["blur-load-wrapper", "image-rounded", "image-border", className]}>
+      <div class="blur-load">
+        <AstroPicture {...pictureProps} />
+      </div>
     </div>
     <figcaption class="image-caption">{title}</figcaption>
   </figure>
 ) : (
-  <div class:list={["blur-load", "image-rounded", "image-border", className]}>
-    <AstroPicture {...pictureProps} />
+  <div class:list={["blur-load-wrapper", "image-rounded", "image-border", className]}>
+    <div class="blur-load">
+      <AstroPicture {...pictureProps} />
+    </div>
   </div>
 )}
 
@@ -53,6 +57,10 @@ const pictureProps = {
     color: var(--c-sub);
     margin-top: 0.5rem;
     line-height: 1.5;
+  }
+
+  .blur-load-wrapper {
+    overflow: hidden;
   }
 
   .blur-load {
