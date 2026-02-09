@@ -1,26 +1,22 @@
 ---
+import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
 import BaseSEO from "#/components/seo/base-seo.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 ---
 
-<BaseLayout class="error-page">
+<BaseLayout>
   <BaseSEO
       title='見つかりませんでした'
       noindex
       slot='seo'
   />
+  <div class="back-link-wrapper">
+    <a href="/" class="back-link">
+      <ArrowLeftIcon class="back-icon" />
+      ホーム
+    </a>
+  </div>
   <h1 class="page-title">
     ページが見つかりませんでした
   </h1>
-  <a href="/" class="btn btn--outline">ホームに戻る</a>
 </BaseLayout>
-
-<style>
-  .error-page {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 1rem;
-  }
-</style>
