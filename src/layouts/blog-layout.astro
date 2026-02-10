@@ -12,7 +12,7 @@ import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { tags as allTags } from "#/features/blog/config/tag";
-import { getRelatedPosts } from "#/features/blog/utils/entry";
+import { getRelatedPosts, toListEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/utils/base-url";
 
@@ -122,7 +122,7 @@ const currentDate = new Date();
     {relatedPosts?.length > 0 && (
       <div class="related-posts">
         <div class="related-posts-title">こちらもおすすめ</div>
-        <EntryList blogEntries={relatedPosts} />
+        <EntryList entries={toListEntries(relatedPosts)} />
       </div>
     )}
   </section>

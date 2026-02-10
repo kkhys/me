@@ -10,7 +10,7 @@ import CategoryNavigation from "#/features/blog/components/ui/category-navigatio
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import Pagination from "#/features/blog/components/ui/pagination.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
-import { getPublicBlogEntries } from "#/features/blog/utils/entry";
+import { getPublicListEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/utils/base-url";
 
@@ -19,17 +19,12 @@ export const getStaticPaths = async ({
 }: {
   paginate: PaginateFunction;
 }) => {
-  const blogEntries = await getPublicBlogEntries();
-  const categories = [
-    ...new Set(blogEntries.flatMap((entry) => entry.data.category ?? [])),
-  ];
+  const entries = await getPublicListEntries();
+  const categories = [...new Set(entries.map((entry) => entry.category))];
   return categories.flatMap((category) => {
-    const filteredEntries = blogEntries
-      .filter((post) => post.data.category.includes(category))
-      .sort(
-        (a, b) => a.data.publishedAt.getTime() - b.data.publishedAt.getTime(),
-      )
-      .reverse();
+    const filteredEntries = entries
+      .filter((entry) => entry.category === category)
+      .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
     return paginate(filteredEntries, {
       pageSize: countPerPage,
       params: { category: category.toLowerCase() },
@@ -78,7 +73,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     <CategoryNavigation class="blog-nav" />
   </section>
   <section class="blog-entries">
-    <EntryList blogEntries={page.data} showDate />
+    <EntryList entries={page.data} showDate />
   </section>
   <Pagination page={page} baseUrl={`/blog/categories/${categorySlug}`} class="blog-pagination" />
 </BaseLayout>
