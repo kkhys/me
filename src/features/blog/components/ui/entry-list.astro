@@ -35,10 +35,7 @@ const { entries, class: className, showDate = false, ...rest } = Astro.props;
               <Budoux>
                 <p class="palt">
                   {entry.title}
-                  <span class="entry-external">
-                    <MoveUpRightIcon class="entry-external-icon" />
-                    <span class="entry-site-name">{entry.siteName}</span>
-                  </span>
+                  <MoveUpRightIcon class="entry-external-icon" />
                 </p>
               </Budoux>
             </div>
@@ -131,22 +128,12 @@ const { entries, class: className, showDate = false, ...rest } = Astro.props;
     background-color: oklch(from var(--uchu-red-4) l c h / 80%);
   }
 
-  .entry-external {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.125rem;
-    margin-left: 0.25rem;
-    vertical-align: middle;
-    color: var(--c-sub);
-  }
-
   .entry-external-icon {
+    display: inline;
     width: 0.875rem;
     height: 0.875rem;
-  }
-
-  .entry-site-name {
-    font-size: var(--fs-xs);
-    white-space: nowrap;
+    margin-left: 0.25rem;
+    vertical-align: -0.1em;
+    color: var(--c-sub);
   }
 </style>
