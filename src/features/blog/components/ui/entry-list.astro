@@ -1,49 +1,80 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import type { HTMLAttributes } from "astro/types";
 import Budoux from "#/components/budoux.astro";
+import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
+import SiteIcon from "#/features/blog/components/ui/site-icon.astro";
+import type { ListEntry } from "#/features/blog/utils/entry";
 import { convertDateToString } from "#/utils/date";
 
 interface Props extends HTMLAttributes<"div"> {
-  blogEntries: CollectionEntry<"blog">[];
+  entries: ListEntry[];
   showDate?: boolean;
 }
 
-const {
-  blogEntries,
-  class: className,
-  showDate = false,
-  ...rest
-} = Astro.props;
+const { entries, class: className, showDate = false, ...rest } = Astro.props;
 ---
 
 {
-  blogEntries.length ? (
+  entries.length ? (
   <div class:list={["entry-list", className]} {...rest}>
-    {blogEntries.map(({ id, data: { title, emoji, status, publishedAt }}) => {
-      const publishedAtString = convertDateToString(publishedAt);
-      return (
-          <a href={`/blog/posts/${id}`} class="entry-item">
+    {entries.map((entry) => {
+      const publishedAtString = convertDateToString(entry.publishedAt);
+
+      if (entry.type === "external") {
+        return (
+          <a
+            href={entry.url}
+            class="entry-item"
+            target="_blank"
+            rel="noreferrer"
+            data-astro-prefetch="false"
+          >
             <div class="entry-left">
-              <EmojiEyeCatch emoji={emoji} size="sm" class="entry-emoji" />
+              <SiteIcon siteName={entry.siteName} />
               <Budoux>
-                <p class="palt">{title}</p>
+                <p class="palt">
+                  {entry.title}
+                  <span class="entry-external">
+                    <MoveUpRightIcon class="entry-external-icon" />
+                    <span class="entry-site-name">{entry.siteName}</span>
+                  </span>
+                </p>
               </Budoux>
             </div>
             {showDate && (
-                <time
-                    class="entry-date palt"
-                    datetime={publishedAt.toISOString()}
-                >
-                  {publishedAtString}
-                </time>
-            )}
-            {status === "draft" && (
-                <span class="entry-draft" />
+              <time
+                class="entry-date palt"
+                datetime={entry.publishedAt.toISOString()}
+              >
+                {publishedAtString}
+              </time>
             )}
           </a>
-      )
+        );
+      }
+
+      return (
+        <a href={`/blog/posts/${entry.id}`} class="entry-item">
+          <div class="entry-left">
+            <EmojiEyeCatch emoji={entry.emoji} size="sm" class="entry-emoji" />
+            <Budoux>
+              <p class="palt">{entry.title}</p>
+            </Budoux>
+          </div>
+          {showDate && (
+            <time
+              class="entry-date palt"
+              datetime={entry.publishedAt.toISOString()}
+            >
+              {publishedAtString}
+            </time>
+          )}
+          {entry.status === "draft" && (
+            <span class="entry-draft" />
+          )}
+        </a>
+      );
     })}
   </div>
   ) : (
@@ -98,5 +129,24 @@ const {
     height: 0.25rem;
     width: 0.5rem;
     background-color: oklch(from var(--uchu-red-4) l c h / 80%);
+  }
+
+  .entry-external {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.125rem;
+    margin-left: 0.25rem;
+    vertical-align: middle;
+    color: var(--c-sub);
+  }
+
+  .entry-external-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .entry-site-name {
+    font-size: var(--fs-xs);
+    white-space: nowrap;
   }
 </style>
