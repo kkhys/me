@@ -1,6 +1,7 @@
 import { defineCollection, z } from "astro:content";
 import { file, glob } from "astro/loaders";
 import { categoryTitles } from "#/features/blog/config/category";
+import { externalSites } from "#/features/blog/config/external-site";
 import { allTagTitles } from "#/features/blog/config/tag";
 
 const blog = defineCollection({
@@ -43,4 +44,16 @@ const bucketList = defineCollection({
   ),
 });
 
-export const collections = { blog, legal, bucketList };
+const externalPost = defineCollection({
+  loader: file("src/content/external-posts/data.yaml"),
+  schema: z.object({
+    title: z.string(),
+    url: z.string().url(),
+    siteName: z.enum(externalSites as [string, ...string[]]),
+    category: z.enum(categoryTitles as [string, ...string[]]),
+    tags: z.array(z.enum(allTagTitles as [string, ...string[]])).optional(),
+    publishedAt: z.date(),
+  }),
+});
+
+export const collections = { blog, legal, bucketList, externalPost };

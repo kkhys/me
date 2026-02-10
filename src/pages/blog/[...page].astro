@@ -9,7 +9,7 @@ import { siteConfig } from "#/config/site";
 import CategoryNavigation from "#/features/blog/components/ui/category-navigation.astro";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import Pagination from "#/features/blog/components/ui/pagination.astro";
-import { getPublicBlogEntries } from "#/features/blog/utils/entry";
+import { getPublicListEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/utils/base-url";
 
@@ -18,8 +18,8 @@ export const getStaticPaths = async ({
 }: {
   paginate: PaginateFunction;
 }) => {
-  const blogEntries = await getPublicBlogEntries();
-  return paginate(blogEntries, { pageSize: countPerPage });
+  const entries = await getPublicListEntries();
+  return paginate(entries, { pageSize: countPerPage });
 };
 
 const { page } = Astro.props;
@@ -56,7 +56,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     <CategoryNavigation class="blog-nav" />
   </section>
   <section class="blog-entries">
-    <EntryList blogEntries={page.data} showDate />
+    <EntryList entries={page.data} showDate />
   </section>
   <Pagination page={page} baseUrl="/blog" class="blog-pagination" />
 </BaseLayout>
