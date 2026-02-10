@@ -1,0 +1,44 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import HatenaBlogIcon from "#/components/icons/hatena-blog.svg";
+import NoteIcon from "#/components/icons/note.svg";
+import ZennIcon from "#/components/icons/zenn.svg";
+import type { ExternalSite } from "#/features/blog/config/external-site";
+
+interface Props extends HTMLAttributes<"span"> {
+  siteName: ExternalSite;
+}
+
+const { siteName, class: className, ...rest } = Astro.props;
+
+const icons = {
+  Hatena: HatenaBlogIcon,
+  note: NoteIcon,
+  Zenn: ZennIcon,
+} as const satisfies Record<ExternalSite, typeof HatenaBlogIcon>;
+
+const Icon = icons[siteName];
+---
+
+<span class:list={["site-icon", className]} {...rest}>
+  <Icon />
+</span>
+
+<style>
+  .site-icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background-color: var(--c-surface);
+    box-shadow: var(--shadow-sm);
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .site-icon :global(svg) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+</style>
