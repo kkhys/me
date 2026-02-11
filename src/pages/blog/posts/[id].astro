@@ -9,6 +9,7 @@ import BlogLayout from "#/layouts/blog-layout.astro";
 import { getLastUpdatedTimeByFile } from "#/lib/api/github";
 import { getBlogPostingSchema } from "#/lib/json-ld";
 import { convertDateToString } from "#/utils/date";
+import { extractDescription } from "#/utils/extract-description";
 
 export const getStaticPaths = (async () =>
   (await getPublicBlogEntries()).map((entry) => {
@@ -18,11 +19,12 @@ export const getStaticPaths = (async () =>
       },
       props: {
         entry,
+        description: extractDescription(entry.body ?? ""),
       },
     };
   })) satisfies GetStaticPaths;
 
-const { entry } = Astro.props;
+const { entry, description } = Astro.props;
 const { Content } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
 
@@ -43,7 +45,11 @@ if (process.env.VERCEL) {
   }
 }
 
-const blogPostingSchema = getBlogPostingSchema(entry);
+const blogPostingSchema = getBlogPostingSchema({
+  id: entry.id,
+  data: entry.data,
+  description,
+});
 const categoryObject = getCategoryByTitle(entry.data.category);
 
 if (!categoryObject) {
@@ -81,7 +87,7 @@ const jsonLd = {
 };
 ---
 
-<BlogLayout id={entry.id} publishedAtString={publishedAtString} {...entry.data}>
+<BlogLayout id={entry.id} publishedAtString={publishedAtString} description={description} {...entry.data}>
   <script
       is:inline
       type='application/ld+json'

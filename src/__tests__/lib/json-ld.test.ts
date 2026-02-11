@@ -23,7 +23,6 @@ describe("websiteSchema", () => {
 describe("getBlogPostingSchema", () => {
   const baseData = {
     title: "Test Post",
-    description: "A test blog post",
     emoji: "🧪",
     category: "Tech" as const,
     publishedAt: new Date("2024-01-15T00:00:00Z"),
@@ -34,6 +33,7 @@ describe("getBlogPostingSchema", () => {
     const schema = getBlogPostingSchema({
       id: "test123",
       data: baseData,
+      description: "A test blog post",
     });
 
     expect(schema["@context"]).toBe("https://schema.org");
@@ -48,6 +48,7 @@ describe("getBlogPostingSchema", () => {
       getBlogPostingSchema({
         id: "test123",
         data: invalidData,
+        description: "test",
       }),
     ).toThrow("Category not found: Invalid");
   });
@@ -56,6 +57,7 @@ describe("getBlogPostingSchema", () => {
     const schema = getBlogPostingSchema({
       id: "test123",
       data: { ...baseData, tags: ["TypeScript", "React"] },
+      description: "test",
     });
 
     expect(schema.keywords).toContain("TypeScript");
@@ -66,6 +68,7 @@ describe("getBlogPostingSchema", () => {
     const schema = getBlogPostingSchema({
       id: "test123",
       data: { ...baseData, tags: ["NonExistentTag"] },
+      description: "test",
     });
 
     expect(schema.keywords).toBe("NonExistentTag");
@@ -78,6 +81,7 @@ describe("getBlogPostingSchema", () => {
         ...baseData,
         updatedAt: new Date("2024-06-01T00:00:00Z"),
       },
+      description: "test",
     });
 
     expect(schema.dateModified).toBe("2024-06-01T00:00:00.000Z");
@@ -87,6 +91,7 @@ describe("getBlogPostingSchema", () => {
     const schema = getBlogPostingSchema({
       id: "test123",
       data: baseData,
+      description: "test",
     });
 
     expect(schema.dateModified).toBe("2024-01-15T00:00:00.000Z");
@@ -97,6 +102,7 @@ describe("getBlogPostingSchema", () => {
     const schema = getBlogPostingSchema({
       id: "abc123",
       data: baseData,
+      description: "test",
     });
 
     expect(schema.url).toBe("https://example.com/blog/posts/abc123");
@@ -106,6 +112,7 @@ describe("getBlogPostingSchema", () => {
     const schema = getBlogPostingSchema({
       id: "test123",
       data: baseData,
+      description: "test",
     });
 
     expect(schema.articleSection).toBe("プログラミング");

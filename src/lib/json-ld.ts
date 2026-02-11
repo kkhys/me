@@ -32,7 +32,10 @@ export const websiteSchema: WithContext<WebSite> = {
 export const getBlogPostingSchema = ({
   id,
   data,
-}: Pick<CollectionEntry<"blog">, "id" | "data">): WithContext<BlogPosting> => {
+  description,
+}: Pick<CollectionEntry<"blog">, "id" | "data"> & {
+  description: string;
+}): WithContext<BlogPosting> => {
   const categoryObject = getCategoryByTitle(data.category);
 
   if (!categoryObject) {
@@ -52,7 +55,7 @@ export const getBlogPostingSchema = ({
       "@type": "ImageObject",
       url: `${import.meta.env.SITE}/api/og/${id}.png`,
     },
-    description: data.description,
+    description,
     publisher: personSchema,
     author: personSchema,
     datePublished: data.publishedAt.toISOString(),
