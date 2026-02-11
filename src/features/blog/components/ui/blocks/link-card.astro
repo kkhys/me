@@ -55,6 +55,11 @@ const { title, description, image } = await getMetadata(props.href);
     overflow: hidden;
     border-radius: var(--radius-md);
     border: 1px solid var(--c-border);
+    transition: transform 0.15s ease;
+  }
+
+  .link-card:active {
+    transform: scale(0.99);
   }
 
   .link-card-inner {
