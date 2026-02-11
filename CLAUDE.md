@@ -36,7 +36,7 @@ import { categories } from "#/features/blog/config/category";
 - `src/features/` — Feature modules, each self-contained with its own components, utilities, and config:
   - `blog/` — Blog system (config, components, utils, actions)
   - `home/` — Home page
-  - `legal/` — Legal pages
+  - `pages/` — Static pages (about, privacy, copyright)
 - `src/lib/` — Libraries (remark/rehype plugins, API wrappers, structured modules)
   - `src/lib/api/` — API wrappers (GitHub, Twitter, emoji, metadata) with in-memory caching
 - `src/utils/` — Pure helper functions (date.ts, font-loader.ts, base-url.ts, hash.ts)
@@ -57,9 +57,9 @@ Defined via `astro:env` in `astro.config.ts` (type-safe access). Server secrets:
 
 ### Collections
 
-3 collections defined in `src/content.config.ts`:
+4 collections defined in `src/content.config.ts`:
 - **blog**: MDX files in `content/blog/YYYY-MM-DD/index.mdx` (images co-located in same directory)
-- **legal**: Markdown in `content/legal/`
+- **pages**: MDX in `src/content/pages/`
 - **bucketList**: YAML in `content/bucket-list/data.yaml`
 
 ### Categories & Tags

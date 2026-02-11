@@ -1,7 +1,6 @@
 ---
 import "#/styles/global.css";
 import BaseSEO from "#/components/seo/base-seo.astro";
-import Footer from "#/components/ui/footer.astro";
 
 interface Props {
   class?: string;
@@ -43,7 +42,6 @@ const { class: className } = Astro.props;
     <slot/>
   </div>
 </main>
-<Footer />
 </body>
 </html>
 

@@ -57,7 +57,7 @@ src/
 ├── features/         # Feature modules
 │   ├── blog/         # Blog system
 │   ├── home/         # Home page
-│   └── legal/        # Legal pages
+│   └── pages/        # Static pages (about, privacy, copyright)
 ├── layouts/          # Page layouts
 ├── lib/              # Libraries and custom plugins
 │   ├── api/          # API wrappers (GitHub, Twitter, emoji, metadata)
@@ -70,7 +70,7 @@ src/
 content/
 ├── blog/             # Blog posts (MDX)
 ├── bucket-list/      # Bucket list data (YAML)
-└── legal/            # Legal pages (Markdown)
+└── pages/            # Static pages (MDX)
 scripts/
 ├── create-entry.ts   # Blog post scaffolding
 ├── render-mermaid.ts # Mermaid SVG pre-rendering

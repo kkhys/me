@@ -1,20 +1,32 @@
 ---
+import { getEntry, render } from "astro:content";
+import profileImage from "#/assets/images/profile.jpg";
 import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
 import BaseSEO from "#/components/seo/base-seo.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
 import TwitterCard from "#/components/seo/twitter-card.astro";
+import Image from "#/components/ui/image/image.astro";
 import { siteConfig } from "#/config/site";
+import ContentWrapper from "#/features/pages/components/content-wrapper.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/utils/base-url";
 
-const seoTitle = `私について｜${siteConfig.title}`;
-const seoDescription = "Keisuke Hayashiのブログ";
+const about = await getEntry("pages", "about");
+
+if (!about) {
+  return Astro.redirect("/404");
+}
+
+const { Content: AboutContent } = await render(about);
+
+const seoTitle = `About｜${siteConfig.title}`;
+const seoDescription = about.data.description;
 const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
 <BaseLayout>
   <Fragment slot='seo'>
-    <BaseSEO title="私について" description={seoDescription} />
+    <BaseSEO title="About" description={seoDescription} />
     <OpenGraph
       title={seoTitle}
       description={seoDescription}
@@ -35,22 +47,44 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     </a>
   </div>
   <h1 class="page-title">
-    わたしについて
+    About
   </h1>
-  <section class="about-body">
-    <p class="about-text">
-      準備中です。
-    </p>
+  <div class="about-profile">
+    <Image
+      src={profileImage}
+      alt="Keisuke Hayashi"
+      width={200}
+      height={200}
+      widths={[200, 400]}
+      sizes="200px"
+      loading="eager"
+      class="about-avatar"
+    />
+  </div>
+  <section class="about-body prose">
+    <ContentWrapper content={AboutContent} />
   </section>
 </BaseLayout>
 
 <style>
+  .about-profile {
+    margin-top: 2rem;
+  }
+
+  .about-profile :global(.about-avatar) {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .about-profile :global(.about-avatar picture img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .about-body {
     margin-top: 2rem;
   }
 
-  .about-text {
-    color: var(--c-sub);
-    font-size: var(--fs-sm);
-  }
 </style>
