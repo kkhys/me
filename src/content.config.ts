@@ -21,7 +21,7 @@ const blog = defineCollection({
 });
 
 const legal = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content" }),
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
