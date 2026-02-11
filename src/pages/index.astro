@@ -1,5 +1,6 @@
 ---
 import Budoux from "#/components/budoux.astro";
+import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
 import BaseSEO from "#/components/seo/base-seo.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
 import TwitterCard from "#/components/seo/twitter-card.astro";
@@ -40,7 +41,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     <Budoux>
       <div class="home-body prose">
         <p>コードを書いて暮らしています。色々なものを作ることが好きです。<a href="/blog/categories/tech" class="home-link">プログラミング</a>のことから<a href="/blog/tags/sewing" class="home-link">手縫いの服づくり</a>まで、<a href="/blog/categories/life" class="home-link">日々のこと</a>や<a href="/blog/categories/object" class="home-link">手に馴染む道具</a>の話をブログに残しています。</p>
-        <p>コードを書いていないときは、珈琲を淹れたりチョコレートを食べたりジムで体を動かしたりしています。日々考えたことは<a href="https://memo.kkhys.me" class="home-link">メモ</a>に書き留めて、いつかやりたいことは<a href="/bucket-list" class="home-link">バケットリスト</a>にまとめています。</p>
+        <p>コードを書いていないときは、珈琲を淹れたりチョコレートを食べたりジムで体を動かしたりしています。日々考えたことは<a href="https://memo.kkhys.me" target="_blank" rel="noreferrer" class="home-link external-link">メモ<MoveUpRightIcon class="external-icon" /></a>に書き留めて、いつかやりたいことは<a href="/bucket-list" class="home-link">バケットリスト</a>にまとめています。</p>
         <p>私の好きな文章には次のようなものがあります。</p>
         <ul class="home-list">
           <li><a href="/blog/posts/b1ty460" class="home-link">デスク構成スナップショット2025</a></li>
@@ -49,7 +50,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
           <li><a href="/blog/posts/b1zn5cl" class="home-link">景色と料理を楽しむ、鹿児島3泊4日の旅</a></li>
           <li><a href="/blog/posts/b17ruev" class="home-link">7日間のマレーシア放浪記</a></li>
         </ul>
-        <p><a href="/blog" class="home-link">私の文章</a>を読んだり<a href="https://github.com/kkhys" class="home-link">GitHub</a>でコードを見ることができます。何かあれば<a href="mailto:hi@kkhys.me" class="home-link">ご連絡ください</a>。</p>
+        <p><a href="/blog" class="home-link">私の文章</a>を読んだり<a href="https://github.com/kkhys" target="_blank" rel="noreferrer" class="home-link external-link">GitHub<MoveUpRightIcon class="external-icon" /></a>でコードを見ることができます。何かあれば<a href="mailto:hi@kkhys.me" class="home-link">ご連絡ください</a>。</p>
       </div>
     </Budoux>
   </div>
@@ -77,6 +78,18 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     text-decoration: underline 1px;
     text-underline-offset: 4px;
     text-decoration-color: oklch(from var(--c-sub) l c h / 50%);
+  }
+
+  .external-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .external-icon {
+    margin-inline: 0.25rem;
+    margin-top: 0.125rem;
+    width: 0.75rem;
+    height: 0.75rem;
   }
 
   .home-link:visited {
