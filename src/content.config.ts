@@ -8,7 +8,6 @@ const blog = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./content/blog" }),
   schema: z.object({
     title: z.string(),
-    description: z.string(),
     emoji: z.string(),
     category: z.enum(categoryTitles as [string, ...string[]]),
     tags: z.array(z.enum(allTagTitles as [string, ...string[]])).optional(),

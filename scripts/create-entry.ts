@@ -8,7 +8,6 @@ import { generateBech32m } from "#/utils/hash";
 
 interface Frontmatter {
   title: string;
-  description: string;
   emoji: string;
   category: CategoryTitle;
   tags: string;
@@ -99,7 +98,6 @@ const generateMDXContent = (frontmatter: Frontmatter) => {
 
   return `---
 title: ${frontmatter.title}
-description: ${frontmatter.description}
 emoji: ${frontmatter.emoji}
 category: ${frontmatter.category}
 tags: ${frontmatter.tags}
@@ -116,8 +114,6 @@ const main = async () => {
 
   try {
     const title = await prompt("タイトルを入力してください: ");
-    const description =
-      (await prompt('説明を入力してください (空白で"xxx"): ')) || "xxx";
     const emoji = (await prompt("絵文字を入力してください (空白で☑️): ")) || "☑️";
     const category = await selectCategory();
     const publishedAt = await inputPublishedDate();
@@ -126,7 +122,6 @@ const main = async () => {
 
     const frontmatter: Frontmatter = {
       title,
-      description,
       emoji,
       category,
       tags: "[]",
@@ -152,7 +147,6 @@ const main = async () => {
     console.log(`📄 ファイル: ${filePath}`);
     console.log(`🏷️  スラッグ: ${frontmatter.slug}`);
     console.log(`📅 日付: ${frontmatter.publishedAt}`);
-    console.log(`📝 説明: ${frontmatter.description}`);
   } catch (error) {
     console.error("エラーが発生しました:", error);
     process.exit(1);
