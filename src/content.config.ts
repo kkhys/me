@@ -20,8 +20,8 @@ const blog = defineCollection({
   }),
 });
 
-const legal = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content" }),
+const pages = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/pages" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -56,4 +56,4 @@ const externalPost = defineCollection({
   }),
 });
 
-export const collections = { blog, legal, bucketList, externalPost };
+export const collections = { blog, pages, bucketList, externalPost };

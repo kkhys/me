@@ -40,7 +40,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     </h1>
     <Budoux>
       <div class="home-body prose">
-        <p>コードを書いて暮らしています。色々なものを作ることが好きです。<a href="/blog/categories/tech" class="home-link">プログラミング</a>のことから<a href="/blog/tags/sewing" class="home-link">手縫いの服づくり</a>まで、<a href="/blog/categories/life" class="home-link">日々のこと</a>や<a href="/blog/categories/object" class="home-link">手に馴染む道具</a>の話をブログに残しています。</p>
+        <p><a href="/about" class="home-link">コードを書いて暮らしています</a>。色々なものを作ることが好きです。<a href="/blog/categories/tech" class="home-link">プログラミング</a>のことから<a href="/blog/tags/sewing" class="home-link">手縫いの服づくり</a>まで、<a href="/blog/categories/life" class="home-link">日々のこと</a>や<a href="/blog/categories/object" class="home-link">手に馴染む道具</a>の話をブログに残しています。</p>
         <p>コードを書いていないときは、珈琲を淹れたりチョコレートを食べたりジムで体を動かしたりしています。日々考えたことは<a href="https://memo.kkhys.me" target="_blank" rel="noreferrer" class="home-link external-link">メモ<MoveUpRightIcon class="external-icon" /></a>に書き留めて、いつかやりたいことは<a href="/bucket-list" class="home-link">バケットリスト</a>にまとめています。</p>
         <p>私の好きな文章には次のようなものがあります。</p>
         <ul class="home-list">
@@ -94,6 +94,10 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
 
   .home-link:visited {
     color: var(--c-text);
+
+    & svg {
+      stroke: currentColor;
+    }
   }
 
   .home-link:hover {

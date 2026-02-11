@@ -57,7 +57,7 @@
     color: var(--c-link-visited);
 
     & svg {
-      stroke: inherit;
+      stroke: currentColor;
     }
   }
 }
@@ -135,10 +135,52 @@
 }
 
 .prose table {
-  width: 100%;
-  table-layout: auto;
+  display: block;
+  overflow-x: auto;
   text-align: left;
   font-size: var(--fs-sm);
+  scroll-timeline: --table-scroll inline;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  animation: table-scroll-mask linear both;
+  animation-timeline: --table-scroll;
+}
+
+.prose :is(th, td) {
+  white-space: nowrap;
+}
+
+.prose table::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes table-scroll-mask {
+  0% {
+    mask-image: linear-gradient(
+      to right,
+      var(--uchu-yin) calc(100% - 2rem),
+      transparent
+    );
+  }
+  1%,
+  99% {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      var(--uchu-yin) 2rem,
+      var(--uchu-yin) calc(100% - 2rem),
+      transparent
+    );
+  }
+  100% {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      var(--uchu-yin) 2rem,
+      var(--uchu-yin) 100%
+    );
+  }
 }
 
 .prose thead {

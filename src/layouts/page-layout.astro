@@ -8,7 +8,7 @@ import { siteConfig } from "#/config/site";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/utils/base-url";
 
-interface Props extends InferEntrySchema<"legal"> {}
+interface Props extends InferEntrySchema<"pages"> {}
 
 const { title, description } = Astro.props;
 
@@ -42,13 +42,13 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     </a>
   </div>
   <h1 class="page-title">{title}</h1>
-  <section class="prose legal-body">
+  <section class="prose page-body">
     <slot />
   </section>
 </BaseLayout>
 
 <style>
-  .legal-body {
+  .page-body {
     margin-top: 2rem;
   }
 </style>
