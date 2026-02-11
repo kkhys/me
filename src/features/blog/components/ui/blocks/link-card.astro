@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 import GlobeIcon from "#/components/icons/globe.svg";
 import { getMetadata } from "#/lib/api/metadata";
+import { BASE_URL } from "#/utils/base-url";
 
 interface Props extends HTMLAttributes<"a"> {
   href: string;
@@ -10,14 +11,14 @@ interface Props extends HTMLAttributes<"a"> {
 
 const props = Astro.props;
 
+const isExternal = !props.href.startsWith(BASE_URL);
 const { title, description, image } = await getMetadata(props.href);
 ---
 
 <div class="link-card">
   <a
-      target="_blank"
-      rel="noreferrer"
       class="link-card-inner"
+      {...(isExternal && { target: "_blank", rel: "noreferrer" })}
       {...props}
   >
     <div class="link-card-content">
