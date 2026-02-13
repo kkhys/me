@@ -130,10 +130,18 @@ const blurryPhotos = tweet.photos
     {
       tweet.video && (
         <div class="tweet-media">
-          <tweet-video poster={tweet.video.poster}>
-            {tweet.video.variants.map((variant) => (
-              <source src={variant.src} type={variant.type} />
-            ))}
+          <tweet-video>
+            <div class="tweet-video-wrapper">
+              <video controls playsinline muted loop preload="metadata" poster={tweet.video.poster} class="tweet-video-el">
+                {tweet.video.variants.map((variant) => (
+                  <source src={variant.src} type={variant.type} />
+                ))}
+                お使いのブラウザはビデオをサポートしていません。
+              </video>
+              <button type="button" class="play-button" aria-label="ビデオを再生" hidden>
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
           </tweet-video>
         </div>
       )
@@ -289,6 +297,15 @@ const blurryPhotos = tweet.photos
     position: relative;
   }
 
+  .tweet-video-wrapper {
+    position: relative;
+  }
+
+  .tweet-video-el {
+    width: 100%;
+    display: block;
+  }
+
   .tweet-photo-blur {
     background-size: cover;
     filter: blur(16px);
@@ -365,68 +382,40 @@ const blurryPhotos = tweet.photos
     image?.addEventListener('load', handleLoadedImage);
   });
 
-	class TweetVideo extends HTMLElement {
-		private video: HTMLVideoElement | null = null;
-		private playButton: HTMLButtonElement | null = null;
+  class TweetVideo extends HTMLElement {
+    private video: HTMLVideoElement | null = null;
+    private playButton: HTMLButtonElement | null = null;
 
-		connectedCallback() {
-			this.render();
-			this.setupEventListeners();
-		}
+    connectedCallback() {
+      this.video = this.querySelector('video');
+      this.playButton = this.querySelector('.play-button');
 
-		private render() {
-			const poster = this.getAttribute("poster") || "";
-			const sources = Array.from(this.querySelectorAll("source"))
-				.map((source) => source.outerHTML)
-				.join("");
+      if (this.video && this.playButton) {
+        // Remove native controls; custom play button takes over
+        this.video.controls = false;
+        this.playButton.hidden = false;
+        this.playButton.addEventListener('click', this.handlePlayClick);
+      }
+    }
 
-			this.innerHTML = `
-				<div class="tweet-video-wrapper">
-					<video playsinline muted loop preload="metadata" poster="${poster}" class="tweet-video-el">
-						${sources}
-						お使いのブラウザはビデオをサポートしていません。
-					</video>
-					<button
-						type="button"
-						class="play-button"
-						aria-label="ビデオを再生"
-					>
-						<svg viewBox="0 0 24 24">
-							<path d="M8 5v14l11-7z"/>
-						</svg>
-					</button>
-				</div>
-			`;
-		}
+    private handlePlayClick = (e: Event) => {
+      e.preventDefault();
 
-		private setupEventListeners() {
-			this.video = this.querySelector("video");
-			this.playButton = this.querySelector(".play-button");
+      if (this.playButton && this.video) {
+        this.playButton.style.opacity = '0';
+        this.playButton.style.pointerEvents = 'none';
 
-			if (this.playButton && this.video) {
-				this.playButton.removeEventListener("click", this.handlePlayClick);
-				this.playButton.addEventListener("click", this.handlePlayClick);
-			}
-		}
+        setTimeout(() => {
+          if (this.playButton && this.video) {
+            this.playButton.style.display = 'none';
+            this.video.controls = true;
+            this.video.play();
+            this.video.focus();
+          }
+        }, 300);
+      }
+    };
+  }
 
-		private handlePlayClick = (e: Event) => {
-			e.preventDefault();
-
-			if (this.playButton && this.video) {
-				this.playButton.style.opacity = "0";
-				this.playButton.style.pointerEvents = "none";
-
-				setTimeout(() => {
-					if (this.playButton && this.video) {
-						this.playButton.style.display = "none";
-						this.video.controls = true;
-						this.video.play();
-						this.video.focus();
-					}
-				}, 300);
-			}
-		};
-	}
-
-	customElements.define("tweet-video", TweetVideo);
+  customElements.define('tweet-video', TweetVideo);
 </script>

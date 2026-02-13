@@ -31,16 +31,28 @@ const {
 } = Astro.props;
 ---
 
-<lite-youtube
-  videoid={videoId}
-  playlistid={playlistId}
-  videotitle={title}
-  params={params}
-  class:list={["youtube-embed", className]}
-  {...rest}
-></lite-youtube>
+<div class="youtube-wrapper">
+  <lite-youtube
+    videoid={videoId}
+    playlistid={playlistId}
+    videotitle={title}
+    params={params}
+    class:list={["youtube-embed", className]}
+    {...rest}
+  ></lite-youtube>
+  <noscript>
+    <a href={`https://www.youtube.com/watch?v=${videoId}`} class="youtube-noscript" target="_blank" rel="noreferrer">
+      YouTubeで動画を見る
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="youtube-noscript-icon"><path d="M13 5H19V11"/><path d="M19 5L5 19"/></svg>
+    </a>
+  </noscript>
+</div>
 
 <style>
+  .youtube-wrapper {
+    position: relative;
+  }
+
   .youtube-embed {
     display: block;
     max-width: 100%;
@@ -123,6 +135,37 @@ const {
     position: absolute;
     white-space: nowrap;
     width: 1px;
+  }
+
+  .youtube-noscript {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    color: var(--c-link);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-sm);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:visited {
+      color: var(--c-link-visited);
+    }
+  }
+
+  .youtube-noscript-icon {
+    margin-inline: 0.25rem;
+    margin-top: 0.125rem;
+    width: 0.75rem;
+    height: 0.75rem;
   }
 </style>
 
