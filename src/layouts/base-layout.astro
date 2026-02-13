@@ -26,6 +26,14 @@ const { class: className } = Astro.props;
     <BaseSEO />
   </slot>
 
+  <noscript>
+    <style>
+      .blur-load { filter: none !important; background: none !important; }
+      .tweet-photo-blur { filter: none !important; background: none !important; }
+      lite-youtube { cursor: default !important; }
+    </style>
+  </noscript>
+
   {import.meta.env.PROD && (
     <script
       is:inline
