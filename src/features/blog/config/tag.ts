@@ -169,6 +169,12 @@ export const tags = [
     slug: "typescript",
     emoji: "🧩",
   },
+  {
+    title: "Chocolate",
+    label: "チョコレート",
+    slug: "chocolate",
+    emoji: "🍫",
+  },
 ] as const satisfies Tag[];
 
 export const allTagTitles = tags.map(({ title }) => title);
