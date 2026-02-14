@@ -181,35 +181,6 @@
 /* ===== Common Layout Patterns ===== */
 
 @layer layout {
-  .back-link-wrapper {
-    margin-bottom: 1rem;
-
-    @media (width >= 1280px) {
-      position: fixed;
-      top: 0;
-      transform: translateY(170px) translateX(-260px);
-    }
-  }
-
-  .back-link {
-    display: inline-flex;
-    gap: 0.25rem;
-    align-items: center;
-    color: var(--c-sub);
-    font-size: var(--fs-xs);
-    font-feature-settings: "palt";
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  .back-icon {
-    width: 0.875rem;
-    height: 0.875rem;
-  }
-
   .page-title {
     font-weight: var(--fw-medium);
   }
