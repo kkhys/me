@@ -6,14 +6,14 @@ interface Props {
   description: string;
   image: string;
   imageAlt: string;
-  type?: "website" | "article" | "profile";
+  type?: "website" | "article" | "profile" | undefined;
   article?: {
     publishedTime?: string;
     modifiedTime?: string;
     authors?: string[];
     section?: string;
     tags?: string[];
-  };
+  } | undefined;
 }
 
 const {

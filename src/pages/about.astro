@@ -1,12 +1,9 @@
 ---
 import { getEntry, render } from "astro:content";
 import profileImage from "#/assets/images/profile.jpg";
-import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
-import BaseSEO from "#/components/seo/base-seo.astro";
-import OpenGraph from "#/components/seo/open-graph.astro";
-import TwitterCard from "#/components/seo/twitter-card.astro";
+import SEO from "#/components/seo/seo.astro";
+import Breadcrumb from "#/components/ui/breadcrumb.astro";
 import Image from "#/components/ui/image/image.astro";
-import { siteConfig } from "#/config/site";
 import ContentWrapper from "#/features/pages/components/content-wrapper.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/utils/base-url";
@@ -19,33 +16,17 @@ if (!about) {
 
 const { Content: AboutContent } = await render(about);
 
-const seoTitle = `About｜${siteConfig.title}`;
-const seoDescription = about.data.description;
 const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
 <BaseLayout>
-  <Fragment slot='seo'>
-    <BaseSEO title="About" description={seoDescription} />
-    <OpenGraph
-      title={seoTitle}
-      description={seoDescription}
-      image={seoImage}
-      imageAlt={seoTitle}
-    />
-    <TwitterCard
-      title={seoTitle}
-      description={seoDescription}
-      image={seoImage}
-      imageAlt={seoTitle}
-    />
-  </Fragment>
-  <div class="back-link-wrapper">
-    <a href="/" class="back-link">
-      <ArrowLeftIcon class="back-icon" />
-      ホーム
-    </a>
-  </div>
+  <SEO
+    title="About"
+    description={about.data.description}
+    image={seoImage}
+    slot='seo'
+  />
+  <Breadcrumb segments={[{ label: "ホーム", href: "/" }]} />
   <h1 class="page-title">
     About
   </h1>
