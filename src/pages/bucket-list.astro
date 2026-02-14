@@ -62,7 +62,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     image={seoImage}
     slot='seo'
   />
-  <Breadcrumb segments={[{ label: "ホーム", href: "/" }]} />
+  <Breadcrumb segments={[{ label: "Home", href: "/" }]} />
   <h1 class="page-title">
     バケットリスト
   </h1>
@@ -142,6 +142,8 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
+    font-size: var(--fs-sm);
+    color: var(--c-prose-text);
   }
 
   @media (width >= 640px) {
