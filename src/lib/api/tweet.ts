@@ -1,6 +1,7 @@
 import type { EnrichedTweet } from "react-tweet";
 import { enrichTweet } from "react-tweet";
 import type { Tweet } from "react-tweet/api";
+import { createCache } from "#/lib/api/cache";
 
 /**
  * Generate token for Twitter Syndication API
@@ -12,7 +13,7 @@ const getToken = (id: string) => {
     .replace(/(0+|\.)/g, "");
 };
 
-const cache = new Map<string, Promise<EnrichedTweet>>();
+const cache = createCache<EnrichedTweet>();
 
 const fetchTweet = async (id: string): Promise<EnrichedTweet> => {
   const URL = "https://cdn.syndication.twimg.com/tweet-result?";
@@ -33,10 +34,5 @@ const fetchTweet = async (id: string): Promise<EnrichedTweet> => {
  * @param id - Tweet ID
  * @returns Enriched tweet data
  */
-export const getTweetData = (id: string): Promise<EnrichedTweet> => {
-  const cached = cache.get(id);
-  if (cached) return cached;
-  const promise = fetchTweet(id);
-  cache.set(id, promise);
-  return promise;
-};
+export const getTweetData = (id: string): Promise<EnrichedTweet> =>
+  cache(id, () => fetchTweet(id));

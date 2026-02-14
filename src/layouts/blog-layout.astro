@@ -1,13 +1,11 @@
 ---
 import type { InferEntrySchema } from "astro:content";
 import { emojiSvg } from "#/components/emoji-svg";
-import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
-import BaseSEO from "#/components/seo/base-seo.astro";
-import OpenGraph from "#/components/seo/open-graph.astro";
-import TwitterCard from "#/components/seo/twitter-card.astro";
+import SEO from "#/components/seo/seo.astro";
+import Breadcrumb from "#/components/ui/breadcrumb.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import Separator from "#/components/ui/separator.astro";
-import { me, siteConfig } from "#/config/site";
+import { me } from "#/config/site";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
@@ -54,51 +52,31 @@ const tagCloudItems = allTagCloudItems.filter(({ title }) =>
 
 const relatedPosts = await getRelatedPosts({ id, category });
 
-const seoTitle = `${title}｜${siteConfig.title}`;
 const seoImage = `${BASE_URL}/api/og/${id}.png`;
 const currentDate = new Date();
 ---
 
 <BaseLayout>
-  <Fragment slot='seo'>
-    <BaseSEO title={title} description={description} />
-    <OpenGraph
-      title={seoTitle}
-      description={description}
-      image={seoImage}
-      imageAlt={seoTitle}
-      type="article"
-      article={{
-        publishedTime: (publishedAt ?? currentDate).toISOString(),
-        modifiedTime: (updatedAt ?? publishedAt ?? currentDate).toISOString(),
-        authors: [me.name],
-        section: categoryObject.label,
-        tags: tagCloudItems.map((tag) => tag.label),
-      }}
-    />
-    <TwitterCard
-      title={seoTitle}
-      description={description}
-      image={seoImage}
-      imageAlt={seoTitle}
-    />
-  </Fragment>
+  <SEO
+    title={title}
+    description={description}
+    image={seoImage}
+    type="article"
+    article={{
+      publishedTime: (publishedAt ?? currentDate).toISOString(),
+      modifiedTime: (updatedAt ?? publishedAt ?? currentDate).toISOString(),
+      authors: [me.name],
+      section: categoryObject.label,
+      tags: tagCloudItems.map((tag) => tag.label),
+    }}
+    slot='seo'
+  />
   <slot name='head' slot='head' />
   <section>
-    <div class="breadcrumb">
-      <span class="breadcrumb-inner">
-        <a href="/blog" class="breadcrumb-link">
-          <ArrowLeftIcon class="breadcrumb-icon" />
-          ブログ
-        </a>
-        <span class="breadcrumb-sep">/</span>
-        <b class="breadcrumb-category">
-          <a href={`/blog/categories/${categorySlug}`} class="breadcrumb-category-link">
-            {categoryObject.label}
-          </a>
-        </b>
-      </span>
-    </div>
+    <Breadcrumb segments={[
+      { label: "ブログ", href: "/blog" },
+      { label: categoryObject.label, href: `/blog/categories/${categorySlug}`, isCurrent: true },
+    ]} />
     <div class:list={[status === 'draft' && 'draft-header']}>
       <EmojiEyeCatch emoji={emoji} />
       {status === "draft" && (
@@ -130,60 +108,6 @@ const currentDate = new Date();
 </BaseLayout>
 
 <style>
-  .breadcrumb {
-    margin-bottom: 1rem;
-  }
-
-  @media (width >= 1280px) {
-    .breadcrumb {
-      position: fixed;
-      top: 0;
-      transform: translateY(170px) translateX(-260px);
-    }
-  }
-
-  .breadcrumb-inner {
-    display: inline-flex;
-    gap: 0.375rem;
-    align-items: center;
-    font-size: var(--fs-xs);
-  }
-
-  .breadcrumb-link {
-    display: inline-flex;
-    gap: 0.25rem;
-    align-items: center;
-    color: var(--c-sub);
-    font-feature-settings: "palt";
-    text-decoration: none;
-  }
-
-  .breadcrumb-link:hover {
-    text-decoration: underline;
-  }
-
-  .breadcrumb-icon {
-    width: 0.875rem;
-    height: 0.875rem;
-  }
-
-  .breadcrumb-sep {
-    color: var(--c-sub);
-  }
-
-  .breadcrumb-category {
-    font-weight: var(--fw-semibold);
-  }
-
-  .breadcrumb-category-link {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .breadcrumb-category-link:hover {
-    text-decoration: underline;
-  }
-
   .draft-header {
     display: flex;
     justify-content: space-between;

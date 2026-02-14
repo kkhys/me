@@ -36,28 +36,21 @@ export const getIconCode = (char: string) => {
   return toCodePoint(!char.includes(U200D) ? char.replace(UFE0Fg, "") : char);
 };
 
-const emojiCache: Record<string, Promise<string>> = {};
+import { createCache } from "#/lib/api/cache";
 
-export const loadEmoji = async (type: keyof typeof apis, code: string) => {
+const cache = createCache<string>();
+
+export const loadEmoji = (type: keyof typeof apis, code: string) => {
   const key = `${type}:${code}`;
 
-  if (key in emojiCache) {
-    return emojiCache[key];
-  }
+  return cache(key, () => {
+    const resolvedType = type && apis[type] ? type : "twemoji";
+    const api = apis[resolvedType];
 
-  const resolvedType = type && apis[type] ? type : "twemoji";
+    if (typeof api === "function") {
+      return fetch(api(code)).then(async (r) => r.text());
+    }
 
-  const api = apis[resolvedType];
-
-  if (typeof api === "function") {
-    const result = fetch(api(code)).then(async (r) => r.text());
-    emojiCache[key] = result;
-    return result;
-  }
-
-  const result = fetch(`${api}${code.toUpperCase()}.svg`).then(async (r) =>
-    r.text(),
-  );
-  emojiCache[key] = result;
-  return result;
+    return fetch(`${api}${code.toUpperCase()}.svg`).then(async (r) => r.text());
+  });
 };

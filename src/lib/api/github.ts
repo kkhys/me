@@ -1,10 +1,11 @@
 import { GITHUB_ACCESS_TOKEN } from "astro:env/server";
+import { createCache } from "#/lib/api/cache";
 
 type LastUpdatedTimeData = {
   lastUpdatedTime: string | undefined;
 };
 
-const cache = new Map<string, Promise<LastUpdatedTimeData>>();
+const cache = createCache<LastUpdatedTimeData>();
 
 const fetchLastUpdatedTime = async (
   filePath: string,
@@ -41,10 +42,5 @@ const fetchLastUpdatedTime = async (
 
 export const getLastUpdatedTimeByFile = (
   filePath: string,
-): Promise<LastUpdatedTimeData> => {
-  const cached = cache.get(filePath);
-  if (cached) return cached;
-  const promise = fetchLastUpdatedTime(filePath);
-  cache.set(filePath, promise);
-  return promise;
-};
+): Promise<LastUpdatedTimeData> =>
+  cache(filePath, () => fetchLastUpdatedTime(filePath));

@@ -1,10 +1,7 @@
 ---
 import type { InferEntrySchema } from "astro:content";
-import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
-import BaseSEO from "#/components/seo/base-seo.astro";
-import OpenGraph from "#/components/seo/open-graph.astro";
-import TwitterCard from "#/components/seo/twitter-card.astro";
-import { siteConfig } from "#/config/site";
+import SEO from "#/components/seo/seo.astro";
+import Breadcrumb from "#/components/ui/breadcrumb.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/utils/base-url";
 
@@ -12,35 +9,19 @@ interface Props extends InferEntrySchema<"pages"> {}
 
 const { title, description } = Astro.props;
 
-const seoTitle = `${title}｜${siteConfig.title}`;
-const seoDescription = description ?? siteConfig.description;
 const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
 <BaseLayout>
-  <Fragment slot='seo'>
-    <BaseSEO title={title} description={seoDescription} />
-    <OpenGraph
-      title={seoTitle}
-      description={seoDescription}
-      image={seoImage}
-      imageAlt={seoTitle}
-      type="article"
-    />
-    <TwitterCard
-      title={seoTitle}
-      description={seoDescription}
-      image={seoImage}
-      imageAlt={seoTitle}
-    />
-  </Fragment>
+  <SEO
+    title={title}
+    description={description}
+    image={seoImage}
+    type="article"
+    slot='seo'
+  />
   <slot name='head' slot='head'/>
-  <div class="back-link-wrapper">
-    <a href="/" class="back-link">
-      <ArrowLeftIcon class="back-icon" />
-      ホーム
-    </a>
-  </div>
+  <Breadcrumb segments={[{ label: "ホーム", href: "/" }]} />
   <h1 class="page-title">{title}</h1>
   <section class="prose page-body">
     <slot />

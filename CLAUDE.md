@@ -98,6 +98,13 @@ Coverage targets: `src/utils/*.ts`, `src/lib/*.ts`, `src/lib/api/*.ts` (excludin
 - **CSS**: Vanilla CSS with `light-dark()` for theme switching, scoped `<style>` blocks, `class:list` directive for conditional classes.
 - **Japanese content**: BudouX for line breaking, bilingual support (English titles/slugs, Japanese labels).
 
+## Type Definition Placement
+
+1. **`.astro` files**: Inline `interface Props` in the frontmatter
+2. **`.ts` files**: Co-locate types tightly coupled with logic in the same file
+3. **Shared types (3+ consumers)**: Extract to a dedicated `types.ts`
+4. **Config constants**: Derive types with `as const satisfies` pattern
+
 ## Content Review System
 
 When asked to review an article ("この記事のレビューを行なってください"), automatically launch all 4 review agents in parallel via the `Task` tool: `content-reviewer`, `language-editor`, `readability-enhancer`, `technical-writer`. Integrate results into a unified report.

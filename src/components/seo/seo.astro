@@ -1,0 +1,53 @@
+---
+import BaseSEO from "#/components/seo/base-seo.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
+import { siteConfig } from "#/config/site";
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+  image?: string | undefined;
+  type?: "website" | "article" | "profile" | undefined;
+  article?:
+    | {
+        publishedTime?: string;
+        modifiedTime?: string;
+        authors?: string[];
+        section?: string;
+        tags?: string[];
+      }
+    | undefined;
+  noindex?: boolean | undefined;
+}
+
+const {
+  title,
+  description,
+  image,
+  type = "website",
+  article,
+  noindex,
+} = Astro.props;
+
+const ogTitle = title ? `${title}｜${siteConfig.title}` : siteConfig.title;
+const ogDescription = description ?? siteConfig.description;
+---
+
+<BaseSEO title={title} description={description} noindex={noindex} />
+{image && (
+  <OpenGraph
+    title={ogTitle}
+    description={ogDescription}
+    image={image}
+    imageAlt={ogTitle}
+    type={type}
+    article={article}
+  />
+  <TwitterCard
+    title={ogTitle}
+    description={ogDescription}
+    image={image}
+    imageAlt={ogTitle}
+  />
+)}

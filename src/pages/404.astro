@@ -1,21 +1,16 @@
 ---
-import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
-import BaseSEO from "#/components/seo/base-seo.astro";
+import SEO from "#/components/seo/seo.astro";
+import Breadcrumb from "#/components/ui/breadcrumb.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 ---
 
 <BaseLayout>
-  <BaseSEO
+  <SEO
       title='見つかりませんでした'
       noindex
       slot='seo'
   />
-  <div class="back-link-wrapper">
-    <a href="/" class="back-link">
-      <ArrowLeftIcon class="back-icon" />
-      ホーム
-    </a>
-  </div>
+  <Breadcrumb segments={[{ label: "ホーム", href: "/" }]} />
   <h1 class="page-title">
     ページが見つかりませんでした
   </h1>

@@ -1,10 +1,7 @@
 ---
 import Budoux from "#/components/budoux.astro";
 import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
-import BaseSEO from "#/components/seo/base-seo.astro";
-import OpenGraph from "#/components/seo/open-graph.astro";
-import TwitterCard from "#/components/seo/twitter-card.astro";
-import { siteConfig } from "#/config/site";
+import SEO from "#/components/seo/seo.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { websiteSchema } from "#/lib/json-ld";
 import { BASE_URL } from "#/utils/base-url";
@@ -13,21 +10,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
 <BaseLayout>
-  <Fragment slot='seo'>
-    <BaseSEO />
-    <OpenGraph
-      title={siteConfig.title}
-      description={siteConfig.description}
-      image={seoImage}
-      imageAlt={siteConfig.title}
-    />
-    <TwitterCard
-      title={siteConfig.title}
-      description={siteConfig.description}
-      image={seoImage}
-      imageAlt={siteConfig.title}
-    />
-  </Fragment>
+  <SEO image={seoImage} slot='seo' />
   <script
       is:inline
       type='application/ld+json'

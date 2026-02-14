@@ -2,9 +2,9 @@
 import { siteConfig } from "#/config/site";
 
 interface Props {
-  title?: string;
-  description?: string;
-  noindex?: boolean;
+  title?: string | undefined;
+  description?: string | undefined;
+  noindex?: boolean | undefined;
 }
 
 const { title, description, noindex = false } = Astro.props;

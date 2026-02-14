@@ -1,0 +1,107 @@
+---
+import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
+
+interface BreadcrumbSegment {
+  label: string;
+  href: string;
+  isCurrent?: boolean | undefined;
+}
+
+interface Props {
+  segments: [BreadcrumbSegment, ...BreadcrumbSegment[]];
+  class?: string | null | undefined;
+}
+
+const { segments, class: className } = Astro.props;
+const first = segments[0];
+const isSimple = segments.length === 1;
+---
+
+<div class:list={["breadcrumb", className]}>
+  {isSimple ? (
+    <a href={first.href} class="breadcrumb-link">
+      <ArrowLeftIcon class="breadcrumb-icon" />
+      {first.label}
+    </a>
+  ) : (
+    <span class="breadcrumb-inner">
+      <a href={first.href} class="breadcrumb-link">
+        <ArrowLeftIcon class="breadcrumb-icon" />
+        {first.label}
+      </a>
+      {segments.slice(1).map((segment) => (
+        <>
+          <span class="breadcrumb-sep">/</span>
+          {segment.isCurrent ? (
+            <b class="breadcrumb-current">
+              <a href={segment.href} class="breadcrumb-current-link">
+                {segment.label}
+              </a>
+            </b>
+          ) : (
+            <a href={segment.href} class="breadcrumb-link">
+              {segment.label}
+            </a>
+          )}
+        </>
+      ))}
+    </span>
+  )}
+</div>
+
+<style>
+  .breadcrumb {
+    margin-bottom: 1rem;
+  }
+
+  @media (width >= 1280px) {
+    .breadcrumb {
+      position: fixed;
+      top: 0;
+      transform: translateY(170px) translateX(-260px);
+    }
+  }
+
+  .breadcrumb-inner {
+    display: inline-flex;
+    gap: 0.375rem;
+    align-items: center;
+    font-size: var(--fs-xs);
+  }
+
+  .breadcrumb-link {
+    display: inline-flex;
+    gap: 0.25rem;
+    align-items: center;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    font-feature-settings: "palt";
+    text-decoration: none;
+  }
+
+  .breadcrumb-link:hover {
+    text-decoration: underline;
+  }
+
+  .breadcrumb-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .breadcrumb-sep {
+    color: var(--c-sub);
+  }
+
+  .breadcrumb-current {
+    font-weight: var(--fw-semibold);
+  }
+
+  .breadcrumb-current-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .breadcrumb-current-link:hover {
+    text-decoration: underline;
+  }
+</style>
