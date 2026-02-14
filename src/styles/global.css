@@ -17,9 +17,10 @@
 
     --c-bg: light-dark(var(--uchu-yang), var(--uchu-yin));
     --c-text: light-dark(var(--uchu-yin), var(--uchu-gray-1));
+    --c-prose-text: light-dark(var(--uchu-yin-7), var(--uchu-gray-4));
     --c-sub: light-dark(var(--uchu-yin-6), var(--uchu-yin-4));
 
-    --c-primary: light-dark(var(--uchu-yin-9), var(--uchu-gray-2));
+    --c-primary: light-dark(var(--uchu-yin-8), var(--uchu-gray-3));
     --c-primary-text: light-dark(var(--uchu-yang), var(--uchu-yin-9));
 
     --c-surface: light-dark(var(--uchu-gray-1), var(--uchu-yin-9));
@@ -66,7 +67,6 @@
 
     --fw-normal: 400;
     --fw-medium: 500;
-    --fw-semibold: 600;
 
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   }
@@ -88,8 +88,8 @@
     scrollbar-width: thin;
     background-color: var(--c-bg);
     color: var(--c-text);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    /*-webkit-font-smoothing: antialiased;*/
+    /*-moz-osx-font-smoothing: grayscale;*/
   }
 
   h1 {
