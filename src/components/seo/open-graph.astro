@@ -7,13 +7,15 @@ interface Props {
   image: string;
   imageAlt: string;
   type?: "website" | "article" | "profile" | undefined;
-  article?: {
-    publishedTime?: string;
-    modifiedTime?: string;
-    authors?: string[];
-    section?: string;
-    tags?: string[];
-  } | undefined;
+  article?:
+    | {
+        publishedTime?: string;
+        modifiedTime?: string;
+        authors?: string[];
+        section?: string;
+        tags?: string[];
+      }
+    | undefined;
 }
 
 const {

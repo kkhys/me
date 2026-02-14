@@ -9,17 +9,26 @@ interface Props {
   description?: string | undefined;
   image?: string | undefined;
   type?: "website" | "article" | "profile" | undefined;
-  article?: {
-    publishedTime?: string;
-    modifiedTime?: string;
-    authors?: string[];
-    section?: string;
-    tags?: string[];
-  } | undefined;
+  article?:
+    | {
+        publishedTime?: string;
+        modifiedTime?: string;
+        authors?: string[];
+        section?: string;
+        tags?: string[];
+      }
+    | undefined;
   noindex?: boolean | undefined;
 }
 
-const { title, description, image, type = "website", article, noindex } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  type = "website",
+  article,
+  noindex,
+} = Astro.props;
 
 const ogTitle = title ? `${title}｜${siteConfig.title}` : siteConfig.title;
 const ogDescription = description ?? siteConfig.description;
