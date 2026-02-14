@@ -74,7 +74,7 @@ const currentDate = new Date();
   <slot name='head' slot='head' />
   <section>
     <Breadcrumb segments={[
-      { label: "ブログ", href: "/blog" },
+      { label: "Blog", href: "/blog" },
       { label: categoryObject.label, href: `/blog/categories/${categorySlug}`, isCurrent: true },
     ]} />
     <div class:list={[status === 'draft' && 'draft-header']}>
@@ -121,7 +121,7 @@ const currentDate = new Date();
 
   .post-title {
     margin-top: 1rem;
-    font-weight: var(--fw-semibold);
+    font-weight: var(--fw-medium);
   }
 
   .post-meta {
