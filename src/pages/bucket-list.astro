@@ -19,7 +19,7 @@ if (!bucketList) {
 
 let updatedAtString = null;
 
-if (process.env.VERCEL) {
+if (import.meta.env.PROD) {
   const filePath = "bucket-list/data.yaml";
   const { lastUpdatedTime } = await getLastUpdatedTimeByFile(filePath);
 
