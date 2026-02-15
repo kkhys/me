@@ -11,34 +11,11 @@ This Privacy Policy describes how LGTM ("the site" or "this site") collects, use
 
 ## Information Collected
 
-### Access Analytics
-
-This site uses Umami Analytics to collect anonymous usage statistics. Umami is a privacy-focused analytics solution that does not use cookies and does not collect personally identifiable information.
-
-The following information may be collected:
-
-- Page views and visit duration
-- Referrer information (where you came from)
-- Browser type and version
-- Operating system
-- Device type (desktop, mobile, tablet)
-- Country and region (based on IP address, but IP addresses are not stored)
-
-## How Information is Used
-
-The analytics data collected is used solely for:
-
-- Understanding how visitors use the site
-- Improving site performance and user experience
-- Analyzing traffic patterns and trends
-
-## Data Sharing and Third Parties
-
-This site does not sell, trade, or otherwise transfer your information to third parties. The only third-party service used is Umami Analytics, which is privacy-focused and does not share data with other parties.
+This site does not collect any personal information or usage statistics. No analytics tools are used, and no tracking is performed.
 
 ## Cookies
 
-This site does not use cookies for tracking purposes. Umami Analytics operates without cookies.
+This site does not use cookies.
 
 ## User-Generated Content
 
@@ -46,7 +23,7 @@ This site does not provide image upload functionality. All images displayed on t
 
 ## Data Security
 
-This site implements appropriate technical measures to protect the limited data collected. However, no method of transmission over the Internet is 100% secure.
+This site implements appropriate technical measures. However, no method of transmission over the Internet is 100% secure.
 
 ## External Links
 
