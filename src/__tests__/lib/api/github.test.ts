@@ -1,9 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("astro:env/server", () => ({
-  GITHUB_ACCESS_TOKEN: "test-token",
-}));
-
 describe("getLastUpdatedTimeByFile", () => {
   let getLastUpdatedTimeByFile: (
     filePath: string,
@@ -12,7 +8,7 @@ describe("getLastUpdatedTimeByFile", () => {
   beforeEach(async () => {
     vi.resetModules();
     vi.stubGlobal("fetch", vi.fn());
-    vi.mock("astro:env/server", () => ({
+    vi.doMock("astro:env/server", () => ({
       GITHUB_ACCESS_TOKEN: "test-token",
     }));
     const mod = await import("#/lib/api/github");
@@ -59,6 +55,20 @@ describe("getLastUpdatedTimeByFile", () => {
     expect(result.lastUpdatedTime).toBeUndefined();
     expect(warnSpy).toHaveBeenCalled();
     warnSpy.mockRestore();
+  });
+
+  it("returns undefined when GITHUB_ACCESS_TOKEN is not set", async () => {
+    vi.resetModules();
+    vi.doMock("astro:env/server", () => ({
+      GITHUB_ACCESS_TOKEN: undefined,
+    }));
+    const mod = await import("#/lib/api/github");
+
+    const result = await mod.getLastUpdatedTimeByFile(
+      "content/blog/no-token.mdx",
+    );
+    expect(result.lastUpdatedTime).toBeUndefined();
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   it("caches results (fetch called once for same path)", async () => {

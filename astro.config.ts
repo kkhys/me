@@ -73,6 +73,7 @@ export default defineConfig({
       GITHUB_ACCESS_TOKEN: envField.string({
         context: "server",
         access: "secret",
+        optional: true,
       }),
       NODE_ENV: envField.enum({
         context: "client",

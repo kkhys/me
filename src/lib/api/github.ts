@@ -10,6 +10,10 @@ const cache = createCache<LastUpdatedTimeData>();
 const fetchLastUpdatedTime = async (
   filePath: string,
 ): Promise<LastUpdatedTimeData> => {
+  if (!GITHUB_ACCESS_TOKEN) {
+    return { lastUpdatedTime: undefined };
+  }
+
   const API_URL = "https://api.github.com/repos/kkhys/content/commits?";
 
   const params = new URLSearchParams({
