@@ -24,6 +24,9 @@ export default defineConfig({
     mdx(),
     sitemap(),
   ],
+  build: {
+    format: "file",
+  },
   prefetch: {
     defaultStrategy: "viewport",
     prefetchAll: true,
