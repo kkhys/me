@@ -10,20 +10,19 @@ Source code for [kkhys.me](https://kkhys.me) — a personal website and blog bui
 - [TypeScript](https://www.typescriptlang.org/) — Strictest mode type safety
 - [Vitest](https://vitest.dev/) — Unit testing
 - [Biome](https://biomejs.dev/) — Linting and formatting
-- [Vercel](https://vercel.com/) — Hosting and deployment
+- [Cloudflare Pages](https://pages.cloudflare.com/) — Hosting and deployment
 
 ## Getting Started
 
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) v24.13.0+
-- [pnpm](https://pnpm.io/) v10.28.2+
+- [pnpm](https://pnpm.io/) v10.29.3+
 
 ### Setup
 
 ```bash
 pnpm install
-cp .env.example .env
 pnpm dev
 ```
 
@@ -34,7 +33,7 @@ Open [http://localhost:4321](http://localhost:4321) to view the site.
 | Command | Description |
 | --- | --- |
 | `pnpm dev` | Start development server |
-| `pnpm build` | Production build (Node.js) |
+| `pnpm build` | Production build (static) |
 | `pnpm preview` | Preview production build locally |
 | `pnpm check` | Run Astro check + TypeScript validation |
 | `pnpm lint` | Check code with Biome |
@@ -44,6 +43,7 @@ Open [http://localhost:4321](http://localhost:4321) to view the site.
 | `pnpm render:mermaid` | Pre-render Mermaid diagrams to SVG cache |
 | `pnpm create:entry` | Create a new blog post |
 | `pnpm release` | Release automation (date-based versioning) |
+| `pnpm deploy` | Build and deploy to Cloudflare Pages |
 
 ## Project Structure
 

@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```bash
 pnpm dev                   # Start development server (localhost:4321)
-pnpm build                 # Production build (Node.js adapter)
+pnpm build                 # Production build (static)
 pnpm preview               # Preview production build locally
 pnpm check                 # Run Astro check + TypeScript validation
 pnpm lint                  # Check code with Biome
@@ -16,13 +16,14 @@ pnpm coverage              # Run tests with coverage report
 pnpm render:mermaid        # Pre-render Mermaid diagrams to SVG cache
 pnpm create:entry          # Interactive blog post creation (runs with Bun)
 pnpm release               # Release automation (date-based versioning, runs with Bun)
+pnpm deploy                # Build and deploy to Cloudflare Pages
 ```
 
 CI runs: lint → test → type check → build. Add `skip-ci` label to PRs to skip.
 
 ## Architecture Overview
 
-Astro 5 static site deployed on Vercel. React is used only for server-side OG image generation (Satori), not as client-side islands. Vanilla CSS with kiso.css reset + uchu.css color palette (OKLCH). TypeScript strictest mode.
+Astro 5 static site deployed on Cloudflare Pages. React is used only for server-side OG image generation (Satori), not as client-side islands. Vanilla CSS with kiso.css reset + uchu.css color palette (OKLCH). TypeScript strictest mode.
 
 ### Path Aliases
 
@@ -51,7 +52,7 @@ Astro file-based API routes in `src/pages/api/`:
 
 ### Environment Variables
 
-Defined via `astro:env` in `astro.config.ts` (type-safe access). Server secrets: `GITHUB_ACCESS_TOKEN`, `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN`. Copy `.env.example` to `.env` for local development.
+Defined via `astro:env` in `astro.config.ts` (type-safe access). Server secrets: `GITHUB_ACCESS_TOKEN`.
 
 ## Content System
 
@@ -61,6 +62,7 @@ Defined via `astro:env` in `astro.config.ts` (type-safe access). Server secrets:
 - **blog**: MDX files in `content/blog/YYYY-MM-DD/index.mdx` (images co-located in same directory)
 - **pages**: MDX in `src/content/pages/`
 - **bucketList**: YAML in `content/bucket-list/data.yaml`
+- **externalPost**: YAML in `src/content/external-posts/data.yaml` (posts published on Hatena, note, Zenn)
 
 ### Categories & Tags
 
@@ -68,7 +70,7 @@ Defined via `astro:env` in `astro.config.ts` (type-safe access). Server secrets:
 
 ### Frontmatter
 
-Required: `title`, `description`, `emoji`, `category`, `publishedAt`. Optional: `tags`, `status` (draft/published — drafts only visible in dev), `updatedAt`, `sourceUrl`, `editUrl`, `revisionHistoryUrl`.
+Required: `title`, `emoji`, `category`, `publishedAt`. Optional: `tags`, `status` (draft/published — drafts only visible in dev), `updatedAt`. Description is dynamically extracted from MDX body.
 
 ### Slugs
 
