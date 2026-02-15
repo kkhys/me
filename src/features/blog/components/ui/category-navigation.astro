@@ -10,7 +10,7 @@ const pathname = Astro.url.pathname;
 ---
 
 <nav class:list={['category-scroll palt', className]} {...rest}>
-  {/^\/blog(\/\d+)?\/?$/.test(pathname) ? (
+  {/^\/blog(\/\d+)?(\.html)?\/?$/.test(pathname) ? (
       <span class="cat-link cat-link--active">
       すべて
     </span>
