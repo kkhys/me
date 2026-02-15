@@ -43,14 +43,16 @@ const cache = createCache<string>();
 export const loadEmoji = (type: keyof typeof apis, code: string) => {
   const key = `${type}:${code}`;
 
-  return cache(key, () => {
+  return cache(key, async () => {
     const resolvedType = type && apis[type] ? type : "twemoji";
     const api = apis[resolvedType];
 
     if (typeof api === "function") {
-      return fetch(api(code)).then(async (r) => r.text());
+      const r = await fetch(api(code));
+      return r.text();
     }
 
-    return fetch(`${api}${code.toUpperCase()}.svg`).then(async (r) => r.text());
+    const r = await fetch(`${api}${code.toUpperCase()}.svg`);
+    return r.text();
   });
 };
