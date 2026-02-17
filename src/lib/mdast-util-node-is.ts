@@ -1,5 +1,4 @@
 import type { FootnoteDefinition, FootnoteReference, Link, Text } from "mdast";
-import type { MdxJsxFlowElement } from "mdast-util-mdx-jsx";
 import type { Literal, Node, Parent } from "unist";
 
 const isObject = (target: unknown): target is { [key: string]: unknown } =>
@@ -35,13 +34,6 @@ export const isFootnoteDefinition = (
 
 export const isFootnoteReference = (node: unknown): node is FootnoteReference =>
   isNode(node) && node.type === "footnoteReference";
-
-export const isVideo = (
-  node: unknown,
-): node is MdxJsxFlowElement & { name: "video" } =>
-  isNode(node) &&
-  node.type === "mdxJsxFlowElement" &&
-  (node as MdxJsxFlowElement).name === "video";
 
 export const hasChildren = (node: Node) =>
   isParent(node) && node.children.length > 0;

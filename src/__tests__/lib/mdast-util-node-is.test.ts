@@ -10,7 +10,6 @@ import {
   isNode,
   isParent,
   isText,
-  isVideo,
 } from "#/lib/mdast-util-node-is";
 
 describe("isNode", () => {
@@ -146,34 +145,6 @@ describe("isFootnoteReference", () => {
 
   it("returns false for other nodes", () => {
     expect(isFootnoteReference({ type: "text", value: "hello" })).toBe(false);
-  });
-});
-
-describe("isVideo", () => {
-  it("returns true for video mdxJsxFlowElement", () => {
-    expect(
-      isVideo({
-        type: "mdxJsxFlowElement",
-        name: "video",
-        attributes: [],
-        children: [],
-      }),
-    ).toBe(true);
-  });
-
-  it("returns false for non-video mdxJsxFlowElement", () => {
-    expect(
-      isVideo({
-        type: "mdxJsxFlowElement",
-        name: "img",
-        attributes: [],
-        children: [],
-      }),
-    ).toBe(false);
-  });
-
-  it("returns false for non-mdxJsxFlowElement", () => {
-    expect(isVideo({ type: "paragraph", children: [] })).toBe(false);
   });
 });
 

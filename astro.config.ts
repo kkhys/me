@@ -12,7 +12,6 @@ import remarkBlockQuoteAlert from "./src/lib/remark-blockquote-alert";
 import remarkFootnoteTitle from "./src/lib/remark-footnote-title";
 import remarkLinkCard from "./src/lib/remark-link-card";
 import remarkUnwrapImages from "./src/lib/remark-unwrap-images";
-import remarkVideoBlock from "./src/lib/remark-video-block";
 import remarkYoutubeBlock from "./src/lib/remark-youtube-block";
 
 export default defineConfig({
@@ -35,7 +34,6 @@ export default defineConfig({
     smartypants: false,
     remarkPlugins: [
       remarkUnwrapImages,
-      remarkVideoBlock,
       remarkYoutubeBlock,
       remarkLinkCard,
       remarkFootnoteTitle,
