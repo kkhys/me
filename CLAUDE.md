@@ -39,7 +39,7 @@ import { categories } from "#/features/blog/config/category";
   - `home/` — Home page
   - `pages/` — Static pages (about, privacy, copyright)
 - `src/lib/` — Libraries (remark/rehype plugins, API wrappers, structured modules)
-  - `src/lib/api/` — API wrappers (GitHub, Twitter, emoji, metadata) with in-memory caching
+  - `src/lib/api/` — API wrappers (GitHub, emoji, metadata) with in-memory caching
 - `src/utils/` — Pure helper functions (date.ts, font-loader.ts, base-url.ts, hash.ts)
 - `src/styles/` — Global CSS (kiso.css reset, uchu.css OKLCH palette, prose styles)
 - `src/__tests__/` — Unit tests (mirrors src/utils/ and src/lib/ structure)
@@ -78,7 +78,7 @@ Auto-generated using Bech32m hashing (7 chars) via `src/utils/hash.ts`.
 
 ## Custom Markdown Plugins (`src/lib/`)
 
-**Remark**: `remark-link-card` (bare URLs → rich previews), `remark-video-block`, `remark-youtube-block` (→ lite-youtube-embed), `remark-tweet-block` (→ react-tweet), `remark-footnote-title`, `remark-blockquote-alert` (GitHub-style `[!NOTE]` etc.)
+**Remark**: `remark-link-card` (bare URLs → rich previews), `remark-video-block`, `remark-youtube-block` (→ lite-youtube-embed), `remark-footnote-title`, `remark-blockquote-alert` (GitHub-style `[!NOTE]` etc.)
 
 **Rehype**: `rehype-budoux` (Japanese natural line breaking with `<wbr>`), `rehype-slug-with-custom-id` (Bech32m heading IDs), `rehype-mermaid-cached` (pre-rendered SVG embedding with light/dark theme support)
 
