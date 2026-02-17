@@ -82,7 +82,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
                     {++globalIndex}
                   </span>
                 </div>
-                <div aria-checked={completedAt ? 'true' : 'false'} class="bucket-check">
+                <div data-checked={completedAt ? 'true' : 'false'} class="bucket-check">
                   <span class="bucket-check-inner">
                     {!!completedAt && (
                         <CheckIcon class="bucket-check-icon" />
@@ -186,7 +186,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     flex-shrink: 0;
   }
 
-  .bucket-check[aria-checked="true"] {
+  .bucket-check[data-checked="true"] {
     background-color: var(--c-primary);
     color: var(--c-primary-text);
   }
