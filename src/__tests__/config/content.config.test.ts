@@ -7,39 +7,39 @@ describe("content.config.ts", () => {
 
       const lgtmBasePath = GITHUB_ACTIONS
         ? "./src/__fixtures__/lgtm-sample"
-        : "./private-content/lgtm";
+        : "./lgtm-content/lgtm";
 
       expect(lgtmBasePath).toBe("./src/__fixtures__/lgtm-sample");
     });
 
-    it("should use private-content path when GITHUB_ACTIONS is false", () => {
+    it("should use lgtm-content path when GITHUB_ACTIONS is false", () => {
       const GITHUB_ACTIONS = false;
 
       const lgtmBasePath = GITHUB_ACTIONS
         ? "./src/__fixtures__/lgtm-sample"
-        : "./private-content/lgtm";
+        : "./lgtm-content/lgtm";
 
-      expect(lgtmBasePath).toBe("./private-content/lgtm");
+      expect(lgtmBasePath).toBe("./lgtm-content/lgtm");
     });
 
-    it("should use private-content path when GITHUB_ACTIONS is undefined", () => {
+    it("should use lgtm-content path when GITHUB_ACTIONS is undefined", () => {
       const GITHUB_ACTIONS = undefined;
 
       const lgtmBasePath = GITHUB_ACTIONS
         ? "./src/__fixtures__/lgtm-sample"
-        : "./private-content/lgtm";
+        : "./lgtm-content/lgtm";
 
-      expect(lgtmBasePath).toBe("./private-content/lgtm");
+      expect(lgtmBasePath).toBe("./lgtm-content/lgtm");
     });
 
-    it("should use private-content path when GITHUB_ACTIONS is null", () => {
+    it("should use lgtm-content path when GITHUB_ACTIONS is null", () => {
       const GITHUB_ACTIONS = null;
 
       const lgtmBasePath = GITHUB_ACTIONS
         ? "./src/__fixtures__/lgtm-sample"
-        : "./private-content/lgtm";
+        : "./lgtm-content/lgtm";
 
-      expect(lgtmBasePath).toBe("./private-content/lgtm");
+      expect(lgtmBasePath).toBe("./lgtm-content/lgtm");
     });
   });
 });
