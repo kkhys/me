@@ -67,7 +67,7 @@ Simply click the extension icon while browsing GitHub, and a random LGTM image i
 ### Image Generation Pipeline
 
 ```
-1. Load source image from private-content submodule
+1. Load source image from lgtm-content submodule
 2. Resize to target width (Sharp)
 3. Render "LGTM" text as SVG (Satori, 2x resolution)
 4. Composite text overlay with 85% opacity (blend mode: over)
@@ -98,7 +98,7 @@ Astro Content Collections with environment-based loader:
 // src/content.config.ts
 const lgtmBasePath = GITHUB_ACTIONS
   ? "./src/__fixtures__/lgtm-sample"
-  : "./private-content/lgtm";
+  : "./lgtm-content/lgtm";
 
 const lgtm = defineCollection({
   loader: glob({ pattern: "**/index.md", base: lgtmBasePath }),
@@ -115,7 +115,7 @@ const lgtm = defineCollection({
 Images stored in private Git submodule with ULID-based identifiers:
 
 ```
-private-content/lgtm/{ulid}/
+lgtm-content/lgtm/{ulid}/
   ├── index.md           # Frontmatter: color, image, isDraft
   └── {filename}.jpg     # Source image
 ```
@@ -134,7 +134,7 @@ private-content/lgtm/{ulid}/
 
 - Node.js 24.12 (via Volta)
 - pnpm 10.26
-- Bun (for utility scripts in private-content/)
+- Bun (for utility scripts in lgtm-content/)
 
 ### Setup
 
@@ -164,7 +164,7 @@ pnpm all          # Full validation (build + check + lint:fix + test + coverage)
 
 ```bash
 # Generate lowercase ULID for new images
-cd private-content
+cd lgtm-content
 pnpm id
 
 # Create timestamped memo
@@ -212,7 +212,7 @@ Deployed locally via wrangler:
 pnpm deploy   # Build and deploy to Cloudflare Pages
 ```
 
-This runs `pnpm build` followed by `wrangler pages deploy dist`. The private-content submodule must be available locally.
+This runs `pnpm build` followed by `wrangler pages deploy dist`. The lgtm-content submodule must be available locally.
 
 ### Environment Variables
 
@@ -251,7 +251,7 @@ lgtm/
 │       ├── components/      # Component tests
 │       ├── pages/           # API route tests
 │       └── config/          # Configuration tests
-├── private-content/         # Git submodule (private)
+├── lgtm-content/         # Git submodule (private)
 ├── scripts/                 # Build and release scripts
 ├── vitest.config.ts         # Vitest configuration
 └── public/                  # Static public assets

@@ -17,7 +17,7 @@ export const LgtmImage = async (
 ) => {
   const lgtmBasePath = GITHUB_ACTIONS
     ? "./src/__fixtures__/lgtm-sample"
-    : "./private-content/lgtm";
+    : "./lgtm-content/lgtm";
 
   const imagePath = join(lgtmBasePath, entry.id, entry.data.image);
   const baseImage = await readFile(imagePath);

@@ -4,7 +4,7 @@ import { glob } from "astro/loaders";
 
 const lgtmBasePath = GITHUB_ACTIONS
   ? "./src/__fixtures__/lgtm-sample"
-  : "./private-content/lgtm";
+  : "./lgtm-content/lgtm";
 
 const lgtm = defineCollection({
   loader: glob({ pattern: "**/index.md", base: lgtmBasePath }),
