@@ -22,7 +22,7 @@ describe("getMetadata", () => {
       vi.doUnmock("astro:env/client");
       vi.doMock("astro:env/client", () => ({
         NODE_ENV: "development",
-        PUBLIC_VERCEL_ENV: undefined,
+        PUBLIC_DEPLOY_ENV: undefined,
       }));
     });
 
@@ -58,7 +58,7 @@ describe("getMetadata", () => {
       vi.doUnmock("astro:env/client");
       vi.doMock("astro:env/client", () => ({
         NODE_ENV: "production",
-        PUBLIC_VERCEL_ENV: "production",
+        PUBLIC_DEPLOY_ENV: "production",
       }));
     });
 
@@ -165,11 +165,11 @@ describe("getMetadata", () => {
   });
 
   describe("edge cases", () => {
-    test("should handle NODE_ENV=production with non-production PUBLIC_VERCEL_ENV", async () => {
+    test("should handle NODE_ENV=production with non-production PUBLIC_DEPLOY_ENV", async () => {
       vi.doUnmock("astro:env/client");
       vi.doMock("astro:env/client", () => ({
         NODE_ENV: "production",
-        PUBLIC_VERCEL_ENV: "preview",
+        PUBLIC_DEPLOY_ENV: "preview",
       }));
 
       const { getMetadata } = await import("#/lib/metadata");
@@ -178,11 +178,11 @@ describe("getMetadata", () => {
       expect(result).toEqual(fallbackMetadata);
     });
 
-    test("should handle NODE_ENV=development with production PUBLIC_VERCEL_ENV", async () => {
+    test("should handle NODE_ENV=development with production PUBLIC_DEPLOY_ENV", async () => {
       vi.doUnmock("astro:env/client");
       vi.doMock("astro:env/client", () => ({
         NODE_ENV: "development",
-        PUBLIC_VERCEL_ENV: "production",
+        PUBLIC_DEPLOY_ENV: "production",
       }));
 
       const { getMetadata } = await import("#/lib/metadata");
