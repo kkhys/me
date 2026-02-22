@@ -3,6 +3,9 @@ import { defineConfig, envField } from "astro/config";
 
 export default defineConfig({
   site: "https://lgtm.kkhys.me",
+  build: {
+    format: "file",
+  },
   integrations: [
     sitemap(),
     (await import("@playform/compress")).default({
