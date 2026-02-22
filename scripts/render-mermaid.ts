@@ -32,7 +32,7 @@ const main = async () => {
   mkdirSync(CACHE_DIR, { recursive: true });
 
   const mdxFiles: string[] = [];
-  for await (const file of glob("content/blog/**/index.mdx")) {
+  for await (const file of glob("me-content/blog/**/index.mdx")) {
     mdxFiles.push(file);
   }
 

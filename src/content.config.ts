@@ -5,7 +5,7 @@ import { externalSites } from "#/features/blog/config/external-site";
 import { allTagTitles } from "#/features/blog/config/tag";
 
 const blog = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./content/blog" }),
+  loader: glob({ pattern: "**/*.mdx", base: "./me-content/blog" }),
   schema: z.object({
     title: z.string(),
     emoji: z.string(),
@@ -28,7 +28,7 @@ const pages = defineCollection({
 });
 
 const bucketList = defineCollection({
-  loader: file("content/bucket-list/data.yaml"),
+  loader: file("me-content/bucket-list/data.yaml"),
   schema: z.array(
     z.record(
       z.string(),
