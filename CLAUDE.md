@@ -49,7 +49,7 @@ pnpm all                # Runs build + check + lint:fix + test + coverage
 
 **Switching Logic** (src/content.config.ts:5-7):
 - Uses `GITHUB_ACTIONS` env variable to detect CI environment
-- Submodule workaround script for Vercel deployment (scripts/vercel-submodule-workaround.sh)
+- Deployed via Cloudflare Pages (Git integration)
 
 **Content Structure**:
 ```
