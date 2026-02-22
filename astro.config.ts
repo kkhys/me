@@ -48,7 +48,7 @@ export default defineConfig({
         optional: true,
         default: false,
       }),
-      PUBLIC_VERCEL_ENV: envField.string({
+      PUBLIC_DEPLOY_ENV: envField.string({
         context: "client",
         access: "public",
         optional: true,
