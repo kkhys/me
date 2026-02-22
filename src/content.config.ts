@@ -1,10 +1,10 @@
 import { defineCollection, z } from "astro:content";
-import { GITHUB_ACTIONS } from "astro:env/client";
 import { glob } from "astro/loaders";
 
-const memoBasePath = GITHUB_ACTIONS
-  ? "./src/__fixtures__/memo-sample"
-  : "./private-content/memo";
+const memoBasePath =
+  process.env.GITHUB_ACTIONS === "true"
+    ? "./src/__fixtures__/memo-sample"
+    : "./private-content/memo";
 
 const memo = defineCollection({
   loader: glob({ pattern: "**/index.md", base: memoBasePath }),
