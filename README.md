@@ -21,7 +21,7 @@ A simple memo posting site that displays short memos (max 500 characters) in a s
 - **Testing**: Vitest
 - **Lint/Format**: Biome
 - **Package Manager**: pnpm
-- **Deployment**: Vercel
+- **Deployment**: Cloudflare Pages
 
 See `package.json` for specific version requirements.
 
@@ -116,15 +116,7 @@ Write your memo content here (max 500 characters)
 
 ## Deployment
 
-For Vercel deployment, use the submodule workaround script:
-
-```bash
-pnpm vercel-install
-```
-
-### Required Environment Variables
-
-- `GITHUB_ACCESS_TOKEN`: For accessing private submodule (set in Vercel)
+Deployed via [Cloudflare Pages](https://pages.cloudflare.com/) with Git integration.
 
 ## Project Structure
 
