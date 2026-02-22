@@ -28,7 +28,7 @@ const { entry, description } = Astro.props;
 const { Content } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
 
-const contentPath = entry.filePath?.replace("content/", "");
+const contentPath = entry.filePath?.replace("me-content/", "");
 
 if (!contentPath) {
   throw new Error("Content path is not defined");

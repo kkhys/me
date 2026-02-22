@@ -14,7 +14,7 @@ const fetchLastUpdatedTime = async (
     return { lastUpdatedTime: undefined };
   }
 
-  const API_URL = "https://api.github.com/repos/kkhys/content/commits?";
+  const API_URL = "https://api.github.com/repos/kkhys/me-content/commits?";
 
   const params = new URLSearchParams({
     path: filePath,

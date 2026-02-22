@@ -28,7 +28,7 @@ describe("getLastUpdatedTimeByFile", () => {
         ]),
     } as Response);
 
-    const result = await getLastUpdatedTimeByFile("content/blog/test.mdx");
+    const result = await getLastUpdatedTimeByFile("me-content/blog/test.mdx");
     expect(result.lastUpdatedTime).toBe("2024-01-15T00:00:00Z");
   });
 
@@ -39,7 +39,7 @@ describe("getLastUpdatedTimeByFile", () => {
       json: () => Promise.resolve([]),
     } as Response);
 
-    const result = await getLastUpdatedTimeByFile("content/blog/empty.mdx");
+    const result = await getLastUpdatedTimeByFile("me-content/blog/empty.mdx");
     expect(result.lastUpdatedTime).toBeUndefined();
     warnSpy.mockRestore();
   });
@@ -51,7 +51,7 @@ describe("getLastUpdatedTimeByFile", () => {
       status: 404,
     } as Response);
 
-    const result = await getLastUpdatedTimeByFile("content/blog/error.mdx");
+    const result = await getLastUpdatedTimeByFile("me-content/blog/error.mdx");
     expect(result.lastUpdatedTime).toBeUndefined();
     expect(warnSpy).toHaveBeenCalled();
     warnSpy.mockRestore();
@@ -65,7 +65,7 @@ describe("getLastUpdatedTimeByFile", () => {
     const mod = await import("#/lib/api/github");
 
     const result = await mod.getLastUpdatedTimeByFile(
-      "content/blog/no-token.mdx",
+      "me-content/blog/no-token.mdx",
     );
     expect(result.lastUpdatedTime).toBeUndefined();
     expect(fetch).not.toHaveBeenCalled();
@@ -80,8 +80,8 @@ describe("getLastUpdatedTimeByFile", () => {
         ]),
     } as Response);
 
-    await getLastUpdatedTimeByFile("content/blog/cached.mdx");
-    await getLastUpdatedTimeByFile("content/blog/cached.mdx");
+    await getLastUpdatedTimeByFile("me-content/blog/cached.mdx");
+    await getLastUpdatedTimeByFile("me-content/blog/cached.mdx");
 
     // fetch is called once for this path
     const calls = vi
