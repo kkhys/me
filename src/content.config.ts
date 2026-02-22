@@ -2,7 +2,7 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const memoBasePath =
-  process.env.GITHUB_ACTIONS === "true"
+  process.env.USE_FIXTURE_DATA === "true"
     ? "./src/__fixtures__/memo-sample"
     : "./private-content/memo";
 

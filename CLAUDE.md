@@ -48,7 +48,7 @@ pnpm all                # Runs build + check + lint:fix + test + coverage
 - Development/CI: `./src/__fixtures__/memo-sample` (sample data)
 
 **Switching Logic** (src/content.config.ts:5-7):
-- Uses `GITHUB_ACTIONS` env variable to detect CI environment
+- Uses `USE_FIXTURE_DATA` env variable to switch to fixture data in CI
 - Deployed via Cloudflare Pages (Git integration)
 
 **Content Structure**:
