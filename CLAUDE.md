@@ -32,7 +32,7 @@ pnpm release --dry-run  # Preview release without executing
 
 ### Private Content Management
 ```bash
-cd private-content
+cd lgtm-content
 pnpm id           # Generate lowercase ULID for new images
 pnpm memo         # Create timestamped memo entry
 ```
@@ -43,7 +43,7 @@ pnpm memo         # Create timestamped memo entry
 
 The core innovation is **dynamic text overlay generation** on user-provided images:
 
-1. **Source Images**: Stored in `private-content/lgtm/{ulid}/` with frontmatter metadata
+1. **Source Images**: Stored in `lgtm-content/lgtm/{ulid}/` with frontmatter metadata
 2. **Text Rendering**: Satori generates SVG "LGTM" text at 2x resolution with custom font (BBHBartle-Regular)
 3. **Compositing**: Sharp blends text overlay (85% opacity, blend mode: "over") onto resized source image
 4. **Multi-Format Output**: Generates PNG/AVIF/WebP variants at multiple widths (400/1000/1200px)
@@ -58,7 +58,7 @@ Astro Content Collections manages LGTM image metadata with environment-based loa
 // src/content.config.ts
 const lgtmBasePath = GITHUB_ACTIONS
   ? "./src/__fixtures__/lgtm-sample"
-  : "./private-content/lgtm";
+  : "./lgtm-content/lgtm";
 
 const lgtm = defineCollection({
   loader: glob({ pattern: "**/index.md", base: lgtmBasePath }),
@@ -71,7 +71,7 @@ const lgtm = defineCollection({
 ```
 
 **Environment-Based Loading**:
-- **Production**: Loads from `private-content/lgtm/` (Git submodule)
+- **Production**: Loads from `lgtm-content/lgtm/` (Git submodule)
 - **CI/Testing**: Loads from `src/__fixtures__/lgtm-sample/` when `GITHUB_ACTIONS=true`
 
 ### URL Structure & API Routes
@@ -106,11 +106,11 @@ All image responses include: `Cache-Control: public, max-age=31536000, immutable
 
 ### Private Content Submodule
 
-**Critical**: The `private-content/` directory is a Git submodule pointing to a private repository.
+**Critical**: The `lgtm-content/` directory is a Git submodule pointing to a private repository.
 
 **Structure**:
 ```
-private-content/
+lgtm-content/
 ├── lgtm/{ulid}/
 │   ├── index.md      # Frontmatter: color, image, isDraft
 │   └── {image}.jpg   # Source image
@@ -191,7 +191,7 @@ All files          |     100 |       88 |     100 |     100
 
 ### Test Fixtures
 
-For CI environments where private-content is unavailable:
+For CI environments where lgtm-content is unavailable:
 1. Set `GITHUB_ACTIONS=true` environment variable (auto-set in GitHub Actions)
 2. System automatically switches to `src/__fixtures__/lgtm-sample/`
 3. Contains minimal sample image for build validation
@@ -238,8 +238,8 @@ GITHUB_ACTIONS       # Auto-set in CI, triggers fixture mode
 - Font size calculated dynamically: `Math.floor((renderWidth / 800) * 90)`
 
 ### Monorepo Structure
-- pnpm workspace with root and `private-content` packages
-- `private-content/` has its own package.json with Bun scripts
+- pnpm workspace with root and `lgtm-content` packages
+- `lgtm-content/` has its own package.json with Bun scripts
 - Root project uses pnpm, utilities use Bun for speed
 
 ### Image Size Details
@@ -251,10 +251,10 @@ The image generation pipeline uses specific widths:
 
 ## Common Gotchas
 
-1. **Missing LGTM Images**: Ensure `private-content/` submodule is initialized and up-to-date
+1. **Missing LGTM Images**: Ensure `lgtm-content/` submodule is initialized and up-to-date
 2. **Type Errors in .astro Files**: These are expected; Biome overrides disable checks
 3. **Font Loading Errors**: BBHBartle-Regular.ttf must exist in `src/assets/`
-4. **Build Failures**: Ensure `private-content/` submodule is initialized before running `pnpm deploy`
+4. **Build Failures**: Ensure `lgtm-content/` submodule is initialized before running `pnpm deploy`
 5. **ULID Case Sensitivity**: Always use lowercase ULIDs (enforced by `pnpm id` script)
 6. **Infinite Scroll on Build**: Pagination routes are pre-rendered at build time; infinite scroll fetches static HTML
 7. **Default Image Size**: `/{id}.{format}` returns 800px, not 400px (common misconception)
