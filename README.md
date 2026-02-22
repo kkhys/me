@@ -54,7 +54,7 @@ Simply click the extension icon while browsing GitHub, and a random LGTM image i
 - Custom design system with light/dark mode
 
 **Infrastructure**
-- Vercel – Edge deployment
+- Cloudflare Pages – Static hosting
 - pnpm 10.26 – Workspace monorepo
 - Biome 2.3 – Linting + formatting
 
@@ -144,9 +144,6 @@ git clone --recursive https://github.com/kkhys/lgtm.git
 
 # Install dependencies
 pnpm install
-
-# For private-content access, set:
-export GITHUB_ACCESS_TOKEN=ghp_xxx
 ```
 
 ### Commands
@@ -198,8 +195,7 @@ pnpm release [--dry-run]
 
 4. **Runtime Caching**
    - `Cache-Control: public, max-age=31536000, immutable`
-   - CDN edge caching on Vercel
-   - Static assets served from Vercel Edge Network
+   - Cloudflare CDN
 
 5. **Infinite Scroll**
    - Fetch next page in background
@@ -208,25 +204,19 @@ pnpm release [--dry-run]
 
 ## Deployment
 
-### Vercel Configuration
+### Cloudflare Pages
 
-```json
-{
-  "installCommand": "pnpm vercel-install",
-  "git": {
-    "deploymentEnabled": {
-      "renovate/*": false
-    }
-  }
-}
+Deployed locally via wrangler:
+
+```bash
+pnpm deploy   # Build and deploy to Cloudflare Pages
 ```
 
-Custom install script (`scripts/vercel-submodule-workaround.sh`) handles private submodule authentication.
+This runs `pnpm build` followed by `wrangler pages deploy dist`. The private-content submodule must be available locally.
 
 ### Environment Variables
 
 ```bash
-GITHUB_ACCESS_TOKEN    # Required: Private submodule access
 NODE_ENV              # development | production (auto-set)
 GITHUB_ACTIONS        # CI detection (auto-set, switches to fixtures)
 ```

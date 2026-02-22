@@ -25,7 +25,7 @@ pnpm all          # Run build + check + lint:fix + test + coverage
 
 ### Deployment & Release
 ```bash
-pnpm vercel-install   # Custom install for Vercel (handles submodule)
+pnpm deploy           # Build and deploy to Cloudflare Pages
 pnpm release          # Create version tag and GitHub release
 pnpm release --dry-run  # Preview release without executing
 ```
@@ -117,7 +117,7 @@ private-content/
 └── memo/             # Personal timestamped notes (not used by site)
 ```
 
-**Vercel Deployment**: Custom `scripts/vercel-submodule-workaround.sh` handles authentication via `GITHUB_ACCESS_TOKEN` environment variable.
+**Deployment**: Local build and deploy via `wrangler pages deploy dist` (Cloudflare Pages).
 
 ### Progressive Image Loading
 
@@ -228,7 +228,6 @@ This pattern allows testing with minimal mock objects while maintaining type saf
 
 ### Environment Variables
 ```bash
-GITHUB_ACCESS_TOKEN   # Required for private submodule access
 NODE_ENV             # development | production (auto-set)
 GITHUB_ACTIONS       # Auto-set in CI, triggers fixture mode
 ```
@@ -255,7 +254,7 @@ The image generation pipeline uses specific widths:
 1. **Missing LGTM Images**: Ensure `private-content/` submodule is initialized and up-to-date
 2. **Type Errors in .astro Files**: These are expected; Biome overrides disable checks
 3. **Font Loading Errors**: BBHBartle-Regular.ttf must exist in `src/assets/`
-4. **Build Failures on Vercel**: Verify `GITHUB_ACCESS_TOKEN` is set in environment variables
+4. **Build Failures**: Ensure `private-content/` submodule is initialized before running `pnpm deploy`
 5. **ULID Case Sensitivity**: Always use lowercase ULIDs (enforced by `pnpm id` script)
 6. **Infinite Scroll on Build**: Pagination routes are pre-rendered at build time; infinite scroll fetches static HTML
 7. **Default Image Size**: `/{id}.{format}` returns 800px, not 400px (common misconception)
