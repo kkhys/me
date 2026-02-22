@@ -48,7 +48,7 @@ This project manages content in a separate repository (Git submodule).
 
 **Development**: Works without submodule (uses fixture data)
 
-**Production Build**: Requires `private-content/` submodule
+**Production Build**: Requires `memo-content/` submodule
 
 ```bash
 # Initialize submodule
@@ -81,11 +81,11 @@ pnpm all          # Run all checks (build + check + lint:fix + test + coverage)
 
 ### Creating Memos
 
-Memos are placed in the `private-content/memo/` directory.
+Memos are placed in the `memo-content/memo/` directory.
 
 **Directory Structure**:
 ```
-private-content/memo/
+memo-content/memo/
 └── <timestamp_id>/          # e.g., 20251001_204021
     ├── index.md              # Memo content
     ├── 01.jpg                # Image 1 (optional)
@@ -139,7 +139,7 @@ memo/
 │   ├── utils/            # Utility functions
 │   ├── lib/              # Remark plugins, etc.
 │   └── styles/           # Global styles
-├── private-content/      # Content (Git submodule)
+├── memo-content/      # Content (Git submodule)
 ├── scripts/              # Build scripts
 └── CLAUDE.md             # AI development assistance doc
 ```

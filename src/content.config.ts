@@ -4,7 +4,7 @@ import { glob } from "astro/loaders";
 const memoBasePath =
   process.env.USE_FIXTURE_DATA === "true"
     ? "./src/__fixtures__/memo-sample"
-    : "./private-content/memo";
+    : "./memo-content/memo";
 
 const memo = defineCollection({
   loader: glob({ pattern: "**/index.md", base: memoBasePath }),

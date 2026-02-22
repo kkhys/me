@@ -23,14 +23,14 @@ jobs:
       - name: Update submodule
         id: update
         run: |
-          BEFORE_HASH=$(git -C private-content rev-parse HEAD)
+          BEFORE_HASH=$(git -C memo-content rev-parse HEAD)
 
-          cd private-content
+          cd memo-content
           git fetch origin main
           git reset --hard origin/main
           cd ..
 
-          AFTER_HASH=$(git -C private-content rev-parse HEAD)
+          AFTER_HASH=$(git -C memo-content rev-parse HEAD)
 
           if [ "$BEFORE_HASH" = "$AFTER_HASH" ]; then
             echo "has_changes=false" >> $GITHUB_OUTPUT
@@ -59,7 +59,7 @@ jobs:
 
           BRANCH="update-submodule-$(TZ=Asia/Tokyo date +%Y%m%d-%H%M%S)"
           git checkout -b "$BRANCH"
-          git add private-content
+          git add memo-content
           git commit -m "$COMMIT_MSG"
           git push origin "$BRANCH"
 
