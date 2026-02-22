@@ -2,7 +2,6 @@
 import { getEntry } from "astro:content";
 import Budoux from "#/components/budoux.astro";
 import CheckIcon from "#/components/icons/check.svg";
-import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
 import SEO from "#/components/seo/seo.astro";
 import Breadcrumb from "#/components/ui/breadcrumb.astro";
 import Separator from "#/components/ui/separator.astro";
@@ -117,10 +116,6 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     {updatedAtString && (
         <p>最終更新日: {updatedAtString}</p>
     )}
-    <a href="https://github.com/kkhys/me-content/commits/main/bucket-list/data.yaml" target="_blank" rel="noreferrer" class="bucket-history-link">
-      変更履歴
-      <MoveUpRightIcon class="bucket-history-icon" />
-    </a>
   </div>
 </BaseLayout>
 
@@ -233,24 +228,5 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.375rem;
-  }
-
-  .bucket-history-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.125rem;
-    text-underline-offset: 4px;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .bucket-history-link:hover {
-    text-decoration: underline;
-  }
-
-  .bucket-history-icon {
-    width: 0.625rem;
-    height: 0.625rem;
   }
 </style>
