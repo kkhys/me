@@ -19,6 +19,8 @@ pnpm release               # Release automation (date-based versioning, runs wit
 pnpm deploy                # Build and deploy to Cloudflare Pages
 ```
 
+Development tools (Node.js, pnpm, Bun) are managed by Nix Flake (`flake.nix`). Run `direnv allow` to autoload the environment. CI uses the same `flake.nix` via `nix develop --command`.
+
 CI runs: lint → test → type check → build. Add `skip-ci` label to PRs to skip.
 
 ## Architecture Overview
