@@ -16,12 +16,13 @@ Source code for [kkhys.me](https://kkhys.me) — a personal website and blog bui
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) v24.13.0+
-- [pnpm](https://pnpm.io/) v10.29.3+
+- [Nix](https://nixos.org/) with Flakes enabled
+- [direnv](https://direnv.net/) with [nix-direnv](https://github.com/nix-community/nix-direnv)
 
 ### Setup
 
 ```bash
+direnv allow   # Loads Node.js, pnpm, Bun via Nix Flake
 pnpm install
 pnpm dev
 ```
