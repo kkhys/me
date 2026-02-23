@@ -30,7 +30,9 @@
             ];
 
             shellHook = ''
-              [ ! -d node_modules ] && pnpm install
+              if [ -z "$CI" ] && [ ! -d node_modules ]; then
+                pnpm install
+              fi
             '';
           };
         }
