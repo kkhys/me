@@ -28,6 +28,10 @@
               pkgs.pnpm
               pkgs.bun
             ];
+
+            shellHook = ''
+              [ ! -d node_modules ] && pnpm install
+            '';
           };
         }
       );
