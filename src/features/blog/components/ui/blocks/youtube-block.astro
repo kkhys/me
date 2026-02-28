@@ -17,7 +17,7 @@ const { videoId, class: className, ...rest } = Astro.props;
 <style>
   .youtube-embed {
     max-width: 100%;
-    border-radius: 1rem;
+    border-radius: var(--radius-lg);
     border: 1px solid light-dark(transparent, var(--c-border));
     overflow: hidden;
   }

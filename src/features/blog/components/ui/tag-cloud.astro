@@ -41,7 +41,7 @@ const { tags, class: className, ...rest } = Astro.props;
     line-height: 1.25rem;
     font-weight: var(--fw-medium);
     background-color: oklch(from var(--c-surface) l c h / 50%);
-    border-radius: 9999px;
+    border-radius: var(--radius-full);
     border: 1px solid var(--c-border);
     padding-block: 0.25rem;
     padding-inline: 0.25rem 0.625rem;
@@ -65,7 +65,7 @@ const { tags, class: className, ...rest } = Astro.props;
   }
 
   .tag-emoji {
-    border-radius: 9999px;
+    border-radius: var(--radius-full);
     background-color: oklch(from var(--c-surface) l c h / 95%);
     padding: 0.125rem;
   }
