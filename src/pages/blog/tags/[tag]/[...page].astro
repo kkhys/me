@@ -81,7 +81,7 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
   <section class="blog-entries">
     <EntryList entries={page.data} showDate />
   </section>
-  <Pagination page={page} baseUrl={`/blog/tags/${tag.slug}`} class="blog-pagination" />
+  <Pagination page={page} class="blog-pagination" />
 </BaseLayout>
 
 <style>
