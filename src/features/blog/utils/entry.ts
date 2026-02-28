@@ -90,21 +90,19 @@ export const getPublicListEntries = async (
 export const getRelatedPosts = async ({
   id,
   category,
-}: { id: string } & Pick<InferEntrySchema<"blog">, "category">) =>
-  fisherYatesShuffle(
-    (await getPublicBlogEntries()).filter(
-      (post) => post.id !== id && post.data.category === category,
-    ),
-  ).slice(0, relatedEntriesCount);
+  tags,
+}: { id: string } & Pick<InferEntrySchema<"blog">, "category" | "tags">) => {
+  const candidates = (await getPublicBlogEntries()).filter(
+    (post) => post.id !== id && post.data.category === category,
+  );
 
-const fisherYatesShuffle = <T>(items: T[]): T[] => {
-  const copy = [...items];
-  let i = copy.length;
+  const scored = candidates.map((post) => ({
+    post,
+    score: tags?.filter((tag) => post.data.tags?.includes(tag)).length ?? 0,
+  }));
 
-  while (i > 1) {
-    const j = Math.floor(Math.random() * i--);
-    [copy[i], copy[j]] = [copy[j] as T, copy[i] as T];
-  }
+  // Sort by shared tag count (desc), shuffle within same score
+  scored.sort((a, b) => b.score - a.score || Math.random() - 0.5);
 
-  return copy;
+  return scored.map(({ post }) => post).slice(0, relatedEntriesCount);
 };

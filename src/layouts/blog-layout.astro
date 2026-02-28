@@ -50,7 +50,7 @@ const tagCloudItems = allTagCloudItems.filter(({ title }) =>
   tags?.includes(title as (typeof tags)[number]),
 );
 
-const relatedPosts = await getRelatedPosts({ id, category });
+const relatedPosts = await getRelatedPosts({ id, category, tags });
 
 const seoImage = `${BASE_URL}/api/og/${id}.png`;
 const currentDate = new Date();
