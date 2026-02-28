@@ -152,6 +152,12 @@ export const tags = [
     emoji: "🪡",
   },
   {
+    title: "Shoes",
+    label: "靴",
+    slug: "shoes",
+    emoji: "👟",
+  },
+  {
     title: "Tips",
     label: "Tips",
     slug: "tips",
