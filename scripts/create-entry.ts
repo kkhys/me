@@ -130,7 +130,7 @@ const main = async () => {
       slug,
     };
 
-    const dirPath = join("content", "blog", publishedAt);
+    const dirPath = join("me-content", "blog", publishedAt);
     const filePath = join(dirPath, "index.mdx");
 
     checkFileExists(filePath);
