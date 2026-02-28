@@ -9,7 +9,7 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
   },
   useThemedScrollbars: false,
   styleOverrides: {
-    borderRadius: "0.25rem",
+    borderRadius: "var(--radius-sm)",
     borderColor: "var(--c-codeblock-border)",
     borderWidth: "1px",
     codeFontSize: "13px",
