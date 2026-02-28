@@ -1,162 +1,47 @@
 ---
 import type { Page } from "astro";
 import type { HTMLAttributes } from "astro/types";
-import ChevronLeftIcon from "#/components/icons/chevron-left.svg";
-import ChevronRightIcon from "#/components/icons/chevron-right.svg";
-import EllipsisIcon from "#/components/icons/ellipsis.svg";
 
 interface Props extends HTMLAttributes<"nav"> {
   page: Page<unknown>;
-  baseUrl: string;
 }
 
-const { page, baseUrl, class: className, ...attrs } = Astro.props;
-
-const generateVisiblePages = (totalPages: number, currentPage: number) => {
-  const pages: Array<number | "..."> = [];
-  const delta = 1;
-  const leftEdge = 1;
-  const rightEdge = totalPages;
-
-  pages.push(leftEdge);
-
-  if (currentPage > delta + 2) {
-    pages.push("...");
-  }
-
-  for (
-    let i = Math.max(currentPage - delta, leftEdge + 1);
-    i <= Math.min(currentPage + delta, rightEdge - 1);
-    i++
-  ) {
-    pages.push(i);
-  }
-
-  if (currentPage < rightEdge - (delta + 1)) {
-    pages.push("...");
-  }
-
-  if (totalPages > leftEdge) {
-    pages.push(rightEdge);
-  }
-
-  return pages;
-};
-const { currentPage, url, lastPage } = page;
-const visiblePages = generateVisiblePages(lastPage, currentPage);
-
-const getPageHref = (pageNumber: number) =>
-  pageNumber === 1 ? baseUrl : `${baseUrl}/${pageNumber}`;
+const { page, class: className, ...attrs } = Astro.props;
 ---
 
 <nav aria-label="pagination" class:list={["pagination", className]} {...attrs}>
-  <ul class="pagination-list">
-    <li>
-      {currentPage > 1 ? (
-          <a
-              href={url.prev}
-              aria-label="前のページへ"
-              class="btn btn--ghost btn--size-icon"
-          >
-            <ChevronLeftIcon class="pagination-icon" />
-          </a>
-      ) : (
-          <span
-              aria-disabled="true"
-              class="btn btn--ghost btn--size-icon pagination-disabled"
-          >
-      <ChevronLeftIcon class="pagination-icon" />
-    </span>
-      )}
-    </li>
-    {visiblePages.map(page =>
-      page === "..." ? (
-          <li>
-      <span
-          aria-hidden="true"
-          class="pagination-ellipsis"
-      >
-      <EllipsisIcon class="pagination-icon" />
-      <span class="sr-only">More pages</span>
-      </span>
-          </li>
-      ) : (
-          <li>
-            {currentPage === page ? (
-                <span
-                    aria-current="page"
-                    class="btn btn--outline btn--size-icon pagination-current"
-                >
-        {page}
-      </span>
-            ) : (
-                <a
-                    href={getPageHref(page)}
-                    class="btn btn--ghost btn--size-icon"
-                >
-                  {page}
-                </a>
-            )}
-          </li>
-      )
-    )}
-    <li>
-      {currentPage < lastPage ? (
-          <a
-              href={getPageHref(currentPage + 1)}
-              aria-label="Go to next page"
-              class="btn btn--ghost btn--size-icon"
-          >
-            <ChevronRightIcon class="pagination-icon" />
-          </a>
-      ) : (
-          <span
-              aria-disabled="true"
-              class="btn btn--ghost btn--size-icon pagination-disabled"
-          >
-      <ChevronRightIcon class="pagination-icon" />
-    </span>
-      )}
-    </li>
-  </ul>
+  {page.url.prev ? (
+    <a href={page.url.prev} rel="prev" class="pagination-link">Previous</a>
+  ) : (
+    <span role="link" aria-disabled="true" class="pagination-link pagination-disabled">Previous</span>
+  )}
+  {page.url.next ? (
+    <a href={page.url.next} rel="next" class="pagination-link">Next</a>
+  ) : (
+    <span role="link" aria-disabled="true" class="pagination-link pagination-disabled">Next</span>
+  )}
 </nav>
 
 <style>
   .pagination {
-    margin-inline: auto;
     display: flex;
-    width: 100%;
     justify-content: center;
+    gap: 2rem;
+    width: 100%;
   }
 
-  .pagination-list {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.25rem;
-    list-style: none;
-    padding: 0;
-  }
+  .pagination-link {
+    color: var(--color-fg-default);
+    text-decoration: none;
+    font-size: 0.875rem;
 
-  .pagination-icon {
-    width: 1rem;
-    height: 1rem;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .pagination-disabled {
     opacity: 0.5;
     pointer-events: none;
-  }
-
-  .pagination-current {
-    pointer-events: none;
-  }
-
-  .pagination-ellipsis {
-    display: flex;
-    width: 2.25rem;
-    height: 2.25rem;
-    align-items: center;
-    justify-content: center;
   }
 </style>
