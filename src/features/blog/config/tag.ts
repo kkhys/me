@@ -128,6 +128,12 @@ export const tags = [
     emoji: "🗑",
   },
   {
+    title: "Running",
+    label: "ランニング",
+    slug: "running",
+    emoji: "🏃",
+  },
+  {
     title: "React",
     label: "React",
     slug: "react",
