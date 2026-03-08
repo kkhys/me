@@ -23,9 +23,7 @@ Simply click the extension icon while browsing GitHub, and a random LGTM image i
 - Privacy-focused with minimal required permissions
 - Lightweight design (< 50KB total)
 
-**Status:** Currently available via manual installation. Chrome Web Store publication coming soon.
-
-**Get it:** [GitHub Repository](https://github.com/kkhys/lgtm-chrome-extension) | [Releases](https://github.com/kkhys/lgtm-chrome-extension/releases)
+**Get it:** [Chrome Web Store](https://chromewebstore.google.com/detail/lgtm-chrome-extension/pekflahhcpfnbllbphcjnjngkhlabohh) | [GitHub Repository](https://github.com/kkhys/lgtm-chrome-extension)
 
 ## Features
 
