@@ -14,16 +14,16 @@ export const tags = [
     emoji: "🍎",
   },
   {
+    title: "Astro",
+    label: "Astro",
+    slug: "astro",
+    emoji: "🚀",
+  },
+  {
     title: "Camera",
     label: "カメラ",
     slug: "camera",
     emoji: "📷",
-  },
-  {
-    title: "Clothes",
-    label: "服",
-    slug: "clothes",
-    emoji: "👗",
   },
   {
     title: "Desk",
@@ -72,6 +72,12 @@ export const tags = [
     label: "ガジェット",
     slug: "gadget",
     emoji: "📱",
+  },
+  {
+    title: "Git",
+    label: "Git",
+    slug: "git",
+    emoji: "🔀",
   },
   {
     title: "Idea",
