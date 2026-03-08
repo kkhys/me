@@ -182,6 +182,12 @@ export const tags = [
     emoji: "🧩",
   },
   {
+    title: "Web API",
+    label: "Web API",
+    slug: "web-api",
+    emoji: "🌐",
+  },
+  {
     title: "Chocolate",
     label: "チョコレート",
     slug: "chocolate",
