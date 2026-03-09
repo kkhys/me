@@ -146,6 +146,12 @@ export const tags = [
     emoji: "⚛",
   },
   {
+    title: "Remote work",
+    label: "リモートワーク",
+    slug: "remote-work",
+    emoji: "🏠",
+  },
+  {
     title: "Release note",
     label: "リリースノート",
     slug: "release-note",
