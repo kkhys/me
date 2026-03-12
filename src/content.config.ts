@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 import { file, glob } from "astro/loaders";
 import { categoryTitles } from "#/features/blog/config/category";
 import { externalSites } from "#/features/blog/config/external-site";
@@ -47,7 +48,7 @@ const externalPost = defineCollection({
   loader: file("src/content/external-posts/data.yaml"),
   schema: z.object({
     title: z.string(),
-    url: z.string().url(),
+    url: z.url(),
     siteName: z.enum(externalSites as [string, ...string[]]),
     category: z.enum(categoryTitles as [string, ...string[]]),
     tags: z.array(z.enum(allTagTitles as [string, ...string[]])).optional(),
