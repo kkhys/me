@@ -1,6 +1,6 @@
 import { defineCollection } from "astro:content";
-import { z } from "astro/zod";
 import { file, glob } from "astro/loaders";
+import { z } from "astro/zod";
 import { categoryTitles } from "#/features/blog/config/category";
 import { externalSites } from "#/features/blog/config/external-site";
 import { allTagTitles } from "#/features/blog/config/tag";
