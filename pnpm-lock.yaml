@@ -12,11 +12,11 @@ importers:
         specifier: 0.9.8
         version: 0.9.8(prettier@3.6.2)(typescript@5.9.3)
       '@astrojs/compiler-rs':
-        specifier: 0.1.5
-        version: 0.1.5
+        specifier: 0.1.6
+        version: 0.1.6
       '@astrojs/mdx':
         specifier: 5.0.2
-        version: 5.0.2(astro@6.0.6(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 5.0.2(astro@6.0.7(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/react':
         specifier: 5.0.1
         version: 5.0.1(@types/node@25.0.3)(@types/react-dom@19.1.6(@types/react@19.2.14))(@types/react@19.2.14)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(terser@5.44.1)(yaml@2.8.2)
@@ -30,11 +30,11 @@ importers:
         specifier: 1.9.0
         version: 1.9.0
       astro:
-        specifier: 6.0.6
-        version: 6.0.6(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2)
+        specifier: 6.0.7
+        version: 6.0.7(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2)
       astro-expressive-code:
         specifier: 0.41.7
-        version: 0.41.7(astro@6.0.6(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.41.7(astro@6.0.7(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2))
       graphql-request:
         specifier: 7.4.0
         version: 7.4.0(graphql@16.11.0)
@@ -141,69 +141,69 @@ packages:
     peerDependencies:
       typescript: ^5.0.0
 
-  '@astrojs/compiler-binding-darwin-arm64@0.1.5':
-    resolution: {integrity: sha512-laGPpjwq355SmOz9p7TbDwFU+1PVEx61s3XwA8LT71bT3VTgyE6jWLmgFTTCJtSh18GfD7vlnEX9Y6hOYk3NQw==}
+  '@astrojs/compiler-binding-darwin-arm64@0.1.6':
+    resolution: {integrity: sha512-pYCFf5a/Tat+uRJU7xUSK0aw45kxnwAaKyhpnosJFCFhiiG4d/b7U526gaIqdcIZx6PbZ0hPOYDAxUYYfMDFaw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [darwin]
 
-  '@astrojs/compiler-binding-darwin-x64@0.1.5':
-    resolution: {integrity: sha512-+z+rEV1EWXc6J+l7UVNrr0vlfQs5Xd5bDIL09AQlpYxPazHZRTYUQRZInn259o9Gu8Hb3qQcIjdORJxZgPcV2w==}
+  '@astrojs/compiler-binding-darwin-x64@0.1.6':
+    resolution: {integrity: sha512-GfXy2xBFwg/yCpd8VWqnDfceCnMgT+7HPoPCuJS+lNeRyi76M/4bACMROcoe59R4brAlc7Tb1kO0MED581OjJQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [darwin]
 
-  '@astrojs/compiler-binding-linux-arm64-gnu@0.1.5':
-    resolution: {integrity: sha512-xZqh284iCNhHW1Ew6JjDYv0nCNSsZhU/o/9lmvNoyL+q7S7HQcLjDtigeLyZzoCMleIxcs06SaofSRPVlOH6/g==}
+  '@astrojs/compiler-binding-linux-arm64-gnu@0.1.6':
+    resolution: {integrity: sha512-XcLFDccESW7ILeO6fFsV7W+PlLX7FNifN3WZdqdO/DNAIyHj1WahI65UImauf3VfMirwexI05XsOjLpiSUg05g==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@astrojs/compiler-binding-linux-arm64-musl@0.1.5':
-    resolution: {integrity: sha512-Uo6aCD7Hm4wiFom6/B9BhzhGv1khqcxWolZeoy/I/UqEotV0dbZD7mtVkplxLu1oijlCMLRIBEqE8uczrhIwNw==}
+  '@astrojs/compiler-binding-linux-arm64-musl@0.1.6':
+    resolution: {integrity: sha512-96Mm9qf1xYHW66DjtvTdHJED0rVeh0X/Gt72lzia8RM6nJSXO+3YqiFBcsP3ixrcHJliMaV8s8+iwb5pR9kgeg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@astrojs/compiler-binding-linux-x64-gnu@0.1.5':
-    resolution: {integrity: sha512-UAVyHRhrIL46/ouYC6aJMy8SPjwb/F89yDw9sfkX8RQvNTxH8qrPqtUZhQrbLBIIAz7/kYI+vURSIuVuBz3wag==}
+  '@astrojs/compiler-binding-linux-x64-gnu@0.1.6':
+    resolution: {integrity: sha512-Eg0N+YYLjIwCgnQvpGUWCs0C7v/dZmcH9hnWAkZYSamSJPxKWDlGC5rVoaBJCtRleAfjmKxHKaCjn9t7E4pyTg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@astrojs/compiler-binding-linux-x64-musl@0.1.5':
-    resolution: {integrity: sha512-1v4JpFAcuBXO161zfp55CyzePbKc8iF9NOCSW9EtmdTbJD2feqBot58dBFf0vwfEe4WWKDX3R+UhGLPuYDQQMA==}
+  '@astrojs/compiler-binding-linux-x64-musl@0.1.6':
+    resolution: {integrity: sha512-YnoxAnVcFzlP/Wr4FPVdjh1ecmvH/BWeeNK8UJZN/xd6XXLbj1loG2ckZ7+lA8HpZeyiwU2+IAZ4XjGsIUHI6w==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@astrojs/compiler-binding-wasm32-wasi@0.1.5':
-    resolution: {integrity: sha512-Bdt9NeWOwSVfGWHdbqJiMSHe72U8TXbNshWqHpcpgfPt69d1PsiMVTnSBBTbame88QjLiit+eCXMD411o7VBDQ==}
+  '@astrojs/compiler-binding-wasm32-wasi@0.1.6':
+    resolution: {integrity: sha512-yNZEslAC8v/3G5lSA4GNuXGTRR8TonRzv/hCkBg7aN+8wOQF88YZTR8TLGb0sYEXV7tukYAGmmWAnMeM2zTRCQ==}
     engines: {node: '>=14.0.0'}
     cpu: [wasm32]
 
-  '@astrojs/compiler-binding-win32-arm64-msvc@0.1.5':
-    resolution: {integrity: sha512-APsMTaNSCoIaiVnMzqJX5MyTJ3+urn/t3jlmJxHwlXEHjMvdYO9BJqRO0a1Cf4qy5B9+NLm9tNGRXqEX3tkUuw==}
+  '@astrojs/compiler-binding-win32-arm64-msvc@0.1.6':
+    resolution: {integrity: sha512-gnMcXKokX3/LiaFmUdTEX/UwUE3geH5TorQ2QMSPTgCpv/kS3nokflRIYQ/69NEqlk2DQoR3gas002spZTMffw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [win32]
 
-  '@astrojs/compiler-binding-win32-x64-msvc@0.1.5':
-    resolution: {integrity: sha512-nScQdW++YPD3ORC1qo4lnP3kSbHwQWsrnlaMKguYxtX/DMcl9jv9LaEjt4m0FY0XyyIJ6qdDG27dl+ME95OXvA==}
+  '@astrojs/compiler-binding-win32-x64-msvc@0.1.6':
+    resolution: {integrity: sha512-7jEsJ1TjX1lVd/1fH1CgO/wvmWBztLHekqefPiIJQC6U+ks7ToMV2+J3so0MM/ZCfXpHnPNigcBmHn94YR1+cQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [win32]
 
-  '@astrojs/compiler-binding@0.1.5':
-    resolution: {integrity: sha512-lE6F44YfORLhleCdDvIQxBqylblSME0Xy3Rr81e/hNtvP96bVLxMuZC7YRKLcbTPtJW7rU7fkjViRf5tZCBIJA==}
+  '@astrojs/compiler-binding@0.1.6':
+    resolution: {integrity: sha512-EPQMZBEgqbjye57qcHQehrYQUl47kNySwUAW3U/IYrMPtuiAWAht1Dl1rahGVeWg8PDXCZXRGm+WCDAowMP1VA==}
     engines: {node: ^20.19.0 || >=22.12.0}
 
-  '@astrojs/compiler-rs@0.1.5':
-    resolution: {integrity: sha512-RWhUk/CYE7bMTOz4B0+kRev42HdysQa/oR4uwA5o+rTAdENphOmqlcGIol0p+zR461F2fdUIyeTAfKNINudf7g==}
+  '@astrojs/compiler-rs@0.1.6':
+    resolution: {integrity: sha512-8PtjNrpEK4+B5Cip/ODgBFQAaBLPxkLLehoqmNMAV+iPSFGRjRHmwxGqSoB5L8pvk3z4IngCkiizcw+HoKMWWA==}
 
   '@astrojs/compiler@2.13.1':
     resolution: {integrity: sha512-f3FN83d2G/v32ipNClRKgYv30onQlMZX1vCeZMjPsMMPl1mDpmbl0+N5BYo4S/ofzqJyS5hvwacEo0CCVDn/Qg==}
@@ -1441,8 +1441,8 @@ packages:
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0 || ^6.0.0-beta
 
-  astro@6.0.6:
-    resolution: {integrity: sha512-Fg25tok0RF+ToCcfdfNdtkv7MutTfbE0Lc4UhZpQyoc8/iiTdAaNw1nHPxPD6Nfa/ql3lGAp9uOWaTTnnFY2Zg==}
+  astro@6.0.7:
+    resolution: {integrity: sha512-tCUrtQI+2Dk13xTM07JYrvk16T4ekWqSXh0/dVCunne816ZV+RCs1tomSoTHZi3DJdoaTnLJmkH+uxCC3b1KWw==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -3587,50 +3587,50 @@ snapshots:
       - prettier
       - prettier-plugin-astro
 
-  '@astrojs/compiler-binding-darwin-arm64@0.1.5':
+  '@astrojs/compiler-binding-darwin-arm64@0.1.6':
     optional: true
 
-  '@astrojs/compiler-binding-darwin-x64@0.1.5':
+  '@astrojs/compiler-binding-darwin-x64@0.1.6':
     optional: true
 
-  '@astrojs/compiler-binding-linux-arm64-gnu@0.1.5':
+  '@astrojs/compiler-binding-linux-arm64-gnu@0.1.6':
     optional: true
 
-  '@astrojs/compiler-binding-linux-arm64-musl@0.1.5':
+  '@astrojs/compiler-binding-linux-arm64-musl@0.1.6':
     optional: true
 
-  '@astrojs/compiler-binding-linux-x64-gnu@0.1.5':
+  '@astrojs/compiler-binding-linux-x64-gnu@0.1.6':
     optional: true
 
-  '@astrojs/compiler-binding-linux-x64-musl@0.1.5':
+  '@astrojs/compiler-binding-linux-x64-musl@0.1.6':
     optional: true
 
-  '@astrojs/compiler-binding-wasm32-wasi@0.1.5':
+  '@astrojs/compiler-binding-wasm32-wasi@0.1.6':
     dependencies:
       '@napi-rs/wasm-runtime': 1.1.1
     optional: true
 
-  '@astrojs/compiler-binding-win32-arm64-msvc@0.1.5':
+  '@astrojs/compiler-binding-win32-arm64-msvc@0.1.6':
     optional: true
 
-  '@astrojs/compiler-binding-win32-x64-msvc@0.1.5':
+  '@astrojs/compiler-binding-win32-x64-msvc@0.1.6':
     optional: true
 
-  '@astrojs/compiler-binding@0.1.5':
+  '@astrojs/compiler-binding@0.1.6':
     optionalDependencies:
-      '@astrojs/compiler-binding-darwin-arm64': 0.1.5
-      '@astrojs/compiler-binding-darwin-x64': 0.1.5
-      '@astrojs/compiler-binding-linux-arm64-gnu': 0.1.5
-      '@astrojs/compiler-binding-linux-arm64-musl': 0.1.5
-      '@astrojs/compiler-binding-linux-x64-gnu': 0.1.5
-      '@astrojs/compiler-binding-linux-x64-musl': 0.1.5
-      '@astrojs/compiler-binding-wasm32-wasi': 0.1.5
-      '@astrojs/compiler-binding-win32-arm64-msvc': 0.1.5
-      '@astrojs/compiler-binding-win32-x64-msvc': 0.1.5
+      '@astrojs/compiler-binding-darwin-arm64': 0.1.6
+      '@astrojs/compiler-binding-darwin-x64': 0.1.6
+      '@astrojs/compiler-binding-linux-arm64-gnu': 0.1.6
+      '@astrojs/compiler-binding-linux-arm64-musl': 0.1.6
+      '@astrojs/compiler-binding-linux-x64-gnu': 0.1.6
+      '@astrojs/compiler-binding-linux-x64-musl': 0.1.6
+      '@astrojs/compiler-binding-wasm32-wasi': 0.1.6
+      '@astrojs/compiler-binding-win32-arm64-msvc': 0.1.6
+      '@astrojs/compiler-binding-win32-x64-msvc': 0.1.6
 
-  '@astrojs/compiler-rs@0.1.5':
+  '@astrojs/compiler-rs@0.1.6':
     dependencies:
-      '@astrojs/compiler-binding': 0.1.5
+      '@astrojs/compiler-binding': 0.1.6
 
   '@astrojs/compiler@2.13.1': {}
 
@@ -3690,12 +3690,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@5.0.2(astro@6.0.6(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2))':
+  '@astrojs/mdx@5.0.2(astro@6.0.7(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2))':
     dependencies:
       '@astrojs/markdown-remark': 7.0.1
       '@mdx-js/mdx': 3.1.1
       acorn: 8.16.0
-      astro: 6.0.6(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2)
+      astro: 6.0.7(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2)
       es-module-lexer: 2.0.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -4890,12 +4890,12 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro-expressive-code@0.41.7(astro@6.0.6(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2)):
+  astro-expressive-code@0.41.7(astro@6.0.7(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2)):
     dependencies:
-      astro: 6.0.6(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2)
+      astro: 6.0.7(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2)
       rehype-expressive-code: 0.41.7
 
-  astro@6.0.6(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2):
+  astro@6.0.7(@types/node@25.0.3)(@upstash/redis@1.36.2)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.59.0)(terser@5.44.1)(typescript@5.9.3)(yaml@2.8.2):
     dependencies:
       '@astrojs/compiler': 3.0.0
       '@astrojs/internal-helpers': 0.8.0
