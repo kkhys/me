@@ -1,6 +1,7 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
 import { GITHUB_ACTIONS } from "astro:env/client";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const lgtmBasePath = GITHUB_ACTIONS
   ? "./src/__fixtures__/lgtm-sample"
