@@ -5,7 +5,7 @@ import profileImage from "#/assets/profile.jpg";
 import Avatar from "#/components/avatar.astro";
 import LinkCard from "#/components/link-card.astro";
 import PostHeader from "#/components/post-header.astro";
-import { getImages } from "#/utils/image";
+import { getImagesForMemo } from "#/utils/image";
 import type { MemoWithComments } from "#/utils/memo";
 
 interface Props {
@@ -25,17 +25,10 @@ const {
 } = Astro.props;
 
 const isComment = !!memo.data.comment;
-const {
-  id,
-  author,
-  createdAt,
-  tag,
-  images: imageFilenames,
-  hideLinkCard,
-} = memo.data;
+const { id, author, createdAt, tag, hideLinkCard } = memo.data;
 const { Content, remarkPluginFrontmatter } = await render(memo);
 
-const images = imageFilenames ? getImages(memo.id, imageFilenames) : [];
+const images = getImagesForMemo(memo.id);
 
 const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
 ---

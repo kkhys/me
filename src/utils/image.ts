@@ -5,7 +5,7 @@ const imageModules = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 
-export const imageMap = new Map<string, ImageMetadata>(
+const imageMap = new Map<string, ImageMetadata>(
   Object.entries(imageModules)
     .map(([path, module]) => {
       const match = path.match(/\/memo\/(.+)$/);
@@ -18,15 +18,12 @@ export const imageMap = new Map<string, ImageMetadata>(
     ),
 );
 
-export const getImage = (memoId: string, filename: string) => {
+export const getImagesForMemo = (memoId: string) => {
   const dirName = memoId.replace(/\/index\.md$/, "");
-  const imagePath = `${dirName}/${filename}`;
+  const prefix = `${dirName}/`;
 
-  return imageMap.get(imagePath);
-};
-
-export const getImages = (memoId: string, imageFilenames: string[] = []) => {
-  return imageFilenames
-    .map((filename) => getImage(memoId, filename))
-    .filter((img): img is ImageMetadata => img !== undefined);
+  return Array.from(imageMap.entries())
+    .filter(([key]) => key.startsWith(prefix))
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([, image]) => image);
 };
