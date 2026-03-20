@@ -7,6 +7,11 @@
             "type": "command",
             "command": "pnpm lint:fix > /dev/null 2>&1; OUTPUT=$(pnpm lint 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\"; exit 1; fi",
             "statusMessage": "Running Biome lint & format..."
+          },
+          {
+            "type": "command",
+            "command": "OUTPUT=$(pnpm check 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\"; exit 1; fi",
+            "statusMessage": "Running type check..."
           }
         ]
       }
