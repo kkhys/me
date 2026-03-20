@@ -57,11 +57,10 @@ const isFirstPage = page.currentPage === 1;
     data-total-pages={page.lastPage}
   >
     {
-      page.data.map(({ main, comments }, index) => (
+      page.data.map(({ main, comments }) => (
         <ThreadPost
           memo={main}
           comments={comments}
-          shouldUsePriority={page.currentPage === 1 && index < 6}
         />
       ))
     }
