@@ -25,7 +25,12 @@ export const getStaticPaths = (async () => {
 const { memo } = Astro.props;
 const comments = await getCommentsByMemoId(memo.data.id);
 
-const memoContent = memo.body?.replace(/\n/g, " ").trim() || "";
+const memoContent =
+  memo.body
+    ?.replace(/\n/g, " ")
+    .trim()
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;") || "";
 const pageTitle = memoContent ? `${memoContent} | ${TITLE}` : TITLE;
 ---
 
