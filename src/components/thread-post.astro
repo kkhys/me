@@ -171,14 +171,49 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
         text-decoration: underline;
     }
 
+    /* Common */
     .post-images {
-        display: grid;
-        gap: 0.5rem;
         margin-top: 0.75rem;
     }
 
-    .post-images:has(:only-child) :global(.blur-load-wrapper) {
+    /* Single image */
+    .post-images:has(> :only-child) {
+        display: grid;
+    }
+
+    .post-images:has(> :only-child) :global(.blur-load-wrapper) {
         max-height: 430px;
+    }
+
+    /* Multiple images: horizontal scroll gallery */
+    .post-images:not(:has(> :only-child)) {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+        scrollbar-color: var(--c-scrollbar) transparent;
+        padding-bottom: 0.5rem;
+    }
+
+    .post-images:not(:has(> :only-child)) :global(.blur-load-wrapper) {
+        flex: 0 0 auto;
+        height: min(260px, 50vw);
+        aspect-ratio: unset !important;
+        scroll-snap-align: start;
+    }
+
+    .post-images:not(:has(> :only-child)) :global(.blur-load) {
+        height: 100%;
+    }
+
+    .post-images:not(:has(> :only-child)) :global(.blur-load picture) {
+        height: 100%;
+    }
+
+    .post-images:not(:has(> :only-child)) :global(.blur-load img) {
+        width: auto;
+        height: 100%;
     }
 
     .post-link-card {
