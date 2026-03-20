@@ -1,8 +1,8 @@
 ---
-import { Picture } from "astro:assets";
 import { type CollectionEntry, render } from "astro:content";
 import profileImage from "#/assets/profile.jpg";
 import Avatar from "#/components/avatar.astro";
+import BlurImage from "#/components/blur-image.astro";
 import LinkCard from "#/components/link-card.astro";
 import PostHeader from "#/components/post-header.astro";
 import { getImagesForMemo } from "#/utils/image";
@@ -11,18 +11,11 @@ import type { MemoWithComments } from "#/utils/memo";
 interface Props {
   memo: CollectionEntry<"memo">;
   asLink?: boolean;
-  shouldUsePriority?: boolean;
   comments?: MemoWithComments[];
   hideTag?: boolean;
 }
 
-const {
-  memo,
-  asLink = true,
-  shouldUsePriority = false,
-  comments = [],
-  hideTag = false,
-} = Astro.props;
+const { memo, asLink = true, comments = [], hideTag = false } = Astro.props;
 
 const isComment = !!memo.data.comment;
 const { id, author, createdAt, tag, hideLinkCard } = memo.data;
@@ -63,15 +56,7 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
                     {images.length > 0 && (
                         <div class="post-images">
                             {images.map((image, index) => (
-                                <Picture
-                                    src={image}
-                                    alt={`Image ${index + 1}`}
-                                    formats={['avif']}
-                                    widths={[320, 640, 1280]}
-                                    sizes="(min-width: 640px) 640px, 100vw"
-                                    class="post-image"
-                                    {...(shouldUsePriority && { priority: true })}
-                                />
+                                <BlurImage src={image} alt={`Image ${index + 1}`} />
                             ))}
                         </div>
                     )}
@@ -192,19 +177,7 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
         margin-top: 0.75rem;
     }
 
-    :global(.post-image) {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 0 0 1px var(--c-gray);
-    }
-
-    .post-images:has(:only-child) :global(.post-image) {
-        width: auto;
-        height: auto;
+    .post-images:has(:only-child) :global(.blur-load-wrapper) {
         max-height: 430px;
     }
 
