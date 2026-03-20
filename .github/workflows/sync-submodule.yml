@@ -47,7 +47,7 @@ jobs:
       - name: Create PR and auto-merge
         if: steps.update.outputs.has_changes == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.SUBMODULE_TOKEN }}
         run: |
           git config user.name "kkhys"
           git config user.email "kkhys@pm.me"
