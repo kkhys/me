@@ -1,5 +1,15 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.4.8/schema.json",
+  "files": {
+    "includes": [
+      "**",
+      "!node_modules",
+      "!public",
+      "!dist",
+      "!.astro",
+      "!memo-content"
+    ]
+  },
   "vcs": {
     "enabled": true,
     "clientKind": "git",
