@@ -1,9 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import Avatar from "#/components/avatar.astro";
 import BotBadge from "#/components/bot-badge.astro";
 import SocialIcon from "#/components/social-icon.astro";
-import { getAvatarImage } from "#/utils/user";
+import { getAvatarImage, getCoverImage } from "#/utils/user";
 
 interface Props {
   user: CollectionEntry<"users">;
@@ -11,62 +12,102 @@ interface Props {
 }
 
 const { user, postCount } = Astro.props;
-const { name, slug, bio, avatar, isBot, links } = user.data;
+const { name, slug, bio, avatar, cover, isBot, links } = user.data;
 const avatarImage = getAvatarImage(avatar);
+const coverImage = getCoverImage(cover);
 ---
 
 <div class="profile-header">
-  <div class="profile-top">
+  {coverImage ? (
+    <div class="cover-image">
+      <Image
+        src={coverImage}
+        alt=""
+        widths={[592, 1184]}
+        sizes="(max-width: 42rem) 100vw, 37rem"
+        class="cover-img"
+        loading="eager"
+      />
+    </div>
+  ) : (
+    <div class="cover-placeholder" />
+  )}
+
+  <div class="profile-body">
+    <div class="avatar-row">
+      <div class="profile-avatar-ring">
+        <Avatar src={avatarImage} alt={name} size={64} />
+      </div>
+    </div>
+
     <div class="profile-info">
       <h1 class="profile-name">{name}{isBot && <BotBadge size={10} />}</h1>
       <p class="profile-username">@{slug}</p>
     </div>
-    <div class="profile-avatar-ring">
-      <Avatar src={avatarImage} alt={name} size={64} />
-    </div>
+
+    {bio && (
+      <p class="profile-bio">{bio}</p>
+    )}
+
+    {links.length > 0 && (
+      <div class="profile-links">
+        {links.map((link) => (
+          <SocialIcon type={link.type} url={link.url} />
+        ))}
+      </div>
+    )}
+
+    <p class="profile-post-count">
+      {postCount} {postCount === 1 ? "post" : "posts"}
+    </p>
   </div>
-
-  {bio && (
-    <p class="profile-bio">{bio}</p>
-  )}
-
-  {links.length > 0 && (
-    <div class="profile-links">
-      {links.map((link) => (
-        <SocialIcon type={link.type} url={link.url} />
-      ))}
-    </div>
-  )}
-
-  <p class="profile-post-count">
-    {postCount} {postCount === 1 ? "post" : "posts"}
-  </p>
 </div>
 
 <style>
   .profile-header {
-    padding: 1.5rem 0 1rem;
+    padding: 0 0 1rem;
   }
 
-  .profile-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
+  .cover-image {
+    aspect-ratio: 3 / 1;
+    overflow: hidden;
+    background: var(--c-surface);
   }
 
-  .profile-info {
-    flex: 1;
-    min-width: 0;
+  .cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cover-placeholder {
+    height: 6rem;
+    background: var(--c-surface);
+  }
+
+  @media (max-width: 42rem) {
+    .cover-image,
+    .cover-placeholder {
+      margin-inline: -1rem;
+    }
+  }
+
+  .profile-body {
+    padding: 0 1rem;
+  }
+
+  .avatar-row {
+    margin-top: -36.5px;
   }
 
   .profile-avatar-ring {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 3px;
     border-radius: 50%;
     border: 1.5px solid var(--c-gray);
+    background: var(--c-bg);
     box-shadow:
       0 1px 3px oklch(0% 0 0 / 0.08),
       0 4px 12px oklch(0% 0 0 / 0.04);
@@ -78,6 +119,10 @@ const avatarImage = getAvatarImage(avatar);
         0 1px 3px oklch(0% 0 0 / 0.3),
         0 4px 12px oklch(0% 0 0 / 0.2);
     }
+  }
+
+  .profile-info {
+    margin-top: 0.75rem;
   }
 
   .profile-name {
