@@ -15,8 +15,8 @@
           },
           {
             "type": "command",
-            "command": "OUTPUT=$(pnpm test 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\"; exit 1; fi",
-            "statusMessage": "Running tests..."
+            "command": "OUTPUT=$(pnpm coverage 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\"; exit 1; fi; CLEAN=$(echo \"$OUTPUT\" | perl -pe 's/\\e\\[\\d+(?:;\\d+)*m//g'); if echo \"$CLEAN\" | awk -F'|' '/\\|/ && !/^-/ && !/File/ { for(i=2;i<=5;i++) { gsub(/[[:space:]]/,\"\",$i); if($i!=\"\" && $i+0!=100) { found=1 } } } END { exit !found }'; then echo \"Coverage is not 100%. Fix the uncovered lines:\"; echo \"$CLEAN\" | grep '|'; exit 1; fi",
+            "statusMessage": "Checking test coverage is 100%..."
           }
         ]
       }
