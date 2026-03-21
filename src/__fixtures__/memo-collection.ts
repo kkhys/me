@@ -153,4 +153,17 @@ export const mockMemos: CollectionEntry<"memo">[] = [
       isBot: true,
     },
   },
+  {
+    id: "oss-gh-labeler",
+    body: "gh-labeler\n\nhttps://github.com/kkhys/gh-labeler",
+    collection: "memo",
+    data: {
+      id: "oss-gh-labeler",
+      isDraft: false,
+      createdAt: new Date("2025-09-07T01:54:02Z"),
+      author: "oss-project",
+      hideLinkCard: false,
+      isBot: true,
+    },
+  },
 ];
