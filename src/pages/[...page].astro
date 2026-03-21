@@ -1,15 +1,21 @@
 ---
 import type { GetStaticPaths } from "astro";
 import Feed from "#/components/feed.astro";
+import InfiniteScroll from "#/components/infinite-scroll.astro";
 import BaseSEO from "#/components/seo/base-seo.astro";
 import JsonLd from "#/components/seo/json-ld.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
 import TwitterCard from "#/components/seo/twitter-card.astro";
-import Spinner from "#/components/spinner.astro";
 import ThreadPost from "#/components/thread-post.astro";
-import { DESCRIPTION, PAGE_SIZE, TITLE, USERNAME } from "#/config/constants";
+import {
+  DESCRIPTION,
+  PAGE_SIZE,
+  SITE_OWNER_SLUG,
+  TITLE,
+} from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 import { getMemosWithComments } from "#/utils/memo";
+import { getAuthorInfo } from "#/utils/user";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const memosWithComments = await getMemosWithComments();
@@ -21,6 +27,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 
 const { page } = Astro.props;
 const isFirstPage = page.currentPage === 1;
+const siteOwner = await getAuthorInfo(SITE_OWNER_SLUG);
 ---
 
 {!isFirstPage && (
@@ -46,7 +53,7 @@ const isFirstPage = page.currentPage === 1;
         description: DESCRIPTION,
         author: {
           "@type": "Person",
-          name: USERNAME,
+          name: siteOwner.name,
         },
       }}
     />
@@ -55,6 +62,7 @@ const isFirstPage = page.currentPage === 1;
     id="memo-container"
     data-current-page={page.currentPage}
     data-total-pages={page.lastPage}
+    data-base-path="/"
   >
     {
       page.data.map(({ main, comments }) => (
@@ -67,155 +75,6 @@ const isFirstPage = page.currentPage === 1;
   </Feed>
 
   {page.currentPage < page.lastPage && (
-    <>
-      <div id="scroll-trigger"></div>
-      <div id="loading-indicator" class="loading-indicator hidden" aria-live="polite" aria-busy="false">
-        <Spinner />
-      </div>
-    </>
+    <InfiniteScroll containerId="memo-container" />
   )}
-
-  <script>
-    const initInfiniteScroll = () => {
-      const containerEl = document.getElementById("memo-container");
-      const triggerEl = document.getElementById("scroll-trigger");
-      const loadingIndicatorEl = document.getElementById("loading-indicator");
-
-      if (!containerEl || !triggerEl || !loadingIndicatorEl) {
-        return;
-      }
-
-      const container: HTMLElement = containerEl;
-      const trigger: HTMLElement = triggerEl;
-      const loadingIndicator: HTMLElement = loadingIndicatorEl;
-
-      let currentPage = Number.parseInt(container.dataset.currentPage || "1", 10);
-      const totalPages = Number.parseInt(container.dataset.totalPages || "1", 10);
-      let isLoading = false;
-
-      const showLoading = () => {
-        loadingIndicator.classList.remove("hidden");
-        loadingIndicator.setAttribute("aria-busy", "true");
-      };
-
-      const hideLoading = () => {
-        loadingIndicator.classList.add("hidden");
-        loadingIndicator.setAttribute("aria-busy", "false");
-      };
-
-      const showEndMessage = () => {
-        trigger.remove();
-        loadingIndicator.innerHTML = "<span role=\"status\">You've reached the end 🎉</span>";
-        loadingIndicator.setAttribute("aria-busy", "false");
-        loadingIndicator.classList.remove("hidden");
-      };
-
-      const showErrorMessage = () => {
-        loadingIndicator.innerHTML = "<span role=\"alert\">Failed to load more posts 😢</span>";
-        loadingIndicator.setAttribute("aria-busy", "false");
-        loadingIndicator.classList.remove("hidden");
-      };
-
-      const loadMoreMemos = async () => {
-        const nextPage = currentPage + 1;
-
-        if (nextPage > totalPages) {
-          observer.unobserve(trigger);
-          showEndMessage();
-          return;
-        }
-
-        isLoading = true;
-        showLoading();
-
-        const startTime = Date.now();
-
-        try {
-          const url = nextPage === 1 ? "/" : `/${nextPage}`;
-          const response = await fetch(url);
-
-          if (!response.ok) {
-            throw new Error(`Failed to fetch page ${nextPage}`);
-          }
-
-          const html = await response.text();
-
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, "text/html");
-
-          const nextContainer = doc.getElementById("memo-container");
-          if (!nextContainer) {
-            throw new Error("memo-container not found in fetched page");
-          }
-
-          const elapsed = Date.now() - startTime;
-          const remainingTime = Math.max(0, 500 - elapsed);
-          if (remainingTime > 0) {
-            await new Promise((resolve) => setTimeout(resolve, remainingTime));
-          }
-
-          const memoCards = nextContainer.children;
-          for (const card of Array.from(memoCards)) {
-            container.appendChild(card);
-          }
-
-          currentPage = nextPage;
-
-          if (currentPage >= totalPages) {
-            observer.unobserve(trigger);
-            hideLoading();
-            showEndMessage();
-          }
-        } catch (error) {
-          console.error("Failed to load more memos:", error);
-
-          const elapsed = Date.now() - startTime;
-          const remainingTime = Math.max(0, 500 - elapsed);
-          if (remainingTime > 0) {
-            await new Promise((resolve) => setTimeout(resolve, remainingTime));
-          }
-
-          showErrorMessage();
-        } finally {
-          isLoading = false;
-        }
-      }
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const firstEntry = entries[0];
-          if (
-            firstEntry &&
-            firstEntry.isIntersecting &&
-            !isLoading &&
-            currentPage < totalPages
-          ) {
-            loadMoreMemos();
-          }
-        },
-        { rootMargin: "200px" },
-      );
-
-      observer.observe(trigger);
-    }
-
-    initInfiniteScroll();
-  </script>
 </Layout>
-
-<style>
-  .loading-indicator {
-    display: grid;
-    place-items: center;
-    padding: 2rem;
-    font-size: var(--fs-xs);
-  }
-
-  .loading-indicator.hidden {
-    display: none;
-  }
-
-  #scroll-trigger {
-    height: 1px;
-  }
-</style>
