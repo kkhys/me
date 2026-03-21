@@ -1,0 +1,114 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Avatar from "#/components/avatar.astro";
+import SocialIcon from "#/components/social-icon.astro";
+import { getAvatarImage } from "#/utils/user";
+
+interface Props {
+  user: CollectionEntry<"users">;
+  postCount: number;
+}
+
+const { user, postCount } = Astro.props;
+const { name, slug, bio, avatar, links } = user.data;
+const avatarImage = getAvatarImage(avatar);
+---
+
+<div class="profile-header">
+  <div class="profile-top">
+    <div class="profile-info">
+      <h1 class="profile-name">{name}</h1>
+      <p class="profile-username">@{slug}</p>
+    </div>
+    <div class="profile-avatar-ring">
+      <Avatar src={avatarImage} alt={name} size={64} />
+    </div>
+  </div>
+
+  {bio && (
+    <p class="profile-bio">{bio}</p>
+  )}
+
+  {links.length > 0 && (
+    <div class="profile-links">
+      {links.map((link) => (
+        <SocialIcon type={link.type} url={link.url} />
+      ))}
+    </div>
+  )}
+
+  <p class="profile-post-count">
+    {postCount} {postCount === 1 ? "post" : "posts"}
+  </p>
+</div>
+
+<style>
+  .profile-header {
+    padding: 1.5rem 0 1rem;
+  }
+
+  .profile-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .profile-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .profile-avatar-ring {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    border-radius: 50%;
+    border: 1.5px solid var(--c-gray);
+    box-shadow:
+      0 1px 3px oklch(0% 0 0 / 0.08),
+      0 4px 12px oklch(0% 0 0 / 0.04);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .profile-avatar-ring {
+      box-shadow:
+        0 1px 3px oklch(0% 0 0 / 0.3),
+        0 4px 12px oklch(0% 0 0 / 0.2);
+    }
+  }
+
+  .profile-name {
+    font-size: var(--fs-base);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-xs);
+    margin: 0;
+    color: var(--c-text);
+  }
+
+  .profile-username {
+    font-size: var(--fs-xs);
+    color: var(--c-sub-text);
+    margin: 0.15rem 0 0;
+  }
+
+  .profile-bio {
+    font-size: var(--fs-sm);
+    line-height: var(--lh-sm);
+    color: var(--c-text);
+    margin: 0.75rem 0 0;
+  }
+
+  .profile-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .profile-post-count {
+    font-size: var(--fs-xs);
+    color: var(--c-sub-text);
+    margin: 0.75rem 0 0;
+  }
+</style>

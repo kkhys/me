@@ -1,12 +1,12 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
-import profileImage from "#/assets/profile.jpg";
 import Avatar from "#/components/avatar.astro";
 import BlurImage from "#/components/blur-image.astro";
 import LinkCard from "#/components/link-card.astro";
 import PostHeader from "#/components/post-header.astro";
 import { getImagesForMemo } from "#/utils/image";
 import type { MemoWithComments } from "#/utils/memo";
+import { getAuthorInfo } from "#/utils/user";
 
 interface Props {
   memo: CollectionEntry<"memo">;
@@ -24,6 +24,12 @@ const { Content, remarkPluginFrontmatter } = await render(memo);
 const images = getImagesForMemo(memo.id);
 
 const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
+
+const {
+  name: authorName,
+  avatar: avatarImage,
+  profileLink: authorLink,
+} = await getAuthorInfo(author);
 ---
 
 <article
@@ -37,14 +43,14 @@ const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
         )}
         <div class="thread-avatar-column">
             <div class="post-avatar">
-                <Avatar src={profileImage} alt={author} size={27} />
+                <Avatar src={avatarImage} alt={authorName} size={27} link={authorLink} />
             </div>
         </div>
 
         <div class="thread-content-column">
             <div class="thread-post">
                 <div class="post-content">
-                    <PostHeader author={author} createdAt={createdAt} />
+                    <PostHeader author={authorName} createdAt={createdAt} authorLink={authorLink} />
                     <div class="post-text">
                         <Content />
                     </div>

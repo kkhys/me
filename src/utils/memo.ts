@@ -97,3 +97,13 @@ export const getAllTags = async () => {
     .filter((tag) => tag !== undefined);
   return Array.from(new Set(tags)).sort();
 };
+
+export const getMemosByAuthor = async (authorSlug: string) => {
+  const allMemos = await getPublishedMemos();
+  const mainMemos = allMemos.filter(({ data }) => !data.comment);
+  const authorMainMemos = mainMemos.filter(
+    ({ data }) => data.author === authorSlug,
+  );
+  const commentMap = buildCommentMap(allMemos);
+  return attachComments(authorMainMemos, commentMap);
+};

@@ -6,9 +6,10 @@ import JsonLd from "#/components/seo/json-ld.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
 import TwitterCard from "#/components/seo/twitter-card.astro";
 import ThreadPost from "#/components/thread-post.astro";
-import { DESCRIPTION, TITLE, USERNAME } from "#/config/constants";
+import { DESCRIPTION, TITLE } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 import { getCommentsByMemoId, getPublishedMemos } from "#/utils/memo";
+import { getAuthorInfo } from "#/utils/user";
 
 export const getStaticPaths = (async () => {
   const allMemos = await getPublishedMemos();
@@ -24,6 +25,7 @@ export const getStaticPaths = (async () => {
 
 const { memo } = Astro.props;
 const comments = await getCommentsByMemoId(memo.data.id);
+const { name: authorName } = await getAuthorInfo(memo.data.author);
 
 const memoContent =
   memo.body
@@ -46,7 +48,7 @@ const pageTitle = memoContent ? `${memoContent} | ${TITLE}` : TITLE;
       article={{
         publishedTime: memo.data.createdAt.toISOString(),
         modifiedTime: memo.data.createdAt.toISOString(),
-        author: memo.data.author,
+        author: authorName,
         ...(memo.data.tag && { tag: memo.data.tag })
       }}
     />
@@ -67,7 +69,7 @@ const pageTitle = memoContent ? `${memoContent} | ${TITLE}` : TITLE;
         datePublished: memo.data.createdAt.toISOString(),
         author: {
           "@type": "Person",
-          name: memo.data.author || USERNAME,
+          name: authorName,
         },
         ...(memo.data.tag && { keywords: memo.data.tag }),
       }}

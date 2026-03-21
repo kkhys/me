@@ -3,12 +3,14 @@ interface Props {
   id?: string;
   "data-current-page"?: number;
   "data-total-pages"?: number;
+  "data-base-path"?: string;
 }
 
 const {
   id,
   "data-current-page": currentPage,
   "data-total-pages": totalPages,
+  "data-base-path": basePath,
 } = Astro.props;
 ---
 
@@ -17,6 +19,7 @@ const {
   id={id}
   data-current-page={currentPage}
   data-total-pages={totalPages}
+  data-base-path={basePath}
 >
   <slot />
 </div>
