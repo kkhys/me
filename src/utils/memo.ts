@@ -130,6 +130,13 @@ export const buildQuoteCountMap = (memos: Memo[]): Map<string, number> => {
   return countMap;
 };
 
+export const countTotalComments = (comments: MemoWithComments[]): number => {
+  return comments.reduce(
+    (total, { comments: children }) => total + 1 + countTotalComments(children),
+    0,
+  );
+};
+
 export const getMemosByAuthor = async (authorSlug: string) => {
   const allMemos = await getPublishedMemos();
   const mainMemos = allMemos.filter(({ data }) => !data.comment);
