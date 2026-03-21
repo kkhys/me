@@ -14,18 +14,23 @@ import {
   TITLE,
 } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
-import { getMemosWithComments } from "#/utils/memo";
+import { getMemosWithCommentsAndPinned } from "#/utils/memo";
 import { getAuthorInfo } from "#/utils/user";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  const memosWithComments = await getMemosWithComments();
+  const { pinned, memos } = await getMemosWithCommentsAndPinned();
 
-  return paginate(memosWithComments, {
-    pageSize: PAGE_SIZE,
-  });
+  const pages = paginate(memos, { pageSize: PAGE_SIZE });
+
+  return pages.map((page) => ({
+    ...page,
+    props: { ...page.props, pinned },
+  }));
 }) satisfies GetStaticPaths;
 
-const { page } = Astro.props;
+const { page, pinned } = Astro.props as typeof Astro.props & {
+  pinned: Awaited<ReturnType<typeof getMemosWithCommentsAndPinned>>["pinned"];
+};
 const isFirstPage = page.currentPage === 1;
 const siteOwner = await getAuthorInfo(SITE_OWNER_SLUG);
 ---
@@ -64,6 +69,15 @@ const siteOwner = await getAuthorInfo(SITE_OWNER_SLUG);
     data-total-pages={page.lastPage}
     data-base-path="/"
   >
+    {
+      isFirstPage && pinned.map(({ main, comments }) => (
+        <ThreadPost
+          memo={main}
+          comments={comments}
+          isPinned={true}
+        />
+      ))
+    }
     {
       page.data.map(({ main, comments }) => (
         <ThreadPost
