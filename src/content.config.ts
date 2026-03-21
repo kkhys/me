@@ -20,6 +20,7 @@ const memo = defineCollection({
     hideLinkCard: z.boolean().default(false),
     isBot: z.boolean().default(false),
     isPinned: z.boolean().default(false),
+    hideComments: z.boolean().default(false),
   }),
 });
 

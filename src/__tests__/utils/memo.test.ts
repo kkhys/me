@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import { mockMemos } from "#/__fixtures__/memo-collection";
+import type { MemoWithComments } from "#/utils/memo";
 
 vi.mock("astro:content", () => ({
   getCollection: vi.fn(),
@@ -681,5 +682,43 @@ describe("buildQuoteCountMap", () => {
     const result = buildQuoteCountMap([]);
 
     expect(result.size).toBe(0);
+  });
+});
+
+describe("countTotalComments", () => {
+  const makeMemo = (id: string) =>
+    ({ data: { id } }) as MemoWithComments["memo"];
+
+  test("should return 0 for empty array", async () => {
+    const { countTotalComments } = await import("#/utils/memo");
+    expect(countTotalComments([])).toBe(0);
+  });
+
+  test("should count flat comments", async () => {
+    const { countTotalComments } = await import("#/utils/memo");
+    const comments: MemoWithComments[] = [
+      { memo: makeMemo("c1"), comments: [] },
+      { memo: makeMemo("c2"), comments: [] },
+      { memo: makeMemo("c3"), comments: [] },
+    ];
+    expect(countTotalComments(comments)).toBe(3);
+  });
+
+  test("should count nested comments recursively", async () => {
+    const { countTotalComments } = await import("#/utils/memo");
+    const comments: MemoWithComments[] = [
+      {
+        memo: makeMemo("c1"),
+        comments: [
+          {
+            memo: makeMemo("c1-1"),
+            comments: [{ memo: makeMemo("c1-1-1"), comments: [] }],
+          },
+        ],
+      },
+      { memo: makeMemo("c2"), comments: [] },
+    ];
+    // c1 + c1-1 + c1-1-1 + c2 = 4
+    expect(countTotalComments(comments)).toBe(4);
   });
 });
