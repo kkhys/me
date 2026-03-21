@@ -3,6 +3,7 @@ import { type CollectionEntry, render } from "astro:content";
 import Avatar from "#/components/avatar.astro";
 import BlurImage from "#/components/blur-image.astro";
 import BotBadge from "#/components/bot-badge.astro";
+import LinkCard from "#/components/link-card.astro";
 import { formatDate, formatDateTime } from "#/utils/date";
 import { getImagesForMemo } from "#/utils/image";
 import { getAuthorInfo } from "#/utils/user";
@@ -12,8 +13,10 @@ interface Props {
 }
 
 const { memo } = Astro.props;
-const { id, author, createdAt, isBot } = memo.data;
-const { Content } = await render(memo);
+const { id, author, createdAt, tag, hideLinkCard, isBot } = memo.data;
+const { Content, remarkPluginFrontmatter } = await render(memo);
+
+const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
 
 const images = getImagesForMemo(memo.id);
 
@@ -37,11 +40,21 @@ const fullDateTimeString = formatDateTime(createdAt);
     <div class="quote-text">
         <Content />
     </div>
+    {tag && (
+        <div class="quote-tags">
+            <a href={`/tag/${tag}`} class="tag-link">#{tag}</a>
+        </div>
+    )}
     {images.length > 0 && (
         <div class="quote-images">
             {images.map((image, index) => (
                 <BlurImage src={image} alt={`Image ${index + 1}`} />
             ))}
+        </div>
+    )}
+    {!hideLinkCard && firstExternalLink && (
+        <div class="quote-link-card">
+            <LinkCard href={firstExternalLink} />
         </div>
     )}
 </div>
@@ -91,7 +104,18 @@ const fullDateTimeString = formatDateTime(createdAt);
         font-variant-numeric: tabular-nums;
     }
 
-    .quote-text {
+    .quote-tags {
+        margin-top: 0.5rem;
+    }
+
+    .tag-link {
+        font-size: var(--fs-sm);
+        color: var(--c-link);
+        text-decoration: none;
+    }
+
+    .tag-link:hover {
+        text-decoration: underline;
     }
 
     :global(.quote-text p) {
@@ -155,5 +179,9 @@ const fullDateTimeString = formatDateTime(createdAt);
     .quote-images:not(:has(> :only-child)) :global(.blur-load img) {
         width: auto;
         height: 100%;
+    }
+
+    .quote-link-card {
+        margin-top: 0.75rem;
     }
 </style>
