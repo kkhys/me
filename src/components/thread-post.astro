@@ -4,8 +4,9 @@ import Avatar from "#/components/avatar.astro";
 import BlurImage from "#/components/blur-image.astro";
 import LinkCard from "#/components/link-card.astro";
 import PostHeader from "#/components/post-header.astro";
+import QuoteEmbed from "#/components/quote-embed.astro";
 import { getImagesForMemo } from "#/utils/image";
-import type { MemoWithComments } from "#/utils/memo";
+import { getQuotedMemo, type MemoWithComments } from "#/utils/memo";
 import { getAuthorInfo } from "#/utils/user";
 
 interface Props {
@@ -18,7 +19,8 @@ interface Props {
 const { memo, asLink = true, comments = [], hideTag = false } = Astro.props;
 
 const isComment = !!memo.data.comment;
-const { id, author, createdAt, tag, hideLinkCard, isBot } = memo.data;
+const { id, author, createdAt, tag, quote, hideLinkCard, isBot } = memo.data;
+const quotedMemo = quote ? await getQuotedMemo(quote) : undefined;
 const { Content, remarkPluginFrontmatter } = await render(memo);
 
 const images = getImagesForMemo(memo.id);
@@ -64,6 +66,11 @@ const {
                             {images.map((image, index) => (
                                 <BlurImage src={image} alt={`Image ${index + 1}`} />
                             ))}
+                        </div>
+                    )}
+                    {quotedMemo && (
+                        <div class="post-quote">
+                            <QuoteEmbed memo={quotedMemo} />
                         </div>
                     )}
                     {!hideLinkCard && firstExternalLink && (
@@ -220,6 +227,10 @@ const {
     .post-images:not(:has(> :only-child)) :global(.blur-load img) {
         width: auto;
         height: 100%;
+    }
+
+    .post-quote {
+        margin-top: 0.75rem;
     }
 
     .post-link-card {
