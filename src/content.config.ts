@@ -14,6 +14,7 @@ const memo = defineCollection({
       .regex(/^[a-z0-9_]+$/)
       .optional(),
     comment: z.ulid().optional(),
+    quote: z.ulid().optional(),
     isDraft: z.boolean().default(false),
     author: z.string().default("kkhys"),
     hideLinkCard: z.boolean().default(false),
