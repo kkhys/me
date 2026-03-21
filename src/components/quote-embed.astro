@@ -1,0 +1,159 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import Avatar from "#/components/avatar.astro";
+import BlurImage from "#/components/blur-image.astro";
+import BotBadge from "#/components/bot-badge.astro";
+import { formatDate, formatDateTime } from "#/utils/date";
+import { getImagesForMemo } from "#/utils/image";
+import { getAuthorInfo } from "#/utils/user";
+
+interface Props {
+  memo: CollectionEntry<"memo">;
+}
+
+const { memo } = Astro.props;
+const { id, author, createdAt, isBot } = memo.data;
+const { Content } = await render(memo);
+
+const images = getImagesForMemo(memo.id);
+
+const {
+  name: authorName,
+  avatar: avatarImage,
+  profileLink: authorLink,
+} = await getAuthorInfo(author);
+
+const createdAtString = formatDate(createdAt);
+const fullDateTimeString = formatDateTime(createdAt);
+---
+
+<div class="quote-card" data-href={`/post/${id}`}>
+    <div class="quote-header">
+        <Avatar src={avatarImage} alt={authorName} size={20} link={authorLink} />
+        <a href={authorLink} class="quote-author">{authorName}</a>
+        {isBot && <BotBadge />}
+        <time class="quote-time" datetime={createdAt.toISOString()} title={fullDateTimeString}>{createdAtString}</time>
+    </div>
+    <div class="quote-text">
+        <Content />
+    </div>
+    {images.length > 0 && (
+        <div class="quote-images">
+            {images.map((image, index) => (
+                <BlurImage src={image} alt={`Image ${index + 1}`} />
+            ))}
+        </div>
+    )}
+</div>
+
+<style>
+    .quote-card {
+        display: block;
+        cursor: pointer;
+        border: 1px solid var(--c-gray);
+        border-radius: 0.75rem;
+        padding: 0.75rem;
+        transition: background-color 0.15s ease;
+        user-select: none;
+    }
+
+    .quote-card:hover {
+        background-color: var(--c-hover);
+    }
+
+    .quote-header {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-bottom: 0.25rem;
+        line-height: 1;
+    }
+
+    .quote-header :global(.avatar-link),
+    .quote-header :global(.avatar) {
+        display: block;
+    }
+
+    .quote-author {
+        font-size: var(--fs-xs);
+        font-weight: var(--fw-semibold);
+        color: var(--c-text);
+        text-decoration: none;
+    }
+
+    .quote-author:hover {
+        text-decoration: underline;
+    }
+
+    .quote-time {
+        font-size: var(--fs-xs);
+        color: var(--c-sub-text);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .quote-text {
+    }
+
+    :global(.quote-text p) {
+        font-size: var(--fs-sm);
+        line-height: var(--lh-sm);
+        color: var(--c-text);
+    }
+
+    :global(.quote-text p + p) {
+        margin-top: 0.5rem;
+    }
+
+    :global(.quote-text .external-link) {
+        color: var(--c-link);
+        text-decoration: none;
+    }
+
+    :global(.quote-text .external-link:hover) {
+        text-decoration: underline;
+    }
+
+    .quote-images {
+        margin-top: 0.75rem;
+    }
+
+    /* Single image */
+    .quote-images:has(> :only-child) {
+        display: grid;
+    }
+
+    .quote-images:has(> :only-child) :global(.blur-load-wrapper) {
+        max-height: 430px;
+    }
+
+    /* Multiple images: horizontal scroll gallery */
+    .quote-images:not(:has(> :only-child)) {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+        scrollbar-color: var(--c-scrollbar) transparent;
+        padding-bottom: 0.5rem;
+    }
+
+    .quote-images:not(:has(> :only-child)) :global(.blur-load-wrapper) {
+        flex: 0 0 auto;
+        height: min(260px, 50vw);
+        aspect-ratio: unset !important;
+        scroll-snap-align: start;
+    }
+
+    .quote-images:not(:has(> :only-child)) :global(.blur-load) {
+        height: 100%;
+    }
+
+    .quote-images:not(:has(> :only-child)) :global(.blur-load picture) {
+        height: 100%;
+    }
+
+    .quote-images:not(:has(> :only-child)) :global(.blur-load img) {
+        width: auto;
+        height: 100%;
+    }
+</style>

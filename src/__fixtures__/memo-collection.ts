@@ -166,4 +166,32 @@ export const mockMemos: CollectionEntry<"memo">[] = [
       isBot: true,
     },
   },
+  {
+    id: "quote-1.md",
+    body: "This is a quote of memo-1",
+    collection: "memo",
+    data: {
+      id: "quote-1",
+      isDraft: false,
+      createdAt: new Date("2025-12-10T00:00:00Z"),
+      author: "kkhys",
+      hideLinkCard: false,
+      isBot: false,
+      quote: "memo-1",
+    },
+  },
+  {
+    id: "quote-2.md",
+    body: "This is a quote of comment-1",
+    collection: "memo",
+    data: {
+      id: "quote-2",
+      isDraft: false,
+      createdAt: new Date("2025-12-15T00:00:00Z"),
+      author: "kkhys",
+      hideLinkCard: false,
+      isBot: false,
+      quote: "comment-1",
+    },
+  },
 ];

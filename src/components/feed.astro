@@ -49,6 +49,15 @@ const {
         return;
       }
 
+      const quoteCard = target.closest<HTMLElement>('.quote-card[data-href]');
+      if (quoteCard) {
+        const href = quoteCard.dataset.href;
+        if (href) {
+          window.location.href = href;
+        }
+        return;
+      }
+
       const card = target.closest<HTMLElement>('.post-container[data-clickable="true"]');
       if (!card) return;
 

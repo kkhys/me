@@ -98,6 +98,24 @@ export const getAllTags = async () => {
   return Array.from(new Set(tags)).sort();
 };
 
+export const getQuotedMemo = async (
+  quoteId: string,
+): Promise<Memo | undefined> => {
+  const allMemos = await getPublishedMemos();
+  return allMemos.find(({ data }) => data.id === quoteId);
+};
+
+export const buildQuoteCountMap = (memos: Memo[]): Map<string, number> => {
+  const countMap = new Map<string, number>();
+  for (const memo of memos) {
+    if (memo.data.quote) {
+      const current = countMap.get(memo.data.quote) ?? 0;
+      countMap.set(memo.data.quote, current + 1);
+    }
+  }
+  return countMap;
+};
+
 export const getMemosByAuthor = async (authorSlug: string) => {
   const allMemos = await getPublishedMemos();
   const mainMemos = allMemos.filter(({ data }) => !data.comment);
