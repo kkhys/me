@@ -12,8 +12,8 @@ importers:
         specifier: 0.1.6
         version: 0.1.6
       astro:
-        specifier: 6.0.7
-        version: 6.0.7(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.54.0)(terser@5.46.0)(typescript@5.9.3)(yaml@2.8.2)
+        specifier: 6.0.8
+        version: 6.0.8(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.54.0)(terser@5.46.0)(typescript@5.9.3)(yaml@2.8.2)
       kiso.css:
         specifier: 1.2.4
         version: 1.2.4
@@ -1039,8 +1039,8 @@ packages:
   ast-v8-to-istanbul@1.0.0:
     resolution: {integrity: sha512-1fSfIwuDICFA4LKkCzRPO7F0hzFf0B7+Xqrl27ynQaa+Rh0e1Es0v6kWHPott3lU10AyAr7oKHa65OppjLn3Rg==}
 
-  astro@6.0.7:
-    resolution: {integrity: sha512-tCUrtQI+2Dk13xTM07JYrvk16T4ekWqSXh0/dVCunne816ZV+RCs1tomSoTHZi3DJdoaTnLJmkH+uxCC3b1KWw==}
+  astro@6.0.8:
+    resolution: {integrity: sha512-DCPeb8GKOoFWh+8whB7Qi/kKWD/6NcQ9nd1QVNzJFxgHkea3WYrNroQRq4whmBdjhkYPTLS/1gmUAl2iA2Es2g==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -1352,10 +1352,6 @@ packages:
 
   fontace@0.4.1:
     resolution: {integrity: sha512-lDMvbAzSnHmbYMTEld5qdtvNH2/pWpICOqpean9IgC7vUbUJc3k+k5Dokp85CegamqQpFbXf0rAVkbzpyTA8aw==}
-
-  fontkitten@1.0.0:
-    resolution: {integrity: sha512-b0RdzQeztiiUFWEDzq6Ka26qkNVNLCehoRtifOIGNbQ4CfxyYRh73fyWaQX/JshPVcueITOEeoSWPy5XQv8FUg==}
-    engines: {node: '>=20'}
 
   fontkitten@1.0.3:
     resolution: {integrity: sha512-Wp1zXWPVUPBmfoa3Cqc9ctaKuzKAV6uLstRqlR56kSjplf5uAce+qeyYym7F+PHbGTk+tCEdkCW6RD7DX/gBZw==}
@@ -2719,7 +2715,7 @@ snapshots:
 
   '@capsizecss/unpack@4.0.0':
     dependencies:
-      fontkitten: 1.0.0
+      fontkitten: 1.0.3
 
   '@clack/core@1.1.0':
     dependencies:
@@ -3020,7 +3016,7 @@ snapshots:
       '@playform/pipe': 0.1.4
       '@types/csso': 5.0.4
       '@types/html-minifier-terser': 7.0.2
-      astro: 6.0.7(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.54.0)(terser@5.46.0)(typescript@5.9.3)(yaml@2.8.2)
+      astro: 6.0.8(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.54.0)(terser@5.46.0)(typescript@5.9.3)(yaml@2.8.2)
       commander: 14.0.3
       csso: 5.0.5
       deepmerge-ts: 7.1.5
@@ -3416,7 +3412,7 @@ snapshots:
       estree-walker: 3.0.3
       js-tokens: 10.0.0
 
-  astro@6.0.7(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.54.0)(terser@5.46.0)(typescript@5.9.3)(yaml@2.8.2):
+  astro@6.0.8(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.54.0)(terser@5.46.0)(typescript@5.9.3)(yaml@2.8.2):
     dependencies:
       '@astrojs/compiler': 3.0.1
       '@astrojs/internal-helpers': 0.8.0
@@ -3786,10 +3782,6 @@ snapshots:
     dependencies:
       fontkitten: 1.0.3
 
-  fontkitten@1.0.0:
-    dependencies:
-      tiny-inflate: 1.0.3
-
   fontkitten@1.0.3:
     dependencies:
       tiny-inflate: 1.0.3
@@ -4053,7 +4045,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.7.3
+      semver: 7.7.4
 
   markdown-table@3.0.4: {}
 
@@ -4831,7 +4823,7 @@ snapshots:
 
   typescript-auto-import-cache@0.3.6:
     dependencies:
-      semver: 7.7.3
+      semver: 7.7.4
 
   typescript@5.9.3: {}
 
@@ -5025,7 +5017,7 @@ snapshots:
   volar-service-typescript@0.0.70(@volar/language-service@2.4.28):
     dependencies:
       path-browserify: 1.0.1
-      semver: 7.7.3
+      semver: 7.7.4
       typescript-auto-import-cache: 0.3.6
       vscode-languageserver-textdocument: 1.0.12
       vscode-nls: 5.2.0
