@@ -18,11 +18,12 @@ export const getStaticPaths = (async ({ paginate }) => {
   const paths = [];
 
   for (const user of users) {
-    const memosWithComments = await getMemosByAuthor(user.data.slug);
-    const pages = paginate(memosWithComments, {
+    const { pinned, memos } = await getMemosByAuthor(user.data.slug);
+    const totalPosts = pinned.length + memos.length;
+    const pages = paginate(memos, {
       pageSize: PAGE_SIZE,
       params: { slug: user.data.slug },
-      props: { user, totalPosts: memosWithComments.length },
+      props: { user, totalPosts, pinned },
     });
     paths.push(...pages);
   }
@@ -31,7 +32,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
-const { user, totalPosts } = Astro.props;
+const { user, totalPosts, pinned } = Astro.props;
 const slug = Astro.params.slug;
 const isFirstPage = page.currentPage === 1;
 const pageTitle = `${user.data.name} (@${user.data.slug}) | ${TITLE}`;
@@ -89,6 +90,15 @@ const profilePath = `/@${slug}`;
     {isFirstPage && (
       <ProfileHeader user={user} postCount={totalPosts} />
     )}
+    {
+      isFirstPage && pinned.map(({ main, comments }) => (
+        <ThreadPost
+          memo={main}
+          comments={comments}
+          isPinned={true}
+        />
+      ))
+    }
     {
       page.data.map(({ main, comments }) => (
         <ThreadPost
