@@ -6,9 +6,10 @@ import JsonLd from "#/components/seo/json-ld.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
 import TwitterCard from "#/components/seo/twitter-card.astro";
 import ThreadPost from "#/components/thread-post.astro";
-import { TITLE, USERNAME } from "#/config/constants";
+import { SITE_OWNER_SLUG, TITLE } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 import { getAllTags, getMemosByTag } from "#/utils/memo";
+import { getAuthorInfo } from "#/utils/user";
 
 export const getStaticPaths = (async () => {
   const tags = await getAllTags();
@@ -29,6 +30,7 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { memosWithComments, tag } = Astro.props;
+const siteOwner = await getAuthorInfo(SITE_OWNER_SLUG);
 const pageTitle = `Tag: ${tag} | ${TITLE}`;
 const description = `「${tag}」タグが付けられた${memosWithComments.length}件のメモを表示しています。`;
 ---
@@ -62,7 +64,7 @@ const description = `「${tag}」タグが付けられた${memosWithComments.len
         description: description,
         author: {
           "@type": "Person",
-          name: USERNAME,
+          name: siteOwner.name,
         },
       }}
     />

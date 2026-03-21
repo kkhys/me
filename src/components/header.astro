@@ -11,6 +11,10 @@ const PATH_RULES = [
     },
   },
   { match: (p: string) => p.startsWith("/post/"), getTitle: () => "Thread" },
+  {
+    match: (p: string) => p.startsWith("/@"),
+    getTitle: () => "Profile",
+  },
 ] as const;
 
 const getHeaderTitle = (path: string) =>
