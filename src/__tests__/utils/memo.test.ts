@@ -22,8 +22,8 @@ describe("getPublishedMemos", () => {
       const { getPublishedMemos } = await import("#/utils/memo");
       const result = await getPublishedMemos();
 
-      // 4 main memos + 3 published comments = 7
-      expect(result).toHaveLength(7);
+      // 5 main memos + 3 published comments = 8
+      expect(result).toHaveLength(8);
       expect(result.every((memo) => !memo.data.isDraft)).toBe(true);
     });
 
@@ -56,9 +56,9 @@ describe("getPublishedMemos", () => {
       expect(result.length).toBeGreaterThan(0);
       const firstMemo = result[0];
       if (firstMemo) {
-        expect(firstMemo.data.id).toBe("memo-6");
+        expect(firstMemo.data.id).toBe("rss-b1akmxp");
         expect(firstMemo.data.createdAt).toEqual(
-          new Date("2025-12-01T00:00:00Z"),
+          new Date("2026-03-09T00:00:00Z"),
         );
       }
     });
@@ -117,8 +117,8 @@ describe("getPublishedMemos", () => {
       const { getPublishedMemos } = await import("#/utils/memo");
       const result = await getPublishedMemos();
 
-      // 5 main memos (including 1 draft) + 4 comments (including 1 draft) = 9
-      expect(result).toHaveLength(9);
+      // 6 main memos (including 1 draft) + 4 comments (including 1 draft) = 10
+      expect(result).toHaveLength(10);
       expect(result.some((memo) => memo.data.isDraft)).toBe(true);
     });
 
@@ -311,7 +311,7 @@ describe("getMainMemos", () => {
     const { getMainMemos } = await import("#/utils/memo");
     const result = await getMainMemos();
 
-    expect(result).toHaveLength(4);
+    expect(result).toHaveLength(5);
     expect(result.every((memo) => !memo.data.comment)).toBe(true);
   });
 
@@ -322,10 +322,11 @@ describe("getMainMemos", () => {
     const { getMainMemos } = await import("#/utils/memo");
     const result = await getMainMemos();
 
-    expect(result[0]?.data.id).toBe("memo-6");
-    expect(result[1]?.data.id).toBe("memo-4");
-    expect(result[2]?.data.id).toBe("memo-2");
-    expect(result[3]?.data.id).toBe("memo-1");
+    expect(result[0]?.data.id).toBe("rss-b1akmxp");
+    expect(result[1]?.data.id).toBe("memo-6");
+    expect(result[2]?.data.id).toBe("memo-4");
+    expect(result[3]?.data.id).toBe("memo-2");
+    expect(result[4]?.data.id).toBe("memo-1");
   });
 
   test("should not include draft memos in production", async () => {
@@ -413,15 +414,17 @@ describe("getMemosWithComments", () => {
     const { getMemosWithComments } = await import("#/utils/memo");
     const result = await getMemosWithComments();
 
-    expect(result).toHaveLength(4);
-    expect(result[0]?.main.data.id).toBe("memo-6");
+    expect(result).toHaveLength(5);
+    expect(result[0]?.main.data.id).toBe("rss-b1akmxp");
     expect(result[0]?.comments).toHaveLength(0);
-    expect(result[1]?.main.data.id).toBe("memo-4");
+    expect(result[1]?.main.data.id).toBe("memo-6");
     expect(result[1]?.comments).toHaveLength(0);
-    expect(result[2]?.main.data.id).toBe("memo-2");
-    expect(result[2]?.comments).toHaveLength(1);
-    expect(result[3]?.main.data.id).toBe("memo-1");
-    expect(result[3]?.comments).toHaveLength(2);
+    expect(result[2]?.main.data.id).toBe("memo-4");
+    expect(result[2]?.comments).toHaveLength(0);
+    expect(result[3]?.main.data.id).toBe("memo-2");
+    expect(result[3]?.comments).toHaveLength(1);
+    expect(result[4]?.main.data.id).toBe("memo-1");
+    expect(result[4]?.comments).toHaveLength(2);
   });
 
   test("should return comments sorted by createdAt in ascending order", async () => {
@@ -502,5 +505,17 @@ describe("getMemosByAuthor", () => {
     const result = await getMemosByAuthor("unknown");
 
     expect(result).toHaveLength(0);
+  });
+
+  test("should return bot memos for bot author", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosByAuthor } = await import("#/utils/memo");
+    const result = await getMemosByAuthor("blog-feed");
+
+    expect(result).toHaveLength(1);
+    expect(result[0]?.main.data.id).toBe("rss-b1akmxp");
+    expect(result[0]?.main.data.isBot).toBe(true);
   });
 });

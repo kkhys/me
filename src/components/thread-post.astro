@@ -18,7 +18,7 @@ interface Props {
 const { memo, asLink = true, comments = [], hideTag = false } = Astro.props;
 
 const isComment = !!memo.data.comment;
-const { id, author, createdAt, tag, hideLinkCard } = memo.data;
+const { id, author, createdAt, tag, hideLinkCard, isBot } = memo.data;
 const { Content, remarkPluginFrontmatter } = await render(memo);
 
 const images = getImagesForMemo(memo.id);
@@ -50,7 +50,7 @@ const {
         <div class="thread-content-column">
             <div class="thread-post">
                 <div class="post-content">
-                    <PostHeader author={authorName} createdAt={createdAt} authorLink={authorLink} />
+                    <PostHeader author={authorName} createdAt={createdAt} authorLink={authorLink} isBot={isBot} />
                     <div class="post-text">
                         <Content />
                     </div>

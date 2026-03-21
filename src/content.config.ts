@@ -1,16 +1,12 @@
 import { defineCollection } from "astro:content";
-import { file, glob } from "astro/loaders";
+import { file } from "astro/loaders";
 import { z } from "astro/zod";
-
-const memoBasePath =
-  process.env.USE_FIXTURE_DATA === "true"
-    ? "./src/__fixtures__/memo-sample"
-    : "./memo-content/memo";
+import { memoLoader } from "./loaders/memo-loader";
 
 const memo = defineCollection({
-  loader: glob({ pattern: "**/index.md", base: memoBasePath }),
+  loader: memoLoader(),
   schema: z.object({
-    id: z.ulid(),
+    id: z.string().min(1),
     createdAt: z.date(),
     tag: z
       .string()
@@ -21,6 +17,7 @@ const memo = defineCollection({
     isDraft: z.boolean().default(false),
     author: z.string().default("kkhys"),
     hideLinkCard: z.boolean().default(false),
+    isBot: z.boolean().default(false),
   }),
 });
 
@@ -31,6 +28,7 @@ const users = defineCollection({
     name: z.string(),
     bio: z.string().default(""),
     avatar: z.string(),
+    isBot: z.boolean().default(false),
     links: z
       .array(
         z.object({
