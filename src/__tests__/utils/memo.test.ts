@@ -584,6 +584,75 @@ describe("getQuotedMemo", () => {
   });
 });
 
+describe("getMemosWithCommentsAndPinned", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+    vi.doUnmock("#/utils/memo");
+    vi.doUnmock("astro:env/client");
+    vi.doMock("astro:env/client", () => ({
+      NODE_ENV: "production",
+    }));
+  });
+
+  test("should separate pinned and unpinned memos", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosWithCommentsAndPinned } = await import("#/utils/memo");
+    const { pinned, memos } = await getMemosWithCommentsAndPinned();
+
+    expect(pinned).toHaveLength(1);
+    expect(pinned[0]?.main.data.id).toBe("memo-4");
+    expect(memos.every(({ main }) => !main.data.isPinned)).toBe(true);
+  });
+
+  test("should not include pinned memos in unpinned list", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosWithCommentsAndPinned } = await import("#/utils/memo");
+    const { memos } = await getMemosWithCommentsAndPinned();
+
+    const pinnedInUnpinned = memos.find(
+      ({ main }) => main.data.id === "memo-4",
+    );
+    expect(pinnedInUnpinned).toBeUndefined();
+  });
+
+  test("should sort pinned memos by date descending", async () => {
+    const { getCollection } = await import("astro:content");
+    const memosWithMultiplePinned = mockMemos.map((memo) =>
+      memo.data.id === "memo-1"
+        ? { ...memo, data: { ...memo.data, isPinned: true } }
+        : memo,
+    );
+    vi.mocked(getCollection).mockResolvedValue(memosWithMultiplePinned);
+
+    const { getMemosWithCommentsAndPinned } = await import("#/utils/memo");
+    const { pinned } = await getMemosWithCommentsAndPinned();
+
+    expect(pinned).toHaveLength(2);
+    expect(pinned[0]?.main.data.id).toBe("memo-4");
+    expect(pinned[1]?.main.data.id).toBe("memo-1");
+  });
+
+  test("should return empty pinned array when no memos are pinned", async () => {
+    const { getCollection } = await import("astro:content");
+    const memosWithNoPinned = mockMemos.map((memo) => ({
+      ...memo,
+      data: { ...memo.data, isPinned: false },
+    }));
+    vi.mocked(getCollection).mockResolvedValue(memosWithNoPinned);
+
+    const { getMemosWithCommentsAndPinned } = await import("#/utils/memo");
+    const { pinned, memos } = await getMemosWithCommentsAndPinned();
+
+    expect(pinned).toHaveLength(0);
+    expect(memos).toHaveLength(8);
+  });
+});
+
 describe("buildQuoteCountMap", () => {
   test("should count quotes correctly", async () => {
     const { buildQuoteCountMap } = await import("#/utils/memo");
