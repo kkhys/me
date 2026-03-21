@@ -8,6 +8,7 @@ export default defineConfig({
     },
   },
   test: {
+    include: ["src/__tests__/**/*.test.ts"],
     coverage: {
       include: ["src/utils/*.ts", "src/lib/*.ts"],
       exclude: ["src/utils/image.ts"],
