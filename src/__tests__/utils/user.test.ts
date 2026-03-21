@@ -14,6 +14,7 @@ const mockUsers: CollectionEntry<"users">[] = [
       name: "Keisuke Hayashi",
       bio: "",
       avatar: "profile.jpg",
+      isBot: false,
       links: [],
     },
   },
@@ -25,6 +26,19 @@ const mockUsers: CollectionEntry<"users">[] = [
       name: "Test User",
       bio: "Hello",
       avatar: "profile.jpg",
+      isBot: false,
+      links: [],
+    },
+  },
+  {
+    id: "blog-feed",
+    collection: "users",
+    data: {
+      slug: "blog-feed",
+      name: "Blog Feed",
+      bio: "",
+      avatar: "bot.webp",
+      isBot: true,
       links: [],
     },
   },
@@ -44,7 +58,7 @@ describe("getAllUsers", () => {
     const { getAllUsers } = await import("#/utils/user");
     const result = await getAllUsers();
 
-    expect(result).toHaveLength(2);
+    expect(result).toHaveLength(3);
   });
 
   test("should handle empty collection", async () => {
@@ -147,6 +161,26 @@ describe("getAuthorInfo", () => {
   });
 });
 
+describe("getUserBySlug (bot user)", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+    vi.doUnmock("#/utils/user");
+  });
+
+  test("should return bot user by slug", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockUsers);
+
+    const { getUserBySlug } = await import("#/utils/user");
+    const result = await getUserBySlug("blog-feed");
+
+    expect(result).toBeDefined();
+    expect(result?.data.name).toBe("Blog Feed");
+    expect(result?.data.isBot).toBe(true);
+  });
+});
+
 describe("getAvatarImage", () => {
   beforeEach(() => {
     vi.resetModules();
@@ -159,6 +193,16 @@ describe("getAvatarImage", () => {
 
     const { getAvatarImage } = await import("#/utils/user");
     const result = getAvatarImage("profile.jpg");
+
+    expect(result).toBeTruthy();
+  });
+
+  test("should return avatar for bot user", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockUsers);
+
+    const { getAvatarImage } = await import("#/utils/user");
+    const result = getAvatarImage("bot.webp");
 
     expect(result).toBeTruthy();
   });

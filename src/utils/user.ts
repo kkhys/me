@@ -5,7 +5,7 @@ import type { ImageMetadata } from "astro";
 export type User = CollectionEntry<"users">;
 
 const avatarModules = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/*.{jpg,png}",
+  "../assets/*.{jpg,png,webp}",
   { eager: true },
 );
 
