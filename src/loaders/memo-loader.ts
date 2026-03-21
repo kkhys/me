@@ -1,10 +1,14 @@
 import type { Loader } from "astro/loaders";
 import { glob } from "astro/loaders";
+import { ossProjects } from "../data/oss-projects";
 import { generateRssEntryId, parseRssItems } from "./rss-parser";
 
 const RSS_FEED_URL = "https://kkhys.me/rss.xml";
 const RSS_FETCH_TIMEOUT_MS = 10_000;
 const BOT_AUTHOR = "blog-feed";
+const OSS_BOT_AUTHOR = "oss-project";
+
+export const generateOssEntryId = (slug: string): string => `oss-${slug}`;
 
 export function memoLoader(): Loader {
   const basePath =
@@ -86,6 +90,58 @@ export function memoLoader(): Loader {
       } catch (error) {
         logger.warn(
           `Failed to fetch RSS feed: ${error instanceof Error ? error.message : String(error)}`,
+        );
+      }
+
+      // Load OSS project entries
+      try {
+        const freshIds = new Set(
+          ossProjects.map((p) => generateOssEntryId(p.slug)),
+        );
+        for (const [id] of store.entries()) {
+          if (id.startsWith("oss-") && !freshIds.has(id)) {
+            store.delete(id);
+          }
+        }
+
+        let ossLoaded = 0;
+        for (const project of ossProjects) {
+          try {
+            const id = generateOssEntryId(project.slug);
+            const body = `${project.name}\n\n${project.url}`;
+
+            const data = await parseData({
+              id,
+              data: {
+                id,
+                createdAt: new Date(project.createdAt),
+                isDraft: false,
+                author: OSS_BOT_AUTHOR,
+                hideLinkCard: false,
+                isBot: true,
+              },
+            });
+
+            const digest = generateDigest(data);
+            if (store.get(id)?.digest === digest) {
+              ossLoaded++;
+              continue;
+            }
+
+            const rendered = await renderMarkdown(body);
+            store.set({ id, data, body, rendered, digest });
+            ossLoaded++;
+          } catch (error) {
+            logger.warn(
+              `Skipping OSS entry ${project.slug}: ${error instanceof Error ? error.message : String(error)}`,
+            );
+          }
+        }
+
+        logger.info(`Loaded ${ossLoaded} OSS project entries`);
+      } catch (error) {
+        logger.warn(
+          `Failed to load OSS projects: ${error instanceof Error ? error.message : String(error)}`,
         );
       }
     },

@@ -22,8 +22,8 @@ describe("getPublishedMemos", () => {
       const { getPublishedMemos } = await import("#/utils/memo");
       const result = await getPublishedMemos();
 
-      // 5 main memos + 3 published comments = 8
-      expect(result).toHaveLength(8);
+      // 6 main memos + 3 published comments = 9
+      expect(result).toHaveLength(9);
       expect(result.every((memo) => !memo.data.isDraft)).toBe(true);
     });
 
@@ -117,8 +117,8 @@ describe("getPublishedMemos", () => {
       const { getPublishedMemos } = await import("#/utils/memo");
       const result = await getPublishedMemos();
 
-      // 6 main memos (including 1 draft) + 4 comments (including 1 draft) = 10
-      expect(result).toHaveLength(10);
+      // 7 main memos (including 1 draft) + 4 comments (including 1 draft) = 11
+      expect(result).toHaveLength(11);
       expect(result.some((memo) => memo.data.isDraft)).toBe(true);
     });
 
@@ -311,7 +311,7 @@ describe("getMainMemos", () => {
     const { getMainMemos } = await import("#/utils/memo");
     const result = await getMainMemos();
 
-    expect(result).toHaveLength(5);
+    expect(result).toHaveLength(6);
     expect(result.every((memo) => !memo.data.comment)).toBe(true);
   });
 
@@ -326,7 +326,8 @@ describe("getMainMemos", () => {
     expect(result[1]?.data.id).toBe("memo-6");
     expect(result[2]?.data.id).toBe("memo-4");
     expect(result[3]?.data.id).toBe("memo-2");
-    expect(result[4]?.data.id).toBe("memo-1");
+    expect(result[4]?.data.id).toBe("oss-gh-labeler");
+    expect(result[5]?.data.id).toBe("memo-1");
   });
 
   test("should not include draft memos in production", async () => {
@@ -414,7 +415,7 @@ describe("getMemosWithComments", () => {
     const { getMemosWithComments } = await import("#/utils/memo");
     const result = await getMemosWithComments();
 
-    expect(result).toHaveLength(5);
+    expect(result).toHaveLength(6);
     expect(result[0]?.main.data.id).toBe("rss-b1akmxp");
     expect(result[0]?.comments).toHaveLength(0);
     expect(result[1]?.main.data.id).toBe("memo-6");
@@ -423,8 +424,10 @@ describe("getMemosWithComments", () => {
     expect(result[2]?.comments).toHaveLength(0);
     expect(result[3]?.main.data.id).toBe("memo-2");
     expect(result[3]?.comments).toHaveLength(1);
-    expect(result[4]?.main.data.id).toBe("memo-1");
-    expect(result[4]?.comments).toHaveLength(2);
+    expect(result[4]?.main.data.id).toBe("oss-gh-labeler");
+    expect(result[4]?.comments).toHaveLength(0);
+    expect(result[5]?.main.data.id).toBe("memo-1");
+    expect(result[5]?.comments).toHaveLength(2);
   });
 
   test("should return comments sorted by createdAt in ascending order", async () => {
@@ -516,6 +519,18 @@ describe("getMemosByAuthor", () => {
 
     expect(result).toHaveLength(1);
     expect(result[0]?.main.data.id).toBe("rss-b1akmxp");
+    expect(result[0]?.main.data.isBot).toBe(true);
+  });
+
+  test("should return oss-project bot memos", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosByAuthor } = await import("#/utils/memo");
+    const result = await getMemosByAuthor("oss-project");
+
+    expect(result).toHaveLength(1);
+    expect(result[0]?.main.data.id).toBe("oss-gh-labeler");
     expect(result[0]?.main.data.isBot).toBe(true);
   });
 });

@@ -42,6 +42,18 @@ const mockUsers: CollectionEntry<"users">[] = [
       links: [],
     },
   },
+  {
+    id: "oss-project",
+    collection: "users",
+    data: {
+      slug: "oss-project",
+      name: "OSS Project",
+      bio: "",
+      avatar: "oss-bot.webp",
+      isBot: true,
+      links: [],
+    },
+  },
 ];
 
 describe("getAllUsers", () => {
@@ -58,7 +70,7 @@ describe("getAllUsers", () => {
     const { getAllUsers } = await import("#/utils/user");
     const result = await getAllUsers();
 
-    expect(result).toHaveLength(3);
+    expect(result).toHaveLength(4);
   });
 
   test("should handle empty collection", async () => {
@@ -181,6 +193,26 @@ describe("getUserBySlug (bot user)", () => {
   });
 });
 
+describe("getUserBySlug (oss-project bot user)", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+    vi.doUnmock("#/utils/user");
+  });
+
+  test("should return oss-project bot user by slug", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockUsers);
+
+    const { getUserBySlug } = await import("#/utils/user");
+    const result = await getUserBySlug("oss-project");
+
+    expect(result).toBeDefined();
+    expect(result?.data.name).toBe("OSS Project");
+    expect(result?.data.isBot).toBe(true);
+  });
+});
+
 describe("getAvatarImage", () => {
   beforeEach(() => {
     vi.resetModules();
@@ -203,6 +235,16 @@ describe("getAvatarImage", () => {
 
     const { getAvatarImage } = await import("#/utils/user");
     const result = getAvatarImage("bot.webp");
+
+    expect(result).toBeTruthy();
+  });
+
+  test("should return avatar for oss-project bot user", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockUsers);
+
+    const { getAvatarImage } = await import("#/utils/user");
+    const result = getAvatarImage("oss-bot.webp");
 
     expect(result).toBeTruthy();
   });
