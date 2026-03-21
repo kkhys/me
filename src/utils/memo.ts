@@ -82,6 +82,20 @@ export const getMemosWithComments = async () => {
   return attachComments(mainMemos, commentMap);
 };
 
+export const getMemosWithCommentsAndPinned = async () => {
+  const allMemos = await getPublishedMemos();
+  const mainMemos = allMemos.filter(({ data }) => !data.comment);
+  const commentMap = buildCommentMap(allMemos);
+
+  const pinnedMemos = mainMemos.filter(({ data }) => data.isPinned);
+  const unpinnedMemos = mainMemos.filter(({ data }) => !data.isPinned);
+
+  return {
+    pinned: attachComments(pinnedMemos, commentMap),
+    memos: attachComments(unpinnedMemos, commentMap),
+  };
+};
+
 export const getMemosByTag = async (tag: string) => {
   const allMemos = await getPublishedMemos();
   const mainMemos = allMemos.filter(({ data }) => !data.comment);

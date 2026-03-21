@@ -19,6 +19,7 @@ const memo = defineCollection({
     author: z.string().default("kkhys"),
     hideLinkCard: z.boolean().default(false),
     isBot: z.boolean().default(false),
+    isPinned: z.boolean().default(false),
   }),
 });
 
