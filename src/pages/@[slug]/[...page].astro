@@ -1,0 +1,105 @@
+---
+import type { GetStaticPaths } from "astro";
+import Feed from "#/components/feed.astro";
+import InfiniteScroll from "#/components/infinite-scroll.astro";
+import ProfileHeader from "#/components/profile-header.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import JsonLd from "#/components/seo/json-ld.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
+import ThreadPost from "#/components/thread-post.astro";
+import { PAGE_SIZE, TITLE } from "#/config/constants";
+import Layout from "#/layouts/layout.astro";
+import { getMemosByAuthor } from "#/utils/memo";
+import { getAllUsers } from "#/utils/user";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const users = await getAllUsers();
+  const paths = [];
+
+  for (const user of users) {
+    const memosWithComments = await getMemosByAuthor(user.data.slug);
+    const pages = paginate(memosWithComments, {
+      pageSize: PAGE_SIZE,
+      params: { slug: user.data.slug },
+      props: { user, totalPosts: memosWithComments.length },
+    });
+    paths.push(...pages);
+  }
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const { user, totalPosts } = Astro.props;
+const slug = Astro.params.slug;
+const isFirstPage = page.currentPage === 1;
+const pageTitle = `${user.data.name} (@${user.data.slug}) | ${TITLE}`;
+const description = `${user.data.name}さんの${totalPosts}件のメモを表示しています。`;
+const profilePath = `/@${slug}`;
+---
+
+{!isFirstPage && (
+  <script is:inline define:vars={{ profilePath }}>
+    if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
+      window.location.replace(profilePath);
+    }
+  </script>
+)}
+
+<Layout>
+  <Fragment slot="seo">
+    <BaseSEO
+      title={pageTitle}
+      description={description}
+      noindex={!isFirstPage}
+    />
+    <OpenGraph
+      title={pageTitle}
+      description={description}
+      image="/og-image.png"
+      imageAlt={user.data.name}
+      type="profile"
+    />
+    <TwitterCard
+      title={pageTitle}
+      description={description}
+      image="/og-image.png"
+      imageAlt={user.data.name}
+    />
+  </Fragment>
+
+  <Fragment slot="structured-data">
+    <JsonLd
+      type="Person"
+      data={{
+        name: user.data.name,
+        description: description,
+        url: new URL(profilePath, Astro.site).toString(),
+      }}
+    />
+  </Fragment>
+
+  <Feed
+    id="profile-memo-container"
+    data-current-page={page.currentPage}
+    data-total-pages={page.lastPage}
+    data-base-path={profilePath}
+  >
+    {isFirstPage && (
+      <ProfileHeader user={user} postCount={totalPosts} />
+    )}
+    {
+      page.data.map(({ main, comments }) => (
+        <ThreadPost
+          memo={main}
+          comments={comments}
+        />
+      ))
+    }
+  </Feed>
+
+  {page.currentPage < page.lastPage && (
+    <InfiniteScroll containerId="profile-memo-container" />
+  )}
+</Layout>

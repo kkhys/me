@@ -22,8 +22,8 @@ describe("getPublishedMemos", () => {
       const { getPublishedMemos } = await import("#/utils/memo");
       const result = await getPublishedMemos();
 
-      // 3 main memos + 3 published comments = 6
-      expect(result).toHaveLength(6);
+      // 4 main memos + 3 published comments = 7
+      expect(result).toHaveLength(7);
       expect(result.every((memo) => !memo.data.isDraft)).toBe(true);
     });
 
@@ -56,9 +56,9 @@ describe("getPublishedMemos", () => {
       expect(result.length).toBeGreaterThan(0);
       const firstMemo = result[0];
       if (firstMemo) {
-        expect(firstMemo.data.id).toBe("memo-4");
+        expect(firstMemo.data.id).toBe("memo-6");
         expect(firstMemo.data.createdAt).toEqual(
-          new Date("2025-11-24T00:00:00Z"),
+          new Date("2025-12-01T00:00:00Z"),
         );
       }
     });
@@ -117,8 +117,8 @@ describe("getPublishedMemos", () => {
       const { getPublishedMemos } = await import("#/utils/memo");
       const result = await getPublishedMemos();
 
-      // 4 main memos (including 1 draft) + 4 comments (including 1 draft) = 8
-      expect(result).toHaveLength(8);
+      // 5 main memos (including 1 draft) + 4 comments (including 1 draft) = 9
+      expect(result).toHaveLength(9);
       expect(result.some((memo) => memo.data.isDraft)).toBe(true);
     });
 
@@ -176,8 +176,8 @@ describe("getMemosByTag", () => {
     const { getMemosByTag } = await import("#/utils/memo");
     const result = await getMemosByTag("tech");
 
-    expect(result).toHaveLength(1);
-    expect(result[0]?.main.data.tag).toBe("tech");
+    expect(result).toHaveLength(2);
+    expect(result.every(({ main }) => main.data.tag === "tech")).toBe(true);
   });
 
   test("should return empty array when no memos have the specified tag", async () => {
@@ -197,6 +197,7 @@ describe("getMemosByTag", () => {
     const { getMemosByTag } = await import("#/utils/memo");
     const result = await getMemosByTag("tech");
 
+    expect(result).toHaveLength(2);
     expect(result.every(({ main }) => !main.data.isDraft)).toBe(true);
     expect(result.every(({ main }) => main.data.tag === "tech")).toBe(true);
   });
@@ -310,7 +311,7 @@ describe("getMainMemos", () => {
     const { getMainMemos } = await import("#/utils/memo");
     const result = await getMainMemos();
 
-    expect(result).toHaveLength(3);
+    expect(result).toHaveLength(4);
     expect(result.every((memo) => !memo.data.comment)).toBe(true);
   });
 
@@ -321,9 +322,10 @@ describe("getMainMemos", () => {
     const { getMainMemos } = await import("#/utils/memo");
     const result = await getMainMemos();
 
-    expect(result[0]?.data.id).toBe("memo-4");
-    expect(result[1]?.data.id).toBe("memo-2");
-    expect(result[2]?.data.id).toBe("memo-1");
+    expect(result[0]?.data.id).toBe("memo-6");
+    expect(result[1]?.data.id).toBe("memo-4");
+    expect(result[2]?.data.id).toBe("memo-2");
+    expect(result[3]?.data.id).toBe("memo-1");
   });
 
   test("should not include draft memos in production", async () => {
@@ -411,13 +413,15 @@ describe("getMemosWithComments", () => {
     const { getMemosWithComments } = await import("#/utils/memo");
     const result = await getMemosWithComments();
 
-    expect(result).toHaveLength(3);
-    expect(result[0]?.main.data.id).toBe("memo-4");
+    expect(result).toHaveLength(4);
+    expect(result[0]?.main.data.id).toBe("memo-6");
     expect(result[0]?.comments).toHaveLength(0);
-    expect(result[1]?.main.data.id).toBe("memo-2");
-    expect(result[1]?.comments).toHaveLength(1);
-    expect(result[2]?.main.data.id).toBe("memo-1");
-    expect(result[2]?.comments).toHaveLength(2);
+    expect(result[1]?.main.data.id).toBe("memo-4");
+    expect(result[1]?.comments).toHaveLength(0);
+    expect(result[2]?.main.data.id).toBe("memo-2");
+    expect(result[2]?.comments).toHaveLength(1);
+    expect(result[3]?.main.data.id).toBe("memo-1");
+    expect(result[3]?.comments).toHaveLength(2);
   });
 
   test("should return comments sorted by createdAt in ascending order", async () => {
@@ -443,5 +447,60 @@ describe("getMemosWithComments", () => {
     expect(allComments.every((comment) => !comment.memo.data.isDraft)).toBe(
       true,
     );
+  });
+});
+
+describe("getMemosByAuthor", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+    vi.doUnmock("#/utils/memo");
+    vi.doUnmock("astro:env/client");
+    vi.doMock("astro:env/client", () => ({
+      NODE_ENV: "production",
+    }));
+  });
+
+  test("should return memos by the specified author", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosByAuthor } = await import("#/utils/memo");
+    const result = await getMemosByAuthor("kkhys");
+
+    expect(result).toHaveLength(3);
+    expect(result.every(({ main }) => main.data.author === "kkhys")).toBe(true);
+  });
+
+  test("should return memos with comments attached", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosByAuthor } = await import("#/utils/memo");
+    const result = await getMemosByAuthor("kkhys");
+
+    const memo1 = result.find(({ main }) => main.data.id === "memo-1");
+    expect(memo1?.comments).toHaveLength(2);
+  });
+
+  test("should return memos for another author", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosByAuthor } = await import("#/utils/memo");
+    const result = await getMemosByAuthor("testuser");
+
+    expect(result).toHaveLength(1);
+    expect(result[0]?.main.data.id).toBe("memo-6");
+  });
+
+  test("should return empty array for unknown author", async () => {
+    const { getCollection } = await import("astro:content");
+    vi.mocked(getCollection).mockResolvedValue(mockMemos);
+
+    const { getMemosByAuthor } = await import("#/utils/memo");
+    const result = await getMemosByAuthor("unknown");
+
+    expect(result).toHaveLength(0);
   });
 });
