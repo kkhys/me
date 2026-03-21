@@ -9,6 +9,11 @@ const avatarModules = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 
+const coverModules = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/covers/*.{jpg,png,webp}",
+  { eager: true },
+);
+
 const DEFAULT_AVATAR = "profile.jpg";
 
 // Cached slug -> User map (built once per build)
@@ -28,6 +33,18 @@ export const getAvatarImage = (filename: string): ImageMetadata => {
   const module = avatarModules[key];
   if (!module) {
     throw new Error(`Avatar not found: ${filename}`);
+  }
+  return module.default;
+};
+
+export const getCoverImage = (
+  filename: string | undefined,
+): ImageMetadata | undefined => {
+  if (!filename) return undefined;
+  const key = `../assets/covers/${filename}`;
+  const module = coverModules[key];
+  if (!module) {
+    throw new Error(`Cover image not found: ${filename}`);
   }
   return module.default;
 };

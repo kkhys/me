@@ -260,3 +260,32 @@ describe("getAvatarImage", () => {
     );
   });
 });
+
+describe("getCoverImage", () => {
+  beforeEach(() => {
+    vi.resetModules();
+    vi.doUnmock("#/utils/user");
+  });
+
+  test("should return undefined when filename is undefined", async () => {
+    const { getCoverImage } = await import("#/utils/user");
+    const result = getCoverImage(undefined);
+
+    expect(result).toBeUndefined();
+  });
+
+  test("should return cover image for existing file", async () => {
+    const { getCoverImage } = await import("#/utils/user");
+    const result = getCoverImage("kkhys-cover.jpg");
+
+    expect(result).toBeTruthy();
+  });
+
+  test("should throw for missing cover file", async () => {
+    const { getCoverImage } = await import("#/utils/user");
+
+    expect(() => getCoverImage("nonexistent.jpg")).toThrow(
+      "Cover image not found: nonexistent.jpg",
+    );
+  });
+});

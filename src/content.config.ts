@@ -30,6 +30,7 @@ const users = defineCollection({
     name: z.string(),
     bio: z.string().default(""),
     avatar: z.string(),
+    cover: z.string().optional(),
     isBot: z.boolean().default(false),
     links: z
       .array(
