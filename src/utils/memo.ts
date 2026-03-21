@@ -137,5 +137,12 @@ export const getMemosByAuthor = async (authorSlug: string) => {
     ({ data }) => data.author === authorSlug,
   );
   const commentMap = buildCommentMap(allMemos);
-  return attachComments(authorMainMemos, commentMap);
+
+  const pinnedMemos = authorMainMemos.filter(({ data }) => data.isPinned);
+  const unpinnedMemos = authorMainMemos.filter(({ data }) => !data.isPinned);
+
+  return {
+    pinned: attachComments(pinnedMemos, commentMap),
+    memos: attachComments(unpinnedMemos, commentMap),
+  };
 };

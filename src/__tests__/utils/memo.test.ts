@@ -478,10 +478,12 @@ describe("getMemosByAuthor", () => {
     vi.mocked(getCollection).mockResolvedValue(mockMemos);
 
     const { getMemosByAuthor } = await import("#/utils/memo");
-    const result = await getMemosByAuthor("kkhys");
+    const { pinned, memos } = await getMemosByAuthor("kkhys");
 
-    expect(result).toHaveLength(5);
-    expect(result.every(({ main }) => main.data.author === "kkhys")).toBe(true);
+    expect(pinned).toHaveLength(1);
+    expect(memos).toHaveLength(4);
+    expect(pinned.every(({ main }) => main.data.author === "kkhys")).toBe(true);
+    expect(memos.every(({ main }) => main.data.author === "kkhys")).toBe(true);
   });
 
   test("should return memos with comments attached", async () => {
@@ -489,9 +491,9 @@ describe("getMemosByAuthor", () => {
     vi.mocked(getCollection).mockResolvedValue(mockMemos);
 
     const { getMemosByAuthor } = await import("#/utils/memo");
-    const result = await getMemosByAuthor("kkhys");
+    const { memos } = await getMemosByAuthor("kkhys");
 
-    const memo1 = result.find(({ main }) => main.data.id === "memo-1");
+    const memo1 = memos.find(({ main }) => main.data.id === "memo-1");
     expect(memo1?.comments).toHaveLength(2);
   });
 
@@ -500,20 +502,22 @@ describe("getMemosByAuthor", () => {
     vi.mocked(getCollection).mockResolvedValue(mockMemos);
 
     const { getMemosByAuthor } = await import("#/utils/memo");
-    const result = await getMemosByAuthor("testuser");
+    const { pinned, memos } = await getMemosByAuthor("testuser");
 
-    expect(result).toHaveLength(1);
-    expect(result[0]?.main.data.id).toBe("memo-6");
+    expect(pinned).toHaveLength(0);
+    expect(memos).toHaveLength(1);
+    expect(memos[0]?.main.data.id).toBe("memo-6");
   });
 
-  test("should return empty array for unknown author", async () => {
+  test("should return empty result for unknown author", async () => {
     const { getCollection } = await import("astro:content");
     vi.mocked(getCollection).mockResolvedValue(mockMemos);
 
     const { getMemosByAuthor } = await import("#/utils/memo");
-    const result = await getMemosByAuthor("unknown");
+    const { pinned, memos } = await getMemosByAuthor("unknown");
 
-    expect(result).toHaveLength(0);
+    expect(pinned).toHaveLength(0);
+    expect(memos).toHaveLength(0);
   });
 
   test("should return bot memos for bot author", async () => {
@@ -521,11 +525,12 @@ describe("getMemosByAuthor", () => {
     vi.mocked(getCollection).mockResolvedValue(mockMemos);
 
     const { getMemosByAuthor } = await import("#/utils/memo");
-    const result = await getMemosByAuthor("blog-feed");
+    const { pinned, memos } = await getMemosByAuthor("blog-feed");
 
-    expect(result).toHaveLength(1);
-    expect(result[0]?.main.data.id).toBe("rss-b1akmxp");
-    expect(result[0]?.main.data.isBot).toBe(true);
+    expect(pinned).toHaveLength(0);
+    expect(memos).toHaveLength(1);
+    expect(memos[0]?.main.data.id).toBe("rss-b1akmxp");
+    expect(memos[0]?.main.data.isBot).toBe(true);
   });
 
   test("should return oss-project bot memos", async () => {
@@ -533,11 +538,12 @@ describe("getMemosByAuthor", () => {
     vi.mocked(getCollection).mockResolvedValue(mockMemos);
 
     const { getMemosByAuthor } = await import("#/utils/memo");
-    const result = await getMemosByAuthor("oss-project");
+    const { pinned, memos } = await getMemosByAuthor("oss-project");
 
-    expect(result).toHaveLength(1);
-    expect(result[0]?.main.data.id).toBe("oss-gh-labeler");
-    expect(result[0]?.main.data.isBot).toBe(true);
+    expect(pinned).toHaveLength(0);
+    expect(memos).toHaveLength(1);
+    expect(memos[0]?.main.data.id).toBe("oss-gh-labeler");
+    expect(memos[0]?.main.data.isBot).toBe(true);
   });
 });
 
