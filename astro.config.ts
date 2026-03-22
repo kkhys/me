@@ -8,6 +8,9 @@ import remarkWordLimit from "./src/lib/remark-word-limit";
 
 export default defineConfig({
   site: "https://memo.kkhys.me",
+  build: {
+    format: "file",
+  },
   integrations: [
     sitemap(),
     (await import("@playform/compress")).default({
