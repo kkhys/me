@@ -1,0 +1,268 @@
+---
+import { getImage, Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+import Budoux from "#/components/budoux.astro";
+import MemoIcon from "#/components/icons/memo.svg";
+import { extractMemoId, getMemoPost } from "#/lib/api/memo";
+import { convertDateToString } from "#/utils/date";
+
+interface Props extends HTMLAttributes<"a"> {
+  href: string;
+}
+
+const props = Astro.props;
+
+const memoId = extractMemoId(props.href);
+const memo = memoId ? await getMemoPost(memoId) : null;
+const hasImages = memo && memo.images.length > 0;
+
+const blurryImages = hasImages
+  ? await Promise.all(
+      memo.images.map((img) =>
+        getImage({
+          src: img.src,
+          width: 20,
+          height: Math.round((20 * img.height) / img.width),
+          format: "webp",
+        }),
+      ),
+    )
+  : [];
+---
+
+{
+  memo ? (
+    <div class="memo-container">
+      <div class="memo-card">
+        <a
+          class="memo-card-link"
+          href={props.href}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {/* Header */}
+          <div class="memo-header">
+            <div class="memo-user">
+              <Image
+                src={memo.author.avatar}
+                width={96}
+                height={96}
+                format="avif"
+                alt={memo.author.name}
+                class="memo-avatar"
+              />
+              <div class="memo-user-info">
+                <span class="memo-name">{memo.author.name}</span>
+                <span class="memo-handle">@{memo.author.username}</span>
+              </div>
+            </div>
+            <MemoIcon class="memo-icon" />
+          </div>
+
+          {/* Body */}
+          <div class="memo-body">
+            <span class="memo-text">
+              <Budoux>{memo.body}</Budoux>
+            </span>
+          </div>
+
+          {/* Tag */}
+          {memo.tag && (
+            <div class="memo-tag">
+              <span>#{memo.tag}</span>
+            </div>
+          )}
+
+          {/* Media */}
+          {hasImages && (
+            <div class="memo-media">
+              <div
+                class:list={[
+                  "memo-images",
+                  { "memo-images-single": memo.images.length === 1 },
+                ]}
+              >
+                {memo.images.map((img, i) => (
+                  <div
+                    class="memo-blur-load"
+                    style={`background-image: url(${blurryImages[i]?.src})`}
+                    data-blur-load
+                  >
+                    <Image
+                      src={img.src}
+                      width={img.width}
+                      height={img.height}
+                      format="avif"
+                      alt={`Image ${i + 1}`}
+                      class="memo-img"
+                      onload="this.closest('[data-blur-load]')?.classList.add('image-loaded')"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Footer */}
+          <div class="memo-footer">
+            <time datetime={memo.createdAt}>
+              {convertDateToString(new Date(memo.createdAt))}
+            </time>
+          </div>
+        </a>
+      </div>
+    </div>
+  ) : (
+    <a href={props.href} target="_blank" rel="noreferrer">
+      {props.href}
+    </a>
+  )
+}
+
+<style>
+  .memo-container {
+    display: grid;
+    place-items: center;
+  }
+
+  .memo-card {
+    position: relative;
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    max-width: 32rem;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--c-border);
+    transition: transform 0.15s ease;
+  }
+
+  .memo-card:active {
+    transform: scale(0.99);
+  }
+
+  .memo-card-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .memo-card-link:hover {
+    background-color: oklch(from var(--c-surface) l c h / 50%);
+  }
+
+  .memo-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .memo-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .memo-avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    border-radius: var(--radius-full);
+    border: 1px solid transparent;
+  }
+
+  .memo-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+
+  .memo-user-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .memo-name {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    white-space: nowrap;
+  }
+
+  .memo-handle {
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+    white-space: nowrap;
+  }
+
+  .memo-body {
+    overflow-wrap: break-word;
+    line-height: 1.5;
+    letter-spacing: -0.025em;
+  }
+
+  .memo-text {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-normal);
+  }
+
+  .memo-media {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .memo-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 0.25rem;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .memo-images-single {
+    grid-template-columns: 1fr;
+  }
+
+  .memo-blur-load {
+    background-size: cover;
+    background-position: center;
+    filter: blur(36px);
+    transition: filter 250ms ease-in-out;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    box-shadow: 0 0 0 1px var(--c-border);
+    line-height: 0;
+  }
+
+  .memo-blur-load.image-loaded {
+    background-image: none !important;
+    filter: none;
+  }
+
+  .memo-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .memo-tag {
+    font-size: var(--fs-sm);
+    color: var(--c-link);
+  }
+
+  .memo-footer {
+    margin-top: 0.125rem;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+</style>
