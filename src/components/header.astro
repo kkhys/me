@@ -6,7 +6,10 @@ const PATH_RULES = [
   {
     match: (p: string) => p.startsWith("/tag/"),
     getTitle: (p: string) => {
-      const tagName = p.replace("/tag/", "").replace(/\/$/, "");
+      const tagName = p
+        .replace("/tag/", "")
+        .replace(/\/$/, "")
+        .replace(/\.html$/, "");
       return tagName ? `#${tagName}` : "Tag";
     },
   },
