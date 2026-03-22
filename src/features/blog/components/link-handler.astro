@@ -2,6 +2,8 @@
 import type { HTMLAttributes } from "astro/types";
 import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
 import LinkCard from "#/features/blog/components/ui/blocks/link-card.astro";
+import MemoCard from "#/features/blog/components/ui/blocks/memo-card.astro";
+import { extractMemoId } from "#/lib/api/memo";
 
 interface Props extends HTMLAttributes<"a"> {
   href: string;
@@ -9,10 +11,14 @@ interface Props extends HTMLAttributes<"a"> {
 }
 
 const { href, ...rest } = Astro.props;
+const isLinkCard = Object.hasOwn(rest, "data-link-card");
+const isMemoLink = isLinkCard && !!extractMemoId(href);
 ---
 
 {
-  Object.hasOwn(rest, "data-link-card") ? (
+  isMemoLink ? (
+    <MemoCard href={href} {...rest} />
+  ) : isLinkCard ? (
     <LinkCard href={href} {...rest} />
   ) : (
     href.startsWith('http') ? (
