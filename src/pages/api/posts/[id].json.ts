@@ -21,7 +21,10 @@ export const getStaticPaths = (async () => {
 
 export const GET: APIRoute = ({ props }) => {
   const { memo, authorName, avatar, images } = props as {
-    memo: { data: { id: string; createdAt: Date; tag?: string }; body: string };
+    memo: {
+      data: { id: string; createdAt: Date; tag?: string; author: string };
+      body: string;
+    };
     authorName: string;
     avatar: ImageMetadata;
     images: ImageMetadata[];
@@ -33,6 +36,7 @@ export const GET: APIRoute = ({ props }) => {
       createdAt: memo.data.createdAt.toISOString(),
       author: {
         name: authorName,
+        username: memo.data.author,
         avatar: new URL(avatar.src, "https://memo.kkhys.me").href,
       },
       tag: memo.data.tag ?? null,
