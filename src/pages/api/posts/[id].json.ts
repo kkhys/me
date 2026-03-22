@@ -7,20 +7,23 @@ export const getStaticPaths = (async () => {
   const memos = await getPublishedMemos();
   return Promise.all(
     memos.map(async (memo) => {
-      const { name: authorName } = await getAuthorInfo(memo.data.author);
+      const { name: authorName, avatar } = await getAuthorInfo(
+        memo.data.author,
+      );
       const images = getImagesForMemo(memo.id);
       return {
         params: { id: memo.data.id },
-        props: { memo, authorName, images },
+        props: { memo, authorName, avatar, images },
       };
     }),
   );
 }) satisfies GetStaticPaths;
 
 export const GET: APIRoute = ({ props }) => {
-  const { memo, authorName, images } = props as {
+  const { memo, authorName, avatar, images } = props as {
     memo: { data: { id: string; createdAt: Date; tag?: string }; body: string };
     authorName: string;
+    avatar: ImageMetadata;
     images: ImageMetadata[];
   };
   return new Response(
@@ -28,7 +31,10 @@ export const GET: APIRoute = ({ props }) => {
       id: memo.data.id,
       body: memo.body,
       createdAt: memo.data.createdAt.toISOString(),
-      author: authorName,
+      author: {
+        name: authorName,
+        avatar: new URL(avatar.src, "https://memo.kkhys.me").href,
+      },
       tag: memo.data.tag ?? null,
       images: images.map((img) => ({
         src: new URL(img.src, "https://memo.kkhys.me").href,
