@@ -5,8 +5,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "pnpm lint:fix > /dev/null 2>&1; OUTPUT=$(pnpm lint 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\"; exit 1; fi",
+            "command": "pnpm run lint:fix > /dev/null 2>&1; OUTPUT=$(pnpm run lint 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\" >&2; exit 1; fi",
             "statusMessage": "Running Biome lint & format..."
+          },
+          {
+            "type": "command",
+            "command": "OUTPUT=$(pnpm run check 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\" >&2; exit 1; fi",
+            "statusMessage": "Running type check..."
+          },
+          {
+            "type": "command",
+            "command": "OUTPUT=$(pnpm run coverage 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\" >&2; exit 1; fi; CLEAN=$(echo \"$OUTPUT\" | perl -pe 's/\\e\\[\\d+(?:;\\d+)*m//g'); if echo \"$CLEAN\" | awk -F'|' '/\\|/ && !/^-/ && !/File/ && !/All files/ { gsub(/[[:space:]]/,\"\",$2); gsub(/[[:space:]]/,\"\",$4); gsub(/[[:space:]]/,\"\",$5); if(($2!=\"\" && $2+0!=100) || ($4!=\"\" && $4+0!=100) || ($5!=\"\" && $5+0!=100)) { found=1 } } END { exit !found }'; then echo \"Coverage is not 100%. Fix the uncovered lines:\" >&2; echo \"$CLEAN\" | grep '|' >&2; exit 1; fi",
+            "statusMessage": "Checking test coverage is 100%..."
           }
         ]
       }

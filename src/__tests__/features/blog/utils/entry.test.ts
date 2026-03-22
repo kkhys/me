@@ -93,6 +93,8 @@ describe("getRelatedPosts", () => {
     // Run multiple times to account for randomness within same score
     const tagScores = new Map<string, number>();
 
+    const tracked = ["a", "c", "d", "g"];
+
     for (let i = 0; i < 50; i++) {
       const results = await getRelatedPosts({
         id: "current",
@@ -103,6 +105,14 @@ describe("getRelatedPosts", () => {
       for (const [rank, result] of results.entries()) {
         const prev = tagScores.get(result.id) ?? 0;
         tagScores.set(result.id, prev + rank);
+      }
+
+      // Penalize posts not in results with worst rank
+      for (const id of tracked) {
+        if (!results.some((r) => r.id === id)) {
+          const prev = tagScores.get(id) ?? 0;
+          tagScores.set(id, prev + results.length);
+        }
       }
     }
 

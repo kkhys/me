@@ -11,6 +11,7 @@ export default defineConfig({
     "import.meta.env.SITE": JSON.stringify("https://example.com"),
   },
   test: {
+    exclude: ["node_modules", ".direnv"],
     coverage: {
       include: ["src/utils/*.ts", "src/lib/*.ts", "src/lib/api/*.ts"],
       exclude: [
