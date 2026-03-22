@@ -65,7 +65,8 @@ const coverImage = getCoverImage(cover);
 
 <style>
   .profile-header {
-    padding: 0 0 1rem;
+    margin-inline: -1rem;
+    padding-bottom: 1rem;
   }
 
   .cover-image {
@@ -85,15 +86,8 @@ const coverImage = getCoverImage(cover);
     background: var(--c-surface);
   }
 
-  @media (max-width: 42rem) {
-    .cover-image,
-    .cover-placeholder {
-      margin-inline: -1rem;
-    }
-  }
-
   .profile-body {
-    padding: 0 1rem;
+    padding-inline: 1rem;
   }
 
   .avatar-row {
