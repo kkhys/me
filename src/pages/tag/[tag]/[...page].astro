@@ -1,0 +1,123 @@
+---
+import type { GetStaticPaths } from "astro";
+import Feed from "#/components/feed.astro";
+import InfiniteScroll from "#/components/infinite-scroll.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import JsonLd from "#/components/seo/json-ld.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
+import ThreadPost from "#/components/thread-post.astro";
+import { PAGE_SIZE, SITE_OWNER_SLUG, TITLE } from "#/config/constants";
+import Layout from "#/layouts/layout.astro";
+import { getAllTags, getMemosByTag } from "#/utils/memo";
+import { getAuthorInfo } from "#/utils/user";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const tags = await getAllTags();
+  const paths = [];
+
+  for (const tag of tags) {
+    const memosWithComments = await getMemosByTag(tag);
+    const totalPosts = memosWithComments.length;
+    const pages = paginate(memosWithComments, {
+      pageSize: PAGE_SIZE,
+      params: { tag },
+      props: { tag, totalPosts },
+    });
+    paths.push(...pages);
+  }
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const { tag, totalPosts } = Astro.props;
+const isFirstPage = page.currentPage === 1;
+const siteOwner = await getAuthorInfo(SITE_OWNER_SLUG);
+const pageTitle = `Tag: ${tag} | ${TITLE}`;
+const description = `「${tag}」タグが付けられた${totalPosts}件のメモを表示しています。`;
+const tagPath = `/tag/${tag}`;
+---
+
+{!isFirstPage && (
+  <script is:inline define:vars={{ tagPath }}>
+    if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
+      window.location.replace(tagPath);
+    }
+  </script>
+)}
+
+<Layout>
+  <Fragment slot="seo">
+    <BaseSEO
+      title={pageTitle}
+      description={description}
+      noindex={!isFirstPage}
+    />
+    <OpenGraph
+      title={pageTitle}
+      description={description}
+      image="/og-image.png"
+      imageAlt="test"
+      type="website"
+    />
+    <TwitterCard
+      title={pageTitle}
+      description={description}
+      image="/og-image.png"
+      imageAlt="test"
+    />
+  </Fragment>
+
+  <Fragment slot="structured-data">
+    <JsonLd
+      type="WebSite"
+      data={{
+        name: pageTitle,
+        description: description,
+        author: {
+          "@type": "Person",
+          name: siteOwner.name,
+        },
+      }}
+    />
+  </Fragment>
+
+  <Feed
+    id="tag-memo-container"
+    data-current-page={page.currentPage}
+    data-total-pages={page.lastPage}
+    data-base-path={tagPath}
+  >
+    {isFirstPage && (
+      <div class="tag-header">
+        <p>{totalPosts} {totalPosts === 1 ? "post" : "posts"}</p>
+      </div>
+    )}
+    {
+      page.data.map(({ main, comments }) => (
+        <ThreadPost
+          memo={main}
+          comments={comments}
+          hideTag={true}
+        />
+      ))
+    }
+  </Feed>
+
+  {page.currentPage < page.lastPage && (
+    <InfiniteScroll containerId="tag-memo-container" />
+  )}
+</Layout>
+
+<style>
+    .tag-header {
+        margin: 1rem 0;
+    }
+
+    .tag-header p {
+        margin: 0;
+        color: var(--c-sub-text);
+        font-size: var(--fs-xs);
+    }
+</style>
