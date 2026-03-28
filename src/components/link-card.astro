@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 import { getMetadata } from "#/lib/metadata";
 
@@ -10,6 +10,20 @@ interface Props extends HTMLAttributes<"a"> {
 const { href, ...props } = Astro.props;
 
 const { title, image } = await getMetadata(href);
+
+let blurSrc: string | undefined;
+if (image) {
+  try {
+    const blurry = await getImage({
+      src: image.src,
+      width: 20,
+      format: "webp",
+    });
+    blurSrc = blurry.src;
+  } catch {
+    // Fall back to no blur if thumbnail generation fails
+  }
+}
 ---
 
 <div class="link-card-container">
@@ -20,13 +34,14 @@ const { title, image } = await getMetadata(href);
       {...props}
   >
     {image && (
-      <div class="link-card-image-wrapper">
+      <div class="link-card-image-wrapper" data-blur-load>
         <Image
             src={image.src}
             alt={`Cover image of ${title}`}
             width={800}
             height={420}
             format="avif"
+            onload="this.closest('[data-blur-load]')?.classList.add('image-loaded')"
         />
       </div>
     )}
@@ -41,7 +56,7 @@ const { title, image } = await getMetadata(href);
   </a>
 </div>
 
-<style>
+<style define:vars={{ 'blur-bg': blurSrc ? `url(${blurSrc})` : 'none' }}>
   .link-card-container {
     user-select: none;
     overflow: hidden;
@@ -56,7 +71,20 @@ const { title, image } = await getMetadata(href);
   }
 
   .link-card-image-wrapper {
-    background-color: var(--c-gray);
+    background: var(--blur-bg) center / cover no-repeat var(--c-gray);
+    filter: blur(36px);
+    transition: filter 250ms ease-in-out;
+  }
+
+  .link-card-image-wrapper.image-loaded {
+    background: none;
+    filter: none;
+  }
+
+  .link-card-image-wrapper :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   .link-card-content {
