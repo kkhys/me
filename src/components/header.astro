@@ -24,21 +24,49 @@ const getHeaderTitle = (path: string) =>
   PATH_RULES.find((r) => r.match(path))?.getTitle(path) ?? "Memo";
 
 const headerTitle = getHeaderTitle(currentPath);
+const showBackButton = currentPath !== "/";
 ---
 
 <header>
+    {showBackButton && (
+        <a href="/" class="back-button" aria-label="Back to home">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5" />
+                <path d="m12 19-7-7 7-7" />
+            </svg>
+        </a>
+    )}
     <div class="header-title">{headerTitle}</div>
 </header>
 
 <style>
     header {
+        position: relative;
         display: grid;
         grid-row: top / main-start;
         justify-items: center;
+        align-items: center;
         width: 100%;
         padding-block: 1rem;
     }
-    
+
+    .back-button {
+        position: absolute;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        color: var(--c-text);
+        transition: background-color 0.15s;
+    }
+
+    .back-button:hover {
+        background-color: var(--c-gray);
+    }
+
     .header-title {
         font-size: var(--fs-xs);
         font-weight: var(--fw-semibold);
