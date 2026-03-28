@@ -1,8 +1,12 @@
 ---
 const currentPath = Astro.url.pathname;
+const isHomePage = currentPath === "/" || currentPath === "/index.html";
 
 const PATH_RULES = [
-  { match: (p: string) => p === "/", getTitle: () => "Memo" },
+  {
+    match: (p: string) => p === "/" || p === "/index.html",
+    getTitle: () => "Memo",
+  },
   {
     match: (p: string) => p.startsWith("/tag/"),
     getTitle: (p: string) => {
@@ -24,7 +28,7 @@ const getHeaderTitle = (path: string) =>
   PATH_RULES.find((r) => r.match(path))?.getTitle(path) ?? "Memo";
 
 const headerTitle = getHeaderTitle(currentPath);
-const showBackButton = currentPath !== "/";
+const showBackButton = !isHomePage;
 ---
 
 <header>
