@@ -73,7 +73,7 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
       <div class="image-container">
         <div
           class="blur-load"
-          style={`background-image: url(${blurryImage.src}); background-size: cover; background-position: center;`}
+          style={`background: url(${blurryImage.src}) center / cover no-repeat;`}
         >
           <Picture
             src={`/${id}-1200.png`}
@@ -84,6 +84,7 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
             densities={[1, 2]}
             loading="eager"
             class="detail-image"
+            onload="this.closest('.blur-load')?.classList.add('image-loaded')"
           />
         </div>
       </div>
@@ -136,7 +137,7 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
 
   .image-container {
     width: 100%;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     overflow: hidden;
     background-color: var(--c-bg-light-gray);
   }
@@ -144,23 +145,13 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
   .blur-load {
     width: 100%;
     position: relative;
-    overflow: hidden;
     filter: blur(36px);
-    transition: filter 300ms ease-in-out;
+    transition: filter 250ms ease-in-out;
   }
 
   .blur-load.image-loaded {
-    background-image: none;
+    background: none;
     filter: blur(0);
-  }
-
-  .blur-load > picture > img {
-    opacity: 0;
-    transition: opacity 300ms ease-in-out;
-  }
-
-  .blur-load.image-loaded > picture > img {
-    opacity: 1;
   }
 
   .detail-image {
@@ -269,7 +260,7 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
     }
 
     .image-container {
-      border-radius: 0.375rem;
+      border-radius: 0.75rem;
     }
 
     .info-bar {
@@ -301,7 +292,7 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
     }
 
     .image-container {
-      border-radius: 0.25rem;
+      border-radius: 0.5rem;
     }
 
     .actions {
@@ -331,19 +322,6 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const blurDivs = document.querySelectorAll(".blur-load");
-
-    blurDivs.forEach((div) => {
-      const image = div.querySelector("img");
-      const handleLoadedImage = () => div.classList.add("image-loaded");
-
-      if (image?.complete) {
-        handleLoadedImage();
-      } else {
-        image?.addEventListener("load", handleLoadedImage);
-      }
-    });
-
     const copyButtons = document.querySelectorAll(".copy-format-button");
 
     copyButtons.forEach((button) => {
