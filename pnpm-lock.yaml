@@ -12,8 +12,8 @@ importers:
         specifier: 0.1.10
         version: 0.1.10(@emnapi/core@1.9.1)(@emnapi/runtime@1.7.1)
       astro:
-        specifier: 6.1.10
-        version: 6.1.10(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.53.3)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.2)
+        specifier: 6.2.1
+        version: 6.2.1(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.53.3)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.2)
       kiso.css:
         specifier: 1.2.4
         version: 1.2.4
@@ -154,8 +154,8 @@ packages:
   '@astrojs/compiler@2.13.1':
     resolution: {integrity: sha512-f3FN83d2G/v32ipNClRKgYv30onQlMZX1vCeZMjPsMMPl1mDpmbl0+N5BYo4S/ofzqJyS5hvwacEo0CCVDn/Qg==}
 
-  '@astrojs/compiler@3.0.1':
-    resolution: {integrity: sha512-z97oYbdebO5aoWzuJ/8q5hLK232+17KcLZ7cJ8BCWk6+qNzVxn/gftC0KzMBUTD8WAaBkPpNSQK6PXLnNrZ0CA==}
+  '@astrojs/compiler@4.0.0':
+    resolution: {integrity: sha512-eouss7G8ygdZqHuke033VMcVw5HTZUu+PXd/h06DGDUg/jt5btPYPqh66ENWw/mU78rBrf/oeC4oqoBwMtDMNA==}
 
   '@astrojs/internal-helpers@0.9.0':
     resolution: {integrity: sha512-GdYkzR26re8izmyYlBqf4z2s7zNngmWLFuxw0UKiPNqHraZGS6GKWIwSHgS22RDlu2ePFJ8bzmpBcUszut/SDg==}
@@ -1063,8 +1063,8 @@ packages:
   ast-v8-to-istanbul@1.0.0:
     resolution: {integrity: sha512-1fSfIwuDICFA4LKkCzRPO7F0hzFf0B7+Xqrl27ynQaa+Rh0e1Es0v6kWHPott3lU10AyAr7oKHa65OppjLn3Rg==}
 
-  astro@6.1.10:
-    resolution: {integrity: sha512-jQAIki6c862oxRr7OXXC+h3n4wg1EpmKgCH3vv1FtXM9VFmD2iTjlaxrfb0I6eQCwtUjSBxfJBFBDSXHu7Wing==}
+  astro@6.2.1:
+    resolution: {integrity: sha512-3g1sYNly+QAkuO5ErNEQBYvsxorNDSCUNIeStBs+kcXGchvKQl1Q9EuDNOvSg010XLlHJFLVFZs9LV18Jjp4Hg==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -2690,7 +2690,7 @@ snapshots:
 
   '@astrojs/compiler@2.13.1': {}
 
-  '@astrojs/compiler@3.0.1': {}
+  '@astrojs/compiler@4.0.0': {}
 
   '@astrojs/internal-helpers@0.9.0':
     dependencies:
@@ -3123,7 +3123,7 @@ snapshots:
       '@playform/pipe': 0.1.5
       '@types/csso': 5.0.4
       '@types/html-minifier-terser': 7.0.2
-      astro: 6.1.10(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.53.3)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.2)
+      astro: 6.2.1(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.53.3)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.2)
       commander: 14.0.3
       csso: 5.0.5
       deepmerge-ts: 7.1.5
@@ -3519,9 +3519,9 @@ snapshots:
       estree-walker: 3.0.3
       js-tokens: 10.0.0
 
-  astro@6.1.10(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.53.3)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.2):
+  astro@6.2.1(@types/node@25.0.3)(lightningcss@1.32.0)(rollup@4.53.3)(terser@5.46.1)(typescript@6.0.3)(yaml@2.8.2):
     dependencies:
-      '@astrojs/compiler': 3.0.1
+      '@astrojs/compiler': 4.0.0
       '@astrojs/internal-helpers': 0.9.0
       '@astrojs/markdown-remark': 7.1.1
       '@astrojs/telemetry': 3.3.1
