@@ -8,7 +8,6 @@ vi.mock("astro:content", () => ({
       id: "01kcy2c0k82cmr4sy2ehadrfgk",
       collection: "lgtm",
       data: {
-        color: "white",
         image: "01.jpg",
         isDraft: false,
       },

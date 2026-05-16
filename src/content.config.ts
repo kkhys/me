@@ -10,7 +10,6 @@ const lgtmBasePath = GITHUB_ACTIONS
 const lgtm = defineCollection({
   loader: glob({ pattern: "**/index.md", base: lgtmBasePath }),
   schema: z.object({
-    color: z.enum(["white", "black"]),
     image: z.string(),
     isDraft: z.boolean().default(false),
   }),
