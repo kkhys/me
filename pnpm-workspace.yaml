@@ -3,6 +3,7 @@ minimumReleaseAge: 4320
 packages:
   - memo-content
 
-ignoredBuiltDependencies:
-  - esbuild
-  - sharp
+allowBuilds:
+  esbuild: false
+  sharp: false
+  workerd: true
