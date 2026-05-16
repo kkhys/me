@@ -27,6 +27,7 @@
               pkgs.nodejs_24
               pkgs.pnpm
               pkgs.bun
+              pkgs.ffmpeg
             ];
 
             shellHook = ''
