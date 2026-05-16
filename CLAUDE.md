@@ -29,7 +29,7 @@ src/
   __fixtures__/lgtm-sample/       # CI test fixtures (used when GITHUB_ACTIONS=true)
 lgtm-content/                     # Git submodule (private) - source images & metadata
   lgtm/{ulid}/
-    index.md                      # Frontmatter: color (white|black), image, isDraft
+    index.md                      # Frontmatter: image, isDraft
     {image}.jpg
 scripts/release.ts                # Date-based release versioning (YYYY.MM.DD[-N])
 ```

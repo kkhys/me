@@ -14,15 +14,11 @@ type ImageFormat = "png" | "avif" | "webp";
 // promise is awaited per call but the underlying readFile happens once.
 const fontPromise = readFile("./src/assets/BBHBartle-Regular.ttf");
 
-const buildTextOverlay = async (
-  entry: CollectionEntry<"lgtm">,
-  imageWidth: number,
-  imageHeight: number,
-) => {
+const buildTextOverlay = async (imageWidth: number, imageHeight: number) => {
   const BBHBartleRegular = await fontPromise;
 
-  const textColor = entry.data.color === "white" ? "#FEFEFE" : "#252426";
-  const strokeColor = entry.data.color === "white" ? "#252426" : "#FEFEFE";
+  const textColor = "#FEFEFE";
+  const strokeColor = "#252426";
 
   const scale = 2;
   const renderWidth = imageWidth * scale;
@@ -121,7 +117,6 @@ export const LgtmImage = async (
     const bytesPerPage = pageWidth * pageHeight * channels;
 
     const textOverlayWithOpacity = await buildTextOverlay(
-      entry,
       pageWidth,
       pageHeight,
     );
@@ -154,7 +149,6 @@ export const LgtmImage = async (
   const imageHeight = metadata.height ?? width;
 
   const textOverlayWithOpacity = await buildTextOverlay(
-    entry,
     imageWidth,
     imageHeight,
   );

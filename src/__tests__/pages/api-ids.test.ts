@@ -9,7 +9,6 @@ vi.mock("astro:content", () => ({
         id: "01kcy2c0k82cmr4sy2ehadrfgk",
         collection: "lgtm",
         data: {
-          color: "white",
           image: "01.jpg",
           isDraft: false,
         },
@@ -18,7 +17,6 @@ vi.mock("astro:content", () => ({
         id: "01kczxdmaz63jrwfjcq8c1x2fj",
         collection: "lgtm",
         data: {
-          color: "black",
           image: "02.jpg",
           isDraft: false,
         },
@@ -27,7 +25,6 @@ vi.mock("astro:content", () => ({
         id: "01kczxcdtf3rhcn3qwc2sfhyv9",
         collection: "lgtm",
         data: {
-          color: "white",
           image: "03.jpg",
           isDraft: true, // This should be filtered out
         },

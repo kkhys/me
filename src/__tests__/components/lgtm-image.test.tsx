@@ -16,7 +16,6 @@ const createMockEntry = (
   id: "01kcy2c0k82cmr4sy2ehadrfgk",
   collection: "lgtm",
   data: {
-    color: "white",
     image: "01.jpg",
     isDraft: false,
     ...overrides?.data,
@@ -98,33 +97,11 @@ describe("LgtmImage", () => {
     });
   });
 
-  describe("Text color validation", () => {
-    it("should handle white text color", async () => {
-      const entry = createMockEntry({
-        data: { color: "white", image: "01.jpg", isDraft: false },
-      });
-      const buffer = await LgtmImage(entry, 400, "png");
-
-      expect(buffer).toBeInstanceOf(Buffer);
-      expect(buffer.length).toBeGreaterThan(0);
-    });
-
-    it("should handle black text color", async () => {
-      const entry = createMockEntry({
-        data: { color: "black", image: "01.jpg", isDraft: false },
-      });
-      const buffer = await LgtmImage(entry, 400, "png");
-
-      expect(buffer).toBeInstanceOf(Buffer);
-      expect(buffer.length).toBeGreaterThan(0);
-    });
-  });
-
   describe("Error handling", () => {
     it("should throw error when image file does not exist", async () => {
       const entry = createMockEntry({
         id: "nonexistent",
-        data: { color: "white", image: "nonexistent.jpg", isDraft: false },
+        data: { image: "nonexistent.jpg", isDraft: false },
       });
 
       await expect(LgtmImage(entry, 400, "png")).rejects.toThrow();
@@ -135,7 +112,7 @@ describe("LgtmImage", () => {
     const createAnimatedEntry = (): CollectionEntry<"lgtm"> => ({
       id: "01kcy2c0k82cmr4sy2ehadrfgl",
       collection: "lgtm",
-      data: { color: "white", image: "01.webp", isDraft: false },
+      data: { image: "01.webp", isDraft: false },
     });
 
     it("should produce animated WebP from an animated source", async () => {
