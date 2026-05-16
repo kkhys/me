@@ -16,11 +16,16 @@ vi.mock("astro:content", () => ({
       id: "01kczxdmaz63jrwfjcq8c1x2fj",
       collection: "lgtm",
       data: {
-        image: "02.jpg",
-        animated: false,
+        image: "01.webp",
+        animated: true,
       },
     },
   ]),
+}));
+
+vi.mock("#/components/lgtm-image", () => ({
+  formatForEntry: (entry: { data: { animated: boolean } }) =>
+    entry.data.animated ? "webp" : "avif",
 }));
 
 describe("GET /api/ids.json", () => {
@@ -42,20 +47,44 @@ describe("GET /api/ids.json", () => {
     const data = JSON.parse(text);
 
     expect(data).toHaveProperty("ids");
+    expect(data).toHaveProperty("entries");
     expect(data).toHaveProperty("count");
     expect(data).toHaveProperty("updatedAt");
 
     expect(Array.isArray(data.ids)).toBe(true);
+    expect(Array.isArray(data.entries)).toBe(true);
     expect(typeof data.count).toBe("number");
     expect(typeof data.updatedAt).toBe("string");
   });
 
-  test("should have consistent count with ids array length", async () => {
+  test("should have consistent count with arrays length", async () => {
     const response = await GET({} as unknown as APIContext);
     const text = await response.text();
     const data = JSON.parse(text);
 
     expect(data.count).toBe(data.ids.length);
+    expect(data.count).toBe(data.entries.length);
+  });
+
+  test("should return entries with format derived from animated flag", async () => {
+    const response = await GET({} as unknown as APIContext);
+    const text = await response.text();
+    const data = JSON.parse(text);
+
+    expect(data.entries).toEqual([
+      { id: "01kcy2c0k82cmr4sy2ehadrfgk", format: "avif" },
+      { id: "01kczxdmaz63jrwfjcq8c1x2fj", format: "webp" },
+    ]);
+  });
+
+  test("should keep ids order aligned with entries order", async () => {
+    const response = await GET({} as unknown as APIContext);
+    const text = await response.text();
+    const data = JSON.parse(text);
+
+    expect(data.ids).toEqual(
+      data.entries.map((entry: { id: string }) => entry.id),
+    );
   });
 
   test("should return valid ISO 8601 timestamp", async () => {
