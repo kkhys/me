@@ -1,14 +1,19 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
+import { formatForEntry } from "#/components/lgtm-image";
 
 export const GET: APIRoute = async () => {
   const entries = await getCollection("lgtm");
 
-  const ids = entries.map((entry) => entry.id);
+  const items = entries.map((entry) => ({
+    id: entry.id,
+    format: formatForEntry(entry),
+  }));
 
   const response = {
-    ids,
-    count: ids.length,
+    ids: items.map(({ id }) => id),
+    entries: items,
+    count: items.length,
     updatedAt: new Date().toISOString(),
   };
 
