@@ -1,8 +1,6 @@
 minimumReleaseAge: 4320
 
-ignoredBuiltDependencies:
-  - workerd
-
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
+allowBuilds:
+  esbuild: true
+  sharp: true
+  workerd: false
