@@ -23,10 +23,13 @@ type Props = {
 };
 
 const { id } = Astro.params;
+const { entry } = Astro.props;
 
 if (!id) {
   return Astro.redirect("/404");
 }
+
+const isAnimated = /\.webp$/i.test(entry.data.image);
 
 const blurryImage = await getImage({
   src: `/${id}-400.png`,
@@ -75,17 +78,30 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
           class="blur-load"
           style={`background: url(${blurryImage.src}) center / cover no-repeat;`}
         >
-          <Picture
-            src={`/${id}-1200.png`}
-            formats={["avif", "webp"]}
-            alt="LGTM Image"
-            width={1200}
-            height={800}
-            densities={[1, 2]}
-            loading="eager"
-            class="detail-image"
-            onload="this.closest('.blur-load')?.classList.add('image-loaded')"
-          />
+          {isAnimated ? (
+            <img
+              src={`/${id}-1200.webp`}
+              alt="LGTM Image"
+              width={1200}
+              height={800}
+              loading="eager"
+              decoding="async"
+              class="detail-image"
+              onload="this.closest('.blur-load')?.classList.add('image-loaded')"
+            />
+          ) : (
+            <Picture
+              src={`/${id}-1200.png`}
+              formats={["avif", "webp"]}
+              alt="LGTM Image"
+              width={1200}
+              height={800}
+              densities={[1, 2]}
+              loading="eager"
+              class="detail-image"
+              onload="this.closest('.blur-load')?.classList.add('image-loaded')"
+            />
+          )}
         </div>
       </div>
 

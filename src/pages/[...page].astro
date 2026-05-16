@@ -98,6 +98,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
       {
         page.data.map((entry, index) => {
           const blurImage = blurryImages[index];
+          const isAnimated = /\.webp$/i.test(entry.data.image);
           return (
             <article class="lgtm-item">
               <a href={`/${entry.id}`} class="lgtm-link">
@@ -105,16 +106,29 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
                   class="blur-load"
                   style={`background: url(${blurImage?.src}) center / cover no-repeat;`}
                 >
-                  <Picture
-                    src={`/${entry.id}-1000.png`}
-                    formats={["avif", "webp"]}
-                    alt="LGTM Image"
-                    width={515}
-                    height={343}
-                    densities={[1, 2]}
-                    class="lgtm-image"
-                    onload="this.closest('.blur-load')?.classList.add('image-loaded')"
-                  />
+                  {isAnimated ? (
+                    <img
+                      src={`/${entry.id}-1000.webp`}
+                      alt="LGTM Image"
+                      width={515}
+                      height={343}
+                      loading="lazy"
+                      decoding="async"
+                      class="lgtm-image"
+                      onload="this.closest('.blur-load')?.classList.add('image-loaded')"
+                    />
+                  ) : (
+                    <Picture
+                      src={`/${entry.id}-1000.png`}
+                      formats={["avif", "webp"]}
+                      alt="LGTM Image"
+                      width={515}
+                      height={343}
+                      densities={[1, 2]}
+                      class="lgtm-image"
+                      onload="this.closest('.blur-load')?.classList.add('image-loaded')"
+                    />
+                  )}
                 </div>
               </a>
               <button
