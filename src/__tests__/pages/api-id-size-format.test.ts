@@ -2,20 +2,26 @@ import type { APIContext } from "astro";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { GET, getStaticPaths } from "#/pages/[id]-[size].[format]";
 
+const stillEntry = {
+  id: "01kcy2c0k82cmr4sy2ehadrfgk",
+  collection: "lgtm",
+  data: { image: "01.jpg", animated: false },
+};
+
+const animatedEntry = {
+  id: "01kcy2c0k82cmr4sy2ehadrfgl",
+  collection: "lgtm",
+  data: { image: "01.webp", animated: true },
+};
+
 vi.mock("astro:content", () => ({
-  getCollection: vi.fn(async () => [
-    {
-      id: "01kcy2c0k82cmr4sy2ehadrfgk",
-      collection: "lgtm",
-      data: {
-        image: "01.jpg",
-      },
-    },
-  ]),
+  getCollection: vi.fn(async () => [stillEntry, animatedEntry]),
 }));
 
 vi.mock("#/components/lgtm-image", () => ({
   LgtmImage: vi.fn(async () => Buffer.from("mock-image-data")),
+  formatForEntry: (entry: { data: { animated: boolean } }) =>
+    entry.data.animated ? "webp" : "avif",
 }));
 
 describe("[id]-[size].[format].ts API Route", () => {
@@ -24,220 +30,79 @@ describe("[id]-[size].[format].ts API Route", () => {
   });
 
   describe("getStaticPaths", () => {
-    it("should generate paths for all format and size combinations", async () => {
+    it("should generate one path per entry per size with format derived from animated flag", async () => {
       const paths = await getStaticPaths();
 
-      // 3 formats × 3 sizes = 9 combinations
-      expect(paths).toHaveLength(9);
+      // 2 entries × 3 sizes
+      expect(paths).toHaveLength(6);
 
-      // Verify all size variations exist
-      const sizes = ["400", "1000", "1200"];
-      const formats = ["png", "avif", "webp"];
-
-      for (const size of sizes) {
-        for (const format of formats) {
-          expect(paths).toContainEqual({
-            params: {
-              id: "01kcy2c0k82cmr4sy2ehadrfgk",
-              size,
-              format,
-            },
-          });
-        }
+      for (const size of ["400", "1000", "1200"] as const) {
+        expect(paths).toContainEqual(
+          expect.objectContaining({
+            params: { id: stillEntry.id, size, format: "avif" },
+          }),
+        );
+        expect(paths).toContainEqual(
+          expect.objectContaining({
+            params: { id: animatedEntry.id, size, format: "webp" },
+          }),
+        );
       }
     });
   });
 
   describe("GET handler", () => {
-    describe("Format validation", () => {
-      it("should return image with correct content type for PNG", async () => {
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "400",
-            format: "png",
-          },
-        } as unknown as APIContext;
+    it("should return avif for still entries", async () => {
+      const context = {
+        params: { id: stillEntry.id, size: "400", format: "avif" },
+        props: { entry: stillEntry, size: "400" },
+      } as unknown as APIContext;
 
-        const response = await GET(context);
+      const response = await GET(context);
 
-        expect(response.headers.get("Content-Type")).toBe("image/png");
-      });
-
-      it("should return image with correct content type for AVIF", async () => {
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "400",
-            format: "avif",
-          },
-        } as unknown as APIContext;
-
-        const response = await GET(context);
-
-        expect(response.headers.get("Content-Type")).toBe("image/avif");
-      });
-
-      it("should return image with correct content type for WebP", async () => {
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "400",
-            format: "webp",
-          },
-        } as unknown as APIContext;
-
-        const response = await GET(context);
-
-        expect(response.headers.get("Content-Type")).toBe("image/webp");
-      });
-
-      it("should default to PNG for invalid format", async () => {
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "400",
-            format: "invalid",
-          },
-        } as unknown as APIContext;
-
-        const response = await GET(context);
-
-        expect(response.headers.get("Content-Type")).toBe("image/png");
-      });
+      expect(response.status).toBe(200);
+      expect(response.headers.get("Content-Type")).toBe("image/avif");
     });
 
-    describe("Size validation", () => {
-      it("should handle 400px size", async () => {
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "400",
-            format: "png",
-          },
-        } as unknown as APIContext;
+    it("should return webp for animated entries", async () => {
+      const context = {
+        params: { id: animatedEntry.id, size: "1000", format: "webp" },
+        props: { entry: animatedEntry, size: "1000" },
+      } as unknown as APIContext;
 
-        const response = await GET(context);
+      const response = await GET(context);
 
-        expect(response.status).toBe(200);
-        expect(response.headers.get("Content-Type")).toBe("image/png");
-      });
-
-      it("should handle 1000px size", async () => {
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "1000",
-            format: "png",
-          },
-        } as unknown as APIContext;
-
-        const response = await GET(context);
-
-        expect(response.status).toBe(200);
-        expect(response.headers.get("Content-Type")).toBe("image/png");
-      });
-
-      it("should handle 1200px size", async () => {
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "1200",
-            format: "png",
-          },
-        } as unknown as APIContext;
-
-        const response = await GET(context);
-
-        expect(response.status).toBe(200);
-        expect(response.headers.get("Content-Type")).toBe("image/png");
-      });
-
-      it("should default to 400px for invalid size", async () => {
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "9999",
-            format: "png",
-          },
-        } as unknown as APIContext;
-
-        const response = await GET(context);
-
-        expect(response.status).toBe(200);
-        expect(response.headers.get("Content-Type")).toBe("image/png");
-      });
+      expect(response.headers.get("Content-Type")).toBe("image/webp");
     });
 
-    describe("Error handling", () => {
-      it("should return 404 for non-existent entry", async () => {
-        const context = {
-          params: { id: "nonexistent", size: "400", format: "png" },
-        } as unknown as APIContext;
+    it("should set immutable cache control header", async () => {
+      const context = {
+        params: { id: stillEntry.id, size: "400", format: "avif" },
+        props: { entry: stillEntry, size: "400" },
+      } as unknown as APIContext;
 
-        const response = await GET(context);
+      const response = await GET(context);
 
-        expect(response.status).toBe(404);
-        expect(await response.text()).toBe("Not found");
-      });
+      const cacheControl = response.headers.get("Cache-Control");
+      expect(cacheControl).toContain("public");
+      expect(cacheControl).toContain("max-age=31536000");
+      expect(cacheControl).toContain("immutable");
     });
 
-    describe("Response headers", () => {
-      it("should set immutable cache control header", async () => {
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "400",
-            format: "png",
-          },
-        } as unknown as APIContext;
+    it("should call LgtmImage with the parsed width", async () => {
+      const { LgtmImage } = await import("#/components/lgtm-image");
 
-        const response = await GET(context);
+      const context = {
+        params: { id: stillEntry.id, size: "1200", format: "avif" },
+        props: { entry: stillEntry, size: "1200" },
+      } as unknown as APIContext;
 
-        const cacheControl = response.headers.get("Cache-Control");
-        expect(cacheControl).toContain("public");
-        expect(cacheControl).toContain("max-age=31536000");
-        expect(cacheControl).toContain("immutable");
-      });
+      await GET(context);
 
-      it("should return valid image data", async () => {
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "400",
-            format: "png",
-          },
-        } as unknown as APIContext;
-
-        const response = await GET(context);
-
-        const body = await response.arrayBuffer();
-        expect(body.byteLength).toBeGreaterThan(0);
-      });
-    });
-
-    describe("Integration with LgtmImage", () => {
-      it("should call LgtmImage with correct width parameter", async () => {
-        const { LgtmImage } = await import("#/components/lgtm-image");
-
-        const context = {
-          params: {
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-            size: "1000",
-            format: "png",
-          },
-        } as unknown as APIContext;
-
-        await GET(context);
-
-        expect(LgtmImage).toHaveBeenCalledWith(
-          expect.objectContaining({
-            id: "01kcy2c0k82cmr4sy2ehadrfgk",
-          }),
-          1000,
-          "png",
-        );
-      });
+      expect(LgtmImage).toHaveBeenCalledWith(
+        expect.objectContaining({ id: stillEntry.id }),
+        1200,
+      );
     });
   });
 });

@@ -9,6 +9,7 @@ vi.mock("astro:content", () => ({
       collection: "lgtm",
       data: {
         image: "01.jpg",
+        animated: false,
       },
     },
     {
@@ -16,6 +17,7 @@ vi.mock("astro:content", () => ({
       collection: "lgtm",
       data: {
         image: "02.jpg",
+        animated: false,
       },
     },
   ]),

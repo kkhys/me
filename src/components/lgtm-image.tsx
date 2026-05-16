@@ -8,7 +8,12 @@ import { join } from "node:path";
 import satori from "satori";
 import sharp from "sharp";
 
-type ImageFormat = "png" | "avif" | "webp";
+export type LgtmFormat = "avif" | "webp";
+
+export const formatForEntry = (entry: CollectionEntry<"lgtm">): LgtmFormat =>
+  entry.data.animated ? "webp" : "avif";
+
+const QUALITY = 90;
 
 // Cache the font file across many LgtmImage calls in a single build. The
 // promise is awaited per call but the underlying readFile happens once.
@@ -73,11 +78,78 @@ const buildTextOverlay = async (imageWidth: number, imageHeight: number) => {
     .toBuffer();
 };
 
+const generateStillAvif = async (
+  baseImage: Buffer,
+  width: number,
+): Promise<Buffer> => {
+  const resizedImage = await sharp(baseImage).resize(width).toBuffer();
+  const metadata = await sharp(resizedImage).metadata();
+  const imageWidth = metadata.width ?? width;
+  const imageHeight = metadata.height ?? width;
+
+  const textOverlay = await buildTextOverlay(imageWidth, imageHeight);
+
+  return sharp(resizedImage)
+    .composite([{ input: textOverlay, blend: "over" }])
+    .avif({ quality: QUALITY })
+    .toBuffer();
+};
+
+const generateAnimatedWebp = async (
+  baseImage: Buffer,
+  width: number,
+): Promise<Buffer> => {
+  // Decode all frames into a fully-composed RGBA strip first, then slice out
+  // each page. Reading a GIF page directly (`{ page: N }`) returns only that
+  // page's payload — which for GIFs that use frame disposal or delta updates
+  // is a partial subframe, not the canvas state at that moment. Going through
+  // the animated raw strip lets libvips do the disposal/composition for us so
+  // each slice is the actual visible frame.
+  const probeMeta = await sharp(baseImage, { animated: true }).metadata();
+  const delay = probeMeta.delay;
+  const loop = probeMeta.loop ?? 0;
+
+  const strip = await sharp(baseImage, { animated: true })
+    .resize({ width })
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  const pageWidth = strip.info.width;
+  const pageCount = strip.info.pages ?? 1;
+  const pageHeight =
+    strip.info.pageHeight ?? Math.floor(strip.info.height / pageCount);
+  const channels = strip.info.channels;
+  const bytesPerPage = pageWidth * pageHeight * channels;
+
+  const textOverlay = await buildTextOverlay(pageWidth, pageHeight);
+
+  // Process frames sequentially to keep peak memory bounded — parallel sharp
+  // pipelines on a long clip can balloon memory usage.
+  const frames: Buffer[] = [];
+  for (let page = 0; page < pageCount; page++) {
+    const pageBytes = strip.data.subarray(
+      page * bytesPerPage,
+      (page + 1) * bytesPerPage,
+    );
+    const frame = await sharp(pageBytes, {
+      raw: { width: pageWidth, height: pageHeight, channels },
+    })
+      .composite([{ input: textOverlay, blend: "over" }])
+      .png()
+      .toBuffer();
+    frames.push(frame);
+  }
+
+  return sharp(frames, { join: { animated: true } })
+    .webp({ quality: QUALITY, delay, loop })
+    .toBuffer();
+};
+
 export const LgtmImage = async (
   entry: CollectionEntry<"lgtm">,
   width = 400,
-  format: ImageFormat = "png",
-) => {
+): Promise<Buffer> => {
   const lgtmBasePath = GITHUB_ACTIONS
     ? "./src/__fixtures__/lgtm-sample"
     : "./lgtm-content/lgtm";
@@ -85,84 +157,7 @@ export const LgtmImage = async (
   const imagePath = join(lgtmBasePath, entry.id, entry.data.image);
   const baseImage = await readFile(imagePath);
 
-  // Animate only when the source has multiple pages AND output is WebP.
-  // Detection is content-based (pages > 1) rather than extension-based so
-  // any animated input format works. PNG/AVIF requests fall back to a still
-  // first frame so blur placeholders, OG images, and legacy
-  // <img src=".png"> snippets keep working.
-  const probeMeta = await sharp(baseImage, { animated: true }).metadata();
-  const animated = (probeMeta.pages ?? 1) > 1 && format === "webp";
-
-  if (animated) {
-    // Decode all frames into a fully-composed RGBA strip first, then slice
-    // out each page. Reading a GIF page directly (`{ page: N }`) returns
-    // only that page's payload — which for GIFs that use frame disposal or
-    // delta updates is a partial subframe, not the canvas state at that
-    // moment. Going through the animated raw strip lets libvips do the
-    // disposal/composition for us so each slice is the actual visible frame.
-    const delay = probeMeta.delay;
-    const loop = probeMeta.loop ?? 0;
-
-    const strip = await sharp(baseImage, { animated: true })
-      .resize({ width })
-      .ensureAlpha()
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-
-    const pageWidth = strip.info.width;
-    const pageCount = strip.info.pages ?? 1;
-    const pageHeight =
-      strip.info.pageHeight ?? Math.floor(strip.info.height / pageCount);
-    const channels = strip.info.channels;
-    const bytesPerPage = pageWidth * pageHeight * channels;
-
-    const textOverlayWithOpacity = await buildTextOverlay(
-      pageWidth,
-      pageHeight,
-    );
-
-    // Process frames sequentially to keep peak memory bounded — parallel
-    // sharp pipelines on a long clip can balloon memory usage.
-    const frames: Buffer[] = [];
-    for (let page = 0; page < pageCount; page++) {
-      const pageBytes = strip.data.subarray(
-        page * bytesPerPage,
-        (page + 1) * bytesPerPage,
-      );
-      const frame = await sharp(pageBytes, {
-        raw: { width: pageWidth, height: pageHeight, channels },
-      })
-        .composite([{ input: textOverlayWithOpacity, blend: "over" }])
-        .png()
-        .toBuffer();
-      frames.push(frame);
-    }
-
-    return sharp(frames, { join: { animated: true } })
-      .webp({ quality: 90, delay, loop })
-      .toBuffer();
-  }
-
-  const resizedImage = await sharp(baseImage).resize(width).toBuffer();
-  const metadata = await sharp(resizedImage).metadata();
-  const imageWidth = metadata.width ?? width;
-  const imageHeight = metadata.height ?? width;
-
-  const textOverlayWithOpacity = await buildTextOverlay(
-    imageWidth,
-    imageHeight,
-  );
-
-  const compositeImage = sharp(resizedImage).composite([
-    { input: textOverlayWithOpacity, blend: "over" },
-  ]);
-
-  switch (format) {
-    case "avif":
-      return compositeImage.avif({ quality: 90 }).toBuffer();
-    case "webp":
-      return compositeImage.webp({ quality: 90 }).toBuffer();
-    default:
-      return compositeImage.png().toBuffer();
-  }
+  return entry.data.animated
+    ? generateAnimatedWebp(baseImage, width)
+    : generateStillAvif(baseImage, width);
 };

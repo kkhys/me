@@ -12,6 +12,7 @@ const lgtm = defineCollection({
   loader: lgtmDirLoader({ base: lgtmBasePath }),
   schema: z.object({
     image: z.string(),
+    animated: z.boolean(),
   }),
 });
 

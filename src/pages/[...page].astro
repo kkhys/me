@@ -1,9 +1,10 @@
 ---
-import { getImage, Picture } from "astro:assets";
+import { getImage } from "astro:assets";
 import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import CheckIcon from "#/components/icon/check-icon.astro";
 import CopyIcon from "#/components/icon/copy-icon.astro";
+import { formatForEntry } from "#/components/lgtm-image";
 import BaseSeo from "#/components/seo/base-seo.astro";
 import JsonLd from "#/components/seo/json-ld.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
@@ -34,14 +35,16 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 const isFirstPage = page.currentPage === 1;
 
-const blurryImages = await Promise.all(
+const items = await Promise.all(
   page.data.map(async (entry) => {
+    const format = formatForEntry(entry);
     const blurryImage = await getImage({
-      src: `/${entry.id}-400.webp`,
+      src: `/${entry.id}-400.${format}`,
       width: 20,
       height: 13,
+      format: "webp",
     });
-    return { id: entry.id, src: blurryImage.src };
+    return { entry, format, blurSrc: blurryImage.src };
   }),
 );
 
@@ -94,53 +97,37 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
       data-total-pages={page.lastPage}
     >
       {
-        page.data.map((entry, index) => {
-          const blurImage = blurryImages[index];
-          const isAnimated = /\.webp$/i.test(entry.data.image);
-          return (
-            <article class="lgtm-item">
-              <a href={`/${entry.id}`} class="lgtm-link">
-                <div
-                  class="blur-load"
-                  style={`background: url(${blurImage?.src}) center / cover no-repeat;`}
-                >
-                  {isAnimated ? (
-                    <img
-                      src={`/${entry.id}-1000.webp`}
-                      alt="LGTM Image"
-                      width={515}
-                      height={343}
-                      loading="lazy"
-                      decoding="async"
-                      class="lgtm-image"
-                      onload="this.closest('.blur-load')?.classList.add('image-loaded')"
-                    />
-                  ) : (
-                    <Picture
-                      src={`/${entry.id}-1000.png`}
-                      formats={["avif", "webp"]}
-                      alt="LGTM Image"
-                      width={515}
-                      height={343}
-                      densities={[1, 2]}
-                      class="lgtm-image"
-                      onload="this.closest('.blur-load')?.classList.add('image-loaded')"
-                    />
-                  )}
-                </div>
-              </a>
-              <button
-                class="copy-button"
-                data-id={entry.id}
-                title="Copy embed code"
-                aria-label="Copy embed code"
+        items.map(({ entry, format, blurSrc }) => (
+          <article class="lgtm-item">
+            <a href={`/${entry.id}`} class="lgtm-link">
+              <div
+                class="blur-load"
+                style={`background: url(${blurSrc}) center / cover no-repeat;`}
               >
-                <CopyIcon class="copy-icon" />
-                <CheckIcon class="check-icon" />
-              </button>
-            </article>
-          );
-        })
+                <img
+                  src={`/${entry.id}-1000.${format}`}
+                  alt="LGTM Image"
+                  width={515}
+                  height={343}
+                  loading="lazy"
+                  decoding="async"
+                  class="lgtm-image"
+                  onload="this.closest('.blur-load')?.classList.add('image-loaded')"
+                />
+              </div>
+            </a>
+            <button
+              class="copy-button"
+              data-id={entry.id}
+              data-format={format}
+              title="Copy embed code"
+              aria-label="Copy embed code"
+            >
+              <CopyIcon class="copy-icon" />
+              <CheckIcon class="check-icon" />
+            </button>
+          </article>
+        ))
       }
     </div>
   </div>
@@ -330,9 +317,10 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
       e.stopPropagation();
 
       const id = (button as HTMLElement).dataset.id;
-      if (!id) return;
+      const format = (button as HTMLElement).dataset.format;
+      if (!id || !format) return;
 
-      const html = `<a href="https://lgtm.kkhys.me/${id}"><img src="https://lgtm.kkhys.me/${id}.avif" alt="LGTM!!" width="400" /></a>`;
+      const html = `<a href="https://lgtm.kkhys.me/${id}"><img src="https://lgtm.kkhys.me/${id}.${format}" alt="LGTM!!" width="400" /></a>`;
 
       try {
         await navigator.clipboard.writeText(html);

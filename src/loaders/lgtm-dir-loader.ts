@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { readdir, stat } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 import type { Loader, LoaderContext } from "astro/loaders";
+import sharp from "sharp";
 
 const MEDIA_EXTENSIONS = new Set([
   ".jpg",
@@ -24,6 +25,11 @@ const pickImage = async (entryDir: string): Promise<string | null> => {
   // resolves to the same entry across rebuilds.
   files.sort();
   return files.find(isMediaFile) ?? null;
+};
+
+const isAnimated = async (filePath: string): Promise<boolean> => {
+  const meta = await sharp(filePath, { animated: true }).metadata();
+  return (meta.pages ?? 1) > 1;
 };
 
 const loadEntries = async (
@@ -50,7 +56,8 @@ const loadEntries = async (
       continue;
     }
 
-    const data = await parseData({ id, data: { image } });
+    const animated = await isAnimated(join(entryDir, image));
+    const data = await parseData({ id, data: { image, animated } });
     store.set({
       id,
       data,

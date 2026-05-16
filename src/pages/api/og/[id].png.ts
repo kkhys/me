@@ -21,7 +21,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response("Not found", { status: 404 });
   }
 
-  const lgtmImageBuffer = await LgtmImage(entry, 1200, "png");
+  const lgtmImageBuffer = await LgtmImage(entry, 1200);
 
   const image = await sharp(lgtmImageBuffer)
     .resize(1200, 630, {
