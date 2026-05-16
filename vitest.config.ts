@@ -8,6 +8,7 @@ export default defineConfig({
     },
   },
   test: {
+    exclude: ["**/node_modules/**", "**/dist/**", "**/.direnv/**"],
     coverage: {
       include: [
         "src/components/lgtm-image.tsx",
