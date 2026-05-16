@@ -75,7 +75,7 @@ describe("getMetadata", () => {
       mockFetchSiteMetadata = vi.fn().mockResolvedValue({
         title: "Example",
         description: "Example description",
-        image: "https://example.com/og.png",
+        image: { src: "https://example.com/og.png", width: "1", height: "1" },
         icon: "https://example.com/favicon.ico",
       });
       vi.doMock("astro:env/client", () => ({
@@ -114,6 +114,50 @@ describe("getMetadata", () => {
       const result = await getMetadata("https://error-example.com");
       expect(result.title).toBe("Not Found");
       expect(result.description).toBe("Page not found");
+    });
+
+    it("strips SVG og:image so Astro's sharp service won't reject the build", async () => {
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "SVG site",
+        description: "desc",
+        image: { src: "https://example.com/og.svg", width: "1", height: "1" },
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://svg-example.com");
+      expect(result.image).toBeUndefined();
+    });
+
+    it("strips SVG og:image even when the URL has query params", async () => {
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "SVG site",
+        description: "desc",
+        image: {
+          src: "https://example.com/og.svg?v=2#frag",
+          width: "1",
+          height: "1",
+        },
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://svg-query-example.com");
+      expect(result.image).toBeUndefined();
+    });
+
+    it("keeps non-SVG og:image untouched", async () => {
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "PNG site",
+        description: "desc",
+        image: { src: "https://example.com/og.png", width: "1", height: "1" },
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://png-example.com");
+      expect(result.image).toEqual({
+        src: "https://example.com/og.png",
+        width: "1",
+        height: "1",
+      });
     });
   });
 });
