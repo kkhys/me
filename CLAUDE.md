@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-LGTM is an Astro-based static site that generates "LGTM" images for GitHub Pull Requests. Satori renders text as SVG, Sharp composites it onto source images, and the result is served as static files in PNG/AVIF/WebP at multiple sizes.
+LGTM is an Astro-based static site that generates "LGTM" images for GitHub Pull Requests. Satori renders text as SVG, Sharp composites it onto source images, and the result is served as static files at multiple sizes. Output format is determined per entry: still sources produce AVIF only, animated sources produce animated WebP only.
 
 Live: https://lgtm.kkhys.me
 
@@ -10,9 +10,9 @@ Live: https://lgtm.kkhys.me
 
 ```
 src/
-  components/lgtm-image.tsx       # Core image generation pipeline (Satori + Sharp)
-  content.config.ts               # Content Collections: lgtm, privacy, copyright
-  loaders/lgtm-dir-loader.ts      # Custom Astro loader: one entry per ULID dir, image = first media file (ascending)
+  components/lgtm-image.tsx       # Core image generation pipeline (Satori + Sharp). Exports formatForEntry helper
+  content.config.ts               # Content Collections: lgtm, privacy, copyright. lgtm schema = { image, animated }
+  loaders/lgtm-dir-loader.ts      # Custom Astro loader: one entry per ULID dir, image = first media file (ascending). Probes animation status via sharp
   config/constants.ts             # Shared constants (TITLE, IMAGES_PER_PAGE)
   layouts/layout.astro            # Base layout (Header, Main, Footer)
   assets/BBHBartle-Regular.ttf    # Custom font for LGTM text overlay
@@ -39,6 +39,7 @@ scripts/release.ts                # Date-based release versioning (YYYY.MM.DD[-N
 - Content loading switches by environment: `lgtm-content/` locally, `src/__fixtures__/lgtm-sample/` when `GITHUB_ACTIONS=true`
 - All images are pre-rendered at build time. Infinite scroll fetches pre-built static HTML pages
 - Text is rendered at 2x resolution via Satori, then downscaled with lanczos3 for anti-aliasing
+- Output format is fixed per entry: still → AVIF, animated → animated WebP. Only one format URL exists per ID
 - `/{id}.{format}` serves 800px images (not 400px — the `LgtmImage` function default of 400 is overridden by the API endpoint)
 - Versioning is date-based (`YYYY.MM.DD[-N]`), not semver
 - Deployment is local: build then `wrangler pages deploy dist` to Cloudflare Pages
@@ -60,3 +61,4 @@ Both are declared in `astro.config.ts` env schema:
 4. ULIDs must be lowercase
 5. Non-first gallery pages (`/2`, `/3`, ...) redirect to `/` when accessed directly — they exist only for infinite scroll fetch
 6. Branch coverage 80% in lgtm-image.tsx is expected (environment switching + nullish coalescing fallbacks)
+7. The animated flag is computed once by the loader (`sharp.metadata().pages > 1`) and persisted in the collection entry — downstream code should rely on `entry.data.animated`, not re-probe the source

@@ -1,8 +1,9 @@
 ---
-import { getImage, Picture } from "astro:assets";
+import { getImage } from "astro:assets";
 import { type CollectionEntry, getCollection } from "astro:content";
 import ArrowLeftIcon from "#/components/icon/arrow-left-icon.astro";
 import CheckIcon from "#/components/icon/check-icon.astro";
+import { formatForEntry } from "#/components/lgtm-image";
 import BaseSeo from "#/components/seo/base-seo.astro";
 import JsonLd from "#/components/seo/json-ld.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
@@ -29,10 +30,10 @@ if (!id) {
   return Astro.redirect("/404");
 }
 
-const isAnimated = /\.webp$/i.test(entry.data.image);
+const format = formatForEntry(entry);
 
 const blurryImage = await getImage({
-  src: `/${id}-400.png`,
+  src: `/${id}-400.${format}`,
   width: 20,
   height: 13,
   format: "webp",
@@ -78,49 +79,29 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
           class="blur-load"
           style={`background: url(${blurryImage.src}) center / cover no-repeat;`}
         >
-          {isAnimated ? (
-            <img
-              src={`/${id}-1200.webp`}
-              alt="LGTM Image"
-              width={1200}
-              height={800}
-              loading="eager"
-              decoding="async"
-              class="detail-image"
-              onload="this.closest('.blur-load')?.classList.add('image-loaded')"
-            />
-          ) : (
-            <Picture
-              src={`/${id}-1200.png`}
-              formats={["avif", "webp"]}
-              alt="LGTM Image"
-              width={1200}
-              height={800}
-              densities={[1, 2]}
-              loading="eager"
-              class="detail-image"
-              onload="this.closest('.blur-load')?.classList.add('image-loaded')"
-            />
-          )}
+          <img
+            src={`/${id}-1200.${format}`}
+            alt="LGTM Image"
+            width={1200}
+            height={800}
+            loading="eager"
+            decoding="async"
+            class="detail-image"
+            onload="this.closest('.blur-load')?.classList.add('image-loaded')"
+          />
         </div>
       </div>
 
       <div class="info-bar">
         <div class="actions">
-          <div class="copy-buttons">
-            <button class="copy-format-button" data-id={id} data-format="avif">
-              <span class="button-text">AVIF</span>
-              <CheckIcon class="check-icon" />
-            </button>
-            <button class="copy-format-button" data-id={id} data-format="webp">
-              <span class="button-text">WebP</span>
-              <CheckIcon class="check-icon" />
-            </button>
-            <button class="copy-format-button" data-id={id} data-format="png">
-              <span class="button-text">PNG</span>
-              <CheckIcon class="check-icon" />
-            </button>
-          </div>
+          <button
+            class="copy-format-button"
+            data-id={id}
+            data-format={format}
+          >
+            <span class="button-text">Copy embed code</span>
+            <CheckIcon class="check-icon" />
+          </button>
 
           <a
             href="/"
@@ -185,11 +166,6 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-  }
-
-  .copy-buttons {
-    display: flex;
-    gap: 0.25rem;
   }
 
   .copy-format-button {
@@ -287,14 +263,8 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
       gap: 0.5rem;
     }
 
-    .copy-buttons {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.25rem;
-    }
-
     .copy-format-button {
-      width: 100%;
+      flex: 1;
     }
   }
 
@@ -313,10 +283,6 @@ const ogImageUrl = new URL(`/api/og/${id}.png`, Astro.site).href;
 
     .actions {
       gap: 0.5rem;
-    }
-
-    .copy-buttons {
-      gap: 0.25rem;
     }
 
     .copy-format-button {

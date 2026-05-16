@@ -1,46 +1,31 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
-import { LgtmImage } from "#/components/lgtm-image";
+import { formatForEntry, LgtmImage } from "#/components/lgtm-image";
 
-type ImageFormat = "png" | "avif" | "webp";
+const CONTENT_TYPES = {
+  avif: "image/avif",
+  webp: "image/webp",
+} as const;
 
 export const getStaticPaths = async () => {
   const lgtmEntries = await getCollection("lgtm");
-  const formats: ImageFormat[] = ["png", "avif", "webp"];
 
-  return lgtmEntries.flatMap((entry) =>
-    formats.map((format) => ({
-      params: { id: entry.id, format },
-    })),
-  );
+  return lgtmEntries.map((entry) => ({
+    params: { id: entry.id, format: formatForEntry(entry) },
+    props: { entry },
+  }));
 };
 
-export const GET: APIRoute = async ({ params }) => {
-  const { id, format } = params;
+export const GET: APIRoute = async ({ props }) => {
+  const { entry } = props as Awaited<
+    ReturnType<typeof getStaticPaths>
+  >[number]["props"];
 
-  const validFormats: ImageFormat[] = ["png", "avif", "webp"];
-  const imageFormat = validFormats.includes(format as ImageFormat)
-    ? (format as ImageFormat)
-    : "png";
-
-  const lgtmEntries = await getCollection("lgtm");
-  const entry = lgtmEntries.find((e) => e.id === id);
-
-  if (!entry) {
-    return new Response("Not found", { status: 404 });
-  }
-
-  const image = await LgtmImage(entry, 800, imageFormat);
-
-  const contentTypes = {
-    png: "image/png",
-    avif: "image/avif",
-    webp: "image/webp",
-  };
+  const image = await LgtmImage(entry, 800);
 
   return new Response(new Uint8Array(image), {
     headers: {
-      "Content-Type": contentTypes[imageFormat],
+      "Content-Type": CONTENT_TYPES[formatForEntry(entry)],
       "Cache-Control": "public, max-age=31536000, immutable",
     },
   });
