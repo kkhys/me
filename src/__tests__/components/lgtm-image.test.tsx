@@ -131,6 +131,45 @@ describe("LgtmImage", () => {
     });
   });
 
+  describe("Animated source", () => {
+    const createAnimatedEntry = (): CollectionEntry<"lgtm"> => ({
+      id: "01kcy2c0k82cmr4sy2ehadrfgl",
+      collection: "lgtm",
+      data: { color: "white", image: "01.webp", isDraft: false },
+    });
+
+    it("should produce animated WebP from an animated source", async () => {
+      const entry = createAnimatedEntry();
+      const buffer = await LgtmImage(entry, 400, "webp");
+
+      const metadata = await sharp(buffer, { animated: true }).metadata();
+      expect(metadata.format).toBe("webp");
+      expect(metadata.pages).toBeGreaterThan(1);
+      expect(metadata.width).toBe(400);
+    });
+
+    it("should produce a still PNG (first frame) from an animated source", async () => {
+      const entry = createAnimatedEntry();
+      const buffer = await LgtmImage(entry, 400, "png");
+
+      const metadata = await sharp(buffer, { animated: true }).metadata();
+      expect(metadata.format).toBe("png");
+      expect(metadata.pages ?? 1).toBe(1);
+      expect(metadata.width).toBe(400);
+    });
+
+    it("should produce a still AVIF (first frame) from an animated source", async () => {
+      const entry = createAnimatedEntry();
+      const buffer = await LgtmImage(entry, 400, "avif");
+
+      const metadata = await sharp(buffer, { animated: true }).metadata();
+      // Sharp identifies AVIF as 'heif' format
+      expect(metadata.format).toBe("heif");
+      expect(metadata.pages ?? 1).toBe(1);
+      expect(metadata.width).toBe(400);
+    });
+  });
+
   describe("Output validation", () => {
     it("should generate valid image buffer", async () => {
       const entry = createMockEntry();

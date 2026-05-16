@@ -12,7 +12,8 @@
     "coverage": "vitest run --coverage",
     "all": "pnpm build && pnpm check && pnpm lint:fix && pnpm test && pnpm coverage",
     "deploy": "pnpm build && wrangler pages deploy dist",
-    "release": "bun run scripts/release.ts"
+    "release": "bun run scripts/release.ts",
+    "convert-videos": "bun run scripts/convert-videos.ts"
   },
   "dependencies": {
     "@astrojs/compiler-rs": "0.2.0",

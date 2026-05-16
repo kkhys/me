@@ -10,28 +10,18 @@ import sharp from "sharp";
 
 type ImageFormat = "png" | "avif" | "webp";
 
-export const LgtmImage = async (
+// Cache the font file across many LgtmImage calls in a single build. The
+// promise is awaited per call but the underlying readFile happens once.
+const fontPromise = readFile("./src/assets/BBHBartle-Regular.ttf");
+
+const buildTextOverlay = async (
   entry: CollectionEntry<"lgtm">,
-  width = 400,
-  format: ImageFormat = "png",
+  imageWidth: number,
+  imageHeight: number,
 ) => {
-  const lgtmBasePath = GITHUB_ACTIONS
-    ? "./src/__fixtures__/lgtm-sample"
-    : "./lgtm-content/lgtm";
-
-  const imagePath = join(lgtmBasePath, entry.id, entry.data.image);
-  const baseImage = await readFile(imagePath);
-
-  const resizedImage = await sharp(baseImage).resize(width).toBuffer();
-
-  const metadata = await sharp(resizedImage).metadata();
-  const imageWidth = metadata.width ?? width;
-  const imageHeight = metadata.height ?? width;
-
-  const BBHBartleRegular = await readFile("./src/assets/BBHBartle-Regular.ttf");
+  const BBHBartleRegular = await fontPromise;
 
   const textColor = entry.data.color === "white" ? "#FEFEFE" : "#252426";
-
   const strokeColor = entry.data.color === "white" ? "#252426" : "#FEFEFE";
 
   const scale = 2;
@@ -63,23 +53,16 @@ export const LgtmImage = async (
     {
       width: renderWidth,
       height: renderHeight,
-      fonts: [
-        {
-          name: "BBHBartle",
-          data: BBHBartleRegular,
-        },
-      ],
+      fonts: [{ name: "BBHBartle", data: BBHBartleRegular }],
     },
   );
 
   const textOverlay = await sharp(Buffer.from(svg))
     .png()
-    .resize(imageWidth, imageHeight, {
-      kernel: "lanczos3",
-    })
+    .resize(imageWidth, imageHeight, { kernel: "lanczos3" })
     .toBuffer();
 
-  const textOverlayWithOpacity = await sharp(textOverlay)
+  return sharp(textOverlay)
     .composite([
       {
         input: Buffer.from(
@@ -92,26 +75,100 @@ export const LgtmImage = async (
     ])
     .png()
     .toBuffer();
+};
 
-  const compositeImage = sharp(resizedImage).composite([
-    {
-      input: textOverlayWithOpacity,
-      blend: "over",
-    },
-  ]);
+export const LgtmImage = async (
+  entry: CollectionEntry<"lgtm">,
+  width = 400,
+  format: ImageFormat = "png",
+) => {
+  const lgtmBasePath = GITHUB_ACTIONS
+    ? "./src/__fixtures__/lgtm-sample"
+    : "./lgtm-content/lgtm";
 
-  let finalImage: Buffer;
-  switch (format) {
-    case "avif":
-      finalImage = await compositeImage.avif({ quality: 90 }).toBuffer();
-      break;
-    case "webp":
-      finalImage = await compositeImage.webp({ quality: 90 }).toBuffer();
-      break;
-    default:
-      finalImage = await compositeImage.png().toBuffer();
-      break;
+  const imagePath = join(lgtmBasePath, entry.id, entry.data.image);
+  const baseImage = await readFile(imagePath);
+
+  // Animate only when the source has multiple pages AND output is WebP.
+  // Detection is content-based (pages > 1) rather than extension-based so
+  // any animated input format works. PNG/AVIF requests fall back to a still
+  // first frame so blur placeholders, OG images, and legacy
+  // <img src=".png"> snippets keep working.
+  const probeMeta = await sharp(baseImage, { animated: true }).metadata();
+  const animated = (probeMeta.pages ?? 1) > 1 && format === "webp";
+
+  if (animated) {
+    // Decode all frames into a fully-composed RGBA strip first, then slice
+    // out each page. Reading a GIF page directly (`{ page: N }`) returns
+    // only that page's payload — which for GIFs that use frame disposal or
+    // delta updates is a partial subframe, not the canvas state at that
+    // moment. Going through the animated raw strip lets libvips do the
+    // disposal/composition for us so each slice is the actual visible frame.
+    const delay = probeMeta.delay;
+    const loop = probeMeta.loop ?? 0;
+
+    const strip = await sharp(baseImage, { animated: true })
+      .resize({ width })
+      .ensureAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+
+    const pageWidth = strip.info.width;
+    const pageCount = strip.info.pages ?? 1;
+    const pageHeight =
+      strip.info.pageHeight ?? Math.floor(strip.info.height / pageCount);
+    const channels = strip.info.channels;
+    const bytesPerPage = pageWidth * pageHeight * channels;
+
+    const textOverlayWithOpacity = await buildTextOverlay(
+      entry,
+      pageWidth,
+      pageHeight,
+    );
+
+    // Process frames sequentially to keep peak memory bounded — parallel
+    // sharp pipelines on a long clip can balloon memory usage.
+    const frames: Buffer[] = [];
+    for (let page = 0; page < pageCount; page++) {
+      const pageBytes = strip.data.subarray(
+        page * bytesPerPage,
+        (page + 1) * bytesPerPage,
+      );
+      const frame = await sharp(pageBytes, {
+        raw: { width: pageWidth, height: pageHeight, channels },
+      })
+        .composite([{ input: textOverlayWithOpacity, blend: "over" }])
+        .png()
+        .toBuffer();
+      frames.push(frame);
+    }
+
+    return sharp(frames, { join: { animated: true } })
+      .webp({ quality: 90, delay, loop })
+      .toBuffer();
   }
 
-  return finalImage;
+  const resizedImage = await sharp(baseImage).resize(width).toBuffer();
+  const metadata = await sharp(resizedImage).metadata();
+  const imageWidth = metadata.width ?? width;
+  const imageHeight = metadata.height ?? width;
+
+  const textOverlayWithOpacity = await buildTextOverlay(
+    entry,
+    imageWidth,
+    imageHeight,
+  );
+
+  const compositeImage = sharp(resizedImage).composite([
+    { input: textOverlayWithOpacity, blend: "over" },
+  ]);
+
+  switch (format) {
+    case "avif":
+      return compositeImage.avif({ quality: 90 }).toBuffer();
+    case "webp":
+      return compositeImage.webp({ quality: 90 }).toBuffer();
+    default:
+      return compositeImage.png().toBuffer();
+  }
 };
