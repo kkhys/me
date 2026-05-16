@@ -9,7 +9,6 @@ vi.mock("astro:content", () => ({
       collection: "lgtm",
       data: {
         image: "01.jpg",
-        isDraft: false,
       },
     },
   ]),
