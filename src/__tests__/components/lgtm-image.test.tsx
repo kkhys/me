@@ -17,7 +17,6 @@ const createMockEntry = (
   collection: "lgtm",
   data: {
     image: "01.jpg",
-    isDraft: false,
     ...overrides?.data,
   },
   ...overrides,
@@ -101,7 +100,7 @@ describe("LgtmImage", () => {
     it("should throw error when image file does not exist", async () => {
       const entry = createMockEntry({
         id: "nonexistent",
-        data: { image: "nonexistent.jpg", isDraft: false },
+        data: { image: "nonexistent.jpg" },
       });
 
       await expect(LgtmImage(entry, 400, "png")).rejects.toThrow();
@@ -112,7 +111,7 @@ describe("LgtmImage", () => {
     const createAnimatedEntry = (): CollectionEntry<"lgtm"> => ({
       id: "01kcy2c0k82cmr4sy2ehadrfgl",
       collection: "lgtm",
-      data: { image: "01.webp", isDraft: false },
+      data: { image: "01.webp" },
     });
 
     it("should produce animated WebP from an animated source", async () => {

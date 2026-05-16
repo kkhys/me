@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import { readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { readdir, rm, stat } from "node:fs/promises";
 import { join, parse } from "node:path";
 import { $ } from "bun";
 
@@ -57,22 +57,6 @@ for (const entryId of entryIds) {
 
     const sizeKB = Bun.file(webpPath).size / 1024;
     console.log(`           ${sizeKB.toFixed(1)} KB`);
-
-    // Rewrite the `image:` line regardless of its previous value so stale
-    // entries (e.g., manually set to .gif before conversion) get fixed too.
-    const indexPath = join(entryDir, "index.md");
-    if (existsSync(indexPath)) {
-      const content = await readFile(indexPath, "utf8");
-      if (/^image:\s*\S+/m.test(content)) {
-        const updated = content.replace(/^(image:\s*)\S+/m, `$1${webpName}`);
-        if (updated !== content) {
-          await writeFile(indexPath, updated);
-          console.log("           updated index.md");
-        }
-      } else {
-        console.warn("           index.md has no image: line");
-      }
-    }
 
     await rm(movPath);
     console.log(`           removed ${mov}`);

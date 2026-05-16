@@ -24,9 +24,7 @@ export const getStaticPaths = (async ({ paginate }) => {
     return shuffled;
   }
 
-  const lgtmEntries = shuffleArray(
-    (await getCollection("lgtm")).filter((entry) => !entry.data.isDraft),
-  );
+  const lgtmEntries = shuffleArray(await getCollection("lgtm"));
 
   return paginate(lgtmEntries, {
     pageSize: IMAGES_PER_PAGE,

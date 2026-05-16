@@ -2,9 +2,7 @@ import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
 
 export const GET: APIRoute = async () => {
-  const entries = await getCollection("lgtm", ({ data }) => {
-    return data.isDraft !== true;
-  });
+  const entries = await getCollection("lgtm");
 
   const ids = entries.map((entry) => entry.id);
 

@@ -12,6 +12,7 @@ Live: https://lgtm.kkhys.me
 src/
   components/lgtm-image.tsx       # Core image generation pipeline (Satori + Sharp)
   content.config.ts               # Content Collections: lgtm, privacy, copyright
+  loaders/lgtm-dir-loader.ts      # Custom Astro loader: one entry per ULID dir, image = first media file (ascending)
   config/constants.ts             # Shared constants (TITLE, IMAGES_PER_PAGE)
   layouts/layout.astro            # Base layout (Header, Main, Footer)
   assets/BBHBartle-Regular.ttf    # Custom font for LGTM text overlay
@@ -20,17 +21,16 @@ src/
     [id].astro                    # Detail page with format selector
     [id].[format].ts              # Image API (800px default)
     [id]-[size].[format].ts       # Sized image API (400/1000/1200px)
-    api/ids.json.ts               # JSON listing of all non-draft image IDs
+    api/ids.json.ts               # JSON listing of all image IDs
     api/og/                       # Open Graph image generation
     api/favicon/                  # Dynamic favicon generation
     copyright.astro               # Legal pages (en/ja)
     privacy.astro
   __tests__/                      # Vitest unit tests
   __fixtures__/lgtm-sample/       # CI test fixtures (used when GITHUB_ACTIONS=true)
-lgtm-content/                     # Git submodule (private) - source images & metadata
+lgtm-content/                     # Git submodule (private) - source images
   lgtm/{ulid}/
-    index.md                      # Frontmatter: image, isDraft
-    {image}.jpg
+    {image}.jpg                   # One media file per ULID dir (jpg/png/webp/gif/avif). First file ascending wins.
 scripts/release.ts                # Date-based release versioning (YYYY.MM.DD[-N])
 ```
 
