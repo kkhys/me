@@ -22,14 +22,9 @@ const isMemoLink = isLinkCard && !!extractMemoId(href);
     <LinkCard href={href} {...rest} />
   ) : (
     href.startsWith('http') ? (
-      <a href={href} target="_blank" rel="noreferrer" class="external-link" {...rest}>
-        <slot />
-        <MoveUpRightIcon class="external-icon" />
-      </a>
+      <a href={href} target="_blank" rel="noreferrer" class="external-link" {...rest}><slot /><MoveUpRightIcon class="external-icon" /></a>
     ) : (
-      <a href={href} {...rest}>
-        <slot />
-      </a>
+      <a href={href} {...rest}><slot /></a>
     )
   )
 }

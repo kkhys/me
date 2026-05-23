@@ -11,14 +11,7 @@ const { as: Tag, id, ...rest } = Astro.props;
 ---
 
 <Tag id={id} class="heading budoux" {...rest}>
-  <a href={`#${id}`} class="heading-link">
-    <div class="anchor-wrapper">
-      <div class="anchor-box">
-        <LinkIcon class="anchor-icon" />
-      </div>
-    </div>
-    <slot />
-  </a>
+  <a href={`#${id}`} class="heading-link"><div class="anchor-wrapper"><div class="anchor-box"><LinkIcon class="anchor-icon" /></div></div><slot /></a>
 </Tag>
 
 <style>
