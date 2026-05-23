@@ -17,8 +17,10 @@
   line-height: 2;
 }
 
-.prose > *:not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  margin-block: 2rem;
+@scope (.prose) to (.not-prose) {
+  :scope > * {
+    margin-block: 2rem;
+  }
 }
 
 .prose p {
