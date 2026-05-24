@@ -21,6 +21,20 @@ const { class: className } = Astro.props;
 
   <link rel='sitemap' href='/sitemap-index.xml' />
 
+  {import.meta.env.PROD && (
+    <>
+      <link rel='preconnect' href='https://cloud.umami.is' crossorigin />
+      <script
+        is:inline
+        defer
+        src='https://cloud.umami.is/script.js'
+        data-website-id='51a14042-a40a-4ea2-a0e0-32a0146e7bc0'
+        data-domains='kkhys.me'
+        data-exclude-search='true'
+      />
+    </>
+  )}
+
   <slot name='head' />
   <slot name='seo'>
     <BaseSEO />
