@@ -26,6 +26,12 @@ export const tags = [
     emoji: "📷",
   },
   {
+    title: "CSS",
+    label: "CSS",
+    slug: "css",
+    emoji: "🎨",
+  },
+  {
     title: "Desk",
     label: "デスク",
     slug: "desk",
