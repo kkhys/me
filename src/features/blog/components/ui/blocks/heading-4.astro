@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Heading from "./heading.astro";
+
+interface Props extends HTMLAttributes<"h4"> {
+  id: string;
+}
+
+const { id, ...rest } = Astro.props;
+---
+
+<Heading as="h4" id={id} {...rest}><slot /></Heading>

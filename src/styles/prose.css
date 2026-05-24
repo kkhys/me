@@ -29,7 +29,8 @@
 
 .prose h1,
 .prose h2,
-.prose h3 {
+.prose h3,
+.prose h4 {
   font-size: 1rem;
   font-weight: var(--fw-medium);
   line-height: 1.75;
@@ -51,7 +52,11 @@
   margin-block: 2rem 1.25rem;
 }
 
-.prose :is(h2, h3) + * {
+.prose h4 {
+  margin-block: 1.5rem 1rem;
+}
+
+.prose :is(h2, h3, h4) + * {
   margin-top: 0;
 }
 
