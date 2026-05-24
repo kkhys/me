@@ -167,7 +167,11 @@
 
   .expressive-code {
     & pre {
-      max-height: 650px !important;
+      max-height: 550px !important;
+
+      @media (width >= 640px) {
+        max-height: 650px !important;
+      }
     }
 
     & .copy {
