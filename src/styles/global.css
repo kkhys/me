@@ -170,12 +170,17 @@
       max-height: 650px !important;
     }
 
+    & .copy {
+      align-items: center !important;
+    }
+
     & .copy button {
       border-radius: var(--radius-md) !important;
 
       &::after {
         mask-size: 0.8rem;
-        margin: 0.6rem !important;
+        mask-position: center;
+        margin: 0 !important;
       }
     }
   }
