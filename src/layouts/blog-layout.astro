@@ -1,5 +1,6 @@
 ---
 import type { InferEntrySchema } from "astro:content";
+import type { MarkdownHeading } from "astro";
 import { emojiSvg } from "#/components/emoji-svg";
 import SEO from "#/components/seo/seo.astro";
 import Breadcrumb from "#/components/ui/breadcrumb.astro";
@@ -8,6 +9,7 @@ import Separator from "#/components/ui/separator.astro";
 import { me } from "#/config/site";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
+import Toc from "#/features/blog/components/ui/toc.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { tags as allTags } from "#/features/blog/config/tag";
 import { getRelatedPosts, toListEntries } from "#/features/blog/utils/entry";
@@ -17,6 +19,7 @@ import { BASE_URL } from "#/utils/base-url";
 interface Props extends InferEntrySchema<"blog"> {
   id: string;
   description: string;
+  headings: MarkdownHeading[];
 }
 
 const {
@@ -30,6 +33,7 @@ const {
   updatedAt,
   description,
   status,
+  headings,
 } = Astro.props;
 
 const categorySlug = category.toLowerCase();
@@ -73,10 +77,13 @@ const currentDate = new Date();
   />
   <slot name='head' slot='head' />
   <section>
-    <Breadcrumb segments={[
-      { label: "Blog", href: "/blog" },
-      { label: categoryObject.label, href: `/blog/categories/${categorySlug}`, isCurrent: true },
-    ]} />
+    <div class="sidebar">
+      <Breadcrumb segments={[
+        { label: "Blog", href: "/blog" },
+        { label: categoryObject.label, href: `/blog/categories/${categorySlug}`, isCurrent: true },
+      ]} />
+      <Toc headings={headings} />
+    </div>
     <div class:list={[status === 'draft' && 'draft-header']}>
       <EmojiEyeCatch emoji={emoji} />
       {status === "draft" && (
@@ -108,6 +115,21 @@ const currentDate = new Date();
 </BaseLayout>
 
 <style>
+  @media (width >= 1280px) {
+    .sidebar {
+      position: fixed;
+      top: 0;
+      transform: translateY(170px) translateX(-260px);
+      width: fit-content;
+    }
+
+    .sidebar :global(.breadcrumb) {
+      position: static;
+      transform: none;
+      margin-bottom: 32px;
+    }
+  }
+
   .draft-header {
     display: flex;
     justify-content: space-between;
@@ -121,6 +143,7 @@ const currentDate = new Date();
 
   .post-title {
     margin-top: 1rem;
+    font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
   }
 
