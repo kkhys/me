@@ -28,8 +28,9 @@ const { as: Tag, id, ...rest } = Astro.props;
   .anchor-wrapper {
     position: absolute;
     width: 2rem;
-    margin-top: 4px;
-    margin-left: -2rem;
+    top: 50%;
+    margin-left: -2.5rem;
+    transform: translateY(-50%);
     display: none;
     opacity: 0;
     transition: opacity 0.2s;
