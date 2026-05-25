@@ -7,10 +7,15 @@ interface Props extends HTMLAttributes<"h2"> {
   id: string;
 }
 
-const { as: Tag, id, ...rest } = Astro.props;
+const { as: Tag, id, class: className, ...rest } = Astro.props;
+const classes = new Set([
+  "heading",
+  "budoux",
+  ...(className?.split(/\s+/).filter(Boolean) ?? []),
+]);
 ---
 
-<Tag id={id} class="heading budoux" {...rest}>
+<Tag id={id} class={[...classes].join(" ")} {...rest}>
   <a href={`#${id}`} class="heading-link"><div class="anchor-wrapper"><div class="anchor-box"><LinkIcon class="anchor-icon" /></div></div><slot /></a>
 </Tag>
 
