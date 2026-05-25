@@ -13,26 +13,44 @@ const blurryImage = await getImage({
   width: 20,
 });
 
+// Wide breakout: render images beyond body width when the source has
+// enough pixels to avoid quality loss at 2x density.
+const WIDE_DISPLAY_PX = 896;
+const WIDE_THRESHOLD_PX = WIDE_DISPLAY_PX * 2;
+const { src } = rest;
+const metadata =
+  typeof src === "object" && src !== null && "width" in src ? src : null;
+const intrinsicWidth = metadata?.width ?? 0;
+const intrinsicHeight = metadata?.height ?? 0;
+const isLandscape = intrinsicWidth > intrinsicHeight;
+const isWide = isLandscape && intrinsicWidth >= WIDE_THRESHOLD_PX;
+
+const widths = isWide
+  ? [640, 750, 828, 1080, 1344, 1792]
+  : [640, 750, 828, 1080, 1344];
+const sizes = isWide
+  ? `(min-width: 960px) ${WIDE_DISPLAY_PX}px, (min-width: 672px) calc(100vw - 4rem), 100vw`
+  : `(min-width: 672px) 672px, 100vw`;
+
 const pictureProps = {
   class: `image-rounded ${className ?? ""}`.trim(),
   formats: ["avif"],
   quality: 80,
-  widths: [640, 750, 828, 1080, 1344],
-  sizes: `(min-width: 672px) 672px, 100vw`,
+  widths,
+  sizes,
   onload: "this.closest('.blur-load')?.classList.add('image-loaded')",
   ...rest,
 } as Parameters<typeof Picture>[0];
 
 // Reserve layout box before image data loads (prevents CLS).
-const { src } = rest;
 const aspectRatio =
-  typeof src === "object" && src !== null && "width" in src
-    ? `${src.width} / ${src.height}`
+  intrinsicWidth && intrinsicHeight
+    ? `${intrinsicWidth} / ${intrinsicHeight}`
     : "auto";
 ---
 
 {title ? (
-  <figure>
+  <figure class:list={[isWide && "image-wide"]}>
     <div class:list={["blur-load-wrapper", "image-rounded", "image-border", className]}>
       <div class="blur-load">
         <AstroPicture {...pictureProps} />
@@ -41,7 +59,7 @@ const aspectRatio =
     <figcaption class="image-caption">{title}</figcaption>
   </figure>
 ) : (
-  <div class:list={["blur-load-wrapper", "image-rounded", "image-border", className]}>
+  <div class:list={["blur-load-wrapper", "image-rounded", "image-border", isWide && "image-wide", className]}>
     <div class="blur-load">
       <AstroPicture {...pictureProps} />
     </div>
@@ -70,6 +88,38 @@ const aspectRatio =
     overflow: hidden;
     max-width: calc(50vh * (var(--aspect-ratio)));
     aspect-ratio: var(--aspect-ratio);
+  }
+
+  /* Numbers below assume main is 42rem wide (see base-layout.astro):
+     - 14rem = max breakout (target 56rem - body 42rem)
+     - 46rem = body 42rem + 2rem breathing room on each side
+     - 23rem = (body 42rem + 4rem breathing room) / 2 */
+  .image-wide {
+    --breakout: max(0px, min(14rem, 100vw - 46rem));
+    width: calc(100% + var(--breakout));
+    max-width: none;
+    margin-inline-start: calc(-1 * var(--breakout) / 2);
+    margin-inline-end: calc(-1 * var(--breakout) / 2);
+  }
+
+  /* When the ToC sidebar is visible, shift breakout to the right side
+     only to avoid collision with the sidebar. */
+  @media (width >= 1280px) {
+    .image-wide {
+      --breakout: max(0px, min(14rem, 50vw - 23rem));
+      margin-inline-start: 0;
+      margin-inline-end: calc(-1 * var(--breakout));
+    }
+  }
+
+  .image-wide .blur-load-wrapper {
+    max-width: none;
+  }
+
+  .image-wide :global(img) {
+    width: 100%;
+    height: auto;
+    max-height: none;
   }
 
   .blur-load {
