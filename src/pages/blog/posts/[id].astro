@@ -6,7 +6,6 @@ import ContentWrapper from "#/features/blog/components/content-wrapper.astro";
 import { getCategoryByTitle } from "#/features/blog/config/category";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import BlogLayout from "#/layouts/blog-layout.astro";
-import { getLastUpdatedTimeByFile } from "#/lib/api/github";
 import { getBlogPostingSchema } from "#/lib/json-ld";
 import { convertDateToString } from "#/utils/date";
 import { extractDescription } from "#/utils/extract-description";
@@ -28,21 +27,8 @@ const { entry, description } = Astro.props;
 const { Content, headings } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
 
-const contentPath = entry.filePath?.replace("me-content/", "");
-
-if (!contentPath) {
-  throw new Error("Content path is not defined");
-}
-
-if (import.meta.env.PROD) {
-  const { lastUpdatedTime } = await getLastUpdatedTimeByFile(contentPath);
-
-  if (lastUpdatedTime) {
-    const updatedAt = new Date(lastUpdatedTime);
-    const updatedAtString = convertDateToString(updatedAt);
-    entry.data.updatedAt = updatedAt;
-    entry.data.updatedAtString = updatedAtString;
-  }
+if (entry.data.updatedAt) {
+  entry.data.updatedAtString = convertDateToString(entry.data.updatedAt);
 }
 
 const blogPostingSchema = getBlogPostingSchema({

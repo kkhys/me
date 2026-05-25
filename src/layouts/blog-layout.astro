@@ -31,10 +31,13 @@ const {
   publishedAt,
   publishedAtString,
   updatedAt,
+  updatedAtString,
   description,
   status,
   headings,
 } = Astro.props;
+
+const hasUpdatedAt = Boolean(updatedAt && updatedAtString);
 
 const categorySlug = category.toLowerCase();
 const categoryObject = getCategoryBySlug(categorySlug);
@@ -92,9 +95,31 @@ const currentDate = new Date();
     </div>
     <h1 class="post-title">{title}</h1>
     <div class="post-meta">
-      <time datetime={publishedAt.toISOString()} class="post-date palt">
-        {publishedAtString}
-      </time>
+      {hasUpdatedAt ? (
+        <button
+          type="button"
+          popovertarget="post-updated-at"
+          class="post-date post-date--trigger palt"
+        >
+          <time datetime={publishedAt.toISOString()}>{publishedAtString}</time>
+        </button>
+        <div id="post-updated-at" popover class="post-updated-at">
+          <dl class="post-updated-at__list">
+            <dt class="post-updated-at__label">Created</dt>
+            <dd class="post-updated-at__date palt">
+              <time datetime={publishedAt.toISOString()}>{publishedAtString}</time>
+            </dd>
+            <dt class="post-updated-at__label">Updated</dt>
+            <dd class="post-updated-at__date palt">
+              <time datetime={updatedAt!.toISOString()}>{updatedAtString}</time>
+            </dd>
+          </dl>
+        </div>
+      ) : (
+        <time datetime={publishedAt.toISOString()} class="post-date palt">
+          {publishedAtString}
+        </time>
+      )}
     </div>
   </section>
   <section class="post-body">
@@ -158,6 +183,86 @@ const currentDate = new Date();
     font-size: var(--fs-sm);
     font-variant-numeric: tabular-nums;
     color: var(--c-sub);
+  }
+
+  .post-date--trigger {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    cursor: pointer;
+    anchor-name: --post-date;
+    border-bottom: 1px dashed
+      color-mix(in oklch, currentColor 30%, transparent);
+  }
+
+  .post-updated-at {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    position-anchor: --post-date;
+    top: anchor(bottom);
+    justify-self: anchor-center;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    color: var(--c-text);
+    opacity: 1;
+    translate: 0 0;
+    transition:
+      opacity 0.2s,
+      translate 0.2s,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+    position-try-fallbacks: --post-updated-at-above;
+  }
+
+  @starting-style {
+    .post-updated-at:popover-open {
+      opacity: 0;
+      translate: 0 -4px;
+    }
+  }
+
+  .post-updated-at:not(:popover-open) {
+    opacity: 0;
+    translate: 0 -4px;
+  }
+
+  .post-updated-at__list {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 0.75rem;
+    row-gap: 0.25rem;
+    align-items: baseline;
+  }
+
+  .post-updated-at__label {
+    margin: 0;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-normal);
+    color: var(--c-sub);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-updated-at__date {
+    margin: 0;
+    font-size: var(--fs-sm);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-text);
+  }
+
+  @position-try --post-updated-at-above {
+    top: auto;
+    bottom: anchor(top);
+    margin-top: 0;
+    margin-bottom: 0.5rem;
   }
 
   .post-body {
