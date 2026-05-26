@@ -35,7 +35,21 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
       max-height: 60vh;
       overflow-y: auto;
       overscroll-behavior: contain;
-      scrollbar-width: thin;
+    }
+
+    .toc::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    .toc::-webkit-scrollbar-thumb {
+      background: var(--c-sub);
+      border-radius: 2px;
+    }
+
+    @supports (-moz-appearance: none) {
+      .toc {
+        scrollbar-width: thin;
+      }
     }
   }
 
