@@ -189,6 +189,7 @@
   .expressive-code {
     & pre {
       max-height: 550px !important;
+      overscroll-behavior: contain;
 
       @media (width >= 640px) {
         max-height: 650px !important;
