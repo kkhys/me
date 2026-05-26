@@ -86,13 +86,34 @@
   html {
     font-family: system-ui, sans-serif;
     scrollbar-gutter: stable both-edges;
-    scrollbar-color: light-dark(var(--uchu-gray-3), var(--uchu-yin-8))
-      transparent;
-    scrollbar-width: thin;
     background-color: var(--c-bg);
     color: var(--c-text);
     /*-webkit-font-smoothing: antialiased;*/
     /*-moz-osx-font-smoothing: grayscale;*/
+  }
+
+  /* Avoid standard scrollbar-* on :root in Chromium: it disables
+     ::-webkit-scrollbar for every scroller on the page. */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: light-dark(var(--uchu-gray-3), var(--uchu-yin-8));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  @supports (-moz-appearance: none) {
+    html {
+      scrollbar-color: light-dark(var(--uchu-gray-3), var(--uchu-yin-8))
+        transparent;
+      scrollbar-width: thin;
+    }
   }
 
   h1 {
