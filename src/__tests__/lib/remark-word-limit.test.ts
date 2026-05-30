@@ -19,7 +19,7 @@ describe("remarkWordLimit", () => {
       await expect(processContent(shortContent)).resolves.toBeDefined();
     });
 
-    test("should accept content at boundary minus one (499 characters)", async () => {
+    test("should accept content at the limit (500 characters)", async () => {
       await expect(processContent(boundaryUnderContent)).resolves.toBeDefined();
     });
 
@@ -29,9 +29,9 @@ describe("remarkWordLimit", () => {
   });
 
   describe("content at or over the limit", () => {
-    test("should reject content exactly at the limit (500 characters)", async () => {
+    test("should reject content just over the limit (501 characters)", async () => {
       await expect(processContent(boundaryAtContent)).rejects.toThrow(
-        "Character count exceeds the limit: 500 characters (limit: 500 characters)",
+        "Character count exceeds the limit: 501 characters (limit: 500 characters)",
       );
     });
 
