@@ -19,14 +19,18 @@ src/
 ├── __fixtures__/               # Test fixtures and sample data
 └── __tests__/                  # Vitest tests
 
-memo-content/                   # Git submodule — all production content lives here, not in main repo
+memo-content/                   # Git submodule — all production content/personal data lives here, not in main repo
+├── memo/                        # Memo directories (index.md + images)
+└── data/                        # Personal data: users.yaml (profiles), oss-projects.json (OSS feed)
 ```
 
 ## Content System
 
 Each memo is a directory in `memo-content/memo/` containing `index.md` and optional images (max 4, JPG/PNG). Schema: `id` (ULID), `createdAt`, `tag?`, `images?`, `comment?` (parent ULID for threaded replies), `isDraft`, `author`, `hideLinkCard`.
 
-`USE_FIXTURE_DATA=true` switches to `src/__fixtures__/memo-sample` for CI/development without the submodule.
+Personal data (user profiles, OSS project list) lives in `memo-content/data/` to keep it out of the public repo. Avatar/cover images stay in `src/assets`. Site-level personal config (author name, site URL, blog RSS URL) is centralized in `src/config/constants.ts`.
+
+`USE_FIXTURE_DATA=true` switches to `src/__fixtures__/memo-sample` (memos) and `src/__fixtures__/users.yaml` (sample profiles) for CI/development without the submodule. OSS entries are skipped in fixture mode.
 
 ## Constraints
 
