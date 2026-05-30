@@ -1,4 +1,5 @@
 import type { APIRoute, GetStaticPaths, ImageMetadata } from "astro";
+import { SITE_URL } from "#/config/constants";
 import { getImagesForMemo } from "#/utils/image";
 import { getPublishedMemos } from "#/utils/memo";
 import { getAuthorInfo } from "#/utils/user";
@@ -37,11 +38,11 @@ export const GET: APIRoute = ({ props }) => {
       author: {
         name: authorName,
         username: memo.data.author,
-        avatar: new URL(avatar.src, "https://memo.kkhys.me").href,
+        avatar: new URL(avatar.src, SITE_URL).href,
       },
       tag: memo.data.tag ?? null,
       images: images.map((img) => ({
-        src: new URL(img.src, "https://memo.kkhys.me").href,
+        src: new URL(img.src, SITE_URL).href,
         width: img.width,
         height: img.height,
       })),

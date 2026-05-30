@@ -1,4 +1,7 @@
 export const SITE_OWNER_SLUG = "kkhys" as const;
+export const SITE_AUTHOR_NAME = "Keisuke Hayashi" as const;
+export const SITE_URL = "https://memo.kkhys.me" as const;
+export const BLOG_RSS_FEED_URL = "https://kkhys.me/rss.xml" as const;
 export const TITLE = "Memo" as const;
 export const DESCRIPTION = "日々のつぶやき" as const;
 export const PAGE_SIZE = 20 as const;

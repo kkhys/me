@@ -1,9 +1,11 @@
 ---
+import { SITE_AUTHOR_NAME } from "#/config/constants";
+
 const currentYear = new Date().getFullYear();
 ---
 
 <footer>
-    <span>&copy;{currentYear} Keisuke Hayashi</span>
+    <span>&copy;{currentYear} {SITE_AUTHOR_NAME}</span>
 </footer>
 
 <style>
