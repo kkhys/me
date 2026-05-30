@@ -24,8 +24,13 @@ const memo = defineCollection({
   }),
 });
 
+const usersPath =
+  process.env.USE_FIXTURE_DATA === "true"
+    ? "src/__fixtures__/users.yaml"
+    : "memo-content/data/users.yaml";
+
 const users = defineCollection({
-  loader: file("src/data/users.yaml"),
+  loader: file(usersPath),
   schema: z.object({
     slug: z.string().regex(/^[a-z][a-z0-9_-]*$/),
     name: z.string(),

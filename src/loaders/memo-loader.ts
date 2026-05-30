@@ -1,12 +1,20 @@
+import { readFileSync } from "node:fs";
 import type { Loader } from "astro/loaders";
 import { glob } from "astro/loaders";
-import { ossProjects } from "../data/oss-projects";
+import { BLOG_RSS_FEED_URL } from "../config/constants";
 import { generateRssEntryId, parseRssItems } from "./rss-parser";
 
-const RSS_FEED_URL = "https://kkhys.me/rss.xml";
 const RSS_FETCH_TIMEOUT_MS = 10_000;
 const BOT_AUTHOR = "blog-feed";
 const OSS_BOT_AUTHOR = "oss-project";
+const OSS_PROJECTS_PATH = "memo-content/data/oss-projects.json";
+
+interface OssProject {
+  slug: string;
+  name: string;
+  url: string;
+  createdAt: string; // ISO 8601
+}
 
 export const generateOssEntryId = (slug: string): string => `oss-${slug}`;
 
@@ -31,7 +39,7 @@ export function memoLoader(): Loader {
         context;
 
       try {
-        const response = await fetch(RSS_FEED_URL, {
+        const response = await fetch(BLOG_RSS_FEED_URL, {
           signal: AbortSignal.timeout(RSS_FETCH_TIMEOUT_MS),
         });
         if (!response.ok) {
@@ -95,6 +103,10 @@ export function memoLoader(): Loader {
 
       // Load OSS project entries
       try {
+        const ossProjects: OssProject[] = JSON.parse(
+          readFileSync(OSS_PROJECTS_PATH, "utf-8"),
+        );
+
         const freshIds = new Set(
           ossProjects.map((p) => generateOssEntryId(p.slug)),
         );

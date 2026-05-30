@@ -1,13 +1,14 @@
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
+import { SITE_URL } from "./src/config/constants";
 import remarkEscapeSyntax from "./src/lib/remark-escape-syntax";
 import remarkExtractLink from "./src/lib/remark-extract-link";
 import remarkTruncateLinkText from "./src/lib/remark-truncate-link-text";
 import remarkWordLimit from "./src/lib/remark-word-limit";
 
 export default defineConfig({
-  site: "https://memo.kkhys.me",
+  site: SITE_URL,
   build: {
     format: "file",
   },
