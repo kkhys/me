@@ -30,7 +30,7 @@ Each memo is a directory in `memo-content/memo/` containing `index.md` and optio
 
 ## Constraints
 
-- Memo body ≤499 characters (enforced at build by remark plugin)
+- Memo body ≤500 characters (enforced at build by remark plugin)
 - Max 4 images per memo (JPG/PNG only)
 - Development shows drafts (`isDraft: true`); production filters them out
 - Path alias: `#/*` → `./src/*`
