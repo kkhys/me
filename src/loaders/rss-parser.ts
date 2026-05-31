@@ -44,7 +44,7 @@ export const parseRssItems = (xml: string): RssItem[] => {
   return items;
 };
 
-export const generateRssEntryId = (guid: string): string => {
+export const generateRssEntryId = (guid: string, prefix = "rss"): string => {
   const slug = guid.replace(/\/$/, "").split("/").pop();
-  return `rss-${slug}`;
+  return `${prefix}-${slug}`;
 };
