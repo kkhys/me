@@ -30,7 +30,7 @@ Each memo is a directory in `memo-content/memo/` containing `index.md` and optio
 
 Personal data (user profiles, OSS project list) lives in `memo-content/data/` to keep it out of the public repo. Avatar/cover images stay in `src/assets`. Site-level personal config (author name, site URL, blog RSS URL) is centralized in `src/config/constants.ts`.
 
-Bot feeds: the memo loader injects entries from external RSS feeds as bot authors — `blog-feed` (`rss-` id prefix) and `zenn-feed` (`zenn-` id prefix), each with a distinct prefix so per-feed stale cleanup stays isolated. OSS projects (`oss-` prefix) come from a local JSON file, not a feed.
+Bot feeds: the memo loader injects entries from external RSS feeds as bot authors — `blog-feed` (`rss-` id prefix) and `zenn-feed` (`zenn-` id prefix), each with a distinct prefix so per-feed stale cleanup stays isolated. Feed XML is cached under `node_modules/.cache/memo-feeds/` with a TTL (default 10 min, override via `FEED_CACHE_TTL_MINUTES`); past the TTL the loader revalidates with conditional requests (ETag/Last-Modified) instead of re-downloading. OSS projects (`oss-` prefix) come from a local JSON file, not a feed.
 
 `USE_FIXTURE_DATA=true` switches to `src/__fixtures__/memo-sample` (memos) and `src/__fixtures__/users.yaml` (sample profiles) for CI/development without the submodule. RSS/Zenn fetches and OSS entries are skipped in fixture mode.
 
