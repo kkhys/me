@@ -1,9 +1,11 @@
 import { defineCollection } from "astro:content";
 import { file, glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { me } from "#/config/site";
 import { categoryTitles } from "#/features/blog/config/category";
 import { externalSites } from "#/features/blog/config/external-site";
 import { allTagTitles } from "#/features/blog/config/tag";
+import { zennLoader } from "#/lib/loaders/zenn";
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "./me-content/blog" }),
@@ -56,4 +58,19 @@ const externalPost = defineCollection({
   }),
 });
 
-export const collections = { blog, pages, bucketList, externalPost };
+const zennPost = defineCollection({
+  loader: zennLoader({ feedUrl: me.zenn.feed }),
+  // Zenn posts are auto-fetched from the RSS feed, which carries no category or
+  // tags, so siteName is fixed to "Zenn" and category to "Tech". To override a
+  // specific article's category/tags, add a manual entry with the same URL to
+  // the externalPost collection (it takes precedence in getPublicListEntries).
+  schema: z.object({
+    title: z.string(),
+    url: z.url(),
+    publishedAt: z.date(),
+    siteName: z.literal("Zenn").default("Zenn"),
+    category: z.literal("Tech").default("Tech"),
+  }),
+});
+
+export const collections = { blog, pages, bucketList, externalPost, zennPost };
