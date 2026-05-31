@@ -138,4 +138,17 @@ describe("generateRssEntryId", () => {
     const guid = "https://kkhys.me/blog/posts/abc123";
     expect(generateRssEntryId(guid)).toBe(generateRssEntryId(guid));
   });
+
+  test("should use a custom prefix when provided", () => {
+    expect(
+      generateRssEntryId("https://zenn.dev/kkhys/articles/my-article", "zenn"),
+    ).toBe("zenn-my-article");
+  });
+
+  test("should keep prefixes isolated across feeds", () => {
+    const guid = "https://example.com/posts/shared-slug";
+    expect(generateRssEntryId(guid, "rss")).not.toBe(
+      generateRssEntryId(guid, "zenn"),
+    );
+  });
 });
