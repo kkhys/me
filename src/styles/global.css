@@ -187,6 +187,20 @@
   }
 
   .expressive-code {
+    /* Empty code lines serialize as " \n ", which renders as two rows under
+       white-space: pre. Collapse the stray newline so blank lines stay 1 row. */
+    & .ec-line .code:not(:has(*)) {
+      white-space: nowrap !important;
+    }
+
+    /* Line numbers ship with surrounding spaces (" 9 ", " 10 ") that
+       white-space: pre preserves, widening the gutter for 2-digit numbers and
+       shifting the code. Collapse that whitespace so every row stays aligned.
+       Gutter width/padding is otherwise left at the plugin default. */
+    & .gutter .ln {
+      white-space: normal !important;
+    }
+
     & pre {
       max-height: 550px !important;
       overscroll-behavior: contain;
