@@ -294,6 +294,12 @@
     &:focus-visible {
       border-color: var(--c-ring);
       box-shadow: 0 0 0 3px oklch(from var(--c-ring) l c h / 50%);
+
+      /* box-shadow is stripped in Forced Colors Mode; restore a visible ring. */
+      @media (forced-colors: active) {
+        outline: 2px solid;
+        outline-offset: 2px;
+      }
     }
 
     & svg {
