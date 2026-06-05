@@ -354,3 +354,19 @@
     border: 0;
   }
 }
+
+/* ===== Reduced Motion ===== */
+
+/* Honor the user's OS-level "reduce motion" setting (vestibular disorders,
+   motion sensitivity). Kept unlayered so these !important rules reliably win
+   over any layered declaration. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
