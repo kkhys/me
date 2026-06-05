@@ -60,8 +60,15 @@ const { tags, class: className, ...rest } = Astro.props;
     transform: scale(0.98);
   }
 
-  .tag:focus {
+  .tag:focus-visible {
     outline: none;
+    box-shadow: 0 0 0 3px oklch(from var(--c-ring) l c h / 50%);
+
+    /* box-shadow is stripped in Forced Colors Mode; restore a visible ring. */
+    @media (forced-colors: active) {
+      outline: 2px solid;
+      outline-offset: 2px;
+    }
   }
 
   .tag-emoji {
