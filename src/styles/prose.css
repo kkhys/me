@@ -4,8 +4,12 @@
 }
 
 .prose img {
-  max-height: 50vh;
+  max-height: 50dvh;
   width: auto;
+}
+
+.prose :is(p, li, blockquote) {
+  text-wrap: pretty;
 }
 
 .prose p,
