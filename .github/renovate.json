@@ -24,6 +24,11 @@
       "matchDepTypes": ["dependencies"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
+    },
+    {
+      "groupName": "Expressive Code",
+      "matchPackageNames": ["astro-expressive-code", "@expressive-code/**"],
+      "automerge": true
     }
   ]
 }
