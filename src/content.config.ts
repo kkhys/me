@@ -7,8 +7,13 @@ import { externalSites } from "#/features/blog/config/external-site";
 import { allTagTitles } from "#/features/blog/config/tag";
 import { zennLoader } from "#/lib/loaders/zenn";
 
+// Blog content lives in the `me-content` git submodule. CI overrides this with
+// a lightweight fixture directory so the build can be smoke-tested without
+// fetching the heavy submodule. See `.github/workflows/ci.yml`.
+const contentDir = process.env.CONTENT_DIR ?? "me-content";
+
 const blog = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./me-content/blog" }),
+  loader: glob({ pattern: "**/*.mdx", base: `./${contentDir}/blog` }),
   schema: z.object({
     title: z.string(),
     emoji: z.string(),
@@ -31,7 +36,7 @@ const pages = defineCollection({
 });
 
 const bucketList = defineCollection({
-  loader: file("me-content/bucket-list/data.yaml"),
+  loader: file(`${contentDir}/bucket-list/data.yaml`),
   schema: z.array(
     z.record(
       z.string(),
