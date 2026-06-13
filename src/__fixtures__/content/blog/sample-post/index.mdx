@@ -1,0 +1,26 @@
+---
+title: CI fixture post
+emoji: 🧪
+category: Tech
+tags: [Astro]
+status: published
+publishedAt: 2024-01-01
+slug: fixt001
+---
+
+This published fixture post lets CI smoke-test the blog build without fetching
+the `me-content` submodule. It exercises the common MDX features used across
+real posts.
+
+## Heading
+
+Body text with an [inline link](https://example.com) and a footnote.[^1]
+
+```ts
+const greeting: string = "hello";
+console.log(greeting);
+```
+
+![Sample image](./sample.png)
+
+[^1]: A footnote, to exercise the footnote remark plugin.
