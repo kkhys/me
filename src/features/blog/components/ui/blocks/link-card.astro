@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 import GlobeIcon from "#/components/icons/globe.svg";
 import { getMetadata } from "#/lib/api/metadata";
@@ -13,6 +13,12 @@ const props = Astro.props;
 
 const isExternal = !props.href.startsWith(BASE_URL);
 const { title, description, image } = await getMetadata(props.href);
+
+// Tiny blurred placeholder shown until the real OG image loads, matching the
+// blur-load effect used by content and memo-card images.
+const blurryImage = image
+  ? await getImage({ src: image.src, width: 20, height: 11, format: "avif" })
+  : undefined;
 ---
 
 <div class="link-card">
@@ -37,16 +43,22 @@ const { title, description, image } = await getMetadata(props.href);
     </div>
     <div class="link-card-image">
       {image && (
-          <Image
-              src={image.src}
-              alt={`${title}のカバー画像`}
-              width={1200}
-              height={630}
-              widths={[230, 460, 690, 920, 1200]}
-              sizes="(max-width: 639.98px) 100vw, 230px"
-              format="avif"
-              class="link-card-img"
-          />
+          <div
+              class="link-card-blur-load blur-load"
+              style={`background-image: url(${blurryImage?.src})`}
+          >
+            <Image
+                src={image.src}
+                alt={`${title}のカバー画像`}
+                width={1200}
+                height={630}
+                widths={[230, 460, 690, 920, 1200]}
+                sizes="(max-width: 639.98px) 100vw, 230px"
+                format="avif"
+                class="link-card-img"
+                onload="this.closest('.link-card-blur-load')?.classList.add('image-loaded')"
+            />
+          </div>
       )}
     </div>
   </a>
@@ -137,7 +149,23 @@ const { title, description, image } = await getMetadata(props.href);
     aspect-ratio: 40 / 21;
   }
 
+  .link-card-blur-load {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(36px);
+    transition: filter 250ms ease-in-out;
+  }
+
+  .link-card-blur-load.image-loaded {
+    background-image: none !important;
+    filter: none;
+  }
+
   .link-card-img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
