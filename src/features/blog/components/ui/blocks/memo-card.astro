@@ -16,6 +16,17 @@ const memoId = extractMemoId(props.href);
 const memo = memoId ? await getMemoPost(memoId) : null;
 const hasImages = memo && memo.images.length > 0;
 
+// The memo API returns the raw markdown body, where items are separated by
+// blank lines. Split on blank lines so each chunk renders as its own paragraph,
+// mirroring how memo.kkhys.me displays the post (otherwise the line breaks
+// collapse into a single run-together block).
+const paragraphs = memo
+  ? memo.body
+      .split(/\n\s*\n/)
+      .map((paragraph) => paragraph.trim())
+      .filter((paragraph) => paragraph.length > 0)
+  : [];
+
 const blurryImages = hasImages
   ? await Promise.all(
       memo.images.map((img) =>
@@ -61,9 +72,11 @@ const blurryImages = hasImages
 
           {/* Body */}
           <div class="memo-body">
-            <span class="memo-text">
-              <Budoux>{memo.body}</Budoux>
-            </span>
+            {paragraphs.map((paragraph) => (
+              <p class="memo-text">
+                <Budoux>{paragraph}</Budoux>
+              </p>
+            ))}
           </div>
 
           {/* Tag */}
@@ -209,8 +222,13 @@ const blurryImages = hasImages
   }
 
   .memo-text {
+    margin: 0;
     font-size: var(--fs-sm);
     font-weight: var(--fw-normal);
+  }
+
+  .memo-text + .memo-text {
+    margin-top: 0.125rem;
   }
 
   .memo-media {
