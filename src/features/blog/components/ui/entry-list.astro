@@ -54,7 +54,7 @@ const { entries, class: className, showDate = false, ...rest } = Astro.props;
       return (
         <a href={`/blog/posts/${entry.id}`} class="entry-item">
           <div class="entry-left">
-            <EmojiEyeCatch emoji={entry.emoji} size="sm" class="entry-emoji" />
+            <EmojiEyeCatch emoji={entry.emoji} size="sm" isColored class="entry-emoji" />
             <Budoux>
               <p class="palt">{entry.title}</p>
             </Budoux>
