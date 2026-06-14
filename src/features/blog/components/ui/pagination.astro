@@ -10,9 +10,7 @@ const { page, class: className, ...attrs } = Astro.props;
 
 const { currentPage, lastPage, total } = page;
 
-// Zero-pad to a consistent width for a tidy, editorial counter (e.g. "02 / 04").
-const pad = Math.max(2, String(lastPage).length);
-const format = (n: number) => String(n).padStart(pad, "0");
+const format = (n: number) => String(n);
 
 // Build the href for an arbitrary page. Page 1 lives at the base path
 // (`/blog`, `/blog/categories/tech`), the rest at `${base}/${n}`. Prev/next
