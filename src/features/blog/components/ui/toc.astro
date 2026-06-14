@@ -72,9 +72,55 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
     line-height: 1.25;
     color: var(--c-sub);
     text-decoration: none;
+    transition: color 0.2s;
   }
 
-  .toc-link:hover {
+  .toc-link:hover,
+  .toc-link--active {
     color: var(--c-text);
   }
 </style>
+
+<script>
+  import { pickActiveId } from "#/features/blog/utils/toc-active";
+
+  const ACTIVE_CLASS = "toc-link--active";
+
+  const toc = document.querySelector(".toc");
+  if (toc) {
+    const links = [...toc.querySelectorAll<HTMLAnchorElement>(".toc-link")];
+    const linkById = new Map(
+      links.map((link) => [decodeURIComponent(link.hash.slice(1)), link]),
+    );
+    const headings = [
+      ...document.querySelectorAll<HTMLElement>(".prose :is(h2, h3)[id]"),
+    ].filter((heading) => linkById.has(heading.id));
+    const orderedIds = headings.map((heading) => heading.id);
+    const visibleIds = new Set<string>();
+    let activeId: string | null = null;
+
+    const setActive = (id: string | null) => {
+      if (id === activeId) return;
+      activeId = id;
+      const activeLink = id ? linkById.get(id) : undefined;
+      for (const link of links) {
+        link.classList.toggle(ACTIVE_CLASS, link === activeLink);
+      }
+      activeLink?.scrollIntoView({ block: "nearest" });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visibleIds.add(entry.target.id);
+          else visibleIds.delete(entry.target.id);
+        }
+        setActive(pickActiveId(orderedIds, visibleIds, activeId));
+      },
+      // Treat the top 20% of the viewport as the "current section" band.
+      { rootMargin: "0px 0px -80% 0px" },
+    );
+
+    for (const heading of headings) observer.observe(heading);
+  }
+</script>
