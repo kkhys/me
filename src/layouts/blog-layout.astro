@@ -80,11 +80,11 @@ const currentDate = new Date();
   />
   <slot name='head' slot='head' />
   <section>
+    <Breadcrumb segments={[
+      { label: "Blog", href: "/blog" },
+      { label: categoryObject.label, href: `/blog/categories/${categorySlug}`, isCurrent: true },
+    ]} />
     <div class="sidebar">
-      <Breadcrumb segments={[
-        { label: "Blog", href: "/blog" },
-        { label: categoryObject.label, href: `/blog/categories/${categorySlug}`, isCurrent: true },
-      ]} />
       <Toc headings={headings} />
     </div>
     <div class:list={[status === 'draft' && 'draft-header']}>
@@ -144,14 +144,11 @@ const currentDate = new Date();
     .sidebar {
       position: fixed;
       top: 0;
-      transform: translateY(170px) translateX(-260px);
+      /* Keep the ToC where it was: 170px (original sidebar offset) + 56px
+         (the breadcrumb block that has since moved to the top) holds it in place. */
+      left: 2rem;
+      transform: translateY(226px);
       width: fit-content;
-    }
-
-    .sidebar :global(.breadcrumb) {
-      position: static;
-      transform: none;
-      margin-bottom: 32px;
     }
   }
 
