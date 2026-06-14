@@ -2,7 +2,7 @@
 /** @jsxRuntime automatic */
 
 import satori from "satori";
-import { getIconCode, loadEmoji } from "#/lib/api/emoji";
+import { getFirstGrapheme, getIconCode, loadEmoji } from "#/lib/api/emoji";
 import { loadFont } from "#/utils/font-loader";
 
 export const emojiSvg = async ({
@@ -12,7 +12,7 @@ export const emojiSvg = async ({
   emoji: string;
   isColored?: boolean;
 }) => {
-  const firstEmoji = Array.from(emoji)[0];
+  const firstEmoji = getFirstGrapheme(emoji);
 
   const selectedFont = isColored
     ? await loadFont("./src/assets/Inter-Medium.ttf")
@@ -46,7 +46,12 @@ export const emojiSvg = async ({
       ],
       loadAdditionalAsset: async (code: string, segment: string) => {
         if (isColored && code === "emoji") {
-          const result = await loadEmoji("fluent", getIconCode(segment));
+          const iconCode = getIconCode(segment);
+          // Prefer fluent, but fall back to twemoji for emojis fluent omits
+          // (notably country/region flags).
+          const result =
+            (await loadEmoji("fluent", iconCode)) ??
+            (await loadEmoji("twemoji", iconCode));
           if (!result) {
             throw new Error(`Failed to load emoji for segment: ${segment}`);
           }

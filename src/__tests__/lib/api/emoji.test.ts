@@ -35,6 +35,37 @@ describe("getIconCode", () => {
   });
 });
 
+describe("getFirstGrapheme", () => {
+  let getFirstGrapheme: (value: string) => string;
+
+  beforeEach(async () => {
+    vi.resetModules();
+    const mod = await import("#/lib/api/emoji");
+    getFirstGrapheme = mod.getFirstGrapheme;
+  });
+
+  it("returns the first grapheme of a simple string", () => {
+    expect(getFirstGrapheme("😀x")).toBe("😀");
+  });
+
+  it("keeps a regional indicator (flag) pair intact", () => {
+    // U+1F1EA U+1F1EA (Estonia flag)
+    const flag = "🇪🇪";
+    expect(getFirstGrapheme(flag)).toBe(flag);
+  });
+
+  it("keeps a ZWJ sequence intact", () => {
+    // Family emoji: U+1F468 U+200D U+1F469 U+200D U+1F467
+    const zwj = String.fromCharCode(8205);
+    const family = `👨${zwj}👩${zwj}👧`;
+    expect(getFirstGrapheme(`${family}😀`)).toBe(family);
+  });
+
+  it("returns an empty string for an empty input", () => {
+    expect(getFirstGrapheme("")).toBe("");
+  });
+});
+
 describe("loadEmoji", () => {
   type EmojiType =
     | "twemoji"
@@ -50,6 +81,7 @@ describe("loadEmoji", () => {
     vi.stubGlobal(
       "fetch",
       vi.fn().mockResolvedValue({
+        ok: true,
         text: () => Promise.resolve("<svg>mock</svg>"),
       }),
     );
@@ -112,5 +144,19 @@ describe("loadEmoji", () => {
     expect(fetch).toHaveBeenCalledWith(
       "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f600.svg",
     );
+  });
+
+  it("returns undefined when the response is not ok", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: false,
+        text: () => Promise.resolve("Not Found"),
+      }),
+    );
+    const { loadEmoji: load } = await import("#/lib/api/emoji");
+
+    const result = await load("fluent", "1f1ea-1f1ea");
+    expect(result).toBeUndefined();
   });
 });

@@ -36,9 +36,18 @@ export const getIconCode = (char: string) => {
   return toCodePoint(!char.includes(U200D) ? char.replace(UFE0Fg, "") : char);
 };
 
+// Return the first grapheme cluster, not the first code point. Flags (Regional
+// Indicator pairs) and ZWJ sequences span multiple code points, so naive
+// indexing would split them and yield a broken fragment.
+export const getFirstGrapheme = (value: string) => {
+  const segmenter = new Intl.Segmenter();
+  const [first] = segmenter.segment(value);
+  return first?.segment ?? value;
+};
+
 import { createCache } from "#/lib/api/cache";
 
-const cache = createCache<string>();
+const cache = createCache<string | undefined>();
 
 export const loadEmoji = (type: keyof typeof apis, code: string) => {
   const key = `${type}:${code}`;
@@ -46,13 +55,13 @@ export const loadEmoji = (type: keyof typeof apis, code: string) => {
   return cache(key, async () => {
     const resolvedType = type && apis[type] ? type : "twemoji";
     const api = apis[resolvedType];
+    const url =
+      typeof api === "function" ? api(code) : `${api}${code.toUpperCase()}.svg`;
 
-    if (typeof api === "function") {
-      const r = await fetch(api(code));
-      return r.text();
-    }
-
-    const r = await fetch(`${api}${code.toUpperCase()}.svg`);
+    const r = await fetch(url);
+    // A set may not provide every emoji (e.g. fluent omits country flags).
+    // Return undefined so callers can fall back to another set.
+    if (!r.ok) return undefined;
     return r.text();
   });
 };

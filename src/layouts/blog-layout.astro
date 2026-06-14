@@ -88,7 +88,7 @@ const currentDate = new Date();
       <Toc headings={headings} />
     </div>
     <div class:list={[status === 'draft' && 'draft-header']}>
-      <EmojiEyeCatch emoji={emoji} />
+      <EmojiEyeCatch emoji={emoji} isColored />
       {status === "draft" && (
           <span class="draft-badge">Draft</span>
       )}
