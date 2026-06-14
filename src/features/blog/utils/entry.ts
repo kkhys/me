@@ -58,29 +58,40 @@ export const toListEntries = (
     publishedAt: entry.data.publishedAt,
   }));
 
-const toExternalListEntries = (
-  externalEntries: CollectionEntry<"externalPost">[],
-): ListEntry[] =>
-  externalEntries.map((entry) => ({
-    type: "external",
-    title: entry.data.title,
-    url: entry.data.url,
-    siteName: entry.data.siteName as ExternalSite,
-    category: entry.data.category,
-    tags: entry.data.tags,
-    publishedAt: entry.data.publishedAt,
-  }));
+const toExternalEntry = (data: {
+  title: string;
+  url: string;
+  siteName: string;
+  category: string;
+  tags?: string[] | undefined;
+  publishedAt: Date;
+}): ExternalEntry => ({
+  type: "external",
+  title: data.title,
+  url: data.url,
+  siteName: data.siteName as ExternalSite,
+  category: data.category,
+  tags: data.tags,
+  publishedAt: data.publishedAt,
+});
 
 export const getPublicListEntries = async (
   sort: "asc" | "desc" = "desc",
 ): Promise<ListEntry[]> => {
   const blogEntries = await getPublicBlogEntries(sort);
   const externalEntries = await getCollection("externalPost");
+  const zennEntries = await getCollection("zennPost");
 
   const internal = toListEntries(blogEntries);
-  const external = toExternalListEntries(externalEntries);
+  const external = externalEntries.map((entry) => toExternalEntry(entry.data));
+  const zenn = zennEntries.map((entry) => toExternalEntry(entry.data));
 
-  return [...internal, ...external].sort((a, b) => {
+  // Manually curated external posts take precedence over auto-fetched Zenn
+  // posts sharing the same URL, allowing per-article category/tag overrides.
+  const manualUrls = new Set(external.map((entry) => entry.url));
+  const dedupedZenn = zenn.filter((entry) => !manualUrls.has(entry.url));
+
+  return [...internal, ...external, ...dedupedZenn].sort((a, b) => {
     const dateA = a.publishedAt.getTime();
     const dateB = b.publishedAt.getTime();
     return sort === "asc" ? dateA - dateB : dateB - dateA;

@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 import GlobeIcon from "#/components/icons/globe.svg";
 import { getMetadata } from "#/lib/api/metadata";
@@ -13,6 +13,12 @@ const props = Astro.props;
 
 const isExternal = !props.href.startsWith(BASE_URL);
 const { title, description, image } = await getMetadata(props.href);
+
+// Tiny blurred placeholder shown until the real OG image loads, matching the
+// blur-load effect used by content and memo-card images.
+const blurryImage = image
+  ? await getImage({ src: image.src, width: 20, height: 11, format: "avif" })
+  : undefined;
 ---
 
 <div class="link-card">
@@ -37,14 +43,22 @@ const { title, description, image } = await getMetadata(props.href);
     </div>
     <div class="link-card-image">
       {image && (
-          <Image
-              src={image.src}
-              alt={`${title}のカバー画像`}
-              width={460}
-              height={240}
-              format="avif"
-              class="link-card-img"
-          />
+          <div
+              class="link-card-blur-load blur-load"
+              style={`background-image: url(${blurryImage?.src})`}
+          >
+            <Image
+                src={image.src}
+                alt={`${title}のカバー画像`}
+                width={1200}
+                height={630}
+                widths={[230, 460, 690, 920, 1200]}
+                sizes="(max-width: 639.98px) 100vw, 230px"
+                format="avif"
+                class="link-card-img"
+                onload="this.closest('.link-card-blur-load')?.classList.add('image-loaded')"
+            />
+          </div>
       )}
     </div>
   </a>
@@ -63,11 +77,12 @@ const { title, description, image } = await getMetadata(props.href);
     transform: scale(0.99);
   }
 
+  /* Mobile: stack vertically with the image on top (image is the last child,
+     so column-reverse lifts it above the text). */
   .link-card-inner {
     display: flex;
-    height: 120px;
+    flex-direction: column-reverse;
     width: 100%;
-    align-items: center;
     color: inherit;
     text-decoration: none;
     box-shadow: var(--shadow-sm);
@@ -80,7 +95,7 @@ const { title, description, image } = await getMetadata(props.href);
 
   .link-card-content {
     min-width: 0;
-    flex: 1;
+    width: 100%;
     padding: 0.5rem 1rem;
   }
 
@@ -128,21 +143,50 @@ const { title, description, image } = await getMetadata(props.href);
     font-size: var(--fs-xs);
   }
 
+  /* Mobile: full-width banner on top, kept at the standard OG ratio. */
   .link-card-image {
-    width: 120px;
-    height: 120px;
-    max-width: 230px;
+    width: 100%;
+    aspect-ratio: 40 / 21;
   }
 
-  @media (width >= 640px) {
-    .link-card-image {
-      width: auto;
-    }
+  .link-card-blur-load {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(36px);
+    transition: filter 250ms ease-in-out;
+  }
+
+  .link-card-blur-load.image-loaded {
+    background-image: none !important;
+    filter: none;
   }
 
   .link-card-img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  /* Desktop: horizontal row with the image beside the text, same ratio. */
+  @media (width >= 640px) {
+    .link-card-inner {
+      flex-direction: row;
+      height: 120px;
+      align-items: center;
+    }
+
+    .link-card-content {
+      flex: 1;
+      width: auto;
+    }
+
+    .link-card-image {
+      width: auto;
+      height: 100%;
+    }
   }
 </style>

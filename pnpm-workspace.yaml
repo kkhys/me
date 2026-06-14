@@ -1,6 +1,12 @@
-minimumReleaseAge: 4320
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - scrub-exif
+
+packages:
+  - me-content
 
 allowBuilds:
   esbuild: true
+  lefthook: true
   sharp: true
   workerd: false

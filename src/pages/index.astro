@@ -24,12 +24,12 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     <Budoux>
       <div class="home-body prose">
         <p><a href="/about" class="home-link">コードを書いて暮らしています</a>。色々なものを作ることが好きです。プログラミングのことから手縫いの服づくりまで、日々のことや手に馴染む道具の話をブログに残しています。</p>
-        <p>コードを書いていないときは、珈琲を淹れたりチョコレートを食べたりジムで体を動かしたりしています。日々考えたことは<a href="https://memo.kkhys.me" target="_blank" rel="noreferrer" class="home-link external-link">メモ<MoveUpRightIcon class="external-icon" /></a>に書き留めて、いつかやりたいことは<a href="/bucket-list" class="home-link">バケットリスト</a>にまとめています。</p>
+        <p>コードを書いていないときは、珈琲を淹れたりボクシングジムで汗を流したりしています。日々考えたことは<a href="https://memo.kkhys.me" target="_blank" rel="noreferrer" class="home-link external-link">メモ<MoveUpRightIcon class="external-icon" /></a>に書き留めて、いつかやりたいことは<a href="/bucket-list" class="home-link">バケットリスト</a>にまとめています。</p>
         <p>私の好きな文章には次のようなものがあります。</p>
         <ul class="home-list">
+          <li><a href="/blog/posts/b1qjure" class="home-link">2026年5月時点の開発環境スナップショット</a></li>
           <li><a href="/blog/posts/b1ty460" class="home-link">デスク構成スナップショット2025</a></li>
           <li><a href="/blog/posts/b1r3zrr" class="home-link">Mac miniという選択</a></li>
-          <li><a href="/blog/posts/b1ppkfs" class="home-link">さよなら、My自作PC</a></li>
           <li><a href="/blog/posts/b1zn5cl" class="home-link">景色と料理を楽しむ、鹿児島3泊4日の旅</a></li>
           <li><a href="/blog/posts/b17ruev" class="home-link">7日間のマレーシア放浪記</a></li>
         </ul>
@@ -64,15 +64,15 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
   }
 
   .external-link {
-    display: inline-flex;
-    align-items: center;
+    white-space: nowrap;
   }
 
   .external-icon {
+    display: inline-block;
     margin-inline: 0.25rem;
-    margin-top: 0.125rem;
     width: 0.75rem;
     height: 0.75rem;
+    vertical-align: -0.05em;
   }
 
   .home-link:visited {

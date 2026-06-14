@@ -41,7 +41,11 @@ const pathname = Astro.url.pathname;
     -ms-overflow-style: none;
     scrollbar-width: none;
 
-    animation: scroll-mask linear both;
+    /* No `both` fill: with it, Firefox keeps applying a keyframe mask even when
+       the nav doesn't overflow (timeline inactive), clipping the leftmost pill
+       and making it look shadowed. Firefox also needs an explicit duration for
+       scroll-driven animations; the scroll timeline still drives progress. */
+    animation: scroll-mask 1ms linear;
     animation-timeline: --category-scroll;
   }
 
@@ -78,6 +82,13 @@ const pathname = Astro.url.pathname;
 
   .cat-link:hover {
     color: var(--c-primary);
+  }
+
+  /* The scroller clips overflow (and applies an edge-fade mask), so draw the
+     ring inset to keep it fully visible. */
+  .cat-link:focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: calc(-1 * var(--ring-width));
   }
 
   .cat-link--active {

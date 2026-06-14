@@ -93,23 +93,13 @@ const aspectRatio =
   /* Numbers below assume main is 42rem wide (see base-layout.astro):
      - 14rem = max breakout (target 56rem - body 42rem)
      - 46rem = body 42rem + 2rem breathing room on each side
-     - 23rem = (body 42rem + 4rem breathing room) / 2 */
+     The breakout is symmetric, so the image stays centered in the viewport. */
   .image-wide {
     --breakout: max(0px, min(14rem, 100vw - 46rem));
     width: calc(100% + var(--breakout));
     max-width: none;
     margin-inline-start: calc(-1 * var(--breakout) / 2);
     margin-inline-end: calc(-1 * var(--breakout) / 2);
-  }
-
-  /* When the ToC sidebar is visible, shift breakout to the right side
-     only to avoid collision with the sidebar. */
-  @media (width >= 1280px) {
-    .image-wide {
-      --breakout: max(0px, min(14rem, 50vw - 23rem));
-      margin-inline-start: 0;
-      margin-inline-end: calc(-1 * var(--breakout));
-    }
   }
 
   .image-wide .blur-load-wrapper {

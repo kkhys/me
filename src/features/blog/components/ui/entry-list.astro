@@ -107,6 +107,13 @@ const { entries, class: className, showDate = false, ...rest } = Astro.props;
     background-color: oklch(from var(--c-surface) l c h / 50%);
   }
 
+  /* Full-bleed rows: an outer ring would overlap the sibling separators, so
+     draw it inset. */
+  .entry-item:focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: calc(-1 * var(--ring-width));
+  }
+
   .entry-left {
     display: flex;
     align-items: center;

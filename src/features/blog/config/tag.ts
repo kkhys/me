@@ -211,6 +211,12 @@ export const tags = [
     slug: "chocolate",
     emoji: "🍫",
   },
+  {
+    title: "Boxing",
+    label: "ボクシング",
+    slug: "boxing",
+    emoji: "🥊",
+  },
 ] as const satisfies Tag[];
 
 export const allTagTitles = tags.map(({ title }) => title);

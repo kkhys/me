@@ -60,8 +60,9 @@ const { tags, class: className, ...rest } = Astro.props;
     transform: scale(0.98);
   }
 
-  .tag:focus {
-    outline: none;
+  .tag:focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: var(--ring-offset);
   }
 
   .tag-emoji {

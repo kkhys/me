@@ -7,41 +7,332 @@ interface Props extends HTMLAttributes<"nav"> {
 }
 
 const { page, class: className, ...attrs } = Astro.props;
+
+const { currentPage, lastPage, total } = page;
+
+const format = (n: number) => String(n);
+
+// Build the href for an arbitrary page. Page 1 lives at the base path
+// (`/blog`, `/blog/categories/tech`), the rest at `${base}/${n}`. Prev/next
+// reuse Astro-generated URLs so their format always matches the router.
+const firstUrl = page.url.first ?? page.url.current;
+const base = firstUrl.replace(/\/$/, "");
+const hrefFor = (n: number) => (n === 1 ? firstUrl : `${base}/${n}`);
+
+const pages = Array.from({ length: lastPage }, (_, i) => i + 1);
+
+// A unique popover id so multiple paginations on one page never collide.
+const menuId = `page-menu-${currentPage}-${lastPage}`;
 ---
 
-<nav aria-label="pagination" class:list={["pagination", className]} {...attrs}>
-  {page.url.prev ? (
-    <a href={page.url.prev} rel="prev" class="pagination-link">Previous</a>
-  ) : (
-    <span role="link" aria-disabled="true" class="pagination-link pagination-disabled">Previous</span>
-  )}
-  {page.url.next ? (
-    <a href={page.url.next} rel="next" class="pagination-link">Next</a>
-  ) : (
-    <span role="link" aria-disabled="true" class="pagination-link pagination-disabled">Next</span>
-  )}
-</nav>
+{lastPage > 1 && (
+  <nav aria-label="Pagination" class:list={["pagination", className]} {...attrs}>
+    <div class="pager">
+      {page.url.prev ? (
+        <a href={page.url.prev} rel="prev" class="pager-arrow" aria-label="Previous page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </a>
+      ) : (
+        <span class="pager-arrow pager-arrow--disabled" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </span>
+      )}
+
+      <button
+        type="button"
+        class="pager-current"
+        popovertarget={menuId}
+        aria-label={`Page ${currentPage} of ${lastPage}. Select a page`}
+      >
+        <span class="pager-current-num">{format(currentPage)}</span>
+        <span class="pager-sep">/</span>
+        <span class="pager-total">{format(lastPage)}</span>
+        <svg class="pager-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+
+      {page.url.next ? (
+        <a href={page.url.next} rel="next" class="pager-arrow" aria-label="Next page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </a>
+      ) : (
+        <span class="pager-arrow pager-arrow--disabled" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </span>
+      )}
+
+      <div id={menuId} popover class="page-menu">
+        <p class="page-menu-total">
+          <span class="page-menu-total-num">{total}</span> posts
+        </p>
+        <ul class="page-menu-list">
+          {pages.map((n) =>
+            n === currentPage ? (
+              <li>
+                <span class="page-menu-item page-menu-item--current" aria-current="page">
+                  {format(n)}
+                </span>
+              </li>
+            ) : (
+              <li>
+                <a href={hrefFor(n)} class="page-menu-item">
+                  {format(n)}
+                </a>
+              </li>
+            ),
+          )}
+        </ul>
+      </div>
+    </div>
+  </nav>
+)}
 
 <style>
   .pagination {
     display: flex;
     justify-content: center;
-    gap: 2rem;
     width: 100%;
   }
 
-  .pagination-link {
-    color: var(--color-fg-default);
-    text-decoration: none;
-    font-size: 0.875rem;
+  /* Connected pill: [ ‹ | 02 / 04 ⌄ | › ] */
+  .pager {
+    display: inline-flex;
+    align-items: stretch;
+    height: 2.5rem;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-full);
+    /* Clip each segment's hover fill to the pill's rounded ends.
+       The page picker is a popover (top layer), so it escapes this clip. */
+    overflow: hidden;
+  }
 
-    &:hover {
-      text-decoration: underline;
+  .pager-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    color: var(--c-sub);
+    transition:
+      color 0.18s ease,
+      background-color 0.18s ease;
+  }
+
+  .pager-arrow svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .pager-arrow:hover {
+    color: var(--c-surface-text);
+    background-color: var(--c-surface);
+  }
+
+  .pager-arrow--disabled {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  /* Center segment: current page + total, opens the page picker. */
+  .pager-current {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding-inline: 0.95rem;
+    /* Reset native button, keep only the inline dividers. */
+    appearance: none;
+    background: none;
+    border: 0;
+    border-inline: 1px solid var(--c-border);
+    color: var(--c-text);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+    cursor: pointer;
+    anchor-name: --pager;
+    transition: background-color 0.18s ease;
+  }
+
+  .pager-current:hover,
+  .pager:has(.page-menu:popover-open) .pager-current {
+    background-color: var(--c-surface);
+  }
+
+  .pager-current-num {
+    font-weight: var(--fw-medium);
+  }
+
+  .pager-sep,
+  .pager-total {
+    color: var(--c-sub);
+  }
+
+  .pager-caret {
+    align-self: center;
+    width: 0.9rem;
+    height: 0.9rem;
+    color: var(--c-sub);
+    transition: rotate 0.2s ease;
+  }
+
+  /* Flip the caret while the picker is open (no JS, :has + :popover-open). */
+  .pager:has(.page-menu:popover-open) .pager-caret {
+    rotate: 180deg;
+  }
+
+  /* Round the end segments' outer corners to match the pill so a per-segment
+     inset ring follows the rounded ends instead of cutting a square corner. */
+  .pager > .pager-arrow:first-child {
+    border-start-start-radius: var(--radius-full);
+    border-end-start-radius: var(--radius-full);
+  }
+
+  .pager > .pager-current + .pager-arrow {
+    border-start-end-radius: var(--radius-full);
+    border-end-end-radius: var(--radius-full);
+  }
+
+  /* Inset focus ring per segment: drawn inside the segment so the pill's
+     overflow clip never trims it, and it follows the rounded ends above. */
+  .pager-arrow:focus-visible,
+  .pager-current:focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: calc(-1 * var(--ring-width));
+  }
+
+  /* Page picker popover, anchored above the center segment. */
+  .page-menu {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    position-anchor: --pager;
+    bottom: anchor(top);
+    justify-self: anchor-center;
+    margin-bottom: 0.4rem;
+    /* Open downward instead when there isn't room above. */
+    position-try-fallbacks: flip-block;
+    /* Clip the header divider and list to the rounded card edges. */
+    overflow: hidden;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 4px 12px -2px oklch(0 0 0 / 25%),
+      var(--shadow-sm);
+    transform-origin: center bottom;
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+    transition:
+      opacity 0.2s ease,
+      translate 0.2s ease,
+      scale 0.2s ease,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  /* Anchor positioning isn't Baseline yet (e.g. unsupported in Firefox).
+     Without it `anchor()` is ignored and the popover would land in a corner;
+     fall back to a centred position near the bottom. CSS-only, no JS. */
+  @supports not (anchor-name: --pager) {
+    .page-menu {
+      inset: auto 0 5rem 0;
+      margin-inline: auto;
+      width: max-content;
     }
   }
 
-  .pagination-disabled {
-    opacity: 0.5;
-    pointer-events: none;
+  .page-menu:not(:popover-open) {
+    opacity: 0;
+    translate: 0 0.25rem;
+    scale: 0.96;
+  }
+
+  @starting-style {
+    .page-menu:popover-open {
+      opacity: 0;
+      translate: 0 0.25rem;
+      scale: 0.96;
+    }
+  }
+
+  /* Total-count header, echoing sizu's "計Nページ（M記事）" idea. */
+  .page-menu-total {
+    margin: 0;
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid var(--c-border);
+    color: var(--c-sub);
+    font-size: var(--fs-2xs);
+    letter-spacing: 0.05em;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .page-menu-total-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-text);
+  }
+
+  .page-menu-list {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 2px;
+    margin: 0;
+    padding: 0.3rem;
+    list-style: none;
+    max-height: 14rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .page-menu-list li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .page-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.5rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius-sm);
+    color: var(--c-text);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+    transition:
+      color 0.18s ease,
+      background-color 0.18s ease;
+  }
+
+  .page-menu-item:not(.page-menu-item--current):hover {
+    background-color: var(--c-surface);
+    color: var(--c-surface-text);
+  }
+
+  .page-menu-item:focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: calc(-1 * var(--ring-width));
+  }
+
+  /* The current page is "you are here": filled, non-interactive, no pointer. */
+  .page-menu-item--current {
+    background-color: var(--c-primary);
+    color: var(--c-primary-text);
+    font-weight: var(--fw-medium);
+    cursor: default;
   }
 </style>

@@ -15,11 +15,13 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip-ci') }}
+    # Skip the heavy me-content submodule and build against fixtures instead.
+    # CI verifies the code, not the real content; content errors are caught at
+    # the Cloudflare Pages deploy. See src/__fixtures__/content.
+    env:
+      CONTENT_DIR: src/__fixtures__/content
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          submodules: recursive
-          token: ${{ secrets.SUBMODULE_TOKEN }}
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - uses: pnpm/action-setup@0e279bb959325dab635dd2c09392533439d90093 # v6.0.8
         with:
