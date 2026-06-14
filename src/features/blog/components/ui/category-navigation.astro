@@ -84,6 +84,13 @@ const pathname = Astro.url.pathname;
     color: var(--c-primary);
   }
 
+  /* The scroller clips overflow (and applies an edge-fade mask), so draw the
+     ring inset to keep it fully visible. */
+  .cat-link:focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: calc(-1 * var(--ring-width));
+  }
+
   .cat-link--active {
     background-color: var(--c-primary);
     color: var(--c-primary-text);
