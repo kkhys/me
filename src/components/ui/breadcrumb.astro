@@ -57,8 +57,9 @@ const isSimple = segments.length === 1;
   @media (width >= 1280px) {
     .breadcrumb {
       position: fixed;
-      top: 0;
-      transform: translateY(170px) translateX(-260px);
+      /* Pin to the very top-left of the viewport. */
+      top: 2rem;
+      left: 2rem;
     }
   }
 
