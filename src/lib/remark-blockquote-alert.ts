@@ -30,7 +30,7 @@ const remarkBlockQuoteAlert = () => (tree: Root) => {
 
       const paragraph = item as Paragraph;
       const firstNode = paragraph.children[0];
-      if (!firstNode || firstNode.type !== "text") return item;
+      if (firstNode?.type !== "text") return item;
 
       const textNode = firstNode as Text;
       const match = textNode.value.match(alertRegex);
