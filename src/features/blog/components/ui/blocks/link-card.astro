@@ -143,10 +143,13 @@ const blurryImage = image
     font-size: var(--fs-xs);
   }
 
-  /* Mobile: full-width banner on top, kept at the standard OG ratio. */
+  /* Mobile: full-width banner on top, kept at the standard OG ratio.
+     overflow: hidden clips the blur halo so it doesn't bleed past the image
+     box into the adjacent text on the desktop horizontal layout. */
   .link-card-image {
     width: 100%;
     aspect-ratio: 40 / 21;
+    overflow: hidden;
   }
 
   .link-card-blur-load {
