@@ -8,8 +8,10 @@
   width: auto;
 }
 
+/* text-wrap: pretty crashes Chrome's renderer on long CJK prose with many
+   inline elements (Aw Snap / error code 5). Fall back to the default wrap. */
 .prose :is(p, li, blockquote) {
-  text-wrap: pretty;
+  text-wrap: wrap;
 }
 
 .prose p,
