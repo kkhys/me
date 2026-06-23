@@ -1,3 +1,4 @@
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
@@ -31,25 +32,27 @@ export default defineConfig({
   },
   markdown: {
     syntaxHighlight: false,
-    smartypants: false,
-    remarkPlugins: [
-      remarkUnwrapImages,
-      remarkYoutubeBlock,
-      remarkLinkCard,
-      remarkFootnoteTitle,
-      remarkBlockQuoteAlert,
-    ],
-    remarkRehype: {
-      footnoteLabel: " ",
-      footnoteBackLabel: "戻る",
-      footnoteLabelTagName: "hr",
-    },
-    rehypePlugins: [
-      rehypeSlug,
-      rehypeSlugWithCustomId,
-      rehypeMermaidCached,
-      rehypeBudoux,
-    ],
+    processor: unified({
+      smartypants: false,
+      remarkPlugins: [
+        remarkUnwrapImages,
+        remarkYoutubeBlock,
+        remarkLinkCard,
+        remarkFootnoteTitle,
+        remarkBlockQuoteAlert,
+      ],
+      remarkRehype: {
+        footnoteLabel: " ",
+        footnoteBackLabel: "戻る",
+        footnoteLabelTagName: "hr",
+      },
+      rehypePlugins: [
+        rehypeSlug,
+        rehypeSlugWithCustomId,
+        rehypeMermaidCached,
+        rehypeBudoux,
+      ],
+    }),
   },
   image: {
     remotePatterns: [{ protocol: "https" }],
