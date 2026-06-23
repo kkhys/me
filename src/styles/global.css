@@ -203,9 +203,16 @@
 
   .expressive-code {
     /* Empty code lines serialize as " \n ", which renders as two rows under
-       white-space: pre. Collapse the stray newline so blank lines stay 1 row. */
+       white-space: pre. nowrap collapses the stray newline, but it also trims
+       the remaining whitespace away, dropping the row to zero height so blank
+       lines vanish entirely. Restore a single row with a zero-width placeholder
+       (it is not collapsible whitespace, so it keeps one line box). */
     & .ec-line .code:not(:has(*)) {
       white-space: nowrap !important;
+    }
+
+    & .ec-line .code:not(:has(*))::after {
+      content: "\200b";
     }
 
     /* Line numbers ship with surrounding spaces (" 9 ", " 10 ") that
