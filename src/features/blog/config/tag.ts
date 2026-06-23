@@ -26,6 +26,12 @@ export const tags = [
     emoji: "📷",
   },
   {
+    title: "Claude Code",
+    label: "Claude Code",
+    slug: "claude-code",
+    emoji: "🤖",
+  },
+  {
     title: "CSS",
     label: "CSS",
     slug: "css",
