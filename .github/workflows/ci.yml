@@ -89,8 +89,51 @@ jobs:
         env:
           PUBLIC_DEPLOY_ENV: "production"
 
+      - name: Create GitHub deployment
+        id: gh_deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          deployment_id=$(gh api "repos/${{ github.repository }}/deployments" \
+            --input - --jq '.id' <<EOF
+          {
+            "ref": "${{ github.sha }}",
+            "environment": "production",
+            "production_environment": true,
+            "auto_merge": false,
+            "required_contexts": [],
+            "description": "Cloudflare Pages deployment"
+          }
+          EOF
+          )
+          echo "id=${deployment_id}" >> "$GITHUB_OUTPUT"
+          gh api "repos/${{ github.repository }}/deployments/${deployment_id}/statuses" \
+            --input - <<EOF
+          {
+            "state": "in_progress",
+            "log_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+          EOF
+
       - name: Deploy to Cloudflare Pages
+        id: deploy
         run: pnpm wrangler pages deploy dist --project-name=memo
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Finalize GitHub deployment
+        if: always() && steps.gh_deployment.outputs.id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          state="success"
+          [ "${{ steps.deploy.outcome }}" = "success" ] || state="failure"
+          gh api "repos/${{ github.repository }}/deployments/${{ steps.gh_deployment.outputs.id }}/statuses" \
+            --input - <<EOF
+          {
+            "state": "${state}",
+            "environment_url": "https://memo.kkhys.me",
+            "log_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+          EOF
