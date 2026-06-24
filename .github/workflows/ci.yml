@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   ci:
+    name: Lint, Test & Build
     runs-on: ubuntu-latest
 
     steps:
@@ -44,13 +45,14 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      - name: Test
-        run: pnpm test
-
-      - name: Coverage
+      # `pnpm coverage` runs the full test suite as well, so a separate
+      # `pnpm test` step would only duplicate the run (and the Vitest
+      # github-actions report in the job summary).
+      - name: Test & Coverage
         run: pnpm coverage
 
   deploy:
+    name: Deploy to Cloudflare
     needs: ci
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -137,3 +139,23 @@ jobs:
             "log_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           }
           EOF
+
+      - name: Write deploy summary
+        if: always() && steps.gh_deployment.outputs.id != ''
+        run: |
+          if [ "${{ steps.deploy.outcome }}" = "success" ]; then
+            result="Success"
+          else
+            result="Failure"
+          fi
+          {
+            echo "## Cloudflare Pages Deploy"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| Result | ${result} |"
+            echo "| Environment | production |"
+            echo "| URL | <https://memo.kkhys.me> |"
+            echo "| Commit | \`${GITHUB_SHA::7}\` |"
+            echo "| Run | [#${GITHUB_RUN_NUMBER}](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}) |"
+          } >> "$GITHUB_STEP_SUMMARY"
