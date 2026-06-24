@@ -1,3 +1,4 @@
+import { unified } from "@astrojs/markdown-remark";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
@@ -21,23 +22,25 @@ export default defineConfig({
   ],
   markdown: {
     syntaxHighlight: false,
-    smartypants: false,
-    remarkPlugins: [
-      remarkEscapeSyntax,
-      remarkWordLimit,
-      remarkExtractLink,
-      remarkTruncateLinkText,
-    ],
-    rehypePlugins: [
-      [
-        rehypeExternalLinks,
-        {
-          target: "_blank",
-          rel: ["noopener", "noreferrer"],
-          properties: { className: "external-link" },
-        },
+    processor: unified({
+      smartypants: false,
+      remarkPlugins: [
+        remarkEscapeSyntax,
+        remarkWordLimit,
+        remarkExtractLink,
+        remarkTruncateLinkText,
       ],
-    ],
+      rehypePlugins: [
+        [
+          rehypeExternalLinks,
+          {
+            target: "_blank",
+            rel: ["noopener", "noreferrer"],
+            properties: { className: "external-link" },
+          },
+        ],
+      ],
+    }),
   },
   env: {
     schema: {
