@@ -1,4 +1,4 @@
-import { IconMaskPng } from "#/components/seo/favicon/icon-mask-png";
-import { createPngHandler } from "./_util";
+import { createPngHandler } from "@kkhys/og/handlers";
+import { IconMaskPng } from "#/components/seo/favicon";
 
 export const GET = createPngHandler(IconMaskPng);
