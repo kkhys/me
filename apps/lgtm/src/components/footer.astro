@@ -1,0 +1,50 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+    <nav>
+        <a href="/privacy">Privacy Policy</a>
+        <span class="separator">|</span>
+        <a href="/copyright">Copyright</a>
+    </nav>
+    <span>&copy;{currentYear} <a href="https://kkhys.me" target="_blank" rel="noopener noreferrer">Keisuke Hayashi</a></span>
+</footer>
+
+<style>
+    footer {
+        grid-row: main-end / bottom;
+        display: grid;
+        justify-items: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 2rem 1rem;
+    }
+
+    footer nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    footer a {
+        font-size: var(--fs-xs);
+        color: var(--c-sub-text);
+        text-decoration: none;
+    }
+
+    footer a:hover {
+        text-decoration: underline;
+    }
+
+    footer span {
+        font-size: var(--fs-xs);
+        color: var(--c-sub-text);
+    }
+
+    footer .separator {
+        font-size: var(--fs-xs);
+        color: var(--c-sub-text);
+    }
+</style>

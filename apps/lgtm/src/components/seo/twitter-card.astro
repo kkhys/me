@@ -1,0 +1,22 @@
+---
+import TwitterCard from "@kkhys/seo/twitter-card.astro";
+import { TWITTER_ACCOUNT_NAME } from "#/config/constants";
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+}
+
+const { title, description, image, imageAlt } = Astro.props;
+---
+
+<TwitterCard
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={imageAlt}
+  site={TWITTER_ACCOUNT_NAME}
+  ellipsis
+/>

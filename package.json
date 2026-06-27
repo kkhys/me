@@ -12,6 +12,9 @@
     "build:me": "pnpm --filter @kkhys/me build",
     "dev:me": "pnpm --filter @kkhys/me dev",
     "deploy:me": "pnpm --filter @kkhys/me deploy",
+    "build:lgtm": "pnpm --filter @kkhys/lgtm build",
+    "dev:lgtm": "pnpm --filter @kkhys/lgtm dev",
+    "deploy:lgtm": "pnpm --filter @kkhys/lgtm deploy",
     "release": "bun run scripts/release.ts"
   },
   "devDependencies": {

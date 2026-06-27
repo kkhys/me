@@ -1,0 +1,29 @@
+---
+import { getEntry, render } from "astro:content";
+import LegalLayout from "#/components/legal-layout.astro";
+import BaseSeo from "#/components/seo/base-seo.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
+import Layout from "#/layouts/layout.astro";
+
+const entry = await getEntry("privacy", "ja");
+
+if (!entry) {
+  throw new Error("Privacy policy entry not found");
+}
+
+const { Content } = await render(entry);
+const { title, description } = entry.data;
+const pageTitle = `${title} - LGTM`;
+const ogImage = `${Astro.site}api/og/default.png`;
+---
+
+<Layout>
+	<BaseSeo slot="seo" title={pageTitle} description={description} />
+	<OpenGraph slot="seo" title={pageTitle} description={description} image={ogImage} imageAlt={title} />
+	<TwitterCard slot="seo" title={pageTitle} description={description} image={ogImage} imageAlt={title} />
+	<LegalLayout currentLang="ja" currentPage="privacy">
+		<Content />
+		<p class="last-updated">最終更新日：{entry.data.lastUpdated.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })}</p>
+	</LegalLayout>
+</Layout>

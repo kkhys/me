@@ -1,0 +1,50 @@
+---
+import OpenGraph from "@kkhys/seo/open-graph.astro";
+import { TITLE } from "#/config/constants";
+
+interface Article {
+  publishedTime: string;
+  modifiedTime: string;
+  author: string;
+  tag?: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  type?: "website" | "article" | "profile";
+  article?: Article;
+}
+
+const {
+  title,
+  description,
+  image,
+  imageAlt,
+  type = "website",
+  article,
+} = Astro.props;
+
+const mappedArticle = article
+  ? {
+      publishedTime: article.publishedTime,
+      modifiedTime: article.modifiedTime,
+      authors: [article.author],
+      tags: article.tag ? [article.tag] : undefined,
+    }
+  : undefined;
+---
+
+<OpenGraph
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={imageAlt}
+  type={type}
+  article={mappedArticle}
+  siteName={TITLE}
+  secureUrlMode="always"
+  ellipsis
+/>
