@@ -1,4 +1,5 @@
 ---
+import TwitterCard from "@kkhys/seo/twitter-card.astro";
 import { me } from "#/config/site";
 
 interface Props {
@@ -9,14 +10,12 @@ interface Props {
 }
 
 const { title, description, image, imageAlt } = Astro.props;
-
-const resolvedDescription = description.slice(0, 200);
 ---
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content={me.twitter} />
-<meta name="twitter:creator" content={me.twitter} />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={resolvedDescription} />
-<meta name="twitter:image" content={image} />
-<meta name="twitter:image:alt" content={imageAlt} />
+<TwitterCard
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={imageAlt}
+  site={me.twitter}
+/>
