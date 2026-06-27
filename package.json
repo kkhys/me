@@ -15,6 +15,9 @@
     "build:lgtm": "pnpm --filter @kkhys/lgtm build",
     "dev:lgtm": "pnpm --filter @kkhys/lgtm dev",
     "deploy:lgtm": "pnpm --filter @kkhys/lgtm deploy",
+    "build:diary": "pnpm --filter @kkhys/diary build",
+    "dev:diary": "pnpm --filter @kkhys/diary dev",
+    "deploy:diary": "pnpm --filter @kkhys/diary deploy",
     "release": "bun run scripts/release.ts"
   },
   "devDependencies": {
