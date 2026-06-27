@@ -1,4 +1,4 @@
-import { Icon192Png } from "#/components/seo/favicon/icon-192-png";
-import { createPngHandler } from "./_util";
+import { createPngHandler } from "@kkhys/og/handlers";
+import { Icon192Png } from "#/components/seo/favicon";
 
 export const GET = createPngHandler(Icon192Png);
