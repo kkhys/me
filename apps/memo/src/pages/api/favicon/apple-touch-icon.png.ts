@@ -1,4 +1,4 @@
-import { AppleTouchIconPng } from "#/components/seo/favicon/apple-touch-icon-png";
-import { createPngHandler } from "./_util";
+import { createPngHandler } from "@kkhys/og/handlers";
+import { AppleTouchIconPng } from "#/components/seo/favicon";
 
 export const GET = createPngHandler(AppleTouchIconPng);

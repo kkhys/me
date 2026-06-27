@@ -1,4 +1,4 @@
-import { IconSvg } from "#/components/seo/favicon/icon-svg";
-import { createSvgHandler } from "./_util";
+import { createSvgHandler } from "@kkhys/og/handlers";
+import { IconSvg } from "#/components/seo/favicon";
 
 export const GET = createSvgHandler(IconSvg);
