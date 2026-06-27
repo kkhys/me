@@ -1,0 +1,51 @@
+@layer reset, tokens, base;
+
+@import "kiso.css" layer(reset);
+@import "./uchu.css" layer(tokens);
+
+/* ===== Design Tokens ===== */
+
+@layer tokens {
+  :root {
+    --c-bg: var(--uchu-yang);
+    --c-text: var(--uchu-yin);
+    --c-sub: var(--uchu-yin-6);
+    --c-border: var(--uchu-gray-2);
+
+    --ff-mono:
+      ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+      "DejaVu Sans Mono", monospace;
+
+    --fs-2xs: 0.625rem;
+    --fw-normal: 400;
+  }
+}
+
+/* ===== Base Styles ===== */
+
+@layer base {
+  * {
+    border-color: var(--c-border);
+  }
+
+  html {
+    font-family: system-ui, sans-serif;
+    scrollbar-gutter: stable both-edges;
+    scrollbar-color: var(--uchu-gray-3) transparent;
+    scrollbar-width: thin;
+    background-color: var(--c-bg);
+    color: var(--c-text);
+  }
+
+  ::selection {
+    box-shadow: none;
+    background-color: var(--uchu-gray-3);
+    color: var(--c-text);
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}

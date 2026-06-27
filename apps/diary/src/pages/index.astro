@@ -1,0 +1,99 @@
+---
+import { getImage } from "astro:assets";
+import DiaryImage from "#/components/diary-image.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+
+const imageModules = import.meta.glob<{
+  default: import("astro").ImageMetadata;
+}>("../../diary-content/diary/**/*.jpg", { eager: true });
+
+const entries = Object.entries(imageModules)
+  .map(([path, mod]) => {
+    const match = path.match(/\/(\d{4}-\d{2}-\d{2})\/(\d+)\.jpg$/);
+    if (!match?.[1] || !match[2]) return null;
+    return { src: mod.default, date: match[1], fileNumber: match[2] };
+  })
+  .filter((entry) => entry !== null)
+  .toSorted((a, b) => {
+    const dateCompare = a.date.localeCompare(b.date);
+    if (dateCompare !== 0) return dateCompare;
+    return a.fileNumber.localeCompare(b.fileNumber);
+  })
+  .map((entry, i) => ({ ...entry, number: i + 1 }))
+  .toReversed();
+
+const ogImage = entries[0]
+  ? await getImage({
+      src: entries[0].src,
+      width: 1200,
+      format: "jpg",
+      quality: 80,
+    })
+  : undefined;
+---
+
+<BaseLayout
+  image={ogImage && entries[0]
+    ? {
+        src: ogImage.src,
+        width: 1200,
+        height: Math.round((1200 * entries[0].src.height) / entries[0].src.width),
+      }
+    : undefined}
+>
+  <div class="diary">
+    <div class="diary-header">
+      <h1 class="title">KEISUKE HAYASHI DIARY</h1>
+    </div>
+    {entries.map((entry, i) => (
+      <DiaryImage
+        src={entry.src}
+        alt={`${entry.date} / ${entry.number}`}
+        date={entry.date}
+        number={entry.number}
+        priority={i === 0}
+      />
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .diary {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .diary-header {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .title {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-normal);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-sub);
+    text-wrap: nowrap;
+    letter-spacing: 0.02em;
+    margin: 0;
+    padding-inline: 1rem;
+  }
+
+  @media (width >= 768px) {
+    .diary-header {
+      justify-content: flex-start;
+      gap: 2rem;
+    }
+
+    .diary-header::before {
+      content: "";
+      flex: 0 1 1200px;
+    }
+
+    .title {
+      padding-inline: 0;
+    }
+  }
+</style>
