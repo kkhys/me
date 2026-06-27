@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/seo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./base-seo.astro": "./src/base-seo.astro",
+    "./open-graph.astro": "./src/open-graph.astro",
+    "./twitter-card.astro": "./src/twitter-card.astro"
+  },
+  "peerDependencies": {
+    "astro": "^7.0.0"
+  }
+}
