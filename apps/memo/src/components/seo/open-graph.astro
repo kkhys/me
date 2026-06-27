@@ -1,4 +1,5 @@
 ---
+import OpenGraph from "@kkhys/seo/open-graph.astro";
 import { TITLE } from "#/config/constants";
 
 interface Article {
@@ -26,33 +27,24 @@ const {
   article,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
-const truncatedDescription =
-  description.length > 200 ? `${description.slice(0, 197)}...` : description;
+const mappedArticle = article
+  ? {
+      publishedTime: article.publishedTime,
+      modifiedTime: article.modifiedTime,
+      authors: [article.author],
+      tags: article.tag ? [article.tag] : undefined,
+    }
+  : undefined;
 ---
 
-<meta property="og:type" content={type} />
-<meta property="og:url" content={canonicalURL} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={truncatedDescription} />
-<meta property="og:image" content={image} />
-<meta property="og:image:secure_url" content={image} />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={imageAlt} />
-<meta property="og:site_name" content={TITLE} />
-<meta property="og:locale" content="ja_JP" />
-
-{
-  type === "article" && article && (
-    <>
-      <meta property="article:published_time" content={article.publishedTime} />
-      <meta property="article:modified_time" content={article.modifiedTime} />
-      <meta property="article:author" content={article.author} />
-      {article.tag && (
-        <meta property="article:tag" content={article.tag} />
-      )}
-    </>
-  )
-}
+<OpenGraph
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={imageAlt}
+  type={type}
+  article={mappedArticle}
+  siteName={TITLE}
+  secureUrlMode="always"
+  ellipsis
+/>
