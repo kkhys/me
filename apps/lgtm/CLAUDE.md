@@ -1,64 +1,63 @@
 # CLAUDE.md
 
-## Project Overview
+LGTM image generator (lgtm.kkhys.me), the `@kkhys/lgtm` app of the kkhys monorepo. Astro 7 static site on Cloudflare Pages. Satori renders "LGTM" text as SVG, Sharp composites it onto source images, served as static files at multiple sizes. Output format is per entry: still sources → AVIF only, animated sources → animated WebP only. TypeScript strictest mode. Vanilla CSS (kiso.css reset + uchu.css palette via `@kkhys/styles`). React is server-side only (Satori). Path alias: `#/*` → `./src/*`.
 
-LGTM is an Astro-based static site that generates "LGTM" images for GitHub Pull Requests. Satori renders text as SVG, Sharp composites it onto source images, and the result is served as static files at multiple sizes. Output format is determined per entry: still sources produce AVIF only, animated sources produce animated WebP only.
-
-Live: https://lgtm.kkhys.me
-
-## Codebase Map
+## Project Map
 
 ```
 src/
-  components/lgtm-image.tsx       # Core image generation pipeline (Satori + Sharp). Exports formatForEntry helper
-  content.config.ts               # Content Collections: lgtm, privacy, copyright. lgtm schema = { image, animated }
-  loaders/lgtm-dir-loader.ts      # Custom Astro loader: one entry per ULID dir, image = first media file (ascending). Probes animation status via sharp
-  config/constants.ts             # Shared constants (TITLE, IMAGES_PER_PAGE)
+  components/lgtm-image.tsx       # Core image pipeline (Satori + Sharp). Exports formatForEntry + LgtmImage
+  content.config.ts               # Collections: lgtm, privacy, copyright. lgtm schema = { image, animated }
+  loaders/lgtm-dir-loader.ts      # Custom loader: one entry per ULID dir, image = first media file. Probes animation via sharp
+  config/constants.ts             # TITLE, TWITTER_ACCOUNT_NAME, IMAGES_PER_PAGE
   layouts/layout.astro            # Base layout (Header, Main, Footer)
-  assets/BBHBartle-Regular.ttf    # Custom font for LGTM text overlay
+  assets/BBHBartle-Regular.ttf    # Font for the LGTM text overlay
+  components/seo/                 # SEO adapters + OG card + favicon (see Shared Packages)
   pages/
     [...page].astro               # Gallery with pagination + infinite scroll
     [id].astro                    # Detail page with format selector
     [id].[format].ts              # Image API (800px default)
     [id]-[size].[format].ts       # Sized image API (400/1000/1200px)
     api/ids.json.ts               # JSON listing of all image IDs
-    api/og/                       # Open Graph image generation
-    api/favicon/                  # Dynamic favicon generation
-    copyright.astro               # Legal pages (en/ja)
-    privacy.astro
+    api/og/                       # OG images: default.png (shared handler) + [id].png (per-image, app-local)
+    api/favicon/                  # Dev-only favicon endpoints (404 in prod)
   __tests__/                      # Vitest unit tests
-  __fixtures__/lgtm-sample/       # CI test fixtures (used when GITHUB_ACTIONS=true)
-lgtm-content/                     # Git submodule (private) - source images
-  lgtm/{ulid}/
-    {image}.jpg                   # One media file per ULID dir (jpg/png/webp/gif/avif). First file ascending wins.
-scripts/release.ts                # Date-based release versioning (YYYY.MM.DD[-N])
+  __fixtures__/lgtm-sample/       # CI fixtures (used when GITHUB_ACTIONS=true)
+lgtm-content/                     # Git submodule (private) — source images, one media file per ULID dir
+scripts/convert-videos.ts         # Bun + ffmpeg: convert .mov sources to animated WebP
 ```
+
+## Shared Packages
+
+Consumed as source (no build step); this app supplies its own config via thin wrappers.
+
+- `@kkhys/styles` — uchu.css OKLCH palette, imported in `src/styles/global.css`. The `--c-*` semantic tokens and the `prefers-color-scheme` dark mode stay app-local.
+- `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard primitives, wrapped by thin adapters in `src/components/seo/`. `head-meta.astro` and `json-ld.astro` are app-local.
+- `@kkhys/og` — favicon generators (`src/components/seo/favicon/index.ts`, bound to the green gradient) + route handlers. The default OG card (`opengraph-image.tsx`) and the per-id OG (`pages/api/og/[id].png.ts`) stay app-local (bespoke layouts).
 
 ## Key Design Decisions
 
-- Content loading switches by environment: `lgtm-content/` locally, `src/__fixtures__/lgtm-sample/` when `GITHUB_ACTIONS=true`
+- Content loading switches by env: `lgtm-content/` locally, `src/__fixtures__/lgtm-sample/` when `GITHUB_ACTIONS=true` (read from `astro:env/client`)
 - All images are pre-rendered at build time. Infinite scroll fetches pre-built static HTML pages
-- Text is rendered at 2x resolution via Satori, then downscaled with lanczos3 for anti-aliasing
-- Output format is fixed per entry: still → AVIF, animated → animated WebP. Only one format URL exists per ID
-- `/{id}.{format}` serves 800px images (not 400px — the `LgtmImage` function default of 400 is overridden by the API endpoint)
-- Versioning is date-based (`YYYY.MM.DD[-N]`), not semver
-- Deployment is local: build then `wrangler pages deploy dist` to Cloudflare Pages
-- pnpm workspace at root, lgtm-content uses Bun for its scripts
-- Path alias `#/*` → `./src/*`
+- Text is rendered at 2x via Satori, then downscaled with lanczos3 for anti-aliasing
+- Output format is fixed per entry: still → AVIF, animated → animated WebP. One format URL per ID
+- `/{id}.{format}` serves 800px images (the `LgtmImage` default of 400 is overridden by the endpoint)
+- The animated flag is computed once by the loader (`sharp.metadata().pages > 1`) and persisted; rely on `entry.data.animated`, not a re-probe
 
-## Environment Variables
+## How to Work
 
-Both are declared in `astro.config.ts` env schema:
-
-- `GITHUB_ACTIONS` (boolean, optional, default: false) — triggers fixture mode in CI
-- `NODE_ENV` (enum: development | production) — auto-set
+- Dev tools come from the Nix Flake at the repo root (`flake.nix`, includes ffmpeg). Run `direnv allow` once.
+- Run scripts from this directory, or from the repo root via `pnpm --filter @kkhys/lgtm <script>` (or `pnpm dev:lgtm` / `build:lgtm` / `deploy:lgtm`).
+- CI: lint → test → type check → build against fixtures (auto via `GITHUB_ACTIONS`). Add the `skip-ci` label to PRs to skip.
+- Deploy: built and shipped locally via `pnpm deploy:lgtm`; lgtm is not deployed from CI. The `lgtm-content` submodule must be initialized first.
+- Release: repo-wide from the root (`pnpm release`); lgtm has no separate release.
 
 ## Gotchas
 
-1. `lgtm-content/` is a private Git submodule — must be initialized before local builds or deploy
-2. `BBHBartle-Regular.ttf` must exist in `src/assets/`
-3. Biome overrides disable `useConst`, `useImportType`, `noUnusedVariables`, `noUnusedImports` for `*.astro` files — these lint "errors" are expected
-4. ULIDs must be lowercase
-5. Non-first gallery pages (`/2`, `/3`, ...) redirect to `/` when accessed directly — they exist only for infinite scroll fetch
-6. Branch coverage 80% in lgtm-image.tsx is expected (environment switching + nullish coalescing fallbacks)
-7. The animated flag is computed once by the loader (`sharp.metadata().pages > 1`) and persisted in the collection entry — downstream code should rely on `entry.data.animated`, not re-probe the source
+- `exactOptionalPropertyTypes: true` — optional props need `| undefined`, not just `?:`
+- `lgtm-content/` is a private Git submodule — initialize it before local builds or deploy
+- `BBHBartle-Regular.ttf` must exist in `src/assets/`
+- Biome disables `useConst` / `useImportType` / `noUnusedVariables` / `noUnusedImports` for `*.astro` — these lint "errors" are expected
+- ULIDs must be lowercase
+- Non-first gallery pages (`/2`, `/3`, …) redirect to `/` when accessed directly — they exist only for the infinite-scroll fetch
+- Favicon endpoints (`api/favicon/*`) are dev-only (404 in production); production serves favicons as static assets
