@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+
+const truncatedDescription =
+  description.length > 200 ? `${description.slice(0, 197)}...` : description;
+---
+
+<title>{title}</title>
+<meta name="description" content={truncatedDescription} />
+<link rel="canonical" href={canonicalURL} />
+<meta name="generator" content={Astro.generator} />
+
+{noindex && <meta name="robots" content="noindex" />}
+{!noindex && <meta name="robots" content="index, follow" />}

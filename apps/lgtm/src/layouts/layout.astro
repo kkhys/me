@@ -1,0 +1,27 @@
+---
+import Footer from "#/components/footer.astro";
+import Header from "#/components/header.astro";
+import HeadMeta from "#/components/seo/head-meta.astro";
+import "#/styles/global.css";
+---
+
+<html lang="en">
+    <head>
+        <HeadMeta />
+        <slot name="head" />
+        <slot name="seo" />
+        <slot name="structured-data" />
+        <noscript>
+            <style>
+                .blur-load { filter: none !important; background: none !important; }
+            </style>
+        </noscript>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>

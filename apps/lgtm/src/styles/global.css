@@ -1,0 +1,50 @@
+@import "#/styles/uchu.css";
+@import "kiso.css";
+
+:root {
+  --c-bg: var(--uchu-yang);
+  --c-bg-light-gray: var(--uchu-gray-1);
+  --c-bg-gray: var(--uchu-gray-2);
+  --c-border: var(--uchu-gray-4);
+  --c-text: var(--uchu-yin-9);
+  --c-sub-text: var(--uchu-yin-5);
+  --c-text-emphasis: var(--uchu-yin-7);
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+
+  --fw-semibold: 600;
+
+  --lh-sm: 1.5;
+  --lh-base: 1.75;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: var(--uchu-yin);
+    --c-bg-light-gray: var(--uchu-yin-9);
+    --c-bg-gray: var(--uchu-yin-8);
+    --c-border: var(--uchu-yin-7);
+    --c-text: var(--uchu-yin-1);
+    --c-sub-text: var(--uchu-yin-5);
+    --c-text-emphasis: var(--uchu-yin-4);
+  }
+}
+
+html {
+  font-size: 16px;
+  line-height: var(--lh-base);
+  background: var(--c-bg);
+  color: var(--c-text);
+  scrollbar-gutter: stable both-edges;
+}
+
+body {
+  margin-inline: auto;
+  min-height: 100vh;
+  max-width: 42rem;
+  display: grid;
+  grid-template-rows: [top] auto [main-start] 1fr [main-end] auto [bottom];
+  grid-template-columns: minmax(0, 1fr);
+}

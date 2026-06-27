@@ -1,0 +1,105 @@
+---
+interface Props {
+  currentLang: "en" | "ja";
+  currentPage: "privacy" | "copyright";
+}
+
+const { currentLang, currentPage } = Astro.props;
+---
+
+<article>
+	<div class="language-toggle">
+		{currentLang === "en" ? (
+			<>
+				<span class="current">English</span>
+				<a href={`/${currentPage}/ja`}>日本語</a>
+			</>
+		) : (
+			<>
+				<a href={`/${currentPage}`}>English</a>
+				<span class="current">日本語</span>
+			</>
+		)}
+	</div>
+
+	<slot />
+</article>
+
+<style>
+	article {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2rem 1rem;
+		line-height: 1.8;
+	}
+
+	.language-toggle {
+		display: flex;
+		gap: 1rem;
+		margin-bottom: 2rem;
+		font-size: var(--fs-sm);
+	}
+
+	.language-toggle a {
+		color: var(--c-text-emphasis);
+		text-decoration: underline;
+	}
+
+	.language-toggle a:hover {
+		opacity: 0.7;
+	}
+
+	.language-toggle .current {
+		color: var(--c-sub-text);
+	}
+
+	article :global(h1) {
+		font-size: var(--fs-2xl);
+		margin-bottom: 2rem;
+		color: var(--c-text-emphasis);
+	}
+
+	article :global(h2) {
+		font-size: var(--fs-xl);
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+		color: var(--c-text-emphasis);
+	}
+
+	article :global(h3) {
+		font-size: var(--fs-lg);
+		margin-top: 1.5rem;
+		margin-bottom: 0.75rem;
+	}
+
+	article :global(p) {
+		margin-bottom: 1rem;
+	}
+
+	article :global(ul) {
+		margin-bottom: 1rem;
+		padding-left: 1.5rem;
+		list-style-type: disc;
+	}
+
+	article :global(li) {
+		margin-bottom: 0.5rem;
+		padding-left: 0.25rem;
+	}
+
+	article :global(a) {
+		color: var(--c-text-emphasis);
+		text-decoration: underline;
+	}
+
+	article :global(a:hover) {
+		opacity: 0.7;
+	}
+
+	article :global(.last-updated) {
+		margin-top: 3rem;
+		font-size: var(--fs-sm);
+		color: var(--c-sub-text);
+		text-align: right;
+	}
+</style>
