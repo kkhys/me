@@ -69,9 +69,27 @@ describe("getMetadata", () => {
   describe("production environment", () => {
     let mockFetchSiteMetadata: ReturnType<typeof vi.fn>;
 
+    // PNG magic number, padded so the byte sniffer reads a full chunk.
+    const PNG_BYTES = new Uint8Array([
+      0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 0, 0, 0, 0, 0,
+    ]);
+
+    const mockImageResponse = (bytes: Uint8Array) => {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockResolvedValue(
+          new Response(bytes as unknown as BodyInit, {
+            status: 200,
+            headers: { "content-type": "image/png" },
+          }),
+        ),
+      );
+    };
+
     beforeEach(async () => {
       vi.resetModules();
       vi.stubEnv("CI", "");
+      mockImageResponse(PNG_BYTES);
       mockFetchSiteMetadata = vi.fn().mockResolvedValue({
         title: "Example",
         description: "Example description",
@@ -89,6 +107,7 @@ describe("getMetadata", () => {
     });
 
     afterEach(() => {
+      vi.unstubAllGlobals();
       vi.unstubAllEnvs();
       vi.resetModules();
     });
@@ -144,7 +163,7 @@ describe("getMetadata", () => {
       expect(result.image).toBeUndefined();
     });
 
-    it("keeps non-SVG og:image untouched", async () => {
+    it("keeps a non-SVG og:image whose bytes are a real raster image", async () => {
       mockFetchSiteMetadata.mockResolvedValueOnce({
         title: "PNG site",
         description: "desc",
@@ -158,6 +177,45 @@ describe("getMetadata", () => {
         width: "1",
         height: "1",
       });
+    });
+
+    it("drops an og:image that serves HTML despite an image content-type", async () => {
+      // Vercel's docs-og endpoint advertises image/png but returns an HTML
+      // bot-protection page to non-browser clients, which crashes sharp.
+      mockImageResponse(new TextEncoder().encode("<!DOCTYPE html><html>"));
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "Fake image site",
+        description: "desc",
+        image: {
+          src: "https://vercel.com/api/docs-og?title=Deploy%20Hooks",
+          width: "1200",
+          height: "630",
+        },
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://fake-image-example.com");
+      expect(result.image).toBeUndefined();
+    });
+
+    it("drops an og:image when fetching its bytes fails", async () => {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockRejectedValue(new Error("Network error")),
+      );
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "Unreachable image site",
+        description: "desc",
+        image: {
+          src: "https://example.com/unreachable.png",
+          width: "1",
+          height: "1",
+        },
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://unreachable-image-example.com");
+      expect(result.image).toBeUndefined();
     });
   });
 });
