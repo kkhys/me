@@ -1,0 +1,298 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import Avatar from "#/components/avatar.astro";
+import BlurImage from "#/components/blur-image.astro";
+import LinkCard from "#/components/link-card.astro";
+import PostHeader from "#/components/post-header.astro";
+import QuoteEmbed from "#/components/quote-embed.astro";
+import { getImagesForMemo } from "#/utils/image";
+import {
+  countTotalComments,
+  getQuotedMemo,
+  type MemoWithComments,
+} from "#/utils/memo";
+import { getAuthorInfo } from "#/utils/user";
+
+interface Props {
+  memo: CollectionEntry<"memo">;
+  asLink?: boolean;
+  comments?: MemoWithComments[];
+  hideTag?: boolean;
+  isPinned?: boolean;
+}
+
+const {
+  memo,
+  asLink = true,
+  comments = [],
+  hideTag = false,
+  isPinned = false,
+} = Astro.props;
+
+const isComment = !!memo.data.comment;
+const hideCommentsInFeed = memo.data.hideComments && asLink;
+const displayComments = hideCommentsInFeed ? [] : comments;
+const commentCount = hideCommentsInFeed ? countTotalComments(comments) : 0;
+const { id, author, createdAt, tag, quote, hideLinkCard, isBot } = memo.data;
+const quotedMemo = quote ? await getQuotedMemo(quote) : undefined;
+const { Content, remarkPluginFrontmatter } = await render(memo);
+
+const images = getImagesForMemo(memo.id);
+
+const firstExternalLink = remarkPluginFrontmatter?.firstExternalLink ?? null;
+
+const {
+  name: authorName,
+  avatar: avatarImage,
+  profileLink: authorLink,
+} = await getAuthorInfo(author);
+---
+
+<article
+    class:list={["post-container", { "is-comment": isComment }]}
+    data-clickable={asLink ? "true" : undefined}
+    data-href={asLink ? `/posts/${id}` : undefined}
+>
+    {isPinned && (
+        <div class="pinned-indicator">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></svg>
+            <span>ピン留め済み</span>
+        </div>
+    )}
+    <div class:list={["thread-wrapper", { "has-comments": displayComments.length > 0, "has-pinned": isPinned }]}>
+        {displayComments.length > 0 && (
+            <span aria-hidden="true" class="avatar-line"></span>
+        )}
+        <div class="thread-avatar-column">
+            <div class="post-avatar">
+                <Avatar src={avatarImage} alt={authorName} size={27} link={authorLink} />
+            </div>
+        </div>
+
+        <div class="thread-content-column">
+            <div class="thread-post">
+                <div class="post-content">
+                    <PostHeader author={authorName} createdAt={createdAt} authorLink={authorLink} isBot={isBot} />
+                    <div class="post-text">
+                        <Content />
+                    </div>
+                    {!hideTag && tag && (
+                        <div class="post-tags">
+                            <a href={`/tag/${tag}`} class="tag-link">#{tag}</a>
+                        </div>
+                    )}
+                    {images.length > 0 && (
+                        <div class="post-images">
+                            {images.map((image, index) => (
+                                <BlurImage src={image} alt={`Image ${index + 1}`} />
+                            ))}
+                        </div>
+                    )}
+                    {quotedMemo && (
+                        <div class="post-quote">
+                            <QuoteEmbed memo={quotedMemo} />
+                        </div>
+                    )}
+                    {!hideLinkCard && firstExternalLink && (
+                        <div class="post-link-card">
+                            <LinkCard href={firstExternalLink} />
+                        </div>
+                    )}
+                    {hideCommentsInFeed && commentCount > 0 && (
+                        <a href={`/posts/${id}`} class="comment-count-indicator">
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
+                            <span>{commentCount}</span>
+                        </a>
+                    )}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {displayComments.length > 0 && (
+        <div class="comments-container">
+            {displayComments.map((commentWithChildren) => (
+                <Astro.self
+                    memo={commentWithChildren.memo}
+                    comments={commentWithChildren.comments}
+                    hideTag={hideTag}
+                />
+            ))}
+        </div>
+    )}
+</article>
+
+<style>
+    .pinned-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-left: calc(27px + 0.65rem);
+        padding-top: 0.75rem;
+        color: var(--c-sub-text);
+        font-size: var(--fs-xs);
+    }
+
+    .thread-wrapper.has-pinned {
+        padding-top: 0.25rem;
+    }
+
+    .thread-wrapper.has-pinned .avatar-line {
+        top: calc(0.25rem + 27px + 0.7rem);
+    }
+
+    .post-container {
+        border-bottom: 1px solid var(--c-gray);
+    }
+
+    .post-container[data-clickable="true"] {
+        cursor: pointer;
+    }
+
+    .post-container.is-comment {
+        border-bottom: none;
+    }
+
+    .thread-wrapper {
+        position: relative;
+        display: flex;
+        gap: 0.65rem;
+        padding: 1rem 0;
+    }
+
+    .thread-wrapper.has-comments {
+        padding-bottom: 2rem;
+    }
+
+    .avatar-line {
+        position: absolute;
+        top: calc(1rem + 27px + 0.7rem);
+        bottom: 1.5rem;
+        left: 13.5px;
+        margin-left: -1px;
+        width: 2px;
+        background-color: var(--c-gray);
+        border-radius: 1px;
+    }
+
+    .comments-container {
+        margin-top: -2rem;
+    }
+
+    .thread-avatar-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .thread-content-column {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .post-content {
+        width: 100%;
+    }
+
+    .post-tags {
+        margin-top: 0.5rem;
+    }
+
+    .tag-link {
+        font-size: var(--fs-sm);
+        color: var(--c-link);
+        text-decoration: none;
+    }
+
+    .tag-link:hover {
+        text-decoration: underline;
+    }
+
+    :global(.post-text p) {
+        font-size: var(--fs-sm);
+        line-height: var(--lh-sm);
+        color: var(--c-text);
+    }
+
+    :global(.post-text p + p) {
+        margin-top: 0.5rem;
+    }
+
+    :global(.post-text .external-link) {
+        color: var(--c-link);
+        text-decoration: none;
+    }
+
+    :global(.post-text .external-link:hover) {
+        text-decoration: underline;
+    }
+
+    /* Common */
+    .post-images {
+        margin-top: 0.75rem;
+    }
+
+    /* Single image */
+    .post-images:has(> :only-child) {
+        display: grid;
+    }
+
+    .post-images:has(> :only-child) :global(.blur-load-wrapper) {
+        max-height: 430px;
+    }
+
+    /* Multiple images: horizontal scroll gallery */
+    .post-images:not(:has(> :only-child)) {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+        scrollbar-color: var(--c-scrollbar) transparent;
+        padding-bottom: 0.5rem;
+    }
+
+    .post-images:not(:has(> :only-child)) :global(.blur-load-wrapper) {
+        flex: 0 0 auto;
+        height: min(260px, 50vw);
+        aspect-ratio: unset !important;
+        scroll-snap-align: start;
+    }
+
+    .post-images:not(:has(> :only-child)) :global(.blur-load) {
+        height: 100%;
+    }
+
+    .post-images:not(:has(> :only-child)) :global(.blur-load picture) {
+        height: 100%;
+    }
+
+    .post-images:not(:has(> :only-child)) :global(.blur-load img) {
+        width: auto;
+        height: 100%;
+    }
+
+    .post-quote {
+        margin-top: 0.75rem;
+    }
+
+    .post-link-card {
+        margin-top: 0.75rem;
+    }
+
+    .comment-count-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-top: 0.75rem;
+        color: var(--c-sub-text);
+        font-size: var(--fs-xs);
+        text-decoration: none;
+        transition: color 0.15s;
+    }
+
+    .comment-count-indicator:hover {
+        color: var(--c-link);
+    }
+</style>

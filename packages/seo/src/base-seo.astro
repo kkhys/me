@@ -1,0 +1,42 @@
+---
+interface Props {
+  /** Final document title, emitted verbatim. */
+  title: string;
+  /** Meta description before truncation. */
+  description: string;
+  /** Emit a noindex robots directive when true. */
+  noindex?: boolean | undefined;
+  /** When noindexing, emit "noindex, nofollow" instead of "noindex". */
+  robotsNofollow?: boolean | undefined;
+  /** Max description length. Defaults to 200. */
+  descriptionMaxLength?: number | undefined;
+  /** Truncate with a trailing "..." instead of a hard slice. */
+  ellipsis?: boolean | undefined;
+}
+
+const {
+  title,
+  description,
+  noindex = false,
+  robotsNofollow = false,
+  descriptionMaxLength = 200,
+  ellipsis = false,
+} = Astro.props;
+
+const resolvedDescription =
+  ellipsis && description.length > descriptionMaxLength
+    ? `${description.slice(0, descriptionMaxLength - 3)}...`
+    : description.slice(0, descriptionMaxLength);
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const robotsContent = noindex
+  ? robotsNofollow
+    ? "noindex, nofollow"
+    : "noindex"
+  : "index, follow";
+---
+
+<title>{title}</title>
+<meta name="description" content={resolvedDescription} />
+<link rel="canonical" href={canonicalUrl} />
+<meta name="robots" content={robotsContent} />
+<meta name="generator" content={Astro.generator} />

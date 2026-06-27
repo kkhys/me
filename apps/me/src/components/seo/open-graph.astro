@@ -1,0 +1,41 @@
+---
+import OpenGraph from "@kkhys/seo/open-graph.astro";
+import { siteConfig } from "#/config/site";
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  imageAlt: string;
+  type?: "website" | "article" | "profile" | undefined;
+  article?:
+    | {
+        publishedTime?: string;
+        modifiedTime?: string;
+        authors?: string[];
+        section?: string;
+        tags?: string[];
+      }
+    | undefined;
+}
+
+const {
+  title,
+  description,
+  image,
+  imageAlt,
+  type = "website",
+  article,
+} = Astro.props;
+---
+
+<OpenGraph
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={imageAlt}
+  type={type}
+  article={article}
+  siteName={siteConfig.title}
+  secureUrlMode="https-only"
+/>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  type: "WebSite" | "BlogPosting" | "Article" | "Person" | "Organization";
+  data: Record<string, unknown>;
+}
+
+const { type, data } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": type,
+  url: canonicalURL,
+  ...data,
+};
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

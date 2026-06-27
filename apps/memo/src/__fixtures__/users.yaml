@@ -1,0 +1,40 @@
+# Sample user data for fixture/CI builds (USE_FIXTURE_DATA=true).
+# Real data lives in the memo-content submodule (memo-content/data/users.yaml).
+# Avatar/cover filenames must exist under src/assets so getAvatarImage resolves.
+- slug: kkhys
+  name: Sample User
+  bio: "サンプルユーザー。"
+  avatar: profile.jpg
+  cover: kkhys-cover.jpg
+  links:
+    - type: website
+      url: https://example.com
+    - type: github
+      url: https://github.com/example
+
+- slug: blog-feed
+  name: Blog Feed
+  bio: "ブログの最新記事を自動でお届け。"
+  avatar: bot.webp
+  isBot: true
+  links:
+    - type: website
+      url: https://example.com
+
+- slug: zenn-feed
+  name: Zenn Feed
+  bio: "Zenn の最新記事を自動でお届け。"
+  avatar: zenn-bot.webp
+  isBot: true
+  links:
+    - type: website
+      url: https://example.com
+
+- slug: oss-project
+  name: OSS Project
+  bio: "公開中のOSSプロジェクトを紹介。"
+  avatar: oss-bot.webp
+  isBot: true
+  links:
+    - type: github
+      url: https://github.com/example

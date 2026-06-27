@@ -1,10 +1,12 @@
 name: CI
 
+# Runs on pull requests (and the merge queue) only. A push to main does not
+# re-run these checks: every change reaches main through a checked PR, the memo
+# deploy re-gates itself in deploy-memo.yml, and me is built locally before its
+# manual deploy.
 on:
   pull_request:
     branches: ["*"]
-  push:
-    branches: ["main"]
   merge_group:
 
 concurrency:
@@ -13,13 +15,16 @@ concurrency:
 
 jobs:
   checks:
+    name: Lint, Test, Type check & Build
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip-ci') }}
-    # Skip the heavy me-content submodule and build against fixtures instead.
-    # CI verifies the code, not the real content; content errors are caught at
-    # the Cloudflare Pages deploy. See src/__fixtures__/content.
+    # Verify the code against fixtures and skip the heavy content submodules.
+    # me reads CONTENT_DIR, memo reads USE_FIXTURE_DATA; both are set so the
+    # workspace-wide `pnpm -r` scripts pick up fixtures for each app. Real
+    # content errors are caught at deploy time. See src/__fixtures__.
     env:
       CONTENT_DIR: src/__fixtures__/content
+      USE_FIXTURE_DATA: "true"
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
@@ -32,7 +37,7 @@ jobs:
           node-version: "24"
           cache: "pnpm"
 
-      - run: pnpm install
+      - run: pnpm install --frozen-lockfile
 
       - name: Lint
         run: pnpm lint

@@ -1,0 +1,13 @@
+---
+import BaseSEO from "@kkhys/seo/base-seo.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+
+const { title, description, noindex = false } = Astro.props;
+---
+
+<BaseSEO title={title} description={description} noindex={noindex} ellipsis />

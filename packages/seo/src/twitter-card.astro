@@ -1,0 +1,44 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  /** Defaults to `title`. */
+  imageAlt?: string | undefined;
+  /** twitter:site handle, e.g. "@kkhys_". */
+  site: string;
+  /** twitter:creator handle. Defaults to `site`. */
+  creator?: string | undefined;
+  /** twitter:card type. Defaults to "summary_large_image". */
+  card?: string | undefined;
+  descriptionMaxLength?: number | undefined;
+  ellipsis?: boolean | undefined;
+}
+
+const {
+  title,
+  description,
+  image,
+  imageAlt,
+  site,
+  creator,
+  card = "summary_large_image",
+  descriptionMaxLength = 200,
+  ellipsis = false,
+} = Astro.props;
+
+const resolvedImageAlt = imageAlt ?? title;
+const resolvedCreator = creator ?? site;
+const resolvedDescription =
+  ellipsis && description.length > descriptionMaxLength
+    ? `${description.slice(0, descriptionMaxLength - 3)}...`
+    : description.slice(0, descriptionMaxLength);
+---
+
+<meta name="twitter:card" content={card} />
+<meta name="twitter:site" content={site} />
+<meta name="twitter:creator" content={resolvedCreator} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={resolvedDescription} />
+<meta name="twitter:image" content={image} />
+<meta name="twitter:image:alt" content={resolvedImageAlt} />

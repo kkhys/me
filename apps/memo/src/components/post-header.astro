@@ -1,0 +1,58 @@
+---
+import type { InferEntrySchema } from "astro:content";
+import BotBadge from "#/components/bot-badge.astro";
+import { formatDate, formatDateTime } from "../utils/date";
+
+interface Props extends Pick<InferEntrySchema<"memo">, "author" | "createdAt"> {
+  authorLink?: string;
+  isBot?: boolean;
+}
+
+const { author, createdAt, authorLink, isBot = false } = Astro.props;
+const createdAtString = formatDate(createdAt);
+const fullDateTimeString = formatDateTime(createdAt);
+---
+
+<div class="post-header">
+    {authorLink ? (
+        <a href={authorLink} class="post-username-link">
+            {author}
+        </a>
+    ) : (
+        <span class="post-username">{author}</span>
+    )}
+    {isBot && <BotBadge />}
+    <time class="post-time" datetime={createdAt.toISOString()} title={fullDateTimeString}
+        >{createdAtString}</time
+    >
+</div>
+
+<style>
+    .post-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.15rem;
+    }
+
+    .post-username-link {
+        /*text-decoration: none;*/
+        /*color: inherit;*/
+    }
+
+    .post-username-link:hover {
+        text-decoration: underline;
+    }
+
+    .post-username, .post-username-link {
+        font-size: var(--fs-xs);
+        font-weight: var(--fw-semibold);
+        color: var(--c-text);
+    }
+
+    .post-time {
+        font-size: var(--fs-xs);
+        color: var(--c-sub-text);
+        font-variant-numeric: tabular-nums;
+    }
+</style>

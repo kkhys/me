@@ -1,39 +1,38 @@
 # CLAUDE.md
 
-Personal blog (kkhys.me). Astro 6 static site on Cloudflare Pages. TypeScript strictest mode. Vanilla CSS (kiso.css reset + uchu.css OKLCH palette). React is server-side only (Satori OG images). Path alias: `#/*` → `./src/*`.
+pnpm monorepo for kkhys's personal sites: two Astro static sites on Cloudflare Pages plus shared packages. TypeScript strictest mode throughout. Dev tools are managed by a Nix Flake (`flake.nix`) — run `direnv allow` to autoload Node.js, pnpm, and Bun.
 
-## Project Map
+## Workspace
 
-- `src/features/` — Self-contained feature modules (blog, pages)
-- `src/lib/` — remark/rehype plugins, API wrappers (`api/`), utilities
-- `src/utils/` — Pure helpers (date, hash, font-loader, base-url, extract-description)
-- `src/styles/` — Global CSS with light-dark() theme switching
-- `src/__tests__/` — Vitest unit tests mirroring source structure
-- `me-content/` — Blog MDX and bucket-list YAML (external content directory)
+Apps:
+- `apps/me` — `@kkhys/me`, the blog at kkhys.me. See `apps/me/CLAUDE.md`.
+- `apps/memo` — `@kkhys/memo`, short threaded memos at memo.kkhys.me. See `apps/memo/CLAUDE.md`.
 
-## Content System
+Packages:
+- `packages/styles` — `@kkhys/styles`, uchu.css OKLCH palette.
+- `packages/seo` — `@kkhys/seo`, BaseSEO / OpenGraph / TwitterCard Astro primitives.
+- `packages/og` — `@kkhys/og`, Satori OG image + favicon generators.
+- `packages/release` — `@kkhys/release`, date-based release tagging used by `scripts/release.ts`.
 
-4 collections in `src/content.config.ts`: blog (MDX in `me-content/blog/`), pages (MDX), bucketList (YAML in `me-content/`), externalPost (YAML). Blog frontmatter requires `title`, `emoji`, `category`, `publishedAt`. Slugs are Bech32m hashed (7 chars) via `src/utils/hash.ts`.
+Shared packages are consumed as source (no build step); each app supplies its own config via thin wrappers. Dependency versions are centralized in the `catalog:` of `pnpm-workspace.yaml`.
 
-4 categories (Tech, Life, Object, DIY) in `src/features/blog/config/category.ts`. Tags scoped per category in `src/features/blog/config/tag.ts`, validated via `z.enum`.
+## Commands
 
-## How to Work
+Run from the repo root:
+- `pnpm build` / `pnpm test` / `pnpm check` — workspace-wide via `pnpm -r`
+- `pnpm lint` / `pnpm lint:fix` — Biome over the whole repo
+- `pnpm dev:me` / `pnpm build:me` / `pnpm deploy:me` — me shortcuts
+- `pnpm --filter @kkhys/memo <script>` — target a single app
+- `pnpm release` — tag a repo-wide release (both apps ship independently; one tag for the repo)
 
-- Dev tools managed by Nix Flake (`flake.nix`). Run `direnv allow` to autoload.
-- All commands: see `scripts` in `package.json`
-- CI: lint → test → type check → build. Add `skip-ci` label to PRs to skip.
-- Lint/format: runs automatically via Stop hook (Biome auto-fix). Fix remaining errors before completing.
+## CI / Deploy
 
-## Key Context Files
-
-Read these when your task involves their domain:
-- `astro.config.ts` — Markdown plugins, env schema, CSP, experimental features
-- `src/content.config.ts` — Collection schemas and validation rules
-- `src/features/blog/config/` — Category and tag definitions
-- `biome.json` — Linter/formatter configuration
+- `.github/workflows/ci.yml` — runs on PRs and the merge queue. Lint → test → type check → build across the workspace against fixtures (`CONTENT_DIR`, `USE_FIXTURE_DATA`); content submodules are skipped. The `skip-ci` label opts out.
+- `.github/workflows/deploy-memo.yml` — on push to main touching `apps/memo/**` or `packages/**`, re-runs memo's checks then deploys to Cloudflare Pages.
+- me is built and deployed locally (`pnpm deploy:me`), not from CI.
 
 ## Gotchas
 
 - `exactOptionalPropertyTypes: true` — optional props need `| undefined`, not just `?:`
 - `.astro` files can't be imported from `.ts` (tsc doesn't resolve them)
-- Type placement: inline `interface Props` in `.astro`; co-locate in `.ts`; extract to `types.ts` at 3+ consumers; `as const satisfies` for config
+- Per-app specifics (content schemas, blog/memo conventions) live in each app's `CLAUDE.md` — read those first when working inside an app.

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/memo",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check && tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
+    "all": "pnpm build && pnpm check && pnpm lint:fix && pnpm test && pnpm coverage",
+    "sync-submodule": "gh workflow run sync-submodule.yml"
+  },
+  "dependencies": {
+    "@astrojs/compiler-rs": "catalog:",
+    "@astrojs/react": "catalog:",
+    "@kkhys/og": "workspace:*",
+    "@kkhys/seo": "workspace:*",
+    "@kkhys/styles": "workspace:*",
+    "astro": "catalog:",
+    "kiso.css": "catalog:",
+    "sharp": "catalog:"
+  },
+  "devDependencies": {
+    "@astrojs/check": "catalog:",
+    "@astrojs/markdown-remark": "catalog:",
+    "@astrojs/sitemap": "catalog:",
+    "@biomejs/biome": "catalog:",
+    "@playform/compress": "0.2.3",
+    "@types/bun": "catalog:",
+    "@types/mdast": "catalog:",
+    "@types/react": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "fetch-site-metadata": "catalog:",
+    "mdast-util-to-string": "4.0.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "rehype-external-links": "3.0.0",
+    "remark": "15.0.1",
+    "satori": "catalog:",
+    "typescript": "catalog:",
+    "unified": "11.0.5",
+    "unist-util-visit": "catalog:",
+    "vitest": "catalog:",
+    "wrangler": "catalog:"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/og",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./favicon": "./src/favicon.tsx",
+    "./handlers": "./src/handlers.ts",
+    "./og": "./src/og.tsx"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "satori": "catalog:",
+    "sharp": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:"
+  },
+  "peerDependencies": {
+    "astro": "^7.0.0"
+  }
+}
