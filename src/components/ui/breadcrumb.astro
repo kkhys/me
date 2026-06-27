@@ -1,5 +1,6 @@
 ---
 import ArrowLeftIcon from "#/components/icons/arrow-left.svg";
+import { siteConfig } from "#/config/site";
 
 interface BreadcrumbSegment {
   label: string;
@@ -8,30 +9,21 @@ interface BreadcrumbSegment {
 }
 
 interface Props {
-  segments: [BreadcrumbSegment, ...BreadcrumbSegment[]];
+  segments?: BreadcrumbSegment[] | undefined;
   class?: string | null | undefined;
 }
 
-const { segments, class: className } = Astro.props;
-const first = segments[0];
-const isSimple = segments.length === 1;
+const { segments = [], class: className } = Astro.props;
+const hasTrail = segments.length > 0;
 ---
 
-<div class:list={["breadcrumb", className]}>
-  {isSimple ? (
-    <a href={first.href} class="breadcrumb-link">
-      <ArrowLeftIcon class="breadcrumb-icon" />
-      {first.label}
-    </a>
-  ) : (
+<nav class:list={["breadcrumb", className]} aria-label="Breadcrumb">
+  <a href="/" class="breadcrumb-site-name">{siteConfig.title}</a>
+  {hasTrail && (
     <span class="breadcrumb-inner">
-      <a href={first.href} class="breadcrumb-link">
-        <ArrowLeftIcon class="breadcrumb-icon" />
-        {first.label}
-      </a>
-      {segments.slice(1).map((segment) => (
+      {segments.map((segment, index) => (
         <>
-          <span class="breadcrumb-sep">/</span>
+          {index > 0 && <span class="breadcrumb-sep">/</span>}
           {segment.isCurrent ? (
             <b class="breadcrumb-current">
               <a href={segment.href} class="breadcrumb-current-link">
@@ -40,6 +32,7 @@ const isSimple = segments.length === 1;
             </b>
           ) : (
             <a href={segment.href} class="breadcrumb-link">
+              {index === 0 && <ArrowLeftIcon class="breadcrumb-icon" />}
               {segment.label}
             </a>
           )}
@@ -47,7 +40,7 @@ const isSimple = segments.length === 1;
       ))}
     </span>
   )}
-</div>
+</nav>
 
 <style>
   .breadcrumb {
@@ -61,6 +54,20 @@ const isSimple = segments.length === 1;
       top: 2rem;
       left: 2rem;
     }
+  }
+
+  .breadcrumb-site-name {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--c-text);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    font-feature-settings: "palt";
+    text-decoration: none;
+  }
+
+  .breadcrumb-site-name:hover {
+    text-decoration: underline;
   }
 
   .breadcrumb-inner {
