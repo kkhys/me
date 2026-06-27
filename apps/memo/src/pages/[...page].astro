@@ -1,0 +1,94 @@
+---
+import type { GetStaticPaths } from "astro";
+import Feed from "#/components/feed.astro";
+import InfiniteScroll from "#/components/infinite-scroll.astro";
+import BaseSEO from "#/components/seo/base-seo.astro";
+import JsonLd from "#/components/seo/json-ld.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
+import ThreadPost from "#/components/thread-post.astro";
+import {
+  DESCRIPTION,
+  PAGE_SIZE,
+  SITE_OWNER_SLUG,
+  TITLE,
+} from "#/config/constants";
+import Layout from "#/layouts/layout.astro";
+import { getMemosWithCommentsAndPinned } from "#/utils/memo";
+import { getAuthorInfo } from "#/utils/user";
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const { pinned, memos } = await getMemosWithCommentsAndPinned();
+
+  const pages = paginate(memos, { pageSize: PAGE_SIZE });
+
+  return pages.map((page) => ({
+    ...page,
+    props: { ...page.props, pinned },
+  }));
+}) satisfies GetStaticPaths;
+
+const { page, pinned } = Astro.props as typeof Astro.props & {
+  pinned: Awaited<ReturnType<typeof getMemosWithCommentsAndPinned>>["pinned"];
+};
+const isFirstPage = page.currentPage === 1;
+const siteOwner = await getAuthorInfo(SITE_OWNER_SLUG);
+---
+
+{!isFirstPage && (
+  <script is:inline>
+    if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
+      window.location.replace("/");
+    }
+  </script>
+)}
+
+<Layout>
+  <Fragment slot="seo">
+    <BaseSEO title={TITLE} description={DESCRIPTION} noindex={!isFirstPage} />
+    <OpenGraph title={TITLE} description={DESCRIPTION} type="website" image="/api/og/default.png" imageAlt={TITLE} />
+    <TwitterCard title={TITLE} description={DESCRIPTION} image="/api/og/default.png" imageAlt={TITLE} />
+  </Fragment>
+
+  <Fragment slot="structured-data">
+    <JsonLd
+      type="WebSite"
+      data={{
+        name: TITLE,
+        description: DESCRIPTION,
+        author: {
+          "@type": "Person",
+          name: siteOwner.name,
+        },
+      }}
+    />
+  </Fragment>
+  <Feed
+    id="memo-container"
+    data-current-page={page.currentPage}
+    data-total-pages={page.lastPage}
+    data-base-path="/"
+  >
+    {
+      isFirstPage && pinned.map(({ main, comments }) => (
+        <ThreadPost
+          memo={main}
+          comments={comments}
+          isPinned={true}
+        />
+      ))
+    }
+    {
+      page.data.map(({ main, comments }) => (
+        <ThreadPost
+          memo={main}
+          comments={comments}
+        />
+      ))
+    }
+  </Feed>
+
+  {page.currentPage < page.lastPage && (
+    <InfiniteScroll containerId="memo-container" />
+  )}
+</Layout>

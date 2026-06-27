@@ -1,0 +1,173 @@
+---
+import Spinner from "#/components/spinner.astro";
+
+interface Props {
+  containerId: string;
+}
+
+const { containerId } = Astro.props;
+---
+
+<div class="infinite-scroll-root" data-container-id={containerId}>
+  <div id="scroll-trigger"></div>
+  <div id="loading-indicator" class="loading-indicator hidden" aria-live="polite" aria-busy="false">
+    <Spinner />
+  </div>
+</div>
+
+<script>
+  const initInfiniteScroll = () => {
+    const root = document.querySelector<HTMLElement>(".infinite-scroll-root");
+    if (!root) return;
+
+    const containerId = root.dataset.containerId || "";
+    const containerEl = document.getElementById(containerId);
+    const triggerEl = document.getElementById("scroll-trigger");
+    const loadingIndicatorEl = document.getElementById("loading-indicator");
+
+    if (!containerEl || !triggerEl || !loadingIndicatorEl) {
+      return;
+    }
+
+    const container: HTMLElement = containerEl;
+    const trigger: HTMLElement = triggerEl;
+    const loadingIndicator: HTMLElement = loadingIndicatorEl;
+
+    const basePath = container.dataset.basePath || "/";
+    let currentPage = Number.parseInt(container.dataset.currentPage || "1", 10);
+    const totalPages = Number.parseInt(container.dataset.totalPages || "1", 10);
+    let isLoading = false;
+
+    const showLoading = () => {
+      loadingIndicator.classList.remove("hidden");
+      loadingIndicator.setAttribute("aria-busy", "true");
+    };
+
+    const hideLoading = () => {
+      loadingIndicator.classList.add("hidden");
+      loadingIndicator.setAttribute("aria-busy", "false");
+    };
+
+    const showEndMessage = () => {
+      trigger.remove();
+      const endSpan = document.createElement("span");
+      endSpan.setAttribute("role", "status");
+      endSpan.textContent = "You've reached the end \u{1F389}";
+      loadingIndicator.replaceChildren(endSpan);
+      loadingIndicator.setAttribute("aria-busy", "false");
+      loadingIndicator.classList.remove("hidden");
+    };
+
+    const showErrorMessage = () => {
+      const errorSpan = document.createElement("span");
+      errorSpan.setAttribute("role", "alert");
+      errorSpan.textContent = "Failed to load more posts \u{1F622}";
+      loadingIndicator.replaceChildren(errorSpan);
+      loadingIndicator.setAttribute("aria-busy", "false");
+      loadingIndicator.classList.remove("hidden");
+    };
+
+    const loadMoreMemos = async () => {
+      const nextPage = currentPage + 1;
+
+      if (nextPage > totalPages) {
+        observer.unobserve(trigger);
+        showEndMessage();
+        return;
+      }
+
+      isLoading = true;
+      showLoading();
+
+      const startTime = Date.now();
+
+      try {
+        const url = nextPage === 1
+          ? basePath
+          : basePath === "/" ? `/${nextPage}` : `${basePath}/${nextPage}`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch page ${nextPage}`);
+        }
+
+        const html = await response.text();
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        const nextContainer = doc.getElementById(containerId);
+        if (!nextContainer) {
+          throw new Error(`${containerId} not found in fetched page`);
+        }
+
+        const elapsed = Date.now() - startTime;
+        const remainingTime = Math.max(0, 500 - elapsed);
+        if (remainingTime > 0) {
+          await new Promise((resolve) => setTimeout(resolve, remainingTime));
+        }
+
+        const memoCards = nextContainer.children;
+        for (const card of Array.from(memoCards)) {
+          container.appendChild(card);
+        }
+
+        currentPage = nextPage;
+
+        if (currentPage >= totalPages) {
+          observer.unobserve(trigger);
+          hideLoading();
+          showEndMessage();
+        }
+      } catch (error) {
+        console.error("Failed to load more memos:", error);
+
+        const elapsed = Date.now() - startTime;
+        const remainingTime = Math.max(0, 500 - elapsed);
+        if (remainingTime > 0) {
+          await new Promise((resolve) => setTimeout(resolve, remainingTime));
+        }
+
+        showErrorMessage();
+      } finally {
+        isLoading = false;
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const firstEntry = entries[0];
+        if (
+          firstEntry &&
+          firstEntry.isIntersecting &&
+          !isLoading &&
+          currentPage < totalPages
+        ) {
+          loadMoreMemos();
+        }
+      },
+      { rootMargin: "200px" },
+    );
+
+    observer.observe(trigger);
+  }
+
+  initInfiniteScroll();
+</script>
+
+<style>
+  .loading-indicator {
+    display: grid;
+    place-items: center;
+    padding: 2rem;
+    font-size: var(--fs-xs);
+  }
+
+  .loading-indicator.hidden {
+    display: none;
+  }
+
+  #scroll-trigger {
+    height: 1px;
+  }
+</style>

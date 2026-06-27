@@ -1,0 +1,33 @@
+---
+interface Props {
+  size?: number;
+}
+
+const { size = 8 } = Astro.props;
+---
+
+<span class="bot-badge" aria-label="Bot" role="img">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 16 16"
+    width={size}
+    height={size}
+    fill="currentColor"
+  >
+    {/* Antenna */}
+    <rect x="6.5" y="0" width="3" height="4.5" rx="1.5" />
+    {/* Head */}
+    <rect x="1.5" y="3.5" width="13" height="11" rx="2.5" />
+    {/* Visor */}
+    <rect x="3.5" y="6.5" width="9" height="3" rx="1.5" class="bot-eye" />
+    {/* Eyes */}
+    <circle cx="5.8" cy="8" r="1.2" />
+    <circle cx="10.2" cy="8" r="1.2" />
+  </svg>
+</span>
+
+<style>
+  .bot-eye {
+    fill: var(--c-bg);
+  }
+</style>

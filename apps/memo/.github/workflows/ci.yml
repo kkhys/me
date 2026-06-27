@@ -1,0 +1,161 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  ci:
+    name: Lint, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+        with:
+          version: 11
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+        env:
+          USE_FIXTURE_DATA: "true"
+
+      - name: Type check
+        run: pnpm check
+
+      - name: Lint
+        run: pnpm lint
+
+      # `pnpm coverage` runs the full test suite as well, so a separate
+      # `pnpm test` step would only duplicate the run (and the Vitest
+      # github-actions report in the job summary).
+      - name: Test & Coverage
+        run: pnpm coverage
+
+  deploy:
+    name: Deploy to Cloudflare
+    needs: ci
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          submodules: true
+          token: ${{ secrets.SUBMODULE_TOKEN }}
+
+      - name: Update submodule to latest
+        run: |
+          cd memo-content
+          git fetch origin main
+          git reset --hard origin/main
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+        with:
+          version: 11
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+        env:
+          PUBLIC_DEPLOY_ENV: "production"
+
+      - name: Create GitHub deployment
+        id: gh_deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          deployment_id=$(gh api "repos/${{ github.repository }}/deployments" \
+            --input - --jq '.id' <<EOF
+          {
+            "ref": "${{ github.sha }}",
+            "environment": "production",
+            "production_environment": true,
+            "auto_merge": false,
+            "required_contexts": [],
+            "description": "Cloudflare Pages deployment"
+          }
+          EOF
+          )
+          echo "id=${deployment_id}" >> "$GITHUB_OUTPUT"
+          gh api "repos/${{ github.repository }}/deployments/${deployment_id}/statuses" \
+            --input - <<EOF
+          {
+            "state": "in_progress",
+            "log_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+          EOF
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        run: pnpm wrangler pages deploy dist --project-name=memo
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Finalize GitHub deployment
+        if: always() && steps.gh_deployment.outputs.id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          state="success"
+          [ "${{ steps.deploy.outcome }}" = "success" ] || state="failure"
+          gh api "repos/${{ github.repository }}/deployments/${{ steps.gh_deployment.outputs.id }}/statuses" \
+            --input - <<EOF
+          {
+            "state": "${state}",
+            "environment_url": "https://memo.kkhys.me",
+            "log_url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+          EOF
+
+      - name: Write deploy summary
+        if: always() && steps.gh_deployment.outputs.id != ''
+        run: |
+          if [ "${{ steps.deploy.outcome }}" = "success" ]; then
+            result="Success"
+          else
+            result="Failure"
+          fi
+          {
+            echo "## Cloudflare Pages Deploy"
+            echo ""
+            echo "| Field | Value |"
+            echo "| --- | --- |"
+            echo "| Result | ${result} |"
+            echo "| Environment | production |"
+            echo "| URL | <https://memo.kkhys.me> |"
+            echo "| Commit | \`${GITHUB_SHA::7}\` |"
+            echo "| Run | [#${GITHUB_RUN_NUMBER}](${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}) |"
+          } >> "$GITHUB_STEP_SUMMARY"
