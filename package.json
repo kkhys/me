@@ -10,9 +10,12 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "build:me": "pnpm --filter @kkhys/me build",
-    "dev:me": "pnpm --filter @kkhys/me dev"
+    "dev:me": "pnpm --filter @kkhys/me dev",
+    "deploy:me": "pnpm --filter @kkhys/me deploy",
+    "release": "bun run scripts/release.ts"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.1"
+    "@biomejs/biome": "catalog:",
+    "@kkhys/release": "workspace:*"
   }
 }
