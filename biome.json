@@ -3,11 +3,11 @@
   "files": {
     "includes": [
       "**",
-      "!node_modules",
-      "!public",
-      "!dist",
-      "!.astro",
-      "!.cache"
+      "!**/node_modules",
+      "!**/public",
+      "!**/dist",
+      "!**/.astro",
+      "!**/.cache"
     ]
   },
   "vcs": {
@@ -42,7 +42,7 @@
       }
     },
     {
-      "includes": ["src/styles/global.css"],
+      "includes": ["**/styles/global.css"],
       "linter": {
         "rules": {
           "complexity": {

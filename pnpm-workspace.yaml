@@ -3,7 +3,9 @@ minimumReleaseAgeExclude:
   - scrub-exif
 
 packages:
-  - me-content
+  - apps/*
+  - packages/*
+  - apps/me/me-content
 
 allowBuilds:
   esbuild: true
