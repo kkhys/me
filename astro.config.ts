@@ -1,4 +1,5 @@
 import { unified } from "@astrojs/markdown-remark";
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, envField } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
@@ -14,6 +15,7 @@ export default defineConfig({
     format: "file",
   },
   integrations: [
+    react(),
     sitemap(),
     (await import("@playform/compress")).default({
       Image: false,
@@ -54,13 +56,6 @@ export default defineConfig({
         access: "public",
         optional: true,
       }),
-    },
-  },
-  experimental: {
-    rustCompiler: true,
-    queuedRendering: {
-      enabled: true,
-      contentCache: true,
     },
   },
 });
