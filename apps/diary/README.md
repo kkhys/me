@@ -1,72 +1,73 @@
 # diary
 
-Photo diary site — [diary.kkhys.me](https://diary.kkhys.me)
+Source code for [diary.kkhys.me](https://diary.kkhys.me) — a photo diary built with Astro. The `@kkhys/diary` app of the [kkhys monorepo](../../README.md).
 
 ## Tech Stack
 
-- [Astro](https://astro.build/) v6 (static site generation)
-- TypeScript (strictest mode)
-- Vanilla CSS ([kiso.css](https://github.com/kiso-mc/kiso.css) reset + uchu.css OKLCH palette)
-- [Cloudflare Pages](https://pages.cloudflare.com/) (hosting)
-- [Biome](https://biomejs.dev/) (linter / formatter)
+- [Astro](https://astro.build/) — Static site generator
+- [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) — [kiso.css](https://github.com/build-trust/kiso.css) reset + [uchu.css](https://github.com/kkhys/uchu.css) palette (`@kkhys/styles`)
+- [TypeScript](https://www.typescriptlang.org/) — Strictest mode type safety
+- [Biome](https://biomejs.dev/) — Linting and formatting
+- [Cloudflare Pages](https://pages.cloudflare.com/) — Hosting and deployment
 
 ## Getting Started
 
-### Prerequisites
+From the monorepo root:
 
-Development tools are managed by [Nix Flake](https://nix.dev/concepts/flakes). Install Nix, then:
-
-```sh
-direnv allow
-```
-
-This will automatically set up Node.js, pnpm, and Bun.
-
-### Install Dependencies
-
-```sh
+```bash
+direnv allow   # Loads Node.js, pnpm, Bun via Nix Flake
 pnpm install
+pnpm dev:diary    # or: pnpm --filter @kkhys/diary dev
 ```
 
-### Development
+Open [http://localhost:4321](http://localhost:4321) to view the site.
 
-```sh
-pnpm dev
+### Content
+
+Photos live in the `diary-content` Git submodule. Development works without it (an empty gallery). A production build needs the submodule:
+
+```bash
+git submodule update --init apps/diary/diary-content
 ```
 
-### Build
+## Scripts
 
-```sh
-pnpm build
-```
-
-### Other Commands
+Run from this directory, or prefix with `pnpm --filter @kkhys/diary`:
 
 | Command | Description |
 | --- | --- |
+| `pnpm dev` | Start development server |
+| `pnpm build` | Production build (static) |
 | `pnpm preview` | Preview production build locally |
-| `pnpm check` | Run Astro check and TypeScript type checking |
-| `pnpm lint` | Lint with Biome |
-| `pnpm lint:fix` | Lint and auto-fix with Biome |
-| `pnpm release` | Create a date-based release tag |
+| `pnpm check` | Astro check + `tsc --noEmit` |
+| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with Biome |
 | `pnpm deploy` | Build and deploy to Cloudflare Pages |
 
 ## Project Structure
 
 ```
-src/
-  pages/        — Astro pages
-  layouts/      — Layout components
-  components/   — Reusable components
-  styles/       — Global CSS
-public/         — Static assets
-diary-content/  — Submodule with diary photos
+apps/diary/
+├── src/
+│   ├── components/   # diary-image.astro (<Picture> + blur-up placeholder)
+│   ├── layouts/      # base-layout.astro (HTML shell + SEO/OGP meta)
+│   ├── pages/        # index.astro (the gallery)
+│   └── styles/       # global.css (tokens + base styles)
+├── diary-content/    # Photos (Git submodule, private)
+└── public/           # Static assets (robots.txt)
 ```
 
-## CI
+For detailed architecture, see [CLAUDE.md](./CLAUDE.md).
 
-GitHub Actions runs lint, type check, and build on every PR and push to `main`. Add the `skip-ci` label to a PR to skip.
+## Deployment
+
+Built and deployed locally via wrangler:
+
+```bash
+pnpm deploy   # Build and deploy to Cloudflare Pages
+```
+
+The `diary-content` submodule must be initialized first. diary is not deployed from CI.
 
 ## License
 
-[MIT](LICENSE.md)
+Code is licensed under [MIT](../../LICENSE.md). Content and images are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).

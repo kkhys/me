@@ -10,6 +10,8 @@ A pnpm monorepo for kkhys's personal sites, built with [Astro](https://astro.bui
 | --- | --- | --- |
 | [`@kkhys/me`](./apps/me) | [kkhys.me](https://kkhys.me) | Personal website and blog |
 | [`@kkhys/memo`](./apps/memo) | [memo.kkhys.me](https://memo.kkhys.me) | Short threaded memos (max 500 chars) |
+| [`@kkhys/lgtm`](./apps/lgtm) | [lgtm.kkhys.me](https://lgtm.kkhys.me) | LGTM images for GitHub Pull Requests |
+| [`@kkhys/diary`](./apps/diary) | [diary.kkhys.me](https://diary.kkhys.me) | Photo diary |
 
 ### Packages
 
@@ -58,7 +60,7 @@ Run from the repo root:
 | `pnpm test` | Run unit tests across the workspace |
 | `pnpm check` | Type check across the workspace |
 | `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with Biome |
-| `pnpm dev:me` / `pnpm build:me` / `pnpm deploy:me` | me shortcuts |
+| `pnpm dev:me` / `pnpm build:me` / `pnpm deploy:me` | me shortcuts (`:lgtm` / `:diary` variants too) |
 | `pnpm --filter @kkhys/memo <script>` | Target a single app |
 | `pnpm release` | Tag a repo-wide release |
 
@@ -68,7 +70,7 @@ Per-app commands are documented in each app's README ([me](./apps/me/README.md),
 
 - `.github/workflows/ci.yml` — runs on pull requests and the merge queue: lint, test, type check, and build across the workspace against fixtures.
 - `.github/workflows/deploy-memo.yml` — deploys memo to Cloudflare Pages on pushes to main that touch memo or shared packages.
-- me is built and deployed locally via `pnpm deploy:me`.
+- me, lgtm, and diary are built and deployed locally via `pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary`.
 
 ## License
 
