@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/diary",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check && tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "deploy": "pnpm build && wrangler pages deploy dist"
+  },
+  "dependencies": {
+    "@astrojs/compiler-rs": "catalog:",
+    "@kkhys/styles": "workspace:*",
+    "astro": "catalog:",
+    "kiso.css": "catalog:",
+    "sharp": "catalog:"
+  },
+  "devDependencies": {
+    "@astrojs/check": "catalog:",
+    "@astrojs/sitemap": "catalog:",
+    "@biomejs/biome": "catalog:",
+    "typescript": "catalog:",
+    "wrangler": "catalog:"
+  }
+}

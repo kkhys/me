@@ -81,6 +81,40 @@ importers:
         specifier: workspace:*
         version: link:packages/release
 
+  apps/diary:
+    dependencies:
+      '@astrojs/compiler-rs':
+        specifier: 'catalog:'
+        version: 0.2.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)
+      '@kkhys/styles':
+        specifier: workspace:*
+        version: link:../../packages/styles
+      astro:
+        specifier: 'catalog:'
+        version: 7.0.2(@astrojs/markdown-remark@7.2.0)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.0.3)(rollup@4.59.0)(terser@5.46.1)(yaml@2.8.2)
+      kiso.css:
+        specifier: 'catalog:'
+        version: 1.2.4
+      sharp:
+        specifier: 'catalog:'
+        version: 0.35.2
+    devDependencies:
+      '@astrojs/check':
+        specifier: 'catalog:'
+        version: 0.9.9(prettier@3.6.2)(typescript@6.0.3)
+      '@astrojs/sitemap':
+        specifier: 'catalog:'
+        version: 3.7.3
+      '@biomejs/biome':
+        specifier: 'catalog:'
+        version: 2.5.1
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      wrangler:
+        specifier: 'catalog:'
+        version: 4.104.0
+
   apps/lgtm:
     dependencies:
       '@astrojs/compiler-rs':

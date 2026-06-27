@@ -1,0 +1,84 @@
+---
+import { getImage, Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  date: string;
+  number: number;
+  priority?: boolean | undefined;
+}
+
+const { src, alt, date, number, priority = false } = Astro.props;
+
+const blurryImage = await getImage({ src, width: 20 });
+---
+
+<article class="entry">
+  <div class="image-wrapper">
+    <div class="blur-load" style={`--bg-image: url(${blurryImage.src})`}>
+      <Picture
+        src={src}
+        alt={alt}
+        width={1200}
+        formats={["avif", "webp"]}
+        quality={80}
+        widths={[640, 900, 1200, 1800, 2400]}
+        sizes="(min-width: 1200px) 1200px, (min-width: 768px) calc(100vw - 5rem), 100vw"
+        loading={priority ? "eager" : "lazy"}
+        fetchpriority={priority ? "high" : undefined}
+        onload="this.closest('.blur-load')?.classList.add('image-loaded')"
+      />
+    </div>
+  </div>
+  <span class="meta">{date} / {number}</span>
+</article>
+
+<style>
+  .entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .image-wrapper {
+    overflow: clip;
+    max-inline-size: 1200px;
+  }
+
+  .blur-load {
+    background: var(--bg-image) center / cover no-repeat;
+    filter: blur(36px);
+    transition: filter 250ms ease-in-out;
+
+    &.image-loaded {
+      background: none;
+      filter: blur(0);
+    }
+  }
+
+  .meta {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-2xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-sub);
+    text-wrap: nowrap;
+    align-self: flex-end;
+    letter-spacing: 0.02em;
+    padding-inline: 1rem;
+  }
+
+  @media (width >= 768px) {
+    .entry {
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .meta {
+      padding-inline: 0;
+      align-self: center;
+    }
+  }
+</style>
