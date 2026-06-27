@@ -1,5 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/lgtm",
   "private": true,
   "scripts": {
     "dev": "astro dev",
@@ -12,27 +13,31 @@
     "coverage": "vitest run --coverage",
     "all": "pnpm build && pnpm check && pnpm lint:fix && pnpm test && pnpm coverage",
     "deploy": "pnpm build && wrangler pages deploy dist",
-    "release": "bun run scripts/release.ts",
     "convert-videos": "bun run scripts/convert-videos.ts"
   },
   "dependencies": {
-    "@astrojs/compiler-rs": "0.2.1",
-    "astro": "6.3.8",
-    "kiso.css": "1.2.4",
-    "sharp": "0.34.5"
+    "@astrojs/compiler-rs": "catalog:",
+    "@astrojs/react": "catalog:",
+    "@kkhys/og": "workspace:*",
+    "@kkhys/seo": "workspace:*",
+    "@kkhys/styles": "workspace:*",
+    "astro": "catalog:",
+    "kiso.css": "catalog:",
+    "sharp": "catalog:"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.9",
-    "@astrojs/sitemap": "3.7.3",
-    "@biomejs/biome": "2.4.15",
+    "@astrojs/check": "catalog:",
+    "@astrojs/sitemap": "catalog:",
+    "@biomejs/biome": "catalog:",
     "@playform/compress": "0.2.3",
-    "@types/bun": "1.3.14",
-    "@types/react": "19.2.15",
-    "@vitest/coverage-v8": "4.1.7",
-    "react": "19.2.6",
-    "satori": "0.26.0",
-    "typescript": "6.0.3",
-    "vitest": "4.1.7",
-    "wrangler": "4.95.0"
+    "@types/bun": "catalog:",
+    "@types/react": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "satori": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "wrangler": "catalog:"
   }
 }

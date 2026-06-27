@@ -1,3 +1,4 @@
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, envField } from "astro/config";
 
@@ -7,6 +8,7 @@ export default defineConfig({
     format: "file",
   },
   integrations: [
+    react(),
     sitemap(),
     (await import("@playform/compress")).default({
       Image: false,
@@ -26,13 +28,6 @@ export default defineConfig({
         optional: true,
         default: false,
       }),
-    },
-  },
-  experimental: {
-    rustCompiler: true,
-    queuedRendering: {
-      enabled: true,
-      contentCache: true,
     },
   },
 });
