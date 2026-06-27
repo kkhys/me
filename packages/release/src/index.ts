@@ -1,5 +1,7 @@
 import { $ } from "bun";
 
+import { resolveReleaseVersion } from "./version";
+
 interface ReleaseOptions {
   /** GitHub repository name, e.g. "me" or "memo". */
   repoName: string;
@@ -28,19 +30,9 @@ export const release = async ({
 
   const now = new Date();
   const baseVersion = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, "0")}.${String(now.getDate()).padStart(2, "0")}`;
-  let version = baseVersion;
 
-  const tags = (await $`git tag`.text())
-    .split("\n")
-    .filter((t) => t.startsWith(baseVersion));
-
-  if (tags.includes(version)) {
-    let suffixCounter = 2;
-    while (tags.includes(`${version}-${suffixCounter}`)) {
-      suffixCounter++;
-    }
-    version = `${version}-${suffixCounter}`;
-  }
+  const existingTags = (await $`git tag`.text()).split("\n");
+  const version = resolveReleaseVersion(baseVersion, existingTags);
 
   console.log(`[RELEASE] Creating tag: ${version}`);
   if (isDryRun) console.log("[DRY-RUN] Mode is ON");
