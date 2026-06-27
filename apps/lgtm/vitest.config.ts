@@ -12,7 +12,7 @@ export default defineConfig({
     coverage: {
       include: [
         "src/components/lgtm-image.tsx",
-        "src/pages/[id]-[size]-[format].ts",
+        "src/pages/[id]-[size].[format].ts",
         "src/pages/[id].[format].ts",
         "src/pages/api/ids.json.ts",
       ],
