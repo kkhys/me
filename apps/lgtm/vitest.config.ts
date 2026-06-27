@@ -1,7 +1,12 @@
 import path from "node:path";
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+  // lgtm-image.test.tsx imports the Satori .tsx pipeline. Astro's tsconfig sets
+  // jsx: "preserve", which Vite 8 leaves untransformed in tests; the React
+  // plugin transforms the JSX (automatic runtime) so the module can load.
+  plugins: [react()],
   resolve: {
     alias: {
       "#": path.resolve(__dirname, "./src"),
