@@ -8,10 +8,13 @@ import {
   writeFileSync,
 } from "node:fs";
 import { glob } from "node:fs/promises";
+import { join } from "node:path";
 import { createMermaidRenderer } from "mermaid-isomorphic";
 import { rehypeMermaidOptions } from "../src/lib/rehype-mermaid-options";
 
-const CACHE_DIR = ".cache/mermaid";
+// Resolve relative to this script so the cache lives under apps/me regardless
+// of the working directory the script is invoked from.
+const CACHE_DIR = join(import.meta.dirname, "..", ".cache", "mermaid");
 
 const getMermaidHash = (source: string): string => {
   return createHash("sha256").update(source).digest("hex").slice(0, 16);
