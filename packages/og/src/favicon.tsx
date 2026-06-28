@@ -40,7 +40,7 @@ const createIconElement = (gradient: string, options?: IconStyleOptions) => {
   );
 };
 
-const generateSvg = async (element: ReactElement, options: SatoriOptions) => {
+const generateSvg = (element: ReactElement, options: SatoriOptions) => {
   return satori(element, {
     width: options.width,
     height: options.height,
@@ -48,7 +48,7 @@ const generateSvg = async (element: ReactElement, options: SatoriOptions) => {
   });
 };
 
-const convertSvgToPng = async (svg: string) => {
+const convertSvgToPng = (svg: string) => {
   return sharp(Buffer.from(svg)).png().toBuffer();
 };
 
@@ -80,26 +80,11 @@ export const generateIcon = async (
  */
 export const createFaviconGenerators = (gradient: string) => ({
   IconSvg: async () =>
-    (await generateIcon(
-      gradient,
-      { width: 500, height: 500 },
-      undefined,
-      "svg",
-    )) as string,
+    (await generateIcon(gradient, { width: 500, height: 500 }, undefined, "svg")) as string,
   Icon192Png: async () =>
-    (await generateIcon(
-      gradient,
-      { width: 192, height: 192 },
-      undefined,
-      "png",
-    )) as Buffer,
+    (await generateIcon(gradient, { width: 192, height: 192 }, undefined, "png")) as Buffer,
   Icon512Png: async () =>
-    (await generateIcon(
-      gradient,
-      { width: 512, height: 512 },
-      undefined,
-      "png",
-    )) as Buffer,
+    (await generateIcon(gradient, { width: 512, height: 512 }, undefined, "png")) as Buffer,
   IconMaskPng: async () =>
     (await generateIcon(
       gradient,

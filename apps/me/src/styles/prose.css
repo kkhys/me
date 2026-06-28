@@ -215,11 +215,7 @@
 
 @keyframes table-scroll-mask {
   0% {
-    mask-image: linear-gradient(
-      to right,
-      var(--uchu-yin) calc(100% - 2rem),
-      transparent
-    );
+    mask-image: linear-gradient(to right, var(--uchu-yin) calc(100% - 2rem), transparent);
   }
   1%,
   99% {
@@ -232,12 +228,7 @@
     );
   }
   100% {
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      var(--uchu-yin) 2rem,
-      var(--uchu-yin) 100%
-    );
+    mask-image: linear-gradient(to right, transparent, var(--uchu-yin) 2rem, var(--uchu-yin) 100%);
   }
 }
 

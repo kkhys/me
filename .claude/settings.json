@@ -6,7 +6,7 @@
           {
             "type": "command",
             "command": "pnpm run lint:fix > /dev/null 2>&1; OUTPUT=$(pnpm run lint 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\" >&2; exit 1; fi",
-            "statusMessage": "Running Biome lint & format..."
+            "statusMessage": "Running oxlint & oxfmt..."
           },
           {
             "type": "command",

@@ -7,8 +7,8 @@
     "check": "pnpm -r check",
     "test": "pnpm -r test",
     "coverage": "pnpm -r coverage",
-    "lint": "biome check .",
-    "lint:fix": "biome check --write .",
+    "lint": "oxlint && oxfmt --check",
+    "lint:fix": "oxlint --fix && oxfmt",
     "build:me": "pnpm --filter @kkhys/me build",
     "dev:me": "pnpm --filter @kkhys/me dev",
     "deploy:me": "pnpm --filter @kkhys/me deploy",
@@ -21,7 +21,8 @@
     "release": "bun run scripts/release.ts"
   },
   "devDependencies": {
-    "@biomejs/biome": "catalog:",
-    "@kkhys/release": "workspace:*"
+    "@kkhys/release": "workspace:*",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:"
   }
 }

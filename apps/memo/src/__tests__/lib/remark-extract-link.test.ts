@@ -3,12 +3,12 @@ import { describe, expect, test } from "vitest";
 import { createVFile } from "#/__fixtures__/vfile-helpers";
 import remarkExtractLink from "#/lib/remark-extract-link";
 
-describe("remarkExtractLink", () => {
-  const processContent = async (content: string) => {
-    const result = await remark().use(remarkExtractLink).process(content);
-    return result.data.astro?.frontmatter?.firstExternalLink;
-  };
+const processContent = async (content: string) => {
+  const result = await remark().use(remarkExtractLink).process(content);
+  return result.data.astro?.frontmatter?.firstExternalLink;
+};
 
+describe("remarkExtractLink", () => {
   describe("external links", () => {
     test("should extract first HTTP link", async () => {
       const content = "This is [a link](http://example.com) and more text.";
@@ -23,8 +23,7 @@ describe("remarkExtractLink", () => {
     });
 
     test("should extract only the first external link when multiple links exist", async () => {
-      const content =
-        "First [link](https://first.com) and second [link](https://second.com)";
+      const content = "First [link](https://first.com) and second [link](https://second.com)";
       const link = await processContent(content);
       expect(link).toBe("https://first.com");
     });
@@ -68,8 +67,7 @@ describe("remarkExtractLink", () => {
     });
 
     test("should extract external link when mixed with internal links", async () => {
-      const content =
-        "Internal [link](/page) and external [link](https://example.com)";
+      const content = "Internal [link](/page) and external [link](https://example.com)";
       const link = await processContent(content);
       expect(link).toBe("https://example.com");
     });
@@ -129,9 +127,7 @@ Second paragraph with [external link](https://example.com).
 
       expect(result.data.astro).toBeDefined();
       expect(result.data.astro?.frontmatter).toBeDefined();
-      expect(result.data.astro?.frontmatter?.firstExternalLink).toBe(
-        "https://example.com",
-      );
+      expect(result.data.astro?.frontmatter?.firstExternalLink).toBe("https://example.com");
     });
 
     test("should handle VFile with existing astro but no frontmatter", async () => {
@@ -143,9 +139,7 @@ Second paragraph with [external link](https://example.com).
       const result = await processor.process(file);
 
       expect(result.data.astro?.frontmatter).toBeDefined();
-      expect(result.data.astro?.frontmatter?.firstExternalLink).toBe(
-        "https://example.com",
-      );
+      expect(result.data.astro?.frontmatter?.firstExternalLink).toBe("https://example.com");
     });
 
     test("should handle VFile with existing astro and frontmatter", async () => {
@@ -161,9 +155,7 @@ Second paragraph with [external link](https://example.com).
       const result = await processor.process(file);
 
       expect(result.data.astro?.frontmatter?.existingField).toBe("value");
-      expect(result.data.astro?.frontmatter?.firstExternalLink).toBe(
-        "https://example.com",
-      );
+      expect(result.data.astro?.frontmatter?.firstExternalLink).toBe("https://example.com");
     });
   });
 });

@@ -14,10 +14,7 @@ export default defineConfig({
     exclude: ["node_modules", ".direnv"],
     coverage: {
       include: ["src/utils/*.ts", "src/lib/*.ts", "src/lib/api/*.ts"],
-      exclude: [
-        "src/lib/expressive-code.ts",
-        "src/lib/rehype-mermaid-options.ts",
-      ],
+      exclude: ["src/lib/expressive-code.ts", "src/lib/rehype-mermaid-options.ts"],
     },
   },
 });

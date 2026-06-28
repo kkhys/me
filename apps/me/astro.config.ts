@@ -17,12 +17,7 @@ import remarkYoutubeBlock from "./src/lib/remark-youtube-block";
 
 export default defineConfig({
   site: "https://kkhys.me",
-  integrations: [
-    expressiveCode(expressiveCodeOptions),
-    react(),
-    mdx(),
-    sitemap(),
-  ],
+  integrations: [expressiveCode(expressiveCodeOptions), react(), mdx(), sitemap()],
   build: {
     format: "file",
   },
@@ -46,12 +41,7 @@ export default defineConfig({
         footnoteBackLabel: "戻る",
         footnoteLabelTagName: "hr",
       },
-      rehypePlugins: [
-        rehypeSlug,
-        rehypeSlugWithCustomId,
-        rehypeMermaidCached,
-        rehypeBudoux,
-      ],
+      rehypePlugins: [rehypeSlug, rehypeSlugWithCustomId, rehypeMermaidCached, rehypeBudoux],
     }),
   },
   image: {

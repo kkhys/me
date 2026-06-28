@@ -7,29 +7,25 @@ export type ZennFeedItem = {
   publishedAt: Date;
 };
 
-const stripCdata = (value: string): string =>
-  value.replace(/^<!\[CDATA\[([\s\S]*?)\]\]>$/, "$1");
+const stripCdata = (value: string): string => value.replace(/^<!\[CDATA\[([\s\S]*?)\]\]>$/, "$1");
 
 const decodeEntities = (value: string): string =>
   value
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#0*39;/g, "'")
-    .replace(/&apos;/g, "'")
-    .replace(/&amp;/g, "&");
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&quot;", '"')
+    .replaceAll(/&#0*39;/g, "'")
+    .replaceAll("&apos;", "'")
+    .replaceAll("&amp;", "&");
 
 const getTagText = (block: string, tag: string): string | undefined => {
-  const match = block.match(
-    new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)</${tag}>`),
-  );
+  const match = block.match(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)</${tag}>`));
   const raw = match?.[1];
   if (raw === undefined) return undefined;
   return decodeEntities(stripCdata(raw.trim()).trim());
 };
 
-const toSlug = (url: string): string | undefined =>
-  url.split("/").filter(Boolean).pop();
+const toSlug = (url: string): string | undefined => url.split("/").findLast(Boolean);
 
 /**
  * Parses a Zenn RSS feed into a list of posts. Only the fields needed for the
@@ -37,9 +33,7 @@ const toSlug = (url: string): string | undefined =>
  * in the feed is ignored.
  */
 export const parseZennFeed = (xml: string): ZennFeedItem[] => {
-  const blocks = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(
-    (match) => match[1] ?? "",
-  );
+  const blocks = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map((match) => match[1] ?? "");
 
   return blocks.flatMap((block) => {
     const title = getTagText(block, "title");
@@ -85,9 +79,7 @@ export const zennLoader = ({ feedUrl }: { feedUrl: string }): Loader => ({
       });
 
       if (response.status === 304) {
-        logger.info(
-          `Zenn feed not modified since ${lastModified}; reusing cached entries.`,
-        );
+        logger.info(`Zenn feed not modified since ${lastModified}; reusing cached entries.`);
         return;
       }
 
@@ -108,9 +100,7 @@ export const zennLoader = ({ feedUrl }: { feedUrl: string }): Loader => ({
     const items = parseZennFeed(xml);
 
     if (items.length === 0) {
-      logger.warn(
-        `Zenn feed at ${feedUrl} contained no items. Keeping previously loaded entries.`,
-      );
+      logger.warn(`Zenn feed at ${feedUrl} contained no items. Keeping previously loaded entries.`);
       return;
     }
 

@@ -1,15 +1,11 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import {
-  type FeedCache,
-  readFeedCache,
-  writeFeedCache,
-} from "#/loaders/feed-cache";
+import { type FeedCache, readFeedCache, writeFeedCache } from "#/loaders/feed-cache";
 
 vi.mock("node:fs", () => ({
-  readFileSync: vi.fn(),
-  writeFileSync: vi.fn(),
-  mkdirSync: vi.fn(),
+  readFileSync: vi.fn<typeof import("node:fs").readFileSync>(),
+  writeFileSync: vi.fn<typeof import("node:fs").writeFileSync>(),
+  mkdirSync: vi.fn<typeof import("node:fs").mkdirSync>(),
 }));
 
 const mockReadFileSync = vi.mocked(readFileSync);
@@ -59,10 +55,9 @@ describe("writeFeedCache", () => {
   test("should create the cache directory and serialize the entry", () => {
     writeFeedCache("zenn", validCache);
 
-    expect(mockMkdirSync).toHaveBeenCalledWith(
-      expect.stringContaining("memo-feeds"),
-      { recursive: true },
-    );
+    expect(mockMkdirSync).toHaveBeenCalledWith(expect.stringContaining("memo-feeds"), {
+      recursive: true,
+    });
     expect(mockWriteFileSync).toHaveBeenCalledWith(
       expect.stringContaining("zenn.json"),
       JSON.stringify(validCache),

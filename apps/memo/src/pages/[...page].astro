@@ -22,10 +22,10 @@ export const getStaticPaths = (async ({ paginate }) => {
 
   const pages = paginate(memos, { pageSize: PAGE_SIZE });
 
-  return pages.map((page) => ({
-    ...page,
-    props: { ...page.props, pinned },
-  }));
+  return pages.map((page) => (Object.assign(page, { props: {
+	...page.props,
+	pinned
+} })));
 }) satisfies GetStaticPaths;
 
 const { page, pinned } = Astro.props as typeof Astro.props & {

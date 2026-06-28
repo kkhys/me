@@ -21,7 +21,7 @@ export const getStaticPaths = async ({
   return categories.flatMap((category) => {
     const filteredEntries = entries
       .filter((entry) => entry.category === category)
-      .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
+      .toSorted((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
     return paginate(filteredEntries, {
       pageSize: countPerPage,
       params: { category: category.toLowerCase() },

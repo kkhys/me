@@ -3,8 +3,15 @@ import { mockMemos } from "#/__fixtures__/memo-collection";
 import type { MemoWithComments } from "#/utils/memo";
 
 vi.mock("astro:content", () => ({
-  getCollection: vi.fn(),
+  getCollection: vi.fn<typeof import("astro:content").getCollection>(),
 }));
+
+const setMemoPinned = (memos: typeof mockMemos, targetId: string) =>
+  memos.map((memo) =>
+    memo.data.id === targetId ? { ...memo, data: { ...memo.data, isPinned: true } } : memo,
+  );
+
+const makeMemo = (id: string) => ({ data: { id } }) as MemoWithComments["memo"];
 
 describe("getPublishedMemos", () => {
   describe("production environment", () => {
@@ -36,15 +43,9 @@ describe("getPublishedMemos", () => {
       const result = await getPublishedMemos();
 
       expect(result.length).toBeGreaterThan(1);
-      for (let i = 0; i < result.length - 1; i++) {
-        const currentMemo = result[i];
-        const nextMemo = result[i + 1];
-        if (currentMemo && nextMemo) {
-          const currentDate = new Date(currentMemo.data.createdAt).getTime();
-          const nextDate = new Date(nextMemo.data.createdAt).getTime();
-          expect(currentDate).toBeGreaterThanOrEqual(nextDate);
-        }
-      }
+      const timestamps = result.map((memo) => new Date(memo.data.createdAt).getTime());
+      const sortedDescending = timestamps.toSorted((a, b) => b - a);
+      expect(timestamps).toEqual(sortedDescending);
     });
 
     test("should return newest published memo first", async () => {
@@ -55,13 +56,8 @@ describe("getPublishedMemos", () => {
       const result = await getPublishedMemos();
 
       expect(result.length).toBeGreaterThan(0);
-      const firstMemo = result[0];
-      if (firstMemo) {
-        expect(firstMemo.data.id).toBe("rss-b1akmxp");
-        expect(firstMemo.data.createdAt).toEqual(
-          new Date("2026-03-09T00:00:00Z"),
-        );
-      }
+      expect(result[0]?.data.id).toBe("rss-b1akmxp");
+      expect(result[0]?.data.createdAt).toEqual(new Date("2026-03-09T00:00:00Z"));
     });
 
     test("should handle empty collection", async () => {
@@ -100,7 +96,7 @@ describe("getPublishedMemos", () => {
   });
 
   describe("development environment", () => {
-    beforeEach(async () => {
+    beforeEach(() => {
       vi.clearAllMocks();
       vi.resetModules();
       vi.doUnmock("#/utils/memo");
@@ -136,9 +132,7 @@ describe("getPublishedMemos", () => {
 
       const draftMemo = result.find((memo) => memo.data.id === "memo-3");
       expect(draftMemo).toBeDefined();
-      if (draftMemo) {
-        expect(draftMemo.data.isDraft).toBe(true);
-      }
+      expect(draftMemo?.data.isDraft).toBe(true);
     });
 
     test("should filter out memos with empty body even in development", async () => {
@@ -363,9 +357,7 @@ describe("getCommentsByMemoId", () => {
     const result = await getCommentsByMemoId("memo-1");
 
     expect(result).toHaveLength(2);
-    expect(
-      result.every((comment) => comment.memo.data.comment === "memo-1"),
-    ).toBe(true);
+    expect(result.every((comment) => comment.memo.data.comment === "memo-1")).toBe(true);
   });
 
   test("should return comments sorted by createdAt in ascending order (oldest first)", async () => {
@@ -457,9 +449,7 @@ describe("getMemosWithComments", () => {
     const result = await getMemosWithComments();
 
     const allComments = result.flatMap(({ comments }) => comments);
-    expect(allComments.every((comment) => !comment.memo.data.isDraft)).toBe(
-      true,
-    );
+    expect(allComments.every((comment) => !comment.memo.data.isDraft)).toBe(true);
   });
 });
 
@@ -621,19 +611,13 @@ describe("getMemosWithCommentsAndPinned", () => {
     const { getMemosWithCommentsAndPinned } = await import("#/utils/memo");
     const { memos } = await getMemosWithCommentsAndPinned();
 
-    const pinnedInUnpinned = memos.find(
-      ({ main }) => main.data.id === "memo-4",
-    );
+    const pinnedInUnpinned = memos.find(({ main }) => main.data.id === "memo-4");
     expect(pinnedInUnpinned).toBeUndefined();
   });
 
   test("should sort pinned memos by date descending", async () => {
     const { getCollection } = await import("astro:content");
-    const memosWithMultiplePinned = mockMemos.map((memo) =>
-      memo.data.id === "memo-1"
-        ? { ...memo, data: { ...memo.data, isPinned: true } }
-        : memo,
-    );
+    const memosWithMultiplePinned = setMemoPinned(mockMemos, "memo-1");
     vi.mocked(getCollection).mockResolvedValue(memosWithMultiplePinned);
 
     const { getMemosWithCommentsAndPinned } = await import("#/utils/memo");
@@ -686,9 +670,6 @@ describe("buildQuoteCountMap", () => {
 });
 
 describe("countTotalComments", () => {
-  const makeMemo = (id: string) =>
-    ({ data: { id } }) as MemoWithComments["memo"];
-
   test("should return 0 for empty array", async () => {
     const { countTotalComments } = await import("#/utils/memo");
     expect(countTotalComments([])).toBe(0);

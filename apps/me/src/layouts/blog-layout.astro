@@ -47,14 +47,14 @@ if (!categoryObject) {
 }
 
 const allTagCloudItems = await Promise.all(
-  allTags?.map(async (tag) => ({
-    ...tag,
-    emojiSvg: await emojiSvg({ emoji: tag.emoji, isColored: true }),
-  })) || [],
+  allTags?.map(async (tag) => (Object.assign(tag, { emojiSvg: await emojiSvg({
+	emoji: tag.emoji,
+	isColored: true
+}) }))) || [],
 );
 
-const tagCloudItems = allTagCloudItems.filter(({ title }) =>
-  tags?.includes(title as (typeof tags)[number]),
+const tagCloudItems = allTagCloudItems.filter(({ title: tagTitle }) =>
+  tags?.includes(tagTitle as (typeof tags)[number]),
 );
 
 const relatedPosts = await getRelatedPosts({ id, category, tags });

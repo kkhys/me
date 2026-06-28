@@ -15,8 +15,8 @@ export const truncateLinkText = (url: string) => {
       return hostname;
     }
 
-    const pathParts = pathname.split("/").filter(Boolean);
-    const truncated = `${hostname}/${pathParts[0]}`;
+    const firstPart = pathname.split("/").find(Boolean);
+    const truncated = `${hostname}/${firstPart}`;
 
     // プロトコルを除いた全体のパス (クエリとハッシュも含む)
     const fullPath = `${hostname}${pathname}${search}${hash}`;

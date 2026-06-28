@@ -59,13 +59,10 @@ export const getBlogPostingSchema = ({
     publisher: personSchema,
     author: personSchema,
     datePublished: data.publishedAt.toISOString(),
-    dateModified:
-      data.updatedAt?.toISOString() ?? data.publishedAt.toISOString(),
+    dateModified: data.updatedAt?.toISOString() ?? data.publishedAt.toISOString(),
     articleSection: categoryObject.label,
     ...(data.tags && {
-      keywords: data.tags
-        .map((tag) => getTagByTitle(tag)?.label || tag)
-        .join(", "),
+      keywords: data.tags.map((tag) => getTagByTitle(tag)?.label || tag).join(", "),
     }),
     inLanguage: "ja-JP",
   };

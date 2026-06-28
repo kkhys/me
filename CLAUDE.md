@@ -5,12 +5,14 @@ pnpm monorepo for kkhys's personal sites: four Astro static sites on Cloudflare 
 ## Workspace
 
 Apps:
+
 - `apps/me` — `@kkhys/me`, the blog at kkhys.me. See `apps/me/CLAUDE.md`.
 - `apps/memo` — `@kkhys/memo`, short threaded memos at memo.kkhys.me. See `apps/memo/CLAUDE.md`.
 - `apps/lgtm` — `@kkhys/lgtm`, LGTM images for GitHub PRs at lgtm.kkhys.me. See `apps/lgtm/CLAUDE.md`.
 - `apps/diary` — `@kkhys/diary`, photo diary at diary.kkhys.me. See `apps/diary/CLAUDE.md`.
 
 Packages:
+
 - `packages/styles` — `@kkhys/styles`, uchu.css OKLCH palette.
 - `packages/seo` — `@kkhys/seo`, BaseSEO / OpenGraph / TwitterCard Astro primitives.
 - `packages/og` — `@kkhys/og`, Satori OG image + favicon generators.
@@ -21,8 +23,9 @@ Shared packages are consumed as source (no build step); each app supplies its ow
 ## Commands
 
 Run from the repo root:
+
 - `pnpm build` / `pnpm test` / `pnpm check` — workspace-wide via `pnpm -r`
-- `pnpm lint` / `pnpm lint:fix` — Biome over the whole repo
+- `pnpm lint` / `pnpm lint:fix` — oxlint + oxfmt over the whole repo
 - `pnpm dev:me` / `pnpm build:me` / `pnpm deploy:me` — me shortcuts (`:lgtm` / `:diary` variants too)
 - `pnpm --filter @kkhys/memo <script>` — target a single app
 - `pnpm release` — tag a repo-wide release (the apps ship independently; one tag for the repo)

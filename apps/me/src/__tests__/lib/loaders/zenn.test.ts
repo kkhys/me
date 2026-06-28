@@ -18,6 +18,47 @@ const buildFeed = (items: string[]) =>
     "",
   )}</channel></rss>`;
 
+const createContext = (metavalues: Record<string, string> = {}) => {
+  const metaStore = new Map<string, string>(Object.entries(metavalues));
+  return {
+    store: {
+      clear: vi.fn<() => void>(),
+      set: vi.fn<(entry: unknown) => void>(),
+    },
+    meta: {
+      get: vi.fn<(key: string) => string | undefined>((key: string) => metaStore.get(key)),
+      set: vi.fn<(key: string, value: string) => void>((key: string, value: string) => {
+        metaStore.set(key, value);
+      }),
+      delete: vi.fn<(key: string) => void>((key: string) => {
+        metaStore.delete(key);
+      }),
+      has: vi.fn<(key: string) => boolean>((key: string) => metaStore.has(key)),
+    },
+    parseData: vi.fn<(props: { data: unknown }) => Promise<unknown>>(({ data }) =>
+      Promise.resolve(data),
+    ),
+    generateDigest: vi.fn<() => string>(() => "digest"),
+    logger: {
+      info: vi.fn<(message: string) => void>(),
+      warn: vi.fn<(message: string) => void>(),
+      error: vi.fn<(message: string) => void>(),
+    },
+  };
+};
+
+const okResponse = (
+  body: string,
+  lastModified: string | null = "Sun, 31 May 2026 05:56:28 GMT",
+) => ({
+  ok: true,
+  status: 200,
+  text: () => Promise.resolve(body),
+  headers: {
+    get: (key: string) => (key === "last-modified" ? lastModified : null),
+  },
+});
+
 describe("parseZennFeed", () => {
   it("extracts title, url and publishedAt from a CDATA item", () => {
     const items = parseZennFeed(buildFeed([buildItem()]));
@@ -65,53 +106,16 @@ describe("parseZennFeed", () => {
 });
 
 describe("zennLoader", () => {
-  const createContext = (metavalues: Record<string, string> = {}) => {
-    const metaStore = new Map<string, string>(Object.entries(metavalues));
-    return {
-      store: {
-        clear: vi.fn(),
-        set: vi.fn(),
-      },
-      meta: {
-        get: vi.fn((key: string) => metaStore.get(key)),
-        set: vi.fn((key: string, value: string) => {
-          metaStore.set(key, value);
-        }),
-        delete: vi.fn((key: string) => {
-          metaStore.delete(key);
-        }),
-        has: vi.fn((key: string) => metaStore.has(key)),
-      },
-      parseData: vi.fn(({ data }) => Promise.resolve(data)),
-      generateDigest: vi.fn(() => "digest"),
-      logger: {
-        info: vi.fn(),
-        warn: vi.fn(),
-        error: vi.fn(),
-      },
-    };
-  };
-
   afterEach(() => {
     vi.restoreAllMocks();
-  });
-
-  const okResponse = (
-    body: string,
-    lastModified: string | null = "Sun, 31 May 2026 05:56:28 GMT",
-  ) => ({
-    ok: true,
-    status: 200,
-    text: () => Promise.resolve(body),
-    headers: {
-      get: (key: string) => (key === "last-modified" ? lastModified : null),
-    },
   });
 
   it("clears the store and sets an entry per feed item on success", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(() => Promise.resolve(okResponse(buildFeed([buildItem()])))),
+      vi.fn<() => Promise<ReturnType<typeof okResponse>>>(() =>
+        Promise.resolve(okResponse(buildFeed([buildItem()]))),
+      ),
     );
 
     const context = createContext();
@@ -134,7 +138,9 @@ describe("zennLoader", () => {
   it("persists the Last-Modified header for conditional requests", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(() => Promise.resolve(okResponse(buildFeed([buildItem()])))),
+      vi.fn<() => Promise<ReturnType<typeof okResponse>>>(() =>
+        Promise.resolve(okResponse(buildFeed([buildItem()]))),
+      ),
     );
 
     const context = createContext();
@@ -142,14 +148,13 @@ describe("zennLoader", () => {
       context as unknown as LoaderContext,
     );
 
-    expect(context.meta.set).toHaveBeenCalledWith(
-      "last-modified",
-      "Sun, 31 May 2026 05:56:28 GMT",
-    );
+    expect(context.meta.set).toHaveBeenCalledWith("last-modified", "Sun, 31 May 2026 05:56:28 GMT");
   });
 
   it("sends If-Modified-Since and reuses cached entries on a 304 response", async () => {
-    const fetchMock = vi.fn(() => Promise.resolve({ status: 304, ok: false }));
+    const fetchMock = vi.fn<() => Promise<{ status: number; ok: boolean }>>(() =>
+      Promise.resolve({ status: 304, ok: false }),
+    );
     vi.stubGlobal("fetch", fetchMock);
 
     const context = createContext({
@@ -169,7 +174,7 @@ describe("zennLoader", () => {
   it("logs an error and keeps existing entries when the fetch fails", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(() =>
+      vi.fn<() => Promise<{ ok: boolean; status: number; statusText: string }>>(() =>
         Promise.resolve({
           ok: false,
           status: 503,
@@ -191,7 +196,9 @@ describe("zennLoader", () => {
   it("logs a warning and keeps existing entries when the feed is empty", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(() => Promise.resolve(okResponse(buildFeed([])))),
+      vi.fn<() => Promise<ReturnType<typeof okResponse>>>(() =>
+        Promise.resolve(okResponse(buildFeed([]))),
+      ),
     );
 
     const context = createContext();

@@ -11,9 +11,7 @@ type MockEntry = {
   };
 };
 
-const createEntry = (
-  overrides: Partial<MockEntry["data"]> & { id: string },
-): MockEntry => ({
+const createEntry = (overrides: Partial<MockEntry["data"]> & { id: string }): MockEntry => ({
   id: overrides.id,
   data: {
     title: overrides.id,
@@ -43,19 +41,48 @@ const mockEntries: MockEntry[] = [
   }),
 ];
 
+const loadGetRelatedPosts = async () => {
+  const mod = await import("#/features/blog/utils/entry");
+  return mod.getRelatedPosts;
+};
+
+type GetRelatedPosts = Awaited<ReturnType<typeof loadGetRelatedPosts>>;
+
+const runTagScoreSimulation = async (
+  getRelatedPosts: GetRelatedPosts,
+  tracked: string[],
+  iterations: number,
+): Promise<Map<string, number>> => {
+  const tagScores = new Map<string, number>();
+  for (let i = 0; i < iterations; i++) {
+    const results = await getRelatedPosts({
+      id: "current",
+      category: "Tech",
+      tags: ["React", "TypeScript"],
+    });
+    for (const [rank, result] of results.entries()) {
+      tagScores.set(result.id, (tagScores.get(result.id) ?? 0) + rank);
+    }
+    // Penalize posts not in results with the worst rank
+    for (const id of tracked) {
+      if (!results.some((r) => r.id === id)) {
+        tagScores.set(id, (tagScores.get(id) ?? 0) + results.length);
+      }
+    }
+  }
+  return new Map([...tagScores].map(([id, score]) => [id, score / iterations]));
+};
+
+const avgRankOf = (avgRanks: Map<string, number>, id: string): number => avgRanks.get(id) ?? 0;
+
 describe("getRelatedPosts", () => {
   beforeEach(() => {
     vi.resetModules();
     vi.doMock("astro:env/client", () => ({ NODE_ENV: "production" }));
     vi.doMock("astro:content", () => ({
-      getCollection: vi.fn(() => Promise.resolve(mockEntries)),
+      getCollection: vi.fn<() => Promise<MockEntry[]>>(() => Promise.resolve(mockEntries)),
     }));
   });
-
-  const loadGetRelatedPosts = async () => {
-    const mod = await import("#/features/blog/utils/entry");
-    return mod.getRelatedPosts;
-  };
 
   it("excludes the current post from results", async () => {
     const getRelatedPosts = await loadGetRelatedPosts();
@@ -90,39 +117,14 @@ describe("getRelatedPosts", () => {
   it("prioritizes posts with more shared tags", async () => {
     const getRelatedPosts = await loadGetRelatedPosts();
 
-    // Run multiple times to account for randomness within same score
-    const tagScores = new Map<string, number>();
-
-    const tracked = ["a", "c", "d", "g"];
-
-    for (let i = 0; i < 50; i++) {
-      const results = await getRelatedPosts({
-        id: "current",
-        category: "Tech",
-        tags: ["React", "TypeScript"],
-      });
-
-      for (const [rank, result] of results.entries()) {
-        const prev = tagScores.get(result.id) ?? 0;
-        tagScores.set(result.id, prev + rank);
-      }
-
-      // Penalize posts not in results with worst rank
-      for (const id of tracked) {
-        if (!results.some((r) => r.id === id)) {
-          const prev = tagScores.get(id) ?? 0;
-          tagScores.set(id, prev + results.length);
-        }
-      }
-    }
-
-    // "g" shares 2 tags (React, TypeScript) — same as "a", should have low avg rank
-    // "c" and "d" share 0 tags — should have high avg rank
-    const avgRank = (id: string) => (tagScores.get(id) ?? 0) / 50;
+    // Run multiple times to account for randomness within same score.
+    // "g" shares 2 tags (React, TypeScript) — same as "a", should have low avg rank.
+    // "c" and "d" share 0 tags — should have high avg rank.
+    const avgRanks = await runTagScoreSimulation(getRelatedPosts, ["a", "c", "d", "g"], 50);
 
     // Posts with 2 shared tags should rank higher (lower number) than 0 shared tags
-    expect(avgRank("a")).toBeLessThan(avgRank("c"));
-    expect(avgRank("a")).toBeLessThan(avgRank("d"));
+    expect(avgRankOf(avgRanks, "a")).toBeLessThan(avgRankOf(avgRanks, "c"));
+    expect(avgRankOf(avgRanks, "a")).toBeLessThan(avgRankOf(avgRanks, "d"));
   });
 
   it("works when current post has no tags", async () => {

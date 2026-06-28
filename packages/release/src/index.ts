@@ -14,10 +14,7 @@ interface ReleaseOptions {
  * matching GitHub Release. Pass `--dry-run` on argv to preview without
  * mutating git or calling the GitHub API. Requires `GITHUB_ACCESS_TOKEN`.
  */
-export const release = async ({
-  repoName,
-  repoOwner = "kkhys",
-}: ReleaseOptions) => {
+export const release = async ({ repoName, repoOwner = "kkhys" }: ReleaseOptions) => {
   const isDryRun = process.argv.includes("--dry-run");
   const githubAccessToken = process.env.GITHUB_ACCESS_TOKEN;
 
@@ -37,38 +34,31 @@ export const release = async ({
   console.log(`[RELEASE] Creating tag: ${version}`);
   if (isDryRun) console.log("[DRY-RUN] Mode is ON");
 
-  const currentBranch = (
-    await $`git rev-parse --abbrev-ref HEAD`.text()
-  ).trim();
+  const currentBranch = (await $`git rev-parse --abbrev-ref HEAD`.text()).trim();
 
-  if (!isDryRun) {
-    await $`git checkout main`;
-    await $`git tag -f -m ${version} ${version}`;
-    await $`git push -f origin ${version}`;
-    await $`git checkout ${currentBranch}`;
-    console.log(
-      `[SUCCESS] Released tag: ${version} and returned to ${currentBranch}`,
-    );
-  } else {
+  if (isDryRun) {
     console.log("[DRY-RUN] Would checkout main");
     console.log(`[DRY-RUN] Would tag -f ${version}`);
     console.log(`[DRY-RUN] Would push -f origin ${version}`);
     console.log(`[DRY-RUN] Would checkout ${currentBranch}`);
+  } else {
+    await $`git checkout main`;
+    await $`git tag -f -m ${version} ${version}`;
+    await $`git push -f origin ${version}`;
+    await $`git checkout ${currentBranch}`;
+    console.log(`[SUCCESS] Released tag: ${version} and returned to ${currentBranch}`);
   }
 
   console.log(`[GITHUB] Preparing to create release for ${version}`);
 
   const getPreviousTag = async (): Promise<string | null> => {
-    const response = await fetch(
-      `https://api.github.com/repos/${repoOwner}/${repoName}/releases`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${githubAccessToken}`,
-          "Content-Type": "application/json",
-        },
+    const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/releases`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${githubAccessToken}`,
+        "Content-Type": "application/json",
       },
-    );
+    });
 
     if (response.ok) {
       const releases = (await response.json()) as { tag_name: string }[];
@@ -95,23 +85,20 @@ export const release = async ({
       body += "\n\n(No previous release found for comparison.)";
     }
 
-    const response = await fetch(
-      `https://api.github.com/repos/${repoOwner}/${repoName}/releases`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${githubAccessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          tag_name: version,
-          name: version,
-          body,
-          draft: false,
-          prerelease: false,
-        }),
+    const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/releases`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${githubAccessToken}`,
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({
+        tag_name: version,
+        name: version,
+        body,
+        draft: false,
+        prerelease: false,
+      }),
+    });
 
     if (response.ok) {
       const responseData = (await response.json()) as { html_url: string };
@@ -123,12 +110,12 @@ export const release = async ({
     }
   };
 
-  if (!isDryRun) {
-    await createGitHubRelease();
-  } else {
+  if (isDryRun) {
     console.log("[DRY-RUN] Would create GitHub release");
     console.log(`[DRY-RUN] Release tag: ${version}`);
     console.log(`[DRY-RUN] Release title: ${version}`);
     console.log("[DRY-RUN] Completed GitHub release process");
+  } else {
+    await createGitHubRelease();
   }
 };

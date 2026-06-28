@@ -227,8 +227,6 @@ export const tags = [
 
 export const allTagTitles = tags.map(({ title }) => title);
 
-export const getTagBySlug = (slug: string) =>
-  tags.find((tag) => tag.slug === slug);
+export const getTagBySlug = (slug: string) => tags.find((tag) => tag.slug === slug);
 
-export const getTagByTitle = (title: string) =>
-  tags.find((tag) => tag.title === title);
+export const getTagByTitle = (title: string) => tags.find((tag) => tag.title === title);

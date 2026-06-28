@@ -2,12 +2,12 @@ import { remark } from "remark";
 import { describe, expect, test } from "vitest";
 import remarkEscapeSyntax from "#/lib/remark-escape-syntax";
 
-describe("remark-escape-syntax", () => {
-  const processMarkdown = async (markdown: string) => {
-    const result = await remark().use(remarkEscapeSyntax).process(markdown);
-    return result.toString();
-  };
+const processMarkdown = async (markdown: string) => {
+  const result = await remark().use(remarkEscapeSyntax).process(markdown);
+  return result.toString();
+};
 
+describe("remark-escape-syntax", () => {
   describe("Heading escaping", () => {
     test("should convert H1 heading to paragraph with # prefix", async () => {
       const input = "# Title";

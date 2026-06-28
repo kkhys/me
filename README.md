@@ -6,21 +6,21 @@ A pnpm monorepo for kkhys's personal sites, built with [Astro](https://astro.bui
 
 ### Apps
 
-| Package | Site | Description |
-| --- | --- | --- |
-| [`@kkhys/me`](./apps/me) | [kkhys.me](https://kkhys.me) | Personal website and blog |
-| [`@kkhys/memo`](./apps/memo) | [memo.kkhys.me](https://memo.kkhys.me) | Short threaded memos (max 500 chars) |
-| [`@kkhys/lgtm`](./apps/lgtm) | [lgtm.kkhys.me](https://lgtm.kkhys.me) | LGTM images for GitHub Pull Requests |
-| [`@kkhys/diary`](./apps/diary) | [diary.kkhys.me](https://diary.kkhys.me) | Photo diary |
+| Package                        | Site                                     | Description                          |
+| ------------------------------ | ---------------------------------------- | ------------------------------------ |
+| [`@kkhys/me`](./apps/me)       | [kkhys.me](https://kkhys.me)             | Personal website and blog            |
+| [`@kkhys/memo`](./apps/memo)   | [memo.kkhys.me](https://memo.kkhys.me)   | Short threaded memos (max 500 chars) |
+| [`@kkhys/lgtm`](./apps/lgtm)   | [lgtm.kkhys.me](https://lgtm.kkhys.me)   | LGTM images for GitHub Pull Requests |
+| [`@kkhys/diary`](./apps/diary) | [diary.kkhys.me](https://diary.kkhys.me) | Photo diary                          |
 
 ### Packages
 
-| Package | Description |
-| --- | --- |
-| `@kkhys/styles` | uchu.css OKLCH color palette |
-| `@kkhys/seo` | BaseSEO / OpenGraph / TwitterCard Astro primitives |
-| `@kkhys/og` | Satori OG image + favicon generators |
-| `@kkhys/release` | Date-based release tagging |
+| Package          | Description                                        |
+| ---------------- | -------------------------------------------------- |
+| `@kkhys/styles`  | uchu.css OKLCH color palette                       |
+| `@kkhys/seo`     | BaseSEO / OpenGraph / TwitterCard Astro primitives |
+| `@kkhys/og`      | Satori OG image + favicon generators               |
+| `@kkhys/release` | Date-based release tagging                         |
 
 Shared packages are consumed as source (no build step); each app applies its own config via thin wrappers. Dependency versions are centralized in the `catalog:` of `pnpm-workspace.yaml`.
 
@@ -31,7 +31,7 @@ Shared packages are consumed as source (no build step); each app applies its own
 - [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) — [kiso.css](https://github.com/build-trust/kiso.css) reset + [uchu.css](https://github.com/kkhys/uchu.css) palette (OKLCH)
 - [TypeScript](https://www.typescriptlang.org/) — Strictest mode type safety
 - [Vitest](https://vitest.dev/) — Unit testing
-- [Biome](https://biomejs.dev/) — Linting and formatting
+- [oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) — Linting and formatting
 - [pnpm](https://pnpm.io/) workspaces — Monorepo management
 - [Cloudflare Pages](https://pages.cloudflare.com/) — Hosting and deployment
 
@@ -54,15 +54,15 @@ pnpm dev:me    # or: pnpm --filter @kkhys/memo dev
 
 Run from the repo root:
 
-| Command | Description |
-| --- | --- |
-| `pnpm build` | Build every app and package (`pnpm -r`) |
-| `pnpm test` | Run unit tests across the workspace |
-| `pnpm check` | Type check across the workspace |
-| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with Biome |
+| Command                                            | Description                                    |
+| -------------------------------------------------- | ---------------------------------------------- |
+| `pnpm build`                                       | Build every app and package (`pnpm -r`)        |
+| `pnpm test`                                        | Run unit tests across the workspace            |
+| `pnpm check`                                       | Type check across the workspace                |
+| `pnpm lint` / `pnpm lint:fix`                      | Check / auto-fix with oxlint + oxfmt           |
 | `pnpm dev:me` / `pnpm build:me` / `pnpm deploy:me` | me shortcuts (`:lgtm` / `:diary` variants too) |
-| `pnpm --filter @kkhys/memo <script>` | Target a single app |
-| `pnpm release` | Tag a repo-wide release |
+| `pnpm --filter @kkhys/memo <script>`               | Target a single app                            |
+| `pnpm release`                                     | Tag a repo-wide release                        |
 
 Per-app commands are documented in each app's README ([me](./apps/me/README.md), [memo](./apps/memo/README.md)).
 

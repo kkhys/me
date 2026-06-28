@@ -78,10 +78,7 @@ const buildTextOverlay = async (imageWidth: number, imageHeight: number) => {
     .toBuffer();
 };
 
-const generateStillAvif = async (
-  baseImage: Buffer,
-  width: number,
-): Promise<Buffer> => {
+const generateStillAvif = async (baseImage: Buffer, width: number): Promise<Buffer> => {
   const resizedImage = await sharp(baseImage).resize(width).toBuffer();
   const metadata = await sharp(resizedImage).metadata();
   const imageWidth = metadata.width ?? width;
@@ -95,10 +92,7 @@ const generateStillAvif = async (
     .toBuffer();
 };
 
-const generateAnimatedWebp = async (
-  baseImage: Buffer,
-  width: number,
-): Promise<Buffer> => {
+const generateAnimatedWebp = async (baseImage: Buffer, width: number): Promise<Buffer> => {
   // Decode all frames into a fully-composed RGBA strip first, then slice out
   // each page. Reading a GIF page directly (`{ page: N }`) returns only that
   // page's payload — which for GIFs that use frame disposal or delta updates
@@ -117,8 +111,7 @@ const generateAnimatedWebp = async (
 
   const pageWidth = strip.info.width;
   const pageCount = strip.info.pages ?? 1;
-  const pageHeight =
-    strip.info.pageHeight ?? Math.floor(strip.info.height / pageCount);
+  const pageHeight = strip.info.pageHeight ?? Math.floor(strip.info.height / pageCount);
   const channels = strip.info.channels;
   const bytesPerPage = pageWidth * pageHeight * channels;
 
@@ -128,10 +121,7 @@ const generateAnimatedWebp = async (
   // pipelines on a long clip can balloon memory usage.
   const frames: Buffer[] = [];
   for (let page = 0; page < pageCount; page++) {
-    const pageBytes = strip.data.subarray(
-      page * bytesPerPage,
-      (page + 1) * bytesPerPage,
-    );
+    const pageBytes = strip.data.subarray(page * bytesPerPage, (page + 1) * bytesPerPage);
     const frame = await sharp(pageBytes, {
       raw: { width: pageWidth, height: pageHeight, channels },
     })
@@ -146,13 +136,8 @@ const generateAnimatedWebp = async (
     .toBuffer();
 };
 
-export const LgtmImage = async (
-  entry: CollectionEntry<"lgtm">,
-  width = 400,
-): Promise<Buffer> => {
-  const lgtmBasePath = GITHUB_ACTIONS
-    ? "./src/__fixtures__/lgtm-sample"
-    : "./lgtm-content/lgtm";
+export const LgtmImage = async (entry: CollectionEntry<"lgtm">, width = 400): Promise<Buffer> => {
+  const lgtmBasePath = GITHUB_ACTIONS ? "./src/__fixtures__/lgtm-sample" : "./lgtm-content/lgtm";
 
   const imagePath = join(lgtmBasePath, entry.id, entry.data.image);
   const baseImage = await readFile(imagePath);

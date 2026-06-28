@@ -1,9 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import {
-  type CategoryTitle,
-  categories,
-} from "#/features/blog/config/category";
+import { type CategoryTitle, categories } from "#/features/blog/config/category";
 import { generateBech32m } from "#/utils/hash";
 
 interface Frontmatter {
@@ -45,13 +42,11 @@ const selectCategory = async (): Promise<CategoryTitle> => {
   console.log("\nカテゴリーを選択してください:");
 
   categories.forEach((category, index) => {
-    console.log(
-      `${index + 1}. ${category.emoji} ${category.title} (${category.label})`,
-    );
+    console.log(`${index + 1}. ${category.emoji} ${category.title} (${category.label})`);
   });
 
   const choice = await prompt(`選択してください (1-${categories.length}): `);
-  const choiceIndex = Number.parseInt(choice, 10) - 1;
+  const choiceIndex = Math.trunc(Number(choice)) - 1;
 
   if (choiceIndex >= 0 && choiceIndex < categories.length) {
     const selectedCategory = categories[choiceIndex];
@@ -66,9 +61,7 @@ const selectCategory = async (): Promise<CategoryTitle> => {
 
 const inputPublishedDate = async () => {
   const defaultDate = getTodayDate();
-  const input = await prompt(
-    "公開日を入力してください (yyyy-mm-dd形式、空白で今日の日付): ",
-  );
+  const input = await prompt("公開日を入力してください (yyyy-mm-dd形式、空白で今日の日付): ");
 
   if (input === "") {
     console.log(`今日の日付を使用します: ${defaultDate}`);
@@ -91,9 +84,7 @@ const checkFileExists = (filePath: string) => {
 
 const generateMDXContent = (frontmatter: Frontmatter) => {
   if (!validateDateFormat(frontmatter.publishedAt)) {
-    throw new Error(
-      `Invalid date format: ${frontmatter.publishedAt}. Expected format: yyyy-mm-dd`,
-    );
+    throw new Error(`Invalid date format: ${frontmatter.publishedAt}. Expected format: yyyy-mm-dd`);
   }
 
   return `---
@@ -157,7 +148,9 @@ const main = async () => {
 
 process.stdin.setEncoding("utf8");
 
-main().catch((error) => {
+try {
+  await main();
+} catch (error) {
   console.error("予期しないエラーが発生しました:", error);
   process.exit(1);
-});
+}

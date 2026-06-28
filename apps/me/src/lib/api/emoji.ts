@@ -33,7 +33,7 @@ const toCodePoint = (unicodeSurrogates: string) => {
 export const getIconCode = (char: string) => {
   const U200D = String.fromCharCode(8205);
   const UFE0Fg = /\uFE0F/g;
-  return toCodePoint(!char.includes(U200D) ? char.replace(UFE0Fg, "") : char);
+  return toCodePoint(char.includes(U200D) ? char : char.replace(UFE0Fg, ""));
 };
 
 // Return the first grapheme cluster, not the first code point. Flags (Regional
@@ -55,13 +55,12 @@ export const loadEmoji = (type: keyof typeof apis, code: string) => {
   return cache(key, async () => {
     const resolvedType = type && apis[type] ? type : "twemoji";
     const api = apis[resolvedType];
-    const url =
-      typeof api === "function" ? api(code) : `${api}${code.toUpperCase()}.svg`;
+    const url = typeof api === "function" ? api(code) : `${api}${code.toUpperCase()}.svg`;
 
     const r = await fetch(url);
     // A set may not provide every emoji (e.g. fluent omits country flags).
     // Return undefined so callers can fall back to another set.
-    if (!r.ok) return undefined;
+    if (!r.ok) return;
     return r.text();
   });
 };

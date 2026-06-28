@@ -8,44 +8,44 @@ export const extractDescription = (body: string, maxLength = 120): string => {
   let text = body;
 
   // Remove import statements
-  text = text.replace(/^import\s+.*$/gm, "");
+  text = text.replaceAll(/^import\s+.*$/gm, "");
 
   // Remove fenced code blocks
-  text = text.replace(/```[\s\S]*?```/g, "");
+  text = text.replaceAll(/```[\s\S]*?```/g, "");
 
   // Remove alert blockquotes (> [!NOTE] etc. and continuation lines)
-  text = text.replace(
+  text = text.replaceAll(
     /^> \[!(?:NOTE|TIP|IMPORTANT|WARNING|CAUTION)\].*(?:\n(?:>\s?.*)?)*$/gm,
     "",
   );
 
   // Remove blockquote markers
-  text = text.replace(/^>\s?/gm, "");
+  text = text.replaceAll(/^>\s?/gm, "");
 
   // Remove headings
-  text = text.replace(/^#{1,6}\s+.*$/gm, "");
+  text = text.replaceAll(/^#{1,6}\s+.*$/gm, "");
 
   // Remove images
-  text = text.replace(/!\[.*?\]\(.*?\)/g, "");
+  text = text.replaceAll(/!\[.*?\]\(.*?\)/g, "");
 
   // Convert links to text only
-  text = text.replace(/\[([^\]]*)\]\(.*?\)/g, "$1");
+  text = text.replaceAll(/\[([^\]]*)\]\(.*?\)/g, "$1");
 
   // Remove inline code
-  text = text.replace(/`[^`]+`/g, "");
+  text = text.replaceAll(/`[^`]+`/g, "");
 
   // Remove bold/italic markers
-  text = text.replace(/\*{1,3}(.*?)\*{1,3}/g, "$1");
-  text = text.replace(/_{1,3}(.*?)_{1,3}/g, "$1");
+  text = text.replaceAll(/\*{1,3}(.*?)\*{1,3}/g, "$1");
+  text = text.replaceAll(/_{1,3}(.*?)_{1,3}/g, "$1");
 
   // Remove horizontal rules
-  text = text.replace(/^[-*_]{3,}$/gm, "");
+  text = text.replaceAll(/^[-*_]{3,}$/gm, "");
 
   // Remove HTML tags
-  text = text.replace(/<[^>]+>/g, "");
+  text = text.replaceAll(/<[^>]+>/g, "");
 
   // Remove footnote references
-  text = text.replace(/\[\^[^\]]*\]/g, "");
+  text = text.replaceAll(/\[\^[^\]]*\]/g, "");
 
   // Normalize whitespace and join
   text = text
@@ -53,7 +53,7 @@ export const extractDescription = (body: string, maxLength = 120): string => {
     .map((line) => line.trim())
     .filter((line) => line.length > 0)
     .join(" ")
-    .replace(/\s+/g, " ")
+    .replaceAll(/\s+/g, " ")
     .trim();
 
   if (text.length <= maxLength) return text;

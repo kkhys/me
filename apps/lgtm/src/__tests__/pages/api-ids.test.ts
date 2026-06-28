@@ -3,24 +3,28 @@ import { describe, expect, test, vi } from "vitest";
 import { GET } from "#/pages/api/ids.json";
 
 vi.mock("astro:content", () => ({
-  getCollection: vi.fn(async () => [
-    {
-      id: "01kcy2c0k82cmr4sy2ehadrfgk",
-      collection: "lgtm",
-      data: {
-        image: "01.jpg",
-        animated: false,
+  getCollection: vi.fn<
+    () => Promise<{ id: string; collection: string; data: { image: string; animated: boolean } }[]>
+  >(() =>
+    Promise.resolve([
+      {
+        id: "01kcy2c0k82cmr4sy2ehadrfgk",
+        collection: "lgtm",
+        data: {
+          image: "01.jpg",
+          animated: false,
+        },
       },
-    },
-    {
-      id: "01kczxdmaz63jrwfjcq8c1x2fj",
-      collection: "lgtm",
-      data: {
-        image: "01.webp",
-        animated: true,
+      {
+        id: "01kczxdmaz63jrwfjcq8c1x2fj",
+        collection: "lgtm",
+        data: {
+          image: "01.webp",
+          animated: true,
+        },
       },
-    },
-  ]),
+    ]),
+  ),
 }));
 
 vi.mock("#/components/lgtm-image", () => ({
@@ -33,12 +37,8 @@ describe("GET /api/ids.json", () => {
     const response = await GET({} as unknown as APIContext);
 
     expect(response.status).toBe(200);
-    expect(response.headers.get("Content-Type")).toBe(
-      "application/json; charset=utf-8",
-    );
-    expect(response.headers.get("Cache-Control")).toBe(
-      "public, max-age=86400, must-revalidate",
-    );
+    expect(response.headers.get("Content-Type")).toBe("application/json; charset=utf-8");
+    expect(response.headers.get("Cache-Control")).toBe("public, max-age=86400, must-revalidate");
   });
 
   test("should return valid JSON with correct structure", async () => {
@@ -82,9 +82,7 @@ describe("GET /api/ids.json", () => {
     const text = await response.text();
     const data = JSON.parse(text);
 
-    expect(data.ids).toEqual(
-      data.entries.map((entry: { id: string }) => entry.id),
-    );
+    expect(data.ids).toEqual(data.entries.map((entry: { id: string }) => entry.id));
   });
 
   test("should return valid ISO 8601 timestamp", async () => {

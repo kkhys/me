@@ -6,9 +6,12 @@ export const siteOpengraphImage = async () => {
 
   return createSiteOgImage({
     text: "Keisuke Hayashi",
-    background: "#fcfcfc", // uchu-yang (oklch(99.4% 0 0))
-    innerBackground: "#fcfcfc", // uchu-yang (oklch(99.4% 0 0))
-    color: "#0e1117", // uchu-yin (oklch(14.38% 0.007 256.88))
+    // uchu-yang (oklch(99.4% 0 0))
+    background: "#fcfcfc",
+    // uchu-yang (oklch(99.4% 0 0))
+    innerBackground: "#fcfcfc",
+    // uchu-yin (oklch(14.38% 0.007 256.88))
+    color: "#0e1117",
     fontData: interSemiBold,
   });
 };

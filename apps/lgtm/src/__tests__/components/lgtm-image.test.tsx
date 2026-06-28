@@ -49,9 +49,7 @@ describe("LgtmImage", () => {
       expect(metadata.format).toBe("heif");
     });
 
-    it.each([
-      400, 800, 1000, 1200,
-    ])("should resize to %ipx width", async (width) => {
+    it.each([400, 800, 1000, 1200])("should resize to %ipx width", async (width) => {
       const buffer = await LgtmImage(createStillEntry(), width);
       const metadata = await sharp(buffer).metadata();
       expect(metadata.width).toBe(width);
@@ -90,7 +88,7 @@ describe("LgtmImage", () => {
         data: { image: "nonexistent.jpg", animated: false },
       });
 
-      await expect(LgtmImage(entry, 400)).rejects.toThrow();
+      await expect(LgtmImage(entry, 400)).rejects.toThrow(Error);
     });
   });
 

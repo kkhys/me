@@ -99,10 +99,7 @@ describe("remarkYoutubeBlock", () => {
   it("skips paragraphs with multiple children", () => {
     const url = "https://www.youtube.com/watch?v=kpz_U8wHpa8";
     const tree = makeTree([
-      makeParagraph([
-        makeBareLink(url),
-        { type: "text", value: " extra" } as Text,
-      ]),
+      makeParagraph([makeBareLink(url), { type: "text", value: " extra" } as Text]),
     ]);
 
     remarkYoutubeBlock()(tree);

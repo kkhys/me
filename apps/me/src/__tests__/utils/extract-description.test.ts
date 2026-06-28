@@ -4,9 +4,7 @@ import { extractDescription } from "#/utils/extract-description";
 describe("extractDescription", () => {
   it("extracts plain text from simple MDX body", () => {
     const body = "これはテスト記事です。\n\n本文の2段落目です。";
-    expect(extractDescription(body)).toBe(
-      "これはテスト記事です。 本文の2段落目です。",
-    );
+    expect(extractDescription(body)).toBe("これはテスト記事です。 本文の2段落目です。");
   });
 
   it("returns empty string for empty body", () => {
@@ -47,8 +45,7 @@ describe("extractDescription", () => {
   });
 
   it("removes alert blockquotes", () => {
-    const body =
-      "テキスト前。\n\n> [!NOTE]\n> これはノートです。\n> 2行目。\n\nテキスト後。";
+    const body = "テキスト前。\n\n> [!NOTE]\n> これはノートです。\n> 2行目。\n\nテキスト後。";
     expect(extractDescription(body)).toBe("テキスト前。 テキスト後。");
   });
 
@@ -63,16 +60,13 @@ describe("extractDescription", () => {
   });
 
   it("removes images", () => {
-    const body =
-      '前のテキスト。\n\n![alt text](./image.jpg "title")\n\n後のテキスト。';
+    const body = '前のテキスト。\n\n![alt text](./image.jpg "title")\n\n後のテキスト。';
     expect(extractDescription(body)).toBe("前のテキスト。 後のテキスト。");
   });
 
   it("preserves link text but removes URL", () => {
     const body = "これは[リンクテキスト](https://example.com)を含む文章です。";
-    expect(extractDescription(body)).toBe(
-      "これはリンクテキストを含む文章です。",
-    );
+    expect(extractDescription(body)).toBe("これはリンクテキストを含む文章です。");
   });
 
   it("removes inline code", () => {

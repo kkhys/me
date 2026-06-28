@@ -17,9 +17,7 @@ export const getStaticPaths = async () => {
 };
 
 export const GET: APIRoute = async ({ props }) => {
-  const { entry } = props as Awaited<
-    ReturnType<typeof getStaticPaths>
-  >[number]["props"];
+  const { entry } = props as Awaited<ReturnType<typeof getStaticPaths>>[number]["props"];
 
   const image = await LgtmImage(entry, 800);
 

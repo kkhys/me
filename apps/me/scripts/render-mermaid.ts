@@ -123,10 +123,7 @@ const main = async () => {
       continue;
     }
 
-    writeFileSync(
-      `${CACHE_DIR}/${block.hash}-light.svg`,
-      lightResult.value.svg,
-    );
+    writeFileSync(`${CACHE_DIR}/${block.hash}-light.svg`, lightResult.value.svg);
     writeFileSync(`${CACHE_DIR}/${block.hash}-dark.svg`, darkResult.value.svg);
     console.log(`  Cached ${block.hash}`);
   }
@@ -134,7 +131,9 @@ const main = async () => {
   console.log("Done!");
 };
 
-main().catch((error) => {
+try {
+  await main();
+} catch (error) {
   console.error("Failed to render mermaid blocks:", error);
   process.exit(1);
-});
+}

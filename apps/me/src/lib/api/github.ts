@@ -7,9 +7,7 @@ type LastUpdatedTimeData = {
 
 const cache = createCache<LastUpdatedTimeData>();
 
-const fetchLastUpdatedTime = async (
-  filePath: string,
-): Promise<LastUpdatedTimeData> => {
+const fetchLastUpdatedTime = async (filePath: string): Promise<LastUpdatedTimeData> => {
   if (!GITHUB_ACCESS_TOKEN) {
     return { lastUpdatedTime: undefined };
   }
@@ -26,9 +24,7 @@ const fetchLastUpdatedTime = async (
   });
 
   if (!response.ok) {
-    console.warn(
-      `Failed to fetch last updated time for ${filePath}: ${response.status}`,
-    );
+    console.warn(`Failed to fetch last updated time for ${filePath}: ${response.status}`);
     return { lastUpdatedTime: undefined };
   }
 
@@ -44,7 +40,5 @@ const fetchLastUpdatedTime = async (
   };
 };
 
-export const getLastUpdatedTimeByFile = (
-  filePath: string,
-): Promise<LastUpdatedTimeData> =>
+export const getLastUpdatedTimeByFile = (filePath: string): Promise<LastUpdatedTimeData> =>
   cache(filePath, () => fetchLastUpdatedTime(filePath));

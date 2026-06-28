@@ -10,7 +10,7 @@ const { page, class: className, ...attrs } = Astro.props;
 
 const { currentPage, lastPage, total } = page;
 
-const format = (n: number) => String(n);
+const format = String;
 
 // Build the href for an arbitrary page. Page 1 lives at the base path
 // (`/blog`, `/blog/categories/tech`), the rest at `${base}/${n}`. Prev/next

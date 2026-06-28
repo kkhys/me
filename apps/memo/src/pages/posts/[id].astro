@@ -29,10 +29,10 @@ const { name: authorName } = await getAuthorInfo(memo.data.author);
 
 const memoContent =
   memo.body
-    ?.replace(/\n/g, " ")
+    ?.replaceAll('\n', " ")
     .trim()
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;") || "";
+    .replaceAll('<', "&lt;")
+    .replaceAll('>', "&gt;") || "";
 const pageTitle = memoContent ? `${memoContent} | ${TITLE}` : TITLE;
 ---
 

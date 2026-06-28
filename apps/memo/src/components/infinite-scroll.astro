@@ -21,9 +21,9 @@ const { containerId } = Astro.props;
     if (!root) return;
 
     const containerId = root.dataset.containerId || "";
-    const containerEl = document.getElementById(containerId);
-    const triggerEl = document.getElementById("scroll-trigger");
-    const loadingIndicatorEl = document.getElementById("loading-indicator");
+    const containerEl = document.querySelector<HTMLElement>(`#${containerId}`);
+    const triggerEl = document.querySelector<HTMLElement>("#scroll-trigger");
+    const loadingIndicatorEl = document.querySelector<HTMLElement>("#loading-indicator");
 
     if (!containerEl || !triggerEl || !loadingIndicatorEl) {
       return;
@@ -34,8 +34,8 @@ const { containerId } = Astro.props;
     const loadingIndicator: HTMLElement = loadingIndicatorEl;
 
     const basePath = container.dataset.basePath || "/";
-    let currentPage = Number.parseInt(container.dataset.currentPage || "1", 10);
-    const totalPages = Number.parseInt(container.dataset.totalPages || "1", 10);
+    let currentPage = Math.trunc(Number(container.dataset.currentPage || "1"));
+    const totalPages = Math.trunc(Number(container.dataset.totalPages || "1"));
     let isLoading = false;
 
     const showLoading = () => {
@@ -96,7 +96,7 @@ const { containerId } = Astro.props;
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
 
-        const nextContainer = doc.getElementById(containerId);
+        const nextContainer = doc.querySelector(`#${containerId}`);
         if (!nextContainer) {
           throw new Error(`${containerId} not found in fetched page`);
         }
@@ -104,12 +104,14 @@ const { containerId } = Astro.props;
         const elapsed = Date.now() - startTime;
         const remainingTime = Math.max(0, 500 - elapsed);
         if (remainingTime > 0) {
-          await new Promise((resolve) => setTimeout(resolve, remainingTime));
+          await new Promise((resolve) => {
+            setTimeout(resolve, remainingTime);
+          });
         }
 
         const memoCards = nextContainer.children;
         for (const card of Array.from(memoCards)) {
-          container.appendChild(card);
+          container.append(card);
         }
 
         currentPage = nextPage;
@@ -125,7 +127,9 @@ const { containerId } = Astro.props;
         const elapsed = Date.now() - startTime;
         const remainingTime = Math.max(0, 500 - elapsed);
         if (remainingTime > 0) {
-          await new Promise((resolve) => setTimeout(resolve, remainingTime));
+          await new Promise((resolve) => {
+            setTimeout(resolve, remainingTime);
+          });
         }
 
         showErrorMessage();

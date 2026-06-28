@@ -31,15 +31,16 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 - Run scripts from this directory, or from the repo root via `pnpm --filter @kkhys/me <script>`.
 - CI: lint → test → type check → build, against fixtures. Add the `skip-ci` label to PRs to skip.
 - Deploy: built and shipped locally via `pnpm deploy`; me is not deployed from CI.
-- Lint/format: runs automatically via Stop hook (Biome auto-fix). Fix remaining errors before completing.
+- Lint/format: runs automatically via Stop hook (oxlint + oxfmt auto-fix). Fix remaining errors before completing.
 
 ## Key Context Files
 
 Read these when your task involves their domain:
+
 - `astro.config.ts` — Markdown plugins, env schema, CSP, experimental features
 - `src/content.config.ts` — Collection schemas and validation rules
 - `src/features/blog/config/` — Category and tag definitions
-- `../../biome.json` — Linter/formatter configuration (shared across the monorepo)
+- `../../.oxlintrc.json` / `../../.oxfmtrc.json` — Linter / formatter configuration (shared across the monorepo)
 
 ## Gotchas
 

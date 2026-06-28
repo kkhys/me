@@ -16,7 +16,9 @@ describe("loadFont", () => {
   });
 
   it("returns cached result on second call (readFile called once)", async () => {
-    const mockReadFile = vi.fn().mockResolvedValue(Buffer.from("cached"));
+    const mockReadFile = vi
+      .fn<(path: string) => Promise<Buffer>>()
+      .mockResolvedValue(Buffer.from("cached"));
 
     vi.doMock("node:fs/promises", () => ({
       readFile: mockReadFile,
@@ -33,7 +35,7 @@ describe("loadFont", () => {
 
   it("caches independently per path", async () => {
     const mockReadFile = vi
-      .fn()
+      .fn<(path: string) => Promise<Buffer>>()
       .mockResolvedValueOnce(Buffer.from("font-a"))
       .mockResolvedValueOnce(Buffer.from("font-b"));
 
@@ -53,7 +55,7 @@ describe("loadFont", () => {
 
   it("throws when file does not exist", async () => {
     const mockReadFile = vi
-      .fn()
+      .fn<(path: string) => Promise<Buffer>>()
       .mockRejectedValue(new Error("ENOENT: no such file or directory"));
 
     vi.doMock("node:fs/promises", () => ({

@@ -57,7 +57,6 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 - `exactOptionalPropertyTypes: true` — optional props need `| undefined`, not just `?:`
 - `lgtm-content/` is a private Git submodule — initialize it before local builds or deploy
 - `BBHBartle-Regular.ttf` must exist in `src/assets/`
-- Biome disables `useConst` / `useImportType` / `noUnusedVariables` / `noUnusedImports` for `*.astro` — these lint "errors" are expected
 - ULIDs must be lowercase
 - Non-first gallery pages (`/2`, `/3`, …) redirect to `/` when accessed directly — they exist only for the infinite-scroll fetch
 - Favicon endpoints (`api/favicon/*`) are dev-only (404 in production); production serves favicons as static assets

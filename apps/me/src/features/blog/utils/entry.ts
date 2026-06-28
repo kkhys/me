@@ -1,8 +1,4 @@
-import {
-  type CollectionEntry,
-  getCollection,
-  type InferEntrySchema,
-} from "astro:content";
+import { type CollectionEntry, getCollection, type InferEntrySchema } from "astro:content";
 import { NODE_ENV } from "astro:env/client";
 import { relatedEntriesCount } from "#/config/constant";
 import type { ExternalSite } from "#/features/blog/config/external-site";
@@ -34,19 +30,15 @@ export const getPublicBlogEntries = async (sort: "asc" | "desc" = "desc") => {
   const entries = await getCollection("blog");
 
   return entries
-    .filter(
-      ({ data }) => NODE_ENV === "development" || data.status === "published",
-    )
-    .sort((a, b) => {
+    .filter(({ data }) => NODE_ENV === "development" || data.status === "published")
+    .toSorted((a, b) => {
       const dateA = new Date(a.data.publishedAt).getTime();
       const dateB = new Date(b.data.publishedAt).getTime();
       return sort === "asc" ? dateA - dateB : dateB - dateA;
     });
 };
 
-export const toListEntries = (
-  blogEntries: CollectionEntry<"blog">[],
-): ListEntry[] =>
+export const toListEntries = (blogEntries: CollectionEntry<"blog">[]): ListEntry[] =>
   blogEntries.map((entry) => ({
     type: "internal",
     id: entry.id,
@@ -75,9 +67,7 @@ const toExternalEntry = (data: {
   publishedAt: data.publishedAt,
 });
 
-export const getPublicListEntries = async (
-  sort: "asc" | "desc" = "desc",
-): Promise<ListEntry[]> => {
+export const getPublicListEntries = async (sort: "asc" | "desc" = "desc"): Promise<ListEntry[]> => {
   const blogEntries = await getPublicBlogEntries(sort);
   const externalEntries = await getCollection("externalPost");
   const zennEntries = await getCollection("zennPost");
@@ -91,7 +81,7 @@ export const getPublicListEntries = async (
   const manualUrls = new Set(external.map((entry) => entry.url));
   const dedupedZenn = zenn.filter((entry) => !manualUrls.has(entry.url));
 
-  return [...internal, ...external, ...dedupedZenn].sort((a, b) => {
+  return [...internal, ...external, ...dedupedZenn].toSorted((a, b) => {
     const dateA = a.publishedAt.getTime();
     const dateB = b.publishedAt.getTime();
     return sort === "asc" ? dateA - dateB : dateB - dateA;

@@ -9,7 +9,7 @@ Source code for [kkhys.me](https://kkhys.me) — a personal website and blog bui
 - [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) — [kiso.css](https://github.com/build-trust/kiso.css) reset + [uchu.css](https://github.com/kkhys/uchu.css) palette (`@kkhys/styles`)
 - [TypeScript](https://www.typescriptlang.org/) — Strictest mode type safety
 - [Vitest](https://vitest.dev/) — Unit testing
-- [Biome](https://biomejs.dev/) — Linting and formatting
+- [oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) — Linting and formatting
 - [Cloudflare Pages](https://pages.cloudflare.com/) — Hosting and deployment
 
 ## Getting Started
@@ -36,17 +36,17 @@ git submodule update --init apps/me/me-content
 
 Run from this directory, or prefix with `pnpm --filter @kkhys/me`:
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start development server |
-| `pnpm build` | Production build (static) |
-| `pnpm preview` | Preview production build locally |
-| `pnpm check` | Astro check + `tsc --noEmit` |
-| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with Biome |
-| `pnpm test` / `pnpm coverage` | Run unit tests / with coverage |
-| `pnpm render:mermaid` | Pre-render Mermaid diagrams to SVG cache |
-| `pnpm create:entry` | Scaffold a new blog post |
-| `pnpm deploy` | Build and deploy to Cloudflare Pages |
+| Command                       | Description                              |
+| ----------------------------- | ---------------------------------------- |
+| `pnpm dev`                    | Start development server                 |
+| `pnpm build`                  | Production build (static)                |
+| `pnpm preview`                | Preview production build locally         |
+| `pnpm check`                  | Astro check + `tsc --noEmit`             |
+| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with oxlint + oxfmt     |
+| `pnpm test` / `pnpm coverage` | Run unit tests / with coverage           |
+| `pnpm render:mermaid`         | Pre-render Mermaid diagrams to SVG cache |
+| `pnpm create:entry`           | Scaffold a new blog post                 |
+| `pnpm deploy`                 | Build and deploy to Cloudflare Pages     |
 
 ## Project Structure
 

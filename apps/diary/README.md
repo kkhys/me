@@ -7,7 +7,7 @@ Source code for [diary.kkhys.me](https://diary.kkhys.me) — a photo diary built
 - [Astro](https://astro.build/) — Static site generator
 - [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) — [kiso.css](https://github.com/build-trust/kiso.css) reset + [uchu.css](https://github.com/kkhys/uchu.css) palette (`@kkhys/styles`)
 - [TypeScript](https://www.typescriptlang.org/) — Strictest mode type safety
-- [Biome](https://biomejs.dev/) — Linting and formatting
+- [oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) — Linting and formatting
 - [Cloudflare Pages](https://pages.cloudflare.com/) — Hosting and deployment
 
 ## Getting Started
@@ -34,14 +34,14 @@ git submodule update --init apps/diary/diary-content
 
 Run from this directory, or prefix with `pnpm --filter @kkhys/diary`:
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start development server |
-| `pnpm build` | Production build (static) |
-| `pnpm preview` | Preview production build locally |
-| `pnpm check` | Astro check + `tsc --noEmit` |
-| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with Biome |
-| `pnpm deploy` | Build and deploy to Cloudflare Pages |
+| Command                       | Description                          |
+| ----------------------------- | ------------------------------------ |
+| `pnpm dev`                    | Start development server             |
+| `pnpm build`                  | Production build (static)            |
+| `pnpm preview`                | Preview production build locally     |
+| `pnpm check`                  | Astro check + `tsc --noEmit`         |
+| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with oxlint + oxfmt |
+| `pnpm deploy`                 | Build and deploy to Cloudflare Pages |
 
 ## Project Structure
 

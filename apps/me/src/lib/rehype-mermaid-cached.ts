@@ -9,9 +9,7 @@ const CACHE_DIR = ".cache/mermaid";
 const getMermaidHash = (source: string) =>
   createHash("sha256").update(source).digest("hex").slice(0, 16);
 
-const extractDimensions = (
-  svg: string,
-): { width: string; height: string } | undefined => {
+const extractDimensions = (svg: string): { width: string; height: string } | undefined => {
   const widthMatch = svg.match(/width="([^"]+)"/);
   const heightMatch = svg.match(/height="([^"]+)"/);
   if (!widthMatch?.[1] || !heightMatch?.[1]) return undefined;
@@ -24,27 +22,18 @@ const extractDimensions = (
 const rehypeMermaidCached = () => {
   return (tree: Root) => {
     visit(tree, "element", (node: Element, index, parent) => {
-      if (
-        node.tagName !== "pre" ||
-        index === undefined ||
-        !parent ||
-        !("children" in parent)
-      ) {
+      if (node.tagName !== "pre" || index === undefined || !parent || !("children" in parent)) {
         return;
       }
 
       const codeEl = node.children.find(
-        (child): child is Element =>
-          child.type === "element" && child.tagName === "code",
+        (child): child is Element => child.type === "element" && child.tagName === "code",
       );
 
       if (!codeEl) return;
 
       const classNames = codeEl.properties?.className;
-      if (
-        !Array.isArray(classNames) ||
-        !classNames.includes("language-mermaid")
-      ) {
+      if (!Array.isArray(classNames) || !classNames.includes("language-mermaid")) {
         return;
       }
 

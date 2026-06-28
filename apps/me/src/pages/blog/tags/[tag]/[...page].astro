@@ -21,10 +21,10 @@ export const getStaticPaths = async ({
   return tags.flatMap((tag) => {
     const filteredEntries = entries
       .filter((entry) => entry.tags?.includes(tag))
-      .sort((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
+      .toSorted((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
     return paginate(filteredEntries, {
       pageSize: countPerPage,
-      params: { tag: tag.toLowerCase().replace(/[\s.]+/g, "-") },
+      params: { tag: tag.toLowerCase().replaceAll(/[\s.]+/g, "-") },
     });
   });
 };

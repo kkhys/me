@@ -123,15 +123,11 @@ describe("parseRssItems", () => {
 
 describe("generateRssEntryId", () => {
   test("should extract slug from URL and prefix with rss-", () => {
-    expect(generateRssEntryId("https://kkhys.me/blog/posts/b1akmxp")).toBe(
-      "rss-b1akmxp",
-    );
+    expect(generateRssEntryId("https://kkhys.me/blog/posts/b1akmxp")).toBe("rss-b1akmxp");
   });
 
   test("should handle trailing slash", () => {
-    expect(generateRssEntryId("https://kkhys.me/blog/posts/b1akmxp/")).toBe(
-      "rss-b1akmxp",
-    );
+    expect(generateRssEntryId("https://kkhys.me/blog/posts/b1akmxp/")).toBe("rss-b1akmxp");
   });
 
   test("should be idempotent", () => {
@@ -140,15 +136,13 @@ describe("generateRssEntryId", () => {
   });
 
   test("should use a custom prefix when provided", () => {
-    expect(
-      generateRssEntryId("https://zenn.dev/kkhys/articles/my-article", "zenn"),
-    ).toBe("zenn-my-article");
+    expect(generateRssEntryId("https://zenn.dev/kkhys/articles/my-article", "zenn")).toBe(
+      "zenn-my-article",
+    );
   });
 
   test("should keep prefixes isolated across feeds", () => {
     const guid = "https://example.com/posts/shared-slug";
-    expect(generateRssEntryId(guid, "rss")).not.toBe(
-      generateRssEntryId(guid, "zenn"),
-    );
+    expect(generateRssEntryId(guid, "rss")).not.toBe(generateRssEntryId(guid, "zenn"));
   });
 });

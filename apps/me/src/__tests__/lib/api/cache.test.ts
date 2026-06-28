@@ -10,7 +10,7 @@ describe("createCache", () => {
 
   it("calls fetcher only once for the same key", async () => {
     const cache = createCache<string>();
-    const fetcher = vi.fn(() => Promise.resolve("value"));
+    const fetcher = vi.fn<() => Promise<string>>(() => Promise.resolve("value"));
 
     await cache("key", fetcher);
     await cache("key", fetcher);
@@ -20,7 +20,7 @@ describe("createCache", () => {
 
   it("calls fetcher for different keys", async () => {
     const cache = createCache<string>();
-    const fetcher = vi.fn(() => Promise.resolve("value"));
+    const fetcher = vi.fn<() => Promise<string>>(() => Promise.resolve("value"));
 
     await cache("a", fetcher);
     await cache("b", fetcher);
@@ -30,9 +30,11 @@ describe("createCache", () => {
 
   it("caches the Promise (deduplicates concurrent requests)", () => {
     const cache = createCache<string>();
-    const fetcher = vi.fn(
+    const fetcher = vi.fn<() => Promise<string>>(
       () =>
-        new Promise<string>((resolve) => setTimeout(() => resolve("v"), 10)),
+        new Promise<string>((resolve) => {
+          setTimeout(() => resolve("v"), 10);
+        }),
     );
 
     const p1 = cache("key", fetcher);
@@ -52,7 +54,7 @@ describe("createResolvedCache", () => {
 
   it("calls fetcher only once for the same key", async () => {
     const cache = createResolvedCache<string>();
-    const fetcher = vi.fn(() => Promise.resolve("value"));
+    const fetcher = vi.fn<() => Promise<string>>(() => Promise.resolve("value"));
 
     await cache("key", fetcher);
     await cache("key", fetcher);
@@ -62,7 +64,7 @@ describe("createResolvedCache", () => {
 
   it("calls fetcher for different keys", async () => {
     const cache = createResolvedCache<string>();
-    const fetcher = vi.fn(() => Promise.resolve("value"));
+    const fetcher = vi.fn<() => Promise<string>>(() => Promise.resolve("value"));
 
     await cache("a", fetcher);
     await cache("b", fetcher);

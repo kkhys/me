@@ -15,11 +15,8 @@ const isSvgSrc = (src: string): boolean => {
 // HTML (e.g. a bot-protection challenge page) to non-browser clients. sharp then
 // fails with "Could not process image metadata" and crashes the whole build, so
 // we sniff the leading bytes and only keep images sharp can actually decode.
-const matchesAt = (
-  bytes: Uint8Array,
-  offset: number,
-  signature: readonly number[],
-): boolean => signature.every((byte, index) => bytes[offset + index] === byte);
+const matchesAt = (bytes: Uint8Array, offset: number, signature: readonly number[]): boolean =>
+  signature.every((byte, index) => bytes[offset + index] === byte);
 
 const isRasterImage = (bytes: Uint8Array): boolean => {
   // PNG
@@ -62,16 +59,12 @@ const isProcessableImage = async (src: string): Promise<boolean> => {
   }
 };
 
-const dropUnprocessableImage = async (
-  metadata: Metadata,
-): Promise<Metadata> => {
+const dropUnprocessableImage = async (metadata: Metadata): Promise<Metadata> => {
   const src = metadata.image?.src;
   if (!src || isSvgSrc(src)) {
     return src ? { ...metadata, image: undefined } : metadata;
   }
-  return (await isProcessableImage(src))
-    ? metadata
-    : { ...metadata, image: undefined };
+  return (await isProcessableImage(src)) ? metadata : { ...metadata, image: undefined };
 };
 
 export const getMetadata = (url: string) =>
@@ -85,7 +78,7 @@ export const getMetadata = (url: string) =>
       };
     }
 
-    return fetchSiteMetadata(url, {
+    return await fetchSiteMetadata(url, {
       suppressAdditionalRequest: true,
       headers: {
         accept: "text/html",

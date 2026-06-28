@@ -19,7 +19,7 @@ const entries = Object.entries(imageModules)
     if (dateCompare !== 0) return dateCompare;
     return a.fileNumber.localeCompare(b.fileNumber);
   })
-  .map((entry, i) => ({ ...entry, number: i + 1 }))
+  .map((entry, i) => (Object.assign(entry, { number: i + 1 })))
   .toReversed();
 
 const ogImage = entries[0]

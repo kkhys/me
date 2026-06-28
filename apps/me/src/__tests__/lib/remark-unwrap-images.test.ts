@@ -31,10 +31,7 @@ describe("remarkUnwrapImages", () => {
 
   it("skips paragraphs with multiple children", () => {
     const tree = makeTree([
-      makeParagraph([
-        makeImage("./photo.jpg"),
-        { type: "text", value: " caption" } as Text,
-      ]),
+      makeParagraph([makeImage("./photo.jpg"), { type: "text", value: " caption" } as Text]),
     ]);
 
     remarkUnwrapImages()(tree);
@@ -44,9 +41,7 @@ describe("remarkUnwrapImages", () => {
   });
 
   it("skips paragraphs with non-image children", () => {
-    const tree = makeTree([
-      makeParagraph([{ type: "text", value: "hello" } as Text]),
-    ]);
+    const tree = makeTree([makeParagraph([{ type: "text", value: "hello" } as Text])]);
 
     remarkUnwrapImages()(tree);
 

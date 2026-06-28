@@ -18,9 +18,7 @@ if (!Number.isFinite(duration) || duration <= 0) {
 }
 
 if (!existsSync(LGTM_DIR)) {
-  console.error(
-    `Error: ${LGTM_DIR} not found. Run 'git submodule update --init' first.`,
-  );
+  console.error(`Error: ${LGTM_DIR} not found. Run 'git submodule update --init' first.`);
   process.exit(1);
 }
 
