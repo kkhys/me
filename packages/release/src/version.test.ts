@@ -9,9 +9,7 @@ describe("resolveReleaseVersion", () => {
   });
 
   it("ignores tags from other dates", () => {
-    expect(resolveReleaseVersion(base, ["2026.06.26", "2025.01.01"])).toBe(
-      base,
-    );
+    expect(resolveReleaseVersion(base, ["2026.06.26", "2025.01.01"])).toBe(base);
   });
 
   it("appends -2 when the base version is already tagged", () => {
@@ -19,9 +17,7 @@ describe("resolveReleaseVersion", () => {
   });
 
   it("increments the suffix past existing numbered releases", () => {
-    expect(resolveReleaseVersion(base, [base, `${base}-2`, `${base}-3`])).toBe(
-      `${base}-4`,
-    );
+    expect(resolveReleaseVersion(base, [base, `${base}-2`, `${base}-3`])).toBe(`${base}-4`);
   });
 
   it("takes the first free suffix even when a later one exists", () => {
