@@ -10,29 +10,20 @@ const apis = {
     `https://cdn.jsdelivr.net/gh/shuding/fluentui-emoji-unicode/assets/${code.toLowerCase()}_flat.svg`,
 };
 
+// Iterating a string with for...of yields whole code points, so surrogate
+// pairs (e.g. emoji above U+FFFF) stay intact without manual UTF-16 bookkeeping.
 const toCodePoint = (unicodeSurrogates: string) => {
-  const r = [];
-  let c = 0;
-  let i = 0;
-  let p = 0;
-
-  while (i < unicodeSurrogates.length) {
-    c = unicodeSurrogates.charCodeAt(i++);
-    if (p) {
-      r.push((65536 + ((p - 55296) << 10) + (c - 56320)).toString(16));
-      p = 0;
-    } else if (55296 <= c && c <= 56319) {
-      p = c;
-    } else {
-      r.push(c.toString(16));
-    }
+  const codePoints: string[] = [];
+  for (const char of unicodeSurrogates) {
+    const code = char.codePointAt(0);
+    if (code !== undefined) codePoints.push(code.toString(16));
   }
-  return r.join("-");
+  return codePoints.join("-");
 };
 
 export const getIconCode = (char: string) => {
-  const U200D = String.fromCharCode(8205);
-  const UFE0Fg = /\uFE0F/g;
+  const U200D = "\u200D";
+  const UFE0Fg = /\uFE0F/gu;
   return toCodePoint(char.includes(U200D) ? char : char.replace(UFE0Fg, ""));
 };
 

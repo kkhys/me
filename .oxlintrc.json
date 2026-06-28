@@ -16,8 +16,6 @@
     "import/no-unassigned-import": "off",
     // Sequential awaits are intentional (ordered ops / pacing)
     "eslint/no-await-in-loop": "off",
-    // charCodeAt is intentional: the twemoji surrogate-pair algorithm needs UTF-16 code units
-    "unicorn/prefer-code-point": "off",
     // Required args typed `T | undefined` must receive an explicit undefined
     "unicorn/no-useless-undefined": "off",
     // Adding the `u` flag to existing regexes is behavior-changing and low-value here

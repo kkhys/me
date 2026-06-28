@@ -21,7 +21,7 @@ describe("getIconCode", () => {
 
   it("handles ZWJ sequences (keeps U+200D)", () => {
     // Family emoji: U+1F468 U+200D U+1F469 U+200D U+1F467
-    const zwj = String.fromCharCode(8205);
+    const zwj = "\u200D";
     const emoji = `\uD83D\uDC68${zwj}\uD83D\uDC69${zwj}\uD83D\uDC67`;
     const result = getIconCode(emoji);
     expect(result).toContain("200d");
@@ -56,7 +56,7 @@ describe("getFirstGrapheme", () => {
 
   it("keeps a ZWJ sequence intact", () => {
     // Family emoji: U+1F468 U+200D U+1F469 U+200D U+1F467
-    const zwj = String.fromCharCode(8205);
+    const zwj = "\u200D";
     const family = `👨${zwj}👩${zwj}👧`;
     expect(getFirstGrapheme(`${family}😀`)).toBe(family);
   });
