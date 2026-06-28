@@ -19,7 +19,7 @@ A simple memo posting site that displays short memos (max 500 characters) in a s
 - **Language**: TypeScript (strictest mode)
 - **Styling**: CSS (kiso.css + custom properties)
 - **Testing**: Vitest
-- **Lint/Format**: Biome
+- **Lint/Format**: oxlint + oxfmt
 - **Package Manager**: pnpm
 - **Deployment**: Cloudflare Pages
 
@@ -84,6 +84,7 @@ pnpm all          # Run all checks (build + check + lint:fix + test + coverage)
 Memos are placed in the `memo-content/memo/` directory.
 
 **Directory Structure**:
+
 ```
 memo-content/memo/
 └── <timestamp_id>/          # e.g., 20251001_204021
@@ -94,14 +95,15 @@ memo-content/memo/
 ```
 
 **index.md Format**:
+
 ```markdown
 ---
-id: 01k6fs5j48ep20vqcvvgh4r4c2  # ULID format
+id: 01k6fs5j48ep20vqcvvgh4r4c2 # ULID format
 createdAt: 2025-10-01 20:40:21
-images:                          # Optional (max 4)
+images: # Optional (max 4)
   - 01.jpg
   - 02.jpg
-isPublished: true                # Publication status
+isPublished: true # Publication status
 author: Keisuke Hayashi
 ---
 

@@ -17,6 +17,7 @@ LGTM generates and serves optimized review approval images with dynamic text ove
 Simply click the extension icon while browsing GitHub, and a random LGTM image is automatically copied to your clipboard as ready-to-paste HTML. The extension activates exclusively on GitHub domains with visual feedback (checkmark badge) and requires minimal permissions for privacy.
 
 **Key Features:**
+
 - One-click operation with GitHub-only activation
 - Random image selection from the full gallery
 - Instant clipboard copy with AVIF format
@@ -39,24 +40,29 @@ Simply click the extension icon while browsing GitHub, and a random LGTM image i
 ## Tech Stack
 
 **Core**
+
 - Astro 5.16 – Static site generation with Content Collections and pagination
 - TypeScript 5.9 – Strictest compiler mode
 - React 19 – Image generation components (JSX for Satori)
 
 **Image Processing**
+
 - Satori 0.18 – SVG/text rendering with custom fonts (BBHBartle-Regular)
 - Sharp 0.34 – High-performance image manipulation (libvips)
 
 **Styling**
+
 - kiso.css 1.2 – Minimal CSS framework
 - Custom design system with light/dark mode
 
 **Infrastructure**
+
 - Cloudflare Pages – Static hosting
 - pnpm 10.26 – Workspace monorepo
-- Biome 2.3 – Linting + formatting
+- oxlint + oxfmt – Linting + formatting
 
 **Testing**
+
 - Vitest 4.0 – Unit testing framework
 - Coverage: 100% statements, 88% branch, 100% functions
 
@@ -94,15 +100,13 @@ Astro Content Collections with environment-based loader:
 
 ```typescript
 // src/content.config.ts
-const lgtmBasePath = GITHUB_ACTIONS
-  ? "./src/__fixtures__/lgtm-sample"
-  : "./lgtm-content/lgtm";
+const lgtmBasePath = GITHUB_ACTIONS ? "./src/__fixtures__/lgtm-sample" : "./lgtm-content/lgtm";
 
 const lgtm = defineCollection({
   loader: glob({ pattern: "**/index.md", base: lgtmBasePath }),
   schema: z.object({
-    color: z.enum(["white", "black"]),  // Text color
-    image: z.string(),                   // Source image filename
+    color: z.enum(["white", "black"]), // Text color
+    image: z.string(), // Source image filename
     isDraft: z.boolean().default(false), // Publishing control
   }),
 });
@@ -151,7 +155,7 @@ pnpm dev          # Start dev server (localhost:4321)
 pnpm build        # Production build to ./dist
 pnpm preview      # Preview production build
 pnpm check        # Type checking (Astro + tsc)
-pnpm lint         # Biome linting
+pnpm lint         # oxlint + oxfmt check
 pnpm lint:fix     # Auto-fix issues
 pnpm test         # Run unit tests (Vitest)
 pnpm coverage     # Test coverage report
@@ -266,6 +270,7 @@ pnpm release
 ```
 
 **Process**:
+
 1. Generate version from current date
 2. Check for existing tags, increment suffix if needed
 3. Create and force-push Git tag
