@@ -56,6 +56,6 @@ export const getMemoPost = (id: string) =>
 
 /** Extract ID from memo.kkhys.me/post/[id] URL */
 export const extractMemoId = (url: string): string | null => {
-  const match = url.match(/^https?:\/\/memo\.kkhys\.me\/posts?\/([A-Z0-9]+)$/i);
+  const match = url.match(/^https?:\/\/memo\.kkhys\.me\/posts?\/([A-Z0-9]+)$/iu);
   return match?.[1] ?? null;
 };

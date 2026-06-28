@@ -8,44 +8,44 @@ export const extractDescription = (body: string, maxLength = 120): string => {
   let text = body;
 
   // Remove import statements
-  text = text.replaceAll(/^import\s+.*$/gm, "");
+  text = text.replaceAll(/^import\s+.*$/gmu, "");
 
   // Remove fenced code blocks
-  text = text.replaceAll(/```[\s\S]*?```/g, "");
+  text = text.replaceAll(/```[\s\S]*?```/gu, "");
 
   // Remove alert blockquotes (> [!NOTE] etc. and continuation lines)
   text = text.replaceAll(
-    /^> \[!(?:NOTE|TIP|IMPORTANT|WARNING|CAUTION)\].*(?:\n(?:>\s?.*)?)*$/gm,
+    /^> \[!(?:NOTE|TIP|IMPORTANT|WARNING|CAUTION)\].*(?:\n(?:>\s?.*)?)*$/gmu,
     "",
   );
 
   // Remove blockquote markers
-  text = text.replaceAll(/^>\s?/gm, "");
+  text = text.replaceAll(/^>\s?/gmu, "");
 
   // Remove headings
-  text = text.replaceAll(/^#{1,6}\s+.*$/gm, "");
+  text = text.replaceAll(/^#{1,6}\s+.*$/gmu, "");
 
   // Remove images
-  text = text.replaceAll(/!\[.*?\]\(.*?\)/g, "");
+  text = text.replaceAll(/!\[.*?\]\(.*?\)/gu, "");
 
   // Convert links to text only
-  text = text.replaceAll(/\[([^\]]*)\]\(.*?\)/g, "$1");
+  text = text.replaceAll(/\[([^\]]*)\]\(.*?\)/gu, "$1");
 
   // Remove inline code
-  text = text.replaceAll(/`[^`]+`/g, "");
+  text = text.replaceAll(/`[^`]+`/gu, "");
 
   // Remove bold/italic markers
-  text = text.replaceAll(/\*{1,3}(.*?)\*{1,3}/g, "$1");
-  text = text.replaceAll(/_{1,3}(.*?)_{1,3}/g, "$1");
+  text = text.replaceAll(/\*{1,3}(.*?)\*{1,3}/gu, "$1");
+  text = text.replaceAll(/_{1,3}(.*?)_{1,3}/gu, "$1");
 
   // Remove horizontal rules
-  text = text.replaceAll(/^[-*_]{3,}$/gm, "");
+  text = text.replaceAll(/^[-*_]{3,}$/gmu, "");
 
   // Remove HTML tags
-  text = text.replaceAll(/<[^>]+>/g, "");
+  text = text.replaceAll(/<[^>]+>/gu, "");
 
   // Remove footnote references
-  text = text.replaceAll(/\[\^[^\]]*\]/g, "");
+  text = text.replaceAll(/\[\^[^\]]*\]/gu, "");
 
   // Normalize whitespace and join
   text = text
@@ -53,7 +53,7 @@ export const extractDescription = (body: string, maxLength = 120): string => {
     .map((line) => line.trim())
     .filter((line) => line.length > 0)
     .join(" ")
-    .replaceAll(/\s+/g, " ")
+    .replaceAll(/\s+/gu, " ")
     .trim();
 
   if (text.length <= maxLength) return text;
@@ -61,7 +61,7 @@ export const extractDescription = (body: string, maxLength = 120): string => {
   // Truncate at a punctuation boundary within the latter half
   const searchStart = Math.floor(maxLength / 2);
   const candidate = text.slice(0, maxLength);
-  const punctuationPattern = /[。、！？!?]/g;
+  const punctuationPattern = /[。、！？!?]/gu;
   let lastIndex = -1;
 
   for (

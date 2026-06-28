@@ -90,7 +90,7 @@ describe("GET /api/ids.json", () => {
     const text = await response.text();
     const data = JSON.parse(text);
 
-    const isoPattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
+    const isoPattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/u;
     expect(isoPattern.test(data.updatedAt)).toBe(true);
 
     const date = new Date(data.updatedAt);
@@ -102,7 +102,7 @@ describe("GET /api/ids.json", () => {
     const text = await response.text();
     const data = JSON.parse(text);
 
-    const ulidPattern = /^[0123456789abcdefghjkmnpqrstvwxyz]{26}$/;
+    const ulidPattern = /^[0123456789abcdefghjkmnpqrstvwxyz]{26}$/u;
     for (const id of data.ids) {
       expect(typeof id).toBe("string");
       expect(ulidPattern.test(id)).toBe(true);

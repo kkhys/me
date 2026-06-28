@@ -22,7 +22,7 @@ const hasImages = memo && memo.images.length > 0;
 // collapse into a single run-together block).
 const paragraphs = memo
   ? memo.body
-      .split(/\n\s*\n/)
+      .split(/\n\s*\n/u)
       .map((paragraph) => paragraph.trim())
       .filter((paragraph) => paragraph.length > 0)
   : [];

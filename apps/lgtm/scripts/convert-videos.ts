@@ -32,7 +32,7 @@ for (const entryId of entryIds) {
   if (!entryStat.isDirectory()) continue;
 
   const files = await readdir(entryDir);
-  const movs = files.filter((f) => /\.mov$/i.test(f));
+  const movs = files.filter((f) => /\.mov$/iu.test(f));
   if (movs.length === 0) continue;
 
   for (const mov of movs) {

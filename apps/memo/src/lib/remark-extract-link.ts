@@ -17,7 +17,7 @@ const remarkExtractLink = () => (tree: Root, file: VFile) => {
 
     const url = node.url;
 
-    if (/^https?:\/\//i.test(url)) {
+    if (/^https?:\/\//iu.test(url)) {
       firstExternalLink = url;
     }
   });

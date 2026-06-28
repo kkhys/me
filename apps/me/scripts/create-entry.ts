@@ -23,7 +23,7 @@ const getTodayDate = () => {
 };
 
 const validateDateFormat = (dateString: string) => {
-  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/u;
   if (!dateRegex.test(dateString)) {
     return false;
   }

@@ -35,7 +35,7 @@ export const truncateLinkText = (url: string) => {
 
 const remarkTruncateLinkText = () => (tree: Root) => {
   visit(tree, "link", (node) => {
-    if (!/^https?:\/\//i.test(node.url)) {
+    if (!/^https?:\/\//iu.test(node.url)) {
       return;
     }
 
@@ -43,7 +43,7 @@ const remarkTruncateLinkText = () => (tree: Root) => {
     if (node.children.length === 1 && firstChild?.type === "text") {
       const originalText = firstChild.value;
 
-      if (/^https?:\/\//i.test(originalText)) {
+      if (/^https?:\/\//iu.test(originalText)) {
         firstChild.value = truncateLinkText(node.url);
       }
     }

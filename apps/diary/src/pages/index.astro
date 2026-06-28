@@ -9,7 +9,7 @@ const imageModules = import.meta.glob<{
 
 const entries = Object.entries(imageModules)
   .map(([path, mod]) => {
-    const match = path.match(/\/(\d{4}-\d{2}-\d{2})\/(\d+)\.jpg$/);
+    const match = path.match(/\/(\d{4}-\d{2}-\d{2})\/(\d+)\.jpg$/u);
     if (!match?.[1] || !match[2]) return null;
     return { src: mod.default, date: match[1], fileNumber: match[2] };
   })

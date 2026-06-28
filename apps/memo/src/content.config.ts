@@ -11,7 +11,7 @@ const memo = defineCollection({
     tag: z
       .string()
       .min(1)
-      .regex(/^[a-z0-9_]+$/)
+      .regex(/^[a-z0-9_]+$/u)
       .optional(),
     comment: z.ulid().optional(),
     quote: z.ulid().optional(),
@@ -32,7 +32,7 @@ const usersPath =
 const users = defineCollection({
   loader: file(usersPath),
   schema: z.object({
-    slug: z.string().regex(/^[a-z][a-z0-9_-]*$/),
+    slug: z.string().regex(/^[a-z][a-z0-9_-]*$/u),
     name: z.string(),
     bio: z.string().default(""),
     avatar: z.string(),
