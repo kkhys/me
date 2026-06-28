@@ -1,10 +1,13 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import type { Element, ElementContent, Root } from "hast";
 import svgToMiniDataURI from "mini-svg-data-uri";
 import { visit } from "unist-util-visit";
 
-const CACHE_DIR = ".cache/mermaid";
+// Resolve relative to this file so cached SVGs are found regardless of the
+// working directory Astro runs the build from (cache lives at apps/me/.cache).
+const CACHE_DIR = join(import.meta.dirname, "..", "..", ".cache", "mermaid");
 
 const getMermaidHash = (source: string) =>
   createHash("sha256").update(source).digest("hex").slice(0, 16);
