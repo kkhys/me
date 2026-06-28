@@ -7,19 +7,19 @@ export type ZennFeedItem = {
   publishedAt: Date;
 };
 
-const stripCdata = (value: string): string => value.replace(/^<!\[CDATA\[([\s\S]*?)\]\]>$/, "$1");
+const stripCdata = (value: string): string => value.replace(/^<!\[CDATA\[([\s\S]*?)\]\]>$/u, "$1");
 
 const decodeEntities = (value: string): string =>
   value
     .replaceAll("&lt;", "<")
     .replaceAll("&gt;", ">")
     .replaceAll("&quot;", '"')
-    .replaceAll(/&#0*39;/g, "'")
+    .replaceAll(/&#0*39;/gu, "'")
     .replaceAll("&apos;", "'")
     .replaceAll("&amp;", "&");
 
 const getTagText = (block: string, tag: string): string | undefined => {
-  const match = block.match(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)</${tag}>`));
+  const match = block.match(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)</${tag}>`, "u"));
   const raw = match?.[1];
   if (raw === undefined) return undefined;
   return decodeEntities(stripCdata(raw.trim()).trim());
@@ -33,7 +33,7 @@ const toSlug = (url: string): string | undefined => url.split("/").findLast(Bool
  * in the feed is ignored.
  */
 export const parseZennFeed = (xml: string): ZennFeedItem[] => {
-  const blocks = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map((match) => match[1] ?? "");
+  const blocks = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/gu)].map((match) => match[1] ?? "");
 
   return blocks.flatMap((block) => {
     const title = getTagText(block, "title");

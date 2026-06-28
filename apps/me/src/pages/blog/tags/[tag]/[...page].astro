@@ -24,7 +24,7 @@ export const getStaticPaths = async ({
       .toSorted((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
     return paginate(filteredEntries, {
       pageSize: countPerPage,
-      params: { tag: tag.toLowerCase().replaceAll(/[\s.]+/g, "-") },
+      params: { tag: tag.toLowerCase().replaceAll(/[\s.]+/gu, "-") },
     });
   });
 };

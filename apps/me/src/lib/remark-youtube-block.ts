@@ -25,8 +25,8 @@ import { isBareExternalLink } from "./mdast-util-node-is";
  */
 const extractYoutubeId = (url: string): string | null => {
   const patterns = [
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/i,
-    /youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]{11})/i,
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/iu,
+    /youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]{11})/iu,
   ];
 
   for (const pattern of patterns) {

@@ -22,7 +22,7 @@ const getMermaidHash = (source: string): string => {
 
 const extractMermaidBlocks = (content: string): string[] => {
   const blocks: string[] = [];
-  const regex = /```mermaid\n([\s\S]*?)```/g;
+  const regex = /```mermaid\n([\s\S]*?)```/gu;
   for (const match of content.matchAll(regex)) {
     if (match[1]) {
       blocks.push(match[1].trim());
@@ -66,7 +66,7 @@ const main = async () => {
   if (existsSync(CACHE_DIR)) {
     const cachedFiles = readdirSync(CACHE_DIR);
     for (const file of cachedFiles) {
-      const hash = file.replace(/-(light|dark)\.svg$/, "");
+      const hash = file.replace(/-(light|dark)\.svg$/u, "");
       if (!uniqueBlocks.has(hash)) {
         unlinkSync(`${CACHE_DIR}/${file}`);
         console.log(`  Removed stale cache: ${file}`);

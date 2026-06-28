@@ -12,8 +12,8 @@ const PATH_RULES = [
     getTitle: (p: string) => {
       const tagName = p
         .replace("/tag/", "")
-        .replace(/\/$/, "")
-        .replace(/\.html$/, "");
+        .replace(/\/$/u, "")
+        .replace(/\.html$/u, "");
       return tagName ? `#${tagName}` : "Tag";
     },
   },

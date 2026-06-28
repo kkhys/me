@@ -13,8 +13,8 @@ const getMermaidHash = (source: string) =>
   createHash("sha256").update(source).digest("hex").slice(0, 16);
 
 const extractDimensions = (svg: string): { width: string; height: string } | undefined => {
-  const widthMatch = svg.match(/width="([^"]+)"/);
-  const heightMatch = svg.match(/height="([^"]+)"/);
+  const widthMatch = svg.match(/width="([^"]+)"/u);
+  const heightMatch = svg.match(/height="([^"]+)"/u);
   if (!widthMatch?.[1] || !heightMatch?.[1]) return undefined;
   return {
     width: widthMatch[1],

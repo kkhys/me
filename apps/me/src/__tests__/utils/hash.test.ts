@@ -27,6 +27,6 @@ describe("generateBech32m", () => {
 
   it("includes the prefix character in the result", () => {
     const result = generateBech32m("test", "h");
-    expect(result).toMatch(/^h/);
+    expect(result).toMatch(/^h/u);
   });
 });

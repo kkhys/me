@@ -13,7 +13,7 @@ const {
   image,
 } = Astro.props;
 
-const pathname = Astro.url.pathname.replace(/index\.html$/, "");
+const pathname = Astro.url.pathname.replace(/index\.html$/u, "");
 const canonicalUrl = new URL(pathname, Astro.site).href;
 const ogImageUrl = image ? new URL(image.src, Astro.site).href : undefined;
 ---

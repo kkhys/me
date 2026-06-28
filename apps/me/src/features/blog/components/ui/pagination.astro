@@ -16,7 +16,7 @@ const format = String;
 // (`/blog`, `/blog/categories/tech`), the rest at `${base}/${n}`. Prev/next
 // reuse Astro-generated URLs so their format always matches the router.
 const firstUrl = page.url.first ?? page.url.current;
-const base = firstUrl.replace(/\/$/, "");
+const base = firstUrl.replace(/\/$/u, "");
 const hrefFor = (n: number) => (n === 1 ? firstUrl : `${base}/${n}`);
 
 const pages = Array.from({ length: lastPage }, (_, i) => i + 1);

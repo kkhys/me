@@ -4,7 +4,7 @@ import { generateBech32m } from "../utils/hash";
 
 const rehypeSlugWithCustomId = () => (tree: Root) => {
   visit(tree, "element", (node) => {
-    if (node.tagName && /^h[1-6]$/.test(node.tagName)) {
+    if (node.tagName && /^h[1-6]$/u.test(node.tagName)) {
       const originalText = node.children
         .filter((child) => child.type === "text")
         .map((child) => child.value)

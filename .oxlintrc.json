@@ -17,9 +17,7 @@
     // Sequential awaits are intentional (ordered ops / pacing)
     "eslint/no-await-in-loop": "off",
     // Required args typed `T | undefined` must receive an explicit undefined
-    "unicorn/no-useless-undefined": "off",
-    // Adding the `u` flag to existing regexes is behavior-changing and low-value here
-    "eslint/require-unicode-regexp": "off"
+    "unicorn/no-useless-undefined": "off"
   },
   "ignorePatterns": ["**/*-content/**", "**/public/**", "**/.cache/**"]
 }

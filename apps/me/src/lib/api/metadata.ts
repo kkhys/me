@@ -7,7 +7,7 @@ const cache = createResolvedCache<Metadata>();
 // Astro's sharp service refuses SVG inputs unless `image.dangerouslyProcessSVG`
 // is enabled, so drop SVG og:images here to keep `<Image>` from crashing the build.
 const isSvgSrc = (src: string): boolean => {
-  const pathname = src.split(/[?#]/, 1)[0] ?? src;
+  const pathname = src.split(/[?#]/u, 1)[0] ?? src;
   return pathname.toLowerCase().endsWith(".svg");
 };
 

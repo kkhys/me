@@ -5,7 +5,7 @@ export interface RssItem {
   pubDate: string;
 }
 
-const stripCdata = (text: string): string => text.replace(/^<!\[CDATA\[([\s\S]*?)]]>$/, "$1");
+const stripCdata = (text: string): string => text.replace(/^<!\[CDATA\[([\s\S]*?)\]\]>$/u, "$1");
 
 const decodeEntities = (text: string): string =>
   text
@@ -16,19 +16,19 @@ const decodeEntities = (text: string): string =>
     .replaceAll("&apos;", "'");
 
 const extractTag = (xml: string, tag: string): string | undefined => {
-  const match = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`));
+  const match = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, "u"));
   if (!match?.[1]) return undefined;
   return decodeEntities(stripCdata(match[1].trim()));
 };
 
 export const parseRssItems = (xml: string): RssItem[] => {
   const items: RssItem[] = [];
-  const itemBlocks = xml.match(/<item>([\s\S]*?)<\/item>/g);
+  const itemBlocks = xml.match(/<item>([\s\S]*?)<\/item>/gu);
 
   if (!itemBlocks) return items;
 
   for (const block of itemBlocks) {
-    const content = block.replaceAll(/<\/?item>/g, "");
+    const content = block.replaceAll(/<\/?item>/gu, "");
 
     const title = extractTag(content, "title");
     const link = extractTag(content, "link");
@@ -44,6 +44,6 @@ export const parseRssItems = (xml: string): RssItem[] => {
 };
 
 export const generateRssEntryId = (guid: string, prefix = "rss"): string => {
-  const slug = guid.replace(/\/$/, "").split("/").pop();
+  const slug = guid.replace(/\/$/u, "").split("/").pop();
   return `${prefix}-${slug}`;
 };

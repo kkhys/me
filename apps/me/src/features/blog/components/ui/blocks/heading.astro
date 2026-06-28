@@ -11,7 +11,7 @@ const { as: Tag, id, class: className, ...rest } = Astro.props;
 const classes = new Set([
   "heading",
   "budoux",
-  ...(className?.split(/\s+/).filter(Boolean) ?? []),
+  ...(className?.split(/\s+/u).filter(Boolean) ?? []),
 ]);
 ---
 

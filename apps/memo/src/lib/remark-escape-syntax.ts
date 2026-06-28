@@ -44,34 +44,34 @@ const remarkEscapeSyntax: Plugin<[], Root> = function (this: Processor) {
 
     // 1. Protect code blocks (temporarily save before inline code processing)
     const codeBlocks: string[] = [];
-    text = text.replaceAll(/```[\s\S]*?```/gm, (match) => {
+    text = text.replaceAll(/```[\s\S]*?```/gmu, (match) => {
       codeBlocks.push(match);
       return `___CODEBLOCK_${codeBlocks.length - 1}___`;
     });
 
     // 2. Escape inline code
-    text = text.replaceAll(/`([^`]+)`/g, "\\`$1\\`");
+    text = text.replaceAll(/`([^`]+)`/gu, "\\`$1\\`");
 
     // 3. Restore code blocks (convert ``` to \```)
-    text = text.replaceAll(/___CODEBLOCK_(\d+)___/g, (_, index) => {
+    text = text.replaceAll(/___CODEBLOCK_(\d+)___/gu, (_, index) => {
       // Index always exists as it references saved codeBlocks
       return codeBlocks[Math.trunc(Number(index))]!.replaceAll("```", "\\```");
     });
 
     // 4. Escape headings
-    text = text.replaceAll(/^(#{1,6})\s/gm, "\\$1 ");
+    text = text.replaceAll(/^(#{1,6})\s/gmu, "\\$1 ");
 
     // 5. Escape blockquotes
-    text = text.replaceAll(/^(\s*)>\s/gm, "$1\\> ");
+    text = text.replaceAll(/^(\s*)>\s/gmu, "$1\\> ");
 
     // 6. Escape horizontal rules (before list markers)
-    text = text.replaceAll(/^(\s*)([-*_])\2{2,}\s*$/gm, "$1\\$2$2$2");
+    text = text.replaceAll(/^(\s*)([-*_])\2{2,}\s*$/gmu, "$1\\$2$2$2");
 
     // 7. Escape unordered lists
-    text = text.replaceAll(/^(\s*)([*\-+])\s/gm, "$1\\$2 ");
+    text = text.replaceAll(/^(\s*)([*\-+])\s/gmu, "$1\\$2 ");
 
     // 8. Escape ordered lists
-    text = text.replaceAll(/^(\s*)(\d+)\.\s/gm, "$1$2\\. ");
+    text = text.replaceAll(/^(\s*)(\d+)\.\s/gmu, "$1$2\\. ");
 
     // Note: Bold (**, __), italic (*, _), and strikethrough (~~) cannot be escaped
     // because remark interprets backslashes multiple times

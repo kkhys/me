@@ -1,13 +1,13 @@
 import type { Paragraph, PhrasingContent, Root, Text } from "mdast";
 import { visit } from "unist-util-visit";
 
-const alertRegex = /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)]/i;
+const alertRegex = /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/iu;
 
 const processAlertParagraph = (item: Paragraph, text: string): PhrasingContent[] => {
   if (text.includes("\n")) {
     item.children[0] = {
       type: "text",
-      value: text.replace(alertRegex, "").replace(/^\n+/, ""),
+      value: text.replace(alertRegex, "").replace(/^\n+/u, ""),
     } as Text;
     return item.children;
   }
