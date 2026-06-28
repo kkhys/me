@@ -1,10 +1,7 @@
 import type { InlineCode, Root, Text } from "mdast";
 import type { Node } from "unist";
 import { visit } from "unist-util-visit";
-import {
-  isFootnoteDefinition,
-  isFootnoteReference,
-} from "./mdast-util-node-is";
+import { isFootnoteDefinition, isFootnoteReference } from "./mdast-util-node-is";
 
 const isTextOrInlineCode = (node: Node): node is Text | InlineCode =>
   node.type === "text" || node.type === "inlineCode";

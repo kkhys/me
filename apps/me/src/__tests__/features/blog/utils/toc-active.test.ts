@@ -9,9 +9,7 @@ describe("pickActiveId", () => {
   });
 
   it("returns the topmost visible heading in document order", () => {
-    expect(pickActiveId(ordered, new Set(["faq", "usage"]), "intro")).toBe(
-      "usage",
-    );
+    expect(pickActiveId(ordered, new Set(["faq", "usage"]), "intro")).toBe("usage");
   });
 
   it("keeps the previous id when nothing is visible", () => {

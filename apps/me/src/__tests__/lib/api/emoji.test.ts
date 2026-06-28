@@ -67,13 +67,7 @@ describe("getFirstGrapheme", () => {
 });
 
 describe("loadEmoji", () => {
-  type EmojiType =
-    | "twemoji"
-    | "openmoji"
-    | "blobmoji"
-    | "noto"
-    | "fluent"
-    | "fluentFlat";
+  type EmojiType = "twemoji" | "openmoji" | "blobmoji" | "noto" | "fluent" | "fluentFlat";
   let loadEmoji: (type: EmojiType, code: string) => Promise<string | undefined>;
 
   beforeEach(async () => {

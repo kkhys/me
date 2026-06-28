@@ -39,10 +39,9 @@ describe("getMemoPost", () => {
 
     const result = await getMemoPost("ABC123");
     expect(result).toEqual(samplePost);
-    expect(fetch).toHaveBeenCalledWith(
-      "https://memo.kkhys.me/api/posts/ABC123.json",
-      { signal: expect.any(AbortSignal) },
-    );
+    expect(fetch).toHaveBeenCalledWith("https://memo.kkhys.me/api/posts/ABC123.json", {
+      signal: expect.any(AbortSignal),
+    });
   });
 
   it("returns null when response is not ok", async () => {

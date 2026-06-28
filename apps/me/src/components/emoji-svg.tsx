@@ -50,8 +50,7 @@ export const emojiSvg = async ({
           // Prefer fluent, but fall back to twemoji for emojis fluent omits
           // (notably country/region flags).
           const result =
-            (await loadEmoji("fluent", iconCode)) ??
-            (await loadEmoji("twemoji", iconCode));
+            (await loadEmoji("fluent", iconCode)) ?? (await loadEmoji("twemoji", iconCode));
           if (!result) {
             throw new Error(`Failed to load emoji for segment: ${segment}`);
           }

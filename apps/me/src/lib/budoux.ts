@@ -17,5 +17,4 @@ export const getBudouxParser = () => {
   return cachedParser;
 };
 
-export const budouxProcess = (html: string) =>
-  getBudouxParser().translateHTMLString(html);
+export const budouxProcess = (html: string) => getBudouxParser().translateHTMLString(html);

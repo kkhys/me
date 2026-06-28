@@ -75,9 +75,7 @@ describe("isText", () => {
 
 describe("isLink", () => {
   it("returns true for link nodes", () => {
-    expect(
-      isLink({ type: "link", url: "https://example.com", children: [] }),
-    ).toBe(true);
+    expect(isLink({ type: "link", url: "https://example.com", children: [] })).toBe(true);
   });
 
   it("returns false for non-link nodes", () => {
@@ -130,17 +128,13 @@ describe("isFootnoteDefinition", () => {
   });
 
   it("returns false for other nodes", () => {
-    expect(isFootnoteDefinition({ type: "paragraph", children: [] })).toBe(
-      false,
-    );
+    expect(isFootnoteDefinition({ type: "paragraph", children: [] })).toBe(false);
   });
 });
 
 describe("isFootnoteReference", () => {
   it("returns true for footnote reference nodes", () => {
-    expect(
-      isFootnoteReference({ type: "footnoteReference", identifier: "1" }),
-    ).toBe(true);
+    expect(isFootnoteReference({ type: "footnoteReference", identifier: "1" })).toBe(true);
   });
 
   it("returns false for other nodes", () => {

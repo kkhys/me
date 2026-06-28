@@ -9,10 +9,7 @@ interface AlertBlockquote extends Blockquote {
   };
 }
 
-const makeAlertBlockquote = (
-  alertText: string,
-  bodyText?: string,
-): Blockquote => {
+const makeAlertBlockquote = (alertText: string, bodyText?: string): Blockquote => {
   const textValue = bodyText ? `${alertText}\n${bodyText}` : alertText;
   return {
     type: "blockquote",
@@ -51,9 +48,7 @@ describe("remarkBlockQuoteAlert", () => {
   });
 
   it("converts [!IMPORTANT] to alert with type important", () => {
-    const tree = makeTree([
-      makeAlertBlockquote("[!IMPORTANT]", "Important content"),
-    ]);
+    const tree = makeTree([makeAlertBlockquote("[!IMPORTANT]", "Important content")]);
 
     remarkBlockQuoteAlert()(tree);
 
@@ -62,9 +57,7 @@ describe("remarkBlockQuoteAlert", () => {
   });
 
   it("converts [!WARNING] to alert with type warning", () => {
-    const tree = makeTree([
-      makeAlertBlockquote("[!WARNING]", "Warning content"),
-    ]);
+    const tree = makeTree([makeAlertBlockquote("[!WARNING]", "Warning content")]);
 
     remarkBlockQuoteAlert()(tree);
 
@@ -73,9 +66,7 @@ describe("remarkBlockQuoteAlert", () => {
   });
 
   it("converts [!CAUTION] to alert with type caution", () => {
-    const tree = makeTree([
-      makeAlertBlockquote("[!CAUTION]", "Caution content"),
-    ]);
+    const tree = makeTree([makeAlertBlockquote("[!CAUTION]", "Caution content")]);
 
     remarkBlockQuoteAlert()(tree);
 
@@ -176,15 +167,11 @@ describe("remarkBlockQuoteAlert", () => {
         children: [
           {
             type: "paragraph",
-            children: [
-              { type: "text", value: "[!NOTE]\nFirst paragraph" } as Text,
-            ],
+            children: [{ type: "text", value: "[!NOTE]\nFirst paragraph" } as Text],
           } as Paragraph,
           {
             type: "paragraph",
-            children: [
-              { type: "text", value: "[!WARNING]\nSecond paragraph" } as Text,
-            ],
+            children: [{ type: "text", value: "[!WARNING]\nSecond paragraph" } as Text],
           } as Paragraph,
         ],
       } as Blockquote,

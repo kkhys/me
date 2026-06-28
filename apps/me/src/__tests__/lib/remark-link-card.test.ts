@@ -78,10 +78,7 @@ describe("remarkLinkCard", () => {
   it("skips paragraphs with multiple children", () => {
     const url = "https://example.com";
     const tree = makeTree([
-      makeParagraph([
-        makeBareLink(url),
-        { type: "text", value: " extra" } as Text,
-      ]),
+      makeParagraph([makeBareLink(url), { type: "text", value: " extra" } as Text]),
     ]);
 
     remarkLinkCard()(tree);

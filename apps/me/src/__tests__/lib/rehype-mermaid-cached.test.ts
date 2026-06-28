@@ -26,7 +26,7 @@ const makeMermaidTree = (source: string): Root => ({
 });
 
 vi.mock("node:fs", () => ({
-  readFileSync: vi.fn((filePath: string) => {
+  readFileSync: vi.fn<(filePath: string) => string>((filePath: string) => {
     if (filePath.endsWith("-light.svg")) return lightSvg;
     if (filePath.endsWith("-dark.svg")) return darkSvg;
     throw new Error(`File not found: ${filePath}`);
@@ -35,8 +35,7 @@ vi.mock("node:fs", () => ({
 
 describe("rehypeMermaidCached", () => {
   it("converts language-mermaid code block to <picture> element", async () => {
-    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached"))
-      .default;
+    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached")).default;
     const source = "graph TD; A-->B;";
     const tree = makeMermaidTree(source);
 
@@ -47,8 +46,7 @@ describe("rehypeMermaidCached", () => {
   });
 
   it("creates <source> with dark media query and <img> with light src", async () => {
-    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached"))
-      .default;
+    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached")).default;
     const source = "graph TD; A-->B;";
     const tree = makeMermaidTree(source);
 
@@ -64,8 +62,7 @@ describe("rehypeMermaidCached", () => {
   });
 
   it("extracts width and height from SVG", async () => {
-    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached"))
-      .default;
+    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached")).default;
     const source = "graph TD; A-->B;";
     const tree = makeMermaidTree(source);
 
@@ -85,19 +82,15 @@ describe("rehypeMermaidCached", () => {
       throw new Error("ENOENT");
     });
 
-    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached"))
-      .default;
+    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached")).default;
     const source = "graph TD; X-->Y;";
     const tree = makeMermaidTree(source);
 
-    expect(() => rehypeMermaidCached()(tree)).toThrow(
-      "Mermaid cache not found",
-    );
+    expect(() => rehypeMermaidCached()(tree)).toThrow("Mermaid cache not found");
   });
 
   it("skips non-mermaid code blocks", async () => {
-    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached"))
-      .default;
+    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached")).default;
     const tree: Root = {
       type: "root",
       children: [
@@ -124,8 +117,7 @@ describe("rehypeMermaidCached", () => {
   });
 
   it("skips empty source", async () => {
-    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached"))
-      .default;
+    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached")).default;
     const tree = makeMermaidTree("   ");
 
     rehypeMermaidCached()(tree);
@@ -143,8 +135,7 @@ describe("rehypeMermaidCached", () => {
     });
 
     vi.resetModules();
-    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached"))
-      .default;
+    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached")).default;
     const source = "graph TD; NoDims;";
     const tree = makeMermaidTree(source);
 
@@ -157,8 +148,7 @@ describe("rehypeMermaidCached", () => {
   });
 
   it("skips <pre> without <code> child", async () => {
-    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached"))
-      .default;
+    const rehypeMermaidCached = (await import("#/lib/rehype-mermaid-cached")).default;
     const tree: Root = {
       type: "root",
       children: [

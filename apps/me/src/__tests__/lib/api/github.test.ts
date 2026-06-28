@@ -22,10 +22,7 @@ describe("getLastUpdatedTimeByFile", () => {
   it("returns lastUpdatedTime from successful response", async () => {
     vi.mocked(fetch).mockResolvedValueOnce({
       ok: true,
-      json: () =>
-        Promise.resolve([
-          { commit: { committer: { date: "2024-01-15T00:00:00Z" } } },
-        ]),
+      json: () => Promise.resolve([{ commit: { committer: { date: "2024-01-15T00:00:00Z" } } }]),
     } as Response);
 
     const result = await getLastUpdatedTimeByFile("me-content/blog/test.mdx");
@@ -64,9 +61,7 @@ describe("getLastUpdatedTimeByFile", () => {
     }));
     const mod = await import("#/lib/api/github");
 
-    const result = await mod.getLastUpdatedTimeByFile(
-      "me-content/blog/no-token.mdx",
-    );
+    const result = await mod.getLastUpdatedTimeByFile("me-content/blog/no-token.mdx");
     expect(result.lastUpdatedTime).toBeUndefined();
     expect(fetch).not.toHaveBeenCalled();
   });
@@ -74,10 +69,7 @@ describe("getLastUpdatedTimeByFile", () => {
   it("caches results (fetch called once for same path)", async () => {
     vi.mocked(fetch).mockResolvedValue({
       ok: true,
-      json: () =>
-        Promise.resolve([
-          { commit: { committer: { date: "2024-01-15T00:00:00Z" } } },
-        ]),
+      json: () => Promise.resolve([{ commit: { committer: { date: "2024-01-15T00:00:00Z" } } }]),
     } as Response);
 
     await getLastUpdatedTimeByFile("me-content/blog/cached.mdx");

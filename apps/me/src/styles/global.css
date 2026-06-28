@@ -29,10 +29,7 @@
     --c-surface: light-dark(var(--uchu-gray-1), var(--uchu-yin-9));
     --c-surface-text: light-dark(var(--uchu-yin-9), var(--uchu-yang));
 
-    --c-border: light-dark(
-      var(--uchu-gray-2),
-      oklch(var(--uchu-yang-raw) / 10%)
-    );
+    --c-border: light-dark(var(--uchu-gray-2), oklch(var(--uchu-yang-raw) / 10%));
     --c-ring: light-dark(var(--uchu-yin-4), var(--uchu-yin-6));
 
     --c-link: light-dark(var(--uchu-blue-5), var(--uchu-blue-3));
@@ -53,10 +50,7 @@
 
     --c-codeblock-bg: light-dark(var(--uchu-yang), var(--uchu-yin));
     --c-codeblock-header-bg: light-dark(var(--uchu-yang), var(--uchu-yin-9));
-    --c-codeblock-header-text: light-dark(
-      var(--uchu-yin-6),
-      var(--uchu-gray-3)
-    );
+    --c-codeblock-header-text: light-dark(var(--uchu-yin-6), var(--uchu-gray-3));
     --c-codeblock-border: light-dark(
       oklch(var(--uchu-gray-3-raw) / 0.3),
       oklch(var(--uchu-yang-raw) / 0.1)
@@ -125,8 +119,7 @@
 
   @supports (-moz-appearance: none) {
     html {
-      scrollbar-color: light-dark(var(--uchu-gray-3), var(--uchu-yin-8))
-        transparent;
+      scrollbar-color: light-dark(var(--uchu-gray-3), var(--uchu-yin-8)) transparent;
       scrollbar-width: thin;
     }
   }

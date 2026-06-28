@@ -36,8 +36,7 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
       inlineButtonBorder: "var(--c-codeblock-border)",
       inlineButtonBorderOpacity: "1",
       inlineButtonBackground: "var(--c-codeblock-bg)",
-      frameBoxShadowCssValue:
-        "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+      frameBoxShadowCssValue: "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
     },
   },
 };

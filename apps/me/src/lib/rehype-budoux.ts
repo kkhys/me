@@ -6,13 +6,9 @@ import { budouxProcess } from "./budoux";
 
 const defaultTargetTagNames = ["p", "li", "h1", "h2", "h3"];
 
-const isElement = (node: Element | ElementContent): node is Element =>
-  node.type === "element";
+const isElement = (node: Element | ElementContent): node is Element => node.type === "element";
 
-const isTargetNode = (
-  node: Element | ElementContent,
-  targetTagNames: string[],
-): node is Element =>
+const isTargetNode = (node: Element | ElementContent, targetTagNames: string[]): node is Element =>
   isElement(node) ? targetTagNames.includes(node.tagName) : false;
 
 const rehypeBudoux =
@@ -29,7 +25,9 @@ const rehypeBudoux =
       const newNode = fromHtml(budouxProcess(toHtml(node)), {
         fragment: true,
       }).children[0];
-      newNode && parent?.children.splice(index, 1, newNode);
+      if (newNode) {
+        parent?.children.splice(index, 1, newNode);
+      }
       return SKIP;
     });
   };

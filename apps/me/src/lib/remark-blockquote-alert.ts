@@ -3,10 +3,7 @@ import { visit } from "unist-util-visit";
 
 const alertRegex = /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)]/i;
 
-const processAlertParagraph = (
-  item: Paragraph,
-  text: string,
-): PhrasingContent[] => {
+const processAlertParagraph = (item: Paragraph, text: string): PhrasingContent[] => {
   if (text.includes("\n")) {
     item.children[0] = {
       type: "text",
@@ -15,9 +12,7 @@ const processAlertParagraph = (
     return item.children;
   }
 
-  return item.children
-    .slice(1)
-    .filter((child, idx) => !(idx === 0 && child.type === "break"));
+  return item.children.slice(1).filter((child, idx) => !(idx === 0 && child.type === "break"));
 };
 
 const remarkBlockQuoteAlert = () => (tree: Root) => {
