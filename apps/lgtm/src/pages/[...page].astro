@@ -12,17 +12,7 @@ import TwitterCard from "#/components/seo/twitter-card.astro";
 import Spinner from "#/components/spinner.astro";
 import { IMAGES_PER_PAGE, TITLE } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
-
-const shuffleArray = <T,>(array: T[]): T[] => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = shuffled[i] as T;
-    shuffled[i] = shuffled[j] as T;
-    shuffled[j] = temp;
-  }
-  return shuffled;
-};
+import { shuffleArray } from "#/utils/shuffle";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const lgtmEntries = shuffleArray(await getCollection("lgtm"));
