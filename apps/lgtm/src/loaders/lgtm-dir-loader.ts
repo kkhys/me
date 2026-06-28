@@ -4,14 +4,7 @@ import { join, relative, resolve } from "node:path";
 import type { Loader, LoaderContext } from "astro/loaders";
 import sharp from "sharp";
 
-const MEDIA_EXTENSIONS = new Set([
-  ".jpg",
-  ".jpeg",
-  ".png",
-  ".webp",
-  ".gif",
-  ".avif",
-]);
+const MEDIA_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"]);
 
 const isMediaFile = (name: string) => {
   const dot = name.lastIndexOf(".");
@@ -24,7 +17,7 @@ const pickImage = async (entryDir: string): Promise<string | null> => {
   // Ascending sort so a directory holding e.g. `01.jpg` and `02.jpg` always
   // resolves to the same entry across rebuilds.
   files.sort();
-  return files.find(isMediaFile) ?? null;
+  return files.find((file) => isMediaFile(file)) ?? null;
 };
 
 const isAnimated = async (filePath: string): Promise<boolean> => {

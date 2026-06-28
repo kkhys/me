@@ -13,18 +13,18 @@ import Spinner from "#/components/spinner.astro";
 import { IMAGES_PER_PAGE, TITLE } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 
-export const getStaticPaths = (async ({ paginate }) => {
-  function shuffleArray<T>(array: T[]): T[] {
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = shuffled[i] as T;
-      shuffled[i] = shuffled[j] as T;
-      shuffled[j] = temp;
-    }
-    return shuffled;
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = shuffled[i] as T;
+    shuffled[i] = shuffled[j] as T;
+    shuffled[j] = temp;
   }
+  return shuffled;
+};
 
+export const getStaticPaths = (async ({ paginate }) => {
   const lgtmEntries = shuffleArray(await getCollection("lgtm"));
 
   return paginate(lgtmEntries, {
@@ -304,7 +304,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
 
 <script>
   const initCopyButtons = () => {
-    const container = document.getElementById("lgtm-container");
+    const container = document.querySelector("#lgtm-container");
     if (!container) return;
 
     container.addEventListener("click", async (e) => {
@@ -335,9 +335,9 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
   };
 
   const initInfiniteScroll = () => {
-    const containerEl = document.getElementById("lgtm-container");
-    const triggerEl = document.getElementById("scroll-trigger");
-    const loadingIndicatorEl = document.getElementById("loading-indicator");
+    const containerEl = document.querySelector<HTMLElement>("#lgtm-container");
+    const triggerEl = document.querySelector<HTMLElement>("#scroll-trigger");
+    const loadingIndicatorEl = document.querySelector<HTMLElement>("#loading-indicator");
 
     if (!containerEl || !triggerEl || !loadingIndicatorEl) {
       return;
@@ -347,8 +347,8 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     const trigger: HTMLElement = triggerEl;
     const loadingIndicator: HTMLElement = loadingIndicatorEl;
 
-    let currentPage = Number.parseInt(container.dataset.currentPage || "1", 10);
-    const totalPages = Number.parseInt(container.dataset.totalPages || "1", 10);
+    let currentPage = Math.trunc(Number(container.dataset.currentPage || "1"));
+    const totalPages = Math.trunc(Number(container.dataset.totalPages || "1"));
     let isLoading = false;
 
     const parser = new DOMParser();
@@ -402,7 +402,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
         const html = await response.text();
         const doc = parser.parseFromString(html, "text/html");
 
-        const nextContainer = doc.getElementById("lgtm-container");
+        const nextContainer = doc.querySelector("#lgtm-container");
         if (!nextContainer) {
           throw new Error("lgtm-container not found in fetched page");
         }
@@ -410,12 +410,14 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
         const elapsed = Date.now() - startTime;
         const remainingTime = Math.max(0, 500 - elapsed);
         if (remainingTime > 0) {
-          await new Promise((resolve) => setTimeout(resolve, remainingTime));
+          await new Promise((resolve) => {
+            setTimeout(resolve, remainingTime);
+          });
         }
 
         const lgtmItems = nextContainer.children;
         for (const item of Array.from(lgtmItems)) {
-          container.appendChild(item);
+          container.append(item);
         }
 
         currentPage = nextPage;
@@ -427,7 +429,6 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
       } catch (error) {
         console.error("Failed to load more images:", error);
         showErrorMessage();
-        return;
       } finally {
         if (reachedEnd) {
           showEndMessage();

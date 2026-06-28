@@ -15,11 +15,13 @@ const animatedEntry = {
 };
 
 vi.mock("astro:content", () => ({
-  getCollection: vi.fn(async () => [stillEntry, animatedEntry]),
+  getCollection: vi.fn<() => Promise<(typeof stillEntry)[]>>(() =>
+    Promise.resolve([stillEntry, animatedEntry]),
+  ),
 }));
 
 vi.mock("#/components/lgtm-image", () => ({
-  LgtmImage: vi.fn(async () => Buffer.from("mock-image-data")),
+  LgtmImage: vi.fn<() => Promise<Buffer>>(() => Promise.resolve(Buffer.from("mock-image-data"))),
   formatForEntry: (entry: { data: { animated: boolean } }) =>
     entry.data.animated ? "webp" : "avif",
 }));
