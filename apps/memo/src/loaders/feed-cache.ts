@@ -6,7 +6,8 @@ import { join } from "node:path";
 const CACHE_DIR = "node_modules/.cache/memo-feeds";
 
 export interface FeedCache {
-  fetchedAt: number; // epoch ms of the last successful fetch/revalidation
+  // epoch ms of the last successful fetch/revalidation
+  fetchedAt: number;
   etag?: string;
   lastModified?: string;
   xml: string;

@@ -8,7 +8,7 @@ import {
 } from "#/__fixtures__/metadata";
 
 vi.mock("fetch-site-metadata", () => ({
-  default: vi.fn(),
+  default: vi.fn<typeof import("fetch-site-metadata").default>(),
 }));
 
 describe("getMetadata", () => {
@@ -94,9 +94,7 @@ describe("getMetadata", () => {
 
     test("should return fallback metadata when fetch fails", async () => {
       const fetchSiteMetadata = (await import("fetch-site-metadata")).default;
-      vi.mocked(fetchSiteMetadata).mockRejectedValue(
-        new Error("Network error"),
-      );
+      vi.mocked(fetchSiteMetadata).mockRejectedValue(new Error("Network error"));
 
       const { getMetadata } = await import("#/lib/metadata");
       const result = await getMetadata("https://example.com");
@@ -106,9 +104,7 @@ describe("getMetadata", () => {
 
     test("should not cache fallback metadata when fetch fails", async () => {
       const fetchSiteMetadata = (await import("fetch-site-metadata")).default;
-      vi.mocked(fetchSiteMetadata).mockRejectedValue(
-        new Error("Network error"),
-      );
+      vi.mocked(fetchSiteMetadata).mockRejectedValue(new Error("Network error"));
 
       const { getMetadata } = await import("#/lib/metadata");
 

@@ -13,9 +13,7 @@ const imageMap = new Map<string, ImageMetadata>(
       const key = match[1];
       return [key, module.default] as const;
     })
-    .filter(
-      (entry): entry is readonly [string, ImageMetadata] => entry !== null,
-    ),
+    .filter((entry): entry is readonly [string, ImageMetadata] => entry !== null),
 );
 
 export const getImagesForMemo = (memoId: string) => {
@@ -24,6 +22,6 @@ export const getImagesForMemo = (memoId: string) => {
 
   return Array.from(imageMap.entries())
     .filter(([key]) => key.startsWith(prefix))
-    .sort(([a], [b]) => a.localeCompare(b))
+    .toSorted(([a], [b]) => a.localeCompare(b))
     .map(([, image]) => image);
 };

@@ -1,15 +1,13 @@
 import { remark } from "remark";
 import { describe, expect, test } from "vitest";
-import remarkTruncateLinkText, {
-  truncateLinkText,
-} from "#/lib/remark-truncate-link-text";
+import remarkTruncateLinkText, { truncateLinkText } from "#/lib/remark-truncate-link-text";
+
+const processContent = async (content: string): Promise<string> => {
+  const result = await remark().use(remarkTruncateLinkText).process(content);
+  return result.toString().trim();
+};
 
 describe("remarkTruncateLinkText", () => {
-  const processContent = async (content: string): Promise<string> => {
-    const result = await remark().use(remarkTruncateLinkText).process(content);
-    return result.toString().trim();
-  };
-
   describe("URL truncation patterns", () => {
     test("should truncate URL with single path segment", async () => {
       const content =
@@ -42,21 +40,15 @@ describe("remarkTruncateLinkText", () => {
     });
 
     test("should handle HTTP protocol", async () => {
-      const content =
-        "[http://example.com/path/to/page](http://example.com/path/to/page)";
+      const content = "[http://example.com/path/to/page](http://example.com/path/to/page)";
       const result = await processContent(content);
-      expect(result).toBe(
-        "[example.com/path…](http://example.com/path/to/page)",
-      );
+      expect(result).toBe("[example.com/path…](http://example.com/path/to/page)");
     });
 
     test("should handle HTTPS protocol", async () => {
-      const content =
-        "[https://example.com/path/to/page](https://example.com/path/to/page)";
+      const content = "[https://example.com/path/to/page](https://example.com/path/to/page)";
       const result = await processContent(content);
-      expect(result).toBe(
-        "[example.com/path…](https://example.com/path/to/page)",
-      );
+      expect(result).toBe("[example.com/path…](https://example.com/path/to/page)");
     });
   });
 
@@ -64,9 +56,7 @@ describe("remarkTruncateLinkText", () => {
     test("should not truncate when custom text is provided", async () => {
       const content = "[Custom Link Text](https://example.com/path/to/page)";
       const result = await processContent(content);
-      expect(result).toBe(
-        "[Custom Link Text](https://example.com/path/to/page)",
-      );
+      expect(result).toBe("[Custom Link Text](https://example.com/path/to/page)");
     });
 
     test("should not truncate when text is not a URL", async () => {
@@ -82,20 +72,15 @@ describe("remarkTruncateLinkText", () => {
     });
 
     test("should not truncate when link has mixed content (not pure text)", async () => {
-      const content =
-        "[**https://example.com/path**](https://example.com/path)";
+      const content = "[**https://example.com/path**](https://example.com/path)";
       const result = await processContent(content);
-      expect(result).toBe(
-        "[**https://example.com/path**](https://example.com/path)",
-      );
+      expect(result).toBe("[**https://example.com/path**](https://example.com/path)");
     });
 
     test("should not truncate when link contains code", async () => {
       const content = "[`https://example.com/path`](https://example.com/path)";
       const result = await processContent(content);
-      expect(result).toBe(
-        "[`https://example.com/path`](https://example.com/path)",
-      );
+      expect(result).toBe("[`https://example.com/path`](https://example.com/path)");
     });
   });
 
@@ -121,39 +106,28 @@ describe("remarkTruncateLinkText", () => {
 
   describe("edge cases", () => {
     test("should handle URL with query parameters", async () => {
-      const content =
-        "[https://example.com/search?q=test](https://example.com/search?q=test)";
+      const content = "[https://example.com/search?q=test](https://example.com/search?q=test)";
       const result = await processContent(content);
-      expect(result).toBe(
-        "[example.com/search…](https://example.com/search?q=test)",
-      );
+      expect(result).toBe("[example.com/search…](https://example.com/search?q=test)");
     });
 
     test("should handle URL with hash fragment", async () => {
-      const content =
-        "[https://example.com/page#section](https://example.com/page#section)";
+      const content = "[https://example.com/page#section](https://example.com/page#section)";
       const result = await processContent(content);
-      expect(result).toBe(
-        "[example.com/page…](https://example.com/page#section)",
-      );
+      expect(result).toBe("[example.com/page…](https://example.com/page#section)");
     });
 
     test("should handle URL with query and hash", async () => {
       const content =
         "[https://example.com/page?foo=bar#section](https://example.com/page?foo=bar#section)";
       const result = await processContent(content);
-      expect(result).toBe(
-        "[example.com/page…](https://example.com/page?foo=bar#section)",
-      );
+      expect(result).toBe("[example.com/page…](https://example.com/page?foo=bar#section)");
     });
 
     test("should handle subdomain", async () => {
-      const content =
-        "[https://blog.example.com/post/123](https://blog.example.com/post/123)";
+      const content = "[https://blog.example.com/post/123](https://blog.example.com/post/123)";
       const result = await processContent(content);
-      expect(result).toBe(
-        "[blog.example.com/post…](https://blog.example.com/post/123)",
-      );
+      expect(result).toBe("[blog.example.com/post…](https://blog.example.com/post/123)");
     });
 
     test("should handle multiple links in one document", async () => {
@@ -163,9 +137,7 @@ describe("remarkTruncateLinkText", () => {
       `.trim();
       const result = await processContent(content);
       expect(result).toContain("[first.com/path](https://first.com/path)");
-      expect(result).toContain(
-        "[second.com/another…](https://second.com/another/path)",
-      );
+      expect(result).toContain("[second.com/another…](https://second.com/another/path)");
     });
 
     test("should handle mixed external and internal links", async () => {
@@ -175,9 +147,7 @@ describe("remarkTruncateLinkText", () => {
       `.trim();
       const result = await processContent(content);
       expect(result).toContain("[/internal](/internal)");
-      expect(result).toContain(
-        "[external.com/path](https://external.com/path)",
-      );
+      expect(result).toContain("[external.com/path](https://external.com/path)");
     });
 
     test("should handle uppercase protocol", async () => {
@@ -253,9 +223,7 @@ Second paragraph with [https://second.com/path](https://second.com/path).
       const content =
         "[https://github.com/user/repo/issues/123](https://github.com/user/repo/issues/123)";
       const result = await processContent(content);
-      expect(result).toBe(
-        "[github.com/user…](https://github.com/user/repo/issues/123)",
-      );
+      expect(result).toBe("[github.com/user…](https://github.com/user/repo/issues/123)");
     });
 
     test("should handle documentation URL", async () => {

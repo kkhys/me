@@ -7,8 +7,7 @@ export const getMetadata = async (url: string) => {
   const cachedMetadata = metadataCache.get(url);
   if (cachedMetadata) return cachedMetadata;
 
-  const isProduction =
-    NODE_ENV === "production" && PUBLIC_DEPLOY_ENV === "production";
+  const isProduction = NODE_ENV === "production" && PUBLIC_DEPLOY_ENV === "production";
 
   if (!isProduction) {
     const fallbackMetadata = {
@@ -21,7 +20,7 @@ export const getMetadata = async (url: string) => {
     return fallbackMetadata;
   }
 
-  return fetchSiteMetadata(url, {
+  return await fetchSiteMetadata(url, {
     suppressAdditionalRequest: true,
     headers: {
       accept: "text/html",

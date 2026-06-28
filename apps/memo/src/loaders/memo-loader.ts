@@ -24,7 +24,8 @@ interface OssProject {
   slug: string;
   name: string;
   url: string;
-  createdAt: string; // ISO 8601
+  // ISO 8601
+  createdAt: string;
 }
 
 interface RssFeedSource {
@@ -74,9 +75,7 @@ async function fetchFeedXml(
     // Network error / timeout: prefer a stale cache over losing the feed.
     const reason = error instanceof Error ? error.message : String(error);
     if (cached) {
-      logger.warn(
-        `RSS fetch errored for ${feedUrl} (${reason}), falling back to stale cache`,
-      );
+      logger.warn(`RSS fetch errored for ${feedUrl} (${reason}), falling back to stale cache`);
       return cached.xml;
     }
     throw error;
@@ -127,9 +126,7 @@ async function loadRssFeed(
 
     // Remove stale entries no longer in the feed
     const prefix = `${idPrefix}-`;
-    const freshIds = new Set(
-      items.map((i) => generateRssEntryId(i.guid, idPrefix)),
-    );
+    const freshIds = new Set(items.map((i) => generateRssEntryId(i.guid, idPrefix)));
     for (const [id] of store.entries()) {
       if (id.startsWith(prefix) && !freshIds.has(id)) {
         store.delete(id);
@@ -197,8 +194,7 @@ export function memoLoader(): Loader {
       // Skip RSS fetch in fixture mode
       if (process.env.USE_FIXTURE_DATA === "true") return;
 
-      const { store, parseData, generateDigest, renderMarkdown, logger } =
-        context;
+      const { store, parseData, generateDigest, renderMarkdown, logger } = context;
 
       // Load RSS-based bot feeds (blog, Zenn)
       for (const source of RSS_FEED_SOURCES) {
@@ -207,13 +203,9 @@ export function memoLoader(): Loader {
 
       // Load OSS project entries
       try {
-        const ossProjects: OssProject[] = JSON.parse(
-          readFileSync(OSS_PROJECTS_PATH, "utf-8"),
-        );
+        const ossProjects: OssProject[] = JSON.parse(readFileSync(OSS_PROJECTS_PATH, "utf-8"));
 
-        const freshIds = new Set(
-          ossProjects.map((p) => generateOssEntryId(p.slug)),
-        );
+        const freshIds = new Set(ossProjects.map((p) => generateOssEntryId(p.slug)));
         for (const [id] of store.entries()) {
           if (id.startsWith("oss-") && !freshIds.has(id)) {
             store.delete(id);

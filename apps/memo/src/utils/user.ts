@@ -4,10 +4,9 @@ import type { ImageMetadata } from "astro";
 
 export type User = CollectionEntry<"users">;
 
-const avatarModules = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/*.{jpg,png,webp}",
-  { eager: true },
-);
+const avatarModules = import.meta.glob<{ default: ImageMetadata }>("../assets/*.{jpg,png,webp}", {
+  eager: true,
+});
 
 const coverModules = import.meta.glob<{ default: ImageMetadata }>(
   "../assets/covers/*.{jpg,png,webp}",
@@ -37,9 +36,7 @@ export const getAvatarImage = (filename: string): ImageMetadata => {
   return module.default;
 };
 
-export const getCoverImage = (
-  filename: string | undefined,
-): ImageMetadata | undefined => {
+export const getCoverImage = (filename: string | undefined): ImageMetadata | undefined => {
   if (!filename) return undefined;
   const key = `../assets/covers/${filename}`;
   const module = coverModules[key];
@@ -54,9 +51,7 @@ export const getAllUsers = async (): Promise<User[]> => {
   return Array.from(userMap.values());
 };
 
-export const getUserBySlug = async (
-  slug: string,
-): Promise<User | undefined> => {
+export const getUserBySlug = async (slug: string): Promise<User | undefined> => {
   const userMap = await getUserMap();
   return userMap.get(slug);
 };
@@ -67,9 +62,7 @@ export interface AuthorInfo {
   profileLink: string;
 }
 
-export const getAuthorInfo = async (
-  authorSlug: string,
-): Promise<AuthorInfo> => {
+export const getAuthorInfo = async (authorSlug: string): Promise<AuthorInfo> => {
   const user = await getUserBySlug(authorSlug);
   return {
     name: user?.data.name ?? authorSlug,

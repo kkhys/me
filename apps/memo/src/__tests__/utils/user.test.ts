@@ -2,7 +2,7 @@ import type { CollectionEntry } from "astro:content";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
 vi.mock("astro:content", () => ({
-  getCollection: vi.fn(),
+  getCollection: vi.fn<typeof import("astro:content").getCollection>(),
 }));
 
 const mockUsers: CollectionEntry<"users">[] = [
@@ -255,9 +255,7 @@ describe("getAvatarImage", () => {
 
     const { getAvatarImage } = await import("#/utils/user");
 
-    expect(() => getAvatarImage("nonexistent.jpg")).toThrow(
-      "Avatar not found: nonexistent.jpg",
-    );
+    expect(() => getAvatarImage("nonexistent.jpg")).toThrow("Avatar not found: nonexistent.jpg");
   });
 });
 

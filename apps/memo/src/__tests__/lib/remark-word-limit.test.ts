@@ -9,11 +9,9 @@ import {
 } from "#/__fixtures__/markdown-content";
 import remarkWordLimit from "#/lib/remark-word-limit";
 
-describe("remarkWordLimit", () => {
-  const processContent = async (content: string) => {
-    return remark().use(remarkWordLimit).process(content);
-  };
+const processContent = (content: string) => remark().use(remarkWordLimit).process(content);
 
+describe("remarkWordLimit", () => {
   describe("content under the limit", () => {
     test("should accept short content (50 characters)", async () => {
       await expect(processContent(shortContent)).resolves.toBeDefined();
@@ -44,17 +42,8 @@ describe("remarkWordLimit", () => {
 
   describe("error message format", () => {
     test("should include actual character count in error message", async () => {
-      try {
-        await processContent(overLimitContent);
-        // Should not reach here
-        expect.fail("Expected error to be thrown");
-      } catch (error) {
-        expect(error).toBeInstanceOf(Error);
-        if (error instanceof Error) {
-          expect(error.message).toContain("600 characters");
-          expect(error.message).toContain("limit: 500 characters");
-        }
-      }
+      await expect(processContent(overLimitContent)).rejects.toThrow("600 characters");
+      await expect(processContent(overLimitContent)).rejects.toThrow("limit: 500 characters");
     });
   });
 

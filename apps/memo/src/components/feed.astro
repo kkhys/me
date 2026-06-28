@@ -33,42 +33,38 @@ const {
 </style>
 
 <script>
-  const setupClickableFeed = () => {
-    const feedContainer = document.querySelector('.feed-container');
-    if (!feedContainer) return;
+  const handleFeedClick = (event: Event) => {
+    const target = event.target as HTMLElement;
 
-    const handleFeedClick = (event: Event) => {
-      const target = event.target as HTMLElement;
+    if (target.closest('a')) {
+      return;
+    }
 
-      if (target.closest('a')) {
-        return;
-      }
+    const selection = window.getSelection();
+    if (selection && selection.toString().length > 0) {
+      return;
+    }
 
-      const selection = window.getSelection();
-      if (selection && selection.toString().length > 0) {
-        return;
-      }
-
-      const quoteCard = target.closest<HTMLElement>('.quote-card[data-href]');
-      if (quoteCard) {
-        const href = quoteCard.dataset.href;
-        if (href) {
-          window.location.href = href;
-        }
-        return;
-      }
-
-      const card = target.closest<HTMLElement>('.post-container[data-clickable="true"]');
-      if (!card) return;
-
-      const href = card.dataset.href;
+    const quoteCard = target.closest<HTMLElement>('.quote-card[data-href]');
+    if (quoteCard) {
+      const href = quoteCard.dataset.href;
       if (href) {
         window.location.href = href;
       }
+      return;
     }
 
+    const card = target.closest<HTMLElement>('.post-container[data-clickable="true"]');
+    if (!card) return;
+
+    const href = card.dataset.href;
+    if (href) {
+      window.location.href = href;
+    }
+  };
+
+  const feedContainer = document.querySelector('.feed-container');
+  if (feedContainer) {
     feedContainer.addEventListener('click', handleFeedClick);
   }
-
-  setupClickableFeed();
 </script>

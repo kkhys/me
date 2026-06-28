@@ -8,9 +8,7 @@ export const getStaticPaths = (async () => {
   const memos = await getPublishedMemos();
   return Promise.all(
     memos.map(async (memo) => {
-      const { name: authorName, avatar } = await getAuthorInfo(
-        memo.data.author,
-      );
+      const { name: authorName, avatar } = await getAuthorInfo(memo.data.author);
       const images = getImagesForMemo(memo.id);
       return {
         params: { id: memo.data.id },

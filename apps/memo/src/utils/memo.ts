@@ -10,7 +10,7 @@ export type MemoWithComments = {
 };
 
 const sortByDate = (memos: Memo[], order: "desc" | "asc" = "desc"): Memo[] => {
-  return [...memos].sort((a, b) => {
+  return [...memos].toSorted((a, b) => {
     const dateA = new Date(a.data.createdAt).getTime();
     const dateB = new Date(b.data.createdAt).getTime();
     return order === "desc" ? dateB - dateA : dateA - dateB;
@@ -21,9 +21,7 @@ export const getPublishedMemos = async () => {
   const memos = await getCollection("memo");
   const isDev = NODE_ENV === "development";
 
-  const filtered = memos.filter(
-    ({ data, body }) => (isDev || !data.isDraft) && body,
-  );
+  const filtered = memos.filter(({ data, body }) => (isDev || !data.isDraft) && body);
 
   return sortByDate(filtered, "desc");
 };
@@ -106,15 +104,11 @@ export const getMemosByTag = async (tag: string) => {
 
 export const getAllTags = async () => {
   const mainMemos = await getMainMemos();
-  const tags = mainMemos
-    .map(({ data }) => data.tag)
-    .filter((tag) => tag !== undefined);
-  return Array.from(new Set(tags)).sort();
+  const tags = mainMemos.map(({ data }) => data.tag).filter((tag) => tag !== undefined);
+  return Array.from(new Set(tags)).toSorted();
 };
 
-export const getQuotedMemo = async (
-  quoteId: string,
-): Promise<Memo | undefined> => {
+export const getQuotedMemo = async (quoteId: string): Promise<Memo | undefined> => {
   const allMemos = await getPublishedMemos();
   return allMemos.find(({ data }) => data.id === quoteId);
 };
@@ -140,9 +134,7 @@ export const countTotalComments = (comments: MemoWithComments[]): number => {
 export const getMemosByAuthor = async (authorSlug: string) => {
   const allMemos = await getPublishedMemos();
   const mainMemos = allMemos.filter(({ data }) => !data.comment);
-  const authorMainMemos = mainMemos.filter(
-    ({ data }) => data.author === authorSlug,
-  );
+  const authorMainMemos = mainMemos.filter(({ data }) => data.author === authorSlug);
   const commentMap = buildCommentMap(allMemos);
 
   const pinnedMemos = authorMainMemos.filter(({ data }) => data.isPinned);

@@ -1,7 +1,4 @@
-export const createVFile = (
-  content: string,
-  data: Record<string, unknown> = {},
-) => {
+export const createVFile = (content: string, data: Record<string, unknown> = {}) => {
   return {
     value: content,
     data,

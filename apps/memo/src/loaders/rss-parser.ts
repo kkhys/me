@@ -5,16 +5,15 @@ export interface RssItem {
   pubDate: string;
 }
 
-const stripCdata = (text: string): string =>
-  text.replace(/^<!\[CDATA\[([\s\S]*?)]]>$/, "$1");
+const stripCdata = (text: string): string => text.replace(/^<!\[CDATA\[([\s\S]*?)]]>$/, "$1");
 
 const decodeEntities = (text: string): string =>
   text
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&apos;/g, "'");
+    .replaceAll("&amp;", "&")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&apos;", "'");
 
 const extractTag = (xml: string, tag: string): string | undefined => {
   const match = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`));
@@ -29,7 +28,7 @@ export const parseRssItems = (xml: string): RssItem[] => {
   if (!itemBlocks) return items;
 
   for (const block of itemBlocks) {
-    const content = block.replace(/<\/?item>/g, "");
+    const content = block.replaceAll(/<\/?item>/g, "");
 
     const title = extractTag(content, "title");
     const link = extractTag(content, "link");
