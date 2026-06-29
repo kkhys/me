@@ -124,6 +124,15 @@ importers:
         specifier: 'catalog:'
         version: 4.105.0
 
+  apps/diary/diary-content:
+    devDependencies:
+      lefthook:
+        specifier: 2.1.8
+        version: 2.1.8
+      scrub-exif:
+        specifier: 0.1.0
+        version: 0.1.0
+
   apps/lgtm:
     dependencies:
       '@astrojs/compiler-rs':
