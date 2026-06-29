@@ -1,6 +1,51 @@
-# Type
+# Type (Conventional Commits)
+- name: "type: feat"
+  description: "A new feature"
+  color: "#d4f4dd"
+
+- name: "type: fix"
+  description: "A bug fix"
+  color: "#ffd8d8"
+
+- name: "type: perf"
+  description: "A change that improves performance"
+  color: "#ffe6cc"
+
+- name: "type: refactor"
+  description: "A change that neither fixes a bug nor adds a feature"
+  color: "#fdf0c2"
+
+- name: "type: docs"
+  description: "Documentation only changes"
+  color: "#d6e8ff"
+
+- name: "type: test"
+  description: "Adding or correcting tests"
+  color: "#d2f0ee"
+
+- name: "type: style"
+  description: "Formatting changes that do not affect code behavior"
+  color: "#fcdcef"
+
+- name: "type: build"
+  description: "Changes to the build system or dependencies"
+  color: "#e6dcc9"
+
+- name: "type: ci"
+  description: "Changes to CI configuration and workflows"
+  color: "#dde6f0"
+
+- name: "type: chore"
+  description: "Maintenance tasks that do not fit other types"
+  color: "#e8e8ec"
+
+- name: "type: revert"
+  description: "Reverts a previous commit"
+  color: "#f0cccc"
+
+# Type (automated)
 - name: "type: bump-version"
-  description: ""
+  description: "Dependency version updates (Renovate)"
   color: "#f2edfc"
 
 - name: "type: submodule"
