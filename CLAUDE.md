@@ -10,6 +10,7 @@ Apps:
 - `apps/memo` — `@kkhys/memo`, short threaded memos at memo.kkhys.me. See `apps/memo/CLAUDE.md`.
 - `apps/lgtm` — `@kkhys/lgtm`, LGTM images for GitHub PRs at lgtm.kkhys.me. See `apps/lgtm/CLAUDE.md`.
 - `apps/diary` — `@kkhys/diary`, photo diary at diary.kkhys.me. See `apps/diary/CLAUDE.md`.
+- `apps/studio` — `@kkhys/studio`, local-only memo composer (never deployed). See `apps/studio/CLAUDE.md`.
 
 Packages:
 
