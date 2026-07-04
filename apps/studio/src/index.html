@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Studio</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./client.ts"></script>
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1 class="header__title">Studio</h1>
+        <div class="header__sync">
+          <span id="status" class="header__status" role="status"></span>
+          <label class="toggle"><input id="deploy" type="checkbox" /> Deploy</label>
+          <button id="sync" class="btn" type="button">Sync</button>
+        </div>
+      </header>
+
+      <form id="compose" class="compose">
+        <div id="reply-banner" class="compose__reply" hidden>
+          <span id="reply-label" class="compose__reply-label"></span>
+          <span id="reply-excerpt" class="compose__reply-excerpt"></span>
+          <button
+            id="reply-clear"
+            class="compose__reply-clear"
+            type="button"
+            aria-label="Clear reply target"
+          >
+            ×
+          </button>
+        </div>
+
+        <textarea
+          id="body"
+          class="compose__body"
+          rows="5"
+          placeholder="What's on your mind?"
+          autofocus
+        ></textarea>
+
+        <div id="previews" class="compose__previews"></div>
+
+        <div class="compose__meta">
+          <input
+            id="created-at"
+            class="compose__input"
+            type="datetime-local"
+            step="1"
+            aria-label="Created at"
+          />
+          <input
+            id="tag"
+            class="compose__input"
+            type="text"
+            list="tag-list"
+            placeholder="tag"
+            pattern="[a-z0-9_]+"
+            aria-label="Tag"
+          />
+          <datalist id="tag-list"></datalist>
+          <label class="toggle"><input id="is-draft" type="checkbox" /> Draft</label>
+          <label class="toggle"><input id="hide-link-card" type="checkbox" /> No link card</label>
+        </div>
+
+        <div class="compose__actions">
+          <label class="btn btn--ghost compose__attach">
+            Images
+            <input id="images" type="file" accept="image/jpeg,image/png" multiple hidden />
+          </label>
+          <span id="counter" class="compose__counter">0 / 500</span>
+          <button id="post" class="btn btn--primary" type="submit">Post</button>
+        </div>
+      </form>
+
+      <p id="message" class="message" role="status" hidden></p>
+
+      <section class="feed" aria-label="Recent memos">
+        <input
+          id="search"
+          class="feed__search"
+          type="search"
+          placeholder="Search memos"
+          aria-label="Search memos"
+        />
+        <ol id="feed" class="feed__list"></ol>
+        <button id="load-more" class="btn btn--ghost feed__more" type="button" hidden>
+          Load more
+        </button>
+      </section>
+    </main>
+  </body>
+</html>
