@@ -10,6 +10,7 @@ import {
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { ulid } from "ulid";
 import { countMemoChars, createMemo, formatDateTime, listMemos } from "../memo-store";
 
 let baseDir: string;
@@ -105,8 +106,14 @@ describe("createMemo", () => {
       createdAt: "2026-06-24 20:35:56",
     });
 
-    // Same timestamp prefix as an id generated at the same instant
-    expect(memo.id.slice(0, 10)).toBe("01kvwpmnb0");
+    // The 10-char ULID prefix encodes the createdAt instant, so it matches a
+    // ULID generated from the same local time. Both sides use the local Date
+    // constructor, keeping the assertion timezone-independent (createMemo
+    // parses createdAt as local wall-clock time).
+    const expectedPrefix = ulid(new Date(2026, 5, 24, 20, 35, 56).getTime())
+      .slice(0, 10)
+      .toLowerCase();
+    expect(memo.id.slice(0, 10)).toBe(expectedPrefix);
   });
 
   it("rejects an empty body", () => {
