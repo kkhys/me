@@ -8,7 +8,7 @@ Astro-based memo posting site. Short memos (max 500 chars) in a threaded social 
 src/
 ├── pages/
 │   ├── [...page].astro        # Paginated feed with infinite scroll
-│   ├── post/[id].astro        # Single memo detail
+│   ├── posts/[id].astro       # Single memo detail
 │   └── tag/[tag].astro        # Tag-filtered feed
 ├── components/                 # Astro components
 ├── utils/
