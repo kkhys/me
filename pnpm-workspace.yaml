@@ -1,14 +1,14 @@
 minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
-  - scrub-exif
 
+# Content submodules (apps/*/*-content) are intentionally NOT workspace members.
+# They are separate repos with their own authoring tooling (lefthook, scrub-exif,
+# bun scripts) and their own lockfiles; CI builds the apps against fixtures with
+# the submodules absent. Listing them here made the root lockfile churn on every
+# local `pnpm i`, because Renovate/CI regenerate it without the submodules
+# checked out while local installs re-add their importer entries.
 packages:
   - apps/*
   - packages/*
-  - apps/me/me-content
-  - apps/memo/memo-content
-  - apps/lgtm/lgtm-content
-  - apps/diary/diary-content
 
 catalog:
   "@astrojs/check": 0.9.9
