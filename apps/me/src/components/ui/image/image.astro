@@ -6,7 +6,7 @@ import type { CustomImageProps } from "./types";
 
 type Props = CustomImageProps;
 
-const { class: className, title, ...rest } = Astro.props;
+const { class: className, title, allowWide = false, ...rest } = Astro.props;
 
 const blurryImage = await getImage({
   ...(rest as UnresolvedImageTransform),
@@ -23,7 +23,7 @@ const metadata =
 const intrinsicWidth = metadata?.width ?? 0;
 const intrinsicHeight = metadata?.height ?? 0;
 const isLandscape = intrinsicWidth > intrinsicHeight;
-const isWide = isLandscape && intrinsicWidth >= WIDE_THRESHOLD_PX;
+const isWide = allowWide && isLandscape && intrinsicWidth >= WIDE_THRESHOLD_PX;
 
 const widths = isWide
   ? [640, 750, 828, 1080, 1344, 1792]
