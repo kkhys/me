@@ -1,0 +1,261 @@
+---
+import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
+import { navItems } from "#/config/navigation";
+
+// Static builds can serve `/blog/2` as `/blog/2/` or `/blog/2.html` depending
+// on the build format, so normalize before matching.
+const pathname = Astro.url.pathname.replace(/\.html$/u, "").replace(/(?<=.)\/$/u, "");
+
+const isActive = (href: string) =>
+  href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+---
+
+<nav class="site-nav" aria-label="Site navigation">
+  <ul class="site-nav-list">
+    {navItems.map(({ label, href, isExternal }) => (
+      <li>
+        {isExternal ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            class="site-nav-link"
+            data-astro-prefetch="false"
+            data-umami-event="sidebar-nav"
+            data-umami-event-label={label}
+          >
+            {label}
+            <MoveUpRightIcon class="site-nav-external-icon" />
+          </a>
+        ) : (
+          <a
+            href={href}
+            class:list={["site-nav-link", isActive(href) && "site-nav-link--active"]}
+            aria-current={isActive(href) ? "page" : undefined}
+            data-umami-event="sidebar-nav"
+            data-umami-event-label={label}
+          >
+            {label}
+          </a>
+        )}
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<button
+  type="button"
+  class="menu-button"
+  popovertarget="site-menu"
+  aria-label="Open site menu"
+>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 6h16" />
+    <path d="M4 12h16" />
+    <path d="M4 18h16" />
+  </svg>
+</button>
+<div id="site-menu" popover class="site-menu">
+  <nav aria-label="Site navigation">
+    <ul class="site-menu-list">
+      {navItems.map(({ label, href, isExternal }) => (
+        <li>
+          {isExternal ? (
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              class="site-menu-link"
+              data-astro-prefetch="false"
+              data-umami-event="menu-nav"
+              data-umami-event-label={label}
+            >
+              {label}
+              <MoveUpRightIcon class="site-nav-external-icon" />
+            </a>
+          ) : (
+            <a
+              href={href}
+              class:list={["site-menu-link", isActive(href) && "site-menu-link--active"]}
+              aria-current={isActive(href) ? "page" : undefined}
+              data-umami-event="menu-nav"
+              data-umami-event-label={label}
+            >
+              {label}
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+<style>
+  .site-nav {
+    display: none;
+  }
+
+  @media (width >= 1280px) {
+    .site-nav {
+      display: block;
+      position: fixed;
+      /* Align with the content column's top padding (7rem at >=768px). */
+      top: 7rem;
+      left: 2rem;
+    }
+  }
+
+  .site-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-nav-list li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-nav-link {
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .site-nav-link:hover {
+    color: var(--c-text);
+  }
+
+  .site-nav-link--active {
+    color: var(--c-text);
+    font-weight: var(--fw-medium);
+  }
+
+  .site-nav-external-icon {
+    display: inline-block;
+    margin-left: 0.25rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    vertical-align: -0.05em;
+  }
+
+  .menu-button {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    /* The button is rendered at the top of <body>, so without a stacking
+       order later content (e.g. code blocks) paints over it. */
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    appearance: none;
+    padding: 0;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-full);
+    color: var(--c-sub);
+    cursor: pointer;
+    transition: color 0.2s;
+    anchor-name: --menu-button;
+  }
+
+  .menu-button:hover {
+    color: var(--c-text);
+  }
+
+  .menu-button svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  @media (width >= 1280px) {
+    .menu-button,
+    .site-menu {
+      display: none;
+    }
+  }
+
+  .site-menu {
+    position: fixed;
+    inset: auto;
+    margin: 0;
+    position-anchor: --menu-button;
+    top: anchor(bottom);
+    right: anchor(right);
+    /* Open upward instead when there isn't room below. */
+    position-try-fallbacks: flip-block;
+    margin-top: 0.5rem;
+    min-width: 10rem;
+    padding: 0.5rem;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    opacity: 1;
+    translate: 0 0;
+    transition:
+      opacity 0.2s,
+      translate 0.2s,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  /* Anchor positioning isn't Baseline yet (e.g. unsupported in Firefox), so
+     fall back to a fixed offset below where the trigger sits. */
+  @supports not (anchor-name: --menu-button) {
+    .site-menu {
+      inset: 4rem 1rem auto auto;
+    }
+  }
+
+  @starting-style {
+    .site-menu:popover-open {
+      opacity: 0;
+      translate: 0 -4px;
+    }
+  }
+
+  .site-menu:not(:popover-open) {
+    opacity: 0;
+    translate: 0 -4px;
+  }
+
+  .site-menu-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-menu-list li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-menu-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-sm);
+    color: var(--c-text);
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .site-menu-link:hover {
+    background-color: var(--c-surface);
+  }
+
+  .site-menu-link--active {
+    font-weight: var(--fw-medium);
+  }
+</style>
