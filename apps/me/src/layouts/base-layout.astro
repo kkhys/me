@@ -1,6 +1,8 @@
 ---
 import "#/styles/global.css";
 import BaseSEO from "#/components/seo/base-seo.astro";
+import SiteFooter from "#/components/ui/site-footer.astro";
+import SiteNav from "#/components/ui/site-nav.astro";
 
 interface Props {
   class?: string;
@@ -13,6 +15,9 @@ const { class: className } = Astro.props;
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  {/* Declared before any CSS loads so dark-preference users don't get a
+      white canvas flash; pairs with `color-scheme: light dark` in CSS. */}
+  <meta name="color-scheme" content="light dark"/>
 
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -49,11 +54,13 @@ const { class: className } = Astro.props;
 
 </head>
 <body>
+<SiteNav />
 <main>
   <div class:list={["content", className]}>
     <slot/>
   </div>
 </main>
+<SiteFooter />
 </body>
 </html>
 
@@ -75,8 +82,11 @@ const { class: className } = Astro.props;
     margin-inline: auto;
   }
 
+  /* Below the desktop breakpoint the site brand sits absolutely in the top
+     header band, so give the content an extra 1rem of breathing room under
+     it; the desktop breakpoint restores the original rhythm. */
   .content {
-    padding-block: 5rem 3rem;
+    padding-block: 6rem 3rem;
     padding-inline: 1rem;
   }
 
@@ -87,6 +97,12 @@ const { class: className } = Astro.props;
   }
 
   @media (width >= 768px) {
+    .content {
+      padding-top: 8rem;
+    }
+  }
+
+  @media (width >= 1280px) {
     .content {
       padding-top: 7rem;
     }
