@@ -12,18 +12,31 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
 ---
 
 {items.length >= MIN_ITEMS && (
-  <nav class="toc" aria-label="目次">
-    <ul class="toc-list">
-      {items.map(({ depth, slug, text }) => (
-        <li class:list={["toc-item", `toc-item--depth-${depth}`]}>
-          <a href={`#${slug}`} class="toc-link palt">{text}</a>
-        </li>
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-rails" aria-hidden="true">
+      {items.map(({ depth, slug }) => (
+        <span class="toc-rail-row">
+          <span class:list={["toc-rail", `toc-rail--depth-${depth}`]} data-id={slug} />
+        </span>
       ))}
-    </ul>
+    </div>
+    <div class="toc-panel">
+      <ul class="toc-list">
+        {items.map(({ depth, slug, text }) => (
+          <li class:list={["toc-item", `toc-item--depth-${depth}`]}>
+            <a href={`#${slug}`} class="toc-link">
+              <span class="toc-link-text palt">{text}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   </nav>
 )}
 
 <style>
+  /* Notion's floating outline, measured from the real thing: 2px rails that
+     fade out while a 242px panel slides in from the right edge on hover. */
   .toc {
     display: none;
   }
@@ -31,24 +44,100 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
   @media (width >= 1280px) {
     .toc {
       display: block;
-      width: 220px;
-      max-height: 60vh;
-      padding-right: 0.5rem;
-      overflow-y: auto;
-      overscroll-behavior: contain;
+      position: relative;
+      /* Invisible left padding widens the hover target, as in Notion. */
+      padding-inline-start: 20px;
     }
 
-    .toc::-webkit-scrollbar {
+    .toc-rails {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 400px;
+      padding-block: 6px;
+      overflow: hidden;
+      transition: opacity 0.2s ease;
+    }
+
+    .toc:hover .toc-rails,
+    .toc:focus-within .toc-rails {
+      opacity: 0;
+    }
+
+    /* Full-width transparent rows keep the hover target generous. */
+    .toc-rail-row {
+      display: flex;
+    }
+
+    .toc-rail {
+      height: 2px;
+      border-radius: 2px;
+      background-color: light-dark(
+        oklch(var(--uchu-yin-raw) / 11%),
+        oklch(var(--uchu-yang-raw) / 31%)
+      );
+      transition:
+        background 0.2s,
+        box-shadow 0.2s;
+    }
+
+    .toc-rail--depth-2 {
+      width: 16px;
+    }
+
+    .toc-rail--depth-3 {
+      width: 12px;
+      margin-inline-start: 4px;
+    }
+
+    .toc-rail--active {
+      --toc-rail-active-color: light-dark(var(--uchu-yin-8), var(--uchu-gray-3));
+
+      background-color: var(--toc-rail-active-color);
+      box-shadow: 0 0 3px var(--toc-rail-active-color);
+    }
+
+    .toc-panel {
+      position: absolute;
+      top: -4px;
+      inset-inline-end: 2px;
+      width: 242px;
+      max-height: min(572px, calc(100dvh - 15rem));
+      padding: 12px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: var(--c-bg);
+      border-radius: 14px;
+      box-shadow:
+        0 0 0 1px var(--c-border),
+        0 14px 28px -6px oklch(var(--uchu-yin-raw) / 20%),
+        0 2px 4px -1px oklch(var(--uchu-yin-raw) / 12%);
+      opacity: 0;
+      pointer-events: none;
+      translate: 12px 0;
+      transition:
+        opacity 0.2s ease,
+        translate 0.2s ease;
+    }
+
+    .toc:hover .toc-panel,
+    .toc:focus-within .toc-panel {
+      opacity: 1;
+      pointer-events: auto;
+      translate: 0 0;
+    }
+
+    .toc-panel::-webkit-scrollbar {
       width: 3px;
     }
 
-    .toc::-webkit-scrollbar-thumb {
+    .toc-panel::-webkit-scrollbar-thumb {
       background: var(--c-sub);
       border-radius: 2px;
     }
 
     @supports (-moz-appearance: none) {
-      .toc {
+      .toc-panel {
         scrollbar-width: thin;
       }
     }
@@ -57,27 +146,44 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
   .toc-list {
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
   }
 
-  .toc-item--depth-3 {
-    padding-left: 1.25rem;
+  .toc-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  .toc-item--depth-3 .toc-link {
+    margin-inline-start: 12px;
   }
 
   .toc-link {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    font-size: var(--fs-xs);
-    line-height: 1.25;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    font-size: 13px;
+    line-height: 1.3;
     color: var(--c-sub);
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color 0.15s;
   }
 
-  .toc-link:hover,
-  .toc-link--active {
+  .toc-link:hover {
     color: var(--c-text);
+  }
+
+  .toc-link.toc-link--active {
+    color: light-dark(var(--uchu-blue-5), var(--uchu-blue-3));
+  }
+
+  .toc-link-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
 </style>
 
@@ -85,6 +191,7 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
   import { pickActiveId } from "#/features/blog/utils/toc-active";
 
   const ACTIVE_CLASS = "toc-link--active";
+  const ACTIVE_RAIL_CLASS = "toc-rail--active";
 
   const toc = document.querySelector(".toc");
   if (toc) {
@@ -92,6 +199,8 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
     const linkById = new Map(
       links.map((link) => [decodeURIComponent(link.hash.slice(1)), link]),
     );
+    const rails = [...toc.querySelectorAll<HTMLElement>(".toc-rail")];
+    const railById = new Map(rails.map((rail) => [rail.dataset.id, rail]));
     const headings = [
       ...document.querySelectorAll<HTMLElement>(".prose :is(h2, h3)[id]"),
     ].filter((heading) => linkById.has(heading.id));
@@ -106,8 +215,27 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
       for (const link of links) {
         link.classList.toggle(ACTIVE_CLASS, link === activeLink);
       }
+      const activeRail = id ? railById.get(id) : undefined;
+      for (const rail of rails) {
+        rail.classList.toggle(ACTIVE_RAIL_CLASS, rail === activeRail);
+      }
       activeLink?.scrollIntoView({ block: "nearest" });
     };
+
+    // Notion animates the jump; honor reduced-motion preferences.
+    const headingById = new Map(headings.map((heading) => [heading.id, heading]));
+    for (const link of links) {
+      link.addEventListener("click", (event) => {
+        const heading = headingById.get(decodeURIComponent(link.hash.slice(1)));
+        if (!heading) return;
+        event.preventDefault();
+        const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth";
+        heading.scrollIntoView({ behavior });
+        history.pushState(null, "", link.hash);
+      });
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
