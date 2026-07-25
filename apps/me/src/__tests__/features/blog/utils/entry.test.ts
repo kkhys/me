@@ -41,10 +41,9 @@ const mockEntries: MockEntry[] = [
   }),
 ];
 
-const loadGetRelatedPosts = async () => {
-  const mod = await import("#/features/blog/utils/entry");
-  return mod.getRelatedPosts;
-};
+const loadEntryModule = () => import("#/features/blog/utils/entry");
+
+const loadGetRelatedPosts = async () => (await loadEntryModule()).getRelatedPosts;
 
 type GetRelatedPosts = Awaited<ReturnType<typeof loadGetRelatedPosts>>;
 
@@ -146,5 +145,30 @@ describe("getRelatedPosts", () => {
       tags: ["React"],
     });
     expect(results).toEqual([]);
+  });
+});
+
+describe("toPostNavItem", () => {
+  beforeEach(() => {
+    vi.resetModules();
+    vi.doMock("astro:env/client", () => ({ NODE_ENV: "production" }));
+    vi.doMock("astro:content", () => ({
+      getCollection: vi.fn<() => Promise<MockEntry[]>>(() => Promise.resolve(mockEntries)),
+    }));
+  });
+
+  it("maps an entry to its navigation fields", async () => {
+    const { toPostNavItem } = await loadEntryModule();
+    const entry = {
+      id: "a",
+      data: { title: "Post A", emoji: "🚀" },
+    } as Parameters<typeof toPostNavItem>[0];
+
+    expect(toPostNavItem(entry)).toEqual({ id: "a", title: "Post A", emoji: "🚀" });
+  });
+
+  it("returns undefined for an out-of-range neighbor", async () => {
+    const { toPostNavItem } = await loadEntryModule();
+    expect(toPostNavItem(undefined)).toBeUndefined();
   });
 });

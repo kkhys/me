@@ -107,3 +107,14 @@ export const getRelatedPosts = async ({
 
   return scored.map(({ post }) => post).slice(0, relatedEntriesCount);
 };
+
+export type PostNavItem = Pick<InternalEntry, "id" | "title" | "emoji">;
+
+export const toPostNavItem = (
+  entry: CollectionEntry<"blog"> | undefined,
+): PostNavItem | undefined =>
+  entry && {
+    id: entry.id,
+    title: entry.data.title,
+    emoji: entry.data.emoji,
+  };

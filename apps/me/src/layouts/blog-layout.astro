@@ -8,11 +8,12 @@ import SiteBrand from "#/components/ui/site-brand.astro";
 import Separator from "#/components/ui/separator.astro";
 import { me } from "#/config/site";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
+import PostNavigation from "#/features/blog/components/ui/post-navigation.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
 import Toc from "#/features/blog/components/ui/toc.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { tags as allTags } from "#/features/blog/config/tag";
-import { getRelatedPosts, toListEntries } from "#/features/blog/utils/entry";
+import { getRelatedPosts, type PostNavItem, toListEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/utils/base-url";
 
@@ -20,6 +21,8 @@ interface Props extends InferEntrySchema<"blog"> {
   id: string;
   description: string;
   headings: MarkdownHeading[];
+  newerPost: PostNavItem | undefined;
+  olderPost: PostNavItem | undefined;
 }
 
 const {
@@ -35,6 +38,8 @@ const {
   description,
   status,
   headings,
+  newerPost,
+  olderPost,
 } = Astro.props;
 
 const hasUpdatedAt = Boolean(updatedAt && updatedAtString);
@@ -127,6 +132,7 @@ const currentDate = new Date();
         <TagCloud tags={tagCloudItems} class="post-tags" />
     )}
     <Separator class="post-separator" />
+    <PostNavigation olderPost={olderPost} newerPost={newerPost} class="post-nav" />
     {relatedPosts?.length > 0 && (
       <div class="related-posts">
         <div class="related-posts-title">こちらもおすすめ</div>
@@ -267,6 +273,10 @@ const currentDate = new Date();
   }
 
   .post-separator {
+    margin-top: 3rem;
+  }
+
+  .post-nav {
     margin-top: 3rem;
   }
 
