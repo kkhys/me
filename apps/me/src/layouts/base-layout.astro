@@ -6,9 +6,10 @@ import SiteNav from "#/components/ui/site-nav.astro";
 
 interface Props {
   class?: string;
+  showFooter?: boolean | undefined;
 }
 
-const { class: className } = Astro.props;
+const { class: className, showFooter = true } = Astro.props;
 ---
 
 <html lang="ja">
@@ -60,7 +61,7 @@ const { class: className } = Astro.props;
     <slot/>
   </div>
 </main>
-<SiteFooter />
+{showFooter && <SiteFooter />}
 </body>
 </html>
 
