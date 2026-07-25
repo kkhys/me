@@ -82,8 +82,11 @@ const { class: className } = Astro.props;
     margin-inline: auto;
   }
 
+  /* Below the desktop breakpoint the site brand sits absolutely in the top
+     header band, so give the content an extra 1rem of breathing room under
+     it; the desktop breakpoint restores the original rhythm. */
   .content {
-    padding-block: 5rem 3rem;
+    padding-block: 6rem 3rem;
     padding-inline: 1rem;
   }
 
@@ -94,6 +97,12 @@ const { class: className } = Astro.props;
   }
 
   @media (width >= 768px) {
+    .content {
+      padding-top: 8rem;
+    }
+  }
+
+  @media (width >= 1280px) {
     .content {
       padding-top: 7rem;
     }
