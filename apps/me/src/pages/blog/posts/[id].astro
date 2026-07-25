@@ -4,14 +4,17 @@ import type { GetStaticPaths } from "astro";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import ContentWrapper from "#/features/blog/components/content-wrapper.astro";
 import { getCategoryByTitle } from "#/features/blog/config/category";
-import { getPublicBlogEntries } from "#/features/blog/utils/entry";
+import { getPublicBlogEntries, toPostNavItem } from "#/features/blog/utils/entry";
 import BlogLayout from "#/layouts/blog-layout.astro";
 import { getBlogPostingSchema } from "#/lib/json-ld";
 import { convertDateToString } from "#/utils/date";
 import { extractDescription } from "#/utils/extract-description";
 
-export const getStaticPaths = (async () =>
-  (await getPublicBlogEntries()).map((entry) => {
+export const getStaticPaths = (async () => {
+  // Entries are sorted newest first, so the previous index is the newer post.
+  const entries = await getPublicBlogEntries();
+
+  return entries.map((entry, index) => {
     return {
       params: {
         id: entry.id,
@@ -19,11 +22,14 @@ export const getStaticPaths = (async () =>
       props: {
         entry,
         description: extractDescription(entry.body ?? ""),
+        newerPost: toPostNavItem(entries[index - 1]),
+        olderPost: toPostNavItem(entries[index + 1]),
       },
     };
-  })) satisfies GetStaticPaths;
+  });
+}) satisfies GetStaticPaths;
 
-const { entry, description } = Astro.props;
+const { entry, description, newerPost, olderPost } = Astro.props;
 const { Content, headings } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
 
@@ -73,7 +79,7 @@ const jsonLd = {
 };
 ---
 
-<BlogLayout id={entry.id} publishedAtString={publishedAtString} description={description} headings={headings} {...entry.data}>
+<BlogLayout id={entry.id} publishedAtString={publishedAtString} description={description} headings={headings} newerPost={newerPost} olderPost={olderPost} {...entry.data}>
   <script
       is:inline
       type='application/ld+json'
