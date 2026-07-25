@@ -20,11 +20,6 @@ export const navItems = [
     isExternal: false,
   },
   {
-    label: "Bucket List",
-    href: "/bucket-list",
-    isExternal: false,
-  },
-  {
     label: "Memo",
     href: me.memo,
     isExternal: true,
