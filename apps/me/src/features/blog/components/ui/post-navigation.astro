@@ -1,0 +1,122 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Budoux from "#/components/budoux.astro";
+import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
+import type { PostNavItem } from "#/features/blog/utils/entry";
+
+interface Props extends HTMLAttributes<"nav"> {
+  olderPost: PostNavItem | undefined;
+  newerPost: PostNavItem | undefined;
+}
+
+const { olderPost, newerPost, class: className, ...rest } = Astro.props;
+---
+
+{(olderPost || newerPost) && (
+  <nav class:list={["post-nav", className]} aria-label="Post navigation" {...rest}>
+    {olderPost ? (
+      <a
+        href={`/blog/posts/${olderPost.id}`}
+        class="post-nav-item"
+        rel="prev"
+        data-umami-event="post-nav"
+        data-umami-event-direction="older"
+      >
+        <span class="post-nav-label">前の記事</span>
+        <span class="post-nav-body">
+          <EmojiEyeCatch emoji={olderPost.emoji} size="sm" isColored />
+          <Budoux>
+            <span class="post-nav-title palt">{olderPost.title}</span>
+          </Budoux>
+        </span>
+      </a>
+    ) : (
+      <span class="post-nav-spacer" />
+    )}
+    {newerPost && (
+      <a
+        href={`/blog/posts/${newerPost.id}`}
+        class="post-nav-item post-nav-item--newer"
+        rel="next"
+        data-umami-event="post-nav"
+        data-umami-event-direction="newer"
+      >
+        <span class="post-nav-label">次の記事</span>
+        <span class="post-nav-body">
+          <EmojiEyeCatch emoji={newerPost.emoji} size="sm" isColored />
+          <Budoux>
+            <span class="post-nav-title palt">{newerPost.title}</span>
+          </Budoux>
+        </span>
+      </a>
+    )}
+  </nav>
+)}
+
+<style>
+  .post-nav {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  @media (width >= 640px) {
+    .post-nav {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .post-nav-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    color: var(--c-prose-text);
+    transition: background-color 0.2s;
+  }
+
+  .post-nav-item:hover {
+    background-color: oklch(from var(--c-surface) l c h / 50%);
+  }
+
+  .post-nav-item--newer {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .post-nav-spacer {
+    display: none;
+  }
+
+  @media (width >= 640px) {
+    .post-nav-spacer {
+      display: block;
+    }
+  }
+
+  .post-nav-label {
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .post-nav-body {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .post-nav-item--newer .post-nav-body {
+    flex-direction: row-reverse;
+  }
+
+  .post-nav-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+  }
+</style>
