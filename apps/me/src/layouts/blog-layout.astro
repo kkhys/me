@@ -144,13 +144,12 @@ const currentDate = new Date();
 
 <style>
   @media (width >= 1280px) {
+    /* Notion-style ToC: top-anchored like Notion's floating outline
+       (~13rem from the viewport top), inset 2rem to mirror the left nav. */
     .sidebar {
       position: fixed;
-      top: 0;
-      /* Keep the ToC where it was: 170px (original sidebar offset) + 56px
-         (the breadcrumb block that has since moved to the top) holds it in place. */
-      left: 2rem;
-      transform: translateY(226px);
+      top: 13rem;
+      right: 2rem;
       width: fit-content;
     }
   }
