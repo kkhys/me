@@ -10,9 +10,10 @@ import { convertDateToString } from "#/utils/date";
 interface Props extends HTMLAttributes<"div"> {
   entries: ListEntry[];
   showDate?: boolean;
+  umamiEvent?: string | undefined;
 }
 
-const { entries, class: className, showDate = false, ...rest } = Astro.props;
+const { entries, class: className, showDate = false, umamiEvent, ...rest } = Astro.props;
 ---
 
 {
@@ -29,6 +30,7 @@ const { entries, class: className, showDate = false, ...rest } = Astro.props;
             target="_blank"
             rel="noreferrer"
             data-astro-prefetch="false"
+            data-umami-event={umamiEvent}
           >
             <div class="entry-left">
               <SiteIcon siteName={entry.siteName} />
@@ -52,7 +54,7 @@ const { entries, class: className, showDate = false, ...rest } = Astro.props;
       }
 
       return (
-        <a href={`/blog/posts/${entry.id}`} class="entry-item">
+        <a href={`/blog/posts/${entry.id}`} class="entry-item" data-umami-event={umamiEvent}>
           <div class="entry-left">
             <EmojiEyeCatch emoji={entry.emoji} size="sm" isColored class="entry-emoji" />
             <Budoux>
