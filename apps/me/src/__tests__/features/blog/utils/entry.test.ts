@@ -93,14 +93,54 @@ describe("getRelatedPosts", () => {
     expect(results.every((r) => r.id !== "current")).toBe(true);
   });
 
-  it("only includes posts from the same category", async () => {
+  it("includes cross-category posts that share tags", async () => {
     const getRelatedPosts = await loadGetRelatedPosts();
     const results = await getRelatedPosts({
       id: "current",
-      category: "Tech",
+      category: "Life",
       tags: ["React"],
     });
-    expect(results.every((r) => r.data.category === "Tech")).toBe(true);
+    // "a", "b", "g" are Tech posts sharing the React tag.
+    expect(results.some((r) => r.data.category === "Tech")).toBe(true);
+  });
+
+  it("excludes cross-category posts with no shared tags", async () => {
+    const getRelatedPosts = await loadGetRelatedPosts();
+    const results = await getRelatedPosts({
+      id: "current",
+      category: "Life",
+      tags: ["React"],
+    });
+    // "c" (Go), "d" (no tags), "f" (TypeScript) are Tech posts without React.
+    const ids = results.map((r) => r.id);
+    expect(ids).not.toContain("c");
+    expect(ids).not.toContain("d");
+    expect(ids).not.toContain("f");
+  });
+
+  it("ranks tag matches above posts that only share the category", async () => {
+    const getRelatedPosts = await loadGetRelatedPosts();
+    const results = await getRelatedPosts({
+      id: "current",
+      category: "Life",
+      tags: ["React", "TypeScript"],
+    });
+    // "a" and "g" (Tech, 2 shared tags, score 4) outrank "e" (Life, 1 shared
+    // tag + same category, score 3).
+    const ids = results.map((r) => r.id);
+    expect(ids.slice(0, 2).toSorted()).toEqual(["a", "g"]);
+    expect(ids[2]).toBe("e");
+  });
+
+  it("falls back to same-category posts without shared tags", async () => {
+    const getRelatedPosts = await loadGetRelatedPosts();
+    const results = await getRelatedPosts({
+      id: "current",
+      category: "Life",
+      tags: undefined,
+    });
+    // Only "e" shares the Life category; nothing else scores.
+    expect(results.map((r) => r.id)).toEqual(["e"]);
   });
 
   it("returns at most relatedEntriesCount posts", async () => {
@@ -137,12 +177,12 @@ describe("getRelatedPosts", () => {
     expect(results.every((r) => r.data.category === "Tech")).toBe(true);
   });
 
-  it("returns empty array when no posts match the category", async () => {
+  it("returns empty array when nothing shares a category or tag", async () => {
     const getRelatedPosts = await loadGetRelatedPosts();
     const results = await getRelatedPosts({
       id: "current",
       category: "DIY",
-      tags: ["React"],
+      tags: undefined,
     });
     expect(results).toEqual([]);
   });

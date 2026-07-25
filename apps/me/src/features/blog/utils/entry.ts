@@ -93,16 +93,20 @@ export const getRelatedPosts = async ({
   category,
   tags,
 }: { id: string } & Pick<InferEntrySchema<"blog">, "category" | "tags">) => {
-  const candidates = (await getPublicBlogEntries()).filter(
-    (post) => post.id !== id && post.data.category === category,
-  );
+  const candidates = (await getPublicBlogEntries()).filter((post) => post.id !== id);
 
-  const scored = candidates.map((post) => ({
-    post,
-    score: tags?.filter((tag) => post.data.tags?.includes(tag)).length ?? 0,
-  }));
+  // Shared tags weigh double so a cross-category post on the same topic can
+  // outrank a same-category post that merely shares the category.
+  const scored = candidates
+    .map((post) => ({
+      post,
+      score:
+        (tags?.filter((tag) => post.data.tags?.includes(tag)).length ?? 0) * 2 +
+        (post.data.category === category ? 1 : 0),
+    }))
+    .filter(({ score }) => score > 0);
 
-  // Sort by shared tag count (desc), shuffle within same score
+  // Sort by score (desc), shuffle within same score
   scored.sort((a, b) => b.score - a.score || Math.random() - 0.5);
 
   return scored.map(({ post }) => post).slice(0, relatedEntriesCount);
