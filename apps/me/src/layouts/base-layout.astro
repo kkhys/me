@@ -1,6 +1,8 @@
 ---
 import "#/styles/global.css";
 import BaseSEO from "#/components/seo/base-seo.astro";
+import SiteFooter from "#/components/ui/site-footer.astro";
+import SiteNav from "#/components/ui/site-nav.astro";
 
 interface Props {
   class?: string;
@@ -49,11 +51,13 @@ const { class: className } = Astro.props;
 
 </head>
 <body>
+<SiteNav />
 <main>
   <div class:list={["content", className]}>
     <slot/>
   </div>
 </main>
+<SiteFooter />
 </body>
 </html>
 
