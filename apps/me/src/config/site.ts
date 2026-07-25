@@ -17,6 +17,7 @@ export const me = {
   },
   twitter: "@kkhys_",
   memo: "https://memo.kkhys.me",
+  diary: "https://diary.kkhys.me",
   zenn: {
     url: "https://zenn.dev/kkhys",
     feed: "https://zenn.dev/kkhys/feed",
