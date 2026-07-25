@@ -136,7 +136,7 @@ const currentDate = new Date();
     {relatedPosts?.length > 0 && (
       <div class="related-posts">
         <div class="related-posts-title">こちらもおすすめ</div>
-        <EntryList entries={toListEntries(relatedPosts)} />
+        <EntryList entries={toListEntries(relatedPosts)} umamiEvent="related-post" />
       </div>
     )}
   </section>
