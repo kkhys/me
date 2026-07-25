@@ -1,7 +1,7 @@
 ---
 import type { InferEntrySchema } from "astro:content";
 import SEO from "#/components/seo/seo.astro";
-import Breadcrumb from "#/components/ui/breadcrumb.astro";
+import SiteBrand from "#/components/ui/site-brand.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/utils/base-url";
 
@@ -21,7 +21,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     slot='seo'
   />
   <slot name='head' slot='head'/>
-  <Breadcrumb />
+  <SiteBrand />
   <h1 class="page-title">{title}</h1>
   <section class="prose page-body">
     <slot />

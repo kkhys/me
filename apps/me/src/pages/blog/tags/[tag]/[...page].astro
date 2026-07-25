@@ -2,7 +2,7 @@
 import type { PaginateFunction } from "astro";
 import type { BreadcrumbList, WithContext } from "schema-dts";
 import SEO from "#/components/seo/seo.astro";
-import Breadcrumb from "#/components/ui/breadcrumb.astro";
+import SiteBrand from "#/components/ui/site-brand.astro";
 import { countPerPage } from "#/config/constant";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import Pagination from "#/features/blog/components/ui/pagination.astro";
@@ -74,7 +74,7 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
       set:html={JSON.stringify(breadcrumbSchema)}
       slot='head'
   />
-  <Breadcrumb segments={[{ label: "Blog", href: "/blog" }]} />
+  <SiteBrand />
   <section>
     <h1 class="page-title">#{tag.label}</h1>
   </section>

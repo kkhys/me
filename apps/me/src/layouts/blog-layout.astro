@@ -3,8 +3,8 @@ import type { InferEntrySchema } from "astro:content";
 import type { MarkdownHeading } from "astro";
 import { emojiSvg } from "#/components/emoji-svg";
 import SEO from "#/components/seo/seo.astro";
-import Breadcrumb from "#/components/ui/breadcrumb.astro";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
+import SiteBrand from "#/components/ui/site-brand.astro";
 import Separator from "#/components/ui/separator.astro";
 import { me } from "#/config/site";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
@@ -80,10 +80,7 @@ const currentDate = new Date();
   />
   <slot name='head' slot='head' />
   <section>
-    <Breadcrumb segments={[
-      { label: "Blog", href: "/blog" },
-      { label: categoryObject.label, href: `/blog/categories/${categorySlug}`, isCurrent: true },
-    ]} />
+    <SiteBrand />
     <div class="sidebar">
       <Toc headings={headings} />
     </div>
