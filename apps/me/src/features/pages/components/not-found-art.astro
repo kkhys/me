@@ -1,0 +1,390 @@
+<div class="nf-art" data-nf-art>
+  <p class="nf-art__fallback" aria-hidden="true">404</p>
+  <canvas
+      class="nf-art__canvas"
+      data-nf-canvas
+      role="img"
+      aria-label="Interactive surface of calm flowing lines; they part around the pointer and ripple on click"
+  ></canvas>
+</div>
+
+<noscript>
+  <style is:inline>
+    .nf-art__fallback {
+      display: grid !important;
+    }
+  </style>
+</noscript>
+
+<script>
+  import {
+    addRipple,
+    ASPECT,
+    computeCanvasSize,
+    FLOATS_PER_RIPPLE,
+    FRAGMENT_SHADER_SOURCE,
+    packRipples,
+    pruneRipples,
+    type Ripple,
+    RIPPLE_SLOTS,
+    VERTEX_SHADER_SOURCE,
+  } from "#/features/pages/lib/not-found-art";
+
+  /** Time (in seconds) baked into the single frame drawn for reduced motion. */
+  const STATIC_TIME = 100;
+  const POINTER_EASE = 0.3;
+  const POINTER_STRENGTH_EASE = 0.12;
+  /** Gripping snaps shut quickly; letting go relaxes slowly. */
+  const GRIP_EASE_IN = 0.35;
+  const GRIP_EASE_OUT = 0.08;
+
+  const clampVel = (v: number): number => Math.min(Math.max(v, -1), 1);
+
+  const createShader = (
+    gl: WebGLRenderingContext,
+    type: number,
+    source: string,
+  ): WebGLShader | null => {
+    const shader = gl.createShader(type);
+    if (!shader) return null;
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      gl.deleteShader(shader);
+      return null;
+    }
+    return shader;
+  };
+
+  const createProgram = (gl: WebGLRenderingContext): WebGLProgram | null => {
+    const vertex = createShader(gl, gl.VERTEX_SHADER, VERTEX_SHADER_SOURCE);
+    const fragment = createShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_SHADER_SOURCE);
+    if (!vertex || !fragment) return null;
+    const program = gl.createProgram();
+    if (!program) return null;
+    gl.attachShader(program, vertex);
+    gl.attachShader(program, fragment);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      gl.deleteProgram(program);
+      return null;
+    }
+    return program;
+  };
+
+  /**
+   * Resolve a theme CSS variable (light-dark() included) to RGB floats.
+   * A 2D canvas does the parsing so any color syntax the browser understands
+   * (oklch included) works without a hand-written parser.
+   */
+  const resolveCssColor = (variable: string): [number, number, number] => {
+    const fallback: [number, number, number] = [0.5, 0.5, 0.5];
+    const probe = document.createElement("span");
+    probe.style.color = `var(${variable})`;
+    document.body.append(probe);
+    const resolved = getComputedStyle(probe).color;
+    probe.remove();
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 1;
+    canvas.height = 1;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return fallback;
+    ctx.fillStyle = resolved;
+    ctx.fillRect(0, 0, 1, 1);
+    const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+    if (r === undefined || g === undefined || b === undefined) return fallback;
+    return [r / 255, g / 255, b / 255];
+  };
+
+  /**
+   * A blurred "404" drawn to an offscreen canvas; the shader reads it as a
+   * height field that the lines swell over. Blur keeps the displacement
+   * smooth; browsers without ctx.filter get a multi-draw approximation.
+   */
+  const createGlyphTexture = (gl: WebGLRenderingContext): WebGLTexture | null => {
+    const source = document.createElement("canvas");
+    source.width = 512;
+    source.height = 288;
+    const ctx = source.getContext("2d");
+    if (!ctx) return null;
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0, 0, source.width, source.height);
+    ctx.fillStyle = "#fff";
+    ctx.font = "700 190px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    const cx = source.width / 2;
+    const cy = source.height / 2 + 8;
+    ctx.filter = "blur(6px)";
+    if (ctx.filter === "blur(6px)") {
+      ctx.fillText("404", cx, cy);
+    } else {
+      ctx.globalAlpha = 1 / 9;
+      for (let dx = -6; dx <= 6; dx += 6) {
+        for (let dy = -6; dy <= 6; dy += 6) {
+          ctx.fillText("404", cx + dx, cy + dy);
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    const texture = gl.createTexture();
+    if (!texture) return null;
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    // The canvas is not power-of-two sized, so clamp + linear, no mipmaps.
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.LUMINANCE, gl.LUMINANCE, gl.UNSIGNED_BYTE, source);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    return texture;
+  };
+
+  const init = (canvas: HTMLCanvasElement): boolean => {
+    const gl = canvas.getContext("webgl", {
+      antialias: true,
+      alpha: true,
+      premultipliedAlpha: false,
+    });
+    if (!gl) return false;
+    // Enables fwidth() so line density can be measured for moire suppression.
+    gl.getExtension("OES_standard_derivatives");
+    const program = createProgram(gl);
+    if (!program) return false;
+    if (!createGlyphTexture(gl)) return false;
+
+    gl.useProgram(program);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.clearColor(0, 0, 0, 0);
+
+    // Single oversized triangle covering the viewport.
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const position = gl.getAttribLocation(program, "a_position");
+    gl.enableVertexAttribArray(position);
+    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+    const uResolution = gl.getUniformLocation(program, "u_resolution");
+    const uTime = gl.getUniformLocation(program, "u_time");
+    const uPointer = gl.getUniformLocation(program, "u_pointer");
+    const uPointerStrength = gl.getUniformLocation(program, "u_pointerStrength");
+    const uPointerVel = gl.getUniformLocation(program, "u_pointerVel");
+    const uGrip = gl.getUniformLocation(program, "u_grip");
+    const uRipples = gl.getUniformLocation(program, "u_ripples[0]");
+    const uLineColor = gl.getUniformLocation(program, "u_lineColor");
+    const uLineAlpha = gl.getUniformLocation(program, "u_lineAlpha");
+    gl.uniform1i(gl.getUniformLocation(program, "u_glyphs"), 0);
+
+    let ripples: Ripple[] = [];
+    const packedRipples = new Float32Array(RIPPLE_SLOTS * FLOATS_PER_RIPPLE);
+    const pointer = { x: -10, y: -10 };
+    const target = { x: -10, y: -10 };
+    const prevPointer = { x: -10, y: -10 };
+    const velocity = { x: 0, y: 0 };
+    let pointerStrength = 0;
+    let pointerStrengthTarget = 0;
+    let pressed = false;
+    let grip = 0;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const darkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    let frame = 0;
+
+    const draw = (time: number) => {
+      gl.uniform2f(uResolution, canvas.width, canvas.height);
+      gl.uniform1f(uTime, time);
+      gl.uniform2f(uPointer, pointer.x, pointer.y);
+      gl.uniform1f(uPointerStrength, pointerStrength);
+      gl.uniform2f(uPointerVel, velocity.x, velocity.y);
+      gl.uniform1f(uGrip, grip);
+      gl.uniform4fv(uRipples, packRipples(ripples, packedRipples));
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    };
+
+    const applyThemeColors = () => {
+      gl.uniform3fv(uLineColor, resolveCssColor("--c-sub"));
+      // The dark theme needs stronger lines to stay visible on near-black.
+      gl.uniform1f(uLineAlpha, darkScheme.matches ? 0.8 : 0.55);
+    };
+
+    const resize = () => {
+      const size = computeCanvasSize(
+        canvas.clientWidth,
+        canvas.clientHeight,
+        window.devicePixelRatio,
+      );
+      if (canvas.width === size.width && canvas.height === size.height) return;
+      canvas.width = size.width;
+      canvas.height = size.height;
+      gl.viewport(0, 0, size.width, size.height);
+      if (reducedMotion.matches) draw(STATIC_TIME);
+    };
+
+    const loop = (now: number) => {
+      const time = now / 1000;
+      pointer.x += (target.x - pointer.x) * POINTER_EASE;
+      pointer.y += (target.y - pointer.y) * POINTER_EASE;
+      pointerStrength += (pointerStrengthTarget - pointerStrength) * POINTER_STRENGTH_EASE;
+      grip += ((pressed ? 1 : 0) - grip) * (pressed ? GRIP_EASE_IN : GRIP_EASE_OUT);
+      // Smoothed pointer velocity (clamped) drives the motion-drag shear.
+      velocity.x += (clampVel((pointer.x - prevPointer.x) * 12) - velocity.x) * 0.2;
+      velocity.y += (clampVel((pointer.y - prevPointer.y) * 12) - velocity.y) * 0.2;
+      prevPointer.x = pointer.x;
+      prevPointer.y = pointer.y;
+      ripples = pruneRipples(ripples, time);
+      draw(time);
+      frame = requestAnimationFrame(loop);
+    };
+
+    const start = () => {
+      if (frame || reducedMotion.matches) return;
+      frame = requestAnimationFrame(loop);
+    };
+
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+    };
+
+    const toWorld = (event: PointerEvent): { x: number; y: number } => {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: ((event.clientX - rect.left) / rect.width) * ASPECT,
+        y: 1 - (event.clientY - rect.top) / rect.height,
+      };
+    };
+
+    // The pointer trail deposits soft wakes, like drawing in sand.
+    const lastWake = { x: Number.NaN, y: Number.NaN };
+    const WAKE_SPACING = 0.09;
+
+    canvas.addEventListener("pointermove", (event) => {
+      const world = toWorld(event);
+      Object.assign(target, world);
+      pointerStrengthTarget = 1;
+      if (reducedMotion.matches) return;
+      const moved = Math.hypot(world.x - lastWake.x, world.y - lastWake.y);
+      if (Number.isNaN(moved)) {
+        Object.assign(lastWake, world);
+        return;
+      }
+      if (moved < WAKE_SPACING) return;
+      Object.assign(lastWake, world);
+      ripples = addRipple(ripples, {
+        x: world.x,
+        y: world.y,
+        born: performance.now() / 1000,
+        strength: 0.35,
+      });
+    });
+
+    canvas.addEventListener("pointerdown", (event) => {
+      pressed = true;
+      pointerStrengthTarget = 1;
+      Object.assign(target, toWorld(event));
+    });
+
+    // Releasing the grip lets the gathered lines fall back as a ripple.
+    canvas.addEventListener("pointerup", (event) => {
+      pressed = false;
+      pointerStrengthTarget = 1;
+      // Ripples are transient, so without animation there is nothing to show.
+      if (reducedMotion.matches) return;
+      const world = toWorld(event);
+      ripples = addRipple(ripples, {
+        x: world.x,
+        y: world.y,
+        born: performance.now() / 1000,
+        strength: 1,
+      });
+    });
+
+    canvas.addEventListener("pointerleave", () => {
+      pressed = false;
+      pointerStrengthTarget = 0;
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stop();
+      } else {
+        start();
+      }
+    });
+
+    reducedMotion.addEventListener("change", () => {
+      if (reducedMotion.matches) {
+        stop();
+        pointerStrength = 0;
+        draw(STATIC_TIME);
+      } else {
+        start();
+      }
+    });
+
+    darkScheme.addEventListener("change", () => {
+      applyThemeColors();
+      if (reducedMotion.matches) draw(STATIC_TIME);
+    });
+
+    applyThemeColors();
+    new ResizeObserver(resize).observe(canvas);
+    resize();
+    if (reducedMotion.matches) {
+      draw(STATIC_TIME);
+    } else {
+      start();
+    }
+    return true;
+  };
+
+  const wrapper = document.querySelector<HTMLElement>("[data-nf-art]");
+  const canvas = wrapper?.querySelector<HTMLCanvasElement>("[data-nf-canvas]");
+  if (wrapper && canvas) {
+    // The fallback is hidden by default (it would flash before this module
+    // runs); it only appears when WebGL is unavailable.
+    wrapper.classList.add(init(canvas) ? "is-live" : "is-fallback");
+  }
+</script>
+
+<style>
+  .nf-art {
+    position: relative;
+    margin-top: 2.5rem;
+    aspect-ratio: 16 / 9;
+  }
+
+  .nf-art__canvas {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    touch-action: manipulation;
+  }
+
+  .nf-art.is-live .nf-art__canvas {
+    opacity: 1;
+  }
+
+  .nf-art__fallback {
+    position: absolute;
+    inset: 0;
+    display: none;
+    place-items: center;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    letter-spacing: 0.2em;
+    color: var(--c-sub);
+  }
+
+  .nf-art.is-fallback .nf-art__fallback {
+    display: grid;
+  }
+</style>
