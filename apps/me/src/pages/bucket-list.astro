@@ -3,7 +3,7 @@ import { getEntry } from "astro:content";
 import Budoux from "#/components/budoux.astro";
 import CheckIcon from "#/components/icons/check.svg";
 import SEO from "#/components/seo/seo.astro";
-import Breadcrumb from "#/components/ui/breadcrumb.astro";
+import SiteBrand from "#/components/ui/site-brand.astro";
 import Separator from "#/components/ui/separator.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { getLastUpdatedTimeByFile } from "#/lib/api/github";
@@ -61,7 +61,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     image={seoImage}
     slot='seo'
   />
-  <Breadcrumb />
+  <SiteBrand />
   <h1 class="page-title">
     バケットリスト
   </h1>

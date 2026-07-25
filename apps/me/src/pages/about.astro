@@ -2,7 +2,7 @@
 import { getEntry, render } from "astro:content";
 import profileImage from "#/assets/images/profile.jpg";
 import SEO from "#/components/seo/seo.astro";
-import Breadcrumb from "#/components/ui/breadcrumb.astro";
+import SiteBrand from "#/components/ui/site-brand.astro";
 import Image from "#/components/ui/image/image.astro";
 import ContentWrapper from "#/features/pages/components/content-wrapper.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
@@ -26,7 +26,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     image={seoImage}
     slot='seo'
   />
-  <Breadcrumb />
+  <SiteBrand />
   <h1 class="page-title">
     About
   </h1>

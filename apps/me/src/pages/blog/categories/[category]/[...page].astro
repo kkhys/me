@@ -1,7 +1,7 @@
 ---
 import type { PaginateFunction } from "astro";
 import SEO from "#/components/seo/seo.astro";
-import Breadcrumb from "#/components/ui/breadcrumb.astro";
+import SiteBrand from "#/components/ui/site-brand.astro";
 import { countPerPage } from "#/config/constant";
 import CategoryNavigation from "#/features/blog/components/ui/category-navigation.astro";
 import EntryList from "#/features/blog/components/ui/entry-list.astro";
@@ -49,7 +49,7 @@ const seoImage = `${BASE_URL}/api/og/default.png`;
     image={seoImage}
     slot='seo'
   />
-  <Breadcrumb />
+  <SiteBrand />
   <section>
     <h1 class="page-title">Blog</h1>
     <CategoryNavigation class="blog-nav" />
