@@ -36,10 +36,15 @@ import type { Plugin, Processor } from "unified";
  * ```
  */
 const remarkEscapeSyntax: Plugin<[], Root> = function (this: Processor) {
-  const parser = this.parser;
-  const originalParse = parser?.prototype?.parse || parser;
+  // remark() registers remark-parse before user plugins, so the parser
+  // function is always set by the time this plugin runs (unified 11 has no
+  // Parser classes anymore).
+  const originalParse = this.parser;
+  if (!originalParse) {
+    throw new Error("remark-escape-syntax requires remark-parse to be registered first");
+  }
 
-  this.parser = (doc: string) => {
+  this.parser = (doc: string, file) => {
     let text = doc;
 
     // 1. Protect code blocks (temporarily save before inline code processing)
@@ -77,7 +82,7 @@ const remarkEscapeSyntax: Plugin<[], Root> = function (this: Processor) {
     // because remark interprets backslashes multiple times
 
     // Parse with escaped text
-    return originalParse.call(this, text);
+    return originalParse.call(this, text, file);
   };
 };
 

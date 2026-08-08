@@ -16,6 +16,17 @@ const { containerId } = Astro.props;
 </div>
 
 <script>
+  // Keep the loading indicator visible for at least 500ms so fast responses
+  // don't flash it.
+  const ensureMinDelay = async (startTime: number) => {
+    const remainingTime = Math.max(0, 500 - (Date.now() - startTime));
+    if (remainingTime > 0) {
+      await new Promise((resolve) => {
+        setTimeout(resolve, remainingTime);
+      });
+    }
+  };
+
   const initInfiniteScroll = () => {
     const root = document.querySelector<HTMLElement>(".infinite-scroll-root");
     if (!root) return;
@@ -101,13 +112,7 @@ const { containerId } = Astro.props;
           throw new Error(`${containerId} not found in fetched page`);
         }
 
-        const elapsed = Date.now() - startTime;
-        const remainingTime = Math.max(0, 500 - elapsed);
-        if (remainingTime > 0) {
-          await new Promise((resolve) => {
-            setTimeout(resolve, remainingTime);
-          });
-        }
+        await ensureMinDelay(startTime);
 
         const memoCards = nextContainer.children;
         for (const card of Array.from(memoCards)) {
@@ -124,13 +129,7 @@ const { containerId } = Astro.props;
       } catch (error) {
         console.error("Failed to load more memos:", error);
 
-        const elapsed = Date.now() - startTime;
-        const remainingTime = Math.max(0, 500 - elapsed);
-        if (remainingTime > 0) {
-          await new Promise((resolve) => {
-            setTimeout(resolve, remainingTime);
-          });
-        }
+        await ensureMinDelay(startTime);
 
         showErrorMessage();
       } finally {

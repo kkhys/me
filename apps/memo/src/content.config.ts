@@ -42,7 +42,7 @@ const users = defineCollection({
       .array(
         z.object({
           type: z.enum(["website", "github"]),
-          url: z.string().url(),
+          url: z.url(),
         }),
       )
       .default([]),

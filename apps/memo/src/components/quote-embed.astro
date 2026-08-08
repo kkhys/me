@@ -1,9 +1,10 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
 import Avatar from "#/components/avatar.astro";
-import BlurImage from "#/components/blur-image.astro";
 import BotBadge from "#/components/bot-badge.astro";
 import LinkCard from "#/components/link-card.astro";
+import MemoImages from "#/components/memo-images.astro";
+import TagLink from "#/components/tag-link.astro";
 import { formatDate, formatDateTime } from "#/utils/date";
 import { getImagesForMemo } from "#/utils/image";
 import { getAuthorInfo } from "#/utils/user";
@@ -40,18 +41,8 @@ const fullDateTimeString = formatDateTime(createdAt);
     <div class="quote-text">
         <Content />
     </div>
-    {tag && (
-        <div class="quote-tags">
-            <a href={`/tag/${tag}`} class="tag-link">#{tag}</a>
-        </div>
-    )}
-    {images.length > 0 && (
-        <div class="quote-images">
-            {images.map((image, index) => (
-                <BlurImage src={image} alt={`Image ${index + 1}`} />
-            ))}
-        </div>
-    )}
+    {tag && <TagLink tag={tag} />}
+    <MemoImages images={images} />
     {!hideLinkCard && firstExternalLink && (
         <div class="quote-link-card">
             <LinkCard href={firstExternalLink} />
@@ -104,20 +95,6 @@ const fullDateTimeString = formatDateTime(createdAt);
         font-variant-numeric: tabular-nums;
     }
 
-    .quote-tags {
-        margin-top: 0.5rem;
-    }
-
-    .tag-link {
-        font-size: var(--fs-sm);
-        color: var(--c-link);
-        text-decoration: none;
-    }
-
-    .tag-link:hover {
-        text-decoration: underline;
-    }
-
     :global(.quote-text p) {
         font-size: var(--fs-sm);
         line-height: var(--lh-sm);
@@ -135,50 +112,6 @@ const fullDateTimeString = formatDateTime(createdAt);
 
     :global(.quote-text .external-link:hover) {
         text-decoration: underline;
-    }
-
-    .quote-images {
-        margin-top: 0.75rem;
-    }
-
-    /* Single image */
-    .quote-images:has(> :only-child) {
-        display: grid;
-    }
-
-    .quote-images:has(> :only-child) :global(.blur-load-wrapper) {
-        max-height: 430px;
-    }
-
-    /* Multiple images: horizontal scroll gallery */
-    .quote-images:not(:has(> :only-child)) {
-        display: flex;
-        gap: 0.5rem;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: thin;
-        scrollbar-color: var(--c-scrollbar) transparent;
-        padding-bottom: 0.5rem;
-    }
-
-    .quote-images:not(:has(> :only-child)) :global(.blur-load-wrapper) {
-        flex: 0 0 auto;
-        height: min(260px, 50vw);
-        aspect-ratio: unset !important;
-        scroll-snap-align: start;
-    }
-
-    .quote-images:not(:has(> :only-child)) :global(.blur-load) {
-        height: 100%;
-    }
-
-    .quote-images:not(:has(> :only-child)) :global(.blur-load picture) {
-        height: 100%;
-    }
-
-    .quote-images:not(:has(> :only-child)) :global(.blur-load img) {
-        width: auto;
-        height: 100%;
     }
 
     .quote-link-card {

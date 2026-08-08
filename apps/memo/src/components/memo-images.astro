@@ -1,0 +1,64 @@
+---
+import type { ImageMetadata } from "astro";
+import BlurImage from "#/components/blur-image.astro";
+
+interface Props {
+  images: ImageMetadata[];
+}
+
+const { images } = Astro.props;
+---
+
+{images.length > 0 && (
+  <div class="memo-images">
+    {images.map((image, index) => (
+      <BlurImage src={image} alt={`Image ${index + 1}`} />
+    ))}
+  </div>
+)}
+
+<style>
+    .memo-images {
+        margin-top: 0.75rem;
+    }
+
+    /* Single image */
+    .memo-images:has(> :only-child) {
+        display: grid;
+    }
+
+    .memo-images:has(> :only-child) :global(.blur-load-wrapper) {
+        max-height: 430px;
+    }
+
+    /* Multiple images: horizontal scroll gallery */
+    .memo-images:not(:has(> :only-child)) {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+        scrollbar-color: var(--c-scrollbar) transparent;
+        padding-bottom: 0.5rem;
+    }
+
+    .memo-images:not(:has(> :only-child)) :global(.blur-load-wrapper) {
+        flex: 0 0 auto;
+        height: min(260px, 50vw);
+        aspect-ratio: unset !important;
+        scroll-snap-align: start;
+    }
+
+    .memo-images:not(:has(> :only-child)) :global(.blur-load) {
+        height: 100%;
+    }
+
+    .memo-images:not(:has(> :only-child)) :global(.blur-load picture) {
+        height: 100%;
+    }
+
+    .memo-images:not(:has(> :only-child)) :global(.blur-load img) {
+        width: auto;
+        height: 100%;
+    }
+</style>
