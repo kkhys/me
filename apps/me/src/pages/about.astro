@@ -5,8 +5,8 @@ import SEO from "#/components/seo/seo.astro";
 import SiteBrand from "#/components/ui/site-brand.astro";
 import Image from "#/components/ui/image/image.astro";
 import ContentWrapper from "#/features/pages/components/content-wrapper.astro";
+import { defaultOgImage } from "#/config/constant";
 import BaseLayout from "#/layouts/base-layout.astro";
-import { BASE_URL } from "#/utils/base-url";
 
 const about = await getEntry("pages", "about");
 
@@ -16,14 +16,13 @@ if (!about) {
 
 const { Content: AboutContent } = await render(about);
 
-const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
 <BaseLayout>
   <SEO
     title="About"
     description={about.data.description}
-    image={seoImage}
+    image={defaultOgImage}
     slot='seo'
   />
   <SiteBrand />

@@ -5,9 +5,9 @@ import CheckIcon from "#/components/icons/check.svg";
 import SEO from "#/components/seo/seo.astro";
 import SiteBrand from "#/components/ui/site-brand.astro";
 import Separator from "#/components/ui/separator.astro";
+import { defaultOgImage } from "#/config/constant";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { getLastUpdatedTimeByFile } from "#/lib/api/github";
-import { BASE_URL } from "#/utils/base-url";
 import { convertDateToString } from "#/utils/date";
 
 const bucketList = await getEntry("bucketList", "data");
@@ -51,14 +51,13 @@ const completedItems = bucketList.data.reduce(
 
 const seoDescription =
   "これは僕がこの人生で達成したいこと、手に入れたいことのリストです。";
-const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
 <BaseLayout>
   <SEO
     title="バケットリスト"
     description={seoDescription}
-    image={seoImage}
+    image={defaultOgImage}
     slot='seo'
   />
   <SiteBrand />

@@ -27,5 +27,3 @@ export const isFootnoteDefinition = (node: unknown): node is FootnoteDefinition 
 
 export const isFootnoteReference = (node: unknown): node is FootnoteReference =>
   isNode(node) && node.type === "footnoteReference";
-
-export const hasChildren = (node: Node) => isParent(node) && node.children.length > 0;

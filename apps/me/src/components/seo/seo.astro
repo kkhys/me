@@ -2,7 +2,7 @@
 import BaseSEO from "#/components/seo/base-seo.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
 import TwitterCard from "#/components/seo/twitter-card.astro";
-import { siteConfig } from "#/config/site";
+import { resolveDescription, resolveTitle } from "#/config/site";
 
 interface Props {
   title?: string | undefined;
@@ -30,8 +30,8 @@ const {
   noindex,
 } = Astro.props;
 
-const ogTitle = title ? `${title}｜${siteConfig.title}` : siteConfig.title;
-const ogDescription = description ?? siteConfig.description;
+const ogTitle = resolveTitle(title);
+const ogDescription = resolveDescription(description);
 ---
 
 <BaseSEO title={title} description={description} noindex={noindex} />

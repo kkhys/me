@@ -10,8 +10,6 @@ const { page, class: className, ...attrs } = Astro.props;
 
 const { currentPage, lastPage, total } = page;
 
-const format = String;
-
 // Build the href for an arbitrary page. Page 1 lives at the base path
 // (`/blog`, `/blog/categories/tech`), the rest at `${base}/${n}`. Prev/next
 // reuse Astro-generated URLs so their format always matches the router.
@@ -48,9 +46,9 @@ const menuId = `page-menu-${currentPage}-${lastPage}`;
         popovertarget={menuId}
         aria-label={`Page ${currentPage} of ${lastPage}. Select a page`}
       >
-        <span class="pager-current-num">{format(currentPage)}</span>
+        <span class="pager-current-num">{currentPage}</span>
         <span class="pager-sep">/</span>
-        <span class="pager-total">{format(lastPage)}</span>
+        <span class="pager-total">{lastPage}</span>
         <svg class="pager-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="m6 9 6 6 6-6" />
         </svg>
@@ -79,13 +77,13 @@ const menuId = `page-menu-${currentPage}-${lastPage}`;
             n === currentPage ? (
               <li>
                 <span class="page-menu-item page-menu-item--current" aria-current="page">
-                  {format(n)}
+                  {n}
                 </span>
               </li>
             ) : (
               <li>
                 <a href={hrefFor(n)} class="page-menu-item">
-                  {format(n)}
+                  {n}
                 </a>
               </li>
             ),

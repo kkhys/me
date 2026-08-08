@@ -2,21 +2,20 @@
 import type { InferEntrySchema } from "astro:content";
 import SEO from "#/components/seo/seo.astro";
 import SiteBrand from "#/components/ui/site-brand.astro";
+import { defaultOgImage } from "#/config/constant";
 import BaseLayout from "#/layouts/base-layout.astro";
-import { BASE_URL } from "#/utils/base-url";
 
 interface Props extends InferEntrySchema<"pages"> {}
 
 const { title, description } = Astro.props;
 
-const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
 <BaseLayout>
   <SEO
     title={title}
     description={description}
-    image={seoImage}
+    image={defaultOgImage}
     type="article"
     slot='seo'
   />

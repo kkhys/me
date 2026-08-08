@@ -8,6 +8,14 @@ export const siteConfig = {
   },
 } as const;
 
+// Single source for how page titles/descriptions resolve, so <title> and
+// og:title can never drift apart.
+export const resolveTitle = (title?: string | undefined): string =>
+  title ? `${title}｜${siteConfig.title}` : siteConfig.title;
+
+export const resolveDescription = (description?: string | undefined): string =>
+  description ?? siteConfig.description;
+
 export const me = {
   name: "Keisuke Hayashi",
   email: "hi@kkhys.me",

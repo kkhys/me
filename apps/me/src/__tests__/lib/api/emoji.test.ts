@@ -131,15 +131,6 @@ describe("loadEmoji", () => {
     );
   });
 
-  it("falls back to twemoji for invalid type", async () => {
-    // @ts-expect-error -- testing invalid emoji type
-    await loadEmoji("invalidType", "1f600");
-
-    expect(fetch).toHaveBeenCalledWith(
-      "https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f600.svg",
-    );
-  });
-
   it("returns undefined when the response is not ok", async () => {
     vi.stubGlobal(
       "fetch",

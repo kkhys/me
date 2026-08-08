@@ -1,6 +1,6 @@
 ---
 import BaseSEO from "@kkhys/seo/base-seo.astro";
-import { siteConfig } from "#/config/site";
+import { resolveDescription, resolveTitle } from "#/config/site";
 
 interface Props {
   title?: string | undefined;
@@ -10,10 +10,8 @@ interface Props {
 
 const { title, description, noindex = false } = Astro.props;
 
-const resolvedTitle = title
-  ? `${title}｜${siteConfig.title}`
-  : siteConfig.title;
-const resolvedDescription = description ?? siteConfig.description;
+const resolvedTitle = resolveTitle(title);
+const resolvedDescription = resolveDescription(description);
 ---
 
 <BaseSEO
