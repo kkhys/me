@@ -23,4 +23,12 @@ describe("resolveReleaseVersion", () => {
   it("takes the first free suffix even when a later one exists", () => {
     expect(resolveReleaseVersion(base, [base, `${base}-3`])).toBe(`${base}-2`);
   });
+
+  it("ignores lookalike tags that merely share the prefix", () => {
+    expect(resolveReleaseVersion(base, [`${base}0`, `${base}-rc1`])).toBe(base);
+  });
+
+  it("treats the dots as literal dots, not wildcards", () => {
+    expect(resolveReleaseVersion(base, ["2026x06y27"])).toBe(base);
+  });
 });
