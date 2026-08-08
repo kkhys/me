@@ -1,4 +1,4 @@
-import type { APIRoute, GetStaticPaths, ImageMetadata } from "astro";
+import type { APIRoute, GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { SITE_URL } from "#/config/constants";
 import { getImagesForMemo } from "#/utils/image";
 import { getPublishedMemos } from "#/utils/memo";
@@ -18,16 +18,10 @@ export const getStaticPaths = (async () => {
   );
 }) satisfies GetStaticPaths;
 
-export const GET: APIRoute = ({ props }) => {
-  const { memo, authorName, avatar, images } = props as {
-    memo: {
-      data: { id: string; createdAt: Date; tag?: string; author: string };
-      body: string;
-    };
-    authorName: string;
-    avatar: ImageMetadata;
-    images: ImageMetadata[];
-  };
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+export const GET: APIRoute<Props> = ({ props }) => {
+  const { memo, authorName, avatar, images } = props;
   return new Response(
     JSON.stringify({
       id: memo.data.id,

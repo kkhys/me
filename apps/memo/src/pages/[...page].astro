@@ -1,7 +1,6 @@
 ---
 import type { GetStaticPaths } from "astro";
-import Feed from "#/components/feed.astro";
-import InfiniteScroll from "#/components/infinite-scroll.astro";
+import PaginatedFeed from "#/components/paginated-feed.astro";
 import BaseSEO from "#/components/seo/base-seo.astro";
 import JsonLd from "#/components/seo/json-ld.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
@@ -29,14 +28,6 @@ const siteOwner = await getAuthorInfo(SITE_OWNER_SLUG);
 const ogImage = new URL("/api/og/default.png", Astro.site).href;
 ---
 
-{!isFirstPage && (
-  <script is:inline>
-    if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
-      window.location.replace("/");
-    }
-  </script>
-)}
-
 <Layout>
   <Fragment slot="seo">
     <BaseSEO title={TITLE} description={DESCRIPTION} noindex={!isFirstPage} />
@@ -57,12 +48,7 @@ const ogImage = new URL("/api/og/default.png", Astro.site).href;
       }}
     />
   </Fragment>
-  <Feed
-    id="memo-container"
-    data-current-page={page.currentPage}
-    data-total-pages={page.lastPage}
-    data-base-path="/"
-  >
+  <PaginatedFeed page={page} basePath="/" containerId="memo-container">
     {
       isFirstPage && pinned.map(({ main, comments }) => (
         <ThreadPost
@@ -80,9 +66,5 @@ const ogImage = new URL("/api/og/default.png", Astro.site).href;
         />
       ))
     }
-  </Feed>
-
-  {page.currentPage < page.lastPage && (
-    <InfiniteScroll containerId="memo-container" />
-  )}
+  </PaginatedFeed>
 </Layout>

@@ -1,7 +1,6 @@
 ---
 import type { GetStaticPaths } from "astro";
-import Feed from "#/components/feed.astro";
-import InfiniteScroll from "#/components/infinite-scroll.astro";
+import PaginatedFeed from "#/components/paginated-feed.astro";
 import BaseSEO from "#/components/seo/base-seo.astro";
 import JsonLd from "#/components/seo/json-ld.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
@@ -40,14 +39,6 @@ const tagPath = `/tag/${tag}`;
 const ogImage = new URL("/api/og/default.png", Astro.site).href;
 ---
 
-{!isFirstPage && (
-  <script is:inline define:vars={{ tagPath }}>
-    if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
-      window.location.replace(tagPath);
-    }
-  </script>
-)}
-
 <Layout>
   <Fragment slot="seo">
     <BaseSEO
@@ -84,12 +75,7 @@ const ogImage = new URL("/api/og/default.png", Astro.site).href;
     />
   </Fragment>
 
-  <Feed
-    id="tag-memo-container"
-    data-current-page={page.currentPage}
-    data-total-pages={page.lastPage}
-    data-base-path={tagPath}
-  >
+  <PaginatedFeed page={page} basePath={tagPath} containerId="tag-memo-container">
     {isFirstPage && (
       <div class="tag-header">
         <p>{totalPosts} {totalPosts === 1 ? "post" : "posts"}</p>
@@ -104,11 +90,7 @@ const ogImage = new URL("/api/og/default.png", Astro.site).href;
         />
       ))
     }
-  </Feed>
-
-  {page.currentPage < page.lastPage && (
-    <InfiniteScroll containerId="tag-memo-container" />
-  )}
+  </PaginatedFeed>
 </Layout>
 
 <style>

@@ -1,0 +1,35 @@
+---
+import type { Page } from "astro";
+import Feed from "#/components/feed.astro";
+import InfiniteScroll from "#/components/infinite-scroll.astro";
+
+interface Props {
+  page: Page<unknown>;
+  basePath: string;
+  containerId: string;
+}
+
+const { page, basePath, containerId } = Astro.props;
+const isFirstPage = page.currentPage === 1;
+---
+
+{/* Non-first pages exist only as infinite-scroll fetch targets; bounce
+    direct visits back to the first page. */}
+{!isFirstPage && (
+  <script is:inline define:vars={{ basePath }}>
+    if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
+      window.location.replace(basePath);
+    }
+  </script>
+)}
+
+<Feed
+  id={containerId}
+  data-current-page={page.currentPage}
+  data-total-pages={page.lastPage}
+  data-base-path={basePath}
+>
+  <slot />
+</Feed>
+
+{page.currentPage < page.lastPage && <InfiniteScroll containerId={containerId} />}
