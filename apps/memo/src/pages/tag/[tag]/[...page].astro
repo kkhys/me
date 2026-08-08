@@ -37,6 +37,7 @@ const siteOwner = await getAuthorInfo(SITE_OWNER_SLUG);
 const pageTitle = `Tag: ${tag} | ${TITLE}`;
 const description = `「${tag}」タグが付けられた${totalPosts}件のメモを表示しています。`;
 const tagPath = `/tag/${tag}`;
+const ogImage = new URL("/api/og/default.png", Astro.site).href;
 ---
 
 {!isFirstPage && (
@@ -57,15 +58,15 @@ const tagPath = `/tag/${tag}`;
     <OpenGraph
       title={pageTitle}
       description={description}
-      image="/og-image.png"
-      imageAlt="test"
+      image={ogImage}
+      imageAlt={pageTitle}
       type="website"
     />
     <TwitterCard
       title={pageTitle}
       description={description}
-      image="/og-image.png"
-      imageAlt="test"
+      image={ogImage}
+      imageAlt={pageTitle}
     />
   </Fragment>
 

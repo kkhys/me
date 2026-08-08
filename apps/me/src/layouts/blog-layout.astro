@@ -52,10 +52,13 @@ if (!categoryObject) {
 }
 
 const allTagCloudItems = await Promise.all(
-  allTags?.map(async (tag) => (Object.assign(tag, { emojiSvg: await emojiSvg({
-	emoji: tag.emoji,
-	isColored: true
-}) }))) || [],
+  // Copy into a fresh object: mutating `tag` would poison the shared config
+  // array for every page rendered later in the same build process.
+  allTags.map(async (tag) =>
+    Object.assign({}, tag, {
+      emojiSvg: await emojiSvg({ emoji: tag.emoji, isColored: true }),
+    }),
+  ),
 );
 
 const tagCloudItems = allTagCloudItems.filter(({ title: tagTitle }) =>
@@ -128,7 +131,7 @@ const currentDate = new Date();
     <article class="prose">
       <slot />
     </article>
-    {tagCloudItems && (
+    {tagCloudItems.length > 0 && (
         <TagCloud tags={tagCloudItems} class="post-tags" />
     )}
     <Separator class="post-separator" />
