@@ -1,8 +1,14 @@
 import { NODE_ENV } from "astro:env/client";
 import fetchSiteMetadata, { type Metadata } from "fetch-site-metadata";
+import { parseHTML } from "linkedom";
 import { createResolvedCache } from "#/lib/api/cache";
 
 const cache = createResolvedCache<Metadata>();
+
+const REQUEST_HEADERS = {
+  accept: "text/html",
+  "accept-language": "ja,en-US;q=0.7,en;q=0.3",
+} as const;
 
 // Astro's sharp service refuses SVG inputs unless `image.dangerouslyProcessSVG`
 // is enabled, so drop SVG og:images here to keep `<Image>` from crashing the build.
@@ -69,6 +75,91 @@ const dropUnprocessableImage = async (metadata: Metadata): Promise<Metadata> => 
   return (await isProcessableImage(src)) ? metadata : { ...metadata, image: undefined };
 };
 
+// `fetch-site-metadata` streams the raw response bytes into an HTMLRewriter
+// that always decodes as UTF-8, ignoring both `Content-Type: charset=` and
+// `<meta charset>`. Legacy Japanese shops (item.rakuten.co.jp is EUC-JP) come
+// back as U+FFFD soup, so re-extract the text fields with the declared charset.
+const REPLACEMENT_CHAR = "�";
+const CHARSET_SNIFF_BYTES = 4096;
+
+const isGarbled = ({ title, description }: Metadata): boolean =>
+  Boolean(title?.includes(REPLACEMENT_CHAR) ?? false) ||
+  Boolean(description?.includes(REPLACEMENT_CHAR) ?? false);
+
+const charsetFromContentType = /charset\s*=\s*"?([^";,\s]+)/iu;
+const charsetFromMeta = /<meta[^>]+charset\s*=\s*["']?([\w.:-]+)/iu;
+
+const decodeWithDeclaredCharset = (
+  bytes: ArrayBuffer,
+  contentType: string | null,
+): string | undefined => {
+  // Charset declarations are pure ASCII, so a latin1 pass over the head of the
+  // document is enough to find one without knowing the encoding yet.
+  const head = new TextDecoder("latin1").decode(bytes.slice(0, CHARSET_SNIFF_BYTES));
+  const charset =
+    charsetFromContentType.exec(contentType ?? "")?.[1] ?? charsetFromMeta.exec(head)?.[1];
+  if (!charset || /^utf-?8$/iu.test(charset)) return undefined;
+
+  try {
+    return new TextDecoder(charset).decode(bytes);
+  } catch {
+    // Unknown encoding label; the UTF-8 reading is the best we have.
+    return undefined;
+  }
+};
+
+// Same precedence as fetch-site-metadata's own rules, minus the case-insensitive
+// attribute matching linkedom's selector engine doesn't support.
+const TITLE_SELECTORS = [
+  'meta[property="og:title"]',
+  'meta[name="twitter:title"]',
+  'meta[property="twitter:title"]',
+] as const;
+
+const DESCRIPTION_SELECTORS = [
+  'meta[property="og:description"]',
+  'meta[name="description"]',
+  'meta[name="twitter:description"]',
+] as const;
+
+const firstContent = (
+  document: ReturnType<typeof parseHTML>["document"],
+  selectors: readonly string[],
+): string | undefined => {
+  for (const selector of selectors) {
+    const content = document.querySelector(selector)?.getAttribute("content")?.trim();
+    if (content) return content;
+  }
+  return undefined;
+};
+
+const reextractText = (html: string, metadata: Metadata): Metadata => {
+  const { document } = parseHTML(html);
+  const title = firstContent(document, TITLE_SELECTORS) ?? document.title.trim();
+  return {
+    ...metadata,
+    title: title || metadata.title,
+    description: firstContent(document, DESCRIPTION_SELECTORS) ?? metadata.description,
+  };
+};
+
+const repairGarbledText = async (url: string, metadata: Metadata): Promise<Metadata> => {
+  if (!isGarbled(metadata)) return metadata;
+
+  try {
+    const response = await fetch(url, { headers: REQUEST_HEADERS });
+    if (!response.ok) return metadata;
+
+    const html = decodeWithDeclaredCharset(
+      await response.arrayBuffer(),
+      response.headers.get("content-type"),
+    );
+    return html ? reextractText(html, metadata) : metadata;
+  } catch {
+    return metadata;
+  }
+};
+
 export const getMetadata = (url: string) =>
   cache(url, async () => {
     if (NODE_ENV !== "production" || process.env.CI) {
@@ -82,11 +173,9 @@ export const getMetadata = (url: string) =>
 
     return await fetchSiteMetadata(url, {
       suppressAdditionalRequest: true,
-      headers: {
-        accept: "text/html",
-        "accept-language": "ja,en-US;q=0.7,en;q=0.3",
-      },
+      headers: REQUEST_HEADERS,
     })
+      .then((metadata) => repairGarbledText(url, metadata))
       .then(dropUnprocessableImage)
       .catch(() => ({
         title: "Not Found",

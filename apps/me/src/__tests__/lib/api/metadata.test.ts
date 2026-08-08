@@ -19,6 +19,39 @@ const mockImageResponse = (bytes: Uint8Array) => {
   );
 };
 
+/** Routes each fetch by URL so a test can serve a page and an image at once. */
+const mockFetchByUrl = (routes: (url: string) => Response) => {
+  const spy = vi
+    .fn<typeof fetch>()
+    .mockImplementation((input) => Promise.resolve(routes(String(input))));
+  vi.stubGlobal("fetch", spy);
+  return spy;
+};
+
+const concatBytes = (...parts: Uint8Array[]) => {
+  const merged = new Uint8Array(parts.reduce((total, part) => total + part.length, 0));
+  let offset = 0;
+  for (const part of parts) {
+    merged.set(part, offset);
+    offset += part.length;
+  }
+  return merged;
+};
+
+/** 「楽天」 in EUC-JP, the encoding item.rakuten.co.jp still serves. */
+const RAKUTEN_EUC_JP = new Uint8Array([0xb3, 0xda, 0xc5, 0xb7]);
+const ascii = (text: string) => new TextEncoder().encode(text);
+
+/** Builds an EUC-JP page whose og:title / og:description are 「楽天」. */
+const eucJpPage = () =>
+  concatBytes(
+    ascii('<html><head><meta charset="EUC-JP"><meta property="og:title" content="'),
+    RAKUTEN_EUC_JP,
+    ascii('"><meta property="og:description" content="'),
+    RAKUTEN_EUC_JP,
+    ascii('"></head><body></body></html>'),
+  );
+
 describe("getMetadata", () => {
   let getMetadata: (url: string) => Promise<SiteMetadata>;
 
@@ -285,6 +318,115 @@ describe("getMetadata", () => {
 
       const result = await getMetadata("https://unreachable-image-example.com");
       expect(result.image).toBeUndefined();
+    });
+
+    it("re-extracts garbled text using the charset the page declares", async () => {
+      mockFetchByUrl(
+        () =>
+          new Response(eucJpPage() as unknown as BodyInit, {
+            status: 200,
+            headers: { "content-type": "text/html;charset=EUC-JP" },
+          }),
+      );
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "����",
+        description: "����",
+        image: undefined,
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://euc-jp-example.com");
+      expect(result.title).toBe("楽天");
+      expect(result.description).toBe("楽天");
+    });
+
+    it("falls back to the <title> element when the page has no og:title", async () => {
+      mockFetchByUrl(
+        () =>
+          new Response(
+            concatBytes(
+              ascii('<html><head><meta charset="euc-jp"><title>'),
+              RAKUTEN_EUC_JP,
+              ascii("</title></head></html>"),
+            ) as unknown as BodyInit,
+            { status: 200, headers: { "content-type": "text/html" } },
+          ),
+      );
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "����",
+        description: undefined,
+        image: undefined,
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://euc-jp-title-example.com");
+      expect(result.title).toBe("楽天");
+    });
+
+    it("keeps garbled text as-is when the page declares UTF-8", async () => {
+      mockFetchByUrl(
+        () =>
+          new Response("<html><head><title>ok</title></head></html>", {
+            status: 200,
+            headers: { "content-type": "text/html; charset=utf-8" },
+          }),
+      );
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "� broken bytes",
+        description: undefined,
+        image: undefined,
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://utf8-broken-example.com");
+      expect(result.title).toBe("� broken bytes");
+    });
+
+    it("keeps garbled text as-is when the charset label is unknown", async () => {
+      mockFetchByUrl(
+        () =>
+          new Response("<html><head><title>ok</title></head></html>", {
+            status: 200,
+            headers: { "content-type": "text/html; charset=x-nonsense" },
+          }),
+      );
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "� unknown charset",
+        description: undefined,
+        image: undefined,
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://unknown-charset-example.com");
+      expect(result.title).toBe("� unknown charset");
+    });
+
+    it("keeps garbled text as-is when the page can't be re-fetched", async () => {
+      vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("Network error")));
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "� unreachable",
+        description: undefined,
+        image: undefined,
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://unreachable-page-example.com");
+      expect(result.title).toBe("� unreachable");
+    });
+
+    it("skips the repair fetch entirely when the text is clean", async () => {
+      const spy = mockFetchByUrl(
+        () => new Response(PNG_BYTES as unknown as BodyInit, { status: 200 }),
+      );
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "Clean title",
+        description: "Clean description",
+        image: undefined,
+        icon: undefined,
+      });
+
+      await getMetadata("https://clean-example.com");
+      expect(spy).not.toHaveBeenCalled();
     });
   });
 });
