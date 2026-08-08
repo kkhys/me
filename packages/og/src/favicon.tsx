@@ -53,50 +53,37 @@ const convertSvgToPng = (svg: string) => {
 };
 
 /**
- * Renders a circular gradient icon via satori. The `gradient` is any CSS
- * background value (e.g. linear/radial-gradient). Returns an SVG string, or a
- * PNG Buffer when `format` is "png".
+ * Renders a circular gradient icon via satori as an SVG string. The `gradient`
+ * is any CSS background value (e.g. linear/radial-gradient).
  */
-export const generateIcon = async (
+const generateIconSvg = (
   gradient: string,
   satoriOptions: SatoriOptions,
   iconStyleOptions?: IconStyleOptions,
-  format: "svg" | "png" = "svg",
-) => {
+): Promise<string> => {
   const element = createIconElement(gradient, iconStyleOptions);
-  const svg = await generateSvg(element, satoriOptions);
-
-  if (format === "png") {
-    return convertSvgToPng(svg);
-  }
-
-  return svg;
+  return generateSvg(element, satoriOptions);
 };
+
+/** PNG variant of {@link generateIconSvg}. */
+const generateIconPng = async (
+  gradient: string,
+  satoriOptions: SatoriOptions,
+  iconStyleOptions?: IconStyleOptions,
+): Promise<Buffer> =>
+  convertSvgToPng(await generateIconSvg(gradient, satoriOptions, iconStyleOptions));
 
 /**
  * Builds the five favicon asset generators bound to a single gradient. Each app
- * calls this with its own gradient and exposes the result to its favicon route
- * handlers.
+ * supplies its own gradient; the route factory in handlers.ts exposes the
+ * result as dev-only endpoints.
  */
 export const createFaviconGenerators = (gradient: string) => ({
-  IconSvg: async () =>
-    (await generateIcon(gradient, { width: 500, height: 500 }, undefined, "svg")) as string,
-  Icon192Png: async () =>
-    (await generateIcon(gradient, { width: 192, height: 192 }, undefined, "png")) as Buffer,
-  Icon512Png: async () =>
-    (await generateIcon(gradient, { width: 512, height: 512 }, undefined, "png")) as Buffer,
-  IconMaskPng: async () =>
-    (await generateIcon(
-      gradient,
-      { width: 512, height: 512 },
-      { width: 409, height: 409 },
-      "png",
-    )) as Buffer,
-  AppleTouchIconPng: async () =>
-    (await generateIcon(
-      gradient,
-      { width: 180, height: 180 },
-      { width: 140, height: 140 },
-      "png",
-    )) as Buffer,
+  IconSvg: () => generateIconSvg(gradient, { width: 500, height: 500 }),
+  Icon192Png: () => generateIconPng(gradient, { width: 192, height: 192 }),
+  Icon512Png: () => generateIconPng(gradient, { width: 512, height: 512 }),
+  IconMaskPng: () =>
+    generateIconPng(gradient, { width: 512, height: 512 }, { width: 409, height: 409 }),
+  AppleTouchIconPng: () =>
+    generateIconPng(gradient, { width: 180, height: 180 }, { width: 140, height: 140 }),
 });

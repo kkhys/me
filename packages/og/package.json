@@ -9,13 +9,23 @@
     "./handlers": "./src/handlers.ts",
     "./og": "./src/og.tsx"
   },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
+  },
   "dependencies": {
     "react": "catalog:",
     "satori": "catalog:",
     "sharp": "catalog:"
   },
   "devDependencies": {
-    "@types/react": "catalog:"
+    "@types/bun": "catalog:",
+    "@types/react": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "astro": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "astro": "^7.0.0"

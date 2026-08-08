@@ -12,7 +12,7 @@ src/
   config/constants.ts             # TITLE, TWITTER_ACCOUNT_NAME, IMAGES_PER_PAGE
   layouts/layout.astro            # Base layout (Header, Main, Footer)
   assets/BBHBartle-Regular.ttf    # Font for the LGTM text overlay
-  components/seo/                 # SEO adapters + OG card + favicon (see Shared Packages)
+  components/seo/                 # SEO adapters + OG card (see Shared Packages)
   pages/
     [...page].astro               # Gallery with pagination + infinite scroll
     [id].astro                    # Detail page with format selector
@@ -20,7 +20,7 @@ src/
     [id]-[size].[format].ts       # Sized image API (400/1000/1200px)
     api/ids.json.ts               # JSON listing of all image IDs
     api/og/                       # OG images: default.png (shared handler) + [id].png (per-image, app-local)
-    api/favicon/                  # Dev-only favicon endpoints (404 in prod)
+    api/favicon/                  # Dev-only favicon endpoints (omitted from prod builds)
   __tests__/                      # Vitest unit tests
   __fixtures__/lgtm-sample/       # CI fixtures (used when GITHUB_ACTIONS=true)
 lgtm-content/                     # Git submodule (private) — source images, one media file per ULID dir
@@ -33,7 +33,7 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 
 - `@kkhys/styles` — uchu.css OKLCH palette, imported in `src/styles/global.css`. The `--c-*` semantic tokens and the `prefers-color-scheme` dark mode stay app-local.
 - `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard primitives, wrapped by thin adapters in `src/components/seo/`. `head-meta.astro` and `json-ld.astro` are app-local.
-- `@kkhys/og` — favicon generators (`src/components/seo/favicon/index.ts`, bound to the green gradient) + route handlers. The default OG card (`opengraph-image.tsx`) and the per-id OG (`pages/api/og/[id].png.ts`) stay app-local (bespoke layouts).
+- `@kkhys/og` — favicon routes (`src/pages/api/favicon/[file].ts`, bound to the green gradient) + OG route handlers. The default OG card (`opengraph-image.tsx`) and the per-id OG (`pages/api/og/[id].png.ts`) stay app-local (bespoke layouts).
 
 ## Key Design Decisions
 
@@ -59,4 +59,4 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 - `BBHBartle-Regular.ttf` must exist in `src/assets/`
 - ULIDs must be lowercase
 - Non-first gallery pages (`/2`, `/3`, …) redirect to `/` when accessed directly — they exist only for the infinite-scroll fetch
-- Favicon endpoints (`api/favicon/*`) are dev-only (404 in production); production serves favicons as static assets
+- Favicon endpoints (`api/favicon/*`) are dev-only (their `getStaticPaths` emits no paths in prod builds); production serves favicons as static assets
