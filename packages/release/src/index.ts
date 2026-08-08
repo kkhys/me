@@ -1,29 +1,45 @@
 import { $ } from "bun";
 
+import { buildReleaseBody } from "./github";
 import { resolveReleaseVersion } from "./version";
 
 interface ReleaseOptions {
   /** GitHub repository name, e.g. "me" or "memo". */
   repoName: string;
   /** GitHub repository owner. Defaults to "kkhys". */
-  repoOwner?: string;
+  repoOwner?: string | undefined;
+  /**
+   * Preview the release: no tag, push, checkout, or GitHub API call. Remote
+   * refs are still fetched (read-only) so the previewed version is accurate.
+   */
+  dryRun?: boolean | undefined;
 }
 
 /**
  * Tags the current date as a release on `main`, pushes it, and creates a
- * matching GitHub Release. Pass `--dry-run` on argv to preview without
- * mutating git or calling the GitHub API. Requires `GITHUB_ACCESS_TOKEN`.
+ * matching GitHub Release. Requires `GITHUB_ACCESS_TOKEN` unless `dryRun`.
+ * Sets a non-zero exit code when any step fails.
  */
-export const release = async ({ repoName, repoOwner = "kkhys" }: ReleaseOptions) => {
-  const isDryRun = process.argv.includes("--dry-run");
+export const release = async ({
+  repoName,
+  repoOwner = "kkhys",
+  dryRun = false,
+}: ReleaseOptions) => {
   const githubAccessToken = process.env.GITHUB_ACCESS_TOKEN;
 
-  if (!githubAccessToken) {
+  if (!dryRun && !githubAccessToken) {
     console.error(
       "[ERROR] GitHub token is missing. Set GITHUB_ACCESS_TOKEN in your environment variables.",
     );
-    process.exit(1);
+    process.exitCode = 1;
+    return;
   }
+
+  // Sync remote tags before resolving the suffix, so a release cut from a
+  // machine with stale tags cannot reuse an existing version. Runs in dry-run
+  // too — it only updates remote-tracking refs, and skipping it would preview
+  // a version that a real release would not pick.
+  await $`git fetch origin main --tags`;
 
   const now = new Date();
   const baseVersion = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, "0")}.${String(now.getDate()).padStart(2, "0")}`;
@@ -32,17 +48,19 @@ export const release = async ({ repoName, repoOwner = "kkhys" }: ReleaseOptions)
   const version = resolveReleaseVersion(baseVersion, existingTags);
 
   console.log(`[RELEASE] Creating tag: ${version}`);
-  if (isDryRun) console.log("[DRY-RUN] Mode is ON");
+  if (dryRun) console.log("[DRY-RUN] Mode is ON");
 
   const currentBranch = (await $`git rev-parse --abbrev-ref HEAD`.text()).trim();
 
-  if (isDryRun) {
+  if (dryRun) {
     console.log("[DRY-RUN] Would checkout main");
     console.log(`[DRY-RUN] Would tag -f ${version}`);
     console.log(`[DRY-RUN] Would push -f origin ${version}`);
     console.log(`[DRY-RUN] Would checkout ${currentBranch}`);
   } else {
     await $`git checkout main`;
+    // Refuse to tag a stale or diverged main; --ff-only aborts on divergence.
+    await $`git pull --ff-only origin main`;
     await $`git tag -f -m ${version} ${version}`;
     await $`git push -f origin ${version}`;
     await $`git checkout ${currentBranch}`;
@@ -74,16 +92,9 @@ export const release = async ({ repoName, repoOwner = "kkhys" }: ReleaseOptions)
     return null;
   };
 
-  const createGitHubRelease = async () => {
+  const createGitHubRelease = async (): Promise<boolean> => {
     const previousTag = await getPreviousTag();
-
-    let body = `Automatic release for version ${version}.`;
-    if (previousTag) {
-      const compareUrl = `https://github.com/${repoOwner}/${repoName}/compare/${previousTag}...${version}`;
-      body += `\n\n[View changes since ${previousTag}](${compareUrl})`;
-    } else {
-      body += "\n\n(No previous release found for comparison.)";
-    }
+    const body = buildReleaseBody(version, previousTag, { repoOwner, repoName });
 
     const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/releases`, {
       method: "POST",
@@ -103,19 +114,23 @@ export const release = async ({ repoName, repoOwner = "kkhys" }: ReleaseOptions)
     if (response.ok) {
       const responseData = (await response.json()) as { html_url: string };
       console.log(`[SUCCESS] GitHub Release created: ${responseData.html_url}`);
-    } else {
-      const errorData = (await response.json()) as { message: string };
-      console.error("[ERROR] Failed to create GitHub release.");
-      console.error(`Error: ${errorData.message}`);
+      return true;
     }
+
+    const errorData = (await response.json()) as { message: string };
+    console.error("[ERROR] Failed to create GitHub release.");
+    console.error(`Error: ${errorData.message}`);
+    return false;
   };
 
-  if (isDryRun) {
+  if (dryRun) {
     console.log("[DRY-RUN] Would create GitHub release");
     console.log(`[DRY-RUN] Release tag: ${version}`);
     console.log(`[DRY-RUN] Release title: ${version}`);
     console.log("[DRY-RUN] Completed GitHub release process");
-  } else {
-    await createGitHubRelease();
+  } else if (!(await createGitHubRelease())) {
+    // The tag is already pushed; fail the command so the missing GitHub
+    // Release doesn't go unnoticed.
+    process.exitCode = 1;
   }
 };
