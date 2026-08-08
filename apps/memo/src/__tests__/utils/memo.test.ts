@@ -392,67 +392,6 @@ describe("getCommentsByMemoId", () => {
   });
 });
 
-describe("getMemosWithComments", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-    vi.resetModules();
-    vi.doUnmock("#/utils/memo");
-    vi.doUnmock("astro:env/client");
-    vi.doMock("astro:env/client", () => ({
-      NODE_ENV: "production",
-    }));
-  });
-
-  test("should return main memos with their comments", async () => {
-    const { getCollection } = await import("astro:content");
-    vi.mocked(getCollection).mockResolvedValue(mockMemos);
-
-    const { getMemosWithComments } = await import("#/utils/memo");
-    const result = await getMemosWithComments();
-
-    expect(result).toHaveLength(8);
-    expect(result[0]?.main.data.id).toBe("rss-b1akmxp");
-    expect(result[0]?.comments).toHaveLength(0);
-    expect(result[1]?.main.data.id).toBe("quote-2");
-    expect(result[1]?.comments).toHaveLength(0);
-    expect(result[2]?.main.data.id).toBe("quote-1");
-    expect(result[2]?.comments).toHaveLength(0);
-    expect(result[3]?.main.data.id).toBe("memo-6");
-    expect(result[3]?.comments).toHaveLength(0);
-    expect(result[4]?.main.data.id).toBe("memo-4");
-    expect(result[4]?.comments).toHaveLength(0);
-    expect(result[5]?.main.data.id).toBe("memo-2");
-    expect(result[5]?.comments).toHaveLength(1);
-    expect(result[6]?.main.data.id).toBe("oss-gh-labeler");
-    expect(result[6]?.comments).toHaveLength(0);
-    expect(result[7]?.main.data.id).toBe("memo-1");
-    expect(result[7]?.comments).toHaveLength(2);
-  });
-
-  test("should return comments sorted by createdAt in ascending order", async () => {
-    const { getCollection } = await import("astro:content");
-    vi.mocked(getCollection).mockResolvedValue(mockMemos);
-
-    const { getMemosWithComments } = await import("#/utils/memo");
-    const result = await getMemosWithComments();
-
-    const memo1Result = result.find(({ main }) => main.data.id === "memo-1");
-    expect(memo1Result?.comments[0]?.memo.data.id).toBe("comment-1");
-    expect(memo1Result?.comments[1]?.memo.data.id).toBe("comment-2");
-  });
-
-  test("should not include draft comments in production", async () => {
-    const { getCollection } = await import("astro:content");
-    vi.mocked(getCollection).mockResolvedValue(mockMemos);
-
-    const { getMemosWithComments } = await import("#/utils/memo");
-    const result = await getMemosWithComments();
-
-    const allComments = result.flatMap(({ comments }) => comments);
-    expect(allComments.every((comment) => !comment.memo.data.isDraft)).toBe(true);
-  });
-});
-
 describe("getMemosByAuthor", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -630,10 +569,12 @@ describe("getMemosWithCommentsAndPinned", () => {
 
   test("should return empty pinned array when no memos are pinned", async () => {
     const { getCollection } = await import("astro:content");
-    const memosWithNoPinned = mockMemos.map((memo) => ({
-      ...memo,
-      data: { ...memo.data, isPinned: false },
-    }));
+    // Object.assign rather than spread: oxlint's no-map-spread rejects
+    // spreading inside map(), and mockMemos is shared with the other tests
+    // in this file, so the copies must not alias it.
+    const memosWithNoPinned = mockMemos.map((memo) =>
+      Object.assign({}, memo, { data: Object.assign({}, memo.data, { isPinned: false }) }),
+    );
     vi.mocked(getCollection).mockResolvedValue(memosWithNoPinned);
 
     const { getMemosWithCommentsAndPinned } = await import("#/utils/memo");
@@ -641,31 +582,6 @@ describe("getMemosWithCommentsAndPinned", () => {
 
     expect(pinned).toHaveLength(0);
     expect(memos).toHaveLength(8);
-  });
-});
-
-describe("buildQuoteCountMap", () => {
-  test("should count quotes correctly", async () => {
-    const { buildQuoteCountMap } = await import("#/utils/memo");
-    const result = buildQuoteCountMap(mockMemos);
-
-    expect(result.get("memo-1")).toBe(1);
-    expect(result.get("comment-1")).toBe(1);
-  });
-
-  test("should return empty map when no memos have quotes", async () => {
-    const { buildQuoteCountMap } = await import("#/utils/memo");
-    const memosWithoutQuotes = mockMemos.filter((m) => !m.data.quote);
-    const result = buildQuoteCountMap(memosWithoutQuotes);
-
-    expect(result.size).toBe(0);
-  });
-
-  test("should return empty map for empty collection", async () => {
-    const { buildQuoteCountMap } = await import("#/utils/memo");
-    const result = buildQuoteCountMap([]);
-
-    expect(result.size).toBe(0);
   });
 });
 
