@@ -22,15 +22,6 @@ jobs:
           submodules: true
           token: ${{ secrets.SUBMODULE_TOKEN }}
 
-      # pnpm version comes from the root package.json packageManager field
-      - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
-
-      - name: Setup Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: "24"
-          cache: "pnpm"
-
       - name: Update submodule
         id: update
         run: |
@@ -65,11 +56,11 @@ jobs:
           TITLE="[main] chore: update memo submodule"
           COMMIT_MSG="chore(memo): update submodule at ${TIMESTAMP}"
 
-          pnpm install --no-frozen-lockfile
-
+          # The submodule is not a workspace member, so the lockfile never
+          # changes here; only the gitlink needs committing.
           BRANCH="update-memo-submodule-$(TZ=Asia/Tokyo date +%Y%m%d-%H%M%S)"
           git checkout -b "$BRANCH"
-          git add apps/memo/memo-content pnpm-lock.yaml
+          git add apps/memo/memo-content
           git commit -m "$COMMIT_MSG"
           git push origin "$BRANCH"
 
