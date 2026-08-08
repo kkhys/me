@@ -4,6 +4,7 @@ import type { HTMLAttributes } from "astro/types";
 import GlobeIcon from "#/components/icons/globe.svg";
 import { getMetadata } from "#/lib/api/metadata";
 import { BASE_URL } from "#/utils/base-url";
+import { blurLoadHandlers } from "#/utils/blur-load";
 
 interface Props extends HTMLAttributes<"a"> {
   href: string;
@@ -56,7 +57,7 @@ const blurryImage = image
                 sizes="(max-width: 639.98px) 100vw, 230px"
                 format="avif"
                 class="link-card-img"
-                onload="this.closest('.link-card-blur-load')?.classList.add('image-loaded')"
+                {...blurLoadHandlers(".link-card-blur-load")}
             />
           </div>
       )}

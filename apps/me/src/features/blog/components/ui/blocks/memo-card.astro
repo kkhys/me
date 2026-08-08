@@ -4,6 +4,7 @@ import type { HTMLAttributes } from "astro/types";
 import Budoux from "#/components/budoux.astro";
 import MemoIcon from "#/components/icons/memo.svg";
 import { extractMemoId, getMemoPost } from "#/lib/api/memo";
+import { blurLoadHandlers } from "#/utils/blur-load";
 import { convertDateToString } from "#/utils/date";
 
 interface Props extends HTMLAttributes<"a"> {
@@ -108,7 +109,7 @@ const blurryImages = hasImages
                       format="avif"
                       alt={`Image ${i + 1}`}
                       class="memo-img"
-                      onload="this.closest('[data-blur-load]')?.classList.add('image-loaded')"
+                      {...blurLoadHandlers("[data-blur-load]")}
                     />
                   </div>
                 ))}
