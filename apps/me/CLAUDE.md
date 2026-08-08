@@ -17,7 +17,7 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 
 - `@kkhys/styles` — uchu.css OKLCH palette
 - `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard primitives, wrapped in `src/components/seo/`
-- `@kkhys/og` — Satori OG image + favicon generators, wired in `src/components/seo/favicon/` and `src/pages/api/`
+- `@kkhys/og` — Satori OG image + favicon generators, wired in `src/pages/api/`
 
 ## Content System
 
