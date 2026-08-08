@@ -11,6 +11,9 @@ import { join } from "node:path";
 import { ulid } from "ulid";
 import { countMemoChars, MAX_BODY_LENGTH, MAX_IMAGES, type MemoSummary } from "./memo-format";
 
+/** Invalid input from the client, as opposed to an unexpected server failure. */
+export class MemoValidationError extends Error {}
+
 const DATE_TIME_PATTERN = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/u;
 const TAG_PATTERN = /^[a-z0-9_]+$/u;
 const ULID_PATTERN = /^[0-9a-hjkmnp-tv-z]{26}$/u;
@@ -46,7 +49,9 @@ export const formatDateTime = (date: Date): string =>
 const parseDateTime = (dateTimeStr: string): Date => {
   const match = dateTimeStr.match(DATE_TIME_PATTERN);
   if (!match) {
-    throw new Error(`Invalid datetime format (expected YYYY-MM-DD HH:mm:ss): ${dateTimeStr}`);
+    throw new MemoValidationError(
+      `Invalid datetime format (expected YYYY-MM-DD HH:mm:ss): ${dateTimeStr}`,
+    );
   }
 
   const [, year, month, day, hour, minute, second] = match.map(Number) as [
@@ -61,7 +66,7 @@ const parseDateTime = (dateTimeStr: string): Date => {
   const date = new Date(year, month - 1, day, hour, minute, second);
 
   if (formatDateTime(date) !== dateTimeStr) {
-    throw new Error(`Invalid datetime: ${dateTimeStr}`);
+    throw new MemoValidationError(`Invalid datetime: ${dateTimeStr}`);
   }
 
   return date;
@@ -105,18 +110,18 @@ const serializeMemoFile = (
 
 const validateInput = (input: CreateMemoInput): void => {
   if (input.body.trim() === "") {
-    throw new Error("Body is required");
+    throw new MemoValidationError("Body is required");
   }
 
   const charCount = countMemoChars(input.body);
   if (charCount > MAX_BODY_LENGTH) {
-    throw new Error(
+    throw new MemoValidationError(
       `Character count exceeds the limit: ${charCount} characters (limit: ${MAX_BODY_LENGTH} characters)`,
     );
   }
 
   if (input.tag !== undefined && !TAG_PATTERN.test(input.tag)) {
-    throw new Error(`Invalid tag (allowed: a-z, 0-9, _): ${input.tag}`);
+    throw new MemoValidationError(`Invalid tag (allowed: a-z, 0-9, _): ${input.tag}`);
   }
 
   for (const [field, value] of [
@@ -124,12 +129,14 @@ const validateInput = (input: CreateMemoInput): void => {
     ["quote", input.quote],
   ] as const) {
     if (value !== undefined && !ULID_PATTERN.test(value)) {
-      throw new Error(`Invalid ${field} target (expected a lowercase ULID): ${value}`);
+      throw new MemoValidationError(
+        `Invalid ${field} target (expected a lowercase ULID): ${value}`,
+      );
     }
   }
 
   if (input.images !== undefined && input.images.length > MAX_IMAGES) {
-    throw new Error(`Too many images: ${input.images.length} (limit: ${MAX_IMAGES})`);
+    throw new MemoValidationError(`Too many images: ${input.images.length} (limit: ${MAX_IMAGES})`);
   }
 };
 
@@ -148,7 +155,7 @@ export const createMemo = (baseDir: string, input: CreateMemoInput): MemoSummary
   const memoDir = join(baseDir, dirName);
 
   if (existsSync(memoDir)) {
-    throw new Error(`Memo directory already exists: ${dirName}`);
+    throw new MemoValidationError(`Memo directory already exists: ${dirName}`);
   }
 
   const body = input.body.trim();

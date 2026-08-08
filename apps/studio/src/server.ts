@@ -10,7 +10,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { $, type BunRequest } from "bun";
 import homepage from "./index.html";
-import { createMemo, listMemos, type MemoImageInput } from "./memo-store";
+import { createMemo, listMemos, type MemoImageInput, MemoValidationError } from "./memo-store";
 import { isAllowedRequest } from "./request-guard";
 
 const REPO_ROOT = fileURLToPath(new URL("../../..", import.meta.url));
@@ -92,7 +92,9 @@ const server = Bun.serve({
 
           return Response.json({ memo }, { status: 201 });
         } catch (error) {
-          return errorResponse(error);
+          // Validation problems are the client's fault; anything else (disk
+          // errors, bugs) should surface as a server failure.
+          return errorResponse(error, error instanceof MemoValidationError ? 400 : 500);
         }
       }),
     },
