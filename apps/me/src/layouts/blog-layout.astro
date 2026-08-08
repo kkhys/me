@@ -11,7 +11,7 @@ import EntryList from "#/features/blog/components/ui/entry-list.astro";
 import PostNavigation from "#/features/blog/components/ui/post-navigation.astro";
 import TagCloud from "#/features/blog/components/ui/tag-cloud.astro";
 import Toc from "#/features/blog/components/ui/toc.astro";
-import { getCategoryBySlug } from "#/features/blog/config/category";
+import { getCategoryByTitle } from "#/features/blog/config/category";
 import { tags as allTags } from "#/features/blog/config/tag";
 import { getRelatedPosts, type PostNavItem, toListEntries } from "#/features/blog/utils/entry";
 import BaseLayout from "#/layouts/base-layout.astro";
@@ -20,6 +20,8 @@ import { BASE_URL } from "#/utils/base-url";
 interface Props extends InferEntrySchema<"blog"> {
   id: string;
   description: string;
+  publishedAtString: string;
+  updatedAtString?: string | undefined;
   headings: MarkdownHeading[];
   newerPost: PostNavItem | undefined;
   olderPost: PostNavItem | undefined;
@@ -45,11 +47,10 @@ const {
 const updatedInfo =
   updatedAt && updatedAtString ? { date: updatedAt, label: updatedAtString } : undefined;
 
-const categorySlug = category.toLowerCase();
-const categoryObject = getCategoryBySlug(categorySlug);
+const categoryObject = getCategoryByTitle(category);
 
 if (!categoryObject) {
-  throw new Error(`Category "${categorySlug}" not found`);
+  throw new Error(`Category "${category}" not found`);
 }
 
 const allTagCloudItems = await Promise.all(
@@ -63,7 +64,7 @@ const allTagCloudItems = await Promise.all(
 );
 
 const tagCloudItems = allTagCloudItems.filter(({ title: tagTitle }) =>
-  tags?.includes(tagTitle as (typeof tags)[number]),
+  tags?.includes(tagTitle),
 );
 
 const relatedPosts = await getRelatedPosts({ id, category, tags });

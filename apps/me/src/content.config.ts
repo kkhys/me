@@ -17,13 +17,11 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     emoji: z.string(),
-    category: z.enum(categoryTitles as [string, ...string[]]),
-    tags: z.array(z.enum(allTagTitles as [string, ...string[]])).optional(),
+    category: z.enum(categoryTitles),
+    tags: z.array(z.enum(allTagTitles)).optional(),
     status: z.enum(["draft", "published"]).default("draft"),
     publishedAt: z.date(),
-    publishedAtString: z.string().optional(),
     updatedAt: z.date().optional(),
-    updatedAtString: z.string().optional(),
   }),
 });
 
@@ -56,9 +54,9 @@ const externalPost = defineCollection({
   schema: z.object({
     title: z.string(),
     url: z.url(),
-    siteName: z.enum(externalSites as [string, ...string[]]),
-    category: z.enum(categoryTitles as [string, ...string[]]),
-    tags: z.array(z.enum(allTagTitles as [string, ...string[]])).optional(),
+    siteName: z.enum(externalSites),
+    category: z.enum(categoryTitles),
+    tags: z.array(z.enum(allTagTitles)).optional(),
     publishedAt: z.date(),
   }),
 });
