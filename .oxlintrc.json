@@ -17,7 +17,10 @@
     // Sequential awaits are intentional (ordered ops / pacing)
     "eslint/no-await-in-loop": "off",
     // Required args typed `T | undefined` must receive an explicit undefined
-    "unicorn/no-useless-undefined": "off"
+    "unicorn/no-useless-undefined": "off",
+    "import/no-cycle": "error",
+    "import/no-duplicates": "error",
+    "unicorn/prefer-node-protocol": "error"
   },
   "ignorePatterns": ["**/*-content/**", "**/public/**", "**/.cache/**"]
 }

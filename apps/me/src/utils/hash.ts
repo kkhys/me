@@ -1,7 +1,10 @@
-import { type BinaryLike, createHash } from "node:crypto";
+import { createHash } from "node:crypto";
 import { bech32m } from "bech32";
 
-export const generateBech32m = (data: BinaryLike, prefix: string) => {
+// `data` is `string`, not node:crypto's `BinaryLike`: every caller hashes
+// heading text, and `BinaryLike` widens to `ArrayBuffer`, which the newer
+// @types/node that @kkhys/og pulls into this program rejects in `Hash.update`.
+export const generateBech32m = (data: string, prefix: string) => {
   const hashAlgorithm = "sha512";
   const encoding = "hex";
   const slugLength = 7;
