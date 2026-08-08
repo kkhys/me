@@ -7,6 +7,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import satori from "satori";
 import sharp from "sharp";
+import { resolveLgtmBasePath } from "#/config/content-path";
 
 export type LgtmFormat = "avif" | "webp";
 
@@ -137,7 +138,7 @@ const generateAnimatedWebp = async (baseImage: Buffer, width: number): Promise<B
 };
 
 export const LgtmImage = async (entry: CollectionEntry<"lgtm">, width = 400): Promise<Buffer> => {
-  const lgtmBasePath = GITHUB_ACTIONS ? "./src/__fixtures__/lgtm-sample" : "./lgtm-content/lgtm";
+  const lgtmBasePath = resolveLgtmBasePath(GITHUB_ACTIONS);
 
   const imagePath = join(lgtmBasePath, entry.id, entry.data.image);
   const baseImage = await readFile(imagePath);

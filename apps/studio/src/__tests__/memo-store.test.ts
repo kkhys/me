@@ -11,7 +11,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { ulid } from "ulid";
-import { countMemoChars, createMemo, formatDateTime, listMemos } from "../memo-store";
+import { createMemo, formatDateTime, listMemos } from "../memo-store";
 
 let baseDir: string;
 
@@ -31,17 +31,6 @@ const writeMemoFixture = (dirName: string, content: string, images: string[] = [
     writeFileSync(join(dir, image), Buffer.from([0xff]));
   }
 };
-
-describe("countMemoChars", () => {
-  it("counts plain text length", () => {
-    expect(countMemoChars("こんにちは")).toBe(5);
-  });
-
-  it("excludes markdown syntax, matching remark-word-limit", () => {
-    expect(countMemoChars("[abc](https://example.com)")).toBe(3);
-    expect(countMemoChars("**bold** and _em_")).toBe(11);
-  });
-});
 
 describe("createMemo", () => {
   it("creates a directory with frontmatter and body", () => {

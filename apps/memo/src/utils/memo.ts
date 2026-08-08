@@ -73,13 +73,6 @@ export const getCommentsByMemoId = async (memoId: string) => {
   return buildNestedComments(memoId, commentMap);
 };
 
-export const getMemosWithComments = async () => {
-  const allMemos = await getPublishedMemos();
-  const mainMemos = allMemos.filter(({ data }) => !data.comment);
-  const commentMap = buildCommentMap(allMemos);
-  return attachComments(mainMemos, commentMap);
-};
-
 export const getMemosWithCommentsAndPinned = async () => {
   const allMemos = await getPublishedMemos();
   const mainMemos = allMemos.filter(({ data }) => !data.comment);
@@ -111,17 +104,6 @@ export const getAllTags = async () => {
 export const getQuotedMemo = async (quoteId: string): Promise<Memo | undefined> => {
   const allMemos = await getPublishedMemos();
   return allMemos.find(({ data }) => data.id === quoteId);
-};
-
-export const buildQuoteCountMap = (memos: Memo[]): Map<string, number> => {
-  const countMap = new Map<string, number>();
-  for (const memo of memos) {
-    if (memo.data.quote) {
-      const current = countMap.get(memo.data.quote) ?? 0;
-      countMap.set(memo.data.quote, current + 1);
-    }
-  }
-  return countMap;
 };
 
 export const countTotalComments = (comments: MemoWithComments[]): number => {

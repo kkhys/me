@@ -8,12 +8,8 @@
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { toString as mdastToString } from "mdast-util-to-string";
-import { remark } from "remark";
 import { ulid } from "ulid";
-
-export const MAX_BODY_LENGTH = 500;
-export const MAX_IMAGES = 4;
+import { countMemoChars, MAX_BODY_LENGTH, MAX_IMAGES, type MemoSummary } from "./memo-format";
 
 const DATE_TIME_PATTERN = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/u;
 const TAG_PATTERN = /^[a-z0-9_]+$/u;
@@ -38,25 +34,7 @@ export interface CreateMemoInput {
   images?: MemoImageInput[] | undefined;
 }
 
-export interface MemoSummary {
-  dirName: string;
-  id: string;
-  createdAt: string;
-  body: string;
-  tag?: string | undefined;
-  comment?: string | undefined;
-  quote?: string | undefined;
-  isDraft: boolean;
-  images: string[];
-}
-
-const processor = remark();
-
-/**
- * Count body characters the same way the memo app's remark-word-limit plugin
- * does: markdown syntax is excluded, only rendered text is counted.
- */
-export const countMemoChars = (body: string): number => mdastToString(processor.parse(body)).length;
+export type { MemoSummary };
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
