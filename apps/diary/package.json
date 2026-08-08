@@ -9,10 +9,15 @@
     "check": "astro check && tsc --noEmit",
     "lint": "oxlint && oxfmt --check",
     "lint:fix": "oxlint --fix && oxfmt",
-    "deploy": "pnpm build && wrangler pages deploy dist"
+    "deploy": "pnpm build && wrangler pages deploy dist",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage",
+    "all": "pnpm build && pnpm check && pnpm lint:fix && pnpm test && pnpm coverage"
   },
   "dependencies": {
     "@astrojs/compiler-rs": "catalog:",
+    "@kkhys/og": "workspace:*",
+    "@kkhys/seo": "workspace:*",
     "@kkhys/styles": "workspace:*",
     "astro": "catalog:",
     "kiso.css": "catalog:",
@@ -21,9 +26,11 @@
   "devDependencies": {
     "@astrojs/check": "catalog:",
     "@astrojs/sitemap": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "typescript": "catalog:",
+    "vitest": "catalog:",
     "wrangler": "catalog:"
   }
 }

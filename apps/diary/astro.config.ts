@@ -8,7 +8,6 @@ export default defineConfig({
     format: "file",
   },
   image: {
-    remotePatterns: [{ protocol: "https" }],
     service:
       process.env.GITHUB_ACTIONS === "true"
         ? { entrypoint: "astro/assets/services/noop" }

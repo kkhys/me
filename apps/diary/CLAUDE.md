@@ -6,10 +6,13 @@ Photo diary site (diary.kkhys.me), the `@kkhys/diary` app of the kkhys monorepo.
 
 ```
 src/
-  pages/index.astro           # The gallery: globs diary-content photos, sorts by date, builds entries + OG image
-  layouts/base-layout.astro   # HTML shell + inline SEO/OGP meta (bespoke, app-local)
+  pages/index.astro           # The gallery: globs diary-content photos, builds entries + OG image
+  pages/api/favicon/          # Dev-only favicon endpoints via @kkhys/og (omitted from prod builds)
+  layouts/base-layout.astro   # HTML shell wired to the @kkhys/seo primitives
   components/diary-image.astro # <Picture> with AVIF/WebP variants + blur-up placeholder
+  utils/entries.ts            # buildEntries: glob paths → dated, numbered entries (newest first)
   styles/global.css           # Design tokens (--c-*, --ff-mono) + base styles; palette from @kkhys/styles
+  __tests__/                  # Vitest unit tests
 public/robots.txt
 diary-content/                # Git submodule (private) — photos at diary/<YYYY-MM-DD>/<n>.jpg, not checked out in CI
 ```
@@ -19,8 +22,8 @@ diary-content/                # Git submodule (private) — photos at diary/<YYY
 Consumed as source (no build step).
 
 - `@kkhys/styles` — uchu.css OKLCH palette, imported in `src/styles/global.css`. The `--c-*` semantic tokens stay app-local.
-
-SEO and the OG image stay app-local: diary's OG image is the first (newest) photo resized to 1200px wide with a dynamic height (JPEG), and the `<meta>` block in `base-layout.astro` emits `og:image` and switches `twitter:card` only when a photo exists. `@kkhys/seo` (image required, fixed 1200×630 PNG) and `@kkhys/og` (Satori OG cards / favicons) do not fit this app and are not used.
+- `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard in `base-layout.astro`. diary's OG image is the newest photo (variable-height JPEG), passed via the `imageType`/`imageWidth`/`imageHeight` props; `twitter:card` switches to "summary" when no photo exists.
+- `@kkhys/og` — favicon routes (`src/pages/api/favicon/[file].ts`, bound to the grayscale gradient). The OG image stays app-local (a photo, not a Satori card).
 
 ## Key Design Decisions
 
@@ -32,7 +35,7 @@ SEO and the OG image stay app-local: diary's OG image is the first (newest) phot
 
 - Dev tools come from the Nix Flake at the repo root (`flake.nix`). Run `direnv allow` once.
 - Run scripts from this directory, or from the repo root via `pnpm --filter @kkhys/diary <script>` (or `pnpm dev:diary` / `build:diary` / `deploy:diary`).
-- CI: lint → test → type check → build across the workspace. diary has no unit tests, so `pnpm -r test` skips it. Add the `skip-ci` label to PRs to skip.
+- CI: lint → test → type check → build across the workspace. Add the `skip-ci` label to PRs to skip.
 - Deploy: built and shipped locally via `pnpm deploy:diary`; diary is not deployed from CI. Initialize `diary-content` first.
 - Release: repo-wide from the root (`pnpm release`); diary has no separate release.
 
