@@ -1,4 +1,3 @@
-import type { APIContext } from "astro";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { GET, getStaticPaths } from "#/pages/[id].[format]";
 
@@ -24,6 +23,7 @@ vi.mock("#/components/lgtm-image", () => ({
   LgtmImage: vi.fn<() => Promise<Buffer>>(() => Promise.resolve(Buffer.from("mock-image-data"))),
   formatForEntry: (entry: { data: { animated: boolean } }) =>
     entry.data.animated ? "webp" : "avif",
+  CONTENT_TYPES: { avif: "image/avif", webp: "image/webp" },
 }));
 
 describe("[id].[format].ts API Route", () => {
@@ -54,7 +54,7 @@ describe("[id].[format].ts API Route", () => {
       const context = {
         params: { id: stillEntry.id, format: "avif" },
         props: { entry: stillEntry },
-      } as unknown as APIContext;
+      } as unknown as Parameters<typeof GET>[0];
 
       const response = await GET(context);
 
@@ -66,7 +66,7 @@ describe("[id].[format].ts API Route", () => {
       const context = {
         params: { id: animatedEntry.id, format: "webp" },
         props: { entry: animatedEntry },
-      } as unknown as APIContext;
+      } as unknown as Parameters<typeof GET>[0];
 
       const response = await GET(context);
 
@@ -77,7 +77,7 @@ describe("[id].[format].ts API Route", () => {
       const context = {
         params: { id: stillEntry.id, format: "avif" },
         props: { entry: stillEntry },
-      } as unknown as APIContext;
+      } as unknown as Parameters<typeof GET>[0];
 
       const response = await GET(context);
 
@@ -91,7 +91,7 @@ describe("[id].[format].ts API Route", () => {
       const context = {
         params: { id: stillEntry.id, format: "avif" },
         props: { entry: stillEntry },
-      } as unknown as APIContext;
+      } as unknown as Parameters<typeof GET>[0];
 
       const response = await GET(context);
 

@@ -1,31 +1,26 @@
 import { getCollection } from "astro:content";
-import type { APIRoute } from "astro";
-import { formatForEntry, LgtmImage } from "#/components/lgtm-image";
+import type { APIRoute, InferGetStaticPropsType } from "astro";
+import { CONTENT_TYPES, formatForEntry, LgtmImage } from "#/components/lgtm-image";
 
-const CONTENT_TYPES = {
-  avif: "image/avif",
-  webp: "image/webp",
-} as const;
-
-const SIZES = ["400", "1000", "1200"] as const;
-type ImageSize = (typeof SIZES)[number];
+const SIZES = [400, 1000, 1200] as const;
 
 export const getStaticPaths = async () => {
   const lgtmEntries = await getCollection("lgtm");
 
   return lgtmEntries.flatMap((entry) =>
     SIZES.map((size) => ({
-      params: { id: entry.id, size, format: formatForEntry(entry) },
+      params: { id: entry.id, size: String(size), format: formatForEntry(entry) },
       props: { entry, size },
     })),
   );
 };
 
-export const GET: APIRoute = async ({ props }) => {
-  const { entry, size } = props as Awaited<ReturnType<typeof getStaticPaths>>[number]["props"];
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-  const width = Math.trunc(Number(size as ImageSize));
-  const image = await LgtmImage(entry, width);
+export const GET: APIRoute<Props> = async ({ props }) => {
+  const { entry, size } = props;
+
+  const image = await LgtmImage(entry, size);
 
   return new Response(new Uint8Array(image), {
     headers: {

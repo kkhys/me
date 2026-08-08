@@ -6,7 +6,7 @@ interface Article {
   publishedTime: string;
   modifiedTime: string;
   author: string;
-  tag?: string;
+  tag?: string | undefined;
 }
 
 interface Props {
@@ -14,8 +14,8 @@ interface Props {
   description: string;
   image: string;
   imageAlt: string;
-  type?: "website" | "article" | "profile";
-  article?: Article;
+  type?: "website" | "article" | "profile" | undefined;
+  article?: Article | undefined;
 }
 
 const {

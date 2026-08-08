@@ -9,7 +9,11 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      // Non-first gallery pages are noindex and redirect direct visits;
+      // advertising them in the sitemap sends crawlers a mixed signal.
+      filter: (page) => !/^\/\d+$/u.test(new URL(page).pathname),
+    }),
     (await import("@playform/compress")).default({
       Image: false,
       SVG: false,
@@ -17,11 +21,6 @@ export default defineConfig({
   ],
   env: {
     schema: {
-      NODE_ENV: envField.enum({
-        context: "client",
-        access: "public",
-        values: ["development", "production"],
-      }),
       GITHUB_ACTIONS: envField.boolean({
         context: "client",
         access: "public",

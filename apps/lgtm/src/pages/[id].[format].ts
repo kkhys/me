@@ -1,11 +1,6 @@
 import { getCollection } from "astro:content";
-import type { APIRoute } from "astro";
-import { formatForEntry, LgtmImage } from "#/components/lgtm-image";
-
-const CONTENT_TYPES = {
-  avif: "image/avif",
-  webp: "image/webp",
-} as const;
+import type { APIRoute, InferGetStaticPropsType } from "astro";
+import { CONTENT_TYPES, formatForEntry, LgtmImage } from "#/components/lgtm-image";
 
 export const getStaticPaths = async () => {
   const lgtmEntries = await getCollection("lgtm");
@@ -16,8 +11,10 @@ export const getStaticPaths = async () => {
   }));
 };
 
-export const GET: APIRoute = async ({ props }) => {
-  const { entry } = props as Awaited<ReturnType<typeof getStaticPaths>>[number]["props"];
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+export const GET: APIRoute<Props> = async ({ props }) => {
+  const { entry } = props;
 
   const image = await LgtmImage(entry, 800);
 

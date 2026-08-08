@@ -14,6 +14,11 @@ export type LgtmFormat = "avif" | "webp";
 export const formatForEntry = (entry: CollectionEntry<"lgtm">): LgtmFormat =>
   entry.data.animated ? "webp" : "avif";
 
+export const CONTENT_TYPES: Record<LgtmFormat, string> = {
+  avif: "image/avif",
+  webp: "image/webp",
+};
+
 const QUALITY = 90;
 
 // Cache the font file across many LgtmImage calls in a single build. The
