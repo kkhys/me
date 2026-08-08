@@ -1,0 +1,27 @@
+---
+interface Props {
+  tag: string;
+}
+
+const { tag } = Astro.props;
+---
+
+<div class="memo-tags">
+  <a href={`/tag/${tag}`} class="tag-link">#{tag}</a>
+</div>
+
+<style>
+    .memo-tags {
+        margin-top: 0.5rem;
+    }
+
+    .tag-link {
+        font-size: var(--fs-sm);
+        color: var(--c-link);
+        text-decoration: none;
+    }
+
+    .tag-link:hover {
+        text-decoration: underline;
+    }
+</style>

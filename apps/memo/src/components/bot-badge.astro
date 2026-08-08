@@ -1,6 +1,6 @@
 ---
 interface Props {
-  size?: number;
+  size?: number | undefined;
 }
 
 const { size = 8 } = Astro.props;
@@ -27,6 +27,18 @@ const { size = 8 } = Astro.props;
 </span>
 
 <style>
+  .bot-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.15rem;
+    border-radius: 0.2rem;
+    border: 1px solid var(--c-gray);
+    color: var(--c-sub-text);
+    flex-shrink: 0;
+    line-height: 0;
+  }
+
   .bot-eye {
     fill: var(--c-bg);
   }

@@ -1,11 +1,11 @@
 ---
 import type { InferEntrySchema } from "astro:content";
 import BotBadge from "#/components/bot-badge.astro";
-import { formatDate, formatDateTime } from "../utils/date";
+import { formatDate, formatDateTime } from "#/utils/date";
 
 interface Props extends Pick<InferEntrySchema<"memo">, "author" | "createdAt"> {
-  authorLink?: string;
-  isBot?: boolean;
+  authorLink?: string | undefined;
+  isBot?: boolean | undefined;
 }
 
 const { author, createdAt, authorLink, isBot = false } = Astro.props;
@@ -33,11 +33,6 @@ const fullDateTimeString = formatDateTime(createdAt);
         align-items: center;
         gap: 0.5rem;
         margin-bottom: 0.15rem;
-    }
-
-    .post-username-link {
-        /*text-decoration: none;*/
-        /*color: inherit;*/
     }
 
     .post-username-link:hover {
