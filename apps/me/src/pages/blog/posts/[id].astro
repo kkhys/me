@@ -8,6 +8,7 @@ import { getCategoryByTitle } from "#/features/blog/config/category";
 import { getPublicBlogEntries, toPostNavItem } from "#/features/blog/utils/entry";
 import BlogLayout from "#/layouts/blog-layout.astro";
 import { getBlogPostingSchema } from "#/lib/json-ld";
+import { BASE_URL } from "#/utils/base-url";
 import { convertDateToString } from "#/utils/date";
 import { extractDescription } from "#/utils/extract-description";
 
@@ -56,19 +57,19 @@ const breadcrumbSchema: WithContext<BreadcrumbList> = {
       "@type": "ListItem",
       position: 1,
       name: "Blog",
-      item: `${import.meta.env.SITE}/blog`,
+      item: `${BASE_URL}/blog`,
     },
     {
       "@type": "ListItem",
       position: 2,
       name: categoryObject.label,
-      item: `${import.meta.env.SITE}/blog/categories/${categoryObject.slug}`,
+      item: `${BASE_URL}/blog/categories/${categoryObject.slug}`,
     },
     {
       "@type": "ListItem",
       position: 3,
       name: entry.data.title,
-      item: `${import.meta.env.SITE}/blog/posts/${entry.id}`,
+      item: `${BASE_URL}/blog/posts/${entry.id}`,
     },
   ],
 };

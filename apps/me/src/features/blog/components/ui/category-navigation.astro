@@ -1,16 +1,18 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { categories } from "#/features/blog/config/category";
+import { normalizePathname } from "@kkhys/seo/pathname";
 
 interface Props extends HTMLAttributes<"div"> {}
 
 const { class: className, ...rest } = Astro.props;
 
-const pathname = Astro.url.pathname;
+const pathname = normalizePathname(Astro.url.pathname);
+const isBlogRoot = /^\/blog(\/\d+)?$/u.test(pathname);
 ---
 
 <nav class:list={['category-scroll palt', className]} {...rest}>
-  {/^\/blog(\/\d+)?(\.html)?\/?$/.test(pathname) ? (
+  {isBlogRoot ? (
       <span class="cat-link cat-link--active">
       すべて
     </span>
@@ -20,7 +22,7 @@ const pathname = Astro.url.pathname;
       </a>
   )}
   {categories.map(({ slug, label }) => (
-    pathname?.startsWith(`/blog/categories/${slug}`) ? (
+    pathname.startsWith(`/blog/categories/${slug}`) ? (
         <span class="cat-link cat-link--active">
       {label}
     </span>

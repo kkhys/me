@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import type { TagTitle } from "#/features/blog/config/tag";
 import { getBlogPostingSchema, websiteSchema } from "#/lib/json-ld";
 
 describe("websiteSchema", () => {
@@ -43,7 +44,8 @@ describe("getBlogPostingSchema", () => {
   });
 
   it("throws error for invalid category", () => {
-    const invalidData = { ...baseData, category: "Invalid" };
+    // Cast past the literal type: the guard under test is runtime behavior.
+    const invalidData = { ...baseData, category: "Invalid" as typeof baseData.category };
     expect(() =>
       getBlogPostingSchema({
         id: "test123",
@@ -67,7 +69,8 @@ describe("getBlogPostingSchema", () => {
   it("falls back to raw tag title when tag is not found in config", () => {
     const schema = getBlogPostingSchema({
       id: "test123",
-      data: { ...baseData, tags: ["NonExistentTag"] },
+      // Cast past the literal type: the fallback under test is runtime behavior.
+      data: { ...baseData, tags: ["NonExistentTag" as TagTitle] },
       description: "test",
     });
 

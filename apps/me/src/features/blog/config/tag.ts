@@ -225,7 +225,10 @@ export const tags = [
   },
 ] as const satisfies Tag[];
 
-export const allTagTitles = tags.map(({ title }) => title);
+export type TagTitle = (typeof tags)[number]["title"];
+
+// Restore the tuple shape map() erases so z.enum keeps the literal types.
+export const allTagTitles = tags.map(({ title }) => title) as [TagTitle, ...TagTitle[]];
 
 export const getTagBySlug = (slug: string) => tags.find((tag) => tag.slug === slug);
 

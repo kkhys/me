@@ -9,11 +9,11 @@ const getLlmsTxt = () => `# ${siteConfig.title}'s website
 
 ## Blog
 
-${blogEntries.map((entry) => `- [${entry.data.title}](${import.meta.env.SITE}/blog/posts/${entry.id})`).join("\n")}
+${blogEntries.map((entry) => `- [${entry.data.title}](${BASE_URL}/blog/posts/${entry.id})`).join("\n")}
 
 ## Other
 
-- [About me](${import.meta.env.SITE}/about)
+- [About me](${BASE_URL}/about)
 
 ## Contact & Social
 

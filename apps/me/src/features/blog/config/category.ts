@@ -28,7 +28,11 @@ export const categories = [
   },
 ] as const satisfies Category[];
 
-export const categoryTitles = categories.map(({ title }) => title);
+// Restore the tuple shape map() erases so z.enum keeps the literal types.
+export const categoryTitles = categories.map(({ title }) => title) as [
+  CategoryTitle,
+  ...CategoryTitle[],
+];
 
 export const getCategoryBySlug = (slug: string) =>
   categories.find((category) => category.slug === slug);

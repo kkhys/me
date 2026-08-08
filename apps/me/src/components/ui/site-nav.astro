@@ -1,10 +1,9 @@
 ---
 import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
 import { navItems } from "#/config/navigation";
+import { normalizePathname } from "@kkhys/seo/pathname";
 
-// Static builds can serve `/blog/2` as `/blog/2/` or `/blog/2.html` depending
-// on the build format, so normalize before matching.
-const pathname = Astro.url.pathname.replace(/\.html$/u, "").replace(/(?<=.)\/$/u, "");
+const pathname = normalizePathname(Astro.url.pathname);
 
 const isActive = (href: string) =>
   href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);

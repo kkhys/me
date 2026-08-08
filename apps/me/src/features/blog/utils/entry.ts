@@ -53,7 +53,7 @@ export const toListEntries = (blogEntries: CollectionEntry<"blog">[]): ListEntry
 const toExternalEntry = (data: {
   title: string;
   url: string;
-  siteName: string;
+  siteName: ExternalSite;
   category: string;
   tags?: string[] | undefined;
   publishedAt: Date;
@@ -61,7 +61,7 @@ const toExternalEntry = (data: {
   type: "external",
   title: data.title,
   url: data.url,
-  siteName: data.siteName as ExternalSite,
+  siteName: data.siteName,
   category: data.category,
   tags: data.tags,
   publishedAt: data.publishedAt,
