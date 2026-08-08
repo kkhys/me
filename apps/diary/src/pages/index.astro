@@ -2,25 +2,13 @@
 import { getImage } from "astro:assets";
 import DiaryImage from "#/components/diary-image.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
+import { buildEntries } from "#/utils/entries";
 
 const imageModules = import.meta.glob<{
   default: import("astro").ImageMetadata;
 }>("../../diary-content/diary/**/*.jpg", { eager: true });
 
-const entries = Object.entries(imageModules)
-  .map(([path, mod]) => {
-    const match = path.match(/\/(\d{4}-\d{2}-\d{2})\/(\d+)\.jpg$/u);
-    if (!match?.[1] || !match[2]) return null;
-    return { src: mod.default, date: match[1], fileNumber: match[2] };
-  })
-  .filter((entry) => entry !== null)
-  .toSorted((a, b) => {
-    const dateCompare = a.date.localeCompare(b.date);
-    if (dateCompare !== 0) return dateCompare;
-    return a.fileNumber.localeCompare(b.fileNumber);
-  })
-  .map((entry, i) => (Object.assign(entry, { number: i + 1 })))
-  .toReversed();
+const entries = buildEntries(imageModules);
 
 const ogImage = entries[0]
   ? await getImage({

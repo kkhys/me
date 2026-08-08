@@ -1,5 +1,8 @@
 ---
 import "#/styles/global.css";
+import BaseSEO from "@kkhys/seo/base-seo.astro";
+import OpenGraph from "@kkhys/seo/open-graph.astro";
+import TwitterCard from "@kkhys/seo/twitter-card.astro";
 
 interface Props {
   title?: string | undefined;
@@ -7,14 +10,14 @@ interface Props {
   image?: { src: string; width: number; height: number } | undefined;
 }
 
+const SITE_NAME = "Keisuke Hayashi Diary";
+
 const {
-  title = "Keisuke Hayashi Diary",
+  title = SITE_NAME,
   description = "Photo diary by kkhys",
   image,
 } = Astro.props;
 
-const pathname = Astro.url.pathname.replace(/index\.html$/u, "");
-const canonicalUrl = new URL(pathname, Astro.site).href;
 const ogImageUrl = image ? new URL(image.src, Astro.site).href : undefined;
 ---
 
@@ -22,38 +25,32 @@ const ogImageUrl = image ? new URL(image.src, Astro.site).href : undefined;
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>{title}</title>
-  <meta name="description" content={description}/>
-  <meta name="generator" content={Astro.generator}/>
-  <link rel="canonical" href={canonicalUrl}/>
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <BaseSEO title={title} description={description} />
   <link rel="sitemap" href="/sitemap-index.xml"/>
 
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content={canonicalUrl}/>
-  <meta property="og:title" content={title}/>
-  <meta property="og:description" content={description}/>
-  <meta property="og:site_name" content="Keisuke Hayashi Diary"/>
-  <meta property="og:locale" content="ja_JP"/>
-  {ogImageUrl && image && (
-    <>
-      <meta property="og:image" content={ogImageUrl}/>
-      <meta property="og:image:width" content={String(image.width)}/>
-      <meta property="og:image:height" content={String(image.height)}/>
-      <meta property="og:image:alt" content={title}/>
-    </>
-  )}
-
-  <meta name="twitter:card" content={ogImageUrl ? "summary_large_image" : "summary"}/>
-  <meta name="twitter:site" content="@kkhys_"/>
-  <meta name="twitter:creator" content="@kkhys_"/>
-  <meta name="twitter:title" content={title}/>
-  <meta name="twitter:description" content={description}/>
-  {ogImageUrl && (
-    <>
-      <meta name="twitter:image" content={ogImageUrl}/>
-      <meta name="twitter:image:alt" content={title}/>
-    </>
-  )}
+  {/* The OG image is the newest photo: a variable-height JPEG, not the
+      1200x630 PNG card the other apps use. */}
+  <OpenGraph
+    title={title}
+    description={description}
+    image={ogImageUrl}
+    imageType="image/jpeg"
+    imageWidth={image?.width}
+    imageHeight={image?.height}
+    siteName={SITE_NAME}
+  />
+  <TwitterCard
+    title={title}
+    description={description}
+    image={ogImageUrl}
+    site="@kkhys_"
+    card={ogImageUrl ? "summary_large_image" : "summary"}
+  />
 
   <noscript>
     <style>
