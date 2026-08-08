@@ -9,7 +9,7 @@ export default defineConfig({
   },
   image: {
     service:
-      process.env.GITHUB_ACTIONS === "true"
+      process.env.USE_FIXTURE_DATA === "true"
         ? { entrypoint: "astro/assets/services/noop" }
         : { entrypoint: "astro/assets/services/sharp" },
   },

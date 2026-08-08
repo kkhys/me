@@ -28,7 +28,7 @@ Consumed as source (no build step).
 ## Key Design Decisions
 
 - Photos load via `import.meta.glob("../../diary-content/diary/**/*.jpg", { eager: true })`; entries sort by date then file number, newest first.
-- CI builds with the submodule absent → an empty gallery. The image service switches to `astro/assets/services/noop` when `GITHUB_ACTIONS` is set; locally it uses sharp.
+- CI builds with the submodule absent → an empty gallery. The image service switches to `astro/assets/services/noop` when `USE_FIXTURE_DATA` is set; locally it uses sharp.
 - The first (newest) entry is eager / high-priority and supplies the OG image; the rest lazy-load with a blurred placeholder.
 
 ## How to Work

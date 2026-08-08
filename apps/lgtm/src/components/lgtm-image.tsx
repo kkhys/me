@@ -2,7 +2,6 @@
 /** @jsxRuntime automatic */
 
 import type { CollectionEntry } from "astro:content";
-import { GITHUB_ACTIONS } from "astro:env/client";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import satori from "satori";
@@ -143,7 +142,7 @@ const generateAnimatedWebp = async (baseImage: Buffer, width: number): Promise<B
 };
 
 export const LgtmImage = async (entry: CollectionEntry<"lgtm">, width = 400): Promise<Buffer> => {
-  const lgtmBasePath = resolveLgtmBasePath(GITHUB_ACTIONS);
+  const lgtmBasePath = resolveLgtmBasePath(process.env.USE_FIXTURE_DATA === "true");
 
   const imagePath = join(lgtmBasePath, entry.id, entry.data.image);
   const baseImage = await readFile(imagePath);

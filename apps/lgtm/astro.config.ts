@@ -1,6 +1,6 @@
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import { defineConfig, envField } from "astro/config";
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
   site: "https://lgtm.kkhys.me",
@@ -19,14 +19,4 @@ export default defineConfig({
       SVG: false,
     }),
   ],
-  env: {
-    schema: {
-      GITHUB_ACTIONS: envField.boolean({
-        context: "client",
-        access: "public",
-        optional: true,
-        default: false,
-      }),
-    },
-  },
 });
