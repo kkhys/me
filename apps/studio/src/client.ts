@@ -4,21 +4,14 @@
  */
 
 import { filterMemos } from "./memo-filter";
+import {
+  countMemoChars,
+  MAX_BODY_LENGTH,
+  MAX_IMAGES,
+  type MemoSummary,
+  toCreatedAt,
+} from "./memo-format";
 
-interface MemoSummary {
-  dirName: string;
-  id: string;
-  createdAt: string;
-  body: string;
-  tag?: string;
-  comment?: string;
-  quote?: string;
-  isDraft: boolean;
-  images: string[];
-}
-
-const MAX_BODY_LENGTH = 500;
-const MAX_IMAGES = 4;
 const FEED_PAGE_SIZE = 20;
 const SITE_URL = "https://memo.kkhys.me";
 
@@ -63,7 +56,9 @@ const showMessage = (text: string, isError = false): void => {
 };
 
 const updateCounter = (): void => {
-  const count = bodyInput.value.length;
+  // Count rendered text, not raw markdown, so the counter agrees with the
+  // server-side limit (remark-word-limit semantics).
+  const count = countMemoChars(bodyInput.value);
   counter.textContent = `${count} / ${MAX_BODY_LENGTH}`;
   counter.classList.toggle("compose__counter--over", count > MAX_BODY_LENGTH);
 };
@@ -235,12 +230,6 @@ const refreshStatus = async (): Promise<void> => {
   const changes = data.changes ?? 0;
   statusLabel.textContent = changes === 0 ? "clean" : `${changes} unsynced`;
   statusLabel.classList.toggle("header__status--dirty", changes > 0);
-};
-
-const toCreatedAt = (value: string): string | undefined => {
-  if (value === "") return undefined;
-  const normalized = value.replace("T", " ");
-  return normalized.length === 16 ? `${normalized}:00` : normalized;
 };
 
 form.addEventListener("submit", async (event) => {
