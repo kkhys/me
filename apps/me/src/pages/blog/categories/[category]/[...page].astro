@@ -1,15 +1,9 @@
 ---
 import type { PaginateFunction } from "astro";
-import SEO from "#/components/seo/seo.astro";
-import SiteBrand from "#/components/ui/site-brand.astro";
 import { countPerPage } from "#/config/constant";
-import CategoryNavigation from "#/features/blog/components/ui/category-navigation.astro";
-import EntryList from "#/features/blog/components/ui/entry-list.astro";
-import Pagination from "#/features/blog/components/ui/pagination.astro";
+import BlogIndex from "#/features/blog/components/ui/blog-index.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
 import { getPublicListEntries } from "#/features/blog/utils/entry";
-import BaseLayout from "#/layouts/base-layout.astro";
-import { BASE_URL } from "#/utils/base-url";
 
 export const getStaticPaths = async ({
   paginate,
@@ -37,39 +31,10 @@ const category = getCategoryBySlug(categorySlug);
 if (!category) {
   throw new Error(`Category "${categorySlug}" not found`);
 }
-
-const seoDescription = `「${category.label}」カテゴリーの記事一覧`;
-const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
-<BaseLayout>
-  <SEO
-    title={category.label}
-    description={seoDescription}
-    image={seoImage}
-    slot='seo'
-  />
-  <SiteBrand />
-  <section>
-    <h1 class="page-title">Blog</h1>
-    <CategoryNavigation class="blog-nav" />
-  </section>
-  <section class="blog-entries">
-    <EntryList entries={page.data} showDate />
-  </section>
-  <Pagination page={page} class="blog-pagination" />
-</BaseLayout>
-
-<style>
-  .blog-nav {
-    margin-top: 2rem;
-  }
-
-  .blog-entries {
-    margin-top: 1.5rem;
-  }
-
-  .blog-pagination {
-    margin-top: 1.5rem;
-  }
-</style>
+<BlogIndex
+  page={page}
+  title={category.label}
+  description={`「${category.label}」カテゴリーの記事一覧`}
+/>

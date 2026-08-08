@@ -1,7 +1,5 @@
-import type { Node } from "unist";
 import { describe, expect, it } from "vitest";
 import {
-  hasChildren,
   isBareExternalLink,
   isFootnoteDefinition,
   isFootnoteReference,
@@ -139,24 +137,5 @@ describe("isFootnoteReference", () => {
 
   it("returns false for other nodes", () => {
     expect(isFootnoteReference({ type: "text", value: "hello" })).toBe(false);
-  });
-});
-
-describe("hasChildren", () => {
-  it("returns true for nodes with children", () => {
-    const node = {
-      type: "paragraph",
-      children: [{ type: "text", value: "hi" }],
-    };
-    expect(hasChildren(node as Node)).toBe(true);
-  });
-
-  it("returns false for nodes with empty children", () => {
-    const node = { type: "paragraph", children: [] };
-    expect(hasChildren(node as Node)).toBe(false);
-  });
-
-  it("returns false for nodes without children property", () => {
-    expect(hasChildren({ type: "text" } as Node)).toBe(false);
   });
 });

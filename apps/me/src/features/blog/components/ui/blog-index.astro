@@ -1,0 +1,50 @@
+---
+import type { Page } from "astro";
+import SEO from "#/components/seo/seo.astro";
+import SiteBrand from "#/components/ui/site-brand.astro";
+import { defaultOgImage } from "#/config/constant";
+import CategoryNavigation from "#/features/blog/components/ui/category-navigation.astro";
+import EntryList from "#/features/blog/components/ui/entry-list.astro";
+import Pagination from "#/features/blog/components/ui/pagination.astro";
+import type { ListEntry } from "#/features/blog/utils/entry";
+import BaseLayout from "#/layouts/base-layout.astro";
+
+interface Props {
+  page: Page<ListEntry>;
+  title: string;
+  description: string;
+  /** Page heading. Defaults to "Blog". */
+  heading?: string | undefined;
+  showCategoryNav?: boolean | undefined;
+}
+
+const { page, title, description, heading = "Blog", showCategoryNav = true } = Astro.props;
+---
+
+<BaseLayout>
+  <SEO title={title} description={description} image={defaultOgImage} slot='seo' />
+  <slot name='head' slot='head' />
+  <SiteBrand />
+  <section>
+    <h1 class="page-title">{heading}</h1>
+    {showCategoryNav && <CategoryNavigation class="blog-nav" />}
+  </section>
+  <section class="blog-entries">
+    <EntryList entries={page.data} showDate />
+  </section>
+  <Pagination page={page} class="blog-pagination" />
+</BaseLayout>
+
+<style>
+  .blog-nav {
+    margin-top: 2rem;
+  }
+
+  .blog-entries {
+    margin-top: 1.5rem;
+  }
+
+  .blog-pagination {
+    margin-top: 1.5rem;
+  }
+</style>

@@ -34,8 +34,8 @@ const getHumansTxt = () => `# TXT for Human Beings
   Last update: ${lastUpdate}
   Language:    ja-JP
   Timezone:    JST
-  Standards:   Astro, TypeScript, React, Tailwind CSS, Vercel
-  Software:    WebStorm
+  Standards:   Astro, TypeScript, React
+  Hosting:     Cloudflare Pages
 `;
 
 export const GET: APIRoute = () => new Response(getHumansTxt());

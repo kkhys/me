@@ -42,7 +42,8 @@ const {
   olderPost,
 } = Astro.props;
 
-const hasUpdatedAt = Boolean(updatedAt && updatedAtString);
+const updatedInfo =
+  updatedAt && updatedAtString ? { date: updatedAt, label: updatedAtString } : undefined;
 
 const categorySlug = category.toLowerCase();
 const categoryObject = getCategoryBySlug(categorySlug);
@@ -68,7 +69,6 @@ const tagCloudItems = allTagCloudItems.filter(({ title: tagTitle }) =>
 const relatedPosts = await getRelatedPosts({ id, category, tags });
 
 const seoImage = `${BASE_URL}/api/og/${id}.png`;
-const currentDate = new Date();
 ---
 
 <BaseLayout>
@@ -78,8 +78,8 @@ const currentDate = new Date();
     image={seoImage}
     type="article"
     article={{
-      publishedTime: (publishedAt ?? currentDate).toISOString(),
-      modifiedTime: (updatedAt ?? publishedAt ?? currentDate).toISOString(),
+      publishedTime: publishedAt.toISOString(),
+      modifiedTime: (updatedAt ?? publishedAt).toISOString(),
       authors: [me.name],
       section: categoryObject.label,
       tags: tagCloudItems.map((tag) => tag.label),
@@ -100,7 +100,7 @@ const currentDate = new Date();
     </div>
     <h1 class="post-title">{title}</h1>
     <div class="post-meta">
-      {hasUpdatedAt ? (
+      {updatedInfo ? (
         <button
           type="button"
           popovertarget="post-updated-at"
@@ -116,7 +116,7 @@ const currentDate = new Date();
             </dd>
             <dt class="post-updated-at__label">Updated</dt>
             <dd class="post-updated-at__date palt">
-              <time datetime={updatedAt!.toISOString()}>{updatedAtString}</time>
+              <time datetime={updatedInfo.date.toISOString()}>{updatedInfo.label}</time>
             </dd>
           </dl>
         </div>
@@ -136,7 +136,7 @@ const currentDate = new Date();
     )}
     <Separator class="post-separator" />
     <PostNavigation olderPost={olderPost} newerPost={newerPost} class="post-nav" />
-    {relatedPosts?.length > 0 && (
+    {relatedPosts.length > 0 && (
       <div class="related-posts">
         <div class="related-posts-title">こちらもおすすめ</div>
         <EntryList entries={toListEntries(relatedPosts)} umamiEvent="related-post" />

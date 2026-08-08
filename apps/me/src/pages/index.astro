@@ -1,22 +1,16 @@
 ---
 import Budoux from "#/components/budoux.astro";
 import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
+import JsonLd from "#/components/seo/json-ld.astro";
 import SEO from "#/components/seo/seo.astro";
+import { defaultOgImage } from "#/config/constant";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { websiteSchema } from "#/lib/json-ld";
-import { BASE_URL } from "#/utils/base-url";
-
-const seoImage = `${BASE_URL}/api/og/default.png`;
 ---
 
 <BaseLayout showFooter={false}>
-  <SEO image={seoImage} slot='seo' />
-  <script
-      is:inline
-      type='application/ld+json'
-      set:html={JSON.stringify(websiteSchema)}
-      slot='head'
-  />
+  <SEO image={defaultOgImage} slot='seo' />
+  <JsonLd schema={websiteSchema} slot='head' />
   <div>
     <h1 class="home-title">
       Keisuke Hayashi

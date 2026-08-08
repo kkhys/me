@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import type { BreadcrumbList, WithContext } from "schema-dts";
+import JsonLd from "#/components/seo/json-ld.astro";
 import ContentWrapper from "#/features/blog/components/content-wrapper.astro";
 import { getCategoryByTitle } from "#/features/blog/config/category";
 import { getPublicBlogEntries, toPostNavItem } from "#/features/blog/utils/entry";
@@ -32,10 +33,9 @@ export const getStaticPaths = (async () => {
 const { entry, description, newerPost, olderPost } = Astro.props;
 const { Content, headings } = await render(entry);
 const publishedAtString = convertDateToString(entry.data.publishedAt);
-
-if (entry.data.updatedAt) {
-  entry.data.updatedAtString = convertDateToString(entry.data.updatedAt);
-}
+const updatedAtString = entry.data.updatedAt
+  ? convertDateToString(entry.data.updatedAt)
+  : undefined;
 
 const blogPostingSchema = getBlogPostingSchema({
   id: entry.id,
@@ -79,12 +79,7 @@ const jsonLd = {
 };
 ---
 
-<BlogLayout id={entry.id} publishedAtString={publishedAtString} description={description} headings={headings} newerPost={newerPost} olderPost={olderPost} {...entry.data}>
-  <script
-      is:inline
-      type='application/ld+json'
-      set:html={JSON.stringify(jsonLd)}
-      slot='head'
-  />
+<BlogLayout id={entry.id} publishedAtString={publishedAtString} description={description} headings={headings} newerPost={newerPost} olderPost={olderPost} {...entry.data} updatedAtString={updatedAtString}>
+  <JsonLd schema={jsonLd} slot='head' />
   <ContentWrapper content={Content} />
 </BlogLayout>

@@ -1,3 +1,5 @@
+import { createCache } from "#/lib/api/cache";
+
 const apis = {
   twemoji: (code: string) =>
     `https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/${code.toLowerCase()}.svg`,
@@ -36,16 +38,13 @@ export const getFirstGrapheme = (value: string) => {
   return first?.segment ?? value;
 };
 
-import { createCache } from "#/lib/api/cache";
-
 const cache = createCache<string | undefined>();
 
 export const loadEmoji = (type: keyof typeof apis, code: string) => {
   const key = `${type}:${code}`;
 
   return cache(key, async () => {
-    const resolvedType = type && apis[type] ? type : "twemoji";
-    const api = apis[resolvedType];
+    const api = apis[type];
     const url = typeof api === "function" ? api(code) : `${api}${code.toUpperCase()}.svg`;
 
     const r = await fetch(url);
