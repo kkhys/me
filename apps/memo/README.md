@@ -1,161 +1,47 @@
 # Memo
 
-A simple memo posting site that displays short memos (max 500 characters) in a social media thread-like layout.
+Short memos (max 500 characters, counted on rendered text) in a threaded
+social media layout, part of the [kkhys monorepo](../../README.md).
 
 **Live Site**: [memo.kkhys.me](https://memo.kkhys.me)
 
 ## Features
 
-- Short memo posts (up to 500 characters)
-- Up to 4 images per post
-- Light/dark mode support
-- Responsive design
-- Fast static site generation with Astro
-- Optimized images with AVIF format
+- Short memo posts with threaded replies and quotes
+- Up to 4 images per post (JPG/PNG)
+- Bot feeds: blog RSS, Zenn RSS, and OSS projects injected as entries
+- Light/dark mode via `light-dark()`
+- Fully static build with infinite scroll over pre-built pages
 
 ## Tech Stack
 
-- **Framework**: [Astro](https://astro.build/)
-- **Language**: TypeScript (strictest mode)
-- **Styling**: CSS (kiso.css + custom properties)
-- **Testing**: Vitest
-- **Lint/Format**: oxlint + oxfmt
-- **Package Manager**: pnpm
-- **Deployment**: Cloudflare Pages
+Astro 7 static site, TypeScript (strictest), vanilla CSS (kiso.css +
+uchu.css via `@kkhys/styles`), Vitest, oxlint + oxfmt. Deployed to
+Cloudflare Pages by GitHub Actions (`.github/workflows/deploy-memo.yml`)
+on pushes to main.
 
-See `package.json` for specific version requirements.
+## Content
 
-## Setup
+Each memo is a directory in the private `memo-content/` submodule
+(`memo/<YYYYMMDD_HHMMSS>/index.md` + numbered images). Frontmatter:
+`id` (lowercase ULID), `createdAt`, optional `tag`, `comment` (parent
+ULID), `quote`, `isDraft`, `hideLinkCard`, `isPinned`, `hideComments`,
+`isBot`, and `author` (user slug).
 
-### Prerequisites
-
-See `package.json` for required Node.js and pnpm versions (managed via Volta).
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/kkhys/memo.git
-cd memo
-
-# Install dependencies
-pnpm install
-```
-
-### Content Setup
-
-This project manages content in a separate repository (Git submodule).
-
-**Development**: Works without submodule (uses fixture data)
-
-**Production Build**: Requires `memo-content/` submodule
-
-```bash
-# Initialize submodule
-git submodule update --init --recursive
-```
+Memos are composed locally with [`@kkhys/studio`](../studio). Without the
+submodule, set `USE_FIXTURE_DATA=true` to build against
+`src/__fixtures__/` (CI does this automatically).
 
 ## Development
 
-```bash
-# Start development server
-pnpm dev
-
-# Open http://localhost:4321 in browser
-```
-
-### Development Commands
+Dev tools come from the Nix Flake at the repo root — run `direnv allow`
+once. Then, from the repo root:
 
 ```bash
-pnpm dev          # Start dev server
-pnpm build        # Production build
-pnpm check        # Type checking
-pnpm lint         # Run linter
-pnpm lint:fix     # Auto-fix lint issues
-pnpm test         # Run tests
-pnpm coverage     # Generate coverage report
-pnpm all          # Run all checks (build + check + lint:fix + test + coverage)
+pnpm dev:memo                       # dev server
+pnpm --filter @kkhys/memo test      # unit tests
+pnpm --filter @kkhys/memo check     # astro check + tsc
+pnpm --filter @kkhys/memo build     # static build
 ```
 
-## Content Management
-
-### Creating Memos
-
-Memos are placed in the `memo-content/memo/` directory.
-
-**Directory Structure**:
-
-```
-memo-content/memo/
-└── <timestamp_id>/          # e.g., 20251001_204021
-    ├── index.md              # Memo content
-    ├── 01.jpg                # Image 1 (optional)
-    ├── 02.jpg                # Image 2 (optional)
-    └── ...                   # Up to 4 images
-```
-
-**index.md Format**:
-
-```markdown
----
-id: 01k6fs5j48ep20vqcvvgh4r4c2 # ULID format
-createdAt: 2025-10-01 20:40:21
-images: # Optional (max 4)
-  - 01.jpg
-  - 02.jpg
-isPublished: true # Publication status
-author: Keisuke Hayashi
----
-
-Write your memo content here (max 500 characters)
-```
-
-### Constraints
-
-- **Character Limit**: Max **499 characters** (validated at build time)
-- **Image Limit**: Max **4 images** per post
-- **Image Formats**: JPG and PNG only
-
-## Deployment
-
-Deployed via [Cloudflare Pages](https://pages.cloudflare.com/) with Git integration.
-
-## Project Structure
-
-```
-memo/
-├── src/
-│   ├── components/       # UI components
-│   ├── layouts/          # Page layouts
-│   ├── pages/            # Page files
-│   │   ├── index.astro   # Memo list
-│   │   └── [id].astro    # Memo detail
-│   ├── utils/            # Utility functions
-│   ├── lib/              # Remark plugins, etc.
-│   └── styles/           # Global styles
-├── memo-content/      # Content (Git submodule)
-├── scripts/              # Build scripts
-└── CLAUDE.md             # AI development assistance doc
-```
-
-For detailed architecture, see [CLAUDE.md](./CLAUDE.md).
-
-## CI/CD
-
-GitHub Actions runs automated tests and build validation:
-
-- Triggered on push and pull requests
-- Build, type checking, linting, testing, coverage
-
-Renovate for automated dependency updates:
-
-- DevDependencies: All versions auto-merged
-- Dependencies: Minor/patch versions auto-merged
-
-## License
-
-MIT License - See [LICENSE.md](./LICENSE.md) for details
-
-## Author
-
-Keisuke Hayashi ([@kkhys](https://github.com/kkhys))
+See [CLAUDE.md](./CLAUDE.md) for the codebase map and conventions.
