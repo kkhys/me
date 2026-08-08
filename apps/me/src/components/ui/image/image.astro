@@ -2,6 +2,7 @@
 import { Picture as AstroPicture, getImage, type Picture } from "astro:assets";
 import type { UnresolvedImageTransform } from "astro";
 
+import { blurLoadHandlers } from "#/utils/blur-load";
 import type { CustomImageProps } from "./types";
 
 type Props = CustomImageProps;
@@ -38,7 +39,7 @@ const pictureProps = {
   quality: 80,
   widths,
   sizes,
-  onload: "this.closest('.blur-load')?.classList.add('image-loaded')",
+  ...blurLoadHandlers(".blur-load"),
   ...rest,
 } as Parameters<typeof Picture>[0];
 
