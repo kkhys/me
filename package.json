@@ -18,6 +18,7 @@
     "build:diary": "pnpm --filter @kkhys/diary build",
     "dev:diary": "pnpm --filter @kkhys/diary dev",
     "deploy:diary": "pnpm --filter @kkhys/diary run deploy",
+    "build:memo": "pnpm --filter @kkhys/memo build",
     "dev:memo": "pnpm --filter @kkhys/memo dev",
     "dev:studio": "pnpm --filter @kkhys/studio dev",
     "release": "bun run scripts/release.ts"
@@ -26,5 +27,9 @@
     "@kkhys/release": "workspace:*",
     "oxfmt": "catalog:",
     "oxlint": "catalog:"
-  }
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "packageManager": "pnpm@11.8.0"
 }

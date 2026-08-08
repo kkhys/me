@@ -4,7 +4,6 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
-import rehypeSlug from "rehype-slug";
 import { expressiveCodeOptions } from "./src/lib/expressive-code";
 import rehypeBudoux from "./src/lib/rehype-budoux";
 import rehypeMermaidCached from "./src/lib/rehype-mermaid-cached";
@@ -41,7 +40,7 @@ export default defineConfig({
         footnoteBackLabel: "戻る",
         footnoteLabelTagName: "hr",
       },
-      rehypePlugins: [rehypeSlug, rehypeSlugWithCustomId, rehypeMermaidCached, rehypeBudoux],
+      rehypePlugins: [rehypeSlugWithCustomId, rehypeMermaidCached, rehypeBudoux],
     }),
   },
   image: {
