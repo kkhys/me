@@ -7,7 +7,19 @@
   "exports": {
     "./base-seo.astro": "./src/base-seo.astro",
     "./open-graph.astro": "./src/open-graph.astro",
+    "./pathname": "./src/pathname.ts",
+    "./truncate": "./src/truncate.ts",
     "./twitter-card.astro": "./src/twitter-card.astro"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "peerDependencies": {
     "astro": "^7.0.0"

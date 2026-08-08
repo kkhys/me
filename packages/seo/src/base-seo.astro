@@ -1,4 +1,7 @@
 ---
+import { normalizePathname } from "./pathname";
+import { truncateDescription } from "./truncate";
+
 interface Props {
   /** Final document title, emitted verbatim. */
   title: string;
@@ -23,11 +26,8 @@ const {
   ellipsis = false,
 } = Astro.props;
 
-const resolvedDescription =
-  ellipsis && description.length > descriptionMaxLength
-    ? `${description.slice(0, descriptionMaxLength - 3)}...`
-    : description.slice(0, descriptionMaxLength);
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const resolvedDescription = truncateDescription(description, descriptionMaxLength, ellipsis);
+const canonicalUrl = new URL(normalizePathname(Astro.url.pathname), Astro.site).href;
 const robotsContent = noindex
   ? robotsNofollow
     ? "noindex, nofollow"
