@@ -1,10 +1,20 @@
 ---
+import { normalizePathname } from "./pathname";
+import { truncateDescription } from "./truncate";
+
 interface Props {
   type?: "website" | "article" | "profile" | undefined;
   title: string;
   description: string;
-  image: string;
-  imageAlt: string;
+  /** Omit to emit no og:image block at all. */
+  image?: string | undefined;
+  imageAlt?: string | undefined;
+  /** og:image:type value. Defaults to "image/png". */
+  imageType?: string | undefined;
+  /** og:image:width value. Defaults to 1200. */
+  imageWidth?: number | undefined;
+  /** og:image:height value. Defaults to 630. */
+  imageHeight?: number | undefined;
   /** og:site_name value. */
   siteName: string;
   /** og:locale value. Defaults to "ja_JP". */
@@ -33,6 +43,9 @@ const {
   description,
   image,
   imageAlt,
+  imageType = "image/png",
+  imageWidth = 1200,
+  imageHeight = 630,
   siteName,
   locale = "ja_JP",
   descriptionMaxLength = 200,
@@ -41,29 +54,32 @@ const {
   article,
 } = Astro.props;
 
-const resolvedDescription =
-  ellipsis && description.length > descriptionMaxLength
-    ? `${description.slice(0, descriptionMaxLength - 3)}...`
-    : description.slice(0, descriptionMaxLength);
-const ogUrl = new URL(Astro.url.pathname, Astro.site).href;
+const resolvedDescription = truncateDescription(description, descriptionMaxLength, ellipsis);
+const ogUrl = new URL(normalizePathname(Astro.url.pathname), Astro.site).href;
 const secureUrl =
-  secureUrlMode === "always"
-    ? image
-    : image.startsWith("https://")
+  image === undefined
+    ? undefined
+    : secureUrlMode === "always"
       ? image
-      : undefined;
+      : image.startsWith("https://")
+        ? image
+        : undefined;
 ---
 
 <meta property="og:type" content={type} />
 <meta property="og:url" content={ogUrl} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={resolvedDescription} />
-<meta property="og:image" content={image} />
-{secureUrl && <meta property="og:image:secure_url" content={secureUrl} />}
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={imageAlt} />
+{image && (
+  <>
+    <meta property="og:image" content={image} />
+    {secureUrl && <meta property="og:image:secure_url" content={secureUrl} />}
+    <meta property="og:image:type" content={imageType} />
+    <meta property="og:image:width" content={String(imageWidth)} />
+    <meta property="og:image:height" content={String(imageHeight)} />
+    <meta property="og:image:alt" content={imageAlt ?? title} />
+  </>
+)}
 <meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content={locale} />
 {type === "article" && article?.publishedTime && (
