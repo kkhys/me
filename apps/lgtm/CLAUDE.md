@@ -22,7 +22,7 @@ src/
     api/og/                       # OG images: default.png (shared handler) + [id].png (per-image, app-local)
     api/favicon/                  # Dev-only favicon endpoints (omitted from prod builds)
   __tests__/                      # Vitest unit tests
-  __fixtures__/lgtm-sample/       # CI fixtures (used when GITHUB_ACTIONS=true)
+  __fixtures__/lgtm-sample/       # CI fixtures (used when USE_FIXTURE_DATA=true)
 lgtm-content/                     # Git submodule (private) — source images, one media file per ULID dir
 scripts/convert-videos.ts         # Bun + ffmpeg: convert .mov sources to animated WebP
 ```
@@ -37,7 +37,7 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 
 ## Key Design Decisions
 
-- Content loading switches by env: `lgtm-content/` locally, `src/__fixtures__/lgtm-sample/` when `GITHUB_ACTIONS=true` (read from `astro:env/client`)
+- Content loading switches by env: `lgtm-content/` locally, `src/__fixtures__/lgtm-sample/` when `USE_FIXTURE_DATA=true`
 - All images are pre-rendered at build time. Infinite scroll fetches pre-built static HTML pages
 - Text is rendered at 2x via Satori, then downscaled with lanczos3 for anti-aliasing
 - Output format is fixed per entry: still → AVIF, animated → animated WebP. One format URL per ID
@@ -48,7 +48,7 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 
 - Dev tools come from the Nix Flake at the repo root (`flake.nix`, includes ffmpeg). Run `direnv allow` once.
 - Run scripts from this directory, or from the repo root via `pnpm --filter @kkhys/lgtm <script>` (or `pnpm dev:lgtm` / `build:lgtm` / `deploy:lgtm`).
-- CI: lint → test → type check → build against fixtures (auto via `GITHUB_ACTIONS`). Add the `skip-ci` label to PRs to skip.
+- CI: lint → test → type check → build against fixtures (via `USE_FIXTURE_DATA`). Add the `skip-ci` label to PRs to skip.
 - Deploy: built and shipped locally via `pnpm deploy:lgtm`; lgtm is not deployed from CI. The `lgtm-content` submodule must be initialized first.
 - Release: repo-wide from the root (`pnpm release`); lgtm has no separate release.
 

@@ -19,11 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'skip-ci') }}
     # Verify the code against fixtures and skip the heavy content submodules.
-    # me reads CONTENT_DIR, memo reads USE_FIXTURE_DATA; both are set so the
-    # workspace-wide `pnpm -r` scripts pick up fixtures for each app. Real
-    # content errors are caught at deploy time. See src/__fixtures__.
+    # Every app reads USE_FIXTURE_DATA, so one env var switches the whole
+    # workspace to fixtures. Real content errors are caught at deploy time.
+    # See src/__fixtures__.
     env:
-      CONTENT_DIR: src/__fixtures__/content
       USE_FIXTURE_DATA: "true"
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

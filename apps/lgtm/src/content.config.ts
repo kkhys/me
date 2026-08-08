@@ -1,11 +1,10 @@
 import { defineCollection } from "astro:content";
-import { GITHUB_ACTIONS } from "astro:env/client";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { resolveLgtmBasePath } from "#/config/content-path";
 import { lgtmDirLoader } from "#/loaders/lgtm-dir-loader";
 
-const lgtmBasePath = resolveLgtmBasePath(GITHUB_ACTIONS);
+const lgtmBasePath = resolveLgtmBasePath(process.env.USE_FIXTURE_DATA === "true");
 
 const lgtm = defineCollection({
   loader: lgtmDirLoader({ base: lgtmBasePath }),

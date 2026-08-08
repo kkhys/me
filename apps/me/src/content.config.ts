@@ -7,10 +7,11 @@ import { externalSites } from "#/features/blog/config/external-site";
 import { allTagTitles } from "#/features/blog/config/tag";
 import { zennLoader } from "#/lib/loaders/zenn";
 
-// Blog content lives in the `me-content` git submodule. CI overrides this with
-// a lightweight fixture directory so the build can be smoke-tested without
-// fetching the heavy submodule. See `.github/workflows/ci.yml`.
-const contentDir = process.env.CONTENT_DIR ?? "me-content";
+// Blog content lives in the `me-content` git submodule. CI sets
+// USE_FIXTURE_DATA so the build can be smoke-tested against a lightweight
+// fixture directory without fetching the heavy submodule.
+const contentDir =
+  process.env.USE_FIXTURE_DATA === "true" ? "src/__fixtures__/content" : "me-content";
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: `./${contentDir}/blog` }),

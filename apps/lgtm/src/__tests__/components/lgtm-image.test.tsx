@@ -6,9 +6,7 @@ import sharp from "sharp";
 import { describe, expect, it, vi } from "vitest";
 import { formatForEntry, LgtmImage } from "#/components/lgtm-image";
 
-vi.mock("astro:env/client", () => ({
-  GITHUB_ACTIONS: true,
-}));
+vi.stubEnv("USE_FIXTURE_DATA", "true");
 
 const createStillEntry = (
   overrides?: Partial<CollectionEntry<"lgtm">>,

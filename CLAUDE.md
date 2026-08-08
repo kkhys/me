@@ -33,7 +33,7 @@ Run from the repo root:
 
 ## CI / Deploy
 
-- `.github/workflows/ci.yml` — runs on PRs and the merge queue. Lint → test → type check → build across the workspace against fixtures (me/memo read `CONTENT_DIR` / `USE_FIXTURE_DATA`; lgtm uses the auto-set `GITHUB_ACTIONS`); content submodules are skipped. The `skip-ci` label opts out.
+- `.github/workflows/ci.yml` — runs on PRs and the merge queue. Lint → test → type check → build across the workspace against fixtures (all apps read `USE_FIXTURE_DATA`); content submodules are skipped. The `skip-ci` label opts out.
 - `.github/workflows/deploy-memo.yml` — on push to main touching `apps/memo/**` or `packages/**`, re-runs memo's checks then deploys to Cloudflare Pages.
 - me, lgtm, and diary are built and deployed locally (`pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary`), not from CI.
 
