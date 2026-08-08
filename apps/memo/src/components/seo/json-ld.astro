@@ -1,4 +1,6 @@
 ---
+import { normalizePathname } from "@kkhys/seo/pathname";
+
 interface Props {
   type: "WebSite" | "BlogPosting" | "Article" | "Person" | "Organization";
   data: Record<string, unknown>;
@@ -6,7 +8,9 @@ interface Props {
 
 const { type, data } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+// Must match BaseSEO's canonical: a raw pathname keeps the `.html` suffix the
+// site is not served under, contradicting the canonical tag on the same page.
+const canonicalURL = new URL(normalizePathname(Astro.url.pathname), Astro.site).href;
 
 const jsonLd = {
   "@context": "https://schema.org",
