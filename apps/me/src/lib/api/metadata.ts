@@ -67,12 +67,22 @@ const isProcessableImage = async (src: string): Promise<boolean> => {
   }
 };
 
+// Astro only optimizes remote images matching `image.remotePatterns` (https
+// only), so an `http:` og:image is emitted verbatim and then blocked as mixed
+// content on our https pages: the `<img>` never fires `load`, so the blur
+// placeholder never clears. Most such hosts also serve https.
+const toHttps = (src: string): string =>
+  src.startsWith("http://") ? `https://${src.slice("http://".length)}` : src;
+
 const dropUnprocessableImage = async (metadata: Metadata): Promise<Metadata> => {
-  const src = metadata.image?.src;
-  if (!src || isSvgSrc(src)) {
-    return src ? { ...metadata, image: undefined } : metadata;
-  }
-  return (await isProcessableImage(src)) ? metadata : { ...metadata, image: undefined };
+  const image = metadata.image;
+  if (!image?.src) return metadata;
+  if (isSvgSrc(image.src)) return { ...metadata, image: undefined };
+
+  const src = toHttps(image.src);
+  return (await isProcessableImage(src))
+    ? { ...metadata, image: { ...image, src } }
+    : { ...metadata, image: undefined };
 };
 
 // `fetch-site-metadata` streams the raw response bytes into an HTMLRewriter

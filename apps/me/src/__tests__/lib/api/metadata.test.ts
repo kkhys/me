@@ -320,6 +320,39 @@ describe("getMetadata", () => {
       expect(result.image).toBeUndefined();
     });
 
+    it("upgrades an http og:image to https so it isn't blocked as mixed content", async () => {
+      const spy = mockFetchByUrl(
+        () => new Response(PNG_BYTES as unknown as BodyInit, { status: 200 }),
+      );
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "Insecure image site",
+        description: "desc",
+        image: { src: "http://example.com/og.png", width: "1", height: "1" },
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://insecure-image-example.com");
+      expect(result.image).toEqual({
+        src: "https://example.com/og.png",
+        width: "1",
+        height: "1",
+      });
+      expect(spy).toHaveBeenCalledWith("https://example.com/og.png", expect.anything());
+    });
+
+    it("drops an http og:image that isn't served over https", async () => {
+      mockFetchByUrl(() => new Response(null, { status: 404 }));
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "Http only site",
+        description: "desc",
+        image: { src: "http://example.com/og.png", width: "1", height: "1" },
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://http-only-image-example.com");
+      expect(result.image).toBeUndefined();
+    });
+
     it("re-extracts garbled text using the charset the page declares", async () => {
       mockFetchByUrl(
         () =>
