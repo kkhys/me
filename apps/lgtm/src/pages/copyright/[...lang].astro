@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import LegalPage from "#/components/legal-page.astro";
+
+export const getStaticPaths = (async () => {
+  const entries = await getCollection("copyright");
+  return entries.map((entry) => ({
+    params: { lang: entry.data.lang === "en" ? undefined : entry.data.lang },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+---
+
+<LegalPage entry={entry} page="copyright" />

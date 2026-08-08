@@ -1,5 +1,5 @@
 import { getCollection } from "astro:content";
-import type { APIRoute } from "astro";
+import type { APIRoute, InferGetStaticPropsType } from "astro";
 import sharp from "sharp";
 import { LgtmImage } from "#/components/lgtm-image";
 
@@ -8,18 +8,14 @@ export const getStaticPaths = async () => {
 
   return lgtmEntries.map((entry) => ({
     params: { id: entry.id },
+    props: { entry },
   }));
 };
 
-export const GET: APIRoute = async ({ params }) => {
-  const { id } = params;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-  const lgtmEntries = await getCollection("lgtm");
-  const entry = lgtmEntries.find((e) => e.id === id);
-
-  if (!entry) {
-    return new Response("Not found", { status: 404 });
-  }
+export const GET: APIRoute<Props> = async ({ props }) => {
+  const { entry } = props;
 
   const lgtmImageBuffer = await LgtmImage(entry, 1200);
 

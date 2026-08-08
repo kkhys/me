@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import LegalLayout from "#/components/legal-layout.astro";
+import BaseSeo from "#/components/seo/base-seo.astro";
+import OpenGraph from "#/components/seo/open-graph.astro";
+import TwitterCard from "#/components/seo/twitter-card.astro";
+import Layout from "#/layouts/layout.astro";
+
+interface Props {
+  entry: CollectionEntry<"privacy"> | CollectionEntry<"copyright">;
+  page: "privacy" | "copyright";
+}
+
+const { entry, page } = Astro.props;
+
+const { Content } = await render(entry);
+const { title, description, lang, lastUpdated } = entry.data;
+const pageTitle = `${title} - LGTM`;
+const ogImage = new URL("/api/og/default.png", Astro.site).href;
+const lastUpdatedLabel =
+  lang === "ja"
+    ? `最終更新日：${lastUpdated.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric" })}`
+    : `Last updated: ${lastUpdated.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`;
+---
+
+<Layout>
+  <BaseSeo slot="seo" title={pageTitle} description={description} />
+  <OpenGraph slot="seo" title={pageTitle} description={description} image={ogImage} imageAlt={title} />
+  <TwitterCard slot="seo" title={pageTitle} description={description} image={ogImage} imageAlt={title} />
+  <link rel="alternate" hreflang="en" href={new URL(`/${page}`, Astro.site).href} slot="seo" />
+  <link rel="alternate" hreflang="ja" href={new URL(`/${page}/ja`, Astro.site).href} slot="seo" />
+  <link rel="alternate" hreflang="x-default" href={new URL(`/${page}`, Astro.site).href} slot="seo" />
+  <LegalLayout currentLang={lang} currentPage={page}>
+    <Content />
+    <p class="last-updated">{lastUpdatedLabel}</p>
+  </LegalLayout>
+</Layout>

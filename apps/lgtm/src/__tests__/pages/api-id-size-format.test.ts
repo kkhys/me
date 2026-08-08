@@ -1,4 +1,3 @@
-import type { APIContext } from "astro";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { GET, getStaticPaths } from "#/pages/[id]-[size].[format]";
 
@@ -24,6 +23,7 @@ vi.mock("#/components/lgtm-image", () => ({
   LgtmImage: vi.fn<() => Promise<Buffer>>(() => Promise.resolve(Buffer.from("mock-image-data"))),
   formatForEntry: (entry: { data: { animated: boolean } }) =>
     entry.data.animated ? "webp" : "avif",
+  CONTENT_TYPES: { avif: "image/avif", webp: "image/webp" },
 }));
 
 describe("[id]-[size].[format].ts API Route", () => {
@@ -57,8 +57,8 @@ describe("[id]-[size].[format].ts API Route", () => {
     it("should return avif for still entries", async () => {
       const context = {
         params: { id: stillEntry.id, size: "400", format: "avif" },
-        props: { entry: stillEntry, size: "400" },
-      } as unknown as APIContext;
+        props: { entry: stillEntry, size: 400 },
+      } as unknown as Parameters<typeof GET>[0];
 
       const response = await GET(context);
 
@@ -69,8 +69,8 @@ describe("[id]-[size].[format].ts API Route", () => {
     it("should return webp for animated entries", async () => {
       const context = {
         params: { id: animatedEntry.id, size: "1000", format: "webp" },
-        props: { entry: animatedEntry, size: "1000" },
-      } as unknown as APIContext;
+        props: { entry: animatedEntry, size: 1000 },
+      } as unknown as Parameters<typeof GET>[0];
 
       const response = await GET(context);
 
@@ -80,8 +80,8 @@ describe("[id]-[size].[format].ts API Route", () => {
     it("should set immutable cache control header", async () => {
       const context = {
         params: { id: stillEntry.id, size: "400", format: "avif" },
-        props: { entry: stillEntry, size: "400" },
-      } as unknown as APIContext;
+        props: { entry: stillEntry, size: 400 },
+      } as unknown as Parameters<typeof GET>[0];
 
       const response = await GET(context);
 
@@ -96,8 +96,8 @@ describe("[id]-[size].[format].ts API Route", () => {
 
       const context = {
         params: { id: stillEntry.id, size: "1200", format: "avif" },
-        props: { entry: stillEntry, size: "1200" },
-      } as unknown as APIContext;
+        props: { entry: stillEntry, size: 1200 },
+      } as unknown as Parameters<typeof GET>[0];
 
       await GET(context);
 

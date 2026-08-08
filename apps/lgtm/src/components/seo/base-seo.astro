@@ -4,7 +4,7 @@ import BaseSEO from "@kkhys/seo/base-seo.astro";
 interface Props {
   title: string;
   description: string;
-  noindex?: boolean;
+  noindex?: boolean | undefined;
 }
 
 const { title, description, noindex = false } = Astro.props;
