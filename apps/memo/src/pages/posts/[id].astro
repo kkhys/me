@@ -34,6 +34,7 @@ const memoContent =
     .replaceAll('<', "&lt;")
     .replaceAll('>', "&gt;") || "";
 const pageTitle = memoContent ? `${memoContent} | ${TITLE}` : TITLE;
+const ogImage = new URL("/api/og/default.png", Astro.site).href;
 ---
 
 <Layout>
@@ -42,7 +43,7 @@ const pageTitle = memoContent ? `${memoContent} | ${TITLE}` : TITLE;
     <OpenGraph
       title={memoContent}
       description={DESCRIPTION}
-      image="/api/og/default.png"
+      image={ogImage}
       imageAlt={TITLE}
       type="article"
       article={{
@@ -55,7 +56,7 @@ const pageTitle = memoContent ? `${memoContent} | ${TITLE}` : TITLE;
     <TwitterCard
       title={memoContent}
       description={DESCRIPTION}
-      image="/api/og/default.png"
+      image={ogImage}
       imageAlt={TITLE}
     />
   </Fragment>

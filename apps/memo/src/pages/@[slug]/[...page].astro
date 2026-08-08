@@ -38,6 +38,7 @@ const isFirstPage = page.currentPage === 1;
 const pageTitle = `${user.data.name} (@${user.data.slug}) | ${TITLE}`;
 const description = `${user.data.name}さんの${totalPosts}件のメモを表示しています。`;
 const profilePath = `/@${slug}`;
+const ogImage = new URL("/api/og/default.png", Astro.site).href;
 ---
 
 {!isFirstPage && (
@@ -58,14 +59,14 @@ const profilePath = `/@${slug}`;
     <OpenGraph
       title={pageTitle}
       description={description}
-      image="/og-image.png"
+      image={ogImage}
       imageAlt={user.data.name}
       type="profile"
     />
     <TwitterCard
       title={pageTitle}
       description={description}
-      image="/og-image.png"
+      image={ogImage}
       imageAlt={user.data.name}
     />
   </Fragment>
