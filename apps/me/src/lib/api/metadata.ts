@@ -49,7 +49,9 @@ const isProcessableImage = async (src: string): Promise<boolean> => {
     while (bytes.length < 16) {
       const { done, value } = await reader.read();
       if (done) break;
-      if (value) bytes.push(...value);
+      // Only the signature bytes are needed; spreading a whole multi-KB chunk
+      // into push() can blow the argument-count limit.
+      if (value) bytes.push(...value.subarray(0, 16 - bytes.length));
     }
     await reader.cancel();
 

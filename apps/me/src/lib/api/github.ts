@@ -1,9 +1,18 @@
 import { GITHUB_ACCESS_TOKEN } from "astro:env/server";
+import { z } from "astro/zod";
 import { createCache } from "#/lib/api/cache";
 
 type LastUpdatedTimeData = {
   lastUpdatedTime: string | undefined;
 };
+
+const commitsSchema = z.array(
+  z.object({
+    commit: z.object({
+      committer: z.object({ date: z.string() }),
+    }),
+  }),
+);
 
 const cache = createCache<LastUpdatedTimeData>();
 
@@ -29,14 +38,15 @@ const fetchLastUpdatedTime = async (filePath: string): Promise<LastUpdatedTimeDa
   }
 
   const json: unknown = await response.json();
+  const parsed = commitsSchema.safeParse(json);
 
-  if (!Array.isArray(json) || json.length === 0) {
+  if (!parsed.success || parsed.data.length === 0) {
     console.warn(`No commit data found for ${filePath}`);
     return { lastUpdatedTime: undefined };
   }
 
   return {
-    lastUpdatedTime: json[0].commit.committer.date,
+    lastUpdatedTime: parsed.data[0]?.commit.committer.date,
   };
 };
 
