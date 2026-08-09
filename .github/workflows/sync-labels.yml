@@ -6,6 +6,10 @@ on:
     paths:
       - .github/labels.yml
       - .github/workflows/sync-labels.yml
+  # Pick up changes to the shared base config (kkhys/.github), which
+  # cannot trigger this workflow on its own.
+  schedule:
+    - cron: "0 18 * * 0" # Mondays 03:00 JST
   workflow_dispatch:
 
 permissions:
