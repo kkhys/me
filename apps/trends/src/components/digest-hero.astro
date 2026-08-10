@@ -14,7 +14,9 @@ const { digest } = Astro.props;
   <Budoux>
     <h1 class="headline palt">{digest.headline}</h1>
   </Budoux>
-  <p class="lead">{digest.lead}</p>
+  <Budoux>
+    <p class="lead">{digest.lead}</p>
+  </Budoux>
   <ol class="highlights">
     {
       digest.highlights.map((highlight, i) => (
@@ -29,7 +31,9 @@ const { digest } = Astro.props;
                 <span class="hl-service">{highlight.service_label}</span>
               </span>
             </Budoux>
-            <span class="hl-reason">{highlight.reason}</span>
+            <Budoux>
+              <span class="hl-reason">{highlight.reason}</span>
+            </Budoux>
           </div>
         </li>
       ))

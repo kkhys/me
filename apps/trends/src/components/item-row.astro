@@ -28,7 +28,13 @@ const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item
         <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
       </div>
     </Budoux>
-    {item.summary && <p class="summary">{item.summary}</p>}
+    {
+      item.summary && (
+        <Budoux>
+          <p class="summary">{item.summary}</p>
+        </Budoux>
+      )
+    }
     <div class="meta">
       <span class:list={["score", scoreLevel(item.score)]} title="スコア">{item.score}</span>
       <span class="stars" title="興味マッチ度">{"★".repeat(item.interest)}</span>
