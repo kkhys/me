@@ -1,0 +1,182 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import Budoux from "#/components/budoux.astro";
+import { formatHost } from "#/utils/host";
+import { scoreLevel } from "#/utils/score";
+import { buildSearchText } from "#/utils/search";
+
+type Item =
+  CollectionEntry<"runs">["data"]["markets"][number]["services"][number]["items"][number];
+
+interface Props {
+  item: Item;
+  rank: number;
+}
+
+const { item, rank } = Astro.props;
+
+const host = formatHost(item.url);
+const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item.url;
+---
+
+<article class="item" data-text={buildSearchText(item)}>
+  <span class="rank">{rank}</span>
+  <div class="body">
+    <Budoux>
+      <div class="title palt">
+        <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
+      </div>
+    </Budoux>
+    {
+      item.summary && (
+        <Budoux>
+          <p class="summary">{item.summary}</p>
+        </Budoux>
+      )
+    }
+    {
+      item.discussion_summary && (
+        <details class="discussion">
+          <summary>議論の要約</summary>
+          <Budoux>
+            <p>{item.discussion_summary}</p>
+          </Budoux>
+        </details>
+      )
+    }
+    <div class="meta">
+      <span class:list={["score", scoreLevel(item.score)]} title="スコア">{item.score}</span>
+      <span class="stars" title="興味マッチ度">{"★".repeat(item.interest)}</span>
+      {item.category && <span class="chip">{item.category}</span>}
+      {host && <span>{host}</span>}
+      {item.engagement_label && <span>{item.engagement_label}</span>}
+      {item.seen_before && <span class="seen">既出</span>}
+      {
+        hasDiscussionLink && (
+          <a class="comments" href={item.comments_url} target="_blank" rel="noopener">
+            議論を見る
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 0.25rem;
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .rank {
+    flex: none;
+    width: 1.25rem;
+    text-align: right;
+    color: var(--c-faint);
+    font-size: var(--fs-xs);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.25rem;
+  }
+
+  .body {
+    min-width: 0;
+  }
+
+  .title {
+    font-size: 0.9375rem;
+    font-weight: var(--fw-medium);
+    line-height: 1.6;
+  }
+
+  .summary {
+    margin: 0.3rem 0 0;
+    color: var(--c-sub);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  .discussion {
+    margin-top: 0.4rem;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .discussion summary {
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  .discussion summary::before {
+    content: "▸ ";
+  }
+
+  .discussion[open] summary::before {
+    content: "▾ ";
+  }
+
+  .discussion summary:hover {
+    color: var(--c-text);
+  }
+
+  .discussion p {
+    margin: 0.3rem 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.875rem;
+    align-items: center;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    margin-top: 0.5rem;
+  }
+
+  .score {
+    font-weight: var(--fw-medium);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .score.hi {
+    color: var(--c-text);
+  }
+
+  .score.mid {
+    color: var(--c-sub);
+  }
+
+  .score.lo {
+    color: var(--c-faint);
+  }
+
+  .stars {
+    color: var(--c-star);
+    letter-spacing: 1px;
+  }
+
+  .chip {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-full);
+    padding: 0 0.5rem;
+    font-size: var(--fs-2xs);
+    line-height: 1.1rem;
+  }
+
+  .seen {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    padding: 0 0.3rem;
+    font-size: var(--fs-2xs);
+  }
+
+  .comments {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    white-space: nowrap;
+  }
+</style>

@@ -1,0 +1,188 @@
+---
+interface Props {
+  markets?: { id: string; label: string }[] | undefined;
+}
+
+const { markets } = Astro.props;
+
+const tabs = markets ? [{ id: "all", label: "すべて" }, ...markets] : undefined;
+---
+
+<header class="site">
+  <div class="site-inner">
+    <span class="brand">
+      <a href="/">Trend Digest</a>
+    </span>
+    {
+      tabs && (
+        <nav class="tabs" aria-label="市場フィルタ">
+          <ul id="tabs">
+            {tabs.map((tab, i) => (
+              <li>
+                <button
+                  type="button"
+                  class:list={["tab", { "tab--active": i === 0 }]}
+                  data-tab={tab.id}
+                  aria-pressed={i === 0}
+                >
+                  {tab.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+    {
+      tabs && (
+        <div class="filter">
+          <input
+            type="search"
+            id="filter"
+            placeholder="キーワードで絞り込み"
+            aria-label="キーワードで絞り込み"
+          />
+        </div>
+      )
+    }
+  </div>
+</header>
+
+<script>
+  const tabList = document.querySelector("#tabs");
+
+  tabList?.addEventListener("click", (e) => {
+    const btn =
+      e.target instanceof Element ? e.target.closest<HTMLButtonElement>("button[data-tab]") : null;
+
+    if (!btn) {
+      return;
+    }
+
+    for (const button of tabList.querySelectorAll("button")) {
+      const active = button === btn;
+      button.classList.toggle("tab--active", active);
+      button.setAttribute("aria-pressed", String(active));
+    }
+
+    const id = btn.dataset.tab;
+
+    for (const market of document.querySelectorAll<HTMLElement>(".market")) {
+      market.classList.toggle("hidden", id !== "all" && market.dataset.market !== id);
+    }
+  });
+
+  const filter = document.querySelector("#filter");
+
+  if (filter instanceof HTMLInputElement) {
+    filter.addEventListener("input", () => {
+      const q = filter.value.trim().toLowerCase();
+
+      for (const service of document.querySelectorAll<HTMLElement>(".service")) {
+        let visible = 0;
+
+        for (const item of service.querySelectorAll<HTMLElement>(".item[data-text]")) {
+          const hit = q === "" || (item.dataset.text ?? "").includes(q);
+          item.classList.toggle("hidden", !hit);
+
+          if (hit) {
+            visible += 1;
+          }
+        }
+
+        const count = service.querySelector("[data-count]");
+
+        if (count) {
+          count.textContent = `${visible}件`;
+        }
+
+        service.classList.toggle("hidden", q !== "" && visible === 0);
+      }
+    });
+  }
+</script>
+
+<style>
+  header.site {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .site-inner {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0.625rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+  }
+
+  .tabs ul {
+    list-style: none;
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .tabs li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .tab {
+    display: flex;
+    height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: none;
+    border-radius: var(--radius-full);
+    padding-inline: 0.5rem;
+    font: inherit;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+    cursor: pointer;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .tab:hover {
+    color: var(--c-primary);
+  }
+
+  .tab--active {
+    background-color: var(--c-primary);
+    color: var(--c-primary-text);
+    font-weight: var(--fw-medium);
+  }
+
+  .tab--active:hover {
+    color: var(--c-primary-text);
+  }
+
+  .filter {
+    margin-left: auto;
+  }
+
+  .filter input {
+    background: var(--c-bg);
+    color: var(--c-text);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: 0.25rem 0.625rem;
+    font: inherit;
+    font-size: var(--fs-xs);
+    width: 11rem;
+  }
+</style>

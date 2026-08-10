@@ -1,0 +1,950 @@
+{
+  "date": "2026-08-09",
+  "generated_at": "2026-08-09T16:39:53+09:00",
+  "digest": {
+    "headline": "「AIがコードを書く時代」への反発と、エージェント運用ノウハウの成熟が同時に噴き出した一日",
+    "lead": "Hacker News と Lobsters の両方で首位を取ったのは「コードは難しい部分ではなかった」という言説への正面からの反論で、AIコーディング礼賛への揺り戻しが可視化された。一方で GitHub Trending は skills 系リポジトリが上位を占め、dev.to も Zenn もエージェントの評価・可観測性・コスト設計といった運用フェーズの記事が並ぶ。日本語圏では「組織にAIをどう配るか」が最上位に来ており、関心は道具の入手から運用設計へ完全に移っている。",
+    "highlights": [
+      {
+        "title": "“Code was never the hard part” is an insult to all programmers",
+        "url": "https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers",
+        "service_label": "Hacker News / Lobsters",
+        "reason": "AI前提の開発論に対する現場側の反論。両サイトで同時に首位、今日最も議論されている一本"
+      },
+      {
+        "title": "「AIを全員に配った組織」の生産性が落ちるとき",
+        "url": "https://blog.takaumada.com/entry/ai-organization-flow",
+        "service_label": "はてなブックマーク",
+        "reason": "AI導入の効果が組織構造で相殺される条件を交通工学の比喩で整理。導入判断に直結する"
+      },
+      {
+        "title": "Claude Code で「ループエンジニアリング」を実践してみた",
+        "url": "https://zenn.dev/tetsu_don/articles/e40b95dfc726ac",
+        "service_label": "はてなブックマーク / Zenn",
+        "reason": "Maker-Checker構成で実際のバグを検出した具体例。手元の運用にそのまま持ち込める"
+      },
+      {
+        "title": "Message your other Claude Code sessions",
+        "url": "https://code.claude.com/docs/en/cross-session-messaging",
+        "service_label": "Hacker News",
+        "reason": "セッション間メッセージングの公式ドキュメント。複数セッション並列運用の前提が変わる"
+      },
+      {
+        "title": "Claude Code の「無駄」を可視化するツール cclens を作った",
+        "url": "https://zenn.dev/lambdalisue/articles/introduce-cclens",
+        "service_label": "Zenn",
+        "reason": "自分の運用の無駄をトークン単位で数値化できる。ループ運用の前後比較に使える"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "「AIを全員に配った組織」の生産性が落ちるとき - 🐴 (馬)",
+              "url": "https://blog.takaumada.com/entry/ai-organization-flow",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://blog.takaumada.com/entry/ai-organization-flow",
+              "score": 100,
+              "engagement_label": "401 users",
+              "category": "AI/組織",
+              "interest": 3,
+              "summary": "全員にAIを配ると逆効果になる条件を、ブライスのパラドックスで説明",
+              "seen_before": false,
+              "extra": "テクノロジー"
+            },
+            {
+              "title": "Claude Code で「ループエンジニアリング」を実践してみた",
+              "url": "https://zenn.dev/tetsu_don/articles/e40b95dfc726ac",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://zenn.dev/tetsu_don/articles/e40b95dfc726ac",
+              "score": 100,
+              "engagement_label": "240 users",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Maker-Checker構成でClaude Codeを回し、実バグを検出した実践記録",
+              "seen_before": false,
+              "extra": "テクノロジー"
+            },
+            {
+              "title": "AI研修(Day2)【MIXI 26新卒技術研修】",
+              "url": "https://speakerdeck.com/mixi_engineers/2026_new_grad_training_ai_day2",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://speakerdeck.com/mixi_engineers/2026_new_grad_training_ai_day2",
+              "score": 88,
+              "engagement_label": "203 users",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "MIXI新卒研修のAI講義資料。社内向け教育設計の作り方が参考になる",
+              "seen_before": false,
+              "extra": "テクノロジー"
+            },
+            {
+              "title": "イオンモール爆発巡り遺族装う投稿拡散、投稿者「閲覧数稼ぎや承認欲求止まらなくなった」",
+              "url": "https://www.yomiuri.co.jp/national/20260808-GYT1T00411/",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://www.yomiuri.co.jp/national/20260808-GYT1T00411/",
+              "score": 64,
+              "engagement_label": "114 users",
+              "category": "AIと社会",
+              "interest": 2,
+              "summary": "生成AIを悪用した偽情報拡散の実例。災害時の情報検証の難しさが表れた",
+              "seen_before": false,
+              "extra": "世の中"
+            },
+            {
+              "title": "Zbtlink製ルータに出荷時組み込まれていたバックドアについてまとめてみた - piyolog",
+              "url": "https://piyolog.hatenadiary.jp/entry/2026/08/08/020650",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://piyolog.hatenadiary.jp/entry/2026/08/08/020650",
+              "score": 63,
+              "engagement_label": "132 users",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "侵害ではなくベンダ自身が出荷時に仕込んだ実装。供給網検証の論点整理",
+              "seen_before": false,
+              "extra": "テクノロジー"
+            },
+            {
+              "title": "眩しすぎるHDRスパム広告について - マルシテイア",
+              "url": "https://blog.amagi.dev/entry/2026/08/08/174615",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://blog.amagi.dev/entry/2026/08/08/174615",
+              "score": 58,
+              "engagement_label": "114 users",
+              "category": "Web",
+              "interest": 2,
+              "summary": "HDR画像の輝度を悪用した広告手法。ブラウザ表示仕様の盲点を突く話",
+              "seen_before": false,
+              "extra": "テクノロジー"
+            },
+            {
+              "title": "ファン付き作業服着用の５０代男性、熱中症の疑いで死亡…スポーツドリンクも持参",
+              "url": "https://www.yomiuri.co.jp/local/kansai/news/20260808-GYO1T00089/",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://www.yomiuri.co.jp/local/kansai/news/20260808-GYO1T00089/",
+              "score": 49,
+              "engagement_label": "228 users",
+              "category": "",
+              "interest": 1,
+              "summary": "空調服と水分補給でも熱中症死に至った事例。屋外作業の安全対策の限界",
+              "seen_before": false,
+              "extra": "世の中"
+            },
+            {
+              "title": "用意した朝食を息子が食べずに注意したら「お母さんの料理はまずいから食べたくない」と…",
+              "url": "https://togetter.com/li/2730835",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://togetter.com/li/2730835",
+              "score": 46,
+              "engagement_label": "152 users",
+              "category": "",
+              "interest": 1,
+              "summary": "家庭内の食事対応をめぐるやり取りがSNSで議論に発展した話題",
+              "seen_before": false,
+              "extra": "暮らし"
+            },
+            {
+              "title": "低所得のアーティストが「毎月約16万円のベーシックインカム」を無条件で受け取る実験で起きた変化とは？",
+              "url": "https://gigazine.net/news/20260808-artists-free-money-make-more-art/",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://gigazine.net/news/20260808-artists-free-money-make-more-art/",
+              "score": 46,
+              "engagement_label": "198 users",
+              "category": "",
+              "interest": 1,
+              "summary": "無条件給付でアーティストの制作量が増えたという米大学の実験結果",
+              "seen_before": false,
+              "extra": "世の中"
+            },
+            {
+              "title": "八王子の滝山病院が「みいちゃん」の最終処理場になっている件",
+              "url": "https://anond.hatelabo.jp/20260808090938",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://anond.hatelabo.jp/20260808090938",
+              "score": 41,
+              "engagement_label": "167 users",
+              "category": "",
+              "interest": 1,
+              "summary": "支援から漏れた人の行き着く先を問いかける匿名ダイアリーの投稿",
+              "seen_before": false,
+              "extra": "世の中"
+            }
+          ]
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "【RAG】話題の米国AIベンチャーで実践される「社内ナレッジ」管理",
+              "url": "https://zenn.dev/knowledgesense/articles/7c1a8f7720b119",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "いいね184 / ブクマ97",
+              "category": "LLM",
+              "interest": 3,
+              "summary": "実運用されている社内ナレッジ管理の設計。RAG構築の実例として濃い",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "Claude が書く長いコメントは、Claude 自身の役に立っていなかった",
+              "url": "https://zenn.dev/uzu_tech/articles/86a2ef05a7d649",
+              "comments_url": "",
+              "score": 99,
+              "engagement_label": "いいね132 / ブクマ49",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "AI生成コメントの有効性を検証。コメント方針を見直す判断材料になる",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "Claude Code の「無駄」を可視化するツール cclens を作った",
+              "url": "https://zenn.dev/lambdalisue/articles/introduce-cclens",
+              "comments_url": "",
+              "score": 95,
+              "engagement_label": "いいね84 / ブクマ47",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Claude Codeのトークン浪費を可視化するツール。運用改善の起点になる",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "オントロジーで AI に業務知識を渡す — AWS の OSS「Context Ontology Accelerator」を試してみた",
+              "url": "https://zenn.dev/aws_japan/articles/context-ontology-accelerator-deploy",
+              "comments_url": "",
+              "score": 92,
+              "engagement_label": "いいね78 / ブクマ46",
+              "category": "LLM",
+              "interest": 3,
+              "summary": "AWSのOSSで業務知識を構造化しAIに渡す試み。RAGの次の一手として",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "Microsoft 謹製 デスクトップアプリ「Skill Recorder」で業務効率化スキル（SKILL.md）の作成が捗る？",
+              "url": "https://zenn.dev/benjuwan/articles/c2ba48e7662f92",
+              "comments_url": "",
+              "score": 88,
+              "engagement_label": "いいね58 / ブクマ43",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "操作記録からSKILL.mdを半自動生成するMicrosoft製アプリの使用感",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "gpt-5.6-sol の high に「ウルトラ」と入力して「ソウル」と話させる技術",
+              "url": "https://zenn.dev/microsoft/articles/agent-framework-ultra-soul",
+              "comments_url": "",
+              "score": 86,
+              "engagement_label": "いいね85 / ブクマ15",
+              "category": "LLM",
+              "interest": 3,
+              "summary": "推論強度指定の挙動を検証した小ネタ。プロンプト設計の勘所が見える",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "ある日エンジニアが突然無職になってしまったら？ — 離職インシデント対応ランブック",
+              "url": "https://zenn.dev/tsukuboshi/articles/engineer-unemployment-runbook",
+              "comments_url": "",
+              "score": 84,
+              "engagement_label": "いいね239 / ブクマ155",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "突然の離職をインシデント対応の手順に落とし込んだキャリア読み物",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "アーキテクチャに限らず意思決定を全部残す「ADR（Any Decision Record）」という文化",
+              "url": "https://zenn.dev/dress_code/articles/c73500ae73361c",
+              "comments_url": "",
+              "score": 79,
+              "engagement_label": "いいね165 / ブクマ67",
+              "category": "組織論",
+              "interest": 2,
+              "summary": "設計に限らずあらゆる意思決定を記録に残す文化の導入方法",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "DESIGN.md を置くと、どこまで「いい感じ」になるのか — 74件を測って確かめた",
+              "url": "https://zenn.dev/ait/articles/google-design-md-measured",
+              "comments_url": "",
+              "score": 78,
+              "engagement_label": "いいね46 / ブクマ35",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "DESIGN.md配置の効果を74件で定量測定。設定ファイル運用の検証例",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "LLM Wikiパターンの標準化 OKF(Open Knowledge Format)",
+              "url": "https://zenn.dev/finatext/articles/2ea88e4b1c2e5b",
+              "comments_url": "",
+              "score": 75,
+              "engagement_label": "いいね50 / ブクマ30",
+              "category": "LLM",
+              "interest": 3,
+              "summary": "LLMに読ませる知識ドキュメントの記述形式を標準化する提案",
+              "seen_before": true,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "鍵を渡さず・文脈を可視化する — マルチエージェント管理デスクトップアプリ「moeca」を個人開発している話",
+              "url": "https://qiita.com/can-can/items/ec8cd4dd183e12ac5781",
+              "comments_url": "",
+              "score": 92,
+              "engagement_label": "LGTM24 / ストック5",
+              "category": "AIエージェント",
+              "interest": 3,
+              "summary": "APIキーを渡さず文脈を可視化するマルチエージェント管理アプリの開発記",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "【便利】 Claude Codeの覚えておきたいスラッシュコマンドまとめ",
+              "url": "https://qiita.com/tamashiro_nobuyuki/items/573178ed3b8a6a22ebb1",
+              "comments_url": "",
+              "score": 87,
+              "engagement_label": "LGTM10 / ストック10",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "用途別のスラッシュコマンド早見表。取りこぼしの確認用に手元に置ける",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "わかるようでわからないssh接続について",
+              "url": "https://qiita.com/hrfm1623/items/91115760e4bd66f7995a",
+              "comments_url": "",
+              "score": 86,
+              "engagement_label": "LGTM55 / ストック53",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "鍵交換前の暗号化など、SSHの素朴な疑問をQ&A形式で解いていく解説",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Web API設計の現在地2026",
+              "url": "https://qiita.com/tatsuya582/items/a800739c02eadff68c70",
+              "comments_url": "",
+              "score": 84,
+              "engagement_label": "LGTM109 / ストック90",
+              "category": "Web",
+              "interest": 2,
+              "summary": "エラー形式やOAuth選択基準など、2026年時点の標準を領域別に一覧化",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "AIで完成度を上げたい、でも人間味のない完璧すぎる作品は嫌だ",
+              "url": "https://qiita.com/sumomoo/items/cfe3c47453968b2d3c29",
+              "comments_url": "",
+              "score": 79,
+              "engagement_label": "LGTM34 / ストック3",
+              "category": "AIと制作",
+              "interest": 2,
+              "summary": "AI補助で成果物が完璧になりすぎることへの違和感を論じたエッセイ",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "Google公式の Cloud Run MCP で、Claude Code にデプロイさせてみた",
+              "url": "https://qiita.com/TaichiYamasaki/items/c75b139044362e18fa68",
+              "comments_url": "",
+              "score": 77,
+              "engagement_label": "LGTM9 / ストック10",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Google公式のリモートMCP経由でClaude Codeにデプロイさせた検証",
+              "seen_before": true,
+              "extra": ""
+            },
+            {
+              "title": "設計図の描き方入門：Mermaid記法とER図・シーケンス図・クラス図(UML)の基礎",
+              "url": "https://qiita.com/mame_hiro416/items/2dd4a428bdf6473c712c",
+              "comments_url": "",
+              "score": 65,
+              "engagement_label": "LGTM6 / ストック14",
+              "category": "発信ネタ",
+              "interest": 2,
+              "summary": "ER図・シーケンス図・クラス図をMermaidで書く入門。図解記事の下地に",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "今更だけど、DynamoDBの設計の勘所をサクッとまとめてみた",
+              "url": "https://qiita.com/miruky/items/c7beb2fbed6492d195d1",
+              "comments_url": "",
+              "score": 59,
+              "engagement_label": "LGTM7 / ストック8",
+              "category": "アーキテクチャ",
+              "interest": 2,
+              "summary": "DynamoDBのキー設計とアクセスパターン起点の考え方を短くまとめた記事",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Amazon DynamoDBのリアルタイムベクトル検索機能をちょっと整理する",
+              "url": "https://qiita.com/Syoitu/items/068db63a8bf3bb961b2b",
+              "comments_url": "",
+              "score": 55,
+              "engagement_label": "LGTM7 / ストック0",
+              "category": "LLM",
+              "interest": 3,
+              "summary": "DynamoDBのリアルタイムベクトル検索対応を整理。RAG基盤の選択肢が増えた",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "LTできたらバンジー飛べる",
+              "url": "https://qiita.com/tanahiro2010/items/e536eabc73691f87dc0e",
+              "comments_url": "",
+              "score": 53,
+              "engagement_label": "LGTM6 / ストック2",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "登壇直前の緊張をバンジージャンプになぞらえた登壇論のエッセイ",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "“Code was never the hard part” is an insult to all programmers",
+              "url": "https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers",
+              "comments_url": "https://news.ycombinator.com/item?id=49222189",
+              "score": 100,
+              "engagement_label": "709pt / 419コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "「コードは難しい部分ではない」というAI時代の言説への正面からの反論",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Shopify replaced Redis with MySQL for inventory reservations–and it scaled",
+              "url": "https://shopify.engineering/scaling-inventory-reservations",
+              "comments_url": "https://news.ycombinator.com/item?id=49226536",
+              "score": 87,
+              "engagement_label": "163pt / 94コメント",
+              "category": "アーキテクチャ",
+              "interest": 2,
+              "summary": "在庫予約をRedisからMySQLへ戻して拡張できた設計判断の記録",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Message your other Claude Code sessions",
+              "url": "https://code.claude.com/docs/en/cross-session-messaging",
+              "comments_url": "https://news.ycombinator.com/item?id=49222824",
+              "score": 85,
+              "engagement_label": "111pt / 46コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Claude Codeのセッション間メッセージ送信。並列運用の公式な手法",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Improving Heuristics for A* Pathfinding",
+              "url": "https://www.redblobgames.com/pathfinding/heuristics/differential.html",
+              "comments_url": "https://news.ycombinator.com/item?id=49079995",
+              "score": 71,
+              "engagement_label": "192pt / 20コメント",
+              "category": "アルゴリズム",
+              "interest": 2,
+              "summary": "A*の差分ヒューリスティクス改良。図解の作り方も含め解説記事の手本",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Incentives are for losers",
+              "url": "https://www.experimental-history.com/p/incentives-are-for-losers",
+              "comments_url": "https://news.ycombinator.com/item?id=49227652",
+              "score": 64,
+              "engagement_label": "81pt / 47コメント",
+              "category": "組織論",
+              "interest": 2,
+              "summary": "インセンティブ設計に依存した組織運営への批判的エッセイ",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Fastmail offers EU data region",
+              "url": "https://www.fastmail.com/blog/fastmail-offers-eu-data-region/",
+              "comments_url": "https://news.ycombinator.com/item?id=49223082",
+              "score": 55,
+              "engagement_label": "386pt / 193コメント",
+              "category": "インフラ",
+              "interest": 1,
+              "summary": "FastmailがEUデータリージョンを提供開始。データ主権対応の一例",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "My server is a phone now",
+              "url": "https://seg6.space/posts/phone-server/",
+              "comments_url": "https://news.ycombinator.com/item?id=49226636",
+              "score": 54,
+              "engagement_label": "271pt / 106コメント",
+              "category": "インフラ",
+              "interest": 1,
+              "summary": "余ったAndroid端末を常時稼働サーバーとして運用する自宅実験の記録",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "_for-sale DNS records",
+              "url": "https://specification.website/spec/foundations/for-sale-dns/",
+              "comments_url": "https://news.ycombinator.com/item?id=49221668",
+              "score": 53,
+              "engagement_label": "385pt / 141コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ドメインの売却意思をDNSレコードで表明するための仕様提案",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Os8088: A powerful Mac-like OS for the IBM XT, 286, 386",
+              "url": "https://os8088.com/",
+              "comments_url": "https://news.ycombinator.com/item?id=49226923",
+              "score": 47,
+              "engagement_label": "141pt / 61コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "IBM XT/286/386向けのMac風OS。レトロPC上の実装プロジェクト",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Triton: DirectX 11 Driver for QEMU",
+              "url": "https://blog.getutm.app/2026/introducing-triton-directx-11-driver-for-qemu/",
+              "comments_url": "https://news.ycombinator.com/item?id=49221711",
+              "score": 47,
+              "engagement_label": "169pt / 31コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "QEMU上でDirectX 11を動かすドライバ。UTM開発陣による公開",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "\"Code was never the hard part\" is an insult to all programmers",
+              "url": "https://blog.senko.net/code-was-never-the-hard-part-is-an-insult-to-all-programmers",
+              "comments_url": "https://lobste.rs/s/iixlsm",
+              "score": 100,
+              "engagement_label": "26pt / 18コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "HNと同じ記事がここでも上位。vibecodingタグで別角度の議論が並走",
+              "seen_before": false,
+              "extra": "practices, vibecoding"
+            },
+            {
+              "title": "They don’t make ’em like Sublime Text anymore",
+              "url": "https://dbushell.com/2026/08/07/sublime-text/",
+              "comments_url": "https://lobste.rs/s/uny1fo",
+              "score": 94,
+              "engagement_label": "96pt / 43コメント",
+              "category": "開発ツール",
+              "interest": 2,
+              "summary": "軽量エディタSublime Textへの賛歌。近年の肥大化への問題提起として",
+              "seen_before": false,
+              "extra": "editors, rant"
+            },
+            {
+              "title": "Am I the problem? Interviewing another team to find out",
+              "url": "https://www.macchaffee.com/blog/2026/am-i-the-problem/",
+              "comments_url": "https://lobste.rs/s/c30jsd",
+              "score": 86,
+              "engagement_label": "99pt / 21コメント",
+              "category": "組織論",
+              "interest": 2,
+              "summary": "対立しがちな他チームに聞き取りをした記録。組織間の摩擦の解き方",
+              "seen_before": true,
+              "extra": "culture, practices"
+            },
+            {
+              "title": "some software talks i like",
+              "url": "https://char.lt/blog/2026/08/talks-i-like/",
+              "comments_url": "https://lobste.rs/s/cmrfrj",
+              "score": 84,
+              "engagement_label": "67pt / 15コメント",
+              "category": "発信ネタ",
+              "interest": 2,
+              "summary": "良質なソフトウェア講演のキュレーション。学び直しの入口に使える",
+              "seen_before": false,
+              "extra": "programming"
+            },
+            {
+              "title": "The Nixpkgs core team has disbanded",
+              "url": "https://discourse.nixos.org/t/the-nixpkgs-core-team-has-disbanded/79413",
+              "comments_url": "https://lobste.rs/s/9cv8me",
+              "score": 82,
+              "engagement_label": "98pt / 14コメント",
+              "category": "OSS運営",
+              "interest": 2,
+              "summary": "Nixpkgsコアチームが解散。Nix運用者は今後のガバナンス動向に注意",
+              "seen_before": true,
+              "extra": "nix"
+            },
+            {
+              "title": "OpenSSH Key Structure Guide",
+              "url": "https://sshref.dev/",
+              "comments_url": "https://lobste.rs/s/lnxdje",
+              "score": 56,
+              "engagement_label": "8pt / 3コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "OpenSSH鍵フォーマットの内部構造を図解したリファレンスサイト",
+              "seen_before": false,
+              "extra": "security"
+            },
+            {
+              "title": "Revision Prompting improves industrial LLM processes",
+              "url": "https://revisionprompting.info/",
+              "comments_url": "https://lobste.rs/s/wkx6jf",
+              "score": 53,
+              "engagement_label": "3pt / 1コメント",
+              "category": "LLM",
+              "interest": 3,
+              "summary": "業務でのLLM処理を改善する推敲型プロンプト手法の提案",
+              "seen_before": false,
+              "extra": "vibecoding"
+            },
+            {
+              "title": "Assembly Hall of Shame: Racing to the bottom of CPU performance",
+              "url": "https://github.com/xoreaxeaxeax/asm-hall-of-shame",
+              "comments_url": "https://lobste.rs/s/hw1y12",
+              "score": 46,
+              "engagement_label": "54pt / 2コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "CPU性能を最大限に落とすアセンブリ実装を集めたコレクション",
+              "seen_before": true,
+              "extra": "hardware"
+            },
+            {
+              "title": "Systemd Dynamic Users (2020)",
+              "url": "https://ethulhu.co.uk/systemd-dynamicuser",
+              "comments_url": "https://lobste.rs/s/kjuxof",
+              "score": 45,
+              "engagement_label": "18pt / 0コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "systemdの動的ユーザー機能でサービスを隔離する仕組みの解説",
+              "seen_before": false,
+              "extra": "systemd"
+            },
+            {
+              "title": "Dithered QR codes",
+              "url": "https://www.andrewt.net/dithered-qr-codes/wtf/",
+              "comments_url": "https://lobste.rs/s/urdoby",
+              "score": 43,
+              "engagement_label": "14pt / 1コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ディザリングで画像に溶け込ませるQRコードの作り方",
+              "seen_before": false,
+              "extra": "art, graphics"
+            }
+          ]
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "PrimeIntellect-ai/prime-agent",
+              "url": "https://github.com/PrimeIntellect-ai/prime-agent",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "+2483 stars today / 計9,476 / TypeScript",
+              "category": "AIエージェント",
+              "interest": 3,
+              "summary": "自己改善型のコーディングエージェント。長時間の自律タスク実行が売り",
+              "seen_before": true,
+              "extra": "TypeScript"
+            },
+            {
+              "title": "mattpocock/skills",
+              "url": "https://github.com/mattpocock/skills",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "+1359 stars today / 計210,360 / Shell",
+              "category": "AIエージェント",
+              "interest": 3,
+              "summary": "実務者向けAgent Skills集。著者の.agentsディレクトリをそのまま公開",
+              "seen_before": true,
+              "extra": "Shell"
+            },
+            {
+              "title": "addyosmani/agent-skills",
+              "url": "https://github.com/addyosmani/agent-skills",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "+779 stars today / 計84,744 / JavaScript",
+              "category": "AIエージェント",
+              "interest": 3,
+              "summary": "本番品質を狙ったエンジニアリング用Agent Skills集",
+              "seen_before": true,
+              "extra": "JavaScript"
+            },
+            {
+              "title": "google/skills",
+              "url": "https://github.com/google/skills",
+              "comments_url": "",
+              "score": 95,
+              "engagement_label": "+481 stars today / 計16,885 / Python",
+              "category": "AIエージェント",
+              "interest": 3,
+              "summary": "Google製品向けの公式Agent Skills。スキル記述の型として参考になる",
+              "seen_before": true,
+              "extra": "Python"
+            },
+            {
+              "title": "goauthentik/authentik",
+              "url": "https://github.com/goauthentik/authentik",
+              "comments_url": "",
+              "score": 66,
+              "engagement_label": "+467 stars today / 計24,060 / Python",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "セルフホスト型の認証基盤。個人IdP構築の定番候補",
+              "seen_before": true,
+              "extra": "Python"
+            },
+            {
+              "title": "denoland/celld",
+              "url": "https://github.com/denoland/celld",
+              "comments_url": "",
+              "score": 60,
+              "engagement_label": "+432 stars today / 計2,700 / Rust",
+              "category": "インフラ",
+              "interest": 2,
+              "summary": "Deno陣営による自己ホスト可能な分散Durable Objects実装",
+              "seen_before": true,
+              "extra": "Rust"
+            },
+            {
+              "title": "TauricResearch/TradingAgents",
+              "url": "https://github.com/TauricResearch/TradingAgents",
+              "comments_url": "",
+              "score": 53,
+              "engagement_label": "+153 stars today / 計96,670 / Python",
+              "category": "LLM",
+              "interest": 2,
+              "summary": "LLMマルチエージェントによる金融取引フレームワーク",
+              "seen_before": false,
+              "extra": "Python"
+            },
+            {
+              "title": "TapXWorld/ChinaTextbook",
+              "url": "https://github.com/TapXWorld/ChinaTextbook",
+              "comments_url": "",
+              "score": 28,
+              "engagement_label": "+118 stars today / 計78,069 / Roff",
+              "category": "",
+              "interest": 1,
+              "summary": "中国の小中高・大学教材PDFを集約したリポジトリ",
+              "seen_before": false,
+              "extra": "Roff"
+            },
+            {
+              "title": "litu54/DevOps-Interview-Guide",
+              "url": "https://github.com/litu54/DevOps-Interview-Guide",
+              "comments_url": "",
+              "score": 26,
+              "engagement_label": "+68 stars today / 計765",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "DevOps面接の質問集。技術面接の出題傾向を掴む用途に",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "bannedbook/fanqiang",
+              "url": "https://github.com/bannedbook/fanqiang",
+              "comments_url": "",
+              "score": 23,
+              "engagement_label": "+101 stars today / 計50,051 / Kotlin",
+              "category": "",
+              "interest": 1,
+              "summary": "検閲回避の手法をまとめたドキュメントリポジトリ",
+              "seen_before": false,
+              "extra": "Kotlin"
+            }
+          ]
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Teaching Your AI Web Design Some Actual Taste",
+              "url": "https://dev.to/lovestaco/teaching-your-ai-web-design-some-actual-taste-4p13",
+              "comments_url": "https://dev.to/lovestaco/teaching-your-ai-web-design-some-actual-taste-4p13",
+              "score": 100,
+              "engagement_label": "14リアクション / 1コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "AIに任せたWebデザインの質を上げるための指示づくりの実践",
+              "seen_before": false,
+              "extra": "ai, webdev, claude, design"
+            },
+            {
+              "title": "Model Routing Made My AI Agents Cheaper. It Didn't Make Them Easier to Trust.",
+              "url": "https://dev.to/devansh365/model-routing-made-my-ai-agents-cheaper-it-didnt-make-them-easier-to-trust-2oad",
+              "comments_url": "https://dev.to/devansh365/model-routing-made-my-ai-agents-cheaper-it-didnt-make-them-easier-to-trust-2oad",
+              "score": 100,
+              "engagement_label": "8リアクション / 4コメント",
+              "category": "AIエージェント",
+              "interest": 3,
+              "summary": "モデルルーティングでコストは下がるが信頼性は別問題という運用報告",
+              "seen_before": false,
+              "extra": "ai, agentskills, chatgpt, workflow"
+            },
+            {
+              "title": "A Second Brain Your AI Agent Can Read: Obsidian + Claude",
+              "url": "https://dev.to/shayan-araghi/a-second-brain-your-ai-agent-can-read-4kf6",
+              "comments_url": "https://dev.to/shayan-araghi/a-second-brain-your-ai-agent-can-read-4kf6",
+              "score": 100,
+              "engagement_label": "1リアクション / 9コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "ObsidianのメモをClaudeに読ませる第二の脳の構築手順",
+              "seen_before": false,
+              "extra": "ai, productivity, documentation, programming"
+            },
+            {
+              "title": "I Built Scenario Packs for Agent Regression Testing. The Integration, Not the Judge, Broke Me.",
+              "url": "https://dev.to/debashish_ghosal/i-built-scenario-packs-for-agent-regression-testing-the-integration-not-the-judge-broke-me-1k9k",
+              "comments_url": "https://dev.to/debashish_ghosal/i-built-scenario-packs-for-agent-regression-testing-the-integration-not-the-judge-broke-me-1k9k",
+              "score": 100,
+              "engagement_label": "5リアクション / 2コメント",
+              "category": "AIエージェント",
+              "interest": 3,
+              "summary": "エージェントの回帰テスト基盤づくり。難所は採点でなく統合部分だった",
+              "seen_before": false,
+              "extra": "ai, agentskills, discuss"
+            },
+            {
+              "title": "The Gate Only Logged When It Fired. I Replayed 116,022 Candidate Stop Points to Find the Rest.",
+              "url": "https://dev.to/hexisteme/the-gate-only-logged-when-it-fired-i-replayed-116022-candidate-stop-points-to-find-the-rest-2g1k",
+              "comments_url": "https://dev.to/hexisteme/the-gate-only-logged-when-it-fired-i-replayed-116022-candidate-stop-points-to-find-the-rest-2g1k",
+              "score": 91,
+              "engagement_label": "1リアクション / 5コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Stop hookの発火率を過去ログの再生で測定した検証記録",
+              "seen_before": false,
+              "extra": "agents, automation, llm, programming"
+            },
+            {
+              "title": "How I Used Claude Code to Hunt Down a Memory Leak That Took Down Prod",
+              "url": "https://dev.to/yureki_lab/how-i-used-claude-code-to-hunt-down-a-memory-leak-that-took-down-prod-2cpf",
+              "comments_url": "https://dev.to/yureki_lab/how-i-used-claude-code-to-hunt-down-a-memory-leak-that-took-down-prod-2cpf",
+              "score": 88,
+              "engagement_label": "3リアクション / 3コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "本番停止を招いたメモリリークをClaude Codeで追跡した障害対応記",
+              "seen_before": false,
+              "extra": "ai, claudecode, debugging, productivity"
+            },
+            {
+              "title": "Four AI Agent Skills That Make Coding Workflows Sharper",
+              "url": "https://dev.to/shubham399/four-ai-agent-skills-that-make-coding-workflows-sharper-3k5",
+              "comments_url": "https://dev.to/shubham399/four-ai-agent-skills-that-make-coding-workflows-sharper-3k5",
+              "score": 86,
+              "engagement_label": "3リアクション / 0コメント",
+              "category": "AIエージェント",
+              "interest": 3,
+              "summary": "AI支援開発の各段階で効く4つのSkillの使い分けを整理したガイド",
+              "seen_before": false,
+              "extra": "productivity, ai, llm, promptengineering"
+            },
+            {
+              "title": "Frontend system design interviews are weird. Here’s how I now approach functional requirements.",
+              "url": "https://dev.to/ale3oula/frontend-system-design-interviews-are-weird-heres-how-i-now-approach-functional-requirements-3ea6",
+              "comments_url": "https://dev.to/ale3oula/frontend-system-design-interviews-are-weird-heres-how-i-now-approach-functional-requirements-3ea6",
+              "score": 81,
+              "engagement_label": "5リアクション / 4コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "フロントエンドのシステム設計面接で要件定義をどう進めるかの型",
+              "seen_before": false,
+              "extra": "architecture, frontend, interview, systemdesign"
+            },
+            {
+              "title": "How to Build AI Evals for Tool-Calling Agents",
+              "url": "https://dev.to/dhanushreddy29/how-to-build-ai-evals-for-tool-calling-agents-3h9d",
+              "comments_url": "https://dev.to/dhanushreddy29/how-to-build-ai-evals-for-tool-calling-agents-3h9d",
+              "score": 75,
+              "engagement_label": "1リアクション / 2コメント",
+              "category": "LLM",
+              "interest": 3,
+              "summary": "ツール呼び出し型エージェントの評価基盤をどう組むかの解説",
+              "seen_before": false,
+              "extra": "ai, evals, aievals, agents"
+            },
+            {
+              "title": "Fable 5 Plays Pokémon Sapphire Vision-Only: Notes on a 2,000-Decision Run",
+              "url": "https://dev.to/qingze_hu_c4c251c1b353ede/fable-5-plays-pokemon-sapphire-vision-only-notes-on-a-2000-decision-run-296k",
+              "comments_url": "https://dev.to/qingze_hu_c4c251c1b353ede/fable-5-plays-pokemon-sapphire-vision-only-notes-on-a-2000-decision-run-296k",
+              "score": 73,
+              "engagement_label": "2リアクション / 1コメント",
+              "category": "LLM",
+              "interest": 3,
+              "summary": "視覚情報のみで2000手プレイさせたモデル挙動の観察記録",
+              "seen_before": false,
+              "extra": "ai, python, machinelearning, agents"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

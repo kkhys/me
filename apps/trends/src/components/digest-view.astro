@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import DateNav from "#/components/date-nav.astro";
+import DigestHero from "#/components/digest-hero.astro";
+import MarketSection from "#/components/market-section.astro";
+import { sortMarketsGlobalFirst } from "#/utils/markets";
+import { formatGeneratedAt } from "#/utils/runs";
+
+interface Props {
+  entry: CollectionEntry<"runs">;
+  prev: string | undefined;
+  next: string | undefined;
+}
+
+const { entry, prev, next } = Astro.props;
+const { date, digest, generated_at } = entry.data;
+const markets = sortMarketsGlobalFirst(entry.data.markets);
+---
+
+<div class="wrap">
+  <DateNav current={date} prev={prev} next={next} />
+  <DigestHero digest={digest} />
+  <main>
+    {markets.map((market) => <MarketSection market={market} />)}
+  </main>
+  <footer class="site">生成: {formatGeneratedAt(generated_at)}</footer>
+</div>
+
+<style>
+  .wrap {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 3.5rem;
+  }
+
+  footer.site {
+    margin-top: 3rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--c-border);
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    font-variant-numeric: tabular-nums;
+  }
+</style>

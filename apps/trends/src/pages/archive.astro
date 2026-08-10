@@ -1,0 +1,81 @@
+---
+import { getCollection } from "astro:content";
+
+import Budoux from "#/components/budoux.astro";
+import SiteHeader from "#/components/site-header.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { formatRunDate, sortRunsByDateDesc } from "#/utils/runs";
+
+const runs = sortRunsByDateDesc(await getCollection("runs"));
+---
+
+<BaseLayout title="アーカイブ | Trend Digest" description="Trend Digest の日別アーカイブ">
+  <SiteHeader />
+  <div class="wrap">
+    <h1 class="page-title">アーカイブ</h1>
+    <div class="entry-list">
+      {
+        runs.map((run) => (
+          <a href={`/${run.id}`} class="entry-item">
+            <time class="entry-date" datetime={run.id}>
+              {formatRunDate(run.id)}
+            </time>
+            <Budoux>
+              <span class="entry-headline palt">{run.data.digest.headline}</span>
+            </Budoux>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 3.5rem;
+  }
+
+  .page-title {
+    margin: 2rem 0 1.5rem;
+    font-size: 1rem;
+    font-weight: var(--fw-medium);
+  }
+
+  .entry-list {
+    border-top: 1px solid var(--c-border);
+  }
+
+  .entry-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.75rem 0.5rem;
+    font-size: var(--fs-sm);
+    border-bottom: 1px solid var(--c-border);
+    transition: background-color 0.2s;
+  }
+
+  .entry-item:hover {
+    background-color: oklch(from var(--c-surface) l c h / 50%);
+    text-decoration: none;
+  }
+
+  /* Full-bleed rows: an outer ring would overlap the sibling separators, so
+     draw it inset. */
+  .entry-item:focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: calc(-1 * var(--ring-width));
+  }
+
+  .entry-date {
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+    color: var(--c-sub);
+  }
+
+  .entry-headline {
+    min-width: 0;
+  }
+</style>

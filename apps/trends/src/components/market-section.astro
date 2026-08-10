@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import ServiceCard from "#/components/service-card.astro";
+
+type Market = CollectionEntry<"runs">["data"]["markets"][number];
+
+interface Props {
+  market: Market;
+}
+
+const { market } = Astro.props;
+---
+
+<section class="market" data-market={market.id}>
+  <h2>{market.label}</h2>
+  {market.services.map((service) => <ServiceCard service={service} />)}
+</section>
+
+<style>
+  .market {
+    margin-top: 3rem;
+  }
+
+  h2 {
+    margin: 0 0 1.25rem;
+    font-size: 1rem;
+    font-weight: var(--fw-medium);
+  }
+</style>
