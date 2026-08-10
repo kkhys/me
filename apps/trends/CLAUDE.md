@@ -19,9 +19,10 @@ src/
     digest-hero.astro         # headline / lead / numbered highlights
     market-section.astro      # 日本 / グローバル section
     service-card.astro        # Per-service section (brand-color dot, count, error note)
-    item-row.astro            # rank / score / title / stars / category chip / summary
-    date-nav.astro            # prev / archive / next links
-  utils/runs.ts               # sortRunsByDateDesc, adjacentRuns (pure, unit-tested)
+    item-row.astro            # rank → title → summary → meta row (score, stars, chip, host, engagement)
+    date-nav.astro            # ← 前日 / current date (links to archive) / 翌日 →
+  utils/runs.ts               # sortRunsByDateDesc, adjacentRuns, date formatters (pure, unit-tested)
+  utils/host.ts               # formatHost — hostname without www. for the meta row
   utils/search.ts             # buildSearchText — server-side twin of the client filter
   utils/score.ts              # scoreLevel: 80+/60+ thresholds → hi/mid/lo score emphasis
   styles/global.css           # --c-* tokens (light-dark over uchu palette) + .hidden helper

@@ -13,11 +13,11 @@ interface Props {
 }
 
 const { entry, prev, next } = Astro.props;
-const { digest, markets, generated_at } = entry.data;
+const { date, digest, markets, generated_at } = entry.data;
 ---
 
 <div class="wrap">
-  <DateNav prev={prev} next={next} />
+  <DateNav current={date} prev={prev} next={next} />
   <DigestHero digest={digest} />
   <main>
     {markets.map((market) => <MarketSection market={market} />)}
