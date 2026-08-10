@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+import Budoux from "#/components/budoux.astro";
 import { formatHost } from "#/utils/host";
 import { scoreLevel } from "#/utils/score";
 import { buildSearchText } from "#/utils/search";
@@ -22,9 +23,11 @@ const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item
 <article class="item" data-text={buildSearchText(item)}>
   <span class="rank">{rank}</span>
   <div class="body">
-    <div class="title palt">
-      <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
-    </div>
+    <Budoux>
+      <div class="title palt">
+        <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
+      </div>
+    </Budoux>
     {item.summary && <p class="summary">{item.summary}</p>}
     <div class="meta">
       <span class:list={["score", scoreLevel(item.score)]} title="スコア">{item.score}</span>

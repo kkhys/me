@@ -21,6 +21,8 @@ src/
     service-card.astro        # Per-service section (brand-color dot, count, error note)
     item-row.astro            # rank → title → summary → meta row (score, stars, chip, host, engagement)
     date-nav.astro            # ← 前日 / current date (links to archive) / 翌日 →
+  lib/budoux.ts               # Cached BudouX parser (same setup as apps/me)
+  components/budoux.astro     # Wraps a slot, inserts <wbr> at Japanese phrase boundaries
   utils/runs.ts               # sortRunsByDateDesc, adjacentRuns, date formatters (pure, unit-tested)
   utils/host.ts               # formatHost — hostname without www. for the meta row
   utils/search.ts             # buildSearchText — server-side twin of the client filter
