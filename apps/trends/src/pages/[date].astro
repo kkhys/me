@@ -41,6 +41,6 @@ const markets = sortMarketsGlobalFirst(entry.data.markets).map(({ id, label }) =
   title={`${entry.data.date} | Trend Digest`}
   description={entry.data.digest.headline}
 >
-  <SiteHeader date={entry.data.date} markets={markets} />
+  <SiteHeader markets={markets} />
   <DigestView entry={entry} prev={prev} next={next} />
 </BaseLayout>

@@ -40,6 +40,7 @@ public/                       # robots.txt, manifest, static favicons (generated
 - When changing the schema, update in the same change: `content.config.ts`, the JSON example in the skill's SKILL.md, and every existing file in `src/content/runs/`.
 - File name must equal the `date` field; `[date].astro`'s getStaticPaths throws on mismatch.
 - All string fields are required with `""` for absent values (no nulls) — keeps `exactOptionalPropertyTypes` out of the data path.
+- `discussion_summary` is non-empty only for the top items of comment-capable sources (HN / Lobsters / はてなブックマーク, `comments_top_n` in the skill's config); it renders as a `<details>` fold. Older runs predate the field and rely on the zod default.
 
 ## Key Design Decisions
 

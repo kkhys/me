@@ -35,6 +35,16 @@ const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item
         </Budoux>
       )
     }
+    {
+      item.discussion_summary && (
+        <details class="discussion">
+          <summary>議論の要約</summary>
+          <Budoux>
+            <p>{item.discussion_summary}</p>
+          </Budoux>
+        </details>
+      )
+    }
     <div class="meta">
       <span class:list={["score", scoreLevel(item.score)]} title="スコア">{item.score}</span>
       <span class="stars" title="興味マッチ度">{"★".repeat(item.interest)}</span>
@@ -86,6 +96,35 @@ const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item
     color: var(--c-sub);
     font-size: 0.8125rem;
     line-height: 1.6;
+  }
+
+  .discussion {
+    margin-top: 0.4rem;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .discussion summary {
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  .discussion summary::before {
+    content: "▸ ";
+  }
+
+  .discussion[open] summary::before {
+    content: "▾ ";
+  }
+
+  .discussion summary:hover {
+    color: var(--c-text);
+  }
+
+  .discussion p {
+    margin: 0.3rem 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.7;
   }
 
   .meta {

@@ -21,4 +21,16 @@ describe("buildSearchText", () => {
   it("returns an empty string when every field is empty", () => {
     expect(buildSearchText({ title: "", summary: "", category: "", extra: "" })).toBe("");
   });
+
+  it("includes the discussion summary when present", () => {
+    expect(
+      buildSearchText({
+        title: "Title",
+        summary: "",
+        category: "",
+        extra: "",
+        discussion_summary: "コメントでは賛否が分かれた",
+      }),
+    ).toBe("title コメントでは賛否が分かれた");
+  });
 });

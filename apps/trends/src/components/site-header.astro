@@ -1,12 +1,9 @@
 ---
-import { formatRunDate } from "#/utils/runs";
-
 interface Props {
-  date?: string | undefined;
   markets?: { id: string; label: string }[] | undefined;
 }
 
-const { date, markets } = Astro.props;
+const { markets } = Astro.props;
 
 const tabs = markets ? [{ id: "all", label: "すべて" }, ...markets] : undefined;
 ---
@@ -15,7 +12,6 @@ const tabs = markets ? [{ id: "all", label: "すべて" }, ...markets] : undefin
   <div class="site-inner">
     <span class="brand">
       <a href="/">Trend Digest</a>
-      {date && <span class="date">{formatRunDate(date)}</span>}
     </span>
     {
       tabs && (
@@ -129,13 +125,6 @@ const tabs = markets ? [{ id: "all", label: "すべて" }, ...markets] : undefin
   .brand {
     font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
-  }
-
-  .brand .date {
-    color: var(--c-sub);
-    font-weight: var(--fw-normal);
-    font-variant-numeric: tabular-nums;
-    margin-left: 0.5rem;
   }
 
   .tabs ul {

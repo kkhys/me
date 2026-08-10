@@ -21,6 +21,6 @@ const markets = sortMarketsGlobalFirst(latest.data.markets).map(({ id, label }) 
 ---
 
 <BaseLayout description={latest.data.digest.headline}>
-  <SiteHeader date={latest.data.date} markets={markets} />
+  <SiteHeader markets={markets} />
   <DigestView entry={latest} prev={runs[1]?.id} next={undefined} />
 </BaseLayout>

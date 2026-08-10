@@ -12,6 +12,7 @@ const item = z.object({
   category: z.string().default(""),
   interest: z.number().int().min(1).max(3),
   summary: z.string().default(""),
+  discussion_summary: z.string().default(""),
   seen_before: z.boolean().default(false),
   extra: z.string().default(""),
 });
