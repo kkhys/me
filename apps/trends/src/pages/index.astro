@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import DigestView from "#/components/digest-view.astro";
 import SiteHeader from "#/components/site-header.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
+import { sortMarketsGlobalFirst } from "#/utils/markets";
 import { sortRunsByDateDesc } from "#/utils/runs";
 
 const runs = sortRunsByDateDesc(await getCollection("runs"));
@@ -13,7 +14,10 @@ if (!latest) {
   throw new Error("No digest runs found in src/content/runs");
 }
 
-const markets = latest.data.markets.map(({ id, label }) => ({ id, label }));
+const markets = sortMarketsGlobalFirst(latest.data.markets).map(({ id, label }) => ({
+  id,
+  label,
+}));
 ---
 
 <BaseLayout description={latest.data.digest.headline}>
