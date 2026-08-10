@@ -1,0 +1,92 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  digest: CollectionEntry<"runs">["data"]["digest"];
+}
+
+const { digest } = Astro.props;
+---
+
+<section class="hero">
+  <h1>{digest.headline}</h1>
+  <p class="lead">{digest.lead}</p>
+  <ol>
+    {
+      digest.highlights.map((highlight) => (
+        <li>
+          <a href={highlight.url} target="_blank" rel="noopener">
+            {highlight.title}
+          </a>
+          <span class="hl-service">{highlight.service_label}</span>
+          <span class="hl-reason">{highlight.reason}</span>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .hero {
+    background: var(--c-hero-bg);
+    color: var(--c-hero-text);
+    border-radius: 14px;
+    padding: 26px 28px;
+    margin: 26px 0 8px;
+  }
+
+  .hero h1 {
+    margin: 0 0 8px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .hero .lead {
+    margin: 0 0 18px;
+    opacity: 0.85;
+    font-size: 14.5px;
+  }
+
+  .hero ol {
+    margin: 0;
+    padding: 0 0 0 2px;
+    list-style: none;
+    counter-reset: hl;
+  }
+
+  .hero ol li {
+    counter-increment: hl;
+    padding: 9px 0;
+    border-top: 1px solid color-mix(in srgb, var(--c-hero-text) 14%, transparent);
+  }
+
+  .hero ol li::before {
+    content: counter(hl, decimal-leading-zero);
+    font-weight: 700;
+    opacity: 0.5;
+    margin-right: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hero ol a {
+    color: var(--c-hero-text);
+    font-weight: 600;
+  }
+
+  .hero .hl-service {
+    font-size: 11px;
+    opacity: 0.65;
+    border: 1px solid currentColor;
+    border-radius: 99px;
+    padding: 1px 8px;
+    margin-left: 8px;
+    white-space: nowrap;
+  }
+
+  .hero .hl-reason {
+    display: block;
+    margin-left: 34px;
+    font-size: 13px;
+    opacity: 0.78;
+  }
+</style>

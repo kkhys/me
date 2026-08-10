@@ -6,13 +6,14 @@ A pnpm monorepo for kkhys's personal sites, built with [Astro](https://astro.bui
 
 ### Apps
 
-| Package                          | Site                                     | Description                          |
-| -------------------------------- | ---------------------------------------- | ------------------------------------ |
-| [`@kkhys/me`](./apps/me)         | [kkhys.me](https://kkhys.me)             | Personal website and blog            |
-| [`@kkhys/memo`](./apps/memo)     | [memo.kkhys.me](https://memo.kkhys.me)   | Short threaded memos (max 500 chars) |
-| [`@kkhys/lgtm`](./apps/lgtm)     | [lgtm.kkhys.me](https://lgtm.kkhys.me)   | LGTM images for GitHub Pull Requests |
-| [`@kkhys/diary`](./apps/diary)   | [diary.kkhys.me](https://diary.kkhys.me) | Photo diary                          |
-| [`@kkhys/studio`](./apps/studio) | (local only)                             | Memo composer for memo-content       |
+| Package                          | Site                                       | Description                          |
+| -------------------------------- | ------------------------------------------ | ------------------------------------ |
+| [`@kkhys/me`](./apps/me)         | [kkhys.me](https://kkhys.me)               | Personal website and blog            |
+| [`@kkhys/memo`](./apps/memo)     | [memo.kkhys.me](https://memo.kkhys.me)     | Short threaded memos (max 500 chars) |
+| [`@kkhys/lgtm`](./apps/lgtm)     | [lgtm.kkhys.me](https://lgtm.kkhys.me)     | LGTM images for GitHub Pull Requests |
+| [`@kkhys/diary`](./apps/diary)   | [diary.kkhys.me](https://diary.kkhys.me)   | Photo diary                          |
+| [`@kkhys/trends`](./apps/trends) | [trends.kkhys.me](https://trends.kkhys.me) | Daily tech trend digest              |
+| [`@kkhys/studio`](./apps/studio) | (local only)                               | Memo composer for memo-content       |
 
 ### Packages
 
@@ -65,13 +66,13 @@ Run from the repo root:
 | `pnpm --filter @kkhys/memo <script>`               | Target a single app                            |
 | `pnpm release`                                     | Tag a repo-wide release                        |
 
-Per-app commands are documented in each app's README ([me](./apps/me/README.md), [memo](./apps/memo/README.md), [lgtm](./apps/lgtm/README.md), [diary](./apps/diary/README.md)).
+Per-app commands are documented in each app's README ([me](./apps/me/README.md), [memo](./apps/memo/README.md), [lgtm](./apps/lgtm/README.md), [diary](./apps/diary/README.md), [trends](./apps/trends/README.md)).
 
 ## CI / Deploy
 
 - `.github/workflows/ci.yml` — runs on pull requests and the merge queue: lint, test, type check, and build across the workspace against fixtures.
 - `.github/workflows/deploy-memo.yml` — deploys memo to Cloudflare Pages on pushes to main that touch memo or shared packages.
-- me, lgtm, and diary are built and deployed locally via `pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary`.
+- me, lgtm, diary, and trends are built and deployed locally via `pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary` / `pnpm deploy:trends`. trends is normally published end-to-end by the `creating-trend-digest` Claude Code skill (data commit → deploy → push).
 
 ## License
 

@@ -1,0 +1,34 @@
+---
+interface Props {
+  prev: string | undefined;
+  next: string | undefined;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<nav class="date-nav" aria-label="日付ナビゲーション">
+  <span class="slot">{prev && <a href={`/${prev}`}>← {prev}</a>}</span>
+  <a href="/archive">アーカイブ</a>
+  <span class="slot end">{next && <a href={`/${next}`}>{next} →</a>}</span>
+</nav>
+
+<style>
+  .date-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 18px;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .slot {
+    flex: 1;
+  }
+
+  .slot.end {
+    text-align: right;
+  }
+</style>

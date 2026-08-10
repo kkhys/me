@@ -1,0 +1,159 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import { scoreLevel } from "#/utils/score";
+import { buildSearchText } from "#/utils/search";
+
+type Item =
+  CollectionEntry<"runs">["data"]["markets"][number]["services"][number]["items"][number];
+
+interface Props {
+  item: Item;
+  rank: number;
+}
+
+const { item, rank } = Astro.props;
+
+const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item.url;
+---
+
+<article class="item" data-text={buildSearchText(item)}>
+  <span class="rank">{rank}</span>
+  <span class="score">
+    <b>{item.score}</b>
+    <span class="bar"><i class={scoreLevel(item.score)} style={`width:${item.score}%`}></i></span>
+  </span>
+  <div class="body">
+    <div class="title">
+      <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
+    </div>
+    <div class="meta">
+      <span class="stars" title="興味マッチ度">{"★".repeat(item.interest)}</span>
+      {item.category && <span class="chip">{item.category}</span>}
+      {item.engagement_label && <span>{item.engagement_label}</span>}
+      {item.seen_before && <span class="seen">既出</span>}
+      {
+        hasDiscussionLink && (
+          <a class="comments" href={item.comments_url} target="_blank" rel="noopener">
+            議論を見る
+          </a>
+        )
+      }
+    </div>
+    {item.summary && <div class="summary">{item.summary}</div>}
+  </div>
+</article>
+
+<style>
+  .item {
+    display: flex;
+    gap: 14px;
+    padding: 12px 18px;
+    border-top: 1px solid var(--c-border);
+  }
+
+  .item:first-of-type {
+    border-top: 0;
+  }
+
+  .rank {
+    flex: none;
+    width: 20px;
+    text-align: right;
+    color: var(--c-muted);
+    font-size: 12.5px;
+    font-variant-numeric: tabular-nums;
+    padding-top: 3px;
+  }
+
+  .score {
+    flex: none;
+    width: 44px;
+    padding-top: 1px;
+  }
+
+  .score b {
+    font-size: 14.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bar {
+    display: block;
+    height: 3px;
+    background: var(--c-border);
+    border-radius: 2px;
+    margin-top: 4px;
+    overflow: hidden;
+  }
+
+  .bar i {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+  }
+
+  .bar i.hi {
+    background: var(--c-score-hi);
+  }
+
+  .bar i.mid {
+    background: var(--c-score-mid);
+  }
+
+  .bar i.lo {
+    background: var(--c-score-lo);
+  }
+
+  .body {
+    min-width: 0;
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 14.5px;
+    line-height: 1.45;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    align-items: center;
+    color: var(--c-muted);
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  .stars {
+    color: var(--c-star);
+    letter-spacing: 1px;
+  }
+
+  .chip {
+    background: var(--c-accent-soft);
+    color: var(--c-accent);
+    border-radius: 99px;
+    padding: 0 9px;
+    font-size: 11px;
+    line-height: 18px;
+  }
+
+  .seen {
+    border: 1px solid var(--c-border);
+    color: var(--c-muted);
+    border-radius: 4px;
+    padding: 0 5px;
+    font-size: 10.5px;
+  }
+
+  .summary {
+    color: var(--c-muted);
+    font-size: 13px;
+    margin-top: 3px;
+  }
+
+  .comments {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+</style>

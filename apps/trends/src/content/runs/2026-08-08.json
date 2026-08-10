@@ -1,0 +1,950 @@
+{
+  "date": "2026-08-08",
+  "generated_at": "2026-08-08T14:12:54+09:00",
+  "digest": {
+    "headline": "エージェント用「スキル」がGitHubを席巻、同時にAI生成コードの運用コストと統制が問い直された一日",
+    "lead": "GitHub Trendingは上位がほぼエージェント向けスキル集と実行環境で埋まり、mattpocock・addyosmani・Google までが同じ土俵に並んだ。一方でOracleはOpenJDKへのAI生成コードを禁止し、DatabricksはAIコーディングのコスト管理を語るなど、論点が導入から運用と統制へ移りつつある。国内はClaude Codeの無駄の可視化やAIレビュー承認率の実測など、手元の運用データを出す記事が目立った。",
+    "highlights": [
+      {
+        "title": "mattpocock/skills",
+        "url": "https://github.com/mattpocock/skills",
+        "service_label": "GitHub Trending",
+        "reason": "スキル集リポジトリが軒並み急上昇。自作marketplaceのSKILL.md設計を見直す比較対象になる。"
+      },
+      {
+        "title": "Oracle bans AI-generated code from OpenJDK",
+        "url": "https://app.dealroom.co/news/feed/oracle-bans-ai-generated-code-from-openjdk-despite-ellison-s-claim-oracle-isn-t-writing-its-own-code",
+        "service_label": "Hacker News",
+        "reason": "大規模OSSがAI生成コードを明確に禁止。受け入れ可否の線引き議論の基準になる。"
+      },
+      {
+        "title": "Claude が書く長いコメントは、Claude 自身の役に立っていなかった",
+        "url": "https://zenn.dev/uzu_tech/articles/86a2ef05a7d649",
+        "service_label": "Zenn",
+        "reason": "冗長コメント不要という方針を実測で裏づける内容。コメント規約の根拠に使える。"
+      },
+      {
+        "title": "Managing AI Coding Costs at Scale",
+        "url": "https://www.databricks.com/blog/managing-ai-coding-costs-scale",
+        "service_label": "Hacker News",
+        "reason": "エージェント常用時に必ず来るコスト問題を組織規模でどう抑えるかの実務知見。"
+      },
+      {
+        "title": "DeepSeek V4 Flash 0731",
+        "url": "https://arcprize.org/results/deepseek-v4-flash-0731",
+        "service_label": "Hacker News",
+        "reason": "新Flash系モデルのARC-AGI評価。安価高速モデルの到達点は押さえておきたい。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "ブックマーカー図鑑 3298 人収録 気づけば3000人超えてたよ 収録予定 http..",
+              "url": "https://anond.hatelabo.jp/20260807233039",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://anond.hatelabo.jp/20260807233039",
+              "score": 94,
+              "engagement_label": "404 users",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "LLMで3298人分のブックマーカー紹介を生成した個人プロジェクト。プロンプトも公開。",
+              "seen_before": false,
+              "extra": "テクノロジー"
+            },
+            {
+              "title": "Web API設計の現在地2026 - Qiita",
+              "url": "https://qiita.com/tatsuya582/items/a800739c02eadff68c70",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://qiita.com/tatsuya582/items/a800739c02eadff68c70",
+              "score": 81,
+              "engagement_label": "165 users",
+              "category": "Web/設計",
+              "interest": 2,
+              "summary": "エラー標準やOAuth選択基準など2026年時点のAPI設計の定番を整理。Qiitaでも上位。",
+              "seen_before": false,
+              "extra": "テクノロジー"
+            },
+            {
+              "title": "AI時代、アーキテクトやテックリードは死ぬ",
+              "url": "https://zenn.dev/neko3cs/articles/architect-and-techlead-is-dead-in-the-ai-era",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://zenn.dev/neko3cs/articles/architect-and-techlead-is-dead-in-the-ai-era",
+              "score": 78,
+              "engagement_label": "120 users",
+              "category": "AI/キャリア",
+              "interest": 3,
+              "summary": "AI進化で設計職は消えるという主張。ブコメの反論込みで発信ネタになる。",
+              "seen_before": false,
+              "extra": "テクノロジー"
+            },
+            {
+              "title": "「好きなことを仕事にしたい」若者への豊田章男の回答が正論すぎて、ぐうの音も出なかった",
+              "url": "https://diamond.jp/articles/-/396632",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://diamond.jp/articles/-/396632",
+              "score": 71,
+              "engagement_label": "156 users",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "「好きなことを仕事に」への回答。キャリア観を語る際の引用元になる。",
+              "seen_before": false,
+              "extra": "政治と経済"
+            },
+            {
+              "title": "テストが増えすぎてもう限界だったので、PRで全テストを回すのをやめた話 - Timee Product Team Blog",
+              "url": "https://tech.timee.co.jp/entry/2026/08/07/164910",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://tech.timee.co.jp/entry/2026/08/07/164910",
+              "score": 65,
+              "engagement_label": "131 users",
+              "category": "開発/CI",
+              "interest": 2,
+              "summary": "Datadog Test Impact AnalysisでPRごとのテストを絞りCIを高速化した事例。",
+              "seen_before": false,
+              "extra": "テクノロジー"
+            },
+            {
+              "title": "税務職員が高齢女性から約1億5000万円受け取り競艇 懲戒免職に | NHKニュース",
+              "url": "https://news.web.nhk/newsweb/na/na-k10015199381000",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://news.web.nhk/newsweb/na/na-k10015199381000",
+              "score": 55,
+              "engagement_label": "262 users",
+              "category": "",
+              "interest": 1,
+              "summary": "税務職員が調査先の高齢女性から1億5千万円を受領し懲戒免職。",
+              "seen_before": false,
+              "extra": "エンタメ"
+            },
+            {
+              "title": "KDDI、楽天へのローミングを9月末で終了",
+              "url": "https://k-tai.watch.impress.co.jp/docs/news/2131649.html",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://k-tai.watch.impress.co.jp/docs/news/2131649.html",
+              "score": 47,
+              "engagement_label": "159 users",
+              "category": "",
+              "interest": 1,
+              "summary": "KDDIが楽天モバイルへのローミングを9月末で終了。国内通信の勢力図が動く。",
+              "seen_before": false,
+              "extra": "テクノロジー"
+            },
+            {
+              "title": "カンボジアで息子が行方不明になり8ヶ月経ったが、息子から連絡がきた… 友人も一緒でとりあえず無事で元気そうではあったが、居場所や会社名も言えず、帰国も難しい状況のよう",
+              "url": "https://togetter.com/li/2730398",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://togetter.com/li/2730398",
+              "score": 44,
+              "engagement_label": "137 users",
+              "category": "",
+              "interest": 1,
+              "summary": "カンボジアで行方不明の息子から連絡。特殊詐欺拠点問題の一断面。",
+              "seen_before": false,
+              "extra": "世の中"
+            },
+            {
+              "title": "イオンモール熊本、「再入館を許可」の証言 社内規定に抵触か | 毎日新聞",
+              "url": "https://mainichi.jp/articles/20260807/k00/00m/040/386000c",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://mainichi.jp/articles/20260807/k00/00m/040/386000c",
+              "score": 43,
+              "engagement_label": "133 users",
+              "category": "",
+              "interest": 1,
+              "summary": "爆発事故で安全確認前の再入館があったとの証言。災害マニュアルの形骸化。",
+              "seen_before": false,
+              "extra": "世の中"
+            },
+            {
+              "title": "コストコで会員カード作った私「白カードで！」店員「今は皆さんエグゼクティブカードしか作りませんけど？」→コストコのカード勧誘はやたら圧が強いが、本当にお得なの？",
+              "url": "https://togetter.com/li/2730321",
+              "comments_url": "https://b.hatena.ne.jp/entry/https://togetter.com/li/2730321",
+              "score": 37,
+              "engagement_label": "114 users",
+              "category": "",
+              "interest": 1,
+              "summary": "コストコの上位会員カード勧誘の圧が強いという話題。損得の検証つき。",
+              "seen_before": false,
+              "extra": "暮らし"
+            }
+          ]
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "【RAG】話題の米国AIベンチャーで実践される「社内ナレッジ」管理",
+              "url": "https://zenn.dev/knowledgesense/articles/7c1a8f7720b119",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "いいね165 / ブクマ86",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "米AIベンチャーの社内ナレッジ管理をRAG観点で解説。設計の実務指針になる。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Claude Code の「無駄」を可視化するツール cclens を作った",
+              "url": "https://zenn.dev/lambdalisue/articles/introduce-cclens",
+              "comments_url": "",
+              "score": 99,
+              "engagement_label": "いいね74 / ブクマ45",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Claude Codeのセッションの無駄を可視化するツール。日々の運用改善に直結。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Claude が書く長いコメントは、Claude 自身の役に立っていなかった",
+              "url": "https://zenn.dev/uzu_tech/articles/86a2ef05a7d649",
+              "comments_url": "",
+              "score": 95,
+              "engagement_label": "いいね86 / ブクマ32",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "AIの冗長コメントはAI自身にも効かないという検証。コメント方針の裏づけに。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "オントロジーで AI に業務知識を渡す — AWS の OSS「Context Ontology Accelerator」を試してみた",
+              "url": "https://zenn.dev/aws_japan/articles/context-ontology-accelerator-deploy",
+              "comments_url": "",
+              "score": 92,
+              "engagement_label": "いいね73 / ブクマ43",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "業務知識をオントロジー化してAIに渡すAWS製OSSの検証レポート。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Microsoft 謹製 デスクトップアプリ「Skill Recorder」で業務効率化スキル（SKILL.md）の作成が捗る？",
+              "url": "https://zenn.dev/benjuwan/articles/c2ba48e7662f92",
+              "comments_url": "",
+              "score": 88,
+              "engagement_label": "いいね53 / ブクマ39",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "操作記録からSKILL.mdを生成するMS製アプリ。スキル作成の省力化を検証。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "gpt-5.6-sol の high に「ウルトラ」と入力して「ソウル」と話させる技術",
+              "url": "https://zenn.dev/microsoft/articles/agent-framework-ultra-soul",
+              "comments_url": "",
+              "score": 86,
+              "engagement_label": "いいね74 / ブクマ12",
+              "category": "LLM/モデル",
+              "interest": 3,
+              "summary": "推論強度の指定で応答傾向を操る実験。プロンプト設計の小ネタとして面白い。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "ある日エンジニアが突然無職になってしまったら？ — 離職インシデント対応ランブック",
+              "url": "https://zenn.dev/tsukuboshi/articles/engineer-unemployment-runbook",
+              "comments_url": "",
+              "score": 84,
+              "engagement_label": "いいね235 / ブクマ150",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "突然の離職をインシデント対応として手順化。備えの棚卸しに使える。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "アーキテクチャに限らず意思決定を全部残す「ADR（Any Decision Record）」という文化",
+              "url": "https://zenn.dev/dress_code/articles/c73500ae73361c",
+              "comments_url": "",
+              "score": 79,
+              "engagement_label": "いいね153 / ブクマ62",
+              "category": "組織/設計",
+              "interest": 2,
+              "summary": "設計以外の意思決定も記録するADR文化の実践。AIに文脈を渡す土台にもなる。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "DESIGN.md を置くと、どこまで「いい感じ」になるのか — 74件を測って確かめた",
+              "url": "https://zenn.dev/ait/articles/google-design-md-measured",
+              "comments_url": "",
+              "score": 78,
+              "engagement_label": "いいね35 / ブクマ29",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "DESIGN.mdの有無で生成品質がどう変わるか74件で実測した検証記事。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "58% の Pull Request を AI が承認するようになった",
+              "url": "https://zenn.dev/she_techblog/articles/937836550dfdf3",
+              "comments_url": "",
+              "score": 75,
+              "engagement_label": "いいね35 / ブクマ17",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "PRの58%をAIが承認する体制に至った経緯と品質担保の工夫。",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "ずぼらAI駆動開発、爆誕",
+              "url": "https://qiita.com/nobu34/items/224f55bc85b813930f61",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "LGTM48 / ストック33",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "スキルを作り込まずにAI駆動開発を回す横着なやり方の提案。対比が面白い。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "プロンプトの次は何を学べばいい？ AIとの付き合い方を4段階で整理する",
+              "url": "https://qiita.com/jqit_suwa/items/cb785917d2661858f7b7",
+              "comments_url": "",
+              "score": 96,
+              "engagement_label": "LGTM26 / ストック22",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "プロンプト/コンテキスト/ハーネス/ループを入れ子の4層として整理。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Web API設計の現在地2026",
+              "url": "https://qiita.com/tatsuya582/items/a800739c02eadff68c70",
+              "comments_url": "",
+              "score": 89,
+              "engagement_label": "LGTM59 / ストック42",
+              "category": "Web/設計",
+              "interest": 2,
+              "summary": "はてなでも伸びたAPI設計の総まとめ。古い記事の知識を上書きできる。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI が原因を当てても、「思いついた」わけじゃない —— 推論の3分類で見分ける",
+              "url": "https://qiita.com/jqit_suwa/items/aefb1adac27a34646cf3",
+              "comments_url": "",
+              "score": 88,
+              "engagement_label": "LGTM25 / ストック19",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "原因特定と修正生成は別物という論文由来の整理。AIの回答の見方が変わる。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "40万件のAI承認を分析したら、見逃し率が3倍違った — 危ないものほど、ちゃんと止められている",
+              "url": "https://qiita.com/jqit_suwa/items/ac7d1201bd14e9a4e1ac",
+              "comments_url": "",
+              "score": 79,
+              "engagement_label": "LGTM17 / ストック17",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "40.9万件の承認/拒否を集計し正答率66%。許可プロンプトの設計に効く。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "新人エンジニア、定年まで続く勉強量に震えてやばいと思った話",
+              "url": "https://qiita.com/prumnn/items/942eaafa9b9435fcc896",
+              "comments_url": "",
+              "score": 78,
+              "engagement_label": "LGTM47 / ストック6",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "学び続ける前提に気づいた新人の記録。学習設計を語る材料になる。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "鍵を渡さず・文脈を可視化する — マルチエージェント管理デスクトップアプリ「moeca」を個人開発している話",
+              "url": "https://qiita.com/can-can/items/ec8cd4dd183e12ac5781",
+              "comments_url": "",
+              "score": 73,
+              "engagement_label": "LGTM22 / ストック3",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "APIキーを渡さず文脈を可視化するマルチエージェント管理アプリの開発記。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "「試してみよう」が毎回「後回し」になるのは怠惰ではなく、情報渋滞のせい【AI時代の弊害】",
+              "url": "https://qiita.com/sumomoo/items/d5cb8ed4935a8df88811",
+              "comments_url": "",
+              "score": 71,
+              "engagement_label": "LGTM43 / ストック3",
+              "category": "生産性",
+              "interest": 2,
+              "summary": "試したいことが溜まるのは怠惰でなく情報過多が原因という整理。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "【新卒エンジニアが考える】「読みやすさ」の正体とは？大学で学んだ認知心理学をUI実装とJavaのコード設計にあてはめてみた",
+              "url": "https://qiita.com/tkmrtkm/items/f6f6c10b802372a53c0d",
+              "comments_url": "",
+              "score": 62,
+              "engagement_label": "LGTM28 / ストック6",
+              "category": "設計/UI",
+              "interest": 2,
+              "summary": "認知心理学を手がかりにUIとコードの読みやすさを分解した解説。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "【初心者向け】「セキュリティを担保できてる？」とは何なのか",
+              "url": "https://qiita.com/sai029/items/a837b6706911d1a0b33a",
+              "comments_url": "",
+              "score": 52,
+              "engagement_label": "LGTM21 / ストック10",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "曖昧に使われがちな「セキュリティ担保」を初学者向けに言語化。",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "DeepSeek V4 Flash 0731",
+              "url": "https://arcprize.org/results/deepseek-v4-flash-0731",
+              "comments_url": "https://news.ycombinator.com/item?id=49214008",
+              "score": 100,
+              "engagement_label": "534pt / 318コメント",
+              "category": "LLM/モデル",
+              "interest": 3,
+              "summary": "DeepSeekの新Flash系モデルのARC-AGI評価結果。安価高速モデルの到達点。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Oracle bans AI-generated code from OpenJDK",
+              "url": "https://app.dealroom.co/news/feed/oracle-bans-ai-generated-code-from-openjdk-despite-ellison-s-claim-oracle-isn-t-writing-its-own-code",
+              "comments_url": "https://news.ycombinator.com/item?id=49213754",
+              "score": 100,
+              "engagement_label": "429pt / 291コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "OpenJDKがAI生成コードを禁止。大規模OSSでの線引きの実例として重要。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Managing AI Coding Costs at Scale",
+              "url": "https://www.databricks.com/blog/managing-ai-coding-costs-scale",
+              "comments_url": "https://news.ycombinator.com/item?id=49214468",
+              "score": 100,
+              "engagement_label": "199pt / 187コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Databricksが語るAIコーディングのコスト管理。組織導入時の運用知見。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "What happens if an entire class of workers loses faith in their careers",
+              "url": "https://www.noemamag.com/why-is-everyone-in-tech-so-sad/",
+              "comments_url": "https://news.ycombinator.com/item?id=49209539",
+              "score": 91,
+              "engagement_label": "511pt / 597コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "テック職の意欲喪失を論じた長文。AI時代のキャリア観を考える材料。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Making Postgres 300x faster for analytics: batching, operator fusion, and SIMD",
+              "url": "https://malisper.me/how-we-made-postgres-hundreds-of-times-faster-the-query-engine/",
+              "comments_url": "https://news.ycombinator.com/item?id=49208535",
+              "score": 81,
+              "engagement_label": "266pt / 127コメント",
+              "category": "パフォーマンス",
+              "interest": 2,
+              "summary": "バッチ処理とSIMDでPostgresの分析クエリを高速化した実装解説。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "U.S. Department of Energy Launches the Genesis Open Models Initiative",
+              "url": "https://genesisopenmodels.anl.gov/",
+              "comments_url": "https://news.ycombinator.com/item?id=49216946",
+              "score": 79,
+              "engagement_label": "167pt / 58コメント",
+              "category": "LLM/モデル",
+              "interest": 3,
+              "summary": "米エネルギー省が科学向けオープンモデル計画を発表。公的なオープンLLMの動き。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Kitesurf: Agent-first browser that runs in V8 isolates",
+              "url": "https://blog.cloudflare.com/kitesurf/",
+              "comments_url": "https://news.ycombinator.com/item?id=49208393",
+              "score": 78,
+              "engagement_label": "176pt / 45コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "V8隔離環境で動くエージェント専用ブラウザ。エージェント実行基盤の新しい形。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The Nixpkgs core team has disbanded",
+              "url": "https://discourse.nixos.org/t/the-nixpkgs-core-team-has-disbanded/79413",
+              "comments_url": "https://news.ycombinator.com/item?id=49217993",
+              "score": 77,
+              "engagement_label": "194pt / 85コメント",
+              "category": "OSS/組織",
+              "interest": 2,
+              "summary": "Nixpkgsのコアチームが解散。大規模OSSのガバナンス崩壊事例として読める。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Responding to the next frontier of critical cyber capabilities",
+              "url": "https://openai.com/index/responding-next-frontier-critical-cyber-capabilities/",
+              "comments_url": "https://news.ycombinator.com/item?id=49213029",
+              "score": 73,
+              "engagement_label": "170pt / 171コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "OpenAIがAIのサイバー能力向上への対応方針を公表。AI×セキュリティの論点。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Water system controllers don't belong on the internet, says ex-NSA chief",
+              "url": "https://www.theregister.com/security/2026/08/07/water-system-controllers-dont-belong-on-the-internet-says-ex-nsa-chief-after-suspected-iran-attacks/5285070",
+              "comments_url": "https://news.ycombinator.com/item?id=49216362",
+              "score": 69,
+              "engagement_label": "156pt / 106コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "制御系をネットに晒す危険を元NSA高官が警告。攻撃疑い事案を受けた論調。",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "tl;dv (Too Lazy; Didn't Validate): 181,874 Meetings Left Wide Open",
+              "url": "https://bobdahacker.com/blog/tldv-hack",
+              "comments_url": "https://lobste.rs/s/97laur",
+              "score": 89,
+              "engagement_label": "185pt / 46コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "会議録画SaaSで18万件超が閲覧可能に。認可欠落の典型的な事故解説。",
+              "seen_before": false,
+              "extra": "privacy, security"
+            },
+            {
+              "title": "jujutsu 0.44.0",
+              "url": "https://github.com/jj-vcs/jj/releases/tag/v0.44.0",
+              "comments_url": "https://lobste.rs/s/xx83dr",
+              "score": 79,
+              "engagement_label": "68pt / 32コメント",
+              "category": "開発ツール",
+              "interest": 2,
+              "summary": "Git互換VCSのjjが新バージョン。Git運用の代替として試す価値あり。",
+              "seen_before": false,
+              "extra": "release, vcs"
+            },
+            {
+              "title": "Am I the problem? Interviewing another team to find out",
+              "url": "https://www.macchaffee.com/blog/2026/am-i-the-problem/",
+              "comments_url": "https://lobste.rs/s/c30jsd",
+              "score": 76,
+              "engagement_label": "39pt / 8コメント",
+              "category": "組織/文化",
+              "interest": 2,
+              "summary": "他チームに聞き取りして自分側の問題を洗い出した記録。摩擦解消の実践論。",
+              "seen_before": false,
+              "extra": "culture, practices"
+            },
+            {
+              "title": "A shell exclamation mark is not for yelling. Be lazy",
+              "url": "https://refp.se/articles/your-shell-and-the-lazy-exclamation-mark",
+              "comments_url": "https://lobste.rs/s/0mjyep",
+              "score": 73,
+              "engagement_label": "63pt / 40コメント",
+              "category": "開発ツール",
+              "interest": 2,
+              "summary": "シェルの履歴展開!を使い倒す小技集。日々のCLI操作を短縮できる。",
+              "seen_before": false,
+              "extra": "unix"
+            },
+            {
+              "title": "the web server deployment model breaks at hobby scale",
+              "url": "https://w.on-t.work/web-deployment-model",
+              "comments_url": "https://lobste.rs/s/rn4inr",
+              "score": 70,
+              "engagement_label": "32pt / 29コメント",
+              "category": "Web",
+              "interest": 2,
+              "summary": "個人規模では常駐Webサーバ前提が割に合わないという議論。",
+              "seen_before": false,
+              "extra": "web"
+            },
+            {
+              "title": "Introducing Kitesurf: The agent-first browser that runs in V8 isolates on Cloudflare Workers",
+              "url": "https://blog.cloudflare.com/kitesurf/",
+              "comments_url": "https://lobste.rs/s/9bxkgi",
+              "score": 53,
+              "engagement_label": "6pt / 7コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "HNと同記事のLobsters側スレッド。実装寄りのコメントが付いている。",
+              "seen_before": false,
+              "extra": "browsers, rust, vibecoding"
+            },
+            {
+              "title": "I'm leaving OpenAI to build Jurassic Park",
+              "url": "https://taylor.town/leaving-openai",
+              "comments_url": "https://lobste.rs/s/ch83co",
+              "score": 52,
+              "engagement_label": "132pt / 16コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "退職エントリを装った風刺。AI業界の空気を皮肉る読み物。",
+              "seen_before": false,
+              "extra": "satire"
+            },
+            {
+              "title": "The Nixpkgs core team has disbanded",
+              "url": "https://discourse.nixos.org/t/the-nixpkgs-core-team-has-disbanded/79413",
+              "comments_url": "https://lobste.rs/s/9cv8me",
+              "score": 50,
+              "engagement_label": "11pt / 1コメント",
+              "category": "OSS/組織",
+              "interest": 2,
+              "summary": "コアチーム解散の一次スレッド。HNとは別角度のコメントが読める。",
+              "seen_before": false,
+              "extra": "nix"
+            },
+            {
+              "title": "i wonder if you could make a useful DOS executable with just emoji",
+              "url": "https://oldbytes.space/@gloriouscow/117044736309312697",
+              "comments_url": "https://lobste.rs/s/0cdps4",
+              "score": 49,
+              "engagement_label": "114pt / 12コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "絵文字だけで動くDOS実行ファイルは作れるかという遊びの検証。",
+              "seen_before": false,
+              "extra": "retrocomputing"
+            },
+            {
+              "title": "Zig's Io.Threaded is Neat",
+              "url": "https://matklad.github.io/2026/08/06/neat-io-threaded.html",
+              "comments_url": "https://lobste.rs/s/aegq82",
+              "score": 46,
+              "engagement_label": "80pt / 9コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ZigのIo.Threadedの設計解説。並行I/OのAPI設計の参考になる。",
+              "seen_before": false,
+              "extra": "zig"
+            }
+          ]
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "PrimeIntellect-ai/prime-agent",
+              "url": "https://github.com/PrimeIntellect-ai/prime-agent",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "+2293 stars today / 計6,931 / TypeScript",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "自己改善型のコーディングエージェント。長時間の自律タスクを狙うTS実装。",
+              "seen_before": false,
+              "extra": "TypeScript"
+            },
+            {
+              "title": "mattpocock/skills",
+              "url": "https://github.com/mattpocock/skills",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "+2152 stars today / 計209,052 / Shell",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "TS界隈で著名な著者のスキル集。自作スキル設計の比較対象になる。",
+              "seen_before": false,
+              "extra": "Shell"
+            },
+            {
+              "title": "addyosmani/agent-skills",
+              "url": "https://github.com/addyosmani/agent-skills",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "+1131 stars today / 計84,014 / JavaScript",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "本番品質を狙ったエージェント向けスキル集。定番になりつつある。",
+              "seen_before": false,
+              "extra": "JavaScript"
+            },
+            {
+              "title": "cloudflare/computer",
+              "url": "https://github.com/cloudflare/computer",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "+872 stars today / 計5,932 / TypeScript",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "エージェントに実行環境を与えるCloudflare製ツール。サンドボックス設計の参考。",
+              "seen_before": false,
+              "extra": "TypeScript"
+            },
+            {
+              "title": "obra/superpowers",
+              "url": "https://github.com/obra/superpowers",
+              "comments_url": "",
+              "score": 98,
+              "engagement_label": "+782 stars today / 計268,843 / Shell",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "スキルフレームワーク兼開発方法論。プラグイン設計の思想が学べる。",
+              "seen_before": false,
+              "extra": "Shell"
+            },
+            {
+              "title": "Significant-Gravitas/AutoGPT",
+              "url": "https://github.com/Significant-Gravitas/AutoGPT",
+              "comments_url": "",
+              "score": 79,
+              "engagement_label": "+355 stars today / 計186,362 / Python",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "老舗の自律エージェント基盤が再浮上。エージェント設計の系譜として。",
+              "seen_before": false,
+              "extra": "Python"
+            },
+            {
+              "title": "google/skills",
+              "url": "https://github.com/google/skills",
+              "comments_url": "",
+              "score": 73,
+              "engagement_label": "+327 stars today / 計16,328 / Python",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Google製品向け公式スキル集。ベンダー公式のSKILL.md記法が見られる。",
+              "seen_before": false,
+              "extra": "Python"
+            },
+            {
+              "title": "goauthentik/authentik",
+              "url": "https://github.com/goauthentik/authentik",
+              "comments_url": "",
+              "score": 70,
+              "engagement_label": "+530 stars today / 計23,675 / Python",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "セルフホスト型の認証基盤。SSO導入の選択肢として。",
+              "seen_before": false,
+              "extra": "Python"
+            },
+            {
+              "title": "denoland/celld",
+              "url": "https://github.com/denoland/celld",
+              "comments_url": "",
+              "score": 66,
+              "engagement_label": "+516 stars today / 計2,268 / Rust",
+              "category": "インフラ",
+              "interest": 2,
+              "summary": "Deno製のセルフホスト可能な分散Durable Objects。状態管理の新手。",
+              "seen_before": false,
+              "extra": "Rust"
+            },
+            {
+              "title": "pranshuparmar/witr",
+              "url": "https://github.com/pranshuparmar/witr",
+              "comments_url": "",
+              "score": 52,
+              "engagement_label": "+234 stars today / 計19,857 / Go",
+              "category": "開発ツール",
+              "interest": 2,
+              "summary": "プロセスやポートの起動元を辿るCLI/TUI。原因調査が速くなる。",
+              "seen_before": false,
+              "extra": "Go"
+            }
+          ]
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "The Year I Started Leaving Breadcrumbs Instead of Notes",
+              "url": "https://dev.to/cseeman/the-year-i-started-leaving-breadcrumbs-instead-of-notes-fe0",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "11リアクション / 3コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "AI前提で作業ログの残し方を作り直した記録。ノート運用の再設計例。",
+              "seen_before": false,
+              "extra": "ai, productivity, notion, claudecode"
+            },
+            {
+              "title": "How Kiro Crew's Cron Jobs Replaced 4 Hours of Weekly Toil",
+              "url": "https://dev.to/aws-builders/how-kiro-crews-cron-jobs-replaced-4-hours-of-weekly-toil-37h",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "8リアクション / 3コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "エージェントの定期実行で週4時間の雑務を自動化。週$2.1という実コスト付き。",
+              "seen_before": false,
+              "extra": "agents, ai, showdev, devops"
+            },
+            {
+              "title": "Agent Sandboxes: Giving AI Agents Their Own Little Linux Box (And Why You Should Care)",
+              "url": "https://dev.to/gde/agent-sandboxes-giving-ai-agents-their-own-little-linux-box-and-why-you-should-care-jl4",
+              "comments_url": "",
+              "score": 100,
+              "engagement_label": "9リアクション / 2コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "エージェントに専用Linux環境を与える意義とGKE実装の解説。",
+              "seen_before": false,
+              "extra": "ai, kubernetes, devops, security"
+            },
+            {
+              "title": "I Found Two Bugs in Zulip. The Maintainers Had Filed Both Two Weeks Earlier.",
+              "url": "https://dev.to/p0rt/i-found-two-bugs-in-zulip-the-maintainers-had-filed-both-two-weeks-earlier-4mom",
+              "comments_url": "",
+              "score": 89,
+              "engagement_label": "9リアクション / 4コメント",
+              "category": "OSS",
+              "interest": 2,
+              "summary": "OSSのバグ探しでAIと修正方針が割れた顛末。OSS参加の作法も学べる。",
+              "seen_before": false,
+              "extra": "devchallenge, bugsmash, python, opensource"
+            },
+            {
+              "title": "One skill per action looked like the safe boundary",
+              "url": "https://dev.to/michaeltruong/one-skill-per-action-looked-like-the-safe-boundary-13pj",
+              "comments_url": "",
+              "score": 88,
+              "engagement_label": "6リアクション / 2コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "1スキル1アクションの境界設計が破綻した話。スキル粒度の実験知見。",
+              "seen_before": false,
+              "extra": "ai, agents, workflow"
+            },
+            {
+              "title": "linkedSignal() Writes Back: A Trace Through the Reactive Graph 🔍🚀",
+              "url": "https://dev.to/gdg/linkedsignal-writes-back-a-trace-through-the-reactive-graph-37o7",
+              "comments_url": "",
+              "score": 86,
+              "engagement_label": "12リアクション / 0コメント",
+              "category": "フロントエンド",
+              "interest": 2,
+              "summary": "AngularのlinkedSignalの書き戻し挙動をリアクティブグラフで追う。",
+              "seen_before": false,
+              "extra": "angular, typescript, angularsignals, webdev"
+            },
+            {
+              "title": "I built a headless timeline/Gantt for React — would love some feedback",
+              "url": "https://dev.to/kriklivyy22/i-built-a-headless-timelinegantt-for-react-would-love-some-feedback-11da",
+              "comments_url": "",
+              "score": 83,
+              "engagement_label": "8リアクション / 3コメント",
+              "category": "フロントエンド",
+              "interest": 2,
+              "summary": "ヘッドレスなReact向けタイムライン/ガント。大量データでも軽い設計。",
+              "seen_before": false,
+              "extra": "react, gantt, javascript, typescript"
+            },
+            {
+              "title": "The Ghost in the View Transitions API: A Bizarre Debugging Saga with Google AI 👻",
+              "url": "https://dev.to/omarafifi/the-ghost-in-the-view-transitions-api-a-bizarre-debugging-saga-with-google-ai-5aph",
+              "comments_url": "",
+              "score": 77,
+              "engagement_label": "10リアクション / 0コメント",
+              "category": "フロントエンド",
+              "interest": 2,
+              "summary": "View Transitions APIの奇妙な挙動を追ったデバッグ記録。",
+              "seen_before": false,
+              "extra": "devchallenge, bugsmash, webdev, googleai"
+            },
+            {
+              "title": "You're installing date-fns for 'X hours ago'. `Intl.RelativeTimeFormat` does it natively.",
+              "url": "https://dev.to/parsajiravand/youre-installing-date-fns-for-x-hours-ago-intlrelativetimeformat-does-it-natively-34o",
+              "comments_url": "",
+              "score": 70,
+              "engagement_label": "10リアクション / 0コメント",
+              "category": "フロントエンド",
+              "interest": 2,
+              "summary": "相対時刻表示に依存を足さず標準APIで済ませる方法。依存削減のネタ。",
+              "seen_before": false,
+              "extra": "javascript, webdev, frontend, intl"
+            },
+            {
+              "title": "A Prompt-Injection Detector That Only Speaks English",
+              "url": "https://dev.to/nova-agent/a-prompt-injection-detector-that-only-speaks-english-2a5h",
+              "comments_url": "",
+              "score": 65,
+              "engagement_label": "3リアクション / 4コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "英語しか検知できないプロンプトインジェクション検査の穴を指摘。",
+              "seen_before": false,
+              "extra": "security, ai, llm, opensource"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

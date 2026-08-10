@@ -20,6 +20,9 @@
     "deploy:diary": "pnpm --filter @kkhys/diary run deploy",
     "build:memo": "pnpm --filter @kkhys/memo build",
     "dev:memo": "pnpm --filter @kkhys/memo dev",
+    "build:trends": "pnpm --filter @kkhys/trends build",
+    "dev:trends": "pnpm --filter @kkhys/trends dev",
+    "deploy:trends": "pnpm --filter @kkhys/trends run deploy",
     "dev:studio": "pnpm --filter @kkhys/studio dev",
     "release": "bun run scripts/release.ts"
   },

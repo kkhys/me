@@ -1,0 +1,88 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import ItemRow from "#/components/item-row.astro";
+
+type Service = CollectionEntry<"runs">["data"]["markets"][number]["services"][number];
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+
+/* Brand colors of the aggregated services; intentionally not mapped to the
+   uchu palette. */
+const SERVICE_COLORS: Record<string, string> = {
+  hackernews: "#ff6600",
+  lobsters: "#ac130d",
+  github: "#8b5cf6",
+  devto: "#0f172a",
+  hatena: "#00a4de",
+  zenn: "#3ea8ff",
+  qiita: "#55c500",
+};
+
+const dotColor = SERVICE_COLORS[service.id] ?? "var(--c-muted)";
+---
+
+<section class="service" data-service={service.id}>
+  <header>
+    <span class="dot" style={`background:${dotColor}`}></span>
+    <h3>{service.label}</h3>
+    <span class="count" data-count>{service.items.length}件</span>
+    {service.note && <span class="note">{service.note}</span>}
+  </header>
+  {service.items.map((item, i) => <ItemRow item={item} rank={i + 1} />)}
+  {service.items.length === 0 && service.status === "ok" && <p class="empty">該当なし</p>}
+</section>
+
+<style>
+  .service {
+    background: var(--c-card);
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+
+  header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 13px 18px 11px;
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    align-self: center;
+    flex: none;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 15.5px;
+  }
+
+  .count {
+    color: var(--c-muted);
+    font-size: 12.5px;
+  }
+
+  .note {
+    color: var(--c-muted);
+    font-size: 12.5px;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .empty {
+    margin: 0;
+    padding: 12px 18px;
+    color: var(--c-muted);
+    font-size: 13px;
+  }
+</style>

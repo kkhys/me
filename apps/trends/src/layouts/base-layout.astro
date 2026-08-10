@@ -1,0 +1,36 @@
+---
+import "#/styles/global.css";
+import BaseSEO from "@kkhys/seo/base-seo.astro";
+import OpenGraph from "@kkhys/seo/open-graph.astro";
+import TwitterCard from "@kkhys/seo/twitter-card.astro";
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+}
+
+const SITE_NAME = "Trend Digest";
+
+const { title = SITE_NAME, description = "Daily tech trend digest by kkhys" } = Astro.props;
+---
+
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <BaseSEO title={title} description={description} />
+  <link rel="sitemap" href="/sitemap-index.xml"/>
+
+  <OpenGraph title={title} description={description} siteName={SITE_NAME} />
+  <TwitterCard title={title} description={description} site="@kkhys_" card="summary" />
+</head>
+<body>
+<slot/>
+</body>
+</html>

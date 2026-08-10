@@ -1,0 +1,72 @@
+@layer reset, tokens, base;
+
+@import "kiso.css" layer(reset);
+@import "@kkhys/styles/uchu.css" layer(tokens);
+
+/* ===== Design Tokens ===== */
+
+@layer tokens {
+  :root {
+    color-scheme: light dark;
+
+    --c-bg: light-dark(var(--uchu-gray-1), var(--uchu-yin));
+    --c-card: light-dark(var(--uchu-yang), var(--uchu-yin-9));
+    --c-text: light-dark(var(--uchu-yin-9), var(--uchu-yin-1));
+    --c-muted: light-dark(var(--uchu-yin-6), var(--uchu-yin-4));
+    --c-border: light-dark(var(--uchu-gray-2), var(--uchu-yin-8));
+    --c-accent: light-dark(var(--uchu-blue-6), var(--uchu-blue-4));
+    --c-accent-soft: color-mix(in oklch, var(--c-accent) 18%, var(--c-bg));
+    --c-star: var(--uchu-orange-5);
+    --c-hero-bg: light-dark(var(--uchu-yin-9), var(--uchu-yin-8));
+    --c-hero-text: var(--uchu-gray-1);
+    --c-score-hi: var(--c-accent);
+    --c-score-mid: light-dark(var(--uchu-yin-5), var(--uchu-gray-7));
+    --c-score-lo: light-dark(var(--uchu-gray-5), var(--uchu-yin-7));
+  }
+}
+
+/* ===== Base Styles ===== */
+
+@layer base {
+  * {
+    border-color: var(--c-border);
+  }
+
+  html {
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans", "Noto Sans JP",
+      sans-serif;
+    scrollbar-gutter: stable both-edges;
+    scrollbar-color: var(--uchu-gray-3) transparent;
+    scrollbar-width: thin;
+    background-color: var(--c-bg);
+    color: var(--c-text);
+  }
+
+  body {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  a {
+    color: var(--c-accent);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  ::selection {
+    box-shadow: none;
+    background-color: var(--uchu-gray-3);
+    color: var(--c-text);
+  }
+
+  /* Toggled from the site-header script on elements rendered by other
+     components, so it cannot live in a scoped style block. */
+  .hidden {
+    display: none !important;
+  }
+}

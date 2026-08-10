@@ -1,0 +1,64 @@
+---
+import { getCollection } from "astro:content";
+
+import SiteHeader from "#/components/site-header.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { sortRunsByDateDesc } from "#/utils/runs";
+
+const runs = sortRunsByDateDesc(await getCollection("runs"));
+---
+
+<BaseLayout title="アーカイブ | Trend Digest" description="Trend Digest の日別アーカイブ">
+  <SiteHeader />
+  <div class="wrap">
+    <h1>アーカイブ</h1>
+    <ol>
+      {
+        runs.map((run) => (
+          <li>
+            <a href={`/${run.id}`}>{run.id}</a>
+            <span class="headline">{run.data.digest.headline}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  h1 {
+    margin: 26px 0 14px;
+    font-size: 21px;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid var(--c-border);
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+
+  li a {
+    flex: none;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+
+  .headline {
+    color: var(--c-muted);
+    font-size: 13px;
+  }
+</style>

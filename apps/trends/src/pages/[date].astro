@@ -1,0 +1,42 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import { getCollection } from "astro:content";
+
+import DigestView from "#/components/digest-view.astro";
+import SiteHeader from "#/components/site-header.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { sortRunsByDateDesc } from "#/utils/runs";
+
+export const getStaticPaths = (async () => {
+  const runs = sortRunsByDateDesc(await getCollection("runs"));
+
+  return runs.map((entry, i) => {
+    if (entry.id !== entry.data.date) {
+      throw new Error(`Run filename and date field mismatch: ${entry.id} vs ${entry.data.date}`);
+    }
+
+    return {
+      params: { date: entry.id },
+      props: {
+        entry,
+        prev: runs[i + 1]?.id,
+        next: i > 0 ? runs[i - 1]?.id : undefined,
+      },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { entry, prev, next } = Astro.props;
+
+const markets = entry.data.markets.map(({ id, label }) => ({ id, label }));
+---
+
+<BaseLayout
+  title={`${entry.data.date} | Trend Digest`}
+  description={entry.data.digest.headline}
+>
+  <SiteHeader date={entry.data.date} markets={markets} />
+  <DigestView entry={entry} prev={prev} next={next} />
+</BaseLayout>

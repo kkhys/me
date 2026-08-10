@@ -22,5 +22,10 @@
     "import/no-duplicates": "error",
     "unicorn/prefer-node-protocol": "error"
   },
-  "ignorePatterns": ["**/*-content/**", "**/public/**", "**/.cache/**"]
+  "ignorePatterns": [
+    "**/*-content/**",
+    "**/public/**",
+    "**/.cache/**",
+    "apps/trends/src/content/runs/**"
+  ]
 }
