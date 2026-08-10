@@ -19,12 +19,9 @@ const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item
 
 <article class="item" data-text={buildSearchText(item)}>
   <span class="rank">{rank}</span>
-  <span class="score">
-    <b>{item.score}</b>
-    <span class="bar"><i class={scoreLevel(item.score)} style={`width:${item.score}%`}></i></span>
-  </span>
+  <span class:list={["score", scoreLevel(item.score)]}>{item.score}</span>
   <div class="body">
-    <div class="title">
+    <div class="title palt">
       <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
     </div>
     <div class="meta">
@@ -47,61 +44,40 @@ const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item
 <style>
   .item {
     display: flex;
-    gap: 14px;
-    padding: 12px 18px;
-    border-top: 1px solid var(--c-border);
-  }
-
-  .item:first-of-type {
-    border-top: 0;
+    gap: 0.75rem;
+    padding: 0.625rem 0.25rem;
+    border-bottom: 1px solid var(--c-border);
   }
 
   .rank {
     flex: none;
-    width: 20px;
+    width: 1.1rem;
     text-align: right;
-    color: var(--c-muted);
-    font-size: 12.5px;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
     font-variant-numeric: tabular-nums;
-    padding-top: 3px;
+    padding-top: 0.15rem;
   }
 
   .score {
     flex: none;
-    width: 44px;
-    padding-top: 1px;
-  }
-
-  .score b {
-    font-size: 14.5px;
+    width: 2rem;
+    text-align: right;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
     font-variant-numeric: tabular-nums;
   }
 
-  .bar {
-    display: block;
-    height: 3px;
-    background: var(--c-border);
-    border-radius: 2px;
-    margin-top: 4px;
-    overflow: hidden;
+  .score.hi {
+    color: var(--c-text);
   }
 
-  .bar i {
-    display: block;
-    height: 100%;
-    border-radius: 2px;
+  .score.mid {
+    color: var(--c-sub);
   }
 
-  .bar i.hi {
-    background: var(--c-score-hi);
-  }
-
-  .bar i.mid {
-    background: var(--c-score-mid);
-  }
-
-  .bar i.lo {
-    background: var(--c-score-lo);
+  .score.lo {
+    color: var(--c-faint);
   }
 
   .body {
@@ -109,19 +85,18 @@ const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item
   }
 
   .title {
-    font-weight: 600;
-    font-size: 14.5px;
-    line-height: 1.45;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
   }
 
   .meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px 12px;
+    gap: 0.25rem 0.75rem;
     align-items: center;
-    color: var(--c-muted);
-    font-size: 12px;
-    margin-top: 3px;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    margin-top: 0.2rem;
   }
 
   .stars {
@@ -130,30 +105,29 @@ const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item
   }
 
   .chip {
-    background: var(--c-accent-soft);
-    color: var(--c-accent);
-    border-radius: 99px;
-    padding: 0 9px;
-    font-size: 11px;
-    line-height: 18px;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-full);
+    padding: 0 0.5rem;
+    font-size: var(--fs-2xs);
+    line-height: 1.1rem;
   }
 
   .seen {
     border: 1px solid var(--c-border);
-    color: var(--c-muted);
-    border-radius: 4px;
-    padding: 0 5px;
-    font-size: 10.5px;
-  }
-
-  .summary {
-    color: var(--c-muted);
-    font-size: 13px;
-    margin-top: 3px;
+    border-radius: var(--radius-sm);
+    padding: 0 0.3rem;
+    font-size: var(--fs-2xs);
   }
 
   .comments {
-    font-size: 12px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
     white-space: nowrap;
+  }
+
+  .summary {
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    margin-top: 0.2rem;
   }
 </style>

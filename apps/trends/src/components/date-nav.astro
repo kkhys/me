@@ -1,4 +1,6 @@
 ---
+import { formatRunDate } from "#/utils/runs";
+
 interface Props {
   prev: string | undefined;
   next: string | undefined;
@@ -8,9 +10,9 @@ const { prev, next } = Astro.props;
 ---
 
 <nav class="date-nav" aria-label="日付ナビゲーション">
-  <span class="slot">{prev && <a href={`/${prev}`}>← {prev}</a>}</span>
+  <span class="slot">{prev && <a href={`/${prev}`}>← {formatRunDate(prev)}</a>}</span>
   <a href="/archive">アーカイブ</a>
-  <span class="slot end">{next && <a href={`/${next}`}>{next} →</a>}</span>
+  <span class="slot end">{next && <a href={`/${next}`}>{formatRunDate(next)} →</a>}</span>
 </nav>
 
 <style>
@@ -18,10 +20,19 @@ const { prev, next } = Astro.props;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    margin-top: 18px;
-    font-size: 13px;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    font-size: var(--fs-xs);
     font-variant-numeric: tabular-nums;
+    color: var(--c-sub);
+  }
+
+  a {
+    color: var(--c-sub);
+  }
+
+  a:hover {
+    color: var(--c-text);
   }
 
   .slot {

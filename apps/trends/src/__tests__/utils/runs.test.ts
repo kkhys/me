@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { adjacentRuns, sortRunsByDateDesc } from "#/utils/runs";
+import { adjacentRuns, formatGeneratedAt, formatRunDate, sortRunsByDateDesc } from "#/utils/runs";
 
 describe("sortRunsByDateDesc", () => {
   it("sorts newest first", () => {
@@ -28,6 +28,18 @@ describe("sortRunsByDateDesc", () => {
       "2026-01-01",
       "2025-12-31",
     ]);
+  });
+});
+
+describe("formatRunDate", () => {
+  it("converts hyphens to the site-wide dot format", () => {
+    expect(formatRunDate("2026-08-10")).toBe("2026.08.10");
+  });
+});
+
+describe("formatGeneratedAt", () => {
+  it("keeps date and minutes, drops seconds and offset", () => {
+    expect(formatGeneratedAt("2026-08-10T07:30:46+09:00")).toBe("2026.08.10 07:30");
   });
 });
 

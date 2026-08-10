@@ -3,6 +3,13 @@
 export const sortRunsByDateDesc = <T extends { id: string }>(runs: T[]): T[] =>
   runs.toSorted((a, b) => b.id.localeCompare(a.id));
 
+/* "2026-08-10" → "2026.08.10", the date format used across kkhys.me sites. */
+export const formatRunDate = (id: string): string => id.replaceAll("-", ".");
+
+/* "2026-08-10T07:30:46+09:00" → "2026.08.10 07:30" */
+export const formatGeneratedAt = (iso: string): string =>
+  iso.slice(0, 16).replace("T", " ").replaceAll("-", ".");
+
 export const adjacentRuns = (
   sortedIdsDesc: string[],
   id: string,

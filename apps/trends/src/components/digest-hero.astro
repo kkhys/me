@@ -9,16 +9,18 @@ const { digest } = Astro.props;
 ---
 
 <section class="hero">
-  <h1>{digest.headline}</h1>
+  <h1 class="headline palt">{digest.headline}</h1>
   <p class="lead">{digest.lead}</p>
-  <ol>
+  <ol class="highlights">
     {
       digest.highlights.map((highlight) => (
         <li>
-          <a href={highlight.url} target="_blank" rel="noopener">
-            {highlight.title}
-          </a>
-          <span class="hl-service">{highlight.service_label}</span>
+          <span class="hl-title">
+            <a href={highlight.url} target="_blank" rel="noopener">
+              {highlight.title}
+            </a>
+            <span class="hl-service">{highlight.service_label}</span>
+          </span>
           <span class="hl-reason">{highlight.reason}</span>
         </li>
       ))
@@ -28,65 +30,65 @@ const { digest } = Astro.props;
 
 <style>
   .hero {
-    background: var(--c-hero-bg);
-    color: var(--c-hero-text);
-    border-radius: 14px;
-    padding: 26px 28px;
-    margin: 26px 0 8px;
+    margin-top: 2rem;
   }
 
-  .hero h1 {
-    margin: 0 0 8px;
-    font-size: 21px;
-    line-height: 1.4;
-  }
-
-  .hero .lead {
-    margin: 0 0 18px;
-    opacity: 0.85;
-    font-size: 14.5px;
-  }
-
-  .hero ol {
+  .headline {
     margin: 0;
-    padding: 0 0 0 2px;
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-medium);
+    line-height: 1.5;
+  }
+
+  .lead {
+    margin: 0.75rem 0 1.5rem;
+    color: var(--c-sub);
+    font-size: var(--fs-sm);
+  }
+
+  .highlights {
     list-style: none;
+    margin: 0;
+    padding: 0;
     counter-reset: hl;
+    border-top: 1px solid var(--c-border);
   }
 
-  .hero ol li {
+  .highlights li {
     counter-increment: hl;
-    padding: 9px 0;
-    border-top: 1px solid color-mix(in srgb, var(--c-hero-text) 14%, transparent);
+    margin: 0;
+    padding: 0.75rem 0.25rem;
+    border-bottom: 1px solid var(--c-border);
   }
 
-  .hero ol li::before {
+  .highlights li::before {
     content: counter(hl, decimal-leading-zero);
-    font-weight: 700;
-    opacity: 0.5;
-    margin-right: 12px;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
     font-variant-numeric: tabular-nums;
+    margin-right: 0.75rem;
   }
 
-  .hero ol a {
-    color: var(--c-hero-text);
-    font-weight: 600;
+  .hl-title {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
   }
 
-  .hero .hl-service {
-    font-size: 11px;
-    opacity: 0.65;
-    border: 1px solid currentColor;
-    border-radius: 99px;
-    padding: 1px 8px;
-    margin-left: 8px;
+  .hl-service {
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-normal);
+    color: var(--c-sub);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-full);
+    padding: 0.0625rem 0.5rem;
+    margin-left: 0.5rem;
     white-space: nowrap;
   }
 
-  .hero .hl-reason {
+  .hl-reason {
     display: block;
-    margin-left: 34px;
-    font-size: 13px;
-    opacity: 0.78;
+    margin: 0.25rem 0 0 1.9rem;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
   }
 </style>

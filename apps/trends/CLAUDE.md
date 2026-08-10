@@ -18,12 +18,12 @@ src/
     digest-view.astro         # One day's body: DateNav + hero + markets + generated-at footer
     digest-hero.astro         # headline / lead / numbered highlights
     market-section.astro      # 日本 / グローバル section
-    service-card.astro        # Per-service card (brand-color dot, count, error note)
-    item-row.astro            # rank / score bar / title / stars / category chip / summary
+    service-card.astro        # Per-service section (brand-color dot, count, error note)
+    item-row.astro            # rank / score / title / stars / category chip / summary
     date-nav.astro            # prev / archive / next links
   utils/runs.ts               # sortRunsByDateDesc, adjacentRuns (pure, unit-tested)
   utils/search.ts             # buildSearchText — server-side twin of the client filter
-  utils/score.ts              # scoreLevel: 80+/60+ thresholds → hi/mid/lo bar colors
+  utils/score.ts              # scoreLevel: 80+/60+ thresholds → hi/mid/lo score emphasis
   styles/global.css           # --c-* tokens (light-dark over uchu palette) + .hidden helper
   __tests__/                  # Vitest unit tests
 public/                       # robots.txt, manifest, static favicons (generated from dev routes)
@@ -40,6 +40,7 @@ public/                       # robots.txt, manifest, static favicons (generated
 
 ## Key Design Decisions
 
+- The UI follows the kkhys.me design language (see apps/me): plain `--uchu-yang`/`--uchu-yin` background, hairline separators instead of cards, pill-style filter tabs, 42rem content column, `2026.08.10` date format, and me's `--c-*` / `--fs-*` / `--radius-*` token names.
 - `/` renders the latest run in full (duplicate of its `/[date]` page, accepted); `/[date]` is the permanent URL.
 - Tabs and keyword filter are the only client JS, colocated in `site-header.astro`. The `.hidden` class they toggle lives in `global.css` because it targets elements owned by other components.
 - Service dot colors are upstream brand colors, intentionally not mapped to the uchu palette.

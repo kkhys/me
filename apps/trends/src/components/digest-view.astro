@@ -4,6 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import DateNav from "#/components/date-nav.astro";
 import DigestHero from "#/components/digest-hero.astro";
 import MarketSection from "#/components/market-section.astro";
+import { formatGeneratedAt } from "#/utils/runs";
 
 interface Props {
   entry: CollectionEntry<"runs">;
@@ -21,21 +22,22 @@ const { digest, markets, generated_at } = entry.data;
   <main>
     {markets.map((market) => <MarketSection market={market} />)}
   </main>
-  <footer class="site">生成: {generated_at}</footer>
+  <footer class="site">生成: {formatGeneratedAt(generated_at)}</footer>
 </div>
 
 <style>
   .wrap {
-    max-width: 980px;
+    max-width: 42rem;
     margin: 0 auto;
-    padding: 0 20px 60px;
+    padding: 0 1.25rem 3.5rem;
   }
 
   footer.site {
-    margin-top: 44px;
-    color: var(--c-muted);
-    font-size: 12.5px;
+    margin-top: 3rem;
+    padding-top: 0.875rem;
     border-top: 1px solid var(--c-border);
-    padding-top: 14px;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    font-variant-numeric: tabular-nums;
   }
 </style>
