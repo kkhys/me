@@ -17,6 +17,8 @@ const { item, rank } = Astro.props;
 
 const host = formatHost(item.url);
 const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item.url;
+const displayTitle = item.title_ja || item.title;
+const originalTitle = item.title_ja ? item.title : "";
 ---
 
 <article class="item">
@@ -24,9 +26,10 @@ const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item
   <div class="body">
     <Budoux>
       <div class="title palt">
-        <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
+        <a href={item.url} target="_blank" rel="noopener">{displayTitle}</a>
       </div>
     </Budoux>
+    {originalTitle && <p class="original-title">{originalTitle}</p>}
     {
       item.summary && (
         <Budoux>
@@ -88,6 +91,14 @@ const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item
     font-size: 0.9375rem;
     font-weight: var(--fw-medium);
     line-height: 1.6;
+  }
+
+  .original-title {
+    margin: 0.15rem 0 0;
+    color: var(--c-faint);
+    font-size: var(--fs-xs);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
   }
 
   .summary {

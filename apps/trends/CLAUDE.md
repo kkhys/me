@@ -44,6 +44,7 @@ public/                       # robots.txt, manifest, static favicons (generated
 - File name must equal the `date` field; `[date].astro`'s getStaticPaths throws on mismatch.
 - All string fields are required with `""` for absent values (no nulls) — keeps `exactOptionalPropertyTypes` out of the data path.
 - `discussion_summary` is non-empty only for the top items of comment-capable sources (HN / Lobsters / はてなブックマーク, `comments_top_n` in the skill's config); it renders as a `<details>` fold. Older runs predate the field and rely on the zod default.
+- `title_ja` (on items and digest highlights) is a Japanese translation of an originally non-Japanese title, `""` when the title is already Japanese. When present it becomes the linked title and the original renders beneath it. Older runs predate the field and rely on the zod default.
 
 ## Key Design Decisions
 

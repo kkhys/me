@@ -4,6 +4,9 @@ import { defineCollection } from "astro:content";
 
 const item = z.object({
   title: z.string(),
+  // Japanese translation of an originally non-Japanese title; "" when the
+  // title is already Japanese. Older runs predate the field.
+  title_ja: z.string().default(""),
   url: z.url(),
   // Empty when the source has no separate discussion page.
   comments_url: z.string().default(""),
@@ -37,6 +40,7 @@ const runs = defineCollection({
         highlights: z.array(
           z.object({
             title: z.string(),
+            title_ja: z.string().default(""),
             url: z.url(),
             service_label: z.string(),
             reason: z.string(),

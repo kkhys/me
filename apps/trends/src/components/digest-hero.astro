@@ -26,11 +26,12 @@ const { digest } = Astro.props;
             <Budoux>
               <span class="hl-title palt">
                 <a href={highlight.url} target="_blank" rel="noopener">
-                  {highlight.title}
+                  {highlight.title_ja || highlight.title}
                 </a>
                 <span class="hl-service">{highlight.service_label}</span>
               </span>
             </Budoux>
+            {highlight.title_ja && <span class="hl-original">{highlight.title}</span>}
             <Budoux>
               <span class="hl-reason">{highlight.reason}</span>
             </Budoux>
@@ -114,6 +115,15 @@ const { digest } = Astro.props;
     padding: 0.0625rem 0.5rem;
     margin-left: 0.5rem;
     white-space: nowrap;
+  }
+
+  .hl-original {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--c-faint);
+    font-size: var(--fs-xs);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
   }
 
   .hl-reason {
