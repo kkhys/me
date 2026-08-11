@@ -1,0 +1,228 @@
+{
+  "date": "2026-08-07",
+  "generated_at": "2026-08-11T11:59:11+09:00",
+  "digest": {
+    "headline": "テック職の士気低下を問うエッセイが1319コメントを集め、AIハードウェアの再編が続いた",
+    "lead": "この日の分は後日の遡及取得で、過去分を照会できるのは Hacker News のみ（他6ソースは取得不可として表示）。テック業界の労働不安を扱ったエッセイが 1078pt / 1319コメントで当日最大の反響となった。ハードウェア側では AMD による推論特化スタートアップ Taalas の買収と2027年分メモリ売約の報道が続き、モデル側では Qwen3.8 Max の agentic index 首位と GPT-5.6 Sol の改善発表が同日に並んだ。",
+    "highlights": [
+      {
+        "title": "What happens if an entire class of workers loses faith in their careers",
+        "url": "https://www.noemamag.com/why-is-everyone-in-tech-so-sad/",
+        "service_label": "Hacker News",
+        "reason": "1078pt / 1319コメントと当日の全アイテム中で最大の反響"
+      },
+      {
+        "title": "AMD acquires Taalas to boost inference performance by etching models in silicon",
+        "url": "https://www.theregister.com/systems/2026/08/06/amd-acquires-ai-chip-startup-taalas-to-boost-inference-performance-by-etching-models-into-silicon/5284344",
+        "service_label": "Hacker News",
+        "reason": "モデルをシリコンに焼き込む推論特化技術の買収で 942pt / 711コメント"
+      },
+      {
+        "title": "Qwen3.8 Max now ranked as the best overall model by agentic index",
+        "url": "https://artificialanalysis.ai/?intelligence=agentic-index",
+        "service_label": "Hacker News",
+        "reason": "エージェント性能指標での首位交代という高関心テーマへの直撃"
+      },
+      {
+        "title": "Improving GPT‑5.6 Sol in ChatGPT, expanding GPT‑5.6 Luna access for free users",
+        "url": "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/",
+        "service_label": "Hacker News",
+        "reason": "Qwen の首位報道と同日に OpenAI 側のモデル改善発表が並んだ"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "What happens if an entire class of workers loses faith in their careers",
+              "url": "https://www.noemamag.com/why-is-everyone-in-tech-so-sad/",
+              "comments_url": "https://news.ycombinator.com/item?id=49209539",
+              "score": 100,
+              "engagement_label": "1078pt / 1319コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "テック業界全体に広がる士気低下とキャリアへの不信を論じたエッセイ。",
+              "discussion_summary": "ZIRP の終焉で報酬と待遇の上振れが消え、ライフスタイルに見合わなくなったという構造的な指摘が目立った。一方で記事自体が内輪への言及に頼り新規性に欠けるという批判や、対人関係や生活のある人は悲観していないという反論もあり、悲観の度合いを巡って受け止めは割れている。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AMD acquires Taalas to boost inference performance by etching models in silicon",
+              "url": "https://www.theregister.com/systems/2026/08/06/amd-acquires-ai-chip-startup-taalas-to-boost-inference-performance-by-etching-models-into-silicon/5284344",
+              "comments_url": "https://news.ycombinator.com/item?id=49201970",
+              "score": 89,
+              "engagement_label": "942pt / 711コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "モデルをシリコンに焼き込む推論特化チップ企業 Taalas を AMD が買収。",
+              "discussion_summary": "単体製品として世に出る前の買収を惜しむ声と、チームが報われ技術が実製品に載る保証になったという歓迎が並んだ。SOTA モデルのアーキテクチャが収斂しつつある今、ベースモデル ASIC に物理 LoRA 的なアダプタを重ねる将来像は理に適うという見方も出ている。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "New Mexico court orders Meta to pay $567m over harms to children's mental health",
+              "url": "https://www.theguardian.com/technology/2026/aug/06/new-mexico-court-meta",
+              "comments_url": "https://news.ycombinator.com/item?id=49204352",
+              "score": 86,
+              "engagement_label": "806pt / 432コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "子どもの精神衛生への害を巡り、州裁判所が Meta に5.67億ドルの支払いを命令。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "2027 memory capacity is reportedly sold out",
+              "url": "https://www.ign.com/articles/ramageddon-continues-another-year-as-2027-memory-capacity-is-reportedly-sold-out",
+              "comments_url": "https://news.ycombinator.com/item?id=49207236",
+              "score": 85,
+              "engagement_label": "512pt / 494コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "AI 需要により2027年分のメモリ生産能力が既に売約済みという報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Taste Is All That's Left",
+              "url": "https://notashelf.dev/posts/taste-is-all-thats-left",
+              "comments_url": "https://news.ycombinator.com/item?id=49199346",
+              "score": 83,
+              "engagement_label": "698pt / 544コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "AI がコードを書く時代に残る職能は審美眼だとする論考。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "A year of fighting scrapers on my 1.5 million-page website",
+              "url": "https://patronview.com/news/99-percent-of-my-website-traffic-is-bots/",
+              "comments_url": "https://news.ycombinator.com/item?id=49211386",
+              "score": 79,
+              "engagement_label": "460pt / 433コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "150万ページ規模のサイトでトラフィックの99%を占める bot と戦った1年の記録。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Qwen3.8 Max now ranked as the best overall model by agentic index",
+              "url": "https://artificialanalysis.ai/?intelligence=agentic-index",
+              "comments_url": "https://news.ycombinator.com/item?id=49200652",
+              "score": 78,
+              "engagement_label": "546pt / 353コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "エージェント性能指標 agentic index で Qwen3.8 Max が総合首位となった。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "GitHub Actions and Pages are experiencing degraded availability",
+              "url": "https://www.githubstatus.com/incidents/qcvjkzcs7j74",
+              "comments_url": "https://news.ycombinator.com/item?id=49198302",
+              "score": 76,
+              "engagement_label": "506pt / 414コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "GitHub Actions と Pages で可用性低下が発生した障害の報告。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "U.S. economy lost 23,000 jobs in July, a sudden reversal",
+              "url": "https://www.nbcnews.com/business/economy/july-2026-jobs-report-rcna591138",
+              "comments_url": "https://news.ycombinator.com/item?id=49209546",
+              "score": 74,
+              "engagement_label": "351pt / 356コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "米国の7月雇用が2.3万人減。増加基調からの突然の反転として報じられた。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Software development with AI is starting to feel like cooking steak",
+              "url": "https://blog.sydorets.com/en/posts/almost-no-skill-required-to-cook-a-steak/",
+              "comments_url": "https://news.ycombinator.com/item?id=49198069",
+              "score": 70,
+              "engagement_label": "419pt / 419コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "AI 前提の開発をステーキ調理に例え、スキルの平準化を論じたエッセイ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}
