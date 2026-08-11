@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-20",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "中国製オープンウェイトモデルをめぐる論考が上位2件を占めた",
+    "lead": "Hacker News では中国のオープンウェイト戦略を論じた記事が1243pt/932コメント、同じ主題を扱った Stratechery の分析が995pt/910コメントを集め、上位2件がいずれも900件を超えるコメントを伴った。モデル関連では Claude Fable がヤコビアン予想の反例を出したという投稿が続いた。セキュリティ側ではルーマニアの土地登記データベースが消去された事案と、EU の個人データ提供をめぐる批判記事が上位に入った。",
+    "highlights": [
+      {
+        "title": "China’s open-weights AI strategy is winning",
+        "url": "https://werd.io/american-ai-is-locked-down-and-proprietary-its-losing/",
+        "service_label": "Hacker News",
+        "reason": "1243pt/932コメントで当日最大、モデル動向の高関心テーマに直撃"
+      },
+      {
+        "title": "Who's afraid of Chinese models?",
+        "url": "https://stratechery.com/2026/whos-afraid-of-chinese-models/",
+        "service_label": "Hacker News",
+        "reason": "995pt/910コメント、同一主題の記事が2件続けて上位に入った"
+      },
+      {
+        "title": "Claude Fable produced a counterexample to the Jacobian Conjecture",
+        "url": "https://xcancel.com/__alpoge__/status/2079028340955197566",
+        "service_label": "Hacker News",
+        "reason": "803pt/515コメント、LLM の数学的能力という高関心テーマに直撃"
+      },
+      {
+        "title": "Hacker wipes Romania's land registry database",
+        "url": "https://news.risky.biz/risky-bulletin-hacker-wipes-romanias-entire-land-registry-database/",
+        "service_label": "Hacker News",
+        "reason": "709pt/416コメントでインシデント事例に反応が集中"
+      },
+      {
+        "title": "Annoying and alarming things about OpenCode",
+        "url": "https://wren.wtf/shower-thoughts/stop-using-opencode/",
+        "service_label": "Hacker News",
+        "reason": "420pt/289コメント、コーディングエージェントの評価という高関心テーマ"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "China’s open-weights AI strategy is winning",
+              "url": "https://werd.io/american-ai-is-locked-down-and-proprietary-its-losing/",
+              "comments_url": "https://news.ycombinator.com/item?id=48979269",
+              "score": 100,
+              "engagement_label": "1243pt / 932コメント",
+              "category": "LLM/モデル",
+              "interest": 3,
+              "summary": "中国のオープンウェイト戦略が優位に立ったと論じた記事。モデル勢力図の話題",
+              "discussion_summary": "無償公開を米国勢の利益率を削る戦略と捉える見方が示された。中国製モデルの安全性への懸念に対し、米国製モデルの制約や提供が停止される可能性を挙げる反論が並んだ。スタートアップの採用比率に関する記事中の数字の妥当性にも疑問が出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Who's afraid of Chinese models?",
+              "url": "https://stratechery.com/2026/whos-afraid-of-chinese-models/",
+              "comments_url": "https://news.ycombinator.com/item?id=48977128",
+              "score": 97,
+              "engagement_label": "995pt / 910コメント",
+              "category": "LLM/モデル",
+              "interest": 3,
+              "summary": "中国製モデルへの警戒論を検証した Stratechery の分析。産業構造の考察",
+              "discussion_summary": "蒸留の何が問題なのかという論点と、学習データ収集をフェアユースとして明文化する提案が議論された。エージェントのハーネスが参入障壁になるという記事の主張に対し、実際に効くのはモデル本体だという反論が出た。ベンチマークが同等でも実運用で置き換え可能とは限らないという指摘もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Airport Simulator",
+              "url": "https://airport.apunen.com/",
+              "comments_url": "https://news.ycombinator.com/item?id=48976846",
+              "score": 92,
+              "engagement_label": "856pt / 168コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ブラウザで動く航空管制シミュレータ。技術テーマ外の話題作",
+              "discussion_summary": "Flight Control や Mini Metro を思い起こさせるという反応が多く投稿された。キーボード操作の追加や実在空港の再現を求める要望が挙がった。スマートフォンでの表示範囲に関する指摘もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Hacker wipes Romania's land registry database",
+              "url": "https://news.risky.biz/risky-bulletin-hacker-wipes-romanias-entire-land-registry-database/",
+              "comments_url": "https://news.ycombinator.com/item?id=48978605",
+              "score": 90,
+              "engagement_label": "709pt / 416コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "ルーマニアの土地登記データベースが攻撃で消去された事案。インシデント事例",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Claude Fable produced a counterexample to the Jacobian Conjecture",
+              "url": "https://xcancel.com/__alpoge__/status/2079028340955197566",
+              "comments_url": "https://news.ycombinator.com/item?id=48973869",
+              "score": 89,
+              "engagement_label": "803pt / 515コメント",
+              "category": "LLM/モデル",
+              "interest": 3,
+              "summary": "Claude Fable がヤコビアン予想の反例を出したという投稿。LLM の数学的能力の事例",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Stolen Buttons",
+              "url": "https://anatolyzenkov.com/stolen-buttons",
+              "comments_url": "https://news.ycombinator.com/item?id=48976262",
+              "score": 84,
+              "engagement_label": "667pt / 164コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ボタンを題材にした個人のアートプロジェクトのサイト。技術テーマ外",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The EU is about to sell our most sensitive data to the US for visa-free travel",
+              "url": "https://edri.org/our-work/the-eu-is-about-to-sell-our-most-sensitive-data-to-the-us-for-visa-free-travel/",
+              "comments_url": "https://news.ycombinator.com/item?id=48977711",
+              "score": 82,
+              "engagement_label": "554pt / 357コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "EU が渡航条件と引き換えに個人データ提供を進めるという批判記事。プライバシー動向",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "India's first privately-developed rocket reaches orbit on debut launch",
+              "url": "https://arstechnica.com/space/2026/07/indias-first-privately-developed-rocket-reaches-orbit-on-dramatic-debut-launch/",
+              "comments_url": "https://news.ycombinator.com/item?id=48973835",
+              "score": 81,
+              "engagement_label": "684pt / 219コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "インド初の民間開発ロケットが初打ち上げで軌道到達。技術テーマ外の宇宙ニュース",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Xiaomi-Robotics-1",
+              "url": "https://robotics.xiaomi.com/xiaomi-robotics-1.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48974454",
+              "score": 77,
+              "engagement_label": "528pt / 325コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Xiaomi によるロボティクス製品の公開。ハードウェア分野の動向",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Annoying and alarming things about OpenCode",
+              "url": "https://wren.wtf/shower-thoughts/stop-using-opencode/",
+              "comments_url": "https://news.ycombinator.com/item?id=48978112",
+              "score": 77,
+              "engagement_label": "420pt / 289コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "コーディングエージェント OpenCode への懸念を列挙した記事。開発ツール評",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

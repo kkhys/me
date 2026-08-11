@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-03",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "位置情報とローカル AI を巡る規制の話題が並び、AI エージェントの停滞にも議論が集まった日",
+    "lead": "Hacker News では架空のスタートアップを描いた風刺記事 Half-Baked Product が1405ポイントで首位となった。規制側ではバージニア州の位置情報販売禁止、スペインによる Palantir 排除、ローカル AI の実行権利を訴えるサイトが上位に並んだ。AI 開発では Zuckerberg のエージェント開発遅延の発言と、Alibaba が社内での Claude Code 利用を禁止するという報道が入った。",
+    "highlights": [
+      {
+        "title": "Half-Baked Product",
+        "url": "https://weli.dev/blog/half-baked-product/",
+        "service_label": "Hacker News",
+        "reason": "1405ポイントで当日最大、実体験と重なるという反応が集中。"
+      },
+      {
+        "title": "Virginia bans sale of precise geolocation data",
+        "url": "https://www.hunton.com/privacy-and-cybersecurity-law-blog/virginia-bans-sale-of-geolocation-data",
+        "service_label": "Hacker News",
+        "reason": "959ポイントに対しコメントは139件と、投票に比べ議論が少ない。"
+      },
+      {
+        "title": "Alibaba to ban Claude Code in workplace over alleged backdoor risks, source says",
+        "url": "https://www.reuters.com/world/china/alibaba-ban-claude-code-workplace-over-alleged-backdoor-risks-source-says-2026-07-03/",
+        "service_label": "Hacker News",
+        "reason": "AI コーディングエージェントの導入可否という高関心テーマに直撃。"
+      },
+      {
+        "title": "Zuckerberg says AI agent development going slower than expected",
+        "url": "https://www.reuters.com/business/zuckerberg-says-ai-agent-development-going-slower-than-expected-2026-07-02/",
+        "service_label": "Hacker News",
+        "reason": "342ポイントに対し616コメントと議論比率が突出。"
+      },
+      {
+        "title": "Since Linux 6.9, LUKS suspend stopped wiping disk-encryption keys from memory",
+        "url": "https://mathstodon.xyz/@iblech/116769502749142438",
+        "service_label": "Hacker News",
+        "reason": "ディスク暗号化の回帰バグ報告として539ポイント。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Half-Baked Product",
+              "url": "https://weli.dev/blog/half-baked-product/",
+              "comments_url": "https://news.ycombinator.com/item?id=48772388",
+              "score": 98,
+              "engagement_label": "1405pt / 415コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "半焼けのオーブンを売る架空のスタートアップを描いた風刺記事。",
+              "discussion_summary": "実際のプロダクト開発と重なるという反応が大半を占め、過去の職場を思い出したという書き込みが並んだ。登場人物それぞれの動機付けの描き方を評価する声がある一方、欧州的な見方で、誇大な宣伝を続けて後から実体を作る企業も現実には成功しているという反論も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Virginia bans sale of precise geolocation data",
+              "url": "https://www.hunton.com/privacy-and-cybersecurity-law-blog/virginia-bans-sale-of-geolocation-data",
+              "comments_url": "https://news.ycombinator.com/item?id=48767347",
+              "score": 91,
+              "engagement_label": "959pt / 139コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "バージニア州が精密な位置情報データの販売を禁止する法律を施行。",
+              "discussion_summary": "メリーランド州やオレゴン州と比べて販売の定義が狭い点や、州外の法人が州内で集めたデータを売る場合の適用範囲が論点になった。IP ベースの推定ではなく端末が報告する精密な位置情報に限られるという読み方も示された。位置情報が保険や広告に使われた過去の事例への言及も並んだ。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "CarPlay Is Additive",
+              "url": "https://www.caseyliss.com/2026/7/2/carplay-is-additive-you-dolts",
+              "comments_url": "https://news.ycombinator.com/item?id=48769397",
+              "score": 89,
+              "engagement_label": "584pt / 739コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "車載システムに CarPlay 対応を求める立場から書かれたコラム。",
+              "discussion_summary": "自動車メーカーが自社ソフトの価値やサブスク収益を守るために CarPlay を避けているという推測が多く出た。CarPlay 非対応車を購入候補から外すという書き込みが並ぶ一方、Apple と Google の影響力拡大を問題視して逆の立場を取る意見もあり、評価が割れた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Valve open-source the Steam Machine e-ink screen so you can make your own",
+              "url": "https://www.gamingonlinux.com/2026/07/valve-open-source-the-steam-machine-e-ink-screen-so-you-can-make-your-own/",
+              "comments_url": "https://news.ycombinator.com/item?id=48774518",
+              "score": 87,
+              "engagement_label": "612pt / 114コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Valve が Steam Machine の電子ペーパー画面の設計を公開した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Why Switzerland has 25 gbit internet and America doesn't",
+              "url": "https://stefan.schueller.net/posts/the-free-market-lie/",
+              "comments_url": "https://news.ycombinator.com/item?id=48770647",
+              "score": 87,
+              "engagement_label": "546pt / 435コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "スイスと米国の回線速度の差を規制と市場構造から論じた記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Spain Orders Blacklist of Palantir from Public and Private Companies",
+              "url": "https://clashreport.com/world/articles/spain-orders-blacklist-of-us-tech-giant-palantir-from-public-and-private-companies-fsnc2z17gjv",
+              "comments_url": "https://news.ycombinator.com/item?id=48762725",
+              "score": 86,
+              "engagement_label": "743pt / 309コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "スペインが公共・民間での Palantir 排除を指示したとの報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Protect your right to run local AI",
+              "url": "https://righttointelligence.org/",
+              "comments_url": "https://news.ycombinator.com/item?id=48768951",
+              "score": 78,
+              "engagement_label": "554pt / 200コメント",
+              "category": "AI/規制",
+              "interest": 2,
+              "summary": "手元で AI を動かす権利の保護を訴えるキャンペーンサイト。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Since Linux 6.9, LUKS suspend stopped wiping disk-encryption keys from memory",
+              "url": "https://mathstodon.xyz/@iblech/116769502749142438",
+              "comments_url": "https://news.ycombinator.com/item?id=48763035",
+              "score": 76,
+              "engagement_label": "539pt / 226コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Linux 6.9 以降 LUKS suspend が鍵をメモリから消さない問題。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Zuckerberg says AI agent development going slower than expected",
+              "url": "https://www.reuters.com/business/zuckerberg-says-ai-agent-development-going-slower-than-expected-2026-07-02/",
+              "comments_url": "https://news.ycombinator.com/item?id=48767058",
+              "score": 73,
+              "engagement_label": "342pt / 616コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Meta の CEO が AI エージェント開発の遅れに言及した報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Alibaba to ban Claude Code in workplace over alleged backdoor risks, source says",
+              "url": "https://www.reuters.com/world/china/alibaba-ban-claude-code-workplace-over-alleged-backdoor-risks-source-says-2026-07-03/",
+              "comments_url": "https://news.ycombinator.com/item?id=48772443",
+              "score": 72,
+              "engagement_label": "336pt / 281コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Alibaba が社内での Claude Code 利用を禁止するとの報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

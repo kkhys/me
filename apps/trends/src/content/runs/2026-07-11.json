@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-11",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "アプリ化への異議と Apple・OpenAI の訴訟が並んだ日",
+    "lead": "Hacker News では、ネイティブアプリしか提供されていないサービスを Web ページとして作り直した個人の記録が最上位に付いた。Apple が OpenAI と元従業員を営業秘密の持ち出しで提訴した件は 967 コメントを集め、この日で最も反応が多かった。ほかに Starlink の衛星10万機追加計画、GPT-5.6 による未解決予想の証明 PDF が上位に並んだ。",
+    "highlights": [
+      {
+        "title": "Your 'app' could have been a webpage (so I fixed it for you)",
+        "url": "https://danq.me/2026/07/09/your-app-could-have-been-a-webpage/",
+        "service_label": "Hacker News",
+        "reason": "895pt に対し550コメントと議論が集中し、この日の最高 base_score だった。"
+      },
+      {
+        "title": "Apple sues OpenAI, accuses ex-employees of stealing trade secrets",
+        "url": "https://9to5mac.com/2026/07/10/apple-sues-openai-trade-secret-theft/",
+        "service_label": "Hacker News",
+        "reason": "1660pt / 967コメントと、この日で最も多くの反応を集めた。"
+      },
+      {
+        "title": "GPT-5.6 Sol Ultra produces proof of the Cycle Double Cover Conjecture [pdf]",
+        "url": "https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf",
+        "service_label": "Hacker News",
+        "reason": "LLM の新モデルが未解決予想の証明を出したという主張で、443コメントが付いた。"
+      },
+      {
+        "title": "An update on residential proxies and the scraper situation",
+        "url": "https://lwn.net/SubscriberLink/1080822/990a8a5e2d379085/",
+        "service_label": "Hacker News",
+        "reason": "住宅用プロキシという中関心テーマのセキュリティ話題で、357pt に対し392コメントが付いた。"
+      },
+      {
+        "title": "Why write code in 2026",
+        "url": "https://softwaredoug.com/blog/2026/07/09/write-code",
+        "service_label": "Hacker News",
+        "reason": "AI とコードを書く行為という高関心テーマに直撃し、220pt に対し303コメントが付いた。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Your 'app' could have been a webpage (so I fixed it for you)",
+              "url": "https://danq.me/2026/07/09/your-app-could-have-been-a-webpage/",
+              "comments_url": "https://news.ycombinator.com/item?id=48869989",
+              "score": 95,
+              "engagement_label": "895pt / 550コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "ネイティブアプリしかなかったサービスを Web ページとして作り直した記録。",
+              "discussion_summary": "アプリ化の動機として通知による囲い込みや広告ブロックの回避が挙げられ、PWA が普及しなかった経緯にも話が及んだ。同種のアプリに使える汎用ツールを求める声がある一方、Web ページもトラッキングを行う点を指摘する反論も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Apple sues OpenAI, accuses ex-employees of stealing trade secrets",
+              "url": "https://9to5mac.com/2026/07/10/apple-sues-openai-trade-secret-theft/",
+              "comments_url": "https://news.ycombinator.com/item?id=48865019",
+              "score": 94,
+              "engagement_label": "1660pt / 967コメント",
+              "category": "AI/業界",
+              "interest": 2,
+              "summary": "Apple が OpenAI と元従業員を営業秘密の持ち出しで提訴した件の報道。",
+              "discussion_summary": "訴状にある、退職時の調査を避ける手ほどきをしたとされる記述を決定的と見る投稿が出た一方、coaching という語は合法な行為も含みうるとして判断を保留する意見もあった。学習データの扱いと対比した皮肉や、Apple 対 Samsung を引き合いに出す反応も見られた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "SpaceX wants to launch 100k more Starlink satellites for 100x the bandwidth",
+              "url": "https://www.zdnet.com/home-and-office/networking/spacex-wants-to-launch-100000-more-starlink-satellites/",
+              "comments_url": "https://news.ycombinator.com/item?id=48863064",
+              "score": 89,
+              "engagement_label": "319pt / 1248コメント",
+              "category": "インフラ",
+              "interest": 1,
+              "summary": "SpaceX が Starlink 衛星10万機の追加打ち上げを求めているという報道。",
+              "discussion_summary": "打ち上げと大気圏再突入に伴う汚染、夜空への影響を問題視する投稿が多く、EU の光ファイバー整備と比べて需要そのものを疑う意見も出た。一方で、真空中のレーザー通信により光ファイバーより低遅延になりうるという利点を挙げる反論もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "QuadRF can spot drones and see WiFi through my wall",
+              "url": "https://www.jeffgeerling.com/blog/2026/quadrf-can-spot-drones-and-see-wifi-through-my-wall/",
+              "comments_url": "https://news.ycombinator.com/item?id=48861717",
+              "score": 86,
+              "engagement_label": "754pt / 237コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Jeff Geerling による RF センサー QuadRF の実機レビュー。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "New York City to ban deceptive subscription practices",
+              "url": "https://www.theguardian.com/us-news/2026/jul/10/new-york-city-deceptive-subscriptions-ban",
+              "comments_url": "https://news.ycombinator.com/item?id=48863464",
+              "score": 83,
+              "engagement_label": "644pt / 344コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ニューヨーク市が解約を困難にするサブスク慣行を禁じる方針を示した件。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "GPT-5.6 Sol Ultra produces proof of the Cycle Double Cover Conjecture [pdf]",
+              "url": "https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf",
+              "comments_url": "https://news.ycombinator.com/item?id=48863490",
+              "score": 81,
+              "engagement_label": "538pt / 443コメント",
+              "category": "AI/研究",
+              "interest": 3,
+              "summary": "OpenAI の GPT-5.6 が Cycle Double Cover 予想の証明を出力したとする PDF。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The kids with phones are alright",
+              "url": "https://heatherburns.tech/2026/07/08/the-kids-with-phones-are-alright/",
+              "comments_url": "https://news.ycombinator.com/item?id=48870217",
+              "score": 79,
+              "engagement_label": "272pt / 441コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "スマートフォンと若年層をめぐる通説に反論するエッセイ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "An update on residential proxies and the scraper situation",
+              "url": "https://lwn.net/SubscriberLink/1080822/990a8a5e2d379085/",
+              "comments_url": "https://news.ycombinator.com/item?id=48864252",
+              "score": 78,
+              "engagement_label": "357pt / 392コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "住宅用プロキシを使うスクレイパーへの対処状況を伝える LWN の記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Einstein's relativity rules chemical bonds in heavy elements, new research shows",
+              "url": "https://www.brown.edu/news/2026-07-09/chemical-bonds-relativity",
+              "comments_url": "https://news.ycombinator.com/item?id=48866134",
+              "score": 76,
+              "engagement_label": "416pt / 196コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "重元素の化学結合に相対論効果が効いていることを示した研究の紹介。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Why write code in 2026",
+              "url": "https://softwaredoug.com/blog/2026/07/09/write-code",
+              "comments_url": "https://news.ycombinator.com/item?id=48861923",
+              "score": 70,
+              "engagement_label": "220pt / 303コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "AI がコードを書く時代に人が書く意味を論じたエンジニアのエッセイ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

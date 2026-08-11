@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-19",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "オープンウェイトの新モデル告知と、Claude Code の実装変更が並んだ",
+    "lead": "Hacker News では ESP32 でボウリング場の管理システムを置き換えたという Show HN が2935ptを集め、当日最大のエンゲージメントになった。モデル面では Alibaba の Qwen 3.8 の告知と、Kimi K3 の位置づけを論じた記事が上位に入った。開発ツール面では Claude Code が Rust 実装の Bun を同梱したという解析が608ptに対し853コメントを集めた。",
+    "highlights": [
+      {
+        "title": "Show HN: I replaced a $120k bowling center system with $1,600 in ESP32s",
+        "url": "https://news.ycombinator.com/item?id=48968606",
+        "service_label": "Hacker News",
+        "reason": "2935ptで当日最大、Show HN としては異常に高いポイント"
+      },
+      {
+        "title": "Claude Code uses Bun written in Rust now",
+        "url": "https://simonwillison.net/2026/Jul/19/claude-code-in-bun-in-rust/",
+        "service_label": "Hacker News",
+        "reason": "608ptに対し853コメント、開発ツールという高関心テーマに直撃"
+      },
+      {
+        "title": "Qwen 3.8",
+        "url": "https://twitter.com/Alibaba_Qwen/status/2078759124914098291",
+        "service_label": "Hacker News",
+        "reason": "961pt/731コメント、告知のみの投稿に対する反応量が大きい"
+      },
+      {
+        "title": "The Kimi K3 Moment",
+        "url": "https://stephen.bochinski.dev/blog/2026/07/18/the-kimi-k3-moment/",
+        "service_label": "Hacker News",
+        "reason": "636pt/613コメントとコメント数が突出、3日連続で同じモデルが上位"
+      },
+      {
+        "title": "Transcribe.cpp",
+        "url": "https://workshop.cjpais.com/projects/transcribe-cpp",
+        "service_label": "Hacker News",
+        "reason": "773pt/168コメントで、ローカル実行ツールにポイントが集中"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Show HN: I replaced a $120k bowling center system with $1,600 in ESP32s",
+              "url": "https://news.ycombinator.com/item?id=48968606",
+              "comments_url": "https://news.ycombinator.com/item?id=48968606",
+              "score": 100,
+              "engagement_label": "2935pt / 360コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "12万ドルのボウリング場システムを ESP32 で置き換えた報告。自作事例",
+              "discussion_summary": "投稿者が DMX による照明制御など今後の拡張予定を説明した。ESP-NOW を使うと接続手続きなしで短いメッセージを送れる点が補足された。詳細な技術記事や GitHub での公開を求める声が複数寄せられた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Qwen 3.8",
+              "url": "https://twitter.com/Alibaba_Qwen/status/2078759124914098291",
+              "comments_url": "https://news.ycombinator.com/item?id=48966120",
+              "score": 95,
+              "engagement_label": "961pt / 731コメント",
+              "category": "LLM/モデル",
+              "interest": 3,
+              "summary": "Alibaba が2.4Tパラメータの Qwen 3.8 を告知。中国勢の新モデル動向",
+              "discussion_summary": "告知ページがなくサイトのバナーのみで、サブスクリプション向けの先行提供と見られる点が指摘された。Kimi K3 の公開予告への対応として出てきたという見方が示された。Fable 5 に次ぐという表現をめぐり、各モデルの位置づけに関する意見が交わされた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Claude Code uses Bun written in Rust now",
+              "url": "https://simonwillison.net/2026/Jul/19/claude-code-in-bun-in-rust/",
+              "comments_url": "https://news.ycombinator.com/item?id=48966569",
+              "score": 95,
+              "engagement_label": "608pt / 853コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Claude Code が未公開版の Bun を同梱していると解析した記事。開発ツールの内部構成",
+              "discussion_summary": "同梱されている Bun が GitHub 上の最新リリースより先の v1.4.0 である点が確認された。AI によるコードベース全体の書き換えが実用段階に入ったとする見方と、経緯や運営の姿勢を批判的に見る意見が並んだ。効果は Linux での起動が10%速くなった程度だという記述にも言及があった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The Kimi K3 Moment",
+              "url": "https://stephen.bochinski.dev/blog/2026/07/18/the-kimi-k3-moment/",
+              "comments_url": "https://news.ycombinator.com/item?id=48960218",
+              "score": 86,
+              "engagement_label": "636pt / 613コメント",
+              "category": "LLM/モデル",
+              "interest": 3,
+              "summary": "Kimi K3 の公開が持つ意味を論じたブログ。オープンウェイト勢の位置づけ",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "What I learned selling 2,500 MIDI recorders: Hardware is not so hard",
+              "url": "https://chipweinberger.com/articles/20260719-hardware-is-not-so-hard",
+              "comments_url": "https://news.ycombinator.com/item?id=48966713",
+              "score": 84,
+              "engagement_label": "552pt / 257コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "MIDI レコーダー2500台の販売から得た知見をまとめた記事。製造の実務記録",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Transcribe.cpp",
+              "url": "https://workshop.cjpais.com/projects/transcribe-cpp",
+              "comments_url": "https://news.ycombinator.com/item?id=48963879",
+              "score": 83,
+              "engagement_label": "773pt / 168コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "ローカルで動く文字起こし実装の公開。手元で完結する AI ツールの事例",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "NYC may require landlords and realtors to disclose the use of AI in listings",
+              "url": "https://petapixel.com/2026/07/16/mayor-mamdani-says-landlords-cant-secretly-use-ai-images-to-advertise-properties/",
+              "comments_url": "https://news.ycombinator.com/item?id=48962983",
+              "score": 81,
+              "engagement_label": "591pt / 266コメント",
+              "category": "AI/社会",
+              "interest": 1,
+              "summary": "不動産広告での AI 画像利用に開示義務を課す案の報道。生成 AI の規制動向",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Minecraft: Java Edition now uses SDL3",
+              "url": "https://www.minecraft.net/en-us/article/minecraft-26-3-snapshot-4",
+              "comments_url": "https://news.ycombinator.com/item?id=48967256",
+              "score": 77,
+              "engagement_label": "352pt / 272コメント",
+              "category": "OS/システム",
+              "interest": 1,
+              "summary": "Minecraft Java 版が SDL3 に移行したというスナップショット告知。基盤の入れ替え事例",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI Mania Is Eviscerating Global Decision-Making",
+              "url": "https://ludic.mataroa.blog/blog/ai-mania-is-eviscerating-global-decision-making/#fnref:3",
+              "comments_url": "https://news.ycombinator.com/item?id=48964185",
+              "score": 76,
+              "engagement_label": "469pt / 297コメント",
+              "category": "AI/社会",
+              "interest": 2,
+              "summary": "AI への過熱が意思決定を損なうと論じた批評。AI 導入をめぐる論考",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "If You Build It, They Will Come",
+              "url": "https://www.benlandautaylor.com/p/if-you-build-it-they-will-come",
+              "comments_url": "https://news.ycombinator.com/item?id=48959090",
+              "score": 73,
+              "engagement_label": "474pt / 211コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "作ることが人を引き寄せると論じたエッセイ。組織とコミュニティの話題",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

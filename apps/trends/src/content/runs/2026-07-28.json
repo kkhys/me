@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-28",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "オープンウェイトをめぐる Anthropic の立場表明に議論が集中した日",
+    "lead": "Hacker News では災害と規制の話題が上位に並んだ。日本で発生した M7.1 の地震と、デジタルIDおよび年齢確認の義務化に反対する欧州市民イニシアチブが最上位に入り、オープンウェイトモデルに関する Anthropic の立場表明は1747コメントと当日で突出した議論量になった。Kimi-K3 の技術レポートや Opus 5 のベンチマークなど、モデル寄りの記事も続いた。",
+    "highlights": [
+      {
+        "title": "Our position on open-weights models",
+        "url": "https://www.anthropic.com/news/position-open-weights-models",
+        "service_label": "Hacker News",
+        "reason": "1180ptに対し1747コメントと、当日で群を抜く議論量になった"
+      },
+      {
+        "title": "7.1 Earthquake in Japan",
+        "url": "https://www.data.jma.go.jp/multi/quake/quake_detail.html?eventID=20260728163528&lang=en",
+        "service_label": "Hacker News",
+        "reason": "速報性の高い出来事として819ptまで短時間で伸びた"
+      },
+      {
+        "title": "Stop Killing the Internet: No Digital ID and No Age Verification",
+        "url": "https://citizens-initiative.europa.eu/initiatives/details/2026/000011_en",
+        "service_label": "Hacker News",
+        "reason": "年齢確認とデジタルIDという継続テーマで727ptを集めた"
+      },
+      {
+        "title": "Kimi-K3 Technical Report [pdf]",
+        "url": "https://github.com/MoonshotAI/Kimi-K3/blob/main/k3_tech_report.pdf",
+        "service_label": "Hacker News",
+        "reason": "前日の公開に続き、技術レポート単体でも391ptまで伸びた"
+      },
+      {
+        "title": "Benchmarking Opus 5 on SlopCodeBench",
+        "url": "https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/benchmarking-opus-5-on-slop-code-bench.md",
+        "service_label": "Hacker News",
+        "reason": "高関心テーマのコーディングエージェント評価で405ptを集めた"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "7.1 Earthquake in Japan",
+              "url": "https://www.data.jma.go.jp/multi/quake/quake_detail.html?eventID=20260728163528&lang=en",
+              "comments_url": "https://news.ycombinator.com/item?id=49080664",
+              "score": 95,
+              "engagement_label": "819pt / 234コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "日本でM7.1の地震が発生し、気象庁の詳細ページが共有された。",
+              "discussion_summary": "震源や規模を2016年の熊本地震と比較する書き込みが並び、日本の震度階級がマグニチュードより被害の目安になるという解説が出た。USGSの地図やNHKの英語中継、ライブカメラへのリンク共有も行われた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Stop Killing the Internet: No Digital ID and No Age Verification",
+              "url": "https://citizens-initiative.europa.eu/initiatives/details/2026/000011_en",
+              "comments_url": "https://news.ycombinator.com/item?id=49084938",
+              "score": 95,
+              "engagement_label": "727pt / 291コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "デジタルIDと年齢確認の義務化に反対する欧州市民イニシアチブの登録ページ。",
+              "discussion_summary": "デジタルIDには正当な用途があり全面否定は極端だという批判と、年齢確認の義務化を監視の拡大と見る意見に分かれた。名称が一般層に意味を持たないという指摘や、Stop Killing Gamesとの比較も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Our position on open-weights models",
+              "url": "https://www.anthropic.com/news/position-open-weights-models",
+              "comments_url": "https://news.ycombinator.com/item?id=49076057",
+              "score": 94,
+              "engagement_label": "1180pt / 1747コメント",
+              "category": "AI/政策",
+              "interest": 2,
+              "summary": "オープンウェイトモデルに対するAnthropicの立場表明。規制の方向性に関わる話題。",
+              "discussion_summary": "規制によって競合を排除する狙いだとする批判が多数を占め、蒸留の制限を二枚舌とする指摘も出た。一方でリスクの整理自体は妥当だとする書き込みもあり、評価は分かれた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "New HIV vaccine shows unprecedented success in preclinical study",
+              "url": "https://www.lji.org/news-events/news/post/new-hiv-vaccine-shows-unprecedented-success-in-preclinical-study/",
+              "comments_url": "https://news.ycombinator.com/item?id=49083314",
+              "score": 92,
+              "engagement_label": "662pt / 295コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "HIVワクチンが前臨床試験で前例のない効果を示したという研究所の発表。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I'm 38 and I Can't Support Myself Anymore",
+              "url": "https://itsmevox.substack.com/p/im-38-and-i-cant-support-myself-anymore",
+              "comments_url": "https://news.ycombinator.com/item?id=49082857",
+              "score": 84,
+              "engagement_label": "267pt / 489コメント",
+              "category": "キャリア",
+              "interest": 1,
+              "summary": "38歳で生活を維持できなくなった経緯を綴った個人エッセイ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Netflix employee fired for sharing personal details in retreat trust exercise",
+              "url": "https://nypost.com/2026/07/26/us-news/netflix-exec-goes-ballistic-after-being-fired-for-stunning-trust-exercise-confession-at-retreat-suit/",
+              "comments_url": "https://news.ycombinator.com/item?id=49076923",
+              "score": 83,
+              "engagement_label": "443pt / 502コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "社内合宿の信頼構築ワークで打ち明けた内容を理由に解雇されたとする訴訟の報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "A missing underscore sent innocent man to prison for 18 months",
+              "url": "https://arstechnica.com/tech-policy/2026/07/police-missed-one-underscore-and-sent-the-wrong-man-to-prison/",
+              "comments_url": "https://news.ycombinator.com/item?id=49076116",
+              "score": 81,
+              "engagement_label": "408pt / 293コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "識別子のアンダースコア1つの欠落で無実の男性が18か月収監された事件の記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Kimi-K3 Technical Report [pdf]",
+              "url": "https://github.com/MoonshotAI/Kimi-K3/blob/main/k3_tech_report.pdf",
+              "comments_url": "https://news.ycombinator.com/item?id=49070985",
+              "score": 76,
+              "engagement_label": "391pt / 183コメント",
+              "category": "AI/LLM",
+              "interest": 3,
+              "summary": "Kimi-K3の構成と学習手法をまとめた技術レポート。新モデルの中身に踏み込んだ資料。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Benchmarking Opus 5 on SlopCodeBench",
+              "url": "https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/benchmarking-opus-5-on-slop-code-bench.md",
+              "comments_url": "https://news.ycombinator.com/item?id=49076391",
+              "score": 73,
+              "engagement_label": "405pt / 119コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "コーディングエージェント向けベンチマークでOpus 5を評価した記録。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Decathlon Germany adds Wero payment option to decathlon.de website",
+              "url": "https://www.sgieurope.com/e-commerce/decathlon-germany-launches-wero-payment-on-its-website/122397.article",
+              "comments_url": "https://news.ycombinator.com/item?id=49072310",
+              "score": 70,
+              "engagement_label": "338pt / 229コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ドイツのDecathlonが欧州の決済手段Weroを自社サイトに導入した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

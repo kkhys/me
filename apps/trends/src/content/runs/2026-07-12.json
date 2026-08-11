@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-12",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "コーディングエージェントの使い道と、その送信内容",
+    "lead": "Hacker News では、数学者 Terence Tao がコーディングエージェントでアプリを作った経緯を綴った記事が最上位に付いた。次いで、xAI の Grok build CLI がリポジトリ全体と git 履歴を送信していることを通信解析で示した gist が 539pt を集めた。GPU 業界の循環的な資金の流れ、独自エンジンを備えた JavaScript ランタイム Ant の発表も上位に並んだ。",
+    "highlights": [
+      {
+        "title": "Old and new apps, via modern coding agents",
+        "url": "https://terrytao.wordpress.com/2026/07/11/old-and-new-apps-via-modern-coding-agents/",
+        "service_label": "Hacker News",
+        "reason": "この日の最高 base_score で、AI コーディングエージェントという高関心テーマに直撃した。"
+      },
+      {
+        "title": "What xAI's Grok build CLI sends to xAI: A wire-level analysis",
+        "url": "https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547",
+        "service_label": "Hacker News",
+        "reason": "gist 単体で539pt / 229コメント。エージェント CLI の送信内容という高関心テーマに直撃した。"
+      },
+      {
+        "title": "Under federal rule, colleges must leave grads better off or lose financial aid",
+        "url": "https://www.npr.org/2026/06/30/nx-s1-5835631/turner-camhi-do-no-harm-college-loans",
+        "service_label": "Hacker News",
+        "reason": "198pt に対し547コメントと、得票に比して議論が突出した。"
+      },
+      {
+        "title": "Show HN: Ant – A JavaScript runtime and ecosystem",
+        "url": "https://antjs.org",
+        "service_label": "Hacker News",
+        "reason": "独自 JavaScript エンジンを持つランタイムの Show HN として330pt を集めた。"
+      },
+      {
+        "title": "Mesh LLM: distributed AI computing on iroh",
+        "url": "https://www.iroh.computer/blog/mesh-llm",
+        "service_label": "Hacker News",
+        "reason": "LLM 推論の分散という高関心テーマで、347pt に対しコメントは94件だった。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Old and new apps, via modern coding agents",
+              "url": "https://terrytao.wordpress.com/2026/07/11/old-and-new-apps-via-modern-coding-agents/",
+              "comments_url": "https://news.ycombinator.com/item?id=48880170",
+              "score": 97,
+              "engagement_label": "455pt / 133コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "数学者 Terence Tao がコーディングエージェントでアプリを作った記録。",
+              "discussion_summary": "論文の中核ではない補助的な可視化に限って LLM を使うという線引きを妥当と見る投稿が多かった。一方で、Tao 氏の AI 発言に開示されていない利害関係があるのではという疑いや、この種の事例が常に趣味的な用途にとどまるという指摘も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "What xAI's Grok build CLI sends to xAI: A wire-level analysis",
+              "url": "https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547",
+              "comments_url": "https://news.ycombinator.com/item?id=48877371",
+              "score": 94,
+              "engagement_label": "539pt / 229コメント",
+              "category": "セキュリティ",
+              "interest": 3,
+              "summary": "Grok の CLI がリポジトリ全体を送信していることを通信解析で示した記事。",
+              "discussion_summary": "リポジトリ全体と git 履歴が、エージェントが実際に読んだ範囲と無関係に送信される点に驚きが集まった。推論中にサーバ側でコードを参照するためという技術的な説明や、config で disable_codebase_upload=true にできるという情報が共有された。プロプライエタリなエージェント実行環境を避け、API 経由でモデルを使う方針を挙げる意見も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Under federal rule, colleges must leave grads better off or lose financial aid",
+              "url": "https://www.npr.org/2026/06/30/nx-s1-5835631/turner-camhi-do-no-harm-college-loans",
+              "comments_url": "https://news.ycombinator.com/item?id=48878126",
+              "score": 92,
+              "engagement_label": "198pt / 547コメント",
+              "category": "キャリア",
+              "interest": 1,
+              "summary": "卒業生の収入改善を示せない課程への学資援助を打ち切る米連邦規則の報道。",
+              "discussion_summary": "学位の費用対効果を問う制度として歓迎する投稿が多く、学生ローンが破産で免責されない点や職業訓練校の位置づけにも議論が及んだ。一方で、学業不振の学生を多く抱える課程が不利になる、要件が抜け道で骨抜きにされるという懸念も示された。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Nvidia, CoreWeave, and Nebius: Inside the Circular Financing of the GPU Boom",
+              "url": "https://io-fund.com/ai-stocks/nvidia-coreweave-nebius-circular-financing-gpu-boom",
+              "comments_url": "https://news.ycombinator.com/item?id=48873836",
+              "score": 86,
+              "engagement_label": "370pt / 182コメント",
+              "category": "AI/業界",
+              "interest": 1,
+              "summary": "Nvidia と GPU クラウド各社の間の循環的な資金の流れを分析した記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Prefer strict tables in SQLite",
+              "url": "https://evanhahn.com/prefer-strict-tables-in-sqlite/",
+              "comments_url": "https://news.ycombinator.com/item?id=48873940",
+              "score": 83,
+              "engagement_label": "362pt / 177コメント",
+              "category": "データベース",
+              "interest": 2,
+              "summary": "SQLite の STRICT テーブルによる型制約の効かせ方を論じた解説記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Modern decor may be straining people's brains",
+              "url": "https://studyfinds.com/modern-decor-may-be-straining-peoples-brains/",
+              "comments_url": "https://news.ycombinator.com/item?id=48873424",
+              "score": 81,
+              "engagement_label": "283pt / 283コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "現代的な内装が脳に負荷をかけている可能性を扱った研究の紹介。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Ant – A JavaScript runtime and ecosystem",
+              "url": "https://antjs.org",
+              "comments_url": "https://news.ycombinator.com/item?id=48875377",
+              "score": 78,
+              "engagement_label": "330pt / 149コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "独自エンジンとパッケージマネージャを備えた JavaScript ランタイムの発表。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Mesh LLM: distributed AI computing on iroh",
+              "url": "https://www.iroh.computer/blog/mesh-llm",
+              "comments_url": "https://news.ycombinator.com/item?id=48876505",
+              "score": 76,
+              "engagement_label": "347pt / 94コメント",
+              "category": "AI/インフラ",
+              "interest": 3,
+              "summary": "P2P ネットワーク iroh 上で LLM 推論を分散させる試みの紹介。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Female US rower completes historic solo journey from California to Hawaii",
+              "url": "https://www.theguardian.com/us-news/2026/jul/04/california-hawaii-rowing-solo-journey",
+              "comments_url": "https://news.ycombinator.com/item?id=48873692",
+              "score": 73,
+              "engagement_label": "325pt / 109コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "カリフォルニアからハワイまで単独で漕破した記録の報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Ghostel.el: Terminal emulator powered by libghostty",
+              "url": "https://dakra.github.io/ghostel/",
+              "comments_url": "https://news.ycombinator.com/item?id=48879504",
+              "score": 72,
+              "engagement_label": "307pt / 67コメント",
+              "category": "開発ツール",
+              "interest": 2,
+              "summary": "libghostty を組み込んだ Emacs 上のターミナルエミュレータ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-27",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "Kimi-K3 の公開と、端末初期化をめぐる訴追が上位に並んだ日",
+    "lead": "Hacker News では新しいオープンウェイトモデルと、端末やデータの扱いをめぐる話題が上位を占めた。Kimi-K3 の HuggingFace ページが1382ptを集め、空港での検査中に GrapheneOS 端末が初期化された件は1118コメントと当日最大の議論量になった。AI 企業による書籍の裁断スキャンや Bun の実装書き換えといった、開発寄りの記事も続いた。",
+    "highlights": [
+      {
+        "title": "Kimi-K3 on HuggingFace",
+        "url": "https://huggingface.co/moonshotai/Kimi-K3",
+        "service_label": "Hacker News",
+        "reason": "高関心テーマの新モデル公開が当日最高の1382ptを集めた"
+      },
+      {
+        "title": "US citizen charged after GrapheneOS phone wipes during airport search",
+        "url": "https://www.techspot.com/news/113236-us-prosecutors-charge-atlanta-man-after-grapheneos-phone.html",
+        "service_label": "Hacker News",
+        "reason": "1118コメントと当日で突出した議論量になった"
+      },
+      {
+        "title": "AI companies are shredding rare books",
+        "url": "https://twitter.com/HedgieMarkets/status/2081534588485296565",
+        "service_label": "Hacker News",
+        "reason": "801ptに対し513コメントと拮抗し、学習データの取得方法に議論が集中した"
+      },
+      {
+        "title": "How is the Bun rewrite in Rust going?",
+        "url": "https://lockwood.dev/ai/2026/07/27/how-is-the-bun-rewrite-in-rust-going.html",
+        "service_label": "Hacker News",
+        "reason": "JavaScript ランタイムの実装動向として496pt / 385コメントまで伸びた"
+      },
+      {
+        "title": "PGSimCity - How PostgreSQL Works",
+        "url": "https://nikolays.github.io/PGSimCity/",
+        "service_label": "Hacker News",
+        "reason": "92コメントに対し930ptと、議論より支持が集中する伸び方をした"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Kimi-K3 on HuggingFace",
+              "url": "https://huggingface.co/moonshotai/Kimi-K3",
+              "comments_url": "https://news.ycombinator.com/item?id=49065752",
+              "score": 95,
+              "engagement_label": "1382pt / 544コメント",
+              "category": "AI/LLM",
+              "interest": 3,
+              "summary": "Moonshot AIのオープンウェイトLLM、Kimi-K3の公開ページ。新モデル動向の中心。",
+              "discussion_summary": "3Tクラスかつmxfp4ネイティブのため約1.5TBのVRAMが要るという試算と、サードパーティの提供価格がどこまで下がるかへの関心が中心になった。オープンウェイトモデルが性能上位に並んだ点を歴史的だとする書き込みや、検閲・偏りの検証を求める声も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI companies are shredding rare books",
+              "url": "https://twitter.com/HedgieMarkets/status/2081534588485296565",
+              "comments_url": "https://news.ycombinator.com/item?id=49068738",
+              "score": 95,
+              "engagement_label": "801pt / 513コメント",
+              "category": "AI/著作権",
+              "interest": 1,
+              "summary": "AI企業が学習データ化のため書籍を裁断してスキャンしているとする投稿。",
+              "discussion_summary": "裁断された希少書の実例が示されていないという指摘と、非破壊スキャンとの区別を求める意見が出た。出版社側の訴訟が結果的に裁断スキャンを促したという見方と、古書の物理的価値をどう評価するかで意見が分かれた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "US citizen charged after GrapheneOS phone wipes during airport search",
+              "url": "https://www.techspot.com/news/113236-us-prosecutors-charge-atlanta-man-after-grapheneos-phone.html",
+              "comments_url": "https://news.ycombinator.com/item?id=49063022",
+              "score": 94,
+              "engagement_label": "1340pt / 1118コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "空港での検査中にGrapheneOS端末が初期化され、米国民が訴追された件の報道。",
+              "discussion_summary": "デュレスPINによる消去が証拠隠滅に問われうる点と、消えた端末に証拠があったと立証できるのかという法的論点が中心になった。渡航用の別端末を使う運用や、囮OSを用意する手法の紹介も並んだ。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "How is the Bun rewrite in Rust going?",
+              "url": "https://lockwood.dev/ai/2026/07/27/how-is-the-bun-rewrite-in-rust-going.html",
+              "comments_url": "https://news.ycombinator.com/item?id=49067854",
+              "score": 90,
+              "engagement_label": "496pt / 385コメント",
+              "category": "言語/処理系",
+              "interest": 2,
+              "summary": "JavaScriptランタイムBunのRustへの書き換え進捗を追った記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "PGSimCity - How PostgreSQL Works",
+              "url": "https://nikolays.github.io/PGSimCity/",
+              "comments_url": "https://news.ycombinator.com/item?id=49063754",
+              "score": 86,
+              "engagement_label": "930pt / 92コメント",
+              "category": "データベース",
+              "interest": 2,
+              "summary": "PostgreSQLの内部動作を都市に見立てて可視化した学習用サイト。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Apple Will 'Watch Everything Burn' When the AI Bubble Bursts",
+              "url": "https://www.macrumors.com/2026/07/27/ed-zitron-apple-watch-it-burn-ai-bubble-bursts/",
+              "comments_url": "https://news.ycombinator.com/item?id=49070427",
+              "score": 82,
+              "engagement_label": "254pt / 356コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "AIバブルの崩壊時にAppleが有利な位置に立つとするEd Zitronの主張を伝えた記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "French firefighters face 'pyrocumulonimbus' for first time",
+              "url": "https://www.france24.com/en/live-news/20260726-french-firefighters-face-pyrocumulonimbus-for-first-time",
+              "comments_url": "https://news.ycombinator.com/item?id=49060495",
+              "score": 81,
+              "engagement_label": "462pt / 367コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "フランスの消防が火災積乱雲に初めて直面したという報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The Strongest El Niño Ever",
+              "url": "https://www.theclimatebrink.com/p/the-strongest-el-nino-ever",
+              "comments_url": "https://news.ycombinator.com/item?id=49060978",
+              "score": 78,
+              "engagement_label": "291pt / 347コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "観測史上最強とされるエルニーニョの現状を扱った気候ブログの記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Should you wash your solar panels?",
+              "url": "https://incoherency.co.uk/blog/stories/should-you-wash-your-solar-panels.html",
+              "comments_url": "https://news.ycombinator.com/item?id=49069132",
+              "score": 77,
+              "engagement_label": "247pt / 252コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "太陽光パネルの洗浄が発電量に見合うかを実測データで検証した個人ブログ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Decker, a platform that builds on the legacy of Hypercard and classic macOS",
+              "url": "https://beyondloom.com/decker/",
+              "comments_url": "https://news.ycombinator.com/item?id=49060856",
+              "score": 73,
+              "engagement_label": "381pt / 102コメント",
+              "category": "開発ツール",
+              "interest": 1,
+              "summary": "HyperCardと旧macOSの系譜を継ぐ制作環境Deckerの紹介ページ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

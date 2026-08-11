@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-24",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "オープンウェイト規制への反対表明と、AI時代のソフトウェア品質論が並んだ日",
+    "lead": "Hacker News では中国製オープンウェイトモデルの遮断に反対する創業者らの要望書が1069pt / 889コメントを集め、同じ論点で Nvidia・Microsoft・Meta の連名書簡も上位に入った。開発が速くなったはずのソフトウェアの品質が下がっているとする記事は当日で最も高い base_score となり、692コメントが付いた。監視カメラに管理トークンが同梱されていた事例や Flux 3 の公開も上位に並んだ。",
+    "highlights": [
+      {
+        "title": "If coding has been solved, why does software keep getting worse?",
+        "url": "https://ptrchm.com/posts/nothing-works-and-everyone-is-euphoric/",
+        "service_label": "Hacker News",
+        "reason": "高関心テーマへの直撃で907pt / 692コメント、base_scoreは当日最高"
+      },
+      {
+        "title": "Startup founders urge U.S. government not to shut off Chinese open weight AI",
+        "url": "https://www.politico.com/news/2026/07/22/startup-founders-urge-trump-not-to-shut-off-chinese-open-weight-ai-01008992",
+        "service_label": "Hacker News",
+        "reason": "1069pt / 889コメントで当日最大のエンゲージメント"
+      },
+      {
+        "title": "Nvidia, Microsoft, Meta warn against overregulating open-weight models",
+        "url": "https://www.cnbc.com/2026/07/24/nvidia-microsoft-meta-open-weight-ai-models.html",
+        "service_label": "Hacker News",
+        "reason": "同じオープンウェイト規制の論点が同日に659ptを集めた"
+      },
+      {
+        "title": "My security camera shipped a GitHub admin token in its login page",
+        "url": "https://hhh.hn/hanwha-github-token/",
+        "service_label": "Hacker News",
+        "reason": "実例ベースのセキュリティ記事として645pt"
+      },
+      {
+        "title": "Flux 3",
+        "url": "https://bfl.ai/blog/flux-3",
+        "service_label": "Hacker News",
+        "reason": "画像生成モデルの新版公開で公開当日に571pt"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "If coding has been solved, why does software keep getting worse?",
+              "url": "https://ptrchm.com/posts/nothing-works-and-everyone-is-euphoric/",
+              "comments_url": "https://news.ycombinator.com/item?id=49033004",
+              "score": 97,
+              "engagement_label": "907pt / 692コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "開発が加速する一方でソフトウェアの品質が下がる状況を論じた記事。",
+              "discussion_summary": "AI以前から同じ傾向があったとする見方と、検証の薄いAI生成コードが原因だとする見方が並んだ。大規模な製品組織で誰も所有権を持たない構造や、社内の評価指標と本来やるべき作業のずれを挙げるコメントも出た。速度ではなく堅牢性や体験に資源を振り向ける選択肢がある、という指摘も見られた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Startup founders urge U.S. government not to shut off Chinese open weight AI",
+              "url": "https://www.politico.com/news/2026/07/22/startup-founders-urge-trump-not-to-shut-off-chinese-open-weight-ai-01008992",
+              "comments_url": "https://news.ycombinator.com/item?id=49023016",
+              "score": 94,
+              "engagement_label": "1069pt / 889コメント",
+              "category": "AI/業界",
+              "interest": 2,
+              "summary": "中国製オープンウェイトモデルの遮断に反対する創業者らの要望書。",
+              "discussion_summary": "どの法的権限で遮断できるのかという疑問が繰り返し挙がった。VPN経由で入手できるため実効性がないという指摘や、今のうちにモデルを保存しておくという反応も出た。重要インフラや防衛用途には来歴の追える国内モデルを充てる方が現実的だという意見や、米国企業の学習データの扱いと比較して二重基準だとするコメントも見られた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "It's getting harder to focus every day",
+              "url": "https://glyphack.com/attention/",
+              "comments_url": "https://news.ycombinator.com/item?id=49032660",
+              "score": 92,
+              "engagement_label": "794pt / 420コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "集中力が保てなくなっていく感覚と、その原因を整理した個人の記事。",
+              "discussion_summary": "情報量の多さが原因だとする声が多く、オフラインの時間を作る対処法が共有された。注意欠如の医学的な検査に言及するコメントと、注意力そのものは変わっておらず環境側の問題だとする反論が並んだ。Claude Codeがソーシャルメディア並みに離れがたいという体験談も投稿された。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Nvidia, Microsoft, Meta warn against overregulating open-weight models",
+              "url": "https://www.cnbc.com/2026/07/24/nvidia-microsoft-meta-open-weight-ai-models.html",
+              "comments_url": "https://news.ycombinator.com/item?id=49035303",
+              "score": 92,
+              "engagement_label": "659pt / 318コメント",
+              "category": "AI/業界",
+              "interest": 2,
+              "summary": "オープンウェイトへの過剰規制に反対する大手各社の連名書簡。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Government orders GitHub to remove Bluetooth-based chat app Bitchat: Jack Dorsey",
+              "url": "https://www.thehindu.com/news/national/government-orders-github-to-remove-bluetooth-based-chat-app-bitchat-over-security-concerns-jack-dorsey/article71262049.ece",
+              "comments_url": "https://news.ycombinator.com/item?id=49036433",
+              "score": 90,
+              "engagement_label": "543pt / 448コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Bluetooth経由のチャットアプリBitchatのGitHub削除要請をDorseyが公表。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "My security camera shipped a GitHub admin token in its login page",
+              "url": "https://hhh.hn/hanwha-github-token/",
+              "comments_url": "https://news.ycombinator.com/item?id=49034292",
+              "score": 87,
+              "engagement_label": "645pt / 243コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "監視カメラのログイン画面にGitHubの管理トークンが同梱されていた事例。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Flux 3",
+              "url": "https://bfl.ai/blog/flux-3",
+              "comments_url": "https://news.ycombinator.com/item?id=49031796",
+              "score": 82,
+              "engagement_label": "571pt / 133コメント",
+              "category": "AI/モデル",
+              "interest": 3,
+              "summary": "Black Forest Labsの画像生成モデルFluxの3世代目が公開された。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "98.css",
+              "url": "https://jdan.github.io/98.css/#status-bar",
+              "comments_url": "https://news.ycombinator.com/item?id=49028927",
+              "score": 76,
+              "engagement_label": "559pt / 129コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "Windows 98風の見た目を再現するCSSライブラリ。フロントエンドの話題。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Echo – Fable-level results at 1/3 the cost using open-weight models",
+              "url": "https://news.ycombinator.com/item?id=49026810",
+              "comments_url": "https://news.ycombinator.com/item?id=49026810",
+              "score": 73,
+              "engagement_label": "484pt / 229コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "複数のオープンウェイトモデルを束ねて低コストで精度を狙う実験。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "How to survive boiling water",
+              "url": "https://taxa.substack.com/p/how-to-survive-boiling-water",
+              "comments_url": "https://news.ycombinator.com/item?id=49036068",
+              "score": 72,
+              "engagement_label": "498pt / 125コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "高温環境で生き延びる生物の仕組みを解説した記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

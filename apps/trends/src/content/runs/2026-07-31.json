@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-31",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "DeepSeek と OpenAI の新モデル告知が同じ日に並んだ",
+    "lead": "Hacker News ではモデル更新とセキュリティの話題が上位を占めた。DeepSeek V4 Flash の更新告知と GPT-5.6 の発表が同じ日に並び、第三者による性能・価格の比較記事もあわせて伸びた。格安 TV スティックが出荷時から不正利用されているという Krebs の記事は552コメントを集め、GitHub のスタック PR や AI による Chrome のバグ修正といった開発寄りの話題も続いた。",
+    "highlights": [
+      {
+        "title": "DeepSeek-V4-Flash Update",
+        "url": "https://api-docs.deepseek.com/updates/",
+        "service_label": "Hacker News",
+        "reason": "高関心テーマの新モデル更新で745ptを集めた"
+      },
+      {
+        "title": "Advancing the price-performance frontier with GPT‑5.6",
+        "url": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/",
+        "service_label": "Hacker News",
+        "reason": "同日にDeepSeekと並ぶ形で610pt / 402コメントまで伸びた"
+      },
+      {
+        "title": "Stacked PRs are now live on GitHub",
+        "url": "https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/",
+        "service_label": "Hacker News",
+        "reason": "開発フローに直接関わる機能追加として781ptを集めた"
+      },
+      {
+        "title": "Google fixed more Chrome bugs in June than over the past two years, thanks to AI",
+        "url": "https://blog.google/security/chrome-stronger-with-every-update/",
+        "service_label": "Hacker News",
+        "reason": "585ptに対し610コメントと、当日で最も議論量が多かった"
+      },
+      {
+        "title": "Read this before you buy that TV streaming stick",
+        "url": "https://krebsonsecurity.com/2026/07/read-this-before-you-buy-that-tv-streaming-stick/",
+        "service_label": "Hacker News",
+        "reason": "817pt / 552コメントと、セキュリティ記事として当日最大の反応になった"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "UEFA and its national associations will not participate in FIFA competitions",
+              "url": "https://www.uefa.com/news-media/news/02a7-213a92896eb0-54dfbf454e3b-1000--statement-on-behalf-of-uefa-and-its-55-national-associations/",
+              "comments_url": "https://news.ycombinator.com/item?id=49113929",
+              "score": 94,
+              "engagement_label": "1235pt / 674コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "UEFAと傘下55協会がFIFA主催大会に参加しないと表明した公式声明。",
+              "discussion_summary": "FIFAの収益化路線と現会長への批判が中心になり、欧州が離脱した場合に大会の価値がどうなるかが論じられた。ワールドカップに導入された広告休止と試合の4分割が離反の一因として挙げられた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Read this before you buy that TV streaming stick",
+              "url": "https://krebsonsecurity.com/2026/07/read-this-before-you-buy-that-tv-streaming-stick/",
+              "comments_url": "https://news.ycombinator.com/item?id=49112744",
+              "score": 91,
+              "engagement_label": "817pt / 552コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "格安TVスティックが出荷時から住居用プロキシと広告詐欺に使われている調査記事。",
+              "discussion_summary": "工場出荷時から不正な用途に組み込まれている点が問題視され、H96など特定機種に限られるのかが論じられた。IoT機器を隔離したネットワークに置く運用の共有と、広告詐欺の被害をどう見るかで意見が分かれた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "DeepSeek-V4-Flash Update",
+              "url": "https://api-docs.deepseek.com/updates/",
+              "comments_url": "https://news.ycombinator.com/item?id=49119559",
+              "score": 90,
+              "engagement_label": "745pt / 347コメント",
+              "category": "AI/LLM",
+              "interest": 3,
+              "summary": "DeepSeek V4 Flashの更新告知。エージェント系ベンチマークが前版から大きく伸びた。",
+              "discussion_summary": "Terminal BenchやToolathlonのスコアが前版から大幅に伸びた点が数値で共有され、GPT-5.6との比較が並んだ。284B-A13Bという規模から単一GPUやM5 Maxでの実行可否、提供価格の安さも話題になった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Stacked PRs are now live on GitHub",
+              "url": "https://github.blog/changelog/2026-07-30-stacked-pull-requests-are-now-in-public-preview/",
+              "comments_url": "https://news.ycombinator.com/item?id=49112232",
+              "score": 89,
+              "engagement_label": "781pt / 295コメント",
+              "category": "開発ツール",
+              "interest": 2,
+              "summary": "GitHubがスタックしたプルリクエストをパブリックプレビューで提供開始した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The session you cannot take with you",
+              "url": "https://earendil.com/posts/session-portability/",
+              "comments_url": "https://news.ycombinator.com/item?id=49118781",
+              "score": 87,
+              "engagement_label": "789pt / 226コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "ログインセッションを別の環境へ持ち出せない構造を論じた記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Google fixed more Chrome bugs in June than over the past two years, thanks to AI",
+              "url": "https://blog.google/security/chrome-stronger-with-every-update/",
+              "comments_url": "https://news.ycombinator.com/item?id=49120097",
+              "score": 82,
+              "engagement_label": "585pt / 610コメント",
+              "category": "AI/セキュリティ",
+              "interest": 2,
+              "summary": "AI活用により6月のChromeのバグ修正数が過去2年分を上回ったというGoogleの発表。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Gemini Robotics 2 brings whole body intelligence to robots",
+              "url": "https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/",
+              "comments_url": "https://news.ycombinator.com/item?id=49111237",
+              "score": 81,
+              "engagement_label": "620pt / 558コメント",
+              "category": "ロボティクス",
+              "interest": 2,
+              "summary": "全身の動作制御を扱うGemini Robotics 2をDeepMindが発表した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "DeepSeek V4 Flash 0731 Intelligence, Performance and Price Analysis",
+              "url": "https://artificialanalysis.ai/models/deepseek-v4-flash",
+              "comments_url": "https://news.ycombinator.com/item?id=49120299",
+              "score": 77,
+              "engagement_label": "594pt / 312コメント",
+              "category": "AI/LLM",
+              "interest": 3,
+              "summary": "DeepSeek V4 Flash 0731の性能と価格を第三者がまとめた分析ページ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The End of an Era",
+              "url": "https://hughhowey.com/the-end-of-an-era/",
+              "comments_url": "https://news.ycombinator.com/item?id=49121980",
+              "score": 77,
+              "engagement_label": "455pt / 459コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "作家Hugh Howeyがひとつの時代の終わりについて綴ったブログ記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Advancing the price-performance frontier with GPT‑5.6",
+              "url": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/",
+              "comments_url": "https://news.ycombinator.com/item?id=49112867",
+              "score": 76,
+              "engagement_label": "610pt / 402コメント",
+              "category": "AI/LLM",
+              "interest": 3,
+              "summary": "OpenAIがGPT-5.6を発表し、価格と性能の関係を前面に置いた告知。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

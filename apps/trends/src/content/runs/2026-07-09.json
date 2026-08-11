@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-09",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "Chat Control 可決が最大の話題、Bun と Postgres の Rust 実装が並んだ日",
+    "lead": "Hacker News では EU 議会による Chat Control 1.0 の可決が1636ポイント863コメントで最上位に立った。実装言語の話題も集中し、Bun の Rust 移行を告知した公式記事と Zig 作者による反応、Postgres の Rust 実装が揃って上位へ入った。モデル関連では Grok 4.5 が1502コメントと当日最多の議論量になった。",
+    "highlights": [
+      {
+        "title": "EU Parliament greenlights Chat Control 1.0",
+        "url": "https://www.patrick-breyer.de/en/eu-parliament-greenlights-chat-control-1-0-breyer-our-children-lose-out/",
+        "service_label": "Hacker News",
+        "reason": "1636ポイント / 863コメントで当日最大のエンゲージメント。"
+      },
+      {
+        "title": "Grok 4.5",
+        "url": "https://x.ai/news/grok-4-5",
+        "service_label": "Hacker News",
+        "reason": "776ポイントに対し1502コメントで当日最多のコメント数。"
+      },
+      {
+        "title": "Rewriting Bun in Rust",
+        "url": "https://bun.com/blog/bun-in-rust",
+        "service_label": "Hacker News",
+        "reason": "JavaScript ランタイムの実装言語変更という関心テーマに直撃、534コメント。"
+      },
+      {
+        "title": "My thoughts on the Bun Rust rewrite",
+        "url": "https://andrewkelley.me/post/my-thoughts-bun-rust-rewrite.html",
+        "service_label": "Hacker News",
+        "reason": "Zig 作者の反応として707コメント、同じ話題で2本が上位入り。"
+      },
+      {
+        "title": "Postgres rewritten in Rust, now passing 100% of the Postgres regression tests",
+        "url": "https://github.com/malisper/pgrust",
+        "service_label": "Hacker News",
+        "reason": "729コメントで Rust 関連のもう一つの議論の山。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "EU Parliament greenlights Chat Control 1.0",
+              "url": "https://www.patrick-breyer.de/en/eu-parliament-greenlights-chat-control-1-0-breyer-our-children-lose-out/",
+              "comments_url": "https://news.ycombinator.com/item?id=48843923",
+              "score": 100,
+              "engagement_label": "1636pt / 863コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Chat Control 1.0 の EU 議会通過を批判的に伝える Breyer 氏の記事。",
+              "discussion_summary": "令状も嫌疑もない私信スキャンが再び可能になる点と、緊急手続きで採決に持ち込んだ進め方への批判が上位を占めた。記事が Chat Control 2.0 を代替として挙げていることに対し、それも暗号化の後退ではないかという指摘が出た。中央の事業者を持たない P2P メッセージングへの移行を挙げる意見もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: 18 Words",
+              "url": "https://18words.com/",
+              "comments_url": "https://news.ycombinator.com/item?id=48845049",
+              "score": 92,
+              "engagement_label": "1160pt / 366コメント",
+              "category": "Web/フロントエンド",
+              "interest": 1,
+              "summary": "18個の単語を順に当てていくブラウザ向けの語彙パズル。",
+              "discussion_summary": "遊び方の説明やアーカイブの一覧が欲しいという要望が並んだ。iPhone で二回タップすると拡大表示から戻れなくなる不具合の報告も出た。難易度については、二周目は簡単に解けたという体験談が挙がった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "John Deere owners will get the right to repair equipment under FTC settlement",
+              "url": "https://apnews.com/article/john-deere-right-to-repair-agriculture-equipment-cb7514ffedb95c130a976af661f2bc02",
+              "comments_url": "https://news.ycombinator.com/item?id=48838876",
+              "score": 91,
+              "engagement_label": "1397pt / 306コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "FTC との和解で John Deere の農機に修理する権利が認められたと伝える記事。",
+              "discussion_summary": "和解の内容自体は歓迎しつつ、100万ドルという制裁金の小ささを指摘する投稿が上位に来た。診断ツールの開放は入口に過ぎず、部品の独自仕様が競争を阻んでいるという指摘も出た。同じ基準が自動車にも及ぶことを期待する声があった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Grok 4.5",
+              "url": "https://x.ai/news/grok-4-5",
+              "comments_url": "https://news.ycombinator.com/item?id=48835111",
+              "score": 89,
+              "engagement_label": "776pt / 1502コメント",
+              "category": "LLM/AI",
+              "interest": 3,
+              "summary": "xAI が新モデル Grok 4.5 を公開し、Cursor も同日に対応を告知した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Postgres rewritten in Rust, now passing 100% of the Postgres regression tests",
+              "url": "https://github.com/malisper/pgrust",
+              "comments_url": "https://news.ycombinator.com/item?id=48841676",
+              "score": 85,
+              "engagement_label": "832pt / 729コメント",
+              "category": "アーキテクチャ",
+              "interest": 2,
+              "summary": "Postgres を Rust で書き直し、回帰テストを全て通したと報告するリポジトリ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "My thoughts on the Bun Rust rewrite",
+              "url": "https://andrewkelley.me/post/my-thoughts-bun-rust-rewrite.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48843352",
+              "score": 84,
+              "engagement_label": "817pt / 707コメント",
+              "category": "言語/処理系",
+              "interest": 2,
+              "summary": "Zig 作者の Andrew Kelley が Bun の Rust 移行について述べた記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Chatto is now open source",
+              "url": "https://www.hmans.dev/blog/chatto-is-open-source",
+              "comments_url": "https://news.ycombinator.com/item?id=48833116",
+              "score": 83,
+              "engagement_label": "1106pt / 305コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "開発者が自作アプリ Chatto をオープンソース化したと告知した記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Getting GLM 5.2 running on my slow computer",
+              "url": "https://github.com/JustVugg/colibri",
+              "comments_url": "https://news.ycombinator.com/item?id=48842459",
+              "score": 77,
+              "engagement_label": "937pt / 240コメント",
+              "category": "LLM/AI",
+              "interest": 2,
+              "summary": "非力な PC で GLM 5.2 を動かすために作られたツール Colibri の公開。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Rewriting Bun in Rust",
+              "url": "https://bun.com/blog/bun-in-rust",
+              "comments_url": "https://news.ycombinator.com/item?id=48837877",
+              "score": 76,
+              "engagement_label": "795pt / 534コメント",
+              "category": "言語/処理系",
+              "interest": 2,
+              "summary": "JavaScript ランタイム Bun が実装を Zig から Rust へ移す方針を説明した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The glass backbone: Why the Army's logistics will break in the next war",
+              "url": "https://mwi.westpoint.edu/the-glass-backbone-why-the-armys-logistics-will-break-in-the-next-war/",
+              "comments_url": "https://news.ycombinator.com/item?id=48845442",
+              "score": 72,
+              "engagement_label": "470pt / 682コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "通信基盤の脆さから米陸軍の兵站が次の戦争で破綻すると論じた寄稿。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-25",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "Claude Opus 5 の公開と、オープンウェイトをめぐる議論が続いた日",
+    "lead": "Hacker News では Anthropic の Claude Opus 5 の発表が1778pt / 1335コメントで当日突出し、Artificial Analysis の指標で首位に立った件も別項として上位に入った。オープンウェイトモデルの普及を Kubernetes の経緯になぞらえた論考が伸び、前日から続く OpenAI の侵入事案には説明を疑う記事が並んだ。Android が端末内 ADB を制限しうるという記事も1010ptを集めた。",
+    "highlights": [
+      {
+        "title": "Claude Opus 5",
+        "url": "https://www.anthropic.com/news/claude-opus-5",
+        "service_label": "Hacker News",
+        "reason": "1778pt / 1335コメントで当日突出したエンゲージメント"
+      },
+      {
+        "title": "Android may soon restrict on-device ADB",
+        "url": "https://kitsumed.github.io/blog/posts/android-may-soon-restrict-on-device-adb/",
+        "service_label": "Hacker News",
+        "reason": "1010pt / 509コメント、base_scoreは当日最高の95"
+      },
+      {
+        "title": "Be skeptical of OpenAI's rogue hacker agent story",
+        "url": "https://www.theguardian.com/technology/2026/jul/24/openai-rogue-hacker",
+        "service_label": "Hacker News",
+        "reason": "前日から続く侵入事案に対する反論記事として544pt"
+      },
+      {
+        "title": "Open-weight AI is having its Kubernetes moment",
+        "url": "https://tobi.knaup.me/2026-07-25-open-weight-ai-is-having-its-kubernetes-moment/",
+        "service_label": "Hacker News",
+        "reason": "416pt に対し322コメントと、議論の比率が高かった"
+      },
+      {
+        "title": "2x, not 10x: coding with LLMs in 2026",
+        "url": "https://obryant.dev/p/2x-not-10x/",
+        "service_label": "Hacker News",
+        "reason": "高関心テーマへの直撃で279pt / 245コメント"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Android may soon restrict on-device ADB",
+              "url": "https://kitsumed.github.io/blog/posts/android-may-soon-restrict-on-device-adb/",
+              "comments_url": "https://news.ycombinator.com/item?id=49045159",
+              "score": 95,
+              "engagement_label": "1010pt / 509コメント",
+              "category": "OS/システム",
+              "interest": 2,
+              "summary": "Androidが端末内でのADB利用を制限しうる動きを追った記事。",
+              "discussion_summary": "セキュリティ上の理由は理解しつつ、代替手段や設定での切り替えが用意されないまま既定が変わる進め方への不満が中心になった。ロック解除済みの端末に物理的に触れる第三者からの保護として妥当だとする意見と、サイドローディング制限の流れの一部と見る意見に分かれた。端末が自分自身にADB接続する構成そのものが設計上の回避策だという指摘もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Claude Opus 5",
+              "url": "https://www.anthropic.com/news/claude-opus-5",
+              "comments_url": "https://news.ycombinator.com/item?id=49038433",
+              "score": 94,
+              "engagement_label": "1778pt / 1335コメント",
+              "category": "AI/モデル",
+              "interest": 3,
+              "summary": "AnthropicがClaude Opus 5を公開。ベンチマークと価格性能が示された。",
+              "discussion_summary": "ベンチマークの数値、特にARC-AGI-3のスコアと価格あたりの性能に関心が集まった。総合的な能力ではFable 5を上回るわけではないという記載の意味を問う声や、アラインメント評価の結果に言及するコメントが出た。分類器の挙動が実用性を左右するという懸念や、オープンウェイトをめぐる発言と同日の公開になった点への指摘も見られた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Open-weight AI is having its Kubernetes moment",
+              "url": "https://tobi.knaup.me/2026-07-25-open-weight-ai-is-having-its-kubernetes-moment/",
+              "comments_url": "https://news.ycombinator.com/item?id=49048034",
+              "score": 90,
+              "engagement_label": "416pt / 322コメント",
+              "category": "AI/業界",
+              "interest": 2,
+              "summary": "オープンウェイトモデルの普及をKubernetesの経緯になぞらえた論考。",
+              "discussion_summary": "推論価格が時間とともに下がり続ける構造をどう説明するかという疑問が挙がった。特定APIへの依存を避けるため政府調達で相互運用性を求めるという提案には、新しい観点だとする反応があった。オープンウェイトモデルでエージェント開発を実際に行っている構成と月額費用を尋ねるコメントや、Kubernetesになぞらえること自体への皮肉も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Be skeptical of OpenAI's rogue hacker agent story",
+              "url": "https://www.theguardian.com/technology/2026/jul/24/openai-rogue-hacker",
+              "comments_url": "https://news.ycombinator.com/item?id=49038060",
+              "score": 89,
+              "engagement_label": "544pt / 300コメント",
+              "category": "セキュリティ",
+              "interest": 3,
+              "summary": "自律エージェントによる侵入というOpenAIの説明に懐疑を示した記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "A shell colon does nothing. Use it anyway",
+              "url": "https://refp.se/articles/your-shell-and-the-magic-colon",
+              "comments_url": "https://news.ycombinator.com/item?id=49047453",
+              "score": 87,
+              "engagement_label": "405pt / 176コメント",
+              "category": "OS/システム",
+              "interest": 2,
+              "summary": "シェルのコロン組み込みコマンドの用途をまとめた解説記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Hannah Fry Wins the Leelavati Prize in 2026 for Mathematics Outreach",
+              "url": "https://www.maths.cam.ac.uk/features/professor-hannah-fry-wins-leelavati-prize",
+              "comments_url": "https://news.ycombinator.com/item?id=49043724",
+              "score": 86,
+              "engagement_label": "605pt / 110コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Hannah Fryが数学の普及活動でLeelavati賞を受賞した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Opus 5 is currently #1 on Artificial Analysis Intelligence Leaderboard",
+              "url": "https://artificialanalysis.ai/models",
+              "comments_url": "https://news.ycombinator.com/item?id=49040741",
+              "score": 78,
+              "engagement_label": "374pt / 236コメント",
+              "category": "AI/モデル",
+              "interest": 3,
+              "summary": "Artificial Analysisの知能指標でOpus 5が首位に立った状態の共有。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "2x, not 10x: coding with LLMs in 2026",
+              "url": "https://obryant.dev/p/2x-not-10x/",
+              "comments_url": "https://news.ycombinator.com/item?id=49047839",
+              "score": 77,
+              "engagement_label": "279pt / 245コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "LLMを使った開発の生産性向上を2倍程度と見積もった記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Taylor Farms Called White House to Try to Delay Cyclospora Recall",
+              "url": "https://www.wsj.com/health/taylor-farms-cyclospora-recall-delay-call-41fef0bc",
+              "comments_url": "https://news.ycombinator.com/item?id=49044074",
+              "score": 76,
+              "engagement_label": "333pt / 226コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "食品会社がリコールの延期を求めて政府に働きかけたとする報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Postgres LISTEN/NOTIFY actually scales",
+              "url": "https://www.dbos.dev/blog/postgres-listen-notify-scalability",
+              "comments_url": "https://news.ycombinator.com/item?id=49040296",
+              "score": 73,
+              "engagement_label": "373pt / 85コメント",
+              "category": "データベース",
+              "interest": 2,
+              "summary": "PostgresのLISTEN/NOTIFYの実際のスケール特性を計測した記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

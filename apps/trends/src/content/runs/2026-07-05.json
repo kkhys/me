@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-05",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "オフラインで動く地図とゲームの所有権が上位を占めた日",
+    "lead": "Hacker News ではオフライン地図アプリ Organic Maps が1184ポイントで首位となり、1人で制作された鉄道シミュレーターの記事と、ゲームの所有権を論じた記事が続いた。所有権の記事は530コメントとこの日最多の議論量になった。AI 関連では Claude Fable を使った Command and Conquer Generals の移植が690ポイントを集め、Web 側では shadcn/ui の基盤が Radix から Base UI へ変わった件が上位に入った。",
+    "highlights": [
+      {
+        "title": "Organic Maps",
+        "url": "https://organicmaps.app/",
+        "service_label": "Hacker News",
+        "reason": "1184ポイントで当日最大、フォーク CoMaps への言及が集中。"
+      },
+      {
+        "title": "It's not about physical vs. digital games, it's about ownership",
+        "url": "https://popcar.bearblog.dev/its-about-ownership/",
+        "service_label": "Hacker News",
+        "reason": "530コメントで当日最多のコメント数。"
+      },
+      {
+        "title": "Command and Conquer Generals natively ported to macOS, iPhone, iPad using Fable",
+        "url": "https://github.com/ammaarreshi/Generals-Mac-iOS-iPad/tree/main",
+        "service_label": "Hacker News",
+        "reason": "LLM を使った移植事例という高関心テーマに直撃、690ポイント。"
+      },
+      {
+        "title": "Leaking YouTube creators' private videos",
+        "url": "https://javoriuski.com/post/youtube",
+        "service_label": "Hacker News",
+        "reason": "非公開動画の漏洩報告として694ポイント / 395コメント。"
+      },
+      {
+        "title": "Shadcn/UI now defaults to Base UI instead of Radix",
+        "url": "https://ui.shadcn.com/docs/changelog",
+        "service_label": "Hacker News",
+        "reason": "フロントエンドの依存基盤の変更として165コメント。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Organic Maps",
+              "url": "https://organicmaps.app/",
+              "comments_url": "https://news.ycombinator.com/item?id=48794446",
+              "score": 100,
+              "engagement_label": "1184pt / 364コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "OpenStreetMap ベースのオフライン地図アプリ Organic Maps。",
+              "discussion_summary": "運営体制への懸念から分岐したフォーク CoMaps への言及が繰り返し出た。電池消費の少なさや地図の誤りを自分で直せる点を挙げる書き込みがある一方、検索機能の弱さや、地図データが FLOSS ライセンスでないという F-Droid の記載を問題視する声もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Train sim created by just one person is being called the best ever made",
+              "url": "https://kotaku.com/a-train-sim-created-by-just-one-person-is-being-called-the-best-ever-made-2000699429",
+              "comments_url": "https://news.ycombinator.com/item?id=48792383",
+              "score": 95,
+              "engagement_label": "862pt / 357コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "1人で制作された鉄道シミュレーターが高評価を得ているという記事。",
+              "discussion_summary": "1人開発とは思えない映像品質への驚きが中心で、LLM をどの程度使ったのかという推測も出た。専用コントローラー対応を歓迎する書き込み、VR 対応の有無を尋ねる質問、Windows 限定という指摘が並んだ。シミュレーター系の遊び方そのものを問う書き込みもあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "It's not about physical vs. digital games, it's about ownership",
+              "url": "https://popcar.bearblog.dev/its-about-ownership/",
+              "comments_url": "https://news.ycombinator.com/item?id=48794750",
+              "score": 95,
+              "engagement_label": "704pt / 530コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "物理か配信かではなく所有権が争点だと論じたゲーム記事。",
+              "discussion_summary": "サブスクや常時接続型への移行を、アーケード時代の課金モデルへの回帰と結びつける見方が出た。所有の条件を転売可能性に置く意見と、旧世代機で買った配信版を今も遊べているとする反論があり、評価が割れた。スポーツ観戦のような利用形態との比較も持ち出された。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Leaking YouTube creators' private videos",
+              "url": "https://javoriuski.com/post/youtube",
+              "comments_url": "https://news.ycombinator.com/item?id=48786781",
+              "score": 86,
+              "engagement_label": "694pt / 395コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "YouTube の非公開動画を第三者が取得できた脆弱性の報告。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Command and Conquer Generals natively ported to macOS, iPhone, iPad using Fable",
+              "url": "https://github.com/ammaarreshi/Generals-Mac-iOS-iPad/tree/main",
+              "comments_url": "https://news.ycombinator.com/item?id=48788283",
+              "score": 83,
+              "engagement_label": "690pt / 288コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Claude Fable で C&C Generals を macOS と iOS に移植した記録。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "EU Council forces Chat Control via fast-track",
+              "url": "https://www.heise.de/en/news/Chat-Control-1-0-EU-Council-forces-messenger-scans-via-fast-track-11353659.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48793393",
+              "score": 82,
+              "engagement_label": "475pt / 266コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "EU 理事会がメッセンジャーの検査を求める規則を早期手続で可決。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "If you're a button, you have one job",
+              "url": "https://unsung.aresluna.org/if-youre-a-button-you-have-one-job/",
+              "comments_url": "https://news.ycombinator.com/item?id=48790689",
+              "score": 81,
+              "engagement_label": "592pt / 282コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "ボタンに複数の役割を持たせる設計の問題を扱った UI 記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Google Books (or similar) all book scans – $200k bounty (2025)",
+              "url": "https://software.annas-archive.gl/AnnaArchivist/annas-archive/-/work_items/234",
+              "comments_url": "https://news.ycombinator.com/item?id=48786838",
+              "score": 78,
+              "engagement_label": "533pt / 350コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Anna's Archive が書籍スキャンの収集に20万ドルの報奨を提示。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Introduction to Compilers and Language Design (2021)",
+              "url": "https://dthain.github.io/books/compiler/",
+              "comments_url": "https://news.ycombinator.com/item?id=48793454",
+              "score": 74,
+              "engagement_label": "327pt / 51コメント",
+              "category": "言語/処理系",
+              "interest": 2,
+              "summary": "コンパイラと言語設計を扱う無償の教科書(2021年)。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Shadcn/UI now defaults to Base UI instead of Radix",
+              "url": "https://ui.shadcn.com/docs/changelog",
+              "comments_url": "https://news.ycombinator.com/item?id=48791328",
+              "score": 74,
+              "engagement_label": "282pt / 165コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "shadcn/ui の既定の基盤が Radix から Base UI に変更された。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

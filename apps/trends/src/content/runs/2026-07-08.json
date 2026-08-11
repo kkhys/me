@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-08",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "ユニクロの T シャツの難読化スクリプト解読がトップ、EU の監視系規制が並走した日",
+    "lead": "Hacker News ではユニクロの製品に印刷された bash スクリプトを解読した記事が1489ポイントを集めて最上位に立った。EU 関連では新車への運転者監視カメラ義務化と Chat Control 1.0 の可決が同時に上位へ入り、前者は1066コメントに達した。AI 関連では GitHub の AI エージェントから非公開リポジトリを引き出した検証と、Mistral のロボット向けモデル公開が伸びた。",
+    "highlights": [
+      {
+        "title": "Decoding the obfuscated bash script on a Uniqlo t-shirt",
+        "url": "https://tris.sherliker.net/blog/obfuscated-self-evaluating-bash-script-by-cdn-akamai-being-supplied-to-consumers-via-retail-stores/",
+        "service_label": "Hacker News",
+        "reason": "1489ポイントで当日突出したスコア。"
+      },
+      {
+        "title": "Every new car sold in the European Union must include a driver monitoring camera",
+        "url": "https://allaboutcookies.org/eu-mandatory-distracted-driver-system",
+        "service_label": "Hacker News",
+        "reason": "1066コメントとポイント数を上回る規模の議論。"
+      },
+      {
+        "title": "GitLost: We Tricked GitHub's AI Agent into Leaking Private Repos",
+        "url": "https://noma.security/blog/gitlost-how-we-tricked-githubs-ai-agent-into-leaking-private-repos/",
+        "service_label": "Hacker News",
+        "reason": "AI エージェントのセキュリティという高関心テーマに直撃。"
+      },
+      {
+        "title": "Chat Control passed first round in EU Parliament",
+        "url": "https://www.heise.de/en/news/Showdown-in-Strasbourg-The-unexpected-return-of-Chat-Control-1-0-11356680.html",
+        "service_label": "Hacker News",
+        "reason": "前日の解説記事に続き、同じ規制の話題が二日連続で上位入り。"
+      },
+      {
+        "title": "Mistral's Robostral Navigate: a state of the art robotics navigation model",
+        "url": "https://mistral.ai/news/robostral-navigate/",
+        "service_label": "Hacker News",
+        "reason": "新モデル公開として488ポイント、コメント112件と票が先行した。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Decoding the obfuscated bash script on a Uniqlo t-shirt",
+              "url": "https://tris.sherliker.net/blog/obfuscated-self-evaluating-bash-script-by-cdn-akamai-being-supplied-to-consumers-via-retail-stores/",
+              "comments_url": "https://news.ycombinator.com/item?id=48829312",
+              "score": 98,
+              "engagement_label": "1489pt / 233コメント",
+              "category": "解説記事",
+              "interest": 2,
+              "summary": "ユニクロの T シャツに印刷された難読化 bash スクリプトを解読した記事。",
+              "discussion_summary": "OCR の精度が最上位の論点になり、画像を行ごとに分割してビジョンモデルに渡す手法が示された。手作業で修正するより入力し直したほうが早かったのではという指摘も出た。なぜ T シャツにこのスクリプトが載っているのかという疑問や、フォントが Consolas に見える点への言及もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Every new car sold in the European Union must include a driver monitoring camera",
+              "url": "https://allaboutcookies.org/eu-mandatory-distracted-driver-system",
+              "comments_url": "https://news.ycombinator.com/item?id=48823557",
+              "score": 91,
+              "engagement_label": "793pt / 1066コメント",
+              "category": "セキュリティ",
+              "interest": 1,
+              "summary": "EU で新車に運転者の脇見を検知するカメラの搭載が義務化されることを伝えた記事。",
+              "discussion_summary": "警告音が増えて警告疲れを招くという指摘と、映像データの取り扱いが不透明だという懸念が上位を占めた。車線維持支援の実装精度が低いという体験談がある一方、注意の逸れを高い精度で検知したという体験談も出て評価が分かれた。カメラを物理的に覆う案への言及もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Microsoft fire idTech team at Id software",
+              "url": "https://gamefromscratch.com/microsoft-fire-idtech-team-at-id-software/",
+              "comments_url": "https://news.ycombinator.com/item?id=48819244",
+              "score": 89,
+              "engagement_label": "676pt / 602コメント",
+              "category": "キャリア/組織",
+              "interest": 1,
+              "summary": "id Software の idTech エンジン開発チームが解雇されたと伝えるブログ。",
+              "discussion_summary": "DOOM シリーズの今後を惜しむ短い投稿が並んだ。記事には idTech チームが対象だという裏付けがないという指摘も出た。配信基盤を持つ企業がスタジオを買収することへの批判も書かれた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Chat Control passed first round in EU Parliament",
+              "url": "https://www.heise.de/en/news/Showdown-in-Strasbourg-The-unexpected-return-of-Chat-Control-1-0-11356680.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48819008",
+              "score": 86,
+              "engagement_label": "637pt / 259コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Chat Control 1.0 が EU 議会の第一段階を通過したと伝える記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "GitLost: We Tricked GitHub's AI Agent into Leaking Private Repos",
+              "url": "https://noma.security/blog/gitlost-how-we-tricked-githubs-ai-agent-into-leaking-private-repos/",
+              "comments_url": "https://news.ycombinator.com/item?id=48827858",
+              "score": 85,
+              "engagement_label": "541pt / 205コメント",
+              "category": "セキュリティ",
+              "interest": 3,
+              "summary": "GitHub の AI エージェントを誘導し非公開リポジトリを漏らさせた検証の報告。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "30papers.com – Ilya's 30 essential ML papers, in a beginner friendly format",
+              "url": "https://30papers.com/",
+              "comments_url": "https://news.ycombinator.com/item?id=48819608",
+              "score": 83,
+              "engagement_label": "652pt / 111コメント",
+              "category": "LLM/AI",
+              "interest": 2,
+              "summary": "Ilya Sutskever が挙げた機械学習の論文30本を入門向けに整理したサイト。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Mistral's Robostral Navigate: a state of the art robotics navigation model",
+              "url": "https://mistral.ai/news/robostral-navigate/",
+              "comments_url": "https://news.ycombinator.com/item?id=48832212",
+              "score": 79,
+              "engagement_label": "488pt / 112コメント",
+              "category": "LLM/AI",
+              "interest": 2,
+              "summary": "Mistral がロボットの経路制御向けモデル Robostral Navigate を公開した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Local, CPU-Friendly, High-Quality TTS (Text-to-Speech) with Kokoro",
+              "url": "https://ariya.io/2026/03/local-cpu-friendly-high-quality-tts-text-to-speech-with-kokoro/",
+              "comments_url": "https://news.ycombinator.com/item?id=48821576",
+              "score": 76,
+              "engagement_label": "515pt / 98コメント",
+              "category": "LLM/AI",
+              "interest": 2,
+              "summary": "CPU だけで動く軽量な音声合成モデル Kokoro をローカルで使う手順の記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "How to Build a Minimal ZFS NAS Without Synology, QNAP, TrueNAS (2024)",
+              "url": "https://neil.computer/notes/how-to-setup-minimal-zfs-nas-without-truenas/",
+              "comments_url": "https://news.ycombinator.com/item?id=48827325",
+              "score": 74,
+              "engagement_label": "346pt / 250コメント",
+              "category": "OS/システム",
+              "interest": 1,
+              "summary": "市販 NAS 製品や TrueNAS を使わず ZFS で最小構成の NAS を組む手順。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Amazon without the knockoffs",
+              "url": "https://knockoff.shopping/",
+              "comments_url": "https://news.ycombinator.com/item?id=48818963",
+              "score": 68,
+              "engagement_label": "332pt / 264コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "模倣品を除外して Amazon の商品を検索できるサイト。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

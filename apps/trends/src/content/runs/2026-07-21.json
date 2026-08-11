@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-21",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "中国系ラボの製品・モデル公開と、iCloudスキャンをめぐる判決が並んだ日",
+    "lead": "Hacker News では Apple の iCloud CSAM スキャンをめぐる免責判決が当日最多の議論量となり、端末外の暗号化と法的責任の関係に反応が集まった。同じ日に Kimi Work と Qwen-Image-3.0 という中国系ラボの製品・モデル公開が上位に並び、フロンティアラボの経済性を論じた記事も続いた。UI 実装のデモや監視カメラ企業の信頼性といった個別の話題も上位に入った。",
+    "highlights": [
+      {
+        "title": "Apple defeats liability for not scanning iCloud for CSAM",
+        "url": "https://blog.ericgoldman.org/archives/2026/07/apple-defeats-liability-for-not-scanning-icloud-for-csam-but-the-judge-was-not-pleased-amy-v-apple.htm",
+        "service_label": "Hacker News",
+        "reason": "456pt に対してコメントが565件と多く、当日で最大の議論量になった"
+      },
+      {
+        "title": "Kimi Work",
+        "url": "https://www.kimi.com/products/kimi-work",
+        "service_label": "Hacker News",
+        "reason": "高関心テーマのAI製品公開で、当日最高の678ptを集めた"
+      },
+      {
+        "title": "Qwen-Image-3.0: Rich Content, Authentic Details, Deep Knowledge",
+        "url": "https://qwen.ai/blog?id=qwen-image-3.0",
+        "service_label": "Hacker News",
+        "reason": "生成AIの新モデル公開が公開当日に571ptまで伸びた"
+      },
+      {
+        "title": "Kimi K3, Qwen 3.8, and Anthropic's (Potential) Unravelling",
+        "url": "https://www.emergingtrajectories.com/lh/frontier-lab-economics/",
+        "service_label": "Hacker News",
+        "reason": "371pt に対して336コメントと拮抗し、ラボの経済性に議論が集中した"
+      },
+      {
+        "title": "Jelly UI: Soft-body physics for native HTML form controls",
+        "url": "https://jelly-ui.com/",
+        "service_label": "Hacker News",
+        "reason": "661ptでフロントエンド系としては当日最上位だった"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Apple defeats liability for not scanning iCloud for CSAM",
+              "url": "https://blog.ericgoldman.org/archives/2026/07/apple-defeats-liability-for-not-scanning-icloud-for-csam-but-the-judge-was-not-pleased-amy-v-apple.htm",
+              "comments_url": "https://news.ycombinator.com/item?id=48992870",
+              "score": 95,
+              "engagement_label": "456pt / 565コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "AppleのiCloud非スキャンを免責した判決。E2E暗号化と責任の境界の話題。",
+              "discussion_summary": "プライバシー保護の観点から判決を支持する反応が多くを占めた。一方で、判事が被害児童を「付随的損害」と表現した点や、E2E暗号化とスキャンが両立しないという構造が論点になった。Appleが以前試みた端末内スキャンも批判を受けた経緯や、サーバとクライアントを同一企業が運営する構成でE2E暗号化が成立するのかを疑う指摘も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Kimi Work",
+              "url": "https://www.kimi.com/products/kimi-work",
+              "comments_url": "https://news.ycombinator.com/item?id=48981703",
+              "score": 94,
+              "engagement_label": "678pt / 279コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Moonshot AIによる業務向けAI環境。エージェント活用の製品動向にあたる。",
+              "discussion_summary": "実体はチャットUIでありAIデスクトップとは言えないという指摘が出た。UIがCodexの模倣だとする批判や、料金プランがすべて売り切れ表示になっている点への言及もあった。ローカルファイルをクラウドに接続する構成への懸念や、AIによる職種への影響を論じるコメントも見られた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Jelly UI: Soft-body physics for native HTML form controls",
+              "url": "https://jelly-ui.com/",
+              "comments_url": "https://news.ycombinator.com/item?id=48981620",
+              "score": 91,
+              "engagement_label": "661pt / 202コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "HTMLフォーム部品に軟体物理を与えるUIライブラリ。フロントエンド実装の話題。",
+              "discussion_summary": "見た目の面白さを評価する反応と、スクロール性能の劣化やアニメーションのフレームレート低下を指摘する反応に分かれた。prefers-reduced-motion への対応は評価されつつ、デモ側でも切り替えられるようにしてほしいという要望が出た。物理演算として認識できないという指摘もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Qwen-Image-3.0: Rich Content, Authentic Details, Deep Knowledge",
+              "url": "https://qwen.ai/blog?id=qwen-image-3.0",
+              "comments_url": "https://news.ycombinator.com/item?id=48989701",
+              "score": 90,
+              "engagement_label": "571pt / 218コメント",
+              "category": "AI/モデル",
+              "interest": 3,
+              "summary": "Alibabaの画像生成モデルQwen-Imageの3.0版公開。生成AIの新モデル動向。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Human mathematicians are being outcounterexampled",
+              "url": "https://xenaproject.wordpress.com/2026/07/20/human-mathematicians-are-being-outcounterexampled/",
+              "comments_url": "https://news.ycombinator.com/item?id=48983382",
+              "score": 83,
+              "engagement_label": "501pt / 256コメント",
+              "category": "AI/モデル",
+              "interest": 2,
+              "summary": "反例の発見でAIが数学者を上回りつつある状況を論じたXenaプロジェクトの記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Flock Credibility Lost as It Repeatedly Lies to City Councils, Police, & Public",
+              "url": "https://www.aclu.org/news/privacy-technology/tracking-alpr-cameras/flock-safety-credibility-lost-as-it-repeatedly-lies-to-city-councils-police-departments-and-public-across-the-country",
+              "comments_url": "https://news.ycombinator.com/item?id=48986731",
+              "score": 81,
+              "engagement_label": "470pt / 170コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "ナンバー自動読取カメラのFlockが虚偽説明を繰り返したとするACLUの報告。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Jellyfin founder Andrew leaves team",
+              "url": "https://forum.jellyfin.org/t-project-leadership-changes",
+              "comments_url": "https://news.ycombinator.com/item?id=48986091",
+              "score": 78,
+              "engagement_label": "370pt / 339コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "メディアサーバJellyfinの創設者がチームを離れる告知。OSS運営体制の変更。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Five US tech giants' hidden debts soar to $1.65T on opaque AI funding",
+              "url": "https://asia.nikkei.com/business/technology/five-us-tech-giants-hidden-debts-soar-to-1.65tn-on-opaque-ai-funding",
+              "comments_url": "https://news.ycombinator.com/item?id=48987863",
+              "score": 77,
+              "engagement_label": "382pt / 272コメント",
+              "category": "AI/業界",
+              "interest": 1,
+              "summary": "米大手5社のAI関連の簿外債務が1.65兆ドルに達したとする報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Kimi K3, Qwen 3.8, and Anthropic's (Potential) Unravelling",
+              "url": "https://www.emergingtrajectories.com/lh/frontier-lab-economics/",
+              "comments_url": "https://news.ycombinator.com/item?id=48980019",
+              "score": 76,
+              "engagement_label": "371pt / 336コメント",
+              "category": "AI/業界",
+              "interest": 3,
+              "summary": "Kimi K3やQwen 3.8の台頭とフロンティアラボの採算構造を論じた記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "New US homeownership measure puts people first",
+              "url": "https://www.minneapolisfed.org/article/2026/new-homeownership-measure-puts-people-first",
+              "comments_url": "https://news.ycombinator.com/item?id=48991139",
+              "score": 72,
+              "engagement_label": "208pt / 375コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ミネアポリス連銀が世帯単位の新しい持ち家率指標を示した記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

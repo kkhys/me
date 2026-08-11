@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-23",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "手書きの効用とLLMを使った数学、そしてAI企業の財務が並んだ日",
+    "lead": "Hacker News では Neal Stephenson が手書きの効用を論じたエッセイが1491ptで当日最高となった。次いで Terence Tao が Jacobian 予想の反例を ChatGPT と検討した会話ログが1128ptを集め、LLM を研究の相手として使う実例に反応が集まった。前日の OpenAI の侵入事案を扱った解説記事や、AI 企業の簿外債務を論じた記事も上位に残った。",
+    "highlights": [
+      {
+        "title": "Writing by hand is good for your brain",
+        "url": "https://nealstephenson.substack.com/p/writing-by-hand-is-good-for-your",
+        "service_label": "Hacker News",
+        "reason": "1491pt / 670コメントで当日最高、base_scoreも100"
+      },
+      {
+        "title": "Terence Tao's ChatGPT conversation about the Jacobian Conjecture counterexample",
+        "url": "https://chatgpt.com/share/6a5fdc7a-d6f8-83e8-bbea-8deb42cfed56",
+        "service_label": "Hacker News",
+        "reason": "LLM活用の実例として1128pt / 637コメント"
+      },
+      {
+        "title": "Show HN: Bento - An entire PowerPoint in one HTML file (edit+view+data+collab)",
+        "url": "https://bento.page/slides/",
+        "service_label": "Hacker News",
+        "reason": "Show HNとしては突出した1033ptを集めた"
+      },
+      {
+        "title": "OpenAI’s accidental attack against Hugging Face is science fiction that happened",
+        "url": "https://simonwillison.net/2026/Jul/22/openai-cyberattack/",
+        "service_label": "Hacker News",
+        "reason": "前日の侵入事案の解説として450コメントが付いた"
+      },
+      {
+        "title": "Everyone should know SIMD",
+        "url": "https://mitchellh.com/writing/everyone-should-know-simd",
+        "service_label": "Hacker News",
+        "reason": "低レイヤの解説記事として672ptまで伸びた"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Writing by hand is good for your brain",
+              "url": "https://nealstephenson.substack.com/p/writing-by-hand-is-good-for-your",
+              "comments_url": "https://news.ycombinator.com/item?id=49022152",
+              "score": 100,
+              "engagement_label": "1491pt / 670コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Neal Stephensonが手書きの効用を論じたエッセイ。",
+              "discussion_summary": "手書きの方が記憶に定着するという体験談が多く寄せられ、reMarkableなどのデジタルノートとの併用例が挙がった。一方で入力速度の遅さや、書いたものをデジタルへ転記する手間を課題とする声もあった。LLMを使わずにコードを書くことも同種の話ではないかという派生的な議論も現れた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Terence Tao's ChatGPT conversation about the Jacobian Conjecture counterexample",
+              "url": "https://chatgpt.com/share/6a5fdc7a-d6f8-83e8-bbea-8deb42cfed56",
+              "comments_url": "https://news.ycombinator.com/item?id=49010345",
+              "score": 91,
+              "engagement_label": "1128pt / 637コメント",
+              "category": "AI/モデル",
+              "interest": 3,
+              "summary": "TaoがJacobian予想の反例をChatGPTと検討した会話ログ。LLM活用の実例。",
+              "discussion_summary": "専門家がLLMを道具ではなく同僚のように扱っている点に注目が集まった。会話の進め方が一般の利用者の使い方と地続きだという指摘や、一流の研究者が要点を突く様子を追える資料として価値があるという意見が出た。この反例が数学全体にどの程度の意味を持つのかを問うコメントもあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI Companies Are Trying to Hide a Staggering Amount of Debt",
+              "url": "https://futurism.com/artificial-intelligence/ai-companies-hide-debt-off-balance-sheet",
+              "comments_url": "https://news.ycombinator.com/item?id=49020999",
+              "score": 90,
+              "engagement_label": "696pt / 381コメント",
+              "category": "AI/業界",
+              "interest": 1,
+              "summary": "AI企業が簿外に多額の債務を抱えているとする記事。前日の報道の続き。",
+              "discussion_summary": "計上場所の形式上の問題であり隠しているわけではないという指摘と、規模そのものを危険視する見方が対立した。モデルの効率化が進めばデータセンター投資が回収できなくなるという懸念や、公的な救済を予想する意見も出た。記事に具体的な事実が乏しいという批判もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Bento - An entire PowerPoint in one HTML file (edit+view+data+collab)",
+              "url": "https://bento.page/slides/",
+              "comments_url": "https://news.ycombinator.com/item?id=49008211",
+              "score": 89,
+              "engagement_label": "1033pt / 239コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "スライド一式を単一HTMLで完結させるツール。Claude Codeでの制作が背景。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I regret migrating to Codeberg",
+              "url": "https://xn--gckvb8fzb.com/i-regret-migrating-to-codeberg/",
+              "comments_url": "https://news.ycombinator.com/item?id=49021856",
+              "score": 87,
+              "engagement_label": "565pt / 567コメント",
+              "category": "開発ツール",
+              "interest": 1,
+              "summary": "Codebergへ移行した筆者が後悔を綴った記事。ホスティング選定の話題。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "John C. Dvorak has died",
+              "url": "https://twitter.com/na_announce/status/2079952538040672302",
+              "comments_url": "https://news.ycombinator.com/item?id=49012070",
+              "score": 86,
+              "engagement_label": "930pt / 323コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "長年テック分野を書いてきたJohn C. Dvorakの訃報。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "OpenAI’s accidental attack against Hugging Face is science fiction that happened",
+              "url": "https://simonwillison.net/2026/Jul/22/openai-cyberattack/",
+              "comments_url": "https://news.ycombinator.com/item?id=49015639",
+              "score": 78,
+              "engagement_label": "587pt / 450コメント",
+              "category": "セキュリティ",
+              "interest": 3,
+              "summary": "前日の侵入事案をSimon Willisonが整理した解説。AI×セキュリティの事例。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Are AI labs pelicanmaxxing?",
+              "url": "https://dylancastillo.co/posts/pelicanmaxxing.html",
+              "comments_url": "https://news.ycombinator.com/item?id=49010129",
+              "score": 76,
+              "engagement_label": "686pt / 242コメント",
+              "category": "AI/モデル",
+              "interest": 2,
+              "summary": "非公式ベンチマークと化した描画課題への最適化の有無を検証した記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Everyone should know SIMD",
+              "url": "https://mitchellh.com/writing/everyone-should-know-simd",
+              "comments_url": "https://news.ycombinator.com/item?id=49010648",
+              "score": 73,
+              "engagement_label": "672pt / 254コメント",
+              "category": "言語/処理系",
+              "interest": 2,
+              "summary": "SIMDの基礎をMitchell Hashimotoが解説した記事。低レイヤの解説ネタ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Physically accurate black hole you can put in your room",
+              "url": "https://blackhole.plav.in",
+              "comments_url": "https://news.ycombinator.com/item?id=49021270",
+              "score": 72,
+              "engagement_label": "477pt / 194コメント",
+              "category": "Web/フロントエンド",
+              "interest": 1,
+              "summary": "相対論的効果を含むブラックホールをブラウザ上で描画するデモ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

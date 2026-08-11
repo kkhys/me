@@ -1,0 +1,228 @@
+{
+  "date": "2026-08-01",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "エージェント実行基盤とMCP設計、AI前提のセキュリティが並んだ日",
+    "lead": "Hacker News では、YC が公開したマルチプレイヤー・エージェント基盤 qm と、Simon Willison によるステートレス MCP の再評価が上位に並んだ。Tailscale が Hugging Face 侵害の経緯を自ら検証した記事も伸び、AI エージェントが動く環境での認証情報の扱いが論点になった。首位はエレベーター制御アルゴリズムの解説で、AI 以外では古典的なスケジューリング題材が最も多くの支持を集めた。",
+    "highlights": [
+      {
+        "title": "Show HN: Elevators",
+        "url": "https://john.fun/elevators",
+        "service_label": "Hacker News",
+        "reason": "1678ポイントで当日最高スコア"
+      },
+      {
+        "title": "qm – Multiplayer agent harness for work",
+        "url": "https://github.com/yc-software/qm",
+        "service_label": "Hacker News",
+        "reason": "エージェント設計という高関心テーマへの直撃"
+      },
+      {
+        "title": "Tailscale didn't stop the Hugging Face intrusion",
+        "url": "https://tailscale.com/blog/hugging-face-intrusion",
+        "service_label": "Hacker News",
+        "reason": "セキュリティ事業者自身による侵害検証で216コメント"
+      },
+      {
+        "title": "Stateless MCP has recaptured my interest",
+        "url": "https://simonwillison.net/2026/Jul/31/stateless-mcp/",
+        "service_label": "Hacker News",
+        "reason": "385ポイントに対し225コメントと議論比率が高い"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Show HN: Elevators",
+              "url": "https://john.fun/elevators",
+              "comments_url": "https://news.ycombinator.com/item?id=49124218",
+              "score": 94,
+              "engagement_label": "1678pt / 415コメント",
+              "category": "技術解説",
+              "interest": 2,
+              "summary": "エレベーター制御アルゴリズムを対話的に可視化した解説記事。解説ネタの題材に該当",
+              "discussion_summary": "エレベーター制御を題材にしたプログラミングゲーム elevator saga や大学課題を挙げる投稿が相次いだ。オブジェクト指向設計の面接問題として出題された経験談も出た。実際の「スマート」エレベーター運用への不満や、ドア開閉ボタンを扱った過去の議論への言及もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "qm – Multiplayer agent harness for work",
+              "url": "https://github.com/yc-software/qm",
+              "comments_url": "https://news.ycombinator.com/item?id=49126604",
+              "score": 91,
+              "engagement_label": "680pt / 164コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "YC が公開した複数人向けエージェント実行基盤。エージェント設計に直結",
+              "discussion_summary": "AI が書いたプロジェクトが PR を人間の書いた文章で求める方針に、矛盾を指摘する声が集まった。Buzz や Hermes、Openclaw といった類似のエージェント基盤との比較も論点になった。オペレータ自身のクラウドで動くという説明に対し、実質は単一マシン前提ではないかという疑問も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Tailscale didn't stop the Hugging Face intrusion",
+              "url": "https://tailscale.com/blog/hugging-face-intrusion",
+              "comments_url": "https://news.ycombinator.com/item?id=49127306",
+              "score": 89,
+              "engagement_label": "626pt / 216コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Hugging Face 侵害を防げなかった経緯を Tailscale が自ら検証。AI時代の認証情報管理の話題",
+              "discussion_summary": "自社の脆弱性ではないと明言しつつ責任を引き受けた姿勢を評価する意見と、顧客の設定ミスをツール側の問題にすべきではないという意見が並んだ。AI エージェントが高速に動く環境では大量の鍵を抱える保管庫が標的になるという記事の指摘には、以前から標的だったはずだという反論も出た。設定の妥当性を点検する機能を求める声もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Stateless MCP has recaptured my interest",
+              "url": "https://simonwillison.net/2026/Jul/31/stateless-mcp/",
+              "comments_url": "https://news.ycombinator.com/item?id=49131438",
+              "score": 87,
+              "engagement_label": "385pt / 225コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Simon Willison によるステートレス MCP の再評価。MCP サーバー設計に直結",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "How to Exist",
+              "url": "https://www.raptitude.com/2026/07/how-to-exist/",
+              "comments_url": "https://news.ycombinator.com/item?id=49129990",
+              "score": 86,
+              "engagement_label": "400pt / 242コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "日々の在り方を論じた個人エッセイ。興味テーマとの対応はない",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Ten advances in mathematics and theoretical computer science",
+              "url": "https://openai.com/index/ten-advances-in-mathematics/",
+              "comments_url": "https://news.ycombinator.com/item?id=49132058",
+              "score": 85,
+              "engagement_label": "464pt / 0コメント",
+              "category": "AI/研究",
+              "interest": 3,
+              "summary": "OpenAI が数学・理論計算機科学における10件の進展を提示。生成AIの能力動向に該当",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI doesn't generate working products, that's still your job",
+              "url": "https://weeraman.com/the-prototype-isnt-the-product/",
+              "comments_url": "https://news.ycombinator.com/item?id=49132130",
+              "score": 82,
+              "engagement_label": "267pt / 293コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "AI が出すのは試作までで製品化は人間の仕事だとする論考。LLM活用開発の実務に該当",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "A Surveillance Treaty in Disguise: Canada Signs UN Cybercrime Convention",
+              "url": "https://www.michaelgeist.ca/2026/07/a-surveillance-treaty-in-disguise-the-trouble-with-canadas-quiet-decision-to-sign-the-un-cybercrime-convention/",
+              "comments_url": "https://news.ycombinator.com/item?id=49134694",
+              "score": 79,
+              "engagement_label": "315pt / 166コメント",
+              "category": "セキュリティ",
+              "interest": 1,
+              "summary": "カナダの国連サイバー犯罪条約署名を監視強化と批判する解説。制度面の話題",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "RipGrep musl binaries occasionally segfault during very-large searches",
+              "url": "https://github.com/BurntSushi/ripgrep/issues/3494",
+              "comments_url": "https://news.ycombinator.com/item?id=49133889",
+              "score": 77,
+              "engagement_label": "282pt / 195コメント",
+              "category": "言語/処理系",
+              "interest": 1,
+              "summary": "ripgrep の musl ビルドが巨大検索で segfault する不具合報告。実装詳細の話題",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Decades-old fish sauce at abandoned factory in Canada finally being removed",
+              "url": "https://defector.com/abandoned-fish-sauce-canada-interview",
+              "comments_url": "https://news.ycombinator.com/item?id=49125168",
+              "score": 76,
+              "engagement_label": "267pt / 287コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "カナダの廃工場に残った数十年前の魚醤が撤去される話題。興味テーマには該当しない",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-30",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "省メモリのローカル推論と、Hashimoto の新プロジェクトが上位に並んだ日",
+    "lead": "Hacker News ではローカル推論と開発者向けの新プロジェクトが上位を占めた。Gemma 4 26B を約2GBのRAMで動かす推論エンジンが当日最上位に入り、Mitchell Hashimoto らによる Superlogical がそれに続いた。Android の年齢確認拡大と GCC の AI 方針は、いずれも400件超のコメントを集めた。",
+    "highlights": [
+      {
+        "title": "Show HN: Open-source engine running Gemma 4 26B in 2 GB RAM on any M-series Mac",
+        "url": "https://github.com/drumih/turbo-fieldfare",
+        "service_label": "Hacker News",
+        "reason": "Show HN として当日最高の919ptを集めた"
+      },
+      {
+        "title": "Superlogical",
+        "url": "https://www.superlogical.com/",
+        "service_label": "Hacker News",
+        "reason": "詳細が未公開の告知ページながら795pt / 458コメントまで伸びた"
+      },
+      {
+        "title": "GCC steering committee announces AI policy",
+        "url": "https://lwn.net/Articles/1086041/",
+        "service_label": "Hacker News",
+        "reason": "356ptに対し429コメントと拮抗し、AI生成コードの扱いに議論が集中した"
+      },
+      {
+        "title": "Google will expand age checks on Android worldwide till the end of the year",
+        "url": "https://android-developers.googleblog.com/2026/07/google-play-age-signals-api-safer-experiences.html",
+        "service_label": "Hacker News",
+        "reason": "423ptに対し525コメントと、当日で最も議論量が多かった"
+      },
+      {
+        "title": "AI's top startups are barely publishing their research",
+        "url": "https://www.science.org/content/article/ai-s-top-startups-are-barely-publishing-their-research",
+        "service_label": "Hacker News",
+        "reason": "AI業界の情報公開をめぐる記事として618ptを集めた"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Show HN: Open-source engine running Gemma 4 26B in 2 GB RAM on any M-series Mac",
+              "url": "https://github.com/drumih/turbo-fieldfare",
+              "comments_url": "https://news.ycombinator.com/item?id=49098510",
+              "score": 94,
+              "engagement_label": "919pt / 345コメント",
+              "category": "AI/LLM",
+              "interest": 3,
+              "summary": "M系MacでGemma 4 26Bを約2GBのRAMで動かす推論エンジンのShow HN。",
+              "discussion_summary": "MoEの専門家をSSDから読み込む方式について、トークンごとの切り替え頻度やSSDの摩耗を懸念する質問が集まった。M2 Airで5〜6 tok/s、M5 Proで31〜35 tok/sという差の要因や、Windows対応の要望も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Superlogical",
+              "url": "https://www.superlogical.com/",
+              "comments_url": "https://news.ycombinator.com/item?id=49098965",
+              "score": 91,
+              "engagement_label": "795pt / 458コメント",
+              "category": "開発ツール",
+              "interest": 3,
+              "summary": "Ghostty作者Mitchell Hashimotoらによる新プロジェクトの告知ページ。",
+              "discussion_summary": "Ghosttyでの実績を理由に期待を示す書き込みが多く、内容が明らかでない点への戸惑いも並んだ。sshで接続できる採用ページや出資者、出社を前提とする採用条件が話題になった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Google will expand age checks on Android worldwide till the end of the year",
+              "url": "https://android-developers.googleblog.com/2026/07/google-play-age-signals-api-safer-experiences.html",
+              "comments_url": "https://news.ycombinator.com/item?id=49107950",
+              "score": 90,
+              "engagement_label": "423pt / 525コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Google Playの年齢シグナルAPIを年内に世界展開するという開発者向け告知。",
+              "discussion_summary": "正確な年齢ではなく範囲の判定で足りるはずだという指摘と、確認手段が示されていない点への疑問が出た。年齢確認は避けられないとする意見と、身元確認の常態化やデータ収集につながるという批判に分かれた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The coolest use for the Vision Pro",
+              "url": "https://christianselig.com/2026/07/vision-pro-house/",
+              "comments_url": "https://news.ycombinator.com/item?id=49102774",
+              "score": 89,
+              "engagement_label": "849pt / 321コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Vision Proの活用例として住宅を扱った個人ブログの記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "GCC steering committee announces AI policy",
+              "url": "https://lwn.net/Articles/1086041/",
+              "comments_url": "https://news.ycombinator.com/item?id=49108685",
+              "score": 87,
+              "engagement_label": "356pt / 429コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "GCCの運営委員会がAI生成コードの受け入れ方針を公表したことを伝える記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI's top startups are barely publishing their research",
+              "url": "https://www.science.org/content/article/ai-s-top-startups-are-barely-publishing-their-research",
+              "comments_url": "https://news.ycombinator.com/item?id=49103285",
+              "score": 86,
+              "engagement_label": "618pt / 318コメント",
+              "category": "AI/LLM",
+              "interest": 2,
+              "summary": "主要AIスタートアップの論文公開が減っている状況を調べたScienceの記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "'VPNs are lawful technical tools,' says EU Court in landmark copyright ruling",
+              "url": "https://remysharp.com/links/2026-07-23-35890312",
+              "comments_url": "https://news.ycombinator.com/item?id=49109440",
+              "score": 79,
+              "engagement_label": "433pt / 177コメント",
+              "category": "セキュリティ",
+              "interest": 1,
+              "summary": "EU司法裁がVPNを適法な技術的手段と認めた著作権判決を伝えるリンク。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Kimi K3-256k",
+              "url": "https://www.kimi.com/code/docs/en/kimi-code/models",
+              "comments_url": "https://news.ycombinator.com/item?id=49101852",
+              "score": 78,
+              "engagement_label": "492pt / 157コメント",
+              "category": "AI/LLM",
+              "interest": 3,
+              "summary": "Kimi K3の256kコンテキスト版がKimi Codeのモデル一覧に追加された。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Keychron announces first open-source firmware for gaming mice",
+              "url": "https://www.digitalfoundry.net/news/2026/07/keychron-announces-first-open-source-firmware-for-gaming-mice",
+              "comments_url": "https://news.ycombinator.com/item?id=49099715",
+              "score": 76,
+              "engagement_label": "442pt / 183コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Keychronがゲーミングマウス向けのオープンソースファームウェアを発表した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The Productivity Mirage",
+              "url": "https://frantic.im/mirage/",
+              "comments_url": "https://news.ycombinator.com/item?id=49104335",
+              "score": 70,
+              "engagement_label": "365pt / 154コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "生産性が上がったように見える錯覚の構造を扱った個人ブログのエッセイ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

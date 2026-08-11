@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-14",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "LLM の口癖を消す試みと、エージェント実装の内側への関心",
+    "lead": "Hacker News では、Claude が多用する言い回しを出力させない方法を扱った記事が最上位に付き、609pt に対し614コメントが集まった。OpenAI Codex がサブエージェントのプロンプトを暗号化し始めた件の GitHub issue も上位に入り、エージェントの実装そのものを覗く投稿が並んだ。EU の年齢確認アプリが Android と iOS を前提としている問題も432コメントを集めた。",
+    "highlights": [
+      {
+        "title": "How to stop Claude from saying load-bearing",
+        "url": "https://jola.dev/posts/how-to-stop-claude-from-saying-load-bearing",
+        "service_label": "Hacker News",
+        "reason": "この日の base_score 最高値で、609pt に対し614コメントと議論が得票を上回った。"
+      },
+      {
+        "title": "European \"age verification\" \"app\" forcing everyone to use Android or iOS",
+        "url": "https://github.com/eu-digital-identity-wallet/av-doc-technical-specification/discussions/19",
+        "service_label": "Hacker News",
+        "reason": "GitHub の discussion スレッドが584pt / 432コメントを集めた。"
+      },
+      {
+        "title": "Codex starts encrypting sub-agent prompts",
+        "url": "https://github.com/openai/codex/issues/28058",
+        "service_label": "Hacker News",
+        "reason": "GitHub issue が425pt / 250コメント。エージェント実装の変更という高関心テーマに直撃した。"
+      },
+      {
+        "title": "Apple's new SpeechAnalyzer API, benchmarked against Whisper and its predecessor",
+        "url": "https://get-inscribe.com/blog/apple-speech-api-benchmark.html",
+        "service_label": "Hacker News",
+        "reason": "音声認識モデルの比較検証記事として570pt を集めた。"
+      },
+      {
+        "title": "The git history command",
+        "url": "https://lalitm.com/post/git-history/",
+        "service_label": "Hacker News",
+        "reason": "開発ツールの話題で、457pt に対し315コメントと議論が伸びた。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "How to stop Claude from saying load-bearing",
+              "url": "https://jola.dev/posts/how-to-stop-claude-from-saying-load-bearing",
+              "comments_url": "https://news.ycombinator.com/item?id=48905248",
+              "score": 100,
+              "engagement_label": "609pt / 614コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Claude が多用する言い回しを出力させないための工夫を扱った記事。",
+              "discussion_summary": "Claude に特徴的な言い回しを挙げて茶化す投稿が並び、hook による正規表現置換で対処する案も出た。エージェント用途への調整が進んだ結果として文体を変えにくくなったという観察や、SillyTavern 界隈の同種の取り組み、可読性スコアや ELI5 を指定する方法が共有された。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "European \"age verification\" \"app\" forcing everyone to use Android or iOS",
+              "url": "https://github.com/eu-digital-identity-wallet/av-doc-technical-specification/discussions/19",
+              "comments_url": "https://news.ycombinator.com/item?id=48903777",
+              "score": 92,
+              "engagement_label": "584pt / 432コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "EU の年齢確認アプリが Android と iOS を前提としている問題の議論。",
+              "discussion_summary": "特定プラットフォームの利用を事実上強制する構図への反発が中心で、身分証に関わる機能を域外企業に委ねる点への懸念も出た。Android・iOS 以外で現代的なアプリを動かせる端末が実在するのかという疑問や、Play Integrity が Google アカウントへのログインを要求する点も指摘された。年齢確認を全員に課す前提自体を問う投稿もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Japan develops a method to recover up to 90% of lithium from used EV batteries",
+              "url": "https://tech.supercarblondie.com/japan-recovers-up-to-90-of-lithium-from-used-ev-batteries/",
+              "comments_url": "https://news.ycombinator.com/item?id=48901569",
+              "score": 91,
+              "engagement_label": "750pt / 196コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "使用済み EV 電池からリチウムを最大90%回収する手法の報道。",
+              "discussion_summary": "記事の記述が粗く LLM で生成されたものではないかという指摘が相次いだ。回収率90%は既に業界標準で95%を超える手法もあるという情報や、リチウム以外のニッケル・コバルト・銅などの回収こそ価値が大きいという指摘も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Apple's new SpeechAnalyzer API, benchmarked against Whisper and its predecessor",
+              "url": "https://get-inscribe.com/blog/apple-speech-api-benchmark.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48894752",
+              "score": 86,
+              "engagement_label": "570pt / 238コメント",
+              "category": "AI/音声",
+              "interest": 2,
+              "summary": "Apple の SpeechAnalyzer API を Whisper と比較したベンチマーク。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "LAPD lets contract with surveillance giant Flock expire",
+              "url": "https://techcrunch.com/2026/07/13/lapd-lets-contract-with-surveillance-giant-flock-expire-citing-serious-concerns-over-civil-liberties-and-privacy/",
+              "comments_url": "https://news.ycombinator.com/item?id=48893947",
+              "score": 83,
+              "engagement_label": "473pt / 414コメント",
+              "category": "セキュリティ",
+              "interest": 1,
+              "summary": "ロサンゼルス市警が監視カメラ企業 Flock との契約を更新しなかった件。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Building and shipping Mac and iOS apps without opening Xcode",
+              "url": "https://scottwillsey.com/building-and-shipping-mac-and-ios-apps-without-ever-opening-xcode/",
+              "comments_url": "https://news.ycombinator.com/item?id=48896665",
+              "score": 81,
+              "engagement_label": "555pt / 232コメント",
+              "category": "開発ツール",
+              "interest": 2,
+              "summary": "Xcode を開かずに Mac・iOS アプリをビルドし配布する手順の解説。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Codex starts encrypting sub-agent prompts",
+              "url": "https://github.com/openai/codex/issues/28058",
+              "comments_url": "https://news.ycombinator.com/item?id=48905028",
+              "score": 79,
+              "engagement_label": "425pt / 250コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "OpenAI Codex がサブエージェントのプロンプトを暗号化し始めた件の issue。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Former NOAA employees built Climate.us to preserve climate data and resources",
+              "url": "https://19thnews.org/2026/07/noaa-climate-data-website/",
+              "comments_url": "https://news.ycombinator.com/item?id=48897945",
+              "score": 78,
+              "engagement_label": "553pt / 217コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "元 NOAA 職員が気候データを保全するサイトを立ち上げた件の報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The git history command",
+              "url": "https://lalitm.com/post/git-history/",
+              "comments_url": "https://news.ycombinator.com/item?id=48901010",
+              "score": 76,
+              "engagement_label": "457pt / 315コメント",
+              "category": "開発ツール",
+              "interest": 2,
+              "summary": "git に history コマンドを設けることを論じた記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Australian energy retailers must offer three hours of free daytime electricity",
+              "url": "https://lenergy.com.au/free-daytime-electricity-is-coming-heres-how-it-actually-works/",
+              "comments_url": "https://news.ycombinator.com/item?id=48902320",
+              "score": 72,
+              "engagement_label": "291pt / 409コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "豪州の電力小売に日中3時間の無償電力提供を義務づける制度の解説。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

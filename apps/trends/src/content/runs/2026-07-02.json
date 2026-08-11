@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-02",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "モバイル OS の自由と自前ホスティングのプロジェクトが上位を占めた日",
+    "lead": "Hacker News では F-Droid による Android 開発者検証の批判が1734ポイントで首位となり、PeerTube、Immich 3.0、Podman v6.0.0 と自前で動かすソフトウェアが続いた。AI 側では GLM-5.2 向けのコーディング環境 ZCode と Claude Fable 5 の提供再開が上位に入った。",
+    "highlights": [
+      {
+        "title": "Android Developer Verification: Threat masquerading as protection",
+        "url": "https://f-droid.org/2026/07/01/adv-malware.html",
+        "service_label": "Hacker News",
+        "reason": "1734ポイント / 746コメントで当日最大のエンゲージメント。"
+      },
+      {
+        "title": "ZCode – Harness for GLM-5.2",
+        "url": "https://zcode.z.ai/en",
+        "service_label": "Hacker News",
+        "reason": "AI コーディング環境という高関心テーマに直撃、355コメント。"
+      },
+      {
+        "title": "Fable 5 is Back",
+        "url": "https://twitter.com/claudeai/status/2072402636813607381",
+        "service_label": "Hacker News",
+        "reason": "408ポイントに対し419コメントと議論比率が高い。"
+      },
+      {
+        "title": "Immich 3.0",
+        "url": "https://github.com/immich-app/immich/discussions/29439",
+        "service_label": "Hacker News",
+        "reason": "自前ホスティング系のメジャーリリースとして294コメント。"
+      },
+      {
+        "title": "PeerTube is a free, decentralized and federated video platform",
+        "url": "https://github.com/Chocobozzz/PeerTube",
+        "service_label": "Hacker News",
+        "reason": "既存プロジェクトの再浮上ながら680ポイント / 354コメント。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Android Developer Verification: Threat masquerading as protection",
+              "url": "https://f-droid.org/2026/07/01/adv-malware.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48755965",
+              "score": 98,
+              "engagement_label": "1734pt / 746コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "F-Droid が Android の開発者検証をマルウェア同然と批判した記事。",
+              "discussion_summary": "削除も無効化もできないシステムサービスという記事の指摘を巡り、サイドロード制限の拡大を懸念する書き込みが並んだ。EU の DMA との整合性を問う質問や、GrapheneOS など別の OS へ移る話も出た。一方でトロイの木馬という表現が過剰で反論の材料になるという批判もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "PeerTube is a free, decentralized and federated video platform",
+              "url": "https://github.com/Chocobozzz/PeerTube",
+              "comments_url": "https://news.ycombinator.com/item?id=48759634",
+              "score": 97,
+              "engagement_label": "680pt / 354コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "分散型・連合型の動画プラットフォーム PeerTube のリポジトリ。",
+              "discussion_summary": "視聴者間の P2P 配信という技術面への関心と、コンテンツ量や視聴者が集まっていないという実用面の指摘が並んだ。ホワイトリスト方式のフェデレーションで発見性が低いという声、動画が再生できなかったという報告、シード側の法的責任への懸念が出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Immich 3.0",
+              "url": "https://github.com/immich-app/immich/discussions/29439",
+              "comments_url": "https://news.ycombinator.com/item?id=48761944",
+              "score": 95,
+              "engagement_label": "650pt / 294コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "セルフホスト型の写真管理 Immich がバージョン3.0を公開。",
+              "discussion_summary": "Google Photos や Apple Photos の代替として使えているという報告が多い一方、エンドツーエンド暗号化がない点を理由に Ente など他の選択肢を選んだという書き込みも出た。iOS からの同期の不安定さ、読み取り専用フォルダの扱い、Google Takeout からの移行手順が質問として挙がった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Podman v6.0.0",
+              "url": "https://blog.podman.io/2026/07/introducing-podman-v6-0-0/",
+              "comments_url": "https://news.ycombinator.com/item?id=48762098",
+              "score": 90,
+              "engagement_label": "648pt / 257コメント",
+              "category": "OS/システム",
+              "interest": 2,
+              "summary": "コンテナ実行環境 Podman のメジャーリリース v6.0.0 が公開。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Bring back crappy forums",
+              "url": "https://tedium.co/2026/07/01/online-web-forums-retrospective/",
+              "comments_url": "https://news.ycombinator.com/item?id=48755731",
+              "score": 86,
+              "engagement_label": "597pt / 362コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "個人運営の掲示板文化とその消失を振り返った記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The Egg Bandits Made a Thousand Times the Fine They Just Paid for Price Fixing",
+              "url": "https://www.thebignewsletter.com/p/crime-pays-the-egg-bandits-made-a",
+              "comments_url": "https://news.ycombinator.com/item?id=48761229",
+              "score": 84,
+              "engagement_label": "509pt / 257コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "価格カルテルの制裁金が得た利益を大きく下回るとする記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "ZCode – Harness for GLM-5.2",
+              "url": "https://zcode.z.ai/en",
+              "comments_url": "https://news.ycombinator.com/item?id=48753715",
+              "score": 81,
+              "engagement_label": "511pt / 355コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "GLM-5.2 向けのコーディングエージェント環境 ZCode の公開。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "How to ask for help from people who don't know you",
+              "url": "https://pradyuprasad.com/writings/how-to-ask-for-help/",
+              "comments_url": "https://news.ycombinator.com/item?id=48761118",
+              "score": 77,
+              "engagement_label": "543pt / 84コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "面識のない相手に助力を求める際の書き方をまとめた記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Fable 5 is Back",
+              "url": "https://twitter.com/claudeai/status/2072402636813607381",
+              "comments_url": "https://news.ycombinator.com/item?id=48752030",
+              "score": 76,
+              "engagement_label": "408pt / 419コメント",
+              "category": "AI/モデル",
+              "interest": 3,
+              "summary": "Anthropic が Claude Fable 5 の提供再開を告知した投稿。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "This blog is written in en-GB",
+              "url": "https://shkspr.mobi/blog/2026/07/this-blog-is-written-in-en-gb/",
+              "comments_url": "https://news.ycombinator.com/item?id=48760289",
+              "score": 74,
+              "engagement_label": "355pt / 438コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "HTML の lang 属性を en-GB に指定する意味と影響を扱った記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

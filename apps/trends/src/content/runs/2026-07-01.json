@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-01",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "Anthropic 関連の発表と、デジタル配信下の所有権への反発が並んだ日",
+    "lead": "Hacker News では Claude Code がリクエストに識別情報を埋め込んでいるという解析が2445ポイントで首位に立ち、Claude Sonnet 5 の公開と Claude Fable 5 の輸出規制解除も上位に入った。同じ日に PlayStation の物理ディスク生産終了と購入済み映画551本の削除がそれぞれ別スレッドで伸び、前者は797コメントに達した。Godot が AI 生成コードの寄稿受け入れを停止した件も上位に並んだ。",
+    "highlights": [
+      {
+        "title": "Claude Code is steganographically marking requests",
+        "url": "https://thereallo.dev/blog/claude-code-prompt-steganography",
+        "service_label": "Hacker News",
+        "reason": "2445ポイント / 750コメントで当日最大のエンゲージメント。"
+      },
+      {
+        "title": "Physical disc production ending in Jan 2028 for new games on PlayStation",
+        "url": "https://blog.playstation.com/2026/07/01/physical-disc-production-ending-in-january-2028-for-new-games-releasing-on-playstation-consoles/",
+        "service_label": "Hacker News",
+        "reason": "797コメントで当日最多のコメント数。"
+      },
+      {
+        "title": "Claude Sonnet 5",
+        "url": "https://www.anthropic.com/news/claude-sonnet-5",
+        "service_label": "Hacker News",
+        "reason": "モデル公開当日に784コメント、Opus 4.8 との比較が続いた。"
+      },
+      {
+        "title": "Godot will no longer accept AI-authored code contributions",
+        "url": "https://www.pcgamer.com/gaming-industry/open-source-game-engine-godot-will-no-longer-accept-ai-authored-code-contributions-we-cant-trust-heavy-users-of-ai-to-understand-their-code-enough-to-fix-it/",
+        "service_label": "Hacker News",
+        "reason": "AI 生成コードの受け入れ方針という高関心テーマに直撃。"
+      },
+      {
+        "title": "Department of Commerce has lifted export controls on Claude Fable 5 and Mythos 5",
+        "url": "https://twitter.com/AnthropicAI/status/2072106151890809341",
+        "service_label": "Hacker News",
+        "reason": "692コメント、Anthropic 関連としてこの日3件目の上位入り。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Claude Code is steganographically marking requests",
+              "url": "https://thereallo.dev/blog/claude-code-prompt-steganography",
+              "comments_url": "https://news.ycombinator.com/item?id=48734373",
+              "score": 94,
+              "engagement_label": "2445pt / 750コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Claude Code がリクエストに識別用の印を埋め込む挙動の解析。",
+              "discussion_summary": "再販業者対策やモデル蒸留対策としてのフィンガープリントの是非が主な論点になった。マルウェアの解析回避技術との類似を指摘する声や、収集したデータが分析にとどまるのか API 側の判断に使われるのかを問う声が出た。難読化の方法が単純すぎるという技術的な指摘もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Physical disc production ending in Jan 2028 for new games on PlayStation",
+              "url": "https://blog.playstation.com/2026/07/01/physical-disc-production-ending-in-january-2028-for-new-games-releasing-on-playstation-consoles/",
+              "comments_url": "https://news.ycombinator.com/item?id=48745456",
+              "score": 92,
+              "engagement_label": "789pt / 797コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "PlayStation が2028年1月に新作の物理ディスク生産を終了する。",
+              "discussion_summary": "小売店頭の縮小とディスクドライブの原価削減という事業上の合理性を認める書き込みと、中古市場の消滅や配信停止による所有権の喪失を問題視する書き込みが並んだ。同日の PS3・PS Vita ストア終了や購入済み映画の削除と結びつける言及が多く、次世代機を買わないとする反応も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Claude Sonnet 5",
+              "url": "https://www.anthropic.com/news/claude-sonnet-5",
+              "comments_url": "https://news.ycombinator.com/item?id=48736605",
+              "score": 91,
+              "engagement_label": "1266pt / 784コメント",
+              "category": "AI/モデル",
+              "interest": 3,
+              "summary": "Anthropic が Claude Sonnet 5 を公開、性能と価格が焦点。",
+              "discussion_summary": "エージェント検索やコンピュータ操作の指標で Opus 4.8 の方が安価かつ高精度な領域が残る点が繰り返し指摘された。モデルごとに effort レベルの意味が変わることへの不満、Haiku の更新を求める声、コーディングでは Opus ではなく Sonnet を使っているという報告が出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "For first time, a cell built from scratch grows and divides",
+              "url": "https://www.quantamagazine.org/for-the-first-time-a-cell-built-from-scratch-grows-and-divides-20260701/",
+              "comments_url": "https://news.ycombinator.com/item?id=48747304",
+              "score": 90,
+              "engagement_label": "957pt / 303コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "人工的に組み立てた細胞が成長と分裂を行った初の報告。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Department of Commerce has lifted export controls on Claude Fable 5 and Mythos 5",
+              "url": "https://twitter.com/AnthropicAI/status/2072106151890809341",
+              "comments_url": "https://news.ycombinator.com/item?id=48740771",
+              "score": 89,
+              "engagement_label": "977pt / 692コメント",
+              "category": "AI/規制",
+              "interest": 2,
+              "summary": "米商務省が Claude Fable 5 と Mythos 5 の輸出規制を解除した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Most arguments are about ego, not ideas",
+              "url": "https://wangcong.org/2026-06-30-why-i-stopped-arguing-with-people.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48746445",
+              "score": 87,
+              "engagement_label": "728pt / 560コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "議論の対立は主張の中身より自尊心に起因すると論じた記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Sony Deletes 551 Movies PlayStation Owners Paid For",
+              "url": "https://reclaimthenet.org/sony-deletes-551-studiocanal-movies-playstation-owners-paid-for",
+              "comments_url": "https://news.ycombinator.com/item?id=48747389",
+              "score": 84,
+              "engagement_label": "636pt / 294コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Sony が購入済みの映画551本を配信から削除した件の報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Godot will no longer accept AI-authored code contributions",
+              "url": "https://www.pcgamer.com/gaming-industry/open-source-game-engine-godot-will-no-longer-accept-ai-authored-code-contributions-we-cant-trust-heavy-users-of-ai-to-understand-their-code-enough-to-fix-it/",
+              "comments_url": "https://news.ycombinator.com/item?id=48743472",
+              "score": 77,
+              "engagement_label": "561pt / 403コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Godot が AI 生成コードの寄稿受け入れを停止した方針の報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Nintendo has raised its employees base salary by 10%",
+              "url": "https://mynintendonews.com/2026/06/26/nintendo-has-raised-its-employees-base-salary-by-10/",
+              "comments_url": "https://news.ycombinator.com/item?id=48745113",
+              "score": 77,
+              "engagement_label": "561pt / 352コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "任天堂が従業員の基本給を10%引き上げたという報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The labor share of income in the US is at its lowest post-war level",
+              "url": "https://libertystreeteconomics.newyorkfed.org/2026/06/the-post-covid-decline-in-the-labor-share/",
+              "comments_url": "https://news.ycombinator.com/item?id=48734234",
+              "score": 76,
+              "engagement_label": "503pt / 547コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "米国の労働分配率が戦後最低水準にあるとする NY 連銀の分析。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

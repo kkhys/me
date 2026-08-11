@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-29",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "AIエージェントを狙う攻撃と、その対策ツールが同じ日に並んだ",
+    "lead": "Hacker News では読書環境と個人サイトの話題が上位に入りつつ、AIエージェントをめぐるセキュリティ記事が中盤を占めた。KOReader が当日最上位で、OpenAI の codex-security、Copilot for Word を経由して自己増殖するワーム、7月の侵入事案の時系列がそれに続いた。Kimi K3 のアーキテクチャ解説も前日から引き続き伸びた。",
+    "highlights": [
+      {
+        "title": "Codex Security",
+        "url": "https://github.com/openai/codex-security",
+        "service_label": "Hacker News",
+        "reason": "高関心テーマのAI開発ツールに直撃し、598ptを集めた"
+      },
+      {
+        "title": "Document-borne AI worms can self-propagate through Copilot for Word",
+        "url": "https://enklypesalt.com/posts/context-collapse-part3-ai-worming-through-word/",
+        "service_label": "Hacker News",
+        "reason": "384ptに対し300コメントと拮抗し、攻撃手法の妥当性に議論が集まった"
+      },
+      {
+        "title": "Anatomy of a Frontier Lab Agent Intrusion: A Timeline of the July 2026 Incident",
+        "url": "https://huggingface.co/blog/agent-intrusion-technical-timeline",
+        "service_label": "Hacker News",
+        "reason": "実際に起きた侵入事案の詳細解説として469ptまで伸びた"
+      },
+      {
+        "title": "KOReader",
+        "url": "https://koreader.rocks/",
+        "service_label": "Hacker News",
+        "reason": "当日最高スコアで、752ptと支持が集中した"
+      },
+      {
+        "title": "Kimi K3 Architecture Overview and Notes",
+        "url": "https://sebastianraschka.com/blog/2026/kimi-k3-architecture-notes.html",
+        "service_label": "Hacker News",
+        "reason": "111コメントに対し507ptと、解説記事として支持が突出した"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "KOReader",
+              "url": "https://koreader.rocks/",
+              "comments_url": "https://news.ycombinator.com/item?id=49095865",
+              "score": 100,
+              "engagement_label": "752pt / 248コメント",
+              "category": "ツール",
+              "interest": 1,
+              "summary": "電子書籍リーダー向けのオープンソース読書アプリKOReaderの公式サイト。",
+              "discussion_summary": "KindleやKobo、Android端末での使用報告が集まり、PDFのリフローやCalibre・Wallabagとの同期といった使い方が共有された。注釈をObsidianへ書き出すスクリプトの紹介も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Substack writers, you need a website",
+              "url": "https://elizabethtai.com/2026/06/10/substack-writers-you-need-a-website/",
+              "comments_url": "https://news.ycombinator.com/item?id=49086788",
+              "score": 91,
+              "engagement_label": "646pt / 353コメント",
+              "category": "ブログ運営",
+              "interest": 2,
+              "summary": "Substack利用者に独自サイトの併用を促す記事。発信基盤の選択に関わる話題。",
+              "discussion_summary": "自分のドメインで公開しSubstackは配信先として使うPOSSEの考え方が支持を集めた。一方で、独自サイトには読者が来ず何らかの配信経路が要るという反論も出て、プラットフォーム依存の是非で意見が分かれた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Codex Security",
+              "url": "https://github.com/openai/codex-security",
+              "comments_url": "https://news.ycombinator.com/item?id=49089755",
+              "score": 89,
+              "engagement_label": "598pt / 230コメント",
+              "category": "AI/セキュリティ",
+              "interest": 3,
+              "summary": "OpenAIが公開したセキュリティ検査用CLI、codex-securityのリポジトリ。",
+              "discussion_summary": "認証エラーや対象プロジェクトの所有確認で弾かれる報告が相次ぎ、開発に関わる本人が回答した。Snykなど既存製品を置き換えうるかという話題と、モデルをCIから呼ぶ薄いラッパーに過ぎないという見方が並んだ。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Document-borne AI worms can self-propagate through Copilot for Word",
+              "url": "https://enklypesalt.com/posts/context-collapse-part3-ai-worming-through-word/",
+              "comments_url": "https://news.ycombinator.com/item?id=49096188",
+              "score": 87,
+              "engagement_label": "384pt / 300コメント",
+              "category": "AI/セキュリティ",
+              "interest": 2,
+              "summary": "文書に仕込んだ指示がCopilot for Word経由で自己増殖する攻撃手法の解説。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Anatomy of a Frontier Lab Agent Intrusion: A Timeline of the July 2026 Incident",
+              "url": "https://huggingface.co/blog/agent-intrusion-technical-timeline",
+              "comments_url": "https://news.ycombinator.com/item?id=49089500",
+              "score": 86,
+              "engagement_label": "469pt / 259コメント",
+              "category": "AI/セキュリティ",
+              "interest": 2,
+              "summary": "2026年7月に起きたエージェント経由の侵入事案の時系列をまとめた技術記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "A.I. companies are recruiting electricians and carpenters by the thousands",
+              "url": "https://www.nytimes.com/2026/07/29/business/economy/data-center-electricians-training.html",
+              "comments_url": "https://news.ycombinator.com/item?id=49098198",
+              "score": 84,
+              "engagement_label": "313pt / 404コメント",
+              "category": "キャリア",
+              "interest": 1,
+              "summary": "AI企業がデータセンター建設のため電気工や大工を大量採用しているという報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Kimi K3 Architecture Overview and Notes",
+              "url": "https://sebastianraschka.com/blog/2026/kimi-k3-architecture-notes.html",
+              "comments_url": "https://news.ycombinator.com/item?id=49085698",
+              "score": 83,
+              "engagement_label": "507pt / 111コメント",
+              "category": "AI/LLM",
+              "interest": 3,
+              "summary": "Kimi K3のアーキテクチャをSebastian Raschkaが図解を交えて整理した解説記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "User Interfaces of the Demo Scene",
+              "url": "https://www.datagubbe.se/scenegui/",
+              "comments_url": "https://news.ycombinator.com/item?id=49093434",
+              "score": 77,
+              "engagement_label": "439pt / 75コメント",
+              "category": "UI/デザイン",
+              "interest": 1,
+              "summary": "デモシーン作品に見られるUI表現の系譜をたどった記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: I was tired of opening 2 tabs for every HN link, so I made a userscript",
+              "url": "https://github.com/twalichiewicz/HNewhere",
+              "comments_url": "https://news.ycombinator.com/item?id=49090607",
+              "score": 76,
+              "engagement_label": "433pt / 126コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "HNのリンクと議論を1タブで開くユーザースクリプトのShow HN。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "More Tailscale tricks for your jailbroken Kindle",
+              "url": "https://tailscale.com/blog/jailbroken-kindle-proxy-tun-modes",
+              "comments_url": "https://news.ycombinator.com/item?id=49093569",
+              "score": 74,
+              "engagement_label": "410pt / 115コメント",
+              "category": "ネットワーク",
+              "interest": 1,
+              "summary": "脱獄したKindleでTailscaleをプロキシやtunモードで使う設定の解説。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

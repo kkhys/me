@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-13",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "Anthropic の Rust 書き換え記事への反発と、Grok CLI の情報送信",
+    "lead": "Hacker News では、Zig 作者の発言と Anthropic の Bun 書き換え記事を比較した論評が1554pt を集め、この日で突出した。AI 生成記事に印を付ける機能を求める Ask HN も1102pt を集め、AI が書いたものをどう扱うかという話題が上位を占めた。Grok CLI がホームディレクトリを送信したという報告は、同じ内容の投稿が2件同時に上位入りした。",
+    "highlights": [
+      {
+        "title": "Zig Creator Calls Spade a Spade, Anthropic Blows Smoke",
+        "url": "https://raymyers.org/post/zed-creator-calls-spade-a-spade/",
+        "service_label": "Hacker News",
+        "reason": "1554pt / 787コメントとこの日で突出し、コメント欄で賛否が明確に割れた。"
+      },
+      {
+        "title": "Ask HN: Add flag for AI-generated articles",
+        "url": "https://news.ycombinator.com/item?id=48886741",
+        "service_label": "Hacker News",
+        "reason": "Ask HN として1102pt / 460コメントという異例の規模になった。"
+      },
+      {
+        "title": "Claude Code sends 33k tokens before reading the prompt; OpenCode sends 7k",
+        "url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+        "service_label": "Hacker News",
+        "reason": "コーディングエージェントの内部挙動という高関心テーマに直撃し、706pt / 396コメントが付いた。"
+      },
+      {
+        "title": "Grok CLI uploaded the whole home directory to GCS",
+        "url": "https://twitter.com/a_green_being/status/2076598897779020159",
+        "service_label": "Hacker News",
+        "reason": "同一の報告に基づく2件の投稿が同日に上位入りし、合計951pt を集めた。"
+      },
+      {
+        "title": "Since Chromium 148, Math.tanh is now fingerprintable to link underlying OS",
+        "url": "https://scrapfly.dev/posts/browser-math-os-fingerprint/",
+        "service_label": "Hacker News",
+        "reason": "ブラウザのフィンガープリントという Web セキュリティの話題で430pt / 220コメント。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Zig Creator Calls Spade a Spade, Anthropic Blows Smoke",
+              "url": "https://raymyers.org/post/zed-creator-calls-spade-a-spade/",
+              "comments_url": "https://news.ycombinator.com/item?id=48889637",
+              "score": 98,
+              "engagement_label": "1554pt / 787コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Zig 作者の発言と Anthropic の Rust 書き換え記事を比較した論評。",
+              "discussion_summary": "Anthropic の Bun 書き換え記事を、選択肢の評価を欠いたマーケティングと見る意見と、十分な技術的詳細があり Zig 側の応答こそ個人攻撃だとする意見に割れた。規律に依存する Zig の設計を C になぞらえる指摘や、こうした発信が採用や学習意欲に与える影響への言及もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "A graph that should be front-page news",
+              "url": "https://www.lyrebirddreaming.com/post/the-graph-that-should-be-front-page-news",
+              "comments_url": "https://news.ycombinator.com/item?id=48888331",
+              "score": 92,
+              "engagement_label": "697pt / 449コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "気温の異常度を示すグラフを取り上げた気候関連のブログ記事。",
+              "discussion_summary": "縦軸の 3.5 が標準偏差の何倍を指すのかが分かりにくいという指摘や、色分けの意味を問う投稿が並んだ。1950年代からのグラフを求める声もあった。記事自体が LLM の助けを借りて書かれた形跡があるという指摘も複数出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Ask HN: Add flag for AI-generated articles",
+              "url": "https://news.ycombinator.com/item?id=48886741",
+              "comments_url": "https://news.ycombinator.com/item?id=48886741",
+              "score": 91,
+              "engagement_label": "1102pt / 460コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "AI 生成記事に印を付ける機能を HN に求める Ask HN の投稿。",
+              "discussion_summary": "既存の投票機能で足りるという意見と、規模の拡大に伴い投票は操作されうるという反論に分かれた。AI 判定の精度が不十分で誤検出が避けられない点も挙がった。ガイドラインが生成テキストの投稿を既に禁じていることへの言及がある一方、Lobsters で AI スロップという決めつけが広がった例を引き、烙印を強めるという懸念も示された。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Claude Code sends 33k tokens before reading the prompt; OpenCode sends 7k",
+              "url": "https://systima.ai/blog/claude-code-vs-opencode-token-overhead",
+              "comments_url": "https://news.ycombinator.com/item?id=48883275",
+              "score": 86,
+              "engagement_label": "706pt / 396コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Claude Code と OpenCode の初期送信トークン量を比較した検証記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Ask HN: What Are You Working On? (July 2026)",
+              "url": "https://news.ycombinator.com/item?id=48884984",
+              "comments_url": "https://news.ycombinator.com/item?id=48884984",
+              "score": 83,
+              "engagement_label": "292pt / 1154コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "各自の進行中プロジェクトを持ち寄る HN の月次スレッド。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Grok CLI uploaded the whole home directory to GCS",
+              "url": "https://twitter.com/a_green_being/status/2076598897779020159",
+              "comments_url": "https://news.ycombinator.com/item?id=48892468",
+              "score": 82,
+              "engagement_label": "439pt / 404コメント",
+              "category": "セキュリティ",
+              "interest": 3,
+              "summary": "Grok CLI がホームディレクトリ全体を GCS へ送信したという報告。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "How to read more books",
+              "url": "https://scotto.me/blog/2026-07-12-how-to-read-more-books/",
+              "comments_url": "https://news.ycombinator.com/item?id=48882056",
+              "score": 81,
+              "engagement_label": "576pt / 295コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "読書量を増やすための習慣づけを扱った個人ブログの記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I love LLMs, I hate hype",
+              "url": "https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48883343",
+              "score": 78,
+              "engagement_label": "501pt / 322コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "geohot による、LLM の実用性と誇大宣伝を切り分けた論考。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Grok uploaded my user directory to xAI's servers",
+              "url": "https://twitter.com/a_green_being/status/2076598897779020159",
+              "comments_url": "https://news.ycombinator.com/item?id=48892512",
+              "score": 74,
+              "engagement_label": "512pt / 19コメント",
+              "category": "セキュリティ",
+              "interest": 3,
+              "summary": "Grok がユーザーディレクトリを xAI のサーバへ送ったとする投稿。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Since Chromium 148, Math.tanh is now fingerprintable to link underlying OS",
+              "url": "https://scrapfly.dev/posts/browser-math-os-fingerprint/",
+              "comments_url": "https://news.ycombinator.com/item?id=48884853",
+              "score": 73,
+              "engagement_label": "430pt / 220コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Chromium 148 以降 Math.tanh の結果から OS を識別できるという報告。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

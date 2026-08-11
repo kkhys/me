@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-18",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "LLM が研究成果と開発者コミュニティに与えた影響の記事が並んだ",
+    "lead": "Hacker News では LG のモニタが Windows Update 経由で同意なくソフトを導入するという報告が1228ptで最上位になった。AI 関連では、GPT-5.6 が凸最適化の未解決問題を進展させたという報告と、Stack Overflow の投稿数推移をグラフ化した投稿が続き、いずれも数百件規模のコメントが付いた。SQLite の運用解説や JPEG の実験など、低レイヤの解説記事も上位に残った。",
+    "highlights": [
+      {
+        "title": "LG monitors silently install software through Windows Update without consent",
+        "url": "https://videocardz.com/newz/lg-monitors-silently-install-software-through-windows-update-without-user-consent",
+        "service_label": "Hacker News",
+        "reason": "1228pt/638コメントで当日最大、同一事象の再現報告が寄せられた"
+      },
+      {
+        "title": "GPT-5.6 used a prompt to close a 30-year gap in convex optimization",
+        "url": "https://old.reddit.com/r/math/comments/1uxj3cy/after_openais_cdc_proof_announcement_gpt56_used_a/",
+        "service_label": "Hacker News",
+        "reason": "601pt/391コメント、LLM の能力という高関心テーマに直撃"
+      },
+      {
+        "title": "What AI did to stackoverflow in a graph",
+        "url": "https://data.stackexchange.com/stackoverflow/query/1953768#graph",
+        "service_label": "Hacker News",
+        "reason": "483ptに対し585コメントとコメント数が上回る伸び方"
+      },
+      {
+        "title": "Fable 5 vs. GPT-5.6 Sol on an NP-Hard Problem: Does /goal help?",
+        "url": "https://charlesazam.com/blog/fable-5-gpt-5-6-sol-goal/",
+        "service_label": "Hacker News",
+        "reason": "プロンプト設計とモデル比較という高関心テーマに直撃"
+      },
+      {
+        "title": "Learning a few things about running SQLite",
+        "url": "https://jvns.ca/blog/2026/07/17/learning-about-running-sqlite/",
+        "service_label": "Hacker News",
+        "reason": "343pt/90コメントで、解説記事としてポイント先行の伸び"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "LG monitors silently install software through Windows Update without consent",
+              "url": "https://videocardz.com/newz/lg-monitors-silently-install-software-through-windows-update-without-user-consent",
+              "comments_url": "https://news.ycombinator.com/item?id=48956688",
+              "score": 100,
+              "engagement_label": "1228pt / 638コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "LG モニタが Windows Update 経由で同意なくソフトを導入した件。OS とセキュリティの話題",
+              "discussion_summary": "同じ事象を自分の環境で確認したという報告があり、削除は Microsoft Store のライブラリからしかできなかったと述べられた。ドライバパッケージに付随ソフトを含める慣行は他のベンダーにも及ぶという指摘が出た。グループポリシーやデバイスインストール設定で自動導入を止める手順が共有された。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "GPT-5.6 used a prompt to close a 30-year gap in convex optimization",
+              "url": "https://old.reddit.com/r/math/comments/1uxj3cy/after_openais_cdc_proof_announcement_gpt56_used_a/",
+              "comments_url": "https://news.ycombinator.com/item?id=48957779",
+              "score": 95,
+              "engagement_label": "601pt / 391コメント",
+              "category": "LLM/モデル",
+              "interest": 3,
+              "summary": "GPT-5.6 が凸最適化の30年来の未解決問題を進展させたという報告。LLM の能力事例",
+              "discussion_summary": "査読前である点と、使われたプロンプトが10ページに及ぶ高度な数学的誘導だった点が指摘された。研究の中心が問題を解くことから問いを立てることへ移るという見方と、成果の範囲を限定的に捉える見方が並んだ。分野に詳しい投稿者からは、対象の予想はニッチだが実質的な貢献ではあるという評価が出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "What AI did to stackoverflow in a graph",
+              "url": "https://data.stackexchange.com/stackoverflow/query/1953768#graph",
+              "comments_url": "https://news.ycombinator.com/item?id=48956949",
+              "score": 92,
+              "engagement_label": "483pt / 585コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "Stack Overflow の投稿数推移をグラフ化したクエリ。LLM 普及との関係が話題",
+              "discussion_summary": "ChatGPT 登場前から減少が始まっていたとして AI の寄与を限定的に見る意見と、AI が減少を加速させたとする見方に分かれた。厳しいモデレーションやコミュニティの不在を要因に挙げる投稿が多く並んだ。グラフ上の COVID 期の変動や、社内 Q&A チャンネルが同様に沈静化したという事例にも言及があった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Thanks HN for 15 years of support and helping me find my life's work",
+              "url": "https://news.ycombinator.com/item?id=48949551",
+              "comments_url": "https://news.ycombinator.com/item?id=48949551",
+              "score": 91,
+              "engagement_label": "836pt / 107コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "Recurse Center 創業者による15周年の投稿。技術者コミュニティとキャリアの話",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Regressive JPEGs",
+              "url": "https://maurycyz.com/projects/bad_jpeg/",
+              "comments_url": "https://news.ycombinator.com/item?id=48954851",
+              "score": 87,
+              "engagement_label": "727pt / 69コメント",
+              "category": "技術解説",
+              "interest": 2,
+              "summary": "JPEG の符号化の挙動を掘り下げた実験記事。発信ネタになる低レイヤ解説",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Why do AI company logos look like buttholes? (2025)",
+              "url": "https://velvetshark.com/ai-company-logos-that-look-like-buttholes",
+              "comments_url": "https://news.ycombinator.com/item?id=48956924",
+              "score": 84,
+              "engagement_label": "453pt / 146コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "AI 企業のロゴが似通う理由をデザイン面から扱った2025年の記事",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "EU ban on destruction of unsold clothes and shoes enters into application",
+              "url": "https://environment.ec.europa.eu/news/ban-destruction-unsold-clothes-and-shoes-enters-application-2026-07-17_en",
+              "comments_url": "https://news.ycombinator.com/item?id=48958269",
+              "score": 82,
+              "engagement_label": "316pt / 305コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "EU で売れ残り衣料の廃棄禁止が適用開始。技術テーマ外の規制ニュース",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Kaiser nurses say AI, surveillance are making their jobs and patient care worse",
+              "url": "https://localnewsmatters.org/2026/07/15/kaiser-nurses-say-ai-workplace-surveillance-are-making-their-jobs-and-patient-care-worse/",
+              "comments_url": "https://news.ycombinator.com/item?id=48952880",
+              "score": 81,
+              "engagement_label": "563pt / 380コメント",
+              "category": "AI/社会",
+              "interest": 1,
+              "summary": "看護師が AI 導入と職場監視の弊害を訴えたという報道。AI 導入の現場影響",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Learning a few things about running SQLite",
+              "url": "https://jvns.ca/blog/2026/07/17/learning-about-running-sqlite/",
+              "comments_url": "https://news.ycombinator.com/item?id=48950122",
+              "score": 73,
+              "engagement_label": "343pt / 90コメント",
+              "category": "技術解説",
+              "interest": 2,
+              "summary": "SQLite を運用する際の挙動をまとめた解説記事。発信ネタになる実務解説",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Fable 5 vs. GPT-5.6 Sol on an NP-Hard Problem: Does /goal help?",
+              "url": "https://charlesazam.com/blog/fable-5-gpt-5-6-sol-goal/",
+              "comments_url": "https://news.ycombinator.com/item?id=48956879",
+              "score": 72,
+              "engagement_label": "257pt / 125コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "NP 困難問題で両モデルを比較し指示の効果を検証した記事。プロンプト設計の実験",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "date": "2026-08-03",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "LLM の出力を誰がどう検証するかが一日を通じた論点になった日",
+    "lead": "Hacker News では LLM の出力をそのまま他人に渡す振る舞いを批判する記事が1843ポイントで最上位に立ち、生成コードを手で打ち直して理解を保つという記事も上位に入った。SQLite に登録された重大 CVE が LLM 生成の虚偽ではないかと検証した記事が続き、AI が生む出力の検証コストが共通の論点になった。モデル側では Alibaba の Qwen3.8-Max が614コメントを集めた。",
+    "highlights": [
+      {
+        "title": "Don't be a meat proxy",
+        "url": "https://gruhn.me/blog/2026-08-03/",
+        "service_label": "Hacker News",
+        "reason": "1843ポイント741コメントと当日突出したエンゲージメント"
+      },
+      {
+        "title": "SQLite Critical CVEs or LLM Slop?",
+        "url": "https://research.jfrog.com/post/sqlite-critical-cves-or-llm-slops/",
+        "service_label": "Hacker News",
+        "reason": "AI×セキュリティという関心テーマへの直撃"
+      },
+      {
+        "title": "Qwen3.8-Max: A New Bar for Coding and Cowork",
+        "url": "https://qwen.ai/blog?id=qwen3.8",
+        "service_label": "Hacker News",
+        "reason": "新モデル公開として614コメントと議論量が突出"
+      },
+      {
+        "title": "Prevent cognitive debt by manually retyping LLM-generated code",
+        "url": "https://ankursethi.com/blog/prevent-cognitive-debt-by-manually-retyping-llm-generated-code/",
+        "service_label": "Hacker News",
+        "reason": "LLM活用開発の実践手法として444コメント"
+      },
+      {
+        "title": "Devtools must be open source",
+        "url": "https://blog.exe.dev/devtools-must-be-open-source",
+        "service_label": "Hacker News",
+        "reason": "233コメントに対し728ポイントと支持が集中"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Don't be a meat proxy",
+              "url": "https://gruhn.me/blog/2026-08-03/",
+              "comments_url": "https://news.ycombinator.com/item?id=49151933",
+              "score": 98,
+              "engagement_label": "1843pt / 741コメント",
+              "category": "AI/働き方",
+              "interest": 2,
+              "summary": "LLM の出力をそのまま他人に転送する振る舞いを批判する記事。LLM 利用の作法の話題",
+              "discussion_summary": "LLM の回答をそのまま同僚に渡して確認を求める行為が疲弊を生むという体験談が多く集まった。一方で自分で15分かかる調査を3分で済ませられる以上使うのは当然で、使ったことを開示すべきか判断できないという投稿もあった。文章を自分で書くことで理解度を確かめているという意見も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "SQLite Critical CVEs or LLM Slop?",
+              "url": "https://research.jfrog.com/post/sqlite-critical-cves-or-llm-slops/",
+              "comments_url": "https://news.ycombinator.com/item?id=49154332",
+              "score": 95,
+              "engagement_label": "727pt / 375コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "SQLite の重大 CVE が LLM 生成の虚偽ではと検証した記事。AI×セキュリティに該当",
+              "discussion_summary": "実在しない脆弱性に重大度が付くことでメンテナのトリアージ負担が増える点が主な論点になった。全 CVE への対応を義務付けられた組織への影響や、偽報告の氾濫が報告システム自体を機能不全にしうるという懸念も出た。同時に LLM が実在の脆弱性を多数発見している事実も併せて挙げられた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Qwen3.8-Max: A New Bar for Coding and Cowork",
+              "url": "https://qwen.ai/blog?id=qwen3.8",
+              "comments_url": "https://news.ycombinator.com/item?id=49150470",
+              "score": 91,
+              "engagement_label": "1122pt / 614コメント",
+              "category": "LLM/生成AI",
+              "interest": 3,
+              "summary": "Alibaba がコーディング性能を掲げる Qwen3.8-Max を公開。新モデル動向に直撃",
+              "discussion_summary": "Max クラスとして初めて重みを公開すると告知された点に関心が集まり、公開時期の記述の食い違いも指摘された。reasoning_effort による推論深度の切り替えがコストに触れた唯一の記述だという確認も出た。併せて告知された Qwen3.8-27B のローカル利用への期待も語られた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Devtools must be open source",
+              "url": "https://blog.exe.dev/devtools-must-be-open-source",
+              "comments_url": "https://news.ycombinator.com/item?id=49156111",
+              "score": 90,
+              "engagement_label": "728pt / 233コメント",
+              "category": "開発ツール",
+              "interest": 2,
+              "summary": "開発ツールはオープンソースであるべきとする主張。ツール選定に関わる論考",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "More German than many Germans",
+              "url": "https://mertbulan.com/more-german-than-many-germans/",
+              "comments_url": "https://news.ycombinator.com/item?id=49151734",
+              "score": 90,
+              "engagement_label": "647pt / 500コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ドイツで暮らす移民の帰属を巡るエッセイ。興味テーマには該当しない",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Prevent cognitive debt by manually retyping LLM-generated code",
+              "url": "https://ankursethi.com/blog/prevent-cognitive-debt-by-manually-retyping-llm-generated-code/",
+              "comments_url": "https://news.ycombinator.com/item?id=49153374",
+              "score": 87,
+              "engagement_label": "540pt / 444コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "LLM 生成コードを手で打ち直して理解の欠落を防ぐ方法論。LLM活用開発に直撃",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Wind and solar overtake fossil fuels in Germany for the first time",
+              "url": "https://www.intellinews.com/wind-and-solar-overtake-fossil-fuels-in-germany-for-the-first-time-ever-458379/",
+              "comments_url": "https://news.ycombinator.com/item?id=49155359",
+              "score": 84,
+              "engagement_label": "378pt / 332コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ドイツで風力と太陽光が化石燃料の発電量を初めて上回ったとの報道。興味テーマ外",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Bonsai: Janestreet's UI Library",
+              "url": "https://github.com/janestreet/bonsai",
+              "comments_url": "https://news.ycombinator.com/item?id=49152842",
+              "score": 79,
+              "engagement_label": "390pt / 155コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "Jane Street の OCaml 製 Web UI ライブラリ Bonsai。フロントエンド設計の事例",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I stopped trusting USB-C cable labels and started testing them",
+              "url": "https://www.makeuseof.com/i-stopped-trusting-usb-c-cable-labels-started-testing-with-meter-instead/",
+              "comments_url": "https://news.ycombinator.com/item?id=49152255",
+              "score": 74,
+              "engagement_label": "258pt / 264コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "USB-C ケーブルの表記を信用せず計測器で確認した記録。ガジェット周辺の話題",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "SwiftUI After 7 Years",
+              "url": "https://ykvm.com/2026/07/swiftui-a-story-of-mediocrity/",
+              "comments_url": "https://news.ycombinator.com/item?id=49147263",
+              "score": 73,
+              "engagement_label": "278pt / 334コメント",
+              "category": "UI/フレームワーク",
+              "interest": 1,
+              "summary": "7年を経た SwiftUI の完成度を批判的に振り返る記事。UI フレームワークの評価",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

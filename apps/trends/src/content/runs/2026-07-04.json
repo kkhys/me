@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-04",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "作業環境と長期的な学習という個人側の話題が上位を占めた日",
+    "lead": "Hacker News では会議室の二酸化炭素濃度と意思決定の関係を扱った記事が833ポイントで首位となり、htop の表示項目を解説した2019年の記事と、長期的な学習を勧めるエッセイが続いた。AI 関連ではローカルで最新級 LLM を動かす構成ガイドと、Claude Code のセッション混在を報告する GitHub Issue が上位に入った。",
+    "highlights": [
+      {
+        "title": "The bottleneck might be the air in the room",
+        "url": "https://blog.mikebowler.ca/2026/07/03/co2-and-decision-making/",
+        "service_label": "Hacker News",
+        "reason": "833ポイント / 468コメントで当日最大のエンゲージメント。"
+      },
+      {
+        "title": "Explanation of everything you can see in htop/top on Linux (2019)",
+        "url": "https://peteris.rocks/blog/htop/",
+        "service_label": "Hacker News",
+        "reason": "2019年の記事が514ポイント、コメントは63件と少ない。"
+      },
+      {
+        "title": "Jamesob's guide to running SOTA LLMs locally",
+        "url": "https://github.com/jamesob/local-llm",
+        "service_label": "Hacker News",
+        "reason": "ローカルでの LLM 運用という高関心テーマに直撃、412ポイント。"
+      },
+      {
+        "title": "Potential session/cache leakage between workspace instances or consumer accounts",
+        "url": "https://github.com/anthropics/claude-code/issues/74066",
+        "service_label": "Hacker News",
+        "reason": "Claude Code の GitHub Issue が314ポイントで上位入り。"
+      },
+      {
+        "title": "Maybe you should learn something",
+        "url": "https://www.marginalia.nu/log/a_135_learn/",
+        "service_label": "Hacker News",
+        "reason": "学習と生活設計というテーマで479ポイント / 208コメント。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "The bottleneck might be the air in the room",
+              "url": "https://blog.mikebowler.ca/2026/07/03/co2-and-decision-making/",
+              "comments_url": "https://news.ycombinator.com/item?id=48783117",
+              "score": 98,
+              "engagement_label": "833pt / 468コメント",
+              "category": "キャリア",
+              "interest": 1,
+              "summary": "会議室の二酸化炭素濃度が意思決定の質を下げると論じた記事。",
+              "discussion_summary": "CO2 そのものが認知低下の原因なのか、換気不良を示す指標にすぎないのかで見方が分かれた。測定器を導入して体感が変わったという報告がある一方、1万5000ppm でも影響が確認されなかった潜水艦の研究が引かれた。屋外での会議や、端末への CO2 センサー搭載を挙げる書き込みも出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Explanation of everything you can see in htop/top on Linux (2019)",
+              "url": "https://peteris.rocks/blog/htop/",
+              "comments_url": "https://news.ycombinator.com/item?id=48784777",
+              "score": 92,
+              "engagement_label": "514pt / 63コメント",
+              "category": "OS/システム",
+              "interest": 2,
+              "summary": "htop と top の表示項目を網羅的に解説した2019年の記事。",
+              "discussion_summary": "長年ブックマークして参照してきたという反応が中心で、内容への異論はほとんど出ていない。ユーザースレッドの非表示やツリー表示といった htop の設定変更の共有、メモリ順ソートの操作、btop へ移行したという書き込みが並んだ。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Maybe you should learn something",
+              "url": "https://www.marginalia.nu/log/a_135_learn/",
+              "comments_url": "https://news.ycombinator.com/item?id=48782435",
+              "score": 92,
+              "engagement_label": "479pt / 208コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "長期的な学習が生活の統制感につながると論じたエッセイ。",
+              "discussion_summary": "長期プロジェクトが自分の状況を変える手段になるという本文の一節が繰り返し引用された。学習の初期は苦痛で、誤りを出していなければ練習になっていないという整理が示された一方、育児などで時間が取れない状況への言及や、多くの人は消費側でよいという反論も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Costco is the anti-Amazon",
+              "url": "https://phenomenalworld.org/analysis/the-anti-amazon/",
+              "comments_url": "https://news.ycombinator.com/item?id=48776044",
+              "score": 91,
+              "engagement_label": "581pt / 583コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Costco の事業構造を Amazon と対比して分析した論考。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Jamesob's guide to running SOTA LLMs locally",
+              "url": "https://github.com/jamesob/local-llm",
+              "comments_url": "https://news.ycombinator.com/item?id=48775921",
+              "score": 83,
+              "engagement_label": "412pt / 184コメント",
+              "category": "AI/モデル",
+              "interest": 3,
+              "summary": "最新級の LLM を手元の機材で動かす構成をまとめたガイド。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Espionage Against the European Parliament",
+              "url": "https://citizenlab.ca/research/member-of-committee-investigating-spyware-hacked-with-pegasus/",
+              "comments_url": "https://news.ycombinator.com/item?id=48779683",
+              "score": 81,
+              "engagement_label": "429pt / 132コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "欧州議会の議員が Pegasus に感染していたという調査報告。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "EVE Online's Carbon engine is now open source: Fenris Creations explains why",
+              "url": "https://www.gamesindustry.biz/eve-onlines-carbon-engine-is-now-open-source-fenris-creations-explains-why",
+              "comments_url": "https://news.ycombinator.com/item?id=48780387",
+              "score": 78,
+              "engagement_label": "403pt / 142コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "EVE Online のエンジン Carbon がオープンソース化された経緯。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Odin, Wikipedia and engagement farming",
+              "url": "https://katamari64.se/posts/2026/odin-wikipedia/",
+              "comments_url": "https://news.ycombinator.com/item?id=48781196",
+              "score": 76,
+              "engagement_label": "262pt / 407コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Wikipedia の記述を巡る注目集めの拡散を追った記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Meta reuses old RAM in new servers with custom bridge chip",
+              "url": "https://www.theregister.com/systems/2026/06/29/zuck-saves-meta-bucks-by-reusing-memory-from-old-servers-with-a-custom-cxl-asic/5263483",
+              "comments_url": "https://news.ycombinator.com/item?id=48778956",
+              "score": 73,
+              "engagement_label": "333pt / 231コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Meta が独自 CXL チップで旧サーバーの RAM を再利用する事例。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Potential session/cache leakage between workspace instances or consumer accounts",
+              "url": "https://github.com/anthropics/claude-code/issues/74066",
+              "comments_url": "https://news.ycombinator.com/item?id=48785485",
+              "score": 72,
+              "engagement_label": "314pt / 135コメント",
+              "category": "セキュリティ",
+              "interest": 3,
+              "summary": "Claude Code でワークスペース間のセッション混在が疑われる報告。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

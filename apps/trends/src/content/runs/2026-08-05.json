@@ -1,0 +1,228 @@
+{
+  "date": "2026-08-05",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "Cloudflare のエージェント基盤公開が最上位、安全性モデルや自動運転も並んだ日",
+    "lead": "Hacker News では Cloudflare が公開したエージェントと業務アプリ向けのオープンな基盤 Cloudflare OS が最上位に立った。Mistral の 3B マルチモーダル安全判定モデル Shieldstral も上位に入り、エージェント運用とその安全性の話題が同日に並んだ。ポイント数では Stephen Wolfram の追悼文が1643ポイントと突出し、コメント数では Waymo のダラス展開が731件で最多だった。",
+    "highlights": [
+      {
+        "title": "Cloudflare OS: an open platform for agents, apps, and work",
+        "url": "https://blog.cloudflare.com/cloudflare-os/",
+        "service_label": "Hacker News",
+        "reason": "エージェント基盤という高関心テーマへの直撃"
+      },
+      {
+        "title": "In Memory of My Wife, Elise Cawley, with Thanks for 36 Wonderful Years",
+        "url": "https://writings.stephenwolfram.com/2026/08/in-memory-of-my-wife-elise-cawley-1961-2026-with-thanks-for-36-wonderful-years/",
+        "service_label": "Hacker News",
+        "reason": "95コメントに対し1643ポイントと支持が集中"
+      },
+      {
+        "title": "Waymo in Dallas",
+        "url": "https://waymo.com/blog/shorts/dallas-open-to-all/",
+        "service_label": "Hacker News",
+        "reason": "330ポイントに対し731コメントと議論量が突出"
+      },
+      {
+        "title": "Mistral's Shieldstral: 3B open-weights model for multimodal moderation",
+        "url": "https://mistral.ai/news/shieldstral/",
+        "service_label": "Hacker News",
+        "reason": "重み公開の新モデルとして481ポイント"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Cloudflare OS: an open platform for agents, apps, and work",
+              "url": "https://blog.cloudflare.com/cloudflare-os/",
+              "comments_url": "https://news.ycombinator.com/item?id=49182996",
+              "score": 97,
+              "engagement_label": "663pt / 331コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Cloudflare がエージェントと業務アプリ向けの基盤を OSS で公開。エージェント基盤の動向",
+              "discussion_summary": "OS という名称が実態と合わないという指摘が繰り返し出た。コネクタ付きチャットボットとして他社製品と競合する位置づけだという見方と、Sandstorm の再来として権限管理の設計を評価する見方が並んだ。自分の Cloudflare アカウントに配置し Access ポリシーを適用できる点も確認された。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "In Memory of My Wife, Elise Cawley, with Thanks for 36 Wonderful Years",
+              "url": "https://writings.stephenwolfram.com/2026/08/in-memory-of-my-wife-elise-cawley-1961-2026-with-thanks-for-36-wonderful-years/",
+              "comments_url": "https://news.ycombinator.com/item?id=49173165",
+              "score": 94,
+              "engagement_label": "1643pt / 95コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Stephen Wolfram が亡き妻を追悼した長文。興味テーマには該当しない",
+              "discussion_summary": "追悼文の丁寧さと記録の細かさに触れる短い反応が大半を占めた。日記のような記録を残していたのではないかという推測も出た。自分も同様の文章を書き残したいという投稿もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Waymo in Dallas",
+              "url": "https://waymo.com/blog/shorts/dallas-open-to-all/",
+              "comments_url": "https://news.ycombinator.com/item?id=49172836",
+              "score": 89,
+              "engagement_label": "330pt / 731コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Waymo がダラス全域で一般提供を開始。自動運転の展開状況",
+              "discussion_summary": "郊外が対象に含まれるのか、高速道路が除外されている点はどうかといった提供範囲の確認が中心になった。都市を増やす際の安全上の課題を指摘する投稿もあった。人間の運転手より受け入れられているという見方も示された。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Civilian plane crash in New Mexico tied to military GPS blocking",
+              "url": "https://www.wired.com/story/a-civilian-plane-crashed-in-new-mexico-was-the-militarys-tech-to-blame/",
+              "comments_url": "https://news.ycombinator.com/item?id=49181099",
+              "score": 87,
+              "engagement_label": "498pt / 278コメント",
+              "category": "セキュリティ",
+              "interest": 1,
+              "summary": "軍の GPS 妨害と民間機墜落の関連を追った調査記事。測位インフラの脆弱性の話題",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Pi's Minimalism Is Its Advantage",
+              "url": "https://earendil.com/posts/pi-autoresearch-and-databricks/",
+              "comments_url": "https://news.ycombinator.com/item?id=49176038",
+              "score": 86,
+              "engagement_label": "544pt / 294コメント",
+              "category": "AI/プロダクト",
+              "interest": 2,
+              "summary": "Pi の機能を絞った設計を利点と論じた記事。AI 製品の設計方針の話題",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Simple algorithm and color space to generate diverse skin tones",
+              "url": "https://toneyalexander.github.io/inclusive-color-space/",
+              "comments_url": "https://news.ycombinator.com/item?id=49170165",
+              "score": 83,
+              "engagement_label": "625pt / 99コメント",
+              "category": "デザイン/色",
+              "interest": 1,
+              "summary": "多様な肌色を生成する色空間とアルゴリズムの公開。配色設計の解説",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Mistral's Shieldstral: 3B open-weights model for multimodal moderation",
+              "url": "https://mistral.ai/news/shieldstral/",
+              "comments_url": "https://news.ycombinator.com/item?id=49171268",
+              "score": 78,
+              "engagement_label": "481pt / 133コメント",
+              "category": "LLM/生成AI",
+              "interest": 3,
+              "summary": "Mistral が 3B のマルチモーダル判定モデルを重み公開。新モデル動向に該当",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Apple says more ex-employees may have taken confidential data to OpenAI",
+              "url": "https://techcrunch.com/2026/08/04/apple-says-more-ex-employees-may-have-taken-confidential-data-to-openai/",
+              "comments_url": "https://news.ycombinator.com/item?id=49170479",
+              "score": 76,
+              "engagement_label": "388pt / 283コメント",
+              "category": "セキュリティ",
+              "interest": 1,
+              "summary": "Apple が元従業員による機密持ち出しの拡大を主張。企業間の情報流出の話題",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "All of Winona Police Department's Flock cameras cut down and stolen",
+              "url": "https://www.valleynewslive.com/2026/08/04/every-flock-camera-winona-minnesota-cut-down-stolen-coordinated-theft/",
+              "comments_url": "https://news.ycombinator.com/item?id=49171656",
+              "score": 73,
+              "engagement_label": "396pt / 248コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ウィノナ警察の Flock 監視カメラが全て切断・盗難された事件。監視インフラの話題",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I am retiring from fulltime writing (& pseudonymity) to launch Guardian Angel",
+              "url": "https://twitter.com/gwern/status/2084739205071343837",
+              "comments_url": "https://news.ycombinator.com/item?id=49174900",
+              "score": 70,
+              "engagement_label": "317pt / 238コメント",
+              "category": "AI/プロダクト",
+              "interest": 2,
+              "summary": "gwern が匿名執筆をやめ Guardian Angel を立ち上げると表明。AI 関連の新規事業",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

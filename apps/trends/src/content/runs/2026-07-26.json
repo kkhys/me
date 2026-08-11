@@ -1,0 +1,228 @@
+{
+  "date": "2026-07-26",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "Cookieバナー撤廃キャンペーンと htmx 4.0 の変則リリースが上位を占めた日",
+    "lead": "Hacker News では Web の規制と開発者文化の話題が上位に並んだ。EU にブラウザ側の同意シグナル統一を求める Cookie バナー撤廃キャンペーンが当日最上位で、htmx 4.0 を Game Boy 用ゲームとして出したリリース企画がそれに続いた。Claude 5 世代のコンテキスト設計をまとめた記事も400件超のコメントを集めた。",
+    "highlights": [
+      {
+        "title": "Kill The Cookie Banner",
+        "url": "https://killthecookiebanner.eu/",
+        "service_label": "Hacker News",
+        "reason": "当日最高スコアで、595コメントと議論量も最大だった"
+      },
+      {
+        "title": "Htmx 4.0, the first JavaScript library to release exclusively on the Game Boy",
+        "url": "https://swag.htmx.org/en-cad/products/htmx-4-the-game",
+        "service_label": "Hacker News",
+        "reason": "ライブラリのリリース告知としては異例の形式で515ptまで伸びた"
+      },
+      {
+        "title": "The new rules of context engineering for Claude 5 generation models",
+        "url": "https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models",
+        "service_label": "Hacker News",
+        "reason": "高関心テーマのAIエージェント運用に直撃し、463ptに対し405コメントと拮抗した"
+      },
+      {
+        "title": "GrapheneOS protections against data extraction from locked devices",
+        "url": "https://discuss.grapheneos.org/d/40700-grapheneos-protections-against-data-extraction-from-locked-devices",
+        "service_label": "Hacker News",
+        "reason": "端末セキュリティの話題として448ptを集めた"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Kill The Cookie Banner",
+              "url": "https://killthecookiebanner.eu/",
+              "comments_url": "https://news.ycombinator.com/item?id=49057175",
+              "score": 100,
+              "engagement_label": "1156pt / 595コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "EUのCookieバナー撤廃とブラウザでの同意シグナル統一を求める運動サイト。",
+              "discussion_summary": "サイトごとに扱いを変えたい需要があり一律のシグナルでは足りないという指摘と、uBlock Originなどの拡張で既に回避できるという報告が並んだ。提案自体を歓迎する声と、EUの規制方針そのものを批判する声に分かれた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Htmx 4.0, the first JavaScript library to release exclusively on the Game Boy",
+              "url": "https://swag.htmx.org/en-cad/products/htmx-4-the-game",
+              "comments_url": "https://news.ycombinator.com/item?id=49057241",
+              "score": 95,
+              "engagement_label": "515pt / 208コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "htmx 4.0のリリースをGame Boy用ゲームとして出した企画ページ。",
+              "discussion_summary": "htmxの姿勢やグッズ展開を好意的に語る書き込みが多く、作者本人がGame Boy版の内容を説明した。htmxとサーバサイドテンプレートを組み合わせて実運用しているという報告も複数寄せられた。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The new rules of context engineering for Claude 5 generation models",
+              "url": "https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models",
+              "comments_url": "https://news.ycombinator.com/item?id=49051361",
+              "score": 91,
+              "engagement_label": "463pt / 405コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Claude 5世代でのコンテキスト設計の指針をまとめた記事。エージェント運用に直結。",
+              "discussion_summary": "長大なシステムプロンプトを書く必要が薄れつつあるという体感の共有と、内容が当たり前で新規性がないという批判が並んだ。指示の作り込みをAnthropic独自ツールへ寄せる動きがロックインにつながるという指摘も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "GrapheneOS protections against data extraction from locked devices",
+              "url": "https://discuss.grapheneos.org/d/40700-grapheneos-protections-against-data-extraction-from-locked-devices",
+              "comments_url": "https://news.ycombinator.com/item?id=49055169",
+              "score": 87,
+              "engagement_label": "448pt / 259コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "ロック中の端末からのデータ吸い出しに対するGrapheneOSの防御機構の解説。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Google Discloses $94.1B in SpaceX Stock, Marking 6% Stake",
+              "url": "https://www.wsj.com/tech/google-discloses-94-1-billion-in-spacex-stock-marking-6-stake-91655d7c",
+              "comments_url": "https://news.ycombinator.com/item?id=49057574",
+              "score": 87,
+              "engagement_label": "342pt / 331コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "GoogleがSpaceX株941億ドル分、6%の保有を開示したという報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Did they ghost you?",
+              "url": "https://didtheyghostyou.com/",
+              "comments_url": "https://news.ycombinator.com/item?id=49051120",
+              "score": 86,
+              "engagement_label": "484pt / 221コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "採用選考で連絡が途絶えた企業を共有するサイト。転職活動の実態に関わる話題。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Ruff v0.16.0 – Significant new updates – 413 default rules up from 59",
+              "url": "https://astral.sh/blog/ruff-v0.16.0",
+              "comments_url": "https://news.ycombinator.com/item?id=49056112",
+              "score": 82,
+              "engagement_label": "353pt / 232コメント",
+              "category": "開発ツール",
+              "interest": 2,
+              "summary": "PythonリンタRuffの新版。既定で有効なルールが59から413に増えた。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "London Gatwick has launched a robotic airport parking service",
+              "url": "https://aerospaceglobalnews.com/news/gatwick-airport-robotic-parking-stanley-robotics/",
+              "comments_url": "https://news.ycombinator.com/item?id=49058669",
+              "score": 79,
+              "engagement_label": "291pt / 262コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "ロンドン・ガトウィック空港がロボットによる自動駐車サービスを開始した。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "What is happening to jobs? Separating AI hype from reality",
+              "url": "https://siepr.stanford.edu/publications/policy-brief/what-really-happening-jobs-separating-ai-hype-reality",
+              "comments_url": "https://news.ycombinator.com/item?id=49052570",
+              "score": 78,
+              "engagement_label": "302pt / 380コメント",
+              "category": "キャリア",
+              "interest": 2,
+              "summary": "AIが雇用に与えた影響を統計から検証したスタンフォードの政策ブリーフ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The Dark Night of Mathematics",
+              "url": "https://kirwinhampshire.substack.com/p/the-dark-night-of-mathematics",
+              "comments_url": "https://news.ycombinator.com/item?id=49048681",
+              "score": 70,
+              "engagement_label": "236pt / 308コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "数学を学ぶ過程で訪れる停滞の局面を扱った個人ブログのエッセイ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

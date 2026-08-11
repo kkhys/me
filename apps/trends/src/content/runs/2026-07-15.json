@@ -1,0 +1,234 @@
+{
+  "date": "2026-07-15",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "睡眠の規則性と過去の計算機、そして端末で動く 27B モデル",
+    "lead": "Hacker News では、睡眠の規則性が睡眠時間より死亡リスクをよく予測するとした2023年の論文が最上位に付いた。得票では映画『ジュラシック・パーク』に映る計算機を特定した調査記事が961pt で最多だった。AI 関連では、Claude の記憶機能から情報を引き出す手口の検証と、スマートフォン上で動く 27B クラスのモデル Bonsai 27B の発表が上位に入った。",
+    "highlights": [
+      {
+        "title": "Sleep regularity is a stronger predictor of mortality risk than sleep duration (2023)",
+        "url": "https://academic.oup.com/sleep/article/47/1/zsad253/7280269",
+        "service_label": "Hacker News",
+        "reason": "759pt / 410コメントで、この日の base_score 最高値だった。"
+      },
+      {
+        "title": "Jurassic Park computers in excruciating detail",
+        "url": "https://fabiensanglard.net/jurrasic_park_computers/index.html",
+        "service_label": "Hacker News",
+        "reason": "961pt とこの日で最も多くの票を集めた。"
+      },
+      {
+        "title": "I tricked Claude into leaking your deepest, darkest secrets",
+        "url": "https://www.ayush.digital/blog/the-memory-heist",
+        "service_label": "Hacker News",
+        "reason": "AI とセキュリティが交差する話題で674pt / 294コメントが付いた。"
+      },
+      {
+        "title": "Bonsai 27B: A 27B-Class model that runs on a phone",
+        "url": "https://prismml.com/news/bonsai-27b",
+        "service_label": "Hacker News",
+        "reason": "新モデルの発表という高関心テーマに直撃し、706pt を集めた。"
+      },
+      {
+        "title": "Speech Recognition and TTS in less than 500kb",
+        "url": "https://github.com/moonshine-ai/moonshine/tree/main/micro",
+        "service_label": "Hacker News",
+        "reason": "570pt に対しコメントは92件と、議論より評価に反応が偏った。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Sleep regularity is a stronger predictor of mortality risk than sleep duration (2023)",
+              "url": "https://academic.oup.com/sleep/article/47/1/zsad253/7280269",
+              "comments_url": "https://news.ycombinator.com/item?id=48919363",
+              "score": 97,
+              "engagement_label": "759pt / 410コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "睡眠の規則性が睡眠時間より死亡リスクをよく予測するとした研究。",
+              "discussion_summary": "相関と因果を区別すべきという指摘が中心で、職種など未調整の交絡要因を挙げる投稿もあった。睡眠中にのみ進む脳内の老廃物排出を根拠に因果関係を支持する意見や、体質や疾患のため規則性を保てないという当事者の報告も並んだ。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "SpaceX bond worth 10% less than issue price – heading for junk bond status",
+              "url": "https://www.ft.com/content/3a023b95-66c3-41e1-b0ce-df752a499541",
+              "comments_url": "https://news.ycombinator.com/item?id=48920181",
+              "score": 95,
+              "engagement_label": "562pt / 593コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "SpaceX 社債の価格下落とジャンク級への接近を伝える FT の報道。",
+              "discussion_summary": "低金利で覆い隠されていたリスクが金利環境の変化で表面化したという見方や、議決権が一人に集中する統治構造への皮肉が並んだ。一方で、+231bps のスプレッドをジャンク級と呼べるのかと見出しの表現を疑う投稿もあった。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Jurassic Park computers in excruciating detail",
+              "url": "https://fabiensanglard.net/jurrasic_park_computers/index.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48915709",
+              "score": 94,
+              "engagement_label": "961pt / 259コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "映画『ジュラシック・パーク』に映る計算機を特定した詳細な調査記事。",
+              "discussion_summary": "当時の Mac や SGI の実機仕様を振り返る投稿が並び、SGI がワークステーションに注力する間に 3dfx や Nvidia に市場を奪われた経緯も語られた。SGI のキーボード接続が ADB ではないという訂正や、劇中の Motorola Envoy が撮影に使われた経緯の補足も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I tricked Claude into leaking your deepest, darkest secrets",
+              "url": "https://www.ayush.digital/blog/the-memory-heist",
+              "comments_url": "https://news.ycombinator.com/item?id=48916975",
+              "score": 87,
+              "engagement_label": "674pt / 294コメント",
+              "category": "セキュリティ",
+              "interest": 3,
+              "summary": "Claude の記憶機能から情報を引き出す手口を検証したセキュリティ記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Bonsai 27B: A 27B-Class model that runs on a phone",
+              "url": "https://prismml.com/news/bonsai-27b",
+              "comments_url": "https://news.ycombinator.com/item?id=48910545",
+              "score": 86,
+              "engagement_label": "706pt / 252コメント",
+              "category": "AI/研究",
+              "interest": 3,
+              "summary": "スマートフォン上で動作する 27B クラスのモデル Bonsai 27B の発表。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Are we offloading too much of our thinking to AI?",
+              "url": "https://www.artfish.ai/p/offloading-thinking-to-ai",
+              "comments_url": "https://news.ycombinator.com/item?id=48908178",
+              "score": 81,
+              "engagement_label": "526pt / 480コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "思考を AI に委ねすぎているのではないかという問題提起のエッセイ。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Stripe and Advent have made a joint offer to acquire PayPal – sources",
+              "url": "https://www.reuters.com/business/finance/stripe-advent-offer-buy-paypal-more-than-53-billion-sources-say-2026-07-15/",
+              "comments_url": "https://news.ycombinator.com/item?id=48915953",
+              "score": 79,
+              "engagement_label": "494pt / 306コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Stripe と Advent が PayPal 買収を提案したとする Reuters の報道。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The Tower Keeps Rising",
+              "url": "https://lucumr.pocoo.org/2026/7/13/the-tower-keeps-rising/",
+              "comments_url": "https://news.ycombinator.com/item?id=48909785",
+              "score": 78,
+              "engagement_label": "558pt / 270コメント",
+              "category": "アーキテクチャ",
+              "interest": 2,
+              "summary": "Armin Ronacher による、抽象層が積み上がり続ける状況を論じた記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Speech Recognition and TTS in less than 500kb",
+              "url": "https://github.com/moonshine-ai/moonshine/tree/main/micro",
+              "comments_url": "https://news.ycombinator.com/item?id=48911793",
+              "score": 73,
+              "engagement_label": "570pt / 92コメント",
+              "category": "AI/音声",
+              "interest": 2,
+              "summary": "500KB 未満で動作する音声認識・音声合成モデルの実装。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I'm a USB-C Maximalist",
+              "url": "https://shkspr.mobi/blog/2026/07/im-a-usb-c-maximalist/",
+              "comments_url": "https://news.ycombinator.com/item?id=48908214",
+              "score": 70,
+              "engagement_label": "349pt / 448コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "USB-C への統一を支持する立場から周辺機器の事情を論じた記事。",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+{
+  "date": "2026-08-02",
+  "generated_at": "2026-08-11T00:00:00+09:00",
+  "digest": {
+    "headline": "モデル同士の描画比較と、Web の情報流通を巡る回顧が並んだ日",
+    "lead": "Hacker News では Karpathy が大きなトークン予算でモデルにペリカンを描かせた投稿が最上位に立ち、ByteDance の動画生成モデル Seedance 2.5 も上位に入った。一方で Google が RSS の普及を阻害した経緯を追う2023年の記事が再浮上し、Google News の現状を問う記事も伸びた。技術文書の分類法 Diátaxis や Go 1.27 の解説など、地味な定番も上位に残った。",
+    "highlights": [
+      {
+        "title": "Karpathy’s Pelican",
+        "url": "https://twitter.com/karpathy/status/2083749667410727319",
+        "service_label": "Hacker News",
+        "reason": "当日最高スコアかつ434コメントで議論量も最多水準"
+      },
+      {
+        "title": "How Google helped destroy adoption of RSS feeds (2023)",
+        "url": "https://openrss.org/blog/how-google-helped-destroy-adoption-of-rss-feeds",
+        "service_label": "Hacker News",
+        "reason": "3年前の記事が641ポイントを集めて再浮上"
+      },
+      {
+        "title": "Seedance 2.5",
+        "url": "https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5",
+        "service_label": "Hacker News",
+        "reason": "生成AIの新モデルという高関心テーマへの直撃"
+      },
+      {
+        "title": "Cursor removed cost information from the usage page and CSV export",
+        "url": "https://forum.cursor.com/t/usage-page-to-token-amount-what/167153",
+        "service_label": "Hacker News",
+        "reason": "AIコーディングツールの課金透明性を巡る報告"
+      },
+      {
+        "title": "Diátaxis",
+        "url": "https://diataxis.fr/",
+        "service_label": "Hacker News",
+        "reason": "63コメントに対し559ポイントと支持が集中"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "japan",
+      "label": "日本",
+      "services": [
+        {
+          "id": "hatena",
+          "label": "はてなブックマーク",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "zenn",
+          "label": "Zenn",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "qiita",
+          "label": "Qiita",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Karpathy’s Pelican",
+              "url": "https://twitter.com/karpathy/status/2083749667410727319",
+              "comments_url": "https://news.ycombinator.com/item?id=49140998",
+              "score": 98,
+              "engagement_label": "617pt / 434コメント",
+              "category": "LLM/生成AI",
+              "interest": 3,
+              "summary": "Karpathy が大トークン予算でモデルにペリカンを描かせた比較。生成AIの能力動向に該当",
+              "discussion_summary": "トークンを大量に消費するベンチマークだという皮肉や、ペリカンSVGテスト自体への食傷を訴える声が上がった。指数的な性能向上の証左と受け取る意見がある一方、Karpathy が所属先の宣伝に寄っているという批判も出た。LLM が使い捨てソフトウェアの時代をもたらすのではという議論にも派生した。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "How Google helped destroy adoption of RSS feeds (2023)",
+              "url": "https://openrss.org/blog/how-google-helped-destroy-adoption-of-rss-feeds",
+              "comments_url": "https://news.ycombinator.com/item?id=49136821",
+              "score": 91,
+              "engagement_label": "641pt / 249コメント",
+              "category": "Web",
+              "interest": 1,
+              "summary": "Google が RSS の普及を阻害した経緯を追う2023年の記事。Web の情報流通の話題",
+              "discussion_summary": "Google Reader の終了を境にウェブが変わったという回顧が多数を占めた。廃止理由に挙げられた利用減少の説明を、当時 Google+ を推していた事実と結びつけて疑う投稿もあった。WordPress などが標準でフィードを出力するため現在も RSS は残っているという指摘も出た。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Diátaxis",
+              "url": "https://diataxis.fr/",
+              "comments_url": "https://news.ycombinator.com/item?id=49138188",
+              "score": 89,
+              "engagement_label": "559pt / 63コメント",
+              "category": "ドキュメント",
+              "interest": 2,
+              "summary": "技術文書を4類型に整理する Diátaxis の公式サイト。文書設計の解説ネタに該当",
+              "discussion_summary": "過去に何度も投稿された定番だという指摘とともに、2024年の議論スレッドが参照された。大規模なコードベースの引き継ぎ文書で有効だったという実践報告がある一方、四類型への当てはめを絶対視しない方がよいという意見も出た。LLM に「Diátaxis で」と指示すると初稿の質が上がるという使い方も共有された。",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Wikimedia Foundation refuses union recognition, hires union-busting law firm",
+              "url": "https://en.wikipedia.org/wiki/Wikipedia:Wikipedia_Signpost/2026-08-02/News_and_notes",
+              "comments_url": "https://news.ycombinator.com/item?id=49143414",
+              "score": 87,
+              "engagement_label": "356pt / 350コメント",
+              "category": "キャリア",
+              "interest": 1,
+              "summary": "Wikimedia 財団が労組承認を拒み法律事務所を起用したとの報道。組織運営の話題",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Seedance 2.5",
+              "url": "https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5",
+              "comments_url": "https://news.ycombinator.com/item?id=49138302",
+              "score": 86,
+              "engagement_label": "442pt / 255コメント",
+              "category": "LLM/生成AI",
+              "interest": 3,
+              "summary": "ByteDance が動画生成モデル Seedance 2.5 を公開。新モデル動向に該当",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI financial advice is surprisingly good, especially if you ask right questions",
+              "url": "https://mitsloan.mit.edu/ideas-made-to-matter/ai-financial-advice-surprisingly-good-especially-if-you-ask-right-questions",
+              "comments_url": "https://news.ycombinator.com/item?id=49139102",
+              "score": 83,
+              "engagement_label": "351pt / 403コメント",
+              "category": "AI/活用",
+              "interest": 2,
+              "summary": "MIT Sloan が問い方次第で AI の資産助言が有用と示した記事。LLM活用の実例",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Go 1.27 Interactive Tour",
+              "url": "https://victoriametrics.com/blog/go-1-27/index.html",
+              "comments_url": "https://news.ycombinator.com/item?id=49140218",
+              "score": 78,
+              "engagement_label": "369pt / 204コメント",
+              "category": "言語/処理系",
+              "interest": 1,
+              "summary": "Go 1.27 の変更点を対話的に紹介する記事。言語アップデートの解説",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "São Paulo resident transforms degraded area into urban forest",
+              "url": "https://saopaulosecreto.com/en/tiquatira-linear-park-en/",
+              "comments_url": "https://news.ycombinator.com/item?id=49138446",
+              "score": 76,
+              "engagement_label": "351pt / 127コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "サンパウロの荒地を個人が都市林に変えた記録。興味テーマには該当しない",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Cursor removed cost information from the usage page and CSV export",
+              "url": "https://forum.cursor.com/t/usage-page-to-token-amount-what/167153",
+              "comments_url": "https://news.ycombinator.com/item?id=49135257",
+              "score": 73,
+              "engagement_label": "336pt / 153コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Cursor が使用量ページと CSV から費用表示を削除。AIコーディング環境の課金の話題",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "NetBSD 11.0",
+              "url": "https://blog.netbsd.org/tnf/entry/netbsd_11_0_released",
+              "comments_url": "https://news.ycombinator.com/item?id=49136736",
+              "score": 70,
+              "engagement_label": "319pt / 163コメント",
+              "category": "OS/システム",
+              "interest": 1,
+              "summary": "NetBSD 11.0 のリリース告知。OS 周辺の動向",
+              "discussion_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        },
+        {
+          "id": "lobsters",
+          "label": "Lobsters",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "github",
+          "label": "GitHub Trending",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        },
+        {
+          "id": "devto",
+          "label": "dev.to",
+          "status": "skipped",
+          "note": "過去日付を照会できるAPIがないため取得不可",
+          "items": []
+        }
+      ]
+    }
+  ]
+}
