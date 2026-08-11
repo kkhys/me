@@ -12,9 +12,9 @@ interface Props {
 const { market } = Astro.props;
 ---
 
-<section class="market" data-market={market.id}>
-  <h2>{market.label}</h2>
-  {market.services.map((service) => <ServiceCard service={service} />)}
+<section class="market">
+  <h2 id={market.id}>{market.label}</h2>
+  {market.services.map((service) => <ServiceCard service={service} marketId={market.id} />)}
 </section>
 
 <style>
@@ -26,5 +26,7 @@ const { market } = Astro.props;
     margin: 0 0 1.25rem;
     font-size: 1rem;
     font-weight: var(--fw-medium);
+    /* Breathing room above anchor-jump targets. */
+    scroll-margin-top: 1.25rem;
   }
 </style>
