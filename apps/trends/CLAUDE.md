@@ -43,7 +43,8 @@ public/                       # robots.txt, manifest, static favicons (generated
 - When changing the schema, update in the same change: `content.config.ts`, the JSON example in the skill's SKILL.md, and every existing file in `src/content/runs/`.
 - File name must equal the `date` field; `[date].astro`'s getStaticPaths throws on mismatch.
 - All string fields are required with `""` for absent values (no nulls) — keeps `exactOptionalPropertyTypes` out of the data path.
-- `discussion_summary` is non-empty only for the top items of comment-capable sources (HN / Lobsters / はてなブックマーク, `comments_top_n` in the skill's config); it renders as a `<details>` fold. Older runs predate the field and rely on the zod default.
+- `discussion_summary` is non-empty only for the top items of comment-capable sources (HN / Lobsters / はてなブックマーク, `comments_top_n` in the skill's config, default 10 = every displayed item). It is 2-3 short paragraphs separated by blank lines (`\n\n`); `item-row.astro` splits on blank lines and renders one `<p>` per paragraph inside a `<details>` fold, so older single-paragraph runs render unchanged.
+- `article_summary` is the same multi-paragraph format for the sources without a comment fetcher (GitHub Trending / dev.to / Zenn / Qiita, `articles_top_n` in the skill's config), summarizing the article body the fetch script attaches. Mutually exclusive with `discussion_summary`; the fold label switches (コメントの要約 / 記事の要約). Older runs predate the field and rely on the zod default.
 - `title_ja` (on items and digest highlights) is a Japanese translation of an originally non-Japanese title, `""` when the title is already Japanese. When present it becomes the linked title and the original renders beneath it. Older runs predate the field and rely on the zod default.
 
 ## Key Design Decisions
