@@ -74,11 +74,17 @@ const { olderPost, newerPost, class: className, ...rest } = Astro.props;
     border-radius: var(--radius-md);
     text-decoration: none;
     color: var(--c-prose-text);
-    transition: background-color 0.2s;
+    transition:
+      background-color 0.2s,
+      transform 0.15s ease;
   }
 
   .post-nav-item:hover {
     background-color: oklch(from var(--c-surface) l c h / 50%);
+  }
+
+  .post-nav-item:active {
+    transform: scale(0.99);
   }
 
   .post-nav-item--newer {
