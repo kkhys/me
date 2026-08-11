@@ -5,12 +5,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "pnpm run lint:fix > /dev/null 2>&1; OUTPUT=$(pnpm run lint 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\" >&2; exit 1; fi",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" || { echo \"CLAUDE_PROJECT_DIR not set\" >&2; exit 1; }; pnpm run lint:fix > /dev/null 2>&1; OUTPUT=$(pnpm run lint 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\" >&2; exit 1; fi",
             "statusMessage": "Running oxlint & oxfmt..."
           },
           {
             "type": "command",
-            "command": "OUTPUT=$(pnpm run check 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\" >&2; exit 1; fi",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" || { echo \"CLAUDE_PROJECT_DIR not set\" >&2; exit 1; }; OUTPUT=$(pnpm run check 2>&1); RC=$?; if [ $RC -ne 0 ]; then echo \"$OUTPUT\" >&2; exit 1; fi",
             "statusMessage": "Running type check..."
           }
         ]
