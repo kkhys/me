@@ -16,6 +16,10 @@ const item = z.object({
   interest: z.number().int().min(1).max(3),
   summary: z.string().default(""),
   discussion_summary: z.string().default(""),
+  // Multi-paragraph summary of the article body itself, for sources without
+  // a comment fetcher (GitHub / dev.to / Zenn / Qiita). Mutually exclusive
+  // with discussion_summary. Older runs predate the field.
+  article_summary: z.string().default(""),
   seen_before: z.boolean().default(false),
   extra: z.string().default(""),
 });

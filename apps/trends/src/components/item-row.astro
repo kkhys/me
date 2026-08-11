@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 
 import Budoux from "#/components/budoux.astro";
 import { formatHost } from "#/utils/host";
+import { splitParagraphs } from "#/utils/paragraphs";
 import { scoreLevel } from "#/utils/score";
 
 type Item =
@@ -19,6 +20,10 @@ const host = formatHost(item.url);
 const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item.url;
 const displayTitle = item.title_ja || item.title;
 const originalTitle = item.title_ja ? item.title : "";
+const discussionParagraphs = splitParagraphs(item.discussion_summary);
+const foldParagraphs =
+  discussionParagraphs.length > 0 ? discussionParagraphs : splitParagraphs(item.article_summary);
+const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "記事の要約";
 ---
 
 <article class="item">
@@ -38,11 +43,13 @@ const originalTitle = item.title_ja ? item.title : "";
       )
     }
     {
-      item.discussion_summary && (
+      foldParagraphs.length > 0 && (
         <details class="discussion">
-          <summary>議論の要約</summary>
+          <summary>{foldLabel}</summary>
           <Budoux>
-            <p>{item.discussion_summary}</p>
+            {foldParagraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
           </Budoux>
         </details>
       )
@@ -57,7 +64,7 @@ const originalTitle = item.title_ja ? item.title : "";
       {
         hasDiscussionLink && (
           <a class="comments" href={item.comments_url} target="_blank" rel="noopener">
-            議論を見る
+            コメントを見る
           </a>
         )
       }
@@ -135,6 +142,10 @@ const originalTitle = item.title_ja ? item.title : "";
     margin: 0.3rem 0 0;
     font-size: 0.8125rem;
     line-height: 1.7;
+  }
+
+  .discussion p + p {
+    margin-top: 0.6rem;
   }
 
   .meta {
