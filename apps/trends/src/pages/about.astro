@@ -1,0 +1,204 @@
+---
+import SiteHeader from "#/components/site-header.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+
+/* JSX text keeps source line breaks as spaces, which show up mid-sentence in
+   Japanese copy — so every paragraph below stays on a single line. */
+const SKILL_URL =
+  "https://github.com/kkhys/claude-code-marketplace/tree/main/plugins/base/skills/creating-trend-digest";
+
+const scoreIntro =
+  "記事の並び順は、このスコアの降順だけで決まります。スコアは「そのソース内での相対的な盛り上がり」を表し、次の2つの加重平均です。";
+const scoreItems = [
+  {
+    term: "エンゲージメント（75%）",
+    description:
+      "同じソース・同じ日の記事集合の中でのパーセンタイル。指標はソースごとに異なり、Hacker News / Lobsters は points とコメント数、はてなブックマークはブックマーク数、Zenn はいいねとブクマ、Qiita は LGTM とストック、dev.to はリアクションとコメント、GitHub Trending は当日のスター増加数を使います。",
+  },
+  {
+    term: "鮮度（25%）",
+    description: "公開からの経過時間による減衰。",
+  },
+];
+const scoreNote =
+  "単位の違うソースを絶対値で比べず、ソース内の相対評価に正規化しているため、サービス間でスコアを直接比較することはできません。表示の濃淡は 80以上 / 60以上 / それ未満の3段階です。";
+
+const starsIntro =
+  "タイトルの下に付く星は、運営者の興味プロフィールと記事のテーマがどの程度合っているかを示す注釈です。";
+const starsNote =
+  "星は並び順に影響しません。一覧は世間のトレンドをそのまま映し、個人の興味は星の注釈と冒頭のハイライトの選定にだけ反映されます。なお、除外テーマに該当する記事は掲載されません。";
+
+const glossary = [
+  {
+    term: "既出",
+    description:
+      "過去の日のダイジェストに掲載済みのURL。減点はせず、掲載が続くこと自体を勢いのシグナルとみなしています。",
+  },
+  {
+    term: "カテゴリ",
+    description: "興味プロフィールのテーマから付けた短いラベル（AI/開発 など）。",
+  },
+  {
+    term: "議論の要約",
+    description:
+      "Hacker News / Lobsters / はてなブックマークの上位記事に付く折りたたみ。コメント欄の主な論点を2-3文でまとめています。",
+  },
+  {
+    term: "ハイライト",
+    description:
+      "ページ冒頭の3-5件。複数ソースへの同時登場や突出したエンゲージメントなど、その日に観測されたシグナルに基づいて選んでいます。",
+  },
+];
+---
+
+<BaseLayout
+  title="About | Trend Digest"
+  description="Trend Digest の仕組みと、スコア・星の基準について"
+>
+  <SiteHeader />
+  <div class="wrap">
+    <h1 class="page-title">About</h1>
+    <p>Trend Digest は、7つのソースの技術トレンドを1日1回集計し、日ごとのダイジェストとして掲載する <a href="https://kkhys.me" target="_blank" rel="noopener">kkhys</a> の個人サイトです。グローバル（Hacker News / Lobsters / GitHub Trending / dev.to）と日本（はてなブックマーク / Zenn / Qiita）に分けて、各ソースの上位記事と要約、その日の総括を載せています。要約とハイライトの選定は Claude が行っています。</p>
+    <p>投稿は不定期です。ダイジェストは Claude Code の <a href={SKILL_URL} target="_blank" rel="noopener">creating-trend-digest</a> スキルを手動で実行して生成・公開しているため、実行しなかった日の分はありません。</p>
+
+    <section>
+      <h2>スコア（0-100）</h2>
+      <p>{scoreIntro}</p>
+      <dl class="glossary">
+        {
+          scoreItems.map(({ term, description }) => (
+            <>
+              <dt>{term}</dt>
+              <dd>{description}</dd>
+            </>
+          ))
+        }
+      </dl>
+      <p>{scoreNote}</p>
+    </section>
+
+    <section>
+      <h2>星（★1-3）</h2>
+      <p>{starsIntro}</p>
+      <dl class="legend">
+        <dt><span class="stars">★★★</span></dt>
+        <dd>関心の高いテーマに合致</dd>
+        <dt><span class="stars">★★</span></dt>
+        <dd>中程度のテーマに合致</dd>
+        <dt><span class="stars">★</span></dt>
+        <dd>合致が弱い、または該当なし</dd>
+      </dl>
+      <p>{starsNote}</p>
+    </section>
+
+    <section>
+      <h2>その他の表示</h2>
+      <dl class="glossary">
+        {
+          glossary.map(({ term, description }) => (
+            <>
+              <dt>{term}</dt>
+              <dd>{description}</dd>
+            </>
+          ))
+        }
+      </dl>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .wrap {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 1rem 3.5rem;
+  }
+
+  /* Same rhythm as apps/me: below 640px the column keeps 1rem side padding,
+     above it the full 42rem is used. */
+  @media (width >= 640px) {
+    .wrap {
+      padding-inline: 0;
+    }
+  }
+
+  .page-title {
+    margin: 2rem 0 1.5rem;
+    font-size: 1rem;
+    font-weight: var(--fw-medium);
+  }
+
+  section {
+    margin-top: 2.5rem;
+  }
+
+  h2 {
+    margin: 0 0 0.25rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid var(--c-border);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+  }
+
+  p {
+    margin: 0.75rem 0 0;
+    font-size: var(--fs-sm);
+    line-height: 1.9;
+  }
+
+  p a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  dl {
+    margin: 1rem 0 0;
+    font-size: var(--fs-sm);
+    line-height: 1.9;
+  }
+
+  dt {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  dd {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .legend {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1.25rem;
+    row-gap: 0.5rem;
+  }
+
+  /* Terms are long enough that a second column would starve the description
+     on narrow screens, so the glossary stacks below 640px. */
+  .glossary dt {
+    color: var(--c-sub);
+  }
+
+  .glossary dd + dt {
+    margin-top: 0.75rem;
+  }
+
+  @media (width >= 640px) {
+    .glossary {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: 1.25rem;
+      row-gap: 0.5rem;
+    }
+
+    .glossary dd + dt {
+      margin-top: 0;
+    }
+  }
+
+  .stars {
+    color: var(--c-star);
+    letter-spacing: 1px;
+  }
+</style>
