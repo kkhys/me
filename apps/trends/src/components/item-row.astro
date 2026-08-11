@@ -4,7 +4,6 @@ import type { CollectionEntry } from "astro:content";
 import Budoux from "#/components/budoux.astro";
 import { formatHost } from "#/utils/host";
 import { scoreLevel } from "#/utils/score";
-import { buildSearchText } from "#/utils/search";
 
 type Item =
   CollectionEntry<"runs">["data"]["markets"][number]["services"][number]["items"][number];
@@ -20,7 +19,7 @@ const host = formatHost(item.url);
 const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item.url;
 ---
 
-<article class="item" data-text={buildSearchText(item)}>
+<article class="item">
   <span class="rank">{rank}</span>
   <div class="body">
     <Budoux>

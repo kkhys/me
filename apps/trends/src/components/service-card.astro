@@ -2,26 +2,16 @@
 import type { CollectionEntry } from "astro:content";
 
 import ItemRow from "#/components/item-row.astro";
+import { SERVICE_COLORS } from "#/utils/service-colors";
 
 type Service = CollectionEntry<"runs">["data"]["markets"][number]["services"][number];
 
 interface Props {
   service: Service;
+  marketId: string;
 }
 
-const { service } = Astro.props;
-
-/* Brand colors of the aggregated services; intentionally not mapped to the
-   uchu palette. */
-const SERVICE_COLORS: Record<string, string> = {
-  hackernews: "#ff6600",
-  lobsters: "#ac130d",
-  github: "#8b5cf6",
-  devto: "#0f172a",
-  hatena: "#00a4de",
-  zenn: "#3ea8ff",
-  qiita: "#55c500",
-};
+const { service, marketId } = Astro.props;
 
 const dotColor = SERVICE_COLORS[service.id] ?? "var(--c-sub)";
 ---
@@ -29,8 +19,8 @@ const dotColor = SERVICE_COLORS[service.id] ?? "var(--c-sub)";
 <section class="service" data-service={service.id}>
   <header>
     <span class="dot" style={`background:${dotColor}`}></span>
-    <h3>{service.label}</h3>
-    <span class="count" data-count>{service.items.length}件</span>
+    <h3 id={`${marketId}-${service.id}`}>{service.label}</h3>
+    <span class="count">{service.items.length}件</span>
     {service.note && <span class="note">{service.note}</span>}
   </header>
   {service.items.map((item, i) => <ItemRow item={item} rank={i + 1} />)}
@@ -62,6 +52,8 @@ const dotColor = SERVICE_COLORS[service.id] ?? "var(--c-sub)";
     margin: 0;
     font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
+    /* Breathing room above anchor-jump targets. */
+    scroll-margin-top: 1.25rem;
   }
 
   .count {

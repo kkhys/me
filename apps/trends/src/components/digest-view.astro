@@ -4,6 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import DateNav from "#/components/date-nav.astro";
 import DigestHero from "#/components/digest-hero.astro";
 import MarketSection from "#/components/market-section.astro";
+import SourceToc from "#/components/source-toc.astro";
 import { sortMarketsGlobalFirst } from "#/utils/markets";
 import { formatGeneratedAt } from "#/utils/runs";
 
@@ -18,6 +19,9 @@ const { date, digest, generated_at } = entry.data;
 const markets = sortMarketsGlobalFirst(entry.data.markets);
 ---
 
+<aside class="sidebar">
+  <SourceToc markets={markets} />
+</aside>
 <div class="wrap">
   <DateNav current={date} prev={prev} next={next} />
   <DigestHero digest={digest} />
@@ -28,10 +32,29 @@ const markets = sortMarketsGlobalFirst(entry.data.markets);
 </div>
 
 <style>
+  @media (width >= 1280px) {
+    /* Same placement as apps/me's blog-layout sidebar: top-anchored, inset
+       2rem from the right edge. */
+    .sidebar {
+      position: fixed;
+      top: 13rem;
+      right: 2rem;
+      width: fit-content;
+    }
+  }
+
   .wrap {
     max-width: 42rem;
     margin: 0 auto;
-    padding: 0 1.25rem 3.5rem;
+    padding: 0 1rem 3.5rem;
+  }
+
+  /* Same rhythm as apps/me: below 640px the column keeps 1rem side padding,
+     above it the full 42rem is used. */
+  @media (width >= 640px) {
+    .wrap {
+      padding-inline: 0;
+    }
   }
 
   footer.site {

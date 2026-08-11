@@ -9,20 +9,20 @@ import { formatRunDate, sortRunsByDateDesc } from "#/utils/runs";
 const runs = sortRunsByDateDesc(await getCollection("runs"));
 ---
 
-<BaseLayout title="アーカイブ | Trend Digest" description="Trend Digest の日別アーカイブ">
+<BaseLayout title="Archive | Trend Digest" description="Trend Digest の日別アーカイブ">
   <SiteHeader />
   <div class="wrap">
-    <h1 class="page-title">アーカイブ</h1>
+    <h1 class="page-title">Archive</h1>
     <div class="entry-list">
       {
         runs.map((run) => (
           <a href={`/${run.id}`} class="entry-item">
-            <time class="entry-date" datetime={run.id}>
-              {formatRunDate(run.id)}
-            </time>
             <Budoux>
               <span class="entry-headline palt">{run.data.digest.headline}</span>
             </Budoux>
+            <time class="entry-date" datetime={run.id}>
+              {formatRunDate(run.id)}
+            </time>
           </a>
         ))
       }
@@ -34,7 +34,15 @@ const runs = sortRunsByDateDesc(await getCollection("runs"));
   .wrap {
     max-width: 42rem;
     margin: 0 auto;
-    padding: 0 1.25rem 3.5rem;
+    padding: 0 1rem 3.5rem;
+  }
+
+  /* Same rhythm as apps/me: below 640px the column keeps 1rem side padding,
+     above it the full 42rem is used. */
+  @media (width >= 640px) {
+    .wrap {
+      padding-inline: 0;
+    }
   }
 
   .page-title {
@@ -47,19 +55,23 @@ const runs = sortRunsByDateDesc(await getCollection("runs"));
     border-top: 1px solid var(--c-border);
   }
 
+  .entry-list > :global(* + *) {
+    border-top: 1px solid var(--c-border);
+  }
+
   .entry-item {
     display: flex;
-    align-items: baseline;
+    align-items: center;
+    justify-content: space-between;
     gap: 1rem;
     padding: 0.75rem 0.5rem;
     font-size: var(--fs-sm);
-    border-bottom: 1px solid var(--c-border);
     transition: background-color 0.2s;
+    text-decoration: none;
   }
 
   .entry-item:hover {
     background-color: oklch(from var(--c-surface) l c h / 50%);
-    text-decoration: none;
   }
 
   /* Full-bleed rows: an outer ring would overlap the sibling separators, so

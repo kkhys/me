@@ -12,7 +12,7 @@ const { current, prev, next } = Astro.props;
 
 <nav class="date-nav" aria-label="日付ナビゲーション">
   <span class="slot">{prev && <a href={`/${prev}`}>← 前日</a>}</span>
-  <a class="current" href="/archive" title="アーカイブを開く">{formatRunDate(current)}</a>
+  <span class="current">{formatRunDate(current)}</span>
   <span class="slot end">{next && <a href={`/${next}`}>翌日 →</a>}</span>
 </nav>
 

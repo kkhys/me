@@ -11,23 +11,26 @@ src/
   pages/index.astro           # Latest run, fully rendered (/ always shows today)
   pages/[date].astro          # Permanent per-day URL (/2026-08-10) with prev/next nav
   pages/archive.astro         # Date-descending list of all runs
+  pages/about.astro           # What the site is + score / star criteria for visitors
   pages/api/favicon/          # Dev-only favicon endpoints via @kkhys/og (omitted from prod builds)
   layouts/base-layout.astro   # HTML shell wired to the @kkhys/seo primitives
   components/
-    site-header.astro         # Sticky header + market tabs + keyword filter (client JS lives here)
+    site-header.astro         # Static header (brand → /, Archive / About links)
     digest-view.astro         # One day's body: DateNav + hero + markets + generated-at footer
     digest-hero.astro         # headline / lead / numbered highlights
     market-section.astro      # 日本 / グローバル section
     service-card.astro        # Per-service section (brand-color dot, count, error note)
+    source-toc.astro          # Always-visible source TOC (markets → services), ≥1280px only
     item-row.astro            # rank → title → summary → meta row (score, stars, chip, host, engagement)
-    date-nav.astro            # ← 前日 / current date (links to archive) / 翌日 →
+    date-nav.astro            # ← 前日 / current date (plain text) / 翌日 →
   lib/budoux.ts               # Cached BudouX parser (same setup as apps/me)
   components/budoux.astro     # Wraps a slot, inserts <wbr> at Japanese phrase boundaries
   utils/runs.ts               # sortRunsByDateDesc, adjacentRuns, date formatters (pure, unit-tested)
   utils/host.ts               # formatHost — hostname without www. for the meta row
-  utils/search.ts             # buildSearchText — server-side twin of the client filter
   utils/score.ts              # scoreLevel: 80+/60+ thresholds → hi/mid/lo score emphasis
-  styles/global.css           # --c-* tokens (light-dark over uchu palette) + .hidden helper
+  utils/toc-active.ts         # pickActiveId — scrollspy state for source-toc (pure, unit-tested)
+  utils/service-colors.ts     # Upstream brand colors, shared by service-card and source-toc
+  styles/global.css           # --c-* tokens (light-dark over uchu palette)
   __tests__/                  # Vitest unit tests
 public/                       # robots.txt, manifest, static favicons (generated from dev routes)
 ```
@@ -44,9 +47,10 @@ public/                       # robots.txt, manifest, static favicons (generated
 
 ## Key Design Decisions
 
-- The UI follows the kkhys.me design language (see apps/me): plain `--uchu-yang`/`--uchu-yin` background, hairline separators instead of cards, pill-style filter tabs, 42rem content column, `2026.08.10` date format, and me's `--c-*` / `--fs-*` / `--radius-*` token names.
+- The UI follows the kkhys.me design language (see apps/me): plain `--uchu-yang`/`--uchu-yin` background, hairline separators instead of cards, 42rem content column, `2026.08.10` date format, and me's `--c-*` / `--fs-*` / `--radius-*` token names.
 - `/` renders the latest run in full (duplicate of its `/[date]` page, accepted); `/[date]` is the permanent URL.
-- Tabs and keyword filter are the only client JS, colocated in `site-header.astro`. The `.hidden` class they toggle lives in `global.css` because it targets elements owned by other components.
+- The source-toc scrollspy is the only client JS, colocated in `source-toc.astro`. Navigation between sources is the TOC's job — the header stays a plain brand link.
+- The source TOC descends from apps/me's `toc.astro` but stays visible instead of expanding on hover; `pickActiveId` keeps one entry highlighted while scrolling. Anchor ids are `{market.id}` on h2 and `{market.id}-{service.id}` on h3.
 - Service dot colors are upstream brand colors, intentionally not mapped to the uchu palette.
 - `runs/**` JSON is excluded from oxlint/oxfmt via root `ignorePatterns` — data, not code.
 

@@ -5,7 +5,6 @@ import { getCollection } from "astro:content";
 import DigestView from "#/components/digest-view.astro";
 import SiteHeader from "#/components/site-header.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
-import { sortMarketsGlobalFirst } from "#/utils/markets";
 import { sortRunsByDateDesc } from "#/utils/runs";
 
 export const getStaticPaths = (async () => {
@@ -30,17 +29,12 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { entry, prev, next } = Astro.props;
-
-const markets = sortMarketsGlobalFirst(entry.data.markets).map(({ id, label }) => ({
-  id,
-  label,
-}));
 ---
 
 <BaseLayout
   title={`${entry.data.date} | Trend Digest`}
   description={entry.data.digest.headline}
 >
-  <SiteHeader markets={markets} />
+  <SiteHeader />
   <DigestView entry={entry} prev={prev} next={next} />
 </BaseLayout>
