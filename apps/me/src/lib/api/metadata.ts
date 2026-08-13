@@ -118,38 +118,44 @@ const decodeWithDeclaredCharset = (
   }
 };
 
-// Same precedence as fetch-site-metadata's own rules, minus the case-insensitive
-// attribute matching linkedom's selector engine doesn't support.
-const TITLE_SELECTORS = [
-  'meta[property="og:title"]',
-  'meta[name="twitter:title"]',
-  'meta[property="twitter:title"]',
+// Same precedence as fetch-site-metadata's own rules. Legacy sites capitalize
+// these attributes (www.kinn-tailor.com writes `name="Description"`) and
+// linkedom's selector engine lacks the `[name="description" i]` flag, so match
+// attribute values manually, case-insensitively.
+const TITLE_SOURCES = [
+  ["property", "og:title"],
+  ["name", "twitter:title"],
+  ["property", "twitter:title"],
 ] as const;
 
-const DESCRIPTION_SELECTORS = [
-  'meta[property="og:description"]',
-  'meta[name="description"]',
-  'meta[name="twitter:description"]',
+const DESCRIPTION_SOURCES = [
+  ["property", "og:description"],
+  ["name", "description"],
+  ["name", "twitter:description"],
 ] as const;
 
 const firstContent = (
   document: ReturnType<typeof parseHTML>["document"],
-  selectors: readonly string[],
+  sources: readonly (readonly [attribute: string, value: string])[],
 ): string | undefined => {
-  for (const selector of selectors) {
-    const content = document.querySelector(selector)?.getAttribute("content")?.trim();
-    if (content) return content;
+  const metas = [...document.querySelectorAll("meta")];
+  for (const [attribute, value] of sources) {
+    for (const meta of metas) {
+      if (meta.getAttribute(attribute)?.toLowerCase() !== value) continue;
+      const content = meta.getAttribute("content")?.trim();
+      if (content) return content;
+    }
   }
   return undefined;
 };
 
 const reextractText = (html: string, metadata: Metadata): Metadata => {
   const { document } = parseHTML(html);
-  const title = firstContent(document, TITLE_SELECTORS) ?? document.title.trim();
+  const title = firstContent(document, TITLE_SOURCES) ?? document.title.trim();
   return {
     ...metadata,
     title: title || metadata.title,
-    description: firstContent(document, DESCRIPTION_SELECTORS) ?? metadata.description,
+    description: firstContent(document, DESCRIPTION_SOURCES) ?? metadata.description,
   };
 };
 
