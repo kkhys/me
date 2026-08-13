@@ -94,7 +94,9 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
       --toc-rail-active-color: light-dark(var(--uchu-yin-8), var(--uchu-gray-3));
 
       background-color: var(--toc-rail-active-color);
-      box-shadow: 0 0 3px var(--toc-rail-active-color);
+      /* The glow reads as emitted light in dark mode but as ink bleeding
+         around the near-black rail in light mode, so light mode drops it. */
+      box-shadow: 0 0 3px light-dark(transparent, var(--toc-rail-active-color));
     }
 
     .toc-panel {
