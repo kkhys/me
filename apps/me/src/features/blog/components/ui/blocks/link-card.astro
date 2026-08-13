@@ -42,8 +42,8 @@ const blurryImage = image
       </span>
       </div>
     </div>
-    <div class="link-card-image">
-      {image && (
+    {image && (
+        <div class="link-card-image">
           <div
               class="link-card-blur-load blur-load"
               style={`background-image: url(${blurryImage?.src})`}
@@ -60,8 +60,8 @@ const blurryImage = image
                 {...blurLoadHandlers(".link-card-blur-load")}
             />
           </div>
-      )}
-    </div>
+        </div>
+    )}
   </a>
 </div>
 
@@ -146,11 +146,14 @@ const blurryImage = image
 
   /* Mobile: full-width banner on top, kept at the standard OG ratio.
      overflow: hidden clips the blur halo so it doesn't bleed past the image
-     box into the adjacent text on the desktop horizontal layout. */
+     box into the adjacent text on the desktop horizontal layout.
+     The divider keeps near-white OG images from blending into the card
+     background in light mode; it sits on the edge facing the text. */
   .link-card-image {
     width: 100%;
     aspect-ratio: 40 / 21;
     overflow: hidden;
+    border-bottom: 1px solid var(--c-border);
   }
 
   .link-card-blur-load {
@@ -191,6 +194,8 @@ const blurryImage = image
     .link-card-image {
       width: auto;
       height: 100%;
+      border-bottom: none;
+      border-left: 1px solid var(--c-border);
     }
   }
 </style>
