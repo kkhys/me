@@ -373,6 +373,34 @@ describe("getMetadata", () => {
       expect(result.description).toBe("楽天");
     });
 
+    it("repairs a description declared with a capitalized name attribute", async () => {
+      // www.kinn-tailor.com (Shift_JIS) writes `<meta name="Description">`;
+      // a case-sensitive selector match would leave the description garbled.
+      mockFetchByUrl(
+        () =>
+          new Response(
+            concatBytes(
+              ascii('<html><head><meta charset="euc-jp"><title>'),
+              RAKUTEN_EUC_JP,
+              ascii('</title><meta name="Description" content="'),
+              RAKUTEN_EUC_JP,
+              ascii('" /></head></html>'),
+            ) as unknown as BodyInit,
+            { status: 200, headers: { "content-type": "text/html" } },
+          ),
+      );
+      mockFetchSiteMetadata.mockResolvedValueOnce({
+        title: "����",
+        description: "����",
+        image: undefined,
+        icon: undefined,
+      });
+
+      const result = await getMetadata("https://capitalized-meta-example.com");
+      expect(result.title).toBe("楽天");
+      expect(result.description).toBe("楽天");
+    });
+
     it("falls back to the <title> element when the page has no og:title", async () => {
       mockFetchByUrl(
         () =>
