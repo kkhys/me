@@ -2,6 +2,7 @@
 import { getImage, Image } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 import GlobeIcon from "#/components/icons/globe.svg";
+import { type Favicon, getFavicon } from "#/lib/api/favicon";
 import { getMetadata } from "#/lib/api/metadata";
 import { BASE_URL } from "#/utils/base-url";
 import { blurLoadHandlers } from "#/utils/blur-load";
@@ -13,7 +14,9 @@ interface Props extends HTMLAttributes<"a"> {
 const props = Astro.props;
 
 const isExternal = !props.href.startsWith(BASE_URL);
-const { title, description, image } = await getMetadata(props.href);
+const { title, description, image, icon } = await getMetadata(props.href);
+
+const favicon: Favicon = icon ? await getFavicon(icon) : { kind: "none" };
 
 // Tiny blurred placeholder shown until the real OG image loads, matching the
 // blur-load effect used by content and memo-card images.
@@ -36,7 +39,28 @@ const blurryImage = image
       {description}
       </span>
       <div class="link-card-domain">
-        <GlobeIcon class="link-card-globe" />
+        {favicon.kind === "remote" ? (
+            <Image
+                src={favicon.src}
+                alt=""
+                width={32}
+                height={32}
+                format="png"
+                class="link-card-favicon"
+            />
+        ) : favicon.kind === "inline" ? (
+            <img
+                src={favicon.src}
+                alt=""
+                width="32"
+                height="32"
+                loading="lazy"
+                decoding="async"
+                class="link-card-favicon"
+            />
+        ) : (
+            <GlobeIcon class="link-card-globe" />
+        )}
         <span class="link-card-hostname">
         {new URL(props.href).hostname}
       </span>
@@ -137,6 +161,21 @@ const blurryImage = image
     height: 0.75rem;
     flex-shrink: 0;
     margin-top: 1.5px;
+  }
+
+  /* Slightly larger than the globe fallback so the glyph stays legible inside
+     the chip padding. Favicons assume a light surface, so the chip stays light
+     in both themes to keep dark logos visible in dark mode; it's dimmed there
+     (gray-3, not white) so the chip doesn't glare against the dark card. */
+  .link-card-favicon {
+    width: 0.875rem;
+    height: 0.875rem;
+    flex-shrink: 0;
+    margin-top: 1.5px;
+    padding: 1.5px;
+    border-radius: 3px;
+    background-color: light-dark(var(--uchu-yang), var(--uchu-gray-3));
+    object-fit: contain;
   }
 
   .link-card-hostname {

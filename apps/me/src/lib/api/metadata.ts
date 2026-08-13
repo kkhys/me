@@ -2,6 +2,7 @@ import { NODE_ENV } from "astro:env/client";
 import fetchSiteMetadata, { type Metadata } from "fetch-site-metadata";
 import { parseHTML } from "linkedom";
 import { createResolvedCache } from "#/lib/api/cache";
+import { isRasterImage } from "#/utils/image-signature";
 
 const cache = createResolvedCache<Metadata>();
 
@@ -21,30 +22,6 @@ const isSvgSrc = (src: string): boolean => {
 // HTML (e.g. a bot-protection challenge page) to non-browser clients. sharp then
 // fails with "Could not process image metadata" and crashes the whole build, so
 // we sniff the leading bytes and only keep images sharp can actually decode.
-const matchesAt = (bytes: Uint8Array, offset: number, signature: readonly number[]): boolean =>
-  signature.every((byte, index) => bytes[offset + index] === byte);
-
-const isRasterImage = (bytes: Uint8Array): boolean => {
-  // PNG
-  if (matchesAt(bytes, 0, [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])) {
-    return true;
-  }
-  // JPEG
-  if (matchesAt(bytes, 0, [0xff, 0xd8, 0xff])) return true;
-  // GIF ("GIF8")
-  if (matchesAt(bytes, 0, [0x47, 0x49, 0x46, 0x38])) return true;
-  // WebP ("RIFF"...."WEBP")
-  if (
-    matchesAt(bytes, 0, [0x52, 0x49, 0x46, 0x46]) &&
-    matchesAt(bytes, 8, [0x57, 0x45, 0x42, 0x50])
-  ) {
-    return true;
-  }
-  // AVIF / HEIF (ISOBMFF "ftyp" box)
-  if (matchesAt(bytes, 4, [0x66, 0x74, 0x79, 0x70])) return true;
-  return false;
-};
-
 const isProcessableImage = async (src: string): Promise<boolean> => {
   try {
     const response = await fetch(src, { headers: { accept: "image/*" } });
