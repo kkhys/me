@@ -169,21 +169,6 @@ for (const market of markets) {
       activeLink?.scrollIntoView({ block: "nearest" });
     };
 
-    // Animate the jump, honoring reduced-motion preferences.
-    const headingById = new Map(headings.map((heading) => [heading.id, heading]));
-    for (const link of links) {
-      link.addEventListener("click", (event) => {
-        const heading = headingById.get(decodeURIComponent(link.hash.slice(1)));
-        if (!heading) return;
-        event.preventDefault();
-        const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "auto"
-          : "smooth";
-        heading.scrollIntoView({ behavior });
-        history.pushState(null, "", link.hash);
-      });
-    }
-
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
