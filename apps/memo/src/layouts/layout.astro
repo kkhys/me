@@ -1,4 +1,5 @@
 ---
+import Umami from "@kkhys/analytics/umami.astro";
 import Footer from "#/components/footer.astro";
 import Header from "#/components/header.astro";
 import HeadMeta from "#/components/seo/head-meta.astro";
@@ -8,6 +9,7 @@ import "#/styles/global.css";
 <html lang="ja">
     <head>
         <HeadMeta />
+        <Umami websiteId="05b2c387-63e2-4d83-86f3-6fd54872d125" domains="memo.kkhys.me" />
         <slot name="head" />
         <slot name="seo" />
         <slot name="structured-data" />

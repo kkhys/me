@@ -1,5 +1,6 @@
 ---
 import "#/styles/global.css";
+import Umami from "@kkhys/analytics/umami.astro";
 import BaseSEO from "#/components/seo/base-seo.astro";
 import SiteFooter from "#/components/ui/site-footer.astro";
 import SiteNav from "#/components/ui/site-nav.astro";
@@ -27,19 +28,7 @@ const { class: className, showFooter = true } = Astro.props;
 
   <link rel='sitemap' href='/sitemap-index.xml' />
 
-  {import.meta.env.PROD && (
-    <>
-      <link rel='preconnect' href='https://analytics.kkhys.me' crossorigin />
-      <script
-        is:inline
-        defer
-        src='https://analytics.kkhys.me/script.js'
-        data-website-id='80a06017-d3fc-4362-ae8a-d5de251c3ef5'
-        data-domains='kkhys.me'
-        data-exclude-search='true'
-      />
-    </>
-  )}
+  <Umami websiteId='80a06017-d3fc-4362-ae8a-d5de251c3ef5' domains='kkhys.me' />
 
   <slot name='head' />
   <slot name='seo'>

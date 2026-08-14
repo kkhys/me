@@ -2,7 +2,7 @@
 title: "Privacy Policy"
 description: "Privacy Policy for LGTM - Information about data collection, usage, and protection."
 lang: "en"
-lastUpdated: 2025-12-28
+lastUpdated: 2026-08-14
 ---
 
 ## Overview
@@ -11,11 +11,11 @@ This Privacy Policy describes how LGTM ("the site" or "this site") collects, use
 
 ## Information Collected
 
-This site does not collect any personal information or usage statistics. No analytics tools are used, and no tracking is performed.
+This site does not collect any personal information. To understand how the site is used, this site uses [Umami](https://umami.is/), an open-source, privacy-focused analytics tool self-hosted by the site administrator. Umami does not use cookies or local storage, does not store IP addresses, and does not collect personally identifiable information (PII) or perform cross-site tracking. Only anonymized statistics such as page URLs, referrers, approximate location (country level), browser type, and screen resolution are collected, and they are stored on infrastructure managed by the site administrator — never sent to a third-party analytics service.
 
 ## Cookies
 
-This site does not use cookies.
+Neither this site nor its analytics tool (Umami) uses cookies.
 
 ## User-Generated Content
 
