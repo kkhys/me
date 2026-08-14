@@ -16,7 +16,7 @@
     "playwright-install": "pnpm dlx playwright-core install chromium",
     "render:mermaid": "bun run scripts/render-mermaid.ts",
     "create:entry": "bun run scripts/create-entry.ts",
-    "deploy": "pnpm build && wrangler pages deploy dist"
+    "deploy": "pnpm build && wrangler pages deploy dist --project-name=me"
   },
   "dependencies": {
     "@astrojs/check": "catalog:",
