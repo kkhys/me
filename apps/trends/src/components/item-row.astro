@@ -26,7 +26,7 @@ const foldParagraphs =
 const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "記事の要約";
 ---
 
-<article class="item">
+<article class:list={["item", { "is-seen": item.seen_before }]}>
   <span class="rank">{rank}</span>
   <div class="body">
     <Budoux>
@@ -78,6 +78,10 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
     gap: 0.75rem;
     padding: 1rem 0.25rem;
     border-bottom: 1px solid var(--c-border);
+  }
+
+  :global(html[data-seen-filter="hide"]) .item.is-seen {
+    display: none;
   }
 
   .rank {

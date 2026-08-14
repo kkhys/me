@@ -1,0 +1,88 @@
+---
+/**
+ * すべて / 既出を除く toggle. Filtering itself is pure CSS keyed off
+ * `html[data-seen-filter="hide"]`; this component only flips that attribute
+ * and remembers the choice. Rendered only on days that have 既出 items.
+ */
+---
+
+<nav class="seen-filter" aria-label="既出フィルタ" hidden>
+  <button type="button" data-mode="all" aria-pressed="true">すべて</button>
+  <span class="sep" aria-hidden="true">/</span>
+  <button type="button" data-mode="hide" aria-pressed="false">既出を除く</button>
+</nav>
+
+<!-- is:inline so a persisted "hide" applies before the items below are
+     painted; a hoisted module would run late enough to flash them. -->
+<script is:inline>
+  (() => {
+    const nav = document.querySelector("nav.seen-filter");
+    if (!(nav instanceof HTMLElement)) return;
+    const KEY = "trends:seen-filter";
+    const buttons = nav.querySelectorAll("button[data-mode]");
+
+    const apply = (mode) => {
+      if (mode === "hide") document.documentElement.dataset.seenFilter = "hide";
+      else delete document.documentElement.dataset.seenFilter;
+      for (const button of buttons) {
+        button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
+      }
+    };
+
+    let stored = null;
+    try {
+      stored = localStorage.getItem(KEY);
+    } catch {
+      /* localStorage unavailable — fall back to showing everything */
+    }
+    apply(stored === "hide" ? "hide" : "all");
+
+    for (const button of buttons) {
+      button.addEventListener("click", () => {
+        apply(button.dataset.mode);
+        try {
+          localStorage.setItem(KEY, button.dataset.mode);
+        } catch {
+          /* non-persistent session is fine */
+        }
+      });
+    }
+
+    /* Stays hidden without JS, where the toggle would be inert. */
+    nav.hidden = false;
+  })();
+</script>
+
+<style>
+  .seen-filter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 0.625rem;
+    margin-top: 1.5rem;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  button {
+    border: 0;
+    background: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  button:hover {
+    color: var(--c-text);
+  }
+
+  button[aria-pressed="true"] {
+    color: var(--c-text);
+    font-weight: var(--fw-medium);
+  }
+
+  .sep {
+    color: var(--c-faint);
+  }
+</style>

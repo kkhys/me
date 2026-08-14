@@ -22,12 +22,14 @@ src/
     service-card.astro        # Per-service section (brand-color dot, count, error note)
     source-toc.astro          # Always-visible source TOC (markets → services), ≥1280px only
     item-row.astro            # rank → title → summary → meta row (score, stars, chip, host, engagement)
+    seen-filter.astro         # すべて / 既出を除く toggle; flips html[data-seen-filter], persisted in localStorage
     date-nav.astro            # ← 前日 / current date (plain text) / 翌日 →
   lib/budoux.ts               # Cached BudouX parser (same setup as apps/me)
   components/budoux.astro     # Wraps a slot, inserts <wbr> at Japanese phrase boundaries
   utils/runs.ts               # sortRunsByDateDesc, adjacentRuns, date formatters (pure, unit-tested)
   utils/host.ts               # formatHost — hostname without www. for the meta row
   utils/score.ts              # scoreLevel: 80+/60+ thresholds → hi/mid/lo score emphasis
+  utils/seen.ts               # countSeen — 既出 item count for the seen filter (pure, unit-tested)
   utils/toc-active.ts         # pickActiveId — scrollspy state for source-toc (pure, unit-tested)
   utils/service-colors.ts     # Upstream brand colors, shared by service-card and source-toc
   styles/global.css           # --c-* tokens (light-dark over uchu palette)
@@ -51,7 +53,8 @@ public/                       # robots.txt, manifest, static favicons (generated
 
 - The UI follows the kkhys.me design language (see apps/me): plain `--uchu-yang`/`--uchu-yin` background, hairline separators instead of cards, 42rem content column, `2026.08.10` date format, and me's `--c-*` / `--fs-*` / `--radius-*` token names.
 - `/` renders the latest run in full (duplicate of its `/[date]` page, accepted); `/[date]` is the permanent URL.
-- The source-toc scrollspy is the only client JS, colocated in `source-toc.astro`. Navigation between sources is the TOC's job — the header stays a plain brand link.
+- Client JS is minimal and colocated: the scrollspy in `source-toc.astro` and the 既出 filter toggle in `seen-filter.astro`. Navigation between sources is the TOC's job — the header stays a plain brand link.
+- The 既出 filter is CSS-driven: rows carry an `is-seen` class, per-service counts are prerendered for both modes, and `html[data-seen-filter="hide"]` switches everything. JS only flips that attribute and persists the choice (`trends:seen-filter`); without JS the toggle stays hidden and the site behaves as before.
 - The source TOC descends from apps/me's `toc.astro` but stays visible instead of expanding on hover; `pickActiveId` keeps one entry highlighted while scrolling. Anchor ids are `{market.id}` on h2 and `{market.id}-{service.id}` on h3.
 - Service dot colors are upstream brand colors, intentionally not mapped to the uchu palette.
 - `runs/**` JSON is excluded from oxlint/oxfmt via root `ignorePatterns` — data, not code.

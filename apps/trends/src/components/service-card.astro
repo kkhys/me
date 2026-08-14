@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 
 import ItemRow from "#/components/item-row.astro";
+import { countSeen } from "#/utils/seen";
 import { SERVICE_COLORS } from "#/utils/service-colors";
 
 type Service = CollectionEntry<"runs">["data"]["markets"][number]["services"][number];
@@ -14,17 +15,21 @@ interface Props {
 const { service, marketId } = Astro.props;
 
 const dotColor = SERVICE_COLORS[service.id] ?? "var(--c-sub)";
+const seenCount = countSeen(service.items);
+const freshCount = service.items.length - seenCount;
 ---
 
-<section class="service" data-service={service.id}>
+<section class:list={["service", { "has-seen": seenCount > 0 }]} data-service={service.id}>
   <header>
     <span class="dot" style={`background:${dotColor}`}></span>
     <h3 id={`${marketId}-${service.id}`}>{service.label}</h3>
-    <span class="count">{service.items.length}件</span>
+    <span class="count total">{service.items.length}件</span>
+    {seenCount > 0 && <span class="count fresh">{freshCount}件</span>}
     {service.note && <span class="note">{service.note}</span>}
   </header>
   {service.items.map((item, i) => <ItemRow item={item} rank={i + 1} />)}
   {service.items.length === 0 && service.status === "ok" && <p class="empty">該当なし</p>}
+  {service.items.length > 0 && freshCount === 0 && <p class="empty all-seen">すべて既出</p>}
 </section>
 
 <style>
@@ -61,6 +66,19 @@ const dotColor = SERVICE_COLORS[service.id] ?? "var(--c-sub)";
     font-size: var(--fs-xs);
   }
 
+  /* Both counts are prerendered; the 既出 filter swaps them with CSS only. */
+  .count.fresh {
+    display: none;
+  }
+
+  :global(html[data-seen-filter="hide"]) .service.has-seen .count.total {
+    display: none;
+  }
+
+  :global(html[data-seen-filter="hide"]) .service.has-seen .count.fresh {
+    display: inline;
+  }
+
   .note {
     color: var(--c-sub);
     font-size: var(--fs-xs);
@@ -74,5 +92,14 @@ const dotColor = SERVICE_COLORS[service.id] ?? "var(--c-sub)";
     color: var(--c-sub);
     font-size: var(--fs-xs);
     border-bottom: 1px solid var(--c-border);
+  }
+
+  /* Keeps a fully-filtered service from collapsing to a bare header. */
+  .all-seen {
+    display: none;
+  }
+
+  :global(html[data-seen-filter="hide"]) .all-seen {
+    display: block;
   }
 </style>
