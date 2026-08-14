@@ -1,0 +1,28 @@
+---
+interface Props {
+  /** Website ID from the Umami dashboard. Public by design (ships in the served HTML). */
+  websiteId: string;
+  /** Comma-separated domains the tracker is allowed to run on. */
+  domains: string;
+  /** Umami instance origin. Defaults to the self-hosted instance. */
+  host?: string | undefined;
+}
+
+const { websiteId, domains, host = "https://analytics.kkhys.me" } = Astro.props;
+---
+
+{
+  import.meta.env.PROD && (
+    <>
+      <link rel="preconnect" href={host} crossorigin />
+      <script
+        is:inline
+        defer
+        src={`${host}/script.js`}
+        data-website-id={websiteId}
+        data-domains={domains}
+        data-exclude-search="true"
+      />
+    </>
+  )
+}

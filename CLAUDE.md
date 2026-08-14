@@ -18,6 +18,7 @@ Packages:
 - `packages/styles` — `@kkhys/styles`, uchu.css OKLCH palette.
 - `packages/seo` — `@kkhys/seo`, BaseSEO / OpenGraph / TwitterCard Astro primitives.
 - `packages/og` — `@kkhys/og`, Satori OG image + favicon generators.
+- `packages/analytics` — `@kkhys/analytics`, self-hosted Umami tracker component.
 - `packages/release` — `@kkhys/release`, date-based release tagging used by `scripts/release.ts`.
 
 Shared packages are consumed as source (no build step); each app supplies its own config via thin wrappers. Dependency versions are centralized in the `catalog:` of `pnpm-workspace.yaml`.

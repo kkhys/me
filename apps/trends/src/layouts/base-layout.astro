@@ -1,5 +1,6 @@
 ---
 import "#/styles/global.css";
+import Umami from "@kkhys/analytics/umami.astro";
 import BaseSEO from "@kkhys/seo/base-seo.astro";
 import OpenGraph from "@kkhys/seo/open-graph.astro";
 import TwitterCard from "@kkhys/seo/twitter-card.astro";
@@ -29,6 +30,8 @@ const { title = SITE_NAME, description = "Daily tech trend digest by kkhys" } = 
 
   <OpenGraph title={title} description={description} siteName={SITE_NAME} />
   <TwitterCard title={title} description={description} site="@kkhys_" card="summary" />
+
+  <Umami websiteId="01beaa78-e50b-4b6a-9288-0d2526a75e12" domains="trends.kkhys.me" />
 </head>
 <body>
 <slot/>
