@@ -12,7 +12,7 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "all": "pnpm build && pnpm check && pnpm lint:fix && pnpm test && pnpm coverage",
-    "deploy": "pnpm build && wrangler pages deploy dist",
+    "deploy": "pnpm build && wrangler pages deploy dist --project-name=lgtm",
     "convert-videos": "bun run scripts/convert-videos.ts"
   },
   "dependencies": {
