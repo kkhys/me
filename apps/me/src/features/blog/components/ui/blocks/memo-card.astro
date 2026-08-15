@@ -4,7 +4,7 @@ import type { HTMLAttributes } from "astro/types";
 import Budoux from "@kkhys/ui/budoux.astro";
 import MemoIcon from "#/components/icons/memo.svg";
 import { extractMemoId, getMemoPost } from "#/lib/api/memo";
-import { blurLoadHandlers } from "#/utils/blur-load";
+import { blurLoadHandlers } from "@kkhys/ui/blur-load";
 import { convertDateToString } from "#/utils/date";
 
 interface Props extends HTMLAttributes<"a"> {

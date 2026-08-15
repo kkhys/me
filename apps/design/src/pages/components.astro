@@ -1,5 +1,6 @@
 ---
 import Budoux from "@kkhys/ui/budoux.astro";
+import LinkCard from "@kkhys/ui/link-card.astro";
 import SiteFooter from "@kkhys/ui/site-footer.astro";
 import SiteHeader from "@kkhys/ui/site-header.astro";
 import Spinner from "@kkhys/ui/spinner.astro";
@@ -17,6 +18,10 @@ const spinnerSnippet = `import Spinner from "@kkhys/ui/spinner.astro";`;
 const budouxSnippet = `import Budoux from "@kkhys/ui/budoux.astro";
 
 <h1 class="budoux"><Budoux>タイトル</Budoux></h1>`;
+const linkCardSnippet = `import LinkCard from "@kkhys/ui/link-card.astro";
+
+<LinkCard href={url} title={title} description={description}
+  imageSrc={image?.src} favicon={favicon} external />`;
 const siteHeaderSnippet = `import SiteHeader from "@kkhys/ui/site-header.astro";
 
 <SiteHeader title="LGTM" href="/" />
@@ -70,6 +75,22 @@ const siteFooterSnippet = `import SiteFooter from "@kkhys/ui/site-footer.astro";
     </figure>
   </div>
   <pre class="snippet"><code>{budouxSnippet}</code></pre>
+
+  <h2>LinkCard</h2>
+  <p class="note">
+    OG メタデータ付きの外部リンクカード(me / memo)。メタデータの取得は各アプリの
+    データ層が行い、このコンポーネントは表示だけを担う。og:image があれば
+    blur-up 付きで横型(モバイルは縦積み)になる。
+  </p>
+  <div class="demo">
+    <LinkCard
+      href="https://kkhys.me"
+      title="Keisuke Hayashi"
+      description="Software Engineer based in Tokyo."
+      external
+    />
+  </div>
+  <pre class="snippet"><code>{linkCardSnippet}</code></pre>
 
   <h2>SiteHeader</h2>
   <p class="note">

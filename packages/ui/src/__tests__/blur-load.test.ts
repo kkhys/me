@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { blurLoadHandlers } from "#/utils/blur-load";
+import { blurLoadHandlers } from "../blur-load";
 
 describe("blurLoadHandlers", () => {
   it("targets the given ancestor selector", () => {
