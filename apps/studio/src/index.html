@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
+    <!-- Declared before the stylesheet loads so dark-preference users don't
+         get a white canvas flash; pairs with `color-scheme: light dark` in CSS. -->
+    <meta name="color-scheme" content="light dark" />
     <title>Studio</title>
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./client.ts"></script>

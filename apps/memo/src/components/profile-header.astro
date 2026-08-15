@@ -103,16 +103,8 @@ const coverImage = getCoverImage(cover);
     border: 1.5px solid var(--c-border);
     background: var(--c-bg);
     box-shadow:
-      0 1px 3px oklch(0% 0 0 / 0.08),
-      0 4px 12px oklch(0% 0 0 / 0.04);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .profile-avatar-ring {
-      box-shadow:
-        0 1px 3px oklch(0% 0 0 / 0.3),
-        0 4px 12px oklch(0% 0 0 / 0.2);
-    }
+      0 1px 3px light-dark(oklch(0% 0 0 / 0.08), oklch(0% 0 0 / 0.3)),
+      0 4px 12px light-dark(oklch(0% 0 0 / 0.04), oklch(0% 0 0 / 0.2));
   }
 
   .profile-info {

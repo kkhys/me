@@ -9,6 +9,9 @@ import "#/styles/global.css";
 <html lang="en">
     <head>
         <HeadMeta />
+        {/* Declared before any CSS loads so dark-preference users don't get a
+            white canvas flash; pairs with `color-scheme: light dark` in CSS. */}
+        <meta name="color-scheme" content="light dark" />
         <Umami websiteId="115514e5-6612-4721-8913-1d0d904fd333" domains="lgtm.kkhys.me" />
         <slot name="head" />
         <slot name="seo" />

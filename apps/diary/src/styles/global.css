@@ -5,6 +5,15 @@
 @import "@kkhys/styles/tokens.css" layer(tokens);
 @import "@kkhys/styles/base.css" layer(base);
 
+/* ===== Design Tokens ===== */
+
+@layer tokens {
+  :root {
+    /* Light theme only: pins every light-dark() token to its light value. */
+    color-scheme: light;
+  }
+}
+
 /* ===== Base Styles ===== */
 
 @layer base {
