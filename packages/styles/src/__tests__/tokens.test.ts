@@ -10,24 +10,20 @@ const definedVars = (css: string) =>
 const referencedVars = (css: string) =>
   new Set([...css.matchAll(/var\((--[\w-]+)/gu)].map((m) => m[1]));
 
-describe("token reference integrity", () => {
-  it("resolves every var() in tokens.css from uchu.css or tokens.css", async () => {
-    const [uchu, tokens] = await Promise.all([read("uchu.css"), read("tokens.css")]);
-    const defined = new Set([...definedVars(uchu), ...definedVars(tokens)]);
-    for (const name of referencedVars(tokens)) {
-      expect(defined, `undefined token: ${name}`).toContain(name);
-    }
-  });
+// Every stylesheet an app can import; each may only reference the primitive
+// palette or the semantic tokens, never a token an app happens to declare.
+const STYLESHEETS = ["tokens.css", "base.css", "components.css"];
 
-  it("resolves every var() in base.css from uchu.css or tokens.css", async () => {
-    const [uchu, tokens, base] = await Promise.all([
+describe("token reference integrity", () => {
+  it.each(STYLESHEETS)("resolves every var() in %s from uchu.css or tokens.css", async (file) => {
+    const [uchu, tokens, stylesheet] = await Promise.all([
       read("uchu.css"),
       read("tokens.css"),
-      read("base.css"),
+      read(file),
     ]);
     const defined = new Set([...definedVars(uchu), ...definedVars(tokens)]);
-    for (const name of referencedVars(base)) {
-      expect(defined, `undefined token: ${name}`).toContain(name);
+    for (const name of referencedVars(stylesheet)) {
+      expect(defined, `undefined token in ${file}: ${name}`).toContain(name);
     }
   });
 });

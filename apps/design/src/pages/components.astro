@@ -7,6 +7,12 @@ import BaseLayout from "#/layouts/base-layout.astro";
 
 const BUDOUX_SAMPLE = "あらゆる現実をすべて自分のほうへねじ曲げたのだと思われるかもしれない。";
 
+const buttonSnippet = `@import "@kkhys/styles/components.css" layer(components);
+
+<button class="btn">Post</button>
+<button class="btn btn--outline">Sync</button>
+<button class="btn btn--ghost">Cancel</button>
+<button class="btn btn--ghost btn--size-sm">Reply</button>`;
 const spinnerSnippet = `import Spinner from "@kkhys/ui/spinner.astro";`;
 const budouxSnippet = `import Budoux from "@kkhys/ui/budoux.astro";
 
@@ -25,6 +31,21 @@ const siteFooterSnippet = `import SiteFooter from "@kkhys/ui/site-footer.astro";
   <p class="lead">
     <code>@kkhys/ui</code> の共有 Astro コンポーネントと、<code>base.css</code> が全サイトに与える挙動。
   </p>
+
+  <h2>Button</h2>
+  <p class="note">
+    <code>components.css</code> のクラスベース。<code>&lt;button&gt;</code> にも
+    <code>&lt;a&gt;</code> にも載る(me / studio)。既定は塗り、<code>--outline</code> /
+    <code>--ghost</code> / <code>--size-icon</code> / <code>--size-sm</code> の修飾子を持つ。
+  </p>
+  <div class="demo demo--row">
+    <button class="btn" type="button">Post</button>
+    <button class="btn btn--outline" type="button">Sync</button>
+    <button class="btn btn--ghost" type="button">Cancel</button>
+    <button class="btn btn--ghost btn--size-sm" type="button">Reply</button>
+    <button class="btn" type="button" disabled>Disabled</button>
+  </div>
+  <pre class="snippet"><code>{buttonSnippet}</code></pre>
 
   <h2>Spinner</h2>
   <p class="note">無限スクロールの読み込み表示(memo / lgtm)。色は <code>--c-sub</code> を参照する。</p>
