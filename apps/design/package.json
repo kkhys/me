@@ -11,6 +11,8 @@
     "lint:fix": "oxlint --fix && oxfmt",
     "deploy": "pnpm build && wrangler pages deploy dist --project-name=design",
     "test": "vitest run",
+    "test:vrt": "playwright test",
+    "test:vrt:update": "playwright test --update-snapshots",
     "coverage": "vitest run --coverage",
     "all": "pnpm build && pnpm check && pnpm lint:fix && pnpm test && pnpm coverage"
   },
@@ -25,6 +27,7 @@
   "devDependencies": {
     "@astrojs/check": "catalog:",
     "@astrojs/sitemap": "catalog:",
+    "@playwright/test": "catalog:",
     "@vitest/coverage-v8": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",

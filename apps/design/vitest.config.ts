@@ -8,7 +8,7 @@ export default defineConfig({
     },
   },
   test: {
-    exclude: ["node_modules", ".direnv", "dist"],
+    exclude: ["node_modules", ".direnv", "dist", "vrt"],
     coverage: {
       include: ["src/utils/*.ts"],
     },

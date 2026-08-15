@@ -21,6 +21,10 @@ src/
   utils/tokens.ts             # parseCustomProperties / splitLightDark / filterByPrefix (unit-tested)
   styles/global.css           # Imports @kkhys/styles (uchu + tokens + base) + page chrome
   __tests__/                  # Vitest unit tests
+vrt/
+  pages.spec.ts               # Playwright full-page screenshots of all five pages
+  serve.mjs                   # Foreground static server for dist/ (astro preview daemonizes)
+  __screenshots__/            # Committed baselines, one directory per project (light / dark)
 ```
 
 ## Key Design Decisions
@@ -41,6 +45,11 @@ src/
   submodule, no fixtures needed.
 - Deploy: built and shipped locally via `pnpm deploy:design`
   (`wrangler pages deploy dist --project-name=design`); not deployed from CI.
+- Visual regression: `pnpm test:vrt` screenshots every page in light and dark
+  against the committed baselines; `pnpm test:vrt:update` re-records them
+  after an intended visual change. Run locally only — the baselines render
+  with macOS system fonts, so CI would diff on fonts alone. Needs the
+  Playwright browser once: `pnpm exec playwright install chromium`.
 
 ## Gotchas
 
