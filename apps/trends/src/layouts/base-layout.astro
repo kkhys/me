@@ -11,8 +11,9 @@ interface Props {
 }
 
 const SITE_NAME = "Trend Digest";
+const SITE_DESCRIPTION = "国内外の技術系サービスで話題になった記事を、1日1回ダイジェストとしてまとめています。";
 
-const { title = SITE_NAME, description = "Daily tech trend digest by kkhys" } = Astro.props;
+const { title = SITE_NAME, description = SITE_DESCRIPTION } = Astro.props;
 ---
 
 <html lang="ja">
