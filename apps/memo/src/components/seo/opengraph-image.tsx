@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { createSiteOgImage } from "@kkhys/og/og";
+import { uchuHex } from "@kkhys/styles/colors";
 import { TITLE } from "#/config/constants";
 
 export const OpengraphImage = async () => {
@@ -7,9 +8,9 @@ export const OpengraphImage = async () => {
 
   return createSiteOgImage({
     text: TITLE,
-    background: "#fff",
-    innerBackground: "#fdfdfc",
-    color: "#21201c",
+    background: uchuHex.yang,
+    innerBackground: uchuHex.yang,
+    color: uchuHex.yin,
     fontData: interSemiBold,
   });
 };

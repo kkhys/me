@@ -61,7 +61,7 @@ if (image) {
     user-select: none;
     overflow: hidden;
     border-radius: 0.75rem;
-    border: 1px solid var(--c-gray);
+    border: 1px solid var(--c-border);
     max-width: 400px;
     transition: transform 0.1s;
   }
@@ -71,7 +71,7 @@ if (image) {
   }
 
   .link-card-image-wrapper {
-    background: var(--blur-bg) center / cover no-repeat var(--c-gray);
+    background: var(--blur-bg) center / cover no-repeat var(--c-surface);
     filter: blur(36px);
     transition: filter 250ms ease-in-out;
   }
@@ -95,13 +95,13 @@ if (image) {
   }
 
   .link-card-image-wrapper + .link-card-content {
-    border-top: 1px solid var(--c-gray);
+    border-top: 1px solid var(--c-border);
   }
 
   .link-card-hostname {
     font-size: var(--fs-xs);
     line-height: var(--lh-xs);
-    color: var(--c-sub-text);
+    color: var(--c-sub);
   }
 
   .link-card-title {

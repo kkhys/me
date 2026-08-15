@@ -15,7 +15,7 @@ Apps:
 
 Packages:
 
-- `packages/styles` — `@kkhys/styles`, uchu.css OKLCH palette.
+- `packages/styles` — `@kkhys/styles`, uchu.css OKLCH palette + shared semantic tokens (`tokens.css`), base styles (`base.css`), and Satori hex mirrors (`colors`).
 - `packages/seo` — `@kkhys/seo`, BaseSEO / OpenGraph / TwitterCard Astro primitives.
 - `packages/og` — `@kkhys/og`, Satori OG image + favicon generators.
 - `packages/analytics` — `@kkhys/analytics`, self-hosted Umami tracker component.

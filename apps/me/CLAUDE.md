@@ -15,7 +15,7 @@ Personal blog (kkhys.me), the `@kkhys/me` app of the kkhys monorepo. Astro 7 sta
 
 Consumed as source (no build step); this app supplies its own config via thin wrappers.
 
-- `@kkhys/styles` — uchu.css OKLCH palette
+- `@kkhys/styles` — uchu.css OKLCH palette + shared semantic tokens / base styles; me keeps only prose- and code-specific tokens local
 - `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard primitives, wrapped in `src/components/seo/`
 - `@kkhys/og` — Satori OG image + favicon generators, wired in `src/pages/api/`
 

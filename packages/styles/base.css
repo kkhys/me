@@ -1,0 +1,70 @@
+/* Shared base styles. Requires uchu.css + tokens.css; import into the app's
+   base cascade layer (after tokens when the app doesn't use layers). */
+
+* {
+  border-color: var(--c-border);
+}
+
+/* Site-wide keyboard focus ring. Every focusable element gets the same
+   calm, theme-aware outline by default. Elements inside clipping
+   containers (full-bleed rows, bordered cards, masked scrollers) draw the
+   identical ring inset via a negative outline-offset. */
+:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}
+
+html {
+  font-family: system-ui, sans-serif;
+  scrollbar-gutter: stable both-edges;
+  background-color: var(--c-bg);
+  color: var(--c-text);
+}
+
+/* Avoid standard scrollbar-* on :root in Chromium: it disables
+   ::-webkit-scrollbar for every scroller on the page. */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-scrollbar);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@supports (-moz-appearance: none) {
+  html {
+    scrollbar-color: var(--c-scrollbar) transparent;
+    scrollbar-width: thin;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-feature-settings: "palt";
+  text-wrap: balance;
+}
+
+.budoux {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.palt {
+  font-feature-settings: "palt";
+}
+
+::selection {
+  box-shadow: none;
+  background-color: var(--c-selection);
+  color: var(--c-text);
+}

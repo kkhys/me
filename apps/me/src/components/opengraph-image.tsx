@@ -1,6 +1,7 @@
 /** @jsxImportSource react */
 /** @jsxRuntime automatic */
 
+import { uchuHex } from "@kkhys/styles/colors";
 import satori from "satori";
 import sharp from "sharp";
 import { getBudouxParser } from "#/lib/budoux";
@@ -14,8 +15,7 @@ export const opengraphImage = async ({ title }: { title: string }) => {
   const svg = await satori(
     <div
       style={{
-        // uchu-yang (oklch(99.4% 0 0))
-        background: "#fcfcfc",
+        background: uchuHex.yang,
         width: "100%",
         height: "100%",
         display: "flex",
@@ -30,11 +30,9 @@ export const opengraphImage = async ({ title }: { title: string }) => {
           flexWrap: "wrap",
           flexGrow: 1,
           fontSize: "50px",
-          // uchu-yang (oklch(99.4% 0 0))
-          background: "#fcfcfc",
+          background: uchuHex.yang,
           fontFamily: "Inter",
-          // uchu-yin (oklch(14.38% 0.007 256.88))
-          color: "#0e1117",
+          color: uchuHex.yin,
           lineHeight: "1.4",
         }}
       >
