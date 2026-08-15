@@ -24,8 +24,6 @@ src/
     item-row.astro            # rank → title → summary → meta row (score, stars, chip, host, engagement)
     seen-filter.astro         # すべて / 既出を除く toggle; flips html[data-seen-filter], persisted in localStorage
     date-nav.astro            # ← 前日 / current date (plain text) / 翌日 →
-  lib/budoux.ts               # Cached BudouX parser (same setup as apps/me)
-  components/budoux.astro     # Wraps a slot, inserts <wbr> at Japanese phrase boundaries
   utils/runs.ts               # sortRunsByDateDesc, adjacentRuns, date formatters (pure, unit-tested)
   utils/host.ts               # formatHost — hostname without www. for the meta row
   utils/score.ts              # scoreLevel: 80+/60+ thresholds → hi/mid/lo score emphasis

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { budouxProcess, getBudouxParser } from "#/lib/budoux";
+import { budouxProcess, getBudouxParser } from "../budoux";
 
 describe("getBudouxParser", () => {
   it("returns a parser instance", () => {

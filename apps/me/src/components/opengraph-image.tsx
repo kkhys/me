@@ -4,7 +4,7 @@
 import { uchuHex } from "@kkhys/styles/colors";
 import satori from "satori";
 import sharp from "sharp";
-import { getBudouxParser } from "#/lib/budoux";
+import { getBudouxParser } from "@kkhys/ui/budoux";
 import { loadFont } from "#/utils/font-loader";
 
 const parser = getBudouxParser();
