@@ -1,0 +1,65 @@
+@layer reset, tokens, base;
+
+@import "kiso.css" layer(reset);
+@import "@kkhys/styles/uchu.css" layer(tokens);
+@import "@kkhys/styles/tokens.css" layer(tokens);
+@import "@kkhys/styles/base.css" layer(base);
+
+/* ===== Design Tokens ===== */
+
+@layer tokens {
+  :root {
+    color-scheme: light dark;
+  }
+}
+
+/* ===== Base Styles ===== */
+
+@layer base {
+  body {
+    margin-inline: auto;
+    padding-inline: 1rem;
+    min-height: 100vh;
+    max-width: var(--content-width);
+    display: grid;
+    grid-template-rows: [top] auto [main-start] 1fr [main-end] auto [bottom];
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  h1 {
+    margin-block: 0;
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-medium);
+  }
+
+  h2 {
+    margin-block: var(--space-12) var(--space-4);
+    font-size: var(--fs-base);
+    font-weight: var(--fw-medium);
+  }
+
+  h3 {
+    margin-block: var(--space-8) var(--space-3);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--c-sub);
+  }
+
+  p {
+    line-height: var(--lh-base);
+  }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+}

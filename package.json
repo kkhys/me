@@ -23,6 +23,9 @@
     "build:trends": "pnpm --filter @kkhys/trends build",
     "dev:trends": "pnpm --filter @kkhys/trends dev",
     "deploy:trends": "pnpm --filter @kkhys/trends run deploy",
+    "build:design": "pnpm --filter @kkhys/design build",
+    "dev:design": "pnpm --filter @kkhys/design dev",
+    "deploy:design": "pnpm --filter @kkhys/design run deploy",
     "dev:studio": "pnpm --filter @kkhys/studio dev",
     "release": "bun run scripts/release.ts"
   },

@@ -11,6 +11,7 @@ Apps:
 - `apps/lgtm` — `@kkhys/lgtm`, LGTM images for GitHub PRs at lgtm.kkhys.me. See `apps/lgtm/CLAUDE.md`.
 - `apps/diary` — `@kkhys/diary`, photo diary at diary.kkhys.me. See `apps/diary/CLAUDE.md`.
 - `apps/trends` — `@kkhys/trends`, daily tech trend digest at trends.kkhys.me. See `apps/trends/CLAUDE.md`.
+- `apps/design` — `@kkhys/design`, design system docs at design.kkhys.me. See `apps/design/CLAUDE.md`.
 - `apps/studio` — `@kkhys/studio`, local-only memo composer (never deployed). See `apps/studio/CLAUDE.md`.
 
 Packages:
@@ -30,7 +31,7 @@ Run from the repo root:
 
 - `pnpm build` / `pnpm test` / `pnpm check` — workspace-wide via `pnpm -r`
 - `pnpm lint` / `pnpm lint:fix` — oxlint + oxfmt over the whole repo
-- `pnpm dev:me` / `pnpm build:me` / `pnpm deploy:me` — me shortcuts (`:lgtm` / `:diary` / `:trends` variants too)
+- `pnpm dev:me` / `pnpm build:me` / `pnpm deploy:me` — me shortcuts (`:lgtm` / `:diary` / `:trends` / `:design` variants too)
 - `pnpm --filter @kkhys/memo <script>` — target a single app
 - `pnpm release` — tag a repo-wide release (the apps ship independently; one tag for the repo)
 
@@ -38,7 +39,7 @@ Run from the repo root:
 
 - `.github/workflows/ci.yml` — runs on PRs and the merge queue. Lint → test → type check → build across the workspace against fixtures (all apps read `USE_FIXTURE_DATA`); content submodules are skipped. The `skip-ci` label opts out.
 - `.github/workflows/deploy-memo.yml` — on push to main touching `apps/memo/**` or `packages/**`, re-runs memo's checks then deploys to Cloudflare Pages.
-- me, lgtm, diary, and trends are built and deployed locally (`pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary` / `pnpm deploy:trends`), not from CI. trends is normally published end-to-end by the `creating-trend-digest` skill (data commit → deploy → push).
+- me, lgtm, diary, trends, and design are built and deployed locally (`pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary` / `pnpm deploy:trends` / `pnpm deploy:design`), not from CI. trends is normally published end-to-end by the `creating-trend-digest` skill (data commit → deploy → push).
 
 ## Gotchas
 

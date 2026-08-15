@@ -1,0 +1,57 @@
+---
+import tokensCss from "@kkhys/styles/tokens.css?raw";
+import uchuCss from "@kkhys/styles/uchu.css?raw";
+import TokenSwatch from "#/components/token-swatch.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { filterByPrefix, parseCustomProperties } from "#/utils/tokens";
+
+const semanticColors = filterByPrefix(parseCustomProperties(tokensCss), "--c-");
+const palette = parseCustomProperties(uchuCss).filter(({ name }) => !name.endsWith("-raw"));
+---
+
+<BaseLayout title="Colors" description="uchu OKLCH パレットとセマンティックカラートークン">
+  <h1>Colors</h1>
+  <p class="lead">
+    色は <a href="https://github.com/NeverCease/uchu">uchu</a> の OKLCH パレットのサブセットだけを使う。
+    アプリのコードが参照するのは用途名を持つセマンティックトークンで、
+    各トークンは <code>light-dark()</code> で両テーマの値を持つ。
+  </p>
+
+  <h2>セマンティックカラー</h2>
+  <p class="note">スワッチは左がライト、右がダークの解決値。</p>
+  <div class="token-list">
+    {semanticColors.map(({ name, value }) => <TokenSwatch name={name} value={value} />)}
+  </div>
+
+  <h2>uchu パレット</h2>
+  <p class="note">
+    生のパレット値。原則としてアプリからは直接使わず、セマンティックトークンの材料にする。
+    透明度を後付けする場合のために、一部の色は <code>oklch()</code> の引数だけを持つ
+    <code>-raw</code> 変種も持つ。
+  </p>
+  <div class="token-list">
+    {palette.map(({ name, value }) => <TokenSwatch name={name} value={value} single />)}
+  </div>
+</BaseLayout>
+
+<style>
+  .lead {
+    color: var(--c-sub);
+    margin-block: var(--space-4) 0;
+  }
+
+  .lead a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .note {
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+    margin-block: 0 var(--space-4);
+  }
+
+  .token-list {
+    display: grid;
+  }
+</style>

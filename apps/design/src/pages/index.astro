@@ -1,0 +1,129 @@
+---
+import BaseLayout from "#/layouts/base-layout.astro";
+
+const usageSnippet = `@layer reset, tokens, base;
+
+@import "kiso.css" layer(reset);
+@import "@kkhys/styles/uchu.css" layer(tokens);
+@import "@kkhys/styles/tokens.css" layer(tokens);
+@import "@kkhys/styles/base.css" layer(base);`;
+---
+
+<BaseLayout>
+  <h1 class="palt">kkhys design system</h1>
+  <p class="lead">
+    kkhys.me / memo / lgtm / diary / trends の5サイトを支えるデザイントークンと共有コンポーネント。
+    実体は monorepo の <code>packages/styles</code> と <code>packages/ui</code> にあり、
+    このサイトは同じソースを読んで描画している。
+  </p>
+
+  <h2>原則</h2>
+  <ul class="principles">
+    <li>
+      <strong>髪の毛ラインで区切る。</strong>
+      カードや影を重ねず、<code>--c-border</code> の1px境界線と余白で構造を示す。
+    </li>
+    <li>
+      <strong>パレットは uchu ひとつ。</strong>
+      OKLCH の <code>--uchu-*</code> を直接使わず、意味を持つ <code>--c-*</code> を介して使う。
+    </li>
+    <li>
+      <strong>テーマは light-dark()。</strong>
+      メディアクエリの分岐ではなく、トークン自身が両テーマの値を持つ。
+    </li>
+    <li>
+      <strong>本文カラムは <code>--content-width</code>(42rem)。</strong>
+      どのサイトも同じ幅に収まる。
+    </li>
+    <li>
+      <strong>素の CSS。</strong>
+      フレームワークを足さず、カスケードレイヤーとモダン CSS で組む。
+    </li>
+  </ul>
+
+  <h2>使い方</h2>
+  <p>各アプリの global.css は次の4行から始まる。</p>
+  <pre class="snippet"><code>{usageSnippet}</code></pre>
+  <p>
+    アプリ固有のトークンは、この後のローカル <code>tokens</code> レイヤーで追加・上書きする。
+    Satori(OG 画像)など CSS 変数を解決できない場所では
+    <code>@kkhys/styles/colors</code> の hex ミラーを使う。
+  </p>
+
+  <h2>目次</h2>
+  <nav class="toc" aria-label="ページ一覧">
+    <a href="/colors"><strong>Colors</strong><span>uchu パレットとセマンティックカラー</span></a>
+    <a href="/typography"><strong>Typography</strong><span>サイズ・ウェイト・行送り・等幅</span></a>
+    <a href="/layout"><strong>Layout</strong><span>スペーシング・角丸・影・選択色</span></a>
+    <a href="/components"><strong>Components</strong><span>@kkhys/ui とベーススタイルの挙動</span></a>
+  </nav>
+</BaseLayout>
+
+<style>
+  .lead {
+    color: var(--c-sub);
+    margin-block: var(--space-4) 0;
+  }
+
+  .principles {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .principles li {
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--c-border);
+    line-height: var(--lh-base);
+    font-size: var(--fs-sm);
+  }
+
+  .principles strong {
+    font-weight: var(--fw-medium);
+  }
+
+  .snippet {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    overflow-x: auto;
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+  }
+
+  .snippet code {
+    font-size: inherit;
+  }
+
+  .toc {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .toc a {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--c-border);
+    font-size: var(--fs-sm);
+  }
+
+  .toc a:hover {
+    text-decoration: none;
+  }
+
+  .toc a:hover strong {
+    text-decoration: underline;
+  }
+
+  .toc strong {
+    font-weight: var(--fw-medium);
+    min-width: 8rem;
+  }
+
+  .toc span {
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+  }
+</style>

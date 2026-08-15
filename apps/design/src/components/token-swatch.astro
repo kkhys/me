@@ -1,0 +1,90 @@
+---
+interface Props {
+  name: string;
+  value: string;
+  /** Render one swatch instead of a light/dark pair (static palette colors). */
+  single?: boolean | undefined;
+}
+
+const { name, value, single = false } = Astro.props;
+---
+
+<div class="token-row">
+  <code class="token-name">{name}</code>
+  <span class="swatches">
+    {
+      single ? (
+        <span class="swatch"><span class="swatch-fill" style={`background: var(${name})`} /></span>
+      ) : (
+        <>
+          <span class="swatch" style="color-scheme: light" title="light">
+            <span class="swatch-fill" style={`background: var(${name})`} />
+          </span>
+          <span class="swatch swatch--dark" style="color-scheme: dark" title="dark">
+            <span class="swatch-fill" style={`background: var(${name})`} />
+          </span>
+        </>
+      )
+    }
+  </span>
+  <code class="token-value">{value}</code>
+</div>
+
+<style>
+  .token-row {
+    display: grid;
+    grid-template-columns: minmax(9rem, auto) auto 1fr;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-2);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .token-name {
+    color: var(--c-text);
+  }
+
+  .swatches {
+    display: flex;
+    gap: var(--space-1);
+  }
+
+  /* Scheme canvas behind the fill so translucent token values render as
+     they do in situ on each scheme's background. */
+  .swatch {
+    display: inline-block;
+    width: var(--space-8);
+    height: var(--space-6);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--uchu-yang);
+    /* Hairline so near-background swatches stay visible on both schemes. */
+    box-shadow: inset 0 0 0 1px oklch(50% 0 0 / 0.25);
+  }
+
+  .swatch--dark {
+    background: var(--uchu-yin);
+  }
+
+  .swatch-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .token-value {
+    color: var(--c-sub);
+    font-size: var(--fs-2xs);
+    overflow-wrap: anywhere;
+  }
+
+  @media (width < 640px) {
+    .token-row {
+      grid-template-columns: auto 1fr;
+    }
+
+    .token-value {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

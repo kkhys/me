@@ -1,0 +1,170 @@
+---
+import Budoux from "@kkhys/ui/budoux.astro";
+import Spinner from "@kkhys/ui/spinner.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+
+const BUDOUX_SAMPLE = "あらゆる現実をすべて自分のほうへねじ曲げたのだと思われるかもしれない。";
+
+const spinnerSnippet = `import Spinner from "@kkhys/ui/spinner.astro";`;
+const budouxSnippet = `import Budoux from "@kkhys/ui/budoux.astro";
+
+<h1 class="budoux"><Budoux>タイトル</Budoux></h1>`;
+---
+
+<BaseLayout title="Components" description="@kkhys/ui の共有コンポーネントとベーススタイルの挙動">
+  <h1>Components</h1>
+  <p class="lead">
+    <code>@kkhys/ui</code> の共有 Astro コンポーネントと、<code>base.css</code> が全サイトに与える挙動。
+  </p>
+
+  <h2>Spinner</h2>
+  <p class="note">無限スクロールの読み込み表示(memo / lgtm)。色は <code>--c-sub</code> を参照する。</p>
+  <div class="demo">
+    <Spinner />
+  </div>
+  <pre class="snippet"><code>{spinnerSnippet}</code></pre>
+
+  <h2>BudouX</h2>
+  <p class="note">
+    スロットの日本語を文節境界で <code>&lt;wbr&gt;</code> 区切りにする(me / trends)。
+    <code>.budoux</code> クラス(<code>word-break: keep-all</code>)と組で使う。
+  </p>
+  <div class="demo demo--narrow-pair">
+    <figure>
+      <figcaption><code>Budoux</code> なし</figcaption>
+      <p class="narrow">{BUDOUX_SAMPLE}</p>
+    </figure>
+    <figure>
+      <figcaption><code>Budoux</code> あり</figcaption>
+      <p class="narrow budoux"><Budoux>{BUDOUX_SAMPLE}</Budoux></p>
+    </figure>
+  </div>
+  <pre class="snippet"><code>{budouxSnippet}</code></pre>
+
+  <h2>フォーカスリング</h2>
+  <p class="note">
+    キーボードフォーカス(<kbd>Tab</kbd>)で全サイト共通のリングが出る。
+    <code>outline</code> ベースなので角丸に追従し、レイアウトを揺らさず、Forced Colors でも消えない。
+  </p>
+  <div class="demo demo--row">
+    <button class="demo-button" type="button">ボタン</button>
+    <a class="demo-link" href="#">リンク</a>
+    <input class="demo-input" type="text" placeholder="入力欄" />
+  </div>
+
+  <h2>スクロールバー</h2>
+  <p class="note">
+    ページ・要素とも 8px の細いつまみ(<code>--c-scrollbar</code>)。トラックは透明。
+  </p>
+  <div class="demo">
+    <div class="scroll-demo">
+      <p>
+        {BUDOUX_SAMPLE}
+        {BUDOUX_SAMPLE}
+        {BUDOUX_SAMPLE}
+        {BUDOUX_SAMPLE}
+        {BUDOUX_SAMPLE}
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .lead {
+    color: var(--c-sub);
+    margin-block: var(--space-4) 0;
+  }
+
+  .note {
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+    margin-block: 0 var(--space-4);
+  }
+
+  .demo {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+  }
+
+  .demo--row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .demo--narrow-pair {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+  }
+
+  .demo--narrow-pair figure {
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .demo--narrow-pair figcaption {
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .narrow {
+    width: 11rem;
+    margin: 0;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-base);
+    border-inline-start: 2px solid var(--c-border);
+    padding-inline-start: var(--space-3);
+  }
+
+  .snippet {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    overflow-x: auto;
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+  }
+
+  .snippet code {
+    font-size: inherit;
+  }
+
+  .demo-button {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    background: var(--c-surface);
+    color: var(--c-text);
+    font-size: var(--fs-sm);
+    padding: var(--space-2) var(--space-4);
+    cursor: pointer;
+  }
+
+  .demo-link {
+    font-size: var(--fs-sm);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .demo-input {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    background: var(--c-bg);
+    color: inherit;
+    font-size: var(--fs-sm);
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .scroll-demo {
+    max-height: 6rem;
+    overflow-y: auto;
+  }
+
+  .scroll-demo p {
+    margin: 0;
+    font-size: var(--fs-sm);
+  }
+</style>

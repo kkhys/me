@@ -1,0 +1,46 @@
+---
+import "#/styles/global.css";
+import BaseSEO from "@kkhys/seo/base-seo.astro";
+import SiteFooter from "#/components/site-footer.astro";
+import SiteHeader from "#/components/site-header.astro";
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+}
+
+const SITE_NAME = "kkhys design system";
+const DEFAULT_DESCRIPTION = "kkhys.me と周辺サイトを支えるデザイントークンと共有コンポーネント";
+
+const { title, description = DEFAULT_DESCRIPTION } = Astro.props;
+const resolvedTitle = title === undefined ? SITE_NAME : `${title} · ${SITE_NAME}`;
+---
+
+<html lang="ja">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  {/* Declared before any CSS loads so dark-preference users don't get a
+      white canvas flash; pairs with `color-scheme: light dark` in CSS. */}
+  <meta name="color-scheme" content="light dark"/>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <BaseSEO title={resolvedTitle} description={description} />
+  <link rel="sitemap" href="/sitemap-index.xml"/>
+</head>
+<body>
+  <SiteHeader />
+  <main>
+    <slot />
+  </main>
+  <SiteFooter />
+</body>
+</html>
+
+<style>
+  main {
+    grid-row: main-start / main-end;
+    padding-block-end: var(--space-12);
+  }
+</style>
