@@ -100,19 +100,11 @@ const coverImage = getCoverImage(cover);
     justify-content: center;
     padding: 3px;
     border-radius: 50%;
-    border: 1.5px solid var(--c-gray);
+    border: 1.5px solid var(--c-border);
     background: var(--c-bg);
     box-shadow:
-      0 1px 3px oklch(0% 0 0 / 0.08),
-      0 4px 12px oklch(0% 0 0 / 0.04);
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .profile-avatar-ring {
-      box-shadow:
-        0 1px 3px oklch(0% 0 0 / 0.3),
-        0 4px 12px oklch(0% 0 0 / 0.2);
-    }
+      0 1px 3px light-dark(oklch(0% 0 0 / 0.08), oklch(0% 0 0 / 0.3)),
+      0 4px 12px light-dark(oklch(0% 0 0 / 0.04), oklch(0% 0 0 / 0.2));
   }
 
   .profile-info {
@@ -132,7 +124,7 @@ const coverImage = getCoverImage(cover);
 
   .profile-username {
     font-size: var(--fs-xs);
-    color: var(--c-sub-text);
+    color: var(--c-sub);
     margin: 0.15rem 0 0;
   }
 
@@ -151,7 +143,7 @@ const coverImage = getCoverImage(cover);
 
   .profile-post-count {
     font-size: var(--fs-xs);
-    color: var(--c-sub-text);
+    color: var(--c-sub);
     margin: 0.75rem 0 0;
   }
 </style>

@@ -1,0 +1,72 @@
+---
+interface Props {
+  author: string;
+  authorUrl?: string | undefined;
+  links?: { href: string; label: string }[] | undefined;
+}
+
+const { author, authorUrl, links = [] } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  {
+    links.length > 0 && (
+      <nav class="footer-nav">
+        {links.map(({ href, label }, index) => (
+          <>
+            {index > 0 && <span class="footer-separator">|</span>}
+            <a href={href}>{label}</a>
+          </>
+        ))}
+      </nav>
+    )
+  }
+  <span class="footer-copyright">
+    &copy;{year}{" "}
+    {
+      authorUrl ? (
+        <a href={authorUrl} target="_blank" rel="noopener noreferrer">
+          {author}
+        </a>
+      ) : (
+        author
+      )
+    }
+  </span>
+</footer>
+
+<style>
+  /* Expects the consumer's body grid to define [main-end] / [bottom] rows
+     (the memo / lgtm / design layout shells); harmless elsewhere. */
+  .site-footer {
+    grid-row: main-end / bottom;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .footer-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .site-footer a,
+  .footer-copyright,
+  .footer-separator {
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .site-footer a {
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    text-decoration: underline;
+  }
+</style>

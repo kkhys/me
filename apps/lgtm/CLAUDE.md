@@ -31,9 +31,10 @@ scripts/convert-videos.ts         # Bun + ffmpeg: convert .mov sources to animat
 
 Consumed as source (no build step); this app supplies its own config via thin wrappers.
 
-- `@kkhys/styles` — uchu.css OKLCH palette, imported in `src/styles/global.css`. The `--c-*` semantic tokens and the `prefers-color-scheme` dark mode stay app-local.
+- `@kkhys/styles` — uchu.css palette + shared `tokens.css` / `base.css`, imported in `src/styles/global.css`. Dark mode via `light-dark()`. Only lgtm-specific tokens (`--c-bg-gray`, `--c-text-emphasis`) stay app-local.
 - `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard primitives, wrapped by thin adapters in `src/components/seo/`. `head-meta.astro` and `json-ld.astro` are app-local.
 - `@kkhys/og` — favicon routes (`src/pages/api/favicon/[file].ts`, bound to the green gradient) + OG route handlers. The default OG card (`opengraph-image.tsx`) and the per-id OG (`pages/api/og/[id].png.ts`) stay app-local (bespoke layouts).
+- `@kkhys/ui` — shared Astro components; lgtm uses `spinner.astro` in the gallery's infinite scroll.
 
 ## Key Design Decisions
 

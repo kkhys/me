@@ -9,7 +9,7 @@ import BaseSeo from "#/components/seo/base-seo.astro";
 import JsonLd from "#/components/seo/json-ld.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
 import TwitterCard from "#/components/seo/twitter-card.astro";
-import Spinner from "#/components/spinner.astro";
+import Spinner from "@kkhys/ui/spinner.astro";
 import { IMAGES_PER_PAGE, TITLE } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
 import { shuffleArray } from "#/utils/shuffle";
@@ -157,7 +157,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     aspect-ratio: 3 / 2;
     overflow: hidden;
     border-radius: 1rem;
-    background-color: var(--c-bg-light-gray);
+    background-color: var(--c-surface);
     transition: transform 0.1s ease;
   }
 

@@ -200,7 +200,7 @@ const renderFeedItem = (memo: MemoSummary): HTMLLIElement => {
   ] as const) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "btn btn--ghost btn--small";
+    button.className = "btn btn--ghost btn--size-sm";
     button.textContent = label;
     button.addEventListener("click", () => setReplyTarget(type, memo));
     actions.append(button);

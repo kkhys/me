@@ -2,6 +2,8 @@
 
 @import "kiso.css" layer(reset);
 @import "@kkhys/styles/uchu.css" layer(tokens);
+@import "@kkhys/styles/tokens.css" layer(tokens);
+@import "@kkhys/styles/base.css" layer(base);
 
 /* ===== Design Tokens ===== */
 
@@ -9,93 +11,16 @@
   :root {
     color-scheme: light dark;
 
-    --radius-sm: 0.25rem;
-    --radius-md: 0.5rem;
-    --radius-full: 9999px;
-
-    --fs-2xs: 0.65rem;
-    --fs-xs: 0.75rem;
-    --fs-sm: 0.875rem;
-    --fs-lg: 1.25rem;
-
-    --fw-normal: 400;
-    --fw-medium: 500;
-
-    --c-bg: light-dark(var(--uchu-yang), var(--uchu-yin));
-    --c-text: light-dark(var(--uchu-yin), var(--uchu-gray-1));
-    --c-sub: light-dark(var(--uchu-yin-6), var(--uchu-yin-4));
-    --c-border: light-dark(var(--uchu-gray-2), oklch(var(--uchu-yang-raw) / 10%));
-    --c-primary: light-dark(var(--uchu-yin-8), var(--uchu-gray-3));
-    --c-primary-text: light-dark(var(--uchu-yang), var(--uchu-yin-9));
-    --c-surface: light-dark(var(--uchu-gray-1), var(--uchu-yin-9));
     --c-star: var(--uchu-orange-5);
     --c-faint: light-dark(var(--uchu-gray-4), var(--uchu-yin-7));
-    --c-ring: light-dark(var(--uchu-yin-4), var(--uchu-yin-6));
-
-    --ring: oklch(from var(--c-ring) l c h / 55%);
-    --ring-width: 2px;
-    --ring-offset: 2px;
   }
 }
 
 /* ===== Base Styles ===== */
 
 @layer base {
-  * {
-    border-color: var(--c-border);
-  }
-
-  :focus-visible {
-    outline: var(--ring-width) solid var(--ring);
-    outline-offset: var(--ring-offset);
-  }
-
-  html {
-    font-family: system-ui, sans-serif;
-    scrollbar-gutter: stable both-edges;
-    background-color: var(--c-bg);
-    color: var(--c-text);
-  }
-
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: light-dark(var(--uchu-gray-3), var(--uchu-yin-8));
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  @supports (-moz-appearance: none) {
-    html {
-      scrollbar-color: light-dark(var(--uchu-gray-3), var(--uchu-yin-8)) transparent;
-      scrollbar-width: thin;
-    }
-  }
-
   body {
     margin: 0;
-  }
-
-  h1,
-  h2,
-  h3 {
-    font-feature-settings: "palt";
-    text-wrap: balance;
-  }
-
-  .budoux {
-    word-break: keep-all;
-    overflow-wrap: anywhere;
-  }
-
-  .palt {
-    font-feature-settings: "palt";
   }
 
   a {
@@ -105,11 +30,5 @@
 
   a:hover {
     text-decoration: underline;
-  }
-
-  ::selection {
-    box-shadow: none;
-    background-color: light-dark(var(--uchu-yellow-2), var(--uchu-yellow-9));
-    color: var(--c-text);
   }
 }

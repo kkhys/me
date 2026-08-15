@@ -1,4 +1,5 @@
 import { createSiteOgImage } from "@kkhys/og/og";
+import { uchuHex } from "@kkhys/styles/colors";
 import { loadFont } from "#/utils/font-loader";
 
 export const siteOpengraphImage = async () => {
@@ -6,12 +7,9 @@ export const siteOpengraphImage = async () => {
 
   return createSiteOgImage({
     text: "Keisuke Hayashi",
-    // uchu-yang (oklch(99.4% 0 0))
-    background: "#fcfcfc",
-    // uchu-yang (oklch(99.4% 0 0))
-    innerBackground: "#fcfcfc",
-    // uchu-yin (oklch(14.38% 0.007 256.88))
-    color: "#0e1117",
+    background: uchuHex.yang,
+    innerBackground: uchuHex.yang,
+    color: uchuHex.yin,
     fontData: interSemiBold,
   });
 };

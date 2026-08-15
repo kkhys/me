@@ -2,7 +2,7 @@ import type { Element, ElementContent, Root } from "hast";
 import { fromHtml } from "hast-util-from-html";
 import { toHtml } from "hast-util-to-html";
 import { SKIP, visit } from "unist-util-visit";
-import { budouxProcess } from "./budoux";
+import { budouxProcess } from "@kkhys/ui/budoux";
 
 const defaultTargetTagNames = ["p", "li", "h1", "h2", "h3"];
 

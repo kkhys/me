@@ -1,0 +1,142 @@
+---
+import tokensCss from "@kkhys/styles/tokens.css?raw";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { filterByPrefix, parseCustomProperties } from "#/utils/tokens";
+
+const declarations = parseCustomProperties(tokensCss);
+const spaces = filterByPrefix(declarations, "--space-");
+const radii = filterByPrefix(declarations, "--radius-");
+const contentWidth = declarations.find(({ name }) => name === "--content-width");
+const shadow = declarations.find(({ name }) => name === "--shadow-sm");
+---
+
+<BaseLayout title="Layout" description="スペーシング・角丸・影・選択色のトークン">
+  <h1>Layout</h1>
+  <p class="lead">
+    余白と寸法のスケール。gap や padding の値はこのスケールから選び、スケール外の直値を増やさない。
+  </p>
+
+  <h2>スペーシング</h2>
+  <div class="rows">
+    {
+      spaces.map(({ name, value }) => (
+        <div class="row">
+          <code class="row-name">{name}</code>
+          <code class="row-value">{value}</code>
+          <span class="space-bar" style={`width: var(${name})`} />
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>角丸</h2>
+  <div class="radius-grid">
+    {
+      radii.map(({ name, value }) => (
+        <figure class="radius-box-wrap">
+          <span class="radius-box" style={`border-radius: var(${name})`} />
+          <figcaption>
+            <code class="row-name">{name}</code>
+            <code class="row-value">{value}</code>
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+
+  <h2>コンテンツ幅</h2>
+  {
+    contentWidth && (
+      <p class="note">
+        本文カラムは <code>{contentWidth.name}</code> = <code>{contentWidth.value}</code>。
+        このページの幅がそのまま実物。
+      </p>
+    )
+  }
+
+  <h2>影</h2>
+  {
+    shadow && (
+      <div class="rows">
+        <div class="row">
+          <code class="row-name">{shadow.name}</code>
+          <code class="row-value">{shadow.value}</code>
+          <span class="shadow-box" />
+        </div>
+      </div>
+    )
+  }
+  <p class="note">影はボタンなど操作要素の浮きにだけ使い、区切りには使わない(区切りは1pxの境界線)。</p>
+
+  <h2>選択色</h2>
+  <p class="selection-demo">
+    この段落を選択すると <code>--c-selection</code> が現れる。ライトでは淡い黄、ダークでは深い黄土。
+  </p>
+</BaseLayout>
+
+<style>
+  .rows {
+    display: grid;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: minmax(7rem, auto) minmax(4rem, auto) 1fr;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-2);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .row-value {
+    color: var(--c-sub);
+    font-size: var(--fs-2xs);
+  }
+
+  .space-bar {
+    height: var(--space-4);
+    background: var(--c-primary);
+    border-radius: var(--radius-xs);
+  }
+
+  .radius-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+
+  .radius-box-wrap {
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+    justify-items: start;
+  }
+
+  .radius-box {
+    display: block;
+    width: var(--space-12);
+    height: var(--space-12);
+    border: 1px solid var(--c-border);
+    background: var(--c-surface);
+  }
+
+  figcaption {
+    display: grid;
+  }
+
+  .shadow-box {
+    display: block;
+    width: var(--space-12);
+    height: var(--space-8);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--c-border);
+    background: var(--c-bg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .selection-demo {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+  }
+</style>

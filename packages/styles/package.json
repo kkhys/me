@@ -5,6 +5,19 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./uchu.css": "./uchu.css"
+    "./uchu.css": "./uchu.css",
+    "./tokens.css": "./tokens.css",
+    "./base.css": "./base.css",
+    "./components.css": "./components.css",
+    "./colors": "./src/colors.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }

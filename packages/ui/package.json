@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./spinner.astro": "./src/spinner.astro",
+    "./budoux.astro": "./src/budoux.astro",
+    "./budoux": "./src/budoux.ts",
+    "./site-header.astro": "./src/site-header.astro",
+    "./site-footer.astro": "./src/site-footer.astro",
+    "./blur-load-noscript.astro": "./src/blur-load-noscript.astro",
+    "./link-card.astro": "./src/link-card.astro",
+    "./blur-load": "./src/blur-load.ts",
+    "./favicon": "./src/favicon.ts",
+    "./image-signature": "./src/image-signature.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "budoux": "catalog:",
+    "linkedom": "catalog:"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "astro": "^7.0.0"
+  }
+}

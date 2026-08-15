@@ -1,8 +1,8 @@
 import { NODE_ENV } from "astro:env/client";
+import { isRasterImage } from "@kkhys/ui/image-signature";
 import fetchSiteMetadata, { type Metadata } from "fetch-site-metadata";
 import { parseHTML } from "linkedom";
 import { createResolvedCache } from "#/lib/api/cache";
-import { isRasterImage } from "#/utils/image-signature";
 
 const cache = createResolvedCache<Metadata>();
 

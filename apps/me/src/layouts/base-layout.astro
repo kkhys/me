@@ -1,6 +1,7 @@
 ---
 import "#/styles/global.css";
 import Umami from "@kkhys/analytics/umami.astro";
+import BlurLoadNoscript from "@kkhys/ui/blur-load-noscript.astro";
 import BaseSEO from "#/components/seo/base-seo.astro";
 import SiteFooter from "#/components/ui/site-footer.astro";
 import SiteNav from "#/components/ui/site-nav.astro";
@@ -35,9 +36,9 @@ const { class: className, showFooter = true } = Astro.props;
     <BaseSEO />
   </slot>
 
+  <BlurLoadNoscript />
   <noscript>
     <style>
-      .blur-load { filter: none !important; background: none !important; }
       lite-youtube { display: none !important; }
     </style>
   </noscript>
@@ -68,7 +69,7 @@ const { class: className, showFooter = true } = Astro.props;
   main {
     flex: 1;
     width: 100%;
-    max-width: 42rem;
+    max-width: var(--content-width);
     margin-inline: auto;
   }
 

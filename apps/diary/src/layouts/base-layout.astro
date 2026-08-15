@@ -1,6 +1,7 @@
 ---
 import "#/styles/global.css";
 import Umami from "@kkhys/analytics/umami.astro";
+import BlurLoadNoscript from "@kkhys/ui/blur-load-noscript.astro";
 import BaseSEO from "@kkhys/seo/base-seo.astro";
 import OpenGraph from "@kkhys/seo/open-graph.astro";
 import TwitterCard from "@kkhys/seo/twitter-card.astro";
@@ -56,11 +57,7 @@ const ogImageUrl = image ? new URL(image.src, Astro.site).href : undefined;
 
   <Umami websiteId="547cd1e3-b5dd-461b-86af-96b35f86c302" domains="diary.kkhys.me" />
 
-  <noscript>
-    <style>
-      .blur-load { filter: none !important; background: none !important; }
-    </style>
-  </noscript>
+  <BlurLoadNoscript />
 </head>
 <body>
 <main>

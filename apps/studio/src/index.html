@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
+    <!-- Declared before the stylesheet loads so dark-preference users don't
+         get a white canvas flash; pairs with `color-scheme: light dark` in CSS. -->
+    <meta name="color-scheme" content="light dark" />
     <title>Studio</title>
     <link rel="stylesheet" href="./styles.css" />
     <script type="module" src="./client.ts"></script>
@@ -15,7 +18,7 @@
         <div class="header__sync">
           <span id="status" class="header__status" role="status"></span>
           <label class="toggle"><input id="deploy" type="checkbox" /> Deploy</label>
-          <button id="sync" class="btn" type="button">Sync</button>
+          <button id="sync" class="btn btn--outline" type="button">Sync</button>
         </div>
       </header>
 
@@ -71,7 +74,7 @@
             <input id="images" type="file" accept="image/jpeg,image/png" multiple hidden />
           </label>
           <span id="counter" class="compose__counter">0 / 500</span>
-          <button id="post" class="btn btn--primary" type="submit">Post</button>
+          <button id="post" class="btn" type="submit">Post</button>
         </div>
       </form>
 

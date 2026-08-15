@@ -11,7 +11,7 @@ src/
   layouts/base-layout.astro   # HTML shell wired to the @kkhys/seo primitives
   components/diary-image.astro # <Picture> with AVIF/WebP variants + blur-up placeholder
   utils/entries.ts            # buildEntries: glob paths → dated, numbered entries (newest first)
-  styles/global.css           # Design tokens (--c-*, --ff-mono) + base styles; palette from @kkhys/styles
+  styles/global.css           # Imports @kkhys/styles (uchu + tokens + base) + app-local base styles
   __tests__/                  # Vitest unit tests
 public/robots.txt
 diary-content/                # Git submodule (private) — photos at diary/<YYYY-MM-DD>/<n>.jpg, not checked out in CI
@@ -21,7 +21,7 @@ diary-content/                # Git submodule (private) — photos at diary/<YYY
 
 Consumed as source (no build step).
 
-- `@kkhys/styles` — uchu.css OKLCH palette, imported in `src/styles/global.css`. The `--c-*` semantic tokens stay app-local.
+- `@kkhys/styles` — uchu.css palette + shared `tokens.css` / `base.css`, imported in `src/styles/global.css`. Tokens resolve to their light values (no dark scheme opt-in).
 - `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard in `base-layout.astro`. diary's OG image is the newest photo (variable-height JPEG), passed via the `imageType`/`imageWidth`/`imageHeight` props; `twitter:card` switches to "summary" when no photo exists.
 - `@kkhys/og` — favicon routes (`src/pages/api/favicon/[file].ts`, bound to the grayscale gradient). The OG image stays app-local (a photo, not a Satori card).
 

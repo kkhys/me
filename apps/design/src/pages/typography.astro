@@ -1,0 +1,114 @@
+---
+import tokensCss from "@kkhys/styles/tokens.css?raw";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { filterByPrefix, parseCustomProperties } from "#/utils/tokens";
+
+const declarations = parseCustomProperties(tokensCss);
+const fontSizes = filterByPrefix(declarations, "--fs-");
+const fontWeights = filterByPrefix(declarations, "--fw-");
+const lineHeights = filterByPrefix(declarations, "--lh-");
+const fontMono = declarations.find(({ name }) => name === "--font-mono");
+
+const SAMPLE = "あらゆる現実をすべて自分のほうへねじ曲げたのだ Sphinx of black quartz 0123";
+---
+
+<BaseLayout title="Typography" description="フォントサイズ・ウェイト・行送りのスケール">
+  <h1>Typography</h1>
+  <p class="lead">
+    本文は <code>system-ui, sans-serif</code>。見出しは <code>font-feature-settings: "palt"</code> で詰め、
+    日本語の折り返しは BudouX(<a href="/components">Components</a>)に任せる。
+  </p>
+
+  <h2>フォントサイズ</h2>
+  <div class="rows">
+    {
+      fontSizes.map(({ name, value }) => (
+        <div class="row">
+          <code class="row-name">{name}</code>
+          <code class="row-value">{value}</code>
+          <p class="sample palt" style={`font-size: var(${name})`}>
+            {SAMPLE}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>フォントウェイト</h2>
+  <div class="rows">
+    {
+      fontWeights.map(({ name, value }) => (
+        <div class="row">
+          <code class="row-name">{name}</code>
+          <code class="row-value">{value}</code>
+          <p class="sample" style={`font-weight: var(${name})`}>
+            {SAMPLE}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>行送り</h2>
+  <div class="rows">
+    {
+      lineHeights.map(({ name, value }) => (
+        <div class="row">
+          <code class="row-name">{name}</code>
+          <code class="row-value">{value}</code>
+          <p class="sample sample--paragraph" style={`line-height: var(${name})`}>
+            {SAMPLE}
+            {SAMPLE}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>等幅</h2>
+  {
+    fontMono && (
+      <div class="rows">
+        <div class="row">
+          <code class="row-name">{fontMono.name}</code>
+          <code class="row-value">{fontMono.value}</code>
+          <p class="sample" style="font-family: var(--font-mono)">
+            const parsed = parseCustomProperties(css);
+          </p>
+        </div>
+      </div>
+    )
+  }
+</BaseLayout>
+
+<style>
+  .rows {
+    display: grid;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: minmax(7rem, auto) auto;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-4);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .row-value {
+    color: var(--c-sub);
+    font-size: var(--fs-2xs);
+  }
+
+  .sample {
+    grid-column: 1 / -1;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .sample--paragraph {
+    white-space: normal;
+  }
+</style>

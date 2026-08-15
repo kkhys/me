@@ -1,0 +1,256 @@
+---
+import { getImage, Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+import { blurLoadHandlers } from "./blur-load";
+import type { Favicon } from "./favicon";
+import GlobeIcon from "./icons/globe.svg";
+
+interface Props extends HTMLAttributes<"a"> {
+  href: string;
+  title?: string | undefined;
+  description?: string | undefined;
+  /** og:image URL, already validated by the consumer's metadata layer. */
+  imageSrc?: string | undefined;
+  favicon?: Favicon | undefined;
+  /** Opens in a new tab when true. */
+  external?: boolean | undefined;
+}
+
+const {
+  href,
+  title,
+  description,
+  imageSrc,
+  favicon = { kind: "none" },
+  external = false,
+  ...rest
+} = Astro.props;
+
+// Tiny blurred placeholder shown until the real OG image loads, matching the
+// blur-load effect used by content and memo-card images. A remote og:image can
+// be unreachable or undecodable at build time, so degrade to no placeholder
+// rather than failing the build (memo deploys unattended from CI).
+let blurryImage: Awaited<ReturnType<typeof getImage>> | undefined;
+if (imageSrc) {
+  try {
+    blurryImage = await getImage({ src: imageSrc, width: 20, height: 11, format: "avif" });
+  } catch {
+    blurryImage = undefined;
+  }
+}
+---
+
+<div class="link-card">
+  <a
+      class="link-card-inner"
+      {...(external && { target: "_blank", rel: "noreferrer" })}
+      href={href}
+      {...rest}
+  >
+    <div class="link-card-content">
+      <span class="link-card-title">
+      <span class="link-card-title-text">{title}</span>
+      </span>
+      <span class="link-card-description">
+      {description}
+      </span>
+      <div class="link-card-domain">
+        {favicon.kind === "remote" ? (
+            <Image
+                src={favicon.src}
+                alt=""
+                width={32}
+                height={32}
+                format="png"
+                class="link-card-favicon"
+            />
+        ) : favicon.kind === "inline" ? (
+            <img
+                src={favicon.src}
+                alt=""
+                width="32"
+                height="32"
+                loading="lazy"
+                decoding="async"
+                class="link-card-favicon"
+            />
+        ) : (
+            <GlobeIcon class="link-card-globe" />
+        )}
+        <span class="link-card-hostname">
+        {new URL(href).hostname}
+      </span>
+      </div>
+    </div>
+    {imageSrc && (
+        <div class="link-card-image">
+          <div
+              class="link-card-blur-load blur-load"
+              style={blurryImage && `background-image: url(${blurryImage.src})`}
+          >
+            <Image
+                src={imageSrc}
+                alt={`${title}のカバー画像`}
+                width={1200}
+                height={630}
+                widths={[230, 460, 690, 920, 1200]}
+                sizes="(max-width: 639.98px) 100vw, 230px"
+                format="avif"
+                class="link-card-img"
+                {...blurLoadHandlers(".link-card-blur-load")}
+            />
+          </div>
+        </div>
+    )}
+  </a>
+</div>
+
+<style>
+  .link-card {
+    user-select: none;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--c-border);
+    transition: transform 0.15s ease;
+  }
+
+  .link-card:active {
+    transform: scale(0.99);
+  }
+
+  /* Mobile: stack vertically with the image on top (image is the last child,
+     so column-reverse lifts it above the text). */
+  .link-card-inner {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.2s;
+  }
+
+  .link-card-inner:hover {
+    background-color: oklch(from var(--c-surface) l c h / 50%);
+  }
+
+  .link-card-content {
+    min-width: 0;
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+
+  .link-card-title {
+    display: block;
+    max-height: 3rem;
+    overflow-wrap: break-word;
+    font-weight: var(--fw-medium);
+    line-height: 1.625;
+  }
+
+  .link-card-title-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .link-card-description {
+    display: block;
+    margin-top: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-wrap: break-word;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .link-card-domain {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+
+  .link-card-globe {
+    width: 0.75rem;
+    height: 0.75rem;
+    flex-shrink: 0;
+    margin-top: 1.5px;
+  }
+
+  /* Slightly larger than the globe fallback so the glyph stays legible inside
+     the chip padding. Favicons assume a light surface, so the chip stays light
+     in both themes to keep dark logos visible in dark mode; it's dimmed there
+     (gray-3, not white) so the chip doesn't glare against the dark card. */
+  .link-card-favicon {
+    width: 0.875rem;
+    height: 0.875rem;
+    flex-shrink: 0;
+    margin-top: 1.5px;
+    padding: 1.5px;
+    border-radius: 3px;
+    background-color: light-dark(var(--uchu-yang), var(--uchu-gray-3));
+    object-fit: contain;
+  }
+
+  .link-card-hostname {
+    margin-left: 0.25rem;
+    font-size: var(--fs-xs);
+  }
+
+  /* Mobile: full-width banner on top, kept at the standard OG ratio.
+     overflow: hidden clips the blur halo so it doesn't bleed past the image
+     box into the adjacent text on the desktop horizontal layout.
+     The divider keeps near-white OG images from blending into the card
+     background in light mode; it sits on the edge facing the text. */
+  .link-card-image {
+    width: 100%;
+    aspect-ratio: 40 / 21;
+    overflow: hidden;
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .link-card-blur-load {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(36px);
+    transition: filter 250ms ease-in-out;
+  }
+
+  .link-card-blur-load.image-loaded {
+    background-image: none !important;
+    filter: none;
+  }
+
+  .link-card-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Desktop: horizontal row with the image beside the text, same ratio. */
+  @media (width >= 640px) {
+    .link-card-inner {
+      flex-direction: row;
+      height: 120px;
+      align-items: center;
+    }
+
+    .link-card-content {
+      flex: 1;
+      width: auto;
+    }
+
+    .link-card-image {
+      width: auto;
+      height: 100%;
+      border-bottom: none;
+      border-left: 1px solid var(--c-border);
+    }
+  }
+</style>
