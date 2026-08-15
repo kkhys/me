@@ -1,0 +1,80 @@
+---
+interface Props {
+  title: string;
+  /** Renders the title as a link (the lgtm brand-link pattern). */
+  href?: string | undefined;
+  /** Shows a back-to-home button on the left (the memo subpage pattern). */
+  showBack?: boolean | undefined;
+}
+
+const { title, href, showBack = false } = Astro.props;
+---
+
+<header class="site-header">
+  {
+    showBack && (
+      <a href="/" class="back-button" aria-label="Back to home">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M19 12H5" />
+          <path d="m12 19-7-7 7-7" />
+        </svg>
+      </a>
+    )
+  }
+  {href ? <a href={href} class="site-title">{title}</a> : <div class="site-title">{title}</div>}
+</header>
+
+<style>
+  /* Expects the consumer's body grid to define [top] / [main-start] rows
+     (the memo / lgtm / design layout shells); harmless elsewhere. */
+  .site-header {
+    position: relative;
+    display: grid;
+    grid-row: top / main-start;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    padding-block: var(--space-4);
+  }
+
+  .site-title {
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+  }
+
+  a.site-title {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a.site-title:hover {
+    opacity: 0.7;
+  }
+
+  .back-button {
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: var(--radius-full);
+    color: var(--c-text);
+    transition: background-color 0.15s;
+  }
+
+  .back-button:hover {
+    background-color: var(--c-surface);
+  }
+</style>

@@ -1,8 +1,10 @@
 ---
 import Umami from "@kkhys/analytics/umami.astro";
-import Footer from "#/components/footer.astro";
+import BlurLoadNoscript from "@kkhys/ui/blur-load-noscript.astro";
+import SiteFooter from "@kkhys/ui/site-footer.astro";
 import Header from "#/components/header.astro";
 import HeadMeta from "#/components/seo/head-meta.astro";
+import { SITE_AUTHOR_NAME } from "#/config/constants";
 import "#/styles/global.css";
 ---
 
@@ -18,15 +20,11 @@ import "#/styles/global.css";
         <slot name="structured-data" />
     </head>
     <body>
-        <noscript>
-            <style>
-                [data-blur-load] { filter: none !important; background: none !important; }
-            </style>
-        </noscript>
+        <BlurLoadNoscript selector="[data-blur-load]" />
         <Header />
         <main>
             <slot />
         </main>
-        <Footer />
+        <SiteFooter author={SITE_AUTHOR_NAME} />
     </body>
 </html>

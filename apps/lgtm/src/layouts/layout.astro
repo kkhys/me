@@ -1,9 +1,15 @@
 ---
 import Umami from "@kkhys/analytics/umami.astro";
-import Footer from "#/components/footer.astro";
-import Header from "#/components/header.astro";
+import BlurLoadNoscript from "@kkhys/ui/blur-load-noscript.astro";
+import SiteFooter from "@kkhys/ui/site-footer.astro";
+import SiteHeader from "@kkhys/ui/site-header.astro";
 import HeadMeta from "#/components/seo/head-meta.astro";
 import "#/styles/global.css";
+
+const FOOTER_LINKS = [
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/copyright", label: "Copyright" },
+];
 ---
 
 <html lang="en">
@@ -16,17 +22,13 @@ import "#/styles/global.css";
         <slot name="head" />
         <slot name="seo" />
         <slot name="structured-data" />
-        <noscript>
-            <style>
-                .blur-load { filter: none !important; background: none !important; }
-            </style>
-        </noscript>
+        <BlurLoadNoscript />
     </head>
     <body>
-        <Header />
+        <SiteHeader title="LGTM" href="/" />
         <main>
             <slot />
         </main>
-        <Footer />
+        <SiteFooter author="Keisuke Hayashi" authorUrl="https://kkhys.me" links={FOOTER_LINKS} />
     </body>
 </html>

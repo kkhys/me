@@ -1,0 +1,11 @@
+---
+interface Props {
+  /** Selector the app's blur-up implementation marks pending images with. */
+  selector?: string | undefined;
+}
+
+const { selector = ".blur-load" } = Astro.props;
+const css = `${selector} { filter: none !important; background: none !important; }`;
+---
+
+<noscript><style set:html={css}></style></noscript>

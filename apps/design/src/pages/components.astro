@@ -1,5 +1,7 @@
 ---
 import Budoux from "@kkhys/ui/budoux.astro";
+import SiteFooter from "@kkhys/ui/site-footer.astro";
+import SiteHeader from "@kkhys/ui/site-header.astro";
 import Spinner from "@kkhys/ui/spinner.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 
@@ -9,6 +11,13 @@ const spinnerSnippet = `import Spinner from "@kkhys/ui/spinner.astro";`;
 const budouxSnippet = `import Budoux from "@kkhys/ui/budoux.astro";
 
 <h1 class="budoux"><Budoux>タイトル</Budoux></h1>`;
+const siteHeaderSnippet = `import SiteHeader from "@kkhys/ui/site-header.astro";
+
+<SiteHeader title="LGTM" href="/" />
+<SiteHeader title="Thread" showBack />`;
+const siteFooterSnippet = `import SiteFooter from "@kkhys/ui/site-footer.astro";
+
+<SiteFooter author="Keisuke Hayashi" authorUrl="https://kkhys.me" links={[...]} />`;
 ---
 
 <BaseLayout title="Components" description="@kkhys/ui の共有コンポーネントとベーススタイルの挙動">
@@ -40,6 +49,34 @@ const budouxSnippet = `import Budoux from "@kkhys/ui/budoux.astro";
     </figure>
   </div>
   <pre class="snippet"><code>{budouxSnippet}</code></pre>
+
+  <h2>SiteHeader</h2>
+  <p class="note">
+    小さなサイトの中央寄せヘッダー(memo / lgtm)。<code>href</code> でブランドリンクに、
+    <code>showBack</code> で左端に戻るボタンが付く。
+  </p>
+  <div class="demo demo--stack">
+    <SiteHeader title="LGTM" href="/components" />
+    <SiteHeader title="Thread" showBack />
+  </div>
+  <pre class="snippet"><code>{siteHeaderSnippet}</code></pre>
+
+  <h2>SiteFooter</h2>
+  <p class="note">
+    中央寄せの © フッター(memo / lgtm)。<code>links</code> で法務リンク列、
+    <code>authorUrl</code> で名前がリンクになる。
+  </p>
+  <div class="demo demo--stack">
+    <SiteFooter
+      author="Keisuke Hayashi"
+      authorUrl="https://kkhys.me"
+      links={[
+        { href: "#", label: "Privacy Policy" },
+        { href: "#", label: "Copyright" },
+      ]}
+    />
+  </div>
+  <pre class="snippet"><code>{siteFooterSnippet}</code></pre>
 
   <h2>フォーカスリング</h2>
   <p class="note">
@@ -74,6 +111,11 @@ const budouxSnippet = `import Budoux from "@kkhys/ui/budoux.astro";
     border: 1px solid var(--c-border);
     border-radius: var(--radius-md);
     padding: var(--space-6);
+  }
+
+  .demo--stack {
+    display: grid;
+    gap: var(--space-4);
   }
 
   .demo--row {
