@@ -60,11 +60,6 @@ const usageSnippet = `@layer reset, tokens, base;
 </BaseLayout>
 
 <style>
-  .lead {
-    color: var(--c-sub);
-    margin-block: var(--space-4) 0;
-  }
-
   .principles {
     margin: 0;
     padding: 0;
@@ -82,19 +77,6 @@ const usageSnippet = `@layer reset, tokens, base;
     font-weight: var(--fw-medium);
   }
 
-  .snippet {
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-md);
-    padding: var(--space-4);
-    overflow-x: auto;
-    font-size: var(--fs-xs);
-    line-height: var(--lh-sm);
-  }
-
-  .snippet code {
-    font-size: inherit;
-  }
-
   .toc {
     display: grid;
     gap: var(--space-2);
@@ -109,12 +91,29 @@ const usageSnippet = `@layer reset, tokens, base;
     font-size: var(--fs-sm);
   }
 
+  .toc a::after {
+    content: "→";
+    margin-inline-start: auto;
+    color: var(--c-sub);
+    opacity: 0;
+    translate: -4px 0;
+    transition:
+      opacity 0.2s,
+      translate 0.2s;
+  }
+
   .toc a:hover {
     text-decoration: none;
   }
 
   .toc a:hover strong {
     text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .toc a:hover::after {
+    opacity: 1;
+    translate: 0;
   }
 
   .toc strong {

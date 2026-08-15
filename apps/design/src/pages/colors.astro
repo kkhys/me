@@ -7,6 +7,23 @@ import { filterByPrefix, parseCustomProperties } from "#/utils/tokens";
 
 const semanticColors = filterByPrefix(parseCustomProperties(tokensCss), "--c-");
 const palette = parseCustomProperties(uchuCss).filter(({ name }) => !name.endsWith("-raw"));
+
+interface PaletteStep {
+  name: string;
+  value: string;
+  label: string;
+}
+
+const families: { family: string; steps: PaletteStep[] }[] = [];
+for (const { name, value } of palette) {
+  const match = name.match(/^--uchu-(?<family>[a-z]+)(?:-(?<step>\d))?$/u);
+  const family = match?.groups?.["family"];
+  if (family === undefined) continue;
+  const step: PaletteStep = { name, value, label: match?.groups?.["step"] ?? "•" };
+  const group = families.find((entry) => entry.family === family);
+  if (group) group.steps.push(step);
+  else families.push({ family, steps: [step] });
+}
 ---
 
 <BaseLayout title="Colors" description="uchu OKLCH パレットとセマンティックカラートークン">
@@ -26,32 +43,78 @@ const palette = parseCustomProperties(uchuCss).filter(({ name }) => !name.endsWi
   <h2>uchu パレット</h2>
   <p class="note">
     生のパレット値。原則としてアプリからは直接使わず、セマンティックトークンの材料にする。
+    番号は uchu の階調(欠番は未使用の色)。チップにポインタを載せると oklch 値が出る。
     透明度を後付けする場合のために、一部の色は <code>oklch()</code> の引数だけを持つ
     <code>-raw</code> 変種も持つ。
   </p>
-  <div class="token-list">
-    {palette.map(({ name, value }) => <TokenSwatch name={name} value={value} single />)}
+  <div class="families">
+    {
+      families.map(({ family, steps }) => (
+        <div class="family">
+          <code class="family-name">{family}</code>
+          <div class="ramp">
+            {steps.map(({ name, value, label }) => (
+              <span class="palette-chip" title={`${name}: ${value}`}>
+                <span class="palette-chip-fill" style={`background: var(${name})`} />
+                <span class="palette-chip-step">{label}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      ))
+    }
   </div>
 </BaseLayout>
 
 <style>
-  .lead {
-    color: var(--c-sub);
-    margin-block: var(--space-4) 0;
-  }
-
-  .lead a {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .note {
-    font-size: var(--fs-xs);
-    color: var(--c-sub);
-    margin-block: 0 var(--space-4);
-  }
-
   .token-list {
     display: grid;
+  }
+
+  .families {
+    display: grid;
+  }
+
+  .family {
+    display: grid;
+    grid-template-columns: minmax(6rem, auto) 1fr;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .ramp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .palette-chip {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-1);
+  }
+
+  .palette-chip-fill {
+    display: block;
+    width: var(--space-8);
+    height: var(--space-8);
+    border-radius: var(--radius-sm);
+    /* Hairline so near-background chips stay visible on both schemes. */
+    box-shadow: inset 0 0 0 1px oklch(50% 0 0 / 0.25);
+  }
+
+  .palette-chip-step {
+    font-size: var(--fs-2xs);
+    font-family: var(--font-mono);
+    color: var(--c-sub);
+  }
+
+  @media (width < 640px) {
+    .family {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
   }
 </style>
