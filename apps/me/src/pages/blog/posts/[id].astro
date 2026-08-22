@@ -5,6 +5,7 @@ import type { BreadcrumbList, WithContext } from "schema-dts";
 import JsonLd from "#/components/seo/json-ld.astro";
 import ContentWrapper from "#/features/blog/components/content-wrapper.astro";
 import { getCategoryByTitle } from "#/features/blog/config/category";
+import { getPostCacheKey } from "#/features/blog/utils/cache-key";
 import { getPublicBlogEntries, toPostNavItem } from "#/features/blog/utils/entry";
 import BlogLayout from "#/layouts/blog-layout.astro";
 import { getBlogPostingSchema } from "#/lib/json-ld";
@@ -17,17 +18,22 @@ export const getStaticPaths = (async () => {
   const entries = await getPublicBlogEntries();
 
   return entries.map((entry, index) => {
-    return {
+    const newerPost = toPostNavItem(entries[index - 1]);
+    const olderPost = toPostNavItem(entries[index + 1]);
+    const cacheKey = getPostCacheKey(entries, entry, newerPost, olderPost);
+    const path = {
       params: {
         id: entry.id,
       },
       props: {
         entry,
         description: extractDescription(entry.body ?? ""),
-        newerPost: toPostNavItem(entries[index - 1]),
-        olderPost: toPostNavItem(entries[index + 1]),
+        newerPost,
+        olderPost,
       },
     };
+
+    return cacheKey === undefined ? path : Object.assign(path, { cacheKey });
   });
 }) satisfies GetStaticPaths;
 

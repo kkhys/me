@@ -1,6 +1,6 @@
 ---
 import { Picture as AstroPicture, getImage, type Picture } from "astro:assets";
-import type { UnresolvedImageTransform } from "astro";
+import type { ImageMetadata, UnresolvedImageTransform } from "astro";
 
 import { blurLoadHandlers } from "@kkhys/ui/blur-load";
 import type { CustomImageProps } from "./types";
@@ -19,8 +19,12 @@ const blurryImage = await getImage({
 const WIDE_DISPLAY_PX = 896;
 const WIDE_THRESHOLD_PX = WIDE_DISPLAY_PX * 2;
 const { src } = rest;
-const metadata =
-  typeof src === "object" && src !== null && "width" in src ? src : null;
+// In dev, markdown images arrive as a function-shaped Proxy around
+// ImageMetadata, so a plain `typeof === "object"` check misses them.
+const metadata: ImageMetadata | null =
+  src === undefined || src === null || typeof src === "string"
+    ? null
+    : (src as ImageMetadata);
 const intrinsicWidth = metadata?.width ?? 0;
 const intrinsicHeight = metadata?.height ?? 0;
 const isLandscape = intrinsicWidth > intrinsicHeight;
@@ -33,9 +37,12 @@ const sizes = isWide
   ? `(min-width: 960px) ${WIDE_DISPLAY_PX}px, (min-width: 672px) calc(100vw - 4rem), 100vw`
   : `(min-width: 672px) 672px, 100vw`;
 
+// SVG can't be transcoded to raster formats; an avif <source> would 500.
+const isSvg = metadata?.format === "svg";
+
 const pictureProps = {
   class: `image-rounded ${className ?? ""}`.trim(),
-  formats: ["avif"],
+  formats: isSvg ? ["svg"] : ["avif"],
   quality: 80,
   widths,
   sizes,

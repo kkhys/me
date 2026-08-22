@@ -4,7 +4,7 @@ import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 
 export const getStaticPaths = (async () =>
   (await getPublicBlogEntries()).map((entry) => {
-    return {
+    const path = {
       params: {
         id: entry.id,
       },
@@ -12,6 +12,8 @@ export const getStaticPaths = (async () =>
         entry,
       },
     };
+
+    return entry.digest === undefined ? path : Object.assign(path, { cacheKey: entry.digest });
   })) satisfies GetStaticPaths;
 
 export const GET: APIRoute = async ({ props }) => {
