@@ -7,4 +7,12 @@ export default defineConfig({
   build: {
     format: "file",
   },
+  vite: {
+    resolve: {
+      // satori bundles harfbuzzjs, whose Emscripten glue reads `__dirname` and
+      // loads `hb.wasm` from beside itself. Both break once inlined into the ESM
+      // prerender bundle, so resolve it from node_modules at runtime instead.
+      external: ["satori"],
+    },
+  },
 });

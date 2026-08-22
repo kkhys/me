@@ -28,8 +28,8 @@ catalogs:
       specifier: 1.62.1
       version: 1.62.1
     '@types/bun':
-      specifier: 1.3.14
-      version: 1.3.14
+      specifier: 1.4.0
+      version: 1.4.0
     '@types/mdast':
       specifier: 4.0.4
       version: 4.0.4
@@ -73,8 +73,8 @@ catalogs:
       specifier: 15.0.1
       version: 15.0.1
     satori:
-      specifier: 0.29.1
-      version: 0.29.1
+      specifier: 0.33.1
+      version: 0.33.1
     sharp:
       specifier: 0.35.3
       version: 0.35.3
@@ -91,8 +91,8 @@ catalogs:
       specifier: 4.1.11
       version: 4.1.11
     wrangler:
-      specifier: 4.124.0
-      version: 4.124.0
+      specifier: 4.125.0
+      version: 4.125.0
 
 importers:
 
@@ -155,7 +155,7 @@ importers:
         version: 4.1.11(@types/node@26.1.2)(@vitest/coverage-v8@4.1.11)(vite@8.1.0(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2))
       wrangler:
         specifier: 'catalog:'
-        version: 4.124.0
+        version: 4.125.0
 
   apps/diary:
     dependencies:
@@ -183,9 +183,12 @@ importers:
       kiso.css:
         specifier: 'catalog:'
         version: 1.2.4
+      satori:
+        specifier: 'catalog:'
+        version: 0.33.1
       sharp:
         specifier: 'catalog:'
-        version: 0.35.3(@types/node@25.0.3)
+        version: 0.35.3(@types/node@26.1.2)
     devDependencies:
       '@astrojs/check':
         specifier: 'catalog:'
@@ -210,7 +213,7 @@ importers:
         version: 4.1.11(@types/node@26.1.2)(@vitest/coverage-v8@4.1.11)(vite@8.1.0(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2))
       wrangler:
         specifier: 'catalog:'
-        version: 4.124.0
+        version: 4.125.0
 
   apps/lgtm:
     dependencies:
@@ -243,7 +246,7 @@ importers:
         version: 1.2.4
       sharp:
         specifier: 'catalog:'
-        version: 0.35.3(@types/node@25.0.3)
+        version: 0.35.3(@types/node@26.1.2)
     devDependencies:
       '@astrojs/check':
         specifier: 'catalog:'
@@ -256,7 +259,7 @@ importers:
         version: 0.2.5(@astrojs/markdown-remark@7.2.4(supports-color@10.2.2))(@emnapi/core@2.0.0-alpha.4)(@emnapi/runtime@2.0.0-alpha.4)(@types/node@26.1.2)(yaml@2.8.2)
       '@types/bun':
         specifier: 'catalog:'
-        version: 1.3.14
+        version: 1.4.0
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.18
@@ -280,7 +283,7 @@ importers:
         version: 19.2.8(react@19.2.8)
       satori:
         specifier: 'catalog:'
-        version: 0.29.1
+        version: 0.33.1
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -289,7 +292,7 @@ importers:
         version: 4.1.11(@types/node@26.1.2)(@vitest/coverage-v8@4.1.11)(vite@8.1.0(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2))
       wrangler:
         specifier: 'catalog:'
-        version: 4.124.0
+        version: 4.125.0
 
   apps/me:
     dependencies:
@@ -340,7 +343,7 @@ importers:
         version: 1.2.4
       sharp:
         specifier: 'catalog:'
-        version: 0.35.3(@types/node@25.0.3)
+        version: 0.35.3(@types/node@26.1.2)
     devDependencies:
       '@astrojs/markdown-remark':
         specifier: 'catalog:'
@@ -350,7 +353,7 @@ importers:
         version: 0.44.1
       '@types/bun':
         specifier: 'catalog:'
-        version: 1.3.14
+        version: 1.4.0
       '@types/hast':
         specifier: 3.0.5
         version: 3.0.5
@@ -407,7 +410,7 @@ importers:
         version: 19.2.8(react@19.2.8)
       satori:
         specifier: 'catalog:'
-        version: 0.29.1
+        version: 0.33.1
       schema-dts:
         specifier: 2.0.0
         version: 2.0.0(typescript@6.0.3)
@@ -422,7 +425,7 @@ importers:
         version: 4.1.11(@types/node@26.1.2)(@vitest/coverage-v8@4.1.11)(vite@8.1.0(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2))
       wrangler:
         specifier: 'catalog:'
-        version: 4.124.0
+        version: 4.125.0
 
   apps/memo:
     dependencies:
@@ -453,9 +456,12 @@ importers:
       kiso.css:
         specifier: 'catalog:'
         version: 1.2.4
+      satori:
+        specifier: 'catalog:'
+        version: 0.33.1
       sharp:
         specifier: 'catalog:'
-        version: 0.35.3(@types/node@25.0.3)
+        version: 0.35.3(@types/node@26.1.2)
     devDependencies:
       '@astrojs/check':
         specifier: 'catalog:'
@@ -516,7 +522,7 @@ importers:
         version: 4.1.11(@types/node@26.1.2)(@vitest/coverage-v8@4.1.11)(vite@8.1.0(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2))
       wrangler:
         specifier: 'catalog:'
-        version: 4.124.0
+        version: 4.125.0
 
   apps/studio:
     dependencies:
@@ -535,7 +541,7 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: 'catalog:'
-        version: 1.3.14
+        version: 1.4.0
       '@vitest/coverage-v8':
         specifier: 'catalog:'
         version: 4.1.11(vitest@4.1.11)
@@ -578,6 +584,9 @@ importers:
       kiso.css:
         specifier: 'catalog:'
         version: 1.2.4
+      satori:
+        specifier: 'catalog:'
+        version: 0.33.1
       sharp:
         specifier: 'catalog:'
         version: 0.35.3(@types/node@26.1.2)
@@ -605,7 +614,7 @@ importers:
         version: 4.1.11(@types/node@26.1.2)(@vitest/coverage-v8@4.1.11)(vite@8.1.0(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2))
       wrangler:
         specifier: 'catalog:'
-        version: 4.124.0
+        version: 4.125.0
 
   packages/analytics:
     dependencies:
@@ -620,14 +629,14 @@ importers:
         version: 19.2.8
       satori:
         specifier: 'catalog:'
-        version: 0.29.1
+        version: 0.33.1
       sharp:
         specifier: 'catalog:'
-        version: 0.35.3(@types/node@25.0.3)
+        version: 0.35.3(@types/node@26.1.2)
     devDependencies:
       '@types/bun':
         specifier: 'catalog:'
-        version: 1.3.14
+        version: 1.4.0
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.18
@@ -648,7 +657,7 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: 'catalog:'
-        version: 1.3.14
+        version: 1.4.0
       '@vitest/coverage-v8':
         specifier: 'catalog:'
         version: 4.1.11(vitest@4.1.11)
@@ -663,7 +672,7 @@ importers:
     dependencies:
       astro:
         specifier: ^7.0.0
-        version: 7.0.7(@astrojs/markdown-remark@7.2.1)(@emnapi/core@2.0.0-alpha.4)(@emnapi/runtime@2.0.0-alpha.4)(@types/node@25.0.3)(terser@5.49.2)(yaml@2.8.2)
+        version: 7.0.7(@astrojs/markdown-remark@7.2.1)(@emnapi/core@2.0.0-alpha.4)(@emnapi/runtime@2.0.0-alpha.4)(@types/node@26.1.2)(terser@5.49.2)(yaml@2.8.2)
     devDependencies:
       '@vitest/coverage-v8':
         specifier: 'catalog:'
@@ -679,7 +688,7 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: 'catalog:'
-        version: 1.3.14
+        version: 1.4.0
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -701,7 +710,7 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: 'catalog:'
-        version: 1.3.14
+        version: 1.4.0
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -1146,32 +1155,32 @@ packages:
       workerd:
         optional: true
 
-  '@cloudflare/workerd-darwin-64@1.20260815.1':
-    resolution: {integrity: sha512-7PsLdcz6pT9EMd1EJGZEgMyYRfs0CHxGs62PS2L1w3s6+xGmQcRXKm/zoMftmqZF45JBa4MzFeownRKbRt/x5g==}
+  '@cloudflare/workerd-darwin-64@1.20260820.1':
+    resolution: {integrity: sha512-5F2/t7SVnugG3rscSe9da1LoHst+GiuVGPaE9BP6j5AonlFpiYi0eoJrl3wof9zDBIIgJZ87NjRj9TKjbbYgHg==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [darwin]
 
-  '@cloudflare/workerd-darwin-arm64@1.20260815.1':
-    resolution: {integrity: sha512-60wtg8ng7FVWeOg/UMbZ9Ye0sslpRRAKoftPbdtuH2volq676quxVr6Zm2EjVULH/JFZeCn72dbLlrnbh0Mpcw==}
+  '@cloudflare/workerd-darwin-arm64@1.20260820.1':
+    resolution: {integrity: sha512-jFnG7715+r9FXRZPpuWWe5Ayd9v/IJKDODARg56ffFJWWtte6bFNi5VY3GazBM04hEmxny6OjXQBh3j2E/wNZw==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [darwin]
 
-  '@cloudflare/workerd-linux-64@1.20260815.1':
-    resolution: {integrity: sha512-MuqKIHPo0Qyo8MZMmy0lP2B5PeAL7f4T9Fu4Usk3QdbV4JIrKG/OoybN3Ign7m/Dff+L1Oo/ZHydB+hEg1ueFw==}
+  '@cloudflare/workerd-linux-64@1.20260820.1':
+    resolution: {integrity: sha512-TbTYaCBht0OaOWmnVpg43hXVYtIti/Kg6lvO819H2DwbxPpK1BH0z2C+Y7ySrVJLlxZQeic5eN7/noqbP80hJg==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [linux]
 
-  '@cloudflare/workerd-linux-arm64@1.20260815.1':
-    resolution: {integrity: sha512-XNFtJ5rIqJxnY6ISjkfbhT/ODiWJ6LcBvNbntuPD6I/F2k7aZeKgPaXrvWvKde66LXyzFKzc8Hn+Ydx4shevQg==}
+  '@cloudflare/workerd-linux-arm64@1.20260820.1':
+    resolution: {integrity: sha512-FQmri1UF7hBnnpeyC5SZJCAnsSRs3+Ykn9wlO5zxmE2qIgKfbJZ+toJ6qrQyugWlxE65juT33HU6aYLtutLJHw==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [linux]
 
-  '@cloudflare/workerd-windows-64@1.20260815.1':
-    resolution: {integrity: sha512-PiIUWrhbMg3quolwjgMvPOd75vKESjT4aDm7nL6mSjL5IOgmpO/zKstXnYfnEH3pq7sC0UCvKlF8ZPcfsh8NMw==}
+  '@cloudflare/workerd-windows-64@1.20260820.1':
+    resolution: {integrity: sha512-BPvCuMxIQfA47wtYsGbBG6Bcar57Qs7yHqU2jWkT1+sRnL/741/ZbQGP9kVRMQ5fwBMuqNFmQRzAu8gSm7ri/w==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
@@ -2215,8 +2224,8 @@ packages:
   '@types/babel__traverse@7.20.7':
     resolution: {integrity: sha512-dkO5fhS7+/oos4ciWxyEyjWe48zmG6wbCheo/G2ZnHx4fs3EU6YC6UM8rk56gAjNJ9P3MTH2jo5jb92/K6wbng==}
 
-  '@types/bun@1.3.14':
-    resolution: {integrity: sha512-h1hFqFVcvAvD9j9K7ZW7vd82aSA+rTdznZa+5bwvCwqSB1jmmfLcbIWhOLx1/+boy/xmjgCs/OMUL8hRJSmnPw==}
+  '@types/bun@1.4.0':
+    resolution: {integrity: sha512-K+lZULY23vRgK/CfTjFIV+tyifaNdSMlPh9j+6mQ/cLfpOznLyAuzgV/JQysyECpkBQLVMSyvjlr2fBUSA9wFQ==}
 
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
@@ -2355,9 +2364,6 @@ packages:
 
   '@types/node@24.12.0':
     resolution: {integrity: sha512-GYDxsZi3ChgmckRT9HPU0WEhKLP08ev/Yfcq2AstjrDASOYCSXeyjDsHg4v5t4jOj7cyDX3vmprafKlWIG9MXQ==}
-
-  '@types/node@25.0.3':
-    resolution: {integrity: sha512-W609buLVRVmeW693xKfzHeIV6nJGGz98uCPfeXI1ELMLXVeKYZ9m15fAMSaUPBHYLGFsVRcMmSCksQOrZV9BYA==}
 
   '@types/node@26.1.2':
     resolution: {integrity: sha512-Vu4a5UFA9rIIFJ7rB/Vaafh9lrCQszopTCx6KjFboXTGQbPNasehVR5TEiithSDGyd1DEiUByggTZsg8jukeIg==}
@@ -2647,8 +2653,8 @@ packages:
   buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
 
-  bun-types@1.3.14:
-    resolution: {integrity: sha512-4N0ig0fEomHt5R0KCFWjovxow98rIoRwKolrYdCcknNwMekCXRnWEUvgu5soYV8QXtVsrUD8B95MBOZGPvr6KQ==}
+  bun-types@1.4.0:
+    resolution: {integrity: sha512-iIKw23BspnQQYd3prITOBxeUsxBHnwzX6YJfGMuNOZzeNcMmVqzIIVGRm1l69ogaPQmb4wB6BN8mA5bE9YuC5Q==}
 
   camel-case@4.1.2:
     resolution: {integrity: sha512-gxGWBrTT1JuMx6R+o5PTXMmUnhnVzLQ9SNutD4YqKtI6ap897t3tKECYla6gCWEkplXnlNybEkZg9GEGxKFCgw==}
@@ -3246,6 +3252,9 @@ packages:
     resolution: {integrity: sha512-W22/mYb9/PIX/gHz52qDf2ZjeoDi+Lf/oM/n4vdYW/82UUrKLJPJD755Ak4asRyNLdGTwTXgBZ+3WinRVh7k7A==}
     engines: {node: '>=18.0'}
 
+  fflate@0.7.3:
+    resolution: {integrity: sha512-0Zz1jOzJWERhyhsimS54VTqOteCNwRtIlh8isdL0AXLo0g7xNTfTL7oWrkmCnPhZGocKIkWHBistBrrpoNH3aw==}
+
   fflate@0.7.4:
     resolution: {integrity: sha512-5u2V/CDW15QM1XbbgS+0DfPxVB+jUKhWEKuuFuHncbk3tEEqzmoXL+2KyOFuKGqOnmdIy0/davWF1CkuwtibCw==}
 
@@ -3334,6 +3343,9 @@ packages:
 
   hachure-fill@0.5.2:
     resolution: {integrity: sha512-3GKBOn+m2LX9iq+JC1064cSFprJY4jL1jCXTcpnfER5HYE2l/4EfWSGzkPa/ZDBmYI0ZOEj5VHV/eKnPGkHuOg==}
+
+  harfbuzzjs@0.10.0:
+    resolution: {integrity: sha512-SN8LVwCOzvTq3OPNd0+EAghgXugItz56wst567D1vs7LnnKGWprhi3EG58aVOBwhN8HEbQxL4I9NDWkcXUutRw==}
 
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
@@ -3885,8 +3897,8 @@ packages:
     resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
     hasBin: true
 
-  miniflare@5.20260815.0-alpha:
-    resolution: {integrity: sha512-YAaGj4Sh5f4fqHKiMQ8zRHDOOM5IGUVtMhnLIeyjuQfU+9P6hcOTrHUVtbfj/ZPay9Kzik4pWELB39pGgefjiQ==}
+  miniflare@5.20260820.0-alpha:
+    resolution: {integrity: sha512-Bv1j2kcKKNwXLWuCx+j0xGt7z318mqQkJmEN6ellM9sCESbPBDTM9ofZMbKqx47jSnoGA3CiaUkAmzGVXUa/wQ==}
     engines: {node: '>=22.0.0'}
 
   mlly@1.7.4:
@@ -4274,8 +4286,8 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  satori@0.29.1:
-    resolution: {integrity: sha512-fPRFt1V0zq+qjNTWuLGdH26Qu9oI/WHcHIsDj7EdrmudDd5XIkx0TsDzD2POthxKiJ4xMPyq20YIj6WcgEbY3Q==}
+  satori@0.33.1:
+    resolution: {integrity: sha512-3vPBvfvaANdvIFXE3EHh/Opc/3q7OXd58H6JnoU6A9Z7OLc4ocHxnzYi8iAUlBrX8l7VYWBTIeqT+LVXW2Dwnw==}
     engines: {node: '>=16'}
 
   satteri@0.10.4:
@@ -4864,17 +4876,17 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
-  workerd@1.20260815.1:
-    resolution: {integrity: sha512-8bArFkHmlp7qFEKVPyNzDzHzS35gc2fg0PYBcDtaNLF7UCDryCX2BQnpkUkTHYIy824IRrHOTwOEoTj0sUO2Fg==}
+  workerd@1.20260820.1:
+    resolution: {integrity: sha512-/wk4rFNHH6IVMXFe6aPEZsT5YWpWtfKTUMt7+rFkyeGbXcGCy4yxODmJatbqYj0jmqHETdz0+m2mT+vNjXnF7w==}
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@4.124.0:
-    resolution: {integrity: sha512-75euoZKjVTJYFy+Xhctt/5JlZL4M6A4xmovZsUlep+6GHcCm14n9VtdGzNIybOW2t8wuNxRj5iMUwjT5E7Ctog==}
+  wrangler@4.125.0:
+    resolution: {integrity: sha512-yFpvggu+xk1Hdm/Uxwaqa19bb7GArME4CrCS3Vov68a2TZq2MPO+wLocKbbnIC9K0oLowcdau7/ycxbbNHKCEg==}
     engines: {node: '>=22.0.0'}
     hasBin: true
     peerDependencies:
-      '@cloudflare/workers-types': ^5.20260815.1
+      '@cloudflare/workers-types': ^5.20260820.1
     peerDependenciesMeta:
       '@cloudflare/workers-types':
         optional: true
@@ -5515,25 +5527,25 @@ snapshots:
 
   '@cloudflare/kv-asset-handler@0.5.0': {}
 
-  '@cloudflare/unenv-preset@2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260815.1)':
+  '@cloudflare/unenv-preset@2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260820.1)':
     dependencies:
       unenv: 2.0.0-rc.24
     optionalDependencies:
-      workerd: 1.20260815.1
+      workerd: 1.20260820.1
 
-  '@cloudflare/workerd-darwin-64@1.20260815.1':
+  '@cloudflare/workerd-darwin-64@1.20260820.1':
     optional: true
 
-  '@cloudflare/workerd-darwin-arm64@1.20260815.1':
+  '@cloudflare/workerd-darwin-arm64@1.20260820.1':
     optional: true
 
-  '@cloudflare/workerd-linux-64@1.20260815.1':
+  '@cloudflare/workerd-linux-64@1.20260820.1':
     optional: true
 
-  '@cloudflare/workerd-linux-arm64@1.20260815.1':
+  '@cloudflare/workerd-linux-arm64@1.20260820.1':
     optional: true
 
-  '@cloudflare/workerd-windows-64@1.20260815.1':
+  '@cloudflare/workerd-windows-64@1.20260820.1':
     optional: true
 
   '@cspotcode/source-map-support@0.8.1':
@@ -6348,9 +6360,9 @@ snapshots:
     dependencies:
       '@babel/types': 7.29.0
 
-  '@types/bun@1.3.14':
+  '@types/bun@1.4.0':
     dependencies:
-      bun-types: 1.3.14
+      bun-types: 1.4.0
 
   '@types/chai@5.2.3':
     dependencies:
@@ -6513,10 +6525,6 @@ snapshots:
       '@types/unist': 3.0.3
 
   '@types/node@24.12.0':
-    dependencies:
-      undici-types: 7.16.0
-
-  '@types/node@25.0.3':
     dependencies:
       undici-types: 7.16.0
 
@@ -6735,7 +6743,7 @@ snapshots:
       rehype-expressive-code: 0.44.1
       url-extras: 0.1.0
 
-  astro@7.0.7(@astrojs/markdown-remark@7.2.1)(@emnapi/core@2.0.0-alpha.4)(@emnapi/runtime@2.0.0-alpha.4)(@types/node@25.0.3)(terser@5.49.2)(yaml@2.8.2):
+  astro@7.0.7(@astrojs/markdown-remark@7.2.1)(@emnapi/core@2.0.0-alpha.4)(@emnapi/runtime@2.0.0-alpha.4)(@types/node@26.1.2)(terser@5.49.2)(yaml@2.8.2):
     dependencies:
       '@astrojs/compiler-rs': 0.3.2(@emnapi/core@2.0.0-alpha.4)(@emnapi/runtime@2.0.0-alpha.4)
       '@astrojs/internal-helpers': 0.10.1
@@ -6785,14 +6793,14 @@ snapshots:
       ultrahtml: 1.6.0
       unifont: 0.7.4
       unstorage: 1.17.5
-      vite: 8.1.0(@types/node@25.0.3)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2)
+      vite: 8.1.0(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2)
       vitefu: 1.1.2(vite@8.1.0(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2))
       xxhash-wasm: 1.1.0
       yargs-parser: 22.0.0
       zod: 4.3.6
     optionalDependencies:
       '@astrojs/markdown-remark': 7.2.1
-      sharp: 0.35.3(@types/node@25.0.3)
+      sharp: 0.35.3(@types/node@26.1.2)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -7056,9 +7064,9 @@ snapshots:
 
   buffer-from@1.1.2: {}
 
-  bun-types@1.3.14:
+  bun-types@1.4.0:
     dependencies:
-      '@types/node': 25.0.3
+      '@types/node': 26.1.2
 
   camel-case@4.1.2:
     dependencies:
@@ -7679,6 +7687,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  fflate@0.7.3: {}
+
   fflate@0.7.4: {}
 
   fill-range@7.1.1:
@@ -7789,6 +7799,8 @@ snapshots:
       uncrypto: 0.1.3
 
   hachure-fill@0.5.2: {}
+
+  harfbuzzjs@0.10.0: {}
 
   has-flag@4.0.0: {}
 
@@ -8692,12 +8704,12 @@ snapshots:
 
   mini-svg-data-uri@1.4.4: {}
 
-  miniflare@5.20260815.0-alpha:
+  miniflare@5.20260820.0-alpha:
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       sharp: 0.35.2
       undici: 7.29.0
-      workerd: 1.20260815.1
+      workerd: 1.20260820.1
       ws: 8.21.0
       youch: 4.1.0-beta.10
     transitivePeerDependencies:
@@ -9188,7 +9200,7 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  satori@0.29.1:
+  satori@0.33.1:
     dependencies:
       '@shuding/opentype.js': 1.4.0-beta.0
       css-background-parser: 0.1.0
@@ -9197,6 +9209,8 @@ snapshots:
       css-to-react-native: 3.2.0
       emoji-regex-xs: 2.0.1
       escape-html: 1.0.3
+      fflate: 0.7.3
+      harfbuzzjs: 0.10.0
       linebreak: 1.1.0
       parse-css-color: 0.2.1
       postcss-value-parser: 4.2.0
@@ -9283,39 +9297,6 @@ snapshots:
       '@img/sharp-win32-arm64': 0.35.2
       '@img/sharp-win32-ia32': 0.35.2
       '@img/sharp-win32-x64': 0.35.2
-
-  sharp@0.35.3(@types/node@25.0.3):
-    dependencies:
-      '@img/colour': 1.1.0
-      detect-libc: 2.1.2
-      semver: 7.8.5
-    optionalDependencies:
-      '@img/sharp-darwin-arm64': 0.35.3
-      '@img/sharp-darwin-x64': 0.35.3
-      '@img/sharp-freebsd-wasm32': 0.35.3
-      '@img/sharp-libvips-darwin-arm64': 1.3.2
-      '@img/sharp-libvips-darwin-x64': 1.3.2
-      '@img/sharp-libvips-linux-arm': 1.3.2
-      '@img/sharp-libvips-linux-arm64': 1.3.2
-      '@img/sharp-libvips-linux-ppc64': 1.3.2
-      '@img/sharp-libvips-linux-riscv64': 1.3.2
-      '@img/sharp-libvips-linux-s390x': 1.3.2
-      '@img/sharp-libvips-linux-x64': 1.3.2
-      '@img/sharp-libvips-linuxmusl-arm64': 1.3.2
-      '@img/sharp-libvips-linuxmusl-x64': 1.3.2
-      '@img/sharp-linux-arm': 0.35.3
-      '@img/sharp-linux-arm64': 0.35.3
-      '@img/sharp-linux-ppc64': 0.35.3
-      '@img/sharp-linux-riscv64': 0.35.3
-      '@img/sharp-linux-s390x': 0.35.3
-      '@img/sharp-linux-x64': 0.35.3
-      '@img/sharp-linuxmusl-arm64': 0.35.3
-      '@img/sharp-linuxmusl-x64': 0.35.3
-      '@img/sharp-webcontainers-wasm32': 0.35.3
-      '@img/sharp-win32-arm64': 0.35.3
-      '@img/sharp-win32-ia32': 0.35.3
-      '@img/sharp-win32-x64': 0.35.3
-      '@types/node': 25.0.3
 
   sharp@0.35.3(@types/node@26.1.2):
     dependencies:
@@ -9650,20 +9631,6 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.2
 
-  vite@8.1.0(@types/node@25.0.3)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2):
-    dependencies:
-      lightningcss: 1.33.0
-      picomatch: 4.0.4
-      postcss: 8.5.15
-      rolldown: 1.1.3
-      tinyglobby: 0.2.17
-    optionalDependencies:
-      '@types/node': 25.0.3
-      esbuild: 0.28.1
-      fsevents: 2.3.3
-      terser: 5.49.2
-      yaml: 2.8.2
-
   vite@8.1.0(@types/node@26.1.2)(esbuild@0.28.1)(terser@5.49.2)(yaml@2.8.2):
     dependencies:
       lightningcss: 1.33.0
@@ -9825,24 +9792,24 @@ snapshots:
       siginfo: 2.0.0
       stackback: 0.0.2
 
-  workerd@1.20260815.1:
+  workerd@1.20260820.1:
     optionalDependencies:
-      '@cloudflare/workerd-darwin-64': 1.20260815.1
-      '@cloudflare/workerd-darwin-arm64': 1.20260815.1
-      '@cloudflare/workerd-linux-64': 1.20260815.1
-      '@cloudflare/workerd-linux-arm64': 1.20260815.1
-      '@cloudflare/workerd-windows-64': 1.20260815.1
+      '@cloudflare/workerd-darwin-64': 1.20260820.1
+      '@cloudflare/workerd-darwin-arm64': 1.20260820.1
+      '@cloudflare/workerd-linux-64': 1.20260820.1
+      '@cloudflare/workerd-linux-arm64': 1.20260820.1
+      '@cloudflare/workerd-windows-64': 1.20260820.1
 
-  wrangler@4.124.0:
+  wrangler@4.125.0:
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
-      '@cloudflare/unenv-preset': 2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260815.1)
+      '@cloudflare/unenv-preset': 2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260820.1)
       blake3-wasm: 2.1.5
       esbuild: 0.28.1
-      miniflare: 5.20260815.0-alpha
+      miniflare: 5.20260820.0-alpha
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
-      workerd: 1.20260815.1
+      workerd: 1.20260820.1
     optionalDependencies:
       fsevents: 2.3.3
     transitivePeerDependencies:
