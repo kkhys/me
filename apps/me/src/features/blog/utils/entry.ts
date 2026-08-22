@@ -88,25 +88,35 @@ export const getPublicListEntries = async (sort: "asc" | "desc" = "desc"): Promi
   });
 };
 
-export const getRelatedPosts = async ({
-  id,
-  category,
-  tags,
-}: { id: string } & Pick<InferEntrySchema<"blog">, "category" | "tags">) => {
-  const candidates = (await getPublicBlogEntries()).filter((post) => post.id !== id);
+export type RelatedPostsInput = { id: string } & Pick<
+  InferEntrySchema<"blog">,
+  "category" | "tags"
+>;
 
-  // Shared tags weigh double so a cross-category post on the same topic can
-  // outrank a same-category post that merely shares the category.
-  const scored = candidates
+// Deterministic part of related-post selection, shared with the post page's
+// incremental-build cache key so the key tracks exactly the inputs that can
+// change which posts are shown.
+export const scoreRelatedPosts = (
+  entries: CollectionEntry<"blog">[],
+  { id, category, tags }: RelatedPostsInput,
+) =>
+  entries
+    .filter((post) => post.id !== id)
+    // Shared tags weigh double so a cross-category post on the same topic can
+    // outrank a same-category post that merely shares the category.
     .map((post) => ({
       post,
       score:
         (tags?.filter((tag) => post.data.tags?.includes(tag)).length ?? 0) * 2 +
         (post.data.category === category ? 1 : 0),
     }))
-    .filter(({ score }) => score > 0);
+    .filter(({ score }) => score > 0)
+    .toSorted((a, b) => b.score - a.score);
 
-  // Sort by score (desc), shuffle within same score
+export const getRelatedPosts = async (input: RelatedPostsInput) => {
+  const scored = scoreRelatedPosts(await getPublicBlogEntries(), input);
+
+  // Shuffle within same score
   scored.sort((a, b) => b.score - a.score || Math.random() - 0.5);
 
   return scored.map(({ post }) => post).slice(0, relatedEntriesCount);

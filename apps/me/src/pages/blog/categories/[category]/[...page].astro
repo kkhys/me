@@ -3,6 +3,7 @@ import type { PaginateFunction } from "astro";
 import { countPerPage } from "#/config/constant";
 import BlogIndex from "#/features/blog/components/ui/blog-index.astro";
 import { getCategoryBySlug } from "#/features/blog/config/category";
+import { withCacheKey } from "#/features/blog/utils/cache-key";
 import { getPublicListEntries } from "#/features/blog/utils/entry";
 
 export const getStaticPaths = async ({
@@ -16,10 +17,12 @@ export const getStaticPaths = async ({
     const filteredEntries = entries
       .filter((entry) => entry.category === category)
       .toSorted((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
-    return paginate(filteredEntries, {
-      pageSize: countPerPage,
-      params: { category: category.toLowerCase() },
-    });
+    return withCacheKey(
+      paginate(filteredEntries, {
+        pageSize: countPerPage,
+        params: { category: category.toLowerCase() },
+      }),
+    );
   });
 };
 

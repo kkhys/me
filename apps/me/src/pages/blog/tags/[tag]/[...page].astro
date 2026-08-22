@@ -5,6 +5,7 @@ import JsonLd from "#/components/seo/json-ld.astro";
 import { countPerPage } from "#/config/constant";
 import BlogIndex from "#/features/blog/components/ui/blog-index.astro";
 import { getTagBySlug } from "#/features/blog/config/tag";
+import { withCacheKey } from "#/features/blog/utils/cache-key";
 import { getPublicListEntries } from "#/features/blog/utils/entry";
 import { BASE_URL } from "#/utils/base-url";
 
@@ -19,10 +20,12 @@ export const getStaticPaths = async ({
     const filteredEntries = entries
       .filter((entry) => entry.tags?.includes(tag))
       .toSorted((a, b) => b.publishedAt.getTime() - a.publishedAt.getTime());
-    return paginate(filteredEntries, {
-      pageSize: countPerPage,
-      params: { tag: tag.toLowerCase().replaceAll(/[\s.]+/gu, "-") },
-    });
+    return withCacheKey(
+      paginate(filteredEntries, {
+        pageSize: countPerPage,
+        params: { tag: tag.toLowerCase().replaceAll(/[\s.]+/gu, "-") },
+      }),
+    );
   });
 };
 

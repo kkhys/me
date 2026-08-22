@@ -53,6 +53,9 @@ export default defineConfig({
   vite: {
     plugins: [],
   },
+  experimental: {
+    incrementalBuild: true,
+  },
   env: {
     schema: {
       GITHUB_ACCESS_TOKEN: envField.string({

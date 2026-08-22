@@ -2,6 +2,7 @@
 import type { PaginateFunction } from "astro";
 import { countPerPage } from "#/config/constant";
 import BlogIndex from "#/features/blog/components/ui/blog-index.astro";
+import { withCacheKey } from "#/features/blog/utils/cache-key";
 import { getPublicListEntries } from "#/features/blog/utils/entry";
 
 export const getStaticPaths = async ({
@@ -10,7 +11,7 @@ export const getStaticPaths = async ({
   paginate: PaginateFunction;
 }) => {
   const entries = await getPublicListEntries();
-  return paginate(entries, { pageSize: countPerPage });
+  return withCacheKey(paginate(entries, { pageSize: countPerPage }));
 };
 
 const { page } = Astro.props;
