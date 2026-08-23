@@ -25,17 +25,25 @@ const alertIcons: Record<AlertType, SvgComponent> = {
 const IconComponent = alertIcons[alertType];
 ---
 
-<div class:list={["alert", `alert--${alertType}`]} {...rest}>
-  <IconComponent
-      class="alert-icon"
-      aria-hidden="true"
-  />
-  <slot />
+<div class="alert-container">
+  <div class:list={["alert", `alert--${alertType}`]} {...rest}>
+    <IconComponent
+        class="alert-icon"
+        aria-hidden="true"
+    />
+    <slot />
+  </div>
 </div>
 
 <style>
-  .alert {
+  /* The query container has to be an ancestor of the queried element: an
+     element never matches @container against itself, so keeping
+     container-type on .alert left the width query below permanently unmatched. */
+  .alert-container {
     container-type: inline-size;
+  }
+
+  .alert {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
