@@ -4,6 +4,7 @@ import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
 import JsonLd from "#/components/seo/json-ld.astro";
 import SEO from "#/components/seo/seo.astro";
 import { defaultOgImage } from "#/config/constant";
+import { me } from "#/config/site";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { websiteSchema } from "#/lib/json-ld";
 ---
@@ -18,7 +19,7 @@ import { websiteSchema } from "#/lib/json-ld";
     <Budoux>
       <div class="home-body prose">
         <p><a href="/about" class="home-link">コードを書いて暮らしています</a>。色々なものを作ることが好きです。プログラミングのことから手縫いの服づくりまで、日々のことや手に馴染む道具の話をブログに残しています。</p>
-        <p>コードを書いていないときは、珈琲を淹れたりボクシングジムで汗を流したりしています。日々考えたことは<a href="https://memo.kkhys.me" target="_blank" rel="noreferrer" class="home-link external-link">メモ<MoveUpRightIcon class="external-icon" /></a>に書き留めて、いつかやりたいことは<a href="/bucket-list" class="home-link">バケットリスト</a>にまとめています。</p>
+        <p>コードを書いていないときは、珈琲を淹れたりボクシングジムで汗を流したりしています。日々考えたことは<a href={me.memo} target="_blank" rel="noreferrer" class="home-link external-link">メモ<MoveUpRightIcon class="external-icon" /></a>に書き留めて、いつかやりたいことは<a href="/bucket-list" class="home-link">バケットリスト</a>にまとめています。</p>
         <p>私の好きな文章には次のようなものがあります。</p>
         <ul class="home-list">
           <li><a href="/blog/posts/b1e2lej" class="home-link">2026年8月時点の開発環境スナップショット</a></li>
@@ -27,7 +28,7 @@ import { websiteSchema } from "#/lib/json-ld";
           <li><a href="/blog/posts/b1x478m" class="home-link">夏の北海道2泊3日の旅行記</a></li>
           <li><a href="/blog/posts/b17ruev" class="home-link">7日間のマレーシア放浪記</a></li>
         </ul>
-        <p><a href="/blog" class="home-link">私の文章</a>を読んだり<a href="https://github.com/kkhys" target="_blank" rel="noreferrer" class="home-link external-link">GitHub<MoveUpRightIcon class="external-icon" /></a>でコードを見ることができます。何かあれば<a href="mailto:hi@kkhys.me" class="home-link">ご連絡ください</a>。</p>
+        <p><a href="/blog" class="home-link">私の文章</a>を読んだり<a href={me.github.url} target="_blank" rel="noreferrer" class="home-link external-link">GitHub<MoveUpRightIcon class="external-icon" /></a>でコードを見ることができます。何かあれば<a href="mailto:hi@kkhys.me" class="home-link">ご連絡ください</a>。</p>
       </div>
     </Budoux>
   </div>
