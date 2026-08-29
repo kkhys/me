@@ -5,7 +5,7 @@
  * og:url tags contradicts the extensionless URLs the sitemap advertises.
  */
 export const normalizePathname = (pathname: string): string => {
-  const withoutHtml = pathname.replace(/(?:index)?\.html$/u, "");
+  const withoutHtml = pathname.replace(/\/index\.html$/u, "/").replace(/\.html$/u, "");
   const withoutTrailingSlash = withoutHtml.replace(/(?<=.)\/$/u, "");
   return withoutTrailingSlash === "" ? "/" : withoutTrailingSlash;
 };

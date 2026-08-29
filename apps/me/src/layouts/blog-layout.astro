@@ -14,6 +14,12 @@ import Toc from "#/features/blog/components/ui/toc.astro";
 import { getCategoryByTitle } from "#/features/blog/config/category";
 import { tags as allTags } from "#/features/blog/config/tag";
 import { getRelatedPosts, type PostNavItem, toListEntries } from "#/features/blog/utils/entry";
+import {
+  buildBodyMeta,
+  buildCategoryFilter,
+  buildDateMeta,
+  buildTitleMeta,
+} from "#/features/search/utils/meta";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { BASE_URL } from "#/utils/base-url";
 
@@ -70,6 +76,11 @@ const tagCloudItems = allTagCloudItems.filter(({ title: tagTitle }) =>
 const relatedPosts = await getRelatedPosts({ id, category, tags });
 
 const seoImage = `${BASE_URL}/api/og/${id}.png`;
+
+const pagefindTitleMeta = buildTitleMeta(emoji);
+const pagefindDateMeta = buildDateMeta();
+const pagefindBodyMeta = buildBodyMeta();
+const pagefindCategoryFilter = buildCategoryFilter(category);
 ---
 
 <BaseLayout>
@@ -99,7 +110,7 @@ const seoImage = `${BASE_URL}/api/og/${id}.png`;
           <span class="draft-badge">Draft</span>
       )}
     </div>
-    <h1 class="post-title">{title}</h1>
+    <h1 class="post-title" data-pagefind-body data-pagefind-meta={pagefindTitleMeta}>{title}</h1>
     <div class="post-meta">
       {updatedInfo ? (
         <button
@@ -107,7 +118,9 @@ const seoImage = `${BASE_URL}/api/og/${id}.png`;
           popovertarget="post-updated-at"
           class="post-date post-date--trigger palt"
         >
-          <time datetime={publishedAt.toISOString()}>{publishedAtString}</time>
+          <time datetime={publishedAt.toISOString()} data-pagefind-meta={pagefindDateMeta}>
+            {publishedAtString}
+          </time>
         </button>
         <div id="post-updated-at" popover class="post-updated-at">
           <dl class="post-updated-at__list">
@@ -122,14 +135,23 @@ const seoImage = `${BASE_URL}/api/og/${id}.png`;
           </dl>
         </div>
       ) : (
-        <time datetime={publishedAt.toISOString()} class="post-date palt">
+        <time
+          datetime={publishedAt.toISOString()}
+          class="post-date palt"
+          data-pagefind-meta={pagefindDateMeta}
+        >
           {publishedAtString}
         </time>
       )}
     </div>
   </section>
   <section class="post-body">
-    <article class="prose">
+    <article
+      class="prose"
+      data-pagefind-body
+      data-pagefind-meta={pagefindBodyMeta}
+      data-pagefind-filter={pagefindCategoryFilter}
+    >
       <slot />
     </article>
     {tagCloudItems.length > 0 && (

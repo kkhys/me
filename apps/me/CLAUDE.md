@@ -4,7 +4,7 @@ Personal blog (kkhys.me), the `@kkhys/me` app of the kkhys monorepo. Astro 7 sta
 
 ## Project Map
 
-- `src/features/` — Self-contained feature modules (blog, pages)
+- `src/features/` — Self-contained feature modules (blog, pages, search)
 - `src/lib/` — remark/rehype plugins, API wrappers (`api/`), utilities
 - `src/utils/` — Pure helpers (date, hash, font-loader, base-url, extract-description)
 - `src/styles/` — Global CSS with light-dark() theme switching
@@ -33,12 +33,13 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 - CI: lint → test → type check → build, against fixtures. Add the `skip-ci` label to PRs to skip.
 - Deploy: built and shipped locally via `pnpm deploy`; me is not deployed from CI.
 - Lint/format: runs automatically via Stop hook (oxlint + oxfmt auto-fix). Fix remaining errors before completing.
+- Search: `astro-pagefind` indexes `dist` after `astro build`; only elements marked `data-pagefind-body` (blog post title + body in `src/layouts/blog-layout.astro`) are indexed. The dev server serves `/pagefind/` from `dist`, so run `pnpm build` once before `pnpm dev` to try search locally. The dialog lives in `src/features/search/`; pure logic sits in `src/features/search/utils/` so it stays unit-testable. No CSP is configured today; adding one needs `script-src` for the dynamic `import()` of `/pagefind/pagefind.js`, `wasm-unsafe-eval` for the Pagefind WASM, and `connect-src 'self'` for fragment fetches.
 
 ## Key Context Files
 
 Read these when your task involves their domain:
 
-- `astro.config.ts` — Markdown plugins, env schema, CSP, experimental features
+- `astro.config.ts` — Markdown plugins, integrations (incl. Pagefind), env schema, experimental features
 - `src/content.config.ts` — Collection schemas and validation rules
 - `src/features/blog/config/` — Category and tag definitions
 - `../../.oxlintrc.json` / `../../.oxfmtrc.json` — Linter / formatter configuration (shared across the monorepo)

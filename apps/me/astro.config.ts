@@ -4,6 +4,7 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
+import pagefind from "astro-pagefind";
 import { expressiveCodeOptions } from "./src/lib/expressive-code";
 import rehypeBudoux from "./src/lib/rehype-budoux";
 import rehypeMermaidCached from "./src/lib/rehype-mermaid-cached";
@@ -16,7 +17,7 @@ import remarkYoutubeBlock from "./src/lib/remark-youtube-block";
 
 export default defineConfig({
   site: "https://kkhys.me",
-  integrations: [expressiveCode(expressiveCodeOptions), react(), mdx(), sitemap()],
+  integrations: [expressiveCode(expressiveCodeOptions), react(), mdx(), sitemap(), pagefind()],
   build: {
     format: "file",
   },

@@ -1,0 +1,667 @@
+---
+import SearchIcon from "#/components/icons/search.svg";
+import { categories } from "#/features/blog/config/category";
+import { searchConfig } from "#/features/search/config";
+---
+
+<dialog id={searchConfig.dialogId} class="search-dialog" closedby="any" aria-label="記事を検索">
+  <search class="search">
+    <form class="search-form">
+      <div class="search-field">
+        <SearchIcon class="search-field-icon" />
+        <input
+          type="search"
+          class="search-input"
+          name="q"
+          placeholder="記事を検索"
+          aria-label="検索キーワード"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          enterkeyhint="go"
+        />
+        <button
+          type="button"
+          class="search-close"
+          commandfor={searchConfig.dialogId}
+          command="close"
+          aria-label="閉じる"
+        >
+          esc
+        </button>
+      </div>
+      <div class="search-filters palt" role="group" aria-label="カテゴリで絞り込み">
+        <button type="button" class="search-filter search-filter--active" data-category="" aria-pressed="true">
+          すべて
+        </button>
+        {categories.map(({ title, label }) => (
+          <button type="button" class="search-filter" data-category={title} aria-pressed="false">
+            {label}
+          </button>
+        ))}
+      </div>
+    </form>
+    <p class="search-status" role="status"></p>
+    <ol class="search-results" aria-label="検索結果"></ol>
+  </search>
+  <template class="search-result-template">
+    <li class="search-results-item">
+      <a class="search-result" data-astro-prefetch="hover" data-umami-event="search-result">
+        <span class="search-result-emoji" aria-hidden="true"></span>
+        <span class="search-result-body">
+          <span class="search-result-title palt"></span>
+          <span class="search-result-excerpt"></span>
+        </span>
+        <time class="search-result-date palt"></time>
+      </a>
+    </li>
+  </template>
+</dialog>
+
+<style>
+  /* Browsers keep the page behind a modal dialog wheel/touch-scrollable; lock
+     it while the search is open. Only overflow changes: the base styles'
+     `scrollbar-gutter: stable both-edges` keeps both gutters even with overflow
+     hidden, so nothing shifts; switching to single-edge `stable` here would
+     move the centred column by half a scrollbar width. */
+  :global(html:has(.search-dialog:modal)) {
+    overflow: hidden;
+  }
+
+  .search-dialog {
+    position: fixed;
+    inset: 0;
+    width: min(100% - 2rem, 36rem);
+    max-height: min(70dvh, 32rem);
+    /* Command-palette placement: pinned near the top rather than centred, so
+       the results list can grow downward without the box jumping around. */
+    margin: 12vh auto auto;
+    padding: 0;
+    overflow: hidden;
+    background: var(--c-bg);
+    color: var(--c-text);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 14px 28px -6px oklch(var(--uchu-yin-raw) / 20%),
+      0 2px 4px -1px oklch(var(--uchu-yin-raw) / 12%);
+    opacity: 1;
+    translate: 0 0;
+    transition:
+      opacity 0.2s,
+      translate 0.2s,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  .search-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Both the entry (@starting-style) and the exit (:not([open])) states are
+     declared: without the exit state the dialog lingers at full opacity for
+     the length of the display transition before vanishing. */
+  @starting-style {
+    .search-dialog[open] {
+      opacity: 0;
+      translate: 0 -8px;
+    }
+  }
+
+  .search-dialog:not([open]) {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+
+  .search-dialog::backdrop {
+    background: oklch(var(--uchu-yin-raw) / 30%);
+    opacity: 1;
+    transition:
+      opacity 0.2s,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  @starting-style {
+    .search-dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  .search-dialog:not([open])::backdrop {
+    opacity: 0;
+  }
+
+  .search {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .search-form {
+    flex-shrink: 0;
+  }
+
+  .search-field {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem 0.5rem;
+  }
+
+  .search-field-icon {
+    flex-shrink: 0;
+    width: 1.125rem;
+    height: 1.125rem;
+    color: var(--c-sub);
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 0;
+    appearance: none;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font: inherit;
+    /* Never below 16px: iOS zooms the page into any smaller focused input. */
+    font-size: max(16px, var(--fs-base));
+    color: var(--c-text);
+    outline: none;
+  }
+
+  .search-input::placeholder {
+    color: var(--c-sub);
+  }
+
+  .search-input::-webkit-search-decoration,
+  .search-input::-webkit-search-cancel-button {
+    appearance: none;
+  }
+
+  .search-close {
+    flex-shrink: 0;
+    appearance: none;
+    padding: 0.125rem 0.375rem;
+    background: transparent;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    line-height: 1.25;
+    color: var(--c-sub);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .search-close:hover {
+    color: var(--c-text);
+  }
+
+  .search-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem 0.75rem;
+  }
+
+  .search-filter {
+    display: flex;
+    height: 1.5rem;
+    align-items: center;
+    appearance: none;
+    padding-inline: 0.5rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    font-family: inherit;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .search-filter:hover {
+    color: var(--c-primary);
+  }
+
+  .search-filter--active,
+  .search-filter--active:hover {
+    background-color: var(--c-primary);
+    color: var(--c-primary-text);
+    font-weight: var(--fw-medium);
+  }
+
+  /* The divider lives here rather than under the form so it only appears once
+     there is something below it; the status is never empty while results
+     show. */
+  .search-status {
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0.75rem 1rem 0.25rem;
+    border-top: 1px solid var(--c-border);
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  /* Hidden visually rather than with display: none so the live region stays
+     in the accessibility tree and the first announcement is not dropped. */
+  .search-status:empty {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    border: 0;
+  }
+
+  /* With nothing below it (no hits, load failure) the status line is the
+     dialog's last visible row, so match its top padding below. */
+  .search-status:has(+ .search-results:empty) {
+    padding-bottom: 0.75rem;
+  }
+
+  .search-results {
+    margin: 0;
+    padding: 0.5rem;
+    list-style: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .search-results:empty {
+    display: none;
+  }
+
+  .search-results::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .search-results::-webkit-scrollbar-thumb {
+    background: var(--c-sub);
+    border-radius: 2px;
+  }
+
+  @supports (-moz-appearance: none) {
+    .search-results {
+      scrollbar-width: thin;
+    }
+  }
+
+  .search-results-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  .search-result {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    color: var(--c-prose-text);
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .search-result:hover {
+    background-color: oklch(from var(--c-surface) l c h / 50%);
+  }
+
+  /* The list clips overflow, so keep the ring inside the row. */
+  .search-result:focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: calc(-1 * var(--ring-width));
+  }
+
+  .search-result-emoji {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-md);
+    background-color: var(--c-surface);
+    box-shadow: var(--shadow-sm);
+    font-size: 1rem;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .search-result-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+  }
+
+  .search-result-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-sm);
+  }
+
+  .search-result-excerpt {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+    color: var(--c-sub);
+    overflow-wrap: anywhere;
+  }
+
+  /* Not `--c-selection`: its dark-mode yellow-9 fill drowns the grey excerpt
+     text, so the match gets body colour and weight over a 35% tint instead. */
+  .search-result-excerpt :global(mark) {
+    padding-inline: 0.125em;
+    margin-inline: -0.0625em;
+    border-radius: var(--radius-xs);
+    background-color: light-dark(
+      var(--uchu-yellow-2),
+      oklch(from var(--uchu-yellow-9) l c h / 35%)
+    );
+    color: var(--c-text);
+    font-weight: var(--fw-medium);
+  }
+
+  .search-result-date {
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+    font-size: var(--fs-xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-sub);
+  }
+
+  @media (width < 640px) {
+    .search-result-date {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { searchConfig } from "#/features/search/config";
+  import type { PagefindFragment, PagefindModule } from "#/features/search/types";
+  import { parseExcerpt } from "#/features/search/utils/excerpt";
+  import { cycleIndex, isEditableTarget, isToggleShortcut } from "#/features/search/utils/keyboard";
+  import { toResultHref } from "#/features/search/utils/query";
+  import { createSearchRunner } from "#/features/search/utils/search-runner";
+
+  const ACTIVE_FILTER_CLASS = "search-filter--active";
+  const { metaKeys } = searchConfig;
+  const pagefindUrl = `${searchConfig.bundlePath}pagefind.js`;
+
+  const requireElement = <T extends Element>(
+    root: ParentNode,
+    selector: string,
+    guard: (element: Element) => element is T,
+  ): T => {
+    const element = root.querySelector(selector);
+    if (!element || !guard(element)) {
+      throw new Error(`search-dialog: missing element for "${selector}"`);
+    }
+    return element;
+  };
+
+  const isHTMLElement = (element: Element): element is HTMLElement =>
+    element instanceof HTMLElement;
+
+  const renderExcerpt = (element: HTMLElement, excerpt: string) => {
+    element.replaceChildren(
+      ...parseExcerpt(excerpt).map(({ text, marked }) => {
+        if (!marked) return document.createTextNode(text);
+        const mark = document.createElement("mark");
+        mark.textContent = text;
+        return mark;
+      }),
+    );
+  };
+
+  const setup = (dialog: HTMLDialogElement) => {
+    // Every selector below points at markup in this same file, so a miss is a
+    // programming error and should fail loudly instead of leaving a dead UI.
+    const input = requireElement(
+      dialog,
+      ".search-input",
+      (element): element is HTMLInputElement => element instanceof HTMLInputElement,
+    );
+    const form = requireElement(
+      dialog,
+      ".search-form",
+      (element): element is HTMLFormElement => element instanceof HTMLFormElement,
+    );
+    const status = requireElement(dialog, ".search-status", isHTMLElement);
+    const list = requireElement(dialog, ".search-results", isHTMLElement);
+    const template = requireElement(
+      dialog,
+      ".search-result-template",
+      (element): element is HTMLTemplateElement => element instanceof HTMLTemplateElement,
+    );
+    const filters = requireElement(dialog, ".search-filters", isHTMLElement);
+    const triggers = [
+      ...document.querySelectorAll<HTMLButtonElement>(`button[commandfor="${dialog.id}"]`),
+    ];
+
+    let category: string | undefined;
+    let pagefindPromise: Promise<PagefindModule> | undefined;
+    let composing = false;
+
+    // The promise is cached even when it rejects: a failed module fetch is
+    // recorded in the module map, so re-importing the same URL fails
+    // identically without a page reload.
+    const loadPagefind = () => {
+      pagefindPromise ??= (async () => {
+        const pagefind = (await import(
+          /* @vite-ignore */
+          pagefindUrl
+        )) as PagefindModule;
+        await pagefind.options({ excerptLength: searchConfig.excerptLength });
+        await pagefind.init();
+        return pagefind;
+      })();
+      return pagefindPromise;
+    };
+
+    // Best-effort warm-up on hover/open. The failure is swallowed here so that
+    // hovering in a dev server without a build neither logs "Search failed"
+    // nor writes to the status line; the next real search reports it.
+    const warmUp = () => {
+      loadPagefind().catch(() => {});
+    };
+
+    const renderResult = (fragment: PagefindFragment) => {
+      const node = template.content.cloneNode(true) as DocumentFragment;
+      const href = toResultHref(fragment.url);
+      const title = fragment.meta[metaKeys.title];
+      const emoji = fragment.meta[metaKeys.emoji];
+      const date = fragment.meta[metaKeys.date];
+      const datetime = fragment.meta[metaKeys.datetime];
+      if (import.meta.env.DEV && (!title || !emoji || !date || !datetime)) {
+        console.warn(
+          "Pagefind fragment is missing expected meta; check data-pagefind-meta in blog-layout",
+          fragment.url,
+          fragment.meta,
+        );
+      }
+
+      requireElement(
+        node,
+        ".search-result",
+        (element): element is HTMLAnchorElement => element instanceof HTMLAnchorElement,
+      ).href = href;
+      requireElement(node, ".search-result-emoji", isHTMLElement).textContent = emoji ?? "";
+      requireElement(node, ".search-result-title", isHTMLElement).textContent = title ?? href;
+      renderExcerpt(requireElement(node, ".search-result-excerpt", isHTMLElement), fragment.excerpt);
+      const time = requireElement(
+        node,
+        ".search-result-date",
+        (element): element is HTMLTimeElement => element instanceof HTMLTimeElement,
+      );
+      // `datetime=""` is not a valid value, so drop the element when the
+      // fragment carries no date.
+      if (date && datetime) {
+        time.textContent = date;
+        time.dateTime = datetime;
+      } else {
+        time.remove();
+      }
+      return node;
+    };
+
+    const search = createSearchRunner({
+      loadPagefind,
+      render: (fragments) => {
+        list.replaceChildren(...fragments.map((fragment) => renderResult(fragment)));
+      },
+      setStatus: (text) => {
+        status.textContent = text;
+      },
+      onError: (stage, error) => {
+        console.error(`Search failed at stage "${stage}"`, { query: input.value, category, error });
+      },
+    });
+
+    const runSearch = () => {
+      // The runner catches everything it expects; anything left is a bug.
+      search(input.value, category).catch((error: unknown) => {
+        console.error("Search runner threw", error);
+      });
+    };
+
+    const focusableItems = () => [
+      input,
+      ...list.querySelectorAll<HTMLAnchorElement>(".search-result"),
+    ];
+
+    const onOpened = () => {
+      input.select();
+      warmUp();
+    };
+
+    const openDialog = () => {
+      if (dialog.open) return;
+      dialog.showModal();
+      onOpened();
+    };
+
+    input.addEventListener("input", runSearch);
+    input.addEventListener("compositionstart", () => {
+      composing = true;
+    });
+    input.addEventListener("compositionend", () => {
+      composing = false;
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      // Some engines let the Enter that commits an IME candidate submit the
+      // form; that Enter must not follow the first result.
+      if (composing) return;
+      list.querySelector<HTMLAnchorElement>(".search-result")?.click();
+    });
+
+    filters.addEventListener("click", (event) => {
+      const button =
+        event.target instanceof Element
+          ? event.target.closest<HTMLButtonElement>(".search-filter")
+          : null;
+      if (!button) return;
+      category = button.dataset.category || undefined;
+      for (const other of filters.querySelectorAll<HTMLButtonElement>(".search-filter")) {
+        const isActive = other === button;
+        other.classList.toggle(ACTIVE_FILTER_CLASS, isActive);
+        other.setAttribute("aria-pressed", String(isActive));
+      }
+      input.focus();
+      runSearch();
+    });
+
+    dialog.addEventListener("keydown", (event) => {
+      // While an IME is composing, Escape and the arrow keys drive candidate
+      // selection and must reach neither the dialog nor the result list.
+      if (event.isComposing) return;
+      if (event.key === "Escape") {
+        // Chrome consumes the first Escape in a non-empty `type="search"` input
+        // to clear it, so close explicitly instead of relying on cancel.
+        // preventDefault also keeps the query, so reopening restores it
+        // selected.
+        event.preventDefault();
+        dialog.close();
+        return;
+      }
+      if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+      const items = focusableItems();
+      const index = cycleIndex(
+        items.findIndex((item) => item === document.activeElement),
+        event.key === "ArrowDown" ? 1 : -1,
+        items.length,
+      );
+      const next = index === undefined ? undefined : items[index];
+      if (!next) return;
+      event.preventDefault();
+      next.focus();
+    });
+
+    // Invoker-driven opens (`commandfor`) bypass `openDialog`, so the toggle
+    // event is the one path that sees every open; `openDialog` still calls
+    // `onOpened` itself for engines that do not fire toggle on dialogs yet.
+    // Running it twice only re-selects the input.
+    dialog.addEventListener("toggle", (event) => {
+      if (event instanceof ToggleEvent && event.newState === "open") onOpened();
+    });
+
+    for (const trigger of triggers) {
+      trigger.addEventListener("pointerenter", warmUp, { once: true });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (isToggleShortcut(event)) {
+        event.preventDefault();
+        if (dialog.open) dialog.close();
+        else openDialog();
+        return;
+      }
+      const target = event.target instanceof HTMLElement ? event.target : null;
+      if (event.key === "/" && !dialog.open && !isEditableTarget(target)) {
+        event.preventDefault();
+        openDialog();
+      }
+    });
+
+    // Invoker commands (`commandfor`) are Baseline 2025 (Safari 26.2); older
+    // engines get click handlers.
+    if (!("commandForElement" in HTMLButtonElement.prototype)) {
+      for (const trigger of triggers) {
+        trigger.addEventListener("click", () => {
+          if (trigger.getAttribute("command") === "close") dialog.close();
+          else openDialog();
+        });
+      }
+    }
+
+    // `closedby` is not Baseline (no Safari support as of 2026-08), so emulate
+    // light dismiss. The dialog has no padding, so a click whose target is the
+    // dialog itself came from the backdrop.
+    if (!("closedBy" in HTMLDialogElement.prototype)) {
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    }
+  };
+
+  const dialog = document.querySelector(`#${searchConfig.dialogId}`);
+  if (dialog instanceof HTMLDialogElement) setup(dialog);
+  else console.error(`search-dialog: no <dialog id="${searchConfig.dialogId}"> in the document`);
+</script>

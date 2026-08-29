@@ -15,6 +15,10 @@ describe("normalizePathname", () => {
     expect(normalizePathname("/privacy/ja.html")).toBe("/privacy/ja");
   });
 
+  it("only treats a whole `index` segment as the directory index", () => {
+    expect(normalizePathname("/reindex.html")).toBe("/reindex");
+  });
+
   it("strips a trailing slash", () => {
     expect(normalizePathname("/blog/2/")).toBe("/blog/2");
   });
