@@ -1,0 +1,77 @@
+---
+import type { ImageMetadata } from "astro";
+import ArtPicture from "#/components/art-picture.astro";
+import type { FashionImage } from "#/utils/fashion";
+
+interface Props {
+  title: string;
+  year: number;
+  images: FashionImage<ImageMetadata>[];
+}
+
+const { title, year, images } = Astro.props;
+---
+
+<section class="series">
+  <header class="series-header">
+    <h3 class="title">{title}</h3>
+    <span class="year">{year}</span>
+  </header>
+  <div class="grid">
+    {images.map((image) => (
+      <ArtPicture
+        src={image.src}
+        alt={`${title} / ${image.number}`}
+        width={704}
+        widths={[480, 720, 960, 1440]}
+        sizes="(min-width: 1520px) 704px, (min-width: 768px) calc((100vw - 7rem) / 2), 100vw"
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .series {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .series-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-inline: 1rem;
+  }
+
+  .title {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-normal);
+    color: var(--c-text);
+    margin: 0;
+  }
+
+  .year {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-sub);
+    letter-spacing: 0.02em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (width >= 768px) {
+    .series-header {
+      padding-inline: 0;
+    }
+
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

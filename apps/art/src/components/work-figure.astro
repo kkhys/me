@@ -1,0 +1,80 @@
+---
+import type { ImageMetadata } from "astro";
+import ArtPicture from "#/components/art-picture.astro";
+
+interface Props {
+  src: ImageMetadata;
+  title: string;
+  year: number;
+  priority?: boolean | undefined;
+}
+
+const { src, title, year, priority = false } = Astro.props;
+---
+
+<figure class="work">
+  <div class="image-wrapper">
+    <ArtPicture
+      src={src}
+      alt={title}
+      width={1200}
+      widths={[640, 900, 1200, 1800, 2400]}
+      sizes="(min-width: 1200px) 1200px, (min-width: 768px) calc(100vw - 5rem), 100vw"
+      priority={priority}
+    />
+  </div>
+  <figcaption class="caption">
+    <span class="title">{title}</span>
+    <span class="year">{year}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .work {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .image-wrapper {
+    max-inline-size: 1200px;
+  }
+
+  .caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-self: flex-end;
+    padding-inline: 1rem;
+    text-align: end;
+  }
+
+  .title {
+    font-size: var(--fs-sm);
+    color: var(--c-text);
+    text-wrap: balance;
+  }
+
+  .year {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--c-sub);
+    letter-spacing: 0.02em;
+  }
+
+  @media (width >= 768px) {
+    .work {
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .caption {
+      align-self: center;
+      padding-inline: 0;
+      text-align: start;
+    }
+  }
+</style>

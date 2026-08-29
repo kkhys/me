@@ -1,0 +1,158 @@
+---
+import { getImage } from "astro:assets";
+import { getCollection } from "astro:content";
+import type { ImageMetadata } from "astro";
+import FashionSeries from "#/components/fashion-series.astro";
+import WorkFigure from "#/components/work-figure.astro";
+import { useFixtureData } from "#/config/content-path";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { sortByOrder } from "#/utils/caption";
+import { buildFashionSeries } from "#/utils/fashion";
+import { buildWorks } from "#/utils/works";
+
+type Modules = Record<string, { default: ImageMetadata }>;
+
+// Glob patterns must be literals, so both trees are declared and one is picked.
+const workModules: Modules = useFixtureData()
+  ? import.meta.glob("../__fixtures__/works/*.jpg", { eager: true })
+  : import.meta.glob("../../art-content/works/*.jpg", { eager: true });
+const fashionModules: Modules = useFixtureData()
+  ? import.meta.glob("../__fixtures__/fashion/*/*.jpg", { eager: true })
+  : import.meta.glob("../../art-content/fashion/*/*.jpg", { eager: true });
+
+const works = buildWorks(
+  sortByOrder((await getCollection("works")).map(({ data }) => data)),
+  workModules,
+);
+const series = buildFashionSeries(
+  sortByOrder((await getCollection("fashion")).map(({ data }) => data)),
+  fashionModules,
+);
+
+const featured = works[0];
+const ogImage = featured
+  ? await getImage({ src: featured.src, width: 1200, format: "jpg", quality: 80 })
+  : undefined;
+---
+
+<BaseLayout
+  image={ogImage && featured
+    ? {
+        src: ogImage.src,
+        width: 1200,
+        height: Math.round((1200 * featured.src.height) / featured.src.width),
+      }
+    : undefined}
+>
+  <header class="page-header">
+    <h1 class="site-title">KEISUKE HAYASHI ART</h1>
+    <nav class="nav" aria-label="Sections">
+      <a href="#works">Works</a>
+      <a href="#fashion">Fashion Design</a>
+    </nav>
+  </header>
+
+  <section id="works" class="section">
+    <h2 class="section-title">Works</h2>
+    <div class="works">
+      {works.map((work, i) => (
+        <WorkFigure src={work.src} title={work.title} year={work.year} priority={i === 0} />
+      ))}
+    </div>
+  </section>
+
+  <section id="fashion" class="section">
+    <h2 class="section-title">Fashion Design</h2>
+    <div class="fashion">
+      {series.map((entry) => (
+        <FashionSeries title={entry.title} year={entry.year} images={entry.images} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+    padding-inline: 1rem;
+    margin-block-end: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .site-title,
+  .nav {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-normal);
+    letter-spacing: 0.02em;
+    text-wrap: nowrap;
+  }
+
+  .site-title {
+    color: var(--c-sub);
+    margin: 0;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1rem;
+
+    & a {
+      color: var(--c-sub);
+      text-decoration: none;
+
+      &:hover {
+        color: var(--c-text);
+      }
+    }
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    scroll-margin-block-start: 2rem;
+
+    & + & {
+      margin-block-start: clamp(5rem, 10vw, 8rem);
+    }
+  }
+
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-normal);
+    color: var(--c-sub);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 0;
+    padding-inline: 1rem;
+  }
+
+  .works {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .fashion {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3rem, 6vw, 5rem);
+  }
+
+  @media (width >= 768px) {
+    .page-header,
+    .section-title {
+      padding-inline: 0;
+    }
+
+    .page-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+  }
+</style>
