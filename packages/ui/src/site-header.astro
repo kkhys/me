@@ -7,7 +7,6 @@ interface Props {
   showBack?: boolean | undefined;
 }
 
-// Slot `actions`: controls pinned to the right edge, opposite the back button.
 const { title, href, showBack = false } = Astro.props;
 ---
 
@@ -34,6 +33,7 @@ const { title, href, showBack = false } = Astro.props;
   }
   {href ? <a href={href} class="site-title">{title}</a> : <div class="site-title">{title}</div>}
   {
+    /* `actions`: controls pinned to the right edge, opposite the back button. */
     Astro.slots.has("actions") && (
       <div class="site-header-actions">
         <slot name="actions" />
