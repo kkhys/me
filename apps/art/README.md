@@ -53,11 +53,12 @@ apps/art/
 ├── src/
 │   ├── components/   # art-picture (<Picture> + blur-up), gallery-thumb, work/fashion figures, header, pager
 │   ├── config/       # content-path.ts (fixture switch), site.ts
-│   ├── layouts/      # base-layout.astro (HTML shell + SEO/OGP meta)
-│   ├── lib/          # gallery.ts (collections + globbed images)
+│   ├── layouts/      # base-layout.astro (HTML shell + SEO/OGP meta, view-transition opt-in)
+│   ├── lib/          # gallery.ts (collections + globbed images), og-image.ts, images/ (the two image trees)
+│   ├── loaders/      # caption-file.ts (YAML parser with positional order, up-front validation)
 │   ├── pages/        # index (thumbnail grids), works/[slug], fashion/[series]/[number]
-│   ├── styles/       # global.css (tokens, base styles, view-transition opt-in)
-│   ├── utils/        # caption pairing, route helpers
+│   ├── styles/       # global.css (tokens, base styles)
+│   ├── utils/        # caption pairing, sheet numbers, route helpers
 │   ├── __fixtures__/ # Sample content for CI builds
 │   └── __tests__/    # Vitest unit tests
 ├── art-content/      # Images + captions (Git submodule, private)

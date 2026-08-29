@@ -79,7 +79,7 @@ Run from the repo root:
 | `pnpm --filter @kkhys/memo <script>`               | Target a single app                                                    |
 | `pnpm release`                                     | Tag a repo-wide release                                                |
 
-Per-app commands are documented in each app's README ([me](./apps/me/README.md), [memo](./apps/memo/README.md), [lgtm](./apps/lgtm/README.md), [diary](./apps/diary/README.md), [trends](./apps/trends/README.md)).
+Per-app commands are documented in each app's README ([me](./apps/me/README.md), [memo](./apps/memo/README.md), [lgtm](./apps/lgtm/README.md), [diary](./apps/diary/README.md), [trends](./apps/trends/README.md), [art](./apps/art/README.md)).
 
 ## CI / Deploy
 
