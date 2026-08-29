@@ -1,19 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  fashionPath,
-  fashionTransitionName,
-  padNumber,
-  workPath,
-  workTransitionName,
-} from "#/utils/routes";
-
-describe("padNumber", () => {
-  it("pads to two digits like the NN.jpg file names", () => {
-    expect(padNumber(1)).toBe("01");
-    expect(padNumber(10)).toBe("10");
-    expect(padNumber(123)).toBe("123");
-  });
-});
+import { fashionPath, fashionTransitionName, workPath, workTransitionName } from "#/utils/routes";
 
 describe("paths", () => {
   it("builds detail page paths", () => {

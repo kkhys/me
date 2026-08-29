@@ -22,7 +22,10 @@ describe("buildFashionSeries", () => {
     );
 
     expect(series.map(({ slug }) => slug)).toEqual(["series-2", "series-1"]);
-    expect(series[1]?.images.map(({ number }) => number)).toEqual([1, 2]);
+    expect(series[1]?.images).toEqual([
+      { src: "../../art-content/fashion/series-1/01.jpg", number: 1 },
+      { src: "../../art-content/fashion/series-1/02.jpg", number: 2 },
+    ]);
     expect(series[0]).toMatchObject({ title: "Series 2", year: 2019 });
   });
 
@@ -58,7 +61,33 @@ describe("buildFashionSeries", () => {
     ).toThrow(/stray/u);
   });
 
-  it("ignores paths that do not match the series layout", () => {
+  it("throws when a series directory holds a file that is not NN.jpg", () => {
+    expect(() =>
+      buildFashionSeries(
+        captions,
+        modules([
+          "../../art-content/fashion/series-1/01.jpg",
+          "../../art-content/fashion/series-2/01.jpg",
+          "../../art-content/fashion/series-2/cover.jpg",
+        ]),
+      ),
+    ).toThrow(/series-2\/cover\.jpg/u);
+  });
+
+  it("throws when two files resolve to the same sheet number", () => {
+    expect(() =>
+      buildFashionSeries(
+        captions,
+        modules([
+          "../../art-content/fashion/series-1/01.jpg",
+          "../../art-content/fashion/series-1/1.jpg",
+          "../../art-content/fashion/series-2/01.jpg",
+        ]),
+      ),
+    ).toThrow(/Duplicate sheet number 1 in fashion\/series-1/u);
+  });
+
+  it("ignores paths outside the fashion tree", () => {
     const series = buildFashionSeries(
       captions,
       modules([
@@ -77,7 +106,7 @@ describe("buildFashionSeries", () => {
 });
 
 describe("flattenFashionSheets", () => {
-  it("lists every sheet in series order, then number order", () => {
+  it("lists every sheet in series order, then number order, with the series caption", () => {
     const series = buildFashionSeries(
       captions,
       modules([
@@ -94,5 +123,6 @@ describe("flattenFashionSheets", () => {
       "series-1/1",
       "series-1/2",
     ]);
+    expect(sheets[0]?.series).toEqual({ slug: "series-2", title: "Series 2", year: 2019 });
   });
 });

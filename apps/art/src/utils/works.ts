@@ -1,4 +1,4 @@
-import { type Caption, ContentMismatchError, type ImageModules } from "#/utils/caption";
+import { type Caption, type ImageModules, pairCaptionsWithImages } from "#/utils/caption";
 
 export interface Work<TImage> extends Caption {
   src: TImage;
@@ -6,26 +6,19 @@ export interface Work<TImage> extends Caption {
 
 const WORK_PATH_PATTERN = /\/works\/([^/]+)\.jpg$/u;
 
-/**
- * Pair each caption with its image (`works/<slug>.jpg`), preserving the
- * caption order from works.yaml, which is the display order.
- */
+/** The image for a caption is `works/<slug>.jpg`. */
 export const buildWorks = <TImage>(
   captions: readonly Caption[],
   modules: ImageModules<TImage>,
 ): Work<TImage>[] => {
   const images = new Map<string, TImage>();
   for (const [path, mod] of Object.entries(modules)) {
-    const slug = path.match(WORK_PATH_PATTERN)?.[1];
+    const slug = WORK_PATH_PATTERN.exec(path)?.[1];
     if (slug) images.set(slug, mod.default);
   }
 
-  const missing = captions.filter(({ slug }) => !images.has(slug)).map(({ slug }) => slug);
-  const captioned = new Set(captions.map(({ slug }) => slug));
-  const orphans = [...images.keys()].filter((slug) => !captioned.has(slug));
-  if (missing.length > 0 || orphans.length > 0) {
-    throw new ContentMismatchError("works", missing, orphans);
-  }
-
-  return captions.map((caption) => ({ ...caption, src: images.get(caption.slug) as TImage }));
+  return pairCaptionsWithImages("works", captions, images, (caption, src) => ({
+    ...caption,
+    src,
+  }));
 };

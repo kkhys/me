@@ -1,29 +1,20 @@
 ---
-import { getImage } from "astro:assets";
 import GalleryThumb from "#/components/gallery-thumb.astro";
 import SiteHeader from "#/components/site-header.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { loadFashionSeries, loadWorks } from "#/lib/gallery";
-import { fashionPath, fashionTransitionName, padNumber, workPath, workTransitionName } from "#/utils/routes";
+import { buildOgImage } from "#/lib/og-image";
+import { fashionPath, fashionTransitionName, workPath, workTransitionName } from "#/utils/routes";
+import { padNumber } from "#/utils/sheet-number";
 
 const works = await loadWorks();
 const series = await loadFashionSeries();
 
 const featured = works[0];
-const ogImage = featured
-  ? await getImage({ src: featured.src, width: 1200, format: "jpg", quality: 80 })
-  : undefined;
+const ogImage = featured ? await buildOgImage(featured.src) : undefined;
 ---
 
-<BaseLayout
-  image={ogImage && featured
-    ? {
-        src: ogImage.src,
-        width: 1200,
-        height: Math.round((1200 * featured.src.height) / featured.src.width),
-      }
-    : undefined}
->
+<BaseLayout image={ogImage}>
   <SiteHeader home />
 
   <section id="works" class="section">

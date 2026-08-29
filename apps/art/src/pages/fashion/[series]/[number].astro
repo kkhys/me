@@ -1,5 +1,4 @@
 ---
-import { getImage } from "astro:assets";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import FashionFigure from "#/components/fashion-figure.astro";
 import Pager from "#/components/pager.astro";
@@ -7,8 +6,10 @@ import SiteHeader from "#/components/site-header.astro";
 import { SITE_NAME } from "#/config/site";
 import BaseLayout from "#/layouts/base-layout.astro";
 import { loadFashionSeries } from "#/lib/gallery";
+import { buildOgImage } from "#/lib/og-image";
 import { type FashionSheet, flattenFashionSheets } from "#/utils/fashion";
-import { FASHION_SECTION, fashionPath, padNumber } from "#/utils/routes";
+import { FASHION_SECTION, fashionPath } from "#/utils/routes";
+import { padNumber } from "#/utils/sheet-number";
 
 export const getStaticPaths = (async () => {
   const sheets = flattenFashionSheets(await loadFashionSeries());
@@ -26,17 +27,13 @@ const { series, image } = sheet;
 const label = (target: FashionSheet<unknown>) =>
   `${target.series.title} ${padNumber(target.image.number)}`;
 
-const ogImage = await getImage({ src: image.src, width: 1200, format: "jpg", quality: 80 });
+const ogImage = await buildOgImage(image.src);
 ---
 
 <BaseLayout
   title={`${label(sheet)} (${series.year}) — ${SITE_NAME}`}
   description={`${series.title}, sheet ${padNumber(image.number)}, ${series.year}. Fashion design by Keisuke Hayashi.`}
-  image={{
-    src: ogImage.src,
-    width: 1200,
-    height: Math.round((1200 * image.src.height) / image.src.width),
-  }}
+  image={ogImage}
 >
   <SiteHeader />
   <FashionFigure sheet={sheet} />

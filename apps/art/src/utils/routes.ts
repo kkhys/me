@@ -1,8 +1,7 @@
+import { padNumber } from "#/utils/sheet-number";
+
 export const WORKS_SECTION = "/#works";
 export const FASHION_SECTION = "/#fashion";
-
-/** Two-digit sheet number, matching the `NN.jpg` file names. */
-export const padNumber = (number: number): string => String(number).padStart(2, "0");
 
 export const workPath = (slug: string): string => `/works/${slug}`;
 
