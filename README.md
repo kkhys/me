@@ -2,6 +2,15 @@
 
 A pnpm monorepo for kkhys's personal sites, built with [Astro](https://astro.build/) and deployed on [Cloudflare Pages](https://pages.cloudflare.com/).
 
+## Architecture
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/architecture/architecture-dark.svg">
+  <img alt="System architecture of the kkhys monorepo: content submodules feed the Astro apps in the pnpm workspace, which deploy to Cloudflare Pages via GitHub Actions (memo) or a developer machine (the rest)" src="./docs/architecture/architecture-light.svg">
+</picture>
+
+The diagram is generated with [Archify](https://github.com/tt-a1i/archify) from [`docs/architecture/kkhys-monorepo.architecture.json`](./docs/architecture/kkhys-monorepo.architecture.json). To update it, edit the JSON, run `archify deliver architecture <json> <html> --quality showcase`, and re-export the light and dark SVGs from the viewer's Export menu.
+
 ## Workspace
 
 ### Apps
@@ -14,16 +23,19 @@ A pnpm monorepo for kkhys's personal sites, built with [Astro](https://astro.bui
 | [`@kkhys/diary`](./apps/diary)   | [diary.kkhys.me](https://diary.kkhys.me)   | Photo diary                          |
 | [`@kkhys/art`](./apps/art)       | [art.kkhys.me](https://art.kkhys.me)       | Artwork and fashion design gallery   |
 | [`@kkhys/trends`](./apps/trends) | [trends.kkhys.me](https://trends.kkhys.me) | Daily tech trend digest              |
+| [`@kkhys/design`](./apps/design) | [design.kkhys.me](https://design.kkhys.me) | Design system docs                   |
 | [`@kkhys/studio`](./apps/studio) | (local only)                               | Memo composer for memo-content       |
 
 ### Packages
 
-| Package          | Description                                        |
-| ---------------- | -------------------------------------------------- |
-| `@kkhys/styles`  | uchu.css OKLCH color palette                       |
-| `@kkhys/seo`     | BaseSEO / OpenGraph / TwitterCard Astro primitives |
-| `@kkhys/og`      | Satori OG image + favicon generators               |
-| `@kkhys/release` | Date-based release tagging                         |
+| Package            | Description                                        |
+| ------------------ | -------------------------------------------------- |
+| `@kkhys/styles`    | uchu.css OKLCH color palette                       |
+| `@kkhys/seo`       | BaseSEO / OpenGraph / TwitterCard Astro primitives |
+| `@kkhys/og`        | Satori OG image + favicon generators               |
+| `@kkhys/ui`        | Shared Astro components + cached BudouX parser     |
+| `@kkhys/analytics` | Self-hosted Umami tracker component                |
+| `@kkhys/release`   | Date-based release tagging                         |
 
 Shared packages are consumed as source (no build step); each app applies its own config via thin wrappers. Dependency versions are centralized in the `catalog:` of `pnpm-workspace.yaml`.
 
@@ -57,15 +69,15 @@ pnpm dev:me    # or: pnpm --filter @kkhys/memo dev
 
 Run from the repo root:
 
-| Command                                            | Description                                             |
-| -------------------------------------------------- | ------------------------------------------------------- |
-| `pnpm build`                                       | Build every app and package (`pnpm -r`)                 |
-| `pnpm test`                                        | Run unit tests across the workspace                     |
-| `pnpm check`                                       | Type check across the workspace                         |
-| `pnpm lint` / `pnpm lint:fix`                      | Check / auto-fix with oxlint + oxfmt                    |
-| `pnpm dev:me` / `pnpm build:me` / `pnpm deploy:me` | me shortcuts (`:lgtm` / `:diary` / `:art` variants too) |
-| `pnpm --filter @kkhys/memo <script>`               | Target a single app                                     |
-| `pnpm release`                                     | Tag a repo-wide release                                 |
+| Command                                            | Description                                                            |
+| -------------------------------------------------- | ---------------------------------------------------------------------- |
+| `pnpm build`                                       | Build every app and package (`pnpm -r`)                                |
+| `pnpm test`                                        | Run unit tests across the workspace                                    |
+| `pnpm check`                                       | Type check across the workspace                                        |
+| `pnpm lint` / `pnpm lint:fix`                      | Check / auto-fix with oxlint + oxfmt                                   |
+| `pnpm dev:me` / `pnpm build:me` / `pnpm deploy:me` | me shortcuts (`:lgtm` / `:diary` / `:trends` / `:design` / `:art` too) |
+| `pnpm --filter @kkhys/memo <script>`               | Target a single app                                                    |
+| `pnpm release`                                     | Tag a repo-wide release                                                |
 
 Per-app commands are documented in each app's README ([me](./apps/me/README.md), [memo](./apps/memo/README.md), [lgtm](./apps/lgtm/README.md), [diary](./apps/diary/README.md), [trends](./apps/trends/README.md)).
 
@@ -73,7 +85,7 @@ Per-app commands are documented in each app's README ([me](./apps/me/README.md),
 
 - `.github/workflows/ci.yml` — runs on pull requests and the merge queue: lint, test, type check, and build across the workspace against fixtures.
 - `.github/workflows/deploy-memo.yml` — deploys memo to Cloudflare Pages on pushes to main that touch memo or shared packages.
-- me, lgtm, diary, and trends are built and deployed locally via `pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary` / `pnpm deploy:trends`. trends is normally published end-to-end by the `creating-trend-digest` Claude Code skill (data commit → deploy → push).
+- me, lgtm, diary, trends, and design are built and deployed locally via `pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary` / `pnpm deploy:trends` / `pnpm deploy:design`. trends is normally published end-to-end by the `creating-trend-digest` Claude Code skill (data commit → deploy → push).
 
 ## License
 
