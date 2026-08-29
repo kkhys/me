@@ -1,0 +1,53 @@
+---
+interface Link {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  prev?: Link | undefined;
+  next?: Link | undefined;
+  back: Link;
+}
+
+const { prev, next, back } = Astro.props;
+---
+
+<nav class="pager" aria-label="Neighbouring pieces">
+  {prev ? <a href={prev.href} rel="prev">← {prev.label}</a> : <span />}
+  <a href={back.href} class="back">{back.label}</a>
+  {next ? <a href={next.href} rel="next">{next.label} →</a> : <span />}
+</nav>
+
+<style>
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    margin-block-start: clamp(2.5rem, 5vw, 4rem);
+    padding-inline: 1rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    letter-spacing: 0.02em;
+
+    & > :last-child {
+      text-align: end;
+    }
+  }
+
+  a {
+    color: var(--c-sub);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--c-text);
+    }
+  }
+
+  @media (width >= 768px) {
+    .pager {
+      padding-inline: 0;
+    }
+  }
+</style>

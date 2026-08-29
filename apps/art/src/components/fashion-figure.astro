@@ -1,0 +1,98 @@
+---
+import type { ImageMetadata } from "astro";
+import ArtPicture from "#/components/art-picture.astro";
+import type { FashionSheet } from "#/utils/fashion";
+import { fashionTransitionName, padNumber } from "#/utils/routes";
+
+interface Props {
+  sheet: FashionSheet<ImageMetadata>;
+}
+
+const { series, image } = Astro.props.sheet;
+const number = padNumber(image.number);
+---
+
+<figure class="sheet">
+  <div class="image-wrapper">
+    <ArtPicture
+      src={image.src}
+      alt={`${series.title} / ${number}`}
+      width={1200}
+      widths={[640, 900, 1200, 1800]}
+      sizes="(min-width: 768px) 68vh, 100vw"
+      transitionName={fashionTransitionName(series.slug, image.number)}
+      framed
+      priority
+    />
+  </div>
+  <figcaption class="caption">
+    <h1 class="title">{series.title}</h1>
+    <span class="meta">{number} / {series.year}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .sheet {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .image-wrapper {
+    max-inline-size: 1200px;
+  }
+
+  .caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-self: flex-end;
+    padding-inline: 1rem;
+    text-align: end;
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    letter-spacing: 0.02em;
+  }
+
+  .title {
+    font-size: inherit;
+    font-weight: var(--fw-normal);
+    color: var(--c-text);
+    margin: 0;
+  }
+
+  .meta {
+    font-variant-numeric: tabular-nums;
+    color: var(--c-sub);
+  }
+
+  @media (width >= 768px) {
+    .sheet {
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    /* Portrait sheets: size by viewport height so one fits on screen, with
+       a definite block-size so the box exists before the image loads. The
+       other two terms keep a 4:5 sheet inside the main column (100vw - 5rem,
+       at most 1200px wide) without container units: the wrapper is a flex
+       item, and inline-size containment would collapse it to zero width.
+       `sizes` mirrors the 85vh term. */
+    .image-wrapper :global(.blur-load) {
+      inline-size: fit-content;
+    }
+
+    .image-wrapper :global(img) {
+      block-size: min(85dvh, 1500px, calc((100vw - 5rem) * 1.25));
+      inline-size: auto;
+    }
+
+    .caption {
+      align-self: center;
+      padding-inline: 0;
+      text-align: start;
+    }
+  }
+</style>

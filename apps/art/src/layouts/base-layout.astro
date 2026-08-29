@@ -22,6 +22,19 @@ const ogImageUrl = image ? new URL(image.src, Astro.site).href : undefined;
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+  {/* Opt into cross-document view transitions so a thumbnail morphs into its
+      detail page (and back). Inline on purpose: Chromium decides whether the
+      incoming page opted in before the external stylesheet is applied on a
+      fresh load, and a rule that lives only there is missed (verified: the
+      forward navigation ran without a transition until this was inlined). */}
+  <style is:inline>
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition {
+        navigation: auto;
+      }
+    }
+  </style>
+
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
@@ -30,8 +43,8 @@ const ogImageUrl = image ? new URL(image.src, Astro.site).href : undefined;
   <BaseSEO title={title} description={description} />
   <link rel="sitemap" href="/sitemap-index.xml"/>
 
-  {/* The OG image is the first work: a variable-height JPEG, not the
-      1200x630 PNG card the other apps use. */}
+  {/* The OG image is a work: a variable-height JPEG, not the 1200x630 PNG
+      card the other apps use. */}
   <OpenGraph
     title={title}
     description={description}
@@ -49,10 +62,15 @@ const ogImageUrl = image ? new URL(image.src, Astro.site).href : undefined;
     card={ogImageUrl ? "summary_large_image" : "summary"}
   />
 
+  {/* Cross-document view transitions snapshot the new page as soon as it
+      renders; hold rendering until <main> is parsed so the image that
+      should morph is already in the DOM. Pages are small, so this is cheap. */}
+  <link rel="expect" href="#main" blocking="render">
+
   <BlurLoadNoscript />
 </head>
 <body>
-<main>
+<main id="main">
   <slot/>
 </main>
 </body>

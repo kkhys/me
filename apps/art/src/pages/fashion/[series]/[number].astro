@@ -1,0 +1,48 @@
+---
+import { getImage } from "astro:assets";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import FashionFigure from "#/components/fashion-figure.astro";
+import Pager from "#/components/pager.astro";
+import SiteHeader from "#/components/site-header.astro";
+import { SITE_NAME } from "#/config/site";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { loadFashionSeries } from "#/lib/gallery";
+import { type FashionSheet, flattenFashionSheets } from "#/utils/fashion";
+import { FASHION_SECTION, fashionPath, padNumber } from "#/utils/routes";
+
+export const getStaticPaths = (async () => {
+  const sheets = flattenFashionSheets(await loadFashionSeries());
+  return sheets.map((sheet, i) => ({
+    params: { series: sheet.series.slug, number: padNumber(sheet.image.number) },
+    props: { sheet, prev: sheets[i - 1], next: sheets[i + 1] },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { sheet, prev, next } = Astro.props;
+const { series, image } = sheet;
+
+const label = (target: FashionSheet<unknown>) =>
+  `${target.series.title} ${padNumber(target.image.number)}`;
+
+const ogImage = await getImage({ src: image.src, width: 1200, format: "jpg", quality: 80 });
+---
+
+<BaseLayout
+  title={`${label(sheet)} (${series.year}) — ${SITE_NAME}`}
+  description={`${series.title}, sheet ${padNumber(image.number)}, ${series.year}. Fashion design by Keisuke Hayashi.`}
+  image={{
+    src: ogImage.src,
+    width: 1200,
+    height: Math.round((1200 * image.src.height) / image.src.width),
+  }}
+>
+  <SiteHeader />
+  <FashionFigure sheet={sheet} />
+  <Pager
+    prev={prev && { href: fashionPath(prev.series.slug, prev.image.number), label: label(prev) }}
+    next={next && { href: fashionPath(next.series.slug, next.image.number), label: label(next) }}
+    back={{ href: FASHION_SECTION, label: "Fashion Design" }}
+  />
+</BaseLayout>

@@ -10,15 +10,23 @@ interface Props {
   width: number;
   widths: number[];
   sizes: string;
+  /** Shared between a thumbnail and its detail page so the image morphs across the navigation. */
+  transitionName: string;
+  /** Hairline border for sheets that would otherwise merge with the page. */
+  framed?: boolean | undefined;
   priority?: boolean | undefined;
 }
 
-const { src, alt, width, widths, sizes, priority = false } = Astro.props;
+const { src, alt, width, widths, sizes, transitionName, framed = false, priority = false } =
+  Astro.props;
 
 const blurryImage = await getImage({ src, width: 20 });
 ---
 
-<div class="blur-load" style={`--bg-image: url(${blurryImage.src})`}>
+<div
+  class:list={["blur-load", { framed }]}
+  style={`--bg-image: url(${blurryImage.src}); view-transition-name: ${transitionName}`}
+>
   <Picture
     src={src}
     alt={alt}
@@ -43,6 +51,10 @@ const blurryImage = await getImage({ src, width: 20 });
     &.image-loaded {
       background: none;
       filter: blur(0);
+    }
+
+    &.framed {
+      border: 1px solid var(--c-border);
     }
   }
 </style>
