@@ -12,7 +12,7 @@ const personSchema: WithContext<Person> = {
   name: me.name,
   url: BASE_URL,
   image: `${BASE_URL}/images/avatar.jpg`,
-  sameAs: [me.memo],
+  sameAs: [me.github.url, me.memo, me.diary, me.art],
   jobTitle: "Software engineer",
   worksFor: {
     "@type": "Organization",

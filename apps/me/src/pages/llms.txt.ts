@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { me, siteConfig } from "#/config/site";
+import { sites } from "#/config/sites";
 import { getPublicBlogEntries } from "#/features/blog/utils/entry";
 import { BASE_URL } from "#/utils/base-url";
 
@@ -14,6 +15,11 @@ ${blogEntries.map((entry) => `- [${entry.data.title}](${BASE_URL}/blog/posts/${e
 ## Other
 
 - [About me](${BASE_URL}/about)
+- [Bucket list](${BASE_URL}/bucket-list)
+
+## Sites
+
+${sites.map(({ label, href, description }) => `- [${label}](${href}): ${description}`).join("\n")}
 
 ## Contact & Social
 
