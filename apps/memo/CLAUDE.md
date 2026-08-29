@@ -38,7 +38,7 @@ Bot feeds: the memo loader injects entries from external RSS feeds as bot author
 
 ## Search
 
-`astro-pagefind` indexes `dist` after `astro build`. Only the root post of each `/posts/[id]` page is indexed: `ThreadPost` gets `indexable` from that page and marks its `.post-text` with `data-pagefind-body` and the author / date / avatar meta the dialog renders. Comments have their own pages, so they are found there. The dev server serves `/pagefind/` from `dist`, so run `pnpm build` once before `pnpm dev` to try search locally. The dialog lives in `src/features/search/`; pure logic sits in `src/features/search/utils/` so it stays unit-testable.
+`astro-pagefind` indexes `dist` after `astro build`. Only the root post of each `/posts/[id]` page is indexed: `ThreadPost` gets `indexable` from that page and marks its `.post-text` with `data-pagefind-body` and the author / date / avatar meta the dialog renders. Comments have their own pages, so they are found there; so do bot entries (`rss-` / `zenn-` / `oss-`), which are therefore indexed alongside memos. `verifyPagefindIndex` (`src/features/search/verify-index.ts`, registered after `pagefind()` in `astro.config.ts`) fails the build when the index is missing or covers a different number of pages than `dist/posts/*.html` — astro-pagefind itself only logs indexing errors. The dev server serves `/pagefind/` from `dist`, so run `pnpm build` once before `pnpm dev` to try search locally. The dialog lives in `src/features/search/`; pure logic sits in `src/features/search/utils/` so it stays unit-testable.
 
 ## Constraints
 
