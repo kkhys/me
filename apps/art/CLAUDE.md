@@ -1,31 +1,39 @@
 # CLAUDE.md
 
-Artwork gallery (art.kkhys.me), the `@kkhys/art` app of the kkhys monorepo. Astro 7 static site on Cloudflare Pages. A single page renders two collections from the `art-content` submodule — titled works (landscape images, one per row with a title/year caption) and fashion design series (portrait illustrations in a two-column grid) — with responsive AVIF/WebP variants, blur-up placeholders, and a work-derived OG image. TypeScript strictest mode. Vanilla CSS (kiso.css reset + uchu.css palette via `@kkhys/styles`). Light theme only. Path alias: `#/*` → `./src/*`.
+Artwork gallery (art.kkhys.me), the `@kkhys/art` app of the kkhys monorepo. Astro 7 static site on Cloudflare Pages. The index shows two collections from the `art-content` submodule as thumbnail grids — titled works (landscape) and fashion design series (portrait sheets) — and each image has its own detail page. Thumbnails morph into the detail image through CSS-only cross-document view transitions; no client JavaScript. Responsive AVIF/WebP variants, blur-up placeholders, and per-page OG images derived from the work. TypeScript strictest mode. Vanilla CSS (kiso.css reset + uchu.css palette via `@kkhys/styles`). Light theme only. Path alias: `#/*` → `./src/*`.
 
 ## Project Map
 
 ```
 src/
-  pages/index.astro               # The gallery: collections + globbed images → sections, OG image
-  pages/api/favicon/              # Dev-only favicon endpoints via @kkhys/og (omitted from prod builds)
-  layouts/base-layout.astro       # HTML shell wired to the @kkhys/seo primitives
-  components/art-picture.astro    # <Picture> with AVIF/WebP variants + blur-up placeholder
-  components/work-figure.astro    # One work: picture + title/year caption
-  components/fashion-series.astro # One series: heading + two-column grid
-  content.config.ts               # `works` / `fashion` collections (file loader over YAML)
-  config/content-path.ts          # USE_FIXTURE_DATA switch between art-content and __fixtures__
-  utils/works.ts                  # buildWorks: captions + images → ordered works
-  utils/fashion.ts                # buildFashionSeries: captions + images → ordered series
-  utils/caption.ts                # Shared caption type + ContentMismatchError
-  __fixtures__/                   # Sample YAML + tiny JPEGs for CI builds
-  __tests__/                      # Vitest unit tests
-art-content/                      # Git submodule (private) — see its README for layout and `pnpm ingest`
+  pages/index.astro                     # Thumbnail grids for both collections, OG image from the first work
+  pages/works/[slug].astro              # Work detail page (getStaticPaths over loadWorks)
+  pages/fashion/[series]/[number].astro # Sheet detail page (getStaticPaths over the flattened sheets)
+  pages/api/favicon/                    # Dev-only favicon endpoints via @kkhys/og (omitted from prod builds)
+  layouts/base-layout.astro             # HTML shell: @kkhys/seo primitives, render-blocking <link rel="expect">
+  lib/gallery.ts                        # loadWorks / loadFashionSeries: collections + globbed images
+  components/art-picture.astro          # <Picture> with AVIF/WebP variants, blur-up, view-transition-name
+  components/gallery-thumb.astro        # Index grid item: linked picture + caption
+  components/work-figure.astro          # Work detail: picture + title/year caption
+  components/fashion-figure.astro       # Sheet detail: viewport-height picture + series/number caption
+  components/site-header.astro          # Site title + section links (h1 on the index)
+  components/pager.astro                # prev / back / next links on detail pages
+  content.config.ts                     # `works` / `fashion` collections (file loader over YAML)
+  config/content-path.ts                # USE_FIXTURE_DATA switch between art-content and __fixtures__
+  utils/works.ts                        # buildWorks: captions + images → ordered works
+  utils/fashion.ts                      # buildFashionSeries + flattenFashionSheets
+  utils/routes.ts                       # Detail paths, NN padding, view-transition-name helpers
+  utils/caption.ts                      # Caption types, sortByOrder, ContentMismatchError
+  __fixtures__/                         # Sample YAML + tiny JPEGs for CI builds
+  __tests__/                            # Vitest unit tests
+art-content/                            # Git submodule (private) — see its README for layout and `pnpm ingest`
 ```
 
 ## Content Model
 
-- `art-content/works/works.yaml` — array of `{ slug, title, year }`; the image is `works/<slug>.jpg`. YAML order is display order.
+- `art-content/works/works.yaml` — array of `{ slug, title, year }`; the image is `works/<slug>.jpg`. YAML order is display order; the `file()` loader's parser records each item's position as `order` because the data store returns entries sorted by id.
 - `art-content/fashion/fashion.yaml` — array of `{ slug, title, year }` per series; images are `fashion/<slug>/NN.jpg`, shown in numeric order. YAML order is display order.
+- Routes: `/works/<slug>` and `/fashion/<series>/<NN>`. prev/next on fashion pages run through every sheet in order, crossing series boundaries.
 - `buildWorks` / `buildFashionSeries` throw `ContentMismatchError` when a caption has no image or an image has no caption, so authoring mistakes fail the local build instead of silently dropping a work.
 - Images are pre-sized by `art-content`'s `pnpm ingest` (2400px long edge, sRGB, metadata stripped). Sources are often Adobe RGB; Astro's sharp service discards metadata, so the sRGB conversion has to happen before commit.
 
@@ -34,15 +42,16 @@ art-content/                      # Git submodule (private) — see its README f
 Consumed as source (no build step).
 
 - `@kkhys/styles` — uchu.css palette + shared `tokens.css` / `base.css`, imported in `src/styles/global.css`. Tokens resolve to their light values (no dark scheme opt-in).
-- `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard in `base-layout.astro`. The OG image is the first work (variable-height JPEG), passed via the `imageType`/`imageWidth`/`imageHeight` props; `twitter:card` switches to "summary" when no work exists.
+- `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard in `base-layout.astro`. The OG image is the page's work (the first work on the index), a variable-height JPEG passed via the `imageType`/`imageWidth`/`imageHeight` props; `twitter:card` switches to "summary" when no work exists.
 - `@kkhys/ui` — `blurLoadHandlers` (inline load/error reveal) and `BlurLoadNoscript`.
 - `@kkhys/og` — favicon routes (`src/pages/api/favicon/[file].ts`, bound to the red→indigo gradient). Static icons in `public/` are generated from those routes.
 
 ## Key Design Decisions
 
-- Captions come from content collections (`file()` loader), images from `import.meta.glob`; both switch to `src/__fixtures__` under `USE_FIXTURE_DATA`, and the image service switches to `astro/assets/services/noop`. Glob patterns must be literals, so `index.astro` declares both trees and picks one.
-- The first work is eager / high-priority and supplies the OG image; everything else lazy-loads behind a blurred placeholder.
-- Fashion images render at 704 CSS px max (half of the 1440px main column minus the gap), so their `widths` stop at 1440.
+- Captions come from content collections (`file()` loader), images from `import.meta.glob`; both switch to `src/__fixtures__` under `USE_FIXTURE_DATA`, and the image service switches to `astro/assets/services/noop`. Glob patterns must be literals, so `lib/gallery.ts` declares both trees and picks one.
+- View transitions are the cross-document kind: `@view-transition { navigation: auto }` inlined in `base-layout.astro`'s head (off under `prefers-reduced-motion: reduce`), a `view-transition-name` per image shared by thumbnail and detail (`utils/routes.ts`), and `<link rel="expect" href="#main" blocking="render">` so the morph target is parsed before the new page is snapshotted. The opt-in must be inline: with it only in the bundled stylesheet, Chromium ran fresh forward navigations without a transition (back/forward from cache still worked). Firefox has no cross-document support and just navigates. Speculation-rules prerendering was tried and removed: with it present Chromium skipped every transition.
+- The first three thumbnails and every detail image are eager / high-priority; everything else lazy-loads behind a blurred placeholder.
+- Fashion detail images are sized by viewport height (`block-size: min(85dvh, 125cqi)`, a definite size so the lazy box exists before load; 125cqi assumes the 4:5 sheets). `sizes` mirrors that as `68vh`.
 
 ## How to Work
 

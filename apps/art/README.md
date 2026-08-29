@@ -1,6 +1,6 @@
 # art
 
-Source code for [art.kkhys.me](https://art.kkhys.me) — an artwork and fashion design gallery built with Astro. The `@kkhys/art` app of the [kkhys monorepo](../../README.md).
+Source code for [art.kkhys.me](https://art.kkhys.me) — an artwork and fashion design gallery built with Astro. Thumbnail grids open per-image pages, with CSS cross-document view transitions morphing the image between them (no client JavaScript). The `@kkhys/art` app of the [kkhys monorepo](../../README.md).
 
 ## Tech Stack
 
@@ -51,12 +51,13 @@ Run from this directory, or prefix with `pnpm --filter @kkhys/art`:
 ```
 apps/art/
 ├── src/
-│   ├── components/   # art-picture.astro (<Picture> + blur-up), work-figure.astro, fashion-series.astro
+│   ├── components/   # art-picture (<Picture> + blur-up), gallery-thumb, work/fashion figures, header, pager
 │   ├── config/       # content-path.ts (fixture switch), site.ts
 │   ├── layouts/      # base-layout.astro (HTML shell + SEO/OGP meta)
-│   ├── pages/        # index.astro (the gallery)
-│   ├── styles/       # global.css (tokens + base styles)
-│   ├── utils/        # buildWorks / buildFashionSeries (caption + image pairing)
+│   ├── lib/          # gallery.ts (collections + globbed images)
+│   ├── pages/        # index (thumbnail grids), works/[slug], fashion/[series]/[number]
+│   ├── styles/       # global.css (tokens, base styles, view-transition opt-in)
+│   ├── utils/        # caption pairing, route helpers
 │   ├── __fixtures__/ # Sample content for CI builds
 │   └── __tests__/    # Vitest unit tests
 ├── art-content/      # Images + captions (Git submodule, private)
