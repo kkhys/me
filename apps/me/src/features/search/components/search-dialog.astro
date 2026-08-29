@@ -60,9 +60,10 @@ import { searchConfig } from "#/features/search/config";
 
 <style>
   /* Browsers keep the page behind a modal dialog wheel/touch-scrollable; lock
-     it while the search is open. Only overflow changes: the shared base styles
-     already reserve the scrollbar gutter on both edges, and overriding it here
-     would move the page by half the gutter. */
+     it while the search is open. Only overflow changes: the base styles'
+     `scrollbar-gutter: stable both-edges` keeps both gutters even with overflow
+     hidden, so nothing shifts; switching to single-edge `stable` here would
+     move the centred column by half a scrollbar width. */
   :global(html:has(.search-dialog:modal)) {
     overflow: hidden;
   }
@@ -245,12 +246,21 @@ import { searchConfig } from "#/features/search/config";
     color: var(--c-sub);
   }
 
+  /* Hidden visually rather than with display: none so the live region stays
+     in the accessibility tree and the first announcement is not dropped. */
   .search-status:empty {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    border: 0;
   }
 
-  /* With no results below (no hits, load failure) the status line closes the
-     dialog, so give it the same breathing room below as above. */
+  /* With nothing below it (no hits, load failure) the status line is the
+     dialog's last visible row, so match its top padding below. */
   .search-status:has(+ .search-results:empty) {
     padding-bottom: 0.75rem;
   }
@@ -352,9 +362,8 @@ import { searchConfig } from "#/features/search/config";
     overflow-wrap: anywhere;
   }
 
-  /* A tinted pill in body colour: the excerpt itself is muted grey, so the
-     match is lifted by weight and colour rather than by a saturated fill
-     (the dark yellow selection token swallows grey text in dark mode). */
+  /* Not `--c-selection`: its dark-mode yellow-9 fill drowns the grey excerpt
+     text, so the match gets body colour and weight over a 35% tint instead. */
   .search-result-excerpt :global(mark) {
     padding-inline: 0.125em;
     margin-inline: -0.0625em;
@@ -385,36 +394,73 @@ import { searchConfig } from "#/features/search/config";
 <script>
   import { searchConfig } from "#/features/search/config";
   import type { PagefindFragment, PagefindModule } from "#/features/search/types";
-  import { buildSearchOptions, normalizeQuery, toResultHref } from "#/features/search/utils/query";
+  import { parseExcerpt } from "#/features/search/utils/excerpt";
+  import { cycleIndex, isEditableTarget, isToggleShortcut } from "#/features/search/utils/keyboard";
+  import { toResultHref } from "#/features/search/utils/query";
+  import { createSearchRunner } from "#/features/search/utils/search-runner";
 
   const ACTIVE_FILTER_CLASS = "search-filter--active";
+  const { metaKeys } = searchConfig;
   const pagefindUrl = `${searchConfig.bundlePath}pagefind.js`;
 
-  const isEditableTarget = (target: EventTarget | null) =>
-    target instanceof HTMLElement &&
-    (target.isContentEditable || /^(?:input|textarea|select)$/iu.test(target.tagName));
+  const requireElement = <T extends Element>(
+    root: ParentNode,
+    selector: string,
+    guard: (element: Element) => element is T,
+  ): T => {
+    const element = root.querySelector(selector);
+    if (!element || !guard(element)) {
+      throw new Error(`search-dialog: missing element for "${selector}"`);
+    }
+    return element;
+  };
 
-  const fill = (root: ParentNode, selector: string, apply: (element: HTMLElement) => void) => {
-    const element = root.querySelector<HTMLElement>(selector);
-    if (element) apply(element);
+  const isHTMLElement = (element: Element): element is HTMLElement =>
+    element instanceof HTMLElement;
+
+  const renderExcerpt = (element: HTMLElement, excerpt: string) => {
+    element.replaceChildren(
+      ...parseExcerpt(excerpt).map(({ text, marked }) => {
+        if (!marked) return document.createTextNode(text);
+        const mark = document.createElement("mark");
+        mark.textContent = text;
+        return mark;
+      }),
+    );
   };
 
   const setup = (dialog: HTMLDialogElement) => {
-    const input = dialog.querySelector<HTMLInputElement>(".search-input");
-    const form = dialog.querySelector<HTMLFormElement>(".search-form");
-    const status = dialog.querySelector<HTMLElement>(".search-status");
-    const list = dialog.querySelector<HTMLOListElement>(".search-results");
-    const template = dialog.querySelector<HTMLTemplateElement>(".search-result-template");
-    const filters = dialog.querySelector<HTMLElement>(".search-filters");
+    // Every selector below points at markup in this same file, so a miss is a
+    // programming error and should fail loudly instead of leaving a dead UI.
+    const input = requireElement(
+      dialog,
+      ".search-input",
+      (element): element is HTMLInputElement => element instanceof HTMLInputElement,
+    );
+    const form = requireElement(
+      dialog,
+      ".search-form",
+      (element): element is HTMLFormElement => element instanceof HTMLFormElement,
+    );
+    const status = requireElement(dialog, ".search-status", isHTMLElement);
+    const list = requireElement(dialog, ".search-results", isHTMLElement);
+    const template = requireElement(
+      dialog,
+      ".search-result-template",
+      (element): element is HTMLTemplateElement => element instanceof HTMLTemplateElement,
+    );
+    const filters = requireElement(dialog, ".search-filters", isHTMLElement);
     const triggers = [
       ...document.querySelectorAll<HTMLButtonElement>(`button[commandfor="${dialog.id}"]`),
     ];
-    if (!input || !form || !status || !list || !template || !filters) return;
 
     let category: string | undefined;
     let pagefindPromise: Promise<PagefindModule> | undefined;
-    let requestId = 0;
+    let composing = false;
 
+    // The promise is cached even when it rejects: a failed module fetch is
+    // recorded in the module map, so re-importing the same URL fails
+    // identically without a page reload.
     const loadPagefind = () => {
       pagefindPromise ??= (async () => {
         const pagefind = (await import(
@@ -428,79 +474,69 @@ import { searchConfig } from "#/features/search/config";
       return pagefindPromise;
     };
 
-    // Best-effort warm-up on hover/open; a failure here is reported by the
-    // real search instead, so the dev server without a build stays quiet.
+    // Best-effort warm-up on hover/open. The failure is swallowed here so that
+    // hovering in a dev server without a build neither logs "Search failed"
+    // nor writes to the status line; the next real search reports it.
     const warmUp = () => {
-      loadPagefind().catch(() => {
-        pagefindPromise = undefined;
-      });
+      loadPagefind().catch(() => {});
     };
 
     const renderResult = (fragment: PagefindFragment) => {
       const node = template.content.cloneNode(true) as DocumentFragment;
-      fill(node, ".search-result", (element) => {
-        if (element instanceof HTMLAnchorElement) element.href = toResultHref(fragment.url);
-      });
-      fill(node, ".search-result-emoji", (element) => {
-        element.textContent = fragment.meta.emoji ?? "";
-      });
-      fill(node, ".search-result-title", (element) => {
-        element.textContent = fragment.meta.title ?? toResultHref(fragment.url);
-      });
-      fill(node, ".search-result-excerpt", (element) => {
-        // Pagefind wraps matches in <mark>; the excerpt is built from this
-        // site's own indexed text.
-        element.innerHTML = fragment.excerpt;
-      });
-      fill(node, ".search-result-date", (element) => {
-        element.textContent = fragment.meta.date ?? "";
-        if (element instanceof HTMLTimeElement) element.dateTime = fragment.meta.datetime ?? "";
-      });
+      const href = toResultHref(fragment.url);
+      const title = fragment.meta[metaKeys.title];
+      const emoji = fragment.meta[metaKeys.emoji];
+      const date = fragment.meta[metaKeys.date];
+      const datetime = fragment.meta[metaKeys.datetime];
+      if (import.meta.env.DEV && (!title || !emoji || !date || !datetime)) {
+        console.warn(
+          "Pagefind fragment is missing expected meta; check data-pagefind-meta in blog-layout",
+          fragment.url,
+          fragment.meta,
+        );
+      }
+
+      requireElement(
+        node,
+        ".search-result",
+        (element): element is HTMLAnchorElement => element instanceof HTMLAnchorElement,
+      ).href = href;
+      requireElement(node, ".search-result-emoji", isHTMLElement).textContent = emoji ?? "";
+      requireElement(node, ".search-result-title", isHTMLElement).textContent = title ?? href;
+      renderExcerpt(requireElement(node, ".search-result-excerpt", isHTMLElement), fragment.excerpt);
+      const time = requireElement(
+        node,
+        ".search-result-date",
+        (element): element is HTMLTimeElement => element instanceof HTMLTimeElement,
+      );
+      // `datetime=""` is not a valid value, so drop the element when the
+      // fragment carries no date.
+      if (date && datetime) {
+        time.textContent = date;
+        time.dateTime = datetime;
+      } else {
+        time.remove();
+      }
       return node;
     };
 
-    const search = async () => {
-      const query = normalizeQuery(input.value);
-      const id = ++requestId;
-      if (query === "") {
-        list.replaceChildren();
-        status.textContent = "";
-        return;
-      }
-
-      let pagefind: PagefindModule;
-      try {
-        pagefind = await loadPagefind();
-      } catch (error) {
-        console.error("Failed to load the Pagefind bundle", error);
-        pagefindPromise = undefined;
-        status.textContent = "検索インデックスを読み込めませんでした";
-        return;
-      }
-
-      const response = await pagefind.debouncedSearch(
-        query,
-        buildSearchOptions(category),
-        searchConfig.debounceMs,
-      );
-      if (response === null || id !== requestId) return;
-
-      const fragments = await Promise.all(
-        response.results.slice(0, searchConfig.maxResults).map((result) => result.data()),
-      );
-      if (id !== requestId) return;
-
-      list.replaceChildren(...fragments.map((fragment) => renderResult(fragment)));
-      status.textContent =
-        response.results.length === 0
-          ? `「${query}」に一致する記事はありません`
-          : `${response.results.length} 件`;
-    };
+    const search = createSearchRunner({
+      loadPagefind,
+      render: (fragments) => {
+        list.replaceChildren(...fragments.map((fragment) => renderResult(fragment)));
+      },
+      setStatus: (text) => {
+        status.textContent = text;
+      },
+      onError: (stage, error) => {
+        console.error(`Search failed at stage "${stage}"`, { query: input.value, category, error });
+      },
+    });
 
     const runSearch = () => {
-      search().catch((error: unknown) => {
-        console.error("Search failed", error);
-        status.textContent = "検索に失敗しました";
+      // The runner catches everything it expects; anything left is a bug.
+      search(input.value, category).catch((error: unknown) => {
+        console.error("Search runner threw", error);
       });
     };
 
@@ -509,17 +545,30 @@ import { searchConfig } from "#/features/search/config";
       ...list.querySelectorAll<HTMLAnchorElement>(".search-result"),
     ];
 
-    const openDialog = () => {
-      if (dialog.open) return;
-      dialog.showModal();
+    const onOpened = () => {
       input.select();
       warmUp();
     };
 
+    const openDialog = () => {
+      if (dialog.open) return;
+      dialog.showModal();
+      onOpened();
+    };
+
     input.addEventListener("input", runSearch);
+    input.addEventListener("compositionstart", () => {
+      composing = true;
+    });
+    input.addEventListener("compositionend", () => {
+      composing = false;
+    });
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
+      // Some engines let the Enter that commits an IME candidate submit the
+      // form; that Enter must not follow the first result.
+      if (composing) return;
       list.querySelector<HTMLAnchorElement>(".search-result")?.click();
     });
 
@@ -546,26 +595,31 @@ import { searchConfig } from "#/features/search/config";
       if (event.key === "Escape") {
         // Chrome consumes the first Escape in a non-empty `type="search"` input
         // to clear it, so close explicitly instead of relying on cancel.
+        // preventDefault also keeps the query, so reopening restores it
+        // selected.
         event.preventDefault();
         dialog.close();
         return;
       }
       if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
       const items = focusableItems();
-      const index = items.findIndex((item) => item === document.activeElement);
-      if (index === -1) return;
-      const offset = event.key === "ArrowDown" ? 1 : -1;
-      const next = items[(index + offset + items.length) % items.length];
+      const index = cycleIndex(
+        items.findIndex((item) => item === document.activeElement),
+        event.key === "ArrowDown" ? 1 : -1,
+        items.length,
+      );
+      const next = index === undefined ? undefined : items[index];
       if (!next) return;
       event.preventDefault();
       next.focus();
     });
 
+    // Invoker-driven opens (`commandfor`) bypass `openDialog`, so the toggle
+    // event is the one path that sees every open; `openDialog` still calls
+    // `onOpened` itself for engines that do not fire toggle on dialogs yet.
+    // Running it twice only re-selects the input.
     dialog.addEventListener("toggle", (event) => {
-      if (event instanceof ToggleEvent && event.newState === "open") {
-        input.select();
-        warmUp();
-      }
+      if (event instanceof ToggleEvent && event.newState === "open") onOpened();
     });
 
     for (const trigger of triggers) {
@@ -573,33 +627,33 @@ import { searchConfig } from "#/features/search/config";
     }
 
     document.addEventListener("keydown", (event) => {
-      if ((event.metaKey || event.ctrlKey) && !event.altKey && event.key.toLowerCase() === "k") {
+      if (isToggleShortcut(event)) {
         event.preventDefault();
         if (dialog.open) dialog.close();
         else openDialog();
         return;
       }
-      if (event.key === "/" && !dialog.open && !isEditableTarget(event.target)) {
+      const target = event.target instanceof HTMLElement ? event.target : null;
+      if (event.key === "/" && !dialog.open && !isEditableTarget(target)) {
         event.preventDefault();
         openDialog();
       }
     });
 
-    // Invoker commands (`commandfor`) are Baseline only since late 2025.
+    // Invoker commands (`commandfor`) are Baseline 2025 (Safari 26.2); older
+    // engines get click handlers.
     if (!("commandForElement" in HTMLButtonElement.prototype)) {
-      for (const button of dialog.ownerDocument.querySelectorAll<HTMLButtonElement>(
-        `button[commandfor="${dialog.id}"]`,
-      )) {
-        button.addEventListener("click", () => {
-          if (button.getAttribute("command") === "close") dialog.close();
+      for (const trigger of triggers) {
+        trigger.addEventListener("click", () => {
+          if (trigger.getAttribute("command") === "close") dialog.close();
           else openDialog();
         });
       }
     }
 
-    // `closedby="any"` light-dismiss is newer still; the dialog has no
-    // padding, so a click that lands on the dialog itself came from the
-    // backdrop.
+    // `closedby` is not Baseline (no Safari support as of 2026-08), so emulate
+    // light dismiss. The dialog has no padding, so a click whose target is the
+    // dialog itself came from the backdrop.
     if (!("closedBy" in HTMLDialogElement.prototype)) {
       dialog.addEventListener("click", (event) => {
         if (event.target === dialog) dialog.close();
@@ -609,4 +663,5 @@ import { searchConfig } from "#/features/search/config";
 
   const dialog = document.querySelector(`#${searchConfig.dialogId}`);
   if (dialog instanceof HTMLDialogElement) setup(dialog);
+  else console.error(`search-dialog: no <dialog id="${searchConfig.dialogId}"> in the document`);
 </script>
