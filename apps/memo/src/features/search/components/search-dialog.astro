@@ -501,6 +501,8 @@ import { searchConfig } from "#/features/search/config";
     ];
 
     const onOpened = () => {
+      // `select()` on its own is not specified to move focus into the input.
+      input.focus();
       input.select();
       warmUp();
     };
@@ -511,12 +513,17 @@ import { searchConfig } from "#/features/search/config";
       onOpened();
     };
 
-    input.addEventListener("input", runSearch);
+    // Search committed text only: while an IME composes, every keystroke
+    // fires `input` with provisional kana and would churn the list.
+    input.addEventListener("input", () => {
+      if (!composing) runSearch();
+    });
     input.addEventListener("compositionstart", () => {
       composing = true;
     });
     input.addEventListener("compositionend", () => {
       composing = false;
+      runSearch();
     });
 
     form.addEventListener("submit", (event) => {
