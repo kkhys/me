@@ -1,7 +1,9 @@
 # Sample works for fixture/CI builds (USE_FIXTURE_DATA=true).
-- slug: sample-work
-  title: Sample Work
-  year: 2024
+# Deliberately not in id order: the site must follow YAML order, not the
+# id-sorted order the data store returns.
 - slug: sample-work-2
   title: Sample Work Ⅱ
   year: 2023
+- slug: sample-work
+  title: Sample Work
+  year: 2024

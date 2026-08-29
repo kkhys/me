@@ -3,7 +3,8 @@
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "paths": {
-      "#/*": ["./src/*"]
+      "#/*": ["./src/*"],
+      "#gallery-images": ["./src/lib/images/art-content.ts"]
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
