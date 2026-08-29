@@ -1,28 +1,37 @@
 ---
 import type { InferEntrySchema } from "astro:content";
 import BotBadge from "#/components/bot-badge.astro";
+import { buildAuthorMeta, buildDateMeta } from "#/features/search/utils/meta";
 import { formatDate, formatDateTime } from "#/utils/date";
 
 interface Props extends Pick<InferEntrySchema<"memo">, "author" | "createdAt"> {
   authorLink?: string | undefined;
   isBot?: boolean | undefined;
+  /** Exposes the author name and date to Pagefind as result metadata. */
+  indexable?: boolean | undefined;
 }
 
-const { author, createdAt, authorLink, isBot = false } = Astro.props;
+const { author, createdAt, authorLink, isBot = false, indexable = false } = Astro.props;
 const createdAtString = formatDate(createdAt);
 const fullDateTimeString = formatDateTime(createdAt);
+const authorMeta = indexable ? buildAuthorMeta() : undefined;
+const dateMeta = indexable ? buildDateMeta() : undefined;
 ---
 
 <div class="post-header">
     {authorLink ? (
-        <a href={authorLink} class="post-username-link">
+        <a href={authorLink} class="post-username-link" data-pagefind-meta={authorMeta}>
             {author}
         </a>
     ) : (
-        <span class="post-username">{author}</span>
+        <span class="post-username" data-pagefind-meta={authorMeta}>{author}</span>
     )}
     {isBot && <BotBadge />}
-    <time class="post-time" datetime={createdAt.toISOString()} title={fullDateTimeString}
+    <time
+        class="post-time"
+        datetime={createdAt.toISOString()}
+        title={fullDateTimeString}
+        data-pagefind-meta={dateMeta}
         >{createdAtString}</time
     >
 </div>

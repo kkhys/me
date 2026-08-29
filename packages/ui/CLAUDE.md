@@ -10,8 +10,11 @@ step).
 - `budoux` (`src/budoux.ts`) — cached BudouX HTML parser behind the
   component; also used directly for OG image titles.
 - `site-header.astro` / `site-footer.astro` — the centered small-site
-  chrome (memo / lgtm). Both expect the consumer's body grid to define the
-  `[top]` / `[main-start]` / `[main-end]` / `[bottom]` row names.
+  chrome (header: memo / lgtm / art / trends / design; footer: memo / lgtm /
+  design / me). Both expect the consumer's body grid to define the
+  `[top]` / `[main-start]` / `[main-end]` / `[bottom]` row names. The
+  header's `actions` slot pins controls to the right edge (memo's search
+  button).
 - `blur-load-noscript.astro` — the no-JS fallback for blur-up images;
   `selector` prop defaults to `.blur-load` (memo passes
   `[data-blur-load], .blur-load`).

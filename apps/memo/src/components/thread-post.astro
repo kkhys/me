@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import { type CollectionEntry, render } from "astro:content";
 import Avatar from "#/components/avatar.astro";
 import LinkCard from "#/components/link-card.astro";
@@ -6,6 +7,7 @@ import MemoImages from "#/components/memo-images.astro";
 import PostHeader from "#/components/post-header.astro";
 import QuoteEmbed from "#/components/quote-embed.astro";
 import TagLink from "#/components/tag-link.astro";
+import { buildAvatarMeta } from "#/features/search/utils/meta";
 import { getImagesForMemo } from "#/utils/image";
 import {
   countTotalComments,
@@ -20,6 +22,12 @@ interface Props {
   comments?: MemoWithComments[];
   hideTag?: boolean;
   isPinned?: boolean;
+  /**
+   * Marks this post's text as the page's Pagefind body. Only the root post of
+   * a thread page sets it: every memo, comments included, has its own page,
+   * so indexing replies here would list them twice.
+   */
+  indexable?: boolean | undefined;
 }
 
 const {
@@ -28,6 +36,7 @@ const {
   comments = [],
   hideTag = false,
   isPinned = false,
+  indexable = false,
 } = Astro.props;
 
 const isComment = !!memo.data.comment;
@@ -47,6 +56,12 @@ const {
   avatar: avatarImage,
   profileLink: authorLink,
 } = await getAuthorInfo(author);
+
+// The search dialog shows the avatar at the feed's 27px, so request the 2x
+// rendition the Avatar component would pick on a high-density screen.
+const avatarMeta = indexable
+  ? buildAvatarMeta((await getImage({ src: avatarImage, width: 54, height: 54 })).src)
+  : undefined;
 ---
 
 <article
@@ -65,7 +80,7 @@ const {
             <span aria-hidden="true" class="avatar-line"></span>
         )}
         <div class="thread-avatar-column">
-            <div class="post-avatar">
+            <div class="post-avatar" data-pagefind-meta={avatarMeta}>
                 <Avatar src={avatarImage} alt={authorName} size={27} link={authorLink} />
             </div>
         </div>
@@ -73,8 +88,14 @@ const {
         <div class="thread-content-column">
             <div class="thread-post">
                 <div class="post-content">
-                    <PostHeader author={authorName} createdAt={createdAt} authorLink={authorLink} isBot={isBot} />
-                    <div class="post-text">
+                    <PostHeader
+                        author={authorName}
+                        createdAt={createdAt}
+                        authorLink={authorLink}
+                        isBot={isBot}
+                        indexable={indexable}
+                    />
+                    <div class="post-text" data-pagefind-body={indexable ? "" : undefined}>
                         <Content />
                     </div>
                     {!hideTag && tag && <TagLink tag={tag} />}

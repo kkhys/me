@@ -10,7 +10,7 @@ export default defineConfig({
   test: {
     include: ["src/__tests__/**/*.test.ts"],
     coverage: {
-      include: ["src/utils/*.ts", "src/lib/*.ts", "src/loaders/*.ts"],
+      include: ["src/utils/*.ts", "src/lib/*.ts", "src/loaders/*.ts", "src/features/**/*.ts"],
       exclude: ["src/utils/image.ts", "src/loaders/memo-loader.ts"],
     },
   },

@@ -5,6 +5,7 @@ import SiteFooter from "@kkhys/ui/site-footer.astro";
 import Header from "#/components/header.astro";
 import HeadMeta from "#/components/seo/head-meta.astro";
 import { SITE_AUTHOR_NAME } from "#/config/constants";
+import SearchDialog from "#/features/search/components/search-dialog.astro";
 import "#/styles/global.css";
 ---
 
@@ -26,5 +27,6 @@ import "#/styles/global.css";
             <slot />
         </main>
         <SiteFooter author={SITE_AUTHOR_NAME} />
+        <SearchDialog />
     </body>
 </html>

@@ -25,7 +25,10 @@ const linkCardSnippet = `import LinkCard from "@kkhys/ui/link-card.astro";
 const siteHeaderSnippet = `import SiteHeader from "@kkhys/ui/site-header.astro";
 
 <SiteHeader title="LGTM" href="/" />
-<SiteHeader title="Thread" showBack />`;
+<SiteHeader title="Thread" showBack />
+<SiteHeader title="Thread" showBack>
+  <button slot="actions" type="button">検索</button>
+</SiteHeader>`;
 const siteFooterSnippet = `import SiteFooter from "@kkhys/ui/site-footer.astro";
 
 <SiteFooter author="Keisuke Hayashi" authorUrl="https://kkhys.me" links={[...]} />`;
@@ -94,12 +97,16 @@ const siteFooterSnippet = `import SiteFooter from "@kkhys/ui/site-footer.astro";
 
   <h2>SiteHeader</h2>
   <p class="note">
-    小さなサイトの中央寄せヘッダー(memo / lgtm)。<code>href</code> でブランドリンクに、
-    <code>showBack</code> で左端に戻るボタンが付く。
+    小さなサイトの中央寄せヘッダー(memo / lgtm / art / trends / design)。<code>href</code>
+    でブランドリンクに、<code>showBack</code> で左端に戻るボタンが付く。<code>actions</code>
+    スロットは右端に操作を置く(memo の検索ボタン)。
   </p>
   <div class="demo demo--stack">
     <SiteHeader title="LGTM" href="/components" />
     <SiteHeader title="Thread" showBack />
+    <SiteHeader title="Thread" showBack>
+      <button slot="actions" class="btn btn--ghost btn--size-sm" type="button">検索</button>
+    </SiteHeader>
   </div>
   <pre class="snippet"><code>{siteHeaderSnippet}</code></pre>
 
