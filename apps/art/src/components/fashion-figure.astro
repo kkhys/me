@@ -2,7 +2,8 @@
 import type { ImageMetadata } from "astro";
 import ArtPicture from "#/components/art-picture.astro";
 import type { FashionSheet } from "#/utils/fashion";
-import { fashionTransitionName, padNumber } from "#/utils/routes";
+import { fashionTransitionName } from "#/utils/routes";
+import { padNumber } from "#/utils/sheet-number";
 
 interface Props {
   sheet: FashionSheet<ImageMetadata>;
@@ -14,11 +15,12 @@ const number = padNumber(image.number);
 
 <figure class="sheet">
   <div class="image-wrapper">
+    {/* The figcaption carries the text; an alt would be read twice. */}
     <ArtPicture
       src={image.src}
-      alt={`${series.title} / ${number}`}
+      alt=""
       width={1200}
-      widths={[640, 900, 1200, 1800]}
+      widths={[640, 900, 1200, 1800, 2400]}
       sizes="(min-width: 768px) 68vh, 100vw"
       transitionName={fashionTransitionName(series.slug, image.number)}
       framed
@@ -75,11 +77,12 @@ const number = padNumber(image.number);
     }
 
     /* Portrait sheets: size by viewport height so one fits on screen, with
-       a definite block-size so the box exists before the image loads. The
-       other two terms keep a 4:5 sheet inside the main column (100vw - 5rem,
-       at most 1200px wide) without container units: the wrapper is a flex
-       item, and inline-size containment would collapse it to zero width.
-       `sizes` mirrors the 85vh term. */
+       a definite block-size so the box exists before the image decodes. The
+       other two terms keep a 4:5 sheet inside its column — the main column
+       is 100vw - 5rem, and .image-wrapper caps it at 1200px (× 1.25 = 1500px)
+       — without container units: the wrapper is a flex item, and inline-size
+       containment would collapse it to zero width. `sizes` uses 68vh, the
+       width of a 4:5 sheet at 85vh. */
     .image-wrapper :global(.blur-load) {
       inline-size: fit-content;
     }

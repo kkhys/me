@@ -13,9 +13,10 @@ const { work } = Astro.props;
 
 <figure class="work">
   <div class="image-wrapper">
+    {/* The figcaption carries the text; an alt would be read twice. */}
     <ArtPicture
       src={work.src}
-      alt={work.title}
+      alt=""
       width={1200}
       widths={[640, 900, 1200, 1800, 2400]}
       sizes="(min-width: 1200px) 1200px, (min-width: 768px) calc(100vw - 5rem), 100vw"
