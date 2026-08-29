@@ -1,0 +1,56 @@
+---
+import SearchIcon from "#/components/icons/search.svg";
+import { searchConfig } from "#/features/search/config";
+---
+
+<button
+  type="button"
+  class="search-button"
+  commandfor={searchConfig.dialogId}
+  command="show-modal"
+  aria-label="記事を検索"
+  data-umami-event="search-open"
+>
+  <SearchIcon />
+</button>
+
+<style>
+  /* Sits beside the hamburger (2.5rem wide at right 1rem) below the desktop
+     breakpoint; above it the hamburger disappears and the button takes the
+     corner, aligned with the fixed site brand's 2rem inset. */
+  .search-button {
+    position: fixed;
+    top: 1rem;
+    right: 4rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    appearance: none;
+    padding: 0;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-full);
+    color: var(--c-sub);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .search-button:hover {
+    color: var(--c-text);
+  }
+
+  .search-button svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  @media (width >= 1280px) {
+    .search-button {
+      top: 1.25rem;
+      right: 2rem;
+    }
+  }
+</style>
