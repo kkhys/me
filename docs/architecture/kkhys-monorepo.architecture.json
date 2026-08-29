@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "kkhys monorepo",
+    "locale": "en",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    {
+      "id": "studio",
+      "type": "frontend",
+      "label": "studio",
+      "sublabel": "local memo composer",
+      "pos": [10, 60],
+      "size": [140, 56]
+    },
+    {
+      "id": "memo_content",
+      "type": "database",
+      "label": "memo-content",
+      "sublabel": "git submodule",
+      "pos": [250, 60],
+      "size": [140, 56]
+    },
+    {
+      "id": "me_content",
+      "type": "database",
+      "label": "me-content",
+      "sublabel": "git submodule",
+      "pos": [250, 150],
+      "size": [140, 56]
+    },
+    {
+      "id": "lgtm_content",
+      "type": "database",
+      "label": "lgtm-content",
+      "sublabel": "git submodule",
+      "pos": [250, 240],
+      "size": [140, 56]
+    },
+    {
+      "id": "diary_content",
+      "type": "database",
+      "label": "diary-content",
+      "sublabel": "git submodule",
+      "pos": [250, 330],
+      "size": [140, 56]
+    },
+    {
+      "id": "memo",
+      "type": "frontend",
+      "label": "memo",
+      "sublabel": "memo.kkhys.me",
+      "pos": [460, 60],
+      "size": [140, 56]
+    },
+    {
+      "id": "me",
+      "type": "frontend",
+      "label": "me",
+      "sublabel": "kkhys.me",
+      "pos": [460, 150],
+      "size": [140, 56]
+    },
+    {
+      "id": "lgtm",
+      "type": "frontend",
+      "label": "lgtm",
+      "sublabel": "lgtm.kkhys.me",
+      "pos": [460, 240],
+      "size": [140, 56]
+    },
+    {
+      "id": "diary",
+      "type": "frontend",
+      "label": "diary",
+      "sublabel": "diary.kkhys.me",
+      "pos": [460, 330],
+      "size": [140, 56]
+    },
+    {
+      "id": "trends",
+      "type": "frontend",
+      "label": "trends",
+      "sublabel": "trends.kkhys.me",
+      "pos": [460, 420],
+      "size": [140, 56]
+    },
+    {
+      "id": "design",
+      "type": "frontend",
+      "label": "design",
+      "sublabel": "design.kkhys.me",
+      "pos": [460, 510],
+      "size": [140, 56]
+    },
+    {
+      "id": "packages",
+      "type": "backend",
+      "label": "Shared packages",
+      "sublabel": "styles · ui · seo · og · analytics",
+      "pos": [430, 600],
+      "size": [200, 56]
+    },
+    {
+      "id": "actions",
+      "type": "cloud",
+      "label": "GitHub Actions",
+      "sublabel": "deploy-memo.yml",
+      "pos": [720, 60],
+      "size": [150, 56],
+      "brand": "github"
+    },
+    {
+      "id": "wrangler",
+      "type": "external",
+      "label": "Developer machine",
+      "sublabel": "pnpm deploy:<app>",
+      "pos": [720, 330],
+      "size": [150, 56]
+    },
+    {
+      "id": "pages",
+      "type": "cloud",
+      "label": "Cloudflare Pages",
+      "sublabel": "one project per app",
+      "pos": [1000, 195],
+      "size": [150, 56],
+      "brand": "cloudflare"
+    },
+    {
+      "id": "visitors",
+      "type": "external",
+      "label": "Visitors",
+      "sublabel": "browser",
+      "pos": [1200, 195],
+      "size": [120, 56]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "pnpm workspace · Astro static sites",
+      "wraps": ["memo", "me", "lgtm", "diary", "trends", "design", "packages"],
+      "pad": 16
+    }
+  ],
+  "connections": [
+    {
+      "id": "studio-writes",
+      "from": "studio",
+      "to": "memo_content",
+      "label": "writes memos",
+      "variant": "dashed"
+    },
+    {
+      "id": "content-memo",
+      "from": "memo_content",
+      "to": "memo",
+      "variant": "dashed"
+    },
+    {
+      "id": "content-me",
+      "from": "me_content",
+      "to": "me",
+      "variant": "dashed"
+    },
+    {
+      "id": "content-lgtm",
+      "from": "lgtm_content",
+      "to": "lgtm",
+      "variant": "dashed"
+    },
+    {
+      "id": "content-diary",
+      "from": "diary_content",
+      "to": "diary",
+      "variant": "dashed"
+    },
+    {
+      "id": "memo-actions",
+      "from": "memo",
+      "to": "actions",
+      "label": "push to main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "me-wrangler",
+      "from": "me",
+      "to": "wrangler",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [665, 178],
+        [665, 358]
+      ]
+    },
+    {
+      "id": "lgtm-wrangler",
+      "from": "lgtm",
+      "to": "wrangler",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [665, 268],
+        [665, 358]
+      ]
+    },
+    {
+      "id": "diary-wrangler",
+      "from": "diary",
+      "to": "wrangler",
+      "route": "straight"
+    },
+    {
+      "id": "trends-wrangler",
+      "from": "trends",
+      "to": "wrangler",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [665, 448],
+        [665, 358]
+      ]
+    },
+    {
+      "id": "design-wrangler",
+      "from": "design",
+      "to": "wrangler",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [665, 538],
+        [665, 358]
+      ]
+    },
+    {
+      "id": "actions-pages",
+      "from": "actions",
+      "to": "pages",
+      "label": "deploy dist",
+      "variant": "emphasis"
+    },
+    {
+      "id": "wrangler-pages",
+      "from": "wrangler",
+      "to": "pages",
+      "label": "deploy dist"
+    },
+    {
+      "id": "visitors-pages",
+      "from": "visitors",
+      "to": "pages",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Content",
+      "items": [
+        "me, memo, lgtm, and diary read Markdown and images from their own content submodule",
+        "trends keeps its digest data inside the repo",
+        "studio writes memo-content locally and is never deployed"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Workspace",
+      "items": [
+        "Six Astro apps consume the shared packages as source, no build step",
+        "Dependency versions live in the pnpm catalog",
+        "CI lints, tests, type-checks, and builds every app against fixtures on each PR"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Deploy",
+      "items": [
+        "memo ships from GitHub Actions on every push to main",
+        "The other apps ship from a developer machine via pnpm deploy:<app>",
+        "Every app is its own Cloudflare Pages project; page views go to self-hosted Umami"
+      ]
+    }
+  ]
+}
