@@ -26,6 +26,9 @@ export const me = {
   twitter: "@kkhys_",
   memo: "https://memo.kkhys.me",
   diary: "https://diary.kkhys.me",
+  art: "https://art.kkhys.me",
+  lgtm: "https://lgtm.kkhys.me",
+  trends: "https://trends.kkhys.me",
   zenn: {
     url: "https://zenn.dev/kkhys",
     feed: "https://zenn.dev/kkhys/feed",
