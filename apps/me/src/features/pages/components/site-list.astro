@@ -1,0 +1,25 @@
+---
+import LinkHandler from "#/features/blog/components/link-handler.astro";
+import { sites } from "#/config/sites";
+
+const hostOf = (href: string) => new URL(href).host;
+---
+
+<table>
+  <thead>
+    <tr>
+      <th>Site</th>
+      <th>Link</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {sites.map(({ label, href, description }) => (
+      <tr>
+        <td>{label}</td>
+        <td><LinkHandler href={href}>{hostOf(href)}</LinkHandler></td>
+        <td>{description}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
