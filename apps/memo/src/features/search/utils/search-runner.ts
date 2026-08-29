@@ -1,13 +1,15 @@
 import { searchConfig } from "#/features/search/config";
-import type { PagefindFragment, PagefindModule } from "#/features/search/types";
+import type { PagefindModule, PagefindSearchFragment } from "#/features/search/types";
 import { normalizeQuery } from "#/features/search/utils/query";
 
 export type SearchStage = "load" | "search" | "fragments" | "render";
 
+export type SearchRunner = (rawQuery: string) => Promise<void>;
+
 export interface SearchRunnerDeps {
   loadPagefind: () => Promise<PagefindModule>;
   /** Replaces the rendered list; an empty array clears it. May throw on template drift. */
-  render: (fragments: PagefindFragment[]) => void;
+  render: (fragments: readonly PagefindSearchFragment[]) => void;
   setStatus: (text: string) => void;
   /** Called for every failure, including partial fragment loads that still render. */
   onError: (stage: SearchStage, error: unknown) => void;
@@ -26,18 +28,25 @@ export const formatResultStatus = ({ query, total, shown, failed }: ResultStatus
   return failed > 0 ? `${count}（${failed} 件を読み込めませんでした）` : count;
 };
 
-// A failed module fetch is cached in the module map for the page lifetime and
-// a missing index is only reported by the first search, so both stages share
-// the reload advice; later stages are per-result and worth retrying in place.
-export const formatErrorStatus = (stage: SearchStage): string =>
-  stage === "load" || stage === "search"
-    ? "検索を読み込めませんでした。ページを再読み込みしてください"
-    : "検索結果を取得できませんでした。もう一度お試しください";
+const RELOAD_STATUS = "検索を読み込めませんでした。ページを再読み込みしてください";
 
-export const createSearchRunner = (deps: SearchRunnerDeps) => {
+// Nothing short of a reload recovers the first three stages: a failed module
+// fetch stays in the browser's module map, a missing index rejects every
+// search, and Pagefind keeps rejected fragment loads in its own cache. A
+// render failure is a template bug, so no advice is offered.
+const errorStatus: Record<SearchStage, string> = {
+  load: RELOAD_STATUS,
+  search: RELOAD_STATUS,
+  fragments: RELOAD_STATUS,
+  render: "検索結果を表示できませんでした",
+};
+
+export const formatErrorStatus = (stage: SearchStage): string => errorStatus[stage];
+
+export const createSearchRunner = (deps: SearchRunnerDeps): SearchRunner => {
   let requestId = 0;
 
-  return async (rawQuery: string): Promise<void> => {
+  return async (rawQuery) => {
     const query = normalizeQuery(rawQuery);
     const id = ++requestId;
     if (query === "") {
@@ -83,8 +92,10 @@ export const createSearchRunner = (deps: SearchRunnerDeps) => {
       // A newer request owns the UI now; reporting here would overwrite its result.
       if (id !== requestId) return;
       deps.onError(stage, error);
-      deps.render([]);
+      // Status first: if the render itself is what failed, clearing the list
+      // may throw again, and the status line must not be left on the old query.
       deps.setStatus(formatErrorStatus(stage));
+      deps.render([]);
     }
   };
 };

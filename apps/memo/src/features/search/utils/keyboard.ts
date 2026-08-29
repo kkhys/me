@@ -1,6 +1,6 @@
-type ShortcutKeyEvent = Pick<KeyboardEvent, "key" | "metaKey" | "ctrlKey" | "altKey">;
+export type ShortcutKeyEvent = Pick<KeyboardEvent, "key" | "metaKey" | "ctrlKey" | "altKey">;
 
-interface EditableCandidate {
+export interface EditableCandidate {
   tagName: string;
   isContentEditable: boolean;
 }

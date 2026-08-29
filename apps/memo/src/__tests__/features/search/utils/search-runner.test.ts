@@ -1,43 +1,27 @@
 import { describe, expect, it, vi } from "vitest";
 import { searchConfig } from "#/features/search/config";
 import type {
-  PagefindFragment,
+  PagefindIndexesSearchResults,
   PagefindModule,
-  PagefindSearchResponse,
+  PagefindSearchFragment,
   PagefindSearchResult,
 } from "#/features/search/types";
 import {
   createSearchRunner,
   formatErrorStatus,
   formatResultStatus,
+  type SearchStage,
 } from "#/features/search/utils/search-runner";
 
-const fragment = (url: string): PagefindFragment => ({
-  url,
-  raw_url: url,
-  content: "",
-  excerpt: "",
-  word_count: 0,
-  meta: {},
-  filters: {},
-});
+const fragment = (url: string): PagefindSearchFragment => ({ url, excerpt: "", meta: {} });
 
 const result = (
   url: string,
-  data: () => Promise<PagefindFragment> = () => Promise.resolve(fragment(url)),
-): PagefindSearchResult => ({
-  id: url,
-  score: 1,
-  words: [],
-  data,
-});
+  data: () => Promise<PagefindSearchFragment> = () => Promise.resolve(fragment(url)),
+): PagefindSearchResult => ({ data });
 
-const response = (results: PagefindSearchResult[]): PagefindSearchResponse => ({
+const response = (results: PagefindSearchResult[]): PagefindIndexesSearchResults => ({
   results,
-  unfilteredResultCount: results.length,
-  filters: {},
-  totalFilters: {},
-  timings: { preload: 0, search: 0, total: 0 },
 });
 
 const respond = (results: PagefindSearchResult[]) =>
@@ -65,11 +49,29 @@ const createHarness = (pagefind: Partial<PagefindModule>) => {
   };
   const deps = {
     loadPagefind: vi.fn<() => Promise<PagefindModule>>(() => Promise.resolve(module)),
-    render: vi.fn<(fragments: PagefindFragment[]) => void>(),
+    render: vi.fn<(fragments: readonly PagefindSearchFragment[]) => void>(),
     setStatus: vi.fn<(text: string) => void>(),
-    onError: vi.fn<(stage: string, error: unknown) => void>(),
+    onError: vi.fn<(stage: SearchStage, error: unknown) => void>(),
   };
   return { module, deps, run: createSearchRunner(deps) };
+};
+
+// Starts `run(first)` with its search still `pending`, then runs `second` to
+// completion; `older` settles once the caller resolves or rejects `pending`.
+const startSuperseded = async (
+  first: string,
+  second: string,
+  pending: Promise<PagefindIndexesSearchResults | null>,
+) => {
+  const debouncedSearch = vi
+    .fn<PagefindModule["debouncedSearch"]>()
+    .mockReturnValueOnce(pending)
+    .mockResolvedValueOnce(response([result("/new.html")]));
+  const harness = createHarness({ debouncedSearch });
+  const older = harness.run(first);
+  await vi.waitFor(() => expect(debouncedSearch).toHaveBeenCalledTimes(1));
+  await harness.run(second);
+  return { ...harness, older };
 };
 
 describe("formatResultStatus", () => {
@@ -97,11 +99,14 @@ describe("formatResultStatus", () => {
 });
 
 describe("formatErrorStatus", () => {
-  it("advises a reload only for the stages a retry cannot fix", () => {
-    expect(formatErrorStatus("load")).toMatch(/再読み込み/u);
-    expect(formatErrorStatus("search")).toMatch(/再読み込み/u);
-    expect(formatErrorStatus("fragments")).toMatch(/もう一度/u);
-    expect(formatErrorStatus("render")).toMatch(/もう一度/u);
+  it("advises a reload for every stage whose failure Pagefind or the browser caches", () => {
+    for (const stage of ["load", "search", "fragments"] as const) {
+      expect(formatErrorStatus(stage)).toMatch(/再読み込み/u);
+    }
+  });
+
+  it("offers no retry advice for a render failure", () => {
+    expect(formatErrorStatus("render")).not.toMatch(/再読み込み|もう一度/u);
   });
 });
 
@@ -123,6 +128,13 @@ describe("createSearchRunner", () => {
     expect(deps.setStatus).toHaveBeenLastCalledWith("1 件");
   });
 
+  it("clears the list and names the normalized query when nothing matched", async () => {
+    const { deps, run } = createHarness({ debouncedSearch: respond([]) });
+    await run(" foo   bar ");
+    expect(deps.render).toHaveBeenCalledWith([]);
+    expect(deps.setStatus).toHaveBeenLastCalledWith("「foo bar」に一致するメモはありません");
+  });
+
   it("does nothing when Pagefind reports the call as superseded", async () => {
     const { deps, run } = createHarness({
       debouncedSearch: vi.fn<PagefindModule["debouncedSearch"]>(() => Promise.resolve(null)),
@@ -142,23 +154,41 @@ describe("createSearchRunner", () => {
     );
     const { deps, run } = createHarness({ debouncedSearch: respond(results) });
     await run("q");
-    expect(loaded).toEqual(results.slice(0, searchConfig.maxResults).map((r) => r.id));
+    expect(loaded).toEqual(Array.from({ length: searchConfig.maxResults }, (_, i) => `/${i}.html`));
     expect(deps.setStatus).toHaveBeenLastCalledWith(
       `${searchConfig.maxResults + 5} 件中 ${searchConfig.maxResults} 件を表示`,
     );
   });
 
-  it("drops a slow response once a newer request has rendered", async () => {
-    const first = deferred<PagefindFragment>();
-    const debouncedSearch = vi
-      .fn<PagefindModule["debouncedSearch"]>()
-      .mockResolvedValueOnce(response([result("/old.html", () => first.promise)]))
-      .mockResolvedValueOnce(response([result("/new.html")]));
-    const { deps, run } = createHarness({ debouncedSearch });
+  it("drops a superseded response even when Pagefind still returns it", async () => {
+    const first = deferred<PagefindIndexesSearchResults | null>();
+    const { deps, older } = await startSuperseded("old", "new", first.promise);
+    expect(deps.render).toHaveBeenLastCalledWith([fragment("/new.html")]);
 
-    const older = run("old");
-    await vi.waitFor(() => expect(debouncedSearch).toHaveBeenCalledTimes(1));
-    await run("new");
+    first.resolve(response([result("/old.html")]));
+    await older;
+    expect(deps.render).toHaveBeenCalledTimes(1);
+    expect(deps.setStatus).toHaveBeenLastCalledWith("1 件");
+  });
+
+  it("drops a late search failure once a newer request has rendered", async () => {
+    const first = deferred<PagefindIndexesSearchResults | null>();
+    const { deps, older } = await startSuperseded("old", "new", first.promise);
+
+    first.reject(new Error("index"));
+    await older;
+    expect(deps.onError).not.toHaveBeenCalled();
+    expect(deps.render).toHaveBeenCalledTimes(1);
+    expect(deps.setStatus).toHaveBeenLastCalledWith("1 件");
+  });
+
+  it("drops slow fragments once a newer request has rendered", async () => {
+    const first = deferred<PagefindSearchFragment>();
+    const { deps, older } = await startSuperseded(
+      "old",
+      "new",
+      Promise.resolve(response([result("/old.html", () => first.promise)])),
+    );
     expect(deps.render).toHaveBeenLastCalledWith([fragment("/new.html")]);
 
     first.resolve(fragment("/old.html"));
@@ -167,22 +197,30 @@ describe("createSearchRunner", () => {
     expect(deps.setStatus).toHaveBeenLastCalledWith("1 件");
   });
 
-  it("drops a late failure once a newer request has rendered", async () => {
-    const first = deferred<PagefindFragment>();
-    const debouncedSearch = vi
-      .fn<PagefindModule["debouncedSearch"]>()
-      .mockResolvedValueOnce(response([result("/old.html", () => first.promise)]))
-      .mockResolvedValueOnce(response([result("/new.html")]));
-    const { deps, run } = createHarness({ debouncedSearch });
-
-    const older = run("old");
-    await vi.waitFor(() => expect(debouncedSearch).toHaveBeenCalledTimes(1));
-    await run("new");
+  it("drops a late fragment failure once a newer request has rendered", async () => {
+    const first = deferred<PagefindSearchFragment>();
+    const { deps, older } = await startSuperseded(
+      "old",
+      "new",
+      Promise.resolve(response([result("/old.html", () => first.promise)])),
+    );
 
     first.reject(new Error("network"));
     await older;
     expect(deps.onError).not.toHaveBeenCalled();
     expect(deps.setStatus).toHaveBeenLastCalledWith("1 件");
+  });
+
+  it("invalidates an in-flight search when the input is cleared", async () => {
+    const first = deferred<PagefindIndexesSearchResults | null>();
+    const { deps, older } = await startSuperseded("old", "", first.promise);
+    expect(deps.render).toHaveBeenCalledWith([]);
+    expect(deps.setStatus).toHaveBeenCalledWith("");
+
+    first.resolve(response([result("/old.html")]));
+    await older;
+    expect(deps.render).toHaveBeenCalledTimes(1);
+    expect(deps.setStatus).toHaveBeenCalledTimes(1);
   });
 
   it("reports a bundle load failure with reload advice and clears the list", async () => {
@@ -224,11 +262,12 @@ describe("createSearchRunner", () => {
     await run("q");
     expect(deps.onError).toHaveBeenCalledTimes(1);
     expect(deps.onError.mock.calls[0]?.[0]).toBe("fragments");
+    expect(deps.onError.mock.calls[0]?.[1]).toMatchObject({ cause: [error] });
     expect(deps.render).toHaveBeenLastCalledWith([]);
     expect(deps.setStatus).toHaveBeenLastCalledWith(formatErrorStatus("fragments"));
   });
 
-  it("surfaces a render failure as a retryable error", async () => {
+  it("reports a render failure and clears the list", async () => {
     const error = new Error("template drift");
     const { deps, run } = createHarness({ debouncedSearch: respond([result("/a.html")]) });
     deps.render.mockImplementationOnce(() => {
@@ -237,6 +276,16 @@ describe("createSearchRunner", () => {
     await run("q");
     expect(deps.onError).toHaveBeenCalledWith("render", error);
     expect(deps.render).toHaveBeenLastCalledWith([]);
+    expect(deps.setStatus).toHaveBeenLastCalledWith(formatErrorStatus("render"));
+  });
+
+  it("sets the error status even when clearing the list throws again", async () => {
+    const error = new Error("template drift");
+    const { deps, run } = createHarness({ debouncedSearch: respond([result("/a.html")]) });
+    deps.render.mockImplementation(() => {
+      throw error;
+    });
+    await expect(run("q")).rejects.toBe(error);
     expect(deps.setStatus).toHaveBeenLastCalledWith(formatErrorStatus("render"));
   });
 });

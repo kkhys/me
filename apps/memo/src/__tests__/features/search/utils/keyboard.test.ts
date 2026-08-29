@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { cycleIndex, isEditableTarget, isToggleShortcut } from "#/features/search/utils/keyboard";
+import {
+  cycleIndex,
+  isEditableTarget,
+  isToggleShortcut,
+  type ShortcutKeyEvent,
+} from "#/features/search/utils/keyboard";
 
-const key = (overrides: Partial<Parameters<typeof isToggleShortcut>[0]>) => ({
+const key = (overrides: Partial<ShortcutKeyEvent>): ShortcutKeyEvent => ({
   key: "k",
   metaKey: false,
   ctrlKey: false,

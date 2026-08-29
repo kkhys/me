@@ -7,13 +7,14 @@ const MARK_PATTERN = /<mark>([\s\S]*?)<\/mark>/gu;
 
 // Pagefind escapes only `<` and `>` in the page text before wrapping matches
 // in `<mark>`, so those are the only entities to undo; everything else in the
-// excerpt is literal text.
+// excerpt is literal text. Since `&` is left alone, a memo that literally
+// contains `&lt;` shows up as `<` — accepted as rare.
 const decodeText = (text: string): string => text.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 
 // The excerpt is rendered as text nodes plus real <mark> elements rather than
-// through innerHTML: the indexed text contains HTML in code samples and titles
-// fetched from external sites for link cards, and relying on Pagefind's
-// runtime escaping to keep that inert ties safety to an implementation detail.
+// through innerHTML: memo bodies contain HTML in code samples and prose, and
+// relying on Pagefind's runtime escaping to keep that inert ties safety to an
+// implementation detail.
 export const parseExcerpt = (excerpt: string): ExcerptPart[] => {
   const parts: ExcerptPart[] = [];
   const push = (text: string, marked: boolean) => {

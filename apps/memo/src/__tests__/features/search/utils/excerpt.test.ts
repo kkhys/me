@@ -26,6 +26,12 @@ describe("parseExcerpt", () => {
     expect(parseExcerpt("<mark>&lt;div&gt;</mark>")).toEqual([{ text: "<div>", marked: true }]);
   });
 
+  it("does not treat an escaped <mark> from the page text as a highlight", () => {
+    expect(parseExcerpt("&lt;mark&gt;x&lt;/mark&gt;")).toEqual([
+      { text: "<mark>x</mark>", marked: false },
+    ]);
+  });
+
   it("leaves other entities alone", () => {
     expect(parseExcerpt("a &amp; b")).toEqual([{ text: "a &amp; b", marked: false }]);
   });

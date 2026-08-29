@@ -345,7 +345,7 @@ import { searchConfig } from "#/features/search/config";
 
 <script>
   import { searchConfig } from "#/features/search/config";
-  import type { PagefindFragment, PagefindModule } from "#/features/search/types";
+  import type { PagefindModule, PagefindSearchFragment } from "#/features/search/types";
   import { parseExcerpt } from "#/features/search/utils/excerpt";
   import { cycleIndex, isEditableTarget, isToggleShortcut } from "#/features/search/utils/keyboard";
   import { toResultHref } from "#/features/search/utils/query";
@@ -430,7 +430,7 @@ import { searchConfig } from "#/features/search/config";
       loadPagefind().catch(() => {});
     };
 
-    const renderResult = (fragment: PagefindFragment) => {
+    const renderResult = (fragment: PagefindSearchFragment) => {
       const node = template.content.cloneNode(true) as DocumentFragment;
       const href = toResultHref(fragment.url);
       const authorName = fragment.meta[metaKeys.author];
@@ -597,7 +597,7 @@ import { searchConfig } from "#/features/search/config";
       }
     }
 
-    // `closedby` is not Baseline (no Safari support as of 2026-08), so emulate
+    // `closedby` is not Baseline yet (unshipped in stable Safari), so emulate
     // light dismiss. The dialog has no padding, so a click whose target is the
     // dialog itself came from the backdrop.
     if (!("closedBy" in HTMLDialogElement.prototype)) {
