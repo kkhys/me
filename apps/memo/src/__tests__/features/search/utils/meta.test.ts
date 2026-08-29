@@ -1,10 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  buildAuthorMeta,
-  buildAvatarMeta,
-  buildBodyMeta,
-  buildDateMeta,
-} from "#/features/search/utils/meta";
+import { buildAuthorMeta, buildAvatarMeta, buildDateMeta } from "#/features/search/utils/meta";
 
 describe("buildAuthorMeta", () => {
   it("captures the author name element's text", () => {
@@ -26,11 +21,5 @@ describe("buildAvatarMeta", () => {
     expect(buildAvatarMeta("/_image?href=%2Fsrc%2Fassets%2Fprofile.jpg&w=54&h=54&f=webp")).toMatch(
       /^avatar:\/_image\?href=/u,
     );
-  });
-});
-
-describe("buildBodyMeta", () => {
-  it("blanks the automatic image capture", () => {
-    expect(buildBodyMeta()).toBe("image:");
   });
 });

@@ -7,7 +7,7 @@ import MemoImages from "#/components/memo-images.astro";
 import PostHeader from "#/components/post-header.astro";
 import QuoteEmbed from "#/components/quote-embed.astro";
 import TagLink from "#/components/tag-link.astro";
-import { buildAvatarMeta, buildBodyMeta } from "#/features/search/utils/meta";
+import { buildAvatarMeta } from "#/features/search/utils/meta";
 import { getImagesForMemo } from "#/utils/image";
 import {
   countTotalComments,
@@ -27,7 +27,7 @@ interface Props {
    * a thread page sets it: every memo, comments included, has its own page,
    * so indexing replies here would list them twice.
    */
-  indexable?: boolean;
+  indexable?: boolean | undefined;
 }
 
 const {
@@ -95,11 +95,7 @@ const avatarMeta = indexable
                         isBot={isBot}
                         indexable={indexable}
                     />
-                    <div
-                        class="post-text"
-                        data-pagefind-body={indexable ? "" : undefined}
-                        data-pagefind-meta={indexable ? buildBodyMeta() : undefined}
-                    >
+                    <div class="post-text" data-pagefind-body={indexable ? "" : undefined}>
                         <Content />
                     </div>
                     {!hideTag && tag && <TagLink tag={tag} />}
