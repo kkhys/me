@@ -2,6 +2,15 @@
 
 A pnpm monorepo for kkhys's personal sites, built with [Astro](https://astro.build/) and deployed on [Cloudflare Pages](https://pages.cloudflare.com/).
 
+## Architecture
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./docs/architecture/architecture-dark.svg">
+  <img alt="System architecture of the kkhys monorepo: content submodules feed the Astro apps in the pnpm workspace, which deploy to Cloudflare Pages via GitHub Actions (memo) or a developer machine (the rest)" src="./docs/architecture/architecture-light.svg">
+</picture>
+
+The diagram is generated with [Archify](https://github.com/tt-a1i/archify) from [`docs/architecture/kkhys-monorepo.architecture.json`](./docs/architecture/kkhys-monorepo.architecture.json). To update it, edit the JSON, run `archify deliver architecture <json> <html> --quality showcase`, and re-export the light and dark SVGs from the viewer's Export menu.
+
 ## Workspace
 
 ### Apps
