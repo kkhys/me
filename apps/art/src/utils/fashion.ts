@@ -40,3 +40,14 @@ export const buildFashionSeries = <TImage>(
     images: (grouped.get(caption.slug) ?? []).toSorted((a, b) => a.number - b.number),
   }));
 };
+
+export interface FashionSheet<TImage> {
+  series: FashionSeries<TImage>;
+  image: FashionImage<TImage>;
+}
+
+/** Every sheet in reading order, so prev/next can cross series boundaries. */
+export const flattenFashionSheets = <TImage>(
+  series: readonly FashionSeries<TImage>[],
+): FashionSheet<TImage>[] =>
+  series.flatMap((entry) => entry.images.map((image) => ({ series: entry, image })));

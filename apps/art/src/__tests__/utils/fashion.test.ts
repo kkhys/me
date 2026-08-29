@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ContentMismatchError } from "#/utils/caption";
-import { buildFashionSeries } from "#/utils/fashion";
+import { buildFashionSeries, flattenFashionSheets } from "#/utils/fashion";
 
 const modules = (paths: string[]) =>
   Object.fromEntries(paths.map((path) => [path, { default: path }]));
@@ -73,5 +73,26 @@ describe("buildFashionSeries", () => {
 
   it("returns an empty list with no captions and no images", () => {
     expect(buildFashionSeries([], {})).toEqual([]);
+  });
+});
+
+describe("flattenFashionSheets", () => {
+  it("lists every sheet in series order, then number order", () => {
+    const series = buildFashionSeries(
+      captions,
+      modules([
+        "../../art-content/fashion/series-1/02.jpg",
+        "../../art-content/fashion/series-1/01.jpg",
+        "../../art-content/fashion/series-2/01.jpg",
+      ]),
+    );
+
+    const sheets = flattenFashionSheets(series);
+
+    expect(sheets.map((sheet) => `${sheet.series.slug}/${sheet.image.number}`)).toEqual([
+      "series-2/1",
+      "series-1/1",
+      "series-1/2",
+    ]);
   });
 });
