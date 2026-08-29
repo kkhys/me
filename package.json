@@ -26,6 +26,9 @@
     "build:design": "pnpm --filter @kkhys/design build",
     "dev:design": "pnpm --filter @kkhys/design dev",
     "deploy:design": "pnpm --filter @kkhys/design run deploy",
+    "build:art": "pnpm --filter @kkhys/art build",
+    "dev:art": "pnpm --filter @kkhys/art dev",
+    "deploy:art": "pnpm --filter @kkhys/art run deploy",
     "dev:studio": "pnpm --filter @kkhys/studio dev",
     "release": "bun run scripts/release.ts"
   },

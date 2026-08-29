@@ -48,6 +48,14 @@
       "size": [140, 56]
     },
     {
+      "id": "art_content",
+      "type": "database",
+      "label": "art-content",
+      "sublabel": "git submodule",
+      "pos": [250, 420],
+      "size": [140, 56]
+    },
+    {
       "id": "memo",
       "type": "frontend",
       "label": "memo",
@@ -80,11 +88,19 @@
       "size": [140, 56]
     },
     {
+      "id": "art",
+      "type": "frontend",
+      "label": "art",
+      "sublabel": "art.kkhys.me",
+      "pos": [460, 420],
+      "size": [140, 56]
+    },
+    {
       "id": "trends",
       "type": "frontend",
       "label": "trends",
       "sublabel": "trends.kkhys.me",
-      "pos": [460, 420],
+      "pos": [460, 510],
       "size": [140, 56]
     },
     {
@@ -92,7 +108,7 @@
       "type": "frontend",
       "label": "design",
       "sublabel": "design.kkhys.me",
-      "pos": [460, 510],
+      "pos": [460, 600],
       "size": [140, 56]
     },
     {
@@ -100,7 +116,7 @@
       "type": "backend",
       "label": "Shared packages",
       "sublabel": "styles · ui · seo · og · analytics",
-      "pos": [430, 600],
+      "pos": [430, 690],
       "size": [200, 56]
     },
     {
@@ -142,7 +158,7 @@
     {
       "kind": "region",
       "label": "pnpm workspace · Astro static sites",
-      "wraps": ["memo", "me", "lgtm", "diary", "trends", "design", "packages"],
+      "wraps": ["memo", "me", "lgtm", "diary", "art", "trends", "design", "packages"],
       "pad": 16
     }
   ],
@@ -176,6 +192,12 @@
       "id": "content-diary",
       "from": "diary_content",
       "to": "diary",
+      "variant": "dashed"
+    },
+    {
+      "id": "content-art",
+      "from": "art_content",
+      "to": "art",
       "variant": "dashed"
     },
     {
@@ -214,13 +236,24 @@
       "route": "straight"
     },
     {
+      "id": "art-wrangler",
+      "from": "art",
+      "to": "wrangler",
+      "fromSide": "right",
+      "toSide": "left",
+      "via": [
+        [665, 448],
+        [665, 358]
+      ]
+    },
+    {
       "id": "trends-wrangler",
       "from": "trends",
       "to": "wrangler",
       "fromSide": "right",
       "toSide": "left",
       "via": [
-        [665, 448],
+        [665, 538],
         [665, 358]
       ]
     },
@@ -231,7 +264,7 @@
       "fromSide": "right",
       "toSide": "left",
       "via": [
-        [665, 538],
+        [665, 628],
         [665, 358]
       ]
     },
@@ -261,7 +294,7 @@
       "dot": "cyan",
       "title": "Content",
       "items": [
-        "me, memo, lgtm, and diary read Markdown and images from their own content submodule",
+        "me, memo, lgtm, diary, and art read their content (Markdown, YAML captions, images) from their own content submodule",
         "trends keeps its digest data inside the repo",
         "studio writes memo-content locally and is never deployed"
       ]
@@ -270,7 +303,7 @@
       "dot": "emerald",
       "title": "Workspace",
       "items": [
-        "Six Astro apps consume the shared packages as source, no build step",
+        "Seven Astro apps consume the shared packages as source, no build step",
         "Dependency versions live in the pnpm catalog",
         "CI lints, tests, type-checks, and builds every app against fixtures on each PR"
       ]

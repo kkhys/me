@@ -1,0 +1,25 @@
+@layer reset, tokens, base;
+
+@import "kiso.css" layer(reset);
+@import "@kkhys/styles/uchu.css" layer(tokens);
+@import "@kkhys/styles/tokens.css" layer(tokens);
+@import "@kkhys/styles/base.css" layer(base);
+
+/* ===== Design Tokens ===== */
+
+@layer tokens {
+  :root {
+    /* Light theme only: the works are colour-managed against a white ground. */
+    color-scheme: light;
+  }
+}
+
+/* ===== Base Styles ===== */
+
+@layer base {
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}

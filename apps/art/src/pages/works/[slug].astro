@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import Pager from "#/components/pager.astro";
+import SiteHeader from "#/components/site-header.astro";
+import WorkFigure from "#/components/work-figure.astro";
+import { SITE_NAME } from "#/config/site";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { loadWorks } from "#/lib/gallery";
+import { buildOgImage } from "#/lib/og-image";
+import { WORKS_SECTION, workPath } from "#/utils/routes";
+
+export const getStaticPaths = (async () => {
+  const works = await loadWorks();
+  return works.map((work, i) => ({
+    params: { slug: work.slug },
+    props: { work, prev: works[i - 1], next: works[i + 1] },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { work, prev, next } = Astro.props;
+
+const ogImage = await buildOgImage(work.src);
+---
+
+<BaseLayout
+  title={`${work.title} (${work.year}) — ${SITE_NAME}`}
+  description={`${work.title}, ${work.year}. Artwork by Keisuke Hayashi.`}
+  image={ogImage}
+>
+  <SiteHeader />
+  <WorkFigure work={work} />
+  <Pager
+    prev={prev && { href: workPath(prev.slug), label: prev.title }}
+    next={next && { href: workPath(next.slug), label: next.title }}
+    back={{ href: WORKS_SECTION, label: "Works" }}
+  />
+</BaseLayout>

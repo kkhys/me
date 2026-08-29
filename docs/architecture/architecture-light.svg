@@ -1,4 +1,4 @@
-<svg data-theme="light" viewBox="0 0 1360 744" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase" style="" width="1360" height="744" xmlns="http://www.w3.org/2000/svg"><style>@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: local('JetBrains Mono'), local('JetBrainsMono-Regular'); }
+<svg data-theme="light" viewBox="0 0 1360 834" role="img" lang="en" aria-labelledby="archify-diagram-title archify-diagram-description" data-preset="classic" data-quality-profile="showcase" style="" width="1360" height="834" xmlns="http://www.w3.org/2000/svg"><style>@font-face { font-family: 'JetBrains Mono'; font-weight: 400; src: local('JetBrains Mono'), local('JetBrainsMono-Regular'); }
 @font-face { font-family: 'JetBrains Mono'; font-weight: 500; src: local('JetBrains Mono'), local('JetBrainsMono-Regular'); }
 @font-face { font-family: 'JetBrains Mono'; font-weight: 600; src: local('JetBrains Mono'), local('JetBrainsMono-Regular'); }
 @font-face { font-family: 'JetBrains Mono'; font-weight: 700; src: local('JetBrains Mono'), local('JetBrainsMono-Regular'); }
@@ -310,7 +310,7 @@ rect.c-bg-rect { fill: var(--bg); }
         <rect width="100%" height="100%" fill="url(#grid)"/>
 
         <!-- Boundaries (behind everything) -->
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="pnpm workspace · Astro static sites" x="414" y="36" width="232" height="640" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="pnpm workspace · Astro static sites" x="414" y="36" width="232" height="730" rx="12" class="c-region" stroke-width="1"/>
 
         <!-- Connection paths (before components for correct z-order) -->
         <path data-edge-from="studio" data-edge-to="memo_content" data-edge-label="writes memos" data-edge-key="0" data-edge-id="studio-writes" data-composition-points="150,88;250,88" d="M 150 88 L 250 88" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
@@ -318,15 +318,17 @@ rect.c-bg-rect { fill: var(--bg); }
         <path data-edge-from="me_content" data-edge-to="me" data-edge-key="2" data-edge-id="content-me" data-composition-points="390,178;460,178" d="M 390 178 L 460 178" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
         <path data-edge-from="lgtm_content" data-edge-to="lgtm" data-edge-key="3" data-edge-id="content-lgtm" data-composition-points="390,268;460,268" d="M 390 268 L 460 268" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
         <path data-edge-from="diary_content" data-edge-to="diary" data-edge-key="4" data-edge-id="content-diary" data-composition-points="390,358;460,358" d="M 390 358 L 460 358" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
-        <path data-edge-from="memo" data-edge-to="actions" data-edge-label="push to main" data-edge-key="5" data-edge-id="memo-actions" data-composition-points="600,88;720,88" d="M 600 88 L 720 88" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="me" data-edge-to="wrangler" data-edge-key="6" data-edge-id="me-wrangler" data-composition-points="600,178;665,178;665,358;720,358" d="M 600 178 L 657 178 Q 665 178 665 186 L 665 350 Q 665 358 673 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="lgtm" data-edge-to="wrangler" data-edge-key="7" data-edge-id="lgtm-wrangler" data-composition-points="600,268;665,268;665,358;720,358" d="M 600 268 L 657 268 Q 665 268 665 276 L 665 350 Q 665 358 673 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="diary" data-edge-to="wrangler" data-edge-key="8" data-edge-id="diary-wrangler" data-composition-points="600,358;720,358" d="M 600 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="trends" data-edge-to="wrangler" data-edge-key="9" data-edge-id="trends-wrangler" data-composition-points="600,448;665,448;665,358;720,358" d="M 600 448 L 657 448 Q 665 448 665 440 L 665 366 Q 665 358 673 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="design" data-edge-to="wrangler" data-edge-key="10" data-edge-id="design-wrangler" data-composition-points="600,538;665,538;665,358;720,358" d="M 600 538 L 657 538 Q 665 538 665 530 L 665 366 Q 665 358 673 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="actions" data-edge-to="pages" data-edge-label="deploy dist" data-edge-key="11" data-edge-id="actions-pages" data-composition-points="870,88;935,88;935,216;1000,216" d="M 870 88 L 927 88 Q 935 88 935 96 L 935 208 Q 935 216 943 216 L 1000 216" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
-        <path data-edge-from="wrangler" data-edge-to="pages" data-edge-label="deploy dist" data-edge-key="12" data-edge-id="wrangler-pages" data-composition-points="870,358;935,358;935,230;1000,230" d="M 870 358 L 927 358 Q 935 358 935 350 L 935 238 Q 935 230 943 230 L 1000 230" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
-        <path data-edge-from="visitors" data-edge-to="pages" data-edge-label="HTTPS" data-edge-key="13" data-edge-id="visitors-pages" data-composition-points="1200,223;1150,223" d="M 1200 223 L 1150 223" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="art_content" data-edge-to="art" data-edge-key="5" data-edge-id="content-art" data-composition-points="390,448;460,448" d="M 390 448 L 460 448" class="a-dashed" stroke-width="1.5" marker-end="url(#arrowhead-dashed)"/>
+        <path data-edge-from="memo" data-edge-to="actions" data-edge-label="push to main" data-edge-key="6" data-edge-id="memo-actions" data-composition-points="600,88;720,88" d="M 600 88 L 720 88" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="me" data-edge-to="wrangler" data-edge-key="7" data-edge-id="me-wrangler" data-composition-points="600,178;665,178;665,358;720,358" d="M 600 178 L 657 178 Q 665 178 665 186 L 665 350 Q 665 358 673 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="lgtm" data-edge-to="wrangler" data-edge-key="8" data-edge-id="lgtm-wrangler" data-composition-points="600,268;665,268;665,358;720,358" d="M 600 268 L 657 268 Q 665 268 665 276 L 665 350 Q 665 358 673 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="diary" data-edge-to="wrangler" data-edge-key="9" data-edge-id="diary-wrangler" data-composition-points="600,358;720,358" d="M 600 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="art" data-edge-to="wrangler" data-edge-key="10" data-edge-id="art-wrangler" data-composition-points="600,448;665,448;665,358;720,358" d="M 600 448 L 657 448 Q 665 448 665 440 L 665 366 Q 665 358 673 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="trends" data-edge-to="wrangler" data-edge-key="11" data-edge-id="trends-wrangler" data-composition-points="600,538;665,538;665,358;720,358" d="M 600 538 L 657 538 Q 665 538 665 530 L 665 366 Q 665 358 673 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="design" data-edge-to="wrangler" data-edge-key="12" data-edge-id="design-wrangler" data-composition-points="600,628;665,628;665,358;720,358" d="M 600 628 L 657 628 Q 665 628 665 620 L 665 366 Q 665 358 673 358 L 720 358" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="actions" data-edge-to="pages" data-edge-label="deploy dist" data-edge-key="13" data-edge-id="actions-pages" data-composition-points="870,88;935,88;935,216;1000,216" d="M 870 88 L 927 88 Q 935 88 935 96 L 935 208 Q 935 216 943 216 L 1000 216" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
+        <path data-edge-from="wrangler" data-edge-to="pages" data-edge-label="deploy dist" data-edge-key="14" data-edge-id="wrangler-pages" data-composition-points="870,358;935,358;935,230;1000,230" d="M 870 358 L 927 358 Q 935 358 935 350 L 935 238 Q 935 230 943 230 L 1000 230" class="a-default" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <path data-edge-from="visitors" data-edge-to="pages" data-edge-label="HTTPS" data-edge-key="15" data-edge-id="visitors-pages" data-composition-points="1200,223;1150,223" d="M 1200 223 L 1150 223" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
 
         <!-- Components -->
         <g id="node-studio" data-node-id="studio" data-node-label="studio" tabindex="0" role="button" aria-label="Focus studio, local memo composer, Architecture component" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="local memo composer" data-node-context="Architecture component">
@@ -391,6 +393,18 @@ rect.c-bg-rect { fill: var(--bg); }
         <text x="320" y="372" class="t-muted" font-size="9" text-anchor="middle">git submodule</text>
         </g>
 
+        <g id="node-art_content" data-node-id="art_content" data-node-label="art-content" tabindex="0" role="button" aria-label="Focus art-content, git submodule, Architecture component" aria-pressed="false" data-node-kind="database" data-node-sublabel="git submodule" data-node-context="Architecture component">
+          <title>art-content · git submodule · Architecture component</title>
+          <rect x="250" y="420" width="140" height="56" rx="6" class="c-mask"/>
+          <rect x="250" y="420" width="140" height="56" rx="6" class="c-database" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="database" class="semantic-sigil s-database" transform="translate(256 426) scale(0.6875)">
+            <ellipse cx="8" cy="4" rx="5" ry="2"/>
+            <path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/>
+          </g>
+          <text data-node-label="" x="320" y="446" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">art-content</text>
+        <text x="320" y="462" class="t-muted" font-size="9" text-anchor="middle">git submodule</text>
+        </g>
+
         <g id="node-memo" data-node-id="memo" data-node-label="memo" tabindex="0" role="button" aria-label="Focus memo, memo.kkhys.me, pnpm workspace · Astro static sites" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="memo.kkhys.me" data-node-context="pnpm workspace · Astro static sites">
           <title>memo · memo.kkhys.me · pnpm workspace · Astro static sites</title>
           <rect x="460" y="60" width="140" height="56" rx="6" class="c-mask"/>
@@ -447,8 +461,8 @@ rect.c-bg-rect { fill: var(--bg); }
         <text x="530" y="372" class="t-muted" font-size="9" text-anchor="middle">diary.kkhys.me</text>
         </g>
 
-        <g id="node-trends" data-node-id="trends" data-node-label="trends" tabindex="0" role="button" aria-label="Focus trends, trends.kkhys.me, pnpm workspace · Astro static sites" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="trends.kkhys.me" data-node-context="pnpm workspace · Astro static sites">
-          <title>trends · trends.kkhys.me · pnpm workspace · Astro static sites</title>
+        <g id="node-art" data-node-id="art" data-node-label="art" tabindex="0" role="button" aria-label="Focus art, art.kkhys.me, pnpm workspace · Astro static sites" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="art.kkhys.me" data-node-context="pnpm workspace · Astro static sites">
+          <title>art · art.kkhys.me · pnpm workspace · Astro static sites</title>
           <rect x="460" y="420" width="140" height="56" rx="6" class="c-mask"/>
           <rect x="460" y="420" width="140" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(466 426) scale(0.6875)">
@@ -457,12 +471,12 @@ rect.c-bg-rect { fill: var(--bg); }
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" x="530" y="446" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">trends</text>
-        <text x="530" y="462" class="t-muted" font-size="9" text-anchor="middle">trends.kkhys.me</text>
+          <text data-node-label="" x="530" y="446" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">art</text>
+        <text x="530" y="462" class="t-muted" font-size="9" text-anchor="middle">art.kkhys.me</text>
         </g>
 
-        <g id="node-design" data-node-id="design" data-node-label="design" tabindex="0" role="button" aria-label="Focus design, design.kkhys.me, pnpm workspace · Astro static sites" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="design.kkhys.me" data-node-context="pnpm workspace · Astro static sites">
-          <title>design · design.kkhys.me · pnpm workspace · Astro static sites</title>
+        <g id="node-trends" data-node-id="trends" data-node-label="trends" tabindex="0" role="button" aria-label="Focus trends, trends.kkhys.me, pnpm workspace · Astro static sites" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="trends.kkhys.me" data-node-context="pnpm workspace · Astro static sites">
+          <title>trends · trends.kkhys.me · pnpm workspace · Astro static sites</title>
           <rect x="460" y="510" width="140" height="56" rx="6" class="c-mask"/>
           <rect x="460" y="510" width="140" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
           <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(466 516) scale(0.6875)">
@@ -471,19 +485,33 @@ rect.c-bg-rect { fill: var(--bg); }
             <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
             <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
           </g>
-          <text data-node-label="" x="530" y="536" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">design</text>
-        <text x="530" y="552" class="t-muted" font-size="9" text-anchor="middle">design.kkhys.me</text>
+          <text data-node-label="" x="530" y="536" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">trends</text>
+        <text x="530" y="552" class="t-muted" font-size="9" text-anchor="middle">trends.kkhys.me</text>
+        </g>
+
+        <g id="node-design" data-node-id="design" data-node-label="design" tabindex="0" role="button" aria-label="Focus design, design.kkhys.me, pnpm workspace · Astro static sites" aria-pressed="false" data-node-kind="frontend" data-node-sublabel="design.kkhys.me" data-node-context="pnpm workspace · Astro static sites">
+          <title>design · design.kkhys.me · pnpm workspace · Astro static sites</title>
+          <rect x="460" y="600" width="140" height="56" rx="6" class="c-mask"/>
+          <rect x="460" y="600" width="140" height="56" rx="6" class="c-frontend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="frontend" class="semantic-sigil s-frontend" transform="translate(466 606) scale(0.6875)">
+            <rect x="2" y="3" width="12" height="10" rx="2"/>
+            <path d="M2 6.5h12"/>
+            <circle cx="4.1" cy="4.8" r=".7" class="sigil-fill"/>
+            <circle cx="6.3" cy="4.8" r=".7" class="sigil-fill"/>
+          </g>
+          <text data-node-label="" x="530" y="626" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">design</text>
+        <text x="530" y="642" class="t-muted" font-size="9" text-anchor="middle">design.kkhys.me</text>
         </g>
 
         <g id="node-packages" data-node-id="packages" data-node-label="Shared packages" tabindex="0" role="button" aria-label="Focus Shared packages, styles · ui · seo · og · analytics, pnpm workspace · Astro static sites" aria-pressed="false" data-node-kind="backend" data-node-sublabel="styles · ui · seo · og · analytics" data-node-context="pnpm workspace · Astro static sites">
           <title>Shared packages · styles · ui · seo · og · analytics · pnpm workspace · Astro static sites</title>
-          <rect x="430" y="600" width="200" height="56" rx="6" class="c-mask"/>
-          <rect x="430" y="600" width="200" height="56" rx="6" class="c-backend" stroke-width="1.5"/>
-          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(436 606) scale(0.6875)">
+          <rect x="430" y="690" width="200" height="56" rx="6" class="c-mask"/>
+          <rect x="430" y="690" width="200" height="56" rx="6" class="c-backend" stroke-width="1.5"/>
+          <g aria-hidden="true" data-semantic-sigil="backend" class="semantic-sigil s-backend" transform="translate(436 696) scale(0.6875)">
             <path d="M6 3 3 8l3 5M10 3l3 5-3 5"/>
           </g>
-          <text data-node-label="" x="530" y="626" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Shared packages</text>
-        <text x="530" y="642" class="t-muted" font-size="9" text-anchor="middle">styles · ui · seo · og · analytics</text>
+          <text data-node-label="" x="530" y="716" class="t-primary" font-size="11" font-weight="600" text-anchor="middle">Shared packages</text>
+        <text x="530" y="732" class="t-muted" font-size="9" text-anchor="middle">styles · ui · seo · og · analytics</text>
         </g>
 
         <g id="node-actions" data-node-id="actions" data-node-label="GitHub Actions" tabindex="0" role="button" aria-label="Focus GitHub Actions, deploy-memo.yml, Architecture component, GitHub" aria-pressed="false" data-node-kind="cloud" data-node-sublabel="deploy-memo.yml" data-node-context="Architecture component" data-node-brand="GitHub" data-node-brand-id="github" data-node-brand-status="preset" data-node-brand-source="https://github.com/logos">
@@ -551,7 +579,8 @@ rect.c-bg-rect { fill: var(--bg); }
 
 
 
-        <g data-edge-from="memo" data-edge-to="actions" data-edge-label="push to main" data-edge-key="5" data-edge-id="memo-actions">
+
+        <g data-edge-from="memo" data-edge-to="actions" data-edge-label="push to main" data-edge-key="6" data-edge-id="memo-actions">
           <rect x="626.2" y="68" width="67.6" height="14" rx="3" class="c-mask"/>
           <text x="660" y="78" class="t-backend" font-size="8" text-anchor="middle">push to main</text>
         </g>
@@ -560,15 +589,16 @@ rect.c-bg-rect { fill: var(--bg); }
 
 
 
-        <g data-edge-from="actions" data-edge-to="pages" data-edge-label="deploy dist" data-edge-key="11" data-edge-id="actions-pages">
+
+        <g data-edge-from="actions" data-edge-to="pages" data-edge-label="deploy dist" data-edge-key="13" data-edge-id="actions-pages">
           <rect x="903.6" y="132" width="62.8" height="14" rx="3" class="c-mask"/>
           <text x="935" y="142" class="t-backend" font-size="8" text-anchor="middle">deploy dist</text>
         </g>
-        <g data-edge-from="wrangler" data-edge-to="pages" data-edge-label="deploy dist" data-edge-key="12" data-edge-id="wrangler-pages">
+        <g data-edge-from="wrangler" data-edge-to="pages" data-edge-label="deploy dist" data-edge-key="14" data-edge-id="wrangler-pages">
           <rect x="903.6" y="274" width="62.8" height="14" rx="3" class="c-mask"/>
           <text x="935" y="284" class="t-muted" font-size="8" text-anchor="middle">deploy dist</text>
         </g>
-        <g data-edge-from="visitors" data-edge-to="pages" data-edge-label="HTTPS" data-edge-key="13" data-edge-id="visitors-pages">
+        <g data-edge-from="visitors" data-edge-to="pages" data-edge-label="HTTPS" data-edge-key="15" data-edge-id="visitors-pages">
           <rect x="1158" y="203" width="34" height="14" rx="3" class="c-mask"/>
           <text x="1175" y="213" class="t-backend" font-size="8" text-anchor="middle">HTTPS</text>
         </g>
@@ -581,26 +611,26 @@ rect.c-bg-rect { fill: var(--bg); }
 
         <!-- Legend -->
         <g data-legend="">
-          <text x="40" y="708" class="t-primary" font-size="12" font-weight="650">Legend</text>
-          <g data-legend-semantic-kind="frontend" data-legend-x="40" data-legend-baseline="728" data-legend-width="83">
-            <rect x="40" y="719" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
-            <text x="62" y="728" class="t-muted" font-size="10" font-weight="500">Frontend</text>
+          <text x="40" y="798" class="t-primary" font-size="12" font-weight="650">Legend</text>
+          <g data-legend-semantic-kind="frontend" data-legend-x="40" data-legend-baseline="818" data-legend-width="83">
+            <rect x="40" y="809" width="16" height="10" rx="2.5" class="c-frontend" stroke-width="1"/>
+            <text x="62" y="818" class="t-muted" font-size="10" font-weight="500">Frontend</text>
           </g>
-          <g data-legend-semantic-kind="backend" data-legend-x="145" data-legend-baseline="728" data-legend-width="78">
-            <rect x="145" y="719" width="16" height="10" rx="2.5" class="c-backend" stroke-width="1"/>
-            <text x="167" y="728" class="t-muted" font-size="10" font-weight="500">Backend</text>
+          <g data-legend-semantic-kind="backend" data-legend-x="145" data-legend-baseline="818" data-legend-width="78">
+            <rect x="145" y="809" width="16" height="10" rx="2.5" class="c-backend" stroke-width="1"/>
+            <text x="167" y="818" class="t-muted" font-size="10" font-weight="500">Backend</text>
           </g>
-          <g data-legend-semantic-kind="database" data-legend-x="245" data-legend-baseline="728" data-legend-width="83">
-            <rect x="245" y="719" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
-            <text x="267" y="728" class="t-muted" font-size="10" font-weight="500">Database</text>
+          <g data-legend-semantic-kind="database" data-legend-x="245" data-legend-baseline="818" data-legend-width="83">
+            <rect x="245" y="809" width="16" height="10" rx="2.5" class="c-database" stroke-width="1"/>
+            <text x="267" y="818" class="t-muted" font-size="10" font-weight="500">Database</text>
           </g>
-          <g data-legend-semantic-kind="cloud" data-legend-x="350" data-legend-baseline="728" data-legend-width="68">
-            <rect x="350" y="719" width="16" height="10" rx="2.5" class="c-cloud" stroke-width="1"/>
-            <text x="372" y="728" class="t-muted" font-size="10" font-weight="500">Cloud</text>
+          <g data-legend-semantic-kind="cloud" data-legend-x="350" data-legend-baseline="818" data-legend-width="68">
+            <rect x="350" y="809" width="16" height="10" rx="2.5" class="c-cloud" stroke-width="1"/>
+            <text x="372" y="818" class="t-muted" font-size="10" font-weight="500">Cloud</text>
           </g>
-          <g data-legend-semantic-kind="external" data-legend-x="440" data-legend-baseline="728" data-legend-width="83">
-            <rect x="440" y="719" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
-            <text x="462" y="728" class="t-muted" font-size="10" font-weight="500">External</text>
+          <g data-legend-semantic-kind="external" data-legend-x="440" data-legend-baseline="818" data-legend-width="83">
+            <rect x="440" y="809" width="16" height="10" rx="2.5" class="c-external" stroke-width="1"/>
+            <text x="462" y="818" class="t-muted" font-size="10" font-weight="500">External</text>
           </g>
         </g>
       </svg>

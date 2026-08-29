@@ -1,0 +1,83 @@
+---
+import type { ImageMetadata } from "astro";
+import ArtPicture from "#/components/art-picture.astro";
+import { workTransitionName } from "#/utils/routes";
+import type { Work } from "#/utils/works";
+
+interface Props {
+  work: Work<ImageMetadata>;
+}
+
+const { work } = Astro.props;
+---
+
+<figure class="work">
+  <div class="image-wrapper">
+    {/* The figcaption carries the text; an alt would be read twice. */}
+    <ArtPicture
+      src={work.src}
+      alt=""
+      width={1200}
+      widths={[640, 900, 1200, 1800, 2400]}
+      sizes="(min-width: 1200px) 1200px, (min-width: 768px) calc(100vw - 5rem), 100vw"
+      transitionName={workTransitionName(work.slug)}
+      priority
+    />
+  </div>
+  <figcaption class="caption">
+    <h1 class="title">{work.title}</h1>
+    <span class="year">{work.year}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .work {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .image-wrapper {
+    max-inline-size: 1200px;
+  }
+
+  .caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-self: flex-end;
+    padding-inline: 1rem;
+    text-align: end;
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    letter-spacing: 0.02em;
+  }
+
+  .title {
+    font-size: inherit;
+    font-weight: var(--fw-normal);
+    color: var(--c-text);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .year {
+    font-variant-numeric: tabular-nums;
+    color: var(--c-sub);
+  }
+
+  @media (width >= 768px) {
+    .work {
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .caption {
+      align-self: center;
+      padding-inline: 0;
+      text-align: start;
+    }
+  }
+</style>

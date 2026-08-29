@@ -1,0 +1,68 @@
+---
+import { SITE_NAME } from "#/config/site";
+import { FASHION_SECTION, WORKS_SECTION } from "#/utils/routes";
+
+interface Props {
+  /** The index page owns the site title as its h1; other pages demote it. */
+  home?: boolean | undefined;
+}
+
+const { home = false } = Astro.props;
+const Title = home ? "h1" : "p";
+---
+
+<header class="page-header">
+  <Title class="site-title"><a href="/">{SITE_NAME}</a></Title>
+  <nav class="nav" aria-label="Sections">
+    <a href={WORKS_SECTION}>Works</a>
+    <a href={FASHION_SECTION}>Fashion Design</a>
+  </nav>
+</header>
+
+<style>
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+    padding-inline: 1rem;
+    margin-block-end: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .site-title,
+  .nav {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-normal);
+    letter-spacing: 0.02em;
+    text-wrap: nowrap;
+    margin: 0;
+  }
+
+  .site-title {
+    text-transform: uppercase;
+  }
+
+  .nav {
+    display: flex;
+    gap: 1rem;
+  }
+
+  a {
+    color: var(--c-sub);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--c-text);
+    }
+  }
+
+  @media (width >= 768px) {
+    .page-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-inline: 0;
+    }
+  }
+</style>
