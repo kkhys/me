@@ -1,0 +1,43 @@
+---
+import SearchIcon from "#/components/icons/search.svg";
+import { searchConfig } from "#/features/search/config";
+---
+
+<button
+  type="button"
+  class="search-button"
+  commandfor={searchConfig.dialogId}
+  command="show-modal"
+  aria-label="メモを検索"
+  data-umami-event="search-open"
+>
+  <SearchIcon />
+</button>
+
+<style>
+  /* Mirrors the shared header's back button on the opposite edge. */
+  .search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    appearance: none;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    color: var(--c-text);
+    cursor: pointer;
+    transition: background-color 0.15s;
+  }
+
+  .search-button:hover {
+    background-color: var(--c-surface);
+  }
+
+  .search-button svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+</style>

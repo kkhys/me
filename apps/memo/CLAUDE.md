@@ -11,6 +11,8 @@ src/
 │   ├── posts/[id].astro       # Single memo detail
 │   └── tag/[tag].astro        # Tag-filtered feed
 ├── components/                 # Astro components
+├── features/
+│   └── search/                # Pagefind dialog; pure logic in utils/ (unit-tested)
 ├── utils/
 │   ├── memo.ts                # Filtering, sorting, comment threading
 │   └── image.ts               # Dynamic image imports from submodule
@@ -34,6 +36,10 @@ Bot feeds: the memo loader injects entries from external RSS feeds as bot author
 
 `USE_FIXTURE_DATA=true` switches to `src/__fixtures__/memo-sample` (memos) and `src/__fixtures__/users.yaml` (sample profiles) for CI/development without the submodule. RSS/Zenn fetches and OSS entries are skipped in fixture mode.
 
+## Search
+
+`astro-pagefind` indexes `dist` after `astro build`. Only the root post of each `/posts/[id]` page is indexed: `ThreadPost` gets `indexable` from that page and marks its `.post-text` with `data-pagefind-body` and the author / date / avatar meta the dialog renders. Comments have their own pages, so they are found there. The dev server serves `/pagefind/` from `dist`, so run `pnpm build` once before `pnpm dev` to try search locally. The dialog lives in `src/features/search/`; pure logic sits in `src/features/search/utils/` so it stays unit-testable.
+
 ## Constraints
 
 - Memo body ≤500 characters (enforced at build by remark plugin)
@@ -44,5 +50,5 @@ Bot feeds: the memo loader injects entries from external RSS feeds as bot author
 ## Testing
 
 - Mocked modules: `astro:content`, `astro:env/client`
-- Coverage target: `src/utils/*.ts` and `src/lib/*.ts` (excludes `image.ts`)
+- Coverage target: `src/utils/*.ts`, `src/lib/*.ts`, `src/loaders/*.ts`, and `src/features/**/*.ts` (excludes `image.ts`, `memo-loader.ts`)
 - Fixtures: `src/__fixtures__/memo-collection.ts`

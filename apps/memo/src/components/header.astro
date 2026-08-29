@@ -1,5 +1,6 @@
 ---
 import SiteHeader from "@kkhys/ui/site-header.astro";
+import SearchButton from "#/features/search/components/search-button.astro";
 
 const currentPath = Astro.url.pathname;
 const isHomePage = currentPath === "/" || currentPath === "/index.html";
@@ -33,4 +34,6 @@ const headerTitle = getHeaderTitle(currentPath);
 const showBackButton = !isHomePage;
 ---
 
-<SiteHeader title={headerTitle} showBack={showBackButton} />
+<SiteHeader title={headerTitle} showBack={showBackButton}>
+  <SearchButton slot="actions" />
+</SiteHeader>

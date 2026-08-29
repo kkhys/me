@@ -2,6 +2,7 @@ import { unified } from "@astrojs/markdown-remark";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig, envField } from "astro/config";
+import pagefind from "astro-pagefind";
 import rehypeExternalLinks from "rehype-external-links";
 import { SITE_URL } from "./src/config/constants";
 import remarkEscapeSyntax from "./src/lib/remark-escape-syntax";
@@ -21,6 +22,8 @@ export default defineConfig({
       Image: false,
       SVG: false,
     }),
+    // After compress so the Pagefind bundle it writes into dist is left as is.
+    pagefind(),
   ],
   markdown: {
     syntaxHighlight: false,
