@@ -1,15 +1,17 @@
 ---
 import "#/styles/global.css";
+import Umami from "@kkhys/analytics/umami.astro";
 import BlurLoadNoscript from "@kkhys/ui/blur-load-noscript.astro";
 import BaseSEO from "@kkhys/seo/base-seo.astro";
 import OpenGraph from "@kkhys/seo/open-graph.astro";
 import TwitterCard from "@kkhys/seo/twitter-card.astro";
 import { SITE_DESCRIPTION, SITE_NAME } from "#/config/site";
+import type { OgImage } from "#/lib/og-image";
 
 interface Props {
   title?: string | undefined;
   description?: string | undefined;
-  image?: { src: string; width: number; height: number } | undefined;
+  image?: OgImage | undefined;
 }
 
 const { title = SITE_NAME, description = SITE_DESCRIPTION, image } = Astro.props;
@@ -17,16 +19,13 @@ const { title = SITE_NAME, description = SITE_DESCRIPTION, image } = Astro.props
 const ogImageUrl = image ? new URL(image.src, Astro.site).href : undefined;
 ---
 
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  {/* Opt into cross-document view transitions so a thumbnail morphs into its
-      detail page (and back). Inline on purpose: Chromium decides whether the
-      incoming page opted in before the external stylesheet is applied on a
-      fresh load, and a rule that lives only there is missed (verified: the
-      forward navigation ran without a transition until this was inlined). */}
+  {/* Cross-document view transition opt-in. Must be inline: Chromium checks it
+      before the external stylesheet applies on a fresh load (see CLAUDE.md). */}
   <style is:inline>
     @media (prefers-reduced-motion: no-preference) {
       @view-transition {
@@ -66,6 +65,8 @@ const ogImageUrl = image ? new URL(image.src, Astro.site).href : undefined;
       renders; hold rendering until <main> is parsed so the image that
       should morph is already in the DOM. Pages are small, so this is cheap. */}
   <link rel="expect" href="#main" blocking="render">
+
+  <Umami websiteId="e0b42f0b-54c0-41b1-a6ef-74cb97e1b778" domains="art.kkhys.me" />
 
   <BlurLoadNoscript />
 </head>
