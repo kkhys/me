@@ -36,13 +36,15 @@ const fullDateTimeString = formatDateTime(createdAt);
         <Avatar src={avatarImage} alt={authorName} size={20} link={authorLink} />
         <a href={authorLink} class="quote-author">{authorName}</a>
         {isBot && <BotBadge />}
-        <time class="quote-time" datetime={createdAt.toISOString()} title={fullDateTimeString}>{createdAtString}</time>
+        <a href={`/posts/${id}`} class="quote-time-link">
+            <time class="quote-time" datetime={createdAt.toISOString()} title={fullDateTimeString}>{createdAtString}</time>
+        </a>
     </div>
     <div class="quote-text">
         <Content />
     </div>
     {tag && <TagLink tag={tag} />}
-    <MemoImages images={images} />
+    <MemoImages images={images} alts={memo.data.images} />
     {!hideLinkCard && firstExternalLink && (
         <div class="quote-link-card">
             <LinkCard href={firstExternalLink} />
@@ -56,20 +58,20 @@ const fullDateTimeString = formatDateTime(createdAt);
         cursor: pointer;
         border: 1px solid var(--c-border);
         border-radius: 0.75rem;
-        padding: 0.75rem;
+        padding: var(--space-3);
         transition: background-color 0.15s ease;
         user-select: none;
     }
 
     .quote-card:hover {
-        background-color: var(--c-hover);
+        background-color: oklch(from var(--c-surface) l c h / 50%);
     }
 
     .quote-header {
         display: flex;
         align-items: center;
         gap: 0.35rem;
-        margin-bottom: 0.25rem;
+        margin-bottom: var(--space-1);
         line-height: 1;
     }
 
@@ -95,6 +97,14 @@ const fullDateTimeString = formatDateTime(createdAt);
         font-variant-numeric: tabular-nums;
     }
 
+    .quote-time-link {
+        text-decoration: none;
+    }
+
+    .quote-time-link:hover {
+        text-decoration: underline;
+    }
+
     :global(.quote-text p) {
         font-size: var(--fs-sm);
         line-height: var(--lh-sm);
@@ -102,7 +112,7 @@ const fullDateTimeString = formatDateTime(createdAt);
     }
 
     :global(.quote-text p + p) {
-        margin-top: 0.5rem;
+        margin-top: var(--space-2);
     }
 
     :global(.quote-text .external-link) {
@@ -115,6 +125,6 @@ const fullDateTimeString = formatDateTime(createdAt);
     }
 
     .quote-link-card {
-        margin-top: 0.75rem;
+        margin-top: var(--space-3);
     }
 </style>

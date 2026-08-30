@@ -92,6 +92,7 @@ const avatarMeta = indexable
                         author={authorName}
                         createdAt={createdAt}
                         authorLink={authorLink}
+                        postLink={asLink ? `/posts/${id}` : undefined}
                         isBot={isBot}
                         indexable={indexable}
                     />
@@ -99,7 +100,7 @@ const avatarMeta = indexable
                         <Content />
                     </div>
                     {!hideTag && tag && <TagLink tag={tag} />}
-                    <MemoImages images={images} />
+                    <MemoImages images={images} alts={memo.data.images} />
                     {quotedMemo && (
                         <div class="post-quote">
                             <QuoteEmbed memo={quotedMemo} />
@@ -140,13 +141,13 @@ const avatarMeta = indexable
         align-items: center;
         gap: 0.35rem;
         margin-left: calc(27px + 0.65rem);
-        padding-top: 0.75rem;
+        padding-top: var(--space-3);
         color: var(--c-sub);
         font-size: var(--fs-xs);
     }
 
     .thread-wrapper.has-pinned {
-        padding-top: 0.25rem;
+        padding-top: var(--space-1);
     }
 
     .thread-wrapper.has-pinned .avatar-line {
@@ -169,11 +170,11 @@ const avatarMeta = indexable
         position: relative;
         display: flex;
         gap: 0.65rem;
-        padding: 1rem 0;
+        padding: var(--space-4) 0;
     }
 
     .thread-wrapper.has-comments {
-        padding-bottom: 2rem;
+        padding-bottom: var(--space-8);
     }
 
     .avatar-line {
@@ -195,7 +196,7 @@ const avatarMeta = indexable
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.5rem;
+        gap: var(--space-2);
     }
 
     .thread-content-column {
@@ -214,7 +215,7 @@ const avatarMeta = indexable
     }
 
     :global(.post-text p + p) {
-        margin-top: 0.5rem;
+        margin-top: var(--space-2);
     }
 
     :global(.post-text .external-link) {
@@ -227,18 +228,18 @@ const avatarMeta = indexable
     }
 
     .post-quote {
-        margin-top: 0.75rem;
+        margin-top: var(--space-3);
     }
 
     .post-link-card {
-        margin-top: 0.75rem;
+        margin-top: var(--space-3);
     }
 
     .comment-count-indicator {
         display: inline-flex;
         align-items: center;
         gap: 0.35rem;
-        margin-top: 0.75rem;
+        margin-top: var(--space-3);
         color: var(--c-sub);
         font-size: var(--fs-xs);
         text-decoration: none;

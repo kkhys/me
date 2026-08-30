@@ -37,18 +37,17 @@ const { src, alt, size, link } = Astro.props;
 )}
 
 <style>
-  .avatar-link {
-    transition: opacity 0.15s ease;
-  }
-
-  .avatar-link:hover {
-    opacity: 0.8;
-  }
-
   .avatar {
     border-radius: 50%;
     object-fit: cover;
     outline: 1px solid var(--c-border);
     outline-offset: -0.5px;
+    transition: outline-color 0.15s;
+  }
+
+  /* An image has no text color to shift, so hover darkens the ring instead
+     of fading the picture. */
+  .avatar-link:hover .avatar {
+    outline-color: var(--c-sub);
   }
 </style>

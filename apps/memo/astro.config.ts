@@ -44,6 +44,14 @@ export default defineConfig({
             target: "_blank",
             rel: ["noopener", "noreferrer"],
             properties: { className: "external-link" },
+            // Visually hidden note so screen readers hear that the link
+            // leaves the page; sighted readers get the styling instead.
+            content: {
+              type: "element",
+              tagName: "span",
+              properties: { className: "sr-only" },
+              children: [{ type: "text", value: "(新しいタブで開く)" }],
+            },
           },
         ],
       ],

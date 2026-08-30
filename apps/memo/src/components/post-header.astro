@@ -6,12 +6,14 @@ import { formatDate, formatDateTime } from "#/utils/date";
 
 interface Props extends Pick<InferEntrySchema<"memo">, "author" | "createdAt"> {
   authorLink?: string | undefined;
+  /** Makes the date a link to the post, so a feed card is reachable by keyboard. */
+  postLink?: string | undefined;
   isBot?: boolean | undefined;
   /** Exposes the author name and date to Pagefind as result metadata. */
   indexable?: boolean | undefined;
 }
 
-const { author, createdAt, authorLink, isBot = false, indexable = false } = Astro.props;
+const { author, createdAt, authorLink, postLink, isBot = false, indexable = false } = Astro.props;
 const createdAtString = formatDate(createdAt);
 const fullDateTimeString = formatDateTime(createdAt);
 const authorMeta = indexable ? buildAuthorMeta() : undefined;
@@ -27,20 +29,32 @@ const dateMeta = indexable ? buildDateMeta() : undefined;
         <span class="post-username" data-pagefind-meta={authorMeta}>{author}</span>
     )}
     {isBot && <BotBadge />}
-    <time
-        class="post-time"
-        datetime={createdAt.toISOString()}
-        title={fullDateTimeString}
-        data-pagefind-meta={dateMeta}
-        >{createdAtString}</time
-    >
+    {postLink ? (
+        <a href={postLink} class="post-time-link">
+            <time
+                class="post-time"
+                datetime={createdAt.toISOString()}
+                title={fullDateTimeString}
+                data-pagefind-meta={dateMeta}
+                >{createdAtString}</time
+            >
+        </a>
+    ) : (
+        <time
+            class="post-time"
+            datetime={createdAt.toISOString()}
+            title={fullDateTimeString}
+            data-pagefind-meta={dateMeta}
+            >{createdAtString}</time
+        >
+    )}
 </div>
 
 <style>
     .post-header {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: var(--space-2);
         margin-bottom: 0.15rem;
     }
 
@@ -58,5 +72,13 @@ const dateMeta = indexable ? buildDateMeta() : undefined;
         font-size: var(--fs-xs);
         color: var(--c-sub);
         font-variant-numeric: tabular-nums;
+    }
+
+    .post-time-link {
+        text-decoration: none;
+    }
+
+    .post-time-link:hover {
+        text-decoration: underline;
     }
 </style>

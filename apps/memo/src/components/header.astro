@@ -32,8 +32,15 @@ const getHeaderTitle = (path: string) =>
 
 const headerTitle = getHeaderTitle(currentPath);
 const showBackButton = !isHomePage;
+/* The profile page renders the user's name as its h1. */
+const isProfilePage = currentPath.startsWith("/@");
 ---
 
-<SiteHeader title={headerTitle} showBack={showBackButton}>
+<SiteHeader
+  title={headerTitle}
+  showBack={showBackButton}
+  backLabel="ホームへ戻る"
+  heading={!isProfilePage}
+>
   <SearchButton slot="actions" />
 </SiteHeader>
