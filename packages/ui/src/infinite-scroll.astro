@@ -1,0 +1,57 @@
+---
+import Spinner from "./spinner.astro";
+
+/* Appends the next paginated page into `#<containerId>` when the trigger
+   scrolls into view. The container carries the paging state as data
+   attributes: `data-current-page`, `data-total-pages`, and optionally
+   `data-base-path` (default "/") — page N lives at `<basePath>/N`. */
+interface Props {
+  containerId: string;
+  endMessage?: string | undefined;
+  errorMessage?: string | undefined;
+  /** What the spinner announces while a page loads. */
+  loadingLabel?: string | undefined;
+}
+
+const {
+  containerId,
+  endMessage = "You've reached the end \u{1F389}",
+  errorMessage = "Failed to load more \u{1F622}",
+  loadingLabel,
+} = Astro.props;
+---
+
+<div
+  class="infinite-scroll-root"
+  data-container-id={containerId}
+  data-end-message={endMessage}
+  data-error-message={errorMessage}
+>
+  <div id="scroll-trigger"></div>
+  <div id="loading-indicator" class="loading-indicator hidden" aria-live="polite" aria-busy="false">
+    <Spinner label={loadingLabel} />
+  </div>
+</div>
+
+<script>
+  import { initInfiniteScroll } from "./infinite-scroll";
+
+  initInfiniteScroll();
+</script>
+
+<style>
+  .loading-indicator {
+    display: grid;
+    place-items: center;
+    padding: var(--space-8);
+    font-size: var(--fs-xs);
+  }
+
+  .loading-indicator.hidden {
+    display: none;
+  }
+
+  #scroll-trigger {
+    height: 1px;
+  }
+</style>

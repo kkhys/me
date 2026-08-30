@@ -14,7 +14,17 @@
     "./link-card.astro": "./src/link-card.astro",
     "./blur-load": "./src/blur-load.ts",
     "./favicon": "./src/favicon.ts",
-    "./image-signature": "./src/image-signature.ts"
+    "./image-signature": "./src/image-signature.ts",
+    "./head-meta.astro": "./src/head-meta.astro",
+    "./blur-image.astro": "./src/blur-image.astro",
+    "./infinite-scroll.astro": "./src/infinite-scroll.astro",
+    "./infinite-scroll": "./src/infinite-scroll.ts",
+    "./skip-link.astro": "./src/skip-link.astro",
+    "./toc-active": "./src/toc-active.ts",
+    "./toc-observer": "./src/toc-observer.ts",
+    "./icons/*": "./src/icons/*",
+    "./paginated-guard.astro": "./src/paginated-guard.astro",
+    "./link-metadata": "./src/link-metadata.ts"
   },
   "scripts": {
     "check": "tsc --noEmit",
@@ -22,10 +32,12 @@
   },
   "dependencies": {
     "budoux": "catalog:",
+    "fetch-site-metadata": "catalog:",
     "linkedom": "catalog:"
   },
   "devDependencies": {
     "@types/bun": "catalog:",
+    "astro": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },

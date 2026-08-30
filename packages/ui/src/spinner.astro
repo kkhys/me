@@ -1,3 +1,12 @@
+---
+interface Props {
+  /** What the spinner announces, in the page's language. */
+  label?: string | undefined;
+}
+
+const { label = "Loading" } = Astro.props;
+---
+
 <svg
   xmlns="http://www.w3.org/2000/svg"
   width={16}
@@ -10,7 +19,7 @@
   stroke-linejoin="round"
   class="spinner"
   role="status"
-  aria-label="Loading"
+  aria-label={label}
 >
   <path d="M12 2v4" />
   <path d="m16.2 7.8 2.9-2.9" />
