@@ -11,7 +11,14 @@ const samplePost: MemoPost = {
     avatar: "https://memo.kkhys.me/avatar.jpg",
   },
   tag: null,
-  images: [],
+  images: [
+    {
+      src: "https://memo.kkhys.me/_astro/01.avif",
+      width: 1200,
+      height: 800,
+      alt: "a red bicycle leaning on a wall",
+    },
+  ],
 };
 
 describe("getMemoPost", () => {

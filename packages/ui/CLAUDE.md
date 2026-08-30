@@ -75,13 +75,12 @@ step).
   `fetch-site-metadata` plus the repairs link cards have needed (garbled
   legacy charsets, SVG / undecodable og:images, http-only image hosts),
   memoized per URL. me / memo wrap it with their own production check.
-- `icons/*.svg` — the 13 Lucide glyphs shared by the apps: `arrow-left`,
-  `check`, `copy`, `ellipsis`, `globe`, `info`, `lightbulb`, `link`,
+- `icons/*.svg` — the 12 Lucide glyphs shared by the apps: `arrow-left`,
+  `check`, `copy`, `globe`, `info`, `lightbulb`, `link`,
   `message-square-warning`, `move-up-right`, `octagon-alert`, `search`,
   `triangle-alert`. Import as `@kkhys/ui/icons/<name>.svg` and pass
-  `width` / `height` / `class`. `globe` is only used by `link-card.astro`;
-  `ellipsis` has no consumer in the apps today. Brand icons stay in the
-  app that uses them.
+  `width` / `height` / `class`. `globe` is only used by `link-card.astro`.
+  Brand icons stay in the app that uses them.
 
 `.astro` exports can only be imported from `.astro` files (tsc doesn't
 resolve them); `./budoux` is the plain-TS entry for `.ts` / `.tsx`
