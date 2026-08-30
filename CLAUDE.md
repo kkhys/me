@@ -48,3 +48,4 @@ Run from the repo root:
 - `exactOptionalPropertyTypes: true` — optional props need `| undefined`, not just `?:`
 - `.astro` files can't be imported from `.ts` (tsc doesn't resolve them)
 - Per-app specifics (content schemas, blog/memo conventions) live in each app's `CLAUDE.md` — read those first when working inside an app.
+- UI changes (`.astro` / `.css` / `.tsx` under `apps/*/src`, `packages/ui`, `packages/styles`) follow the design system in `apps/design` (design.kkhys.me). `.claude/rules/design-system.md` loads for those files and names the sources to read — consult it first when a task is UI work, even before opening a file.
