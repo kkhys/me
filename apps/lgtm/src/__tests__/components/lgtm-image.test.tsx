@@ -16,6 +16,7 @@ const createStillEntry = (
   data: {
     image: "01.jpg",
     animated: false,
+    description: "a cartoon cat giving a thumbs up",
     ...overrides?.data,
   },
   ...overrides,
@@ -24,7 +25,7 @@ const createStillEntry = (
 const createAnimatedEntry = (): CollectionEntry<"lgtm"> => ({
   id: "01kcy2c0k82cmr4sy2ehadrfgl",
   collection: "lgtm",
-  data: { image: "01.webp", animated: true },
+  data: { image: "01.webp", animated: true, description: "a looping animation of a dog nodding" },
 });
 
 describe("formatForEntry", () => {
@@ -83,7 +84,7 @@ describe("LgtmImage", () => {
     it("should throw error when image file does not exist", async () => {
       const entry = createStillEntry({
         id: "nonexistent",
-        data: { image: "nonexistent.jpg", animated: false },
+        data: { image: "nonexistent.jpg", animated: false, description: "nothing" },
       });
 
       await expect(LgtmImage(entry, 400)).rejects.toThrow(Error);
