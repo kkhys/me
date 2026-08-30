@@ -56,14 +56,17 @@
 
   --c-danger: light-dark(var(--uchu-red-6), var(--uchu-red-4));
 
-  --c-selection: light-dark(var(--uchu-yellow-2), var(--uchu-yellow-9));
+  /* Dark side is translucent: opaque yellow-9 leaves --c-text at 3.2:1. */
+  --c-selection: light-dark(var(--uchu-yellow-2), oklch(from var(--uchu-yellow-9) l c h / 45%));
   --c-scrollbar: light-dark(var(--uchu-gray-3), var(--uchu-yin-8));
 
-  --c-ring: light-dark(var(--uchu-yin-4), var(--uchu-yin-6));
+  --c-ring: light-dark(var(--uchu-yin-7), var(--uchu-yin-4));
   /* Unified focus ring. Outline (not box-shadow) so it follows
      border-radius, never shifts layout, and survives Forced Colors Mode
      where box-shadow rings are stripped. */
-  --ring: oklch(from var(--c-ring) l c h / 55%);
+  /* 70% keeps the ring soft while clearing WCAG 1.4.11's 3:1 against
+     --c-bg on both schemes (3.6:1 light, 4.0:1 dark). */
+  --ring: oklch(from var(--c-ring) l c h / 70%);
   --ring-width: 2px;
   --ring-offset: 2px;
 }
