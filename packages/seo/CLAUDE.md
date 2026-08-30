@@ -6,6 +6,9 @@ consumed as source by me, memo, lgtm (via thin app-local adapters in
 
 ## API notes
 
+- `json-ld.astro` emits a schema.org block (`type` + `data`) whose `url`
+  is the normalized canonical; memo and lgtm use it. me keeps its own
+  `schema-dts`-typed variant.
 - `truncate.ts` holds the shared description clamping; the three
   components import it.
 - `pathname.ts` normalizes `Astro.url.pathname` before it becomes a
