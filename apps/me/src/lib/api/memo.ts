@@ -5,6 +5,7 @@ export interface MemoImage {
   src: string;
   width: number;
   height: number;
+  alt: string;
 }
 
 export interface MemoAuthor {
