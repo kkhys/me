@@ -29,6 +29,7 @@ export const me = {
   art: "https://art.kkhys.me",
   lgtm: "https://lgtm.kkhys.me",
   trends: "https://trends.kkhys.me",
+  design: "https://design.kkhys.me",
   zenn: {
     url: "https://zenn.dev/kkhys",
     feed: "https://zenn.dev/kkhys/feed",
