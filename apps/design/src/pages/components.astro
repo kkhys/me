@@ -1,27 +1,30 @@
 ---
-import Budoux from "@kkhys/ui/budoux.astro";
-import LinkCard from "@kkhys/ui/link-card.astro";
-import SiteFooter from "@kkhys/ui/site-footer.astro";
-import SiteHeader from "@kkhys/ui/site-header.astro";
-import Spinner from "@kkhys/ui/spinner.astro";
+import CodeBlock from "#/components/code-block.astro";
+import Demo from "#/components/demo.astro";
+import Stage from "#/components/stage.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 
-const BUDOUX_SAMPLE = "あらゆる現実をすべて自分のほうへねじ曲げたのだと思われるかもしれない。";
-
-const buttonSnippet = `@import "@kkhys/styles/components.css" layer(components);
-
+const buttonSnippet = `{/* classes: @kkhys/styles/components.css */}
 <button class="btn">Post</button>
 <button class="btn btn--outline">Sync</button>
 <button class="btn btn--ghost">Cancel</button>
 <button class="btn btn--ghost btn--size-sm">Reply</button>`;
-const spinnerSnippet = `import Spinner from "@kkhys/ui/spinner.astro";`;
+const spinnerSnippet = `import Spinner from "@kkhys/ui/spinner.astro";
+
+<Spinner />`;
 const budouxSnippet = `import Budoux from "@kkhys/ui/budoux.astro";
 
 <h1 class="budoux"><Budoux>タイトル</Budoux></h1>`;
 const linkCardSnippet = `import LinkCard from "@kkhys/ui/link-card.astro";
 
-<LinkCard href={url} title={title} description={description}
-  imageSrc={image?.src} favicon={favicon} external />`;
+<LinkCard
+  href={url}
+  title={title}
+  description={description}
+  imageSrc={image?.src}
+  favicon={favicon}
+  external
+/>`;
 const siteHeaderSnippet = `import SiteHeader from "@kkhys/ui/site-header.astro";
 
 <SiteHeader title="LGTM" href="/" />
@@ -31,207 +34,320 @@ const siteHeaderSnippet = `import SiteHeader from "@kkhys/ui/site-header.astro";
 </SiteHeader>`;
 const siteFooterSnippet = `import SiteFooter from "@kkhys/ui/site-footer.astro";
 
-<SiteFooter author="Keisuke Hayashi" authorUrl="https://kkhys.me" links={[...]} />`;
+<SiteFooter
+  author="Keisuke Hayashi"
+  authorUrl="https://kkhys.me"
+  links={[{ href: "/privacy", label: "Privacy Policy" }]}
+/>`;
+const blurImageSnippet = `import BlurImage from "@kkhys/ui/blur-image.astro";
+import photo from "#/assets/photo.jpg";
+
+<BlurImage
+  src={photo}
+  alt="..."
+  widths={[640, 1280]}
+  sizes="(min-width: 640px) 640px, 100vw"
+  radius="0.5rem"
+  framed
+  priority
+/>`;
+const searchDialogSnippet = `import SearchDialog from "@kkhys/search/dialog.astro";
+
+<SearchDialog id="search-dialog" label="記事を検索" placeholder="記事を検索">
+  <div slot="filters">...</div>
+  <Fragment slot="template">
+    <template class="search-result-template">...</template>
+  </Fragment>
+</SearchDialog>
+
+<script>
+  import { mountSearchDialog } from "@kkhys/search/dialog-setup";
+  mountSearchDialog("search-dialog", { bundlePath: "/pagefind/", noun: "記事", renderResult, ... });
+</script>`;
+const infiniteScrollSnippet = `import InfiniteScroll from "@kkhys/ui/infinite-scroll.astro";
+import PaginatedGuard from "@kkhys/ui/paginated-guard.astro";
+
+{page.currentPage > 1 && <PaginatedGuard basePath="/" />}
+<div id="feed" data-current-page={page.currentPage} data-total-pages={page.lastPage}>
+  ...
+</div>
+{page.currentPage < page.lastPage && (
+  <InfiniteScroll containerId="feed" errorMessage="Failed to load more posts" />
+)}`;
+const focusSnippet = `:focus-visible {
+  outline: var(--ring-width) solid var(--ring);
+  outline-offset: var(--ring-offset);
+}`;
+const scrollbarSnippet = `::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-scrollbar);
+  border-radius: 4px;
+}`;
 ---
 
 <BaseLayout title="Components" description="@kkhys/ui の共有コンポーネントとベーススタイルの挙動">
-  <h1>Components</h1>
-  <p class="lead">
-    <code>@kkhys/ui</code> の共有 Astro コンポーネントと、<code>base.css</code> が全サイトに与える挙動。
-  </p>
+  <header class="page-header">
+    <h1>Components</h1>
+    <p class="lead">
+      <code>@kkhys/ui</code> の共有 Astro コンポーネントと、<code>base.css</code> が全サイトに与える挙動。
+      ステージ上のものは実物なので、押したり、タブで移動したり、スクロールしたりして確かめられる。
+      mobile を押すと同じものを 375px 幅の実ビューポートで表示する。
+    </p>
+  </header>
 
-  <h2>Button</h2>
+  <h2 id="button">Button</h2>
   <p class="note">
     <code>components.css</code> のクラスベース。<code>&lt;button&gt;</code> にも
     <code>&lt;a&gt;</code> にも載る(me / studio)。既定は塗り、<code>--outline</code> /
     <code>--ghost</code> / <code>--size-icon</code> / <code>--size-sm</code> の修飾子を持つ。
   </p>
-  <div class="demo demo--row">
-    <button class="btn" type="button">Post</button>
-    <button class="btn btn--outline" type="button">Sync</button>
-    <button class="btn btn--ghost" type="button">Cancel</button>
-    <button class="btn btn--ghost btn--size-sm" type="button">Reply</button>
-    <button class="btn" type="button" disabled>Disabled</button>
+  <dl class="guidance">
+    <div><dt>使う</dt><dd>フォーム送信や投稿など、画面内で 1 つだけの主操作は塗り。並ぶ副操作は <code>--outline</code>、取り消しは <code>--ghost</code>。</dd></div>
+    <div><dt>使わない</dt><dd>ナビゲーションの遷移先(リンクは下線かテキストのまま)。塗りボタンを 1 画面に 2 つ以上並べない。</dd></div>
+    <div><dt>配慮</dt><dd>高さ 2.25rem はタップ領域の下限。<code>disabled</code> は <code>pointer-events: none</code> なので、理由はボタンの外に書く。</dd></div>
+  </dl>
+  <div class="example">
+    <Stage preview="button">
+      <button slot="controls" type="button" aria-pressed="false" data-toggle-disabled>disabled</button>
+      <Demo kind="button" />
+    </Stage>
+    <CodeBlock code={buttonSnippet} lang="astro" title="src/pages/index.astro" />
   </div>
-  <pre class="snippet"><code>{buttonSnippet}</code></pre>
 
-  <h2>Spinner</h2>
+  <h2 id="spinner">Spinner</h2>
   <p class="note">無限スクロールの読み込み表示(memo / lgtm)。色は <code>--c-sub</code> を参照する。</p>
-  <div class="demo">
-    <Spinner />
+  <dl class="guidance">
+    <div><dt>使う</dt><dd>次ページの取得中だけ。最低 500ms は表示してチラつきを防ぐ。</dd></div>
+    <div><dt>使わない</dt><dd>初回描画やボタン内。終端と失敗はスピナーではなくテキストで告げる。</dd></div>
+  </dl>
+  <div class="example">
+    <Stage size="sm" preview="spinner">
+      <Demo kind="spinner" />
+    </Stage>
+    <CodeBlock code={spinnerSnippet} lang="astro" title="src/components/feed.astro" />
   </div>
-  <pre class="snippet"><code>{spinnerSnippet}</code></pre>
 
-  <h2>BudouX</h2>
+  <h2 id="budoux">BudouX</h2>
   <p class="note">
-    スロットの日本語を文節境界で <code>&lt;wbr&gt;</code> 区切りにする(me / trends)。
+    スロットの日本語を文節境界で <code>&lt;wbr&gt;</code> 区切りにする(me / trends / design)。
     <code>.budoux</code> クラス(<code>word-break: keep-all</code>)と組で使う。
+    幅を動かすと、右側だけが文節で折り返す。
   </p>
-  <div class="demo demo--narrow-pair">
-    <figure>
-      <figcaption><code>Budoux</code> なし</figcaption>
-      <p class="narrow">{BUDOUX_SAMPLE}</p>
-    </figure>
-    <figure>
-      <figcaption><code>Budoux</code> あり</figcaption>
-      <p class="narrow budoux"><Budoux>{BUDOUX_SAMPLE}</Budoux></p>
-    </figure>
+  <dl class="guidance">
+    <div><dt>使う</dt><dd>見出し・リード・カードのタイトルなど、折り返し位置が目立つ短い日本語。</dd></div>
+    <div><dt>使わない</dt><dd>長文本文(me は rehype で自動適用)、<code>&lt;pre&gt;</code> / <code>&lt;code&gt;</code>、ボタンのラベル。</dd></div>
+  </dl>
+  <div class="example">
+    <Stage preview="budoux">
+      <label slot="controls">
+        幅
+        <input type="range" min="8" max="24" step="0.5" value="11" data-stage-width />
+      </label>
+      <Demo kind="budoux" />
+    </Stage>
+    <CodeBlock code={budouxSnippet} lang="astro" title="src/pages/index.astro" />
   </div>
-  <pre class="snippet"><code>{budouxSnippet}</code></pre>
 
-  <h2>LinkCard</h2>
+  <h2 id="link-card">LinkCard</h2>
   <p class="note">
     OG メタデータ付きの外部リンクカード(me / memo)。メタデータの取得は各アプリの
     データ層が行い、このコンポーネントは表示だけを担う。og:image があれば
     blur-up 付きで横型(モバイルは縦積み)になる。
   </p>
-  <div class="demo">
-    <LinkCard
-      href="https://kkhys.me"
-      title="Keisuke Hayashi"
-      description="Software Engineer based in Tokyo."
-      external
-    />
+  <dl class="guidance">
+    <div><dt>使う</dt><dd>本文中で単独の段落として置く外部参照。メタデータはビルド時に取得済みのものを渡す。</dd></div>
+    <div><dt>使わない</dt><dd>文中のインラインリンク、同一サイト内の相互リンクの羅列。</dd></div>
+    <div><dt>配慮</dt><dd>favicon は取得失敗時に globe へ、og:image は取得失敗時にプレースホルダなしへ自動で落ちる。</dd></div>
+  </dl>
+  <div class="example">
+    <Stage preview="link-card">
+      <Demo kind="link-card" />
+    </Stage>
+    <CodeBlock code={linkCardSnippet} lang="astro" title="src/components/link-card.astro" />
   </div>
-  <pre class="snippet"><code>{linkCardSnippet}</code></pre>
 
-  <h2>SiteHeader</h2>
+  <h2 id="site-header">SiteHeader</h2>
   <p class="note">
-    小さなサイトの中央寄せヘッダー(memo / lgtm / art / trends / design)。<code>href</code>
+    小さなサイトの中央寄せヘッダー(memo / lgtm / art / trends)。<code>href</code>
     でブランドリンクに、<code>showBack</code> で左端に戻るボタンが付く。<code>actions</code>
     スロットは右端に操作を置く(memo の検索ボタン)。
   </p>
-  <div class="demo demo--stack">
-    <SiteHeader title="LGTM" href="/components" />
-    <SiteHeader title="Thread" showBack />
-    <SiteHeader title="Thread" showBack>
-      <button slot="actions" class="btn btn--ghost btn--size-sm" type="button">検索</button>
-    </SiteHeader>
+  <dl class="guidance">
+    <div><dt>使う</dt><dd>ページ数の少ないサイトのトップ chrome。下層ページは <code>showBack</code> でホームへ戻る導線を出す。</dd></div>
+    <div><dt>使わない</dt><dd>複数の主要ナビを持つサイト(me は独自の <code>site-nav</code>)。</dd></div>
+  </dl>
+  <div class="example">
+    <Stage fill preview="site-header">
+      <Demo kind="site-header" />
+    </Stage>
+    <CodeBlock code={siteHeaderSnippet} lang="astro" title="src/layouts/layout.astro" />
   </div>
-  <pre class="snippet"><code>{siteHeaderSnippet}</code></pre>
 
-  <h2>SiteFooter</h2>
+  <h2 id="site-footer">SiteFooter</h2>
   <p class="note">
     中央寄せの © フッター(memo / lgtm)。<code>links</code> で法務リンク列、
     <code>authorUrl</code> で名前がリンクになる。
   </p>
-  <div class="demo demo--stack">
-    <SiteFooter
-      author="Keisuke Hayashi"
-      authorUrl="https://kkhys.me"
-      links={[
-        { href: "#", label: "Privacy Policy" },
-        { href: "#", label: "Copyright" },
-      ]}
-    />
+  <dl class="guidance">
+    <div><dt>使う</dt><dd>本文カラム末尾の © 表記。法務ページがあれば <code>links</code> に並べる。</dd></div>
+    <div><dt>使わない</dt><dd>サイトマップ代わりのリンク集。</dd></div>
+  </dl>
+  <div class="example">
+    <Stage fill size="sm" preview="site-footer">
+      <Demo kind="site-footer" />
+    </Stage>
+    <CodeBlock code={siteFooterSnippet} lang="astro" title="src/layouts/layout.astro" />
   </div>
-  <pre class="snippet"><code>{siteFooterSnippet}</code></pre>
 
-  <h2>フォーカスリング</h2>
+  <h2 id="blur-image">BlurImage</h2>
+  <p class="note">
+    blur-up 付きの <code>&lt;Picture&gt;</code>(memo / diary / art)。20px のプレースホルダを
+    <code>blur(36px)</code> で敷き、読み込み(または失敗)で 250ms かけて解く。アスペクト比を先に確保するので
+    レイアウトが動かない。
+  </p>
+  <dl class="guidance">
+    <div><dt>使う</dt><dd>コンテンツ画像全般。<code>radius</code> / <code>framed</code> で枠、<code>transitionName</code> で一覧と詳細をつなぐ。</dd></div>
+    <div><dt>使わない</dt><dd>アイコンやアバターなど小さな画像、CSS 背景。</dd></div>
+    <div><dt>配慮</dt><dd>最初の 1 枚は <code>priority</code>(eager + fetchpriority high)。JS 無効時は <code>BlurLoadNoscript</code> がぼかしを解く。</dd></div>
+  </dl>
+  <div class="example">
+    <Stage preview="blur-image">
+      <button slot="controls" type="button" data-replay-blur>replay</button>
+      <Demo kind="blur-image" />
+    </Stage>
+    <CodeBlock code={blurImageSnippet} lang="astro" title="src/components/photo.astro" />
+  </div>
+
+  <h2 id="search-dialog">SearchDialog</h2>
+  <p class="note">
+    Pagefind 検索のコマンドパレット(me / memo)。シェル・キーボード操作・読み込みは <code>@kkhys/search</code>
+    が持ち、アプリは結果行のテンプレートと描画関数だけを書く。このサイト自身の 8 ページを索引にしてあるので
+    実際に検索できる。結果行はヒットした <code>h2</code> の節を名指しし、その見出しへ直接飛ぶ。
+  </p>
+  <dl class="guidance">
+    <div><dt>使う</dt><dd>ページ数が多く、目次だけでは辿れないサイト。トリガーは <code>commandfor</code> のボタンか ⌘K / Ctrl+K(単キーのショートカットは持たない)。</dd></div>
+    <div><dt>使わない</dt><dd>数ページのサイト、フィルタ 1 つで済む一覧。</dd></div>
+    <div><dt>配慮</dt><dd>IME 変換中は検索しない、Esc は入力を保持したまま閉じる、状態行は <code>role=status</code> のまま残す。</dd></div>
+  </dl>
+  <div class="example">
+    <Stage preview="search-dialog">
+      <Demo kind="search-dialog" />
+    </Stage>
+    <CodeBlock code={searchDialogSnippet} lang="astro" title="src/features/search/components/search-dialog.astro" />
+  </div>
+
+  <h2 id="infinite-scroll">InfiniteScroll</h2>
+  <p class="note">
+    次ページを取得してコンテナへ追記する(memo / lgtm)。トリガーが見えてから 200px 手前で読み込み、
+    スピナーは最低 500ms 表示、終端と失敗はテキスト。2 ページ目以降への直接アクセスは
+    <code>PaginatedGuard</code> が先頭へ戻す。下のフィードは 24 件を 6 件ずつ 4 ページに分けた固定データで、
+    <code>/preview/infinite-scroll/2</code> 以降を実際に fetch している。
+  </p>
+  <dl class="guidance">
+    <div><dt>使う</dt><dd>時系列で流し読みするフィード。ページ境界に意味がなく、途中の位置を人に伝える必要がないもの。</dd></div>
+    <div><dt>使わない</dt><dd>検索結果や一覧表など位置を指して参照するもの、フッターへ辿り着く必要があるページ。</dd></div>
+    <div><dt>配慮</dt><dd>読み込み中は <code>aria-busy</code>、終端は <code>role=status</code>、失敗は <code>role=alert</code> で告げる。スクロール以外の再試行手段はないので、失敗文言には再読み込みの含みを持たせる。</dd></div>
+  </dl>
+  <div class="example">
+    <Stage size="lg" preview="infinite-scroll">
+      <button slot="controls" type="button" data-reset-feed data-mobile-control>reset</button>
+      <Demo kind="infinite-scroll" />
+    </Stage>
+    <CodeBlock code={infiniteScrollSnippet} lang="astro" title="src/components/paginated-feed.astro" />
+  </div>
+
+  <h2 id="focus-ring">Focus ring</h2>
   <p class="note">
     キーボードフォーカス(<kbd>Tab</kbd>)で全サイト共通のリングが出る。
     <code>outline</code> ベースなので角丸に追従し、レイアウトを揺らさず、Forced Colors でも消えない。
   </p>
-  <div class="demo demo--row">
-    <button class="demo-button" type="button">ボタン</button>
-    <a class="demo-link" href="#">リンク</a>
-    <input class="demo-input" type="text" placeholder="入力欄" />
+  <div class="example">
+    <Stage preview="focus-ring">
+      <Demo kind="focus-ring" />
+    </Stage>
+    <CodeBlock code={focusSnippet} lang="css" title="packages/styles/base.css" />
   </div>
 
-  <h2>スクロールバー</h2>
+  <h2 id="scrollbar">Scrollbar</h2>
   <p class="note">
     ページ・要素とも 8px の細いつまみ(<code>--c-scrollbar</code>)。トラックは透明。
   </p>
-  <div class="demo">
-    <div class="scroll-demo">
-      <p>
-        {BUDOUX_SAMPLE}
-        {BUDOUX_SAMPLE}
-        {BUDOUX_SAMPLE}
-        {BUDOUX_SAMPLE}
-        {BUDOUX_SAMPLE}
-      </p>
-    </div>
+  <div class="example">
+    <Stage preview="scrollbar">
+      <Demo kind="scrollbar" />
+    </Stage>
+    <CodeBlock code={scrollbarSnippet} lang="css" title="packages/styles/base.css" />
   </div>
 </BaseLayout>
 
+<script>
+  import { initInfiniteScroll } from "@kkhys/ui/infinite-scroll";
+
+  /* Stage controls: each control only touches the stage it sits in. */
+  for (const input of document.querySelectorAll<HTMLInputElement>("[data-stage-width]")) {
+    const stage = input.closest<HTMLElement>("[data-stage]");
+    const apply = () => stage?.style.setProperty("--narrow", `${input.value}rem`);
+    input.addEventListener("input", apply);
+    apply();
+  }
+
+  // Replays the blur-up reveal: drop the loaded state so the 20px placeholder
+  // shows blurred again, then restore it to run the 250ms transition.
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-replay-blur]")) {
+    button.addEventListener("click", () => {
+      const frames = button.closest("[data-stage]")?.querySelectorAll(".blur-load") ?? [];
+      for (const frame of frames) frame.classList.remove("image-loaded");
+      setTimeout(() => {
+        for (const frame of frames) frame.classList.add("image-loaded");
+      }, 700);
+    });
+  }
+
+  // Puts the feed back to its first page and wires InfiniteScroll again. The
+  // snapshot is taken now: IntersectionObserver callbacks are delivered
+  // asynchronously, so nothing has been appended yet. The previous wiring
+  // only knows the replaced nodes and stays inert. In the phone view the
+  // demo is a document of its own, so reloading it is the reset.
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-reset-feed]")) {
+    const stage = button.closest<HTMLElement>("[data-stage]");
+    const scroller = stage?.querySelector<HTMLElement>(".feed-scroller");
+    if (!stage || !scroller) continue;
+    const pristine = scroller.cloneNode(true) as HTMLElement;
+    button.addEventListener("click", () => {
+      if (stage.classList.contains("stage--mobile")) {
+        stage.querySelector<HTMLIFrameElement>(".stage-phone iframe")?.contentWindow?.location.reload();
+        return;
+      }
+      scroller.replaceChildren(...[...pristine.childNodes].map((node) => node.cloneNode(true)));
+      scroller.scrollTop = 0;
+      initInfiniteScroll(scroller.querySelector<HTMLElement>(".infinite-scroll-root"));
+    });
+  }
+
+  for (const toggle of document.querySelectorAll<HTMLButtonElement>("[data-toggle-disabled]")) {
+    toggle.addEventListener("click", () => {
+      const next = toggle.getAttribute("aria-pressed") !== "true";
+      toggle.setAttribute("aria-pressed", String(next));
+      const buttons = toggle.closest("[data-stage]")?.querySelectorAll<HTMLButtonElement>(".btn") ?? [];
+      for (const button of buttons) button.disabled = next;
+    });
+  }
+</script>
+
 <style>
-  .demo {
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-md);
-    padding: var(--space-6);
-  }
-
-  .demo--stack {
+  .example {
     display: grid;
     gap: var(--space-4);
+    align-items: stretch;
   }
 
-  .demo--row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-4);
-  }
-
-  .demo--narrow-pair {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-8);
-  }
-
-  .demo--narrow-pair figure {
-    margin: 0;
-    display: grid;
-    gap: var(--space-2);
-  }
-
-  .demo--narrow-pair figcaption {
-    font-size: var(--fs-xs);
-    color: var(--c-sub);
-  }
-
-  .narrow {
-    width: 11rem;
-    margin: 0;
-    font-size: var(--fs-sm);
-    line-height: var(--lh-base);
-    border-inline-start: 2px solid var(--c-border);
-    padding-inline-start: var(--space-3);
-  }
-
-  .demo-button {
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-md);
-    background: var(--c-surface);
-    color: var(--c-text);
-    font-size: var(--fs-sm);
-    padding: var(--space-2) var(--space-4);
-    cursor: pointer;
-  }
-
-  .demo-link {
-    font-size: var(--fs-sm);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .demo-input {
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-md);
-    background: var(--c-bg);
-    color: inherit;
-    font-size: var(--fs-sm);
-    padding: var(--space-2) var(--space-3);
-  }
-
-  .scroll-demo {
-    max-height: 6rem;
-    overflow-y: auto;
-  }
-
-  .scroll-demo p {
-    margin: 0;
-    font-size: var(--fs-sm);
+  @container main (width >= 56rem) {
+    .example {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
   }
 </style>

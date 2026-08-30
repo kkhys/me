@@ -1,0 +1,17 @@
+---
+import Demo from "#/components/demo.astro";
+import PreviewLayout from "#/layouts/preview-layout.astro";
+import { DEMO_KINDS, isDemoKind } from "#/utils/demos";
+
+/* Standalone demo documents for the phone-width iframe on the Components
+   page. Not linked or indexed; they exist only to give the shared
+   components a real narrow viewport. */
+export const getStaticPaths = () => DEMO_KINDS.map((kind) => ({ params: { kind } }));
+
+const { kind } = Astro.params;
+if (!isDemoKind(kind)) throw new Error(`Unknown demo: ${kind}`);
+---
+
+<PreviewLayout title={`${kind} preview`}>
+  <Demo kind={kind} />
+</PreviewLayout>

@@ -1,0 +1,21 @@
+---
+import PaginatedGuard from "@kkhys/ui/paginated-guard.astro";
+import DemoFeed from "#/components/demo-feed.astro";
+import PreviewLayout from "#/layouts/preview-layout.astro";
+import { FEED_DEMO, feedDemoPageCount } from "#/utils/feed-demo";
+
+/* Pages 2..N of the InfiniteScroll demo feed: the documents the component
+   fetches and lifts `#demo-feed` out of. Page 1 is /preview/infinite-scroll,
+   rendered by [kind].astro. */
+export const getStaticPaths = () =>
+  Array.from({ length: feedDemoPageCount() - 1 }, (_, index) => ({
+    params: { page: String(index + 2) },
+  }));
+
+const page = Number(Astro.params.page);
+---
+
+<PreviewLayout title={`infinite-scroll preview ${page}`}>
+  <PaginatedGuard basePath={FEED_DEMO.basePath} />
+  <DemoFeed page={page} />
+</PreviewLayout>

@@ -1,0 +1,155 @@
+---
+import SearchDialog from "@kkhys/search/dialog.astro";
+import { searchConfig } from "#/utils/search";
+
+/* This site's Pagefind dialog: the shared shell from @kkhys/search with a
+   result row that names the page and the h2 section the hit sits in. */
+---
+
+<SearchDialog id={searchConfig.dialogId} label="ページを検索" placeholder="ページを検索">
+  <Fragment slot="template">
+    <template class="search-result-template">
+      <li class="search-results-item">
+        <a class="search-result">
+          <span class="search-result-heading">
+            <span class="search-result-page palt"></span>
+            <span class="search-result-title palt"></span>
+          </span>
+          <span class="search-result-excerpt"></span>
+        </a>
+      </li>
+    </template>
+  </Fragment>
+</SearchDialog>
+
+<style>
+  .search-results-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  .search-result {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    color: var(--c-text);
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .search-result:hover {
+    background-color: oklch(from var(--c-surface) l c h / 50%);
+  }
+
+  /* The list clips overflow, so keep the ring inside the row. */
+  .search-result:focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: calc(-1 * var(--ring-width));
+  }
+
+  .search-result-heading {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    min-width: 0;
+    line-height: var(--lh-sm);
+  }
+
+  /* Page name as a breadcrumb before the section; removed when the hit is
+     the page itself. */
+  .search-result-page {
+    flex-shrink: 0;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .search-result-page::after {
+    content: "/";
+    margin-inline-start: var(--space-2);
+  }
+
+  .search-result-title {
+    overflow: hidden;
+    font-weight: var(--fw-medium);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .search-result-excerpt {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+    color: var(--c-sub);
+    overflow-wrap: anywhere;
+  }
+
+  /* Not `--c-selection`: its dark-mode yellow-9 fill drowns the grey excerpt
+     text, so the match gets body colour and weight over a 35% tint instead. */
+  .search-result-excerpt :global(mark) {
+    padding-inline: 0.125em;
+    margin-inline: -0.0625em;
+    border-radius: var(--radius-xs);
+    background-color: light-dark(
+      var(--uchu-yellow-2),
+      oklch(from var(--uchu-yellow-9) l c h / 35%)
+    );
+    color: var(--c-text);
+    font-weight: var(--fw-medium);
+  }
+</style>
+
+<script>
+  import {
+    isHTMLElement,
+    mountSearchDialog,
+    renderExcerpt,
+    requireElement,
+  } from "@kkhys/search/dialog-setup";
+  import type { PagefindSearchFragment } from "@kkhys/search/types";
+  import { pickSubResult, searchConfig, toSectionHref } from "#/utils/search";
+
+  const renderResult = (fragment: PagefindSearchFragment, template: HTMLTemplateElement) => {
+    const node = template.content.cloneNode(true) as DocumentFragment;
+    const pageTitle = fragment.meta["title"];
+    if (import.meta.env.DEV && !pageTitle) {
+      console.warn("Pagefind fragment has no title; is the page missing its h1?", fragment.url);
+    }
+    // A hit before the first h2 comes back as the page itself (no anchor).
+    const section = pickSubResult(fragment);
+    const href = section === undefined ? fragment.url : section.url;
+    const excerpt = section === undefined ? fragment.excerpt : section.excerpt;
+    const heading = section?.anchor === undefined ? undefined : section.title;
+
+    requireElement(
+      node,
+      ".search-result",
+      (element): element is HTMLAnchorElement => element instanceof HTMLAnchorElement,
+    ).href = toSectionHref(href);
+    const page = requireElement(node, ".search-result-page", isHTMLElement);
+    const title = requireElement(node, ".search-result-title", isHTMLElement);
+    if (heading === undefined) {
+      page.remove();
+      title.textContent = pageTitle ?? href;
+    } else {
+      page.textContent = pageTitle ?? "";
+      title.textContent = heading;
+    }
+    renderExcerpt(requireElement(node, ".search-result-excerpt", isHTMLElement), excerpt);
+    return node;
+  };
+
+  mountSearchDialog(searchConfig.dialogId, {
+    bundlePath: searchConfig.bundlePath,
+    excerptLength: searchConfig.excerptLength,
+    maxResults: searchConfig.maxResults,
+    debounceMs: searchConfig.debounceMs,
+    noun: "ページ",
+    renderResult,
+  });
+</script>

@@ -1,0 +1,382 @@
+---
+import BlurImage from "@kkhys/ui/blur-image.astro";
+import Budoux from "@kkhys/ui/budoux.astro";
+import SearchIcon from "@kkhys/ui/icons/search.svg";
+import InfiniteScroll from "@kkhys/ui/infinite-scroll.astro";
+import LinkCard from "@kkhys/ui/link-card.astro";
+import SiteFooter from "@kkhys/ui/site-footer.astro";
+import SiteHeader from "@kkhys/ui/site-header.astro";
+import Spinner from "@kkhys/ui/spinner.astro";
+import preview from "../assets/preview.png";
+import DemoFeed from "#/components/demo-feed.astro";
+import SearchDialog from "#/components/search-dialog.astro";
+import type { DemoKind } from "#/utils/demos";
+import { FEED_DEMO } from "#/utils/feed-demo";
+import { searchConfig } from "#/utils/search";
+
+/* The live demo bodies, shared by the Components page stages and the
+   standalone /preview pages so both views render the same markup. Kinds
+   with several patterns stack them as captioned figures. */
+interface Props {
+  kind: DemoKind;
+}
+
+const { kind } = Astro.props;
+
+const BUDOUX_SAMPLE = "あらゆる現実をすべて自分のほうへねじ曲げたのだと思われるかもしれない。";
+
+/* Inline favicon so the card demo needs no network at build time. */
+const FAVICON_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#111"/><circle cx="16" cy="16" r="7" fill="#fff"/></svg>';
+const favicon = { kind: "inline", src: `data:image/svg+xml,${encodeURIComponent(FAVICON_SVG)}` } as const;
+---
+
+{
+  kind === "button" && (
+    <div class="variants">
+      <figure>
+        <figcaption>種類</figcaption>
+        <div class="cluster">
+          <button class="btn" type="button">Post</button>
+          <button class="btn btn--outline" type="button">Sync</button>
+          <button class="btn btn--ghost" type="button">Cancel</button>
+        </div>
+      </figure>
+      <figure>
+        <figcaption>サイズ: --size-sm / 既定 / --size-icon</figcaption>
+        <div class="cluster">
+          <button class="btn btn--size-sm" type="button">Reply</button>
+          <button class="btn" type="button">Reply</button>
+          <button class="btn btn--outline btn--size-icon" type="button" aria-label="追加">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </button>
+        </div>
+      </figure>
+      <figure>
+        <figcaption>&lt;a&gt; に載せたもの / disabled</figcaption>
+        <div class="cluster">
+          <a class="btn btn--outline" href="#">Open</a>
+          <button class="btn" type="button" disabled>Disabled</button>
+        </div>
+      </figure>
+    </div>
+  )
+}
+
+{kind === "spinner" && <Spinner />}
+
+{
+  kind === "budoux" && (
+    <div class="pair">
+      <figure>
+        <figcaption><code>Budoux</code> なし</figcaption>
+        <p class="narrow" data-budoux="off">{BUDOUX_SAMPLE}</p>
+      </figure>
+      <figure>
+        <figcaption><code>Budoux</code> あり</figcaption>
+        <p class="narrow budoux"><Budoux>{BUDOUX_SAMPLE}</Budoux></p>
+      </figure>
+    </div>
+  )
+}
+
+{
+  kind === "link-card" && (
+    <div class="variants variants--card">
+      <figure>
+        <figcaption>og:image と favicon あり(external)</figcaption>
+        <LinkCard
+          href="https://kkhys.me"
+          title="Keisuke Hayashi"
+          description="Software Engineer based in Tokyo."
+          imageSrc="/preview/og.svg"
+          favicon={favicon}
+          external
+        />
+      </figure>
+      <figure>
+        <figcaption>og:image なし、favicon なし(globe にフォールバック)</figcaption>
+        <LinkCard
+          href="https://kkhys.me"
+          title="Keisuke Hayashi"
+          description="Software Engineer based in Tokyo."
+          external
+        />
+      </figure>
+      <figure>
+        <figcaption>タイトルのみ(内部リンク)</figcaption>
+        <LinkCard href="https://memo.kkhys.me/some-thread" title="memo のスレッド" />
+      </figure>
+    </div>
+  )
+}
+
+{
+  kind === "site-header" && (
+    <div class="stack">
+      <SiteHeader title="LGTM" href="#" />
+      <SiteHeader title="Thread" showBack />
+      <SiteHeader title="Thread" showBack>
+        <button slot="actions" class="btn btn--ghost btn--size-sm" type="button">検索</button>
+      </SiteHeader>
+    </div>
+  )
+}
+
+{
+  kind === "site-footer" && (
+    <div class="stack">
+      <SiteFooter
+        author="Keisuke Hayashi"
+        authorUrl="https://kkhys.me"
+        links={[
+          { href: "#", label: "Privacy Policy" },
+          { href: "#", label: "Copyright" },
+        ]}
+      />
+      <SiteFooter author="Keisuke Hayashi" />
+    </div>
+  )
+}
+
+{
+  kind === "focus-ring" && (
+    <div class="cluster">
+      <button class="demo-button" type="button">ボタン</button>
+      <a class="demo-link" href="#">リンク</a>
+      <input class="demo-input" type="text" placeholder="入力欄" />
+    </div>
+  )
+}
+
+{
+  kind === "scrollbar" && (
+    <div class="variants">
+      <figure>
+        <figcaption>縦</figcaption>
+        <div class="scroll-demo" tabindex="0">
+          <p>
+            {BUDOUX_SAMPLE}
+            {BUDOUX_SAMPLE}
+            {BUDOUX_SAMPLE}
+            {BUDOUX_SAMPLE}
+            {BUDOUX_SAMPLE}
+            {BUDOUX_SAMPLE}
+          </p>
+        </div>
+      </figure>
+      <figure>
+        <figcaption>横</figcaption>
+        <div class="scroll-demo scroll-demo--x" tabindex="0">
+          <p data-budoux="off">{BUDOUX_SAMPLE}{BUDOUX_SAMPLE}</p>
+        </div>
+      </figure>
+    </div>
+  )
+}
+
+{
+  kind === "blur-image" && (
+    <div class="card-slot">
+      <BlurImage
+        src={preview}
+        alt="グラデーションのサンプル画像"
+        widths={[320, 640, 960]}
+        sizes="(min-width: 640px) 28rem, 100vw"
+        radius="0.5rem"
+        framed
+      />
+    </div>
+  )
+}
+
+{
+  kind === "search-dialog" && (
+    <div class="cluster">
+      <button
+        class="btn btn--outline"
+        type="button"
+        commandfor={searchConfig.dialogId}
+        command="show-modal"
+      >
+        <SearchIcon width={16} height={16} aria-hidden="true" />
+        検索を開く
+      </button>
+      <span class="hint">⌘K / Ctrl+K</span>
+      <SearchDialog />
+    </div>
+  )
+}
+
+{
+  kind === "infinite-scroll" && (
+    <div class="feed-scroller scroller-thin" tabindex="0">
+      <DemoFeed page={1} />
+      <InfiniteScroll
+        containerId={FEED_DEMO.containerId}
+        endMessage="最後まで読み込みました 🎉"
+        errorMessage="読み込みに失敗しました 😢"
+        loadingLabel="読み込み中"
+      />
+    </div>
+  )
+}
+
+<style>
+  .hint {
+    font-size: var(--fs-2xs);
+    font-family: var(--font-mono);
+    color: var(--c-sub);
+  }
+
+  .variants {
+    display: grid;
+    gap: var(--space-6);
+    width: 100%;
+    justify-items: center;
+  }
+
+  .variants figure {
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+    justify-items: center;
+    width: 100%;
+  }
+
+  .variants figcaption,
+  .pair figcaption {
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+  }
+
+  .variants--card figure > :global(.link-card) {
+    width: min(100%, 28rem);
+  }
+
+  .cluster {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .stack {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+  /* SiteHeader / SiteFooter place themselves on the consumer's named body
+     rows; inside a demo each variant gets its own row instead. */
+  .stack > :global(*) {
+    grid-row: auto;
+    grid-column: 1;
+  }
+
+  .stack > :global(* + *) {
+    border-top: 1px solid var(--c-border);
+  }
+
+  .pair {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-6);
+  }
+
+  .pair figure {
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+  }
+
+  /* --narrow is driven by the width slider on the Components page. */
+  .narrow {
+    width: var(--narrow, 11rem);
+    max-width: 100%;
+    margin: 0;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-base);
+    border-inline-start: 2px solid var(--c-border);
+    padding-inline-start: var(--space-3);
+    transition: width 0.15s ease-out;
+  }
+
+  .demo-button {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    background: var(--c-surface);
+    color: var(--c-text);
+    font-size: var(--fs-sm);
+    padding: var(--space-2) var(--space-4);
+    cursor: pointer;
+  }
+
+  .demo-link {
+    font-size: var(--fs-sm);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .demo-input {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    background: var(--c-bg);
+    color: inherit;
+    font-size: var(--fs-sm);
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .scroll-demo {
+    width: min(100%, 28rem);
+    max-height: 6rem;
+    padding-inline-end: var(--space-2);
+    overflow-y: auto;
+  }
+
+  .scroll-demo--x {
+    max-height: none;
+    padding-block-end: var(--space-2);
+    overflow: auto hidden;
+  }
+
+  .scroll-demo--x p {
+    white-space: nowrap;
+  }
+
+  .scroll-demo p {
+    margin: 0;
+    font-size: var(--fs-xs);
+    line-height: var(--lh-base);
+  }
+
+  /* A viewport of its own on the Components page: the trigger below the
+     first page stays clipped until the reader scrolls, so the load can be
+     watched. IntersectionObserver clips through scroll ancestors, so no
+     `root` is needed. In the phone preview the document itself scrolls. */
+  .feed-scroller {
+    width: min(100%, 28rem);
+    max-height: 18rem;
+    padding-inline-end: var(--space-2);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  :global(body.preview) .feed-scroller {
+    max-height: none;
+    padding-inline-end: 0;
+    overflow: visible;
+  }
+</style>

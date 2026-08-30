@@ -1,0 +1,174 @@
+---
+import { type DemoKind, previewPath } from "#/utils/demos";
+
+/* Live demo surface: the component sits centered on a quiet canvas the
+   reader can actually operate, with optional controls pinned top-right.
+   With `preview`, a toggle swaps the demo for the same markup loaded in a
+   phone-width iframe so viewport media queries take effect. */
+interface Props {
+  /** Stretch the demo across the stage instead of centering it. */
+  fill?: boolean | undefined;
+  /** Stage height; defaults to the compact 14rem. */
+  size?: "sm" | "md" | "lg" | undefined;
+  /** Demo kind to load in the mobile preview iframe. */
+  preview?: DemoKind | undefined;
+  class?: string | undefined;
+}
+
+const { fill = false, size = "md", preview, class: className } = Astro.props;
+---
+
+{/* data-stage: hook for the control scripts to find their own demo.
+   data-pagefind-ignore: demo labels and fixture text are not documentation. */}
+<div
+  class:list={["stage", `stage--${size}`, { "stage--fill": fill }, className]}
+  data-stage
+  data-pagefind-ignore
+>
+  {
+    (Astro.slots.has("controls") || preview !== undefined) && (
+      <div class="stage-controls">
+        <slot name="controls" />
+        {preview !== undefined && (
+          <button type="button" aria-pressed="false" data-viewport-toggle>
+            mobile
+          </button>
+        )}
+      </div>
+    )
+  }
+  <div class="stage-body">
+    <slot />
+  </div>
+  {
+    preview !== undefined && (
+      <div class="stage-phone" hidden>
+        {/* src is assigned on first toggle so idle stages cost nothing. */}
+        <iframe data-src={previewPath(preview)} title={`${preview} のモバイル表示`} loading="lazy" />
+      </div>
+    )
+  }
+</div>
+
+<script>
+  for (const toggle of document.querySelectorAll<HTMLButtonElement>("[data-viewport-toggle]")) {
+    toggle.addEventListener("click", () => {
+      const stage = toggle.closest<HTMLElement>("[data-stage]");
+      const phone = stage?.querySelector<HTMLElement>(".stage-phone");
+      const frame = phone?.querySelector<HTMLIFrameElement>("iframe");
+      if (!stage || !phone || !frame) return;
+      const mobile = toggle.getAttribute("aria-pressed") !== "true";
+      const src = frame.dataset["src"];
+      if (mobile && src !== undefined && frame.getAttribute("src") === null) frame.src = src;
+      toggle.setAttribute("aria-pressed", String(mobile));
+      stage.classList.toggle("stage--mobile", mobile);
+      phone.hidden = !mobile;
+    });
+  }
+</script>
+
+<style>
+  .stage {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 14rem;
+    padding: var(--space-6);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    background: var(--c-stage-bg);
+    overflow: hidden;
+  }
+
+  .stage--sm {
+    min-height: 9rem;
+  }
+
+  .stage--lg {
+    min-height: 20rem;
+  }
+
+  .stage-body {
+    grid-row: 2;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+  }
+
+  .stage--fill .stage-body {
+    place-items: stretch;
+  }
+
+  .stage--mobile .stage-body {
+    display: none;
+  }
+
+  /* Phone-width frame (375 CSS px) so the iframe document lays out at a
+     real mobile viewport. */
+  .stage-phone {
+    grid-row: 2;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+  }
+
+  .stage-phone iframe {
+    width: 375px;
+    max-width: 100%;
+    height: 32rem;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    /* Inherits the page's color-scheme so the embedder and the preview
+       document agree and Chromium doesn't paint an opaque backdrop. */
+    background: var(--c-bg);
+  }
+
+  /* Controls take their own row above the demo (never overlaid on it), so
+     a tall demo can't collide with them. */
+  .stage-controls {
+    grid-row: 1;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: var(--space-2);
+    margin: calc(var(--space-3) * -1) calc(var(--space-3) * -1) var(--space-3);
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+  }
+
+  /* Inline-only controls (sliders, state toggles) drive the inline demo;
+     hide them while the iframe is showing. `data-mobile-control` marks one
+     that also handles the iframe. */
+  .stage--mobile .stage-controls > :global(:not([data-viewport-toggle], [data-mobile-control])) {
+    display: none;
+  }
+
+  .stage-controls :global(label) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .stage-controls :global(input[type="range"]) {
+    width: 8rem;
+    accent-color: var(--c-primary);
+  }
+
+  .stage-controls :global(button) {
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    background: var(--c-bg);
+    color: var(--c-sub);
+    font: inherit;
+    cursor: pointer;
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+
+  .stage-controls :global(button:hover),
+  .stage-controls :global(button[aria-pressed="true"]) {
+    color: var(--c-text);
+    background: var(--c-surface);
+  }
+</style>
