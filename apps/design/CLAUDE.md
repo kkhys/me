@@ -4,7 +4,10 @@ Design system documentation site (design.kkhys.me), the `@kkhys/design` app
 of the kkhys monorepo. Astro 7 static site on Cloudflare Pages. Documents
 the shared tokens (`@kkhys/styles`) and components (`@kkhys/ui`) by parsing
 the actual CSS sources at build time — token pages can never drift from the
-real values. TypeScript strictest mode. Path alias: `#/*` → `./src/*`.
+real values. Also consumes `@kkhys/seo` (BaseSEO in `base-layout.astro`) and
+`@kkhys/search` (the dialog shell in `components/search-dialog.astro`, the
+query helpers in `utils/search.ts`). TypeScript strictest mode. Path alias:
+`#/*` → `./src/*`.
 
 ## Project Map
 
@@ -20,7 +23,7 @@ src/
   pages/accessibility.astro   # Build-time WCAG contrast table + a11y rules / known gaps / checklist
   pages/preview/[kind].astro  # Standalone demo documents for the phone-width iframe (noindex)
   pages/preview/infinite-scroll/[page].astro  # Pages 2..N of the InfiniteScroll demo feed (fetch targets)
-  layouts/base-layout.astro   # Sidebar + main shell; runs enhanceProse over the rendered page; data-pagefind-body on <main>
+  layouts/base-layout.astro   # Sidebar + main shell: HeadMeta icons={false}, ThemeInit, BaseSEO, SkipLink label="本文へ移動", SiteFooter; runs enhanceProse over the rendered page; data-pagefind-body on <main>
   layouts/preview-layout.astro  # Shell of the /preview documents (no sidebar, noindex, not indexed)
   components/site-sidebar.astro  # Sticky page nav + current page's h2 sections + theme toggle
   components/site-footer.astro
@@ -37,9 +40,10 @@ src/
   utils/tokens.ts             # parseCustomProperties / splitLightDark / filterByPrefix (unit-tested)
   utils/color.ts              # OKLCH → sRGB, WCAG contrast + grading, token color resolver (unit-tested)
   utils/prose.ts              # enhanceProse: BudouX over prose blocks + h2[id] section index (unit-tested)
-  utils/demos.ts              # DEMO_KINDS / previewPath
+  utils/demos.ts              # DEMO_KINDS / DemoKind / isDemoKind / previewPath
   utils/feed-demo.ts          # FEED_DEMO paging constants + feedDemoPage (unit-tested)
   utils/search.ts             # searchConfig, pickSubResult, toSectionHref (unit-tested)
+  utils/source-refs.ts        # splitSourceRefs / SourceRefPart — `path:line` refs in prose (unit-tested)
   utils/pagefind-index.ts     # Index coverage check helpers (unit-tested)
   integrations/verify-pagefind-index.ts  # Fails the build unless the index covers every doc page
   utils/icons.ts              # parseSvgAttributes / iconNameFromPath / iconImportName (unit-tested)
@@ -48,6 +52,10 @@ src/
   data/icons.ts               # Per-glyph role + usedBy annotations for the Icons page (hand-curated)
   styles/global.css           # Imports @kkhys/styles (uchu + tokens + base) + site shell
   __tests__/                  # Vitest unit tests
+public/
+  favicon.svg                 # The only icon; linked by hand since HeadMeta runs with icons={false}
+  preview/og.svg              # imageSrc of the LinkCard demo (no network at build time)
+  robots.txt
 vrt/
   pages.spec.ts               # Playwright full-page screenshots of all eight pages
   serve.mjs                   # Foreground static server for dist/ (astro preview daemonizes)

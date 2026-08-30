@@ -1,7 +1,8 @@
 # CLAUDE.md
 
 `@kkhys/og` — Satori-based OG image and favicon generation, consumed as
-source by me, memo, lgtm, and diary.
+source by me, memo, lgtm, and diary in full; art and trends use only the
+favicon route (`src/pages/api/favicon/[file].ts`).
 
 ## Exports
 

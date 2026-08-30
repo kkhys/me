@@ -1,7 +1,8 @@
 # CLAUDE.md
 
 `@kkhys/analytics` — Umami tracker script component, consumed as source by
-the five published apps (me, memo, lgtm, diary, trends).
+six published apps (me, memo, lgtm, diary, trends, art); design does not
+render it.
 
 ## API notes
 
@@ -12,6 +13,8 @@ the five published apps (me, memo, lgtm, diary, trends).
 - The tracker only renders in production builds (`import.meta.env.PROD`),
   so dev servers never send events; `data-domains` additionally guards
   non-production hostnames (e.g. `*.pages.dev` previews).
+  `data-exclude-search="true"` strips query strings from tracked URLs, so
+  a search dialog's `?q=` never reaches the dashboard.
 - Website IDs are public (they ship in the served HTML), so apps hardcode
   them at the call site in their root layout.
 

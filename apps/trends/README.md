@@ -6,20 +6,25 @@ One JSON file per day lives in `src/content/runs/`, validated by the zod schema 
 
 ## Pages
 
-| URL        | Content                                   |
-| ---------- | ----------------------------------------- |
-| `/`        | Latest digest                             |
-| `/<date>`  | Permanent per-day page with prev/next nav |
-| `/archive` | All runs, newest first                    |
+| URL        | Content                                     |
+| ---------- | ------------------------------------------- |
+| `/`        | Latest digest                               |
+| `/<date>`  | Permanent per-day page with prev/next nav   |
+| `/archive` | All runs, newest first                      |
+| `/about`   | How the site works, score and star criteria |
 
 ## Scripts
 
-| Command       | Description                                     |
-| ------------- | ----------------------------------------------- |
-| `pnpm dev`    | Start the dev server                            |
-| `pnpm build`  | Build to `dist/` (validates all run JSON)       |
-| `pnpm check`  | `astro check` + `tsc --noEmit`                  |
-| `pnpm test`   | Vitest unit tests                               |
-| `pnpm deploy` | Build and deploy to Cloudflare Pages (`trends`) |
+| Command                       | Description                                     |
+| ----------------------------- | ----------------------------------------------- |
+| `pnpm dev`                    | Start the dev server                            |
+| `pnpm build`                  | Build to `dist/` (validates all run JSON)       |
+| `pnpm preview`                | Preview the production build locally            |
+| `pnpm check`                  | `astro check` + `tsc --noEmit`                  |
+| `pnpm test`                   | Vitest unit tests                               |
+| `pnpm coverage`               | Vitest with coverage                            |
+| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with oxlint + oxfmt            |
+| `pnpm all`                    | build → check → lint:fix → test → coverage      |
+| `pnpm deploy`                 | Build and deploy to Cloudflare Pages (`trends`) |
 
 From the repo root: `pnpm dev:trends` / `pnpm build:trends` / `pnpm deploy:trends`.

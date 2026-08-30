@@ -36,22 +36,23 @@ New images are added through the submodule's `pnpm ingest` script, which resizes
 
 Run from this directory, or prefix with `pnpm --filter @kkhys/art`:
 
-| Command                       | Description                          |
-| ----------------------------- | ------------------------------------ |
-| `pnpm dev`                    | Start development server             |
-| `pnpm build`                  | Production build (static)            |
-| `pnpm preview`                | Preview production build locally     |
-| `pnpm check`                  | Astro check + `tsc --noEmit`         |
-| `pnpm test`                   | Run unit tests                       |
-| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with oxlint + oxfmt |
-| `pnpm deploy`                 | Build and deploy to Cloudflare Pages |
+| Command                       | Description                                |
+| ----------------------------- | ------------------------------------------ |
+| `pnpm dev`                    | Start development server                   |
+| `pnpm build`                  | Production build (static)                  |
+| `pnpm preview`                | Preview production build locally           |
+| `pnpm check`                  | Astro check + `tsc --noEmit`               |
+| `pnpm test` / `pnpm coverage` | Run unit tests / with coverage             |
+| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with oxlint + oxfmt       |
+| `pnpm all`                    | build + check + lint:fix + test + coverage |
+| `pnpm deploy`                 | Build and deploy to Cloudflare Pages       |
 
 ## Project Structure
 
 ```
 apps/art/
 ├── src/
-│   ├── components/   # art-picture (<Picture> + blur-up), gallery-thumb, work/fashion figures, header, pager
+│   ├── components/   # gallery-thumb, work-figure, fashion-figure (around @kkhys/ui/blur-image.astro), site-header, pager
 │   ├── config/       # content-path.ts (fixture switch), site.ts
 │   ├── layouts/      # base-layout.astro (HTML shell + SEO/OGP meta, view-transition opt-in)
 │   ├── lib/          # gallery.ts (collections + globbed images), og-image.ts, images/ (the two image trees)

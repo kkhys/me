@@ -1,8 +1,10 @@
 # CLAUDE.md
 
 `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard Astro primitives,
-consumed as source by me, memo, lgtm (via thin app-local adapters in
-`src/components/seo/`) and diary (directly in its layout).
+consumed as source by all seven apps: me, memo, lgtm (via thin app-local
+adapters in `src/components/seo/`), diary, art, trends (directly in their
+layouts), and design (BaseSEO only). `@kkhys/search` also imports
+`normalizePathname` for result hrefs.
 
 ## API notes
 
@@ -31,5 +33,5 @@ consumed as source by me, memo, lgtm (via thin app-local adapters in
   `Astro.url.pathname` reintroduces the `.html` suffix.
 - `check` runs tsc over the `.ts` sources only; the `.astro` components
   are type-checked by each consuming app's `astro check`.
-- API changes ripple into four apps — grep consumers before changing
-  props.
+- API changes ripple into seven apps and `@kkhys/search` — grep consumers
+  before changing props.

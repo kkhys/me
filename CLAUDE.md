@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-pnpm monorepo for kkhys's personal sites: four Astro static sites on Cloudflare Pages plus shared packages. TypeScript strictest mode throughout. Dev tools are managed by a Nix Flake (`flake.nix`) — run `direnv allow` to autoload Node.js, pnpm, and Bun.
+pnpm monorepo for kkhys's personal sites: eight apps (seven Astro static sites deployed on Cloudflare Pages, plus studio, which is local-only) and shared packages. TypeScript strictest mode throughout. Dev tools are managed by a Nix Flake (`flake.nix`) — run `direnv allow` to autoload Node.js, pnpm, and Bun.
 
 ## Workspace
 
@@ -17,12 +17,12 @@ Apps:
 
 Packages:
 
-- `packages/styles` — `@kkhys/styles`, uchu.css OKLCH palette + shared semantic tokens (`tokens.css`), base styles (`base.css`), and Satori hex mirrors (`colors`).
+- `packages/styles` — `@kkhys/styles`, uchu.css OKLCH palette + shared semantic tokens (`tokens.css`), base styles (`base.css`), component classes (`components.css`: `.btn` and its modifiers), and Satori hex mirrors (`colors`).
 - `packages/seo` — `@kkhys/seo`, BaseSEO / OpenGraph / TwitterCard Astro primitives.
 - `packages/og` — `@kkhys/og`, Satori OG image + favicon generators.
-- `packages/ui` — `@kkhys/ui`, shared Astro components (spinner, BudouX wrapper) + the cached BudouX parser.
+- `packages/ui` — `@kkhys/ui`, shared Astro components: site header / footer chrome, head meta, skip link, blur-up images, link card, infinite scroll + paginated guard, TOC scrollspy, link-metadata fetcher, Lucide icons, and the BudouX wrapper + cached parser.
 - `packages/analytics` — `@kkhys/analytics`, self-hosted Umami tracker component.
-- `packages/search` — `@kkhys/search`, the Pagefind search dialog shell, setup script, runner, and helpers shared by me and memo.
+- `packages/search` — `@kkhys/search`, the Pagefind search dialog shell, setup script, runner, and helpers shared by me, memo, and design.
 - `packages/release` — `@kkhys/release`, date-based release tagging used by `scripts/release.ts`.
 
 Shared packages are consumed as source (no build step); each app supplies its own config via thin wrappers. Dependency versions are centralized in the `catalog:` of `pnpm-workspace.yaml`.
