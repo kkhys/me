@@ -141,10 +141,13 @@ if (imageSrc) {
     padding: var(--space-2) var(--space-4);
   }
 
+  /* Explicit so the card renders the same in every host: me's .prose is
+     already --fs-sm, but memo mounts it under the 1rem body. */
   .link-card-title {
     display: block;
     max-height: 3rem;
     overflow-wrap: break-word;
+    font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
     line-height: 1.625;
   }

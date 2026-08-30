@@ -37,7 +37,7 @@ const { images, alts } = Astro.props;
         display: grid;
     }
 
-    .memo-images:has(> :only-child) :global(.blur-load-wrapper) {
+    .memo-images:has(> :only-child) :global(.blur-image) {
         max-height: 430px;
     }
 
@@ -52,7 +52,7 @@ const { images, alts } = Astro.props;
         padding-bottom: var(--space-2);
     }
 
-    .memo-images:not(:has(> :only-child)) :global(.blur-load-wrapper) {
+    .memo-images:not(:has(> :only-child)) :global(.blur-image) {
         flex: 0 0 auto;
         height: min(260px, 50vw);
         aspect-ratio: unset !important;
