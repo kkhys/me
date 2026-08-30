@@ -45,7 +45,7 @@ const loadMoreButton = $<HTMLButtonElement>("load-more");
 const searchInput = $<HTMLInputElement>("search");
 
 let memos: MemoSummary[] = [];
-let attachedImages: File[] = [];
+let attachedImages: { file: File; alt: string }[] = [];
 let replyTarget: { type: "comment" | "quote"; memo: MemoSummary } | null = null;
 let feedLimit = FEED_PAGE_SIZE;
 
@@ -65,13 +65,13 @@ const updateCounter = (): void => {
 
 const renderPreviews = (): void => {
   previews.replaceChildren();
-  attachedImages.forEach((file, index) => {
+  attachedImages.forEach((attachment, index) => {
     const item = document.createElement("figure");
     item.className = "compose__preview";
 
     const img = document.createElement("img");
-    img.src = URL.createObjectURL(file);
-    img.alt = file.name;
+    img.src = URL.createObjectURL(attachment.file);
+    img.alt = attachment.file.name;
     img.addEventListener("load", () => URL.revokeObjectURL(img.src));
 
     const remove = document.createElement("button");
@@ -84,7 +84,19 @@ const renderPreviews = (): void => {
       renderPreviews();
     });
 
-    item.append(img, remove);
+    // The memo app renders this as the img alt, so it is required per image.
+    const alt = document.createElement("input");
+    alt.type = "text";
+    alt.className = "compose__input compose__preview-alt";
+    alt.placeholder = "Alt text";
+    alt.required = true;
+    alt.value = attachment.alt;
+    alt.setAttribute("aria-label", `Alt text for image ${index + 1}`);
+    alt.addEventListener("input", () => {
+      attachment.alt = alt.value;
+    });
+
+    item.append(img, remove, alt);
     previews.append(item);
   });
 };
@@ -96,7 +108,7 @@ const addImages = (files: Iterable<File>): void => {
       showMessage(`Up to ${MAX_IMAGES} images per memo`, true);
       break;
     }
-    attachedImages.push(file);
+    attachedImages.push({ file, alt: "" });
   }
   renderPreviews();
 };
@@ -247,7 +259,10 @@ form.addEventListener("submit", async (event) => {
     if (replyTarget) formData.set(replyTarget.type, replyTarget.memo.id);
     if (isDraftInput.checked) formData.set("isDraft", "true");
     if (hideLinkCardInput.checked) formData.set("hideLinkCard", "true");
-    for (const file of attachedImages) formData.append("images", file);
+    for (const { file, alt } of attachedImages) {
+      formData.append("images", file);
+      formData.append("imageAlts", alt.trim());
+    }
 
     const response = await fetch("/api/memos", { method: "POST", body: formData });
     const data = (await response.json()) as { memo?: MemoSummary; error?: string };

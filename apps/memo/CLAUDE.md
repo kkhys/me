@@ -28,7 +28,7 @@ memo-content/                   # Git submodule — all production content/perso
 
 ## Content System
 
-Each memo is a directory in `memo-content/memo/` containing `index.md` and optional images (max 4, JPG/PNG). Schema: `id` (ULID), `createdAt`, `tag?`, `images?`, `comment?` (parent ULID for threaded replies), `isDraft`, `author`, `hideLinkCard`.
+Each memo is a directory in `memo-content/memo/` containing `index.md` and optional images (max 4, JPG/PNG). Schema: `id` (ULID), `createdAt`, `tag?`, `images?` (`{ file, alt }[]` — alt text keyed by file name; the files themselves are discovered from the directory by `utils/image.ts`), `comment?` (parent ULID for threaded replies), `isDraft`, `author`, `hideLinkCard`. Images without an `images[].alt` entry render with a numbered placeholder alt; new memos get their alt from the studio composer.
 
 Personal data (user profiles, OSS project list) lives in `memo-content/data/` to keep it out of the public repo. Avatar/cover images stay in `src/assets`. Site-level personal config (author name, site URL, blog RSS URL) is centralized in `src/config/constants.ts`.
 
@@ -38,7 +38,7 @@ Bot feeds: the memo loader injects entries from external RSS feeds as bot author
 
 ## Search
 
-`astro-pagefind` indexes `dist` after `astro build`. Only the root post of each `/posts/[id]` page is indexed: `ThreadPost` gets `indexable` from that page and marks its `.post-text` with `data-pagefind-body` and the author / date / avatar meta the dialog renders. Comments have their own pages, so they are found there; so do bot entries (`rss-` / `zenn-` / `oss-`), which are therefore indexed alongside memos. `verifyPagefindIndex` (`src/features/search/verify-index.ts`, registered after `pagefind()` in `astro.config.ts`) fails the build when the index is missing or covers a different number of pages than `dist/posts/*.html` — astro-pagefind itself only logs indexing errors. The dev server serves `/pagefind/` from `dist`, so run `pnpm build` once before `pnpm dev` to try search locally. The dialog lives in `src/features/search/`; pure logic sits in `src/features/search/utils/` so it stays unit-testable.
+`astro-pagefind` indexes `dist` after `astro build`. Only the root post of each `/posts/[id]` page is indexed: `ThreadPost` gets `indexable` from that page and marks its `.post-text` with `data-pagefind-body` and the author / date / avatar meta the dialog renders. Comments have their own pages, so they are found there; so do bot entries (`rss-` / `zenn-` / `oss-`), which are therefore indexed alongside memos. `verifyPagefindIndex` (`src/features/search/verify-index.ts`, registered after `pagefind()` in `astro.config.ts`) fails the build when the index is missing or covers a different number of pages than `dist/posts/*.html` — astro-pagefind itself only logs indexing errors. The dev server serves `/pagefind/` from `dist`, so run `pnpm build` once before `pnpm dev` to try search locally. The dialog lives in `src/features/search/` as a thin wrapper over `@kkhys/search` (shell, runner, keyboard handling); only the result-row template and the Pagefind meta keys are app-local.
 
 ## Constraints
 

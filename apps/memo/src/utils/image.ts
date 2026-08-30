@@ -1,5 +1,11 @@
 import type { ImageMetadata } from "astro";
 
+export interface MemoImage {
+  /** File name inside the memo directory, e.g. `01.jpg`; matches `images[].file` in the frontmatter. */
+  file: string;
+  src: ImageMetadata;
+}
+
 const imageModules = import.meta.glob<{ default: ImageMetadata }>(
   "../../memo-content/memo/**/*.{jpg,png}",
   { eager: true },
@@ -16,12 +22,12 @@ const imageMap = new Map<string, ImageMetadata>(
     .filter((entry): entry is readonly [string, ImageMetadata] => entry !== null),
 );
 
-export const getImagesForMemo = (memoId: string) => {
+export const getImagesForMemo = (memoId: string): MemoImage[] => {
   const dirName = memoId.replace(/\/index\.md$/u, "");
   const prefix = `${dirName}/`;
 
   return Array.from(imageMap.entries())
     .filter(([key]) => key.startsWith(prefix))
     .toSorted(([a], [b]) => a.localeCompare(b))
-    .map(([, image]) => image);
+    .map(([key, src]) => ({ file: key.slice(prefix.length), src }));
 };

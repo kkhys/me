@@ -21,13 +21,13 @@ src/
 All API routes are guarded by a Host/Origin check (`request-guard.ts`) against DNS rebinding and cross-origin POSTs; non-localhost requests get 403.
 
 - `GET /api/memos` — all memos, newest first
-- `POST /api/memos` — multipart: `body`, `createdAt?`, `tag?`, `comment?`, `quote?`, `isDraft?`, `hideLinkCard?`, `images` (≤4, JPG/PNG)
+- `POST /api/memos` — multipart: `body`, `createdAt?`, `tag?`, `comment?`, `quote?`, `isDraft?`, `hideLinkCard?`, `images` (≤4, JPG/PNG) with one `imageAlts` entry per image (required, non-empty; written to the memo's `images[].alt` frontmatter)
 - `GET /api/images/:dirName/:file` — serve memo images for the feed
 - `GET /api/status` — uncommitted change count in memo-content
 - `POST /api/sync` — git add/commit/push of memo-content (same message format as memo-content's sync.ts). With JSON body `{"deploy": true}` (the header's Deploy checkbox, off by default) it also triggers `sync-submodule.yml` via `gh workflow run` so the pushed content deploys
 
 ## Constraints
 
-- Writes must follow memo conventions: dir `YYYYMMDD_HHMMSS`, ULID lowercased and derived from `createdAt`, images numbered `01.jpg`…; body ≤500 chars counted like remark-word-limit (rendered text, not raw markdown)
+- Writes must follow memo conventions: dir `YYYYMMDD_HHMMSS`, ULID lowercased and derived from `createdAt`, images numbered `01.jpg`… each described by `images[].alt` in the frontmatter; body ≤500 chars counted like remark-word-limit (rendered text, not raw markdown)
 - `memo-store.ts` stays Bun-free so CI (Node + vitest) can test it; Bun APIs live in `server.ts` only
 - EXIF stripping is handled by memo-content's lefthook pre-commit hook, not here

@@ -15,6 +15,16 @@ const memo = defineCollection({
       .optional(),
     comment: z.ulid().optional(),
     quote: z.ulid().optional(),
+    // Alt text per attached image file (`01.jpg`, ...). Images are discovered
+    // from the directory; this only describes them.
+    images: z
+      .array(
+        z.object({
+          file: z.string().regex(/^\d{2}\.(jpg|png)$/u),
+          alt: z.string(),
+        }),
+      )
+      .optional(),
     isDraft: z.boolean().default(false),
     author: z.string().default("kkhys"),
     hideLinkCard: z.boolean().default(false),
