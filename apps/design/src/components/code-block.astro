@@ -1,0 +1,151 @@
+---
+import { Code } from "astro:components";
+import CheckIcon from "@kkhys/ui/icons/check.svg";
+import CopyIcon from "@kkhys/ui/icons/copy.svg";
+import type { ComponentProps } from "astro/types";
+
+type Lang = ComponentProps<typeof Code>["lang"];
+
+interface Props {
+  code: string;
+  lang?: Lang | undefined;
+  /** File name or context label shown in the header bar. */
+  title?: string | undefined;
+}
+
+const { code, lang = "plaintext", title } = Astro.props;
+---
+
+<figure class="code-block" data-code-block>
+  <div class="code-header">
+    {title !== undefined && <figcaption class="code-title">{title}</figcaption>}
+    <button class="copy-button" type="button" aria-label="コードをコピー" data-copy>
+      <CopyIcon class="icon icon--copy" aria-hidden="true" />
+      <CheckIcon class="icon icon--check" aria-hidden="true" />
+    </button>
+    {/* Announces the result; the button itself only swaps its icon. */}
+    <span class="sr-only" role="status" data-copy-status></span>
+  </div>
+  {/* defaultColor={false} leaves only the per-theme custom properties on each
+      token, so the colors resolve through light-dark() like every other
+      token on the site instead of a media-query override. */}
+  <Code
+    code={code}
+    lang={lang}
+    themes={{ light: "github-light", dark: "poimandres" }}
+    defaultColor={false}
+  />
+</figure>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>("[data-copy]")) {
+    const block = button.closest("[data-code-block]");
+    const code = block?.querySelector("pre")?.textContent ?? "";
+    const status = block?.querySelector("[data-copy-status]");
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(code);
+      } catch {
+        return;
+      }
+      button.dataset["copied"] = "";
+      if (status) status.textContent = "コピーしました";
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        delete button.dataset["copied"];
+        if (status) status.textContent = "";
+      }, 1500);
+    });
+  }
+</script>
+
+<style>
+  /* Column flex so the <pre> fills the box: a horizontal scrollbar then sits
+     on the bottom edge rather than right under the last line. */
+  /* Capped at the prose measure (.lead / .note) so a standalone snippet does
+     not stretch across the whole main column. */
+  .code-block {
+    max-width: 48rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    background: var(--c-codeblock-bg);
+    overflow: hidden;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    min-height: 2rem;
+    padding: var(--space-1) var(--space-2) var(--space-1) var(--space-4);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .code-title {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+  }
+
+  .copy-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-inline-start: auto;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--c-sub);
+    cursor: pointer;
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+
+  .copy-button:hover {
+    color: var(--c-text);
+    background: var(--c-surface);
+  }
+
+  .icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .icon--check,
+  .copy-button[data-copied] .icon--copy {
+    display: none;
+  }
+
+  .copy-button[data-copied] .icon--check {
+    display: block;
+  }
+
+  .code-block :global(pre.astro-code) {
+    flex: 1;
+    margin: 0;
+    padding: var(--space-3) var(--space-4);
+    background: transparent !important;
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+    overflow-x: auto;
+    tab-size: 2;
+  }
+
+  .code-block :global(pre.astro-code),
+  .code-block :global(pre.astro-code span) {
+    color: light-dark(var(--shiki-light), var(--shiki-dark));
+  }
+
+  .code-block :global(pre.astro-code code) {
+    font-size: inherit;
+  }
+</style>

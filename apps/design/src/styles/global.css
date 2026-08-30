@@ -12,19 +12,56 @@
   :root {
     color-scheme: light dark;
   }
+
+  /* Theme toggle: pinning color-scheme flips every light-dark() token. */
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  :root {
+    /* Sidebar + content shell; --content-width stays the demo of the apps'
+       reading column, not the width of this site. */
+    --site-width: 84rem;
+    --sidebar-width: 12rem;
+    --site-padding: var(--space-6);
+
+    --c-code-bg: light-dark(
+      oklch(var(--uchu-gray-3-raw) / 0.25),
+      oklch(var(--uchu-gray-2-raw) / 0.08)
+    );
+    --c-codeblock-bg: light-dark(var(--uchu-gray-1), var(--uchu-yin-9));
+    --c-stage-bg: light-dark(
+      oklch(from var(--uchu-gray-1) l c h / 0.6),
+      oklch(from var(--uchu-yin-9) l c h / 0.6)
+    );
+  }
 }
 
 /* ===== Base Styles ===== */
 
 @layer base {
+  html {
+    font-size: 16px;
+    line-height: var(--lh-sm);
+  }
+
   body {
     margin-inline: auto;
-    padding-inline: 1rem;
-    min-height: 100vh;
-    max-width: var(--content-width);
+    max-width: var(--site-width);
+    min-height: 100dvh;
+    padding-inline: var(--site-padding);
     display: grid;
+    grid-template-columns: [side-start] var(--sidebar-width) [side-end main-start] minmax(
+        0,
+        1fr
+      ) [main-end];
     grid-template-rows: [top] auto [main-start] 1fr [main-end] auto [bottom];
-    grid-template-columns: minmax(0, 1fr);
+    column-gap: var(--space-12);
+    font-size: var(--fs-sm);
   }
 
   a {
@@ -32,89 +69,164 @@
     text-decoration: none;
   }
 
-  a:hover {
-    text-decoration: underline;
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    font-weight: var(--fw-medium);
   }
 
   h1 {
-    margin-block: 0;
-    font-size: var(--fs-xl);
-    font-weight: var(--fw-medium);
-  }
-
-  /* Heading accent bars mirror the prose headings on kkhys.me. */
-  h2,
-  h3 {
-    position: relative;
-    padding-inline-start: var(--space-3);
-    font-weight: var(--fw-medium);
-  }
-
-  h2::before,
-  h3::before {
-    content: "";
-    position: absolute;
-    inset-block: 0;
-    inset-inline-start: 0;
-    border-radius: var(--radius-full);
+    font-size: var(--fs-lg);
+    line-height: var(--lh-xs);
+    letter-spacing: -0.01em;
   }
 
   h2 {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
     margin-block: var(--space-12) var(--space-4);
-    font-size: var(--fs-base);
+    padding-block-end: var(--space-2);
+    border-bottom: 1px solid var(--c-border);
+    font-size: var(--fs-sm);
+    scroll-margin-block-start: var(--space-6);
   }
 
-  h2::before {
-    width: 3px;
-    background: var(--c-text);
+  h2 > small {
+    margin-inline-start: auto;
+    font-size: var(--fs-2xs);
+    font-weight: var(--fw-normal);
+    font-family: var(--font-mono);
+    color: var(--c-sub);
   }
 
   h3 {
     margin-block: var(--space-8) var(--space-3);
-    font-size: var(--fs-sm);
-  }
-
-  h3::before {
-    width: 2px;
-    background: var(--c-sub);
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
   }
 
   p {
-    line-height: var(--lh-base);
+    margin: 0;
+  }
+
+  p + p {
+    margin-block-start: var(--space-3);
   }
 
   code {
     font-family: var(--font-mono);
-    font-size: var(--fs-xs);
+    font-size: 0.92em;
+  }
+
+  p code,
+  li code,
+  dd code,
+  figcaption code {
+    padding: 0.1em 0.35em;
+    border-radius: var(--radius-xs);
+    background: var(--c-code-bg);
+  }
+
+  kbd {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 0.05em 0.4em;
+    border: 1px solid var(--c-border);
+    border-bottom-width: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  /* Page intro: title + one-paragraph lead, sharing the header row with
+     the sidebar's brand on wide screens. */
+  .page-header {
+    padding-block: var(--space-8) var(--space-6);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .page-header h1 {
+    margin-block-end: var(--space-3);
+  }
+
+  .page-header + h2 {
+    margin-block-start: var(--space-8);
   }
 
   .lead {
+    max-width: 48rem;
     color: var(--c-sub);
-    margin-block: var(--space-4) 0;
     line-height: var(--lh-base);
   }
 
-  .lead a {
+  .lead a,
+  .prose a {
     text-decoration: underline;
     text-underline-offset: 4px;
+    text-decoration-color: var(--c-sub);
   }
 
   .note {
-    font-size: var(--fs-xs);
-    color: var(--c-sub);
+    max-width: 48rem;
     margin-block: 0 var(--space-4);
   }
 
-  .snippet {
-    border: 1px solid var(--c-border);
-    border-radius: var(--radius-md);
-    padding: var(--space-4);
-    overflow-x: auto;
+  /* A note that follows content (rather than introducing it) needs the
+     same breathing room above. */
+  :not(h2, h3) + .note {
+    margin-block-start: var(--space-4);
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+    color: var(--c-sub);
+  }
+
+  .prose {
+    max-width: 48rem;
+    line-height: var(--lh-base);
+  }
+
+  /* 使う / 使わない / 配慮 rows above a demo or a table. */
+  .guidance {
+    display: grid;
+    gap: var(--space-1);
+    max-width: 48rem;
+    margin: 0 0 var(--space-4);
     font-size: var(--fs-xs);
     line-height: var(--lh-sm);
   }
 
-  .snippet code {
-    font-size: inherit;
+  .guidance > div {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: var(--space-2);
+  }
+
+  .guidance dt {
+    color: var(--c-sub);
+  }
+
+  .guidance dd {
+    margin: 0;
+  }
+
+  /* Token tables share one row grammar: mono name, then the value / preview
+     columns supplied per page. */
+  .token-name {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--c-text);
+  }
+
+  .token-value {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+    overflow-wrap: anywhere;
+  }
+
+  code.token-name,
+  code.token-value {
+    padding: 0;
+    background: none;
   }
 }

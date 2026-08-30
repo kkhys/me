@@ -1,0 +1,117 @@
+---
+const options = [
+  { value: "system", label: "auto" },
+  { value: "light", label: "light" },
+  { value: "dark", label: "dark" },
+];
+---
+
+<div class="theme-toggle" role="radiogroup" aria-label="テーマ" data-theme-toggle>
+  {
+    options.map(({ value, label }) => (
+      <label data-value={value}>
+        <input type="radio" name="theme" value={value} checked={value === "system"} />
+        <span>{label}</span>
+      </label>
+    ))
+  }
+</div>
+
+<script>
+  const KEY = "theme";
+  const root = document.documentElement;
+
+  const read = () => {
+    try {
+      return localStorage.getItem(KEY) ?? "system";
+    } catch {
+      return "system";
+    }
+  };
+
+  const write = (value: string) => {
+    try {
+      if (value === "system") localStorage.removeItem(KEY);
+      else localStorage.setItem(KEY, value);
+    } catch {
+      /* storage unavailable: the choice lasts for this page only */
+    }
+  };
+
+  const apply = (value: string) => {
+    if (value === "light" || value === "dark") root.dataset["theme"] = value;
+    else delete root.dataset["theme"];
+  };
+
+  for (const group of document.querySelectorAll<HTMLElement>("[data-theme-toggle]")) {
+    const current = group.querySelector<HTMLInputElement>(`input[value="${read()}"]`);
+    if (current) current.checked = true;
+    group.addEventListener("change", (event) => {
+      const input = event.target;
+      if (!(input instanceof HTMLInputElement)) return;
+      write(input.value);
+      apply(input.value);
+    });
+  }
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    padding: 2px;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+  }
+
+  label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem var(--space-2);
+    border-radius: calc(var(--radius-sm) - 1px);
+    cursor: pointer;
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+
+  label:hover {
+    color: var(--c-text);
+  }
+
+  /* The segments are 20px tall; extend the hit area to the 24px WCAG 2.5.8
+     minimum without changing the visual. */
+  label::before {
+    content: "";
+    position: absolute;
+    inset: -0.25rem 0;
+  }
+
+  /* The highlight follows :root[data-theme], which theme-init sets before
+     first paint; the radios' checked state is only synced afterwards, so
+     keying the visual on :checked would flash "auto" on every navigation. */
+  :global(:root:not([data-theme])) label[data-value="system"],
+  :global(:root[data-theme="light"]) label[data-value="light"],
+  :global(:root[data-theme="dark"]) label[data-value="dark"] {
+    color: var(--c-text);
+    background: var(--c-surface);
+  }
+
+  label:has(:focus-visible) {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: 1px;
+  }
+
+  /* The radio stays in the tree for keyboard and screen-reader access;
+     the label is the visible control. */
+  input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>

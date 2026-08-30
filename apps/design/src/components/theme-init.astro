@@ -1,0 +1,26 @@
+---
+/* Applies the stored theme before the first paint. Inline (not bundled)
+   so it runs ahead of the stylesheet; every token resolves through
+   light-dark(), so pinning color-scheme on :root is the whole switch.
+   The storage listener keeps the preview iframes in step with the page. */
+---
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement;
+    const apply = () => {
+      let theme = null;
+      try {
+        theme = localStorage.getItem("theme");
+      } catch {
+        /* storage unavailable: follow the system preference */
+      }
+      if (theme === "light" || theme === "dark") root.dataset.theme = theme;
+      else delete root.dataset.theme;
+    };
+    apply();
+    addEventListener("storage", (event) => {
+      if (event.key === null || event.key === "theme") apply();
+    });
+  })();
+</script>

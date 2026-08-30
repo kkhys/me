@@ -1,8 +1,12 @@
 ---
 import "#/styles/global.css";
 import BaseSEO from "@kkhys/seo/base-seo.astro";
+import HeadMeta from "@kkhys/ui/head-meta.astro";
+import SkipLink from "@kkhys/ui/skip-link.astro";
 import SiteFooter from "#/components/site-footer.astro";
-import SiteHeader from "#/components/site-header.astro";
+import SiteSidebar from "#/components/site-sidebar.astro";
+import ThemeInit from "#/components/theme-init.astro";
+import { enhanceProse } from "#/utils/prose";
 
 interface Props {
   title?: string | undefined;
@@ -14,33 +18,43 @@ const DEFAULT_DESCRIPTION = "kkhys.me と周辺サイトを支えるデザイン
 
 const { title, description = DEFAULT_DESCRIPTION } = Astro.props;
 const resolvedTitle = title === undefined ? SITE_NAME : `${title} · ${SITE_NAME}`;
+
+/* Render the page first so BudouX and the section index see the final
+   markup, including the shared components and highlighted snippets. */
+const { html, sections } = enhanceProse(await Astro.slots.render("default"));
 ---
 
 <html lang="ja">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  {/* Declared before any CSS loads so dark-preference users don't get a
-      white canvas flash; pairs with `color-scheme: light dark` in CSS. */}
-  <meta name="color-scheme" content="light dark"/>
+  <HeadMeta icons={false} />
+  <ThemeInit />
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
   <BaseSEO title={resolvedTitle} description={description} />
-  <link rel="sitemap" href="/sitemap-index.xml"/>
 </head>
 <body>
-  <SiteHeader />
-  <main>
-    <slot />
-  </main>
+  <SkipLink label="本文へ移動" />
+  <SiteSidebar sections={sections} />
+  {/* Only the doc pages carry data-pagefind-body, so /preview/* stays out of the index. */}
+  <main id="main" data-pagefind-body set:html={html} />
   <SiteFooter />
 </body>
 </html>
 
 <style>
   main {
-    grid-row: main-start / main-end;
-    padding-block: var(--space-8) var(--space-12);
+    grid-column: main-start / main-end;
+    grid-row: top / main-end;
+    padding-block-end: var(--space-12);
+    container-type: inline-size;
+    container-name: main;
+  }
+
+  @media (width < 64rem) {
+    main {
+      grid-column: 1 / -1;
+      grid-row: main-start / main-end;
+    }
   }
 </style>

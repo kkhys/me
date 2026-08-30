@@ -9,23 +9,30 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
+    grid-column: main-start / main-end;
     grid-row: main-end / bottom;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: var(--space-4);
     border-top: 1px solid var(--c-border);
-    padding-block: var(--space-8);
-    margin-block-start: var(--space-12);
+    padding-block: var(--space-6);
   }
 
   .copyright,
   .repo-link {
-    font-size: var(--fs-xs);
+    margin: 0;
+    font-size: var(--fs-2xs);
     color: var(--c-sub);
   }
 
-  .copyright {
-    margin: 0;
+  .repo-link:hover {
+    color: var(--c-text);
+  }
+
+  @media (width < 64rem) {
+    .site-footer {
+      grid-column: 1 / -1;
+    }
   }
 </style>
