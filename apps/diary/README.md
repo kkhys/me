@@ -34,26 +34,30 @@ git submodule update --init apps/diary/diary-content
 
 Run from this directory, or prefix with `pnpm --filter @kkhys/diary`:
 
-| Command                       | Description                          |
-| ----------------------------- | ------------------------------------ |
-| `pnpm dev`                    | Start development server             |
-| `pnpm build`                  | Production build (static)            |
-| `pnpm preview`                | Preview production build locally     |
-| `pnpm check`                  | Astro check + `tsc --noEmit`         |
-| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with oxlint + oxfmt |
-| `pnpm deploy`                 | Build and deploy to Cloudflare Pages |
+| Command                       | Description                                |
+| ----------------------------- | ------------------------------------------ |
+| `pnpm dev`                    | Start development server                   |
+| `pnpm build`                  | Production build (static)                  |
+| `pnpm preview`                | Preview production build locally           |
+| `pnpm check`                  | Astro check + `tsc --noEmit`               |
+| `pnpm test` / `pnpm coverage` | Run unit tests / with coverage             |
+| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with oxlint + oxfmt       |
+| `pnpm all`                    | build + check + lint:fix + test + coverage |
+| `pnpm deploy`                 | Build and deploy to Cloudflare Pages       |
 
 ## Project Structure
 
 ```
 apps/diary/
 ├── src/
-│   ├── components/   # diary-image.astro (<Picture> + blur-up placeholder)
+│   ├── components/   # diary-image.astro (entry frame around the shared <Picture> in @kkhys/ui/blur-image.astro)
 │   ├── layouts/      # base-layout.astro (HTML shell + SEO/OGP meta)
 │   ├── pages/        # index.astro (the gallery)
-│   └── styles/       # global.css (tokens + base styles)
+│   ├── styles/       # global.css (tokens + base styles)
+│   ├── utils/        # entries.ts (photo paths → dated entries)
+│   └── __tests__/    # Vitest unit tests
 ├── diary-content/    # Photos (Git submodule, private)
-└── public/           # Static assets (robots.txt)
+└── public/           # Static assets (icons, manifest, robots.txt)
 ```
 
 For detailed architecture, see [CLAUDE.md](./CLAUDE.md).

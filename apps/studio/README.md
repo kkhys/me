@@ -10,10 +10,11 @@ the content submodule.
 pnpm dev:studio   # from the repo root; binds to 127.0.0.1:5757
 ```
 
-The UI provides a compose form (body, tag, reply/quote, draft flag,
-images), a searchable feed of existing memos, and a sync button that
-commits and pushes memo-content (optionally triggering the deploy
-workflow).
+The UI provides a compose form (body, created-at datetime, tag,
+reply/quote, draft flag, "No link card" toggle, images with a required
+alt text input per image), a searchable feed of existing memos, and a
+sync button that commits and pushes memo-content (optionally triggering
+the deploy workflow).
 
 Body length is validated like the memo app (rendered text ≤ 500 chars),
 and all API routes are guarded against DNS rebinding / cross-origin

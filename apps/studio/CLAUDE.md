@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Local-only browser app for composing memos into `apps/memo/memo-content`. Never deployed — it runs on the developer's machine (`pnpm dev:studio`, binds to 127.0.0.1:5757) and writes directly to the memo-content submodule.
+Local-only browser app for composing memos into `apps/memo/memo-content`. Never deployed — it runs on the developer's machine (`pnpm dev:studio`, binds to 127.0.0.1:5757; the port follows the `PORT` env var, and the allowed Host list in `server.ts` follows it) and writes directly to the memo-content submodule.
 
 ## Codebase Map
 
@@ -8,6 +8,7 @@ Local-only browser app for composing memos into `apps/memo/memo-content`. Never 
 src/
 ├── server.ts        # Bun.serve: serves the UI (HTML import) + JSON API, git status/sync
 ├── memo-store.ts    # Pure Node module: list/create memos, frontmatter, validation
+├── memo-format.ts   # Shared by memo-store.ts and client.ts: MAX_BODY_LENGTH (500), MAX_IMAGES (4), countMemoChars, toCreatedAt, MemoSummary; fs/DOM-free
 ├── memo-filter.ts   # Pure Node module: free-text feed filtering (AND terms)
 ├── request-guard.ts # Pure Node module: Host/Origin validation for all API routes
 ├── index.html       # Single-page UI (bundled by Bun with client.ts / styles.css)
@@ -28,6 +29,6 @@ All API routes are guarded by a Host/Origin check (`request-guard.ts`) against D
 
 ## Constraints
 
-- Writes must follow memo conventions: dir `YYYYMMDD_HHMMSS`, ULID lowercased and derived from `createdAt`, images numbered `01.jpg`… each described by `images[].alt` in the frontmatter; body ≤500 chars counted like remark-word-limit (rendered text, not raw markdown)
+- Writes must follow memo conventions: dir `YYYYMMDD_HHMMSS`, ULID lowercased and derived from `createdAt`, images numbered `01.jpg`… each described by `images[].alt` in the frontmatter; body ≤500 chars counted like remark-word-limit (rendered text, not raw markdown — `countMemoChars` in `memo-format.ts`, tested in `__tests__/memo-format.test.ts`)
 - `memo-store.ts` stays Bun-free so CI (Node + vitest) can test it; Bun APIs live in `server.ts` only
 - EXIF stripping is handled by memo-content's lefthook pre-commit hook, not here

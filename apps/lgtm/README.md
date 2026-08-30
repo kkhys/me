@@ -2,285 +2,142 @@
 
 <a href="https://lgtm.kkhys.me/01kdg0h1dnmjgpqw8rxwmbakeh"><img src="https://lgtm.kkhys.me/01kdg0h1dnmjgpqw8rxwmbakeh.avif" alt="LGTM!!" width="400" /></a>
 
-A curated collection of LGTM images for GitHub Pull Requests. High-performance image delivery with multiple formats, progressive loading, and infinite scroll pagination.
-
-**Live**: [lgtm.kkhys.me](https://lgtm.kkhys.me)
-
-## Overview
-
-LGTM generates and serves optimized review approval images with dynamic text overlay rendering. Built on Astro with server-side image processing, delivering AVIF/WebP/PNG formats with aggressive caching strategies.
-
-## Browser Extension
-
-**[LGTM Chrome Extension](https://github.com/kkhys/lgtm-chrome-extension)** – One-click LGTM image insertion for GitHub code reviews.
-
-Simply click the extension icon while browsing GitHub, and a random LGTM image is automatically copied to your clipboard as ready-to-paste HTML. The extension activates exclusively on GitHub domains with visual feedback (checkmark badge) and requires minimal permissions for privacy.
-
-**Key Features:**
-
-- One-click operation with GitHub-only activation
-- Random image selection from the full gallery
-- Instant clipboard copy with AVIF format
-- Privacy-focused with minimal required permissions
-- Lightweight design (< 50KB total)
-
-**Get it:** [Chrome Web Store](https://chromewebstore.google.com/detail/lgtm-chrome-extension/pekflahhcpfnbllbphcjnjngkhlabohh) | [GitHub Repository](https://github.com/kkhys/lgtm-chrome-extension)
+Source code for [lgtm.kkhys.me](https://lgtm.kkhys.me) — a curated collection of LGTM images for GitHub Pull Requests, built with Astro. The `@kkhys/lgtm` app of the [kkhys monorepo](../../README.md).
 
 ## Features
 
-- **Dynamic Image Generation** – Server-rendered text overlays using Satori + Sharp
-- **Multi-Format Delivery** – AVIF, WebP, PNG with automatic format negotiation
-- **Progressive Loading** – Low-res WebP placeholder blur with smooth transitions
-- **Infinite Scroll** – Paginated gallery with IntersectionObserver-based loading
-- **Responsive Images** – Multiple size variants (400/1000/1200px) with 2x density support
-- **One-Click Markdown** – Copy-to-clipboard with format selection (AVIF/WebP/PNG)
-- **SEO Optimized** – Complete Open Graph, Twitter Card, JSON-LD, PWA manifest
-- **Edge Cached** – Immutable responses with max-age 1 year
+- "LGTM" text rendered by Satori and composited onto each source image by sharp at build time
+- Still sources ship as AVIF, animated sources as animated WebP — one format per image
+- Three sizes per image (400 / 1000 / 1200px) plus an 800px default endpoint
+- Paginated gallery (20 per page, shuffled at build) with infinite scroll over pre-built pages
+- Blur-up placeholders, one-click "Copy embed code" (HTML `<a><img></a>` snippet)
+- Per-image Open Graph cards, JSON-LD, sitemap, PWA manifest
+- Privacy policy and copyright pages in English and Japanese
+- Light/dark mode via `light-dark()`
+
+## Browser Extension
+
+[LGTM Chrome Extension](https://github.com/kkhys/lgtm-chrome-extension) copies a random image from this gallery to the clipboard while browsing GitHub. Get it from the [Chrome Web Store](https://chromewebstore.google.com/detail/lgtm-chrome-extension/pekflahhcpfnbllbphcjnjngkhlabohh).
 
 ## Tech Stack
 
-**Core**
+- [Astro](https://astro.build/) — Static site generator (Content Collections + pagination)
+- [Satori](https://github.com/vercel/satori) + [sharp](https://sharp.pixelplumbing.com/) — Text overlay rendering and image compositing
+- [React](https://react.dev/) — Server-side only, as Satori's JSX runtime
+- [Vanilla CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) — [kiso.css](https://github.com/build-trust/kiso.css) reset + [uchu.css](https://github.com/kkhys/uchu.css) palette (`@kkhys/styles`)
+- [TypeScript](https://www.typescriptlang.org/) — Strictest mode type safety
+- [Vitest](https://vitest.dev/) — Unit testing
+- [oxlint](https://oxc.rs/docs/guide/usage/linter.html) + [oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) — Linting and formatting
+- [Cloudflare Pages](https://pages.cloudflare.com/) — Hosting and deployment
 
-- Astro 5.16 – Static site generation with Content Collections and pagination
-- TypeScript 5.9 – Strictest compiler mode
-- React 19 – Image generation components (JSX for Satori)
+Dependency versions are pinned in the `catalog:` of [`pnpm-workspace.yaml`](../../pnpm-workspace.yaml); Node.js, pnpm, Bun, and ffmpeg come from the Nix Flake at the repo root.
 
-**Image Processing**
+## Getting Started
 
-- Satori 0.18 – SVG/text rendering with custom fonts (BBHBartle-Regular)
-- Sharp 0.34 – High-performance image manipulation (libvips)
+From the monorepo root:
 
-**Styling**
-
-- kiso.css 1.2 – Minimal CSS framework
-- Custom design system with light/dark mode
-
-**Infrastructure**
-
-- Cloudflare Pages – Static hosting
-- pnpm 10.26 – Workspace monorepo
-- oxlint + oxfmt – Linting + formatting
-
-**Testing**
-
-- Vitest 4.0 – Unit testing framework
-- Coverage: 100% statements, 88% branch, 100% functions
-
-## Architecture
-
-### Image Generation Pipeline
-
-```
-1. Load source image from lgtm-content submodule
-2. Resize to target width (Sharp)
-3. Render "LGTM" text as SVG (Satori, 2x resolution)
-4. Composite text overlay with 85% opacity (blend mode: over)
-5. Convert to AVIF/WebP/PNG
-6. Serve with immutable cache headers
+```bash
+git clone --recurse-submodules https://github.com/kkhys/me.git
+cd me
+direnv allow   # Loads Node.js, pnpm, Bun, ffmpeg via Nix Flake
+pnpm install
+pnpm dev:lgtm  # or: pnpm --filter @kkhys/lgtm dev
 ```
 
-**Implementation**: `src/components/lgtm-image.tsx`
+Open [http://localhost:4321](http://localhost:4321) to view the site.
 
-### URL Structure
+### Content
 
-```
-/                        → Gallery (paginated, 20 images per page)
-/{page}                  → Gallery page N (infinite scroll target)
-/{id}                    → Detail page with format selector
-/{id}.{format}           → 800px image (default endpoint)
-/{id}-{size}.{format}    → Custom size (400|1000|1200)
-/api/og/default.png      → Default Open Graph image
-/api/og/{id}.png         → Per-image Open Graph image
-/api/favicon/*           → Dynamic favicon generation
+Images live in the private `lgtm-content` Git submodule. Without it, set `USE_FIXTURE_DATA=true` to build against the sample entries in `src/__fixtures__/lgtm-sample` (CI does this automatically). A production build needs the submodule:
+
+```bash
+git submodule update --init apps/lgtm/lgtm-content
 ```
 
-### Content Collections
-
-Astro Content Collections with environment-based loader:
-
-```typescript
-// src/content.config.ts
-const lgtmBasePath = GITHUB_ACTIONS ? "./src/__fixtures__/lgtm-sample" : "./lgtm-content/lgtm";
-
-const lgtm = defineCollection({
-  loader: glob({ pattern: "**/index.md", base: lgtmBasePath }),
-  schema: z.object({
-    color: z.enum(["white", "black"]), // Text color
-    image: z.string(), // Source image filename
-    isDraft: z.boolean().default(false), // Publishing control
-  }),
-});
-```
-
-### Private Content Submodule
-
-Images stored in private Git submodule with ULID-based identifiers:
+Each entry is a directory named by a lowercase ULID:
 
 ```
 lgtm-content/lgtm/{ulid}/
-  ├── index.md           # Frontmatter: color, image, isDraft
-  └── {filename}.jpg     # Source image
+  ├── 01.jpg             # Source image (jpg / png / webp / gif / avif; the first media file by name is used)
+  └── description.txt    # One line describing the picture — required, the build fails without it
 ```
 
-### Pagination & Infinite Scroll
+The loader probes each file with sharp: a multi-frame source is served as animated WebP, everything else as AVIF. The description becomes the image alt (`LGTM over <description>`).
 
-- Gallery shows 20 images per page (IMAGES_PER_PAGE constant)
-- Fisher-Yates shuffle on build for randomized display order
-- IntersectionObserver triggers next page load 200px before scroll end
-- Minimum 500ms loading indicator for better UX
-- Non-first pages redirect to home if accessed directly
+Inside `lgtm-content/`, `pnpm lgtm` creates a new ULID directory (drop the image and write `description.txt` by hand), `pnpm strip-exif` scrubs EXIF from all images, and a lefthook pre-commit hook scrubs staged images automatically. `.mov` sources are converted to animated WebP with `pnpm convert-videos` from this directory (Bun + ffmpeg).
 
-## Development
+## Routes
 
-### Prerequisites
-
-- Node.js 24.12 (via Volta)
-- pnpm 10.26
-- Bun (for utility scripts in lgtm-content/)
-
-### Setup
-
-```bash
-# Clone with submodules
-git clone --recursive https://github.com/kkhys/lgtm.git
-
-# Install dependencies
-pnpm install
+```
+/                         → Gallery (paginated)
+/{page}                   → Gallery page N — infinite-scroll fetch target; direct visits redirect to /
+/{id}                     → Detail page with the image and a "Copy embed code" button
+/{id}.{avif|webp}         → 800px image (the embed URL)
+/{id}-{size}.{avif|webp}  → 400 / 1000 / 1200px image
+/privacy, /privacy/ja     → Privacy policy (en / ja)
+/copyright, /copyright/ja → Copyright (en / ja)
+/api/ids.json             → All image IDs with their format
+/api/og/default.png       → Default Open Graph image
+/api/og/{id}.png          → Per-image Open Graph image
+/api/favicon/*            → Favicon generation (dev only; production serves static files from public/)
 ```
 
-### Commands
+The format of an image is fixed by its source: `.avif` for still images, `.webp` for animated ones. There is no format negotiation.
 
-```bash
-pnpm dev          # Start dev server (localhost:4321)
-pnpm build        # Production build to ./dist
-pnpm preview      # Preview production build
-pnpm check        # Type checking (Astro + tsc)
-pnpm lint         # oxlint + oxfmt check
-pnpm lint:fix     # Auto-fix issues
-pnpm test         # Run unit tests (Vitest)
-pnpm coverage     # Test coverage report
-pnpm all          # Full validation (build + check + lint:fix + test + coverage)
-```
+## Scripts
 
-### Utility Scripts
+Run from this directory, or prefix with `pnpm --filter @kkhys/lgtm`:
 
-```bash
-# Generate lowercase ULID for new images
-cd lgtm-content
-pnpm id
+| Command                       | Description                                               |
+| ----------------------------- | --------------------------------------------------------- |
+| `pnpm dev`                    | Start development server                                  |
+| `pnpm build`                  | Production build (static)                                 |
+| `pnpm preview`                | Preview production build locally                          |
+| `pnpm check`                  | Astro check + `tsc --noEmit`                              |
+| `pnpm test` / `pnpm coverage` | Run unit tests / with coverage                            |
+| `pnpm lint` / `pnpm lint:fix` | Check / auto-fix with oxlint + oxfmt                      |
+| `pnpm all`                    | build + check + lint:fix + test + coverage                |
+| `pnpm convert-videos`         | Convert `.mov` sources in `lgtm-content` to animated WebP |
+| `pnpm deploy`                 | Build and deploy to Cloudflare Pages                      |
 
-# Create timestamped memo
-pnpm memo
-
-# Create release tag (date-based versioning)
-pnpm release [--dry-run]
-```
-
-## Performance
-
-### Optimization Strategies
-
-1. **Progressive Enhancement**
-   - 20x13px WebP placeholder with CSS blur filter (36px)
-   - Full image fades in on load (300ms transition)
-   - `loading="eager"` on detail page, lazy on gallery
-
-2. **Format Priorities** (via `<Picture>` component)
-   - AVIF: Best compression (~50% smaller than WebP)
-   - WebP: Broad browser support
-   - PNG: Lossless fallback
-
-3. **Build-Time Processing**
-   - Static generation of all image variants at build time
-   - Pre-rendered text overlays with Satori
-   - HTML/CSS/JS compression via @playform/compress
-
-4. **Runtime Caching**
-   - `Cache-Control: public, max-age=31536000, immutable`
-   - Cloudflare CDN
-
-5. **Infinite Scroll**
-   - Fetch next page in background
-   - Pre-connect and load images on demand
-   - Smooth transition with loading states
-
-## Deployment
-
-### Cloudflare Pages
-
-Deployed locally via wrangler:
-
-```bash
-pnpm deploy   # Build and deploy to Cloudflare Pages
-```
-
-This runs `pnpm build` followed by `wrangler pages deploy dist`. The lgtm-content submodule must be available locally.
-
-### Environment Variables
-
-```bash
-NODE_ENV              # development | production (auto-set)
-GITHUB_ACTIONS        # CI detection (auto-set, switches to fixtures)
-```
-
-### CI/CD
-
-GitHub Actions uses fixture data (`src/__fixtures__/lgtm-sample/`) to avoid private submodule dependency in public CI.
+Releases are tagged for the whole repo with `pnpm release` from the monorepo root.
 
 ## Project Structure
 
 ```
-lgtm/
+apps/lgtm/
 ├── src/
-│   ├── assets/               # Static assets (fonts, images)
-│   ├── components/
-│   │   ├── icon/            # SVG icon components
-│   │   ├── seo/             # SEO meta components
-│   │   ├── lgtm-image.tsx   # Image generation logic
-│   │   └── *.astro          # UI components
-│   ├── config/              # Constants and configuration
-│   ├── layouts/             # Page layouts
-│   ├── pages/
-│   │   ├── [...page].astro  # Paginated gallery
-│   │   ├── [id].astro       # Detail page
-│   │   ├── [id].[format].ts # Default image API
-│   │   ├── [id]-[size].[format].ts # Sized image API
-│   │   └── api/             # OG images and favicons
-│   ├── styles/              # Global CSS
-│   ├── content.config.ts    # Content Collections config
-│   ├── __fixtures__/        # Test fixtures for CI
-│   └── __tests__/           # Unit tests (Vitest)
-│       ├── components/      # Component tests
-│       ├── pages/           # API route tests
-│       └── config/          # Configuration tests
-├── lgtm-content/         # Git submodule (private)
-├── scripts/                 # Build and release scripts
-├── vitest.config.ts         # Vitest configuration
-└── public/                  # Static public assets
+│   ├── assets/           # BBHBartle-Regular.ttf (the overlay font)
+│   ├── components/       # lgtm-image.tsx (Satori + sharp pipeline), seo/ adapters + OG card, legal-layout / legal-page
+│   ├── config/           # constants.ts, content-path.ts (fixture switch)
+│   ├── content/          # privacy/ and copyright/ pages ({en,ja}.md)
+│   ├── layouts/          # layout.astro (HTML shell: head meta, header, footer, Umami)
+│   ├── loaders/          # lgtm-dir-loader.ts (one entry per ULID directory)
+│   ├── pages/            # Gallery, detail, image endpoints, legal pages, api/
+│   ├── styles/           # global.css (@kkhys/styles + app-local tokens)
+│   ├── utils/            # alt, date, embed, shuffle
+│   ├── content.config.ts # lgtm / privacy / copyright collections
+│   ├── __fixtures__/     # Sample entries for CI builds
+│   └── __tests__/        # Vitest unit tests (components, pages, config, loaders, utils)
+├── scripts/              # convert-videos.ts (Bun + ffmpeg)
+├── lgtm-content/         # Images (Git submodule, private)
+└── public/               # Static assets (icons, manifest, robots.txt)
 ```
 
-## Release Management
+Shared packages from the monorepo: `@kkhys/ui` (head meta, header / footer, infinite scroll, icons), `@kkhys/seo`, `@kkhys/og`, `@kkhys/styles`, `@kkhys/analytics`.
 
-Automated versioning with date-based tags:
+For detailed architecture, see [CLAUDE.md](./CLAUDE.md).
+
+## Deployment
+
+Built and deployed locally via wrangler:
 
 ```bash
-pnpm release
-# Creates tag: YYYY.MM.DD[-N]
-# Generates GitHub release with changelog comparison
+pnpm deploy:lgtm   # from the repo root; runs pnpm build then wrangler pages deploy dist --project-name=lgtm
 ```
 
-**Process**:
-
-1. Generate version from current date
-2. Check for existing tags, increment suffix if needed
-3. Create and force-push Git tag
-4. Generate GitHub Release via API
-5. Return to original branch
+The `lgtm-content` submodule must be initialized first. lgtm is not deployed from CI; CI only verifies the build against fixtures.
 
 ## License
 
-MIT © [Keisuke Hayashi](https://github.com/kkhys)
-
----
-
-Built with precision. Served with speed.
+Code is licensed under [MIT](../../LICENSE.md). Image usage terms are on the [copyright page](https://lgtm.kkhys.me/copyright).

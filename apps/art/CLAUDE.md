@@ -22,6 +22,7 @@ src/
   components/pager.astro                # prev / back / next links on detail pages
   content.config.ts                     # `works` / `fashion` collections (file loader over YAML)
   config/content-path.ts                # USE_FIXTURE_DATA switch between art-content and __fixtures__
+  config/site.ts                        # SITE_NAME / SITE_DESCRIPTION (base-layout, site-header, detail page titles)
   utils/caption.ts                      # Caption schema/types, sortByOrder, pairCaptionsWithImages, ContentMismatchError
   utils/works.ts                        # buildWorks: captions + images → ordered works
   utils/fashion.ts                      # buildFashionSeries + flattenFashionSheets
@@ -47,7 +48,7 @@ Consumed as source (no build step).
 - `@kkhys/styles` — uchu.css palette + shared `tokens.css` / `base.css`, imported in `src/styles/global.css`. Tokens resolve to their light values (no dark scheme opt-in).
 - `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard in `base-layout.astro`. The OG image is the page's work (the first work on the index), a variable-height JPEG built by `lib/og-image.ts` and passed via the `imageType`/`imageWidth`/`imageHeight` props; `twitter:card` switches to "summary" when no work exists.
 - `@kkhys/analytics` — the Umami tracker in `base-layout.astro` (production only).
-- `@kkhys/ui` — `blurLoadHandlers` (inline load/error reveal) and `BlurLoadNoscript`.
+- `@kkhys/ui` — `BlurImage` in `gallery-thumb` / `work-figure` / `fashion-figure` (the `<Picture>`, blurred 20px placeholder, `transitionName`, and `framed` frame live in `packages/ui/src/blur-image.astro`; `blurLoadHandlers` is applied inside it, art does not import it directly), plus `BlurLoadNoscript` and `HeadMeta` in `base-layout.astro`.
 - `@kkhys/og` — favicon routes (`src/pages/api/favicon/[file].ts`, bound to the pink→red→indigo gradient). Static icons in `public/` are generated from those routes.
 
 ## Key Design Decisions

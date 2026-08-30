@@ -7,8 +7,13 @@ by every app.
 - `tokens.css` — shared semantic tokens: `--c-*` colors (via `light-dark()`),
   `--fs-*` / `--fw-*` / `--lh-*` / `--radius-*` / `--space-*` scales,
   `--font-mono`, `--shadow-sm`, `--content-width`, focus-ring tokens.
-- `base.css` — shared base rules built on the tokens (focus ring, html
-  defaults, scrollbars, `::selection`, `.budoux` / `.palt`).
+- `base.css` — shared base rules built on the tokens: `* { border-color }`,
+  the `:focus-visible` ring, html defaults, page scrollbars, heading
+  `palt` + `text-wrap: balance`, `.budoux` / `.palt`, `.sr-only`,
+  `.scroller-thin` (3px thumb for inner scrollers; never on `:root`),
+  `::selection`, and a `prefers-reduced-motion` block that collapses
+  transitions and smooth scrolling (animations are left alone on
+  purpose).
 - `components.css` — shared component classes (`.btn` and its
   `--outline` / `--ghost` / `--size-*` modifiers), used by me / studio /
   design.
@@ -17,7 +22,7 @@ by every app.
 
 Apps import css files into their cascade layers
 (`@import "@kkhys/styles/tokens.css" layer(tokens);` etc.). Each app declares
-its own `color-scheme` (diary pins light) and may override any token in its
+its own `color-scheme` (diary and art pin light) and may override any token in its
 local tokens layer; app-specific tokens (me's prose/code colors, trends'
 `--c-star`) stay app-local.
 

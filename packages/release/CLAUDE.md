@@ -7,9 +7,12 @@
 
 - Versions are `YYYY.MM.DD`, suffixed `-2`, `-3`, … for same-day
   re-releases (`version.ts`, anchored matching — tested).
-- `release()` fetches origin tags first, refuses to tag a stale or
-  diverged main (`pull --ff-only`), force-pushes the tag, and creates a
-  GitHub Release; any failure sets a non-zero exit code.
+- `release({ repoName, repoOwner?, dryRun? })` (`src/index.ts`) targets
+  `repoOwner/repoName` on GitHub (`repoOwner` defaults to `kkhys`;
+  `scripts/release.ts` passes `repoName: "me"`). It fetches origin tags
+  first, refuses to tag a stale or diverged main (`pull --ff-only`),
+  force-pushes the tag, and creates a GitHub Release; any failure sets a
+  non-zero exit code.
 - `dryRun: true` (CLI: `--dry-run`) previews without git/API mutations
   and needs no `GITHUB_ACCESS_TOKEN`.
 

@@ -34,4 +34,9 @@ export const sites = [
     href: me.lgtm,
     description: "GitHubのPRレビューで使うLGTM画像",
   },
+  {
+    label: "Design",
+    href: me.design,
+    description: "各サイトを支えるデザイントークンと共有コンポーネントのドキュメント",
+  },
 ] as const satisfies SatelliteSite[];

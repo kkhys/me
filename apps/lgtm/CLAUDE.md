@@ -8,16 +8,26 @@ LGTM image generator (lgtm.kkhys.me), the `@kkhys/lgtm` app of the kkhys monorep
 src/
   components/lgtm-image.tsx       # Core image pipeline (Satori + Sharp). Exports formatForEntry + LgtmImage
   content.config.ts               # Collections: lgtm, privacy, copyright. lgtm schema = { image, animated, description }
+  content/{privacy,copyright}/    # Legal pages as markdown, {en,ja}.md each (title, description, lang, lastUpdated)
   loaders/lgtm-dir-loader.ts      # Custom loader: one entry per ULID dir, image = first media file + description.txt. Probes animation via sharp
-  config/constants.ts             # TITLE, TWITTER_ACCOUNT_NAME, IMAGES_PER_PAGE
-  layouts/layout.astro            # Base layout (Header, Main, Footer)
+  config/constants.ts             # TITLE, TWITTER_ACCOUNT_NAME, IMAGES_PER_PAGE, SITE_URL (canonical origin for embed snippets)
+  config/content-path.ts          # resolveLgtmBasePath: lgtm-content vs __fixtures__ (USE_FIXTURE_DATA)
+  layouts/layout.astro            # Base layout (HeadMeta, Umami, SkipLink, SiteHeader, main, SiteFooter)
   assets/BBHBartle-Regular.ttf    # Font for the LGTM text overlay
   components/seo/                 # SEO adapters + OG card (see Shared Packages)
+  components/legal-layout.astro   # en/ja toggle + prose styles for the legal pages
+  components/legal-page.astro     # Renders a privacy/copyright entry with SEO, hreflang alternates, last-updated
+  utils/alt.ts                    # lgtmAlt: "LGTM over <description>"
+  utils/date.ts                   # formatDate (UTC getters; legal-page lastUpdated)
+  utils/embed.ts                  # buildEmbedCode: the <a><img></a> snippet the copy buttons put on the clipboard
+  utils/shuffle.ts                # Fisher-Yates for the gallery order
   pages/
-    [...page].astro               # Gallery with pagination + infinite scroll
-    [id].astro                    # Detail page with format selector
+    [...page].astro               # Gallery with pagination + infinite scroll; copy button per item
+    [id].astro                    # Detail page: the entry's image + "Copy embed code" button (format is fixed per entry, no selector)
     [id].[format].ts              # Image API (800px default)
     [id]-[size].[format].ts       # Sized image API (400/1000/1200px)
+    privacy/[...lang].astro       # /privacy (en) and /privacy/ja
+    copyright/[...lang].astro     # /copyright (en) and /copyright/ja
     api/ids.json.ts               # JSON listing of all image IDs
     api/og/                       # OG images: default.png (shared handler) + [id].png (per-image, app-local)
     api/favicon/                  # Dev-only favicon endpoints (omitted from prod builds)
@@ -33,9 +43,9 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 
 - `@kkhys/styles` — uchu.css palette + shared `tokens.css` / `base.css`, imported in `src/styles/global.css`. Dark mode via `light-dark()`. Only lgtm-specific tokens (`--c-bg-gray`, `--c-text-emphasis`) stay app-local.
 - `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard primitives, wrapped by thin adapters in `src/components/seo/`; `JsonLd` comes from `@kkhys/seo/json-ld.astro`.
-- `@kkhys/ui` — `HeadMeta` (charset / viewport / color-scheme / favicon set / sitemap), `SiteHeader` / `SiteFooter`, `InfiniteScroll` + `PaginatedGuard` for the gallery pages, `BlurLoadNoscript`, and the Lucide icons under `@kkhys/ui/icons/*.svg`.
+- `@kkhys/ui` — in `layouts/layout.astro`: `HeadMeta` (charset / viewport / color-scheme / favicon set / sitemap), `SkipLink`, `SiteHeader` / `SiteFooter`, `BlurLoadNoscript`. In `pages/[...page].astro`: `InfiniteScroll` (which brings its own spinner) + `PaginatedGuard`, and `blurLoadHandlers` from `@kkhys/ui/blur-load` on the gallery images (the detail page inlines its own `onload`). Icons (`arrow-left`, `check`, `copy`) come from `@kkhys/ui/icons/*.svg`.
 - `@kkhys/og` — favicon routes (`src/pages/api/favicon/[file].ts`, bound to the green gradient) + OG route handlers. The default OG card (`opengraph-image.tsx`) and the per-id OG (`pages/api/og/[id].png.ts`) stay app-local (bespoke layouts).
-- `@kkhys/ui` — shared Astro components; lgtm uses `spinner.astro` in the gallery's infinite scroll.
+- `@kkhys/analytics` — the Umami tracker in `layouts/layout.astro`.
 
 ## Key Design Decisions
 
@@ -61,6 +71,6 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 - `lgtm-content/` is a private Git submodule — initialize it before local builds or deploy
 - `BBHBartle-Regular.ttf` must exist in `src/assets/`
 - ULIDs must be lowercase
-- A new entry needs both the media file and `description.txt` — the dev server logs the missing file and keeps the previous entries, the build stops
+- A new entry needs both the media file and `description.txt` — the dev server logs the missing file and keeps the previous entries, the build stops. `description.txt` has been required since ff4f61721, but the content repo's `scripts/create-lgtm.ts` (`pnpm lgtm` in `lgtm-content/`) still only creates the ULID directory — write the file by hand for every new entry
 - Non-first gallery pages (`/2`, `/3`, …) redirect to `/` when accessed directly — they exist only for the infinite-scroll fetch
 - Favicon endpoints (`api/favicon/*`) are dev-only (their `getStaticPaths` emits no paths in prod builds); production serves favicons as static assets
