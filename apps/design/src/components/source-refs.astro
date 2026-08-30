@@ -1,0 +1,42 @@
+---
+import { sourceUrl } from "#/data/conventions";
+import { splitSourceRefs } from "#/utils/source-refs";
+
+/* Prose that mentions `path:line` references; each reference becomes a link
+   to that line on GitHub, the rest is rendered as-is. */
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+{
+  splitSourceRefs(text).map((part) =>
+    part.kind === "ref" ? (
+      <a class="source-ref" href={sourceUrl(part.path, part.line)}>
+        {part.path}
+        <span class="line">:{part.line}</span>
+      </a>
+    ) : (
+      part.text
+    ),
+  )
+}
+
+<style>
+  .source-ref {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    overflow-wrap: anywhere;
+  }
+
+  .source-ref:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .line {
+    opacity: 0.6;
+  }
+</style>

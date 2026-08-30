@@ -1,0 +1,543 @@
+---
+import tokensCss from "@kkhys/styles/tokens.css?raw";
+import uchuCss from "@kkhys/styles/uchu.css?raw";
+import RuleList from "#/components/rule-list.astro";
+import SourceRefs from "#/components/source-refs.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { A11Y_GROUPS, CHECKLIST, CONTRAST_PAIRS, GAPS } from "#/data/accessibility";
+import { sourceUrl } from "#/data/conventions";
+import {
+  composite,
+  type ContrastGrade,
+  type ContrastUse,
+  contrastRatio,
+  gradeContrast,
+  oklchToRgb,
+  resolveColor,
+  type Scheme,
+  toColorVars,
+} from "#/utils/color";
+import { parseCustomProperties } from "#/utils/tokens";
+
+/* The same stylesheets the Colors page parses; the ratios are computed
+   from them at build time, so the table cannot drift from tokens.css. */
+const vars = toColorVars([...parseCustomProperties(uchuCss), ...parseCustomProperties(tokensCss)]);
+
+const SCHEMES: Scheme[] = ["light", "dark"];
+
+interface Reading {
+  ratio: number;
+  grade: ContrastGrade;
+}
+
+/* Translucent tokens are composited the way the page paints them: a
+   background token over --c-bg first, then the foreground over that. */
+const read = (fg: string, bg: string, use: ContrastUse, scheme: Scheme): Reading => {
+  const fgColor = resolveColor(`var(${fg})`, vars, scheme);
+  const bgColor = resolveColor(`var(${bg})`, vars, scheme);
+  const pageColor = resolveColor("var(--c-bg)", vars, scheme);
+  if (!fgColor || !bgColor || !pageColor) {
+    throw new Error(`Cannot resolve ${fg} on ${bg} (${scheme})`);
+  }
+  const canvas = composite(oklchToRgb(bgColor), bgColor.alpha, oklchToRgb(pageColor));
+  const ratio = contrastRatio(composite(oklchToRgb(fgColor), fgColor.alpha, canvas), canvas);
+  return { ratio, grade: gradeContrast(ratio, use) };
+};
+
+const rows = CONTRAST_PAIRS.map((pair) => ({
+  pair,
+  light: read(pair.fg, pair.bg, pair.use, "light"),
+  dark: read(pair.fg, pair.bg, pair.use, "dark"),
+}));
+
+const textRows = rows.filter(({ pair }) => pair.use === "text");
+const uiRows = rows.filter(({ pair }) => pair.use !== "text");
+
+const GRADE_LABEL: Record<ContrastGrade, string> = {
+  AAA: "AAA",
+  AA: "AA",
+  "AA-large": "AA 大きな文字のみ",
+  fail: "不足",
+  exempt: "対象外",
+};
+
+const format = (ratio: number) => `${ratio.toFixed(2)}:1`;
+
+const SEVERITY_LABEL = { high: "高", medium: "中", low: "低" } as const;
+
+const totalRules = A11Y_GROUPS.reduce((sum, group) => sum + group.items.length, 0);
+---
+
+<BaseLayout
+  title="Accessibility"
+  description="共有トークンと各サイトの実装をアクセシビリティの観点で読み直したもの。コントラスト比はビルド時に算出"
+>
+  <header class="page-header">
+    <h1>Accessibility</h1>
+    <p class="lead">
+      物差しは WCAG 2.2 の AA。共有パッケージ(<code>@kkhys/styles</code> / <code>@kkhys/ui</code> /
+      <code>@kkhys/search</code>)が保証する範囲と、各サイトが自分で守る範囲を分けて書く。
+      コントラスト比は <code>tokens.css</code> と <code>uchu.css</code> からビルド時に計算していて、
+      規約の根拠は Conventions と同じく <code>path:line</code> で示す。適合を宣言するものではなく、
+      現状の記録と、直すべき点の一覧。
+    </p>
+  </header>
+
+  <h2 id="contrast">Contrast <small>{rows.length} pairs</small></h2>
+  <p class="note">
+    各トークンを OKLCH から sRGB に変換し、透過色は背景に合成してから WCAG 2.x の比を出す。
+    文字は 4.5:1 で AA、7:1 で AAA、3:1 は 18pt 相当以上の大きな文字だけ。フォーカスリングや
+    ボタンの輪郭のような非テキストは 3:1。情報を持たない装飾は比だけ記録して「対象外」にする。
+    左のサンプルは実トークンを <code>color-scheme</code> を固定して描いたもの。
+  </p>
+
+  <h3>文字</h3>
+  <div class="table-scroll">
+    <table class="contrast">
+      <caption class="sr-only">文字色と背景色のコントラスト比(ライト / ダーク)</caption>
+      <thead>
+        <tr>
+          <th scope="col">サンプル</th>
+          <th scope="col">前景 / 背景</th>
+          <th scope="col">用途</th>
+          <th scope="col">ライト</th>
+          <th scope="col">ダーク</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          textRows.map(({ pair: { fg, bg, label }, light, dark }) => (
+            <tr>
+              <td>
+                <span class="samples">
+                  {SCHEMES.map((scheme) => (
+                    <span
+                      class="sample"
+                      style={`color-scheme: ${scheme}; color: var(${fg}); background: var(${bg})`}
+                      aria-hidden="true"
+                    >
+                      Aa あ
+                    </span>
+                  ))}
+                </span>
+              </td>
+              <th scope="row">
+                <span class="tokens">
+                  <code class="token-name">{fg}</code>
+                  <code class="token-value">on {bg}</code>
+                </span>
+              </th>
+              <td class="label">{label}</td>
+              <td class:list={["reading", `reading--${light.grade}`]}>
+                <span class="ratio">{format(light.ratio)}</span>
+                <span class="grade">{GRADE_LABEL[light.grade]}</span>
+              </td>
+              <td class:list={["reading", `reading--${dark.grade}`]}>
+                <span class="ratio">{format(dark.ratio)}</span>
+                <span class="grade">{GRADE_LABEL[dark.grade]}</span>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <h3>非テキスト</h3>
+  <div class="table-scroll">
+    <table class="contrast">
+      <caption class="sr-only">UI 部品と背景色のコントラスト比(ライト / ダーク)</caption>
+      <thead>
+        <tr>
+          <th scope="col">サンプル</th>
+          <th scope="col">前景 / 背景</th>
+          <th scope="col">用途</th>
+          <th scope="col">ライト</th>
+          <th scope="col">ダーク</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          uiRows.map(({ pair: { fg, bg, label }, light, dark }) => (
+            <tr>
+              <td>
+                <span class="samples">
+                  {SCHEMES.map((scheme) => (
+                    <span
+                      class="sample sample--ui"
+                      style={`color-scheme: ${scheme}; background: var(${bg})`}
+                      aria-hidden="true"
+                    >
+                      <span class="sample-ui" style={`background: var(${fg})`} />
+                    </span>
+                  ))}
+                </span>
+              </td>
+              <th scope="row">
+                <span class="tokens">
+                  <code class="token-name">{fg}</code>
+                  <code class="token-value">on {bg}</code>
+                </span>
+              </th>
+              <td class="label">{label}</td>
+              <td class:list={["reading", `reading--${light.grade}`]}>
+                <span class="ratio">{format(light.ratio)}</span>
+                <span class="grade">{GRADE_LABEL[light.grade]}</span>
+              </td>
+              <td class:list={["reading", `reading--${dark.grade}`]}>
+                <span class="ratio">{format(dark.ratio)}</span>
+                <span class="grade">{GRADE_LABEL[dark.grade]}</span>
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <p class="note">
+    境界線・サーフェス・スクロールバーは意図して淡く、区切りは余白と並びでも読めるようにしてある(Principles
+    の「髪の毛ラインで区切る」)。1.4.11 が 3:1 を求めるのは部品の識別に要る境界と状態表示だけなので、
+    これらは装飾として「対象外」にしている。スクロールバーは <code>scrollbar-color</code> で色を指定して
+    いるぶん厳密には操作部品だが、つまみの位置と長さで足りると判断した。フォーカスリングはそうではないので、
+    <code>--ring</code> は 70% 透過の <code>--c-ring</code> で 3:1 を超える値に決めてある。ダークの選択色も
+    yellow-9 の 45% 透過で本文が AA を保つ。アプリ固有の色(me の alert、trends の star)はこの表に含まれない。
+  </p>
+
+  <h2 id="focus">Focus <small>{A11Y_GROUPS[0]?.items.length} rules</small></h2>
+  <p class="note">
+    キーボードフォーカスは共有 <code>base.css</code> の <code>:focus-visible</code> で全サイト同じリングになる。
+    ポインタのクリックでは出ない。実物は <a href="/components#focus-ring">Components の Focus ring</a>。
+    ネイティブの dialog / popover を使っているので、フォーカスの移動と復帰はブラウザが行い、
+    自前で管理するのは検索ダイアログの入力欄への移動だけ。
+  </p>
+  <RuleList items={A11Y_GROUPS[0]?.items ?? []} />
+
+  <h2 id="motion">Motion</h2>
+  <div class="prose">
+    <p>
+      動きは <code>transition</code> に限り、<code>@keyframes</code> はスピナーの回転とスクロール駆動の端フェードだけ。
+      <code>prefers-reduced-motion: reduce</code> では共有 base.css が全 transition を 0.01ms に潰し、
+      smooth scroll を止める(<SourceRefs text="packages/styles/base.css:112" />)。<code>animation-duration</code>
+      は触らない。唯一の時間ベースでないアニメーションが端フェードのマスクで、これは利用者のスクロールに従うだけだから。
+    </p>
+    <p>
+      装飾的な動きは局所で opt-in する。art のページ間 view transition は
+      <code>prefers-reduced-motion: no-preference</code> の中でだけ宣言され(<SourceRefs text="apps/art/src/layouts/base-layout.astro:30" />)、
+      me の 404 の WebGL 演出は <code>matchMedia</code> で同じ設定を読む(<SourceRefs text="apps/me/src/features/pages/components/not-found-art.astro:191" />)。
+      popover と dialog の開閉は 0.2s の移動 4〜8px。自動再生や点滅、視差はどのサイトにもない。
+    </p>
+  </div>
+
+  <h2 id="text">Text</h2>
+  <div class="prose">
+    <p>
+      文字サイズは全て rem で、<code>html</code> の 16px を基準にする。<code>viewport</code> に
+      <code>maximum-scale</code> や <code>user-scalable=no</code> は置かず(<SourceRefs text="packages/ui/src/head-meta.astro:19" />)、
+      ブラウザのズームと文字サイズ設定がそのまま効く。本文は <code>--fs-sm</code>(14px)、注釈は
+      <code>--fs-xs</code>(12px)で、最小の <code>--fs-2xs</code> は 10.4px。読み物の行送りは
+      <code>--lh-base</code> 1.75、prose 本文は 2 で、WCAG 1.4.12 の 1.5 倍を上回る。
+    </p>
+    <p>
+      日本語の折り返しは BudouX が <code>&lt;wbr&gt;</code> を入れ、CSS は <code>word-break: keep-all</code> と
+      <code>overflow-wrap: anywhere</code> の 2 行だけ(<SourceRefs text="packages/styles/base.css:57" />)。
+      狭い幅でも文節の途中で切れず、長い URL は溢れない。見出しは <code>text-wrap: balance</code>。
+      Web フォントは読まないので、OS の文字設定(太さ・字形)がそのまま反映される。
+    </p>
+  </div>
+
+  {
+    A11Y_GROUPS.slice(1).map((group) => (
+      <>
+        <h2 id={group.id}>
+          {group.title} <small>{group.items.length} rules</small>
+        </h2>
+        <RuleList items={group.items} />
+      </>
+    ))
+  }
+
+  <h2 id="color">Color & theme</h2>
+  <div class="prose">
+    <p>
+      色は <code>light-dark()</code> を持つセマンティックトークンだけを使い、テーマは <code>color-scheme</code>
+      で切り替わる。<code>&lt;meta name="color-scheme"&gt;</code> をスタイルシートより先に置くので、
+      ダーク設定の環境で白い画面が一瞬出ない。フォーカスリングを <code>box-shadow</code> ではなく
+      <code>outline</code> で描いているのは、Windows の Forced Colors モードで box-shadow が消えるから
+      (<SourceRefs text="packages/styles/tokens.css:65" />)。kiso.css も <code>mark</code> をシステムカラーに寄せる。
+    </p>
+    <p>
+      色だけで情報を伝えている箇所はない。trends の「既出」は文字で示し、星は sr-only の「興味マッチ度 n」が読まれる。
+      me の下書きマークも sr-only の「下書き」を持つ。リンクは prose では下線と色の両方、chrome では位置と文言で分かる。
+      <code>prefers-contrast</code> への対応はない。上の表の文字とフォーカスリングは、両テーマとも AA 以上。
+    </p>
+  </div>
+
+  <h2 id="gaps">Known gaps <small>{GAPS.length} items</small></h2>
+  <p class="note">
+    重い順。それぞれ WCAG 2.2 の達成基準を添えた。コードで閉じられるものは閉じてあり、残りはコンテンツか
+    仕様の判断が要るもの。共有トークンを変えるときは VRT の更新まで含めて 1 つの PR にする。
+  </p>
+  <ol class="gaps">
+    {
+      GAPS.map(({ issue, impact, fix, sc, severity, evidence }) => (
+        <li class="gap">
+          <div class="gap-head">
+            <span class:list={["severity", `severity--${severity}`]}>{SEVERITY_LABEL[severity]}</span>
+            <strong class="gap-issue">{issue}</strong>
+            <span class="gap-sc">{sc}</span>
+          </div>
+          <p class="gap-impact">{impact}</p>
+          <p class="gap-fix">対処: {fix}</p>
+          <ul class="evidence">
+            {evidence.map(({ path, line }) => (
+              <li>
+                <a href={sourceUrl(path, line)}>
+                  {path}
+                  <span class="line">:{line}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ol>
+
+  <h2 id="checklist">Checklist <small>{CHECKLIST.length} items</small></h2>
+  <p class="note">画面を 1 つ足すときに通す項目。上の各節の要約なので、迷ったら該当する節へ戻る。</p>
+  <ol class="checklist">
+    {CHECKLIST.map((item) => <li>{item}</li>)}
+  </ol>
+
+  <p class="note total">
+    規約 {totalRules} 項目、課題 {GAPS.length} 件。根拠のリンクは GitHub の main ブランチを指す。
+  </p>
+</BaseLayout>
+
+<style>
+  .table-scroll {
+    overflow-x: auto;
+    margin-block-end: var(--space-4);
+  }
+
+  .contrast {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+  }
+
+  .contrast th,
+  .contrast td {
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--c-border);
+    text-align: start;
+    vertical-align: middle;
+  }
+
+  .contrast thead th {
+    font-weight: var(--fw-normal);
+    color: var(--c-sub);
+    white-space: nowrap;
+  }
+
+  .contrast th:first-child,
+  .contrast td:first-child {
+    padding-inline-start: 0;
+  }
+
+  /* Cells stay table-cells; the flex / grid boxes live on inner spans so
+     the columns keep lining up with the header. */
+  .samples {
+    display: inline-flex;
+    white-space: nowrap;
+  }
+
+  /* The sample paints the real tokens with color-scheme pinned per cell,
+     like the Colors page swatches. */
+  .sample {
+    display: inline-grid;
+    place-items: center;
+    width: 3rem;
+    height: 2rem;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    box-shadow: inset 0 0 0 1px oklch(50% 0 0 / 0.25);
+  }
+
+  .sample:first-child {
+    border-start-start-radius: var(--radius-sm);
+    border-end-start-radius: var(--radius-sm);
+  }
+
+  .sample:last-child {
+    border-start-end-radius: var(--radius-sm);
+    border-end-end-radius: var(--radius-sm);
+  }
+
+  .sample-ui {
+    display: block;
+    width: 1.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
+  }
+
+  .contrast tbody th {
+    font-weight: var(--fw-normal);
+  }
+
+  .tokens {
+    display: grid;
+    gap: 0.125rem;
+  }
+
+  .label {
+    color: var(--c-sub);
+  }
+
+  .reading {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ratio {
+    display: block;
+    font-family: var(--font-mono);
+  }
+
+  .grade {
+    display: block;
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+  }
+
+  /* The grade is always written out; color only underlines it. */
+  .reading--fail .grade {
+    color: var(--c-danger);
+  }
+
+  .reading--AA-large .grade {
+    color: var(--c-text);
+  }
+
+  .reading--exempt .ratio {
+    color: var(--c-sub);
+  }
+
+  .gaps,
+  .checklist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gaps {
+    display: grid;
+    gap: var(--space-6);
+    counter-reset: gap;
+  }
+
+  .gap {
+    display: grid;
+    gap: var(--space-2);
+    max-width: 48rem;
+    padding-block-start: var(--space-3);
+    border-top: 1px solid var(--c-border);
+  }
+
+  .gap-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-3);
+  }
+
+  .severity {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    padding: 0.1em 0.45em;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-xs);
+    color: var(--c-sub);
+  }
+
+  .severity--high {
+    border-color: var(--c-danger);
+    color: var(--c-danger);
+  }
+
+  .severity--medium {
+    color: var(--c-text);
+  }
+
+  .gap-issue {
+    font-weight: var(--fw-medium);
+  }
+
+  .gap-sc {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+  }
+
+  .gap-impact,
+  .gap-fix {
+    margin: 0;
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+  }
+
+  .gap-impact {
+    color: var(--c-sub);
+  }
+
+  .evidence {
+    display: grid;
+    gap: 0.125rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+  }
+
+  .evidence a {
+    overflow-wrap: anywhere;
+  }
+
+  .evidence a:hover {
+    color: var(--c-text);
+  }
+
+  .line {
+    opacity: 0.6;
+  }
+
+  .checklist {
+    display: grid;
+    gap: var(--space-2);
+    max-width: 48rem;
+    counter-reset: check;
+  }
+
+  .checklist li {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: var(--space-2);
+    line-height: var(--lh-sm);
+  }
+
+  .checklist li::before {
+    counter-increment: check;
+    content: counter(check, decimal-leading-zero);
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+    padding-block-start: 0.2em;
+  }
+
+  .total {
+    margin-block-start: var(--space-12);
+  }
+</style>

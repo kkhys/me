@@ -1,0 +1,39 @@
+---
+import RuleList from "#/components/rule-list.astro";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { CONVENTION_GROUPS } from "#/data/conventions";
+
+const total = CONVENTION_GROUPS.reduce((sum, group) => sum + group.items.length, 0);
+---
+
+<BaseLayout title="Conventions" description="me monorepo の各サイトが暗黙に共有している UI/UX の規約">
+  <header class="page-header">
+    <h1>Conventions</h1>
+    <p class="lead">
+      トークンや共有コンポーネントとして切り出されてはいないが、各サイトの CSS
+      に繰り返し現れている決まりごと。実装から逆算して言語化したもので、
+      各項目は 2 つ以上のアプリ(または共有パッケージ)に根拠がある。
+      新しい画面を作るときはここに合わせ、合わせない場合はこのページを更新する。
+      アクセシビリティに関わる規約は <a href="/accessibility">Accessibility</a> にまとめてある。
+    </p>
+  </header>
+
+  {
+    CONVENTION_GROUPS.map((group) => (
+      <>
+        <h2 id={group.id}>
+          {group.title} <small>{group.items.length} rules</small>
+        </h2>
+        <RuleList items={group.items} />
+      </>
+    ))
+  }
+
+  <p class="note total">全 {total} 項目。根拠のリンクは GitHub の main ブランチを指す。</p>
+</BaseLayout>
+
+<style>
+  .total {
+    margin-block-start: var(--space-12);
+  }
+</style>

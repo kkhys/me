@@ -1,0 +1,262 @@
+---
+import type { SvgComponent } from "astro/types";
+import CodeBlock from "#/components/code-block.astro";
+import { ICON_NOTES } from "#/data/icons";
+import BaseLayout from "#/layouts/base-layout.astro";
+import { iconImportName, iconNameFromPath, parseSvgAttributes } from "#/utils/icons";
+
+/* The inventory is the icons directory itself: both globs walk
+   packages/ui/src/icons, one for the components and one for the raw
+   markup the spec is read from, so a glyph added there shows up here
+   without a list to maintain. */
+const components = import.meta.glob<SvgComponent>("../../../../packages/ui/src/icons/*.svg", {
+  eager: true,
+  import: "default",
+});
+const sources = import.meta.glob<string>("../../../../packages/ui/src/icons/*.svg", {
+  eager: true,
+  import: "default",
+  query: "?raw",
+});
+
+const byName = new Map(
+  Object.entries(components).map(([path, Icon]) => {
+    const name = iconNameFromPath(path);
+    const source = sources[path] ?? "";
+    return [name, { name, Icon, attrs: parseSvgAttributes(source) }] as const;
+  }),
+);
+
+for (const name of Object.keys(ICON_NOTES)) {
+  if (!byName.has(name)) throw new Error(`data/icons.ts annotates a missing glyph: ${name}`);
+}
+
+/* Annotated glyphs first, in data order; anything not yet annotated
+   follows alphabetically so it still appears. */
+const ordered = [
+  ...Object.keys(ICON_NOTES),
+  ...[...byName.keys()].filter((name) => !(name in ICON_NOTES)).toSorted(),
+];
+const icons = ordered.flatMap((name) => {
+  const icon = byName.get(name);
+  return icon ? [{ ...icon, note: ICON_NOTES[name] }] : [];
+});
+
+const specs = new Set(icons.map(({ attrs }) => JSON.stringify(attrs)));
+const spec = icons[0]?.attrs;
+const uniform = specs.size === 1 && spec !== undefined;
+
+/* The sizes the apps actually render, each with the context that picks it. */
+const SIZES = [
+  { px: 12, context: "本文中の記号", example: "外部リンク、見出しのアンカー、favicon の代替", icon: "move-up-right" },
+  { px: 14, context: "ヘッダー", example: "SiteHeader の戻る", icon: "arrow-left" },
+  { px: 16, context: "ブロックの先頭", example: "Alert、チェックボックス", icon: "info" },
+  { px: 18, context: "ボタン", example: "lgtm のコピー・戻る、memo カード", icon: "copy" },
+];
+
+const snippet = `import SearchIcon from "@kkhys/ui/icons/search.svg";
+
+{/* decorative: the label is the text next to it */}
+<a href="/search">
+  <SearchIcon width={12} height={12} aria-hidden="true" />
+  検索
+</a>
+
+{/* meaningful: the icon is the only content, so the parent names it */}
+<button type="button" aria-label="検索">
+  <SearchIcon width={18} height={18} aria-hidden="true" />
+</button>`;
+
+const addSnippet = `# 1. Lucide から SVG をそのまま置く(24 viewBox、stroke-width 2 のまま)
+packages/ui/src/icons/<name>.svg
+
+# 2. 意味と利用先を書く
+apps/design/src/data/icons.ts`;
+---
+
+<BaseLayout title="Icons" description="共有アイコンの一覧・サイズ・使い方">
+  <header class="page-header">
+    <h1>Icons</h1>
+    <p class="lead">
+      Lucide 由来の線画アイコン。<code>@kkhys/ui/icons/&lt;name&gt;.svg</code> を import すると
+      Astro の SVG コンポーネントになり、<code>width</code> / <code>height</code> / <code>class</code> /
+      <code>aria-*</code> をそのまま渡せる。色は <code>currentColor</code> なので親の <code>color</code> に従う。
+      {
+        uniform ? (
+          <>
+            全 {icons.length} 個が <code>viewBox {spec.viewBox}</code>、<code>stroke-width {spec.strokeWidth}</code>、
+            <code>stroke {spec.stroke}</code>、<code>fill {spec.fill}</code>。
+          </>
+        ) : (
+          <>{icons.length} 個。下の一覧で属性が揃っていないものは太字にしてある。</>
+        )
+      }
+    </p>
+  </header>
+
+  <h2 id="glyphs">Glyphs <small>{icons.length}</small></h2>
+  <div class="rows">
+    {
+      icons.map(({ name, Icon, attrs, note }) => (
+        <div class="row" data-budoux="off">
+          <span class="glyphs" aria-hidden="true">
+            {SIZES.map(({ px }) => (
+              <Icon width={px} height={px} />
+            ))}
+          </span>
+          <span class="names">
+            <code class="token-name">{name}</code>
+            <code class="token-value">{iconImportName(name)}</code>
+            {!uniform && JSON.stringify(attrs) !== JSON.stringify(spec) && (
+              <code class="token-value outlier">
+                {attrs.viewBox} / {attrs.strokeWidth}
+              </code>
+            )}
+          </span>
+          <span class="role">{note?.role}</span>
+          <span class="used-by">
+            {note === undefined ? (
+              <span class="unlisted">未記載</span>
+            ) : note.usedBy.length === 0 ? (
+              <span class="unlisted">未使用</span>
+            ) : (
+              note.usedBy.map((app) => <code>{app}</code>)
+            )}
+          </span>
+          <a class="source" href={`https://lucide.dev/icons/${name}`} rel="noopener">
+            Lucide
+          </a>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2 id="sizes">Sizes</h2>
+  <p class="note">
+    4 段。置く文脈で決まり、同じ文脈で別の値を増やさない。<code>width</code> / <code>height</code>
+    を属性で渡すか、アプリ側の CSS で同じ値を指定する。
+  </p>
+  <div class="rows">
+    {
+      SIZES.map(({ px, context, example, icon }) => {
+        const Icon = byName.get(icon)?.Icon;
+        return (
+          <div class="row row--size">
+            <code class="token-value">{px}px</code>
+            <span class="size-sample" data-budoux="off">
+              {Icon && <Icon width={px} height={px} aria-hidden="true" />}
+              {context}
+            </span>
+            <span class="role">{example}</span>
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <h2 id="usage">Usage</h2>
+  <dl class="guidance">
+    <div><dt>使う</dt><dd>UI の記号(検索、戻る、外部リンク、コピー、状態)。同じ意味には同じ glyph。</dd></div>
+    <div><dt>使わない</dt><dd>ブランドロゴ(各アプリに置く)、装飾目的のイラスト、Lucide 以外のセットとの混在。</dd></div>
+    <div><dt>配慮</dt><dd>装飾は <code>aria-hidden</code>。アイコンしかない操作は親に <code>aria-label</code>。</dd></div>
+  </dl>
+  <CodeBlock code={snippet} lang="astro" title="src/components/search-button.astro" />
+
+  <h2 id="adding">Adding</h2>
+  <p class="note">
+    Lucide の SVG をそのまま <code>packages/ui/src/icons/</code> に置けば、この一覧には自動で載る。
+    意味と利用先だけ <code>data/icons.ts</code> に書く(未記載でも一覧には出る)。
+  </p>
+  <CodeBlock code={addSnippet} lang="sh" title="追加手順" />
+</BaseLayout>
+
+<style>
+  .rows {
+    display: grid;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 7rem 12rem minmax(8rem, 1fr) minmax(8rem, 1fr) auto;
+    align-items: center;
+    gap: var(--space-4);
+    padding-block: var(--space-2);
+    border-bottom: 1px solid var(--c-border);
+    font-size: var(--fs-xs);
+  }
+
+  .row--size {
+    grid-template-columns: 7rem 12rem minmax(0, 1fr);
+  }
+
+  .glyphs {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--c-text);
+  }
+
+  .glyphs :global(svg) {
+    flex-shrink: 0;
+  }
+
+  .names {
+    display: grid;
+    gap: 0.125rem;
+  }
+
+  .outlier {
+    color: var(--c-text);
+    font-weight: var(--fw-medium);
+  }
+
+  .role,
+  .used-by {
+    color: var(--c-sub);
+  }
+
+  .used-by {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  .used-by code {
+    font-size: var(--fs-2xs);
+  }
+
+  .unlisted {
+    font-size: var(--fs-2xs);
+  }
+
+  .source {
+    color: var(--c-sub);
+    font-size: var(--fs-2xs);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--c-sub);
+  }
+
+  .size-sample {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--c-text);
+  }
+
+  @media (width < 48rem) {
+    .row {
+      grid-template-columns: 7rem minmax(0, 1fr);
+    }
+
+    .row--size {
+      grid-template-columns: 7rem minmax(0, 1fr);
+    }
+
+    .role,
+    .used-by,
+    .source {
+      grid-column: 2;
+    }
+  }
+</style>
