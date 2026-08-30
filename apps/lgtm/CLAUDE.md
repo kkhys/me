@@ -71,6 +71,6 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 - `lgtm-content/` is a private Git submodule — initialize it before local builds or deploy
 - `BBHBartle-Regular.ttf` must exist in `src/assets/`
 - ULIDs must be lowercase
-- A new entry needs both the media file and `description.txt` — the dev server logs the missing file and keeps the previous entries, the build stops. `description.txt` has been required since ff4f61721, but the content repo's `scripts/create-lgtm.ts` (`pnpm lgtm` in `lgtm-content/`) still only creates the ULID directory — write the file by hand for every new entry
+- A new entry needs both the media file and `description.txt` — the dev server logs the missing file and keeps the previous entries, the build stops. `pnpm lgtm "<description>"` in `lgtm-content/` (`scripts/create-lgtm.ts`) creates the ULID directory with the file written; it refuses to run without the description
 - Non-first gallery pages (`/2`, `/3`, …) redirect to `/` when accessed directly — they exist only for the infinite-scroll fetch
 - Favicon endpoints (`api/favicon/*`) are dev-only (their `getStaticPaths` emits no paths in prod builds); production serves favicons as static assets

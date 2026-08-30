@@ -64,7 +64,7 @@ lgtm-content/lgtm/{ulid}/
 
 The loader probes each file with sharp: a multi-frame source is served as animated WebP, everything else as AVIF. The description becomes the image alt (`LGTM over <description>`).
 
-Inside `lgtm-content/`, `pnpm lgtm` creates a new ULID directory (drop the image and write `description.txt` by hand), `pnpm strip-exif` scrubs EXIF from all images, and a lefthook pre-commit hook scrubs staged images automatically. `.mov` sources are converted to animated WebP with `pnpm convert-videos` from this directory (Bun + ffmpeg).
+Inside `lgtm-content/`, `pnpm lgtm "<one line describing the picture>"` creates a new ULID directory with `description.txt` written (drop the image in afterwards), `pnpm strip-exif` scrubs EXIF from all images, and a lefthook pre-commit hook scrubs staged images automatically. `.mov` sources are converted to animated WebP with `pnpm convert-videos` from this directory (Bun + ffmpeg).
 
 ## Routes
 
