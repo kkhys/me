@@ -1,6 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
-import ArtPicture from "#/components/art-picture.astro";
+import BlurImage from "@kkhys/ui/blur-image.astro";
 import type { FashionSheet } from "#/utils/fashion";
 import { fashionTransitionName } from "#/utils/routes";
 import { padNumber } from "#/utils/sheet-number";
@@ -16,7 +16,7 @@ const number = padNumber(image.number);
 <figure class="sheet">
   <div class="image-wrapper">
     {/* The figcaption carries the text; an alt would be read twice. */}
-    <ArtPicture
+    <BlurImage
       src={image.src}
       alt=""
       width={1200}
@@ -37,7 +37,7 @@ const number = padNumber(image.number);
   .sheet {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: var(--space-3);
     margin: 0;
   }
 
@@ -48,9 +48,9 @@ const number = padNumber(image.number);
   .caption {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: var(--space-1);
     align-self: flex-end;
-    padding-inline: 1rem;
+    padding-inline: var(--space-4);
     text-align: end;
     font-family: var(--font-mono);
     font-size: var(--fs-2xs);
@@ -73,7 +73,7 @@ const number = padNumber(image.number);
     .sheet {
       flex-direction: row;
       align-items: center;
-      gap: 2rem;
+      gap: var(--space-8);
     }
 
     /* Portrait sheets: size by viewport height so one fits on screen, with

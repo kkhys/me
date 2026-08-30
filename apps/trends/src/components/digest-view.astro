@@ -32,7 +32,7 @@ const seenTotal = markets.reduce(
   <DateNav current={date} prev={prev} next={next} />
   <DigestHero digest={digest} />
   {seenTotal > 0 && <SeenFilter />}
-  <main>
+  <main id="main">
     {markets.map((market) => <MarketSection market={market} />)}
   </main>
   <footer class="site">生成: {formatGeneratedAt(generated_at)}</footer>
@@ -53,7 +53,7 @@ const seenTotal = markets.reduce(
   .wrap {
     max-width: var(--content-width);
     margin: 0 auto;
-    padding: 0 1rem 3.5rem;
+    padding: 0 var(--space-4) 3.5rem;
   }
 
   /* Same rhythm as apps/me: below 640px the column keeps 1rem side padding,
@@ -65,7 +65,7 @@ const seenTotal = markets.reduce(
   }
 
   footer.site {
-    margin-top: 3rem;
+    margin-top: var(--space-12);
     padding-top: 0.875rem;
     border-top: 1px solid var(--c-border);
     color: var(--c-sub);

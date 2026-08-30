@@ -66,13 +66,13 @@ const ogImage = entries[0]
     text-wrap: nowrap;
     letter-spacing: 0.02em;
     margin: 0;
-    padding-inline: 1rem;
+    padding-inline: var(--space-4);
   }
 
   @media (width >= 768px) {
     .diary-header {
       justify-content: flex-start;
-      gap: 2rem;
+      gap: var(--space-8);
     }
 
     .diary-header::before {
