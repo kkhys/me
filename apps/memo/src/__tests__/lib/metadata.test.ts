@@ -1,5 +1,5 @@
 import type { Metadata } from "fetch-site-metadata";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import {
   errorFallbackMetadata,
   fallbackMetadata,
@@ -60,6 +60,21 @@ describe("getMetadata", () => {
         NODE_ENV: "production",
         PUBLIC_DEPLOY_ENV: "production",
       }));
+      // The shared fetcher sniffs og:image bytes before keeping the image;
+      // answer every probe with a PNG signature so fixtures survive intact.
+      vi.stubGlobal(
+        "fetch",
+        vi.fn<typeof fetch>().mockResolvedValue(
+          new Response(new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), {
+            status: 200,
+            headers: { "content-type": "image/png" },
+          }),
+        ),
+      );
+    });
+
+    afterEach(() => {
+      vi.unstubAllGlobals();
     });
 
     test("should fetch and return site metadata", async () => {

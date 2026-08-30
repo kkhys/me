@@ -21,7 +21,13 @@ const TYPES = {
 
 createServer(async (req, res) => {
   const path = normalize(new URL(req.url ?? "/", "http://localhost").pathname);
-  const file = path.endsWith("/") ? `${path}index.html` : path;
+  /* Cloudflare Pages resolves extensionless URLs to `.html`; mirror that so
+     in-page links and the preview iframes work against dist/ too. */
+  const file = path.endsWith("/")
+    ? `${path}index.html`
+    : extname(path) === ""
+      ? `${path}.html`
+      : path;
   try {
     const body = await readFile(join(ROOT, file));
     res.writeHead(200, { "content-type": TYPES[extname(file)] ?? "application/octet-stream" });

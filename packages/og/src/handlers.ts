@@ -1,4 +1,4 @@
-import type { APIRoute } from "astro";
+import type { APIContext, APIRoute } from "astro";
 import { createFaviconGenerators } from "./favicon";
 
 const IMAGE_CACHE_CONTROL = "public, max-age=31536000, immutable";
@@ -54,11 +54,16 @@ export const createFaviconRoutes = (
 
 /**
  * Wraps a PNG generator as a production OG-image route handler. Unlike the
- * favicon routes, OG images are served in production.
+ * favicon routes, OG images are served in production. The generator receives
+ * the route context (props from getStaticPaths) and may return a Response of
+ * its own, e.g. a 404 for an entry without a title.
  */
-export const createOgResponse = (generator: () => Promise<ArrayBuffer | Buffer>): APIRoute => {
-  return async () => {
-    const image = await generator();
+export const createOgResponse = <Props extends Record<string, unknown> = Record<string, unknown>>(
+  generator: (context: APIContext<Props>) => Promise<ArrayBuffer | Buffer | Response>,
+): APIRoute<Props> => {
+  return async (context) => {
+    const image = await generator(context);
+    if (image instanceof Response) return image;
     return new Response(new Uint8Array(image), {
       headers: {
         "Content-Type": "image/png",

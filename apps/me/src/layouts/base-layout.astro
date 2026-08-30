@@ -2,6 +2,8 @@
 import "#/styles/global.css";
 import Umami from "@kkhys/analytics/umami.astro";
 import BlurLoadNoscript from "@kkhys/ui/blur-load-noscript.astro";
+import HeadMeta from "@kkhys/ui/head-meta.astro";
+import SkipLink from "@kkhys/ui/skip-link.astro";
 import BaseSEO from "#/components/seo/base-seo.astro";
 import SiteFooter from "#/components/ui/site-footer.astro";
 import SiteNav from "#/components/ui/site-nav.astro";
@@ -18,18 +20,7 @@ const { class: className, showFooter = true } = Astro.props;
 
 <html lang="ja">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  {/* Declared before any CSS loads so dark-preference users don't get a
-      white canvas flash; pairs with `color-scheme: light dark` in CSS. */}
-  <meta name="color-scheme" content="light dark"/>
-
-  <link rel="manifest" href="/manifest.webmanifest">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-  <link rel='sitemap' href='/sitemap-index.xml' />
+  <HeadMeta />
 
   <Umami websiteId='80a06017-d3fc-4362-ae8a-d5de251c3ef5' domains='kkhys.me' />
 
@@ -47,9 +38,10 @@ const { class: className, showFooter = true } = Astro.props;
 
 </head>
 <body>
+<SkipLink label="本文へ移動" />
 <SiteNav />
 <SearchButton />
-<main>
+<main id="main">
   <div class:list={["content", className]}>
     <slot/>
   </div>
@@ -81,8 +73,8 @@ const { class: className, showFooter = true } = Astro.props;
      header band, so give the content an extra 1rem of breathing room under
      it; the desktop breakpoint restores the original rhythm. */
   .content {
-    padding-block: 6rem 3rem;
-    padding-inline: 1rem;
+    padding-block: 6rem var(--space-12);
+    padding-inline: var(--space-4);
   }
 
   @media (width >= 640px) {

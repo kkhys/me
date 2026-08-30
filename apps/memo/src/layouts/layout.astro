@@ -3,7 +3,8 @@ import Umami from "@kkhys/analytics/umami.astro";
 import BlurLoadNoscript from "@kkhys/ui/blur-load-noscript.astro";
 import SiteFooter from "@kkhys/ui/site-footer.astro";
 import Header from "#/components/header.astro";
-import HeadMeta from "#/components/seo/head-meta.astro";
+import HeadMeta from "@kkhys/ui/head-meta.astro";
+import SkipLink from "@kkhys/ui/skip-link.astro";
 import { SITE_AUTHOR_NAME } from "#/config/constants";
 import SearchDialog from "#/features/search/components/search-dialog.astro";
 import "#/styles/global.css";
@@ -12,9 +13,6 @@ import "#/styles/global.css";
 <html lang="ja">
     <head>
         <HeadMeta />
-        {/* Declared before any CSS loads so dark-preference users don't get a
-            white canvas flash; pairs with `color-scheme: light dark` in CSS. */}
-        <meta name="color-scheme" content="light dark" />
         <Umami websiteId="05b2c387-63e2-4d83-86f3-6fd54872d125" domains="memo.kkhys.me" />
         <slot name="head" />
         <slot name="seo" />
@@ -22,8 +20,9 @@ import "#/styles/global.css";
     </head>
     <body>
         <BlurLoadNoscript selector="[data-blur-load], .blur-load" />
+        <SkipLink label="本文へ移動" />
         <Header />
-        <main>
+        <main id="main">
             <slot />
         </main>
         <SiteFooter author={SITE_AUTHOR_NAME} />

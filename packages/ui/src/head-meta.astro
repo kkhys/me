@@ -1,0 +1,31 @@
+---
+/* The <head> lines every app repeats: charset, viewport, the color-scheme
+   meta, the favicon set produced by @kkhys/og, and the sitemap link. Place it
+   first in <head> — the color-scheme meta must precede any stylesheet so
+   dark-preference users don't get a white canvas flash. */
+interface Props {
+  /** Matches the app's `color-scheme` declaration in CSS. */
+  colorScheme?: "light dark" | "light" | "dark" | undefined;
+  /** Emit the manifest + favicon links (apps that ship the @kkhys/og set). */
+  icons?: boolean | undefined;
+  /** Emit the sitemap link (apps using @astrojs/sitemap). */
+  sitemap?: boolean | undefined;
+}
+
+const { colorScheme = "light dark", icons = true, sitemap = true } = Astro.props;
+---
+
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="color-scheme" content={colorScheme}/>
+{
+  icons && (
+    <>
+      <link rel="manifest" href="/manifest.webmanifest"/>
+      <link rel="icon" href="/favicon.ico" sizes="32x32"/>
+      <link rel="icon" href="/icon.svg" type="image/svg+xml"/>
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    </>
+  )
+}
+{sitemap && <link rel="sitemap" href="/sitemap-index.xml"/>}

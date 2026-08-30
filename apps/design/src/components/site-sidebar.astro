@@ -1,0 +1,188 @@
+---
+import ThemeToggle from "#/components/theme-toggle.astro";
+import type { Section } from "#/utils/prose";
+
+interface Props {
+  sections: Section[];
+}
+
+const { sections } = Astro.props;
+
+const pages = [
+  { href: "/", label: "Overview" },
+  { href: "/colors", label: "Colors" },
+  { href: "/typography", label: "Typography" },
+  { href: "/layout", label: "Layout" },
+  { href: "/icons", label: "Icons" },
+  { href: "/components", label: "Components" },
+  { href: "/conventions", label: "Conventions" },
+  { href: "/accessibility", label: "Accessibility" },
+];
+
+/* build.format "file" leaves `.html` (and `index.html`) on the pathname
+   during the build. */
+const currentPath =
+  Astro.url.pathname
+    .replace(/(?:index)?\.html$/u, "")
+    .replace(/\/$/u, "") || "/";
+const isCurrent = (href: string) => href === currentPath;
+---
+
+<aside class="sidebar">
+  <a class="brand palt" href="/">kkhys<span class="brand-sub">design</span></a>
+  <nav class="site-nav" aria-label="サイト内ナビゲーション">
+    <ul class="pages">
+      {
+        pages.map(({ href, label }) => {
+          const current = isCurrent(href);
+          return (
+            <li>
+              <a href={href} aria-current={current ? "page" : undefined}>
+                {label}
+              </a>
+              {current && sections.length > 0 && (
+                <ul class="sections">
+                  {sections.map(({ id, label: sectionLabel }) => (
+                    <li>
+                      <a href={`#${id}`}>{sectionLabel}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </nav>
+  <ThemeToggle />
+  <p class="sidebar-meta">
+    <a href="https://github.com/kkhys/me/tree/main/packages/styles">packages/styles</a>
+    <a href="https://github.com/kkhys/me/tree/main/packages/ui">packages/ui</a>
+  </p>
+</aside>
+
+<style>
+  .sidebar {
+    grid-column: side-start / side-end;
+    grid-row: top / bottom;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+    max-height: 100dvh;
+    overflow-y: auto;
+    padding-block: var(--space-8);
+    font-size: var(--fs-xs);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-xs);
+  }
+
+  .brand-sub {
+    font-weight: var(--fw-normal);
+    color: var(--c-sub);
+  }
+
+  .pages,
+  .sections {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pages {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .pages > li > a {
+    display: block;
+    padding-block: var(--space-1);
+    color: var(--c-sub);
+    transition: color 0.2s;
+  }
+
+  .pages > li > a:hover {
+    color: var(--c-text);
+  }
+
+  .pages > li > a[aria-current="page"] {
+    color: var(--c-text);
+    font-weight: var(--fw-medium);
+  }
+
+  .sections {
+    margin-block: var(--space-1) var(--space-2);
+    padding-inline-start: var(--space-3);
+    border-inline-start: 1px solid var(--c-border);
+  }
+
+  .sections a {
+    display: block;
+    padding-block: var(--space-1);
+    color: var(--c-sub);
+    transition: color 0.2s;
+  }
+
+  .sections a:hover {
+    color: var(--c-text);
+  }
+
+  /* The column flex would stretch the segmented control to the sidebar
+     width; keep it at its content size. */
+  .sidebar > :global(.theme-toggle) {
+    align-self: start;
+  }
+
+  .sidebar-meta {
+    display: grid;
+    gap: var(--space-1);
+    margin-block-start: auto;
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+  }
+
+  .sidebar-meta a:hover {
+    color: var(--c-text);
+  }
+
+  @media (width < 64rem) {
+    .sidebar {
+      grid-column: 1 / -1;
+      grid-row: top / main-start;
+      position: static;
+      max-height: none;
+      flex-direction: row;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: var(--space-2) var(--space-6);
+      padding-block: var(--space-6) var(--space-4);
+      border-bottom: 1px solid var(--c-border);
+    }
+
+    .pages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+
+    .sections,
+    .sidebar-meta {
+      display: none;
+    }
+
+    .sidebar > :global(.theme-toggle) {
+      margin-inline-start: auto;
+    }
+  }
+</style>

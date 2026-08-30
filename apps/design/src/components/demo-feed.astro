@@ -1,0 +1,64 @@
+---
+import { FEED_DEMO, feedDemoPage } from "#/utils/feed-demo";
+
+/* One page of the fixture feed, carrying the paging state InfiniteScroll
+   reads off the container. Rendered inline for page 1 and as the fetched
+   document for the rest, so the appended items share this markup and CSS. */
+interface Props {
+  page: number;
+}
+
+const { page } = Astro.props;
+const feed = feedDemoPage(page);
+if (!feed) throw new Error(`InfiniteScroll demo: page ${page} is out of range`);
+---
+
+{/* data-budoux="off": later pages arrive un-processed, so page 1 must not
+   carry phrase breaks the appended items would lack. */}
+<ol
+  id={FEED_DEMO.containerId}
+  class="feed"
+  data-budoux="off"
+  data-current-page={feed.currentPage}
+  data-total-pages={feed.totalPages}
+  data-base-path={FEED_DEMO.basePath}
+>
+  {
+    feed.items.map((item) => (
+      <li class="feed-item">
+        <span class="feed-id">#{item.id}</span>
+        <p class="feed-text">{item.text}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .feed {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .feed-item {
+    display: flex;
+    gap: var(--space-3);
+    padding-block: var(--space-3);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .feed-id {
+    flex-shrink: 0;
+    min-width: 2.25rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-sm);
+    color: var(--c-sub);
+  }
+
+  .feed-text {
+    margin: 0;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-sm);
+  }
+</style>

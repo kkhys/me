@@ -15,7 +15,6 @@ src/
   lib/images/                           # art-content.ts / fixtures.ts: the two globbed image trees
   lib/og-image.ts                       # buildOgImage: 1200px JPEG of a work + its aspect-correct height
   loaders/caption-file.ts               # parseCaptionYaml (order, duplicate slugs) + readCaptionFile (up-front check)
-  components/art-picture.astro          # <Picture> with AVIF/WebP variants, blur-up, view-transition-name
   components/gallery-thumb.astro        # Index grid item: linked picture + caption
   components/work-figure.astro          # Work detail: picture + title/year caption
   components/fashion-figure.astro       # Sheet detail: viewport-height picture + series/number caption

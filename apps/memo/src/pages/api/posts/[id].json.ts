@@ -1,6 +1,7 @@
 import type { APIRoute, GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { SITE_URL } from "#/config/constants";
 import { getImagesForMemo } from "#/utils/image";
+import { memoImageAlt } from "#/utils/image-alt";
 import { getPublishedMemos } from "#/utils/memo";
 import { getAuthorInfo } from "#/utils/user";
 
@@ -33,10 +34,11 @@ export const GET: APIRoute<Props> = ({ props }) => {
         avatar: new URL(avatar.src, SITE_URL).href,
       },
       tag: memo.data.tag ?? null,
-      images: images.map((img) => ({
-        src: new URL(img.src, SITE_URL).href,
-        width: img.width,
-        height: img.height,
+      images: images.map(({ file, src }, index) => ({
+        src: new URL(src.src, SITE_URL).href,
+        width: src.width,
+        height: src.height,
+        alt: memoImageAlt(file, index, memo.data.images),
       })),
     }),
     { headers: { "Content-Type": "application/json" } },

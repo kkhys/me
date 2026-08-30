@@ -1,37 +1,38 @@
 ---
+import ArrowLeftIcon from "./icons/arrow-left.svg";
+
 interface Props {
   title: string;
   /** Renders the title as a link (the lgtm brand-link pattern). */
   href?: string | undefined;
   /** Shows a back-to-home button on the left (the memo subpage pattern). */
   showBack?: boolean | undefined;
+  /** Accessible name of the back button, in the page's language. */
+  backLabel?: string | undefined;
+  /** Renders the title as the page's h1 (for pages that have no other h1). */
+  heading?: boolean | undefined;
 }
 
-const { title, href, showBack = false } = Astro.props;
+const { title, href, showBack = false, backLabel = "Back to home", heading = false } = Astro.props;
 ---
 
 <header class="site-header">
   {
     showBack && (
-      <a href="/" class="back-button" aria-label="Back to home">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M19 12H5" />
-          <path d="m12 19-7-7 7-7" />
-        </svg>
+      <a href="/" class="back-button" aria-label={backLabel}>
+        <ArrowLeftIcon width={14} height={14} />
       </a>
     )
   }
-  {href ? <a href={href} class="site-title">{title}</a> : <div class="site-title">{title}</div>}
+  {
+    heading ? (
+      <h1 class="site-title">{href ? <a href={href}>{title}</a> : title}</h1>
+    ) : href ? (
+      <a href={href} class="site-title">{title}</a>
+    ) : (
+      <div class="site-title">{title}</div>
+    )
+  }
   {
     /* `actions`: controls pinned to the right edge, opposite the back button. */
     Astro.slots.has("actions") && (
@@ -56,17 +57,23 @@ const { title, href, showBack = false } = Astro.props;
   }
 
   .site-title {
+    margin: 0;
     font-size: var(--fs-xs);
     font-weight: var(--fw-semibold);
   }
 
-  a.site-title {
+  a.site-title,
+  .site-title a {
     text-decoration: none;
     color: inherit;
+    transition: color 0.2s;
   }
 
-  a.site-title:hover {
-    opacity: 0.7;
+  /* The title rests at --c-text, so the hover lightness shift runs the other
+     way (to --c-sub) rather than dimming with opacity. */
+  a.site-title:hover,
+  .site-title a:hover {
+    color: var(--c-sub);
   }
 
   .back-button {

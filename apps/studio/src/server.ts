@@ -71,12 +71,25 @@ const server = Bun.serve({
         try {
           const form = await req.formData();
 
+          const files = form
+            .getAll("images")
+            .filter((value): value is File => value instanceof File && value.size > 0);
+          const alts = form
+            .getAll("imageAlts")
+            .map((value) => (typeof value === "string" ? value : ""));
+          if (alts.length !== files.length) {
+            return errorResponse(`Expected ${files.length} imageAlts, got ${alts.length}`);
+          }
+
           const images: MemoImageInput[] = [];
-          for (const value of form.getAll("images")) {
-            if (!(value instanceof File) || value.size === 0) continue;
-            const ext = IMAGE_EXT_BY_MIME[value.type];
-            if (!ext) return errorResponse(`Unsupported image type: ${value.type || "unknown"}`);
-            images.push({ data: new Uint8Array(await value.arrayBuffer()), ext });
+          for (const [index, file] of files.entries()) {
+            const ext = IMAGE_EXT_BY_MIME[file.type];
+            if (!ext) return errorResponse(`Unsupported image type: ${file.type || "unknown"}`);
+            images.push({
+              data: new Uint8Array(await file.arrayBuffer()),
+              ext,
+              alt: alts[index] ?? "",
+            });
           }
 
           const memo = createMemo(MEMO_DIR, {

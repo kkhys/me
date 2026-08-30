@@ -1,0 +1,130 @@
+---
+import SourceRefs from "#/components/source-refs.astro";
+import { type Convention, sourceUrl } from "#/data/conventions";
+
+/* One rule per card: the rule, its detail, the concrete values, the
+   `path:line` evidence and any known deviation. Shared by the Conventions
+   and Accessibility pages. */
+interface Props {
+  items: Convention[];
+}
+
+const { items } = Astro.props;
+---
+
+<dl class="rules">
+  {
+    items.map((item) => (
+      <div class="rule">
+        <dt>{item.rule}</dt>
+        <dd>
+          {item.detail !== undefined && <p class="detail">{item.detail}</p>}
+          {item.values !== undefined && (
+            <ul class="values">
+              {item.values.map((value) => (
+                <li>
+                  <code>{value}</code>
+                </li>
+              ))}
+            </ul>
+          )}
+          <ul class="evidence">
+            {item.evidence.map(({ path, line }) => (
+              <li>
+                <a href={sourceUrl(path, line)}>
+                  {path}
+                  <span class="line">:{line}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          {item.deviation !== undefined && (
+            <p class="deviation">
+              逸脱: <SourceRefs text={item.deviation} />
+            </p>
+          )}
+        </dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .rules {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    gap: var(--space-6);
+    margin: 0;
+  }
+
+  .rule {
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+    padding-block-start: var(--space-3);
+    border-top: 1px solid var(--c-border);
+  }
+
+  .rule dt {
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-sm);
+  }
+
+  .rule dd {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+  }
+
+  .detail {
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+    color: var(--c-sub);
+  }
+
+  .values,
+  .evidence {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+  }
+
+  .values code {
+    font-size: var(--fs-2xs);
+    padding: 0.1em 0.35em;
+    border-radius: var(--radius-xs);
+    background: var(--c-code-bg);
+  }
+
+  .evidence {
+    display: grid;
+    gap: 0.125rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+  }
+
+  .evidence a {
+    overflow-wrap: anywhere;
+  }
+
+  .evidence a:hover {
+    color: var(--c-text);
+  }
+
+  .line {
+    opacity: 0.6;
+  }
+
+  .deviation {
+    font-size: var(--fs-2xs);
+    line-height: var(--lh-sm);
+    color: var(--c-danger);
+  }
+</style>

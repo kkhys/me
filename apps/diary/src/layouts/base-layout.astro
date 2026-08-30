@@ -2,6 +2,7 @@
 import "#/styles/global.css";
 import Umami from "@kkhys/analytics/umami.astro";
 import BlurLoadNoscript from "@kkhys/ui/blur-load-noscript.astro";
+import HeadMeta from "@kkhys/ui/head-meta.astro";
 import BaseSEO from "@kkhys/seo/base-seo.astro";
 import OpenGraph from "@kkhys/seo/open-graph.astro";
 import TwitterCard from "@kkhys/seo/twitter-card.astro";
@@ -25,16 +26,9 @@ const ogImageUrl = image ? new URL(image.src, Astro.site).href : undefined;
 
 <html lang="ja">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-  <link rel="manifest" href="/manifest.webmanifest">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
-  <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <HeadMeta colorScheme="light" />
 
   <BaseSEO title={title} description={description} />
-  <link rel="sitemap" href="/sitemap-index.xml"/>
 
   {/* The OG image is the newest photo: a variable-height JPEG, not the
       1200x630 PNG card the other apps use. */}

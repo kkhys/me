@@ -61,10 +61,10 @@ const glossary = [
   description="Trend Digest の仕組みと、スコア・星の基準について"
 >
   <SiteHeader />
-  <div class="wrap">
+  <main class="wrap" id="main">
     <h1 class="page-title">About</h1>
-    <p>Trend Digest は、10のソースの技術トレンドを1日1回集計し、日ごとのダイジェストとして掲載する <a href="https://kkhys.me" target="_blank" rel="noopener">kkhys</a> の個人サイトです。グローバル（Hacker News / Lobsters / Reddit / GitHub Trending / dev.to / Techmeme / Hugging Face Daily Papers）と日本（はてなブックマーク / Zenn / Qiita）に分けて、各ソースの上位記事と要約、その日の総括を載せています。要約とハイライトの選定は Claude が行っています。</p>
-    <p>投稿は不定期です。ダイジェストは Claude Code の <a href={SKILL_URL} target="_blank" rel="noopener">creating-trend-digest</a> スキルを手動で実行して生成・公開しているため、実行しなかった日の分はありません。</p>
+    <p>Trend Digest は、10のソースの技術トレンドを1日1回集計し、日ごとのダイジェストとして掲載する <a href="https://kkhys.me" target="_blank" rel="noreferrer">kkhys</a> の個人サイトです。グローバル（Hacker News / Lobsters / Reddit / GitHub Trending / dev.to / Techmeme / Hugging Face Daily Papers）と日本（はてなブックマーク / Zenn / Qiita）に分けて、各ソースの上位記事と要約、その日の総括を載せています。要約とハイライトの選定は Claude が行っています。</p>
+    <p>投稿は不定期です。ダイジェストは Claude Code の <a href={SKILL_URL} target="_blank" rel="noreferrer">creating-trend-digest</a> スキルを手動で実行して生成・公開しているため、実行しなかった日の分はありません。</p>
 
     <section>
       <h2>スコア（0-100）</h2>
@@ -109,14 +109,14 @@ const glossary = [
         }
       </dl>
     </section>
-  </div>
+  </main>
 </BaseLayout>
 
 <style>
   .wrap {
     max-width: var(--content-width);
     margin: 0 auto;
-    padding: 0 1rem 3.5rem;
+    padding: 0 var(--space-4) 3.5rem;
   }
 
   /* Same rhythm as apps/me: below 640px the column keeps 1rem side padding,
@@ -128,7 +128,7 @@ const glossary = [
   }
 
   .page-title {
-    margin: 2rem 0 1.5rem;
+    margin: var(--space-8) 0 var(--space-6);
     font-size: 1rem;
     font-weight: var(--fw-medium);
   }
@@ -138,7 +138,7 @@ const glossary = [
   }
 
   h2 {
-    margin: 0 0 0.25rem;
+    margin: 0 0 var(--space-1);
     padding-bottom: 0.625rem;
     border-bottom: 1px solid var(--c-border);
     font-size: var(--fs-sm);
@@ -146,18 +146,18 @@ const glossary = [
   }
 
   p {
-    margin: 0.75rem 0 0;
+    margin: var(--space-3) 0 0;
     font-size: var(--fs-sm);
     line-height: 1.9;
   }
 
   p a {
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 4px;
   }
 
   dl {
-    margin: 1rem 0 0;
+    margin: var(--space-4) 0 0;
     font-size: var(--fs-sm);
     line-height: 1.9;
   }
@@ -176,7 +176,7 @@ const glossary = [
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 1.25rem;
-    row-gap: 0.5rem;
+    row-gap: var(--space-2);
   }
 
   /* Terms are long enough that a second column would starve the description
@@ -186,7 +186,7 @@ const glossary = [
   }
 
   .glossary dd + dt {
-    margin-top: 0.75rem;
+    margin-top: var(--space-3);
   }
 
   @media (width >= 640px) {
@@ -194,7 +194,7 @@ const glossary = [
       display: grid;
       grid-template-columns: auto 1fr;
       column-gap: 1.25rem;
-      row-gap: 0.5rem;
+      row-gap: var(--space-2);
     }
 
     .glossary dd + dt {

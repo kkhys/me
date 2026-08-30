@@ -23,11 +23,19 @@
 
   body {
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: var(--space-4);
     min-height: 100vh;
     max-width: var(--content-width);
     display: grid;
     grid-template-rows: [top] auto [main-start] 1fr [main-end] auto [bottom];
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Same rhythm as apps/me: below 640px the column keeps 1rem side padding,
+     above it the full 42rem is used. */
+  @media (width >= 640px) {
+    body {
+      padding-inline: 0;
+    }
   }
 }

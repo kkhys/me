@@ -28,7 +28,6 @@ src/
   utils/host.ts               # formatHost — hostname without www. for the meta row
   utils/score.ts              # scoreLevel: 80+/60+ thresholds → hi/mid/lo score emphasis
   utils/seen.ts               # countSeen — 既出 item count for the seen filter (pure, unit-tested)
-  utils/toc-active.ts         # pickActiveId — scrollspy state for source-toc (pure, unit-tested)
   utils/service-colors.ts     # Upstream brand colors, shared by service-card and source-toc
   styles/global.css           # Imports @kkhys/styles (uchu + tokens + base); app-local --c-star / --c-faint
   __tests__/                  # Vitest unit tests

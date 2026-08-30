@@ -1,25 +1,35 @@
 ---
-import type { ImageMetadata } from "astro";
-import BlurImage from "#/components/blur-image.astro";
+import BlurImage from "@kkhys/ui/blur-image.astro";
+import type { MemoImage } from "#/utils/image";
+import { type MemoImageAlt, memoImageAlt } from "#/utils/image-alt";
 
 interface Props {
-  images: ImageMetadata[];
+  images: MemoImage[];
+  alts?: MemoImageAlt[] | undefined;
 }
 
-const { images } = Astro.props;
+const { images, alts } = Astro.props;
 ---
 
 {images.length > 0 && (
   <div class="memo-images">
-    {images.map((image, index) => (
-      <BlurImage src={image} alt={`Image ${index + 1}`} />
+    {images.map(({ file, src }, index) => (
+      <BlurImage
+        src={src}
+        alt={memoImageAlt(file, index, alts)}
+        formats={["avif"]}
+        widths={[320, 640, 1280]}
+        sizes="(min-width: 640px) 640px, 100vw"
+        radius="8px"
+        framed
+      />
     ))}
   </div>
 )}
 
 <style>
     .memo-images {
-        margin-top: 0.75rem;
+        margin-top: var(--space-3);
     }
 
     /* Single image */
@@ -34,12 +44,12 @@ const { images } = Astro.props;
     /* Multiple images: horizontal scroll gallery */
     .memo-images:not(:has(> :only-child)) {
         display: flex;
-        gap: 0.5rem;
+        gap: var(--space-2);
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         scrollbar-width: thin;
         scrollbar-color: var(--c-scrollbar) transparent;
-        padding-bottom: 0.5rem;
+        padding-bottom: var(--space-2);
     }
 
     .memo-images:not(:has(> :only-child)) :global(.blur-load-wrapper) {

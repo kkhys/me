@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import { readdir, stat } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
 import type { Loader, LoaderContext } from "astro/loaders";
 import sharp from "sharp";
@@ -18,6 +18,30 @@ const pickImage = async (entryDir: string): Promise<string | null> => {
   // resolves to the same entry across rebuilds.
   files.sort();
   return files.find((file) => isMediaFile(file)) ?? null;
+};
+
+export const DESCRIPTION_FILE = "description.txt";
+
+/**
+ * One line describing the source picture, kept next to it so a new entry
+ * cannot ship without one. The pages turn it into the img alt.
+ *
+ * @throws when the file is missing or blank — the build stops rather than
+ *   publishing an image nobody can hear.
+ */
+export const readDescription = async (entryDir: string): Promise<string> => {
+  const path = join(entryDir, DESCRIPTION_FILE);
+  let raw: string;
+  try {
+    raw = await readFile(path, "utf-8");
+  } catch {
+    throw new Error(`Missing ${DESCRIPTION_FILE} in ${entryDir}`);
+  }
+  const description = raw.trim();
+  if (description === "") {
+    throw new Error(`Empty ${DESCRIPTION_FILE} in ${entryDir}`);
+  }
+  return description;
 };
 
 const isAnimated = async (filePath: string): Promise<boolean> => {
@@ -50,7 +74,8 @@ const loadEntries = async (
     }
 
     const animated = await isAnimated(join(entryDir, image));
-    const data = await parseData({ id, data: { image, animated } });
+    const description = await readDescription(entryDir);
+    const data = await parseData({ id, data: { image, animated, description } });
     store.set({
       id,
       data,
@@ -71,7 +96,12 @@ export const lgtmDirLoader = ({ base }: { base: string }): Loader => {
       // In dev, refresh the store when files appear or disappear under the
       // base directory so adding a new ULID dir shows up without restarting.
       context.watcher?.add(baseDir);
-      const reload = () => loadEntries(baseDir, context);
+      // A half-added entry (image without its description yet) must not
+      // take the dev server down; the build still fails on it.
+      const reload = () =>
+        loadEntries(baseDir, context).catch((error: unknown) => {
+          context.logger.error(error instanceof Error ? error.message : String(error));
+        });
       context.watcher?.on("add", reload);
       context.watcher?.on("unlink", reload);
       context.watcher?.on("addDir", reload);

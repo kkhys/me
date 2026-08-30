@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@kkhys/search",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./dialog.astro": "./src/dialog.astro",
+    "./dialog-setup": "./src/dialog-setup.ts",
+    "./excerpt": "./src/excerpt.ts",
+    "./keyboard": "./src/keyboard.ts",
+    "./query": "./src/query.ts",
+    "./runner": "./src/runner.ts",
+    "./types": "./src/types.ts"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@kkhys/seo": "workspace:*",
+    "@kkhys/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "catalog:",
+    "astro": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "astro": "^7.0.0"
+  }
+}

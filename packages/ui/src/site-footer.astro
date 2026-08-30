@@ -3,16 +3,18 @@ interface Props {
   author: string;
   authorUrl?: string | undefined;
   links?: { href: string; label: string }[] | undefined;
+  /** Accessible name of the links nav, in the page's language. */
+  navLabel?: string | undefined;
 }
 
-const { author, authorUrl, links = [] } = Astro.props;
+const { author, authorUrl, links = [], navLabel = "Footer navigation" } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   {
     links.length > 0 && (
-      <nav class="footer-nav">
+      <nav class="footer-nav" aria-label={navLabel}>
         {links.map(({ href, label }, index) => (
           <>
             {index > 0 && <span class="footer-separator">|</span>}
@@ -26,7 +28,7 @@ const year = new Date().getFullYear();
     &copy;{year}{" "}
     {
       authorUrl ? (
-        <a href={authorUrl} target="_blank" rel="noopener noreferrer">
+        <a href={authorUrl} target="_blank" rel="noreferrer">
           {author}
         </a>
       ) : (

@@ -1,0 +1,16 @@
+---
+/* Non-first pages of an infinite-scroll feed exist only as fetch targets;
+   a direct visit (no same-origin referrer) is bounced back to the first
+   page. Render it only on pages after the first. */
+interface Props {
+  basePath?: string | undefined;
+}
+
+const { basePath = "/" } = Astro.props;
+---
+
+<script is:inline define:vars={{ basePath }}>
+  if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
+    window.location.replace(basePath);
+  }
+</script>

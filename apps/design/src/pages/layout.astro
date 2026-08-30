@@ -11,64 +11,73 @@ const shadow = declarations.find(({ name }) => name === "--shadow-sm");
 ---
 
 <BaseLayout title="Layout" description="スペーシング・角丸・影・選択色のトークン">
-  <h1>Layout</h1>
-  <p class="lead">
-    余白と寸法のスケール。gap や padding の値はこのスケールから選び、スケール外の直値を増やさない。
-  </p>
+  <header class="page-header">
+    <h1>Layout</h1>
+    <p class="lead">
+      余白と寸法のスケール。gap や padding の値はこのスケールから選び、スケール外の直値を増やさない。
+    </p>
+  </header>
 
-  <h2>スペーシング</h2>
+  <h2 id="spacing">Spacing <small>{spaces.length} steps</small></h2>
   <div class="rows">
     {
       spaces.map(({ name, value }) => (
         <div class="row">
-          <code class="row-name">{name}</code>
-          <code class="row-value">{value}</code>
+          <code class="token-name">{name}</code>
+          <code class="token-value">{value}</code>
           <span class="space-bar" style={`width: var(${name})`} />
         </div>
       ))
     }
   </div>
 
-  <h2>角丸</h2>
+  <h2 id="radius">Radius <small>{radii.length} steps</small></h2>
   <div class="radius-grid">
     {
       radii.map(({ name, value }) => (
         <figure class="radius-box-wrap">
           <span class="radius-box" style={`border-radius: var(${name})`} />
           <figcaption>
-            <code class="row-name">{name}</code>
-            <code class="row-value">{value}</code>
+            <code class="token-name">{name}</code>
+            <code class="token-value">{value}</code>
           </figcaption>
         </figure>
       ))
     }
   </div>
 
-  <h2>コンテンツ幅</h2>
+  <h2 id="content-width">Content width</h2>
   {
     contentWidth && (
-      <p class="note">
-        本文カラムは <code>{contentWidth.name}</code> = <code>{contentWidth.value}</code>。
-        このページの幅がそのまま実物。
-      </p>
+      <>
+        <p class="note">
+          各アプリの本文カラムは <code>{contentWidth.name}</code> = <code>{contentWidth.value}</code>。
+          このサイトだけは資料として横に広く、下のルーラーが実寸。
+        </p>
+        <div class="ruler">
+          <span class="ruler-bar" style={`width: var(${contentWidth.name})`}>
+            <code class="token-value">{contentWidth.value}</code>
+          </span>
+        </div>
+      </>
     )
   }
 
-  <h2>影</h2>
+  <h2 id="shadow">Shadow</h2>
+  <p class="note">影はボタンなど操作要素の浮きにだけ使い、区切りには使わない(区切りは 1px の境界線)。</p>
   {
     shadow && (
       <div class="rows">
         <div class="row">
-          <code class="row-name">{shadow.name}</code>
-          <code class="row-value">{shadow.value}</code>
+          <code class="token-name">{shadow.name}</code>
+          <code class="token-value">{shadow.value}</code>
           <span class="shadow-box" />
         </div>
       </div>
     )
   }
-  <p class="note">影はボタンなど操作要素の浮きにだけ使い、区切りには使わない(区切りは1pxの境界線)。</p>
 
-  <h2>選択色</h2>
+  <h2 id="selection">Selection</h2>
   <p class="selection-demo">
     この段落を選択すると <code>--c-selection</code> が現れる。ライトでは淡い黄、ダークでは深い黄土。
   </p>
@@ -81,20 +90,15 @@ const shadow = declarations.find(({ name }) => name === "--shadow-sm");
 
   .row {
     display: grid;
-    grid-template-columns: minmax(7rem, auto) minmax(4rem, auto) 1fr;
+    grid-template-columns: 8rem 12rem minmax(0, 1fr);
     align-items: center;
     gap: var(--space-4);
     padding-block: var(--space-2);
     border-bottom: 1px solid var(--c-border);
   }
 
-  .row-value {
-    color: var(--c-sub);
-    font-size: var(--fs-2xs);
-  }
-
   .space-bar {
-    height: var(--space-4);
+    height: var(--space-3);
     background: var(--c-primary);
     border-radius: var(--radius-xs);
   }
@@ -124,6 +128,32 @@ const shadow = declarations.find(({ name }) => name === "--shadow-sm");
     display: grid;
   }
 
+  .ruler {
+    overflow-x: auto;
+    padding-block: var(--space-2);
+    border-block: 1px solid var(--c-border);
+  }
+
+  .ruler-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: none;
+    height: var(--space-8);
+    border-inline: 1px solid var(--c-text);
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0 calc(1rem - 1px),
+      var(--c-border) calc(1rem - 1px) 1rem
+    );
+  }
+
+  .ruler-bar code {
+    padding-inline: var(--space-2);
+    background: var(--c-bg);
+    color: var(--c-text);
+  }
+
   .shadow-box {
     display: block;
     width: var(--space-12);
@@ -135,8 +165,21 @@ const shadow = declarations.find(({ name }) => name === "--shadow-sm");
   }
 
   .selection-demo {
+    max-width: 48rem;
     border: 1px solid var(--c-border);
     border-radius: var(--radius-md);
     padding: var(--space-4);
+    line-height: var(--lh-base);
+  }
+
+  @media (width < 40rem) {
+    .row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .space-bar,
+    .shadow-box {
+      grid-column: 1 / -1;
+    }
   }
 </style>

@@ -65,19 +65,37 @@ describe("createMemo", () => {
     );
   });
 
-  it("writes images as zero-padded numbered files", () => {
+  it("writes images as zero-padded numbered files with their alt in the frontmatter", () => {
     const memo = createMemo(baseDir, {
       body: "With images",
       createdAt: "2026-07-04 12:00:00",
       images: [
-        { data: new Uint8Array([1]), ext: "jpg" },
-        { data: new Uint8Array([2]), ext: "png" },
+        { data: new Uint8Array([1]), ext: "jpg", alt: "干し芋の袋" },
+        { data: new Uint8Array([2]), ext: "png", alt: ' 値段: "1,200円" # 税込 ' },
       ],
     });
 
     expect(memo.images).toEqual(["01.jpg", "02.png"]);
     const files = readdirSync(join(baseDir, memo.dirName)).toSorted();
     expect(files).toEqual(["01.jpg", "02.png", "index.md"]);
+
+    const content = readFileSync(join(baseDir, memo.dirName, "index.md"), "utf-8");
+    expect(content).toBe(
+      `---\nid: ${memo.id}\ncreatedAt: 2026-07-04 12:00:00\nimages:\n  - file: 01.jpg\n    alt: "干し芋の袋"\n  - file: 02.png\n    alt: "値段: \\"1,200円\\" # 税込"\n---\n\nWith images\n`,
+    );
+  });
+
+  it("rejects an image without alt text", () => {
+    expect(() =>
+      createMemo(baseDir, {
+        body: "x",
+        images: [
+          { data: new Uint8Array([1]), ext: "jpg", alt: "ok" },
+          { data: new Uint8Array([2]), ext: "jpg", alt: "  " },
+        ],
+      }),
+    ).toThrow("Alt text is required for image 2");
+    expect(readdirSync(baseDir)).toEqual([]);
   });
 
   it("defaults createdAt to now", () => {
@@ -137,6 +155,7 @@ describe("createMemo", () => {
     const images = Array.from({ length: 5 }, () => ({
       data: new Uint8Array([1]),
       ext: "jpg" as const,
+      alt: "x",
     }));
     expect(() => createMemo(baseDir, { body: "x", images })).toThrow("Too many images");
   });
@@ -170,7 +189,7 @@ describe("listMemos", () => {
     );
     writeMemoFixture(
       "20260201_000000",
-      "---\nid: 01bbbbbbbbbbbbbbbbbbbbbbbb\ncreatedAt: 2026-02-01 00:00:00\nisDraft: true\n---\n\nNew memo\n",
+      '---\nid: 01bbbbbbbbbbbbbbbbbbbbbbbb\ncreatedAt: 2026-02-01 00:00:00\nisDraft: true\nimages:\n  - file: 01.jpg\n    alt: "tag: not a tag"\n---\n\nNew memo\n',
       ["02.png", "01.jpg"],
     );
 
@@ -184,6 +203,7 @@ describe("listMemos", () => {
       dirName: "20260201_000000",
       body: "New memo",
       isDraft: true,
+      tag: undefined,
       images: ["01.jpg", "02.png"],
     });
     expect(memos[1]).toMatchObject({ tag: "idea", isDraft: false, images: [] });
@@ -202,7 +222,7 @@ describe("listMemos", () => {
       createdAt: "2026-07-04 12:00:00",
       tag: "test_tag",
       quote: "01kw9kgfn8zsvt3dftz9kemfv9",
-      images: [{ data: new Uint8Array([1]), ext: "jpg" }],
+      images: [{ data: new Uint8Array([1]), ext: "jpg", alt: "a photo" }],
     });
 
     const [memo] = listMemos(baseDir);

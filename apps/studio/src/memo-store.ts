@@ -24,6 +24,8 @@ export type MemoImageExt = "jpg" | "png";
 export interface MemoImageInput {
   data: Uint8Array;
   ext: MemoImageExt;
+  /** Read in place of the photo; the memo app renders it as the img alt. */
+  alt: string;
 }
 
 export interface CreateMemoInput {
@@ -86,6 +88,9 @@ const parseMemoFile = (content: string): ParsedMemoFile | undefined => {
 
   const frontmatter = new Map<string, string>();
   for (const line of (match[1] as string).split("\n")) {
+    // Only top-level scalars matter here; nested blocks (`images:`) are
+    // read by the memo app's loader, not by the studio feed.
+    if (line.startsWith(" ") || line.startsWith("-")) continue;
     const separator = line.indexOf(":");
     if (separator === -1) continue;
     frontmatter.set(line.slice(0, separator).trim(), line.slice(separator + 1).trim());
@@ -94,8 +99,20 @@ const parseMemoFile = (content: string): ParsedMemoFile | undefined => {
   return { frontmatter, body: (match[2] as string).trim() };
 };
 
+interface ImageFrontmatter {
+  file: string;
+  alt: string;
+}
+
+// A JSON string literal is a valid YAML double-quoted scalar, so this keeps
+// quotes, colons and hashes in the alt from breaking the frontmatter.
+const yamlString = (value: string): string => JSON.stringify(value);
+
 const serializeMemoFile = (
-  frontmatter: { id: string; createdAt: string } & Omit<CreateMemoInput, "body" | "images">,
+  frontmatter: { id: string; createdAt: string; images: ImageFrontmatter[] } & Omit<
+    CreateMemoInput,
+    "body" | "images"
+  >,
   body: string,
 ): string => {
   const lines = [`id: ${frontmatter.id}`, `createdAt: ${frontmatter.createdAt}`];
@@ -104,6 +121,12 @@ const serializeMemoFile = (
   if (frontmatter.quote) lines.push(`quote: ${frontmatter.quote}`);
   if (frontmatter.isDraft) lines.push("isDraft: true");
   if (frontmatter.hideLinkCard) lines.push("hideLinkCard: true");
+  if (frontmatter.images.length > 0) {
+    lines.push("images:");
+    for (const image of frontmatter.images) {
+      lines.push(`  - file: ${image.file}`, `    alt: ${yamlString(image.alt)}`);
+    }
+  }
 
   return `---\n${lines.join("\n")}\n---\n\n${body.trim()}\n`;
 };
@@ -138,6 +161,12 @@ const validateInput = (input: CreateMemoInput): void => {
   if (input.images !== undefined && input.images.length > MAX_IMAGES) {
     throw new MemoValidationError(`Too many images: ${input.images.length} (limit: ${MAX_IMAGES})`);
   }
+
+  input.images?.forEach((image, index) => {
+    if (image.alt.trim() === "") {
+      throw new MemoValidationError(`Alt text is required for image ${index + 1}`);
+    }
+  });
 };
 
 /**
@@ -160,6 +189,9 @@ export const createMemo = (baseDir: string, input: CreateMemoInput): MemoSummary
 
   const body = input.body.trim();
   const images = input.images ?? [];
+  const imageNames = images.map(
+    (image, index) => `${String(index + 1).padStart(2, "0")}.${image.ext}`,
+  );
 
   mkdirSync(memoDir, { recursive: true });
   writeFileSync(
@@ -173,16 +205,18 @@ export const createMemo = (baseDir: string, input: CreateMemoInput): MemoSummary
         quote: input.quote,
         isDraft: input.isDraft,
         hideLinkCard: input.hideLinkCard,
+        images: images.map((image, index) => ({
+          file: imageNames[index] as string,
+          alt: image.alt.trim(),
+        })),
       },
       body,
     ),
     "utf-8",
   );
 
-  const imageNames = images.map((image, index) => {
-    const name = `${String(index + 1).padStart(2, "0")}.${image.ext}`;
-    writeFileSync(join(memoDir, name), image.data);
-    return name;
+  images.forEach((image, index) => {
+    writeFileSync(join(memoDir, imageNames[index] as string), image.data);
   });
 
   return {

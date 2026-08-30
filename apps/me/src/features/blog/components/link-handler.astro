@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
+import MoveUpRightIcon from "@kkhys/ui/icons/move-up-right.svg";
 import LinkCard from "#/features/blog/components/ui/blocks/link-card.astro";
 import MemoCard from "#/features/blog/components/ui/blocks/memo-card.astro";
 import { extractMemoId } from "#/lib/api/memo";
@@ -22,7 +22,7 @@ const isMemoLink = isLinkCard && !!extractMemoId(href);
     <LinkCard href={href} {...rest} />
   ) : (
     href.startsWith('http') ? (
-      <a href={href} target="_blank" rel="noreferrer" class="external-link" {...rest}><slot /><MoveUpRightIcon class="external-icon" /></a>
+      <a href={href} target="_blank" rel="noreferrer" class="external-link" {...rest}><slot /><span class="sr-only">(新しいタブで開く)</span><MoveUpRightIcon class="external-icon" /></a>
     ) : (
       <a href={href} {...rest}><slot /></a>
     )
@@ -36,7 +36,7 @@ const isMemoLink = isLinkCard && !!extractMemoId(href);
   }
 
   .external-icon {
-    margin-inline: 0.25rem;
+    margin-inline: var(--space-1);
     margin-top: 0.125rem;
     width: 0.75rem;
     height: 0.75rem;

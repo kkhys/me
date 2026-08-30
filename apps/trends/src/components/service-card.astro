@@ -40,7 +40,7 @@ const freshCount = service.items.length - seenCount;
   header {
     display: flex;
     align-items: baseline;
-    gap: 0.5rem;
+    gap: var(--space-2);
     padding-bottom: 0.625rem;
     border-bottom: 1px solid var(--c-border);
   }
@@ -88,7 +88,7 @@ const freshCount = service.items.length - seenCount;
 
   .empty {
     margin: 0;
-    padding: 0.625rem 0.25rem;
+    padding: 0.625rem var(--space-1);
     color: var(--c-sub);
     font-size: var(--fs-xs);
     border-bottom: 1px solid var(--c-border);

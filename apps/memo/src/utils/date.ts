@@ -3,7 +3,7 @@ export const formatDate = (date: Date) => {
   const month = String(date.getUTCMonth() + 1).padStart(2, "0");
   const day = String(date.getUTCDate()).padStart(2, "0");
 
-  return `${year}/${month}/${day}`;
+  return `${year}.${month}.${day}`;
 };
 
 export const formatDateTime = (date: Date) => {
@@ -14,5 +14,5 @@ export const formatDateTime = (date: Date) => {
   const minutes = String(date.getUTCMinutes()).padStart(2, "0");
   const seconds = String(date.getUTCSeconds()).padStart(2, "0");
 
-  return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+  return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
 };

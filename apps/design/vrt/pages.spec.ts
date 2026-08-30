@@ -7,7 +7,10 @@ const PAGES = [
   { path: "/colors.html", name: "colors" },
   { path: "/typography.html", name: "typography" },
   { path: "/layout.html", name: "layout" },
+  { path: "/icons.html", name: "icons" },
   { path: "/components.html", name: "components" },
+  { path: "/conventions.html", name: "conventions" },
+  { path: "/accessibility.html", name: "accessibility" },
 ];
 
 for (const { path, name } of PAGES) {

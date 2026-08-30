@@ -31,7 +31,9 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
   <div class="body">
     <Budoux>
       <div class="title palt">
-        <a href={item.url} target="_blank" rel="noopener">{displayTitle}</a>
+        <a href={item.url} target="_blank" rel="noreferrer">
+          {displayTitle}<span class="sr-only">(新しいタブで開く)</span>
+        </a>
       </div>
     </Budoux>
     {originalTitle && <p class="original-title">{originalTitle}</p>}
@@ -55,16 +57,21 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
       )
     }
     <div class="meta">
-      <span class:list={["score", scoreLevel(item.score)]} title="スコア">{item.score}</span>
-      <span class="stars" title="興味マッチ度">{"★".repeat(item.interest)}</span>
+      <span class:list={["score", scoreLevel(item.score)]} title="スコア">
+        <span class="sr-only">スコア </span>{item.score}
+      </span>
+      <span class="stars" title="興味マッチ度">
+        <span class="sr-only">興味マッチ度 {item.interest}</span>
+        <span aria-hidden="true">{"★".repeat(item.interest)}</span>
+      </span>
       {item.category && <span class="chip">{item.category}</span>}
       {host && <span>{host}</span>}
       {item.engagement_label && <span>{item.engagement_label}</span>}
       {item.seen_before && <span class="seen">既出</span>}
       {
         hasDiscussionLink && (
-          <a class="comments" href={item.comments_url} target="_blank" rel="noopener">
-            コメントを見る
+          <a class="comments" href={item.comments_url} target="_blank" rel="noreferrer">
+            コメントを見る<span class="sr-only">(新しいタブで開く)</span>
           </a>
         )
       }
@@ -75,8 +82,8 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
 <style>
   .item {
     display: flex;
-    gap: 0.75rem;
-    padding: 1rem 0.25rem;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-1);
     border-bottom: 1px solid var(--c-border);
   }
 
@@ -91,7 +98,7 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
     color: var(--c-faint);
     font-size: var(--fs-xs);
     font-variant-numeric: tabular-nums;
-    padding-top: 0.25rem;
+    padding-top: var(--space-1);
   }
 
   .body {
@@ -155,11 +162,11 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
   .meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.25rem 0.875rem;
+    gap: var(--space-1) 0.875rem;
     align-items: center;
     color: var(--c-sub);
     font-size: var(--fs-xs);
-    margin-top: 0.5rem;
+    margin-top: var(--space-2);
   }
 
   .score {
@@ -187,7 +194,7 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
   .chip {
     border: 1px solid var(--c-border);
     border-radius: var(--radius-full);
-    padding: 0 0.5rem;
+    padding: 0 var(--space-2);
     font-size: var(--fs-2xs);
     line-height: 1.1rem;
   }
@@ -201,7 +208,7 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
 
   .comments {
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 4px;
     white-space: nowrap;
   }
 </style>

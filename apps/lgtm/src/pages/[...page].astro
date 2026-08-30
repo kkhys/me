@@ -2,16 +2,19 @@
 import { getImage } from "astro:assets";
 import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
-import CheckIcon from "#/components/icon/check-icon.astro";
-import CopyIcon from "#/components/icon/copy-icon.astro";
+import { blurLoadHandlers } from "@kkhys/ui/blur-load";
+import CheckIcon from "@kkhys/ui/icons/check.svg";
+import CopyIcon from "@kkhys/ui/icons/copy.svg";
 import { formatForEntry } from "#/components/lgtm-image";
 import BaseSeo from "#/components/seo/base-seo.astro";
-import JsonLd from "#/components/seo/json-ld.astro";
+import JsonLd from "@kkhys/seo/json-ld.astro";
 import OpenGraph from "#/components/seo/open-graph.astro";
 import TwitterCard from "#/components/seo/twitter-card.astro";
-import Spinner from "@kkhys/ui/spinner.astro";
+import InfiniteScroll from "@kkhys/ui/infinite-scroll.astro";
+import PaginatedGuard from "@kkhys/ui/paginated-guard.astro";
 import { IMAGES_PER_PAGE, TITLE } from "#/config/constants";
 import Layout from "#/layouts/layout.astro";
+import { lgtmAlt } from "#/utils/alt";
 import { shuffleArray } from "#/utils/shuffle";
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -44,15 +47,9 @@ const description =
 const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
 ---
 
-{!isFirstPage && (
-  <script is:inline>
-    if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
-      window.location.replace("/");
-    }
-  </script>
-)}
+{!isFirstPage && <PaginatedGuard basePath="/" />}
 
-<Layout>
+<Layout heading>
   <BaseSeo slot="seo" title={title} description={description} noindex={!isFirstPage} />
   <OpenGraph
     slot="seo"
@@ -80,6 +77,8 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     }}
   />
   <div class="container">
+    {/* Announces the clipboard result; the button itself only swaps its icon. */}
+    <p class="sr-only" role="status" id="copy-status"></p>
     <div
       class="lgtm-grid"
       id="lgtm-container"
@@ -96,13 +95,13 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
               >
                 <img
                   src={`/${entry.id}-1000.${format}`}
-                  alt="LGTM Image"
+                  alt={lgtmAlt(entry.data.description)}
                   width={515}
                   height={343}
                   loading="lazy"
                   decoding="async"
                   class="lgtm-image"
-                  onload="this.closest('.blur-load')?.classList.add('image-loaded')"
+                  {...blurLoadHandlers(".blur-load")}
                 />
               </div>
             </a>
@@ -113,8 +112,8 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
               title="Copy embed code"
               aria-label="Copy embed code"
             >
-              <CopyIcon class="copy-icon" />
-              <CheckIcon class="check-icon" />
+              <CopyIcon class="copy-icon" width={18} height={18} />
+              <CheckIcon class="check-icon" width={18} height={18} />
             </button>
           </article>
         ))
@@ -123,12 +122,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
   </div>
 
   {page.currentPage < page.lastPage && (
-    <>
-      <div id="scroll-trigger"></div>
-      <div id="loading-indicator" class="loading-indicator hidden" aria-live="polite" aria-busy="false">
-        <Spinner />
-      </div>
-    </>
+    <InfiniteScroll containerId="lgtm-container" errorMessage="Failed to load more images \u{1F622}" />
   )}
 </Layout>
 
@@ -136,17 +130,17 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: var(--space-8) var(--space-4);
   }
 
   .lgtm-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     max-width: 100%;
-    gap: 1.5rem;
+    gap: var(--space-6);
   }
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     .lgtm-grid {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -247,25 +241,11 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     display: block;
   }
 
-  .loading-indicator {
-    display: grid;
-    place-items: center;
-    padding: 2rem;
-    font-size: var(--fs-xs);
-  }
-
-  .loading-indicator.hidden {
-    display: none;
-  }
-
-  #scroll-trigger {
-    height: 1px;
-  }
 
   @media (max-width: 768px) {
     .lgtm-grid {
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1rem;
+      gap: var(--space-4);
     }
 
     .copy-button {
@@ -279,7 +259,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     }
 
     .container {
-      padding: 1.5rem 1rem;
+      padding: var(--space-6) var(--space-4);
     }
 
     .copy-button {
@@ -287,7 +267,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     }
 
     .page-description {
-      margin-bottom: 2rem;
+      margin-bottom: var(--space-8);
     }
   }
 </style>
@@ -297,6 +277,7 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
 
   const initCopyButtons = () => {
     const container = document.querySelector("#lgtm-container");
+    const status = document.querySelector("#copy-status");
     if (!container) return;
 
     container.addEventListener("click", async (e) => {
@@ -315,8 +296,10 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
       try {
         await navigator.clipboard.writeText(buildEmbedCode(id, format));
         button.classList.add("copied");
+        if (status) status.textContent = "Copied";
         setTimeout(() => {
           button.classList.remove("copied");
+          if (status) status.textContent = "";
         }, 1000);
       } catch (err) {
         console.error("Failed to copy:", err);
@@ -324,131 +307,5 @@ const ogImageUrl = new URL("/api/og/default.png", Astro.site).href;
     });
   };
 
-  const initInfiniteScroll = () => {
-    const containerEl = document.querySelector<HTMLElement>("#lgtm-container");
-    const triggerEl = document.querySelector<HTMLElement>("#scroll-trigger");
-    const loadingIndicatorEl = document.querySelector<HTMLElement>("#loading-indicator");
-
-    if (!containerEl || !triggerEl || !loadingIndicatorEl) {
-      return;
-    }
-
-    const container: HTMLElement = containerEl;
-    const trigger: HTMLElement = triggerEl;
-    const loadingIndicator: HTMLElement = loadingIndicatorEl;
-
-    let currentPage = Math.trunc(Number(container.dataset.currentPage || "1"));
-    const totalPages = Math.trunc(Number(container.dataset.totalPages || "1"));
-    let isLoading = false;
-
-    const parser = new DOMParser();
-
-    const showLoading = () => {
-      loadingIndicator.classList.remove("hidden");
-      loadingIndicator.setAttribute("aria-busy", "true");
-    };
-
-    const hideLoading = () => {
-      loadingIndicator.classList.add("hidden");
-      loadingIndicator.setAttribute("aria-busy", "false");
-    };
-
-    const showEndMessage = () => {
-      trigger.remove();
-      loadingIndicator.innerHTML = "<span role=\"status\">You've reached the end 🎉</span>";
-      loadingIndicator.setAttribute("aria-busy", "false");
-      loadingIndicator.classList.remove("hidden");
-    };
-
-    const showErrorMessage = () => {
-      loadingIndicator.innerHTML = "<span role=\"alert\">Failed to load more images 😢</span>";
-      loadingIndicator.setAttribute("aria-busy", "false");
-      loadingIndicator.classList.remove("hidden");
-    };
-
-    const loadMoreImages = async () => {
-      const nextPage = currentPage + 1;
-
-      if (nextPage > totalPages) {
-        observer.unobserve(trigger);
-        showEndMessage();
-        return;
-      }
-
-      isLoading = true;
-      showLoading();
-
-      const startTime = Date.now();
-      let reachedEnd = false;
-
-      try {
-        const url = nextPage === 1 ? "/" : `/${nextPage}`;
-        const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error(`Failed to fetch page ${nextPage}`);
-        }
-
-        const html = await response.text();
-        const doc = parser.parseFromString(html, "text/html");
-
-        const nextContainer = doc.querySelector("#lgtm-container");
-        if (!nextContainer) {
-          throw new Error("lgtm-container not found in fetched page");
-        }
-
-        const elapsed = Date.now() - startTime;
-        const remainingTime = Math.max(0, 500 - elapsed);
-        if (remainingTime > 0) {
-          await new Promise((resolve) => {
-            setTimeout(resolve, remainingTime);
-          });
-        }
-
-        const lgtmItems = nextContainer.children;
-        for (const item of Array.from(lgtmItems)) {
-          container.append(item);
-        }
-
-        currentPage = nextPage;
-
-        if (currentPage >= totalPages) {
-          observer.unobserve(trigger);
-          reachedEnd = true;
-        }
-      } catch (error) {
-        console.error("Failed to load more images:", error);
-        showErrorMessage();
-      } finally {
-        if (reachedEnd) {
-          showEndMessage();
-        } else {
-          hideLoading();
-        }
-        isLoading = false;
-      }
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const firstEntry = entries[0];
-        if (
-          firstEntry &&
-          firstEntry.isIntersecting &&
-          !isLoading &&
-          currentPage < totalPages
-        ) {
-          loadMoreImages();
-        }
-      },
-      { rootMargin: "200px" },
-    );
-
-    observer.observe(trigger);
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    initCopyButtons();
-    initInfiniteScroll();
-  });
+  document.addEventListener("DOMContentLoaded", initCopyButtons);
 </script>

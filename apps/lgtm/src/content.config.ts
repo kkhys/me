@@ -11,6 +11,8 @@ const lgtm = defineCollection({
   schema: z.object({
     image: z.string(),
     animated: z.boolean(),
+    /** What the source picture shows; see `lgtmAlt` for the rendered alt. */
+    description: z.string().min(1),
   }),
 });
 

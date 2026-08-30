@@ -35,7 +35,7 @@ for (const market of markets) {
 ---
 
 {entries.length > 0 && (
-  <nav class="toc" aria-label="ソース一覧">
+  <nav class="toc scroller-thin" aria-label="ソース一覧">
     <ul class="toc-list">
       {entries.map((entry) => (
         <li class:list={["toc-item", `toc-item--depth-${entry.depth}`]}>
@@ -67,20 +67,6 @@ for (const market of markets) {
       overscroll-behavior: contain;
     }
 
-    .toc::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    .toc::-webkit-scrollbar-thumb {
-      background: var(--c-sub);
-      border-radius: 2px;
-    }
-
-    @supports (-moz-appearance: none) {
-      .toc {
-        scrollbar-width: thin;
-      }
-    }
   }
 
   .toc-list {
@@ -97,7 +83,7 @@ for (const market of markets) {
   }
 
   .toc-item--depth-2:not(:first-child) {
-    margin-top: 0.75rem;
+    margin-top: var(--space-3);
   }
 
   .toc-item--depth-2 .toc-link {
@@ -144,43 +130,21 @@ for (const market of markets) {
 </style>
 
 <script>
-  import { pickActiveId } from "#/utils/toc-active";
+  import { observeActiveHeading } from "@kkhys/ui/toc-observer";
 
   const ACTIVE_CLASS = "toc-link--active";
 
   const toc = document.querySelector(".toc");
   if (toc) {
     const links = [...toc.querySelectorAll<HTMLAnchorElement>(".toc-link")];
-    const linkById = new Map(links.map((link) => [decodeURIComponent(link.hash.slice(1)), link]));
-    const headings = [...document.querySelectorAll<HTMLElement>("main :is(h2, h3)[id]")].filter(
-      (heading) => linkById.has(heading.id),
-    );
-    const orderedIds = headings.map((heading) => heading.id);
-    const visibleIds = new Set<string>();
-    let activeId: string | null = null;
-
-    const setActive = (id: string | null) => {
-      if (id === activeId) return;
-      activeId = id;
-      const activeLink = id ? linkById.get(id) : undefined;
-      for (const link of links) {
-        link.classList.toggle(ACTIVE_CLASS, link === activeLink);
-      }
-      activeLink?.scrollIntoView({ block: "nearest" });
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) visibleIds.add(entry.target.id);
-          else visibleIds.delete(entry.target.id);
+    observeActiveHeading({
+      links,
+      headingSelector: "main :is(h2, h3)[id]",
+      onChange: (_id, activeLink) => {
+        for (const link of links) {
+          link.classList.toggle(ACTIVE_CLASS, link === activeLink);
         }
-        setActive(pickActiveId(orderedIds, visibleIds, activeId));
       },
-      // Treat the top 20% of the viewport as the "current section" band.
-      { rootMargin: "0px 0px -80% 0px" },
-    );
-
-    for (const heading of headings) observer.observe(heading);
+    });
   }
 </script>

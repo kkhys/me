@@ -1,5 +1,5 @@
 ---
-import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
+import MoveUpRightIcon from "@kkhys/ui/icons/move-up-right.svg";
 import { navItems } from "#/config/navigation";
 import { me } from "#/config/site";
 
@@ -8,7 +8,7 @@ const currentYear = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="site-footer-inner">
-    <nav class="footer-nav" aria-label="Footer navigation">
+    <nav class="footer-nav" aria-label="フッターナビゲーション">
       {navItems.map(({ label, href, isExternal }) =>
         isExternal ? (
           <a
@@ -21,6 +21,7 @@ const currentYear = new Date().getFullYear();
             data-umami-event-label={label}
           >
             {label}
+            <span class="sr-only">(新しいタブで開く)</span>
             <MoveUpRightIcon class="footer-external-icon" />
           </a>
         ) : (
@@ -51,7 +52,7 @@ const currentYear = new Date().getFullYear();
     width: 100%;
     max-width: var(--content-width);
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: var(--space-4);
   }
 
   @media (width >= 640px) {
@@ -62,8 +63,8 @@ const currentYear = new Date().getFullYear();
 
   .site-footer-inner {
     display: grid;
-    gap: 1rem;
-    padding-block: 2rem 3rem;
+    gap: var(--space-4);
+    padding-block: var(--space-8) var(--space-12);
     border-top: 1px solid var(--c-border);
   }
 
@@ -71,7 +72,7 @@ const currentYear = new Date().getFullYear();
     display: flex;
     flex-wrap: wrap;
     column-gap: 1.25rem;
-    row-gap: 0.5rem;
+    row-gap: var(--space-2);
   }
 
   .footer-link {
@@ -88,7 +89,7 @@ const currentYear = new Date().getFullYear();
 
   .footer-external-icon {
     display: inline-block;
-    margin-left: 0.25rem;
+    margin-left: var(--space-1);
     width: 0.625rem;
     height: 0.625rem;
     vertical-align: -0.05em;
@@ -100,7 +101,7 @@ const currentYear = new Date().getFullYear();
     align-items: center;
     justify-content: space-between;
     column-gap: 1.25rem;
-    row-gap: 0.5rem;
+    row-gap: var(--space-2);
   }
 
   .footer-copyright {

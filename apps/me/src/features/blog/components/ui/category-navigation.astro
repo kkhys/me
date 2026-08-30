@@ -11,7 +11,7 @@ const pathname = normalizePathname(Astro.url.pathname);
 const isBlogRoot = /^\/blog(\/\d+)?$/u.test(pathname);
 ---
 
-<nav class:list={['category-scroll palt', className]} {...rest}>
+<nav class:list={['category-scroll palt', className]} aria-label="カテゴリ" {...rest}>
   {isBlogRoot ? (
       <span class="cat-link cat-link--active">
       すべて
@@ -73,7 +73,7 @@ const isBlogRoot = /^\/blog(\/\d+)?$/u.test(pathname);
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-full);
-    padding-inline: 0.5rem;
+    padding-inline: var(--space-2);
     text-align: center;
     font-size: var(--fs-xs);
     transition: color 0.2s;

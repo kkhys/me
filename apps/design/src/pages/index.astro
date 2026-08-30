@@ -1,4 +1,5 @@
 ---
+import CodeBlock from "#/components/code-block.astro";
 import BaseLayout from "#/layouts/base-layout.astro";
 
 const usageSnippet = `@layer reset, tokens, base;
@@ -7,122 +8,161 @@ const usageSnippet = `@layer reset, tokens, base;
 @import "@kkhys/styles/uchu.css" layer(tokens);
 @import "@kkhys/styles/tokens.css" layer(tokens);
 @import "@kkhys/styles/base.css" layer(base);`;
+
+const principles = [
+  {
+    title: "髪の毛ラインで区切る",
+    body: "カードや影を重ねず、--c-border の 1px 境界線と余白で構造を示す。",
+  },
+  {
+    title: "パレットは uchu ひとつ",
+    body: "OKLCH の --uchu-* を直接使わず、意味を持つ --c-* を介して使う。",
+  },
+  {
+    title: "テーマは light-dark()",
+    body: "メディアクエリの分岐ではなく、トークン自身が両テーマの値を持つ。",
+  },
+  {
+    title: "本文カラムは --content-width",
+    body: "42rem。どのサイトも同じ幅に収まる。",
+  },
+  {
+    title: "素の CSS",
+    body: "フレームワークを足さず、カスケードレイヤーとモダン CSS で組む。",
+  },
+  {
+    title: "文字は小さく、密に",
+    body: "本文 14px・注釈 12px。余白より情報を優先し、行送りで読みやすさを保つ。",
+  },
+];
+
+const pages = [
+  { href: "/colors", title: "Colors", body: "uchu パレットとセマンティックカラー" },
+  { href: "/typography", title: "Typography", body: "サイズ・ウェイト・行送り・等幅" },
+  { href: "/layout", title: "Layout", body: "スペーシング・角丸・影・選択色" },
+  { href: "/icons", title: "Icons", body: "共有アイコンの一覧・サイズ・使い方" },
+  { href: "/components", title: "Components", body: "@kkhys/ui とベーススタイルの挙動" },
+  { href: "/conventions", title: "Conventions", body: "各サイトが暗黙に共有している UI/UX の規約" },
+  { href: "/accessibility", title: "Accessibility", body: "コントラスト・フォーカス・構造の規約と既知の課題" },
+];
 ---
 
 <BaseLayout>
-  <h1 class="palt">kkhys design system</h1>
-  <p class="lead">
-    kkhys.me / memo / lgtm / diary / trends の5サイトを支えるデザイントークンと共有コンポーネント。
-    実体は monorepo の <code>packages/styles</code> と <code>packages/ui</code> にあり、
-    このサイトは同じソースを読んで描画している。
-  </p>
+  <header class="page-header">
+    <h1 class="palt">kkhys design system</h1>
+    <p class="lead">
+      kkhys.me / memo / lgtm / diary / trends / art の各サイトを支えるデザイントークンと共有コンポーネント。
+      実体は monorepo の <code>packages/styles</code> と <code>packages/ui</code> にあり、
+      このサイトは同じソースをビルド時に読んで描画している。
+    </p>
+  </header>
 
-  <h2>原則</h2>
-  <ul class="principles">
-    <li>
-      <strong>髪の毛ラインで区切る。</strong>
-      カードや影を重ねず、<code>--c-border</code> の1px境界線と余白で構造を示す。
-    </li>
-    <li>
-      <strong>パレットは uchu ひとつ。</strong>
-      OKLCH の <code>--uchu-*</code> を直接使わず、意味を持つ <code>--c-*</code> を介して使う。
-    </li>
-    <li>
-      <strong>テーマは light-dark()。</strong>
-      メディアクエリの分岐ではなく、トークン自身が両テーマの値を持つ。
-    </li>
-    <li>
-      <strong>本文カラムは <code>--content-width</code>(42rem)。</strong>
-      どのサイトも同じ幅に収まる。
-    </li>
-    <li>
-      <strong>素の CSS。</strong>
-      フレームワークを足さず、カスケードレイヤーとモダン CSS で組む。
-    </li>
-  </ul>
+  <h2 id="principles">Principles</h2>
+  <dl class="principles">
+    {
+      principles.map(({ title, body }) => (
+        <div class="principle">
+          <dt>{title}</dt>
+          <dd>{body}</dd>
+        </div>
+      ))
+    }
+  </dl>
 
-  <h2>使い方</h2>
-  <p>各アプリの global.css は次の4行から始まる。</p>
-  <pre class="snippet"><code>{usageSnippet}</code></pre>
-  <p>
-    アプリ固有のトークンは、この後のローカル <code>tokens</code> レイヤーで追加・上書きする。
-    Satori(OG 画像)など CSS 変数を解決できない場所では
-    <code>@kkhys/styles/colors</code> の hex ミラーを使う。
-  </p>
+  <h2 id="usage">Usage</h2>
+  <div class="usage">
+    <CodeBlock code={usageSnippet} lang="css" title="src/styles/global.css" />
+    <div class="prose">
+      <p>各アプリの global.css はこの 4 行から始まる。</p>
+      <p>
+        アプリ固有のトークンは、この後のローカル <code>tokens</code> レイヤーで追加・上書きする。
+        Satori(OG 画像)など CSS 変数を解決できない場所では
+        <code>@kkhys/styles/colors</code> の hex ミラーを使う。
+      </p>
+    </div>
+  </div>
 
-  <h2>目次</h2>
-  <nav class="toc" aria-label="ページ一覧">
-    <a href="/colors"><strong>Colors</strong><span>uchu パレットとセマンティックカラー</span></a>
-    <a href="/typography"><strong>Typography</strong><span>サイズ・ウェイト・行送り・等幅</span></a>
-    <a href="/layout"><strong>Layout</strong><span>スペーシング・角丸・影・選択色</span></a>
-    <a href="/components"><strong>Components</strong><span>@kkhys/ui とベーススタイルの挙動</span></a>
+  <h2 id="pages">Pages</h2>
+  <nav class="pages" aria-label="ページ一覧">
+    {
+      pages.map(({ href, title, body }) => (
+        <a href={href}>
+          <strong>{title}</strong>
+          <span>{body}</span>
+        </a>
+      ))
+    }
   </nav>
 </BaseLayout>
 
 <style>
   .principles {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .principles li {
-    padding-block: var(--space-3);
-    border-bottom: 1px solid var(--c-border);
-    line-height: var(--lh-base);
-    font-size: var(--fs-sm);
-  }
-
-  .principles strong {
-    font-weight: var(--fw-medium);
-  }
-
-  .toc {
     display: grid;
-    gap: var(--space-2);
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: var(--space-6);
+    margin: 0;
   }
 
-  .toc a {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-4);
-    padding-block: var(--space-3);
-    border-bottom: 1px solid var(--c-border);
-    font-size: var(--fs-sm);
+  .principle {
+    padding-block-start: var(--space-3);
+    border-top: 1px solid var(--c-border);
   }
 
-  .toc a::after {
-    content: "→";
-    margin-inline-start: auto;
-    color: var(--c-sub);
-    opacity: 0;
-    translate: -4px 0;
-    transition:
-      opacity 0.2s,
-      translate 0.2s;
-  }
-
-  .toc a:hover {
-    text-decoration: none;
-  }
-
-  .toc a:hover strong {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .toc a:hover::after {
-    opacity: 1;
-    translate: 0;
-  }
-
-  .toc strong {
+  .principle dt {
+    margin-block-end: var(--space-1);
     font-weight: var(--fw-medium);
-    min-width: 8rem;
   }
 
-  .toc span {
-    color: var(--c-sub);
+  .principle dd {
+    margin: 0;
     font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+    color: var(--c-sub);
+  }
+
+  .usage {
+    display: grid;
+    gap: var(--space-6);
+    align-items: start;
+  }
+
+  @container main (width >= 56rem) {
+    .usage {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    }
+  }
+
+  .pages {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: var(--space-4);
+  }
+
+  .pages a {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    transition:
+      background-color 0.2s,
+      transform 0.15s ease;
+  }
+
+  .pages a:hover {
+    background: oklch(from var(--c-surface) l c h / 50%);
+  }
+
+  .pages a:active {
+    transform: scale(0.99);
+  }
+
+  .pages strong {
+    font-weight: var(--fw-medium);
+  }
+
+  .pages span {
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
   }
 </style>

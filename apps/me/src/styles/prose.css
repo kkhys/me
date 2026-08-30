@@ -25,7 +25,7 @@
 
 @scope (.prose) to (.not-prose) {
   :scope > * {
-    margin-block: 2rem;
+    margin-block: var(--space-8);
   }
 }
 
@@ -57,7 +57,7 @@
 
 .prose :is(h2, h3, h4) {
   position: relative;
-  padding-left: 0.75rem;
+  padding-left: var(--space-3);
 }
 
 .prose :is(h2, h3, h4)::before {
@@ -79,7 +79,7 @@
 }
 
 .prose h3 {
-  margin-block: 2.5rem 1rem;
+  margin-block: 2.5rem var(--space-4);
 }
 
 .prose h3::before {
@@ -88,7 +88,7 @@
 }
 
 .prose h4 {
-  margin-block: 2rem 0.75rem;
+  margin-block: var(--space-8) var(--space-3);
 }
 
 .prose h4::before {
@@ -140,18 +140,18 @@
 
 .prose blockquote {
   border-left: 2px solid light-dark(var(--uchu-gray-2), var(--uchu-gray-9));
-  padding-left: 1.5rem;
+  padding-left: var(--space-6);
   font-style: italic;
 }
 
 .prose ul {
   list-style-type: "-";
-  padding-left: 0.5rem;
+  padding-left: var(--space-2);
 }
 
 .prose ol {
   list-style-type: decimal;
-  padding-left: 1rem;
+  padding-left: var(--space-4);
 }
 
 .prose li::marker {
@@ -160,12 +160,12 @@
 }
 
 .prose li :is(ol, ul) {
-  margin-block: 0.25rem;
-  padding-left: 0.5rem;
+  margin-block: var(--space-1);
+  padding-left: var(--space-2);
 }
 
 .prose li :is(li, p) {
-  margin-block: 0.25rem;
+  margin-block: var(--space-1);
 }
 
 .prose :is(ul, ol) > li::marker {
@@ -179,7 +179,7 @@
   & > li {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-2);
     padding-left: 0;
   }
 }
@@ -239,15 +239,15 @@
 .prose thead th {
   font-weight: var(--fw-medium);
   vertical-align: bottom;
-  padding-bottom: 0.5rem;
+  padding-bottom: var(--space-2);
 }
 
 .prose thead th:not(:first-child) {
-  padding-left: 0.5rem;
+  padding-left: var(--space-2);
 }
 
 .prose thead th:not(:last-child) {
-  padding-right: 0.5rem;
+  padding-right: var(--space-2);
 }
 
 .prose tbody tr {
@@ -271,13 +271,13 @@
 }
 
 .prose :is(tbody, tfoot) td {
-  padding-block: 0.5rem;
+  padding-block: var(--space-2);
 }
 
 .prose :is(tbody, tfoot) td:not(:first-child) {
-  padding-left: 0.5rem;
+  padding-left: var(--space-2);
 }
 
 .prose :is(tbody, tfoot) td:not(:last-child) {
-  padding-right: 0.5rem;
+  padding-right: var(--space-2);
 }

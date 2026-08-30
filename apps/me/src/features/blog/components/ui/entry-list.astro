@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import Budoux from "@kkhys/ui/budoux.astro";
-import MoveUpRightIcon from "#/components/icons/move-up-right.svg";
+import MoveUpRightIcon from "@kkhys/ui/icons/move-up-right.svg";
 import EmojiEyeCatch from "#/components/ui/emoji-eye-catch.astro";
 import SiteIcon from "#/features/blog/components/ui/site-icon.astro";
 import type { ListEntry } from "#/features/blog/utils/entry";
@@ -37,6 +37,7 @@ const { entries, class: className, showDate = false, umamiEvent, ...rest } = Ast
               <Budoux>
                 <p class="palt">
                   {entry.title}
+                  <span class="sr-only">(新しいタブで開く)</span>
                   <MoveUpRightIcon class="entry-external-icon" />
                 </p>
               </Budoux>
@@ -70,7 +71,7 @@ const { entries, class: className, showDate = false, umamiEvent, ...rest } = Ast
             </time>
           )}
           {entry.status === "draft" && (
-            <span class="entry-draft" />
+            <span class="entry-draft"><span class="sr-only">下書き</span></span>
           )}
         </a>
       );
@@ -97,8 +98,8 @@ const { entries, class: className, showDate = false, umamiEvent, ...rest } = Ast
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
-    padding: 0.75rem 0.5rem;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-2);
     font-size: var(--fs-sm);
     transition: background-color 0.2s;
     text-decoration: none;
@@ -119,7 +120,7 @@ const { entries, class: className, showDate = false, umamiEvent, ...rest } = Ast
   .entry-left {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-4);
   }
 
   .entry-date {
@@ -140,10 +141,10 @@ const { entries, class: className, showDate = false, umamiEvent, ...rest } = Ast
 
   .entry-external-icon {
     display: inline;
-    width: 0.875rem;
-    height: 0.875rem;
-    margin-left: 0.25rem;
-    vertical-align: -0.1em;
+    width: 0.75rem;
+    height: 0.75rem;
+    margin-left: var(--space-1);
+    vertical-align: -0.05em;
     color: var(--c-sub);
   }
 </style>

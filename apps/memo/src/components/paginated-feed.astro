@@ -1,7 +1,8 @@
 ---
+import InfiniteScroll from "@kkhys/ui/infinite-scroll.astro";
+import PaginatedGuard from "@kkhys/ui/paginated-guard.astro";
 import type { Page } from "astro";
 import Feed from "#/components/feed.astro";
-import InfiniteScroll from "#/components/infinite-scroll.astro";
 
 interface Props {
   page: Page<unknown>;
@@ -13,15 +14,7 @@ const { page, basePath, containerId } = Astro.props;
 const isFirstPage = page.currentPage === 1;
 ---
 
-{/* Non-first pages exist only as infinite-scroll fetch targets; bounce
-    direct visits back to the first page. */}
-{!isFirstPage && (
-  <script is:inline define:vars={{ basePath }}>
-    if (!document.referrer || !document.referrer.startsWith(window.location.origin)) {
-      window.location.replace(basePath);
-    }
-  </script>
-)}
+{!isFirstPage && <PaginatedGuard basePath={basePath} />}
 
 <Feed
   id={containerId}
@@ -32,4 +25,11 @@ const isFirstPage = page.currentPage === 1;
   <slot />
 </Feed>
 
-{page.currentPage < page.lastPage && <InfiniteScroll containerId={containerId} />}
+{page.currentPage < page.lastPage && (
+  <InfiniteScroll
+    containerId={containerId}
+    endMessage="最後まで読み込みました \u{1F389}"
+    errorMessage="読み込みに失敗しました \u{1F622}"
+    loadingLabel="読み込み中"
+  />
+)}

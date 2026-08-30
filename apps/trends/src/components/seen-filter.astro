@@ -59,18 +59,27 @@
     justify-content: flex-end;
     align-items: baseline;
     gap: 0.625rem;
-    margin-top: 1.5rem;
+    margin-top: var(--space-6);
     font-size: var(--fs-xs);
     color: var(--c-sub);
   }
 
   button {
+    position: relative;
     border: 0;
     background: none;
     padding: 0;
     font: inherit;
     color: inherit;
     cursor: pointer;
+  }
+
+  /* Text-only buttons are 18px tall; extend the hit area to the 24px
+     WCAG 2.5.8 minimum without changing the visual. */
+  button::before {
+    content: "";
+    position: absolute;
+    inset: -0.25rem 0;
   }
 
   button:hover {

@@ -7,8 +7,8 @@ LGTM image generator (lgtm.kkhys.me), the `@kkhys/lgtm` app of the kkhys monorep
 ```
 src/
   components/lgtm-image.tsx       # Core image pipeline (Satori + Sharp). Exports formatForEntry + LgtmImage
-  content.config.ts               # Collections: lgtm, privacy, copyright. lgtm schema = { image, animated }
-  loaders/lgtm-dir-loader.ts      # Custom loader: one entry per ULID dir, image = first media file. Probes animation via sharp
+  content.config.ts               # Collections: lgtm, privacy, copyright. lgtm schema = { image, animated, description }
+  loaders/lgtm-dir-loader.ts      # Custom loader: one entry per ULID dir, image = first media file + description.txt. Probes animation via sharp
   config/constants.ts             # TITLE, TWITTER_ACCOUNT_NAME, IMAGES_PER_PAGE
   layouts/layout.astro            # Base layout (Header, Main, Footer)
   assets/BBHBartle-Regular.ttf    # Font for the LGTM text overlay
@@ -23,7 +23,7 @@ src/
     api/favicon/                  # Dev-only favicon endpoints (omitted from prod builds)
   __tests__/                      # Vitest unit tests
   __fixtures__/lgtm-sample/       # CI fixtures (used when USE_FIXTURE_DATA=true)
-lgtm-content/                     # Git submodule (private) — source images, one media file per ULID dir
+lgtm-content/                     # Git submodule (private) — one media file + description.txt per ULID dir
 scripts/convert-videos.ts         # Bun + ffmpeg: convert .mov sources to animated WebP
 ```
 
@@ -32,7 +32,8 @@ scripts/convert-videos.ts         # Bun + ffmpeg: convert .mov sources to animat
 Consumed as source (no build step); this app supplies its own config via thin wrappers.
 
 - `@kkhys/styles` — uchu.css palette + shared `tokens.css` / `base.css`, imported in `src/styles/global.css`. Dark mode via `light-dark()`. Only lgtm-specific tokens (`--c-bg-gray`, `--c-text-emphasis`) stay app-local.
-- `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard primitives, wrapped by thin adapters in `src/components/seo/`. `head-meta.astro` and `json-ld.astro` are app-local.
+- `@kkhys/seo` — BaseSEO / OpenGraph / TwitterCard primitives, wrapped by thin adapters in `src/components/seo/`; `JsonLd` comes from `@kkhys/seo/json-ld.astro`.
+- `@kkhys/ui` — `HeadMeta` (charset / viewport / color-scheme / favicon set / sitemap), `SiteHeader` / `SiteFooter`, `InfiniteScroll` + `PaginatedGuard` for the gallery pages, `BlurLoadNoscript`, and the Lucide icons under `@kkhys/ui/icons/*.svg`.
 - `@kkhys/og` — favicon routes (`src/pages/api/favicon/[file].ts`, bound to the green gradient) + OG route handlers. The default OG card (`opengraph-image.tsx`) and the per-id OG (`pages/api/og/[id].png.ts`) stay app-local (bespoke layouts).
 - `@kkhys/ui` — shared Astro components; lgtm uses `spinner.astro` in the gallery's infinite scroll.
 
@@ -44,6 +45,7 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 - Output format is fixed per entry: still → AVIF, animated → animated WebP. One format URL per ID
 - `/{id}.{format}` serves 800px images (the `LgtmImage` default of 400 is overridden by the endpoint)
 - The animated flag is computed once by the loader (`sharp.metadata().pages > 1`) and persisted; rely on `entry.data.animated`, not a re-probe
+- Every entry dir must hold a one-line `description.txt` saying what the source picture shows; the loader fails the build without it. Pages render the alt through `utils/alt.ts` (`LGTM over <description>`), so the file holds only the description
 
 ## How to Work
 
@@ -59,5 +61,6 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 - `lgtm-content/` is a private Git submodule — initialize it before local builds or deploy
 - `BBHBartle-Regular.ttf` must exist in `src/assets/`
 - ULIDs must be lowercase
+- A new entry needs both the media file and `description.txt` — the dev server logs the missing file and keeps the previous entries, the build stops
 - Non-first gallery pages (`/2`, `/3`, …) redirect to `/` when accessed directly — they exist only for the infinite-scroll fetch
 - Favicon endpoints (`api/favicon/*`) are dev-only (their `getStaticPaths` emits no paths in prod builds); production serves favicons as static assets

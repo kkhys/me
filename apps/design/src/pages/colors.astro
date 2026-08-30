@@ -6,13 +6,19 @@ import BaseLayout from "#/layouts/base-layout.astro";
 import { filterByPrefix, parseCustomProperties } from "#/utils/tokens";
 
 const semanticColors = filterByPrefix(parseCustomProperties(tokensCss), "--c-");
-const palette = parseCustomProperties(uchuCss).filter(({ name }) => !name.endsWith("-raw"));
+const uchu = parseCustomProperties(uchuCss);
+const palette = uchu.filter(({ name }) => !name.endsWith("-raw"));
+const rawVariants = uchu.filter(({ name }) => name.endsWith("-raw")).map(({ name }) => name);
 
 interface PaletteStep {
   name: string;
   value: string;
   label: string;
 }
+
+/* Column per uchu step so every family lines up on the same scale; "•" is
+   the unnumbered anchor color (yin / yang). */
+const STEPS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "•"];
 
 const families: { family: string; steps: PaletteStep[] }[] = [];
 for (const { name, value } of palette) {
@@ -27,94 +33,127 @@ for (const { name, value } of palette) {
 ---
 
 <BaseLayout title="Colors" description="uchu OKLCH パレットとセマンティックカラートークン">
-  <h1>Colors</h1>
-  <p class="lead">
-    色は <a href="https://github.com/NeverCease/uchu">uchu</a> の OKLCH パレットのサブセットだけを使う。
-    アプリのコードが参照するのは用途名を持つセマンティックトークンで、
-    各トークンは <code>light-dark()</code> で両テーマの値を持つ。
-  </p>
+  <header class="page-header">
+    <h1>Colors</h1>
+    <p class="lead">
+      色は <a href="https://github.com/NeverCease/uchu">uchu</a> の OKLCH パレットのサブセットだけを使う。
+      アプリのコードが参照するのは用途名を持つセマンティックトークンで、
+      各トークンは <code>light-dark()</code> で両テーマの値を持つ。
+    </p>
+  </header>
 
-  <h2>セマンティックカラー</h2>
-  <p class="note">スワッチは左がライト、右がダークの解決値。</p>
+  <h2 id="semantic">Semantic colors <small>{semanticColors.length} tokens</small></h2>
+  <p class="note">スワッチは左がライト、右がダークの解決値。L / D は <code>light-dark()</code> の各引数。</p>
   <div class="token-list">
     {semanticColors.map(({ name, value }) => <TokenSwatch name={name} value={value} />)}
   </div>
 
-  <h2>uchu パレット</h2>
+  <h2 id="palette">uchu palette <small>{palette.length} colors</small></h2>
   <p class="note">
     生のパレット値。原則としてアプリからは直接使わず、セマンティックトークンの材料にする。
-    番号は uchu の階調(欠番は未使用の色)。チップにポインタを載せると oklch 値が出る。
-    透明度を後付けする場合のために、一部の色は <code>oklch()</code> の引数だけを持つ
-    <code>-raw</code> 変種も持つ。
+    列は uchu の階調で、空きは未使用の色。チップにポインタを載せると oklch 値が出る。
   </p>
-  <div class="families">
+  <div class="matrix" style={`--cols: ${STEPS.length}`}>
+    <div class="matrix-row matrix-head" aria-hidden="true">
+      <span />
+      {STEPS.map((step) => <span class="matrix-step">{step}</span>)}
+    </div>
     {
       families.map(({ family, steps }) => (
-        <div class="family">
-          <code class="family-name">{family}</code>
-          <div class="ramp">
-            {steps.map(({ name, value, label }) => (
-              <span class="palette-chip" title={`${name}: ${value}`}>
-                <span class="palette-chip-fill" style={`background: var(${name})`} />
-                <span class="palette-chip-step">{label}</span>
+        <div class="matrix-row">
+          <code class="token-name">{family}</code>
+          {STEPS.map((label) => {
+            const step = steps.find((entry) => entry.label === label);
+            return step ? (
+              <span class="chip" title={`${step.name}: ${step.value}`}>
+                <span class="chip-fill" style={`background: var(${step.name})`} />
               </span>
-            ))}
-          </div>
+            ) : (
+              <span class="chip chip--empty" />
+            );
+          })}
         </div>
       ))
     }
   </div>
+
+  <h3>-raw variants</h3>
+  <p class="note">
+    透明度を後付けするために、<code>oklch()</code> の引数だけを持つ変種。
+    <code>oklch(var(--uchu-yang-raw) / 10%)</code> のように使う。
+  </p>
+  <ul class="raw-list">
+    {rawVariants.map((name) => <li><code class="token-name">{name}</code></li>)}
+  </ul>
 </BaseLayout>
 
 <style>
   .token-list {
     display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+    column-gap: var(--space-8);
   }
 
-  .families {
+  .matrix {
     display: grid;
-  }
-
-  .family {
-    display: grid;
-    grid-template-columns: minmax(6rem, auto) 1fr;
-    align-items: center;
-    gap: var(--space-4);
-    padding-block: var(--space-3);
-    border-bottom: 1px solid var(--c-border);
-  }
-
-  .ramp {
-    display: flex;
-    flex-wrap: wrap;
     gap: var(--space-2);
   }
 
-  .palette-chip {
+  .matrix-row {
     display: grid;
-    justify-items: center;
-    gap: var(--space-1);
+    grid-template-columns: 5rem repeat(var(--cols), minmax(0, 1fr));
+    align-items: center;
+    gap: var(--space-2);
   }
 
-  .palette-chip-fill {
+  .matrix-head {
+    padding-block-end: var(--space-1);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .matrix-step {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    color: var(--c-sub);
+    text-align: center;
+  }
+
+  .chip {
     display: block;
-    width: var(--space-8);
-    height: var(--space-8);
+    width: 100%;
+    max-width: 2.5rem;
+    aspect-ratio: 1;
+    margin-inline: auto;
     border-radius: var(--radius-sm);
+    overflow: hidden;
     /* Hairline so near-background chips stay visible on both schemes. */
     box-shadow: inset 0 0 0 1px oklch(50% 0 0 / 0.25);
   }
 
-  .palette-chip-step {
-    font-size: var(--fs-2xs);
-    font-family: var(--font-mono);
-    color: var(--c-sub);
+  .chip--empty {
+    box-shadow: inset 0 0 0 1px var(--c-border);
+    opacity: 0.6;
   }
 
-  @media (width < 640px) {
-    .family {
-      grid-template-columns: 1fr;
-      gap: var(--space-2);
+  .chip-fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .raw-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (width < 40rem) {
+    .matrix-row {
+      grid-template-columns: 3.5rem repeat(var(--cols), minmax(0, 1fr));
+      gap: var(--space-1);
     }
   }
 </style>
