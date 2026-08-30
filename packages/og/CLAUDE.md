@@ -11,7 +11,9 @@ source by me, memo, lgtm, and diary.
   factory whose `getStaticPaths` emits paths only outside PROD, so
   favicons are served dynamically in dev and shipped as static files in
   production (prod builds emit no favicon routes at all).
-  `createOgResponse(generator)`: production OG-image route handler.
+  `createOgResponse(generator)`: production OG-image route handler. The
+  generator receives the route context (`props` from `getStaticPaths`) and
+  may return a `Response` of its own (a 404 for an entry without a title).
 - `./og` — `createSiteOgImage`: the fixed-layout site OG card. me and
   lgtm keep bespoke Satori layouts app-local instead.
 
