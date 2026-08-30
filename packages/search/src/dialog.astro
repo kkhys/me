@@ -1,0 +1,259 @@
+---
+import SearchIcon from "@kkhys/ui/icons/search.svg";
+
+/* The command-palette shell shared by the Pagefind search dialogs: field,
+   close button, status line and the results list. What a result row looks
+   like is the app's business — it supplies the row `<template>` through the
+   `template` slot and renders into it via `setupSearchDialog`. An optional
+   `filters` slot sits under the field (category chips on the blog). */
+interface Props {
+  id: string;
+  /** Accessible name of the dialog, e.g. 記事を検索. */
+  label: string;
+  placeholder: string;
+}
+
+const { id, label, placeholder } = Astro.props;
+---
+
+<dialog id={id} class="search-dialog" closedby="any" aria-label={label}>
+  <search class="search">
+    <form class="search-form">
+      <div class="search-field">
+        <SearchIcon class="search-field-icon" />
+        <input
+          type="search"
+          class="search-input"
+          name="q"
+          placeholder={placeholder}
+          aria-label="検索キーワード"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          enterkeyhint="go"
+        />
+        <button type="button" class="search-close" commandfor={id} command="close" aria-label="閉じる">
+          esc
+        </button>
+      </div>
+      <slot name="filters" />
+    </form>
+    <p class="search-status" role="status"></p>
+    <ol class="search-results scroller-thin" aria-label="検索結果"></ol>
+  </search>
+  <slot name="template" />
+</dialog>
+
+<style>
+  /* Browsers keep the page behind a modal dialog wheel/touch-scrollable; lock
+     it while the search is open. Only overflow changes: the base styles'
+     `scrollbar-gutter: stable both-edges` keeps both gutters even with overflow
+     hidden, so nothing shifts; switching to single-edge `stable` here would
+     move the centred column by half a scrollbar width. */
+  :global(html:has(.search-dialog:modal)) {
+    overflow: hidden;
+  }
+
+  .search-dialog {
+    position: fixed;
+    inset: 0;
+    width: min(100% - 2rem, 36rem);
+    max-height: min(70dvh, 32rem);
+    /* Command-palette placement: pinned near the top rather than centred, so
+       the results list can grow downward without the box jumping around. */
+    margin: 12vh auto auto;
+    padding: 0;
+    overflow: hidden;
+    background: var(--c-bg);
+    color: var(--c-text);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 14px 28px -6px oklch(var(--uchu-yin-raw) / 20%),
+      0 2px 4px -1px oklch(var(--uchu-yin-raw) / 12%);
+    opacity: 1;
+    translate: 0 0;
+    transition:
+      opacity 0.2s,
+      translate 0.2s,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  .search-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Both the entry (@starting-style) and the exit (:not([open])) states are
+     declared: without the exit state the dialog lingers at full opacity for
+     the length of the display transition before vanishing. */
+  @starting-style {
+    .search-dialog[open] {
+      opacity: 0;
+      translate: 0 -8px;
+    }
+  }
+
+  .search-dialog:not([open]) {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+
+  .search-dialog::backdrop {
+    background: oklch(var(--uchu-yin-raw) / 30%);
+    opacity: 1;
+    transition:
+      opacity 0.2s,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  @starting-style {
+    .search-dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  .search-dialog:not([open])::backdrop {
+    opacity: 0;
+  }
+
+  .search {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .search-form {
+    flex-shrink: 0;
+  }
+
+  .search-field {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0.875rem var(--space-4);
+  }
+
+  /* Filters under the field take over the bottom spacing. */
+  .search-field:has(+ *) {
+    padding-bottom: var(--space-2);
+  }
+
+  .search-field-icon {
+    flex-shrink: 0;
+    width: 1.125rem;
+    height: 1.125rem;
+    color: var(--c-sub);
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 0;
+    appearance: none;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font: inherit;
+    /* Never below 16px: iOS zooms the page into any smaller focused input. */
+    font-size: max(16px, var(--fs-base));
+    color: var(--c-text);
+    /* Re-declared as an underline in :focus-visible below. */
+    outline: none;
+  }
+
+  /* An underline instead of the shared ring: the input has no box of its
+     own inside the field row, so a ring would float around bare text.
+     box-shadow is stripped in Forced Colors, where the outline comes back. */
+  .search-input:focus-visible {
+    box-shadow: 0 var(--ring-width) 0 var(--ring);
+  }
+
+  @media (forced-colors: active) {
+    .search-input:focus-visible {
+      outline: var(--ring-width) solid var(--ring);
+      outline-offset: var(--ring-offset);
+    }
+  }
+
+  .search-input::placeholder {
+    color: var(--c-sub);
+  }
+
+  .search-input::-webkit-search-decoration,
+  .search-input::-webkit-search-cancel-button {
+    appearance: none;
+  }
+
+  .search-close {
+    position: relative;
+    flex-shrink: 0;
+    appearance: none;
+    padding: 0.125rem 0.375rem;
+    background: transparent;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    line-height: 1.25;
+    color: var(--c-sub);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .search-close:hover {
+    color: var(--c-text);
+  }
+
+  /* The chip is 19px tall; extend the hit area to the 24px WCAG 2.5.8
+     minimum without changing the visual. */
+  .search-close::before {
+    content: "";
+    position: absolute;
+    inset: -0.25rem 0;
+  }
+
+  /* The divider lives here rather than under the form so it only appears once
+     there is something below it; the status is never empty while results
+     show. */
+  .search-status {
+    flex-shrink: 0;
+    margin: 0;
+    padding: var(--space-3) var(--space-4) var(--space-1);
+    border-top: 1px solid var(--c-border);
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  /* Hidden visually rather than with display: none so the live region stays
+     in the accessibility tree and the first announcement is not dropped. */
+  .search-status:empty {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    border: 0;
+  }
+
+  /* With nothing below it (no hits, load failure) the status line is the
+     dialog's last visible row, so match its top padding below. */
+  .search-status:has(+ .search-results:empty) {
+    padding-bottom: var(--space-3);
+  }
+
+  .search-results {
+    margin: 0;
+    padding: var(--space-2);
+    list-style: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .search-results:empty {
+    display: none;
+  }
+</style>
