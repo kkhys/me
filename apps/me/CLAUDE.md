@@ -33,7 +33,7 @@ Consumed as source (no build step); this app supplies its own config via thin wr
 - CI: lint → test → type check → build, against fixtures. Add the `skip-ci` label to PRs to skip.
 - Deploy: built and shipped locally via `pnpm deploy`; me is not deployed from CI.
 - Lint/format: runs automatically via Stop hook (oxlint + oxfmt auto-fix). Fix remaining errors before completing.
-- Search: `astro-pagefind` indexes `dist` after `astro build`; only elements marked `data-pagefind-body` (blog post title + body in `src/layouts/blog-layout.astro`) are indexed. The dev server serves `/pagefind/` from `dist`, so run `pnpm build` once before `pnpm dev` to try search locally. The dialog lives in `src/features/search/`; pure logic sits in `src/features/search/utils/` so it stays unit-testable. No CSP is configured today; adding one needs `script-src` for the dynamic `import()` of `/pagefind/pagefind.js`, `wasm-unsafe-eval` for the Pagefind WASM, and `connect-src 'self'` for fragment fetches.
+- Search: `astro-pagefind` indexes `dist` after `astro build`; only elements marked `data-pagefind-body` (blog post title + body in `src/layouts/blog-layout.astro`) are indexed. The dev server serves `/pagefind/` from `dist`, so run `pnpm build` once before `pnpm dev` to try search locally. The dialog lives in `src/features/search/` as a thin wrapper over `@kkhys/search` (shell, runner, keyboard handling); only the category filter, the result-row template, and the Pagefind meta keys are app-local. No CSP is configured today; adding one needs `script-src` for the dynamic `import()` of `/pagefind/pagefind.js`, `wasm-unsafe-eval` for the Pagefind WASM, and `connect-src 'self'` for fragment fetches.
 
 ## Key Context Files
 

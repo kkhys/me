@@ -3,6 +3,7 @@ import { Picture as AstroPicture, getImage, type Picture } from "astro:assets";
 import type { ImageMetadata, UnresolvedImageTransform } from "astro";
 
 import { blurLoadHandlers } from "@kkhys/ui/blur-load";
+import { figureAlt } from "#/utils/image-alt";
 import type { CustomImageProps } from "./types";
 
 type Props = CustomImageProps;
@@ -48,6 +49,7 @@ const pictureProps = {
   sizes,
   ...blurLoadHandlers(".blur-load"),
   ...rest,
+  alt: figureAlt(rest.alt ?? "", title),
 } as Parameters<typeof Picture>[0];
 
 // Reserve layout box before image data loads (prevents CLS).
@@ -88,7 +90,7 @@ const aspectRatio =
     text-align: center;
     font-size: var(--fs-xs);
     color: var(--c-sub);
-    margin-top: 0.5rem;
+    margin-top: var(--space-2);
     line-height: 1.5;
   }
 

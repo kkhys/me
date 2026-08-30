@@ -24,17 +24,17 @@ const menuId = `page-menu-${currentPage}-${lastPage}`;
 ---
 
 {lastPage > 1 && (
-  <nav aria-label="Pagination" class:list={["pagination", className]} {...attrs}>
+  <nav aria-label="ページネーション" class:list={["pagination", className]} {...attrs}>
     <div class="pager">
       {page.url.prev ? (
-        <a href={page.url.prev} rel="prev" class="pager-arrow" aria-label="Previous page">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <a href={page.url.prev} rel="prev" class="pager-arrow" aria-label="前のページ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="m15 18-6-6 6-6" />
           </svg>
         </a>
       ) : (
         <span class="pager-arrow pager-arrow--disabled" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m15 18-6-6 6-6" />
           </svg>
         </span>
@@ -44,25 +44,25 @@ const menuId = `page-menu-${currentPage}-${lastPage}`;
         type="button"
         class="pager-current"
         popovertarget={menuId}
-        aria-label={`Page ${currentPage} of ${lastPage}. Select a page`}
+        aria-label={`${lastPage} ページ中 ${currentPage} ページ目。ページを選ぶ`}
       >
         <span class="pager-current-num">{currentPage}</span>
         <span class="pager-sep">/</span>
         <span class="pager-total">{lastPage}</span>
-        <svg class="pager-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <svg class="pager-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="m6 9 6 6 6-6" />
         </svg>
       </button>
 
       {page.url.next ? (
-        <a href={page.url.next} rel="next" class="pager-arrow" aria-label="Next page">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <a href={page.url.next} rel="next" class="pager-arrow" aria-label="次のページ">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="m9 18 6-6-6-6" />
           </svg>
         </a>
       ) : (
         <span class="pager-arrow pager-arrow--disabled" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m9 18 6-6-6-6" />
           </svg>
         </span>
@@ -266,7 +266,7 @@ const menuId = `page-menu-${currentPage}-${lastPage}`;
   /* Total-count header, echoing sizu's "計Nページ（M記事）" idea. */
   .page-menu-total {
     margin: 0;
-    padding: 0.4rem 0.75rem;
+    padding: 0.4rem var(--space-3);
     border-bottom: 1px solid var(--c-border);
     color: var(--c-sub);
     font-size: var(--fs-2xs);

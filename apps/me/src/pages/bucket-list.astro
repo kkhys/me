@@ -1,7 +1,7 @@
 ---
 import { getEntry } from "astro:content";
 import Budoux from "@kkhys/ui/budoux.astro";
-import CheckIcon from "#/components/icons/check.svg";
+import CheckIcon from "@kkhys/ui/icons/check.svg";
 import SEO from "#/components/seo/seo.astro";
 import SiteBrand from "#/components/ui/site-brand.astro";
 import Separator from "#/components/ui/separator.astro";
@@ -122,17 +122,17 @@ const seoDescription =
   .page-description {
     font-size: var(--fs-sm);
     color: var(--c-sub);
-    margin-top: 0.5rem;
+    margin-top: var(--space-2);
   }
 
   .bucket-section {
-    margin-top: 2rem;
+    margin-top: var(--space-8);
   }
 
   .bucket-list {
     list-style: none;
     padding: 0;
-    margin-left: 1.5rem;
+    margin-left: var(--space-6);
     display: flex;
     flex-direction: column;
     gap: 0.625rem;
@@ -156,7 +156,7 @@ const seoDescription =
   .bucket-index {
     position: absolute;
     left: -1.5rem;
-    margin-top: 0.25rem;
+    margin-top: var(--space-1);
     width: 1rem;
     text-align: right;
   }
@@ -169,14 +169,14 @@ const seoDescription =
   }
 
   .bucket-check {
-    margin-right: 0.5rem;
+    margin-right: var(--space-2);
     width: 1rem;
     height: 1rem;
     border-radius: var(--radius-xs);
     border: 1px solid var(--c-primary);
     box-shadow: var(--shadow-sm);
     opacity: 0.5;
-    margin-top: 0.25rem;
+    margin-top: var(--space-1);
     flex-shrink: 0;
   }
 
@@ -197,7 +197,7 @@ const seoDescription =
 
   .bucket-content {
     display: grid;
-    gap: 0.25rem;
+    gap: var(--space-1);
   }
 
   .bucket-desc {
@@ -206,7 +206,7 @@ const seoDescription =
   }
 
   .bucket-summary {
-    margin-top: 1.5rem;
+    margin-top: var(--space-6);
   }
 
   .bucket-summary-text {
@@ -216,11 +216,11 @@ const seoDescription =
   }
 
   .bucket-separator {
-    margin-top: 2rem;
+    margin-top: var(--space-8);
   }
 
   .bucket-footer {
-    margin-top: 2rem;
+    margin-top: var(--space-8);
     font-size: var(--fs-xs);
     color: var(--c-sub);
     display: flex;

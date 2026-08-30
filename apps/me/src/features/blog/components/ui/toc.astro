@@ -12,7 +12,7 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
 ---
 
 {items.length >= MIN_ITEMS && (
-  <nav class="toc" aria-label="Table of contents">
+  <nav class="toc" aria-label="目次">
     <div class="toc-rails" aria-hidden="true">
       {items.map(({ depth, slug }) => (
         <span class="toc-rail-row">
@@ -20,7 +20,7 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
         </span>
       ))}
     </div>
-    <div class="toc-panel">
+    <div class="toc-panel scroller-thin">
       <ul class="toc-list">
         {items.map(({ depth, slug, text }) => (
           <li class:list={["toc-item", `toc-item--depth-${depth}`]}>
@@ -129,20 +129,6 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
       translate: 0 0;
     }
 
-    .toc-panel::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    .toc-panel::-webkit-scrollbar-thumb {
-      background: var(--c-sub);
-      border-radius: 2px;
-    }
-
-    @supports (-moz-appearance: none) {
-      .toc-panel {
-        scrollbar-width: thin;
-      }
-    }
   }
 
   .toc-list {
@@ -190,7 +176,7 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
 </style>
 
 <script>
-  import { pickActiveId } from "#/features/blog/utils/toc-active";
+  import { observeActiveHeading } from "@kkhys/ui/toc-observer";
 
   const ACTIVE_CLASS = "toc-link--active";
   const ACTIVE_RAIL_CLASS = "toc-rail--active";
@@ -198,44 +184,21 @@ const items = headings.filter(({ depth }) => depth === 2 || depth === 3);
   const toc = document.querySelector(".toc");
   if (toc) {
     const links = [...toc.querySelectorAll<HTMLAnchorElement>(".toc-link")];
-    const linkById = new Map(
-      links.map((link) => [decodeURIComponent(link.hash.slice(1)), link]),
-    );
     const rails = [...toc.querySelectorAll<HTMLElement>(".toc-rail")];
     const railById = new Map(rails.map((rail) => [rail.dataset.id, rail]));
-    const headings = [
-      ...document.querySelectorAll<HTMLElement>(".prose :is(h2, h3)[id]"),
-    ].filter((heading) => linkById.has(heading.id));
-    const orderedIds = headings.map((heading) => heading.id);
-    const visibleIds = new Set<string>();
-    let activeId: string | null = null;
 
-    const setActive = (id: string | null) => {
-      if (id === activeId) return;
-      activeId = id;
-      const activeLink = id ? linkById.get(id) : undefined;
-      for (const link of links) {
-        link.classList.toggle(ACTIVE_CLASS, link === activeLink);
-      }
-      const activeRail = id ? railById.get(id) : undefined;
-      for (const rail of rails) {
-        rail.classList.toggle(ACTIVE_RAIL_CLASS, rail === activeRail);
-      }
-      activeLink?.scrollIntoView({ block: "nearest" });
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) visibleIds.add(entry.target.id);
-          else visibleIds.delete(entry.target.id);
+    observeActiveHeading({
+      links,
+      headingSelector: ".prose :is(h2, h3)[id]",
+      onChange: (id, activeLink) => {
+        for (const link of links) {
+          link.classList.toggle(ACTIVE_CLASS, link === activeLink);
         }
-        setActive(pickActiveId(orderedIds, visibleIds, activeId));
+        const activeRail = id === null ? undefined : railById.get(id);
+        for (const rail of rails) {
+          rail.classList.toggle(ACTIVE_RAIL_CLASS, rail === activeRail);
+        }
       },
-      // Treat the top 20% of the viewport as the "current section" band.
-      { rootMargin: "0px 0px -80% 0px" },
-    );
-
-    for (const heading of headings) observer.observe(heading);
+    });
   }
 </script>

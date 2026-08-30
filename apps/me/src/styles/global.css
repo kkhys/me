@@ -52,7 +52,7 @@
   }
 
   li {
-    margin-block: 0.5rem;
+    margin-block: var(--space-2);
     padding-inline-start: 0.625rem;
   }
 
@@ -66,7 +66,7 @@
     }
 
     & > ol {
-      margin-top: 1.5rem;
+      margin-top: var(--space-6);
 
       & > li {
         scroll-margin-top: 3rem;
@@ -84,7 +84,7 @@
     font-size: var(--fs-lg);
     font-family: var(--font-mono);
     line-height: 0;
-    margin-left: 0.25rem;
+    margin-left: var(--space-1);
   }
 
   .expressive-code {
@@ -156,42 +156,5 @@
 @layer layout {
   .page-title {
     font-weight: var(--fw-medium);
-  }
-}
-
-/* ===== Utility Classes ===== */
-
-@layer utilities {
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-    border: 0;
-  }
-}
-
-/* ===== Reduced Motion ===== */
-
-/* Honor the user's OS-level "reduce motion" setting (vestibular disorders,
-   motion sensitivity). Kept unlayered so these !important rules reliably win
-   over any layered declaration.
-
-   We collapse interaction transitions and disable smooth scrolling, but
-   deliberately do NOT blanket-kill animation-duration. The only @keyframes
-   in this project are scroll-driven edge-fade masks (category nav, prose
-   tables): they are user-driven affordances, not time-based motion, and
-   forcing a tiny animation-duration risks breaking them. Any future
-   decorative/looping animation should opt into a reduced variant locally. */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
