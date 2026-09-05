@@ -2,7 +2,8 @@
 /**
  * すべて / 既出を除く toggle. Filtering itself is pure CSS keyed off
  * `html[data-seen-filter="hide"]`; this component only flips that attribute
- * and remembers the choice. Rendered only on days that have 既出 items.
+ * and remembers the choice. Rendered by digest-toolbar only on days that
+ * have 既出 items.
  */
 ---
 
@@ -56,10 +57,9 @@
 <style>
   .seen-filter {
     display: flex;
-    justify-content: flex-end;
     align-items: baseline;
     gap: 0.625rem;
-    margin-top: var(--space-6);
+    margin-left: auto;
     font-size: var(--fs-xs);
     color: var(--c-sub);
   }

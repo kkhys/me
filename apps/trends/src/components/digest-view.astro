@@ -3,9 +3,10 @@ import type { CollectionEntry } from "astro:content";
 
 import DateNav from "#/components/date-nav.astro";
 import DigestHero from "#/components/digest-hero.astro";
+import DigestToolbar from "#/components/digest-toolbar.astro";
 import MarketSection from "#/components/market-section.astro";
-import SeenFilter from "#/components/seen-filter.astro";
 import SourceToc from "#/components/source-toc.astro";
+import { highlightAnchors } from "#/utils/highlights";
 import { sortMarketsGlobalFirst } from "#/utils/markets";
 import { formatGeneratedAt } from "#/utils/runs";
 import { countSeen } from "#/utils/seen";
@@ -19,10 +20,16 @@ interface Props {
 const { entry, prev, next } = Astro.props;
 const { date, digest, generated_at } = entry.data;
 const markets = sortMarketsGlobalFirst(entry.data.markets);
+const itemTotal = markets.reduce(
+  (total, market) => total + market.services.reduce((n, s) => n + s.items.length, 0),
+  0,
+);
 const seenTotal = markets.reduce(
   (total, market) => total + market.services.reduce((n, s) => n + countSeen(s.items), 0),
   0,
 );
+const anchors = highlightAnchors(markets, digest.highlights);
+const highlightedAnchors = new Set(anchors.values());
 ---
 
 <aside class="sidebar">
@@ -30,11 +37,16 @@ const seenTotal = markets.reduce(
 </aside>
 <div class="wrap">
   <DateNav current={date} prev={prev} next={next} />
-  <DigestHero digest={digest} />
-  {seenTotal > 0 && <SeenFilter />}
   <main id="main">
-    {markets.map((market) => <MarketSection market={market} />)}
+    <DigestHero digest={digest} anchors={anchors} />
+    <DigestToolbar date={date} total={itemTotal} seen={seenTotal} />
+    {
+      markets.map((market) => (
+        <MarketSection market={market} highlightedAnchors={highlightedAnchors} />
+      ))
+    }
   </main>
+  <DateNav current={date} prev={prev} next={next} position="bottom" />
   <footer class="site">生成: {formatGeneratedAt(generated_at)}</footer>
 </div>
 
@@ -65,7 +77,7 @@ const seenTotal = markets.reduce(
   }
 
   footer.site {
-    margin-top: var(--space-12);
+    margin-top: var(--space-6);
     padding-top: 0.875rem;
     border-top: 1px solid var(--c-border);
     color: var(--c-sub);

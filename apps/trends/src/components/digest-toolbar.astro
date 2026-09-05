@@ -1,0 +1,79 @@
+---
+/**
+ * Sticky context bar above the sections: the day, how many items it holds,
+ * and the 既出 filter. Stays in reach through the whole scroll, where the
+ * top-of-page nav and the filter would otherwise be gone after one screen.
+ */
+import SeenFilter from "#/components/seen-filter.astro";
+import { formatRunDate } from "#/utils/runs";
+
+interface Props {
+  date: string;
+  total: number;
+  seen: number;
+}
+
+const { date, total, seen } = Astro.props;
+---
+
+<div class:list={["toolbar", { "has-seen": seen > 0 }]}>
+  <a class="date" href={`/${date}`} title="この日の固定 URL">
+    <time datetime={date}>{formatRunDate(date)}</time>
+  </a>
+  <span class="count total">{total}件</span>
+  {seen > 0 && <span class="count fresh">{total - seen}件</span>}
+  {seen > 0 && <SeenFilter />}
+</div>
+
+<style>
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: var(--toolbar-height);
+    margin-top: var(--space-8);
+    background: var(--c-bg);
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    font-variant-numeric: tabular-nums;
+    container-type: scroll-state;
+  }
+
+  /* Hairline only while stuck; at rest the bar sits in the flow with the
+     hero above and needs no separator. Browsers without scroll-state
+     queries simply never draw it. */
+  .toolbar::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: transparent;
+  }
+
+  @container scroll-state(stuck: top) {
+    .toolbar::after {
+      background: var(--c-border);
+    }
+  }
+
+  .date {
+    color: var(--c-text);
+    font-weight: var(--fw-medium);
+  }
+
+  /* Both counts are prerendered; the 既出 filter swaps them with CSS only. */
+  .count.fresh {
+    display: none;
+  }
+
+  :global(html[data-seen-filter="hide"]) .toolbar.has-seen .count.total {
+    display: none;
+  }
+
+  :global(html[data-seen-filter="hide"]) .toolbar.has-seen .count.fresh {
+    display: inline;
+  }
+</style>

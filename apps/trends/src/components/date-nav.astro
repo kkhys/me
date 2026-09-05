@@ -5,14 +5,20 @@ interface Props {
   current: string;
   prev: string | undefined;
   next: string | undefined;
+  /* "bottom" repeats the nav after the last section so a reader who has
+     scrolled the whole day can move on without going back up. */
+  position?: "top" | "bottom" | undefined;
 }
 
-const { current, prev, next } = Astro.props;
+const { current, prev, next, position = "top" } = Astro.props;
+const label = position === "top" ? "日付ナビゲーション" : "日付ナビゲーション（末尾）";
 ---
 
-<nav class="date-nav" aria-label="日付ナビゲーション">
+<nav class:list={["date-nav", position]} aria-label={label}>
   <span class="slot">{prev && <a href={`/${prev}`}>← 前日</a>}</span>
-  <span class="current">{formatRunDate(current)}</span>
+  <a class="current" href={`/${current}`} title="この日の固定 URL">
+    <time datetime={current}>{formatRunDate(current)}</time>
+  </a>
   <span class="slot end">{next && <a href={`/${next}`}>翌日 →</a>}</span>
 </nav>
 
@@ -25,6 +31,10 @@ const { current, prev, next } = Astro.props;
     margin-top: var(--space-6);
     font-size: var(--fs-xs);
     color: var(--c-sub);
+  }
+
+  .date-nav.bottom {
+    margin-top: var(--space-8);
   }
 
   a {

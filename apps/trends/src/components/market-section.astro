@@ -7,14 +7,23 @@ type Market = CollectionEntry<"runs">["data"]["markets"][number];
 
 interface Props {
   market: Market;
+  highlightedAnchors: ReadonlySet<string>;
 }
 
-const { market } = Astro.props;
+const { market, highlightedAnchors } = Astro.props;
 ---
 
 <section class="market">
   <h2 id={market.id}>{market.label}</h2>
-  {market.services.map((service) => <ServiceCard service={service} marketId={market.id} />)}
+  {
+    market.services.map((service) => (
+      <ServiceCard
+        service={service}
+        marketId={market.id}
+        highlightedAnchors={highlightedAnchors}
+      />
+    ))
+  }
 </section>
 
 <style>
@@ -26,7 +35,7 @@ const { market } = Astro.props;
     margin: 0 0 1.25rem;
     font-size: 1rem;
     font-weight: var(--fw-medium);
-    /* Breathing room above anchor-jump targets. */
-    scroll-margin-top: 1.25rem;
+    /* Lands below the sticky toolbar when jumped to. */
+    scroll-margin-top: calc(var(--toolbar-height) + var(--space-4));
   }
 </style>
