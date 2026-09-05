@@ -12,7 +12,9 @@
     color-scheme: light dark;
 
     --c-star: var(--uchu-orange-5);
-    --c-faint: light-dark(var(--uchu-gray-4), var(--uchu-yin-7));
+    /* Decorative only (rank numbers): 2.7:1 light / 3.7:1 dark. Text that
+       must be read uses --c-sub. */
+    --c-faint: light-dark(var(--uchu-gray-7), var(--uchu-yin-6));
   }
 }
 
