@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Daily tech trend digest site (trends.kkhys.me), the `@kkhys/trends` app of the kkhys monorepo. Astro 7 static site on Cloudflare Pages. Renders one page per daily run from JSON committed to this repo; data is written by the `creating-trend-digest` Claude Code skill, which also commits, deploys, and pushes. TypeScript strictest mode. Vanilla CSS (kiso.css reset + uchu.css palette via `@kkhys/styles`), light/dark via `light-dark()`. Path alias: `#/*` → `./src/*`.
+Daily tech trend digest site (trends.kkhys.me), the `@kkhys/trends` app of the kkhys monorepo. Astro 7 static site on Cloudflare Pages. Renders one page per daily run from JSON committed to this repo; data is written by the `creating-trend-digest` Claude Code skill (`.claude/skills/creating-trend-digest` at the repo root), which also commits, deploys, and pushes. TypeScript strictest mode. Vanilla CSS (kiso.css reset + uchu.css palette via `@kkhys/styles`), light/dark via `light-dark()`. Path alias: `#/*` → `./src/*`.
 
 ## Project Map
 
@@ -51,10 +51,10 @@ Consumed as source (no build step).
 
 ## Data Contract
 
-- The `creating-trend-digest` skill (claude-code-marketplace repo) writes `src/content/runs/<YYYY-MM-DD>.json`, commits only that file, runs `pnpm deploy:trends`, then pushes main.
+- The `creating-trend-digest` skill writes `src/content/runs/<YYYY-MM-DD>.json`, commits only that file, runs `pnpm deploy:trends`, then pushes main.
 - The zod schema in `content.config.ts` is the single validation gate: a schema violation fails `astro build`, which blocks both deploy and push.
 - `digest` is `.strict()` on purpose — retired fields (e.g. `action_note`) must fail the build rather than silently pass.
-- When changing the schema, update in the same change: `content.config.ts`, the JSON example in the skill's SKILL.md, and every existing file in `src/content/runs/`.
+- When changing the schema, update in the same change: `content.config.ts`, the JSON example in `.claude/skills/creating-trend-digest/SKILL.md`, and every existing file in `src/content/runs/`.
 - File name must equal the `date` field; `[date].astro`'s getStaticPaths throws on mismatch.
 - All string fields are required with `""` for absent values (no nulls) — keeps `exactOptionalPropertyTypes` out of the data path.
 - `discussion_summary` is non-empty only for the top items of comment-capable sources (HN / Lobsters / Reddit / はてなブックマーク, `comments_top_n` in the skill's config, default 10 = every displayed item). It is 2-3 short paragraphs separated by blank lines (`\n\n`); `item-row.astro` splits it with `splitParagraphs` (`utils/paragraphs.ts`) and renders one `<p>` per paragraph inside a `<details>` fold, so older single-paragraph runs render unchanged.
