@@ -15,23 +15,26 @@ src/
   pages/api/favicon/          # Dev-only favicon endpoints via @kkhys/og (omitted from prod builds)
   layouts/base-layout.astro   # HTML shell wired to the @kkhys/seo primitives
   components/
-    site-header.astro         # Static header (brand → /, Archive / About links)
-    digest-view.astro         # One day's body: DateNav + hero + markets + generated-at footer
-    digest-hero.astro         # headline / lead / numbered highlights
-    market-section.astro      # グローバル / 日本 section (global first via sortMarketsGlobalFirst in digest-view; the run JSON stores japan first)
-    service-card.astro        # Per-service section (brand-color dot, total + fresh counts, error note, 該当なし / すべて既出 states)
-    source-toc.astro          # Always-visible source TOC (markets → services), ≥1280px only
-    item-row.astro            # rank → title → summary → meta row (score, stars, chip, host, engagement)
+    site-header.astro         # Header (brand → /, Archive / About links with aria-current)
+    digest-view.astro         # One day's body: DateNav + main(hero + toolbar + markets) + bottom DateNav + generated-at footer
+    digest-hero.astro         # headline / lead / numbered highlights; service chips jump to the item row
+    digest-toolbar.astro      # Sticky bar: date permalink, item count (total / fresh), SeenFilter
+    market-section.astro      # グローバル / 日本 group label (global first via sortMarketsGlobalFirst in digest-view; the run JSON stores japan first)
+    service-card.astro        # Per-service section (sticky header with brand-color dot, total + fresh counts, error note, 該当なし / すべて既出 states)
+    source-toc.astro          # Always-visible source TOC (markets → services, per-service counts), ≥1280px only
+    item-row.astro            # rank → title → summary → fold → meta row (facts left: chips / host / engagement / comments link; signal right: score bar + stars)
     seen-filter.astro         # すべて / 既出を除く toggle; flips html[data-seen-filter], persisted in localStorage
-    date-nav.astro            # ← 前日 / current date (plain text) / 翌日 →
+    date-nav.astro            # ← 前日 / current date (permalink) / 翌日 →, rendered at top and bottom
   utils/runs.ts               # sortRunsByDateDesc, adjacentRuns, date formatters (pure, unit-tested)
   utils/host.ts               # formatHost — hostname without www. for the meta row
   utils/markets.ts            # sortMarketsGlobalFirst — display order of the markets (pure, unit-tested)
   utils/paragraphs.ts         # splitParagraphs — blank-line split for the summary folds (pure, unit-tested)
   utils/score.ts              # scoreLevel: 80+/60+ thresholds → hi/mid/lo score emphasis
   utils/seen.ts               # countSeen — 既出 item count for the seen filter (pure, unit-tested)
+  utils/highlights.ts         # itemAnchorId / highlightAnchors — hero highlight → item row anchors (pure, unit-tested)
+  utils/stars.ts              # interestStars — ★ counts; level 1 renders nothing (pure, unit-tested)
   utils/service-colors.ts     # Upstream brand colors, shared by service-card and source-toc
-  styles/global.css           # Imports @kkhys/styles (uchu + tokens + base); app-local --c-star / --c-faint
+  styles/global.css           # Imports @kkhys/styles (uchu + tokens + base); app-local --c-faint and the sticky chrome heights
   __tests__/                  # Vitest unit tests
 public/                       # robots.txt, manifest, static favicons (generated from dev routes)
 ```
@@ -67,7 +70,9 @@ Consumed as source (no build step).
 - The 既出 filter is CSS-driven: rows carry an `is-seen` class, per-service counts are prerendered for both modes (`service-card.astro` renders the total and the fresh count and swaps them with CSS), and `html[data-seen-filter="hide"]` switches everything. JS only flips that attribute and persists the choice (`trends:seen-filter`); without JS the toggle stays hidden and the site behaves as before.
 - `service-card.astro` has two empty states: 該当なし when a service returned no items with `status: "ok"`, and すべて既出 (shown only in hide mode) when every item is 既出, so a fully-filtered service keeps more than a bare header.
 - The source TOC descends from apps/me's `toc.astro` but stays visible instead of expanding on hover; the observer keeps one entry highlighted while scrolling. Anchor ids are `{market.id}` on h2 and `{market.id}-{service.id}` on h3.
-- `about.astro` is the visitor-facing spec of the score (engagement percentile 75% + freshness decay 25%, hi/mid/lo at 80 / 60), the ★1-3 interest stars, and the 既出 / summary fold terms. Keep it in step with the skill's scoring when that changes.
+- `about.astro` is the visitor-facing spec of the score (engagement percentile 75% + freshness decay 25%, hi/mid/lo at 80 / 60 shown as the fill of a small bar), the interest stars (★★★ / ★★☆; level 1 renders no stars), and the 既出 / summary fold terms. Keep it in step with the skill's scoring when that changes.
+- Sticky chrome: `digest-toolbar` sticks at the top of `main`, each `service-card` header sticks below it, and every anchor target (h2 / h3 / item row) offsets its `scroll-margin-top` by `--toolbar-height` / `--service-header-height` from `global.css`. The toolbar's hairline appears only while stuck, via a `scroll-state()` container query.
+- Hero highlights link to their own row: `highlightAnchors` (`utils/highlights.ts`) resolves each highlight URL to an item anchor (`{market}-{service}-{rank}`), matching the service label first because the same URL can appear in several services; the matched rows show a ハイライト chip.
 - Service dot colors are upstream brand colors, intentionally not mapped to the uchu palette.
 - `runs/**` JSON is excluded from oxlint/oxfmt via root `ignorePatterns` — data, not code.
 

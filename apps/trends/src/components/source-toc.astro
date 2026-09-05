@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 
+import { countSeen } from "#/utils/seen";
 import { SERVICE_COLORS } from "#/utils/service-colors";
 
 type Market = CollectionEntry<"runs">["data"]["markets"][number];
@@ -16,19 +17,35 @@ interface TocEntry {
   id: string;
   label: string;
   color: string | undefined;
+  /* Item counts, so the reader can size a section before jumping. Both are
+     prerendered and swapped by the 既出 filter; fresh is undefined when the
+     service has nothing to hide. */
+  total: number | undefined;
+  fresh: number | undefined;
 }
 
 const entries: TocEntry[] = [];
 
 for (const market of markets) {
-  entries.push({ depth: 2, id: market.id, label: market.label, color: undefined });
+  entries.push({
+    depth: 2,
+    id: market.id,
+    label: market.label,
+    color: undefined,
+    total: undefined,
+    fresh: undefined,
+  });
 
   for (const service of market.services) {
+    const seen = countSeen(service.items);
+
     entries.push({
       depth: 3,
       id: `${market.id}-${service.id}`,
       label: service.label,
       color: SERVICE_COLORS[service.id] ?? "var(--c-sub)",
+      total: service.items.length,
+      fresh: seen > 0 ? service.items.length - seen : undefined,
     });
   }
 }
@@ -38,10 +55,18 @@ for (const market of markets) {
   <nav class="toc scroller-thin" aria-label="ソース一覧">
     <ul class="toc-list">
       {entries.map((entry) => (
-        <li class:list={["toc-item", `toc-item--depth-${entry.depth}`]}>
+        <li
+          class:list={[
+            "toc-item",
+            `toc-item--depth-${entry.depth}`,
+            { "toc-item--has-seen": entry.fresh !== undefined },
+          ]}
+        >
           <a href={`#${entry.id}`} class="toc-link">
             {entry.color && <span class="toc-dot" style={`background:${entry.color}`} />}
             <span class="toc-link-text palt">{entry.label}</span>
+            {entry.total !== undefined && <span class="toc-count total">{entry.total}</span>}
+            {entry.fresh !== undefined && <span class="toc-count fresh">{entry.fresh}</span>}
           </a>
         </li>
       ))}
@@ -126,6 +151,24 @@ for (const market of markets) {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+  }
+
+  .toc-count {
+    color: var(--c-faint);
+    font-size: var(--fs-2xs);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toc-count.fresh {
+    display: none;
+  }
+
+  :global(html[data-seen-filter="hide"]) .toc-item--has-seen .toc-count.total {
+    display: none;
+  }
+
+  :global(html[data-seen-filter="hide"]) .toc-item--has-seen .toc-count.fresh {
+    display: inline;
   }
 </style>
 

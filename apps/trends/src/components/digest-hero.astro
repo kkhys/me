@@ -5,9 +5,11 @@ import Budoux from "@kkhys/ui/budoux.astro";
 
 interface Props {
   digest: CollectionEntry<"runs">["data"]["digest"];
+  /* Highlight URL → anchor of its row in the list below (see highlightAnchors). */
+  anchors: ReadonlyMap<string, string>;
 }
 
-const { digest } = Astro.props;
+const { digest, anchors } = Astro.props;
 ---
 
 <section class="hero">
@@ -19,25 +21,36 @@ const { digest } = Astro.props;
   </Budoux>
   <ol class="highlights">
     {
-      digest.highlights.map((highlight, i) => (
-        <li>
-          <span class="hl-rank">{i + 1}</span>
-          <div class="hl-body">
-            <Budoux>
-              <span class="hl-title palt">
-                <a href={highlight.url} target="_blank" rel="noreferrer">
-                  {highlight.title_ja || highlight.title}
-                </a>
-                <span class="hl-service">{highlight.service_label}</span>
-              </span>
-            </Budoux>
-            {highlight.title_ja && <span class="hl-original">{highlight.title}</span>}
-            <Budoux>
-              <span class="hl-reason">{highlight.reason}</span>
-            </Budoux>
-          </div>
-        </li>
-      ))
+      digest.highlights.map((highlight, i) => {
+        const anchor = anchors.get(highlight.url);
+
+        return (
+          <li>
+            <span class="hl-rank">{i + 1}</span>
+            <div class="hl-body">
+              <Budoux>
+                <span class="hl-title palt">
+                  <a href={highlight.url} target="_blank" rel="noreferrer">
+                    {highlight.title_ja || highlight.title}
+                    <span class="sr-only">(新しいタブで開く)</span>
+                  </a>
+                  {anchor ? (
+                    <a class="hl-service is-link" href={`#${anchor}`} title="一覧の該当記事へ移動">
+                      {highlight.service_label}
+                    </a>
+                  ) : (
+                    <span class="hl-service">{highlight.service_label}</span>
+                  )}
+                </span>
+              </Budoux>
+              {highlight.title_ja && <span class="hl-original">{highlight.title}</span>}
+              <Budoux>
+                <span class="hl-reason">{highlight.reason}</span>
+              </Budoux>
+            </div>
+          </li>
+        );
+      })
     }
   </ol>
 </section>
@@ -106,6 +119,15 @@ const { digest } = Astro.props;
     line-height: 1.6;
   }
 
+  .hl-original {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
   .hl-service {
     font-size: var(--fs-2xs);
     font-weight: var(--fw-normal);
@@ -117,13 +139,14 @@ const { digest } = Astro.props;
     white-space: nowrap;
   }
 
-  .hl-original {
-    display: block;
-    margin-top: 0.15rem;
-    color: var(--c-faint);
-    font-size: var(--fs-xs);
-    line-height: 1.5;
-    overflow-wrap: anywhere;
+  .hl-service.is-link::after {
+    content: " ↓";
+  }
+
+  .hl-service.is-link:hover {
+    color: var(--c-text);
+    text-decoration: none;
+    border-color: var(--c-sub);
   }
 
   .hl-reason {

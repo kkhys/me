@@ -21,10 +21,10 @@ const scoreItems = [
   },
 ];
 const scoreNote =
-  "単位の違うソースを絶対値で比べず、ソース内の相対評価に正規化しているため、サービス間でスコアを直接比較することはできません。表示の濃淡は 80以上 / 60以上 / それ未満の3段階です。";
+  "単位の違うソースを絶対値で比べず、ソース内の相対評価に正規化しているため、サービス間でスコアを直接比較することはできません。数字の横のバーの濃さは 80以上 / 60以上 / それ未満の3段階です。";
 
 const starsIntro =
-  "タイトルの下に付く星は、運営者の興味プロフィールと記事のテーマがどの程度合っているかを示す注釈です。";
+  "記事の右下に付く星は、運営者の興味プロフィールと記事のテーマがどの程度合っているかを示す注釈です。合致が弱い記事には星を付けていません。";
 const starsNote =
   "星は並び順に影響しません。一覧は世間のトレンドをそのまま映し、個人の興味は星の注釈と冒頭のハイライトの選定にだけ反映されます。なお、除外テーマに該当する記事は掲載されません。";
 
@@ -88,9 +88,9 @@ const glossary = [
       <dl class="legend">
         <dt><span class="stars">★★★</span></dt>
         <dd>関心の高いテーマに合致</dd>
-        <dt><span class="stars">★★</span></dt>
+        <dt><span class="stars">★★☆</span></dt>
         <dd>中程度のテーマに合致</dd>
-        <dt><span class="stars">★</span></dt>
+        <dt><span class="stars">なし</span></dt>
         <dd>合致が弱い、または該当なし</dd>
       </dl>
       <p>{starsNote}</p>
@@ -203,7 +203,6 @@ const glossary = [
   }
 
   .stars {
-    color: var(--c-star);
-    letter-spacing: 1px;
+    color: var(--c-sub);
   }
 </style>

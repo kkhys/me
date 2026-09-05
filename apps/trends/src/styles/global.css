@@ -11,8 +11,14 @@
   :root {
     color-scheme: light dark;
 
-    --c-star: var(--uchu-orange-5);
-    --c-faint: light-dark(var(--uchu-gray-4), var(--uchu-yin-7));
+    /* Decorative only (rank numbers, empty stars): 2.7:1 light / 3.7:1 dark.
+       Text that must be read uses --c-sub. */
+    --c-faint: light-dark(var(--uchu-gray-7), var(--uchu-yin-6));
+
+    /* Sticky chrome heights, shared by the toolbar, the service headers and
+       the scroll-margin of every anchor target beneath them. */
+    --toolbar-height: 2.5rem;
+    --service-header-height: 2.75rem;
   }
 }
 

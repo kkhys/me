@@ -5,6 +5,7 @@ import Budoux from "@kkhys/ui/budoux.astro";
 import { formatHost } from "#/utils/host";
 import { splitParagraphs } from "#/utils/paragraphs";
 import { scoreLevel } from "#/utils/score";
+import { interestStars } from "#/utils/stars";
 
 type Item =
   CollectionEntry<"runs">["data"]["markets"][number]["services"][number]["items"][number];
@@ -12,9 +13,12 @@ type Item =
 interface Props {
   item: Item;
   rank: number;
+  /* Row id; the hero's service chips jump here. */
+  anchorId: string;
+  highlighted: boolean;
 }
 
-const { item, rank } = Astro.props;
+const { item, rank, anchorId, highlighted } = Astro.props;
 
 const host = formatHost(item.url);
 const hasDiscussionLink = item.comments_url !== "" && item.comments_url !== item.url;
@@ -24,9 +28,13 @@ const discussionParagraphs = splitParagraphs(item.discussion_summary);
 const foldParagraphs =
   discussionParagraphs.length > 0 ? discussionParagraphs : splitParagraphs(item.article_summary);
 const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "記事の要約";
+const stars = interestStars(item.interest);
 ---
 
-<article class:list={["item", { "is-seen": item.seen_before }]}>
+<article
+  class:list={["item", { "is-seen": item.seen_before, "is-highlight": highlighted }]}
+  id={anchorId}
+>
   <span class="rank">{rank}</span>
   <div class="body">
     <Budoux>
@@ -48,33 +56,49 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
       foldParagraphs.length > 0 && (
         <details class="discussion">
           <summary>{foldLabel}</summary>
-          <Budoux>
-            {foldParagraphs.map((paragraph) => (
-              <p>{paragraph}</p>
-            ))}
-          </Budoux>
+          <div class="fold-body">
+            <Budoux>
+              {foldParagraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </Budoux>
+          </div>
         </details>
       )
     }
     <div class="meta">
-      <span class:list={["score", scoreLevel(item.score)]} title="スコア">
-        <span class="sr-only">スコア </span>{item.score}
+      <span class="facts">
+        {highlighted && <span class="chip highlight">ハイライト</span>}
+        {item.category && <span class="chip">{item.category}</span>}
+        {host && <span>{host}</span>}
+        {item.engagement_label && <span>{item.engagement_label}</span>}
+        {item.seen_before && <span class="seen">既出</span>}
+        {
+          hasDiscussionLink && (
+            <a class="comments" href={item.comments_url} target="_blank" rel="noreferrer">
+              コメントを見る<span class="sr-only">(新しいタブで開く)</span>
+            </a>
+          )
+        }
       </span>
-      <span class="stars" title="興味マッチ度">
-        <span class="sr-only">興味マッチ度 {item.interest}</span>
-        <span aria-hidden="true">{"★".repeat(item.interest)}</span>
+      <span class="signal">
+        <span
+          class:list={["score", scoreLevel(item.score)]}
+          title="スコア: ソース内の相対的な盛り上がり (0-100)"
+        >
+          <span class="sr-only">スコア </span>
+          <span class="score-bar" aria-hidden="true" style={`--score:${item.score}`}></span>
+          {item.score}
+        </span>
+        {
+          stars && (
+            <span class="stars" title="興味マッチ度">
+              <span class="sr-only">興味マッチ度 {item.interest}</span>
+              <span aria-hidden="true">{"★".repeat(stars.filled) + "☆".repeat(stars.empty)}</span>
+            </span>
+          )
+        }
       </span>
-      {item.category && <span class="chip">{item.category}</span>}
-      {host && <span>{host}</span>}
-      {item.engagement_label && <span>{item.engagement_label}</span>}
-      {item.seen_before && <span class="seen">既出</span>}
-      {
-        hasDiscussionLink && (
-          <a class="comments" href={item.comments_url} target="_blank" rel="noreferrer">
-            コメントを見る<span class="sr-only">(新しいタブで開く)</span>
-          </a>
-        )
-      }
     </div>
   </div>
 </article>
@@ -85,6 +109,8 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
     gap: var(--space-3);
     padding: var(--space-4) var(--space-1);
     border-bottom: 1px solid var(--c-border);
+    /* Lands below the two sticky bars when jumped to from the hero. */
+    scroll-margin-top: calc(var(--toolbar-height) + var(--service-header-height) + var(--space-2));
   }
 
   :global(html[data-seen-filter="hide"]) .item.is-seen {
@@ -101,8 +127,20 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
     padding-top: var(--space-1);
   }
 
+  /* Give the gutter back to the text on phones. */
+  @media (width < 640px) {
+    .item {
+      gap: var(--space-2);
+    }
+
+    .rank {
+      width: 1rem;
+    }
+  }
+
   .body {
     min-width: 0;
+    flex: 1;
   }
 
   .title {
@@ -113,7 +151,7 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
 
   .original-title {
     margin: 0.15rem 0 0;
-    color: var(--c-faint);
+    color: var(--c-sub);
     font-size: var(--fs-xs);
     line-height: 1.5;
     overflow-wrap: anywhere;
@@ -133,6 +171,7 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
   }
 
   .discussion summary {
+    position: relative;
     cursor: pointer;
     width: fit-content;
   }
@@ -145,12 +184,27 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
     content: "▾ ";
   }
 
+  /* 12px text is an 18px target; extend it to the 24px minimum without
+     changing the visual. */
+  .discussion summary::after {
+    content: "";
+    position: absolute;
+    inset: -0.25rem 0;
+  }
+
   .discussion summary:hover {
     color: var(--c-text);
   }
 
+  /* A hairline marks where the fold ends and the meta row begins. */
+  .fold-body {
+    margin-top: var(--space-2);
+    padding-left: var(--space-3);
+    border-left: 1px solid var(--c-border);
+  }
+
   .discussion p {
-    margin: 0.3rem 0 0;
+    margin: 0;
     font-size: 0.8125rem;
     line-height: 1.7;
   }
@@ -159,36 +213,71 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
     margin-top: 0.6rem;
   }
 
+  /* Facts about the article on the left, this site's judgement on the right. */
   .meta {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-1) 0.875rem;
     align-items: center;
+    gap: var(--space-1) 0.875rem;
+    margin-top: var(--space-2);
     color: var(--c-sub);
     font-size: var(--fs-xs);
-    margin-top: var(--space-2);
+  }
+
+  /* Facts wrap as individual flex items so the signal can share their last
+     line when there is room, instead of always dropping below them. */
+  .facts {
+    display: contents;
+  }
+
+  .signal {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-left: auto;
   }
 
   .score {
-    font-weight: var(--fw-medium);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
     font-variant-numeric: tabular-nums;
   }
 
+  .score-bar {
+    position: relative;
+    width: 2.5rem;
+    height: 3px;
+    border-radius: var(--radius-full);
+    background: var(--c-border);
+    overflow: hidden;
+  }
+
+  .score-bar::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: calc(var(--score) * 1%);
+    border-radius: inherit;
+    background: var(--bar);
+  }
+
   .score.hi {
-    color: var(--c-text);
+    --bar: var(--c-text);
   }
 
   .score.mid {
-    color: var(--c-sub);
+    --bar: var(--c-sub);
   }
 
   .score.lo {
-    color: var(--c-faint);
+    --bar: var(--c-faint);
   }
 
+  /* Filled vs outline glyphs carry the level; lightness alone was under
+     2:1 between the two states. */
   .stars {
-    color: var(--c-star);
-    letter-spacing: 1px;
+    color: var(--c-sub);
   }
 
   .chip {
@@ -197,6 +286,11 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
     padding: 0 var(--space-2);
     font-size: var(--fs-2xs);
     line-height: 1.1rem;
+  }
+
+  .chip.highlight {
+    border-color: var(--c-sub);
+    color: var(--c-text);
   }
 
   .seen {

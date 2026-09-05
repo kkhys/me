@@ -1,11 +1,24 @@
+---
+const path = Astro.url.pathname.replace(/\/$/u, "") || "/";
+const links = [
+  { href: "/archive", label: "Archive" },
+  { href: "/about", label: "About" },
+];
+---
+
 <header>
   <div class="site-inner">
     <span class="brand">
       <a href="/">Trend Digest</a>
     </span>
     <nav class="menu" aria-label="サイト内リンク">
-      <a href="/archive">Archive</a>
-      <a href="/about">About</a>
+      {
+        links.map(({ href, label }) => (
+          <a href={href} aria-current={path === href ? "page" : undefined}>
+            {label}
+          </a>
+        ))
+      }
     </nav>
   </div>
 </header>
@@ -42,7 +55,12 @@
     color: var(--c-sub);
   }
 
-  .menu a:hover {
+  .menu a:hover,
+  .menu a[aria-current="page"] {
     color: var(--c-text);
+  }
+
+  .menu a[aria-current="page"] {
+    font-weight: var(--fw-medium);
   }
 </style>
