@@ -16,6 +16,7 @@ base_score = round(100 × (0.75 × engagement_pct + 0.25 × freshness))
 - `engagement_pct`: サービス内バッチでのエンゲージメントのpercentile (0-1)。
   同値は順位範囲の平均percentileを共有する (同値の並び順で順位が反転しない)。
   エンゲージメントの定義はソースごと:
+
   | ソース                    | engagement                                                              |
   | ------------------------- | ----------------------------------------------------------------------- |
   | Hacker News / Lobsters    | points + comments÷2                                                     |
@@ -27,6 +28,10 @@ base_score = round(100 × (0.75 × engagement_pct + 0.25 × freshness))
   | GitHub Trending           | 当日のstar増加数                                                        |
   | Techmeme                  | トップページの掲載順位 (編集部ランキング。カウント指標なし)             |
   | Hugging Face Daily Papers | upvotes + comments÷2                                                    |
+
+  dev.to と Hugging Face Daily Papers は 2026-09-05 から既定で無効
+  (`disabled_sources`)。行は過去分の説明と再有効化のために残している。
+
 - `freshness`: 公開からの経過時間による減衰。
   <6h: 1.0 / <12h: 0.9 / <24h: 0.75 / <48h: 0.55 / それ以降: 0.35 /
   不明 (GitHub等): 0.75

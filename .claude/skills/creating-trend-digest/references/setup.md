@@ -1,8 +1,12 @@
 # セットアップ
 
-認証不要の10ソース (Hacker News, Lobsters, Reddit, GitHub Trending, dev.to,
-Techmeme, Hugging Face Daily Papers, はてなブックマーク, Zenn, Qiita) のみで
-動作する。追加設定なしで使い始められる。
+認証不要の8ソース (Hacker News, Lobsters, Reddit, GitHub Trending, Techmeme,
+はてなブックマーク, Zenn, Qiita) のみで動作する。追加設定なしで使い始められる。
+
+dev.to と Hugging Face Daily Papers は 2026-09-05 に対象から外した。fetcher
+は残してあり、config.json の `disabled_sources` (既定で `devto`, `hfpapers`)
+で無効化しているだけなので、復活させるには該当 id を外せばよい。無効化した
+ソースは raw.json に一切現れない (skipped 扱いにもならない)。
 
 ## Qiita トークン (任意)
 
