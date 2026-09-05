@@ -37,6 +37,11 @@
       "automerge": false
     },
     {
+      "description": "TypeScript 7 is the native (tsgo) rewrite and no longer exposes the legacy compiler API that @astrojs/language-server needs for `astro check`. Lift once the language server supports it.",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7"
+    },
+    {
       "groupName": "Expressive Code",
       "matchPackageNames": ["astro-expressive-code", "@expressive-code/**"],
       "automerge": true
