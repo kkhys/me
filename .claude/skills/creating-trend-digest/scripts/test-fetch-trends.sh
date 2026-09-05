@@ -3,19 +3,21 @@ set -euo pipefail
 
 # Offline tests for fetch_trends.py: the pure parsers of the sources whose
 # feeds carry no machine-readable engagement (Techmeme, Reddit, HF Daily
-# Papers), tie handling in scoring, and backfill mode (--date) — the day
-# window, source selection, and the guards around state.
+# Papers), tie handling in scoring, disabled_sources, and backfill mode
+# (--date) — the day window, source selection, and the guards around state.
 #
-# Backfill reaches only Hacker News and Hugging Face Daily Papers, so it
-# silently produces a much thinner digest than a live run. The guards tested
-# here are what keep that from doing damage: overwriting a full 10-source
-# raw.json with a reduced one, or rewriting seen.json with an out-of-order
-# date so later runs mislabel what is new.
+# Backfill reaches only Hacker News and Hugging Face Daily Papers (the latter
+# disabled by default), so it silently produces a much thinner digest than a
+# live run. The guards tested here are what keep that from doing damage:
+# overwriting a full raw.json with a reduced one, or rewriting seen.json with
+# an out-of-order date so later runs mislabel what is new.
 
 TEST_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 readonly TEST_DIR
 
 python3 - "$TEST_DIR" <<'PY'
+import contextlib
+import io
 import json
 import sys
 import tempfile
@@ -216,6 +218,7 @@ def failing_fetch(cfg, start, end):
 def run_main(state_dir, argv_extra, fetchers):
     ft.BACKFILL_FETCHERS = fetchers
     ft.attach_comments = lambda services, cfg: None
+    ft.attach_article_content = lambda services, cfg: None
     sys.argv = ["fetch_trends.py", "--skill-dir", str(SKILL_DIR),
                 "--state-dir", str(state_dir), *argv_extra]
     return ft.main()
@@ -223,6 +226,7 @@ def run_main(state_dir, argv_extra, fetchers):
 
 original_fetchers = dict(ft.BACKFILL_FETCHERS)
 original_attach = ft.attach_comments
+original_attach_content = ft.attach_article_content
 original_live = [s["fetch"] for s in ft.SERVICES]
 # The live path must never reach the network from a test.
 for svc in ft.SERVICES:
@@ -242,8 +246,10 @@ try:
         check("fetches the historical source", by_id["hackernews"]["status"] == "ok")
         check("skips sources with no archive",
               all(by_id[i]["status"] == "skipped"
-                  for i in ("lobsters", "reddit", "github", "devto", "techmeme",
-                            "hfpapers", "hatena", "zenn", "qiita")))
+                  for i in ("lobsters", "reddit", "github", "techmeme",
+                            "hatena", "zenn", "qiita")))
+        check("the default config leaves dev.to and HF Papers out entirely",
+              not ({"devto", "hfpapers"} & set(by_id)), sorted(by_id))
         check("explains why they were skipped",
               by_id["zenn"]["note"] == ft.BACKFILL_NOTE, by_id["zenn"]["note"])
         check("leaves seen.json alone", not (state / "seen.json").exists())
@@ -278,9 +284,30 @@ try:
         raw = json.loads((state / "runs" / today / "raw.json").read_text(encoding="utf-8"))
         check("treats --date today as a live run", raw["backfill"] is False)
         check("writes seen.json on a live run", (state / "seen.json").exists())
+
+    with tempfile.TemporaryDirectory() as tmp:
+        state = Path(tmp)
+        today = datetime.now().astimezone().strftime("%Y-%m-%d")
+        (state / "config.json").write_text(
+            json.dumps({"disabled_sources": ["zenn", "nosuch"]}), encoding="utf-8")
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            rc = run_main(state, [], {})
+        raw = json.loads((state / "runs" / today / "raw.json").read_text(encoding="utf-8"))
+        ids = [s["id"] for s in raw["services"]]
+        check("succeeds with a source disabled", rc == 0, rc)
+        check("drops a disabled source from the live run", "zenn" not in ids, ids)
+        check("keeps every other source", set(ids) == service_ids - {"zenn"}, sorted(ids))
+        check("never reports a disabled source as skipped",
+              all(s["status"] == "ok" for s in raw["services"]),
+              [(s["id"], s["status"]) for s in raw["services"]])
+        check("names the disabled sources in the summary",
+              "DISABLED: zenn (" in out.getvalue(), out.getvalue())
+        check("warns about an unknown id", "nosuch" in out.getvalue(), out.getvalue())
 finally:
     ft.BACKFILL_FETCHERS = original_fetchers
     ft.attach_comments = original_attach
+    ft.attach_article_content = original_attach_content
     for svc, fetch in zip(ft.SERVICES, original_live):
         svc["fetch"] = fetch
 

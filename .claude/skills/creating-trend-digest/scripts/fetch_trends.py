@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Fetch trending items for the creating-trend-digest skill.
 
-Sources: Hacker News, Lobsters, Reddit, GitHub Trending, dev.to, Techmeme,
-Hugging Face Daily Papers, Hatena Bookmark, Zenn, Qiita. Stdlib only.
+Sources: Hacker News, Lobsters, Reddit, GitHub Trending, Techmeme, Hatena
+Bookmark, Zenn, Qiita. dev.to and Hugging Face Daily Papers keep their
+fetchers but sit in config.json's disabled_sources by default; a disabled
+source is left out of the run entirely. Stdlib only.
 
 Each source failure is isolated: the service is reported with status
 "error" and the rest of the run continues, so one flaky API never kills
@@ -740,6 +742,12 @@ def main():
     except json.JSONDecodeError as e:
         return f"config.json が不正な JSON です ({config_path}): {e}"
     disabled = set(cfg.get("disabled_sources", []))
+    unknown = sorted(disabled - {s["id"] for s in SERVICES})
+    if unknown:
+        print(f"WARNING: disabled_sources に未知の id があります: {', '.join(unknown)}")
+    # Left out of the run rather than reported as skipped: a skipped service
+    # still renders a notice on the site, a disabled one must not show at all.
+    active = [s for s in SERVICES if s["id"] not in disabled]
 
     today = datetime.now().astimezone().strftime("%Y-%m-%d")
     target = args.date or today
@@ -765,8 +773,6 @@ def main():
     seen = json.loads(seen_path.read_text(encoding="utf-8")) if seen_path.exists() else {}
 
     def run(svc):
-        if svc["id"] in disabled:
-            return {"status": "skipped", "note": "config.json の disabled_sources で無効化", "items": []}
         fetch = BACKFILL_FETCHERS.get(svc["id"]) if backfill else svc["fetch"]
         if fetch is None:
             return {"status": "skipped", "note": BACKFILL_NOTE, "items": []}
@@ -776,11 +782,11 @@ def main():
             return {"status": "error", "note": f"{type(e).__name__}: {e}", "items": []}
 
     with cf.ThreadPoolExecutor(max_workers=8) as pool:
-        results = list(pool.map(run, SERVICES))
+        results = list(pool.map(run, active))
 
     keep = cfg.get("items_per_service", 10) * 2
     services = []
-    for svc, res in zip(SERVICES, results):
+    for svc, res in zip(active, results):
         items = res.get("items", [])
         add_base_scores(items, now)
         items.sort(key=lambda x: x.get("base_score", 0), reverse=True)
@@ -815,6 +821,8 @@ def main():
         print(f"BOOTSTRAPPED: {', '.join(created)} を {args.state_dir} に作成 (要ユーザー確認)")
     if backfill:
         print(f"BACKFILL: {target} を遡って取得 (対応ソースのみ。他は skipped)")
+    if disabled - set(unknown):
+        print(f"DISABLED: {', '.join(sorted(disabled - set(unknown)))} (config.json の disabled_sources)")
     for s in services:
         note = f" — {s['note']}" if s["note"] else ""
         print(f"{s['id']:<11} {s['status']:<8} {len(s['items']):>3} items{note}")

@@ -17,8 +17,9 @@ const item = z.object({
   summary: z.string().default(""),
   discussion_summary: z.string().default(""),
   // Multi-paragraph summary of the article body itself, for sources without
-  // a comment fetcher (GitHub / dev.to / Zenn / Qiita). Mutually exclusive
-  // with discussion_summary. Older runs predate the field.
+  // a comment fetcher (GitHub / Zenn / Qiita; dev.to / Hugging Face in
+  // older runs). Mutually exclusive with discussion_summary. Older runs
+  // predate the field.
   article_summary: z.string().default(""),
   seen_before: z.boolean().default(false),
   extra: z.string().default(""),

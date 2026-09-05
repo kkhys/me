@@ -3,7 +3,8 @@
    dev.to's brand black and Techmeme's dark teal vanish on the dark
    background, so they flip to lighter variants there; Hugging Face's
    yellow washes out on the light background, so it darkens to the
-   orange from the same logo gradient. */
+   orange from the same logo gradient. devto / hfpapers stay for the runs
+   up to 2026-09-05, which still render them. */
 export const SERVICE_COLORS: Record<string, string> = {
   hackernews: "#ff6600",
   lobsters: "#ac130d",
