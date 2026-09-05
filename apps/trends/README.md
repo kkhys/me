@@ -2,7 +2,7 @@
 
 Daily tech trend digest at [trends.kkhys.me](https://trends.kkhys.me).
 
-One JSON file per day lives in `src/content/runs/`, validated by the zod schema in `src/content.config.ts` at build time. The data is produced and published end-to-end (write → commit → deploy → push) by the `creating-trend-digest` Claude Code skill.
+One JSON file per day lives in `src/content/runs/`, validated by the zod schema in `src/content.config.ts` at build time. The data is produced and published end-to-end (write → commit → deploy → push) by the `creating-trend-digest` Claude Code skill (`.claude/skills/creating-trend-digest` at the repo root).
 
 ## Pages
 

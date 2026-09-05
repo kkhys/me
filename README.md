@@ -86,7 +86,7 @@ Per-app commands are documented in each app's README ([me](./apps/me/README.md),
 
 - `.github/workflows/ci.yml` — runs on pull requests and the merge queue: lint, test, type check, and build across the workspace against fixtures.
 - `.github/workflows/deploy-memo.yml` — deploys memo to Cloudflare Pages on pushes to main that touch memo or shared packages.
-- me, lgtm, diary, trends, design, and art are built and deployed locally via `pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary` / `pnpm deploy:trends` / `pnpm deploy:design` / `pnpm deploy:art`. trends is normally published end-to-end by the `creating-trend-digest` Claude Code skill (data commit → deploy → push).
+- me, lgtm, diary, trends, design, and art are built and deployed locally via `pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary` / `pnpm deploy:trends` / `pnpm deploy:design` / `pnpm deploy:art`. trends is normally published end-to-end by the `creating-trend-digest` Claude Code skill in `.claude/skills/` (data commit → deploy → push).
 
 ## License
 

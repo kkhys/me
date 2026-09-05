@@ -41,7 +41,7 @@ Run from the repo root:
 
 - `.github/workflows/ci.yml` — runs on PRs and the merge queue. Lint → test → type check → build across the workspace against fixtures (all apps read `USE_FIXTURE_DATA`); content submodules are skipped. The `skip-ci` label opts out.
 - `.github/workflows/deploy-memo.yml` — on push to main touching `apps/memo/**` or `packages/**`, re-runs memo's checks then deploys to Cloudflare Pages.
-- me, lgtm, diary, trends, design, and art are built and deployed locally (`pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary` / `pnpm deploy:trends` / `pnpm deploy:design` / `pnpm deploy:art`), not from CI. trends is normally published end-to-end by the `creating-trend-digest` skill (data commit → deploy → push).
+- me, lgtm, diary, trends, design, and art are built and deployed locally (`pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary` / `pnpm deploy:trends` / `pnpm deploy:design` / `pnpm deploy:art`), not from CI. trends is normally published end-to-end by the `creating-trend-digest` skill in `.claude/skills/` (data commit → deploy → push).
 
 ## Gotchas
 
