@@ -1,3 +1,5 @@
+// Augments mdast `Data` with `hProperties`; no longer reachable transitively since @astrojs/mdx v8.
+/// <reference types="mdast-util-to-hast" />
 import type { Root } from "mdast";
 import { SKIP, visit } from "unist-util-visit";
 import { isBareExternalLink } from "./mdast-util-node-is";
