@@ -12,7 +12,7 @@ const scoreItems = [
   {
     term: "エンゲージメント（75%）",
     description:
-      "同じソース・同じ日の記事集合の中でのパーセンタイル。指標はソースごとに異なり、Hacker News / Lobsters は points とコメント数、はてなブックマークはブックマーク数、Zenn はいいねとブクマ、Qiita は LGTM とストック、dev.to はリアクションとコメント、GitHub Trending は当日のスター増加数、Hugging Face Daily Papers は upvote とコメント数を使います。カウント指標のない Reddit と Techmeme は、それぞれの一覧での掲載順位（Reddit の top ランキング / Techmeme の編集部による掲載順）をそのまま使います。",
+      "同じソース・同じ日の記事集合の中でのパーセンタイル。指標はソースごとに異なり、Hacker News / Lobsters は points とコメント数、はてなブックマークはブックマーク数、Zenn はいいねとブクマ、Qiita は LGTM とストック、GitHub Trending は当日のスター増加数を使います（過去分の dev.to はリアクションとコメント、Hugging Face Daily Papers は upvote とコメント数）。カウント指標のない Reddit と Techmeme は、それぞれの一覧での掲載順位（Reddit の top ランキング / Techmeme の編集部による掲載順）をそのまま使います。",
   },
   {
     term: "鮮度（25%）",
@@ -45,7 +45,7 @@ const glossary = [
   {
     term: "記事の要約",
     description:
-      "GitHub Trending / dev.to / Zenn / Qiita / Hugging Face Daily Papers の記事に付く折りたたみ。コメント欄の取得に対応していないソースのため、代わりに記事本文（README や論文アブストラクト）の要点を2-3段落でまとめています。なお Techmeme は見出しと概要が記事の要点を兼ねるため、折りたたみは付きません。",
+      "GitHub Trending / Zenn / Qiita（過去分では dev.to / Hugging Face Daily Papers も）の記事に付く折りたたみ。コメント欄の取得に対応していないソースのため、代わりに記事本文（README や論文アブストラクト）の要点を2-3段落でまとめています。なお Techmeme は見出しと概要が記事の要点を兼ねるため、折りたたみは付きません。",
   },
   {
     term: "ハイライト",
@@ -62,7 +62,7 @@ const glossary = [
   <SiteHeader />
   <main class="wrap" id="main">
     <h1 class="page-title">About</h1>
-    <p>Trend Digest は、10のソースの技術トレンドを1日1回集計し、日ごとのダイジェストとして掲載する <a href="https://kkhys.me" target="_blank" rel="noreferrer">kkhys</a> の個人サイトです。グローバル（Hacker News / Lobsters / Reddit / GitHub Trending / dev.to / Techmeme / Hugging Face Daily Papers）と日本（はてなブックマーク / Zenn / Qiita）に分けて、各ソースの上位記事と要約、その日の総括を載せています。要約とハイライトの選定は Claude が行っています。</p>
+    <p>Trend Digest は、8つのソースの技術トレンドを1日1回集計し、日ごとのダイジェストとして掲載する <a href="https://kkhys.me" target="_blank" rel="noreferrer">kkhys</a> の個人サイトです。グローバル（Hacker News / Lobsters / Reddit / GitHub Trending / Techmeme）と日本（はてなブックマーク / Zenn / Qiita）に分けて、各ソースの上位記事と要約、その日の総括を載せています。要約とハイライトの選定は Claude が行っています。2026年9月5日以前のダイジェストには dev.to と Hugging Face Daily Papers も含まれています。</p>
     <p>投稿は不定期です。ダイジェストは Claude Code の <a href={SKILL_URL} target="_blank" rel="noreferrer">creating-trend-digest</a> スキルを手動で実行して生成・公開しているため、実行しなかった日の分はありません。</p>
 
     <section>
