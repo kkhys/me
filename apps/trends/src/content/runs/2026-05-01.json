@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-01",
+  "generated_at": "2026-09-06T20:36:54+09:00",
+  "digest": {
+    "headline": "Linux カーネル脆弱性 Copy Fail の事前通知問題が 548 コメント、Grok 4.3 公開と Apple の CLAUDE.md 流出が並んだ日",
+    "lead": "Hacker News では Linux カーネルの脆弱性がディストリビューションに事前通知されない仕組みを指摘した oss-security の投稿が 548 コメントを集め、前日の Copy Fail (CVE-2026-31431) をめぐる議論が続いた。xAI の Grok 4.3 は 529 コメントで価格と速度が話題になり、Apple Support アプリに CLAUDE.md が残っていた件は Apple 内部での Claude 利用をめぐる議論を呼んだ。PyTorch Lightning への Shai-Hulud 系マルウェア混入、LinkedIn によるブラウザ拡張スキャン、Rivian のデータ収集停止手順など、セキュリティとプライバシーの話題が上位の大半を占めた。",
+    "highlights": [
+      {
+        "title": "For Linux kernel vulnerabilities, there is no heads-up to distributions",
+        "title_ja": "Linux カーネルの脆弱性では、ディストリビューションへの事前通知はない",
+        "url": "https://www.openwall.com/lists/oss-security/2026/04/30/10",
+        "service_label": "Hacker News",
+        "reason": "601pt に対し 548 コメント。Copy Fail の続報で、カーネル脆弱性の開示プロセスというセキュリティテーマに該当。"
+      },
+      {
+        "title": "Grok 4.3",
+        "title_ja": "Grok 4.3",
+        "url": "https://docs.x.ai/developers/models/grok-4.3",
+        "service_label": "Hacker News",
+        "reason": "405pt / 529 コメント。新モデルの公開で、LLM の新モデル動向という高関心テーマに直撃。"
+      },
+      {
+        "title": "Apple accidentally left Claude.md files Apple Support app",
+        "title_ja": "Apple が Apple Support アプリに CLAUDE.md を誤って残していた",
+        "url": "https://x.com/aaronp613/status/2049986504617820551",
+        "service_label": "Hacker News",
+        "reason": "384pt / 321 コメント。Claude Code の設定ファイルが Apple のアプリに残っていた件で、AI コーディングエージェントのテーマに該当。"
+      },
+      {
+        "title": "Shai-Hulud Themed Malware Found in the PyTorch Lightning AI Training Library",
+        "title_ja": "PyTorch Lightning の AI 学習ライブラリに Shai-Hulud 系のマルウェアが混入",
+        "url": "https://semgrep.dev/blog/2026/malicious-dependency-in-pytorch-lightning-used-for-ai-training/",
+        "service_label": "Hacker News",
+        "reason": "465pt / 177 コメント。PyPI パッケージのサプライチェーン攻撃で、AI 学習ライブラリが標的になった。"
+      },
+      {
+        "title": "Can I disable all data collection from my vehicle?",
+        "title_ja": "自分の車両からのデータ収集をすべて無効にできますか?",
+        "url": "https://rivian.com/support/article/can-i-disable-all-data-collection-from-my-vehicle",
+        "service_label": "Hacker News",
+        "reason": "760pt / 350 コメントで当日の首位。車両のデータ収集をユーザーが止められるという珍しい公式手順。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Can I disable all data collection from my vehicle?",
+              "title_ja": "自分の車両からのデータ収集をすべて無効にできますか?",
+              "url": "https://rivian.com/support/article/can-i-disable-all-data-collection-from-my-vehicle",
+              "comments_url": "https://news.ycombinator.com/item?id=47967786",
+              "score": 94,
+              "engagement_label": "760pt / 350コメント",
+              "category": "プライバシー",
+              "interest": 1,
+              "summary": "Rivian の公式サポート記事。車両からのデータ収集と通信を無効化する手順を案内しており、自動車メーカーが公式にオプトアウトを用意した例として 760pt を集めた。",
+              "discussion_summary": "Rivian のサポートページで、車両のデータ収集とセルラー通信を無効にする方法を案内している。カナダでは設定画面のトグルで切り替えられる一方、米国ではサービス予約が必要という違いがあり、760pt / 350 コメントで当日の首位になった。\n\nコメントでは、2015 年式の Silverado で OnStar ユニットを物理的に外した経験を挙げて Rivian がユーザーのプライバシー機能として正式に対応した点を評価する声や、Zed の disable_ai 設定と同種の選択肢だという指摘があった。カナダでトグルにできるなら米国でも同じにすべきで、予約制は引き止めのためではないかという批判も出た。\n\n通信を切ると車線維持支援も無効になる点について、オプトアウトへの罰則的な設計か安全上の理由かを問う声や、アンテナを物理的に切る物理ボタンが必要だという意見もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "For Linux kernel vulnerabilities, there is no heads-up to distributions",
+              "title_ja": "Linux カーネルの脆弱性では、ディストリビューションへの事前通知はない",
+              "url": "https://www.openwall.com/lists/oss-security/2026/04/30/10",
+              "comments_url": "https://news.ycombinator.com/item?id=47965108",
+              "score": 91,
+              "engagement_label": "601pt / 548コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "oss-security への投稿。Linux カーネルの脆弱性は報告者が linux-distros ML に持ち込まない限りディストリビューションに事前通知されないと指摘し、Copy Fail の続報として 548 コメントを集めた。",
+              "discussion_summary": "Gentoo 開発者の Sam James が oss-security に投稿した内容で、Linux カーネルの脆弱性は報告者が自ら linux-distros メーリングリストに持ち込まない限りディストリビューションへの事前通知がないと説明している。前日に 466 コメントを集めた Copy Fail (CVE-2026-31431) の続報にあたる。\n\nコメントでは、ディストリビューションが修正を出す前にエクスプロイトが公開されたのは極めて無責任で、共有ホスティング事業者への被害は不明だという指摘が最上位にある。連絡の責任を報告者に負わせるのはカーネルの開発プロセスへの高い習熟を前提にしているという疑問も出た。\n\n実務面では、initcall_blacklist による回避、Ubuntu が修正済みパッチを配布しているという報告、AF_ALG がモジュールではなくカーネルに直接リンクされた環境向けの eBPF ベースの緩和策を本番で運用しているという報告があった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Grok 4.3",
+              "title_ja": "Grok 4.3",
+              "url": "https://docs.x.ai/developers/models/grok-4.3",
+              "comments_url": "https://news.ycombinator.com/item?id=47972447",
+              "score": 90,
+              "engagement_label": "405pt / 529コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "xAI が公開した Grok 4.3 のモデルドキュメント。コメントでは 202.7 tok/s の速度と入力 1.25 / 出力 2.50 ドルの価格が話題になり、405pt / 529 コメントを集めた。",
+              "discussion_summary": "xAI の開発者向けドキュメントに掲載された Grok 4.3 のモデルページ。405pt に対して 529 コメントと、議論が点数を大きく上回った。\n\nコメントでは Artificial Analysis のベンチマークページが共有され、202.7 tok/s の速度と入力 1.25 ドル / 出力 2.50 ドルの価格を、同等の競合と比べて驚くほど安いと評価する声が上位にある。知能と価格の面で Kimi K2.6 に近く、オープンモデルに欠ける AA-Omniscience 指標が高いという比較や、Cursor との提携と合わせてコーディングエージェントで競争力を持つという見方も出た。\n\n一方で、Musk が OpenAI との訴訟で Grok は OpenAI のモデルを一部使って学習したと述べたことを引き、性能とコストが中国勢のモデルに似るはずだという皮肉や、ペリカンが自転車に乗る絵の生成結果を共有する投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "How Mark Klein told the EFF about Room 641A [book excerpt]",
+              "title_ja": "Mark Klein はいかにして EFF に Room 641A を伝えたか (書籍抜粋)",
+              "url": "https://thereader.mitpress.mit.edu/the-whistleblower-who-uncovered-the-nsas-big-brother-machine/",
+              "comments_url": "https://news.ycombinator.com/item?id=47965060",
+              "score": 89,
+              "engagement_label": "710pt / 254コメント",
+              "category": "プライバシー",
+              "interest": 1,
+              "summary": "MIT Press Reader に掲載された書籍抜粋。AT&T の技術者 Mark Klein が NSA の盗聴施設 Room 641A を EFF に告発した経緯を描き、710pt / 254 コメントを集めた。",
+              "discussion_summary": "MIT Press Reader に掲載された、EFF の Cindy Cohn による書籍の抜粋。AT&T の技術者だった Mark Klein が、サンフランシスコの Room 641A で NSA が通信を複製していた証拠を EFF に持ち込んだ経緯を描いている。710pt / 254 コメント。\n\nコメントでは、独立した記事ではなく書籍の抜粋なので途中で終わるという注意や、Hepting 訴訟の舞台裏として読み応えがあり、著名人になろうとしなかった Klein への追悼の声があった。一方で、Snowden や PRISM と同時期の古い話であり、いま議論すべきは Section 702 と FISA の再承認だという指摘も出た。\n\n米国は国内の直接監視を法で禁じているため Five Eyes を抜け道にしているという主張や、両党が同じ立場を取った時点で政治的に争点でなくなったという見方もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: WhatCable, a tiny menu bar app for inspecting USB-C cables",
+              "title_ja": "Show HN: WhatCable、USB-C ケーブルを調べる小さなメニューバーアプリ",
+              "url": "https://github.com/darrylmorley/whatcable",
+              "comments_url": "https://news.ycombinator.com/item?id=47972511",
+              "score": 87,
+              "engagement_label": "566pt / 168コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "macOS のメニューバーから接続中の USB-C ケーブルの充電能力や Thunderbolt 対応を確認できる Show HN。見た目が同じケーブルの見分けに使え、566pt / 168 コメントを集めた。",
+              "discussion_summary": "macOS のメニューバーに常駐し、挿した USB-C ケーブルが 5W 充電なのか 100W と Thunderbolt 4 に対応しているのかを表示するアプリ。GitHub で公開されており、566pt / 168 コメントを集めた。\n\nコメントでは Linux 版を求める声があり、PD 情報を扱う lsucpd が紹介された。USB@1 と USB@2 の両方に同じデバイスが表示される、M1 Pro の MacBook Pro で「No USB-C ports detected」と出て動作しないといった不具合報告も複数あった。\n\nThunderbolt ケーブルが上下逆に挿されていると表示されて驚いたという投稿や、コンソールユーティリティで十分ではないかという意見も出た。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Spain's parliament will act against massive IP blockages by LaLiga",
+              "title_ja": "スペイン議会、LaLiga による大規模な IP ブロックに対処へ",
+              "url": "https://www.democrata.es/en/politics/congress-and-senate/congress-will-act-against-massive-ip-blockages-by-laliga/",
+              "comments_url": "https://news.ycombinator.com/item?id=47964034",
+              "score": 81,
+              "engagement_label": "520pt / 227コメント",
+              "category": "インフラ",
+              "interest": 1,
+              "summary": "スペイン議会が LaLiga の要請による大規模 IP ブロックに対処する方針を示した記事。Cloudflare の共有 IP が試合中に遮断され無関係なサイトが巻き込まれており、520pt / 227 コメントを集めた。",
+              "discussion_summary": "スペインのサッカーリーグ LaLiga は昨年、違法配信に使われた IP をスペインの ISP に試合中ブロックさせる裁判所命令を得ており、Cloudflare の共有 IP が対象に含まれるため無関係な多数のサイトが巻き込まれている。スペイン議会がこれに対処するという報道で、520pt / 227 コメント。\n\nコメントでは、Cloudflare の IP ブロック全体が平日でも遮断されているという報告や、CDN の IP を全国規模で司法命令で止めるのは不条理で認められるべきではなかったという意見が並んだ。海賊版対策としての効果はなかったという指摘もある。\n\n議会が「状況を注視」するだけで終わらないことを望む声や、影響を受けた側の回避策として Cloudflare WARP を使っているという報告もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Apple accidentally left Claude.md files Apple Support app",
+              "title_ja": "Apple が Apple Support アプリに CLAUDE.md を誤って残していた",
+              "url": "https://x.com/aaronp613/status/2049986504617820551",
+              "comments_url": "https://news.ycombinator.com/item?id=47973378",
+              "score": 81,
+              "engagement_label": "384pt / 321コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Apple Support アプリのバンドル内に Claude Code 用の CLAUDE.md が残っていたという X の投稿。Apple 内部での Claude 利用の証拠として 384pt / 321 コメントを集めた。",
+              "discussion_summary": "Apple Support アプリのパッケージに Claude Code の設定ファイル CLAUDE.md が含まれていたという X の投稿。384pt / 321 コメントで、Apple 内部での AI コーディングツール利用をめぐる議論になった。\n\nコメントでは、多数のコメントがあるのに中身を問う人がいないという指摘が最上位にある。Bloomberg の Mark Gurman が「Apple は現時点で Anthropic の上で動いている」と述べ、社内ツールの多くを Claude が支えていると報じた発言が引用された。Apple は AI コーディングを避けると思っていたという意外さを示す声や、macOS や iOS のコードを大量生成していないことを願う声もあった。\n\n一方で、プロジェクト構造を記述したファイルにすぎず機密ではない、OpenAI の Agent SDK にも複数モデル対応のため CLAUDE.md があると、ミスと決めつけない意見も出た。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Shai-Hulud Themed Malware Found in the PyTorch Lightning AI Training Library",
+              "title_ja": "PyTorch Lightning の AI 学習ライブラリに Shai-Hulud 系のマルウェアが混入",
+              "url": "https://semgrep.dev/blog/2026/malicious-dependency-in-pytorch-lightning-used-for-ai-training/",
+              "comments_url": "https://news.ycombinator.com/item?id=47964617",
+              "score": 78,
+              "engagement_label": "465pt / 177コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Semgrep のブログ。PyPI の lightning パッケージに Shai-Hulud を名乗るワーム型マルウェアが混入した件を解説し、AI 学習ライブラリを狙ったサプライチェーン攻撃として 465pt / 177 コメント。",
+              "discussion_summary": "Semgrep のブログ記事で、Lightning AI が公開する PyPI の lightning パッケージに Shai-Hulud を名乗るマルウェアが混入した件を解説している。Socket のブログも同じ侵害を報じ、Lightning-AI のリポジトリにはセキュリティアドバイザリが出た。465pt / 177 コメント。\n\nコメントでは、GitHub 検索で「A Mini Shai-Hulud has Appeared」という文言を含むリポジトリが 1 日で 2.2K 件作られていたという報告があり、ワームが広がっている様子が示された。Shai-Hulud が無害なパッケージをゾンビ化し続けているので依存関係は必ずピン留めするという助言もある。\n\nPyTorch 本体ではなく Lightning AI 社のライブラリだという確認や、「またか」という反応、ソフトウェアにも建築基準法のような安全基準が要るという声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "LinkedIn is scanning browser extensions",
+              "title_ja": "LinkedIn はブラウザ拡張をスキャンしている",
+              "url": "https://404privacy.com/blog/linkedin-is-scanning-your-browser-extensions-this-is-how-they-use-the-data/",
+              "comments_url": "https://news.ycombinator.com/item?id=47967262",
+              "score": 74,
+              "engagement_label": "435pt / 219コメント",
+              "category": "プライバシー",
+              "interest": 2,
+              "summary": "404privacy のブログ。LinkedIn がユーザーのブラウザ拡張を検出しデータをどう使っているかを解説しており、812 コメントを集めた過去の議論の続報として 435pt / 219 コメントを集めた。",
+              "discussion_summary": "404privacy のブログ記事で、LinkedIn の Web サイトがユーザーのインストール済みブラウザ拡張を検出し、そのデータをどう利用しているかを解説している。数週間前に 812 コメントを集めた同じ話題の続報にあたり、435pt / 219 コメントを集めた。\n\nコメントでは、記事中の「刑事捜査が開始されたことは疑いがない」という記述を引き、こうした企業には相応の批判が向けられるべきだという声があった。Safari ならこの検出を防げるのかという質問や、対策を試したら LinkedIn からログアウトされたという報告もある。\n\n自分の職場で同種の実装を求められたら拒否して職を失うか従うか、テレメトリと監視の境界をどこに引くかを問う投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Your website is not for you",
+              "title_ja": "あなたの Web サイトはあなたのためのものではない",
+              "url": "https://websmith.studio/blog/your-website-is-not-for-you/",
+              "comments_url": "https://news.ycombinator.com/item?id=47973376",
+              "score": 72,
+              "engagement_label": "268pt / 189コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "Web 制作スタジオ Websmith のブログ。企業サイトは創業者やマーケ担当ではなく訪問者のためにあると主張する記事で、268pt に対し 189 コメントと反論が多く集まった。",
+              "discussion_summary": "Web 制作スタジオ Websmith のブログ記事で、Web サイトは創業者やマーケティング担当や取締役会のためではなく訪問者のためにあると主張している。268pt に対して 189 コメントと、反論が多く集まった。\n\nコメントでは「反論: いや、自分のためだ」という短い投稿が最上位で、制作会社がそう考える理由は分かるが多くの場合は自分のためだという声が続いた。企業サイトは会社の目的を追求するもので、個人サイトは閲覧数を成功指標にしなければ自分のためのものだという整理もあった。\n\n一方で、クライアントへの不満を率直に書いた人間らしい文章で AI 生成の文章とは違うという評価や、自分で使うものにだけ関わればソフトウェアはもっと良くなるという意見も出た。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

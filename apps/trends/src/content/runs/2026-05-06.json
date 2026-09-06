@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-06",
+  "generated_at": "2026-09-06T20:48:29+09:00",
+  "digest": {
+    "headline": ".de ドメイン全体に及んだ DNSSEC 障害と GitHub の障害を草に見立てた Red Squares が上位を占め、Gemma 4 の高速化と Cloudflare のエージェント向けアカウント作成が続いた日",
+    "lead": "Hacker News では GitHub の障害を contribution graph 風に赤いマスで並べた Red Squares が 767pt で首位となり、DENIC の DNSSEC 障害で amazon.de や spiegel.de を含む .de ドメインが解決できなくなった件が 411 コメントを集めた。AI 関連では、Google が Gemma 4 に multi-token prediction のドラフタを加えて推論を高速化した記事、エージェントが Stripe 経由で Cloudflare アカウントを作りドメインを買って配備できるようになった発表、Computer Use が構造化 API より 45 倍高価だという Reflex の計測が並んだ。Star Labs の Linux ノート StarFighter 16 インチ、Susam Pal の AI の三つの逆法則、Zuckerberg が Meta の著作権侵害を自ら承認したとする訴訟報道も上位に入った。",
+    "highlights": [
+      {
+        "title": "Agents can now create Cloudflare accounts, buy domains, and deploy",
+        "title_ja": "エージェントが Cloudflare のアカウント作成、ドメイン購入、デプロイまでできるように",
+        "url": "https://blog.cloudflare.com/agents-stripe-projects/",
+        "service_label": "Hacker News",
+        "reason": "658pt / 368 コメント。コーディングエージェントがインフラの調達まで担う仕組みで、エージェント設計の高関心テーマに直撃。"
+      },
+      {
+        "title": "Accelerating Gemma 4: faster inference with multi-token prediction drafters",
+        "title_ja": "Gemma 4 の高速化: multi-token prediction のドラフタによる高速推論",
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/",
+        "service_label": "Hacker News",
+        "reason": "687pt / 330 コメント。Gemma 4 の推論高速化で、ローカル LLM の速度をめぐる報告が集まった。"
+      },
+      {
+        "title": "Computer Use is 45x more expensive than structured APIs",
+        "title_ja": "Computer Use は構造化 API より 45 倍高価",
+        "url": "https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/",
+        "service_label": "Hacker News",
+        "reason": "495pt / 271 コメント。Computer Use と構造化 API のコストを実測で比較した記事で、エージェント設計の判断材料になった。"
+      },
+      {
+        "title": "DNSSEC disruption affecting .de domains – Resolved",
+        "title_ja": ".de ドメインに影響する DNSSEC の障害 – 解決済み",
+        "url": "https://status.denic.de/pages/incident/592577eab611ce1e0d00046f/69fa60ef9d12f5057a974f38",
+        "service_label": "Hacker News",
+        "reason": "747pt / 411 コメント。.de の TLD 全体が DNSSEC の署名不良で解決不能になった大規模障害。"
+      },
+      {
+        "title": "Red Squares – GitHub outages as contributions",
+        "title_ja": "Red Squares – GitHub の障害を contribution として表示",
+        "url": "https://red-squares.cian.lol/",
+        "service_label": "Hacker News",
+        "reason": "767pt / 170 コメントで当日の首位。GitHub の障害頻度を可視化した風刺的なサイト。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Red Squares – GitHub outages as contributions",
+              "title_ja": "Red Squares – GitHub の障害を contribution として表示",
+              "url": "https://red-squares.cian.lol/",
+              "comments_url": "https://news.ycombinator.com/item?id=48034587",
+              "score": 94,
+              "engagement_label": "767pt / 170コメント",
+              "category": "開発文化",
+              "interest": 2,
+              "summary": "GitHub の障害履歴を contribution graph 風に赤いマスで並べた風刺サイト。週末に障害が少ない傾向が見え、767pt / 170 コメントで当日の首位になった。",
+              "discussion_summary": "GitHub の障害履歴を、GitHub の contribution graph に見立てて赤いマスで並べた風刺的なサイト。767pt / 170 コメントで当日の首位になった。\n\nコメントでは、週末にマスがまばらなのは負荷によるものか GitHub の社員の稼働によるものか、その両方かという二重の意味の指摘が最上位にある。週末はどのみち仕事をしないので都合がよいという皮肉や、週末は未開拓のフロンティアでまだ拡大の余地があるという冗談も続いた。\n\nリリースサイクルや Azure の米国リージョンの障害との相関を見てみたいという声があった一方、ミームが痛々しくなっており水面下で必死に耐えているチームに同情するという投稿や、「Microsoft、素晴らしい稼働率だ」という皮肉もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "DNSSEC disruption affecting .de domains – Resolved",
+              "title_ja": ".de ドメインに影響する DNSSEC の障害 – 解決済み",
+              "url": "https://status.denic.de/pages/incident/592577eab611ce1e0d00046f/69fa60ef9d12f5057a974f38",
+              "comments_url": "https://news.ycombinator.com/item?id=48027897",
+              "score": 94,
+              "engagement_label": "747pt / 411コメント",
+              "category": "インフラ",
+              "interest": 2,
+              "summary": "DENIC のステータスページ。DNSSEC の署名不良により、検証を行うリゾルバで .de ドメインの名前解決が全面的に失敗した障害の記録で、amazon.de などが到達不能になり 747pt / 411 コメント。",
+              "discussion_summary": "ドイツの .de を管理する DENIC のステータスページに掲載された障害記録。DNSSEC の署名に不備があり、検証を行うリゾルバではすべての .de ドメインが SERVFAIL になった。747pt / 411 コメントを集めた。\n\nコメントでは、.de の TLD 全体が DNSSEC か nic.de のネームサーバーの欠落でオフラインになっているようだという報告が最上位にあり、amazon.de や spiegel.de のような著名サイトに到達できないという投稿が続いた。ネームサーバーの障害ではなく DNSSEC の問題で、NSEC3 レコードの RRSIG が不正だという EDE が返り、dig +cd では解決できるのでゾーンデータ自体は無事だという分析も示された。\n\nVerisign Labs の DNSSEC Analyzer や DNSViz で状況を確認した投稿や、すべての .de ではないが著名なドメインの多くが落ちているという観察もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "StarFighter 16-Inch",
+              "title_ja": "StarFighter 16 インチ",
+              "url": "https://us.starlabs.systems/pages/starfighter",
+              "comments_url": "https://news.ycombinator.com/item?id=48031261",
+              "score": 91,
+              "engagement_label": "687pt / 389コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Star Labs の Linux ノート StarFighter 16 インチの製品ページ。分解や部品交換や独自ファームウェアの導入をしても保証が無効にならない点が評価され、687pt / 389 コメントを集めた。",
+              "discussion_summary": "英国の Star Labs が販売する Linux 向けノート PC、StarFighter 16 インチの製品ページ。687pt / 389 コメントを集めた。\n\nコメントでは、プレミアムな Linux ノートにとって素晴らしい月だという感想が最上位にある。分解や部品交換やアップグレード、任意の OS やファームウェアの導入をしても無効にならない 1 年保証を評価し、5 年以上の更新提供を望む声も続いた。\n\n一方で、CPU の選択肢が 2 世代前と 1 世代前の Intel と 1 世代前の AMD で新しさがないという指摘や、MacBook Pro に似せすぎたという意見、カーソルキーが同じ大きさで一列に並んでいるのはブラインド操作しにくい設計だという批判もあった。米国外のメーカーなので関税がかかるのか、Linux に興味はあるが不安な非プログラマに向くのかという質問や、内蔵トラックボールを望む声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Accelerating Gemma 4: faster inference with multi-token prediction drafters",
+              "title_ja": "Gemma 4 の高速化: multi-token prediction のドラフタによる高速推論",
+              "url": "https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/",
+              "comments_url": "https://news.ycombinator.com/item?id=48024540",
+              "score": 87,
+              "engagement_label": "687pt / 330コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Google のブログ。Gemma 4 に multi-token prediction のドラフタモデルを組み合わせた投機的デコードで推論を高速化する手法を紹介し、ローカルでの実行速度を気にする読者から 687pt / 330 コメント。",
+              "discussion_summary": "Google の公式ブログで、Gemma 4 に multi-token prediction のドラフタモデルを組み合わせ、投機的デコードで推論を高速化する手法を紹介している。687pt / 330 コメントを集めた。\n\nコメントでは、Google が Gemma 4 の推論に自社クラウドを積極的に売り込まないのが不思議だという疑問が最上位にある。LM Studio に UI の選択肢はあるが有効にできないという報告や、速度が理由で Qwen 3.6 27B を使っていたので後で比較するという投稿、100 tps を超えると何かが変わるという感想も続いた。\n\nllama.cpp に Qwen 向けの MTP 対応が入りつつあり Gemma 4 も続くだろうという情報、Nemotron のようにモデル自体に MTP を組み込まなかった点への疑問、300 ボーから 1200 ボーへの改善のようで意味は大きいがまだ遅いという比喩もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Agents can now create Cloudflare accounts, buy domains, and deploy",
+              "title_ja": "エージェントが Cloudflare のアカウント作成、ドメイン購入、デプロイまでできるように",
+              "url": "https://blog.cloudflare.com/agents-stripe-projects/",
+              "comments_url": "https://news.ycombinator.com/item?id=48031684",
+              "score": 87,
+              "engagement_label": "658pt / 368コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Cloudflare のブログ。Stripe との連携により AI エージェントが Cloudflare のアカウント作成からドメイン購入、デプロイまでを自律的に行えるようになったという発表で、658pt / 368 コメント。",
+              "discussion_summary": "Cloudflare の公式ブログで、Stripe との連携により AI エージェントが Cloudflare のアカウント作成、ドメインの購入、デプロイまでを自律的に行えるようになったと発表した。658pt / 368 コメントを集めた。\n\nコメントでは、wrangler ではなく Stripe を経由する点が興味深く、Stripe が CLI を通じてエージェントの活動の中心になろうとしているのは巧みだという分析が最上位にある。昨年 12 月から Claude に aws や vercel や gh の CLI でドメイン購入と配備をさせており、この用途では MCP サーバーより CLI が好みだという報告も続いた。\n\n4 年前に免許証の確認に応じなかったため人間の自分はアカウントを止められたのに、という皮肉や、エージェントが設定したドメインの所有者は誰で削除要請に誰が応じるのかという疑問、スロップがさらに広がるという懸念もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Singapore introduces caning for boys who bully others at school",
+              "title_ja": "シンガポール、学校でいじめをした男子生徒への鞭打ちを導入",
+              "url": "https://www.theguardian.com/world/2026/may/06/singapore-caning-school-bullies",
+              "comments_url": "https://news.ycombinator.com/item?id=48032968",
+              "score": 85,
+              "engagement_label": "403pt / 665コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Guardian の記事。シンガポールが学校でいじめをした男子生徒への鞭打ち刑を導入したと報じ、体罰への賛否が激しく分かれて 403pt に対し 665 コメントが集まった。",
+              "discussion_summary": "Guardian の記事で、シンガポールが学校でいじめを行った男子生徒に対する鞭打ちを導入したと報じている。403pt に対して 665 コメントと、議論が点数を大きく上回った。\n\nコメントでは、「いじめっ子への解決策はより大きないじめっ子」という皮肉が最上位にある。鞭打ちは一生残る傷を負わせるという指摘や、Hacker News で子供を叩くことに賛成する人を見るとは思わなかった、野蛮な虐待だという強い反発が続いた。\n\n体罰はいじめる側が弱い相手に証明しにくい形でより残酷に報復するだけで、解決ではなく激化を招き、権力は乱用されるという反論や、男子だけを対象にするのは性差別で教師も間違えるという意見があった。一方で、自分が叩かれたのは相応の理由があった時だけで正当だったという体験談や、学校での鞭打ちと司法による鞭打ちの厳しさを比べる投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Three Inverse Laws of AI",
+              "title_ja": "AI の三つの逆法則",
+              "url": "https://susam.net/inverse-laws-of-robotics.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48023861",
+              "score": 78,
+              "engagement_label": "548pt / 351コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "Susam Pal のエッセイ。アシモフのロボット三原則を裏返し、人間が AI を擬人化せず出力を盲信しない側に責任を置く三つの法則を提案しており、548pt / 351 コメント。",
+              "discussion_summary": "Susam Pal のエッセイで、アシモフのロボット三原則を裏返し、AI ではなく人間の側に、擬人化しない、出力を盲信しない、確率的な性質ゆえに誤りが残ることを前提にするといった責任を置く三つの法則を提案している。548pt / 351 コメントを集めた。\n\nコメントでは、大学時代に AI が生きているかを議論していたのに、Turing テストを通る AI の構造を知った途端に擬人化しなくなった自分に驚くという投稿が最上位にある。AI は友好的で人間らしく振る舞うのではなく、道具であることを思い出させるよう機械的で冷淡に振る舞うべきだという提案も続いた。\n\n一方で、機械の欠点に合わせて人間の行動を変えろというのは正気ではなく、人間は必ず擬人化し盲信し責任を委ねるという強い反対や、チャット UI 自体が関与を高めるために擬人化を促すよう設計されているので利用者に抵抗を求めるのは層が違うという指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Zuckerberg 'Personally Authorized and Encouraged' Meta's Copyright Infringement",
+              "title_ja": "Zuckerberg は Meta の著作権侵害を「自ら承認し奨励した」",
+              "url": "https://variety.com/2026/digital/news/meta-ai-mark-zuckerberg-copyright-infringement-lawsuit-publishers-scott-turow-1236738383/",
+              "comments_url": "https://news.ycombinator.com/item?id=48026207",
+              "score": 76,
+              "engagement_label": "496pt / 453コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Variety の記事。作家 Scott Turow らが Meta を訴えた訴訟で、Zuckerberg が AI 学習のための海賊版利用を自ら承認したと主張されていると報じ、496pt / 453 コメントを集めた。",
+              "discussion_summary": "Variety の記事で、作家の Scott Turow らが Meta を相手取った著作権侵害訴訟において、Mark Zuckerberg が AI 学習のために海賊版の書籍を使うことを自ら承認し奨励したと主張されていると報じている。Meta の広報は、裁判所は著作物での AI 学習がフェアユースになりうると認めており、訴訟には徹底的に争うとしている。496pt / 453 コメントを集めた。\n\nコメントでは、侵害 1 件あたり法定の最低額でも損害賠償が認められれば多くの人が喜ぶだろうという投稿が最上位にあり、Anthropic の先例では学習自体は変容的で侵害ではないが、そのために海賊版を集めることは別だと判断されたという補足が続いた。\n\nMeta への罰金より Zuckerberg の 6 か月の収監の方がよいという声や、「速く動いて盗め」という皮肉、結果が科されるまで行動は続くという意見の一方で、AI の学習は人間が本を読むのと本当に違うのかという問いもあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Computer Use is 45x more expensive than structured APIs",
+              "title_ja": "Computer Use は構造化 API より 45 倍高価",
+              "url": "https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/",
+              "comments_url": "https://news.ycombinator.com/item?id=48024859",
+              "score": 73,
+              "engagement_label": "495pt / 271コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Reflex のブログ。画面を見て操作する Computer Use のエージェントと構造化 API を使うエージェントで同じタスクのコストを比較し、前者が 45 倍高価で精度も低かったと報告しており、495pt / 271 コメント。",
+              "discussion_summary": "Reflex のブログ記事で、画面のレンダリング結果を見て操作する Computer Use のエージェントと、構造化 API を使うエージェントに同じタスクをさせ、前者のコストが 45 倍で精度も低かったと報告している。視覚エージェントにはサイドバーやタブを名指しした手順書も与えたとしている。495pt / 271 コメントを集めた。\n\nコメントでは、人間向けのインターフェースが AI に不向きなのは空が青いのと同じくらい当然だという反応が最上位にある。Vercel の agent-browser や dev-browser のような LLM がブラウザを操作するツール同士の比較を見たいという声も続いた。\n\nComputer Use はラストワンマイル配送のようなもので、API や bash が使える時はそちらを使うべきだという整理や、すべてに API があるわけではないが人間向け UI は必ずあるという反論、ウィンドウマネージャのネイティブな情報を使えないのかという提案もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Knitting bullshit",
+              "title_ja": "編み物のでたらめ",
+              "url": "https://katedaviesdesigns.com/2026/04/29/knitting-bullshit/",
+              "comments_url": "https://news.ycombinator.com/item?id=48032461",
+              "score": 72,
+              "engagement_label": "489pt / 207コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "編み物デザイナー Kate Davies のブログ。AI で量産された編み物の本や図案が Amazon などに溢れ、70 万件超のダウンロードを集めている実態を告発しており、489pt / 207 コメントを集めた。",
+              "discussion_summary": "編み物デザイナー Kate Davies のブログ記事で、AI で量産された編み物の本や図案が販売サイトに溢れている実態を告発している。489pt / 207 コメントを集めた。\n\nコメントでは、AI の助けを借りた脳を腐らせるコンテンツ工場があるという要約とともに、3〜4 年前から予想していたという投稿がある。70 万件超のダウンロードが自然な流入だとは信じがたく誰が消費しているのかという疑問や、人々がどれほど手を抜いているかに気づけばこうしたスロップは消えるのではないかという期待も出た。\n\nLLM 以前にも科学を読んだ気分にさせるだけの雑誌のようなスロップはあったという指摘や、園芸や編み物や料理といった「間違っても許される」分野のコンテンツ工場だった Inception AI が法律事務所向けの移民書類作成ソフトに転じたという報告もあった。記事のサイトがローカルネットワークへのアクセスを求めるのはなぜかという疑問もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

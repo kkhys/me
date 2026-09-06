@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-13",
+  "generated_at": "2026-09-06T21:03:50+09:00",
+  "digest": {
+    "headline": "Google のノート PC「Googlebook」が 1571 コメント、デジタルスタックを欧州に移した記録と GitHub から Forgejo への移行記事が並んだ日",
+    "lead": "Hacker News では Google が Android と ChromeOS を統合した新 OS を載せるノート PC「Googlebook」を予告したページが 932pt / 1571 コメントと月内最多の議論を集めた。Monokai の作者が Web サービスを米国から欧州の事業者に移した記録が 1040pt で首位、GitHub を離れて Forgejo を自前で運用する記事が 362 コメントで続き、脱・米国大手の流れが目立った。Cactus が Gemini のツール呼び出しを 26M パラメータのモデルに蒸留した Needle は Google の利用規約との関係が問われ、Bambu Lab 向けの OrcaSlicer 派生を FULU Foundation が復活させた件、解雇直後に 96 の政府データベースを消した双子の兄弟の事件も上位に入った。",
+    "highlights": [
+      {
+        "title": "Show HN: Needle: We Distilled Gemini Tool Calling into a 26M Model",
+        "title_ja": "Show HN: Needle: Gemini のツール呼び出しを 26M パラメータのモデルに蒸留した",
+        "url": "https://github.com/cactus-compute/needle",
+        "service_label": "Hacker News",
+        "reason": "776pt / 211 コメント。フロンティアモデルのツール呼び出しを 26M の小型モデルに蒸留した Show HN で、LLM の新技術動向に直撃。"
+      },
+      {
+        "title": "Googlebook",
+        "title_ja": "Googlebook",
+        "url": "https://googlebook.google/",
+        "service_label": "Hacker News",
+        "reason": "932pt / 1571 コメントで月内最多の議論。Android と ChromeOS を統合した OS を載せる新ハードウェア。"
+      },
+      {
+        "title": "Why senior developers fail to communicate their expertise",
+        "title_ja": "シニア開発者が自分の専門性を伝えられない理由",
+        "url": "https://www.nair.sh/guides-and-opinions/communicating-your-expertise/why-senior-developers-fail-to-communicate-their-expertise",
+        "service_label": "Hacker News",
+        "reason": "826pt / 333 コメント。シニア開発者の価値が伝わらない理由を AI 時代の文脈で論じ、キャリアと組織論のテーマに該当。"
+      },
+      {
+        "title": "I moved my digital stack to Europe",
+        "title_ja": "デジタルスタックを欧州に移した",
+        "url": "https://monokai.com/articles/how-i-moved-my-digital-stack-to-europe/",
+        "service_label": "Hacker News",
+        "reason": "1040pt / 610 コメントで当日の首位。米国のクラウドから欧州の事業者へ移行した具体的な記録。"
+      },
+      {
+        "title": "Leaving GitHub for Forgejo",
+        "title_ja": "GitHub を離れて Forgejo へ",
+        "url": "https://jorijn.com/en/blog/leaving-github-for-forgejo/",
+        "service_label": "Hacker News",
+        "reason": "634pt / 362 コメント。同日の欧州移行の記事と合わせ、GitHub の障害と AI 学習を理由に Forgejo へ移った記録。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "I moved my digital stack to Europe",
+              "title_ja": "デジタルスタックを欧州に移した",
+              "url": "https://monokai.com/articles/how-i-moved-my-digital-stack-to-europe/",
+              "comments_url": "https://news.ycombinator.com/item?id=48120629",
+              "score": 97,
+              "engagement_label": "1040pt / 610コメント",
+              "category": "インフラ",
+              "interest": 2,
+              "summary": "Monokai の作者のブログ。ホスティングやメールや分析ツールを米国の事業者から OVHcloud や Scaleway や Matomo など欧州の事業者へ移した記録で、1040pt / 610 コメントと当日の首位。",
+              "discussion_summary": "Monokai の作者による記事で、自身の Web サービスのホスティングやバックアップやメールや分析を米国の事業者から OVHcloud、Scaleway、Matomo、Lettermint といった欧州の事業者へ移した過程を記録している。1040pt / 610 コメントで当日の首位になった。\n\nコメントでは「ローマからバビロンへ」という皮肉が上位にある。OVHcloud の管理画面は迷路だという記事の記述に対し、OpenTofu や Terraform を使えば構成が自己文書化されるという助言や、Matomo は毎秒数十のログインが続くと遅くなるという経験談が続いた。\n\nOVH は木造のデータセンターが全焼して顧客データを失ったのでバックアップに使うのは正気ではないという批判、欧州移行の記事は飽きたし Amazon も同じ EU の規則に従っているという反論、Lettermint が Postmark に似た価格と機能で興味深いという声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Googlebook",
+              "title_ja": "Googlebook",
+              "url": "https://googlebook.google/",
+              "comments_url": "https://news.ycombinator.com/item?id=48111545",
+              "score": 94,
+              "engagement_label": "932pt / 1571コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Google が公開した「Googlebook」の予告ページ。Android と ChromeOS の要素を組み合わせた新 OS を載せたノート PC とみられ、命名や市場性をめぐって 932pt / 1571 コメントと月内最多の議論。",
+              "discussion_summary": "Google が公開した「Googlebook」の予告ページ。Android と ChromeOS の要素を組み合わせた「Intelligence のために設計された現代的な OS」を載せるノート PC で、Google のブログで詳細が説明された。932pt に対して 1571 コメントと、月内最多の議論になった。\n\nコメントでは、格好いいが Pixelbook のブランドを再利用すればよかった、Windows 11 とのデュアルブートができるとよいという投稿が最上位にある。RAM 不足を助けはしないだろうという皮肉や、Microsoft の「エージェント型」Windows の失敗から学べ、誰も頼んでいないという声も続いた。\n\n7 年後には killedbygoogle に載るだろうという予想、中核は Android でその上に Chrome が載るという推測、安いなら MacBook Neo を選ぶので市場が見えず、「Googlebook」と答えるのは恥ずかしいという意見もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Why senior developers fail to communicate their expertise",
+              "title_ja": "シニア開発者が自分の専門性を伝えられない理由",
+              "url": "https://www.nair.sh/guides-and-opinions/communicating-your-expertise/why-senior-developers-fail-to-communicate-their-expertise",
+              "comments_url": "https://news.ycombinator.com/item?id=48109460",
+              "score": 89,
+              "engagement_label": "826pt / 333コメント",
+              "category": "キャリア/組織",
+              "interest": 2,
+              "summary": "nair.sh の記事。速さを最適化する実験派と規模を最適化するシニア開発者のフィードバックループの違いを軸に、専門性が経営層に伝わらない理由を論じており、826pt / 333 コメント。",
+              "discussion_summary": "nair.sh の記事で、速さのために最適化する実験派と規模のために最適化するシニア開発者ではフィードバックループが異なり、後者の専門性は「本当に必要か」「やらなければどうなるか」という問いの形でしか現れないため経営層に伝わりにくいと論じている。AI はまだ責任を取るという仕事を代替できないとも述べている。826pt / 333 コメントを集めた。\n\nコメントでは、結論には反対しないが AI 特有の文体が気になって集中できなかったという投稿が最上位にある。シニアとして一括りの主張は嫌いで、「今は間に合わせでよいか」という判断が招いた失敗も実験派の失敗と同じだけ見てきたという反論も続いた。\n\n実用化された概念実証の多くはそのまま本番になり、約束された書き直しは実現しなかったという経験談、有能なシニアは会社の文化と 5 年後の必要に合わせて適応するという意見、経営者は開発者が時間をかけることにうんざりしており AI に置き換えたがっているという指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Leaving GitHub for Forgejo",
+              "title_ja": "GitHub を離れて Forgejo へ",
+              "url": "https://jorijn.com/en/blog/leaving-github-for-forgejo/",
+              "comments_url": "https://news.ycombinator.com/item?id=48121266",
+              "score": 87,
+              "engagement_label": "634pt / 362コメント",
+              "category": "開発文化",
+              "interest": 2,
+              "summary": "Jorijn のブログ。相次ぐ障害と AI 学習へのコード利用を理由に GitHub から自前運用の Forgejo へ移った記録で、失ったソーシャルグラフなどが話題になり 634pt / 362 コメント。",
+              "discussion_summary": "Jorijn のブログ記事で、GitHub から自前で運用する Forgejo へ移行した経緯と、失ったものを記録している。障害が理由ではないとしつつ障害にも触れ、コードが AI の学習に使われることへの懸念も挙げている。634pt / 362 コメントを集めた。\n\nコメントでは、皆が GitHub を離れているが git は元々分散型であり、GitHub に集中したのは周辺ツールの体験が優れていたからだという投稿が最上位にある。Forgejo を自前で運用しているが驚くほど保守しやすいという推薦や、「障害が理由ではない」と言いながら記事の大半が障害の話だという矛盾の指摘も続いた。\n\nForgejo Actions は使えるのかという質問、GitSocial でソーシャルグラフと協業履歴を持ち出しフォージ間の PR もできるという紹介、人々は分散化を求めるが結局は新しい中心に集まり、自分が開拓者になれる場所を探しているだけではないかという見方もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Needle: We Distilled Gemini Tool Calling into a 26M Model",
+              "title_ja": "Show HN: Needle: Gemini のツール呼び出しを 26M パラメータのモデルに蒸留した",
+              "url": "https://github.com/cactus-compute/needle",
+              "comments_url": "https://news.ycombinator.com/item?id=48111896",
+              "score": 86,
+              "engagement_label": "776pt / 211コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Cactus が公開した 26M パラメータの関数呼び出し専用モデル Needle。Gemini のツール呼び出し能力を蒸留したもので、Google の利用規約との関係も問われて 776pt / 211 コメント。",
+              "discussion_summary": "Cactus の Henry による Show HN で、Gemini のツール呼び出し能力を蒸留した 26M パラメータの関数呼び出し専用モデル Needle をオープンソースで公開した。prefill 6000 tok/s、生成 1200 tok/s で動作するとしている。776pt / 211 コメントを集めた。\n\nコメントでは、README の手順で Hugging Face のトークナイザのリポジトリが見つからないという報告が最上位にある。自然言語で引数を指定できるコマンドラインツールが現実的になるという構想や、MOO システムのコマンドパーサの代替として組み込みたいという声、ライブデモの公開を求める提案も続いた。\n\nGemini の蒸留は競合モデルの開発を禁じる利用規約に明確に反するという指摘、タイマーや天気を扱う Siri のような中核にできるかという質問、M と B の違いが微妙すぎるので 0.026B と書くべきだという冗談もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Setting up a free *.city.state.us locality domain (2025)",
+              "title_ja": "無料の *.city.state.us ローカリティドメインを設定する (2025)",
+              "url": "https://fredchan.org/blog/locality-domains-guide/",
+              "comments_url": "https://news.ycombinator.com/item?id=48122635",
+              "score": 84,
+              "engagement_label": "618pt / 222コメント",
+              "category": "インフラ",
+              "interest": 1,
+              "summary": "Fred Chan のブログ。米国の city.state.us 形式のローカリティドメインを無料で登録する手順を解説した 2025 年の記事で、独特な登録手続きや商用サービスでの扱いの癖が語られ 618pt / 222 コメント。",
+              "discussion_summary": "Fred Chan のブログ記事で、米国の市名と州名からなる *.city.state.us 形式のローカリティドメインを無料で登録する手順を解説している。618pt / 222 コメントを集めた。\n\nコメントでは、シンシナティの同種のページを挙げた後で記事の末尾に既に載っていたと気づく投稿が最上位にある。*.lastname.name との類似として、Public Suffix List では管理権限のない他者と同じサイトの一部とみなされる点と、奇妙な登録手続きが挙げられた。\n\n1991 年頃の UUCP の時代に持っていたが要件の変更で手放したという昔話、商用サービスにとってこれらのホストは珍しいので厄介なエッジケースを露呈させるという注意、k12.oh.us を見て高校時代を思い出したという声、同じ州に同名の市がある場合はどうするのかという疑問もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Restore full BambuNetwork support for Bambu Lab printers",
+              "title_ja": "Bambu Lab プリンタ向けの BambuNetwork 完全対応を復活",
+              "url": "https://github.com/FULU-Foundation/OrcaSlicer-bambulab",
+              "comments_url": "https://news.ycombinator.com/item?id=48115127",
+              "score": 83,
+              "engagement_label": "671pt / 316コメント",
+              "category": "開発文化",
+              "interest": 1,
+              "summary": "FULU Foundation が公開した OrcaSlicer の派生リポジトリ。Bambu Lab の法的圧力で消えた BambuNetwork の完全対応を復活させたもので、クラウド接続の要否をめぐって 671pt / 316 コメント。",
+              "discussion_summary": "FULU Foundation が GitHub で公開した OrcaSlicer の派生リポジトリで、Bambu Lab の圧力で取り下げられた BambuNetwork の完全対応を復活させたとしている。671pt / 316 コメントを集めた。\n\nコメントでは FULU の Web サイトと動画の紹介が最上位にあり、Bambu Lab が明確な技術的説明ではなく弁護士で応じるなら強制的なクラウド要件はますます怪しく見え、研究室や企業や政府機関で使われるプリンタにとって明白なセキュリティリスクだという意見が続いた。\n\nサーバーに縛られたくないのが目的ではなかったのか、なぜクラウド対応を復活させるのかという疑問や、Bambu が既定モードと LAN モードの二つの様式に分けた経緯を調べて整理した長文の解説があった。microSD で印刷する Ender 3 のユーザーから、人々はクラウドを使いたいのかという素朴な問いもあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Twin brothers wipe 96 government databases minutes after being fired",
+              "title_ja": "双子の兄弟、解雇の数分後に 96 の政府データベースを消去",
+              "url": "https://arstechnica.com/tech-policy/2026/05/drop-database-what-not-to-do-after-losing-an-it-job/",
+              "comments_url": "https://news.ycombinator.com/item?id=48115438",
+              "score": 76,
+              "engagement_label": "489pt / 432コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Ars Technica の記事。政府向け IT 業務に従事していた双子の兄弟が解雇直後に 96 の政府データベースを消した事件で、平文パスワードの保管や採用時の審査が問われ 489pt / 432 コメント。",
+              "discussion_summary": "Ars Technica の記事で、政府向けのシステムを保守する企業に勤めていた双子の兄弟が、解雇の数分後に「DROP DATABASE dhsproddb」などのコマンドで国土安全保障省を含む 96 の政府データベースを消去した事件を伝えている。489pt / 432 コメントを集めた。\n\nコメントでは、解雇を知る前に全ての認証情報が取り消されても構わないので出社だけはさせないでほしいという投稿が最上位にある。EEOC のポータルで苦情を申し立てた個人の平文パスワードを兄弟間で照会していたという記事の記述から、パスワードが平文で保管されていたという指摘も続いた。\n\nハッキングで有罪になったことのある人物がなぜ多数の本番データベースにアクセスできる職に就けたのかという疑問、口論する兄弟が Ocean's シリーズの登場人物のようだという感想、職を求める人が多い中でこうした人物が雇われるのは異常だという声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The Emacsification of Software",
+              "title_ja": "ソフトウェアの Emacs 化",
+              "url": "https://sockpuppet.org/blog/2026/05/12/emacsification/",
+              "comments_url": "https://news.ycombinator.com/item?id=48118727",
+              "score": 74,
+              "engagement_label": "465pt / 284コメント",
+              "category": "開発文化",
+              "interest": 2,
+              "summary": "Thomas Ptacek のブログ。LLM によって Emacs のように自分専用のソフトウェアを書いて使う文化が一般化しつつあると論じ、良い Markdown ビューアを勧める記事で、465pt / 284 コメント。",
+              "discussion_summary": "Thomas Ptacek のブログ記事で、LLM の時代には Emacs ユーザーが長年やってきたように、自分一人のためのソフトウェアを書いて使う文化が一般化しつつあると論じている。思っている以上に良い Markdown ビューアが必要だとも述べている。465pt / 284 コメントを集めた。\n\nコメントでは、だからこそ workflow ツールに最も求めるのは拡張性で、他人の neovim プラグインを試して要るか判断し自分に合わせて直せることだという投稿が最上位にある。Claude に書かせた対象読者が世界に 20 人程度の TUI を例に、「一人の観客のためのコンテンツ制作」こそが革命だという同意も続いた。\n\n自分の Emacs 設定は脆く OS をまたぐと悪夢だったという経験談、自分のためにプログラムを書くのは 1960 年代のホームコンピューティングの元々の構想だったという指摘、等幅の平文で十分だという反論もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The US is winning the AI race where it matters most: commercialization",
+              "title_ja": "米国は最も重要な領域である商用化で AI 競争に勝っている",
+              "url": "https://avkcode.github.io/blog/us-winning-ai-race.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48121929",
+              "score": 74,
+              "engagement_label": "241pt / 677コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "avkcode のブログ。米国は AI の商用化で競争に勝っていると主張する記事だが、241pt に対し 677 コメントと反論が集中し、資金投入の規模や移民の技術者への依存が指摘された。",
+              "discussion_summary": "avkcode のブログ記事で、米国は AI の研究ではなく商用化という最も重要な領域で競争に勝っていると主張している。241pt に対して 677 コメントと、反論が点数を大きく上回った。\n\nコメントでは、Anthropic が自社のスタックを AWS に前例のない水準で載せ、企業が自前の Claude スタックを持てるようにしたのは興味深く、次は GCP や Azure かという投稿が最上位にある。勝つ価値のある競争であって世界的な災厄への競争でないことを願うという声も続いた。\n\nもっと単純な説明は米国が圧倒的に多くの資金を投じているからだという意見、題名は「AI 競争に勝っている」だが内容は「AI の資本化が最も上手い」であり、レントシーキング型の SaaS が終着点ならそうだという批判、勝てているのは移民の技術者や H-1B のおかげで、その道が閉ざされればこれが最後の勝利になるという指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

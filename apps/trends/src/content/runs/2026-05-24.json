@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-24",
+  "generated_at": "2026-09-06T21:25:55+09:00",
+  "digest": {
+    "headline": "DeepSeek のキャッシュ効率を活かすコーディングエージェント Reasonix が首位、AMD が Vivado の無料枠から Linux を外し、LLM エージェントの「制約の減衰」を示す論文が並んだ日曜",
+    "lead": "Hacker News では DeepSeek のキャッシュ機構を前提に設計された低コストのコーディングエージェント DeepSeek Reasonix が 729pt で首位となり、前々日の V4 Pro の値下げ恒久化に続いて DeepSeek の話題が上位を占めた。AMD が FPGA 開発環境 Vivado 2026.1 の無料枠から Linux 対応を外す件は教育機関や趣味の利用者の反発を集め、Microsoft が現存する最古の DOS のソースコードを公開した記事、AWS を 4 年で去った元社員が生成 AI への転換で顧客志向が失われたと綴った記事も上位に入った。LLM エージェントが明示的なアーキテクチャの制約を守れずに性能が落ちる「制約の減衰」を示した arXiv の論文は 197 コメントを集めた。",
+    "highlights": [
+      {
+        "title": "DeepSeek reasonix, DeepSeek native coding agent with high caching and low cost",
+        "title_ja": "DeepSeek Reasonix、高いキャッシュ効率と低コストの DeepSeek ネイティブなコーディングエージェント",
+        "url": "https://esengine.github.io/DeepSeek-Reasonix/",
+        "service_label": "Hacker News",
+        "reason": "729pt / 288 コメントで当日の首位。DeepSeek のキャッシュ効率を軸にした低コストのコーディングエージェントで、AI 開発ツールの高関心テーマに直撃。"
+      },
+      {
+        "title": "Constraint Decay: The Fragility of LLM Agents in Back End Code Generation",
+        "title_ja": "制約の減衰: バックエンドのコード生成における LLM エージェントの脆さ",
+        "url": "https://arxiv.org/abs/2605.06445",
+        "service_label": "Hacker News",
+        "reason": "287pt / 197 コメント。LLM エージェントが明示的なアーキテクチャの制約に弱いことを 8 つの Web フレームワークで示した論文で、エージェント設計のテーマに該当。"
+      },
+      {
+        "title": "Amazon Web Services – Four Years and Out",
+        "title_ja": "Amazon Web Services – 4 年で退職",
+        "url": "https://www.adventuresinoss.com/aws-four-years/",
+        "service_label": "Hacker News",
+        "reason": "329pt / 139 コメント。AWS の生成 AI への転換で顧客志向が失われたという元社員の記録で、組織論のテーマに該当。"
+      },
+      {
+        "title": "Why is Vivado 2026.1 dropping Linux support for free tier?",
+        "title_ja": "なぜ Vivado 2026.1 は無料枠の Linux 対応をやめるのか?",
+        "url": "https://adaptivesupport.amd.com/s/question/0D5Pd00001YQLdMKAX/why-is-vivado-20261-dropping-linux-support-for-free-tier-?language=en_US",
+        "service_label": "Hacker News",
+        "reason": "409pt / 233 コメント。FPGA 開発環境の無料枠から Linux が外れる件で、教育機関が他社へ移ると表明した。"
+      },
+      {
+        "title": "Scammers are abusing an internal Microsoft account to send spam links",
+        "title_ja": "詐欺師が Microsoft の内部アカウントを悪用してスパムのリンクを送っている",
+        "url": "https://techcrunch.com/2026/05/21/scammers-are-abusing-an-internal-microsoft-account-to-send-spam/",
+        "service_label": "Hacker News",
+        "reason": "304pt / 185 コメント。Microsoft の正規ドメインからスパムが送られている件で、メールセキュリティのテーマに該当。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "DeepSeek reasonix, DeepSeek native coding agent with high caching and low cost",
+              "title_ja": "DeepSeek Reasonix、高いキャッシュ効率と低コストの DeepSeek ネイティブなコーディングエージェント",
+              "url": "https://esengine.github.io/DeepSeek-Reasonix/",
+              "comments_url": "https://news.ycombinator.com/item?id=48256953",
+              "score": 97,
+              "engagement_label": "729pt / 288コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "DeepSeek のプロンプトキャッシュを最大限に当てる設計のコーディングエージェント DeepSeek Reasonix の紹介ページ。V4 Pro の値下げ恒久化と重なり、キャッシュ効率への注目と共に 729pt / 288 コメント。",
+              "discussion_summary": "GitHub Pages で公開された DeepSeek Reasonix の紹介ページで、DeepSeek のプロンプトキャッシュに当たりやすいよう設計され、低コストで動くコーディングエージェントだとしている。前々日の V4 Pro の値下げ恒久化のスレッドが関連として挙がった。729pt / 288 コメントで当日の首位になった。\n\nコメントでは、DeepSeek のキャッシュを活かすのに専用のエージェントは要らず、DeepSeek V4 Pro を Codex から使う小さな橋渡しを書いたらほぼ全てキャッシュに当たったという報告が最上位にある。Kimi 2.6 や Composer 2.5 と比べて今の最良の低コストなエージェントは何かという問いも続いた。\n\n他のフロンティアモデルの値上がりの中で良い時期だという声、キャッシュはサーバー側の話でエージェントがどう影響するのかという疑問、タイピングのアニメーションでページが上下に動く UX への不満もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Time to talk about my writerdeck",
+              "title_ja": "私の writerdeck について語る時が来た",
+              "url": "https://veronicaexplains.net/my-first-writerdeck/",
+              "comments_url": "https://news.ycombinator.com/item?id=48250144",
+              "score": 89,
+              "engagement_label": "517pt / 294コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Veronica Explains のブログ。Raspberry Pi と機械式キーボードで作った、文章を書くことだけに使う Linux 端末「writerdeck」を紹介した記事で、単機能の機器への共感が集まり 517pt / 294 コメント。",
+              "discussion_summary": "Veronica Explains のブログ記事で、Raspberry Pi と機械式キーボードを組み合わせ、文章を書くことだけに使う Linux 端末「writerdeck」を初めて作った経緯を紹介している。一つのことをうまくやり、終わったら片づけられる機器を意図的に選びたいと述べている。517pt / 294 コメントを集めた。\n\nコメントでは、素の Linux ターミナルのストレス解消効果は文章だけでなくシェル操作でも侮れず、Raspberry Pi をそのために愛用しているという投稿が最上位にある。tmux ではなく zellij を使うべきだという勧めや、80〜90 年代の WYSIWYG 以前の DOS のワープロを思い出すという声も続いた。\n\nDoom が入っていないという冗談、Obsidian での執筆に合う完璧な E-ink 端末を待っているという嘆き、意図的な技術選択という一節に賛同し音声専用の機器もほしいという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Why is Vivado 2026.1 dropping Linux support for free tier?",
+              "title_ja": "なぜ Vivado 2026.1 は無料枠の Linux 対応をやめるのか?",
+              "url": "https://adaptivesupport.amd.com/s/question/0D5Pd00001YQLdMKAX/why-is-vivado-20261-dropping-linux-support-for-free-tier-?language=en_US",
+              "comments_url": "https://news.ycombinator.com/item?id=48254309",
+              "score": 87,
+              "engagement_label": "409pt / 233コメント",
+              "category": "プログラミング",
+              "interest": 1,
+              "summary": "AMD のサポートフォーラムの質問。FPGA 開発環境 Vivado 2026.1 が無料の Basic 枠で Windows だけを対象にし Linux を外す件で、学生や趣味の利用者を遠ざけるという批判が集まり 409pt / 233 コメント。",
+              "discussion_summary": "AMD のサポートフォーラムに投稿された質問で、FPGA 開発環境 Vivado 2026.1 が無料の Basic 枠で Linux 対応をやめ Windows だけを対象にする理由を問うている。409pt / 233 コメントを集めた。\n\nコメントでは、公式の回答は誰も聞いていない質問に答えており、本題は Windows は許されるのになぜ Linux が外されるのかで、エコシステムを育てるには自社ハードで開発する人を増やす必要があるのに学生や趣味の利用者を遠ざけるだけだという投稿が最上位にある。批判されている新価格体系への AMD のページも共有された。\n\nFPGA 開発はいまだに 90 年代のままで改善は望めないという意見、F4PGA のようなオープンなツールチェーンには追い風だという見方、Xilinx の FPGA に数十万ドル使っているのにライセンスの手続きで消耗させられるという不満、教育機関として他社へ移り学生も追随するという表明もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Microsoft open-sources “the earliest DOS source code discovered to date”",
+              "title_ja": "Microsoft、「現存する最古の DOS ソースコード」をオープンソース化",
+              "url": "https://arstechnica.com/gadgets/2026/04/microsoft-open-sources-the-earliest-dos-source-code-discovered-to-date/",
+              "comments_url": "https://news.ycombinator.com/item?id=48253386",
+              "score": 86,
+              "engagement_label": "517pt / 197コメント",
+              "category": "プログラミング",
+              "interest": 1,
+              "summary": "Ars Technica の記事。Microsoft が 45 周年に合わせて DOS 1.00 を含む現存する最古の DOS のソースコードを公開した件で、手書きで最適化されていた時代への郷愁が語られ 517pt / 197 コメント。",
+              "discussion_summary": "Ars Technica の記事で、Microsoft が現存する最古の DOS のソースコードをオープンソースとして公開したと報じている。4 月末に 45 周年に合わせて DOS 1.00 を公開した Microsoft のブログが元になっている。517pt / 197 コメントを集めた。\n\nコメントでは、4 月に同じ話題が HN で議論されていたという過去スレッドへのリンクが上位にある。この古い DOS のソースを保管していたのなら、初期の Windows のソースも残っていて公開される望みがあるという期待も続いた。\n\n初期のコンピューティングは機械を機械として扱い、386 で何でも動かせた時代の輝きがあり、今はライブラリと仮想化と悪いコードの積み重ねばかりだという感慨、全てが手書きでよく最適化されていた時代だという投稿、大学の地下で ISA カードと 5.25 インチのフロッピーで計測装置を動かしていた DOS 機の思い出もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Amazon Web Services – Four Years and Out",
+              "title_ja": "Amazon Web Services – 4 年で退職",
+              "url": "https://www.adventuresinoss.com/aws-four-years/",
+              "comments_url": "https://news.ycombinator.com/item?id=48254475",
+              "score": 82,
+              "engagement_label": "329pt / 139コメント",
+              "category": "キャリア/組織",
+              "interest": 2,
+              "summary": "Adventures in OSS のブログ。AWS に 4 年勤めて退職した元社員が、生成 AI への転換で顧客のニーズから逆算する文化が失われ、大量に作って様子を見る姿勢に変わったと綴った記事で、329pt / 139 コメント。",
+              "discussion_summary": "Adventures in OSS のブログ記事で、AWS に 4 年勤めて退職した元社員が、生成 AI への転換の中で AWS が顧客への集中を失い、本当の顧客の需要から逆算するのではなく、できるだけ多くのものを速く作って世に投げ何が定着するかを見る姿勢になったと綴っている。329pt / 139 コメントを集めた。\n\nコメントでは、書いてくれてありがとうという感謝が最上位にある。判読不能な文字の入った AI 生成の画像をそのままスライドに使う発表者を見たが「十分」は顧客への執着ではなく、未熟な生成 AI の強制的な採用は『キャッチ 22』で綿を食べさせようとする Milo を思い出させるという投稿も続いた。\n\n2022 年が Amazon の頂点だったわけではないという意見、大企業の経営陣の目標はここ半年、一般社員を交換可能か不要にすることで、産業革命のように労働者には一世代ほど悪化するという見方、アカウント復旧の話は企業が人をチケットとして扱う様子を物語っているという感想もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Wake up! 16b",
+              "title_ja": "Wake up! 16b",
+              "url": "https://hellmood.111mb.de/wake_up_16b_writeup.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48253060",
+              "score": 81,
+              "engagement_label": "435pt / 36コメント",
+              "category": "プログラミング",
+              "interest": 1,
+              "summary": "HellMood による 16 バイトの x86 デモ「Wake up!」の解説記事。16 バイトで映像と音を出す仕組みを説明しており、16B パラメータの LLM と勘違いしたという声と共に 435pt / 36 コメント。",
+              "discussion_summary": "デモシーンの HellMood による、わずか 16 バイトの x86 デモ「Wake up!」の技術解説。6 日前にも別のスレッドで議論されていた。435pt / 36 コメントを集めた。\n\nコメントでは過去スレッドへのリンクが最上位にあり、16B パラメータの LLM だと思ったら 16 バイトのデモだったという投稿が続いた。以前見た音なしの 32 バイトのデモが限界だと思っていたが、これは引退作にできる傑作だという称賛もあった。\n\n全く常軌を逸していて圧倒されたという声、これこそプログラミングとコンピューティングを愛するようになった理由で真の芸術だが、AI の時代の業界ではこうしたものを作る機会がないという感想、投稿されるたびに賛成票を入れるという投稿、再帰的な PowerPoint でシェルピンスキーの三角形を作る動画にたどり着いたという脱線もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Constraint Decay: The Fragility of LLM Agents in Back End Code Generation",
+              "title_ja": "制約の減衰: バックエンドのコード生成における LLM エージェントの脆さ",
+              "url": "https://arxiv.org/abs/2605.06445",
+              "comments_url": "https://news.ycombinator.com/item?id=48256912",
+              "score": 79,
+              "engagement_label": "287pt / 197コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "arXiv の論文。LLM のコーディングエージェントは制約のない生成には優れるが、明示的なアーキテクチャの規則を守らせると性能が落ちる「制約の減衰」を 8 つの Web フレームワークで示した研究で、287pt / 197 コメント。",
+              "discussion_summary": "arXiv に投稿された論文で、LLM のコーディングエージェントは制約のない生成には優れるが、明示的なアーキテクチャの規則の下で動かすと性能が落ちる「制約の減衰」という現象を、8 つの Web フレームワークにまたがるバックエンドのタスクで系統的に示している。素早い試作には信頼できるが制約のある環境では脆いと結論づけている。287pt / 197 コメントを集めた。\n\nコメントでは、文書編集を LLM に委ねる最近の論文でプログラミングだけが長期のタスクで誤りを蓄積せずに済む分野だったという結果との対比が最上位にある。\n\nコーディング向けの GPT-5.2-codex ではなく GPT-5.2 を使ったのは奇妙だという指摘、Python と JS という動的型付けの言語を使っており静的型付けの方がエージェントにも保守しやすいのではという経験談、LLM は既存のフレームワークより素の HTML と JS の方が上手だという観察もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Scammers are abusing an internal Microsoft account to send spam links",
+              "title_ja": "詐欺師が Microsoft の内部アカウントを悪用してスパムのリンクを送っている",
+              "url": "https://techcrunch.com/2026/05/21/scammers-are-abusing-an-internal-microsoft-account-to-send-spam/",
+              "comments_url": "https://news.ycombinator.com/item?id=48253186",
+              "score": 76,
+              "engagement_label": "304pt / 185コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "TechCrunch の記事。詐欺師が Microsoft の正規の内部アカウントを悪用し、正規ドメインからスパムのリンクを送っていると報じた件で、Microsoft のドメインの乱立への皮肉が集まり 304pt / 185 コメント。",
+              "discussion_summary": "TechCrunch の記事で、詐欺師が Microsoft の内部アカウントを悪用し、Microsoft の正規のドメインからスパムのリンクを送っていると報じている。304pt / 185 コメントを集めた。\n\nコメントでは、本物の Microsoft のドメインがスパムを送る場合、他のメール事業者はそのドメインだけを罰するのか Microsoft の全ドメインを少しずつ罰するのかという疑問が最上位にある。PayPal のドメインから明らかな詐欺メールが届いているという似た報告や、Booking の予約でホテルを装ったフィッシングが Booking のドメインから届いたという経験談も続いた。\n\nmicrosoftonline.com が正規かどうか誰が確信できるのか、Microsoft のドメインの状況は混乱していて社内にも全一覧はないだろうという皮肉、Abnormal のブログの分析、2021 年に FBI のメールシステムが同様に悪用された事例へのリンクもあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Childhood Computing",
+              "title_ja": "子供時代のコンピューティング",
+              "url": "https://susam.net/childhood-computing.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48256597",
+              "score": 72,
+              "engagement_label": "254pt / 126コメント",
+              "category": "開発文化",
+              "interest": 1,
+              "summary": "Susam Pal のブログ。子供時代に触れたコンピュータとプログラミングの思い出を、当時のゲーム Digger の動画などと共に綴った記事で、同世代の思い出話が集まり 254pt / 126 コメント。",
+              "discussion_summary": "Susam Pal のブログ記事で、子供時代に触れたコンピュータとプログラミングの思い出を、当時のゲームの動画や短いプログラムと共に綴っている。254pt / 126 コメントを集めた。\n\nコメントでは、あの匂いの話は本当で、今でも不意に嗅ぐと 10 歳に戻るという共感が最上位にある。最初の動画のプログラムの簡潔さが印象的で、Dig Dug しか知らず Digger の存在を知らなかったという投稿も続いた。\n\nAmiga との初期の日々について自分もブログを書きたくなったという声、10 年ほど早く Apple II の Logo や Oregon Trail、1988 年の TRS-80 で似た経験をしたという思い出、9 歳頃に RPG Maker で変数を理解した瞬間に世界が開けたという投稿、Microsoft が子供向けに手頃なライセンスを用意しなかったのが不思議だという意見もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Greg Brockman interview [video]",
+              "title_ja": "Greg Brockman のインタビュー [動画]",
+              "url": "https://fs.blog/knowledge-project-podcast/greg-brockman/",
+              "comments_url": "https://news.ycombinator.com/item?id=48255593",
+              "score": 72,
+              "engagement_label": "214pt / 253コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "Farnam Street の Knowledge Project ポッドキャストによる OpenAI 社長 Greg Brockman へのインタビュー動画。214pt に対し 253 コメントと議論が点数を上回った。",
+              "discussion_summary": "",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

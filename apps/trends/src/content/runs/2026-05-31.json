@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-31",
+  "generated_at": "2026-09-06T21:39:40+09:00",
+  "digest": {
+    "headline": "Cloudflare Turnstile が指紋採取可能な WebGL を要求、Microsoft Office 2019 / 2021 for Mac の閲覧専用化、rsync への「バイブで壊すな」という issue が並んだ月末の日曜",
+    "lead": "Hacker News では Cloudflare の Turnstile が指紋採取に使える WebGL を要求するようになったという記事が 787pt で首位となり、bot 対策とプライバシーの両立をめぐって月初からの reCAPTCHA の議論が続いた。買い切りの Microsoft Office 2019 と 2021 for Mac が閲覧専用に変換される件は 1015pt で「窃盗」だという反発が集まり、rsync のメンテナが AI で 2 か月に 2 万 6000 件の変更を入れたことに「この ソフトウェアをバイブで壊さないでくれ」という issue が立った。ドメイン知識こそが本当の堀だという記事は 549 コメント、AI の購読をやめることが解決かもしれないというエッセイ、OpenRouter の 1 億 1300 万ドルの調達、AV2 デコーダ dav2d の解説記事も上位に入った。",
+    "highlights": [
+      {
+        "title": "Please Do Not Vibe Fuck Up This Software",
+        "title_ja": "どうかこのソフトウェアをバイブで壊さないでください",
+        "url": "https://github.com/RsyncProject/rsync/issues/929",
+        "service_label": "Hacker News",
+        "reason": "553pt / 480 コメント。rsync のような基盤ソフトウェアへの AI コードの大量投入への反発で、AI コーディングの品質をめぐる高関心テーマに直撃。"
+      },
+      {
+        "title": "Domain expertise has always been the real moat",
+        "title_ja": "ドメイン知識こそが常に本当の堀だった",
+        "url": "https://www.brethorsting.com/blog/2026/05/domain-expertise-has-always-been-the-real-moat/",
+        "service_label": "Hacker News",
+        "reason": "884pt / 549 コメント。コードを書く力より領域の知識が価値だという主張で、エンジニアのキャリアのテーマに該当。"
+      },
+      {
+        "title": "Cloudflare Turnstile requiring fingerprintable WebGL",
+        "title_ja": "Cloudflare Turnstile が指紋採取可能な WebGL を要求",
+        "url": "https://hacktivis.me/articles/cloudflare-turnstile-webgl-fingerprinting",
+        "service_label": "Hacker News",
+        "reason": "787pt / 481 コメントで当日の首位。CAPTCHA 代替が指紋採取を要求する件で、Web セキュリティとプライバシーの交点。"
+      },
+      {
+        "title": "OpenRouter raises $113M Series B",
+        "title_ja": "OpenRouter が 1 億 1300 万ドルのシリーズ B を調達",
+        "url": "https://openrouter.ai/announcements/series-b",
+        "service_label": "Hacker News",
+        "reason": "460pt / 253 コメント。複数の LLM を一つの API で使える OpenRouter の資金調達で、LLM の利用基盤の動向。"
+      },
+      {
+        "title": "The solution might be cancelling my AI subscription",
+        "title_ja": "解決策は AI の購読をやめることかもしれない",
+        "url": "https://thoughts.hmmz.org/2026-05-31.html",
+        "service_label": "Hacker News",
+        "reason": "388pt / 243 コメント。AI で量産した副産物と注意力の消耗を綴った内省で、AI 活用の負の側面。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Cloudflare Turnstile requiring fingerprintable WebGL",
+              "title_ja": "Cloudflare Turnstile が指紋採取可能な WebGL を要求",
+              "url": "https://hacktivis.me/articles/cloudflare-turnstile-webgl-fingerprinting",
+              "comments_url": "https://news.ycombinator.com/item?id=48345840",
+              "score": 95,
+              "engagement_label": "787pt / 481コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "hacktivis.me の記事。Cloudflare の CAPTCHA 代替 Turnstile が、ブラウザの指紋採取に使える WebGL を必須にしたと指摘した記事で、利用をやめるという声が集まり 787pt / 481 コメント。",
+              "discussion_summary": "hacktivis.me の記事で、Cloudflare の CAPTCHA 代替 Turnstile が、ブラウザの指紋採取に使える WebGL を必須にしたと指摘している。787pt / 481 コメントで当日の首位になった。\n\nコメントでは、複数のサイトで Turnstile を使っている立場としてその判断を見直す必要があるという投稿が最上位にある。Cloudflare は善玉だと思っていたという皮肉や、EU で指紋採取の禁止を求める請願を作ってほしいという呼びかけも続いた。\n\nFirefox の privacy.resistfingerprinting を知らなかったので今後は Cloudflare の検査を全て失敗させるという投稿、AI の時代に人間のプライバシーを保ちながら bot を締め出す実際の解決策はあるのかという問い、Cloudflare は以前から JA3 の指紋で curl を弾いてきたが簡単に偽装できるという解説もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Microsoft Office 2019 and 2021 for Mac view-only conversion",
+              "title_ja": "Microsoft Office 2019 と 2021 for Mac の閲覧専用への変換",
+              "url": "https://consumerrights.wiki/w/Microsoft_Office_2019_and_2021_for_Mac_view-only_conversion_(2026)",
+              "comments_url": "https://news.ycombinator.com/item?id=48341578",
+              "score": 94,
+              "engagement_label": "1015pt / 376コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Consumer Rights Wiki の項目。買い切りの Office 2019 と 2021 for Mac が閲覧専用に変換される件をまとめたもので、窃盗だという反発と少額訴訟の勧めが集まり 1015pt / 376 コメント。",
+              "discussion_summary": "Consumer Rights Wiki の項目で、買い切りで販売された Microsoft Office 2019 と 2021 for Mac が 2026 年に閲覧専用に変換される件をまとめている。1015pt / 376 コメントを集めた。\n\nコメントでは、認証局の TLS の脆さがソフトウェアの寿命を有限で非常に短くするまた別の例で、TLS を使うソフトウェアは「動き続ける」とは言えないのに Microsoft はそう言ったのだから責任があるという投稿が最上位にある。全顧客から購入代金を盗む組織犯罪として扱うべきだという声も続いた。\n\n影響を受けた顧客は少額訴訟に行くべきで、まさにこの種の問題のために作られた制度だという助言、AI ラボがエージェントのワークフローでオフラインのライセンス版 Office を使っており Microsoft はエージェントごとに別のライセンスを求めているため急いでいるのではという推測、海賊版の方が元の契約に忠実だという皮肉もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "United Airlines 767 returns to Newark after Bluetooth name sparks alert",
+              "title_ja": "United Airlines の 767、Bluetooth の機器名が警報を招き Newark に引き返す",
+              "url": "https://simpleflying.com/united-airlines-767-returns-newark-bluetooth-name-alert/",
+              "comments_url": "https://news.ycombinator.com/item?id=48345248",
+              "score": 92,
+              "engagement_label": "420pt / 947コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Simple Flying の記事。United Airlines の 767 が機内で検出された Bluetooth 機器の名前を理由に Newark に引き返した件で、対応の妥当性をめぐって 420pt / 947 コメント。",
+              "discussion_summary": "Simple Flying の記事で、United Airlines の 767 が、機内で検出された Bluetooth 機器の名前が脅威とみなされたため Newark に引き返したと報じている。客室乗務員は機内放送で Bluetooth を直ちに切らなければ引き返すと告げたという。420pt に対して 947 コメントと、議論が点数を大きく上回った。\n\nコメントでは、機器名に政治的な文言が含まれていたとして FBI が関わるのは普通なのかという問いが最上位にある。本人が名前を戻せば済むのなら脅威ではないだろう、テロリストが爆弾に「bomb」と名づけると思ったのかという皮肉も続いた。\n\n16 歳の少年が Bluetooth スピーカーに「bomb」と名づけ、預け荷物の中で切れなかったらしいという情報、機器に無作為の無害な名前を割り当てる時代が来るのかという問い、同乗していた 9 人の Reddit 利用者の実況が面白かったという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Domain expertise has always been the real moat",
+              "title_ja": "ドメイン知識こそが常に本当の堀だった",
+              "url": "https://www.brethorsting.com/blog/2026/05/domain-expertise-has-always-been-the-real-moat/",
+              "comments_url": "https://news.ycombinator.com/item?id=48340411",
+              "score": 91,
+              "engagement_label": "884pt / 549コメント",
+              "category": "キャリア/組織",
+              "interest": 2,
+              "summary": "Bret Horsting のブログ。ソフトウェアを書くことの難しさは書くこと自体にはなく、領域の知識が常に本当の価値だったと論じた記事で、LLM が領域知識も符号化しているという反論と共に 884pt / 549 コメント。",
+              "discussion_summary": "Bret Horsting のブログ記事で、ソフトウェアを書くことの難しさは書くこと自体にはなく、領域の知識こそが常に本当の堀だったと論じている。884pt / 549 コメントを集めた。\n\nコメントでは、モデルは似たシステムの実装で事前学習済みで、作ろうとしているものは大抵過去に何らかの形で作られており曖昧さは学習データの誰かが解決しているという指摘が最上位にある。インターネットがあれば織物労働者も同じ記事を書いただろうという皮肉も続いた。\n\n領域の知識の方が純粋なコーディング能力より面白く、コーディングは手段にすぎないという同意、自分の存在意義を作り直そうとするエンジニアの記事にうんざりだという不満、LLM は望みうる全ての領域知識を符号化しており開発者は短時間で専門家になれるので安全なニッチはないという反論、土木技術者として領域を理解しない計算機技術者が作ったソフトウェアは臭いで分かるという声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Please Do Not Vibe Fuck Up This Software",
+              "title_ja": "どうかこのソフトウェアをバイブで壊さないでください",
+              "url": "https://github.com/RsyncProject/rsync/issues/929",
+              "comments_url": "https://news.ycombinator.com/item?id=48342705",
+              "score": 87,
+              "engagement_label": "553pt / 480コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "rsync の GitHub の issue。約 6 万 7000 行の rsync に 2 か月で 2 万 6000 件の変更が AI で入れられ回帰が起きているとして、AI での改変をやめるよう求めたもので 553pt / 480 コメント。",
+              "discussion_summary": "rsync の GitHub リポジトリに立てられた issue で、約 6 万 7000 行だった rsync に 2 か月で 2 万 6000 件の変更が AI によって投入され回帰が起きているとして、メンテナにこのソフトウェアをバイブコーディングで壊さないよう求めている。553pt / 480 コメントを集めた。\n\nコメントでは「でも大きな計画があるんだ」という冗談が最上位にあり、変更の規模を引用して驚く投稿が続いた。前日に話題になった OpenBSD の openrsync との時期の重なりを指摘する声もあった。\n\nissue の書き方は不快だが、名声を確立し市場の圧力とも無縁な指導者がなぜ実験的な代物を rsync に解き放ったのか不可解だという意見、誰か実際に原因を調べたのか、生成コードのせいなのか正当な修正の副作用なのかという問い、「コードの現代化」と称する変更で退行を起こされるのが最も苛立つという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The Website Specification",
+              "title_ja": "The Website Specification",
+              "url": "https://specification.website/",
+              "comments_url": "https://news.ycombinator.com/item?id=48343683",
+              "score": 85,
+              "engagement_label": "559pt / 221コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "specification.website は、well-known URL やメタデータなど Web サイトが備えるべき慣習をまとめた仕様集。IANA の一覧との重複や llms.txt の有害性が指摘され 559pt / 221 コメント。",
+              "discussion_summary": "specification.website は、.well-known の各種 URL やメタデータなど、Web サイトが備えるべき慣習を一覧にまとめた仕様集のサイト。559pt / 221 コメントを集めた。\n\nコメントでは、この指針を検証するスクリプト群を備えたスキルに変換してサイト構築に使えないかという要望が最上位にある。well-known URL の選択肢の半分は知らなかったという感謝や、.well-known/security が例に挙がっているのに well-known の分類に入っていないという指摘も続いた。\n\n/.well-known/change-password は HN も Google も実装していないようだという観察、IANA の well-known URI の登録一覧へのリンク、llms.txt は主要な AI 事業者のどこも対応しておらず、効果があると思わせるだけで実際は何もない有害なものだという批判もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Dav2d",
+              "title_ja": "Dav2d",
+              "url": "https://jbkempf.com/blog/2026/dav2d/",
+              "comments_url": "https://news.ycombinator.com/item?id=48344961",
+              "score": 84,
+              "engagement_label": "551pt / 202コメント",
+              "category": "プログラミング",
+              "interest": 1,
+              "summary": "VideoLAN の Jean-Baptiste Kempf のブログ。AV2 デコーダ dav2d の解説で、AV2 は AV1 より約 25% 効率が良い一方でデコードは約 5 倍複雑だと述べており 551pt / 202 コメント。",
+              "discussion_summary": "VideoLAN の Jean-Baptiste Kempf のブログ記事で、月初に公開された AV2 デコーダ dav2d を解説している。AV2 は AV1 に比べて約 25% の改善がある一方、デコードは約 5 倍複雑で、今のハードウェアではアーキテクチャごとの最適化なしにリアルタイムでの復号は難しいと述べている。前日には AV2 の最終版 1.0 仕様の公開も話題になった。551pt / 202 コメントを集めた。\n\nコメントでは、25% の改善と 5 倍の複雑さという二つの数字は何を意味し比較できるのかという質問が最上位にある。AV1 のソフトウェアデコードも既に重いので AV2 のベンチマークが興味深いという声も続いた。\n\nRust が進歩する中で C とアセンブリでコーデックを書く意味はあるのかという問い、極めて低いビットレートでの AV1 との比較を見たいという要望、Wiener フィルタという名前への冗談もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The solution might be cancelling my AI subscription",
+              "title_ja": "解決策は AI の購読をやめることかもしれない",
+              "url": "https://thoughts.hmmz.org/2026-05-31.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48345896",
+              "score": 79,
+              "engagement_label": "388pt / 243コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "hmmz.org のエッセイ。AI で次々に作った小さな製品が収入にならず注意力だけを消耗させたとして、購読をやめることが解決かもしれないと綴った内省で、遊びを収益で測る見方への反論もあり 388pt / 243 コメント。",
+              "discussion_summary": "hmmz.org のエッセイで、AI で次々に作った小さな製品が収入にならず、注意力だけを消耗させたとして、AI の購読をやめることが解決かもしれないと綴っている。388pt / 243 コメントを集めた。\n\nコメントでは、著者は「有用」を重視しすぎて「素晴らしい」を軽視しており、楽しんで作った製品を収入にならなかったからと否定するのは奇妙に資本主義的な遊びの見方だという投稿が最上位にある。AI は簡単な仕事をさらに簡単にする一方で注意の持続時間を縮め、難しい仕事をしにくくするので生産性が上がっても本当の進歩は少ないという分析も続いた。\n\nAI を使って一つの製品だけに丁寧さを注いだらどうかという提案、McLuhan 的なメディア分析を AI に当てるのは慎重にという助言、ADHD で 2 年以上 AI 支援のコーディングを家族を支える一つの SaaS に集中させているという実践、AI で生産的になったがコーディングの楽しさは減り漂流している気分だという告白もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "OpenRouter raises $113M Series B",
+              "title_ja": "OpenRouter が 1 億 1300 万ドルのシリーズ B を調達",
+              "url": "https://openrouter.ai/announcements/series-b",
+              "comments_url": "https://news.ycombinator.com/item?id=48338660",
+              "score": 76,
+              "engagement_label": "460pt / 253コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "OpenRouter の発表。複数の LLM を一つの API で使えるサービスがシリーズ B で 1 億 1300 万ドルを調達した件で、新モデルを試す最良の手段だという評価と VC 資金への警戒が並び 460pt / 253 コメント。",
+              "discussion_summary": "OpenRouter の発表で、複数のプロバイダの LLM を一つの API で使えるルーティングサービスがシリーズ B で 1 億 1300 万ドルを調達した。460pt / 253 コメントを集めた。\n\nコメントでは、OpenRouter を広く使う立場から、各社の異なる API をいじらずに新モデルを試す最良の方法で、それが繰り返し必要になっているという投稿が最上位にある。Tinfoil や Replicate や Cerebras と併用しており競争は良いことだという声も続いた。\n\nLLM との間にプロキシを挟む理由が分からなかったが、全モデルを試す最も摩擦の少ない手段であることと請求上限を設定できることに大きな価値があるという評価、名前の「Open」は OpenAI と同じ意味でリポジトリも自前運用もないのかという疑問、API 利用は大手 3 社の購読より 100 倍高いという不満、VC 資金で消費者に不利な収益策を導入しないか警戒するという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I put a datacenter GPU in my gaming PC",
+              "title_ja": "データセンター用の GPU をゲーミング PC に載せた",
+              "url": "https://blog.tymscar.com/posts/v100localllm/",
+              "comments_url": "https://news.ycombinator.com/item?id=48345694",
+              "score": 72,
+              "engagement_label": "332pt / 192コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "tymscar のブログ。中古の NVIDIA V100 をアダプタ経由でゲーミング PC に載せてローカル LLM を動かした記録で、ドライバやファン制御の苦労と引き換えの価格あたりの性能が語られ 332pt / 192 コメント。",
+              "discussion_summary": "tymscar のブログ記事で、2017 年当時約 1 万ドルだったデータセンター用の NVIDIA V100 を中古で安く入手し、SXM2 のアダプタを介してゲーミング PC に載せてローカル LLM を動かした記録を綴っている。332pt / 192 コメントを集めた。\n\nコメントでは、ドライバやカーネルやアダプタやファンのデバッグをやりたがる人は少ないが、やる気があれば価格あたりの性能は常軌を逸しているという祝福が最上位にある。「計算力は本物、VRAM も本物」という文体は AI 臭いという皮肉も続いた。\n\n128GB の HBM2E を持つ AMD MI250X も中古で 1000 ドル未満で見かけるが OAM ソケットが必要だという情報、5090 の帯域は 9 年前の GPU の 2 倍だという補足、埋め立てに向かうこれらのカードの量は膨大で再販を容易にする仕組みが要るという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

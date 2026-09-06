@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-09",
+  "generated_at": "2026-09-06T20:55:17+09:00",
+  "digest": {
+    "headline": "Bun の Rust 書き直しが 6 日で Linux x64 のテスト 99.8% を通過、Google が de-Google 化した Android で reCAPTCHA を壊した件が 1561pt を集めた日",
+    "lead": "Hacker News では Google の新しい reCAPTCHA が Google サービスなしの Android 端末で動かなくなったという記事が 1561pt / 591 コメントで首位となり、前日までの Google Cloud Fraud Defence をめぐる議論が続いた。Jarred Sumner は Bun の Zig から Rust への実験的な書き直しが 6 日で Linux x64 glibc のテストの 99.8% を通過したと報告し、計算資源と成果が結びつく時代の到来として 698 コメントを集めた。AWS に戻って離れた理由を思い出したという記事、数学者 Tim Gowers による ChatGPT 5.5 Pro の体験記、Claude Code に HTML を生成させる有効性を説いた投稿、Google の IDE の歴史も上位に入った。",
+    "highlights": [
+      {
+        "title": "Bun's experimental Rust rewrite hits 99.8% test compatibility on Linux x64 glibc",
+        "title_ja": "Bun の実験的な Rust 書き直しが Linux x64 glibc でテスト互換性 99.8% に到達",
+        "url": "https://twitter.com/jarredsumner/status/2053047748191232310",
+        "service_label": "Hacker News",
+        "reason": "718pt / 698 コメント。エージェントによる大規模な言語移行の実例で、AI コーディングの高関心テーマに直撃。"
+      },
+      {
+        "title": "Using Claude Code: The unreasonable effectiveness of HTML",
+        "title_ja": "Claude Code の使い方: HTML の不合理な有効性",
+        "url": "https://twitter.com/trq212/status/2052809885763747935",
+        "service_label": "Hacker News",
+        "reason": "528pt / 274 コメント。Claude Code の出力形式として HTML を勧める投稿で、Simon Willison の関連記事とともに読まれた。"
+      },
+      {
+        "title": "A recent experience with ChatGPT 5.5 Pro",
+        "title_ja": "ChatGPT 5.5 Pro での最近の経験",
+        "url": "https://gowers.wordpress.com/2026/05/08/a-recent-experience-with-chatgpt-5-5-pro/",
+        "service_label": "Hacker News",
+        "reason": "728pt / 535 コメント。フィールズ賞受賞者が ChatGPT 5.5 Pro で研究数学の進め方が変わると述べ、LLM の到達点の議論になった。"
+      },
+      {
+        "title": "Google broke reCAPTCHA for de-googled Android users",
+        "title_ja": "Google が de-Google 化した Android ユーザーの reCAPTCHA を壊した",
+        "url": "https://reclaimthenet.org/google-broke-recaptcha-for-de-googled-android-users",
+        "service_label": "Hacker News",
+        "reason": "1561pt / 591 コメントで当日の首位。リモート認証に基づく新しい reCAPTCHA の影響がすでに出ている報告。"
+      },
+      {
+        "title": "I returned to AWS and was reminded why I left",
+        "title_ja": "AWS に戻って、離れた理由を思い出した",
+        "url": "http://fourlightyears.blogspot.com/2026/05/i-returned-to-aws-and-was-reminded-hard.html",
+        "service_label": "Hacker News",
+        "reason": "854pt / 650 コメント。AWS の複雑さと OSS への姿勢を批判した記事で、Hetzner などへの移行報告が集まった。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "I returned to AWS and was reminded why I left",
+              "title_ja": "AWS に戻って、離れた理由を思い出した",
+              "url": "http://fourlightyears.blogspot.com/2026/05/i-returned-to-aws-and-was-reminded-hard.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48073201",
+              "score": 95,
+              "engagement_label": "854pt / 650コメント",
+              "category": "インフラ",
+              "interest": 2,
+              "summary": "Four Light Years のブログ。AWS に戻ってみて IAM や CLI の複雑さと、OSS を OpenSearch や Valkey として囲い込む姿勢に改めて嫌気がさしたという記事で、854pt / 650 コメント。",
+              "discussion_summary": "Four Light Years のブログ記事で、しばらく離れていた AWS に戻り、離れた理由を痛感したと綴っている。クラウドはかつて革命だったが、Elasticsearch や Redis や MongoDB が望まないにもかかわらず OpenSearch や Valkey や DocumentDB として複製し収益を奪ったと批判している。854pt / 650 コメントを集めた。\n\nコメントでは、AWS の IAM はひどく GCP の IAM は優れており、AWS CLI は基本操作すら混乱しているという比較が上位にある。個人の実験用ゲームサーバーを立てるだけなのに、明日無限にスケールする準備をしているかのような複雑さで毎回悪夢だという声も続いた。\n\n1 日数百万リクエストのアプリを 10 年近く DigitalOcean と Hetzner で動かしており、クラウドは不必要に複雑ですぐ高くなるという投稿や、本当に必要な計算量を問い直す投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Bun's experimental Rust rewrite hits 99.8% test compatibility on Linux x64 glibc",
+              "title_ja": "Bun の実験的な Rust 書き直しが Linux x64 glibc でテスト互換性 99.8% に到達",
+              "url": "https://twitter.com/jarredsumner/status/2053047748191232310",
+              "comments_url": "https://news.ycombinator.com/item?id=48073680",
+              "score": 95,
+              "engagement_label": "718pt / 698コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Jarred Sumner の X への投稿。Bun の Zig から Rust への実験的な移行が、6 日間で既存の Linux x64 glibc テストスイートの 99.8% を通過したと報告し、718pt / 698 コメント。",
+              "discussion_summary": "Bun の作者 Jarred Sumner による X への投稿で、Zig から Rust への実験的な移行の進捗として、Rust 版が既存の Linux x64 glibc テストスイートの 99.8% を通過したと報告している。数日前の移植ガイドの公開に続く話題で、718pt / 698 コメントを集めた。\n\nコメントでは、6 日間の作業でここまで来たことは、今後はトークンと成し遂げられる仕事が直結し、より多くの計算資源を持つ相手と競うのが難しくなることを示すという見方が上位にある。業界はプログラミング言語としての英語と、仕様とコンテキストと TDD の枠組みへ移行しつつあるという分析も続いた。\n\n副業には十分だが COBOL の銀行システムの移行には足りないという意見、そもそもテストスイートの網羅性と品質はどうなのかという疑問、ライセンスは GPL ではないだろうという推測もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Google broke reCAPTCHA for de-googled Android users",
+              "title_ja": "Google が de-Google 化した Android ユーザーの reCAPTCHA を壊した",
+              "url": "https://reclaimthenet.org/google-broke-recaptcha-for-de-googled-android-users",
+              "comments_url": "https://news.ycombinator.com/item?id=48067119",
+              "score": 94,
+              "engagement_label": "1561pt / 591コメント",
+              "category": "プライバシー",
+              "interest": 2,
+              "summary": "Reclaim The Net の記事。Google の新しい reCAPTCHA が Google サービスを外した Android 端末で通らなくなったと報じ、リモート認証への移行の影響として 1561pt / 591 コメントで当日の首位。",
+              "discussion_summary": "Reclaim The Net の記事で、Google の新しい reCAPTCHA が、Google サービスを取り除いた Android 端末で通らなくなったと報じている。数日前の Google Cloud Fraud Defence の発表と、それを WEI の焼き直しだと批判した記事に続く話題で、1561pt / 591 コメントと当日の首位になった。\n\nコメントでは「豚小屋の門が閉まりつつある」という投稿が最上位にある。ISP が IP を頻繁に変えるため何年も前から CAPTCHA の無限ループで普通の操作すら弾かれているという報告や、新しい reCAPTCHA は本質的にリモート認証で、ブラインド署名を使わないため Google のサーバーと結託すれば端末と本人を紐づけられるという技術的な解説も続いた。\n\nいずれデスクトップ OS も続き、TPM がなければインターネットの半分を閲覧できなくなるという懸念や、訴訟の時だという声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Internet Archive Switzerland",
+              "title_ja": "Internet Archive Switzerland",
+              "url": "https://blog.archive.org/2026/05/06/internet-archive-switzerland-expanding-a-global-mission-to-preserve-knowledge/",
+              "comments_url": "https://news.ycombinator.com/item?id=48074265",
+              "score": 87,
+              "engagement_label": "702pt / 117コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Internet Archive のブログ。スイスに独立組織 Internet Archive Switzerland を設立し、米国外でのバックアップと生成 AI の波の収集を掲げた発表で、702pt / 117 コメント。",
+              "discussion_summary": "Internet Archive のブログ記事で、スイスのザンクト・ガレンに独立した組織 Internet Archive Switzerland を設立し、Internet Archive Canada や Internet Archive Europe と並ぶネットワークを広げると発表した。当初は生成 AI の波の収集などに注力するとしている。702pt / 117 コメントを集めた。\n\nコメントでは、なぜ AI の波を収集したいのかという疑問とともに、米国に依存しないバックアップができるのはようやくだという歓迎が最上位にある。発表ページが負荷で開けず、本家の読み込み速度まで再現しているという皮肉も続いた。\n\n2024 年に Internet Archive Canada で働いた経験から、法的には別組織でも子会社のように運営されていたとして、スイスの組織がどれほど独立しているのかを問う投稿や、欧州に必要な基盤だという声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "EU Parliamentary Research Service calls VPNs \"a loophole that needs closing\"",
+              "title_ja": "EU 議会調査局、VPN を「塞ぐべき抜け穴」と呼ぶ",
+              "url": "https://cyberinsider.com/eu-calls-vpns-a-loophole-that-needs-closing-in-age-verification-push/",
+              "comments_url": "https://news.ycombinator.com/item?id=48072190",
+              "score": 87,
+              "engagement_label": "663pt / 446コメント",
+              "category": "プライバシー",
+              "interest": 1,
+              "summary": "CyberInsider の記事。EU 議会の調査局が年齢確認の議論の中で VPN を塞ぐべき抜け穴と位置づけたと報じ、663pt / 446 コメントで反発と見出しの誇張への指摘が並んだ。",
+              "discussion_summary": "CyberInsider の記事で、EU 議会調査局が年齢確認の推進に関する文書の中で VPN を塞ぐべき抜け穴と位置づけたと報じている。663pt / 446 コメントを集めた。\n\nコメントでは、税の抜け穴はなぜ同じように精査されないのか、オンラインの年齢確認の義務化は害悪で禁止すべきだという投稿が最上位にある。欧州の政治家はすべてを管理したがり、官僚制そのものが目的のようだ、プライバシーと匿名性は法で守られるべきで法で侵されるべきではないという声や、技術的な決定の前に本物の専門家を呼ぶべきだという意見も続いた。\n\n身元確認をするなら企業の実質的所有者から始めるべきだという主張の一方、見出しは誤解を招くもので、文書は VPN をめぐる議論の存在を示しているだけで、抜け穴だと主張する側と VPN 事業者の反論を併記しているという指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "A recent experience with ChatGPT 5.5 Pro",
+              "title_ja": "ChatGPT 5.5 Pro での最近の経験",
+              "url": "https://gowers.wordpress.com/2026/05/08/a-recent-experience-with-chatgpt-5-5-pro/",
+              "comments_url": "https://news.ycombinator.com/item?id=48071262",
+              "score": 86,
+              "engagement_label": "728pt / 535コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "フィールズ賞受賞者 Tim Gowers のブログ。ChatGPT 5.5 Pro が研究数学の問題に取り組んだ経験を長文で綴り、博士課程の指導や数学者の不朽の業績という考えが変わると述べて 728pt / 535 コメント。",
+              "discussion_summary": "フィールズ賞受賞者 Tim Gowers のブログ記事で、ChatGPT 5.5 Pro を研究数学に使った経験を、技術的な部分と哲学的な部分を交えて長文で綴っている。博士課程の学生に手頃な問題を与えて研究を始めさせる指導法が難しくなった、数学で不朽の名声を得ることは誰にとっても間もなく不可能になるかもしれないと述べている。728pt / 535 コメントを集めた。\n\nコメントでは、10 年ほど前に Gowers が 100 年後には人間は研究数学をしていないと予測した講演を聞いたが、時期の見積もりを修正したのだろうかという投稿が最上位にある。長い証明では同僚に送る前に別のセッションで 5.5 Pro に批判的に欠陥を探させるべきだという助言も続いた。\n\n不朽の業績についての一節に悲しくなったという大学院生の声や、東欧の理論計算機科学の助教として、著名な数学者が高価な長考モデルに簡単にアクセスできるのが少し羨ましいという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Using Claude Code: The unreasonable effectiveness of HTML",
+              "title_ja": "Claude Code の使い方: HTML の不合理な有効性",
+              "url": "https://twitter.com/trq212/status/2052809885763747935",
+              "comments_url": "https://news.ycombinator.com/item?id=48071940",
+              "score": 82,
+              "engagement_label": "528pt / 274コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Anthropic の Thariq Shihipar による X の投稿。Claude Code に対話的な HTML を作らせると資料や文書より有効だと説き、Simon Willison の関連記事とともに 528pt / 274 コメント。",
+              "discussion_summary": "Anthropic の Thariq Shihipar による X の投稿で、Claude Code に対話的な HTML を生成させることの有効性を説いている。例をまとめた GitHub Pages のサイトと、Simon Willison の関連記事も共有された。528pt / 274 コメントを集めた。\n\nコメントでは、Claude Code が使えるようになって以来多くの人が日常的に HTML を生成させており、目新しさとして提示されるのが意外だという投稿が最上位にある。Web 技術は多くのことを正しくやっており、URL がバックエンドと対応しないバイブコーディング製の SPA に苦しんだ経験と対比する声も続いた。\n\n学習コーパスは HTML に偏っているはずなのにエージェントへの指示に Markdown が共通語として使われるのは不思議だという指摘や、PartyKit のカーソルや投票を備えたワークショップ用の HTML を作ったという報告もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "A History of IDEs at Google",
+              "title_ja": "Google における IDE の歴史",
+              "url": "https://laurent.le-brun.eu/blog/a-history-of-ides-at-google",
+              "comments_url": "https://news.ycombinator.com/item?id=48073979",
+              "score": 79,
+              "engagement_label": "473pt / 316コメント",
+              "category": "開発文化",
+              "interest": 2,
+              "summary": "Laurent Le Brun のブログ。Google 社内の IDE が VS Code ベースの Cider-V に収斂した経緯と、単一プラットフォームの利点を綴った記事で、473pt / 316 コメント。",
+              "discussion_summary": "Laurent Le Brun のブログ記事で、Google 社内の IDE の変遷を辿り、多くのエンジニアが VS Code ベースの Cider-V を使うようになった経緯と、単一の拡張可能なプラットフォームを持つ利点を論じている。473pt / 316 コメントを集めた。\n\nコメントでは、Cider-V と google3 の外で使うリモートの VS Code との行き来がほぼ苦にならない点が一番好きだという投稿が最上位にある。ほぼ全員が同じ IDE を使うことで、どの機能がどれだけ使われているかの膨大なテレメトリが集まり、モノレポと同様の可視性が得られるという分析も続いた。\n\nエンジニアが Chromebook を使うのが一般的だというのは意外だという声、Android と Chromium の開発フローがまだ Cider-V に乗っていないという指摘、会社の VS Code の VM で全ての開発をするようになり手元の PC はシンクライアントになったという報告もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The hypocrisy of cyberlibertarianism",
+              "title_ja": "サイバーリバタリアニズムの偽善",
+              "url": "https://matduggan.com/the-intolerable-hypocrisy-of-cyberlibertarianism/",
+              "comments_url": "https://news.ycombinator.com/item?id=48074952",
+              "score": 77,
+              "engagement_label": "425pt / 399コメント",
+              "category": "開発文化",
+              "interest": 1,
+              "summary": "Mat Duggan のブログ。技術業界を動かしてきたサイバーリバタリアニズムの理想と、それがもたらした現実の乖離を批判する記事で、Paulina Borsook の著書などが挙がり 425pt / 399 コメント。",
+              "discussion_summary": "Mat Duggan のブログ記事で、インターネットが民主主義を栄えさせ貧富の差を埋めるといった 90 年代のサイバーリバタリアニズムの予言を引き、それが技術業界を動かし続ける一方で結果はことごとく外れたと批判している。425pt / 399 コメントを集めた。\n\nコメントでは、同じ系統の批判として Paulina Borsook の「Cyberselfish」を薦める投稿が最上位にある。合法すれすれのことを直せそうに見える形で始め、巨大化してから既成事実にするというスタートアップの型が空気を悪くしたという関連する不満も続いた。\n\n記事が「ひどかった」とする携帯電話や GPS 以前の時代も実際は問題なかったという反論、絶えず成長を求める経済の教義と自由な個人は共存できないという意見、Web3 やテクノ封建制への言及がないという指摘、「階級闘争のない生態学は園芸だ」に似た話だという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Driver accused of DUI tracks missing laptop to Illinois State trooper's house",
+              "title_ja": "飲酒運転で告発された運転者、紛失したノート PC を追跡してイリノイ州警察官の自宅にたどり着く",
+              "url": "https://abc7chicago.com/post/top-cop-driver-accused-dui-tracks-missing-laptop-illinois-state-police-trooper-kevin-bradleys-house/19060850/",
+              "comments_url": "https://news.ycombinator.com/item?id=48067184",
+              "score": 76,
+              "engagement_label": "447pt / 382コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "ABC7 Chicago の報道。飲酒運転で逮捕された男性が紛失したノート PC を追跡したところイリノイ州警察官の自宅にあり、警官の処分は 1 日の停職だった件で、447pt / 382 コメント。",
+              "discussion_summary": "ABC7 Chicago の報道で、飲酒運転で告発された運転者が押収後に紛失したノート PC の位置を追跡したところ、逮捕したイリノイ州警察官の自宅にあったと伝えている。捜査の結果、警官は州警察の規則に違反したとされ、1 日の停職処分を受けた。447pt / 382 コメントを集めた。\n\nコメントでは、飲酒や障害や高齢で現場のテストに通らない人は多いので血液検査を要求する権利があるべきだという投稿が最上位にある。この警官が 2024 年に給与をほぼ 3 倍の約 25 万ドルにしていたという記事の記述への驚きや、処分が 1 日の停職だったという引用も続いた。\n\n追跡技術を買えない人から奪われたものを考えると米国の制度は二層構造だという意見、警官が撃って逆恨みだと主張できた可能性を考えると被害者の行動は危険だったという指摘、法を犯した同僚をかばう警官が多すぎるという批判もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

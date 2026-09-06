@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-05",
+  "generated_at": "2026-09-06T20:44:29+09:00",
+  "digest": {
+    "headline": "Chrome が同意なく 4GB の AI モデルを入れていたという記事が 1755pt / 1143 コメント、Bun の Zig → Rust 移植ガイドと Bun への懸念記事が同日に並んだ日",
+    "lead": "Hacker News では Google Chrome が同意なしに 4GB のオンデバイス AI モデルを入れていたという記事が 1755pt / 1143 コメントで月内最大級の反応を集めた。Anthropic 傘下となった Bun をめぐっては、oven-sh/bun に Zig から Rust への移植ガイドがコミットされた件と、Bun の将来を心配する記事が同じ日に上位へ入った。Coinbase が人員を 14% 削減し「非技術チームが本番コードを出荷している」と述べた CEO の投稿は 807 コメント、AI がデータベースを消したのではなく消させたのは人間だという記事は 304 コメントを集め、AI と組織運営の話題が続いた。",
+    "highlights": [
+      {
+        "title": "Zig → Rust porting guide",
+        "title_ja": "Zig → Rust 移植ガイド",
+        "url": "https://github.com/oven-sh/bun/commit/46d3bc29f270fa881dd5730ef1549e88407701a5",
+        "service_label": "Hacker News",
+        "reason": "723pt / 555 コメント。Anthropic 傘下の Bun で Zig から Rust への移植を示すコミットが見つかり、AI 開発ツールの高関心テーマに直撃。"
+      },
+      {
+        "title": "I am worried about Bun",
+        "title_ja": "Bun が心配だ",
+        "url": "https://wwj.dev/posts/i-am-worried-about-bun/",
+        "service_label": "Hacker News",
+        "reason": "523pt / 349 コメント。同日の移植ガイドと合わせて読まれた Bun への懸念記事で、Claude Code の品質をめぐる意見も割れた。"
+      },
+      {
+        "title": "Google Chrome silently installs a 4 GB AI model on your device without consent",
+        "title_ja": "Google Chrome は同意なしに 4GB の AI モデルをデバイスに黙ってインストールする",
+        "url": "https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/",
+        "service_label": "Hacker News",
+        "reason": "1755pt / 1143 コメントで当日の首位。オンデバイス AI モデルの配布と同意の線引きをめぐる議論。"
+      },
+      {
+        "title": "Today I've made the difficult decision to reduce the size of Coinbase by ~14%",
+        "title_ja": "今日、Coinbase の規模を約 14% 縮小するという難しい決断をした",
+        "url": "https://twitter.com/brian_armstrong/status/2051616759145185723",
+        "service_label": "Hacker News",
+        "reason": "484pt に対し 807 コメント。AI で非技術チームが本番コードを出荷するという発言に、セキュリティ面の懸念が集中した。"
+      },
+      {
+        "title": "AI didn't delete your database, you did",
+        "title_ja": "AI があなたのデータベースを消したのではない、あなたが消したのだ",
+        "url": "https://idiallo.com/blog/ai-didnt-delete-your-database-you-did",
+        "service_label": "Hacker News",
+        "reason": "545pt / 304 コメント。AI エージェントに本番を消す権限を与えた設計の責任を問う記事で、エージェント運用の高関心テーマに該当。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Google Chrome silently installs a 4 GB AI model on your device without consent",
+              "title_ja": "Google Chrome は同意なしに 4GB の AI モデルをデバイスに黙ってインストールする",
+              "url": "https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/",
+              "comments_url": "https://news.ycombinator.com/item?id=48019219",
+              "score": 98,
+              "engagement_label": "1755pt / 1143コメント",
+              "category": "プライバシー",
+              "interest": 2,
+              "summary": "That Privacy Guy のブログ。Chrome が Gemini Nano とみられる 4GB のオンデバイス AI モデルをユーザーの同意なしにダウンロードしていると指摘し、1755pt / 1143 コメントで当日の首位。",
+              "discussion_summary": "That Privacy Guy のブログ記事で、Google Chrome がユーザーの同意なしに 4GB のオンデバイス AI モデルをダウンロードしていると指摘している。1755pt / 1143 コメントで当日の首位となり、記事のサイトは負荷で 503 を返した。\n\nコメントでは、サイトが読めないが何に同意を求めるべきなのか、すべての依存関係か 1GB 以上のものかという問いが最上位にある。自動更新はバグ修正とセキュリティ修正に限るべきで、乱用が業界の恥になっているという意見や、2026 年に Google や Microsoft のブラウザを使う理由がないという声も続いた。\n\n一方で、Chrome を入れた時点でその構成要素すべてを入れたのであり部品ごとに同意を求めるのは不条理だ、クラウドではなくローカルの AI を使うのは良いことだと合意されていたはずだという反論もあり、誰かの昇進のために承認を通したのだろうという皮肉もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Today I've made the difficult decision to reduce the size of Coinbase by ~14%",
+              "title_ja": "今日、Coinbase の規模を約 14% 縮小するという難しい決断をした",
+              "url": "https://twitter.com/brian_armstrong/status/2051616759145185723",
+              "comments_url": "https://news.ycombinator.com/item?id=48021368",
+              "score": 95,
+              "engagement_label": "484pt / 807コメント",
+              "category": "キャリア/組織",
+              "interest": 2,
+              "summary": "Coinbase CEO Brian Armstrong の X への投稿。人員を約 14% 削減し、非技術チームが本番コードを出荷していると述べた内容に、金融機関としての妥当性を問う声が集まり 484pt / 807 コメント。",
+              "discussion_summary": "Coinbase の CEO Brian Armstrong による X への投稿で、人員を約 14% 削減すると発表した。AI によって非技術チームが本番コードを出荷し多くのワークフローが自動化されているとし、エンジニアとデザイナーとプロダクトマネージャーを一人で兼ねる「一人チーム」も試すとしている。484pt に対して 807 コメントを集めた。\n\nコメントでは、退職者への補償は手厚そうだが、非技術スタッフが本番にコードを配備するという点が気になり、暗号資産の分野で見たい賭けだという皮肉が最上位にある。同じ一文を引用して、セキュリティエンジニアとして恐怖を覚える、金融機関にしてほしいことではないという声が続いた。\n\nエンジニアが AI で数週間分の仕事を数日で出す様子を見てきたが、来年はその結果を見ることになるという見方や、一人チームは実験ではなくコスト削減で複数の役割分の報酬は払われるのかという疑問、上場企業として言うべきことなのかと問う投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Zig → Rust porting guide",
+              "title_ja": "Zig → Rust 移植ガイド",
+              "url": "https://github.com/oven-sh/bun/commit/46d3bc29f270fa881dd5730ef1549e88407701a5",
+              "comments_url": "https://news.ycombinator.com/item?id=48016880",
+              "score": 91,
+              "engagement_label": "723pt / 555コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "oven-sh/bun へのコミット。Bun を Zig から Rust へ移植するためのガイドが追加されており、Anthropic 傘下での実験なのか本気の移行なのかをめぐって 723pt / 555 コメントを集めた。",
+              "discussion_summary": "oven-sh/bun リポジトリへのコミットで、Zig から Rust への移植ガイドが追加された。Anthropic による買収後の Bun で見つかった変更として、723pt / 555 コメントを集めた。\n\nコメントでは、何かの実験が行われているのだろうが、いずれにせよ大変な物語になるという投稿が最上位にある。Bun のメンテナが Zig から Rust に移る必要を感じる理由は何かという疑問や、当時の Zig には作業を止めるコンパイラのバグが多かったのに JS ランタイムを Zig で作ったのは前から奇妙に思えたという意見も出た。\n\n同じ日に HN の首位にあった Bun を心配する記事では「Anthropic は自社のコードベースで実験するが Bun チームは同じバイブコーディングの実験はしない」というコメントが上位にあったのに、まさにそれが起きているように見えるという指摘や、「Claude、Bun を Rust に移行して、ミスはしないで」という冗談もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Removable batteries in smartphones will be mandatory in the EU starting in 2027",
+              "title_ja": "EU では 2027 年からスマートフォンの取り外し可能なバッテリーが義務化される",
+              "url": "https://www.ecopv-eu.com/en/blog-en/replaceable-smartphone-batteries-2027-eu-regulation/",
+              "comments_url": "https://news.ycombinator.com/item?id=48009697",
+              "score": 86,
+              "engagement_label": "573pt / 535コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "EU の規則で 2027 年からスマートフォンのバッテリーを取り外し可能にすることが義務づけられるという解説記事。1000 サイクル後に 80% の容量を保つ機種は除外され、iPhone は対象外という指摘が集まり 573pt / 535 コメント。",
+              "discussion_summary": "EU のバッテリー規則により、2027 年からスマートフォンのバッテリーを取り外し可能にすることが義務づけられるという解説記事。573pt / 535 コメントを集めた。\n\nコメントでは、1000 回の充電サイクル後に 80% の容量を保つ機種は例外になるため、iPhone などのフラッグシップは対象外で法律が無意味になるという指摘が最上位にある。この例外が市場のどれだけの割合に当たるのかという疑問や、それでも 80% という基準がまともなインセンティブを作るという評価もあった。\n\n「取り外し可能」の定義が特殊な工具なしでという意味か明確であることを望む声や、防水性と薄さは取り外し可能なバッテリーと両立できるという意見、爪を割った昔のクリップ式の蓋を思い出して拒否反応があったが標準工具の使用も可と知って納得したという EU 市民の投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI didn't delete your database, you did",
+              "title_ja": "AI があなたのデータベースを消したのではない、あなたが消したのだ",
+              "url": "https://idiallo.com/blog/ai-didnt-delete-your-database-you-did",
+              "comments_url": "https://news.ycombinator.com/item?id=48022742",
+              "score": 86,
+              "engagement_label": "545pt / 304コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Ibrahim Diallo のブログ。AI エージェントが本番データベースを消した事故は、AI に削除できる権限と経路を与えた人間の設計の問題だと論じており、545pt / 304 コメント。",
+              "discussion_summary": "Ibrahim Diallo のブログ記事で、AI エージェントが本番データベースを消したという事故は、そもそも本番データベース全体を消せる API エンドポイントや権限を用意した人間の側の問題だと論じている。545pt / 304 コメントを集めた。\n\nコメントでは、「AI を使うのは間違いだ、データベースを消すかもしれない」という皮肉が最上位にあり、「ハッカーがやった」から「AI がやった」に移っただけで問題の構造は同じだという指摘や、区別に意味がないという声が続いた。\n\nLLM のような確率的なシステムは何をするか決めるのに向き、実行は決定論的なシステムが担うべきで、デプロイの仕組みは常に決定論的であるべきだという整理や、問題は AI がデータベースを消せるシステムを持っていたことだという同意の一方、AI がやったことはやったことで記事の論点は無関係だという反論もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Microsoft Edge stores all passwords in memory in clear text, even when unused",
+              "title_ja": "Microsoft Edge は未使用時でも全パスワードを平文でメモリに保持している",
+              "url": "https://twitter.com/L1v1ng0ffTh3L4N/status/2051308329880719730",
+              "comments_url": "https://news.ycombinator.com/item?id=48012735",
+              "score": 83,
+              "engagement_label": "644pt / 234コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "X への投稿。Microsoft Edge が保存済みの全パスワードを使っていない時も平文でメモリに保持していると指摘したが、メモリを読める攻撃者なら他の手段もあるという反論が集まり 644pt / 234 コメント。",
+              "discussion_summary": "X への投稿で、Microsoft Edge が保存されたすべてのパスワードを、使用していない間も平文のままプロセスのメモリに保持していると指摘した。644pt / 234 コメントを集めた。\n\nコメントでは、「メモリに読み込む」と「保存する」は同じではないという指摘が最上位にある。任意のプロセスメモリを読める立場なら、そのユーザーになりすましてパスワードを書き出すこともできるはずで、Raymond Chen の言う「気密ハッチの向こう側にいる」類の話だという見方や、同じマシンの Edge なら保存済みパスワードのエクスポート機能で取り出せるという投稿も続いた。\n\nEdge 固有の話ではなく、Chrome もパスワードをハッシュ化せず起動中は平文でメモリに置いているという補足や、ブラウザ内蔵ではなく KeePass のような専用のパスワードマネージャを使うべきだという助言もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I am worried about Bun",
+              "title_ja": "Bun が心配だ",
+              "url": "https://wwj.dev/posts/i-am-worried-about-bun/",
+              "comments_url": "https://news.ycombinator.com/item?id=48011184",
+              "score": 80,
+              "engagement_label": "523pt / 349コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "wwj.dev のブログ。Anthropic に買収された Bun の将来を、Claude Code の品質変化や機能肥大を根拠に懸念し、一部のプロジェクトを Bun から移すと述べた記事で 523pt / 349 コメント。",
+              "discussion_summary": "wwj.dev のブログ記事で、Anthropic に買収された Bun の将来を懸念し、著者自身は一部のプロジェクトを Bun から移していると述べている。Cursor の利用をやめた経緯にも触れている。523pt / 349 コメントを集めた。\n\nコメントでは、自分は Bun から離れつつあるが助言を鵜呑みにしないでほしいという著者の留保を評価する声が最上位にある。日々 90% は Claude Code を使っているがそこまで悪化したとは思えず、API の扱いや OpenClaw では疑問のある判断もあったが記事は誇張だという意見や、公開以来使っているが悪くなってはいないという投稿もあった。\n\n一方で、機能を増やし続ける肥大化と時間をかけないバイブコーディングに将来を疑うという声や、Node.js の方が安定しているという指摘があった。買収前の Bun は収益化の方法を探す必要があったので、親会社の他製品の問題が Bun に波及すると決めつけるのは飛躍だという反論もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "iOS 27 is adding a 'Create a Pass' button to Apple Wallet",
+              "title_ja": "iOS 27 で Apple Wallet に「パスを作成」ボタンが追加される",
+              "url": "https://walletwallet.alen.ro/blog/ios-27-wallet-create-pass/",
+              "comments_url": "https://news.ycombinator.com/item?id=48021561",
+              "score": 79,
+              "engagement_label": "435pt / 318コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "WalletWallet のブログ。iOS 27 の Apple Wallet にユーザー自身がバーコードや QR コードからパスを作成するボタンが加わるという記事で、なぜ今までなかったのかという声が集まり 435pt / 318 コメント。",
+              "discussion_summary": "WalletWallet のブログ記事で、iOS 27 の Apple Wallet にユーザー自身がパスを作成するボタンが追加されると報じている。会員証やチケットの QR コードやバーコードを自分で Wallet に登録できるようになる。435pt / 318 コメントを集めた。\n\nコメントでは、なぜ今まで不可能だったのか不思議で、チケットに QR コードのあるイベントによく行くので役立つという声が最上位にある。必要だと知らずに必要だったもので、数年前に実装されていてもよかったという同意や、会員証のバーコードを写真に撮って油性ペンでラベルを書き OCR 検索で呼び出していたひどい回避策からの解放を喜ぶ投稿もあった。\n\n同じ目的で無料の Wallet Creator を使っているという紹介、Wallet は問題を探す解決策のようなもので会員証を要求する店が自作を認めるとは思えないという意見、AI 特有の文体の記事にうんざりするという声、そもそもパスとは何かという質問もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "US healthcare marketplaces shared citizenship and race data with ad tech giants",
+              "title_ja": "米国の医療保険マーケットプレイスが市民権と人種のデータを広告技術大手と共有していた",
+              "url": "https://techcrunch.com/2026/05/04/us-healthcare-marketplaces-shared-citizenship-and-race-data-with-ad-tech-giants/",
+              "comments_url": "https://news.ycombinator.com/item?id=48011689",
+              "score": 76,
+              "engagement_label": "523pt / 169コメント",
+              "category": "プライバシー",
+              "interest": 1,
+              "summary": "TechCrunch の記事。州営の医療保険取引所のほぼすべてが Meta pixel などの広告トラッカーを埋め込み、利用者の市民権や人種のデータを送信していたという Bloomberg の調査を報じ、523pt / 169 コメント。",
+              "discussion_summary": "TechCrunch の記事で、米国の 20 の州営医療保険取引所のほぼすべてが広告トラッカーを埋め込み、利用者の市民権や人種に関するデータを広告技術大手に送信していたという Bloomberg の調査を報じている。州当局はマーケティング施策の測定と訪問者への広告のためだと説明している。523pt / 169 コメントを集めた。\n\nコメントでは Bloomberg の調査本体が共有され、これがなぜ HIPAA 違反にならないのかという疑問や、データを送ることも受け取ることも違法にして橋の両側を燃やすべきだという意見が並んだ。\n\n実際の共有は Meta pixel と TikTok の同等物によるもので、保険加入を促すリターゲティングという狭い目的自体は妥当に見えるが、pixel が自動的に多くの情報を送ってしまうという解説や、州当局の説明の不条理さを指摘する投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Async Rust never left the MVP state",
+              "title_ja": "Async Rust は MVP の状態を出ていない",
+              "url": "https://tweedegolf.nl/en/blog/237/async-rust-never-left-the-mvp-state",
+              "comments_url": "https://news.ycombinator.com/item?id=48019163",
+              "score": 72,
+              "engagement_label": "446pt / 266コメント",
+              "category": "プログラミング",
+              "interest": 2,
+              "summary": "Tweede golf のブログ。Rust の async がコンパイラの最適化の面で最小限の実装にとどまっていると論じ、単純な future のオーバーヘッドを減らす取り組みを紹介しており、446pt / 266 コメント。",
+              "discussion_summary": "オランダの Tweede golf のブログ記事で、Rust の async はコンパイラの最適化の面で最小限の実装にとどまっていると論じ、単純な future に残るオーバーヘッドを減らす取り組みを紹介している。446pt / 266 コメントを集めた。\n\nコメントでは、最適化の深掘りとして優れた記事で目標の実現を願うが、題名は内容に比べて大げさで「コンパイラが見逃している async Rust の最適化」の方が合うという評価が最上位にある。例が単純すぎて複雑な async 関数で違いが出るのか結論できないという疑問も出た。\n\nasync は全般に生煮えの考えで、通常のコードは既に非同期だったという根本的な批判や、Rust を嫌うために future の数バイトのオーバーヘッドをあげつらう一方で自分の言語ではランタイム全体を使うのは滑稽だという反論、非同期と同期の両方の API のため関数を二重に書く必要があり maybe-async がほしいという不満もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

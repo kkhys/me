@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-15",
+  "generated_at": "2026-09-06T21:07:56+09:00",
+  "digest": {
+    "headline": "RAV4 からモデムと GPS を外す手順が 1091pt で首位、Mullvad の出口 IP が利用者を識別できるという指摘と arXiv の幻覚参照への 1 年間の投稿禁止が続いた日",
+    "lead": "Hacker News では 2024 年式 RAV4 ハイブリッドからモデムと GPS を物理的に取り外した記録が 1091pt / 585 コメントで首位となり、車のテレメトリからの離脱が再び話題になった。Mullvad の出口 IP が WireGuard の鍵から決定的に選ばれるため利用者の識別に使えるという分析、arXiv が幻覚による存在しない参照文献を 1 年間の投稿禁止で罰する方針、Project Zero による Pixel 10 のゼロクリック攻撃チェーンと、プライバシーとセキュリティの話題が並んだ。AI と仕事では、Amazon の従業員が AI 利用の圧力で無意味なタスクを作っているという記事、「AI が私を馬鹿にしている」というエッセイ、Codex が ChatGPT のモバイルアプリに入った発表が上位に入った。",
+    "highlights": [
+      {
+        "title": "Codex is now in the ChatGPT mobile app",
+        "title_ja": "Codex が ChatGPT のモバイルアプリに搭載",
+        "url": "https://openai.com/index/work-with-codex-from-anywhere/",
+        "service_label": "Hacker News",
+        "reason": "486pt / 247 コメント。コーディングエージェントをモバイルから操作する機能で、Anthropic の Remote Control との比較が出た。"
+      },
+      {
+        "title": "Amazon workers under pressure to up their AI usage are making up tasks",
+        "title_ja": "AI 利用を増やすよう圧力を受けた Amazon の従業員が、タスクをでっち上げている",
+        "url": "https://www.fastcompany.com/91541586/amazon-workers-pressured-to-up-ai-use-extraneous-tasks",
+        "service_label": "Hacker News",
+        "reason": "400pt / 434 コメント。AI の利用量が評価指標になった職場の実態で、Goodhart の法則として組織論のテーマに該当。"
+      },
+      {
+        "title": "New arXiv policy: 1-year ban for hallucinated references",
+        "title_ja": "arXiv の新方針: 幻覚による参照文献には 1 年間の投稿禁止",
+        "url": "https://twitter.com/tdietterich/status/2055000956144935055",
+        "service_label": "Hacker News",
+        "reason": "659pt / 230 コメント。LLM が生成した存在しない参照への制裁で、AI 生成コンテンツと学術の信頼性の問題。"
+      },
+      {
+        "title": "Mullvad exit IPs are surprisingly identifying",
+        "title_ja": "Mullvad の出口 IP は驚くほど識別性が高い",
+        "url": "https://tmctmt.com/posts/mullvad-exit-ips-as-a-fingerprinting-vector/",
+        "service_label": "Hacker News",
+        "reason": "613pt / 389 コメント。VPN の出口 IP が指紋になるという分析で、Web セキュリティとプライバシーの中関心テーマに直撃。"
+      },
+      {
+        "title": "A 0-click exploit chain for the Pixel 10",
+        "title_ja": "Pixel 10 のゼロクリック攻撃チェーン",
+        "url": "https://projectzero.google/2026/05/pixel-10-exploit.html",
+        "service_label": "Hacker News",
+        "reason": "448pt / 241 コメント。Project Zero によるカーネルドライバの脆弱性の詳細な報告で、90 日以内の修正が初めて達成された。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Removing the modem and GPS from my 2024 RAV4 hybrid",
+              "title_ja": "2024 年式 RAV4 ハイブリッドからモデムと GPS を取り外す",
+              "url": "https://arkadiyt.com/2026/05/13/removing-the-modem-and-gps-from-my-rav4/",
+              "comments_url": "https://news.ycombinator.com/item?id=48138136",
+              "score": 94,
+              "engagement_label": "1091pt / 585コメント",
+              "category": "プライバシー",
+              "interest": 1,
+              "summary": "Arkadiy Tetelman のブログ。Toyota へのテレメトリ送信を止めるため RAV4 からモデムと GPS を物理的に外した手順を写真つきで解説し、1091pt / 585 コメントで当日の首位。",
+              "discussion_summary": "Arkadiy Tetelman のブログ記事で、Toyota へのテレメトリ送信を止めるために 2024 年式 RAV4 ハイブリッドからセルラーモデムと GPS ユニットを物理的に取り外した手順を写真つきで解説している。1091pt / 585 コメントで当日の首位になった。\n\nコメントでは、今後この種の作業が増えるだろうという予想が最上位にある。モデムを外しても Bluetooth で電話を接続すると車が電話を経由して同じテレメトリを Toyota に送るが、有線の USB 接続ならそうならないという記事の注意を引用する投稿や、電話が Bluetooth 機器に勝手にインターネットを共有することはないはずだという疑問も続いた。\n\nGPS とセルラーのアンテナの同軸ケーブルに金属のピンを刺せば済むのではという提案、テレメトリを避けるために全てを尽くしながら iPhone を使っているという冗談、2015 年式の車が寿命を迎えたら自分もこれをやらなければならないという嘆きもあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Mullvad exit IPs are surprisingly identifying",
+              "title_ja": "Mullvad の出口 IP は驚くほど識別性が高い",
+              "url": "https://tmctmt.com/posts/mullvad-exit-ips-as-a-fingerprinting-vector/",
+              "comments_url": "https://news.ycombinator.com/item?id=48143880",
+              "score": 91,
+              "engagement_label": "613pt / 389コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "tmctmt.com の記事。Mullvad の出口 IP が接続ごとにランダムではなく WireGuard の鍵から決定的に選ばれるため、サーバーが違っても同じ利用者を識別できる指紋になると分析しており、613pt / 389 コメント。",
+              "discussion_summary": "tmctmt.com の記事で、Mullvad の VPN では出口 IP が接続ごとにランダムに割り当てられるのではなく、1〜30 日で回転する WireGuard の鍵から決定的に選ばれるため、異なるサーバーを使っても同じ利用者だと推定できる指紋になると分析している。フォーラムの管理者が BAN したユーザーの別垢を IP ログから見抜く例が挙げられている。613pt / 389 コメントを集めた。\n\nコメントでは、決定的な割り当てはサーバー側で出口 IP を対応づけるより複雑なはずで、何のためにそうしているのかという疑問が最上位にある。VPN は蛇の油で出口 IP は公開情報だという冷めた意見も続いた。\n\nMullvad は事実上の防弾ホストなのでサイト運営者がこの性質で BAN できるとよく、擬似乱数のシードを足せば済むので数日で修正されるだろうという見方や、VPN の目的には訪問先サイトに対する匿名化は含まれず、匿名性がほしいなら Tor を使うべきだという指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "RTX 5090 and M4 MacBook Air: Can It Game?",
+              "title_ja": "RTX 5090 と M4 MacBook Air: ゲームはできるのか?",
+              "url": "https://scottjg.com/posts/2026-05-05-egpu-mac-gaming/",
+              "comments_url": "https://news.ycombinator.com/item?id=48137145",
+              "score": 89,
+              "engagement_label": "699pt / 180コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Scott Goodhew のブログ。M4 MacBook Air に外付けの RTX 5090 をつなぎ Windows のゲームを動かせるか検証した記事で、実用的ではないという結論と共に 699pt / 180 コメント。",
+              "discussion_summary": "Scott Goodhew のブログ記事で、M4 MacBook Air に外付けの RTX 5090 を接続し、Linux VM への GPU パススルーと x86 エミュレーションを経由して Windows のゲームを動かせるか検証している。結論は「実用的な意味では不可、研究的な意味でかろうじて可」としている。699pt / 180 コメントを集めた。\n\nコメントでは、x86 エミュレーションを使うのは Windows のゲームが ARM 向けにほとんど作られていないからかという確認と、素晴らしい記事だという称賛が最上位にある。本物のマッドサイエンスだという感想や、AI の時代にも本物のハッキングが生きていて嬉しいという声も続いた。\n\nApple の承認が得られれば Mac mini で CUDA を直接動かす AI 推論に役立つという期待、Mac Pro を担当していた時に VM チームへ GPU パススルーを何年も頼んだが実現しなかったという元社員の投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "New arXiv policy: 1-year ban for hallucinated references",
+              "title_ja": "arXiv の新方針: 幻覚による参照文献には 1 年間の投稿禁止",
+              "url": "https://twitter.com/tdietterich/status/2055000956144935055",
+              "comments_url": "https://news.ycombinator.com/item?id=48140922",
+              "score": 86,
+              "engagement_label": "659pt / 230コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "Thomas Dietterich の X への投稿。arXiv が LLM の幻覚による存在しない参照文献を含む論文に 1 年間の投稿禁止と、その後の査読済み採録の条件を課す方針を紹介し、659pt / 230 コメント。",
+              "discussion_summary": "Thomas Dietterich による X への投稿で、arXiv が LLM の幻覚によって生成された存在しない参照文献を含む論文に対し、1 年間の投稿禁止と、その後の投稿には査読つきの信頼できる会議や論文誌での採録を先に求める方針を導入したと紹介している。659pt / 230 コメントを集めた。\n\nコメントでは、学術文献はスロップで危機にあり、容易に検出できる幻覚に結果を課すのは良いことだという賛成が上位にある。arXiv は無料だが権利ではなく特権だという同意や、AI スロップが残ったまま投稿した同僚が厳しい修正要求を受けたという体験談も続いた。\n\n推論やエージェントの文脈で参照の検証はどれほど難しいのか、正当な AI 生成の成果は許されるのかという問い、共著者の名前を無断で入れた場合に全員が禁止されるのかという慎重な審査を求める声、X で LLM 推進派が怒って反応しているのが象徴的だという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Amazon workers under pressure to up their AI usage are making up tasks",
+              "title_ja": "AI 利用を増やすよう圧力を受けた Amazon の従業員が、タスクをでっち上げている",
+              "url": "https://www.fastcompany.com/91541586/amazon-workers-pressured-to-up-ai-use-extraneous-tasks",
+              "comments_url": "https://news.ycombinator.com/item?id=48148337",
+              "score": 84,
+              "engagement_label": "400pt / 434コメント",
+              "category": "キャリア/組織",
+              "interest": 2,
+              "summary": "Fast Company の記事。Amazon の従業員が AI 利用量を上げる圧力を受け、トークンを消費するための無意味なタスクを作っていると報じ、Goodhart の法則の例として 400pt / 434 コメント。",
+              "discussion_summary": "Fast Company の記事で、Amazon の従業員が AI ツールの利用量を増やすよう圧力を受け、指標を満たすために不要なタスクをでっち上げていると報じている。400pt / 434 コメントを集めた。\n\nコメントでは、自分の職場でも期限切れになる前にトークンを使い切るよう経営陣に言われ、文書作成などの些細な作業に回して消費しているという報告が最上位にある。Goodhart の法則そのもので、「指標が目標になると」という投稿や、「トークン駆動開発」という造語も続いた。\n\n狙いはむしろ皆に試させて無駄にしながら用途を学ばせることではないかという見方、AWS の担当者がプレゼンの途中で今月使った Opus のトークン量を誇ったという体験談、「勝利のためにトークンを回せ」という第三帝国のスローガンをもじった皮肉もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI is making me dumb",
+              "title_ja": "AI が私を馬鹿にしている",
+              "url": "https://jpain.io/god-damn-ai-is-making-me-dumb/",
+              "comments_url": "https://news.ycombinator.com/item?id=48139148",
+              "score": 83,
+              "engagement_label": "556pt / 302コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "jpain.io のエッセイ。AI に頼るうちに自分で考える力が衰えていると感じるという告白で、自分でもっと書くという対策や、抽象度が上がるだけだという反論が集まり 556pt / 302 コメント。",
+              "discussion_summary": "jpain.io のエッセイで、AI に頼るうちに自分で考えたり書いたりする力が衰えていると感じると告白している。556pt / 302 コメントを集めた。\n\nコメントでは、記事のサイトの証明書の問題を AI で直せばよいという皮肉が最上位にある。共感するという声とともに、自分でもっと書くために個人ブログを作った、問題の枠組みを考える時間を増やした、経験を活かして AI を導くといった対策が続いた。\n\nより高い抽象度に移るだけで、思考はアセンブリでの効率的なコーディングのように今の世界では不要になるという意見、自分でそうしているだけだという指摘、コードを書く量が減って報酬は増えたのだから馬鹿になったとは言えないという反論があった。エージェントの活用は好きだが、メールやブログや意見を LLM に書かせる気にはなれず、書くことは最後まで自分のものだという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "UK government replaces Palantir software with internally-built refugee system",
+              "title_ja": "英国政府、Palantir のソフトウェアを内製の難民システムに置き換え",
+              "url": "https://www.bbc.com/news/articles/c2l2j1lxdk5o",
+              "comments_url": "https://news.ycombinator.com/item?id=48142251",
+              "score": 81,
+              "engagement_label": "519pt / 211コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "BBC の記事。英国の住宅・コミュニティ・地方自治省が Homes for Ukraine の難民支援システムを Palantir から内製に切り替えたと報じ、Palantir の価格構造が語られて 519pt / 211 コメント。",
+              "discussion_summary": "BBC の記事で、英国の住宅・コミュニティ・地方自治省が Homes for Ukraine の難民支援に使っていた Palantir のソフトウェアを内製のシステムに置き換えたと報じている。省のブログに詳細がある。519pt / 211 コメントを集めた。\n\nコメントでは、これが偶然の成功か意味のある結果かを判断する情報が足りず、「自前で作って得した / 損した」はよくある話で、この制度は 2023 年時点で 20〜30 億ポンドかかっていたという指摘が最上位にある。複数の政府システムのデータを統合するという Palantir が挙げた課題は GDS などの行政部門が日常的に作っている種類のものだという反論も続いた。\n\nPalantir は製品企業の利幅を求めながらコンサル型で運用し、「無料」の現場配備エンジニアを顧客の購入費で賄っているので高価だという解説、EU 各国で禁止すべきで公然と MAGA の企業は信用できないという意見もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Explore Wikipedia Like a Windows XP Desktop",
+              "title_ja": "Wikipedia を Windows XP のデスクトップのように探索する",
+              "url": "https://explorer.samismith.com/",
+              "comments_url": "https://news.ycombinator.com/item?id=48146129",
+              "score": 77,
+              "engagement_label": "539pt / 122コメント",
+              "category": "Web/フロントエンド",
+              "interest": 1,
+              "summary": "Sami Smith による、Wikipedia のカテゴリを Windows XP 風のエクスプローラでフォルダとして辿れる Web サイト。動作の軽さと懐かしさが評価され、539pt / 122 コメント。",
+              "discussion_summary": "Sami Smith が公開した、Wikipedia のカテゴリ階層を Windows XP 風のエクスプローラでフォルダとして辿れる Web サイト。539pt / 122 コメントを集めた。\n\nコメントでは、瞬時に読み込まれて滑らかで、役には立たないが格好いいという感想が最上位にある。光沢の感じは通常の XP より Media Center Edition に近いという指摘や、一番好きだった XP のテーマを見て懐かしさが押し寄せたという声も続いた。\n\n適当にクリックしていたら「人生」から「死」「最期の言葉」を経て Michael Jackson の死のページにたどり着いたという報告、著作権への配慮で Temu 版の XP のように見えるのかという冗談、検索機能が動けば実用的になるという要望、省略記号を含むフォルダ名が全文表示されないという指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "A 0-click exploit chain for the Pixel 10",
+              "title_ja": "Pixel 10 のゼロクリック攻撃チェーン",
+              "url": "https://projectzero.google/2026/05/pixel-10-exploit.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48148460",
+              "score": 77,
+              "engagement_label": "448pt / 241コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Google Project Zero のブログ。Pixel 10 のビデオ処理ドライバの脆弱性を起点とするゼロクリック攻撃チェーンを解説し、初めて 90 日以内に修正されたと記しており、448pt / 241 コメント。",
+              "discussion_summary": "Google Project Zero のブログ記事で、Pixel 10 のビデオ処理ドライバの脆弱性を起点とするゼロクリックの攻撃チェーンを解説している。報告した Android ドライバのバグがベンダーの認知から 90 日以内に修正されたのは初めてだと記している。448pt / 241 コメントを集めた。\n\nコメントでは、カーネルの専門家でなくても追える優れた報告で、これほど重大なバグがこれほど少ない労力で見つかったことに他の危険を恐れるという投稿が最上位にある。問題の vpu_mmap 関数を GPT 5.5 に見せた結果を検証してほしいという投稿も続いた。\n\n90 日以内の修正が初めてという記述に Google への安心と Android の他の部分への不安を覚えるという声、同じハードウェアで GrapheneOS が高い安全性を達成しているのは興味深いという指摘、最近公開されるエクスプロイトが増えたのは AI の話題性のせいかという問いもあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Codex is now in the ChatGPT mobile app",
+              "title_ja": "Codex が ChatGPT のモバイルアプリに搭載",
+              "url": "https://openai.com/index/work-with-codex-from-anywhere/",
+              "comments_url": "https://news.ycombinator.com/item?id=48140529",
+              "score": 76,
+              "engagement_label": "486pt / 247コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "OpenAI の発表。Codex を ChatGPT のモバイルアプリから操作できるようになった件で、無料プランでも使える点や Anthropic の Remote Control との比較が出て 486pt / 247 コメント。",
+              "discussion_summary": "OpenAI の発表で、コーディングエージェント Codex を ChatGPT のモバイルアプリから操作できるようになり、どこからでも作業を続けられるとしている。486pt / 247 コメントを集めた。\n\nコメントでは、それより驚くのは Codex が無料で、デスクトップアプリも CLI も ChatGPT のアカウントでサインインすれば無料プランに含まれていることだという投稿が最上位にある。Anthropic の Remote Control と違って実際に動くのが新鮮で時間をかけて作った価値の証だとしつつ、後で追記で不安定さに触れ、1M トークンのコンテキストを戻してほしいという声も続いた。\n\n計画の承認や小さな判断だけが必要な時に便利だという評価、課題管理ツールを LLM の UI にする OpenAI の Symphony の紹介、Linux 未対応の Codex App の統合だったという落胆、Termius で電話からリモート操作しているという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

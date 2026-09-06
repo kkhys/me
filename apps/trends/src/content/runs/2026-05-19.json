@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-19",
+  "generated_at": "2026-09-06T21:15:38+09:00",
+  "digest": {
+    "headline": "Musk が OpenAI への訴訟で敗訴、Simon Willison の「直近 6 か月の LLM を 5 分で」、Anthropic の Stainless 買収と 8B モデルの信頼性を高める Forge が並んだ日",
+    "lead": "Hacker News では Elon Musk が Sam Altman と OpenAI を相手取った訴訟で、出訴期限の徒過を理由に陪審が請求を退けたという TechCrunch の報道が 1097pt / 595 コメントを集めた。Simon Willison が直近 6 か月の LLM の進展を 5 分にまとめた記事は 587 コメントで、12 月以降の各社モデルの浮き沈みが語られた。Anthropic は SDK 生成の Stainless を買収し、Texas Instruments の AI ディレクターは 8B モデルのツール呼び出し成功率を 53% から 99% に上げるガードレール層 Forge を公開した。Apple のアクセシビリティ新機能、4 万 8000 ドルの GPU サーバーは元が取れたかという検証、OpenBSD 7.9 のリリースも上位に入った。",
+    "highlights": [
+      {
+        "title": "The last six months in LLMs in five minutes",
+        "title_ja": "直近 6 か月の LLM を 5 分で",
+        "url": "https://simonwillison.net/2026/May/19/5-minute-llms/",
+        "service_label": "Hacker News",
+        "reason": "804pt / 587 コメント。半年分の LLM の動向を俯瞰した記事で、LLM の新モデル動向という高関心テーマに直撃。"
+      },
+      {
+        "title": "Show HN: Forge – Guardrails take an 8B model from 53% to 99% on agentic tasks",
+        "title_ja": "Show HN: Forge – ガードレールで 8B モデルのエージェントタスクの成功率を 53% から 99% に",
+        "url": "https://github.com/antoinezambelli/forge",
+        "service_label": "Hacker News",
+        "reason": "687pt / 252 コメント。自前運用の小型モデルでツール呼び出しの信頼性を上げる層で、エージェント設計のテーマに該当。"
+      },
+      {
+        "title": "Anthropic acquires Stainless",
+        "title_ja": "Anthropic、Stainless を買収",
+        "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+        "service_label": "Hacker News",
+        "reason": "531pt / 382 コメント。OpenAI の SDK も生成する Stainless の買収で、開発ツールの囲い込みへの懸念が出た。"
+      },
+      {
+        "title": "Elon Musk has lost his lawsuit against Sam Altman and OpenAI",
+        "title_ja": "Elon Musk、Sam Altman と OpenAI に対する訴訟で敗訴",
+        "url": "https://techcrunch.com/2026/05/18/elon-musk-has-lost-his-lawsuit-against-sam-altman-and-openai/",
+        "service_label": "Hacker News",
+        "reason": "1097pt / 595 コメントで当日最多の点数。AI 業界の主要な法廷闘争の決着。"
+      },
+      {
+        "title": "Was my $48K GPU server worth it?",
+        "title_ja": "4 万 8000 ドルの GPU サーバーは元が取れたか?",
+        "url": "https://rosmine.ai/2026/05/13/was-my-48k-gpu-worth-it/",
+        "service_label": "Hacker News",
+        "reason": "571pt / 449 コメント。GPU サーバーの自前保有とクラウドのコスト比較で、ローカル AI の実践的な検証。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Apple unveils new accessibility features",
+              "title_ja": "Apple、新しいアクセシビリティ機能を発表",
+              "url": "https://www.apple.com/newsroom/2026/05/apple-unveils-new-accessibility-features-and-updates-with-apple-intelligence/",
+              "comments_url": "https://news.ycombinator.com/item?id=48192224",
+              "score": 95,
+              "engagement_label": "726pt / 381コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Apple のニュースルーム。Apple Intelligence を使った請求書の読み上げやオンデバイスの動画字幕生成などのアクセシビリティ新機能を発表した記事で、LLM の有用な応用例として 726pt / 381 コメント。",
+              "discussion_summary": "Apple のニュースルームで、Apple Intelligence を活用した新しいアクセシビリティ機能を発表した。請求書の金額の読み上げやオンデバイスでの動画字幕の生成などが含まれる。726pt / 381 コメントを集めた。\n\nコメントでは、AI で請求額を判定し、請求元に電話して金額を確認し、支払うという手順の皮肉が最上位にある。人間を置き換えたり絞ったりするのではなく助けることに集中した、LLM の本当に有用な応用だという評価も続いた。\n\n紹介動画の音声は晴眼者向けの速さで、盲目の人は想像を超える速さで音声を聞くという豆知識、Apple は Gemini を使っているのでこれらは実際は Google の機能なのかという疑問、一部の言語でしか提供しないことへの懸念、この領域を Apple だけが触れる状態が続くことへの不満、オンデバイスの動画字幕生成への期待もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Elon Musk has lost his lawsuit against Sam Altman and OpenAI",
+              "title_ja": "Elon Musk、Sam Altman と OpenAI に対する訴訟で敗訴",
+              "url": "https://techcrunch.com/2026/05/18/elon-musk-has-lost-his-lawsuit-against-sam-altman-and-openai/",
+              "comments_url": "https://news.ycombinator.com/item?id=48182754",
+              "score": 94,
+              "engagement_label": "1097pt / 595コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "TechCrunch の記事。Musk が OpenAI と Altman を訴えた裁判で、9 人の陪審が 3 年の出訴期限を過ぎていたと判断し請求を退けた件で、Musk 側は控訴すると表明。1097pt / 595 コメント。",
+              "discussion_summary": "TechCrunch の記事で、Elon Musk が Sam Altman と OpenAI を相手取った訴訟で敗訴したと報じている。9 人の陪審は、Musk が 3 年の出訴期限を過ぎてから提訴したと判断した。Musk 側の弁護士は「一言、控訴」と述べた。1097pt / 595 コメントを集めた。\n\nコメントでは、ChatGPT にはリマインダー機能があるので「OpenAI を提訴する」と設定しておけばよかったという皮肉が最上位にある。Altman はこのゲームが上手すぎて Musk を出し抜いたという見方や、Musk 自身が 2017 年に営利化を支持したメールが「裏切り」の物語を売りにくくしたという分析も続いた。\n\n出訴期限という手続き上の理由での決着であり完全な敗北ではないという指摘、手続きの技術論で裁判を終えるのは良い司法ではないという意見、何を根拠に控訴するのかという疑問もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Forge – Guardrails take an 8B model from 53% to 99% on agentic tasks",
+              "title_ja": "Show HN: Forge – ガードレールで 8B モデルのエージェントタスクの成功率を 53% から 99% に",
+              "url": "https://github.com/antoinezambelli/forge",
+              "comments_url": "https://news.ycombinator.com/item?id=48192383",
+              "score": 92,
+              "engagement_label": "687pt / 252コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Texas Instruments の AI ディレクターによる Show HN。自前運用の LLM のツール呼び出しに信頼性の層を加え、8B モデルの成功率を 53% から 99% に上げたとして 687pt / 252 コメント。",
+              "discussion_summary": "Texas Instruments の AI ディレクター Antoine Zambelli による Show HN で、自前運用の LLM のツール呼び出しに信頼性の層を加えるオープンソースの Forge を公開した。ガードレールにより 8B モデルのエージェントタスクの成功率が 53% から 99% に上がったとしている。687pt / 252 コメントを集めた。\n\nコメントでは、評価手法やバックエンドの知見について質問に答えるという作者の投稿が最上位にある。この文脈でのガードレールとは何か、pi のエージェントと llama-server の間に置いて何をするのかという質問や、要するにモデルが正しい形式で正しいツールを呼ぶことを保証するものかという確認も続いた。\n\n本番ではベンチマークと実際の統合の差が大きいので評価手法とエラー回復のループを知りたいという声、修士の卒業研究で使いたいという学生、TI の Explorer Lisp マシンの知的財産の所在を調べてほしいという脱線もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The last six months in LLMs in five minutes",
+              "title_ja": "直近 6 か月の LLM を 5 分で",
+              "url": "https://simonwillison.net/2026/May/19/5-minute-llms/",
+              "comments_url": "https://news.ycombinator.com/item?id=48188183",
+              "score": 91,
+              "engagement_label": "804pt / 587コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Simon Willison のブログ。PyCon の講演を元に直近 6 か月の LLM の進展を 5 分で読める形にまとめた記事で、12 月以降の各社モデルの浮き沈みを語る声が集まり 804pt / 587 コメント。",
+              "discussion_summary": "Simon Willison のブログ記事で、直近 6 か月の LLM の進展を 5 分で読める形にまとめている。804pt / 587 コメントを集めた。\n\nコメントでは、大きな成果をもたらすはずの改善に日付が明記されているのはよく、進捗を測る物差しができたので言い訳はもう通らないという投稿が最上位にある。PyCon で初めて会ったが素晴らしい人物だったという声や、今この瞬間にも大手ラボで人間の画家が自転車に乗るペリカンの絵を学習データ用に描かされているという冗談も続いた。\n\n12 月が転機で、1 月の Claude は最高、2 月は Gemini、4 月は大きな弱体化、5 月は GPT 5.5 が至福だという個人的な年表、変化が速すぎて全体像を記録する人が少ないので Simon の記録はありがたいという感謝、最新モデルでもゲームのバイブコーディングは苦戦するので「転換点」はマーケティングではないかという疑問もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Was my $48K GPU server worth it?",
+              "title_ja": "4 万 8000 ドルの GPU サーバーは元が取れたか?",
+              "url": "https://rosmine.ai/2026/05/13/was-my-48k-gpu-worth-it/",
+              "comments_url": "https://news.ycombinator.com/item?id=48184402",
+              "score": 83,
+              "engagement_label": "571pt / 449コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "rosmine.ai のブログ。独立研究者が 2024 年に組んだ 4 万 8000 ドルの GPU サーバーの費用対効果をクラウドと比較した記事で、GPU 間の接続が遅い構成の問題や故障リスクが指摘され 571pt / 449 コメント。",
+              "discussion_summary": "rosmine.ai のブログ記事で、独立研究者が 2024 年に組んだ 4 万 8000 ドルの GPU サーバーの費用対効果を、クラウドで借りた場合と比較して検証している。571pt / 449 コメントを集めた。\n\nコメントでは、GPU 間の接続が遅いマザーボードを選んだため複数 GPU にまたがるモデルには向かないという記事の記述に対し、プロの PC ビルダーに頼んだのに教えてもらえなかったのかという投稿が最上位にある。GPU が故障した時の負担は借りれば免れるが所有ではそうならないというリスクの指摘も続いた。\n\n独立研究者とは何をして何で生計を立てているのかという問い、M3 Ultra の Mac Studio などに 2 万 5000 ドルを使ったが最悪でも売却できるという投稿、6800 ドルの RTX 6000 Ada 48GB は 9500 ドルの RTX 6000 Pro 96GB に取って代わられたという更新情報もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Anthropic acquires Stainless",
+              "title_ja": "Anthropic、Stainless を買収",
+              "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+              "comments_url": "https://news.ycombinator.com/item?id=48182281",
+              "score": 81,
+              "engagement_label": "531pt / 382コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Anthropic の発表。OpenAPI 仕様から SDK を生成する Stainless を買収した件で、OpenAI の SDK も Stainless 製である点や、開発ツールの囲い込みへの懸念が語られ 531pt / 382 コメント。",
+              "discussion_summary": "Anthropic の発表で、OpenAPI 仕様から各言語の SDK を生成する Stainless を買収したと伝えている。Stainless 側のブログでも参加が説明された。531pt / 382 コメントを集めた。\n\nコメントでは Stainless 側の記事へのリンクが最上位にあり、Anthropic の発表に Stainless のサイトへのリンクがないという指摘や、早期に Anthropic とつながった経緯を問う声が続いた。OpenAI も少なくとも一部の SDK に Stainless を使っているという補足もあった。\n\n標準化には価値があり開発者中心の Anthropic にチームが加わるのは理にかなうという祝福の一方、Anthropic が買収するものはいずれ利用者に不利に使われると思っておくという冷めた見方、Claude Code の利用制限と Codex の台頭を挙げて、エージェント型コーディングツールが囲い込みに向かっているという懸念もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Gaussian Splat of a Strawberry",
+              "title_ja": "Show HN: イチゴの Gaussian Splat",
+              "url": "https://superspl.at/scene/84df8849",
+              "comments_url": "https://news.ycombinator.com/item?id=48191602",
+              "score": 79,
+              "engagement_label": "530pt / 200コメント",
+              "category": "サイエンス",
+              "interest": 1,
+              "summary": "Nikon Z8 と 180mm マクロで 90 方向から各 88 枚の焦点合成をしてイチゴを Gaussian Splatting で再構成した Show HN。撮影の仕組みへの質問が集まり 530pt / 200 コメント。",
+              "discussion_summary": "SuperSplat に公開されたイチゴの Gaussian Splat。Nikon Z8 と Laowa 180mm のマクロレンズで、90 の視点からそれぞれ 88 枚の焦点合成画像を撮影し、LED 照明とブルースクリーンで再構成したもの。撮影機材の写真も添えられた。530pt / 200 コメントを集めた。\n\nコメントでは、そのイチゴは捨てた方がよいという冗談が最上位にある。顕微鏡と Gaussian Splatting を組み合わせてほしいという要望や、撮影条件を引用して正気ではないと驚く投稿も続いた。\n\nイチゴの底に何があったのかという疑問、KIRI Engine でも Splat を作れるという補足、全てのショットの一貫性を保つ機械的な仕組みと所要時間を問う質問、撮影機材の Gaussian Splat も見たいという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "OpenBSD 7.9",
+              "title_ja": "OpenBSD 7.9",
+              "url": "https://www.openbsd.org/79.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48192882",
+              "score": 74,
+              "engagement_label": "418pt / 308コメント",
+              "category": "プログラミング",
+              "interest": 1,
+              "summary": "OpenBSD 7.9 のリリースページ。恒例のリリースソングが久々に付き、カーネルのミューテックスのスピンロックが「parking」ロックに置き換えられるなどの変更があり、418pt / 308 コメント。",
+              "discussion_summary": "OpenBSD 7.9 の公式リリースページ。カーネルのミューテックスの CAS スピンロックを「parking」ロックに置き換えるなどの変更が含まれる。418pt / 308 コメントを集めた。\n\nコメントでは、ちょうど 7.9 の時期を気にしていたところで、久しぶりにリリースソングが付いたという歓迎が最上位にある。BSD は FreeBSD が汎用、NetBSD が移植性、OpenBSD がセキュリティ重視という整理や、「カナダの OS」という愛称も続いた。\n\n誰が何の用途で OpenBSD を使っているのかという質問、他の OS で次々と見つかるセキュリティ問題は AI で加速するので、数十年のセキュリティ重視は他に並ぶものがなく Ubuntu と Debian から全面移行したという投稿、parking ロックとは何でどう動くのかという疑問もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "We stopped AI bot spam in our GitHub repo using Git's –author flag",
+              "title_ja": "Git の --author フラグで GitHub リポジトリの AI bot スパムを止めた",
+              "url": "https://archestra.ai/blog/only-responsible-ai",
+              "comments_url": "https://news.ycombinator.com/item?id=48181125",
+              "score": 70,
+              "engagement_label": "501pt / 237コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "Archestra のブログ。GitHub リポジトリに押し寄せる AI エージェント製の PR を、Git の --author フラグを使った規約で抑えた方法を紹介する記事で、501pt / 237 コメント。",
+              "discussion_summary": "",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "CISA Admin Leaked AWS GovCloud Keys on GitHub",
+              "title_ja": "CISA の管理者が AWS GovCloud の鍵を GitHub に漏洩",
+              "url": "https://krebsonsecurity.com/2026/05/cisa-admin-leaked-aws-govcloud-keys-on-github/",
+              "comments_url": "https://news.ycombinator.com/item?id=48190454",
+              "score": 69,
+              "engagement_label": "478pt / 182コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Krebs on Security の記事。米 CISA の管理者が AWS GovCloud の認証情報を GitHub に公開してしまっていた件を報じており、478pt / 182 コメント。",
+              "discussion_summary": "",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

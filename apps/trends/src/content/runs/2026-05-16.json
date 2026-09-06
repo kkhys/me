@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-16",
+  "generated_at": "2026-09-06T21:09:58+09:00",
+  "digest": {
+    "headline": "Mitchell Hashimoto の「企業ごと AI 精神病にかかっている」が 2105pt / 1272 コメント、Bun の Rust 版が miri の基本検査に通らないという issue が続いた土曜",
+    "lead": "Hacker News では Mitchell Hashimoto が「エージェントがすぐ直すからバグを出荷しても構わない」と考える企業を AI 精神病と呼んだ投稿が 2105pt / 1272 コメントと月内最大級の反応を集めた。Bun の Rust 書き直しについては、コードベースが miri の基本的な検査に通らず safe Rust で未定義動作が起きるという issue が 345 コメントで議論された。Julia Evans が Tailwind をやめて CSS の構造化を学んだ記事が 698pt で首位、Project Gutenberg のサイト改善が 1239pt を集め、npm のサプライチェーン攻撃を The Onion の定型記事に見立てた風刺、フロンティア AI が CTF の公開形式を壊したという記事も上位に入った。",
+    "highlights": [
+      {
+        "title": "I believe there are entire companies right now under AI psychosis",
+        "title_ja": "今まさに、企業ごと AI 精神病にかかっている会社があると思う",
+        "url": "https://twitter.com/mitchellh/status/2055380239711457578",
+        "service_label": "Hacker News",
+        "reason": "2105pt / 1272 コメントで月内最大級の反応。AI エージェントへの過信をめぐる議論で、AI 活用開発の高関心テーマに直撃。"
+      },
+      {
+        "title": "Bun Rust rewrite: \"codebase fails basic miri checks, allows for UB in safe rust\"",
+        "title_ja": "Bun の Rust 書き直し: 「コードベースは基本的な miri 検査に通らず、safe Rust で UB が起きる」",
+        "url": "https://github.com/oven-sh/bun/issues/30719",
+        "service_label": "Hacker News",
+        "reason": "488pt / 345 コメント。AI による大規模書き直しの品質を検証した issue で、前々日のマージ報告への続報。"
+      },
+      {
+        "title": "Moving away from Tailwind, and learning to structure my CSS",
+        "title_ja": "Tailwind から離れ、CSS の構造化を学ぶ",
+        "url": "https://jvns.ca/blog/2026/05/15/moving-away-from-tailwind--and-learning-to-structure-my-css-/",
+        "service_label": "Hacker News",
+        "reason": "698pt / 397 コメントで当日の首位。Tailwind からの離脱と CSS 設計の話で、Web フロントエンドの中関心テーマに該当。"
+      },
+      {
+        "title": "Frontier AI has broken the open CTF format",
+        "title_ja": "フロンティア AI は公開 CTF の形式を壊した",
+        "url": "https://kabir.au/blog/the-ctf-scene-is-dead",
+        "service_label": "Hacker News",
+        "reason": "418pt / 466 コメント。LLM が CTF の競技性を壊したという指摘で、AI とセキュリティの交点。"
+      },
+      {
+        "title": "'No way to prevent this,' says only package manager where this regularly happens",
+        "title_ja": "「防ぐ方法はない」と、これが定期的に起きる唯一のパッケージマネージャが語る",
+        "url": "https://kevinpatel.xyz/posts/no-way-to-prevent-this/",
+        "service_label": "Hacker News",
+        "reason": "452pt / 218 コメント。npm の繰り返す侵害を風刺した記事で、postinstall の廃止など具体策が語られた。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Moving away from Tailwind, and learning to structure my CSS",
+              "title_ja": "Tailwind から離れ、CSS の構造化を学ぶ",
+              "url": "https://jvns.ca/blog/2026/05/15/moving-away-from-tailwind--and-learning-to-structure-my-css-/",
+              "comments_url": "https://news.ycombinator.com/item?id=48158400",
+              "score": 95,
+              "engagement_label": "698pt / 397コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "Julia Evans のブログ。Tailwind をやめて意味のある HTML と構造化した CSS を書く方法を学んだ経緯を綴った記事で、Tailwind の是非をめぐって 698pt / 397 コメントと当日の首位。",
+              "discussion_summary": "Julia Evans のブログ記事で、Tailwind から離れて意味のある HTML と構造化した CSS を書く方法を学び直した経緯を綴っている。698pt / 397 コメントで当日の首位になった。\n\nコメントでは、LLM の時代に React や TypeScript に依存するのは愚かで、LLM に素の DOM 操作をまともな JS で書かせればサプライチェーンの問題も減るという投稿が最上位にある。意味のある HTML とアクセシブルなマークアップを長年教えてきた立場から、Tailwind の最大の問題は考えるべき順序を逆転させることだという意見も続いた。\n\nSvelte と LLM で Tailwind の必要がなくなり、使っていた理由は CSS の衝突回避だったと気づいたという声、Angular が既定で CSS をコンポーネントに閉じ込めていたおかげで助かったという投稿、一周回って元に戻っているという感想もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I believe there are entire companies right now under AI psychosis",
+              "title_ja": "今まさに、企業ごと AI 精神病にかかっている会社があると思う",
+              "url": "https://twitter.com/mitchellh/status/2055380239711457578",
+              "comments_url": "https://news.ycombinator.com/item?id=48153379",
+              "score": 94,
+              "engagement_label": "2105pt / 1272コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Mitchell Hashimoto の X への投稿。エージェントがすぐ直すからバグを出荷しても構わないと考える企業を AI 精神病と呼んだ内容で、2105pt / 1272 コメントと月内最大級の反応。",
+              "discussion_summary": "Ghostty と Terraform の作者 Mitchell Hashimoto による X への投稿で、「エージェントが人間には不可能な規模と速さで直すからバグを出荷しても構わない」と考えるような企業は、企業ごと AI 精神病にかかっていると述べた。2105pt / 1272 コメントと、月内でも最大級の反応になった。\n\nコメントでは、主張には同意するが、ボトルネックはバグを見つけることであり、この論拠は最良ではないという投稿が上位にある。「テストカバレッジは 100% ある」と言いつつコードもテストもレビューも全部 AI に任せている大企業の内情を明かし、相互チェックが要るという声も続いた。\n\nAI ラボ自身が「AI 労働者」の夢をこうした企業に売り込んでいるという指摘、精神病ではなく流行への便乗のいつもの例にすぎないという反論、VC の資金を受けた企業は AI 商用化への巨額投資の失敗を受け入れられないという分析もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Project Gutenberg – keeps getting better",
+              "title_ja": "Project Gutenberg – 良くなり続けている",
+              "url": "https://www.gutenberg.org/",
+              "comments_url": "https://news.ycombinator.com/item?id=48150431",
+              "score": 91,
+              "engagement_label": "1239pt / 286コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "パブリックドメインの電子書籍を配布する Project Gutenberg のサイト。数か月にわたる改善で表示が刷新され、開発者本人がコメントに現れて 1239pt / 286 コメント。",
+              "discussion_summary": "パブリックドメインの書籍を電子化して配布する Project Gutenberg の公式サイト。この数か月で大きく改善されたことが話題になり、1239pt / 286 コメントを集めた。\n\nコメントでは、Gutenberg のプログラマの一人が、この数か月サイトを大きく改善しておりさらに続くので、最近訪れていないなら見直す価値があると述べる投稿が最上位にある。長らく不満だったモバイル向けのスタイルがなかった問題が直っているという報告や、久しぶりに思い出したという声も続いた。\n\nMichael Hart が 1971 年に独立宣言の電子化から始めたという歴史の紹介、Gutenberg の本を iPhone でオーディオブックとして聞けるアプリの宣伝、電子書籍リーダーのメーカーが Gutenberg の「ストア」を用意せず Kindle は敵対的で Calibre が要るという不満もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "We've made the world too complicated",
+              "title_ja": "私たちは世界を複雑にしすぎた",
+              "url": "https://user8.bearblog.dev/the-world-is-too-complicated/",
+              "comments_url": "https://news.ycombinator.com/item?id=48158065",
+              "score": 87,
+              "engagement_label": "480pt / 470コメント",
+              "category": "開発文化",
+              "interest": 1,
+              "summary": "user8 の Bear Blog の記事。現代の技術と社会が誰にも理解できないほど複雑になったと嘆くエッセイで、自然界は元から複雑だという反論や燃え尽きではという指摘が集まり 480pt / 470 コメント。",
+              "discussion_summary": "Bear Blog に掲載されたエッセイで、現代の技術や社会が誰にも全体を理解できないほど複雑になり、それを自ら作り出してしまったと嘆いている。480pt に対して 470 コメントを集めた。\n\nコメントでは、すべては常に「複雑すぎた」のであり、それが自然界の既定状態で、「あれは同じ植物か」「その実は食べられるか」といった問題の氾濫を想像してみろという反論が最上位にある。複雑さを全否定するのではなく、尊厳や美や自律や平穏の増加を伴わない複雑さにもっと疑いを持つべきだという整理も続いた。\n\nあらゆる抽象は漏れるが無知は本当に幸福なのかという問い、支配への執着に聞こえるという批判、単に燃え尽きているだけではないかという見方、Heidegger の技術論を第一原理から作り直したような内容だという指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Bill to block publishers from killing online games advances in California",
+              "title_ja": "出版社によるオンラインゲームの停止を禁じる法案がカリフォルニアで前進",
+              "url": "https://arstechnica.com/gaming/2026/05/bill-to-keep-online-games-playable-clears-key-hurdle-in-california/",
+              "comments_url": "https://news.ycombinator.com/item?id=48152994",
+              "score": 86,
+              "engagement_label": "596pt / 484コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Ars Technica の記事。サービス終了後もオンラインゲームを遊べる状態に保つよう出版社に求める法案がカリフォルニア州議会の関門を通過した件で、小規模スタジオへの負担を懸念する声もあり 596pt / 484 コメント。",
+              "discussion_summary": "Ars Technica の記事で、サービス終了後もオンラインゲームを遊べる状態に保つことをパブリッシャーに求める法案が、カリフォルニア州議会の重要な関門を通過したと報じている。596pt / 484 コメントを集めた。\n\nコメントでは、リバースエンジニアリングを合法にすればコミュニティが望む形で残りを引き受けるので、元の会社から最低限の対応を引き出すよりましだという意見が最上位にある。なぜゲームに限るのか、永久ライセンスを止められた AutoCAD のような例にも適用すべきだという声も続いた。\n\n資金をエスクローに入れる必要はあるのか、会社ごと畳んで訴訟に任せるのかという実効性への疑問、政府が資金を出すなら Baldur's Gate 1 の保守を一生やりたいという冗談、独立したサーバーを公開するのは工学的にも法的にも大きな負担で、小規模スタジオには高くつき大手が市場を独占するという懸念もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "U.S. DOJ demands Apple and Google unmask over 100k users of car-tinkering app",
+              "title_ja": "米司法省、車両改造アプリの 10 万人超の利用者の身元開示を Apple と Google に要求",
+              "url": "https://macdailynews.com/2026/05/15/u-s-doj-demands-apple-and-google-unmask-over-100000-users-of-popular-car-tinkering-app-in-emissions-crackdown/",
+              "comments_url": "https://news.ycombinator.com/item?id=48151383",
+              "score": 81,
+              "engagement_label": "477pt / 369コメント",
+              "category": "プライバシー",
+              "interest": 1,
+              "summary": "MacDailyNews の記事。米司法省が排ガス規制の取り締まりのため、車両の ECU を書き換えるアプリの 10 万人超の利用者の身元を Apple と Google に開示させようとしていると報じ、477pt / 369 コメント。",
+              "discussion_summary": "MacDailyNews の記事で、米司法省が排ガス規制の取り締まりの一環として、車両の ECU を書き換える人気アプリの 10 万人を超える利用者の身元を Apple と Google に開示するよう求めていると報じている。政府はツールの実際の使われ方を証言できる証人を特定するためだと説明している。477pt / 369 コメントを集めた。\n\nコメントでは、これは米国に限らない利用者のプライバシーへのはるかに大きな侵食の一部だという指摘が最上位にある。証人を探すためというなら、その情報も協力者もないのになぜ捜査を始めたのかという疑問も続いた。\n\n通勤中に排ガスを吸わされるのはうんざりなので引き渡して免許を失えばよいという反対意見、できるからやっているのでありこれは始まりにすぎないという嘆き、「令状を取れ」という短い投稿、F-Droid から匿名でダウンロードすべきだという助言もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Frontier AI has broken the open CTF format",
+              "title_ja": "フロンティア AI は公開 CTF の形式を壊した",
+              "url": "https://kabir.au/blog/the-ctf-scene-is-dead",
+              "comments_url": "https://news.ycombinator.com/item?id=48157559",
+              "score": 79,
+              "engagement_label": "418pt / 466コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "kabir.au のブログ。フロンティアモデルが CTF の問題を解けるようになり、誰でも参加できる公開形式の競技が成り立たなくなったと論じる記事で、418pt / 466 コメント。",
+              "discussion_summary": "kabir.au のブログ記事で、フロンティアモデルが CTF の問題を解けるようになったことで、誰でも参加できる公開形式のセキュリティ競技が成り立たなくなり、かつての競技は戻らないと論じている。418pt / 466 コメントを集めた。\n\nコメントでは、著者が始めた 2021 年の時点で多くの人にとって CTF の世界は既に見違えるほど変わっており、死んだのではなく違うものになっただけだという投稿が最上位にある。Wikipedia の CTF の項目にはまだ AI への言及がないが変わるだろうという指摘も続いた。\n\n2012 年の Stripe CTF で得たシャツを今も着ており、ポルトガルの学生だった自分が米国人と同じ水準で競えると思えたという思い出、YouTube に良い CTF の動画が流れてこなくなったという観察、6〜7 年前に参加してよかった、まだ意味があった頃だったという投稿、サイトが読みにくいという脱線もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Bun Rust rewrite: \"codebase fails basic miri checks, allows for UB in safe rust\"",
+              "title_ja": "Bun の Rust 書き直し: 「コードベースは基本的な miri 検査に通らず、safe Rust で UB が起きる」",
+              "url": "https://github.com/oven-sh/bun/issues/30719",
+              "comments_url": "https://news.ycombinator.com/item?id=48150900",
+              "score": 78,
+              "engagement_label": "488pt / 345コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "oven-sh/bun の issue。Rust 版のコードベースが miri の基本的な検査に通らず safe Rust で未定義動作が起きると報告したもので、派手な発表と地味な検証の非対称性が語られ 488pt / 345 コメント。",
+              "discussion_summary": "oven-sh/bun リポジトリの issue で、マージされた Rust 版のコードベースが miri の基本的な検査に通らず、safe Rust のコードで未定義動作が起きると報告している。488pt / 345 コメントを集めた。\n\nコメントでは、「Bun が数週間でメモリ安全な Rust に書き直された」という派手な発表の届く範囲と、それを検証する地味な報告の届く範囲には大きな非対称があるという指摘が最上位にある。本当の狙いは時間をかけて直しながら Rust 能力の貴重な学習データにすることではないかという推測も続いた。\n\nこの種の誤りは予想されたもので、安定版は Zig のまま残しているのだから問題ではないという擁護、UB とは未定義動作のことだという補足、Rust は未定義動作をコンパイラのバグとして扱うのではなかったのかという疑問、壁に投げて何が残るか見る状況でありスフレを作るには卵を割る必要があるという見方もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "SANA-WM, a 2.6B open-source world model for 1-minute 720p video",
+              "title_ja": "SANA-WM、1 分の 720p 動画を生成する 2.6B のオープンソース世界モデル",
+              "url": "https://nvlabs.github.io/Sana/WM/",
+              "comments_url": "https://news.ycombinator.com/item?id=48159445",
+              "score": 77,
+              "engagement_label": "405pt / 152コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "NVIDIA Labs の SANA-WM。2.6B パラメータで 1 分間の 720p 動画を生成できるオープンソースの世界モデルで、公開の所在や世界モデルの用途をめぐって 405pt / 152 コメント。",
+              "discussion_summary": "NVIDIA Labs が公開した SANA-WM は、2.6B パラメータで 1 分間の 720p 動画を生成できるオープンソースの世界モデル。405pt / 152 コメントを集めた。\n\nコメントでは、ダウンロードが GitHub に見当たらずページのボタンも無効になっている、24GB の RTX 4090 で動くのかという質問が最上位にある。Seedance や Kling のように無尽蔵の動画在庫を使える相手と比べて学習データが足りず、少し違うカメラの動きや被写体の相互作用で崩れるという課題の指摘も続いた。\n\n最初の雪山の動画で洞窟の入口に一貫性の問題があるがこの規模では想定内かという観察、どれもビデオゲームのように見えるので Unreal Engine で合成データを作っているのだろうという推測、世界モデルの長期的な用途は何かという問い、2.6B でこの品質と一貫性の 1 分の動画は正気ではないという驚きもあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "'No way to prevent this,' says only package manager where this regularly happens",
+              "title_ja": "「防ぐ方法はない」と、これが定期的に起きる唯一のパッケージマネージャが語る",
+              "url": "https://kevinpatel.xyz/posts/no-way-to-prevent-this/",
+              "comments_url": "https://news.ycombinator.com/item?id=48155690",
+              "score": 73,
+              "engagement_label": "452pt / 218コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "Kevin Patel のブログ。The Onion の銃乱射の定型記事をもじり、npm のサプライチェーン攻撃が繰り返される状況を風刺した記事で、postinstall の廃止などの対策が語られ 452pt / 218 コメント。",
+              "discussion_summary": "Kevin Patel のブログ記事で、The Onion が銃乱射のたびに掲載する「防ぐ方法はない、とこれが定期的に起きる唯一の国が語る」という定型記事をもじり、npm でサプライチェーン攻撃が繰り返される状況を風刺している。452pt / 218 コメントを集めた。\n\nコメントでは元ネタの Wikipedia の項目の紹介が最上位にある。最近の PyPI への攻撃を見れば npm が「唯一」ではなくなっており、pip はロックファイルがない分むしろ危険で、uv の普及は遅々としているという指摘も続いた。\n\nGo や Rust が実際に持つ保証は何か、単に狙われやすいだけではないかという問い、npm が PGP を採用しない理由が分からないという声、postinstall スクリプトに正当な存在理由はなく特定の日付以降のパッケージでは実行しないと宣言すべきだという提案、CVE-2024-YIKES と並ぶ楽しい風刺だという感想もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

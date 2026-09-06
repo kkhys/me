@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-17",
+  "generated_at": "2026-09-06T21:12:11+09:00",
+  "digest": {
+    "headline": "Mozilla が英国の規制当局に VPN 擁護の意見書、BitLocker のバックドア疑惑と Bitwarden の静かな有料化、Rust 製の軽量コーディングエージェント Zerostack が並んだ日曜",
+    "lead": "Hacker News では Mozilla が英国の規制当局に対し VPN は不可欠なプライバシーとセキュリティの道具だと訴えた意見書が 808pt で首位となり、前週の EU の VPN 抜け穴論に続く話題になった。セキュリティでは、研究者が Microsoft は BitLocker にバックドアを作ったと主張してエクスプロイトを公開した件と、Bitwarden が告知なしに無料プランの機能を削っているという記事が上位に入った。AI 関連では、AI は組織のプロセスを速くしないという記事が 454 コメント、企業向け AI サブスクリプションは時限爆弾だという記事が 401 コメントを集め、メモリ 8MB で動く Rust 製のコーディングエージェント Zerostack、Apple Silicon でのローカル推論は OpenRouter より高くつくという試算も話題になった。",
+    "highlights": [
+      {
+        "title": "Zerostack – A Unix-inspired coding agent written in pure Rust",
+        "title_ja": "Zerostack – 純粋な Rust で書かれた Unix 風のコーディングエージェント",
+        "url": "https://crates.io/crates/zerostack/1.0.0",
+        "service_label": "Hacker News",
+        "reason": "575pt / 308 コメント。数 GB を使う Claude Code に対し 8MB で動く Rust 製エージェントで、AI コーディングツールの高関心テーマに直撃。"
+      },
+      {
+        "title": "I don't think AI will make your processes go faster",
+        "title_ja": "AI があなたのプロセスを速くするとは思わない",
+        "url": "https://frederickvanbrabant.com/blog/2026-05-15-i-dont-think-ai-will-make-your-processes-go-faster/",
+        "service_label": "Hacker News",
+        "reason": "680pt / 454 コメント。AI による高速化を阻むのは組織の官僚制だという主張で、開発組織論のテーマに該当。"
+      },
+      {
+        "title": "Apple Silicon costs more than OpenRouter",
+        "title_ja": "Apple Silicon は OpenRouter より高くつく",
+        "url": "https://www.williamangel.net/blog/2026/05/17/offline-llm-energy-use.html",
+        "service_label": "Hacker News",
+        "reason": "355pt / 302 コメント。ローカル LLM とクラウド API のコスト比較で、入力トークンを無視しているという反論が集まった。"
+      },
+      {
+        "title": "Security researcher says Microsoft built a Bitlocker backdoor, releases exploit",
+        "title_ja": "セキュリティ研究者、Microsoft は BitLocker にバックドアを作ったと主張しエクスプロイトを公開",
+        "url": "https://www.techspot.com/news/112410-security-researcher-microsoft-secretly-built-backdoor-bitlocker-releases.html",
+        "service_label": "Hacker News",
+        "reason": "594pt / 263 コメント。全ディスク暗号化のバックドア疑惑で、YellowKey と GreenPlasma の公開経緯が整理された。"
+      },
+      {
+        "title": "AI subscriptions are a ticking time bomb for enterprise",
+        "title_ja": "AI サブスクリプションは企業にとって時限爆弾",
+        "url": "https://www.thestateofbrand.com/news/ai-subscription-time-bomb",
+        "service_label": "Hacker News",
+        "reason": "421pt / 401 コメント。AI サービスの値上げリスクをめぐる議論で、推論は既に黒字だという反論と記事の信頼性への疑問が出た。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Mozilla to UK regulators: VPNs are essential privacy and security tools",
+              "title_ja": "Mozilla から英国の規制当局へ: VPN は不可欠なプライバシーとセキュリティの道具である",
+              "url": "https://blog.mozilla.org/netpolicy/2026/05/15/mozilla-to-uk-regulators-vpns-are-essential-privacy-and-security-tools-and-should-not-be-undermined/",
+              "comments_url": "https://news.ycombinator.com/item?id=48166459",
+              "score": 98,
+              "engagement_label": "808pt / 356コメント",
+              "category": "プライバシー",
+              "interest": 2,
+              "summary": "Mozilla のポリシーブログ。英国の規制当局に対し、年齢確認の文脈で VPN を弱体化させるべきではないと訴えた意見書で、Mozilla 自身が VPN を販売している点の開示を求める声もあり 808pt / 356 コメント。",
+              "discussion_summary": "Mozilla のネットポリシーブログに掲載された意見書で、英国の規制当局に対し、VPN は不可欠なプライバシーとセキュリティの道具であり、年齢確認の推進の中で弱体化させるべきではないと訴えている。808pt / 356 コメントで当日の首位になった。\n\nコメントでは、英国の規制当局はまた「免許」の口実を聞いているだけだという皮肉が最上位にある。英国政府は 1984 のような真似をやめるべきだという声や、英国は自由な社会だったことがなく、支配層の権威主義的な傾向は Covid の時に仮面が外れ、HN の外ではこうした政策は不人気ですらないという意見も続いた。\n\nVPN がプライバシーの道具だからこそ英国は禁じたいのだと Mozilla は分かっていないのかという指摘、1984 は警告であって英国のデジタル基盤の工程表ではないという投稿、Mozilla は自らも VPN の再販業者であることを文書で開示すべきだという注文もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I don't think AI will make your processes go faster",
+              "title_ja": "AI があなたのプロセスを速くするとは思わない",
+              "url": "https://frederickvanbrabant.com/blog/2026-05-15-i-dont-think-ai-will-make-your-processes-go-faster/",
+              "comments_url": "https://news.ycombinator.com/item?id=48168221",
+              "score": 97,
+              "engagement_label": "680pt / 454コメント",
+              "category": "キャリア/組織",
+              "interest": 2,
+              "summary": "Frederick Van Brabant のブログ。速く入力できても開発は速くならないのと同じで、AI が速くしても組織の調整コストは減らないと論じ、AI 研修より会議の廃止が効くという反応が集まり 680pt / 454 コメント。",
+              "discussion_summary": "Frederick Van Brabant のブログ記事で、速く入力できてもプロジェクトは速くならないのと同じで、AI がコードを速く生成しても組織のプロセスは速くならないと論じている。680pt / 454 コメントを集めた。\n\nコメントでは、義務的な AI 研修の代わりに 4 人以上で議題のない会議を全て廃止して作業時間に充てればよく、この助言料は 2000 ドルだという皮肉が最上位にある。ワークフローが騒がしく曖昧で調整の負荷が大きいなら、生成が速くなっても文脈の薄い出力が増えてレビューと調整が増えるだけだという同意も続いた。\n\n定型コードの生成では確実に速くなるが組織はそれを活かせる形になっていないという意見、組織の負荷のない小さなチームは電光石火で進むので究極の破壊の道具だという見方、AI は官僚制こそが遅い部分だと暴いているという投稿、生成されるコードはほぼ常に正しいが追加のされ方が気に入らないだけだという反論もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Security researcher says Microsoft built a Bitlocker backdoor, releases exploit",
+              "title_ja": "セキュリティ研究者、Microsoft は BitLocker にバックドアを作ったと主張しエクスプロイトを公開",
+              "url": "https://www.techspot.com/news/112410-security-researcher-microsoft-secretly-built-backdoor-bitlocker-releases.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48168856",
+              "score": 90,
+              "engagement_label": "594pt / 263コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "TechSpot の記事。研究者が BitLocker で保護されたドライブを USB メモリ上のファイルだけで開ける YellowKey などのエクスプロイトを公開し、意図的なバックドアだと主張した件で 594pt / 263 コメント。",
+              "discussion_summary": "TechSpot の記事で、セキュリティ研究者が Microsoft は BitLocker に意図的なバックドアを作ったと主張し、USB メモリ上のファイルだけで保護されたドライブを開けるエクスプロイトを公開したと報じている。594pt / 263 コメントを集めた。\n\nコメントでは、Microsoft がダークパターンでローカルアカウントをオンラインアカウントに変え、同意なしにドライブを暗号化してユーザーを締め出し続ける限り、これは良いことだという投稿が最上位にある。壊れた PC からドライブを抜いて別の PC で読みたいので暗号化は望まないという声も続いた。\n\n研究者 Nightmare-Eclipse が 5 月 12 日に YellowKey と GreenPlasma の 2 件を予告していたという経緯の整理や、TrueCrypt が終了時に BitLocker を代替に挙げた論争と符合するという指摘、Windows 自体をやめろと言う方が筋が通るという意見もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The quiet renovation at Bitwarden",
+              "title_ja": "Bitwarden の静かな改装",
+              "url": "https://blog.ppb1701.com/the-quiet-renovation-at-bitwarden",
+              "comments_url": "https://news.ycombinator.com/item?id=48163389",
+              "score": 89,
+              "engagement_label": "715pt / 314コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "ppb1701 のブログ。パスワードマネージャ Bitwarden が告知なしに無料プランの機能を有料側へ移し、UI も肥大化しているという指摘で、自前運用できるという擁護もあり 715pt / 314 コメント。",
+              "discussion_summary": "ppb1701 のブログ記事で、パスワードマネージャの Bitwarden が告知なしに無料プランの機能を有料側へ移し、デスクトップの UI も肥大化していると指摘している。715pt / 314 コメントを集めた。\n\nコメントでは代替は何かという質問が最上位にある。企業に無料プランを維持する義務はなく、告知しなかったのは少し不誠実だがオープンソースで自前運用もできるという擁護や、製品は優れており金を稼ぎたいなら構わず、値上げが法外なら財布で投票するという意見も続いた。\n\nクローズドソースのクライアントを持つパスワードマネージャは信用できないので Bitwarden を使っているという投稿、GitHub の issue に長いメモリリークの履歴があるという報告、昨年からデスクトップの UX が劣化したという共感、「always free」に法的な意味はあるのかという疑問もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI subscriptions are a ticking time bomb for enterprise",
+              "title_ja": "AI サブスクリプションは企業にとって時限爆弾",
+              "url": "https://www.thestateofbrand.com/news/ai-subscription-time-bomb",
+              "comments_url": "https://news.ycombinator.com/item?id=48168056",
+              "score": 87,
+              "engagement_label": "421pt / 401コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "The State of Brand の記事。AI 各社が囲い込みのために赤字で提供し、業務が依存した後に値上げするという主張だが、推論は既に黒字だという反論と記事自体が AI 生成だという指摘が集まり 421pt / 401 コメント。",
+              "discussion_summary": "The State of Brand の記事で、生成 AI 各社は採用と囲い込みのために赤字でサービスを提供しており、業務が依存しきった段階で値上げするという企業向けのリスクを論じている。421pt に対して 401 コメントを集めた。\n\nコメントでは、産業規模の「おとり商法」だという同意が最上位にあるが、Brad Gerstner がトークンは赤字では売られていないと認めており、給与や株式報酬を含めれば赤字でもトークンの販売自体は黒字だという反論が続いた。推論は黒字で、赤字の原因は学習の費用と新モデルを出し続けねばならない構造だという整理もあった。\n\nより小さなモデルに知能を詰め込む研究が続くので価格対性能の急激な悪化はないという楽観、値上げは安価なモデルへの圧力になり、フロンティア企業の収益予測を削るという見方、このサイトは AI で記事を量産すると自ら明かしているクリックベイトだという指摘、1 と 3 をつなぐ論拠が欠けているという要約もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Zerostack – A Unix-inspired coding agent written in pure Rust",
+              "title_ja": "Zerostack – 純粋な Rust で書かれた Unix 風のコーディングエージェント",
+              "url": "https://crates.io/crates/zerostack/1.0.0",
+              "comments_url": "https://news.ycombinator.com/item?id=48164287",
+              "score": 86,
+              "engagement_label": "575pt / 308コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "crates.io に公開された Rust 製のコーディングエージェント Zerostack 1.0.0。空のセッションで約 8MB という RAM 使用量が Claude Code との対比で評価され 575pt / 308 コメント。",
+              "discussion_summary": "crates.io に公開された Zerostack 1.0.0 は、Unix の哲学に沿って純粋な Rust で書かれたコーディングエージェント。空のセッションで約 8MB、作業中で約 12MB の RAM 使用量を掲げている。575pt / 308 コメントを集めた。\n\nコメントでは、Claude Code は数 GB を使うので低スペックのノート PC では厄介であり、この軽さが気に入ったという投稿が最上位にある。スクリプト言語の TUI はもういらないという声や、大きなプロジェクトで opencode が 6GB までメモリを漏らして遅くなるのに困っていたという報告も続いた。\n\nハーネスはモデルの性能を大きく左右するので Claude や Codex や opencode との比較ベンチマークがほしいという要望、コードベースが小さいので DeepSeek V4 Flash に危険な処理がないか読ませたが問題なかったという検証、似た思想の airun の紹介もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Native all the way, until you need text",
+              "title_ja": "ネイティブで行く、テキストが必要になるまでは",
+              "url": "https://justsitandgrin.im/posts/native-all-the-way-until-you-need-text/",
+              "comments_url": "https://news.ycombinator.com/item?id=48168058",
+              "score": 84,
+              "engagement_label": "452pt / 308コメント",
+              "category": "プログラミング",
+              "interest": 2,
+              "summary": "justsitandgrin.im のブログ。macOS や iOS のネイティブ UI で Markdown の描画とストリーミング表示が実用に耐えず Electron に戻らざるをえないという記事で、452pt / 308 コメント。",
+              "discussion_summary": "justsitandgrin.im のブログ記事で、macOS や iOS のネイティブ UI フレームワークで AI チャットのような Markdown の描画やストリーミング表示を作ろうとすると実用に耐えず、結局 Electron に頼ることになると述べている。452pt / 308 コメントを集めた。\n\nコメントでは、Electron はデスクトップアプリを作る最悪の方法だが他の全てよりはましだというもじりが最上位にある。IMGUI のように描画プリミティブを出力する C 製の Markdown ライブラリがほしいという投稿や、UIKit と SwiftUI の人気のテキストエディタ部品を 5 つ試したが全て壊れていたという同意も続いた。\n\n非標準の挙動が要る UI では SwiftUI は失敗し AppKit の方がましだという意見の一方、Markdown を描画するネイティブアプリは山ほどあるのでコードを見せろという反論もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "AI is a technology not a product",
+              "title_ja": "AI は技術であって製品ではない",
+              "url": "https://daringfireball.net/2026/05/ai_is_technology_not_a_product",
+              "comments_url": "https://news.ycombinator.com/item?id=48168626",
+              "score": 82,
+              "engagement_label": "480pt / 209コメント",
+              "category": "AI/開発",
+              "interest": 2,
+              "summary": "John Gruber の Daring Fireball の記事。AI は製品ではなく製品に組み込まれる技術であり、Apple が顧客体験から逆算する姿勢と整合すると論じ、480pt / 209 コメント。",
+              "discussion_summary": "John Gruber の Daring Fireball の記事で、AI は製品そのものではなく製品に組み込まれる技術であり、電話という形態は AI 機器に置き換えられないと論じている。480pt / 209 コメントを集めた。\n\nコメントでは、Steve Jobs が「顧客体験から逆算しなければならない」と語った講演を引き、技術と製品を区別するのが Apple の DNA なので AI が大きくロードマップに載ることはなかったという投稿が最上位にある。「Dropbox は機能であって製品ではない」という議論と同じで、この場合も正しく響くという意見も続いた。\n\n電話という形態は消えず、スマートグラスや画面のない機器に置き換わることはないという同意、売れるなら何でも製品だという反論、GPT 3.5 から 4 年経つがコーディング以外で普通の人の生活を大きく良くした用途は何かという問い、Apple にとっての理想の AI 実装は Siri をようやくまともに動かすことだという声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I turned a $80 RK3562 Android tablet into a Debian Linux workstation",
+              "title_ja": "80 ドルの RK3562 Android タブレットを Debian Linux のワークステーションにした",
+              "url": "https://github.com/tech4bot/rk3562deb",
+              "comments_url": "https://news.ycombinator.com/item?id=48168668",
+              "score": 79,
+              "engagement_label": "449pt / 237コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "GitHub のプロジェクト。RK3562 を積んだ 80 ドルの Doogee U10 を、純正ファームウェアから抽出した DTB を元に SD カードから Debian を起動できるようにした記録で、449pt / 237 コメント。",
+              "discussion_summary": "GitHub のプロジェクトで、Rockchip RK3562 を搭載した 80 ドルの Android タブレット Doogee U10 を、SD カードから Debian をネイティブに起動できるようにした記録。BSP もカーネルソースもベンダーの資料もなく、純正ファームウェアから抽出した DTB を元に組み立て、内蔵の Android には手を加えていない。449pt / 237 コメントを集めた。\n\nコメントでは作者による経緯の説明が最上位にあり、動機とこのタブレットを選んだ理由を問う声が続いた。AI のおかげで、以前なら時間をかける価値のなかった機器のハックが簡単になったという感想や、postmarketOS の移植に役立つ教材はないかという問いもあった。\n\nタブレットメーカーが Debian を簡単に動かせる手段を用意しない理由への疑問や、4GB の RAM でまともに動くソフトは何かという実用面の質問もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Apple Silicon costs more than OpenRouter",
+              "title_ja": "Apple Silicon は OpenRouter より高くつく",
+              "url": "https://www.williamangel.net/blog/2026/05/17/offline-llm-energy-use.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48168198",
+              "score": 77,
+              "engagement_label": "355pt / 302コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "William Angel のブログ。MacBook Pro でオフラインの LLM を動かす費用を出力トークンあたりで試算し OpenRouter より高いと結論づけた記事で、反論が集まり 355pt / 302 コメント。",
+              "discussion_summary": "William Angel のブログ記事で、MacBook Pro でオフラインの LLM を動かす際の電力と機材費を出力トークンあたりに換算し、OpenRouter 経由のクラウド推論より高くつくと試算している。355pt / 302 コメントを集めた。\n\nコメントでは、データのプライバシーはいくらの価値なのかという問いが最上位にある。この費用構造が今後も続くのか、プライバシーや稼働率や将来のコスト管理といったクラウドを使わない利点はどうかという視点も続いた。\n\nこの計算は機材全体をトークン生成の費用に含めており、金と引き換えにノート PC も手に入れている点を無視しているという指摘、OpenRouter などは VC の補助金で原価割れしているが MacBook Pro はそうではないという反論、著者は出力トークンだけを比べているがエージェント型の作業では入力トークンが費用の大半で、ローカルなら入力はほぼ無料だという重要な指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

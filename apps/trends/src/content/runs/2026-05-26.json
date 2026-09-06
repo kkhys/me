@@ -1,0 +1,211 @@
+{
+  "date": "2026-05-26",
+  "generated_at": "2026-09-06T21:29:57+09:00",
+  "digest": {
+    "headline": "Nolan Lawson の「AI でより良いコードをよりゆっくり書く」が 1257pt、カリフォルニアが年齢確認法から Linux を除外、オランダが重要なデジタル供給業者の米国企業による買収を阻止した日",
+    "lead": "Hacker News では Nolan Lawson が AI をバグ探しやレビューに使い、速さではなく品質のために時間をかける使い方を提案した記事が 1257pt / 446 コメントで首位となり、Claude Code の code-review コマンドや独自のオーケストレータの報告が集まった。カリフォルニア州が OS に利用者の年齢を集めさせる法律から Linux を除外する修正を出した件、オランダ政府が政府向けのデジタル基盤を担う Solvinity の米国企業 Kyndryl による買収を阻止した件と、政策の話題が続いた。Ferrari 初の EV「Luce」は 925 コメントで賛否が割れ、GitHub Actions の障害、Dropbox の Drew Houston の CEO 退任、Motorola の端末が Amazon アプリにアフィリエイトコードを差し込んでいた件も上位に入った。",
+    "highlights": [
+      {
+        "title": "Using AI to write better code more slowly",
+        "title_ja": "AI を使って、より良いコードをよりゆっくり書く",
+        "url": "https://nolanlawson.com/2026/05/25/using-ai-to-write-better-code-more-slowly/",
+        "service_label": "Hacker News",
+        "reason": "1257pt / 446 コメントで当日の首位。AI を速度ではなく品質のために使う実践で、AI 活用開発の高関心テーマに直撃。"
+      },
+      {
+        "title": "Outsourcing plus local AI will soon become more economical vs. frontier labs",
+        "title_ja": "アウトソーシングとローカル AI の組み合わせは、間もなくフロンティアラボより経済的になる",
+        "url": "https://www.signalbloom.ai/posts/outsourcing-plus-localai-will-soon-become-more-economical-vs-frontier-labs/",
+        "service_label": "Hacker News",
+        "reason": "323pt / 374 コメント。フロンティアモデルの 30 倍の価格差と DeepSeek などのローカル AI の経済性をめぐる議論で、LLM の動向に該当。"
+      },
+      {
+        "title": "California moves to exempt Linux from its age-verification law after backlash",
+        "title_ja": "カリフォルニア、反発を受け年齢確認法から Linux を除外へ",
+        "url": "https://www.tomshardware.com/software/linux/california-moves-to-exempt-linux-from-its-upcoming-age-verification-law-after-backlash-over-forcing-operating-systems-to-collect-users-ages-amendment-proposed-by-the-same-lawmaker-who-wrote-the-original-law",
+        "service_label": "Hacker News",
+        "reason": "1066pt / 499 コメント。OS に年齢確認を課す法律から Linux を除外する修正で、オープンソースへの規制の影響。"
+      },
+      {
+        "title": "Motorola phones have started hijacking the Amazon app to insert affiliate codes",
+        "title_ja": "Motorola の端末が Amazon アプリを乗っ取ってアフィリエイトコードを差し込み始めた",
+        "url": "https://9to5google.com/2026/05/25/motorola-amazon-app-hijacking-behavior/",
+        "service_label": "Hacker News",
+        "reason": "406pt / 232 コメント。端末メーカーがアプリの挙動を書き換えて収益を得ていた事例で、セキュリティとプライバシーの交点。"
+      },
+      {
+        "title": "Dropbox CEO Drew Houston to step down",
+        "title_ja": "Dropbox の CEO Drew Houston が退任へ",
+        "url": "https://www.cnbc.com/2026/05/26/dropbox-ceo-drew-houston-ashraf-alkarmi.html",
+        "service_label": "Hacker News",
+        "reason": "375pt / 443 コメント。Dropbox 創業者の退任で、2007 年の HN での初期の議論が「円環が閉じた」として振り返られた。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Using AI to write better code more slowly",
+              "title_ja": "AI を使って、より良いコードをよりゆっくり書く",
+              "url": "https://nolanlawson.com/2026/05/25/using-ai-to-write-better-code-more-slowly/",
+              "comments_url": "https://news.ycombinator.com/item?id=48272984",
+              "score": 94,
+              "engagement_label": "1257pt / 446コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "Nolan Lawson のブログ。AI にバグを探させレビューさせることで、速さではなく品質のために時間をかけるという使い方を提案した記事で、1257pt / 446 コメントと当日の首位。",
+              "discussion_summary": "Nolan Lawson のブログ記事で、AI を速く書くためではなく、バグを探させたりレビューさせたりして、より良いコードをよりゆっくり書くために使うという姿勢を提案している。1257pt / 446 コメントで当日の首位になった。\n\nコメントでは、不慣れな領域では自分の力で書けるだけの動かないコードをまず書き、LLM に何が間違っているかと正しいコードを根気よく示させる家庭教師として使い、最後には自分が理解したコードが残るという使い方が最上位にある。Claude Code の /code-review コマンドが便利だという紹介も続いた。\n\n中規模の機能を AI で設計してから Claude 4.7 Max で実装させる長い往復の実践、pi agent core を使った外部のオーケストレータを作っているという報告、コード例のない意見記事だったという不満、「バイブコーディングでバグゼロ」から「ゆっくり AI を楽しめ」へ推進派の論点が変わったという皮肉もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "California moves to exempt Linux from its age-verification law after backlash",
+              "title_ja": "カリフォルニア、反発を受け年齢確認法から Linux を除外へ",
+              "url": "https://www.tomshardware.com/software/linux/california-moves-to-exempt-linux-from-its-upcoming-age-verification-law-after-backlash-over-forcing-operating-systems-to-collect-users-ages-amendment-proposed-by-the-same-lawmaker-who-wrote-the-original-law",
+              "comments_url": "https://news.ycombinator.com/item?id=48269961",
+              "score": 89,
+              "engagement_label": "1066pt / 499コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Tom's Hardware の記事。OS に利用者の年齢を集めさせるカリフォルニア州の法律への反発を受け、法案を書いた議員自身が Linux を除外する修正を提案した件で、法律ごと撤回すべきだという声が集まり 1066pt / 499 コメント。",
+              "discussion_summary": "Tom's Hardware の記事で、OS に利用者の年齢を収集させるカリフォルニア州の年齢確認法への反発を受け、元の法案を書いた議員が Linux を除外する修正を提案したと報じている。1066pt / 499 コメントを集めた。\n\nコメントでは、除外ではなく馬鹿げた法律を丸ごと廃止しろという投稿が最上位にある。機器に義務づけるべきなのは Web クライアントの既定の設定でペアレンタルコントロールの有効化を確認することだけで、各ブラウザのインターンが数分で追加できるという提案も続いた。\n\n公的機関が企業を規制する意志や能力を失ったため消費者に負担を移しているという分析、Linux だけでなく GPL などのライセンス全般に関わるという指摘、BSD も加えてほしいという声、7 歳と 10 歳の父としてサービスが何を制限し何を許すかの判断に全く同意できないという不満、それでも強制された表現であり違法だという意見もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Netherlands blocks US takeover of vital digital supplier",
+              "title_ja": "オランダ、重要なデジタル供給業者の米国企業による買収を阻止",
+              "url": "https://www.politico.eu/article/netherlands-blocks-us-takeover-vital-digital-supplier/",
+              "comments_url": "https://news.ycombinator.com/item?id=48278406",
+              "score": 87,
+              "engagement_label": "607pt / 234コメント",
+              "category": "インフラ",
+              "interest": 1,
+              "summary": "Politico Europe の記事。オランダ政府が、政府向けのデジタル基盤を担う Solvinity の IBM 系 Kyndryl による買収を阻止したと報じ、議会の圧力に政府が応じた経緯が語られ 607pt / 234 コメント。",
+              "discussion_summary": "Politico Europe の記事で、オランダ政府が政府向けのデジタル基盤を担う Solvinity の、IBM から分離した米国企業 Kyndryl による買収を阻止したと報じている。607pt / 234 コメントを集めた。\n\nコメントでは、ようやくだ、国全体が何週間も求めていたのに政府は沈黙しており、数週間前には一党を除く議会全体が Solvinity との契約終了の動議を可決したのに政府は契約を延長していたという経緯の説明が最上位にある。実際に行動した政府への称賛や、今年最高のニュースだという声も続いた。\n\nKyndryl は 2021 年に IBM のインフラサービス部門から分離した企業だという補足、Solvinity はひどい社名だという冗談、ASML が 2013 年に米国の Cymer を買収した際は厳しい技術共有と輸出管理の条件が付いたことを挙げ、今の米国政府の下でこれで終わりとは思えないという見方もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Ferrari Luce",
+              "title_ja": "Ferrari Luce",
+              "url": "https://www.ferrari.com/en-EN/auto/ferrari-luce",
+              "comments_url": "https://news.ycombinator.com/item?id=48271629",
+              "score": 86,
+              "engagement_label": "500pt / 925コメント",
+              "category": "ハードウェア",
+              "interest": 1,
+              "summary": "Ferrari 初の EV「Luce」の公式ページ。1050 馬力や四輪操舵、車軸の振動から音を作る仕組みが紹介されたが、デザインと大型ディスプレイへの不満が集まり 500pt に対し 925 コメント。",
+              "discussion_summary": "Ferrari の公式サイトに掲載された、同社初の EV「Luce」のページ。Top Gear の記事も関連として挙がった。500pt に対して 925 コメントと、議論が点数を大きく上回った。\n\nコメントでは、曲線もシルエットも Ferrari として語りかけてこず、iPad のような不快なディスプレイで伝統ブランドがまた台無しになったという批判が最上位にある。訪問時に音つきの動画が自動再生されるという警告や、BMW i3 と Magic Mouse が出会ったようだ、高級な Prius に見えるという皮肉も続いた。\n\n車軸の電気機械的な振動から音を取り出して増幅し運転者に伝えるという説明を「EV にブーンと言わせた」と要約する投稿、四輪操舵とアクティブサスペンションと 1050 馬力を挙げて表示と操作系は良く、音で本当のフィードバックを与える工夫が好きだという肯定的な意見もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "GitHub Actions was down",
+              "title_ja": "GitHub Actions が落ちていた",
+              "url": "https://www.githubstatus.com/?today",
+              "comments_url": "https://news.ycombinator.com/item?id=48278374",
+              "score": 84,
+              "engagement_label": "655pt / 1コメント",
+              "category": "インフラ",
+              "interest": 2,
+              "summary": "GitHub のステータスページ。GitHub Actions の障害が発生し、月内に繰り返された GitHub の障害の一つとして 655pt を集めたが、議論は別のスレッドに統合された。",
+              "discussion_summary": "GitHub のステータスページに掲載された GitHub Actions の障害。今月は Red Squares という風刺サイトが GitHub の障害の頻度を contribution graph に見立てて可視化し 767pt を集めており、その後も障害が続いている。655pt を集めた。\n\nこのスレッドの唯一のコメントは、議論が同じ障害を扱う別のスレッドに移されたという案内で、点数だけがこちらに集まった形になった。\n\nGitHub は同月に内部リポジトリへの不正アクセスと 3800 リポジトリの侵害も認めており、可用性とセキュリティの両面で信頼が問われる月になった。翌日にも Pull Request と Issue と Git 操作に影響する障害が起きている。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Taking a walk may lead to more creativity than sitting, study finds (2014)",
+              "title_ja": "座っているより歩く方が創造性が高まると研究で判明 (2014)",
+              "url": "https://www.apa.org/news/press/releases/2014/04/creativity-walk",
+              "comments_url": "https://news.ycombinator.com/item?id=48272670",
+              "score": 83,
+              "engagement_label": "616pt / 235コメント",
+              "category": "サイエンス",
+              "interest": 1,
+              "summary": "アメリカ心理学会の 2014 年のプレスリリース。歩いている間と直後は座っている時より創造的な発想が増えるという Stanford の研究を紹介したもので、616pt / 235 コメント。",
+              "discussion_summary": "アメリカ心理学会の 2014 年のプレスリリースで、歩いている間とその直後は座っている時より創造的な発想が増えるという Stanford の研究を紹介している。616pt / 235 コメントを集めた。\n\nコメントでは論文本体の PDF へのリンクが最上位にある。直感的に同意で、良い考えは早歩きの最中とトイレで生まれるという投稿や、「歩けば解決する」を意味するラテン語の solvitur ambulando の紹介も続いた。\n\n歩きながら目を動かすと頭の中から出て周囲に気づけるという助言、天気が悪ければオフィスの中を歩くという実践、前を遅く歩く人や電話を見ている人のせいで早歩きだと帰る頃には余計に苛立つという反論、厄介なプログラミングの問題はコンピュータの前以外の場所にいると進むという声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Dropbox CEO Drew Houston to step down",
+              "title_ja": "Dropbox の CEO Drew Houston が退任へ",
+              "url": "https://www.cnbc.com/2026/05/26/dropbox-ceo-drew-houston-ashraf-alkarmi.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48279453",
+              "score": 82,
+              "engagement_label": "375pt / 443コメント",
+              "category": "キャリア/組織",
+              "interest": 1,
+              "summary": "CNBC の記事。Dropbox の共同創業者 Drew Houston が CEO を退く件で、2007 年の HN での「rsync で十分」という有名な投稿への言及が集まり 375pt / 443 コメント。",
+              "discussion_summary": "CNBC の記事で、Dropbox の共同創業者 Drew Houston が CEO を退任し、Ashraf Alkarmi が後任になると報じている。Dropbox のブログと Houston 自身の投稿も共有された。375pt / 443 コメントを集めた。\n\nコメントでは、2007 年の HN で Dropbox を紹介した投稿へのリンクとともに「円環が閉じた」という投稿が最上位にある。「取締役会はついに FTP と SVN と rsync で自分でできると気づいた」という当時の有名なコメントをもじった冗談も続いた。\n\nブロック単位の同期を持つ Dropbox の競合が少ないのは意外だという声、次は Anthropic の Member of Technical Staff かという皮肉、2011 年以降に意味のある新機能を思い出せないという評価、デスクトップアプリの書き直し以降は同期が安定せず iCloud に移ったという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Motorola phones have started hijacking the Amazon app to insert affiliate codes",
+              "title_ja": "Motorola の端末が Amazon アプリを乗っ取ってアフィリエイトコードを差し込み始めた",
+              "url": "https://9to5google.com/2026/05/25/motorola-amazon-app-hijacking-behavior/",
+              "comments_url": "https://news.ycombinator.com/item?id=48274794",
+              "score": 77,
+              "engagement_label": "406pt / 232コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "9to5Google の記事。Motorola の端末が Amazon アプリを開く際にアフィリエイトコードつきの URL を経由させていたと報じ、クッキー詰め込みと同じ手口だという指摘が集まり 406pt / 232 コメント。",
+              "discussion_summary": "9to5Google の記事で、Motorola の端末が Amazon アプリを開く際に、ファッション系インフルエンサーを参照する kira-abboud.com という URL を経由させてアフィリエイトコードを差し込んでいたと報じている。この URL はそのインフルエンサーの SNS には載っておらず、コードも一致しないという。406pt / 232 コメントを集めた。\n\nコメントでは、中国系ブランドは常にこういうことをするという投稿が最上位にあり、GrapheneOS の対応を待って Motorola を買おうと考えていたがやめたという声が続いた。\n\n記事の URL に関する記述を引用して Motorola からのリダイレクトの経緯を疑う投稿、2000 年代に FBI に摘発された手口と同じクッキー詰め込みで誰かが刑務所に行くべきだという意見、Edge 30 Fusion が月に 2 回ほど勝手にアプリを追加し止める方法がないという報告もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Outsourcing plus local AI will soon become more economical vs. frontier labs",
+              "title_ja": "アウトソーシングとローカル AI の組み合わせは、間もなくフロンティアラボより経済的になる",
+              "url": "https://www.signalbloom.ai/posts/outsourcing-plus-localai-will-soon-become-more-economical-vs-frontier-labs/",
+              "comments_url": "https://news.ycombinator.com/item?id=48278610",
+              "score": 77,
+              "engagement_label": "323pt / 374コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "SignalBloom のブログ。オフショア開発とローカルで動くオープンなモデルの組み合わせが、フロンティアラボの API より経済的になると論じた記事で、30 倍の価格差は正当化できるかをめぐって 323pt / 374 コメント。",
+              "discussion_summary": "SignalBloom のブログ記事で、オフショアの開発者とローカルで動くオープンなモデルの組み合わせが、間もなくフロンティアラボの API を使うより経済的になると論じている。323pt に対して 374 コメントを集めた。\n\nコメントでは、クローズドなフロンティアモデルは DeepSeek の最新版より有能だが、30 倍の価格差を正当化するほどの差なのか、開発に巨額を投じたラボは自ら招いた財務的ジレンマにあるという投稿が最上位にある。昔からそうで、人々は僅かな性能差に金を払うという声も続いた。\n\n説得力はあるが、ローカル AI はベンチマークでは比較可能でも実際は脆く管理の手間が大きく、大多数の企業でうまくいくとは思えないという反論、フロンティアモデルがなければ DeepSeek が追いつく土台もないという矛盾の指摘、ChatGPT との作業は企業時代のオフショアのインド人開発者との仕事に不気味なほど似ていて LLM はオフショアの開発者を置き換えるという見方もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Hacker News front page as a site",
+              "title_ja": "Hacker News のフロントページをサイトにした",
+              "url": "https://thefrontpage.dev/",
+              "comments_url": "https://news.ycombinator.com/item?id=48271127",
+              "score": 68,
+              "engagement_label": "434pt / 118コメント",
+              "category": "Web/フロントエンド",
+              "interest": 1,
+              "summary": "thefrontpage.dev は、Hacker News のフロントページに載った記事を新聞の一面のようなレイアウトで読めるサイト。434pt / 118 コメント。",
+              "discussion_summary": "",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
