@@ -1,0 +1,211 @@
+{
+  "date": "2026-06-27",
+  "generated_at": "2026-09-06T19:57:02+09:00",
+  "digest": {
+    "headline": "GPT-5.6 Sol のプレビューと米政府による利用者選別が計 2000 コメント、Mythos の限定解禁と DeepSeek の DSpark が並んだ日",
+    "lead": "Hacker News では OpenAI が次世代モデル GPT-5.6 Sol をプレビュー公開した発表が 1139pt / 744 コメント、そのプレビュー期間中は米政府が利用者を審査するという Washington Post の報道が 1184pt / 1240 コメントと、OpenAI 関連が上位 2 件を占めた。同じ日に米政府が Anthropic に「信頼できる」米国組織への Mythos 提供を認めたという Semafor の報道が 809 コメントを集め、Fable ではなく Mythos が先という順序に疑問が出た。DeepSeek が投機的デコードで推論を高速化する DSpark の論文を公開し、匿名の GitHub アカウントが未公開の 0-day を大量投下したという報告がスコア上の首位に立った。",
+    "highlights": [
+      {
+        "title": "U.S. government will decide who gets to use GPT-5.6",
+        "title_ja": "米政府が GPT-5.6 を誰が使えるかを決める",
+        "url": "https://www.washingtonpost.com/technology/2026/06/26/openai-says-us-government-will-vet-users-its-latest-ai-model/",
+        "service_label": "Hacker News",
+        "reason": "1184pt に対し 1240 コメントで当日最多の議論。フロンティアモデルへのアクセス制限という LLM 動向の高関心テーマに直撃。"
+      },
+      {
+        "title": "Previewing GPT‑5.6 Sol: a next-generation model",
+        "title_ja": "GPT-5.6 Sol のプレビュー: 次世代モデル",
+        "url": "https://openai.com/index/previewing-gpt-5-6-sol/",
+        "service_label": "Hacker News",
+        "reason": "1139pt / 744 コメント。3 サイズと価格が公開された新モデルで、高関心テーマに該当。"
+      },
+      {
+        "title": "U.S. allows Anthropic to release Mythos AI to ‘trusted’ US organizations",
+        "title_ja": "米国、Anthropic に「信頼できる」米国組織への Mythos AI の提供を許可",
+        "url": "https://www.semafor.com/article/06/27/2026/us-releases-powerful-anthropic-model-mythos-to-some-us-companies",
+        "service_label": "Hacker News",
+        "reason": "553pt に対し 809 コメント。Fable 5 停止から 2 週間後の Mythos 限定解禁で、LLM 動向の高関心テーマに直撃。"
+      },
+      {
+        "title": "DSpark: Speculative decoding accelerates LLM inference [pdf]",
+        "title_ja": "DSpark: 投機的デコードで LLM の推論を高速化 [pdf]",
+        "url": "https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf",
+        "service_label": "Hacker News",
+        "reason": "797pt / 361 コメント。DeepSeek の推論高速化の論文で、LLM の新技術動向の高関心テーマに該当。"
+      },
+      {
+        "title": "Anonymous GitHub account mass-dropping undisclosed 0-days",
+        "title_ja": "匿名の GitHub アカウントが未公開の 0-day を大量投下",
+        "url": "https://github.com/bikini/exploitarium",
+        "service_label": "Hacker News",
+        "reason": "951pt / 385 コメントでスコア上の首位。OSS へのエクスプロイトの一括公開で、セキュリティのテーマに直撃。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Anonymous GitHub account mass-dropping undisclosed 0-days",
+              "title_ja": "匿名の GitHub アカウントが未公開の 0-day を大量投下",
+              "url": "https://github.com/bikini/exploitarium",
+              "comments_url": "https://news.ycombinator.com/item?id=48698617",
+              "score": 95,
+              "engagement_label": "951pt / 385コメント",
+              "category": "セキュリティ",
+              "interest": 2,
+              "summary": "GitHub の bikini/exploitarium リポジトリ。匿名のアカウントが c-ares や Ghidra など多数の OSS に対する未公開のエクスプロイトを一括で公開した。951pt / 385 コメントでスコア首位。",
+              "discussion_summary": "匿名の GitHub アカウント bikini が exploitarium というリポジトリで、c-ares や Ghidra など多数のオープンソースソフトに対するエクスプロイトを一括で公開した。951pt / 385 コメントで当日のスコア首位になった。\n\nコメントでは、本当に全て 0-day なのか、多くは既に開示された CVE や修正済みのコードに対するもので「0-day」という語が意味を失っているという指摘が上位にある。PoC が公開された時点で 0-day ではなく単なる脆弱性だという定義の注意や、Ghidra 向けのものは Swift のツールのバイナリを上書きできることが前提で感心しないという検証も出た。\n\nc-ares の use-after-free は古いポインタのサイズを推定してメモリを撒く手法が面白いという分析や、LLM に落とさせただけにしては文書が多いという観察、報告の手続きが遅すぎて公開した方が早いのではという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "U.S. government will decide who gets to use GPT-5.6",
+              "title_ja": "米政府が GPT-5.6 を誰が使えるかを決める",
+              "url": "https://www.washingtonpost.com/technology/2026/06/26/openai-says-us-government-will-vet-users-its-latest-ai-model/",
+              "comments_url": "https://news.ycombinator.com/item?id=48690101",
+              "score": 94,
+              "engagement_label": "1184pt / 1240コメント",
+              "category": "AI/政策",
+              "interest": 3,
+              "summary": "Washington Post の報道。OpenAI は GPT-5.6 のプレビュー期間中、米政府が利用者を審査すると説明した。Reuters によれば政権が OpenAI に要請した。1184pt に対して 1240 コメント。",
+              "discussion_summary": "OpenAI が、最新モデル GPT-5.6 のプレビュー期間中は米政府が利用者を審査すると説明したという Washington Post の報道。Reuters によれば政権側が OpenAI に要請した。1184pt に対して 1240 コメントと当日最多の議論になった。\n\nコメントでは、オープンソースが今こそ輝いて見えるという反応が最上位にあり、世界は既に手頃な価格の十分なオープンモデルに移ったのでモデルは自分たちで抱えていろという投稿が続く。プレビュー期間限定とはいえ良い兆候ではなく、Opus 4.8 が大衆に提供される最後のフロンティアモデルになるかもしれないという懸念も出た。\n\n上場前に政権が AI 企業の持ち分を確保するためではという疑念や、非米国民がモデルを使えないなら Anthropic と OpenAI は非市民の従業員を解雇するのかという問い、「政府に AI の規制を求めた結果がこれか」という皮肉、DeepSeek の件はそれほど悪くなかったのかという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "DSpark: Speculative decoding accelerates LLM inference [pdf]",
+              "title_ja": "DSpark: 投機的デコードで LLM の推論を高速化 [pdf]",
+              "url": "https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf",
+              "comments_url": "https://news.ycombinator.com/item?id=48696585",
+              "score": 92,
+              "engagement_label": "797pt / 361コメント",
+              "category": "LLM/研究",
+              "interest": 3,
+              "summary": "DeepSeek が公開した DSpark の論文。投機的デコードで推論のスループットを高める手法で、V4-Flash と同様に負荷下でも有用なスループットを保つとする。797pt / 361 コメント。",
+              "discussion_summary": "DeepSeek が DeepSpec リポジトリで公開した DSpark の論文。投機的デコードで LLM の推論を高速化する手法で、V4-Flash と同様に負荷下でも有用なスループットを保つとしている。797pt / 361 コメント。\n\nコメントでは、公開のタイミングは偶然ではなく、厳しい規制に対して開放性を示す意図だろうという見方が最上位にある。既に本番で使われており 1 か月前の大幅な値下げの理由の一つではという推測や、用途や企業、個人ごとに特化した投機的デコード用の小型モデルが多様に生まれる未来を予想する投稿も出た。\n\nDeepSeek は 1000 億ドル超の負債でデータセンターを建てる他社と違い、安価に提供するための論文を出し続けているという評価や、米国のラボがもうやらない手法の公開を続ける中国のラボが最も面白い仕事をしているという意見、Kilo Code で V4 Pro を 1 か月使い 15 億トークンで 40 ドルだったという報告もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Previewing GPT‑5.6 Sol: a next-generation model",
+              "title_ja": "GPT-5.6 Sol のプレビュー: 次世代モデル",
+              "url": "https://openai.com/index/previewing-gpt-5-6-sol/",
+              "comments_url": "https://news.ycombinator.com/item?id=48689028",
+              "score": 91,
+              "engagement_label": "1139pt / 744コメント",
+              "category": "LLM/新モデル",
+              "interest": 3,
+              "summary": "OpenAI の発表。GPT-5.6 を Sol、Terra、Luna の 3 サイズで提供し、Sol は 100 万トークンあたり入力 5 ドル / 出力 30 ドル。システムカードも公開された。",
+              "discussion_summary": "OpenAI が次世代モデルと位置づける GPT-5.6 を Sol、Terra、Luna の 3 サイズでプレビュー公開した。価格は 100 万トークンあたり Sol が入力 5 ドル / 出力 30 ドル、Terra が 2.5 / 15 ドル、Luna が 1 / 6 ドルで、システムカードも公開された。1139pt / 744 コメント。\n\nコメントでは、Sol / Terra / Luna という命名がこれまでで最悪だという不満と、価格は依然として高いという指摘が最上位にある。次世代なら GPT-6 ではないのか、なぜメジャーバージョンが変わらないのかという問いも複数出た。\n\nChatGPT、Codex、API で近く広く提供するという記述に対し Fable も再び公開されることを期待する声や、時間が経てば Fable 5 に大きく劣ると評価されるはずだという予測の事前登録、Anthropic の命名を真似ようとしているという皮肉、The Expanse になぞらえた冗談もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Zuckerberg's war on whistleblowers",
+              "title_ja": "Zuckerberg の内部告発者との戦争",
+              "url": "https://pluralistic.net/2026/06/27/zuckerstreisand-2/",
+              "comments_url": "https://news.ycombinator.com/item?id=48698684",
+              "score": 90,
+              "engagement_label": "807pt / 302コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Cory Doctorow の記事。Careless People の著者 Sarah Wynn-Williams に対する Meta の仲裁による口封じを取り上げ、内部告発者への対応を批判する。807pt / 302 コメント。",
+              "discussion_summary": "Careless People の著者で元 Meta 幹部の Sarah Wynn-Williams に対し、Meta が仲裁条項を使って発言を封じ法的手段へのアクセスを奪っている状況を Cory Doctorow が批判した記事。807pt / 302 コメント。\n\nコメントでは、舞台で黙って立っていただけの Wynn-Williams を脅すのは歴史上最もギロチンにかけられそうな億万長者に見えるという皮肉や、初期の「彼らは私を信頼している、馬鹿だ」という Zuckerberg の発言の引用が並ぶ。数千億ドルと数十万人の働く人生を支配するには人間の脳は向いていないという意見も出た。\n\n一方で、記事にある Facebook が中国政府に全アクセスと検閲権を与えたという記述は事実ではなく証拠も申し立てもないという反論があり、基本的な権利に反する契約条項を合法にしていることへの怒りや、なぜ仲裁で公の裁判所を回避できるのかという問いも並んだ。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "OpenRA",
+              "title_ja": "OpenRA",
+              "url": "https://www.openra.net/",
+              "comments_url": "https://news.ycombinator.com/item?id=48697560",
+              "score": 84,
+              "engagement_label": "815pt / 167コメント",
+              "category": "ゲーム",
+              "interest": 1,
+              "summary": "Command & Conquer や Red Alert をオープンソースで再実装した RTS エンジン OpenRA の公式サイト。815pt / 167 コメントで、バランス調整の良さと元のゲームデータの入手の難しさが語られた。",
+              "discussion_summary": "Command & Conquer と Red Alert をオープンソースで再実装した RTS エンジン OpenRA の公式サイト。815pt / 167 コメント。\n\nコメントでは、原作と比べて OpenRA のバランスの良さに驚くという評価が上位にあり、原作では自殺行為だった連合軍の砲兵でソ連のテスラコイルを射程外から撃てるといった例が挙がった。友人と AI を混ぜたチーム戦を何か月も遊んでいるという報告や、非常によく考えられたゲームだという称賛も並ぶ。\n\n元のゲームをコンテンツパックとして持っていないのが毎回の壁だという嘆きや、Tiberian Sun を出してほしいという要望、ブラウザ版はあるのか、より良い AI を作った人はいるのかという問い、Beyond All Reason も良いという言及もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Fintech Engineering Handbook",
+              "title_ja": "Fintech エンジニアリングハンドブック",
+              "url": "https://w.pitula.me/fintech-engineering-handbook/",
+              "comments_url": "https://news.ycombinator.com/item?id=48696982",
+              "score": 82,
+              "engagement_label": "636pt / 220コメント",
+              "category": "技術解説",
+              "interest": 2,
+              "summary": "金融システムを作る際の冪等性キー、再試行、イベントの順序、金額の表現などの実務知識をまとめたハンドブック。636pt / 220 コメントで、実体験に基づく内容だという証言が出た。",
+              "discussion_summary": "金融システムを作る際の冪等性キーや再試行、イベントの順序、金額の表現といった実務知識をまとめた Fintech Engineering Handbook。636pt / 220 コメント。\n\nコメントでは、冪等性キーの節だけでも読む価値があり多くの開発者は痛い目を見て学ぶという評価が最上位にある。長年の経験なのか AI のスロップなのかを問う声に対し、5 年フィンテックにいた立場から本物で自分が学んだ教訓と同じだという証言や、会計を理解する時間を取るよう勧める投稿も出た。\n\n最小単位の整数で金額を表す方式は API の交換形式にすると後で痛い目に遭うという忠告や、再試行や冪等性、順序の話はフィンテックに限らず正確さが要る全てのシステムに当てはまるという指摘、同じ趣旨の Shape of the System の紹介、学習資料や練習用の実装を求める問いもあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "U.S. allows Anthropic to release Mythos AI to ‘trusted’ US organizations",
+              "title_ja": "米国、Anthropic に「信頼できる」米国組織への Mythos AI の提供を許可",
+              "url": "https://www.semafor.com/article/06/27/2026/us-releases-powerful-anthropic-model-mythos-to-some-us-companies",
+              "comments_url": "https://news.ycombinator.com/item?id=48692995",
+              "score": 81,
+              "engagement_label": "553pt / 809コメント",
+              "category": "AI/政策",
+              "interest": 3,
+              "summary": "Semafor の報道。米政府が Anthropic に対し、信頼できると認めた米国の組織に限って Mythos モデルを提供することを認めた。Fable 5 は対象外。553pt に対して 809 コメント。",
+              "discussion_summary": "米政府が Anthropic に対し、信頼できると認めた一部の米国組織に限って Mythos モデルを提供することを認めたという Semafor の報道。NBC も伝え、553pt に対して 809 コメントと議論が多い。\n\nコメントでは、「一部の米国企業に」という但し書きがトラック並みに大きく、政権が誰にどの AI を渡すかを決めるのは縁故と好き嫌いの温床だという批判が上位にある。国内利用を制限するライセンス制は議会の立法が要るはずでその一線はとうに越えたという指摘も出た。\n\n対象は Mythos 5 のみで Fable 5 は含まれないという確認に対し、ガードレールの多い Fable ではなく Mythos を許すのはなぜか、Fable は「安全な」Mythos だったはずではという疑問が複数並ぶ。OpenAI の 5.6 の公開と同じ日に出たのは偶然かという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The case for physical media ownership",
+              "title_ja": "物理メディアを所有することの意義",
+              "url": "https://dervis.de/physical/",
+              "comments_url": "https://news.ycombinator.com/item?id=48697335",
+              "score": 79,
+              "engagement_label": "496pt / 373コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "dervis.de の記事。配信は利用権の貸与でデジタルストアは取り消しうるライセンスの販売だが、Blu-ray やカートリッジ、本は遠隔で消せない所有物だと論じる。496pt / 373 コメント。",
+              "discussion_summary": "配信サービスは利用権を貸すだけでデジタルストアは取り消しうるライセンスを売るのに対し、Blu-ray やゲームのカートリッジ、本は遠隔で消したり無効にしたりできない所有物だと論じた記事。496pt / 373 コメント。\n\nコメントでは、再生機器が本社に通信し著作権法も変わるので「遠隔で消せない」は意外に当てはまらないという反論が最上位にある。今のゲームディスクの多くはダウンローダしか入っておらずアカウントへの紐付けも要り、Baldur's Gate 3 のコレクターズ版も Steam キーと大差ないという指摘も出た。\n\n権利やライセンスの泥沼は海賊版で断ち切れ、愛好家が数千時間をかけた DRM なしの 4K のリップがあるという投稿や、所有は法が定める社会的構築物だという議論、Spotify や YouTube があらゆる音楽への開かれたアクセスを実現した点は軽視できないという反論、xkcd と Dune の引用もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "We can still stop California's 3D printer surveillance scheme",
+              "title_ja": "カリフォルニアの 3D プリンタ監視計画はまだ止められる",
+              "url": "https://www.eff.org/deeplinks/2026/06/we-can-still-stop-californias-3d-printer-surveillance-scheme",
+              "comments_url": "https://news.ycombinator.com/item?id=48692051",
+              "score": 70,
+              "engagement_label": "513pt / 193コメント",
+              "category": "テック政策",
+              "interest": 1,
+              "summary": "EFF の記事。3D プリンタに銃器部品の印刷を拒否する仕組みと製造元の専用スライサー経由での印刷を義務づけるカリフォルニアの法案に反対し、行動を呼びかける。513pt / 193 コメント。",
+              "discussion_summary": "3D プリンタに銃器部品の印刷を拒否する仕組みを義務づけるカリフォルニアの法案に反対し、議員への働きかけを呼びかける EFF の記事。513pt / 193 コメント。\n\nコメントでは、記事の画像にあるカリフォルニア州の形が AR15 のグリップに似ているので誤検知が楽しみだという皮肉や、製造元の独自のロックされたスライサーからしか印刷を受け付けないよう義務づける点でニューヨークの法律より厳しいという読み取りが並ぶ。EFF の行動リンクは 30 秒で済んだという報告もある。\n\n野球のバットを作れない旋盤やブレーキラインを切れない鋏を例に不条理を示す投稿や、銃を自作する人は 3D プリンタも自作するので次はステッピングモーターを禁じるのかという指摘、OS の年齢確認などと合わせて計算機への協調攻撃に見えるという見方、ソ連がファックスに監視員を置いた逸話もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "date": "2026-06-19",
+  "generated_at": "2026-09-06T19:31:49+09:00",
+  "digest": {
+    "headline": "Project Valhalla の JDK 28 到達の解説が首位、AirPods が会話を奪うという論考が 794 コメントを集めた日",
+    "lead": "Hacker News では 10 年に及ぶ Project Valhalla の成果が JDK 28 に届くまでを解説した JVM Weekly の記事が 658pt / 447 コメントで首位に立った。AirPods を常時着けることで他人との会話が消えたという The Escape の論考は 447pt に対して 794 コメントと当日最多の議論になり、17 万語の英単語のうちどれだけ知っているかを測るサイトが 555 コメントで続いた。LLM の重みの中に自分の名前がどう記憶されているかを複数のモデルで調べる Show HN と、Python の作図ライブラリ plotnine のサイトが技術系の話題として並び、当日の最高得点は 658pt と 6 月の他の日より低い。",
+    "highlights": [
+      {
+        "title": "Project Valhalla, Explained: How a Decade of Work Arrives in JDK 28",
+        "title_ja": "Project Valhalla の解説: 10 年の作業が JDK 28 に届くまで",
+        "url": "https://www.jvm-weekly.com/p/project-valhalla-explained-how-a",
+        "service_label": "Hacker News",
+        "reason": "658pt / 447 コメントで当日の首位。Java の値型という言語設計の解説記事。"
+      },
+      {
+        "title": "The AirPods Effect",
+        "title_ja": "AirPods 効果",
+        "url": "https://www.theescapenewsletter.com/p/the-airpods-effect",
+        "service_label": "Hacker News",
+        "reason": "447pt に対し 794 コメントで当日最多の議論。"
+      },
+      {
+        "title": "Show HN: Are You in the Weights?",
+        "title_ja": "Show HN: あなたは重みの中にいる?",
+        "url": "https://www.intheweights.com/",
+        "service_label": "Hacker News",
+        "reason": "471pt / 247 コメント。LLM の重みに残る個人の痕跡を複数モデルで比較する Show HN で、LLM のテーマに関わる。"
+      },
+      {
+        "title": "I told them forced consent was unlawful. 5 years later it cost Elkjop €1.8M",
+        "title_ja": "強制的な同意は違法だと伝えた。5 年後、Elkjøp に 180 万ユーロの制裁金が科された",
+        "url": "https://www.thatprivacyguy.com/blog/elkjop-forced-consent-fine/",
+        "service_label": "Hacker News",
+        "reason": "484pt / 299 コメント。GDPR の強制同意をめぐる 5 年越しの制裁金の事例。"
+      },
+      {
+        "title": "How many of the 170k English words do you know?",
+        "title_ja": "英語の 17 万語のうち、あなたはいくつ知っている?",
+        "url": "https://vocabowl-870366514258.us-west1.run.app/",
+        "service_label": "Hacker News",
+        "reason": "501pt / 555 コメント。語彙量を推定するサイトで、結果の報告と操作性の要望が集まった。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Project Valhalla, Explained: How a Decade of Work Arrives in JDK 28",
+              "title_ja": "Project Valhalla の解説: 10 年の作業が JDK 28 に届くまで",
+              "url": "https://www.jvm-weekly.com/p/project-valhalla-explained-how-a",
+              "comments_url": "https://news.ycombinator.com/item?id=48595511",
+              "score": 98,
+              "engagement_label": "658pt / 447コメント",
+              "category": "プログラミング言語",
+              "interest": 2,
+              "summary": "JVM Weekly の記事。Java に値型を導入する Project Valhalla が 10 年を経て JDK 28 に到達するまでの設計の変遷と、同一性を持たない値クラスの仕組みを解説する。658pt / 447 コメント。",
+              "discussion_summary": "Java に値型を導入する Project Valhalla が 10 年の作業を経て JDK 28 に到達するまでの設計の変遷を解説した JVM Weekly の記事。同一性を持たない値クラスや、== が内部状態を比較するようになる点などを扱う。658pt / 447 コメント。\n\nコメントでは、メーリングリストと動画を追ってきた立場から、Java らしさを保ちながらここまで設計を集約したのは感動的だという評価がある。.NET の struct とどう違うのかという問いや、== が memcmp 相当になり実装の詳細を露出してカプセル化を壊すという懸念も出た。\n\n「null にならない変数」は精神的に重いという記事の記述への反論や、フラットな ArrayList<Point> はまだ得られないことを残念がる声、1995 年にメモリアクセスと CPU 命令のコストが同程度だったという記述は誤りで 1993 年にはキャッシュのプリフェッチの論文があるという指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "How many of the 170k English words do you know?",
+              "title_ja": "英語の 17 万語のうち、あなたはいくつ知っている?",
+              "url": "https://vocabowl-870366514258.us-west1.run.app/",
+              "comments_url": "https://news.ycombinator.com/item?id=48598586",
+              "score": 95,
+              "engagement_label": "501pt / 555コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "英単語の知識量を推定する Web アプリ。段階的に難しい語を出題し、既知の語数を推定する。501pt / 555 コメントで、操作性への要望と語源の話題が並んだ。",
+              "discussion_summary": "英語の約 17 万語のうちいくつ知っているかを、段階的に難しくなる出題で推定する Web アプリ。501pt / 555 コメント。\n\nコメントでは、進み方が論理的で楽しかったという感想や 71,000 語という結果の報告がある一方、1 問に 3 回クリックが要りボタンの位置も 2 か所に分かれているので 1 クリックで次に進んでほしいという要望が複数出た。定義を読むのに時間がかかるので「知っている」「知らない」の 2 択にしてほしいという声もある。\n\n出題される語の大半がフランス語由来なのが面白いという指摘や、Hippopotomonstrosesquippedaliophobia の綴りの誤りとレイアウト崩れの報告、10 問の語彙テスト wordsum が IQ と 0.71 の相関を持つという豆知識もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The AirPods Effect",
+              "title_ja": "AirPods 効果",
+              "url": "https://www.theescapenewsletter.com/p/the-airpods-effect",
+              "comments_url": "https://news.ycombinator.com/item?id=48592832",
+              "score": 91,
+              "engagement_label": "447pt / 794コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "The Escape の論考。AirPods を一日中着けたままにする習慣が広がり、店や職場で他人と言葉を交わす機会が消えたと論じる。447pt に対して 794 コメントと当日最多の議論。",
+              "discussion_summary": "AirPods を一日中着けたままにする習慣が広がり、店や職場、公共の場で見知らぬ人と言葉を交わす機会が消えたと論じる The Escape の記事。447pt に対して 794 コメントと当日最多の議論になった。\n\nコメントでは、地下鉄でスピーカーから TikTok を流す人よりイヤホンを着けた人に囲まれる方がましだという反応が最上位にある。見知らぬ人と話すのが普通だと感じた時期は人生で一度もないという声や、女性はバスで話しかけられない口実として家を出る時に必ずヘッドホンを持つという指摘も出た。\n\n常時の刺激が心の彷徨うデフォルトモードネットワークを抑えているのではという推測や、ヘッドホンの多用と孤独感の相関は因果とは限らず孤立が先にあるのではという反論、Fahrenheit 451 の貝殻型ラジオは必然だったという投稿、耳の形のせいで着けたままにできないという脱線もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "I told them forced consent was unlawful. 5 years later it cost Elkjop €1.8M",
+              "title_ja": "強制的な同意は違法だと伝えた。5 年後、Elkjøp に 180 万ユーロの制裁金が科された",
+              "url": "https://www.thatprivacyguy.com/blog/elkjop-forced-consent-fine/",
+              "comments_url": "https://news.ycombinator.com/item?id=48589501",
+              "score": 86,
+              "engagement_label": "484pt / 299コメント",
+              "category": "プライバシー",
+              "interest": 1,
+              "summary": "That Privacy Guy のブログ。北欧の家電量販店 Elkjøp の強制的な同意取得を 5 年前にノルウェーのデータ保護当局へ通報し、180 万ユーロの制裁金に至った経緯。484pt / 299 コメント。",
+              "discussion_summary": "北欧の家電量販店 Elkjøp がサービス利用と引き換えに個人データの利用への同意を強制していた件を 5 年前にノルウェーのデータ保護当局 Datatilsynet へ通報し、180 万ユーロの制裁金に至った経緯を書いたブログ。484pt / 299 コメント。\n\nコメントでは、実際に制裁金が科されたのは素晴らしいが通報者に経過が知らされなかったのは意外だという反応や、米国にもこうした権利が欲しいが 5 年は長すぎるという声が並ぶ。その 5 年間で同社はいくら稼いだのかという皮肉も出た。\n\nDatatilsynet は時間はかかるが一貫して利用者の側に立った判断を下すという経験談や、自分のメールプロバイダも同じことをしているので通報してみるという投稿、記事の画像が読み込めず生成に使ったプロンプトだけが見えてむしろその方が良いという指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Are You in the Weights?",
+              "title_ja": "Show HN: あなたは重みの中にいる?",
+              "url": "https://www.intheweights.com/",
+              "comments_url": "https://news.ycombinator.com/item?id=48591348",
+              "score": 83,
+              "engagement_label": "471pt / 247コメント",
+              "category": "LLM",
+              "interest": 2,
+              "summary": "自分の名前を複数の LLM に問い、モデルの重みの中にどう記憶されているかを調べる Show HN。Web からの流入が LLM に移る中で残る痕跡への関心から作られた。471pt / 247 コメント。",
+              "discussion_summary": "自分の名前を複数の LLM に問い合わせ、モデルの重みの中にどんな人物として記憶されているかを調べる Show HN。Web からの流入が LLM に移る中で自分がどんな痕跡を残しているのかへの関心から、デザインパートナーと共に作ったとしている。471pt / 247 コメント。\n\nコメントは結果の報告が中心で、メキシコの画家兼俳優兼サッカー選手にされた、プロのラグビー選手や神経科医にされた、大量殺人犯と結びつけられたなど、幻覚の実例が並ぶ。Llama 3.2 1B が The Big Lebowski の俳優だと答えたという投稿や、幻覚の印がない項目も全て間違いだったという報告もある。\n\n自分が最上位で、弱いモデルほど幻覚が忍び込むのが興味深いという投稿や、低信頼度の結果が偽名を当て高信頼度の結果は有名なストリーマーに帰属したという観察、完成度は高いが目的は何かという問いもあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "My Mathematical Regression",
+              "title_ja": "私の数学の退化",
+              "url": "https://blog.dahl.dev/posts/my-mathematical-regression/",
+              "comments_url": "https://news.ycombinator.com/item?id=48597221",
+              "score": 82,
+              "engagement_label": "366pt / 146コメント",
+              "category": "数学",
+              "interest": 1,
+              "summary": "dahl.dev のブログ。格子上の経路数を求める問題で、学生時代なら組み合わせの公式で解けたのにパターンを見つけて拡張するだけで済ませた自分を振り返る記事。366pt / 146 コメント。",
+              "discussion_summary": "格子上の経路の数を求める問題を前に、学生時代なら組み合わせの公式で解いたはずが、パターンを見つけて外挿するだけで済ませた自分を振り返るブログ記事。366pt / 146 コメント。\n\nコメントでは、n×n の格子では 2n 歩のうち n 歩を「右」に選ぶので 2n choose n になるという直感的な説明や、図を斜めから見ればパスカルの三角形だと気づいたという投稿が並ぶ。パターンを見つけて証明なしに拡張するのは解法ではなく、Moser の円問題のように一般化しないこともあるという指摘も出た。\n\n組み合わせを忘れていても動的計画法で解けるという声や、bc で階乗を計算して確かめたという投稿、複雑な問題に公式を当てはめられる人ほど企業では評価されにくいという嘆き、数学は使わないと衰える筋肉だという感想もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The founder of Craigslist has given away half a billion dollars",
+              "title_ja": "Craigslist の創業者が 5 億ドルを寄付してきた",
+              "url": "https://www.independent.co.uk/us/money/craigslist-multimillionaire-craig-newmark-b2980681.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48588216",
+              "score": 81,
+              "engagement_label": "419pt / 321コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "The Independent の記事。Craigslist 創業者の Craig Newmark が資産の大半にあたる 5 億ドルを寄付してきた経緯と、「足るを知る」という本人の言葉を伝える。419pt / 321 コメント。",
+              "discussion_summary": "Craigslist の創業者 Craig Newmark が 5 億ドルを寄付してきたという The Independent の記事。人を自分が扱われたいように扱い、足るを知るという教えに従ってきたという本人の言葉を伝える。419pt / 321 コメント。\n\nコメントでは、15 年前のインタビューで金を得て生活が変わったかと問われ「良い水道はもうある」と答えていたという回想や、「足るを知る」の意味を分かっている富豪は新鮮だという評価が並ぶ。読みにくいサイトなので別の情報源が欲しいという声も出た。\n\n寄付は誓約の段階で実際の送金はまだなのかという手続きへの疑問や、少額の手数料しか取らない Craigslist でなぜこれほどの資産になるのかという問い、20 年近い富豪の慈善活動で世界が本当に変わった分野はあるのかという懐疑もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "The room the economy can't see",
+              "title_ja": "経済が見ることのできない部屋",
+              "url": "https://wilsoniumite.com/2026/06/19/the-room-the-economy-cant-see/",
+              "comments_url": "https://news.ycombinator.com/item?id=48596911",
+              "score": 79,
+              "engagement_label": "254pt / 290コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Wilsoniumite のブログ。スウェーデンの若者向けの居場所を例に、市場が価値を測れないが確かに存在するものについて論じる。254pt に対して 290 コメント。",
+              "discussion_summary": "スウェーデンにある、孤独な若者が過ごせる場所を例に、市場では価値を測れないが確かに存在するものについて論じたブログ記事。254pt に対して 290 コメントと得点に比べて議論が多い。\n\nコメントでは、経済的な価値の概念は富で重み付けされており他の価値観とは異なるという指摘や、市場には意志があるわけではなく人々の欲求の総和なので、こうした部屋を望む人がいれば存在するという反論が並ぶ。ボランティアをすればこうした部屋がたくさん見えるという投稿もある。\n\n全てが金融化の要求で地獄になっており、年金を株式市場に委ねる米国の決定が原因だという主張や、市場が何でも動かすのが正しいという市場原理主義はソ連共産主義の裏返しだという意見、市場はこの種の支出を抑えるよう最適化しており正しく機能していると認めた上で議論を始めたいという投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "A website that lists websites to submit your website to",
+              "title_ja": "自分の Web サイトを登録できる Web サイトを一覧する Web サイト",
+              "url": "https://www.submission.directory/",
+              "comments_url": "https://news.ycombinator.com/item?id=48586631",
+              "score": 78,
+              "engagement_label": "444pt / 99コメント",
+              "category": "Web",
+              "interest": 1,
+              "summary": "Medium や Product Hunt、Hacker News など、自作のサイトや製品を投稿できる 50 のサイトを列挙したディレクトリ。444pt / 99 コメント。",
+              "discussion_summary": "Medium、Crunchbase、Hacker News、Product Hunt など、自作のサイトや製品を投稿できる 50 のサイトを列挙したディレクトリ。444pt / 99 コメント。\n\nコメントでは、Wikipedia の「一覧の一覧の一覧」へのリンクや、90 年代に Submit It のようなサービスで全てのクローラーに URL を登録したことを思い出すという回想が並ぶ。今は検索エンジンではなく特定の読者を持つサイトが対象だという整理もある。\n\n「質の高い被リンクを得る」という文言は少なくとも正直だが、多くのサイトでは SEO 目的の投稿は無礼とみなされるという指摘や、Medium を「権威ある出版プラットフォーム」と紹介するのは今の評価と違うという声、自分自身を一覧に載せているのかという冗談もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Plotnine",
+              "title_ja": "Plotnine",
+              "url": "https://plotnine.org/",
+              "comments_url": "https://news.ycombinator.com/item?id=48596488",
+              "score": 74,
+              "engagement_label": "273pt / 77コメント",
+              "category": "可視化",
+              "interest": 2,
+              "summary": "R の ggplot2 のグラフィックス文法を Python に移植した作図ライブラリ plotnine の公式サイト。作者がコメントで次期版 0.16.0 のプレリリースを案内した。273pt / 77 コメント。",
+              "discussion_summary": "R の ggplot2 に由来するグラフィックス文法を Python で実装した作図ライブラリ plotnine の公式サイト。273pt / 77 コメント。\n\nコメントでは、+ 演算子のオーバーロードでプロットを構成するのは一つの選択だという反応や、from plotnine import * というアンチパターンが作図ライブラリで多い理由を問う声が並ぶ。ggplot の手引きを読んでグラフィックス文法を理解した時に超能力を得たようだったという体験談もある。\n\n同じ発想の Altair や JetBrains の lets-plot の紹介、性能の良い purrr と dplyr の Python 版があれば R に戻らなくて済むという投稿があり、作者からは次の 0.16.0 で新機能が入るのでプレリリースを試してほしいという案内が出た。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

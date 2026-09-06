@@ -1,0 +1,211 @@
+{
+  "date": "2026-06-15",
+  "generated_at": "2026-09-06T19:19:28+09:00",
+  "digest": {
+    "headline": "ローカルモデルでの日常コーディングを問う Ask HN が 1318pt、Hetzner の値上げと curl の 7 月休業が並んだ日",
+    "lead": "Hacker News では Claude や GPT をローカルモデルに完全に置き換えた人はいるかを問う Ask HN が 1318pt / 563 コメントで首位に立ち、Fable 5 の停止後にオープンウェイトへの関心が続いていることを示した。Hetzner が一部のプランで 2 倍を超える値上げを実施した件は 767 コメント、curl が 2026 年 7 月の脆弱性報告の受け付けを止めるという Daniel Stenberg の記事は 793pt を集めた。Claude を Apple の Foundation Models フレームワークから使える SDK の文書、ナードに何が起きたのかを問う記事、Kobo で表示が崩れる ePub の原因を Adobe のレンダラに求める記事も上位に入った。",
+    "highlights": [
+      {
+        "title": "Ask HN: Has anyone replaced Claude/GPT with a local model for daily coding?",
+        "title_ja": "Ask HN: 日常のコーディングで Claude/GPT をローカルモデルに置き換えた人は?",
+        "url": "https://news.ycombinator.com/item?id=48542100",
+        "service_label": "Hacker News",
+        "reason": "1318pt / 563 コメントで当日の首位。ローカル LLM でのコーディングという高関心テーマに直撃し、具体的な構成の報告が集まった。"
+      },
+      {
+        "title": "Apple Foundation Models",
+        "title_ja": "Apple Foundation Models",
+        "url": "https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models",
+        "service_label": "Hacker News",
+        "reason": "485pt / 225 コメント。Claude の新しい SDK で、AI 開発ツールの高関心テーマに該当。"
+      },
+      {
+        "title": "Hetzner Price Adjustment",
+        "title_ja": "Hetzner の価格改定",
+        "url": "https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/#cloud-servers",
+        "service_label": "Hacker News",
+        "reason": "550pt に対し 767 コメント。18 日前の予告に続く実施で、一部プランは 2 倍超の値上げ。"
+      },
+      {
+        "title": "Curl will not accept vulnerability reports during July 2026",
+        "title_ja": "curl は 2026 年 7 月中、脆弱性報告を受け付けない",
+        "url": "https://daniel.haxx.se/blog/2026/06/15/curl-summer-of-bliss/",
+        "service_label": "Hacker News",
+        "reason": "793pt / 316 コメント。OSS メンテナの負担をめぐる話題で、称賛のコメントが集中した。"
+      },
+      {
+        "title": "What happened to nerds?",
+        "title_ja": "ナードに何が起きたのか?",
+        "url": "https://mrmarket.lol/what-the-fuck-happened-to-nerds/",
+        "service_label": "Hacker News",
+        "reason": "755pt / 512 コメント。2 日前の別 URL からの再浮上で、エンジニア文化と組織のテーマに該当。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "Ask HN: Has anyone replaced Claude/GPT with a local model for daily coding?",
+              "title_ja": "Ask HN: 日常のコーディングで Claude/GPT をローカルモデルに置き換えた人は?",
+              "url": "https://news.ycombinator.com/item?id=48542100",
+              "comments_url": "https://news.ycombinator.com/item?id=48542100",
+              "score": 100,
+              "engagement_label": "1318pt / 563コメント",
+              "category": "AI/開発",
+              "interest": 3,
+              "summary": "副次的な実験ではなく主要なコーディングツールとしてローカルモデルに完全移行した人に、構成と使用感を尋ねる Ask HN。1318pt / 563 コメントで当日の首位。",
+              "discussion_summary": "副次的な実験ではなく主なコーディングツールとして Claude や GPT をローカルモデルに完全に置き換えた人に、構成と使用感を尋ねる Ask HN。1318pt / 563 コメントで当日の首位になった。\n\n回答では、Apple M4 で Gemma 4 を試したがトークン毎秒がクラウドよりかなり低く、モデル選定を助ける企業向けツールもないのでまだだという報告が最上位にある。RTX Pro 6000 Blackwell 2 枚で DeepSeek V4 Flash を 160 トークン毎秒で動かし、自動でコードを書かせて別のシステムにレビューさせているという構成や、Qwen 3.6 27B dense は Haiku 4.5 から Sonnet 程度だという評価も出た。\n\nOpenRouter を繋げば主要なオープンウェイトモデルを全て試せるという助言や、Strix Halo 向けに antirez の ds4 の安定を待っているという声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "What happened to nerds?",
+              "title_ja": "ナードに何が起きたのか?",
+              "url": "https://mrmarket.lol/what-the-fuck-happened-to-nerds/",
+              "comments_url": "https://news.ycombinator.com/item?id=48538229",
+              "score": 92,
+              "engagement_label": "755pt / 512コメント",
+              "category": "開発文化",
+              "interest": 2,
+              "summary": "Mr. Market のブログ。かつて技術そのものに熱中していたナードの文化が、金と権力を追う人々に置き換わったと嘆く記事。755pt / 512 コメント。",
+              "discussion_summary": "技術そのものに熱中するナードの文化がどこへ行ったのかを問う個人ブログの記事。2 日前に別 URL で投稿されたものの再浮上で、755pt / 512 コメント。\n\nコメントでは、変わったのはナードではなくテック企業の経営者で、参入してきた詐欺師たちの手口を真似る手引きができたのだという意見が最上位にある。MVP から超成長、堀の構築という VC の手法が技術との関係を歪めたという見方や、単純に金が集まる場所には野心的な人が集まるという指摘も出た。\n\nかつては論理と理屈で議論できるインターネットがあったが、イデオローグが現れて議論の水準が下がったという投稿や、注意が高価になり見た目が全てで、優れたライブラリより良いページと端末の GIF がある方が勝つという分析、シリコンバレーが客観主義へ押しやられたという主張もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Your ePub Is fine",
+              "title_ja": "あなたの ePub は問題ない",
+              "url": "https://andreklein.net/your-epub-is-fine-kobo-disagrees-blame-adobe/",
+              "comments_url": "https://news.ycombinator.com/item?id=48533848",
+              "score": 91,
+              "engagement_label": "919pt / 308コメント",
+              "category": "Web",
+              "interest": 1,
+              "summary": "André Klein の記事。epubcheck を通る ePub が Kobo で崩れる原因は、多くの端末が使う Adobe のレンダラ RMSDK が古い CSS しか扱えないことだと説明する。919pt / 308 コメント。",
+              "discussion_summary": "検証を通る ePub が Kobo で正しく表示されない原因を、多くの端末が使う Adobe の RMSDK が古い CSS しか扱えないことに求めた André Klein の記事。919pt / 308 コメント。\n\nコメントでは「いつも CSS が原因」という一言や、Adobe は後方互換を守っている一方で ePub の標準側が最新仕様への競争を続けているという整理がある。ePub の標準はどの CSS のバージョンに対応するか定めていないので、レンダラが壊れているとは言えないという反論も出た。\n\nAdobe Digital Editions と RMSDK は最近 Wipro に売却されたという情報や、Kobo は .kepub.epub という拡張子にすると別のレンダラを使うので kepubify を通してから転送しているという実用的な助言、W3C が仕様を引き継いだ際に WHATWG の生きた標準を参照したことが混乱の元だという指摘もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Curl will not accept vulnerability reports during July 2026",
+              "title_ja": "curl は 2026 年 7 月中、脆弱性報告を受け付けない",
+              "url": "https://daniel.haxx.se/blog/2026/06/15/curl-summer-of-bliss/",
+              "comments_url": "https://news.ycombinator.com/item?id=48537165",
+              "score": 90,
+              "engagement_label": "793pt / 316コメント",
+              "category": "OSS",
+              "interest": 2,
+              "summary": "Daniel Stenberg のブログ。curl プロジェクトは 2026 年 7 月の 1 か月間、脆弱性報告の受け付けを止めて休む。悪者は休まないだろうが自分たちは休むと書く。793pt / 316 コメント。",
+              "discussion_summary": "curl の Daniel Stenberg が、2026 年 7 月の 1 か月間は脆弱性報告を受け付けず休むと発表した記事。「悪者は休まないだろうが、我々は休む」という一節があり、793pt / 316 コメント。\n\nコメントは称賛が中心で、非人間的な時代における人間味だという反応や、素晴らしい宣伝だという声、FOSS のメンテナは報酬ほぼゼロで常に手一杯で LLM によりマージリクエストの管理はさらに爆発しているという指摘が並ぶ。\n\n一方で、有償の契約先への対応は続けるという抜け穴が気になり、公開で脆弱性が開示されれば顧客から修正を迫られるのではという懸念も出た。休暇中は仕事用の端末を置いて 2FA キーをパートナーに預けるなど、完全に切り離す方法を勧める投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Hetzner Price Adjustment",
+              "title_ja": "Hetzner の価格改定",
+              "url": "https://docs.hetzner.com/general/infrastructure-and-availability/price-adjustment/#cloud-servers",
+              "comments_url": "https://news.ycombinator.com/item?id=48540844",
+              "score": 90,
+              "engagement_label": "550pt / 767コメント",
+              "category": "インフラ",
+              "interest": 1,
+              "summary": "Hetzner の価格改定の告知。2026 年 6 月 15 日から新規およびリスケールしたクラウドインスタンスの価格が引き上げられ、一部のプランは 2 倍を超えた。550pt に対して 767 コメント。",
+              "discussion_summary": "Hetzner が 2026 年 6 月 15 日 8 時 (CEST) から新規およびリスケールしたクラウドインスタンスの価格を引き上げるという告知。それ以前の注文には旧価格が適用され、既存のインスタンスはリスケールしない限り据え置かれる。550pt に対し 767 コメント。\n\nコメントでは、一部のプランが 2 倍以上になった理由を問う声や、移行期間なしにこれほど急に値上げできるのかという疑問が並ぶ。18 日前にも議論されていたという指摘や、数か月前から一部の地域でコスト最適化 VPS が在庫切れで確保に苦労していたという報告も出た。\n\nGEX44 の初期費用が 1 年前の約 60 ユーロから 500 ユーロになったという不満の一方、RAM とディスクが不足して価格が高騰した今のハードウェア事情の現実で、ハイパースケーラーがどれだけ供給網に影響力を持って価格を抑えているのかが気になるという見方もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Ask HN: What are you working on? (June 2026)",
+              "title_ja": "Ask HN: 今何に取り組んでいますか? (2026 年 6 月)",
+              "url": "https://news.ycombinator.com/item?id=48528779",
+              "comments_url": "https://news.ycombinator.com/item?id=48528779",
+              "score": 81,
+              "engagement_label": "312pt / 1148コメント",
+              "category": "コミュニティ",
+              "interest": 1,
+              "summary": "毎月恒例の、取り組んでいるプロジェクトやアイデアを共有する Ask HN。312pt に対し 1148 コメントと当日最多の議論。ローカルの Markdown 検索や喘息の記録アプリ、Rust 製のナレッジ管理などが並んだ。",
+              "discussion_summary": "取り組んでいるプロジェクトや温めているアイデアを共有する毎月恒例の Ask HN。312pt に対して 1148 コメントと当日最多の議論になった。\n\n投稿には、ローカルの Markdown を全文、ベクトル、ハイブリッドで検索し Web 検索やクロールも備える gmd、維持カロリーをアルゴリズムで推定する Macrocodex、喘息のピークフロー値を環境データと組み合わせて早期警告を出す日記アプリなどが並んだ。Web 技術を使わず Rust だけで作る共同ナレッジ管理システム Totem もある。\n\nHN で急上昇する記事をメールで知らせる HN Alerts、アプリごとに分離したデータベースやスキーマを配るための仕組み、SQL キャンバスへのエージェント追加など、開発者向けの道具も多い。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "CrankGPT",
+              "title_ja": "CrankGPT",
+              "url": "https://crankgpt.com",
+              "comments_url": "https://news.ycombinator.com/item?id=48540854",
+              "score": 79,
+              "engagement_label": "608pt / 236コメント",
+              "category": "AI/ハードウェア",
+              "interest": 1,
+              "summary": "手回しクランクで発電して質問に答える LLM 端末 CrankGPT のサイト。風刺なのか本物の製品なのか判別しにくい作りで、608pt / 236 コメントを集めた。",
+              "discussion_summary": "手回しのクランクで発電して質問に答えるオフラインの LLM 端末を紹介するサイト。凝った演出のページで、技術文書と背後にある edge_voice_agent のリポジトリへのリンクがある。608pt / 236 コメント。\n\nコメントでは、サイトの見づらさへの不満の代わりに技術文書のページを勧める投稿が最上位にある。「本物か」という動画を見ても本物か分からないが、全てを一握りの超富裕層に渡すのをやめるという考えには賛成だという声も出た。\n\n風刺なのか将来の実際の製品なのか分からない世界にいるという感想や、それでも買うという投稿、Magic 8 Ball の方が疲れないという冗談、ローイングマシンで MacBook に電力を供給するには何時間漕ぐ必要があるかという脱線もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Windows 11 users are tired of MS account requirements creeping into everything",
+              "title_ja": "Windows 11 の利用者は、あらゆる場面に忍び込む Microsoft アカウントの要求にうんざりしている",
+              "url": "https://www.windowscentral.com/microsoft/windows-11/windows-11-users-are-tired-of-microsoft-account-requirements-and-workarounds",
+              "comments_url": "https://news.ycombinator.com/item?id=48533101",
+              "score": 78,
+              "engagement_label": "570pt / 446コメント",
+              "category": "OS",
+              "interest": 1,
+              "summary": "Windows Central の記事。Windows 11 のセットアップや機能に Microsoft アカウントの要求が広がり、回避策も塞がれていくことへの利用者の不満を伝える。570pt / 446 コメント。",
+              "discussion_summary": "Windows 11 でセットアップから各機能まで Microsoft アカウントの要求が広がり、回避策も塞がれていくことへの利用者の不満を伝える Windows Central の記事。570pt / 446 コメント。\n\nコメントでは、回復用のアカウントまで強制されるのは政府の本人確認の方針が背景にあるのではという推測や、アカウントとテレメトリで利用者の行動を紐づけられるため内蔵のディスク暗号化が無意味になるという指摘がある。BitLocker の鍵をアカウントに保存する理由の説明に対し、アカウントを停止されればデータまで失うのでむしろ怖いという反応も出た。\n\n10 年前から同じ話なのに広告だらけの長い記事だという批判や、なぜこの OS を使い続けるのかという問い、Adobe に依存しないなら初心者向けの Linux で足りるという投稿、子供の Minecraft のアカウントを紐づけて PC が制限モードになったという体験談もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Show HN: Kage – Shadow any website to a single binary for offline viewing",
+              "title_ja": "Show HN: Kage – 任意の Web サイトを単一バイナリに写してオフラインで閲覧",
+              "url": "https://github.com/tamnd/kage",
+              "comments_url": "https://news.ycombinator.com/item?id=48529990",
+              "score": 76,
+              "engagement_label": "712pt / 141コメント",
+              "category": "ツール",
+              "interest": 1,
+              "summary": "JavaScript が必要なページも含めて Web サイトを丸ごと取得し、単一のバイナリとしてオフラインで閲覧できるようにするツール Kage の Show HN。712pt / 141 コメント。",
+              "discussion_summary": "Web サイトを JavaScript の実行結果も含めて取得し、単一のバイナリにまとめてオフラインで閲覧できるようにするツール Kage の Show HN。712pt / 141 コメント。\n\nコメントでは、JavaScript を除去して全てを 1 つの HTML に詰める SingleFile の方が堅牢だという比較が最上位にある。サイトに大きな負荷をかける可能性があるので取得速度や画像と動画の除外、サブセットの指定はできるのかという問いや、wget --mirror が JavaScript の要るページで動く版という理解で合っているかという確認も出た。\n\nmitmproxy と組み合わせて配信されたデータそのものと現代のブラウザでの表現を同時に保存すれば WARC の代替になるという提案や、Chrome を --no-sandbox で起動している理由を問う指摘、飛行機や長距離列車で HN の記事を読むのに使いたいという声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Apple Foundation Models",
+              "title_ja": "Apple Foundation Models",
+              "url": "https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models",
+              "comments_url": "https://news.ycombinator.com/item?id=48536776",
+              "score": 74,
+              "engagement_label": "485pt / 225コメント",
+              "category": "AI/開発ツール",
+              "interest": 3,
+              "summary": "Claude の開発者向け文書にある、Apple の Foundation Models フレームワークから Claude を差し替えて使うための Swift パッケージの解説。485pt / 225 コメント。",
+              "discussion_summary": "Claude のプラットフォーム文書に追加された、Apple の Foundation Models フレームワークから Claude を使うための Swift パッケージの解説。iOS 27 と macOS 27 の標準 API に Claude を差し替えで組み込める。485pt / 225 コメント。\n\nコメントでは、Apple が自社モデルを出す時に開発者を移しやすくするための抽象化層への誘導ではないかという見方や、Apple のフレームワークはローカルモデルを 3B 程度に制限しているので本当にオンデバイスなのか、実態は Foundation Models の皮を被った Claude SDK ではないかという疑問が出た。\n\nAPI キーをどこに置くのか、iOS クライアントに載せれば誰でも読めて悪用されるという実務的な問いや、複数のアプリが同じローカルモデルをそれぞれダウンロードすると端末が膨らむという懸念、コーディングエージェントの上にさらに層を重ねるのかという不満もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "date": "2026-06-04",
+  "generated_at": "2026-09-06T18:42:05+09:00",
+  "digest": {
+    "headline": "LLM の意識をめぐる 2 本が計 2000 コメント超、Gemma 4 12B と Elixir 1.20 が並んだ日",
+    "lead": "Hacker News では「They're made out of meat」をもじった短編「They're made out of weights」が 1529pt / 711 コメントで首位、Ted Chiang が AI は意識を持たないと論じた The Atlantic の記事が 1382 コメントで続き、LLM の意識をめぐる話題が上位 2 件を占めた。Google のエンコーダ不要のマルチモーダルモデル Gemma 4 12B が 1062pt、漸進的型付けを導入した Elixir 1.20 が 992pt で並んだ。Vite の VoidZero が Cloudflare に加わる発表と、UC Berkeley の CS 講義で AI 利用の増加とともに落第が急増したという報道も上位に入った。",
+    "highlights": [
+      {
+        "title": "They’re made out of weights",
+        "title_ja": "彼らはウェイトでできている",
+        "url": "https://maxleiter.com/blog/weights",
+        "service_label": "Hacker News",
+        "reason": "1529pt / 711 コメントで当日最大のエンゲージメント。"
+      },
+      {
+        "title": "Artificial intelligence is not conscious – Ted Chiang",
+        "title_ja": "人工知能は意識を持たない – Ted Chiang",
+        "url": "https://www.theatlantic.com/philosophy/2026/06/no-artificial-intelligence-is-not-conscious/687378/",
+        "service_label": "Hacker News",
+        "reason": "800pt に対し 1382 コメントで当日最多の議論。首位の短編と同じ AI の意識という主題。"
+      },
+      {
+        "title": "Gemma 4 12B: A unified, encoder-free multimodal model",
+        "title_ja": "Gemma 4 12B: エンコーダ不要の統合マルチモーダルモデル",
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/",
+        "service_label": "Hacker News",
+        "reason": "1062pt / 401 コメント。エンコーダ不要のマルチモーダル構成という新モデル動向の高関心テーマに直撃。"
+      },
+      {
+        "title": "Elixir v1.20: Now a gradually typed language",
+        "title_ja": "Elixir v1.20: 漸進的型付け言語に",
+        "url": "https://elixir-lang.org/blog/2026/06/03/elixir-v1-20-0-released/",
+        "service_label": "Hacker News",
+        "reason": "992pt / 411 コメント。言語のリリース記事としては高いエンゲージメント。"
+      },
+      {
+        "title": "VoidZero Is Joining Cloudflare",
+        "title_ja": "VoidZero が Cloudflare に加わる",
+        "url": "https://blog.cloudflare.com/voidzero-joins-cloudflare/",
+        "service_label": "Hacker News",
+        "reason": "689pt / 303 コメント。Vite と Vitest の開発元の買収で、JavaScript エコシステムのテーマに該当。"
+      }
+    ]
+  },
+  "markets": [
+    {
+      "id": "global",
+      "label": "グローバル",
+      "services": [
+        {
+          "id": "hackernews",
+          "label": "Hacker News",
+          "status": "ok",
+          "note": "",
+          "items": [
+            {
+              "title": "They’re made out of weights",
+              "title_ja": "彼らはウェイトでできている",
+              "url": "https://maxleiter.com/blog/weights",
+              "comments_url": "https://news.ycombinator.com/item?id=48391611",
+              "score": 94,
+              "engagement_label": "1529pt / 711コメント",
+              "category": "LLM",
+              "interest": 2,
+              "summary": "Max Leiter による短編。Terry Bisson の SF 短編「They're made out of meat」をもじり、言語モデルを重みでできた存在として描く。当日最大の 1529pt / 711 コメント。",
+              "discussion_summary": "Max Leiter による短編。Terry Bisson の 1990 年代の SF 短編「They're made out of meat」の構図を借り、言語モデルを重みでできた存在として外側から眺める。1529pt / 711 コメントで当日の首位になった。\n\nコメントでは元ネタを知らない人向けに原典の説明があり、原典からの見事な橋渡しで賞に値するという評価や、詩のように読めたという感想が並ぶ。言語学の背景から、LLM の創発的な能力が人間の意識を生む仕組みと深いところで似ているのかを考えているという投稿もあった。\n\n一方で、辞書はトークナイザとして存在し文法規則も弱いながら存在するので「フラクタル的に間違っている」という指摘があり、原典の短編映画版へのリンクも挙がった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Artificial intelligence is not conscious – Ted Chiang",
+              "title_ja": "人工知能は意識を持たない – Ted Chiang",
+              "url": "https://www.theatlantic.com/philosophy/2026/06/no-artificial-intelligence-is-not-conscious/687378/",
+              "comments_url": "https://news.ycombinator.com/item?id=48387270",
+              "score": 91,
+              "engagement_label": "800pt / 1382コメント",
+              "category": "AI/社会",
+              "interest": 2,
+              "summary": "SF 作家 Ted Chiang が The Atlantic に寄稿した論考。意識の本質を完全に理解しなくても、会話の記録である LLM の出力が意識を持たないとは言えると論じる。800pt に対し 1382 コメント。",
+              "discussion_summary": "SF 作家 Ted Chiang が The Atlantic に寄稿した論考。意識の本質を完全に解明しなくても、特定のものが意識を持たないとは言えるとし、会話の記録はその範疇に入ると論じる。800pt に対し 1382 コメントと当日最多の議論になった。\n\nコメントでは、LLM が意識を持つとは思わないが、断言するには意識を定義する必要があり、そこで深い穴にはまるので「絶対にない」と言い切る人には「ふうん」としか言えないという反応が最上位にある。全人類を含み現在の AI を除く定義を示してほしいという要求や、意識の難問を解いたのかという問いもあった。\n\n一方で、次トークン予測器が意識を持たないのは最初から明らかで、引用箇所は正しいという賛同や、意識は「太い」「賢い」のような便宜上のラベルにすぎないという主張、Chiang の中編が人生の見方を変えたという投稿も並んだ。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Gemma 4 12B: A unified, encoder-free multimodal model",
+              "title_ja": "Gemma 4 12B: エンコーダ不要の統合マルチモーダルモデル",
+              "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/",
+              "comments_url": "https://news.ycombinator.com/item?id=48385906",
+              "score": 89,
+              "engagement_label": "1062pt / 401コメント",
+              "category": "LLM/新モデル",
+              "interest": 3,
+              "summary": "Google が公開した Gemma 4 12B。視覚と音声の入力を専用エンコーダなしで LLM 本体に直接流す統合アーキテクチャを採用したオープンウェイトモデル。1062pt / 401 コメント。",
+              "discussion_summary": "Google が公開したオープンウェイトモデル Gemma 4 12B の発表記事。視覚と音声の入力を専用のマルチモーダルエンコーダなしで LLM 本体に直接流す統合アーキテクチャが特徴で、視覚側は行列積 1 回と位置埋め込み、正規化からなる軽量モジュールに置き換えたとしている。1062pt / 401 コメント。\n\nコメントでは、エンコーダ不要が最大の話題だが、記事の説明は「エンコーダを使わないエンコード」であり、アーキテクチャの詳細がリンク先にも見当たらないという指摘がある。Google がオープンウェイトの公開で Llama 4 以前の Meta の立ち位置になっているという見方や、営利企業としての狙いを問う投稿も出た。\n\nE4B との違いや、この規模のモデルの用途を尋ねる質問、Ollama のタグが MLX 付きで Mac 専用に見えるという報告、デモ動画で頼まれていないのに箇条書きを文章に戻した点を面白がる声もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Failing grades soar with AI usage, dwindling math skills in Berkeley CS classes",
+              "title_ja": "UC Berkeley の CS 講義で AI 利用の増加と数学力の低下に伴い落第が急増",
+              "url": "https://www.dailycal.org/news/campus/academics/failing-grades-soar-as-professors-see-greater-ai-usage-dwindling-math-skills-in-uc-berkeley/article_16fad0bf-02cb-4b8c-8d88-888ffd9f8608.html",
+              "comments_url": "https://news.ycombinator.com/item?id=48392004",
+              "score": 86,
+              "engagement_label": "834pt / 791コメント",
+              "category": "AI/社会",
+              "interest": 1,
+              "summary": "UC Berkeley の CS 10 と CS 61A で 2026 年春に落第が急増し、教員は AI 利用の増加と数学の基礎力の低下を挙げる。CS 10 では 35.3% が F だった。",
+              "discussion_summary": "UC Berkeley の学生新聞 The Daily Californian の報道。Berkeleytime の集計で 2026 年春に CS 10 の 35.3%、CS 61A の 10.6% の学生が F を受け、教員は AI 利用の広がりと数学力の低下を指摘している。834pt / 791 コメント。\n\nコメントでは、見出しが「落第点が急上昇」とも読める曖昧さを指摘する投稿が上位にある。担当教員の Garcia 氏によれば落第の一部は不正行為を摘発して学生行動センターに送った結果で、CS 10 では 30 人近くが捕まったという引用が出た。\n\n適性に関わらず履修者が増えただけではないかという見方や、教育の目的は知識の定着で LLM の目的は人間らしい出力なので相容れないという意見、AI だけの責任ではなく教授がスライドを読み上げるだけの授業にも問題があるという体験談もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Elixir v1.20: Now a gradually typed language",
+              "title_ja": "Elixir v1.20: 漸進的型付け言語に",
+              "url": "https://elixir-lang.org/blog/2026/06/03/elixir-v1-20-0-released/",
+              "comments_url": "https://news.ycombinator.com/item?id=48388324",
+              "score": 83,
+              "engagement_label": "992pt / 411コメント",
+              "category": "プログラミング言語",
+              "interest": 2,
+              "summary": "Elixir 1.20 のリリース記事。複数バージョンにわたり段階的に導入してきた集合論的型システムにより、漸進的型付け言語として位置づけられた。992pt / 411 コメント。",
+              "discussion_summary": "Elixir 1.20 のリリース記事。複数バージョンにわたって段階的に導入してきた集合論的な型システムにより、Elixir を漸進的型付け言語と位置づけた。992pt / 411 コメントを集めた。\n\nコメントでは、Elixir は好きだが関数型に脳が向いておらず何度も挫折したのでまた挑戦したくなるという声や、動的型付けで離れた開発者が戻るきっかけになるという期待がある。破壊的変更なしに更新するだけでコンパイラがバグを見つけてくれるという報告や、大きな umbrella アプリのコンパイルが速くなったという投稿も出た。\n\nRacket のように漸進的型が計算量を変えるのかという質問や、Gleam と比べて今 Elixir を選ぶ理由を問う投稿、BEAM が下にある構成やデバッガの不在への戸惑いもあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "VoidZero Is Joining Cloudflare",
+              "title_ja": "VoidZero が Cloudflare に加わる",
+              "url": "https://blog.cloudflare.com/voidzero-joins-cloudflare/",
+              "comments_url": "https://news.ycombinator.com/item?id=48398055",
+              "score": 82,
+              "engagement_label": "689pt / 303コメント",
+              "category": "Web/フロントエンド",
+              "interest": 2,
+              "summary": "Vite と Vitest、Rolldown、Oxc を開発する Evan You の VoidZero が Cloudflare に加わると両社が発表した。689pt / 303 コメント。",
+              "discussion_summary": "Vite、Vitest、Rolldown、Oxc を開発する Evan You の会社 VoidZero が Cloudflare に加わるという Cloudflare ブログと VoidZero 側の発表。689pt / 303 コメントを集めた。\n\nコメントでは、Bun、Astro、uv に続いてまた買収されたので Vite と Vitest の代替は何かという問いや、オープンソース組織の買収はいつも不安だという声がある。開発者がツールに金を払わないから企業が支配権を握り独立性を失うという意見に対し、VoidZero が収益を上げていたのかという問いも出た。\n\nNuxt チームと vue-router や Pinia の作者は Vercel、Evan You は Cloudflare という Vue にとって妙な構図だという指摘や、Vite のコードベースが Rust 移植に置き換わるまでどれくらいかという冗談もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "How LLMs work",
+              "title_ja": "LLM の仕組み",
+              "url": "https://www.0xkato.xyz/how-llms-actually-work/",
+              "comments_url": "https://news.ycombinator.com/item?id=48389360",
+              "score": 81,
+              "engagement_label": "948pt / 276コメント",
+              "category": "LLM",
+              "interest": 2,
+              "summary": "0xkato による LLM の動作原理の解説記事。長い記事で、コメントでは構成が散漫だという指摘と、公開当時に自分で図解した経験談が並ぶ。948pt / 276 コメント。",
+              "discussion_summary": "0xkato が LLM の動作原理を解説した長文記事。SSL の問題で直接開けない読者向けにアーカイブへのリンクが共有され、948pt / 276 コメントを集めた。\n\nコメントでは「次は『なぜ LLM は動くのか』を」という反応が最上位にある。1200 ボーの packet radio で生のパケットを読んで TCP/IP を学んだように、遅い LLM の出力を見ていると機構が見えてくるという体験談や、ChatGPT 登場時に 1 か月かけてホワイトボードに図と数式を書いて理解したという投稿があった。\n\n一方で、AI 生成の文章には関心を持てずチャットボットで得られる以上のものがあるのかという疑問や、脇道が多く対象読者が分からないので構成を整えてほしいという批判、「偶然の二次関数」という一言も出ている。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Ian's Secure Shoelace Knot",
+              "title_ja": "Ian の解けにくい靴紐の結び方",
+              "url": "https://www.fieggen.com/shoelace/secureknot.htm",
+              "comments_url": "https://news.ycombinator.com/item?id=48397028",
+              "score": 79,
+              "engagement_label": "610pt / 228コメント",
+              "category": "",
+              "interest": 1,
+              "summary": "Ian Fieggen の靴紐サイトにある、ほどけにくい結び方 Ian's Secure Shoelace Knot の解説ページ。610pt / 228 コメントで再浮上した。",
+              "discussion_summary": "Ian Fieggen が運営する靴紐の結び方のサイトから、ほどけにくい結び方を解説したページの再浮上。610pt / 228 コメント。\n\nコメントでは、5 年前に HN で知って以来この結び方しか使っていないという報告や、10 年で 4 時間ほど節約したという計算、見た目も良く一方の端を引けば即座に解けるという評価が並ぶ。Animated Knots のアニメーションや Veritasium の逆向きに二重に結ぶ方法の紹介もあった。\n\n30 代になって「おばあさん結び」をしていたと気づき、標準の結び方に変えただけで一日中解けなくなったという体験談や、伸縮性のある靴紐にして結ぶ必要をなくしたという投稿も出た。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "U.S. to dismantle system tracking Atlantic currents that are at risk of collapse",
+              "title_ja": "米国、崩壊の危機にある大西洋の海流を追跡するシステムを解体へ",
+              "url": "https://e360.yale.edu/digest/trump-ooi-amoc",
+              "comments_url": "https://news.ycombinator.com/item?id=48392232",
+              "score": 78,
+              "engagement_label": "646pt / 486コメント",
+              "category": "科学",
+              "interest": 1,
+              "summary": "Yale Environment 360 の記事。崩壊の危険が指摘される大西洋子午面循環 (AMOC) を観測するシステムを米国が解体する計画で、議会の民主党は阻止を表明している。",
+              "discussion_summary": "崩壊の危険が指摘される大西洋子午面循環 (AMOC) を追跡する米国の観測システムが解体される計画だという Yale Environment 360 の記事。議会の民主党は「戦う」と表明している。646pt / 486 コメント。\n\nコメントは政権への批判が中心で、「Don't look up」や、事実を無視すれば消えると考えているという皮肉が並ぶ。都合の悪い情報を消せば人々が気にしなくなると考える政治と資本の側の最近の動きの一つだという見方も出た。\n\nこの観測のおかげで AMOC の変動を最近になってようやくモデル化できるようになったと説明する Simon Clark の動画への言及や、科学系媒体が「戦う」を引用符で括った点を評価する投稿もあった。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            },
+            {
+              "title": "Wind and solar generated more power than gas globally in April 2026",
+              "title_ja": "2026 年 4 月、風力と太陽光の発電量が世界で初めてガスを上回った",
+              "url": "https://electrek.co/2026/05/20/in-a-first-wind-solar-generated-more-power-than-gas-globally-april-2026/",
+              "comments_url": "https://news.ycombinator.com/item?id=48399332",
+              "score": 74,
+              "engagement_label": "405pt / 390コメント",
+              "category": "エネルギー",
+              "interest": 1,
+              "summary": "Electrek の記事。2026 年 4 月に世界の風力と太陽光の発電量が初めてガス火力を上回った。5 月 20 日の記事が 405pt / 390 コメントで上位に入った。",
+              "discussion_summary": "2026 年 4 月に世界の風力と太陽光による発電量が初めてガス火力を上回ったという Electrek の記事。5 月 20 日公開の記事が 405pt / 390 コメントで上位に入った。\n\nコメントでは、再生可能エネルギーは製造や AI などエネルギー集約型の活動で競争優位になり中国は理解しているが米国はしていないという意見や、太陽光と電池の進歩は AI より重要な技術革命なのに投機で儲からないので報じられないという主張がある。\n\n石炭の方がはるかに有害で普及しているので次はそれを超えるのが筋だという声や、これは電力の話でガスは暖房や調理、産業用途に広く使われているという注記、データセンターが柔軟性のためにガスを使っているという指摘も出た。",
+              "article_summary": "",
+              "seen_before": false,
+              "extra": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
