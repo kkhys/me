@@ -86,10 +86,14 @@ const dropUnprocessableImage = async (metadata: Metadata): Promise<Metadata> => 
     : { ...metadata, image: undefined };
 };
 
-// `fetch-site-metadata` streams the raw response bytes into an HTMLRewriter
-// that always decodes as UTF-8, ignoring both `Content-Type: charset=` and
-// `<meta charset>`. Legacy Japanese shops (item.rakuten.co.jp is EUC-JP) come
-// back as U+FFFD soup, so re-extract the text fields with the declared charset.
+// `fetch-site-metadata` streams the response through an HTMLRewriter that stops
+// at the first element which cannot precede `<body>`, and decodes every chunk as
+// UTF-8 whatever `Content-Type: charset=` and `<meta charset>` say. Two kinds of
+// page come back unusable: legacy Japanese shops (item.rakuten.co.jp is EUC-JP)
+// turn into U+FFFD soup, and a YouTube channel page carries its og:* meta some
+// 50KB past `</head>`, so the stream ends before any of it is seen and every
+// field but the icon is empty. Both are repaired by re-reading the whole
+// document with linkedom.
 const REPLACEMENT_CHAR = "�";
 const CHARSET_SNIFF_BYTES = 4096;
 
@@ -135,6 +139,15 @@ const DESCRIPTION_SOURCES = [
   ["name", "twitter:description"],
 ] as const;
 
+const IMAGE_SOURCES = [
+  ["property", "og:image:secure_url"],
+  ["property", "og:image:url"],
+  ["property", "og:image"],
+  ["name", "twitter:image"],
+  ["property", "twitter:image"],
+  ["name", "thumbnail"],
+] as const;
+
 const firstContent = (
   document: ReturnType<typeof parseHTML>["document"],
   sources: readonly (readonly [attribute: string, value: string])[],
@@ -150,28 +163,35 @@ const firstContent = (
   return undefined;
 };
 
-const reextractText = (html: string, metadata: Metadata): Metadata => {
+// Whatever the stream did reach is kept: only the fields it left empty are
+// filled in, so a page that merely needed a charset pass keeps its image.
+const reextract = (html: string, metadata: Metadata): Metadata => {
   const { document } = parseHTML(html);
   const title = firstContent(document, TITLE_SOURCES) ?? document.title.trim();
+  const src = metadata.image ? undefined : firstContent(document, IMAGE_SOURCES);
   return {
     ...metadata,
     title: title || metadata.title,
     description: firstContent(document, DESCRIPTION_SOURCES) ?? metadata.description,
+    image: src ? { src, width: undefined, height: undefined, alt: undefined } : metadata.image,
   };
 };
 
-const repairGarbledText = async (url: string, metadata: Metadata): Promise<Metadata> => {
-  if (!isGarbled(metadata)) return metadata;
+const repairMetadata = async (url: string, metadata: Metadata): Promise<Metadata> => {
+  const cutShort = !metadata.title;
+  if (!cutShort && !isGarbled(metadata)) return metadata;
 
   try {
     const response = await fetch(url, { headers: REQUEST_HEADERS });
     if (!response.ok) return metadata;
 
-    const html = decodeWithDeclaredCharset(
-      await response.arrayBuffer(),
-      response.headers.get("content-type"),
-    );
-    return html ? reextractText(html, metadata) : metadata;
+    const bytes = await response.arrayBuffer();
+    // Garbled text only improves when the page declares a charset other than
+    // UTF-8; re-decoding it as UTF-8 would reproduce the same U+FFFD. A parse
+    // that ended early has nothing to lose either way.
+    const declared = decodeWithDeclaredCharset(bytes, response.headers.get("content-type"));
+    const html = declared ?? (cutShort ? new TextDecoder().decode(bytes) : undefined);
+    return html ? reextract(html, metadata) : metadata;
   } catch {
     return metadata;
   }
@@ -255,15 +275,15 @@ const fetchYoutubeMetadata = async (videoId: string): Promise<Metadata | undefin
 
 const scrapeMetadata = (url: string): Promise<Metadata> =>
   fetchSiteMetadata(url, { suppressAdditionalRequest: true, headers: REQUEST_HEADERS })
-    .then((fetched) => repairGarbledText(url, fetched))
+    .then((fetched) => repairMetadata(url, fetched))
     .then(dropUnprocessableImage);
 
 /**
  * Builds the `getMetadata(url)` used behind link cards: `fetch-site-metadata`
  * plus the repairs the blogs have needed in practice (garbled legacy charsets,
- * SVG or non-decodable og:images, http-only image hosts), memoized per URL for
- * the build. YouTube video URLs come from oEmbed instead. Failures resolve to
- * `notFound` and are not cached.
+ * og:* meta the streaming parse never reaches, SVG or non-decodable og:images,
+ * http-only image hosts), memoized per URL for the build. YouTube video URLs
+ * come from oEmbed instead. Failures resolve to `notFound` and are not cached.
  */
 export const createMetadataFetcher = ({
   enabled,

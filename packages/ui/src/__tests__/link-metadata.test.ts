@@ -26,6 +26,9 @@ const VIDEO_ID = "YeohjAYgyQ4";
 const HQ_THUMBNAIL = `https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg`;
 const MAXRES_THUMBNAIL = `https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`;
 
+const documentWith = (meta: string) =>
+  `<!doctype html><html><head><title></title></head><body><script>var a=1;</script>${meta}</body></html>`;
+
 const OEMBED = {
   title: "I Left Tokyo for Rural Japan",
   author_name: "Keisuke",
@@ -223,6 +226,70 @@ describe("createMetadataFetcher", () => {
 
       await expect(getMetadata(`https://youtu.be/${VIDEO_ID}`)).resolves.toEqual(SITE);
       expect(await fetched()).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  // fetch-site-metadata stops parsing at the first element that cannot precede
+  // <body>, and a YouTube channel page puts its og:* meta well past that point.
+  describe("metadata past the end of the streaming parse", () => {
+    const CHANNEL = "https://www.youtube.com/@keisuke_life";
+    const ICON = "https://www.youtube.com/favicon.ico";
+    const AVATAR = "https://yt3.example/avatar.jpg";
+
+    const EMPTY: Metadata = {
+      title: undefined,
+      description: undefined,
+      image: undefined,
+      icon: ICON,
+    };
+
+    const stubDocument = (html: string) => {
+      const spy = vi.fn<(input: string | URL | Request) => Promise<Response>>((input) =>
+        Promise.resolve(
+          String(input) === CHANNEL
+            ? new Response(html, { headers: { "content-type": "text/html; charset=utf-8" } })
+            : new Response(JPEG_BYTES as unknown as ResponseBody),
+        ),
+      );
+      vi.stubGlobal("fetch", spy);
+      return spy;
+    };
+
+    it("re-reads the whole document when the stream yielded no title", async () => {
+      vi.mocked(await fetched()).mockResolvedValue(EMPTY);
+      const fetchSpy = stubDocument(
+        documentWith(
+          '<meta property="og:title" content="山白Shanbai">' +
+            '<meta property="og:description" content="handicrafts">' +
+            `<meta property="og:image" content="${AVATAR}">`,
+        ),
+      );
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      await expect(getMetadata(CHANNEL)).resolves.toEqual({
+        title: "山白Shanbai",
+        description: "handicrafts",
+        icon: ICON,
+        image: { src: AVATAR, width: undefined, height: undefined, alt: undefined },
+      });
+      expect(fetchSpy.mock.calls[0]?.[0]).toBe(CHANNEL);
+    });
+
+    it("keeps the empty result when the document carries no metadata either", async () => {
+      vi.mocked(await fetched()).mockResolvedValue(EMPTY);
+      stubDocument(documentWith(""));
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      await expect(getMetadata(CHANNEL)).resolves.toEqual(EMPTY);
+    });
+
+    it("leaves a page the stream read in full alone", async () => {
+      vi.mocked(await fetched()).mockResolvedValue(SITE);
+      const fetchSpy = stubDocument(documentWith(""));
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      await expect(getMetadata(CHANNEL)).resolves.toEqual(SITE);
+      expect(fetchSpy).not.toHaveBeenCalled();
     });
   });
 });
