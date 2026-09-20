@@ -75,6 +75,12 @@ step).
   `fetch-site-metadata` plus the repairs link cards have needed (garbled
   legacy charsets, SVG / undecodable og:images, http-only image hosts),
   memoized per URL. me / memo wrap it with their own production check.
+  YouTube video URLs (`youtu.be`, `watch` / `shorts` / `embed` / `live`,
+  the `m.` and `music.` hosts) skip the scraper and read oEmbed instead:
+  YouTube serves clients it treats as automated a watch page with no
+  video metadata, which is what memo's CI build gets. oEmbed has no
+  description, so the channel name fills that slot, and the thumbnail is
+  `maxresdefault` where it exists, else the one oEmbed returns.
 - `icons/*.svg` — the 12 Lucide glyphs shared by the apps: `arrow-left`,
   `check`, `copy`, `globe`, `info`, `lightbulb`, `link`,
   `message-square-warning`, `move-up-right`, `octagon-alert`, `search`,
@@ -89,5 +95,6 @@ targeting, reveal on error), `budoux` (cached parser, `<wbr>` insertion,
 tags preserved), `favicon` (data-URI inlining, rejections, per-URL cache),
 `infinite-scroll` (trigger margin, page append, spinner minimum, end /
 error announcements, re-init on replaced markup), `link-metadata`
-(disabled placeholder, caching, failure retry, SVG og:image dropped), and
-`toc-active` (`pickActiveId`).
+(disabled placeholder, caching, failure retry, SVG og:image dropped,
+YouTube oEmbed routing and thumbnail fallback), and `toc-active`
+(`pickActiveId`).
