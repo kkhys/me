@@ -15,6 +15,10 @@ vi.mock("#/lib/link-metadata-cache", () => ({
   readLinkMetadata: vi.fn<typeof import("#/lib/link-metadata-cache").readLinkMetadata>(() => ({})),
 }));
 
+const PNG_BYTES = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+
+const EMPTY_PAGE = "<!doctype html><html><head><title></title></head><body></body></html>";
+
 describe("getMetadata", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -64,15 +68,22 @@ describe("getMetadata", () => {
         NODE_ENV: "production",
         PUBLIC_DEPLOY_ENV: "production",
       }));
-      // The shared fetcher sniffs og:image bytes before keeping the image;
-      // answer every probe with a PNG signature so fixtures survive intact.
+      // The shared fetcher reads the page itself to check the HTTP status, then
+      // sniffs og:image bytes before keeping the image. Answer each request in
+      // kind, and build a fresh Response every time: a body reads only once.
       vi.stubGlobal(
         "fetch",
-        vi.fn<typeof fetch>().mockResolvedValue(
-          new Response(new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), {
-            status: 200,
-            headers: { "content-type": "image/png" },
-          }),
+        // Typed from the call signature rather than `typeof fetch`: astro check
+        // resolves bun's lib, which declares static members on it.
+        vi.fn<(input: string | URL | Request, options?: RequestInit) => Promise<Response>>(
+          (_input, options) =>
+            Promise.resolve(
+              (options?.headers as Record<string, string> | undefined)?.accept === "image/*"
+                ? new Response(PNG_BYTES, { headers: { "content-type": "image/png" } })
+                : new Response(EMPTY_PAGE, {
+                    headers: { "content-type": "text/html; charset=utf-8" },
+                  }),
+            ),
         ),
       );
     });
