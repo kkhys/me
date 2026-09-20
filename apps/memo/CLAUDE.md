@@ -29,16 +29,19 @@ src/
 │   ├── date.ts                # UTC date formatting
 │   ├── image.ts               # Dynamic image imports from submodule
 │   └── image-alt.ts           # images[].alt lookup with numbered fallback
-├── lib/                        # Remark plugins (word limit, link extraction, etc.) + metadata.ts (link-card fetcher)
+├── lib/                        # Remark plugins (word limit, link extraction, etc.) + metadata.ts (link-card fetcher) + link-metadata-cache.ts (its committed cache)
 ├── config/                     # constants.ts: site-level personal config
 ├── assets/                     # Avatars, covers, bot icons, OG font
 ├── styles/                     # global.css: @kkhys/styles (uchu/tokens/base) + kiso.css imports, app tokens
 ├── __fixtures__/               # Test fixtures and sample data
 └── __tests__/                  # Vitest tests
 
+scripts/
+└── refresh-link-metadata.ts    # Resolves link-card metadata locally into memo-content/data
+
 memo-content/                   # Git submodule — all production content/personal data lives here, not in main repo
 ├── memo/                        # Memo directories (index.md + images)
-└── data/                        # Personal data: users.yaml (profiles), oss-projects.json (OSS feed)
+└── data/                        # Personal data: users.yaml (profiles), oss-projects.json (OSS feed), link-metadata.json (link-card cache)
 ```
 
 ## Content System
@@ -50,6 +53,10 @@ Personal data (user profiles, OSS project list) lives in `memo-content/data/` to
 Bot feeds: the memo loader injects entries from external RSS feeds as bot authors — `blog-feed` (`rss-` id prefix) and `zenn-feed` (`zenn-` id prefix), each with a distinct prefix so per-feed stale cleanup stays isolated. Feed XML is cached under `node_modules/.cache/memo-feeds/` with a TTL (default 10 min, override via `FEED_CACHE_TTL_MINUTES`); past the TTL the loader revalidates with conditional requests (ETag/Last-Modified) instead of re-downloading. OSS projects (`oss-` prefix) come from a local JSON file, not a feed.
 
 `USE_FIXTURE_DATA=true` switches to `src/__fixtures__/memo-sample` (memos) and `src/__fixtures__/users.yaml` (sample profiles) for CI/development without the submodule. RSS/Zenn fetches and OSS entries are skipped in fixture mode.
+
+## Link Cards
+
+A memo's first external link renders a card unless the memo sets `hideLinkCard`. The metadata behind it comes from `@kkhys/ui/link-metadata`, but the deploy runs unattended from CI, where a host that blocks its IPs or simply answers slowly leaves a card with nothing but the hostname. So the metadata is resolved from a developer's machine and committed: `pnpm --filter @kkhys/memo link-metadata` walks every memo, resolves the links it has not seen before and writes `memo-content/data/link-metadata.json`, which the build prefers over its own fetch. Pass `--force` to re-resolve everything; a URL no longer referenced by any memo drops out on the next run. studio's sync runs the refresh before it commits, so a memo composed there carries its card metadata along with it.
 
 ## Navigation
 
@@ -85,4 +92,5 @@ Consumed as source (no build step); memo supplies its own config via thin wrappe
 
 - Mocked modules: `astro:content`, `astro:env/client`
 - Coverage target: `src/utils/*.ts`, `src/lib/*.ts`, `src/loaders/*.ts`, and `src/features/**/*.ts` (excludes `image.ts`, `memo-loader.ts`)
+- `link-metadata-cache` tests write to a temp dir; `metadata` tests mock `#/lib/link-metadata-cache` so they never read the submodule
 - Fixtures: `src/__fixtures__/memo-collection.ts`

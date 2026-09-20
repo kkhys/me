@@ -76,16 +76,24 @@ step).
 - `toc-active` / `toc-observer` — scrollspy: `pickActiveId` (pure) and
   `observeActiveHeading` (IntersectionObserver over the headings, calls
   back with the active link) for me's TOC and trends' source TOC.
-- `link-metadata` — `createMetadataFetcher({ enabled, placeholder })`:
+- `link-metadata` —
+  `createMetadataFetcher({ enabled, placeholder, notFound, preloaded })`:
   `fetch-site-metadata` plus the repairs link cards have needed (garbled
-  legacy charsets, SVG / undecodable og:images, http-only image hosts),
-  memoized per URL. me / memo wrap it with their own production check.
-  YouTube video URLs (`youtu.be`, `watch` / `shorts` / `embed` / `live`,
-  the `m.` and `music.` hosts) skip the scraper and read oEmbed instead:
-  YouTube serves clients it treats as automated a watch page with no
-  video metadata, which is what memo's CI build gets. oEmbed has no
+  legacy charsets, og:* meta the streaming parse never reaches, SVG /
+  undecodable og:images, http-only image hosts), memoized per URL. me /
+  memo wrap it with their own production check. `preloaded` is metadata
+  resolved ahead of the build and keyed by URL; a hit skips the network
+  entirely (memo passes what `memo-content/data/link-metadata.json`
+  holds). YouTube video URLs (`youtu.be`, `watch` / `shorts` / `embed` /
+  `live`, the `m.` and `music.` hosts) skip the scraper and read oEmbed
+  instead: YouTube serves clients it treats as automated a watch page with
+  no video metadata, which is what memo's CI build gets. oEmbed has no
   description, so the channel name fills that slot, and the thumbnail is
-  `maxresdefault` where it exists, else the one oEmbed returns.
+  `maxresdefault` where it exists, else the one oEmbed returns. A channel
+  URL has no oEmbed endpoint and carries its og:* meta some 50KB past
+  `</head>`, where `fetch-site-metadata` has already stopped parsing — a
+  scrape that comes back with no title is retried by re-reading the whole
+  document with linkedom, which also covers the charset repair.
 - `icons/*.svg` — the 12 Lucide glyphs shared by the apps: `arrow-left`,
   `check`, `copy`, `globe`, `info`, `lightbulb`, `link`,
   `message-square-warning`, `move-up-right`, `octagon-alert`, `search`,
@@ -103,5 +111,7 @@ left to the browser),
 `infinite-scroll` (trigger margin, page append, spinner minimum, end /
 error announcements, re-init on replaced markup), `link-metadata`
 (disabled placeholder, caching, failure retry, SVG og:image dropped,
-YouTube oEmbed routing and thumbnail fallback), and `toc-active`
+YouTube oEmbed routing and thumbnail fallback, `preloaded` hits bypassing
+the network, whole-document re-read when the stream yielded no title),
+and `toc-active`
 (`pickActiveId`).

@@ -14,6 +14,7 @@ import { createMemo, listMemos, type MemoImageInput, MemoValidationError } from 
 import { isAllowedRequest } from "./request-guard";
 
 const REPO_ROOT = fileURLToPath(new URL("../../..", import.meta.url));
+const MEMO_DIR_ROOT = fileURLToPath(new URL("../../memo", import.meta.url));
 const CONTENT_DIR = fileURLToPath(new URL("../../memo/memo-content", import.meta.url));
 const MEMO_DIR = join(CONTENT_DIR, "memo");
 const PORT = Number(process.env.PORT ?? 5757);
@@ -41,6 +42,18 @@ const errorResponse = (error: unknown, status = 400) =>
 const formField = (form: FormData, name: string): string | undefined => {
   const value = form.get(name);
   return typeof value === "string" && value.trim() !== "" ? value.trim() : undefined;
+};
+
+// Link-card metadata is resolved here rather than at build time: memo deploys
+// unattended from CI, where a failed or bot-gated fetch would bake an empty
+// card into the page. The refreshed file is part of what the commit pushes.
+const refreshLinkMetadata = async (): Promise<string | undefined> => {
+  try {
+    await $`bun run scripts/refresh-link-metadata.ts`.cwd(MEMO_DIR_ROOT).quiet();
+    return undefined;
+  } catch (error) {
+    return error instanceof Error ? error.message : String(error);
+  }
 };
 
 const syncTimestamp = () =>
@@ -142,10 +155,15 @@ const server = Bun.serve({
           .then((body: unknown) => (body as { deploy?: unknown } | null)?.deploy === true)
           .catch(() => false);
 
+        // Before the status check: a refresh can be the only change to commit.
+        const metadataError = await refreshLinkMetadata();
+        const note = (message: string) =>
+          metadataError ? `${message} (link metadata refresh failed: ${metadataError})` : message;
+
         try {
           const status = await $`git -C ${CONTENT_DIR} status --porcelain`.text();
           if (!status.trim()) {
-            return Response.json({ synced: false, message: "No changes to commit" });
+            return Response.json({ synced: false, message: note("No changes to commit") });
           }
 
           await $`git -C ${CONTENT_DIR} add -A`;
@@ -156,19 +174,22 @@ const server = Bun.serve({
         }
 
         if (!deploy) {
-          return Response.json({ synced: true, message: "Synced successfully" });
+          return Response.json({ synced: true, message: note("Synced successfully") });
         }
 
         // Bump the submodule pointer in the main repo so the push actually
         // deploys (sync-submodule.yml opens an auto-merging PR).
         try {
           await $`gh workflow run sync-submodule.yml`.cwd(REPO_ROOT).quiet();
-          return Response.json({ synced: true, message: "Synced, submodule sync triggered" });
+          return Response.json({
+            synced: true,
+            message: note("Synced, submodule sync triggered"),
+          });
         } catch (error) {
           const reason = error instanceof Error ? error.message : String(error);
           return Response.json({
             synced: true,
-            message: `Synced, but workflow trigger failed: ${reason}`,
+            message: note(`Synced, but workflow trigger failed: ${reason}`),
           });
         }
       }),
