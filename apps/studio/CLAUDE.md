@@ -25,7 +25,7 @@ All API routes are guarded by a Host/Origin check (`request-guard.ts`) against D
 - `POST /api/memos` — multipart: `body`, `createdAt?`, `tag?`, `comment?`, `quote?`, `isDraft?`, `hideLinkCard?`, `images` (≤4, JPG/PNG) with one `imageAlts` entry per image (required, non-empty; written to the memo's `images[].alt` frontmatter)
 - `GET /api/images/:dirName/:file` — serve memo images for the feed
 - `GET /api/status` — uncommitted change count in memo-content
-- `POST /api/sync` — git add/commit/push of memo-content (same message format as memo-content's sync.ts). With JSON body `{"deploy": true}` (the header's Deploy checkbox, off by default) it also triggers `sync-submodule.yml` via `gh workflow run` so the pushed content deploys
+- `POST /api/sync` — refreshes the link-card metadata cache, then git add/commit/push of memo-content (same message format as memo-content's sync.ts). With JSON body `{"deploy": true}` (the header's Deploy checkbox, off by default) it also triggers `sync-submodule.yml` via `gh workflow run` so the pushed content deploys. The refresh runs `apps/memo/scripts/refresh-link-metadata.ts` before the status check, since a refreshed `memo-content/data/link-metadata.json` can be the only thing to commit; a failure there is reported in the response message but does not stop the sync
 
 ## Constraints
 
