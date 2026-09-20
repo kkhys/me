@@ -170,8 +170,8 @@ export const A11Y_GROUPS: ConventionGroup[] = [
           at("apps/me/src/layouts/blog-layout.astro", 113),
           at("apps/memo/src/components/profile-header.astro", 44),
           at("apps/trends/src/components/digest-hero.astro", 15),
-          at("packages/ui/src/site-header.astro", 29),
-          at("apps/memo/src/components/header.astro", 43),
+          at("packages/ui/src/site-header.astro", 47),
+          at("apps/memo/src/components/header.astro", 44),
           at("apps/lgtm/src/components/legal-page.astro", 35),
         ],
       },
@@ -219,7 +219,7 @@ export const A11Y_GROUPS: ConventionGroup[] = [
         evidence: [
           at("apps/art/src/pages/index.astro", 28),
           at("apps/diary/src/pages/index.astro", 39),
-          at("apps/memo/src/components/thread-post.astro", 84),
+          at("apps/memo/src/components/thread-post.astro", 80),
           at("apps/art/src/components/work-figure.astro", 19),
           at("apps/memo/src/components/profile-header.astro", 25),
           at("apps/me/src/utils/image-alt.ts", 6),
@@ -248,7 +248,7 @@ export const A11Y_GROUPS: ConventionGroup[] = [
         rule: "アイコンだけの操作は親に aria-label、SVG は aria-hidden",
         detail: "Conventions の Icons と同じ。lgtm はさらに title で hover 時の説明を重ねる。",
         evidence: [
-          at("packages/ui/src/site-header.astro", 22),
+          at("packages/ui/src/site-header.astro", 38),
           at("apps/me/src/features/search/components/search-button.astro", 11),
           at("apps/design/src/components/code-block.astro", 22),
           at("apps/me/src/features/blog/components/ui/blocks/alert-block.astro", 32),
@@ -307,10 +307,9 @@ export const A11Y_GROUPS: ConventionGroup[] = [
       {
         rule: "カード全体クリックはポインタ向けの拡張。キーボードには中に本物の a を置く",
         detail:
-          "link-card はカード全体が a。memo の data-href 委譲は選択中テキストと内部リンクを除外し、日時を投稿へのリンクにしてキーボードの入口にする。",
+          "link-card はカード全体が a。memo のフィードはカード全体クリックを持たない。本文は一覧で読み切れるうえ、誤タップで無限スクロールの位置を失うので、投稿への入口は日時のリンクに絞る。",
         evidence: [
           at("packages/ui/src/link-card.astro", 44),
-          at("apps/memo/src/components/feed.astro", 48),
           at("apps/memo/src/components/post-header.astro", 33),
           at("apps/memo/src/components/quote-embed.astro", 39),
         ],
@@ -329,7 +328,7 @@ export const A11Y_GROUPS: ConventionGroup[] = [
         values: ["height: 2.25rem", "width: 1.5rem", "&::before { inset: -0.25rem 0 }"],
         evidence: [
           at("packages/styles/components.css", 23),
-          at("packages/ui/src/site-header.astro", 85),
+          at("packages/ui/src/site-header.astro", 109),
           at("apps/trends/src/components/seen-filter.astro", 79),
           at("packages/search/src/dialog.astro", 211),
           at("apps/design/src/components/theme-toggle.astro", 87),

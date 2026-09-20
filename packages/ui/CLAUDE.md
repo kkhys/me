@@ -21,6 +21,11 @@ step).
   body grid to define the `[top]` / `[main-start]` / `[main-end]` /
   `[bottom]` row names. Header props: `title` (required), `href` (renders
   the title as a link — lgtm), `showBack` + `backLabel` (memo subpages),
+  `historyBackLabel` (memo: opts the back button into `history.back()`
+  for a visitor who came from the same site, so the bfcache brings an
+  infinite-scroll feed back where they left it; the value replaces the
+  accessible name then. Behaviour in `history-back.ts`, a plain home
+  link otherwise),
   `heading` (renders the title as the page's `<h1>` — lgtm, memo feed /
   thread / tag), and the `actions` slot that pins controls to the right
   edge (memo's search button). Footer props: `author` (required),
@@ -93,6 +98,8 @@ resolve them); `./budoux` is the plain-TS entry for `.ts` / `.tsx`
 consumers. `vitest run` covers `src/__tests__/`: `blur-load` (selector
 targeting, reveal on error), `budoux` (cached parser, `<wbr>` insertion,
 tags preserved), `favicon` (data-URI inlining, rejections, per-URL cache),
+`history-back` (same-origin referrer check, label swap, modified clicks
+left to the browser),
 `infinite-scroll` (trigger margin, page append, spinner minimum, end /
 error announcements, re-init on replaced markup), `link-metadata`
 (disabled placeholder, caching, failure retry, SVG og:image dropped,

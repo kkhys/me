@@ -174,7 +174,9 @@ const scrollbarSnippet = `::-webkit-scrollbar {
   <p class="note">
     小さなサイトの中央寄せヘッダー(memo / lgtm / art / trends)。<code>href</code>
     でブランドリンクに、<code>showBack</code> で左端に戻るボタンが付く。<code>actions</code>
-    スロットは右端に操作を置く(memo の検索ボタン)。
+    スロットは右端に操作を置く(memo の検索ボタン)。<code>historyBackLabel</code>
+    を渡すと、同じサイトから来た訪問者には戻るボタンが <code>history.back()</code>
+    になり、無限スクロールのフィードが読んでいた位置のまま戻る(memo)。
   </p>
   <dl class="guidance">
     <div><dt>使う</dt><dd>ページ数の少ないサイトのトップ chrome。下層ページは <code>showBack</code> でホームへ戻る導線を出す。</dd></div>

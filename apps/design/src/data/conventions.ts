@@ -46,7 +46,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         values: ["color 0.2s", "background-color 0.2s", "transform 0.15s ease"],
         evidence: [
           at("packages/styles/components.css", 15),
-          at("packages/ui/src/site-header.astro", 89),
+          at("packages/ui/src/site-header.astro", 113),
           at("apps/me/src/components/ui/site-nav.astro", 127),
           at("apps/memo/src/components/social-icon.astro", 36),
           at("apps/trends/src/components/source-toc.astro", 120),
@@ -225,7 +225,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         evidence: [
           at("packages/styles/tokens.css", 6),
           at("apps/me/src/styles/prose.css", 2),
-          at("apps/memo/src/components/thread-post.astro", 211),
+          at("apps/memo/src/components/thread-post.astro", 203),
         ],
       },
       {
@@ -298,7 +298,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         evidence: [
           at("apps/memo/src/styles/global.css", 30),
           at("apps/lgtm/src/styles/global.css", 32),
-          at("packages/ui/src/site-header.astro", 63),
+          at("packages/ui/src/site-header.astro", 76),
           at("packages/ui/src/site-footer.astro", 45),
         ],
       },
@@ -338,7 +338,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         values: ["--space-1: 0.25rem", "--space-3: 0.75rem", "--space-8: 2rem", "--space-12: 3rem"],
         evidence: [
           at("apps/me/src/layouts/blog-layout.astro", 292),
-          at("apps/memo/src/components/thread-post.astro", 246),
+          at("apps/memo/src/components/thread-post.astro", 238),
         ],
       },
       {
@@ -502,19 +502,9 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         ],
       },
       {
-        rule: "カード全体クリックは data-href + 親のイベント委譲。選択中テキストと内部リンクは除外",
-        values: ["data-clickable", "data-href"],
-        evidence: [
-          at("apps/memo/src/components/thread-post.astro", 69),
-          at("apps/memo/src/components/feed.astro", 36),
-          at("apps/memo/src/components/quote-embed.astro", 34),
-        ],
-      },
-      {
         rule: "クリック可能なカードは user-select: none",
         evidence: [
           at("packages/ui/src/link-card.astro", 111),
-          at("apps/memo/src/components/quote-embed.astro", 63),
           at("apps/me/src/components/ui/image/image.astro", 80),
         ],
       },
@@ -523,7 +513,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         values: ["height: 2.25rem", "--radius-md", "--fs-sm", "--fw-medium", "1.5rem の丸ボタン"],
         evidence: [
           at("packages/styles/components.css", 5),
-          at("packages/ui/src/site-header.astro", 79),
+          at("packages/ui/src/site-header.astro", 103),
           at("apps/memo/src/features/search/components/search-button.astro", 19),
         ],
       },
@@ -552,7 +542,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         ],
         evidence: [
           at("packages/ui/src/icons/globe.svg", 1),
-          at("packages/ui/src/site-header.astro", 24),
+          at("packages/ui/src/site-header.astro", 41),
           at("packages/ui/src/icons/search.svg", 1),
           at("packages/ui/src/icons/copy.svg", 1),
         ],
@@ -567,7 +557,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
       {
         rule: "表示サイズは 0.875rem / 1rem / 1.125rem の 3 段",
         evidence: [
-          at("packages/ui/src/site-header.astro", 23),
+          at("packages/ui/src/site-header.astro", 41),
           at("packages/styles/components.css", 51),
           at("apps/me/src/features/search/components/search-button.astro", 45),
         ],
@@ -575,7 +565,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
       {
         rule: "装飾アイコンは aria-hidden、意味を持つものは親に aria-label",
         evidence: [
-          at("apps/memo/src/components/thread-post.astro", 74),
+          at("apps/memo/src/components/thread-post.astro", 70),
           at("apps/me/src/components/ui/site-nav.astro", 52),
           at("apps/me/src/features/blog/components/ui/blocks/alert-block.astro", 32),
         ],
