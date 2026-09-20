@@ -97,14 +97,14 @@ const avatarMeta = indexable
                     </div>
                     {!hideTag && tag && <TagLink tag={tag} />}
                     <MemoImages images={images} alts={memo.data.images} />
-                    {quotedMemo && (
-                        <div class="post-quote">
-                            <QuoteEmbed memo={quotedMemo} />
-                        </div>
-                    )}
                     {!hideLinkCard && firstExternalLink && (
                         <div class="post-link-card">
                             <LinkCard href={firstExternalLink} />
+                        </div>
+                    )}
+                    {quotedMemo && (
+                        <div class="post-quote">
+                            <QuoteEmbed memo={quotedMemo} />
                         </div>
                     )}
                     {hideCommentsInFeed && commentCount > 0 && (
