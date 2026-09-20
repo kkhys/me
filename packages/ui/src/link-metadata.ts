@@ -14,6 +14,12 @@ export interface MetadataFetcherOptions {
   placeholder?: Metadata | undefined;
   /** Returned when the fetch fails; not cached so a retry can succeed. */
   notFound?: Metadata | undefined;
+  /**
+   * Metadata resolved ahead of the build, keyed by URL. A hit skips the network
+   * entirely, which is what lets a build render cards for hosts that answer its
+   * IPs with a metadata-less page.
+   */
+  preloaded?: Readonly<Record<string, Metadata>> | undefined;
 }
 
 const PLACEHOLDER: Metadata = {
@@ -282,13 +288,15 @@ const scrapeMetadata = (url: string): Promise<Metadata> =>
  * Builds the `getMetadata(url)` used behind link cards: `fetch-site-metadata`
  * plus the repairs the blogs have needed in practice (garbled legacy charsets,
  * og:* meta the streaming parse never reaches, SVG or non-decodable og:images,
- * http-only image hosts), memoized per URL for the build. YouTube video URLs
- * come from oEmbed instead. Failures resolve to `notFound` and are not cached.
+ * http-only image hosts), memoized per URL for the build. `preloaded` entries
+ * win over the network, and YouTube video URLs come from oEmbed instead.
+ * Failures resolve to `notFound` and are not cached.
  */
 export const createMetadataFetcher = ({
   enabled,
   placeholder = PLACEHOLDER,
   notFound = NOT_FOUND,
+  preloaded,
 }: MetadataFetcherOptions) => {
   const cache = new Map<string, Metadata>();
 
@@ -300,6 +308,12 @@ export const createMetadataFetcher = ({
       const copy = { ...placeholder };
       cache.set(url, copy);
       return copy;
+    }
+
+    const preset = preloaded?.[url];
+    if (preset) {
+      cache.set(url, preset);
+      return preset;
     }
 
     try {

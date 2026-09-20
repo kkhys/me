@@ -229,6 +229,46 @@ describe("createMetadataFetcher", () => {
     });
   });
 
+  describe("preloaded", () => {
+    const CHANNEL = "https://www.youtube.com/@keisuke_life";
+    const PRESET: Metadata = {
+      title: "Channel",
+      description: "A channel",
+      image: undefined,
+      icon: undefined,
+    };
+
+    it("answers from the preloaded entry without touching the network", async () => {
+      const getMetadata = createMetadataFetcher({
+        enabled: true,
+        preloaded: { [CHANNEL]: PRESET },
+      });
+
+      await expect(getMetadata(CHANNEL)).resolves.toEqual(PRESET);
+      expect(await fetched()).not.toHaveBeenCalled();
+    });
+
+    it("scrapes a URL the preload does not cover", async () => {
+      vi.mocked(await fetched()).mockResolvedValue(SITE);
+      const getMetadata = createMetadataFetcher({
+        enabled: true,
+        preloaded: { [CHANNEL]: PRESET },
+      });
+
+      await expect(getMetadata("https://example.com")).resolves.toEqual(SITE);
+      expect(await fetched()).toHaveBeenCalledTimes(1);
+    });
+
+    it("still hands out the placeholder while disabled", async () => {
+      const getMetadata = createMetadataFetcher({
+        enabled: false,
+        preloaded: { [CHANNEL]: PRESET },
+      });
+
+      await expect(getMetadata(CHANNEL)).resolves.toMatchObject({ title: "リンク" });
+    });
+  });
+
   // fetch-site-metadata stops parsing at the first element that cannot precede
   // <body>, and a YouTube channel page puts its og:* meta well past that point.
   describe("metadata past the end of the streaming parse", () => {

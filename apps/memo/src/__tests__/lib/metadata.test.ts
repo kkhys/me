@@ -11,6 +11,10 @@ vi.mock("fetch-site-metadata", () => ({
   default: vi.fn<typeof import("fetch-site-metadata").default>(),
 }));
 
+vi.mock("#/lib/link-metadata-cache", () => ({
+  readLinkMetadata: vi.fn<typeof import("#/lib/link-metadata-cache").readLinkMetadata>(() => ({})),
+}));
+
 describe("getMetadata", () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -157,6 +161,31 @@ describe("getMetadata", () => {
       expect(result1).toEqual(mockMetadata1);
       expect(result2).toEqual(mockMetadata2);
       expect(fetchSiteMetadata).toHaveBeenCalledTimes(2);
+    });
+
+    test("should answer from the committed cache without fetching", async () => {
+      const { readLinkMetadata } = await import("#/lib/link-metadata-cache");
+      vi.mocked(readLinkMetadata).mockReturnValueOnce({ "https://cached.com": mockMetadata });
+      const fetchSiteMetadata = (await import("fetch-site-metadata")).default;
+
+      const { getMetadata } = await import("#/lib/metadata");
+      const result = await getMetadata("https://cached.com");
+
+      expect(result).toEqual(mockMetadata);
+      expect(fetchSiteMetadata).not.toHaveBeenCalled();
+    });
+
+    test("should fetch a URL the cache does not cover", async () => {
+      const { readLinkMetadata } = await import("#/lib/link-metadata-cache");
+      vi.mocked(readLinkMetadata).mockReturnValueOnce({ "https://cached.com": mockMetadata });
+      const fetchSiteMetadata = (await import("fetch-site-metadata")).default;
+      vi.mocked(fetchSiteMetadata).mockResolvedValue(mockMetadataMinimal);
+
+      const { getMetadata } = await import("#/lib/metadata");
+      const result = await getMetadata("https://example.com");
+
+      expect(result).toEqual(mockMetadataMinimal);
+      expect(fetchSiteMetadata).toHaveBeenCalledTimes(1);
     });
 
     test("should handle fetch success after previous failure for different URL", async () => {

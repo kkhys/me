@@ -12,7 +12,8 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "all": "pnpm build && pnpm check && pnpm lint:fix && pnpm test && pnpm coverage",
-    "sync-submodule": "gh workflow run sync-submodule.yml"
+    "sync-submodule": "gh workflow run sync-submodule.yml",
+    "link-metadata": "bun run scripts/refresh-link-metadata.ts"
   },
   "dependencies": {
     "@astrojs/compiler-rs": "catalog:",
