@@ -51,6 +51,10 @@ Bot feeds: the memo loader injects entries from external RSS feeds as bot author
 
 `USE_FIXTURE_DATA=true` switches to `src/__fixtures__/memo-sample` (memos) and `src/__fixtures__/users.yaml` (sample profiles) for CI/development without the submodule. RSS/Zenn fetches and OSS entries are skipped in fixture mode.
 
+## Navigation
+
+Feed cards are not clickable as a whole: a feed already shows a memo in full, and a stray tap would cost the reader their place in the infinite scroll. The ways into `/posts/[id]` from a feed are the date link (`post-header.astro`), the reply count of a `hideComments` memo, the date link of a quote card, and search. The header back button passes `historyBackLabel`, so a visitor who came from a feed steps back through history and gets it back from the bfcache at the position they left; anyone else gets the plain link home.
+
 ## Shared Packages
 
 Consumed as source (no build step); memo supplies its own config via thin wrappers.
