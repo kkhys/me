@@ -35,6 +35,11 @@ export const navItems = [
     isExternal: true,
   },
   {
+    label: "Vlog",
+    href: me.youtube,
+    isExternal: true,
+  },
+  {
     label: "GitHub",
     href: me.github.url,
     isExternal: true,

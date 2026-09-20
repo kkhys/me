@@ -27,6 +27,7 @@ const getHumansTxt = () => `# TXT for Human Beings
   Writer:    ${me.name}
   Location:  Tokyo, Japan
   GitHub:    ${me.github.url}
+  YouTube:   ${me.youtube}
   Memo:      ${me.memo}
   Diary:     ${me.diary}
   Art:       ${me.art}
