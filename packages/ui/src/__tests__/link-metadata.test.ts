@@ -1,5 +1,5 @@
 import type { Metadata } from "fetch-site-metadata";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createMetadataFetcher } from "../link-metadata";
 
 vi.mock("fetch-site-metadata", () => ({
@@ -15,9 +15,67 @@ const SITE: Metadata = {
   icon: undefined,
 };
 
+// JPEG magic number, padded so the signature check can read past the header.
+const JPEG_BYTES = new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
+// Spelled from the Response constructor rather than DOM's BodyInit: this
+// package type-checks against bun's lib, which has no DOM globals.
+type ResponseBody = ConstructorParameters<typeof Response>[0];
+
+const VIDEO_ID = "YeohjAYgyQ4";
+const HQ_THUMBNAIL = `https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg`;
+const MAXRES_THUMBNAIL = `https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`;
+
+const OEMBED = {
+  title: "I Left Tokyo for Rural Japan",
+  author_name: "Keisuke",
+  thumbnail_url: HQ_THUMBNAIL,
+};
+
+interface YoutubeStub {
+  status?: number;
+  payload?: Record<string, unknown>;
+  /** Whether the 1280x720 still exists for this video. */
+  maxres?: boolean;
+  /** Whether the thumbnail oEmbed itself points at is reachable. */
+  hq?: boolean;
+}
+
+// Typed from the call signature rather than `typeof fetch`: this package's
+// lib declares static members on it that a bare mock can't satisfy.
+const stubYoutube = ({
+  status = 200,
+  payload = OEMBED,
+  maxres = true,
+  hq = true,
+}: YoutubeStub = {}) => {
+  const image = (exists: boolean) =>
+    Promise.resolve(
+      exists
+        ? new Response(JPEG_BYTES as unknown as ResponseBody)
+        : new Response(null, { status: 404 }),
+    );
+
+  const spy = vi.fn<(input: string | URL | Request) => Promise<Response>>((input) => {
+    const url = String(input);
+    if (url.startsWith("https://www.youtube.com/oembed")) {
+      return Promise.resolve(new Response(JSON.stringify(payload), { status }));
+    }
+    if (url === MAXRES_THUMBNAIL) return image(maxres);
+    if (url === HQ_THUMBNAIL) return image(hq);
+    throw new Error(`unexpected fetch: ${url}`);
+  });
+  vi.stubGlobal("fetch", spy);
+  return spy;
+};
+
 describe("createMetadataFetcher", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   describe("disabled", () => {
@@ -94,6 +152,77 @@ describe("createMetadataFetcher", () => {
       const getMetadata = createMetadataFetcher({ enabled: true });
       const metadata = await getMetadata("https://example.com");
       expect(metadata.image).toBeUndefined();
+    });
+  });
+
+  describe("YouTube", () => {
+    it("reads a video from oEmbed instead of the watch page", async () => {
+      const fetchSpy = stubYoutube();
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      await expect(getMetadata(`https://youtu.be/${VIDEO_ID}?si=Keif9yEo`)).resolves.toEqual({
+        title: OEMBED.title,
+        description: OEMBED.author_name,
+        icon: "https://www.youtube.com/favicon.ico",
+        image: { src: MAXRES_THUMBNAIL, width: undefined, height: undefined, alt: undefined },
+      });
+      expect(await fetched()).not.toHaveBeenCalled();
+      expect(new URL(String(fetchSpy.mock.calls[0]?.[0])).searchParams.get("url")).toBe(
+        `https://www.youtube.com/watch?v=${VIDEO_ID}`,
+      );
+    });
+
+    it("keeps the oEmbed thumbnail when the 1280x720 still is missing", async () => {
+      stubYoutube({ maxres: false });
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      const metadata = await getMetadata(`https://youtu.be/${VIDEO_ID}`);
+      expect(metadata.image?.src).toBe(HQ_THUMBNAIL);
+    });
+
+    it("drops the image when no thumbnail is reachable", async () => {
+      stubYoutube({ maxres: false, hq: false });
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      const metadata = await getMetadata(`https://youtu.be/${VIDEO_ID}`);
+      expect(metadata).toMatchObject({ title: OEMBED.title, image: undefined });
+    });
+
+    it.each([
+      `https://www.youtube.com/watch?v=${VIDEO_ID}&t=10s`,
+      `https://m.youtube.com/watch?v=${VIDEO_ID}`,
+      `https://music.youtube.com/watch?v=${VIDEO_ID}`,
+      `https://www.youtube.com/shorts/${VIDEO_ID}`,
+      `https://www.youtube.com/embed/${VIDEO_ID}`,
+      `https://www.youtube.com/live/${VIDEO_ID}`,
+    ])("recognizes %s as a video", async (url) => {
+      stubYoutube();
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      await expect(getMetadata(url)).resolves.toMatchObject({ title: OEMBED.title });
+      expect(await fetched()).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      "https://www.youtube.com/@keisuke_life",
+      "https://www.youtube.com/watch?v=too-short",
+      "https://notyoutube.example/watch?v=YeohjAYgyQ4",
+    ])("leaves %s to the scraper", async (url) => {
+      const fetchSpy = stubYoutube();
+      vi.mocked(await fetched()).mockResolvedValue(SITE);
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      await expect(getMetadata(url)).resolves.toEqual(SITE);
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
+
+    it("falls back to the scraper when oEmbed refuses the video", async () => {
+      stubYoutube({ status: 401 });
+      vi.mocked(await fetched()).mockResolvedValue(SITE);
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      await expect(getMetadata(`https://youtu.be/${VIDEO_ID}`)).resolves.toEqual(SITE);
+      expect(await fetched()).toHaveBeenCalledTimes(1);
     });
   });
 });

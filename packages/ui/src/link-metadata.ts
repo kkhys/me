@@ -177,11 +177,93 @@ const repairGarbledText = async (url: string, metadata: Metadata): Promise<Metad
   }
 };
 
+// YouTube answers clients it treats as automated with a metadata-less variant
+// of the watch page — title " - YouTube", the generic site description, no
+// og:image — which is what memo's CI build (GitHub Actions IPs) gets. The
+// public oEmbed endpoint has no such gate, so video URLs go through it instead
+// of the scraper. It carries no description; the channel name takes that slot.
+const YOUTUBE_OEMBED_ENDPOINT = "https://www.youtube.com/oembed";
+const YOUTUBE_FAVICON = "https://www.youtube.com/favicon.ico";
+const YOUTUBE_VIDEO_ID = /^[\w-]{11}$/u;
+const YOUTUBE_PATH_PREFIXES = new Set(["embed", "shorts", "live", "v"]);
+const YOUTUBE_HOSTS = new Set(["youtube.com", "m.youtube.com", "music.youtube.com"]);
+
+interface YoutubeOEmbed {
+  title?: string;
+  author_name?: string;
+  thumbnail_url?: string;
+}
+
+const asVideoId = (value: string | null | undefined): string | undefined =>
+  value && YOUTUBE_VIDEO_ID.test(value) ? value : undefined;
+
+const youtubeVideoId = (url: string): string | undefined => {
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    return undefined;
+  }
+
+  const host = parsed.hostname.replace(/^www\./u, "");
+  const [first, second] = parsed.pathname.split("/").filter(Boolean);
+
+  if (host === "youtu.be") return asVideoId(first);
+  if (!YOUTUBE_HOSTS.has(host)) return undefined;
+  if (first === "watch") return asVideoId(parsed.searchParams.get("v"));
+  return first && YOUTUBE_PATH_PREFIXES.has(first) ? asVideoId(second) : undefined;
+};
+
+// oEmbed hands back `hqdefault` (480x360, letterboxed for 16:9 video). The
+// 1280x720 still is sharper but only exists for recent enough uploads, and both
+// are verified for the same reason og:images are: Astro fetches remote images
+// at build time, so a 404 would take the build down.
+const youtubeThumbnail = async (
+  videoId: string,
+  fallback: string | undefined,
+): Promise<string | undefined> => {
+  const maxres = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+  if (await isProcessableImage(maxres)) return maxres;
+  return fallback && (await isProcessableImage(fallback)) ? fallback : undefined;
+};
+
+const fetchYoutubeMetadata = async (videoId: string): Promise<Metadata | undefined> => {
+  const target = encodeURIComponent(`https://www.youtube.com/watch?v=${videoId}`);
+
+  try {
+    const response = await fetch(`${YOUTUBE_OEMBED_ENDPOINT}?url=${target}&format=json`, {
+      headers: { accept: "application/json" },
+    });
+    // Private, deleted and age-gated videos answer 401/403/404 here; falling
+    // through to the scraper keeps whatever the watch page still exposes.
+    if (!response.ok) return undefined;
+
+    const data = (await response.json()) as YoutubeOEmbed;
+    if (!data.title) return undefined;
+
+    const src = await youtubeThumbnail(videoId, data.thumbnail_url);
+    return {
+      title: data.title,
+      description: data.author_name,
+      icon: YOUTUBE_FAVICON,
+      image: src ? { src, width: undefined, height: undefined, alt: undefined } : undefined,
+    };
+  } catch {
+    return undefined;
+  }
+};
+
+const scrapeMetadata = (url: string): Promise<Metadata> =>
+  fetchSiteMetadata(url, { suppressAdditionalRequest: true, headers: REQUEST_HEADERS })
+    .then((fetched) => repairGarbledText(url, fetched))
+    .then(dropUnprocessableImage);
+
 /**
  * Builds the `getMetadata(url)` used behind link cards: `fetch-site-metadata`
  * plus the repairs the blogs have needed in practice (garbled legacy charsets,
  * SVG or non-decodable og:images, http-only image hosts), memoized per URL for
- * the build. Failures resolve to `notFound` and are not cached.
+ * the build. YouTube video URLs come from oEmbed instead. Failures resolve to
+ * `notFound` and are not cached.
  */
 export const createMetadataFetcher = ({
   enabled,
@@ -201,12 +283,9 @@ export const createMetadataFetcher = ({
     }
 
     try {
-      const metadata = await fetchSiteMetadata(url, {
-        suppressAdditionalRequest: true,
-        headers: REQUEST_HEADERS,
-      })
-        .then((fetched) => repairGarbledText(url, fetched))
-        .then(dropUnprocessableImage);
+      const videoId = youtubeVideoId(url);
+      const oembed = videoId ? await fetchYoutubeMetadata(videoId) : undefined;
+      const metadata = oembed ?? (await scrapeMetadata(url));
       cache.set(url, metadata);
       return metadata;
     } catch {
