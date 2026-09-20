@@ -7,14 +7,18 @@ interface SiteMetadata {
   image?: unknown;
 }
 
+// A fresh Response per call: the scrape reads the page to check its status
+// before the image probe runs, and a body can only be read once.
 const mockImageResponse = (bytes: Uint8Array) => {
   vi.stubGlobal(
     "fetch",
-    vi.fn<typeof fetch>().mockResolvedValue(
-      new Response(bytes as unknown as BodyInit, {
-        status: 200,
-        headers: { "content-type": "image/png" },
-      }),
+    vi.fn<typeof fetch>(() =>
+      Promise.resolve(
+        new Response(bytes as unknown as BodyInit, {
+          status: 200,
+          headers: { "content-type": "image/png" },
+        }),
+      ),
     ),
   );
 };
@@ -462,7 +466,7 @@ describe("getMetadata", () => {
       expect(result.title).toBe("� unknown charset");
     });
 
-    it("keeps garbled text as-is when the page can't be re-fetched", async () => {
+    it("falls back when the page itself cannot be read", async () => {
       vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("Network error")));
       mockFetchSiteMetadata.mockResolvedValueOnce({
         title: "� unreachable",
@@ -472,10 +476,26 @@ describe("getMetadata", () => {
       });
 
       const result = await getMetadata("https://unreachable-page-example.com");
-      expect(result.title).toBe("� unreachable");
+      expect(result.title).toBe("Not Found");
     });
 
-    it("skips the repair fetch entirely when the text is clean", async () => {
+    it("falls back when the host answers with an error page", async () => {
+      // engineering.mercari.com answers our CI IPs with a 403 whose <title> is
+      // "403"; fetch-site-metadata would scrape that into the card.
+      mockFetchByUrl(
+        () =>
+          new Response("<html><head><title>403</title></head><body></body></html>", {
+            status: 403,
+            headers: { "content-type": "text/html" },
+          }),
+      );
+
+      const result = await getMetadata("https://forbidden-example.com");
+      expect(result.title).toBe("Not Found");
+      expect(mockFetchSiteMetadata).not.toHaveBeenCalled();
+    });
+
+    it("reads the page once when the text is clean", async () => {
       const spy = mockFetchByUrl(
         () => new Response(PNG_BYTES as unknown as BodyInit, { status: 200 }),
       );
@@ -487,7 +507,8 @@ describe("getMetadata", () => {
       });
 
       await getMetadata("https://clean-example.com");
-      expect(spy).not.toHaveBeenCalled();
+      // Only the status check; the repair pass reuses those bytes.
+      expect(spy).toHaveBeenCalledTimes(1);
     });
   });
 });

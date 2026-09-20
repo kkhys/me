@@ -183,20 +183,36 @@ const reextract = (html: string, metadata: Metadata): Metadata => {
   };
 };
 
-const repairMetadata = async (url: string, metadata: Metadata): Promise<Metadata> => {
+interface Page {
+  bytes: ArrayBuffer;
+  contentType: string | null;
+}
+
+// `fetch-site-metadata` parses whatever body comes back without ever looking at
+// `response.ok`, so a host that answers the build's IPs with an error page is
+// scraped into a card titled "403". Reading the page here first is what makes
+// the status visible; the bytes are then reused by the repair pass, so the
+// check costs no extra request on the pages that need repairing.
+const fetchPage = async (url: string): Promise<Page> => {
+  const response = await fetch(url, { headers: REQUEST_HEADERS });
+  if (!response.ok) throw new Error(`${url} answered ${response.status}`);
+
+  return {
+    bytes: await response.arrayBuffer(),
+    contentType: response.headers.get("content-type"),
+  };
+};
+
+const repairMetadata = (page: Page, metadata: Metadata): Metadata => {
   const cutShort = !metadata.title;
   if (!cutShort && !isGarbled(metadata)) return metadata;
 
   try {
-    const response = await fetch(url, { headers: REQUEST_HEADERS });
-    if (!response.ok) return metadata;
-
-    const bytes = await response.arrayBuffer();
     // Garbled text only improves when the page declares a charset other than
     // UTF-8; re-decoding it as UTF-8 would reproduce the same U+FFFD. A parse
     // that ended early has nothing to lose either way.
-    const declared = decodeWithDeclaredCharset(bytes, response.headers.get("content-type"));
-    const html = declared ?? (cutShort ? new TextDecoder().decode(bytes) : undefined);
+    const declared = decodeWithDeclaredCharset(page.bytes, page.contentType);
+    const html = declared ?? (cutShort ? new TextDecoder().decode(page.bytes) : undefined);
     return html ? reextract(html, metadata) : metadata;
   } catch {
     return metadata;
@@ -279,10 +295,14 @@ const fetchYoutubeMetadata = async (videoId: string): Promise<Metadata | undefin
   }
 };
 
-const scrapeMetadata = (url: string): Promise<Metadata> =>
-  fetchSiteMetadata(url, { suppressAdditionalRequest: true, headers: REQUEST_HEADERS })
-    .then((fetched) => repairMetadata(url, fetched))
-    .then(dropUnprocessableImage);
+const scrapeMetadata = async (url: string): Promise<Metadata> => {
+  const page = await fetchPage(url);
+  const fetched = await fetchSiteMetadata(url, {
+    suppressAdditionalRequest: true,
+    headers: REQUEST_HEADERS,
+  });
+  return dropUnprocessableImage(repairMetadata(page, fetched));
+};
 
 /**
  * Builds the `getMetadata(url)` used behind link cards: `fetch-site-metadata`
@@ -290,7 +310,8 @@ const scrapeMetadata = (url: string): Promise<Metadata> =>
  * og:* meta the streaming parse never reaches, SVG or non-decodable og:images,
  * http-only image hosts), memoized per URL for the build. `preloaded` entries
  * win over the network, and YouTube video URLs come from oEmbed instead.
- * Failures resolve to `notFound` and are not cached.
+ * Failures — a refused connection as much as a non-2xx status — resolve to
+ * `notFound` and are not cached.
  */
 export const createMetadataFetcher = ({
   enabled,

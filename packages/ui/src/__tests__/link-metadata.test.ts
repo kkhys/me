@@ -29,6 +29,34 @@ const MAXRES_THUMBNAIL = `https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`;
 const documentWith = (meta: string) =>
   `<!doctype html><html><head><title></title></head><body><script>var a=1;</script>${meta}</body></html>`;
 
+type ResponseOptions = ConstructorParameters<typeof Response>[1];
+
+const PAGE_HEADERS = { "content-type": "text/html; charset=utf-8" };
+
+const SHARED_HEADERS = {
+  accept: "text/html",
+  "accept-language": "ja,en-US;q=0.7,en;q=0.3",
+};
+
+// Every scrape reads the page itself to learn the HTTP status, so any test that
+// reaches the scraper has to answer that request. Image probes are told apart by
+// the `accept` header the signature check sends.
+const isImageRequest = (options: RequestInit | undefined): boolean =>
+  (options?.headers as Record<string, string> | undefined)?.accept === "image/*";
+
+const stubNetwork = (html: string = documentWith(""), init: ResponseOptions = {}) => {
+  const spy = vi.fn<(input: string | URL | Request, options?: RequestInit) => Promise<Response>>(
+    (_input, options) =>
+      Promise.resolve(
+        isImageRequest(options)
+          ? new Response(JPEG_BYTES as unknown as ResponseBody)
+          : new Response(html, { headers: PAGE_HEADERS, ...init }),
+      ),
+  );
+  vi.stubGlobal("fetch", spy);
+  return spy;
+};
+
 const OEMBED = {
   title: "I Left Tokyo for Rural Japan",
   author_name: "Keisuke",
@@ -66,7 +94,8 @@ const stubYoutube = ({
     }
     if (url === MAXRES_THUMBNAIL) return image(maxres);
     if (url === HQ_THUMBNAIL) return image(hq);
-    throw new Error(`unexpected fetch: ${url}`);
+    // Anything else is the scraper reading the page to check its status.
+    return Promise.resolve(new Response(documentWith(""), { headers: PAGE_HEADERS }));
   });
   vi.stubGlobal("fetch", spy);
   return spy;
@@ -113,6 +142,7 @@ describe("createMetadataFetcher", () => {
 
   describe("enabled", () => {
     it("fetches with the shared headers and caches per URL", async () => {
+      const fetchSpy = stubNetwork();
       vi.mocked(await fetched()).mockResolvedValue(SITE);
       const getMetadata = createMetadataFetcher({ enabled: true });
 
@@ -124,14 +154,47 @@ describe("createMetadataFetcher", () => {
       expect(await fetched()).toHaveBeenCalledTimes(1);
       expect(await fetched()).toHaveBeenCalledWith("https://example.com", {
         suppressAdditionalRequest: true,
-        headers: {
-          accept: "text/html",
-          "accept-language": "ja,en-US;q=0.7,en;q=0.3",
-        },
+        headers: SHARED_HEADERS,
       });
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
+      expect(fetchSpy).toHaveBeenCalledWith("https://example.com", { headers: SHARED_HEADERS });
+    });
+
+    it("resolves to Not Found when the host answers with an error page", async () => {
+      const fetchSpy = stubNetwork(
+        "<!doctype html><html><head><title>403</title></head><body></body></html>",
+        { status: 403 },
+      );
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      await expect(getMetadata("https://example.com")).resolves.toEqual({
+        title: "Not Found",
+        description: "Page not found",
+        image: undefined,
+        icon: undefined,
+      });
+      // The error page is never parsed, so its <title> cannot become the card.
+      expect(await fetched()).not.toHaveBeenCalled();
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it("retries a refused URL instead of caching the failure", async () => {
+      vi.mocked(await fetched()).mockResolvedValue(SITE);
+      const spy = vi
+        .fn<(input: string | URL | Request) => Promise<Response>>()
+        .mockResolvedValueOnce(new Response(null, { status: 403 }))
+        .mockResolvedValue(new Response(documentWith(""), { headers: PAGE_HEADERS }));
+      vi.stubGlobal("fetch", spy);
+      const getMetadata = createMetadataFetcher({ enabled: true });
+
+      await expect(getMetadata("https://example.com")).resolves.toMatchObject({
+        title: "Not Found",
+      });
+      await expect(getMetadata("https://example.com")).resolves.toEqual(SITE);
     });
 
     it("resolves to Not Found on failure and retries on the next call", async () => {
+      stubNetwork();
       vi.mocked(await fetched())
         .mockRejectedValueOnce(new Error("network"))
         .mockResolvedValueOnce(SITE);
@@ -148,6 +211,7 @@ describe("createMetadataFetcher", () => {
     });
 
     it("drops an SVG og:image so the image pipeline never sees it", async () => {
+      stubNetwork();
       vi.mocked(await fetched()).mockResolvedValue({
         ...SITE,
         image: { src: "https://example.com/og.svg", width: "1200", height: "630", alt: "" },
@@ -216,7 +280,10 @@ describe("createMetadataFetcher", () => {
       const getMetadata = createMetadataFetcher({ enabled: true });
 
       await expect(getMetadata(url)).resolves.toEqual(SITE);
-      expect(fetchSpy).not.toHaveBeenCalled();
+      expect(fetchSpy).not.toHaveBeenCalledWith(
+        expect.stringContaining("youtube.com/oembed"),
+        expect.anything(),
+      );
     });
 
     it("falls back to the scraper when oEmbed refuses the video", async () => {
@@ -283,21 +350,9 @@ describe("createMetadataFetcher", () => {
       icon: ICON,
     };
 
-    const stubDocument = (html: string) => {
-      const spy = vi.fn<(input: string | URL | Request) => Promise<Response>>((input) =>
-        Promise.resolve(
-          String(input) === CHANNEL
-            ? new Response(html, { headers: { "content-type": "text/html; charset=utf-8" } })
-            : new Response(JPEG_BYTES as unknown as ResponseBody),
-        ),
-      );
-      vi.stubGlobal("fetch", spy);
-      return spy;
-    };
-
     it("re-reads the whole document when the stream yielded no title", async () => {
       vi.mocked(await fetched()).mockResolvedValue(EMPTY);
-      const fetchSpy = stubDocument(
+      const fetchSpy = stubNetwork(
         documentWith(
           '<meta property="og:title" content="山白Shanbai">' +
             '<meta property="og:description" content="handicrafts">' +
@@ -317,7 +372,7 @@ describe("createMetadataFetcher", () => {
 
     it("keeps the empty result when the document carries no metadata either", async () => {
       vi.mocked(await fetched()).mockResolvedValue(EMPTY);
-      stubDocument(documentWith(""));
+      stubNetwork();
       const getMetadata = createMetadataFetcher({ enabled: true });
 
       await expect(getMetadata(CHANNEL)).resolves.toEqual(EMPTY);
@@ -325,11 +380,12 @@ describe("createMetadataFetcher", () => {
 
     it("leaves a page the stream read in full alone", async () => {
       vi.mocked(await fetched()).mockResolvedValue(SITE);
-      const fetchSpy = stubDocument(documentWith(""));
+      const fetchSpy = stubNetwork();
       const getMetadata = createMetadataFetcher({ enabled: true });
 
       await expect(getMetadata(CHANNEL)).resolves.toEqual(SITE);
-      expect(fetchSpy).not.toHaveBeenCalled();
+      // The status check reads the page once; the repair pass adds no second read.
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

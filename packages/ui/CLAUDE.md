@@ -81,7 +81,12 @@ step).
   `fetch-site-metadata` plus the repairs link cards have needed (garbled
   legacy charsets, og:* meta the streaming parse never reaches, SVG /
   undecodable og:images, http-only image hosts), memoized per URL. me /
-  memo wrap it with their own production check. `preloaded` is metadata
+  memo wrap it with their own production check. `fetch-site-metadata`
+  parses whatever body comes back without checking the status, so a
+  scrape starts by reading the page itself: a non-2xx answer fails the
+  fetch — a host that blocks the build's IPs would otherwise become a
+  card titled "403" — and the bytes it read are what the repairs below
+  re-parse, so the check costs no extra request. `preloaded` is metadata
   resolved ahead of the build and keyed by URL; a hit skips the network
   entirely (memo passes what `memo-content/data/link-metadata.json`
   holds). YouTube video URLs (`youtu.be`, `watch` / `shorts` / `embed` /
@@ -110,7 +115,8 @@ tags preserved), `favicon` (data-URI inlining, rejections, per-URL cache),
 left to the browser),
 `infinite-scroll` (trigger margin, page append, spinner minimum, end /
 error announcements, re-init on replaced markup), `link-metadata`
-(disabled placeholder, caching, failure retry, SVG og:image dropped,
+(disabled placeholder, caching, failure retry, an error page refused by
+its status, SVG og:image dropped,
 YouTube oEmbed routing and thumbnail fallback, `preloaded` hits bypassing
 the network, whole-document re-read when the stream yielded no title),
 and `toc-active`
