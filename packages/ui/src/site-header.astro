@@ -9,17 +9,35 @@ interface Props {
   showBack?: boolean | undefined;
   /** Accessible name of the back button, in the page's language. */
   backLabel?: string | undefined;
+  /**
+   * Opts the back button into `history.back()` for a visitor who came from
+   * this site, so an infinite-scroll feed comes back where they left it. The
+   * value is the button's accessible name in that case; see history-back.ts.
+   */
+  historyBackLabel?: string | undefined;
   /** Renders the title as the page's h1 (for pages that have no other h1). */
   heading?: boolean | undefined;
 }
 
-const { title, href, showBack = false, backLabel = "Back to home", heading = false } = Astro.props;
+const {
+  title,
+  href,
+  showBack = false,
+  backLabel = "Back to home",
+  historyBackLabel,
+  heading = false,
+} = Astro.props;
 ---
 
 <header class="site-header">
   {
     showBack && (
-      <a href="/" class="back-button" aria-label={backLabel}>
+      <a
+        href="/"
+        class="back-button"
+        aria-label={backLabel}
+        data-history-back-label={historyBackLabel}
+      >
         <ArrowLeftIcon width={14} height={14} />
       </a>
     )
@@ -42,6 +60,12 @@ const { title, href, showBack = false, backLabel = "Back to home", heading = fal
     )
   }
 </header>
+
+<script>
+  import { initHistoryBack } from "./history-back";
+
+  initHistoryBack();
+</script>
 
 <style>
   /* Expects the consumer's body grid to define [top] / [main-start] rows
