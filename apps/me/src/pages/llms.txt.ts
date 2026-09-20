@@ -25,6 +25,7 @@ ${sites.map(({ label, href, description }) => `- [${label}](${href}): ${descript
 
 - **Email**: ${me.email}
 - **GitHub**: ${me.github.url}
+- **YouTube**: ${me.youtube}
 - **Memo**: ${me.memo}
 - **Website**: ${BASE_URL}
 - **Support**: ${siteConfig.support}

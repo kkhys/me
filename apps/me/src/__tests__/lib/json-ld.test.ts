@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { me } from "#/config/site";
 import type { TagTitle } from "#/features/blog/config/tag";
 import { getBlogPostingSchema, websiteSchema } from "#/lib/json-ld";
 
@@ -119,5 +120,17 @@ describe("getBlogPostingSchema", () => {
     });
 
     expect(schema.articleSection).toBe("プログラミング");
+  });
+
+  it("links the author to the profiles hosted outside this site", () => {
+    const schema = getBlogPostingSchema({
+      id: "test123",
+      data: baseData,
+      description: "test",
+    });
+
+    expect(schema.author).toMatchObject({
+      sameAs: expect.arrayContaining([me.github.url, me.youtube]),
+    });
   });
 });

@@ -24,6 +24,7 @@ export const me = {
     url: "https://github.com/kkhys",
   },
   twitter: "@kkhys_",
+  youtube: "https://www.youtube.com/@keisuke_life",
   memo: "https://memo.kkhys.me",
   diary: "https://diary.kkhys.me",
   art: "https://art.kkhys.me",
