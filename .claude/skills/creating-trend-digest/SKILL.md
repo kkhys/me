@@ -61,6 +61,13 @@ engagement percentile × freshness — see `references/scoring.md`), marks
 `runs/<date>/raw.json`. Failed sources appear with `status: "error"` — never
 abort the run for them; their note is shown on the site instead.
 
+Each parallel phase (source fetch, then comment/article enrichment) is capped
+at 240 s (`TREND_DIGEST_PHASE_DEADLINE` overrides it). A source still running
+at the cap comes back as `error` with a 打ち切り note, and unfinished
+enrichment is simply left off, so a stalled request cannot hang the run. The
+worst case is about 8 minutes, so run the script with a Bash timeout of
+600000 ms to keep it in the foreground.
+
 Sources listed in `disabled_sources` of `~/.claude/trend-digest/config.json`
 are left out of `raw.json` entirely and must not appear in the digest. The
 default disables `devto` and `hfpapers` (dev.to and Hugging Face Daily
