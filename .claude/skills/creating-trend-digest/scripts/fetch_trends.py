@@ -16,7 +16,6 @@ as skipped.
 """
 
 import argparse
-import concurrent.futures as cf
 import json
 import os
 import re
@@ -50,6 +49,55 @@ def http_get(url, headers=None):
 
 def get_json(url, headers=None):
     return json.loads(http_get(url, headers))
+
+
+# urlopen's timeout does not bound DNS resolution: getaddrinfo can block
+# indefinitely, and a live run once sat idle for over 5 minutes with no
+# sockets open. ThreadPoolExecutor joins its workers at interpreter exit, so
+# one stuck call hangs the whole run. Each parallel phase therefore runs on
+# daemon threads under a deadline and abandons whatever has not finished.
+PHASE_DEADLINE = float(os.environ.get("TREND_DIGEST_PHASE_DEADLINE", 240))
+PENDING = object()
+
+
+def map_bounded(fn, items, deadline, workers=8):
+    """Map fn over items in parallel, giving up after `deadline` seconds.
+
+    Returns results in input order; slots still running (or never started)
+    at the deadline hold PENDING. An exception raised by fn is re-raised
+    here, matching ThreadPoolExecutor.map.
+    """
+    items = list(items)
+    results = [PENDING] * len(items)
+    errors = []
+    lock = threading.Lock()
+    cursor = [0]
+    stop = threading.Event()
+
+    def worker():
+        while not stop.is_set():
+            with lock:
+                i = cursor[0]
+                if i >= len(items):
+                    return
+                cursor[0] += 1
+            try:
+                results[i] = fn(items[i])
+            except BaseException as e:  # noqa: BLE001 - re-raised by the caller
+                errors.append(e)
+                return
+
+    threads = [threading.Thread(target=worker, daemon=True)
+               for _ in range(min(workers, len(items)))]
+    for t in threads:
+        t.start()
+    end = time.monotonic() + deadline
+    for t in threads:
+        t.join(max(0.0, end - time.monotonic()))
+    stop.set()
+    if errors:
+        raise errors[0]
+    return list(results)
 
 
 def hours_ago(iso, now):
@@ -432,9 +480,10 @@ def fetch_qiita(cfg):
         return make_item(title, href, likes + stocks,
                          f"LGTM{likes} / ストック{stocks}", published, excerpt=excerpt)
 
-    with cf.ThreadPoolExecutor(max_workers=8) as pool:
-        items = list(pool.map(detail, entries))
-    return {"status": "ok", "items": items}
+    # Half the phase deadline, so a slow detail API costs Qiita some entries
+    # instead of timing out the whole source.
+    items = map_bounded(detail, entries, PHASE_DEADLINE / 2)
+    return {"status": "ok", "items": [i for i in items if i is not PENDING]}
 
 
 # --- backfill (--date) ------------------------------------------------------
@@ -603,10 +652,9 @@ def _attach(services, fetchers, top_n, key):
         except Exception:  # noqa: BLE001 - enrichment is best-effort
             return None
 
-    with cf.ThreadPoolExecutor(max_workers=8) as pool:
-        results = list(pool.map(run_job, jobs))
+    results = map_bounded(run_job, jobs, PHASE_DEADLINE)
     for (_, item), value in zip(jobs, results):
-        if value:
+        if value and value is not PENDING:
             item[key] = value
 
 
@@ -781,8 +829,11 @@ def main():
         except Exception as e:  # noqa: BLE001 - isolate any source failure
             return {"status": "error", "note": f"{type(e).__name__}: {e}", "items": []}
 
-    with cf.ThreadPoolExecutor(max_workers=8) as pool:
-        results = list(pool.map(run, active))
+    timeout_note = f"{PHASE_DEADLINE:.0f}秒以内に取得が終わらず打ち切り"
+    results = [
+        {"status": "error", "note": timeout_note, "items": []} if res is PENDING else res
+        for res in map_bounded(run, active, PHASE_DEADLINE)
+    ]
 
     keep = cfg.get("items_per_service", 10) * 2
     services = []

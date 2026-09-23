@@ -197,6 +197,36 @@ check("an all-tied batch scores uniformly",
       len({i["base_score"] for i in same}) == 1, [i["base_score"] for i in same])
 
 
+# --- map_bounded --------------------------------------------------------------
+
+print("map_bounded")
+import threading  # noqa: E402
+import time  # noqa: E402
+
+FOREVER = threading.Event()  # never set: stands in for a lookup that never returns
+
+check("keeps input order", ft.map_bounded(lambda x: x * 2, [3, 1, 2], 5) == [6, 2, 4])
+check("handles an empty input", ft.map_bounded(lambda x: x, [], 5) == [])
+
+t0 = time.monotonic()
+res = ft.map_bounded(lambda x: FOREVER.wait() if x == "hang" else x, ["a", "hang", "b"], 0.5)
+elapsed = time.monotonic() - t0
+check("returns at the deadline despite a stuck call", elapsed < 2, f"{elapsed:.2f}s")
+check("marks the stuck slot PENDING", res[1] is ft.PENDING, res)
+check("keeps the results that finished", res[0] == "a" and res[2] == "b", res)
+
+
+def boom(x):
+    raise ValueError(x)
+
+
+try:
+    ft.map_bounded(boom, ["x"], 5)
+    check("re-raises an exception from fn", False, "no ValueError")
+except ValueError:
+    check("re-raises an exception from fn", True)
+
+
 # --- main() with the network stubbed out ------------------------------------
 
 print("main")
@@ -304,6 +334,32 @@ try:
         check("names the disabled sources in the summary",
               "DISABLED: zenn (" in out.getvalue(), out.getvalue())
         check("warns about an unknown id", "nosuch" in out.getvalue(), out.getvalue())
+
+    with tempfile.TemporaryDirectory() as tmp:
+        state = Path(tmp)
+        today = datetime.now().astimezone().strftime("%Y-%m-%d")
+        original_deadline = ft.PHASE_DEADLINE
+        hn = next(s for s in ft.SERVICES if s["id"] == "hackernews")
+        hn_fetch = hn["fetch"]
+        hn["fetch"] = lambda cfg: FOREVER.wait()
+        ft.PHASE_DEADLINE = 0.5
+        try:
+            t0 = time.monotonic()
+            with contextlib.redirect_stdout(io.StringIO()):
+                rc = run_main(state, [], {})
+            elapsed = time.monotonic() - t0
+        finally:
+            ft.PHASE_DEADLINE = original_deadline
+            hn["fetch"] = hn_fetch
+        raw = json.loads((state / "runs" / today / "raw.json").read_text(encoding="utf-8"))
+        by_id = {s["id"]: s for s in raw["services"]}
+        check("finishes a live run despite a hung source", rc == 0 and elapsed < 3,
+              (rc, f"{elapsed:.2f}s"))
+        check("reports the hung source as an error with a note",
+              by_id["hackernews"]["status"] == "error" and "打ち切り" in by_id["hackernews"]["note"],
+              by_id["hackernews"])
+        check("keeps the sources that answered", by_id["lobsters"]["status"] == "ok",
+              by_id["lobsters"]["status"])
 finally:
     ft.BACKFILL_FETCHERS = original_fetchers
     ft.attach_comments = original_attach
