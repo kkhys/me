@@ -1244,5 +1244,88 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Some Git over HTTPS may temporarily require authentication",
+          "title_ja": "異常なトラフィック時、公開リポジトリの HTTPS クローンに一時的に認証を要求する場合がある",
+          "url": "https://github.blog/changelog/2026-10-19-some-git-over-https-may-temporarily-require-authentication",
+          "source": "Improvement, account management",
+          "published_at": "2026-10-19T10:37:30+00:00",
+          "interest": 1,
+          "summary": "github.com の可用性保護のため、異常なトラフィックの時期には公開リポジトリの未認証 HTTPS クローンや fetch が認証を求めて失敗することがある。SSH、push、認証済み操作は対象外。CI では `GITHUB_TOKEN` や GitHub App のトークンでの認証が推奨される。",
+          "article_summary": ""
+        },
+        {
+          "title": "CodeQL changes for macOS 27, Xcode 27, and Swift 6.4",
+          "title_ja": "CodeQL が macOS 27 / Xcode 27 のトレース付きスキャンと Swift 6.4 を非対応に。Intel Mac 対応は 12 月中旬に廃止",
+          "url": "https://github.blog/changelog/2026-10-19-codeql-changes-for-macos-27-xcode-27-and-swift-6-4",
+          "source": "Retired, application security",
+          "published_at": "2026-10-19T10:29:09+00:00",
+          "interest": 1,
+          "summary": "Apple が macOS 27 / Xcode 27 の一部システムバイナリから Intel コードを外したため、Xcode 27 では C/C++・C#・Go・Java・Kotlin・Swift のトレース付き抽出が使えず、Swift 6.4 は全プラットフォームで非対応。回避策は macOS 26 / Xcode 26 へのピン留めか、build mode none への切替。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Orca 1.4.230",
+          "title_ja": "Orca 1.4.230: ネイティブチャットで Antigravity に対応、チャットで開くエージェントの選択、不足エージェントのチャット内インストール",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.230",
+          "source": "Orca",
+          "published_at": "2026-10-19T06:30:00+00:00",
+          "interest": 3,
+          "summary": "実験的なネイティブチャットで Antigravity を使え、どのエージェントをチャットとして開くか選べ、足りないエージェントをチャットからインストールできる。コピーしたファイルを添付として貼り付け、画像をキューに入れられる。",
+          "article_summary": "ネイティブチャット（実験的）では Antigravity を使え、どのエージェントをチャットとして開くか選び、足りないエージェントをチャットからインストールできる。コピーしたファイルを添付として貼り付け、画像をキューに入れ、添付やキュー操作の待ち状態がわかりやすくなった。\n\nアカウントとエージェント面では、Claude のアカウント切替後に実行中のセッションを新しいアカウントで再起動でき、ダウンロード済みのエージェントランタイムを Settings から削除でき、Orca CLI で Linear のコメントを編集・削除できる。\n\nスマートフォンでは、キューに入れたメッセージをその場で編集し、ツール実行をデスクトップ風のカードで追え、履歴から再開した時に会話がすぐ出る。SSH では切断状態や休止中ワークスペース、閉じたタブが再接続後も維持される。SSH ホストの `orca` コマンドは、未設定の環境では既定で off に移行する。"
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

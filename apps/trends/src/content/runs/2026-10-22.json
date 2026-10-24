@@ -1319,5 +1319,110 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Platform release notes (October 22, 2026)",
+          "title_ja": "Claude Platform: Google Cloud 経由で Anthropic が運用する Claude API「Claude Models on Google Cloud (Anthropic managed)」を提供開始",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-22-2026",
+          "source": "Platform",
+          "published_at": "2026-10-22T00:00:00+00:00",
+          "interest": 2,
+          "summary": "Google Cloud プロジェクトから Anthropic が運用する Claude API に到達できる「Claude Models on Google Cloud (Anthropic managed)」が開始。アクセス制御は Google Cloud IAM、課金は Google Cloud Marketplace が担い、Claude Opus 5.5 の Fast mode も使える。",
+          "article_summary": ""
+        },
+        {
+          "title": "Claude Code v2.1.307",
+          "title_ja": "Claude Code v2.1.307: API バージョン移行用の /claude-api api-version と、安全機構の発火を記録する OpenTelemetry イベントを追加",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307",
+          "source": "Claude Code",
+          "published_at": "2026-10-21T22:17:02+00:00",
+          "interest": 3,
+          "summary": "Claude API を使うコードを API バージョン `2026-10-21` へ移行する `/claude-api api-version` と、権限ルール・auto mode・安全チェック・hook・サンドボックスがツール呼び出しを止めたり確認したりするたびに記録する `claude_code.safety_event` イベントが加わった。",
+          "article_summary": "追加は 2 つ。`/claude-api api-version` は Claude API を呼ぶコードを API バージョン `2026-10-21` に移す。`claude_code.safety_event` は OpenTelemetry イベントで、権限ルール、auto mode、安全チェック、hook、サンドボックスのいずれかがツール呼び出しを停止・確認・差し戻した時に記録される。\n\n修正では、`CLAUDE_CODE_DISABLE_1M_CONTEXT` 設定時に `opus[1m]` のようなエイリアスで model-not-found になる問題、`prompt-caching-scope` ベータヘッダーが効果のないカスタムゲートウェイや Foundry にも送られていた問題、macOS のキーチェーンがロック中に `claude -p` で MCP サーバーが「needs authentication」と出る問題を直した。\n\nHTTP MCP のツール呼び出しが接続切断時に二重送信される問題は、読み取り専用か冪等なツールだけをリトライするよう変わった。PDF や画像を多く読む turn での「Autocompact is thrashing」エラー、クラウドセッション再起動後に `/clear` した会話が戻る問題も修正された。"
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Devin release notes (October 21, 2026)",
+          "title_ja": "Devin 10/21: Devin Review が Bitbucket Cloud に対応、レビュー指摘をチャットに引用、Oncall の Lite モード",
+          "url": "https://docs.devin.ai/release-notes/overview#october-21-2026",
+          "source": "Release notes",
+          "published_at": "2026-10-22T00:47:02+00:00",
+          "interest": 2,
+          "summary": "Devin Review が Bitbucket Cloud に対応し、Settings > Connections からワークスペースを接続すると review の webhook が自動設定される。各レビュー指摘には「Quote in chat」ボタンが付き、Cmd+I でチャットに引用できる。",
+          "article_summary": "Devin Review は Bitbucket Cloud に対応し、ワークスペースを接続すると webhook が自動で入り、メンバーが個人アカウントを紐付けると Devin Review は本人として投稿する。各指摘にはインラインコメントと一覧に「Quote in chat」ボタンが付き、Cmd+I でも開いている指摘をチャットへ引用できる。\n\nGitHub でマージ要件をバイパスできるアカウントは、ブロックされた PR を確認のうえ Devin Review から直接マージできる。PR に `/devin review` とコメントすると開始時に 👀、完了時に 👍 のリアクションが付く。アナリティクスの「解決済み」は後続の push か Devin によってコードで修正された指摘だけを数えるようになり、却下や重複は含まれないため数値は下がる。\n\nセッションの「Received feedback from …」行をクリックすると該当 PR コメントが開く。Devin Oncall の responder とインシデント調査は Lite モードで動かせるようになった。"
+        }
+      ]
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "GitHub CLI: Opt in to expiring, auto-refreshing OAuth tokens",
+          "title_ja": "GitHub CLI が期限付き・自動更新の OAuth トークンにオプトインで対応",
+          "url": "https://github.blog/changelog/2026-10-21-github-cli-opt-in-to-expiring-auto-refreshing-oauth-tokens",
+          "source": "Release, application security, client apps",
+          "published_at": "2026-10-21T16:43:23+00:00",
+          "interest": 2,
+          "summary": "gh v2.103.0 から `gh auth login --expiring` で、期限付きアクセストークンとローテーションするリフレッシュトークンをパブリックプレビューとして使える。漏えいしたトークンは数時間で無効になる。git 連携は `gh auth setup-git` と git 2.46 以上が推奨。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Release: Slack CLI v4.11.0",
+          "title_ja": "Slack CLI v4.11.0: サンドボックス作成がパスワードなしサインインに、侵害された eMudhra CA を信頼しない Go / Deno へ更新",
+          "url": "https://docs.slack.dev/changelog/2026/10/22/slack-cli",
+          "source": "Platform",
+          "published_at": "2026-10-22T00:00:00+00:00",
+          "interest": 1,
+          "summary": "`slack sandbox create` は既定でメールのリンクによるサインインになり、`features.user_connections` マニフェストプロパティに対応。CLI は Go 1.27.3、ローカル開発の Deno は 2.9.8 以上に上がり、いずれも侵害された eMudhra の認証局を信頼しない。",
+          "article_summary": ""
+        }
+      ]
+    }
   ]
 }

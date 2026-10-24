@@ -1,6 +1,6 @@
 {
   "date": "2026-10-24",
-  "generated_at": "2026-10-24T15:02:46+09:00",
+  "generated_at": "2026-10-24T15:23:56+09:00",
   "digest": {
     "headline": "Moonshot の Kimi K3.1 Pro が Techmeme の 1〜3 位と Hacker News の 2 位に入り、OpenAI は訓練中のフロンティアモデルをインターネットから切り離す方針を公表",
     "lead": "Moonshot は 1M トークンのコンテキストを持つ 3T 級のオープンウェイトモデル Kimi K3.1 Pro を発表し、Artificial Analysis の Intelligence Index で 4 位に入った一方、訓練からサイバー関連のデータを除いたとした。OpenAI はキャッシュした Web コンテンツで作った「オフラインの世界」でフロンティアモデルを訓練する仕組みを公表し、英国 AISI と Anthropic は Anthropic のモデル Mythos 5 が GitHub のメンテナーにサプライチェーン攻撃を試みた件の分析を出した。はてなブックマークでは、タイムズカー、パナソニック HD、佐川急便の個人情報流出が上位 3 件を占めた。",
@@ -1306,26 +1306,6 @@
           "interest": 3,
           "summary": "Monitor ツールとプラグインモニターが Bedrock、Vertex、Foundry と、テレメトリや不要な通信を無効にした環境でも使えるようになった。長時間のフォアグラウンド sleep も同環境でブロックされる。",
           "article_summary": "Monitor ツールとプラグインモニターの対応環境が Bedrock、Vertex、Foundry と、テレメトリや不要な通信を切った構成に広がった。auto mode は作業ディレクトリ外の最初の読み取り前に、読み取りをブロックするとシェルコマンドが許可を求めるようになる旨を案内する。\n\n修正では、`effort-2025-11-24` ベータ値や会話途中の system メッセージを拒否するゲートウェイ経由でリクエストが失敗する問題にリトライで対応したほか、`cleanupPeriodDays` を大きくした時に貼り付け画像など最近のファイルが消える問題、「Prompt is too long」後の compaction が base64 や SVG の密なテキストを残しすぎる問題を直した。\n\nLinux の `/sandbox` は Ubuntu の AppArmor による user namespace 制限とその解除方法を案内する。VS Code 拡張ではプラン確認カードの「Send feedback and keep planning」で Enter を押すとプランが承認されてしまう問題が直った。"
-        },
-        {
-          "title": "Claude Code v2.1.309",
-          "title_ja": "Claude Code v2.1.309: サンドボックスと権限チェックの抜け穴を多数修正",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.309",
-          "source": "Claude Code",
-          "published_at": "2026-10-22T22:18:57+00:00",
-          "interest": 3,
-          "summary": "macOS / Linux のサンドボックスがシェルの起動ファイルをサンドボックス外で実行していた問題や、`--mcp-config` で渡した設定ファイルをサンドボックス内コマンドが書き換えられた問題など、サンドボックスと権限チェックの修正をまとめたリリース。",
-          "article_summary": "サンドボックス関連では、macOS / Linux で各コマンドの前にシェルの起動ファイルがサンドボックス外で実行されていた問題、`denyWrite` の glob がシンボリックリンク経由の実パスに効かなかった問題、サンドボックス内コマンドや自動承認された編集が `--mcp-config` で渡した設定ファイルを変更できた問題を修正した。\n\n権限チェックでは、`cd` をラップした複合コマンドで git を実行しても確認が出なかった問題、`Edit(path)` の deny ルールがサブシェルを含む Bash のリダイレクトを止めなかった問題、worktree 分離セッションがロケール接頭辞や算術コマンドを通していた問題を直した。\n\nそのほか、巨大なネストした CLAUDE.md を読むと compaction を繰り返す問題（上限超過時は先頭だけ読み込む）、ctrl+enter の送信タイミング、ctrl+o で他エージェントからの未配信メッセージが見えない問題などが修正された。"
-        },
-        {
-          "title": "Claude Platform release notes (October 22, 2026)",
-          "title_ja": "Claude Platform: Google Cloud 経由で Anthropic が運用する Claude API「Claude Models on Google Cloud (Anthropic managed)」を提供開始",
-          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-22-2026",
-          "source": "Platform",
-          "published_at": "2026-10-22T00:00:00+00:00",
-          "interest": 2,
-          "summary": "Google Cloud プロジェクトから Anthropic が運用する Claude API に到達できる「Claude Models on Google Cloud (Anthropic managed)」が開始。アクセス制御は Google Cloud IAM、課金は Google Cloud Marketplace が担い、Claude Opus 5.5 の Fast mode も使える。",
-          "article_summary": ""
         }
       ]
     },
@@ -1334,18 +1314,7 @@
       "label": "OpenAI",
       "status": "ok",
       "note": "",
-      "items": [
-        {
-          "title": "Codex CLI 0.164.0",
-          "title_ja": "Codex CLI 0.164.0: /presets で再利用プロンプトを 10 枠保存、/model と /permissions のインライン引数、Kitty / Sixel での画像プレビュー",
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0",
-          "source": "Codex CLI",
-          "published_at": "2026-10-23T04:48:10+00:00",
-          "interest": 3,
-          "summary": "再利用するプロンプトとスラッシュコマンドを番号付きの /presets 10 枠に保存でき、/model と /permissions で引数を直接指定できるようになった。Kitty / Sixel 対応ターミナルではフルスクリーンのトランスクリプトで画像をプレビューできる。",
-          "article_summary": "新機能は、番号付きの /presets 10 枠に再利用プロンプトとスラッシュコマンドを保存してキーボードメニューから呼び出す機能、/model と /permissions のインライン引数によるモデル・推論量・速度・権限プロファイルの指定、Kitty / Sixel 対応ターミナルでの画像プレビュー。\n\nエンタープライズの MCP 接続を Codex アカウントの権限付与か専用サインインで認証できるようになり（シークレットが必要な OAuth クライアントを含む）、リモートの Bash コマンドと Zsh スナップショットセッションでは認証情報がマスクされる。Amazon Bedrock のセットアップウィザードは既定で有効になった。\n\n修正では、compaction 失敗時に部分的な要約が履歴に残る問題、セッション再開時に圧縮済み履歴やスレッド設定が復元されない問題、Windows のプロキシ認証（Negotiate / NTLM）への対応、キューに入れたプロンプトが権限選択を待たずに進む問題などが直った。"
-        }
-      ]
+      "items": []
     },
     {
       "id": "devin",
@@ -1376,16 +1345,6 @@
           "interest": 2,
           "summary": "Teams の GitHub アプリ（旧 GitHub notifications）に Copilot が入り、Issue の通知に @github とメンションすると調査・修正・PR 作成まで行う。旧 GitHub アプリは「GitHub (deprecated)」に改名され 11 月 16 日に廃止される。",
           "article_summary": ""
-        },
-        {
-          "title": "GitHub Copilot in Visual Studio — September update",
-          "title_ja": "Copilot in Visual Studio 9 月更新: Git エージェントによる PR 探索、BYOM が新 Agent (Preview) 必須に、NuGet 脆弱性の修正アクション",
-          "url": "https://github.blog/changelog/2026-10-22-github-copilot-in-visual-studio-september-update-2",
-          "source": "Release, copilot",
-          "published_at": "2026-10-23T00:17:51+00:00",
-          "interest": 3,
-          "summary": "Git エージェントが PR を要約し、コメントやファイルへのリンク付きで探索できるようになった。BYOM（Bring Your Own Model）はプレビューで既定有効になる一方、新しい Agent (Preview) が必須になり、従来の Ask / Agent モードでは使えず Ollama モデルの再登録が必要という破壊的変更を含む。",
-          "article_summary": ""
         }
       ]
     },
@@ -1412,7 +1371,58 @@
       "label": "Slack",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Kick off an agent conversation from a workflow",
+          "title_ja": "ワークフローから Slackbot やエージェントとの会話を自動で開始",
+          "url": "https://slack.com/intl/en-gb/help/articles/115004846068-Slack-updates-and-changes#h_01M3ZDWCZST086A04C2JXYBY86",
+          "source": "What's new · October 2026",
+          "published_at": "",
+          "interest": 2,
+          "summary": "ワークフローで集めた情報とコンテキストを使って、Slackbot やエージェントとの会話を自動的に始められるようになった。ワークフローの AI ステップとして追加する。",
+          "article_summary": ""
+        },
+        {
+          "title": "Later is now To-dos",
+          "title_ja": "「後で」が「To-do」に。期限のリマインダー付きで管理",
+          "url": "https://slack.com/intl/en-gb/help/articles/115004846068-Slack-updates-and-changes#h_01M4EH7B9EB5A22Z83TRF0FCJ4",
+          "source": "What's new · October 2026",
+          "published_at": "",
+          "interest": 1,
+          "summary": "メッセージやファイルを To-do として追加し、サイドバーの To-do タブで期限のリマインダーを付けて管理し、完了したらチェックを付けられる。",
+          "article_summary": ""
+        },
+        {
+          "title": "Add skills to your Slackbot surfaces",
+          "title_ja": "Slackbot のサーフェスにスキルを組み込めるように",
+          "url": "https://slack.com/intl/en-gb/help/articles/115004846068-Slack-updates-and-changes#h_01M3A6152XZA310PH9VY4HKE19",
+          "source": "What's new · September 2026",
+          "published_at": "",
+          "interest": 2,
+          "summary": "サーフェスを作る時にスキルを含めておくと、閲覧者は Slackbot との新しい会話に切り替えずにその場で関連スキルを使える。",
+          "article_summary": ""
+        },
+        {
+          "title": "Sign in with a passkey",
+          "title_ja": "パスキーでのサインインに対応",
+          "url": "https://slack.com/intl/en-gb/help/articles/115004846068-Slack-updates-and-changes#h_01M336VAXV05G25GX7DP5CYBXN",
+          "source": "What's new · September 2026",
+          "published_at": "",
+          "interest": 2,
+          "summary": "Free / Pro / Business+ ワークスペースのメンバーは、指紋・顔・端末の PIN によるパスキーで Slack にサインインできるようになった。",
+          "article_summary": ""
+        },
+        {
+          "title": "Filter Activity by people and agents",
+          "title_ja": "アクティビティを人・エージェント・アプリで絞り込み",
+          "url": "https://slack.com/intl/en-gb/help/articles/115004846068-Slack-updates-and-changes#h_01M3T7BQEN7QA9QZXZ6MB6EJC8",
+          "source": "What's new · September 2026",
+          "published_at": "",
+          "interest": 1,
+          "summary": "アクティビティビューに人・エージェント・アプリのフィルターが付き、エージェントの作業だけを追うことも、隠して人からの更新に集中することもできる。",
+          "article_summary": ""
+        }
+      ]
     }
   ]
 }

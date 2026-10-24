@@ -1319,5 +1319,120 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Platform release notes (October 20, 2026)",
+          "title_ja": "Claude Platform: Claude Tag API がベータ提供。Slack のチャンネル・ワークスペースの Claude Tag 設定を API で操作",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-20-2026",
+          "source": "Platform",
+          "published_at": "2026-10-20T00:00:00+00:00",
+          "interest": 1,
+          "summary": "Claude Enterprise 組織向けに、`experimental-claude-tag-2026-10-21` ベータヘッダーで Claude Tag API が使える。`/v1/organizations/claude_tag/` エンドポイントで Slack チャンネルとワークスペースの設定を読み書きし、`read:claude_tag` / `write:claude_tag` スコープの Admin API キーで呼ぶ。",
+          "article_summary": ""
+        },
+        {
+          "title": "Claude Code v2.1.304",
+          "title_ja": "Claude Code v2.1.304: /auto-mode-setup と /claude-api managed-agents-secure を追加、mod の tool.check に decider: \"person\" と isReadOnly",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.304",
+          "source": "Claude Code",
+          "published_at": "2026-10-19T21:34:39+00:00",
+          "interest": 3,
+          "summary": "プロジェクトと最近のセッションを読んで auto mode に環境を教える `/auto-mode-setup`、Managed Agents の設定を Anthropic のセキュリティガイドと比較する `/claude-api managed-agents-secure` が加わった。mod の `tool.check` では `decider: \"person\"` で人の承認を必須にでき、`e.isReadOnly` で読み取り専用の呼び出しを判別できる。",
+          "article_summary": "追加のコマンドは `/auto-mode-setup`（プロジェクトと最近のセッションを読み、auto mode に環境を教えるガイド付きセットアップ。Bedrock、Vertex、Foundry、Claude apps gateway、テレメトリ無効のセッションでも使える）と `/claude-api managed-agents-secure`（Managed Agents のエージェント設定を Anthropic 公開のセキュリティガイドと比較し、何も変更しない）。\n\nmod 向けには、`tool.check` の応答に `decider: \"person\"` を指定すると権限ダイアログかホストのコールバックだけが承認でき、誰にも聞けない場合は mod の理由で拒否される。イベントには読み取り専用の呼び出しを示す `e.isReadOnly` が付き、先に動くプラグインが mod の hook を飛ばした時はトランスクリプトに行が出る。\n\nPro / Max プランでは、休止していた会話の再開が 5 時間の利用上限のかなりの割合を使う場合に警告が出る。compaction の要約には以前呼んだツール名が載る。修正には、`denyRead` の glob に `[user-id]` のような角括弧があるとサンドボックスが起動しない問題などが含まれる。"
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Devin release notes (October 19, 2026)",
+          "title_ja": "Devin 10/19: Devin Oncall が GA、Devin Review のルールエディタ、コミット・ブランチ・タグの CI ステータス確認",
+          "url": "https://docs.devin.ai/release-notes/overview#october-19-2026",
+          "source": "Release notes",
+          "published_at": "2026-10-20T02:36:26+00:00",
+          "interest": 2,
+          "summary": "Slack / Teams のチャンネルや PagerDuty のインシデントを見張り、テレメトリやコード、runbook から原因と次の手を投稿する Devin Oncall が全組織で使えるようになった。Devin Review には除外とルールを 1 つの一覧で編集するルールエディタが付いた。",
+          "article_summary": "Devin Oncall が一般提供になった。responder が Slack や Microsoft Teams のチャンネルと PagerDuty のインシデントを監視し、新しいアラート・バグ報告・サポート依頼をトリアージして、テレメトリツール、コード、デプロイ、runbook から推定原因と推奨アクションを投稿する。インシデントチャンネルに参加して調査を続け、自己更新するインシデントレポートを維持し、定期レポートで調査したインシデントと出荷した修正をまとめる。\n\nDevin Review の設定に、除外とレビュールールを展開可能なカードの 1 つの一覧で編集するルールエディタが入った。以前のコミットでレビュー済みの PR に新しいコミットがあると「Latest changes haven't been reviewed」と表示し、自動レビューを有効にせずに最新コミットだけを「Review now」で一度レビューできる。\n\nCI ステータスは PR だけでなくコミット、ブランチ、タグ（main へのマージ後の実行など）でも確認できる。作業ログは「Deciding action」ではなく要約ができ次第それを表示し、内部的な処理を実況しなくなった。"
+        }
+      ]
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Dependabot now supports npm 12, pnpm 11 and 12, and Bun 1.4",
+          "title_ja": "Dependabot が npm 12、pnpm 11 / 12、Bun 1.4 に対応",
+          "url": "https://github.blog/changelog/2026-10-20-dependabot-now-supports-npm-12-pnpm-11-and-12-and-bun-1-4",
+          "source": "Improvement, supply chain security",
+          "published_at": "2026-10-20T13:52:38+00:00",
+          "interest": 2,
+          "summary": "npm 12、pnpm 11 / 12、Bun 1.4 に上げても Dependabot の更新を受け取れる。pnpm 12 既定の 2 文書形式の pnpm-lock.yaml は dependency graph がまだ検出せず、version updates は動くが alerts と security updates は作られない既知の制限がある。",
+          "article_summary": ""
+        },
+        {
+          "title": "GitHub Copilot models deprecated on October 19, 2026",
+          "title_ja": "Copilot で GPT-5.5 / GPT-5.4 / GPT-5.4 mini / GPT-5 mini / Gemini 3.7 Flash / Grok 4.5 を廃止",
+          "url": "https://github.blog/changelog/2026-10-19-github-copilot-models-deprecated-on-october-19-2026",
+          "source": "Retired, copilot",
+          "published_at": "2026-10-19T21:27:10+00:00",
+          "interest": 2,
+          "summary": "9 月 18 日の予告どおり、Copilot Chat・インライン編集・ask / agent モード・補完で上記モデルを廃止。代替は GPT-5.5 / GPT-5.4 → GPT-6.1 Sol、GPT-5.4 mini / GPT-5 mini → GPT-6 Luna、Gemini 3.7 Flash → Gemini 3.8 Flash、Grok 4.5 → Grok 4.7。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Orca v1.4.232",
+          "title_ja": "Orca v1.4.232: エージェント権限に Manual / Auto / Yolo、ネイティブチャットで OpenCode 2、スマートフォンのコンポーザー強化",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.232",
+          "source": "Orca",
+          "published_at": "2026-10-20T06:20:47+00:00",
+          "interest": 3,
+          "summary": "Settings → Agents で Manual / Auto / Yolo を選べ、Auto では対応する Claude / Codex エージェントが承認を自ら処理し、新しいネイティブチャットもその設定に従う。実験的なネイティブチャットでは OpenCode 2 を直接開き、`$` で Codex のスキルを探せる。",
+          "article_summary": "権限は Settings → Agents で Manual / Auto / Yolo から選び、Auto は対応する Claude と Codex のエージェントに承認を任せ、新しいネイティブチャットもその選択に従う。他のエージェントには別の権限モードを指定でき、既存のチャットは自分の設定を保つ。\n\n実験的なネイティブチャットでは、OpenCode 2 をチャットで直接開き、`$` で Codex のスキルを検索し、画像プレビューをパン・ズームできる。長い会話でも Rewind が動き、利用上限はリセット時刻と Continue ボタンを表示する。スマートフォンのコンポーザーは写真に加えてファイルを添付でき、スキルをインラインで挿入し、モデル・effort・権限を 1 つのシートで選べる。\n\nSSH では、ペアリングを失った管理サーバーの復旧、再起動したサーバーのポートに追従するトンネル、高遅延回線でのファイルアップロード改善、nodejs.org を遮断するネットワーク向けの Node.js ミラー設定が加わった。デスクトップとブラウザのアセット共有でアプリが軽くなり、Mac の更新が速くなった。"
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

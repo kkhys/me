@@ -1319,5 +1319,129 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Platform release notes (October 21, 2026)",
+          "title_ja": "Claude Platform: API バージョン 2026-10-21 を公開、各 SDK と ant CLI がメジャー更新で破壊的変更と Apache 2.0 への変更",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-21-2026",
+          "source": "Platform",
+          "published_at": "2026-10-21T00:00:00+00:00",
+          "interest": 3,
+          "summary": "API バージョン `2026-10-21` がリリースされ、それを既定で送る Python SDK 2.0.0、TypeScript SDK 1.0.0、Go SDK 2.0.0、Java SDK 3.0.0 などの新版と `ant` CLI 2.0.0 が出た。SDK と CLI には API バージョンに依らない破壊的変更があり、ライセンスは MIT から Apache 2.0 に変わった。",
+          "article_summary": "API バージョン `2026-10-21` が公開され、移行ガイド「Migrating to API version 2026-10-21」が用意された。新しいクライアント SDK（Python 2.0.0、TypeScript 1.0.0、C# 13.0.0、Go 2.0.0、Java 3.0.0、PHP 1.0.0、Ruby 2.0.0）と `ant` CLI 2.0.0 は既定でこのバージョンを送る。\n\n新しい SDK と CLI には API バージョンとは独立した破壊的変更があり、ライセンスは MIT License から Apache 2.0 に変わった。詳細は移行ガイドの「SDK and CLI changes」にまとめられている。\n\nユーザープロファイルに `enforcement_status` と `enforcement_actions` フィールドが加わり、Anthropic がエンドユーザーを制限・停止しているかを確認できる。一覧 API の `enforcement_status[]` フィルターで該当プロファイルを絞り込める。"
+        },
+        {
+          "title": "Claude Duet research preview for Pro and Max plans",
+          "title_ja": "Pro / Max プラン向けに Claude Duet のリサーチプレビューを開始",
+          "url": "https://support.claude.com/en/articles/12138966-release-notes#h_fdbb85f303-claude-duet-research-preview-for-pro-and-max-plans",
+          "source": "Claude Apps",
+          "published_at": "2026-10-21T00:00:00+00:00",
+          "interest": 3,
+          "summary": "Claude が能動的なエージェントとして働く新アプリ Claude Duet のリサーチプレビューが、Pro / Max プランのユーザー向けに始まった。詳細はブログ記事「Introducing Claude Duet」にある。",
+          "article_summary": ""
+        },
+        {
+          "title": "Claude Code v2.1.305",
+          "title_ja": "Claude Code v2.1.305: sandbox.allowNestedUserNamespaces の追加と、Vertex / Bedrock で全リクエストが失敗する 2.1.304 のリグレッション修正",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305",
+          "source": "Claude Code",
+          "published_at": "2026-10-20T20:46:50+00:00",
+          "interest": 3,
+          "summary": "Linux のサンドボックス内で Chromium や rootless podman が user namespace を作れるようにする `sandbox.allowNestedUserNamespaces` が加わった（サンドボックスのファイル保護を回避できる点に注意書き）。2.1.304 で Vertex / Bedrock などがツール検索を拒否して全リクエストが失敗していた問題を修正。",
+          "article_summary": "追加は、Linux のサンドボックス内コマンドが user namespace を作れるようにする `sandbox.allowNestedUserNamespaces`（Chromium や rootless podman 向け。サンドボックスのファイル保護を回避できる）と、無人リトライモード `CLAUDE_CODE_RETRY_WATCHDOG` が解除済みの利用上限に気づくための `CLAUDE_CODE_RETRY_WATCHDOG_USAGE_LIMIT_RECHECK_MS`。\n\n修正の中心は 2.1.304 のリグレッションで、Vertex、Bedrock などのエンドポイントやゲートウェイがツール検索を拒否すると全リクエストが失敗していた問題。ツール検索なしでリトライするようになった。`/effort` と `/autocompact` の設定が `modelOverrides` と大文字小文字や `[1m]` タグで食い違うと効かない問題も直った。\n\nそのほか、bare リポジトリでの新規 worktree の起点、ディスクフル時の `ENOSPC` エラー文、クラウドセッションや SDK の `setMcpServers` で渡した MCP サーバーが同名の設定に置き換わる問題、サブエージェントのフォールバック後のモデル名表示などが修正された。"
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Bulk migrate branch protections to rulesets for a repository",
+          "title_ja": "リポジトリのブランチ保護ルールを一括で rulesets に変換",
+          "url": "https://github.blog/changelog/2026-10-20-bulk-migrate-branch-protections-to-rulesets-for-a-repository",
+          "source": "Improvement, platform governance",
+          "published_at": "2026-10-20T18:06:21+00:00",
+          "interest": 1,
+          "summary": "Settings → Rulesets の「Import branch protection rules」で、リポジトリの全ブランチ保護ルールを一度に rulesets へ変換できる。作成される rulesets をプレビューし、enforcement を選び、元のルールを残すか消すかを決められる。",
+          "article_summary": ""
+        },
+        {
+          "title": "GitHub package firewall in public preview",
+          "title_ja": "GitHub package firewall がパブリックプレビュー。エージェントや CI のパッケージ取得をポリシーで検査",
+          "url": "https://github.blog/changelog/2026-10-20-github-package-firewall-in-public-preview",
+          "source": "Release, supply chain security, universe26",
+          "published_at": "2026-10-20T16:11:53+00:00",
+          "interest": 2,
+          "summary": "エンドポイントや内部レジストリと上流のパッケージリポジトリの間に置くファイアウォール。メタデータ要求とダウンロードをクールダウン期間、GitHub Advisory Database、attestation のダウングレード検査などのポリシーで評価する。GitHub Enterprise Cloud 向けのパブリックプレビュー。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Orca v1.4.237",
+          "title_ja": "Orca v1.4.237: GitHub 10 万スター。スマートフォンからのノート編集、Claude の巻き戻しコンテキスト維持、ヘッドレスホスト経由の音声入力",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.237",
+          "source": "Orca",
+          "published_at": "2026-10-21T07:25:23+00:00",
+          "interest": 3,
+          "summary": "GitHub スター 10 万到達に合わせたリリース。スマートフォンからヘッドレスホスト上のノート作成・Markdown 保存・埋め込み画像の表示ができ、Codex チャットが undo 後に正しく再開し、Claude はロールバック後も巻き戻したコンテキストを保つ。",
+          "article_summary": "スマートフォン版では、ノートの作成と編集、ヘッドレスホストへの Markdown 保存、相対リンクの追従、埋め込み画像の表示ができ、未送信のターミナル入力がワークスペース移動をまたいで残る。音声入力はヘッドレスの `orca serve` ホスト経由でも動き、ホストの OpenAI キーを設定する CLI コマンドが付いた。\n\nチャットでは、Codex チャットが undo 後に正しく再開し、Claude は Orca のロールバックをまたいで巻き戻したコンテキストを保ち、スクリーンショットが会話に残る。Codex のスキルピッカーは実際に読み込まれたスキルを反映する。\n\n編集の保護として、Discard は同じファイルのワークスペース横断の自動保存を止め、読み取り専用の Markdown / CSV ビューが未保存編集を守る。リモートでは、再起動後に隠れたターミナルタブを再接続し、再ペアリング時にブラウザのログインを保ち、数千ホストの SSH 設定を固まらずに検索できる。"
+        },
+        {
+          "title": "Orca v1.4.235",
+          "title_ja": "Orca v1.4.235: Claude チャットの「Rewind to here」、会話ごとのモデル・effort・Fast 設定の保持、ツール出力の全文保存",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.235",
+          "source": "Orca",
+          "published_at": "2026-10-20T22:52:23+00:00",
+          "interest": 3,
+          "summary": "turn を始めたメッセージで「Rewind to here」を選びプロンプトを編集して Claude の会話を分岐できる。各会話はモデル・effort・Fast の設定を個別に記憶し、完了した返答とツール結果はプレビュー上限で切らず全文保存される。",
+          "article_summary": "Claude チャットは、turn を始めたメッセージの「Rewind to here」からプロンプトを編集して別方向に進められ、残した履歴から続く。各会話はモデル、effort、Fast の設定を自分で記憶し、モデル切替時に互換な選択を保ち、エージェント既定値の変更が設定済みのチャットを黙って動かさなくなった。\n\n完了した返答とツール結果はプレビュー上限で切らずに全文保存され、デスクトップとスマートフォンの「Show full output」「Show full message」で読み込める。New Chat はすぐにコンポーザーを開き、ワークスペースのジャンプパレットは事前読み込みされ、エディタは全ワークスペースではなく活動中・最近・リスクのあるワークスペースだけを監視する。\n\nスマートフォンでは、ライブチャットが中断箇所から再接続し、プロジェクトグループがデスクトップと同期し、クラウドの音声認識モデルを選べる。ワークスペース作成はフォーム入力中にチェックアウトの準備を始める。"
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }
