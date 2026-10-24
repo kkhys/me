@@ -111,8 +111,10 @@ import { searchConfig } from "#/utils/search";
     renderExcerpt,
     requireElement,
   } from "@kkhys/search/dialog-setup";
+  import { toSectionHref } from "@kkhys/search/query";
+  import { pickSubResult } from "@kkhys/search/sub-result";
   import type { PagefindSearchFragment } from "@kkhys/search/types";
-  import { pickSubResult, searchConfig, toSectionHref } from "#/utils/search";
+  import { searchConfig } from "#/utils/search";
 
   const renderResult = (fragment: PagefindSearchFragment, template: HTMLTemplateElement) => {
     const node = template.content.cloneNode(true) as DocumentFragment;

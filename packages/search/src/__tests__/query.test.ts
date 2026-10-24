@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { normalizeQuery, toResultHref } from "../query";
+import { normalizeQuery, toResultHref, toSectionHref } from "../query";
 
 describe("normalizeQuery", () => {
   it("trims surrounding whitespace", () => {
@@ -26,5 +26,16 @@ describe("toResultHref", () => {
     expect(toResultHref("/posts/01kamfkgq06rsnxh0aqart3bp1")).toBe(
       "/posts/01kamfkgq06rsnxh0aqart3bp1",
     );
+  });
+});
+
+describe("toSectionHref", () => {
+  it("drops .html and keeps the heading fragment", () => {
+    expect(toSectionHref("/components.html#search-dialog")).toBe("/components#search-dialog");
+  });
+
+  it("handles the page itself", () => {
+    expect(toSectionHref("/components.html")).toBe("/components");
+    expect(toSectionHref("/index.html")).toBe("/");
   });
 });

@@ -1,6 +1,6 @@
-import type { PagefindSearchFragment, PagefindSubResult } from "@kkhys/search/types";
 import { describe, expect, it } from "vitest";
-import { pickSubResult, toSectionHref } from "#/utils/search";
+import { pickSubResult } from "../sub-result";
+import type { PagefindSearchFragment, PagefindSubResult } from "../types";
 
 const subResult = (title: string, weights: number[], anchor?: string): PagefindSubResult => ({
   title,
@@ -46,16 +46,5 @@ describe("pickSubResult", () => {
 
   it("is undefined without sections", () => {
     expect(pickSubResult(fragment([]))).toBeUndefined();
-  });
-});
-
-describe("toSectionHref", () => {
-  it("drops .html and keeps the heading fragment", () => {
-    expect(toSectionHref("/components.html#search-dialog")).toBe("/components#search-dialog");
-  });
-
-  it("handles the page itself", () => {
-    expect(toSectionHref("/components.html")).toBe("/components");
-    expect(toSectionHref("/index.html")).toBe("/");
   });
 });
