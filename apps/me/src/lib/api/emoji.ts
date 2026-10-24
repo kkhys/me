@@ -26,7 +26,7 @@ const toCodePoint = (unicodeSurrogates: string) => {
 export const getIconCode = (char: string) => {
   const U200D = "\u200D";
   const UFE0Fg = /\uFE0F/gu;
-  return toCodePoint(char.includes(U200D) ? char : char.replace(UFE0Fg, ""));
+  return toCodePoint(char.includes(U200D) ? char : char.replaceAll(UFE0Fg, ""));
 };
 
 // Return the first grapheme cluster, not the first code point. Flags (Regional
