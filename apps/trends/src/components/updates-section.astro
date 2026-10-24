@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import GroupSection from "#/components/group-section.astro";
+import UpdateCard from "#/components/update-card.astro";
+import { splitProducts, UPDATES_ID, UPDATES_LABEL } from "#/utils/updates";
+
+type Product = CollectionEntry<"runs">["data"]["updates"][number];
+
+interface Props {
+  updates: Product[];
+  highlightedAnchors: ReadonlySet<string>;
+}
+
+const { updates, highlightedAnchors } = Astro.props;
+
+const { active, quiet } = splitProducts(updates);
+---
+
+{
+  updates.length > 0 && (
+    <GroupSection id={UPDATES_ID} label={UPDATES_LABEL}>
+      {active.map((product) => (
+        <UpdateCard product={product} highlightedAnchors={highlightedAnchors} />
+      ))}
+      {quiet.length > 0 && <p class="quiet">更新なし: {quiet.join(" / ")}</p>}
+    </GroupSection>
+  )
+}
+
+<style>
+  /* Products with nothing notable share one line instead of an empty card
+     each; the hairline ties it to the cards above. */
+  .quiet {
+    margin: 0;
+    padding: 0.625rem var(--space-1);
+    border-top: 1px solid var(--c-border);
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+  }
+</style>

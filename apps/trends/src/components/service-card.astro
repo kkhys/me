@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 
 import ItemRow from "#/components/item-row.astro";
+import SourceCard from "#/components/source-card.astro";
 import { itemAnchorId } from "#/utils/highlights";
 import { countSeen } from "#/utils/seen";
 import { SERVICE_COLORS } from "#/utils/service-colors";
@@ -16,19 +17,20 @@ interface Props {
 
 const { service, marketId, highlightedAnchors } = Astro.props;
 
-const dotColor = SERVICE_COLORS[service.id] ?? "var(--c-sub)";
 const seenCount = countSeen(service.items);
 const freshCount = service.items.length - seenCount;
 ---
 
-<section class:list={["service", { "has-seen": seenCount > 0 }]} data-service={service.id}>
-  <header>
-    <span class="dot" style={`background:${dotColor}`}></span>
-    <h3 id={`${marketId}-${service.id}`}>{service.label}</h3>
-    <span class="count total">{service.items.length}件</span>
-    {seenCount > 0 && <span class="count fresh">{freshCount}件</span>}
-    {service.note && <span class="note">{service.note}</span>}
-  </header>
+<SourceCard
+  id={`${marketId}-${service.id}`}
+  label={service.label}
+  dotColor={SERVICE_COLORS[service.id] ?? "var(--c-sub)"}
+  total={service.items.length}
+  fresh={seenCount > 0 ? freshCount : undefined}
+  note={service.note}
+  empty={service.items.length === 0 && service.status === "ok" ? "該当なし" : undefined}
+  allSeen={service.items.length > 0 && freshCount === 0}
+>
   {
     service.items.map((item, i) => {
       const anchorId = itemAnchorId(marketId, service.id, i + 1);
@@ -43,86 +45,4 @@ const freshCount = service.items.length - seenCount;
       );
     })
   }
-  {service.items.length === 0 && service.status === "ok" && <p class="empty">該当なし</p>}
-  {service.items.length > 0 && freshCount === 0 && <p class="empty all-seen">すべて既出</p>}
-</section>
-
-<style>
-  .service {
-    margin-bottom: 2.5rem;
-  }
-
-  /* Sticks under the toolbar while its own rows scroll, so the source is
-     always named on screen; the next section pushes it away. */
-  header {
-    position: sticky;
-    top: var(--toolbar-height);
-    z-index: 1;
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-2);
-    min-height: var(--service-header-height);
-    padding-top: var(--space-3);
-    padding-bottom: 0.625rem;
-    border-bottom: 1px solid var(--c-border);
-    background: var(--c-bg);
-  }
-
-  .dot {
-    width: 0.4rem;
-    height: 0.4rem;
-    border-radius: 50%;
-    align-self: center;
-    flex: none;
-  }
-
-  h3 {
-    margin: 0;
-    font-size: var(--fs-sm);
-    font-weight: var(--fw-medium);
-    /* Jump targets land exactly where the header sticks. */
-    scroll-margin-top: calc(var(--toolbar-height) + var(--space-3));
-  }
-
-  .count {
-    color: var(--c-sub);
-    font-size: var(--fs-xs);
-  }
-
-  /* Both counts are prerendered; the 既出 filter swaps them with CSS only. */
-  .count.fresh {
-    display: none;
-  }
-
-  :global(html[data-seen-filter="hide"]) .service.has-seen .count.total {
-    display: none;
-  }
-
-  :global(html[data-seen-filter="hide"]) .service.has-seen .count.fresh {
-    display: inline;
-  }
-
-  .note {
-    color: var(--c-sub);
-    font-size: var(--fs-xs);
-    margin-left: auto;
-    text-align: right;
-  }
-
-  .empty {
-    margin: 0;
-    padding: 0.625rem var(--space-1);
-    color: var(--c-sub);
-    font-size: var(--fs-xs);
-    border-bottom: 1px solid var(--c-border);
-  }
-
-  /* Keeps a fully-filtered service from collapsing to a bare header. */
-  .all-seen {
-    display: none;
-  }
-
-  :global(html[data-seen-filter="hide"]) .all-seen {
-    display: block;
-  }
-</style>
+</SourceCard>

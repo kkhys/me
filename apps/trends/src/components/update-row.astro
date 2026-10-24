@@ -1,0 +1,231 @@
+---
+/**
+ * One release-note entry: rank → title → summary → fold → meta row (source
+ * chip, publication day, host; stars on the right). The trend rows' score
+ * bar, engagement and 既出 badge have no counterpart here, so this is a
+ * trimmed sibling of item-row.astro — keep the shared styles in step.
+ */
+import type { CollectionEntry } from "astro:content";
+
+import Budoux from "@kkhys/ui/budoux.astro";
+import { formatHost } from "#/utils/host";
+import { splitParagraphs } from "#/utils/paragraphs";
+import { interestStars } from "#/utils/stars";
+import { formatUpdateDate } from "#/utils/updates";
+
+type Update = CollectionEntry<"runs">["data"]["updates"][number]["items"][number];
+
+interface Props {
+  item: Update;
+  rank: number;
+  /* Row id; the hero's service chips jump here. */
+  anchorId: string;
+  highlighted: boolean;
+}
+
+const { item, rank, anchorId, highlighted } = Astro.props;
+
+const host = formatHost(item.url);
+const displayTitle = item.title_ja || item.title;
+const originalTitle = item.title_ja ? item.title : "";
+const foldParagraphs = splitParagraphs(item.article_summary);
+const date = formatUpdateDate(item.published_at);
+const stars = interestStars(item.interest);
+---
+
+<article class:list={["item", { "is-highlight": highlighted }]} id={anchorId}>
+  <span class="rank">{rank}</span>
+  <div class="body">
+    <Budoux>
+      <div class="title palt">
+        <a href={item.url} target="_blank" rel="noreferrer">
+          {displayTitle}<span class="sr-only">(新しいタブで開く)</span>
+        </a>
+      </div>
+    </Budoux>
+    {originalTitle && <p class="original-title">{originalTitle}</p>}
+    {
+      item.summary && (
+        <Budoux>
+          <p class="summary">{item.summary}</p>
+        </Budoux>
+      )
+    }
+    {
+      foldParagraphs.length > 0 && (
+        <details class="discussion">
+          <summary>変更点の要約</summary>
+          <div class="fold-body">
+            <Budoux>
+              {foldParagraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </Budoux>
+          </div>
+        </details>
+      )
+    }
+    <div class="meta">
+      <span class="facts">
+        {highlighted && <span class="chip highlight">ハイライト</span>}
+        {item.source && <span class="chip">{item.source}</span>}
+        {date && <time class="date" datetime={item.published_at}>{date}</time>}
+        {host && <span>{host}</span>}
+      </span>
+      {
+        stars && (
+          <span class="stars" title="興味マッチ度">
+            <span class="sr-only">興味マッチ度 {item.interest}</span>
+            <span aria-hidden="true">{"★".repeat(stars.filled) + "☆".repeat(stars.empty)}</span>
+          </span>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .item {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-1);
+    border-bottom: 1px solid var(--c-border);
+    /* Lands below the two sticky bars when jumped to from the hero. */
+    scroll-margin-top: calc(var(--toolbar-height) + var(--service-header-height) + var(--space-2));
+  }
+
+  .rank {
+    flex: none;
+    width: 1.25rem;
+    text-align: right;
+    color: var(--c-faint);
+    font-size: var(--fs-xs);
+    font-variant-numeric: tabular-nums;
+    padding-top: var(--space-1);
+  }
+
+  /* Give the gutter back to the text on phones. */
+  @media (width < 640px) {
+    .item {
+      gap: var(--space-2);
+    }
+
+    .rank {
+      width: 1rem;
+    }
+  }
+
+  .body {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .title {
+    font-size: 0.9375rem;
+    font-weight: var(--fw-medium);
+    line-height: 1.6;
+  }
+
+  .original-title {
+    margin: 0.15rem 0 0;
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .summary {
+    margin: 0.3rem 0 0;
+    color: var(--c-sub);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  .discussion {
+    margin-top: 0.4rem;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .discussion summary {
+    position: relative;
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  .discussion summary::before {
+    content: "▸ ";
+  }
+
+  .discussion[open] summary::before {
+    content: "▾ ";
+  }
+
+  /* 12px text is an 18px target; extend it to the 24px minimum without
+     changing the visual. */
+  .discussion summary::after {
+    content: "";
+    position: absolute;
+    inset: -0.25rem 0;
+  }
+
+  .discussion summary:hover {
+    color: var(--c-text);
+  }
+
+  /* A hairline marks where the fold ends and the meta row begins. */
+  .fold-body {
+    margin-top: var(--space-2);
+    padding-left: var(--space-3);
+    border-left: 1px solid var(--c-border);
+  }
+
+  .discussion p {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.7;
+  }
+
+  .discussion p + p {
+    margin-top: 0.6rem;
+  }
+
+  /* Facts about the entry on the left, this site's judgement on the right. */
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) 0.875rem;
+    margin-top: var(--space-2);
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+  }
+
+  /* Facts wrap as individual flex items so the stars can share their last
+     line when there is room, instead of always dropping below them. */
+  .facts {
+    display: contents;
+  }
+
+  .date {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stars {
+    margin-left: auto;
+    color: var(--c-sub);
+  }
+
+  .chip {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-full);
+    padding: 0 var(--space-2);
+    font-size: var(--fs-2xs);
+    line-height: 1.1rem;
+  }
+
+  .chip.highlight {
+    border-color: var(--c-sub);
+    color: var(--c-text);
+  }
+</style>

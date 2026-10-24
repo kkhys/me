@@ -1,0 +1,116 @@
+---
+/**
+ * Section shell shared by the service cards of the markets and the product
+ * cards of the updates: a sticky header (brand dot, title, counts, note)
+ * over the rows passed through the slot, plus the two empty states.
+ */
+interface Props {
+  /* Also the h3 id the TOC jumps to. */
+  id: string;
+  label: string;
+  dotColor: string;
+  total: number;
+  /* Rows left once 既出 rows are hidden; undefined when there is nothing to hide. */
+  fresh: number | undefined;
+  note: string;
+  /* Shown in place of rows when there are none. */
+  empty: string | undefined;
+  /* Every row is 既出, so hide mode needs more than a bare header. */
+  allSeen: boolean;
+}
+
+const { id, label, dotColor, total, fresh, note, empty, allSeen } = Astro.props;
+---
+
+<section class:list={["service", { "has-seen": fresh !== undefined }]}>
+  <header>
+    <span class="dot" style={`background:${dotColor}`}></span>
+    <h3 id={id}>{label}</h3>
+    <span class="count total">{total}件</span>
+    {fresh !== undefined && <span class="count fresh">{fresh}件</span>}
+    {note && <span class="note">{note}</span>}
+  </header>
+  <slot />
+  {empty && <p class="empty">{empty}</p>}
+  {allSeen && <p class="empty all-seen">すべて既出</p>}
+</section>
+
+<style>
+  .service {
+    margin-bottom: 2.5rem;
+  }
+
+  /* Sticks under the toolbar while its own rows scroll, so the source is
+     always named on screen; the next section pushes it away. */
+  header {
+    position: sticky;
+    top: var(--toolbar-height);
+    z-index: 1;
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    min-height: var(--service-header-height);
+    padding-top: var(--space-3);
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid var(--c-border);
+    background: var(--c-bg);
+  }
+
+  .dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    align-self: center;
+    flex: none;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    /* Jump targets land exactly where the header sticks. */
+    scroll-margin-top: calc(var(--toolbar-height) + var(--space-3));
+  }
+
+  .count {
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+  }
+
+  /* Both counts are prerendered; the 既出 filter swaps them with CSS only. */
+  .count.fresh {
+    display: none;
+  }
+
+  :global(html[data-seen-filter="hide"]) .service.has-seen .count.total {
+    display: none;
+  }
+
+  :global(html[data-seen-filter="hide"]) .service.has-seen .count.fresh {
+    display: inline;
+  }
+
+  .note {
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .empty {
+    margin: 0;
+    padding: 0.625rem var(--space-1);
+    color: var(--c-sub);
+    font-size: var(--fs-xs);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  /* Keeps a fully-filtered service from collapsing to a bare header. */
+  .all-seen {
+    display: none;
+  }
+
+  :global(html[data-seen-filter="hide"]) .all-seen {
+    display: block;
+  }
+</style>

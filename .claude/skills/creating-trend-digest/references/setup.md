@@ -8,6 +8,33 @@ dev.to と Hugging Face Daily Papers は 2026-09-05 に対象から外した。f
 で無効化しているだけなので、復活させるには該当 id を外せばよい。無効化した
 ソースは raw.json に一切現れない (skipped 扱いにもならない)。
 
+## 製品アップデート
+
+トレンド 8 ソースとは別に、7 製品のリリースノートを market `updates` の
+サービスとして取得する (fetch_trends.py の `UPDATE_PRODUCTS`)。認証不要。
+
+| id                 | フィード                                                                                                                                                                |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `claude`           | GitHub Releases `anthropics/claude-code` / Claude Platform release notes (platform.claude.com の `.md`) / Claude Apps release notes (support.claude.com の HTML)        |
+| `openai`           | GitHub Releases `openai/codex` (prerelease の alpha は除外) / ChatGPT & Codex changelog RSS (developers.openai.com) / OpenAI News RSS のうち category が Product のもの |
+| `devin`            | docs.devin.ai の release notes RSS (1 日分が 1 エントリ)                                                                                                                |
+| `cursor`           | cursor.com/changelog RSS / forum.cursor.com の Announcements カテゴリ RSS (Grok Bot やモデル提供の告知はここに出る)                                                     |
+| `github_changelog` | github.blog/changelog RSS (10 件/ページなので最大 4 ページ読む。Copilot を含む)                                                                                         |
+| `orca`             | GitHub Releases `stablyai/orca` (prerelease のモバイル版は除外)                                                                                                         |
+| `slack`            | ヘルプセンター「Slack updates and changes」(en-gb の HTML。日付は月単位なので `published_at` は null) / docs.slack.dev/changelog RSS                                    |
+
+- `updates_window_days` (既定 7) 以内に公開されたエントリだけを残し、過去の
+  実行で取得済みの URL は raw.json から落とす (既出バッジではなく非掲載)。
+  同じ日に再実行しても落ちない (seen.json の初出日が当日のため)。
+- 製品内の一部フィードが失敗しても、他が取れていれば `status: ok` で note に
+  `取得失敗: ...` が付く。全フィード失敗で `error`。
+- 対象外: anthropic.com/news (RSS がなく、モデル発表は Claude Apps release
+  notes に載る)、x.ai/news (スクリプトの UA は 403)。Grok Bot は Cursor の
+  フォーラム告知で拾う。
+- `GITHUB_TOKEN` があれば GitHub API のレート制限 (未認証 60 回/時) に余裕が
+  出る。1 回の実行で使うのは 3 回。
+- バックフィル (`--date`) では全製品 `skipped`。
+
 ## Qiita トークン (任意)
 
 未認証だと IP あたり 60リクエスト/時。1回の実行で最大26リクエスト使うため、
@@ -38,12 +65,12 @@ chat completions + search_parameters を使う fetcher を足し、`SERVICES` �
 
 `~/.claude/trend-digest/`:
 
-| ファイル       | 役割                                                                                                              |
-| -------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `profile.md`   | 興味プロフィール。フィードバックで育つ                                                                            |
-| `config.json`  | ソース設定 (hatena_categories, subreddits, 表示件数, comments_top_n など) と `site_repo` (公開先リポジトリのパス) |
-| `seen.json`    | 既出URL履歴 (「既出」バッジ用、自動管理)                                                                          |
-| `runs/<date>/` | raw.json (取得結果)                                                                                               |
+| ファイル       | 役割                                                                                                                                   |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `profile.md`   | 興味プロフィール。フィードバックで育つ                                                                                                 |
+| `config.json`  | ソース設定 (hatena_categories, subreddits, 表示件数, comments_top_n, updates_window_days など) と `site_repo` (公開先リポジトリのパス) |
+| `seen.json`    | 既出URL履歴 (「既出」バッジ用、自動管理)                                                                                               |
+| `runs/<date>/` | raw.json (取得結果)                                                                                                                    |
 
 ## 公開
 

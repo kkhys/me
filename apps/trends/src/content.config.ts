@@ -33,6 +33,32 @@ const service = z.object({
   items: z.array(item),
 });
 
+// One release-note entry of a product in the updates group. Feeds carry no
+// engagement, so there is no score and rows keep publication order.
+const update = z.object({
+  title: z.string(),
+  title_ja: z.string().default(""),
+  url: z.url(),
+  // Which feed of the product the entry came from ("Claude Code", "Platform",
+  // "Forum" ...), rendered as a chip.
+  source: z.string().default(""),
+  // ISO 8601; "" when the feed dates entries by month only (Slack).
+  published_at: z.string().default(""),
+  interest: z.number().int().min(1).max(3),
+  summary: z.string().default(""),
+  // The notable changes of an entry that bundles several, in the same
+  // multi-paragraph format as the item folds.
+  article_summary: z.string().default(""),
+});
+
+const product = z.object({
+  id: z.string(),
+  label: z.string(),
+  status: z.enum(["ok", "error", "skipped"]),
+  note: z.string().default(""),
+  items: z.array(update),
+});
+
 const runs = defineCollection({
   loader: glob({ pattern: "*.json", base: "./src/content/runs" }),
   schema: z.object({
@@ -62,6 +88,9 @@ const runs = defineCollection({
         services: z.array(service),
       }),
     ),
+    // Product release notes, one entry per product; added 2026-10-24, so
+    // older runs rely on the default. A backfilled run writes [].
+    updates: z.array(product).default([]),
   }),
 });
 

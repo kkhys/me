@@ -3,14 +3,17 @@ import type { CollectionEntry } from "astro:content";
 
 import { countSeen } from "#/utils/seen";
 import { SERVICE_COLORS } from "#/utils/service-colors";
+import { splitProducts, UPDATES_ID, UPDATES_LABEL } from "#/utils/updates";
 
 type Market = CollectionEntry<"runs">["data"]["markets"][number];
+type Product = CollectionEntry<"runs">["data"]["updates"][number];
 
 interface Props {
+  updates: Product[];
   markets: Market[];
 }
 
-const { markets } = Astro.props;
+const { updates, markets } = Astro.props;
 
 interface TocEntry {
   depth: 2 | 3;
@@ -25,6 +28,30 @@ interface TocEntry {
 }
 
 const entries: TocEntry[] = [];
+
+/* Same order as the page: the updates group first, only the products that
+   render as cards. */
+if (updates.length > 0) {
+  entries.push({
+    depth: 2,
+    id: UPDATES_ID,
+    label: UPDATES_LABEL,
+    color: undefined,
+    total: undefined,
+    fresh: undefined,
+  });
+
+  for (const product of splitProducts(updates).active) {
+    entries.push({
+      depth: 3,
+      id: `${UPDATES_ID}-${product.id}`,
+      label: product.label,
+      color: SERVICE_COLORS[product.id] ?? "var(--c-sub)",
+      total: product.items.length,
+      fresh: undefined,
+    });
+  }
+}
 
 for (const market of markets) {
   entries.push({

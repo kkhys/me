@@ -19,9 +19,13 @@ src/
     digest-view.astro         # One day's body: DateNav + main(hero + toolbar + markets) + bottom DateNav + generated-at footer
     digest-hero.astro         # headline / lead / numbered highlights; service chips jump to the item row
     digest-toolbar.astro      # Sticky bar: date permalink, item count (total / fresh), SeenFilter
-    market-section.astro      # グローバル / 日本 group label (global first via sortMarketsGlobalFirst in digest-view; the run JSON stores japan first)
-    service-card.astro        # Per-service section (sticky header with brand-color dot, total + fresh counts, error note, 該当なし / すべて既出 states)
-    source-toc.astro          # Always-visible source TOC (markets → services, per-service counts), ≥1280px only
+    group-section.astro       # Group heading (アップデート / グローバル / 日本) over the cards in its slot; digest-view renders the markets global first via sortMarketsGlobalFirst (the run JSON stores japan first)
+    source-card.astro         # Section shell shared by service-card and update-card: sticky header with brand-color dot, total + fresh counts, error note, 該当なし / すべて既出 states
+    service-card.astro        # Per-service card: SourceCard + an ItemRow per item
+    updates-section.astro     # The アップデート group: an UpdateCard per product with entries (or an error), one 更新なし line for the quiet ones; not rendered when the run has no updates
+    update-card.astro         # Per-product card: SourceCard + an UpdateRow per entry
+    update-row.astro          # rank → title → summary → 変更点の要約 fold → meta row (source chip / JST date / host; stars right); trimmed sibling of item-row, no score
+    source-toc.astro          # Always-visible source TOC (updates → products, then markets → services, per-source counts), ≥1280px only
     item-row.astro            # rank → title → summary → fold → meta row (facts left: chips / host / engagement / comments link; signal right: score bar + stars)
     seen-filter.astro         # すべて / 既出を除く toggle; flips html[data-seen-filter], persisted in localStorage
     date-nav.astro            # ← 前日 / current date (permalink) / 翌日 →, rendered at top and bottom
@@ -33,7 +37,8 @@ src/
   utils/seen.ts               # countSeen — 既出 item count for the seen filter (pure, unit-tested)
   utils/highlights.ts         # itemAnchorId / highlightAnchors — hero highlight → item row anchors (pure, unit-tested)
   utils/stars.ts              # interestStars — ★ counts; level 1 renders nothing (pure, unit-tested)
-  utils/service-colors.ts     # Upstream brand colors, shared by service-card and source-toc
+  utils/updates.ts            # UPDATES_ID / UPDATES_LABEL, splitProducts (cards vs the 更新なし line), formatUpdateDate (JST day; pure, unit-tested)
+  utils/service-colors.ts     # Upstream brand colors (services and products), shared by service-card, update-card and source-toc
   styles/global.css           # Imports @kkhys/styles (uchu + tokens + base); app-local --c-faint and the sticky chrome heights
   __tests__/                  # Vitest unit tests
 public/                       # robots.txt, manifest, static favicons (generated from dev routes)
@@ -61,12 +66,14 @@ Consumed as source (no build step).
 - `article_summary` is the same multi-paragraph format for the sources without a comment fetcher (GitHub Trending / Zenn / Qiita, plus dev.to / Hugging Face Daily Papers in older runs, `articles_top_n` in the skill's config), summarizing the article body the fetch script attaches. Mutually exclusive with `discussion_summary`; the fold label switches (コメントの要約 / 記事の要約). Techmeme items carry neither summary — the headline is already the condensed story. Older runs predate the field and rely on the zod default.
 - dev.to (`devto`) and Hugging Face Daily Papers (`hfpapers`) left the source set on 2026-09-05 via `disabled_sources` in the skill's config; new runs omit them. Runs up to that date still contain them, so `service-colors.ts` keeps their entries and the schema keeps accepting them.
 - `title_ja` (on items and digest highlights) is a Japanese translation of an originally non-Japanese title, `""` when the title is already Japanese. When present it becomes the linked title and the original renders beneath it. Older runs predate the field and rely on the zod default.
+- `updates` (since 2026-10-24; older runs rely on the `[]` default) holds one product per entry — `claude`, `openai`, `devin`, `cursor`, `github_changelog`, `orca`, `slack` — with the same `status` / `note` / `items` shape as a service but a different item: `title`, `title_ja`, `url`, `source` (which feed of the product: "Claude Code", "Platform", "Forum", GitHub's categories ...), `published_at` (ISO 8601, `""` for the month-dated Slack page), `interest`, `summary`, `article_summary` (the 変更点の要約 fold). No `score`, `engagement_label`, `comments_url`, `discussion_summary` or `seen_before`: the feeds carry no engagement, rows stay in publication order, and the fetch script drops entries already fetched on an earlier day instead of badging them. The skill keeps only notable changes (new features, models, pricing, breaking changes, deprecations) and writes `items: []` for a product with nothing notable. A backfilled run writes `updates: []`.
 
 ## Key Design Decisions
 
 - The UI follows the kkhys.me design language (see apps/me): plain `--uchu-yang`/`--uchu-yin` background, hairline separators instead of cards, a `--content-width` content column, `2026.08.10` date format, and the shared `--c-*` / `--fs-*` / `--radius-*` tokens from `@kkhys/styles`.
 - `/` renders the latest run in full (duplicate of its `/[date]` page, accepted); `/[date]` is the permanent URL.
 - Markets display global first: `digest-view.astro` applies `sortMarketsGlobalFirst` before rendering the sections and the TOC, while the run JSON keeps japan first. Reorder there, not in the data.
+- The アップデート group renders first, above the markets, because those entries are the most actionable part of the day for the reader; `splitProducts` (`utils/updates.ts`) turns the products with no entries into one 更新なし line so a quiet day costs one line, not seven empty cards, and a product with `status: "error"` keeps its card so the failure is visible. The group id `updates` works like a market id for anchors (`updates-{product}-{rank}`), the TOC and `highlightAnchors`. The toolbar count includes the entries; the 既出 filter ignores them (they are never 既出).
 - Client JS is minimal: `source-toc.astro` only wires `observeActiveHeading` from `@kkhys/ui/toc-observer` (the `pickActiveId` selection logic lives in `packages/ui/src/toc-active.ts`), and the 既出 filter toggle stays colocated in `seen-filter.astro`. Navigation between sources is the TOC's job — the header stays a plain brand link.
 - The 既出 filter is CSS-driven: rows carry an `is-seen` class, per-service counts are prerendered for both modes (`service-card.astro` renders the total and the fresh count and swaps them with CSS), and `html[data-seen-filter="hide"]` switches everything. JS only flips that attribute and persists the choice (`trends:seen-filter`); without JS the toggle stays hidden and the site behaves as before.
 - `service-card.astro` has two empty states: 該当なし when a service returned no items with `status: "ok"`, and すべて既出 (shown only in hide mode) when every item is 既出, so a fully-filtered service keeps more than a bare header.

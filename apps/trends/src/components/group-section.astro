@@ -1,0 +1,31 @@
+---
+/**
+ * Group heading (アップデート / グローバル / 日本) over the cards passed
+ * through the slot; the h2 id is the TOC's jump target.
+ */
+interface Props {
+  id: string;
+  label: string;
+}
+
+const { id, label } = Astro.props;
+---
+
+<section class="group">
+  <h2 id={id}>{label}</h2>
+  <slot />
+</section>
+
+<style>
+  .group {
+    margin-top: var(--space-12);
+  }
+
+  h2 {
+    margin: 0 0 1.25rem;
+    font-size: 1rem;
+    font-weight: var(--fw-medium);
+    /* Lands below the sticky toolbar when jumped to. */
+    scroll-margin-top: calc(var(--toolbar-height) + var(--space-4));
+  }
+</style>

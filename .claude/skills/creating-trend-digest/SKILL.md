@@ -1,6 +1,6 @@
 ---
 name: creating-trend-digest
-description: Collect today's trends from 8 sources (HN, Lobsters, Reddit, GitHub Trending, Techmeme, Hatena, Zenn, Qiita), score them against a personal interest profile, and publish the digest to trends.kkhys.me
+description: Collect today's trends from 8 sources (HN, Lobsters, Reddit, GitHub Trending, Techmeme, Hatena, Zenn, Qiita) and the notable release notes of 7 products (Claude, OpenAI, Devin, Cursor, GitHub, Orca, Slack), score them against a personal interest profile, and publish the digest to trends.kkhys.me
 argument-hint: "[今日の関心・調整指示、または遡る日付 (省略可)]"
 disable-model-invocation: true
 allowed-tools:
@@ -75,6 +75,32 @@ Papers, dropped on 2026-09-05; their fetchers stay in the script, so
 re-enabling is a config edit). Runs published before that still contain
 them — leave those files alone.
 
+#### Product updates
+
+Besides the 8 trend sources, the script collects the release notes of 7
+products as services of market `updates`, one service per product:
+
+| id                 | label  | feeds                                                                                              |
+| ------------------ | ------ | -------------------------------------------------------------------------------------------------- |
+| `claude`           | Claude | Claude Code GitHub releases, Claude Platform release notes, Claude Apps release notes              |
+| `openai`           | OpenAI | Codex CLI GitHub releases (stable only), ChatGPT & Codex changelog, OpenAI News (Product category) |
+| `devin`            | Devin  | Release notes (one entry per release day)                                                          |
+| `cursor`           | Cursor | Changelog, forum announcements (Grok Bot and model availability are announced there)               |
+| `github_changelog` | GitHub | github.blog changelog, Copilot included                                                            |
+| `orca`             | Orca   | GitHub releases (stable only)                                                                      |
+| `slack`            | Slack  | Help-centre "Slack updates and changes" page, platform changelog (docs.slack.dev)                  |
+
+The script keeps entries published within `updates_window_days` (default 7) of the run, and drops entries it already fetched on an earlier day — a
+release is news once, so there is no 既出 badge here. Each item carries
+`extra` naming its feed ("Claude Code", "Platform", "Claude Apps", "Codex
+CLI", "Forum", GitHub's categories, "What's new · October 2026" ...),
+`published_at` (null for Slack's help page, which dates by month only),
+`excerpt`, and `content` (the release body, clipped to 3000 chars); there
+is no engagement, `base_score` is 0 and the order is newest first. A
+product id in `disabled_sources` removes it like any other source. A feed
+that fails while the product's other feeds answer leaves a 取得失敗 note
+on the product instead of an error.
+
 #### Backfilling a past date
 
 When the user asks for a past date ("8/5の分も作って"), add `--date`:
@@ -85,10 +111,12 @@ python3 "${CLAUDE_SKILL_DIR}/scripts/fetch_trends.py" --skill-dir "${CLAUDE_SKIL
 
 Only Hacker News (via the Algolia index) and Hugging Face Daily Papers
 (via the API's date filter, but disabled by default) can be queried
-historically. The other sources expose no archive and come back `skipped`
-with a note, which renders as a notice on the site — carry it through like
-any other skipped service. Tell the user up front that a backfilled digest
-covers Hacker News only, not all 8 sources.
+historically. The other sources, the product updates included, expose no
+archive and come back `skipped` with a note, which renders as a notice on
+the site — carry it through like any other skipped service, except that
+the `updates` services are not written to the digest at all (`"updates":
+[]`). Tell the user up front that a backfilled digest covers Hacker News
+only, not all 8 sources and no product updates.
 
 - Freshness is scored against the end of the target day, so `base_score` is
   comparable to a live run.
@@ -150,6 +178,46 @@ list (top `items_per_service` per service after filtering):
   this). Techmeme items have neither `comments` nor `content` — their
   headline is already the story in condensed form, so both fields stay `""`.
 
+#### Product updates
+
+For each `updates` service in raw.json, keep the entries worth a
+developer's attention and drop the rest — the reader asked for the notable
+changes, not the changelog:
+
+- **Keep**: new features and capabilities, new or retired models, new
+  products and surfaces (apps, integrations, platforms), pricing / plan /
+  limit changes, breaking changes, deprecations, GA or beta transitions of
+  significant features, security advisories.
+- **Drop**: releases whose body is only bug fixes, reliability or
+  performance work ("Bug fixes and reliability improvements"), docs or
+  typo changes, dependency bumps, cosmetic UI polish, enterprise
+  administration minutiae that does not change how an individual developer
+  works, and marketing or customer-story posts.
+- A release that bundles notable and trivial changes stays; the summary
+  names the notable ones.
+- At most `items_per_service` entries per product, newest first (raw.json
+  order). A product with nothing notable gets `items: []` with its
+  `status` — the site folds it into one 更新なし line.
+
+Each kept entry:
+
+- `title` / `title_ja`: carry the title through. When the source title is
+  only a version or a date ("Claude Code v2.1.310", "Devin release notes
+  (October 21, 2026)", "Claude Platform release notes (October 22,
+  2026)"), `title_ja` is a descriptive Japanese title that names the main
+  change ("Claude Code v2.1.310: Monitor ツールが Bedrock / Vertex /
+  Foundry でも利用可能に"). Otherwise the usual rule: translation, `""`
+  when already Japanese.
+- `source`: `extra` from raw.json unchanged.
+- `published_at`: from raw.json unchanged, `""` when it is null.
+- `interest`: stars from the profile, same scale as the items.
+- `summary`: 1-2 Japanese sentences naming what changed concretely
+  (feature, model, price, version).
+- `article_summary`: only when the entry bundles several changes
+  (releases, daily release-note pages): 2-3 short paragraphs (300-450
+  chars, `\n\n`-separated) listing the notable changes from `content`,
+  nothing beyond it. `""` for a single-change entry.
+
 ### 3. Write the digest
 
 Compose the digest for the top of the page:
@@ -160,7 +228,10 @@ Compose the digest for the top of the page:
   stating the observed signal (e.g. appears on multiple services, unusually
   high engagement, direct hit on a high-interest theme). Prefer items
   appearing in multiple services and high-interest matches. Carry the item's
-  `title_ja` through (same rule: `""` for Japanese titles).
+  `title_ja` through (same rule: `""` for Japanese titles). A product update
+  can be a highlight too — a new model or a major release — with the product
+  label as `service_label` (e.g. "Claude"); the hero chip then jumps to its
+  row.
 
 ### 4. Publish
 
@@ -233,6 +304,27 @@ Write `$REPO/apps/trends/src/content/runs/<date>.json` in this shape:
       "label": "グローバル",
       "services": ["... hackernews, lobsters, reddit, github, techmeme ..."]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.310",
+          "title_ja": "Claude Code v2.1.310: Monitor ツールが Bedrock / Vertex / Foundry でも利用可能に",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.310",
+          "source": "Claude Code",
+          "published_at": "2026-10-23T23:39:00+00:00",
+          "interest": 3,
+          "summary": "...",
+          "article_summary": ""
+        }
+      ]
+    },
+    "... openai, devin, cursor, github_changelog, orca, slack ..."
   ]
 }
 ```
@@ -245,6 +337,11 @@ Write `$REPO/apps/trends/src/content/runs/<date>.json` in this shape:
   Global: hackernews, lobsters, reddit, github, techmeme. Sources absent
   from raw.json (disabled ones) stay absent here — never add an empty
   section for them.
+- `updates` lists every `updates` service of raw.json in its order (claude,
+  openai, devin, cursor, github_changelog, orca, slack) with `status` /
+  `note` carried through and the entries kept in step 2; a product with
+  nothing notable keeps `items: []`. Disabled products stay absent. In a
+  backfill write `"updates": []`.
 - The site's zod schema (`apps/trends/src/content.config.ts`) is strict:
   unknown or retired fields (e.g. `action_note`) fail the build. When the
   schema changes, update it, this JSON example, and the existing files in
@@ -291,14 +388,17 @@ When the user reacts to a digest ("Rustは興味ない", "この記事良かっ�
 - `profile.md` — move themes between high/mid/low, add new themes, extend
   除外テーマ. Generalize: "この記事不要" usually means a theme, not one URL.
   Append a dated entry to フィードバックログ recording feedback → change.
-- `config.json` — hatena_categories, items_per_service, disabled_sources,
-  site_repo.
+- `config.json` — hatena_categories, items_per_service, disabled_sources
+  (a product id such as `slack` drops that product from the updates),
+  updates_window_days, site_repo. Feedback on what counts as notable
+  ("Copilot の企業管理系は要らない") goes into the profile as a 除外テーマ
+  entry under アップデート.
 
 Prefer small durable adjustments over drastic rewrites; the log exists so
 changes remain traceable and reversible.
 
 ## Setup and troubleshooting
 
-Optional `QIITA_ACCESS_TOKEN` (rate-limit headroom) and notes on future
-X/Grok integration: `references/setup.md`. Scoring details and tuning:
-`references/scoring.md`.
+Optional `QIITA_ACCESS_TOKEN` / `GITHUB_TOKEN` (rate-limit headroom), the
+feed behind each product update, and notes on future X/Grok integration:
+`references/setup.md`. Scoring details and tuning: `references/scoring.md`.

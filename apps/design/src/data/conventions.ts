@@ -309,7 +309,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         evidence: [
           at("apps/me/src/layouts/base-layout.astro", 85),
           at("apps/me/src/components/ui/site-footer.astro", 54),
-          at("apps/trends/src/components/digest-view.astro", 53),
+          at("apps/trends/src/components/digest-view.astro", 94),
         ],
       },
       {
@@ -327,7 +327,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         values: ["position: fixed", "top: 13rem", "right: 2rem"],
         evidence: [
           at("apps/me/src/layouts/blog-layout.astro", 172),
-          at("apps/trends/src/components/digest-view.astro", 42),
+          at("apps/trends/src/components/digest-view.astro", 76),
           at("apps/me/src/features/blog/components/ui/toc.astro", 40),
         ],
       },
@@ -735,7 +735,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         values: ["scroll-margin: 3rem", "scroll-margin-top: 1.25rem"],
         evidence: [
           at("apps/me/src/features/blog/components/ui/blocks/heading.astro", 25),
-          at("apps/trends/src/components/service-card.astro", 61),
+          at("apps/trends/src/components/source-card.astro", 72),
           at("apps/art/src/pages/index.astro", 79),
         ],
       },

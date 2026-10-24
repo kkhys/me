@@ -21,6 +21,7 @@ import io
 import json
 import sys
 import tempfile
+import urllib.error
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -171,6 +172,207 @@ check("falls back to the abstract", hf[1]["excerpt"] == "Abstract B", hf[1]["exc
 check("respects the limit", len(ft._hf_items(HF_DATA, 1)) == 1)
 
 
+# --- product updates ----------------------------------------------------------
+
+print("parse_date")
+check("reads ISO 8601 with Z", ft.parse_date("2026-10-23T23:39:00Z").isoformat() == "2026-10-23T23:39:00+00:00")
+check("reads RFC 2822", ft.parse_date("Fri, 23 Oct 2026 21:29:58 +0000").year == 2026)
+check("reads a release-note heading", ft.parse_date("October 22, 2026").isoformat() == "2026-10-22T00:00:00+00:00")
+check("returns None for prose", ft.parse_date("Later is now To-dos") is None)
+check("returns None for empty", ft.parse_date("") is None)
+
+print("update_cutoff")
+cut = ft.update_cutoff({"updates_window_days": 3}, datetime(2026, 10, 24, 0, 30, tzinfo=timezone.utc))
+check("floors to midnight UTC", cut == datetime(2026, 10, 21, tzinfo=timezone.utc), cut)
+check("defaults to a week", ft.update_cutoff({}, datetime(2026, 10, 24, tzinfo=timezone.utc)).day == 17)
+
+NOW = datetime(2026, 10, 24, 0, 30, tzinfo=timezone.utc)
+CUTOFF = ft.update_cutoff({}, NOW)
+
+print("feed entries")
+RSS_XML = """<?xml version="1.0"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel>
+<item><title>Copilot in Teams</title><link>https://gh.example/teams</link><pubDate>Fri, 23 Oct 2026 21:29:58 +0000</pubDate>
+<category><![CDATA[Improvement]]></category><category><![CDATA[ecosystem &amp; accessibility]]></category><category><![CDATA[copilot]]></category>
+<description>Short.</description><content:encoded><![CDATA[<p>Long <b>body</b> with a <!DOCTYPE html> quote.</p>]]></content:encoded></item>
+<item><title>Codex CLI Release: 0.164.0</title><link>https://oa.example/#rel</link><pubDate>Fri, 23 Oct 2026 00:00:00 GMT</pubDate><description>0.164.0</description></item>
+<item><title>Old story</title><link>https://gh.example/old</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><category>Release</category><description>old</description></item>
+</channel></rss>"""
+ATOM_XML = """<?xml version="1.0"?><feed xmlns="http://www.w3.org/2005/Atom">
+<entry><title>CLI v4.11.0</title><link rel="alternate" href="https://slack.example/cli"/><link rel="self" href="https://slack.example/self"/>
+<published>2026-10-22T00:00:00.000Z</published><category term="release"/><summary>Summary text</summary></entry></feed>"""
+rss = list(ft._feed_entries(RSS_XML))
+atom = list(ft._feed_entries(ATOM_XML))
+check("keeps every category, entities decoded",
+      rss[0]["categories"] == ["Improvement", "ecosystem & accessibility", "copilot"], rss[0]["categories"])
+check("reads content:encoded", "Long" in rss[0]["encoded"])
+check("tolerates a DOCTYPE quoted inside CDATA", len(rss) == 3)
+check("reads the Atom alternate link, not self", atom[0]["link"] == "https://slack.example/cli", atom[0].get("link"))
+check("reads Atom category terms", atom[0]["categories"] == ["release"])
+
+print("rss update items")
+served = {}
+original_http_get = ft.http_get
+ft.http_get = lambda url, headers=None: served[url]
+try:
+    served["https://f.example/feed/"] = RSS_XML
+    src = {"kind": "rss", "url": "https://f.example/feed/", "name": "Changelog", "extra": "categories"}
+    got = ft._rss_update_items(src, CUTOFF)
+    check("drops entries older than the window", [i["title"] for i in got] == ["Copilot in Teams", "Codex CLI Release: 0.164.0"], [i["title"] for i in got])
+    check("names the feed by the entry's categories",
+          got[0]["extra"] == "Improvement, ecosystem & accessibility, copilot", got[0]["extra"])
+    check("falls back to the feed name without categories", got[1]["extra"] == "Changelog", got[1]["extra"])
+    check("stores the published date in UTC", got[0]["published_at"] == "2026-10-23T21:29:58+00:00", got[0]["published_at"])
+    check("content is the stripped body", got[0]["content"] == "Long body with a quote.", repr(got[0]["content"]))
+    check("excerpt is the description", got[0]["excerpt"] == "Short.", repr(got[0]["excerpt"]))
+    check("no engagement", got[0]["engagement"] == 0 and got[0]["engagement_label"] == "")
+    got = ft._rss_update_items({**src, "skip_title": r"^Codex CLI Release:"}, CUTOFF)
+    check("skip_title removes matching titles", [i["title"] for i in got] == ["Copilot in Teams"])
+    got = ft._rss_update_items({**src, "categories": ["Product"]}, CUTOFF)
+    check("categories keeps only entries carrying one", got == [], [i["title"] for i in got])
+    got = ft._rss_update_items({**src, "categories": ["copilot"]}, CUTOFF)
+    check("categories matches any listed one", [i["title"] for i in got] == ["Copilot in Teams"])
+    got = ft._rss_update_items({**src, "title": "Devin release notes ({title})"}, CUTOFF)
+    check("title formats the entry title", got[0]["title"] == "Devin release notes (Copilot in Teams)", got[0]["title"])
+    served["https://f.example/feed/?paged=2"] = RSS_XML
+    served["https://f.example/feed/?paged=3"] = "<rss><channel></channel></rss>"
+    fetched = []
+    ft.http_get = lambda url, headers=None: (fetched.append(url), served[url])[1]
+    got = ft._rss_update_items({**src, "pages": 4}, CUTOFF)
+    check("stops paging once a page is older than the window", fetched == ["https://f.example/feed/"], fetched)
+    fresh_xml = RSS_XML.replace("Thu, 01 Oct 2026", "Thu, 22 Oct 2026")
+    served["https://f.example/feed/"] = fresh_xml
+    served["https://f.example/feed/?paged=2"] = fresh_xml
+    fetched.clear()
+    got = ft._rss_update_items({**src, "pages": 4}, CUTOFF)
+    check("reads on while pages stay inside the window and stops at an empty page",
+          fetched == ["https://f.example/feed/", "https://f.example/feed/?paged=2", "https://f.example/feed/?paged=3"], fetched)
+finally:
+    ft.http_get = original_http_get
+
+print("github releases")
+RELEASES = [
+    {"tag_name": "v2.1.310", "name": "v2.1.310", "draft": False, "prerelease": False,
+     "published_at": "2026-10-23T23:39:00Z", "html_url": "https://gh.example/r/310",
+     "body": "## What's changed\n- Added the [Monitor](https://x) tool"},
+    {"tag_name": "rust-v0.165.0-alpha.1", "name": "0.165.0-alpha.1", "draft": False, "prerelease": True,
+     "published_at": "2026-10-23T14:09:53Z", "html_url": "https://gh.example/r/alpha", "body": "Release"},
+    {"tag_name": "v2.1.0", "name": "", "draft": False, "prerelease": False,
+     "published_at": "2026-09-01T00:00:00Z", "html_url": "https://gh.example/r/old", "body": "old"},
+    {"tag_name": "v9", "name": "v9", "draft": True, "prerelease": False,
+     "published_at": "2026-10-23T00:00:00Z", "html_url": "https://gh.example/r/draft", "body": "draft"},
+]
+gh = ft._github_release_items(RELEASES, {"name": "Claude Code"}, CUTOFF)
+check("keeps only stable releases inside the window", [i["url"] for i in gh] == ["https://gh.example/r/310"], [i["url"] for i in gh])
+check("titles the release with the feed name and version", gh[0]["title"] == "Claude Code v2.1.310", gh[0]["title"])
+check("flattens markdown links in the body", gh[0]["content"] == "## What's changed - Added the Monitor tool", repr(gh[0]["content"]))
+check("names the feed", gh[0]["extra"] == "Claude Code")
+
+print("claude platform notes")
+PLATFORM_MD = """---
+title: Claude Platform release notes
+---
+
+Intro paragraph.
+
+### October 22, 2026
+
+* We've launched [Claude Models on Google Cloud](https://p.example/gc), operated by Anthropic.
+* [Fast mode](https://p.example/fast) is available for Claude Opus 5.5.
+
+### October 1, 2026
+
+* Something older.
+"""
+pl = ft._claude_platform_items(PLATFORM_MD, CUTOFF)
+check("one item per dated section inside the window", len(pl) == 1, len(pl))
+check("anchors the rendered heading", pl[0]["url"] == ft.CLAUDE_PLATFORM_URL + "#october-22-2026", pl[0]["url"])
+check("joins the bullets as content, links flattened",
+      pl[0]["content"] == "We've launched Claude Models on Google Cloud, operated by Anthropic. Fast mode is available for Claude Opus 5.5.",
+      repr(pl[0]["content"]))
+check("dates the section", pl[0]["published_at"] == "2026-10-22T00:00:00+00:00", pl[0]["published_at"])
+check("titles it with the heading", pl[0]["title"] == "Claude Platform release notes (October 22, 2026)", pl[0]["title"])
+
+print("claude apps notes")
+APPS_HTML = """<h2 id="h_m">October 2026</h2>
+<div><h3 id="h_90213b2c7a">October 21, 2026</h3></div>
+<div><p><b>Claude Duet research preview</b></p></div>
+<div><p>We just opened a research preview: <b><a href="https://c.example/duet">Introducing Claude Duet</a></b>.</p></div>
+<div><p> </p></div>
+<div><h3 id="h_7e1">October 7, 2026</h3></div>
+<div><p><b>Claude Haiku 5.5 launch</b></p></div>
+<div><p>We just launched Claude Haiku 5.5.</p></div>
+<div><p><b>Monthly API credits for Max and Team plans</b></p></div>
+<div><p>Max and Team plans now include monthly API credits.</p></div>
+<div><p>They roll out over a few days.</p></div>
+<div><h3 id="h_old">September 1, 2026</h3></div>
+<div><p><b>Old entry</b></p></div><div><p>Old.</p></div>
+"""
+apps = ft._claude_apps_items(APPS_HTML, ft.update_cutoff({"updates_window_days": 20}, NOW))
+check("one item per bold title paragraph", [i["title"] for i in apps] ==
+      ["Claude Duet research preview", "Claude Haiku 5.5 launch", "Monthly API credits for Max and Team plans"],
+      [i["title"] for i in apps])
+check("dates entries by their h3", apps[1]["published_at"] == "2026-10-07T00:00:00+00:00", apps[1]["published_at"])
+check("gathers the description paragraphs", apps[2]["content"] ==
+      "Max and Team plans now include monthly API credits. They roll out over a few days.", repr(apps[2]["content"]))
+check("builds a unique anchor per entry", apps[1]["url"] != apps[2]["url"] and apps[1]["url"].startswith(ft.CLAUDE_APPS_URL + "#h_7e1-"), apps[1]["url"])
+check("stops at the first section older than the window", all("Old" not in i["title"] for i in apps))
+
+print("slack help page")
+SLACK_HTML = """<html><body><nav><h2>Site nav</h2></nav><div class="article_body"><p>See what's new.</p>
+<h2 id="h_oct">\n<br>October 2026</h2><h3 id="h_a">Later is now To-dos</h3><p>Stay on top of <a href="https://s.example">deadlines</a>.</p><ul><li>Add a reminder.</li></ul>
+<h3 id="h_b">Saved items have moved</h3><p>Previously archived items live in Saved.</p>
+<h2 id="h_sep">September 2026</h2><h3 id="h_c">Sign in with a passkey</h3><p>Members can sign in with a fingerprint.</p>
+<h2 id="h_aug">August 2026</h2><h3 id="h_d">Too old</h3><p>Dropped.</p></div><footer>Footer</footer></body></html>"""
+sl = ft._slack_help_items(SLACK_HTML)
+check("reads the two newest month sections only",
+      [i["title"] for i in sl] == ["Later is now To-dos", "Saved items have moved", "Sign in with a passkey"], [i["title"] for i in sl])
+check("anchors the h3 id", sl[0]["url"] == ft.SLACK_HELP_URL + "#h_a", sl[0]["url"])
+check("leaves the date unknown", sl[0]["published_at"] is None)
+check("carries the month in the feed name", sl[0]["extra"] == "What's new · October 2026", sl[0]["extra"])
+check("content runs to the next heading",
+      sl[0]["content"].endswith("Add a reminder.") and "Saved items" not in sl[0]["content"], repr(sl[0]["content"]))
+check("the last entry does not swallow the footer", sl[2]["content"] == "Members can sign in with a fingerprint.", repr(sl[2]["content"]))
+
+print("fetch_updates")
+original_fetchers = dict(ft.UPDATE_FETCHERS)
+try:
+    ft.UPDATE_FETCHERS["ok1"] = lambda src, cutoff: [
+        ft._update_item("B", "https://u.example/b", datetime(2026, 10, 22, tzinfo=timezone.utc), "", "", src["name"]),
+        ft._update_item("dup", "https://u.example/a", None, "", "", src["name"]),
+    ]
+    ft.UPDATE_FETCHERS["ok2"] = lambda src, cutoff: [
+        ft._update_item("A", "https://u.example/a", datetime(2026, 10, 23, tzinfo=timezone.utc), "", "", src["name"]),
+        ft._update_item("undated", "https://u.example/c", None, "", "", src["name"]),
+    ]
+    def boom_fetch(src, cutoff):
+        raise urllib.error.HTTPError(src.get("url", "x"), 403, "Forbidden", None, None)
+    ft.UPDATE_FETCHERS["boom"] = boom_fetch
+    product = {"id": "p", "label": "P", "sources": [
+        {"kind": "ok1", "name": "One"}, {"kind": "boom", "name": "Two"}, {"kind": "ok2", "name": "Three"}]}
+    res = ft.fetch_updates(product, {})
+    check("stays ok while one feed fails", res["status"] == "ok")
+    check("names the failed feed in the note", res["note"].startswith("取得失敗: Two (HTTPError"), res["note"])
+    check("dedupes by url, first feed wins", [i["title"] for i in res["items"]] == ["B", "undated", "dup"] or
+          [i["title"] for i in res["items"]] == ["B", "dup", "undated"], [i["title"] for i in res["items"]])
+    check("orders newest first with undated entries last",
+          [i["title"] for i in res["items"]][0] == "B" and res["items"][-1]["published_at"] is None, [i["title"] for i in res["items"]])
+    try:
+        ft.fetch_updates({"id": "p", "label": "P", "sources": [{"kind": "boom", "name": "Only"}]}, {})
+        check("fails when every feed fails", False, "no exception")
+    except RuntimeError as e:
+        check("fails when every feed fails", "Only" in str(e), e)
+finally:
+    ft.UPDATE_FETCHERS.clear(); ft.UPDATE_FETCHERS.update(original_fetchers)
+
+print("services")
+ids = [s["id"] for s in ft.SERVICES]
+check("service ids are unique", len(ids) == len(set(ids)), ids)
+check("every product is registered under market updates",
+      {s["id"] for s in ft.SERVICES if s["market"] == "updates"} == {p["id"] for p in ft.UPDATE_PRODUCTS})
+check("every product feed kind has a fetcher",
+      all(src["kind"] in ft.UPDATE_FETCHERS for p in ft.UPDATE_PRODUCTS for src in p["sources"]))
+
+
 # --- tie handling in scoring --------------------------------------------------
 
 print("add_base_scores ties")
@@ -278,6 +480,9 @@ try:
               all(by_id[i]["status"] == "skipped"
                   for i in ("lobsters", "reddit", "github", "techmeme",
                             "hatena", "zenn", "qiita")))
+        check("skips the product updates too",
+              all(by_id[p["id"]]["status"] == "skipped" for p in ft.UPDATE_PRODUCTS),
+              [(p["id"], by_id[p["id"]]["status"]) for p in ft.UPDATE_PRODUCTS])
         check("the default config leaves dev.to and HF Papers out entirely",
               not ({"devto", "hfpapers"} & set(by_id)), sorted(by_id))
         check("explains why they were skipped",
@@ -314,6 +519,38 @@ try:
         raw = json.loads((state / "runs" / today / "raw.json").read_text(encoding="utf-8"))
         check("treats --date today as a live run", raw["backfill"] is False)
         check("writes seen.json on a live run", (state / "seen.json").exists())
+
+    with tempfile.TemporaryDirectory() as tmp:
+        state = Path(tmp)
+        today = datetime.now().astimezone().strftime("%Y-%m-%d")
+        # /a was first seen on an earlier day: a trend service badges it, a
+        # product drops it; /b is new to both.
+        (state / "seen.json").write_text(json.dumps({"https://example.com/a": "2026-01-01"}), encoding="utf-8")
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            rc = run_main(state, [], {})
+        raw = json.loads((state / "runs" / today / "raw.json").read_text(encoding="utf-8"))
+        by_id = {s["id"]: s for s in raw["services"]}
+        check("registers the products under market updates",
+              all(by_id[p["id"]]["market"] == "updates" for p in ft.UPDATE_PRODUCTS))
+        check("a trend service keeps a seen item with the badge",
+              [(i["url"], i["seen_before"]) for i in by_id["hackernews"]["items"]] ==
+              [("https://example.com/a", True), ("https://example.com/b", False)],
+              by_id["hackernews"]["items"])
+        check("a product drops the seen item",
+              [i["url"] for i in by_id["claude"]["items"]] == ["https://example.com/b"],
+              [i["url"] for i in by_id["claude"]["items"]])
+        check("product items carry no score", by_id["claude"]["items"][0]["base_score"] == 0)
+        check("reports the dropped count", "claude" in out.getvalue() and "既出 1 件を除外" in out.getvalue(), out.getvalue())
+        seen = json.loads((state / "seen.json").read_text(encoding="utf-8"))
+        check("records the kept product item as seen today", seen.get("https://example.com/b") == today)
+        # Rerunning on the same day keeps what was first seen today.
+        with contextlib.redirect_stdout(io.StringIO()):
+            run_main(state, [], {})
+        raw = json.loads((state / "runs" / today / "raw.json").read_text(encoding="utf-8"))
+        by_id = {s["id"]: s for s in raw["services"]}
+        check("a same-day rerun keeps the product item",
+              [i["url"] for i in by_id["claude"]["items"]] == ["https://example.com/b"])
 
     with tempfile.TemporaryDirectory() as tmp:
         state = Path(tmp)

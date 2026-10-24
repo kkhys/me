@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+import SourceCard from "#/components/source-card.astro";
+import UpdateRow from "#/components/update-row.astro";
+import { itemAnchorId } from "#/utils/highlights";
+import { SERVICE_COLORS } from "#/utils/service-colors";
+import { UPDATES_ID } from "#/utils/updates";
+
+type Product = CollectionEntry<"runs">["data"]["updates"][number];
+
+interface Props {
+  product: Product;
+  highlightedAnchors: ReadonlySet<string>;
+}
+
+const { product, highlightedAnchors } = Astro.props;
+---
+
+<SourceCard
+  id={`${UPDATES_ID}-${product.id}`}
+  label={product.label}
+  dotColor={SERVICE_COLORS[product.id] ?? "var(--c-sub)"}
+  total={product.items.length}
+  fresh={undefined}
+  note={product.note}
+  empty={undefined}
+  allSeen={false}
+>
+  {
+    product.items.map((item, i) => {
+      const anchorId = itemAnchorId(UPDATES_ID, product.id, i + 1);
+
+      return (
+        <UpdateRow
+          item={item}
+          rank={i + 1}
+          anchorId={anchorId}
+          highlighted={highlightedAnchors.has(anchorId)}
+        />
+      );
+    })
+  }
+</SourceCard>

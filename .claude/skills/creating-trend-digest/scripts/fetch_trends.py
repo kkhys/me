@@ -6,6 +6,12 @@ Bookmark, Zenn, Qiita. dev.to and Hugging Face Daily Papers keep their
 fetchers but sit in config.json's disabled_sources by default; a disabled
 source is left out of the run entirely. Stdlib only.
 
+A second group of services, market "updates", collects the release notes of
+the products in UPDATE_PRODUCTS (Claude, OpenAI, Devin, Cursor, GitHub, Orca,
+Slack): one service per product, fed by that product's feeds. They carry no
+engagement, so they are ordered by recency and an entry already shown on an
+earlier day is dropped instead of badged.
+
 Each source failure is isolated: the service is reported with status
 "error" and the rest of the run continues, so one flaky API never kills
 the digest.
@@ -29,6 +35,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
+from functools import partial
 from html import unescape
 from pathlib import Path
 
@@ -391,8 +398,10 @@ def fetch_reddit(cfg):
 def safe_xml(xml_text):
     # Entity-expansion (billion laughs) and XXE both require a DTD; feeds
     # from these services never legitimately contain one, so reject outright
-    # instead of pulling in defusedxml as a dependency.
-    if re.search(r"<!\s*(DOCTYPE|ENTITY)", xml_text, re.I):
+    # instead of pulling in defusedxml as a dependency. CDATA is skipped
+    # first: a changelog entry quoting "<!DOCTYPE html>" in its body is text,
+    # not a declaration.
+    if re.search(r"<!\s*(DOCTYPE|ENTITY)", re.sub(r"<!\[CDATA\[.*?\]\]>", "", xml_text, flags=re.S), re.I):
         raise RuntimeError("XML に DTD 宣言が含まれるため解析を拒否")
     return ET.fromstring(xml_text)
 
@@ -538,6 +547,298 @@ BACKFILL_FETCHERS = {
 }
 
 
+# --- product updates --------------------------------------------------------
+
+# Release notes of the tools the reader uses. Each product becomes one service
+# of market "updates", fed by several feeds; a feed is stored under `extra`
+# so the digest can name it. Entries older than updates_window_days are left
+# out; entries with no per-entry date (Slack's monthly page) pass the window
+# and rely on the seen history alone.
+
+UPDATE_WINDOW_DAYS = 7
+UPDATE_CONTENT_CLIP = 3000
+
+CLAUDE_PLATFORM_URL = "https://platform.claude.com/docs/en/release-notes/overview"
+CLAUDE_APPS_URL = "https://support.claude.com/en/articles/12138966-release-notes"
+SLACK_HELP_URL = "https://slack.com/intl/en-gb/help/articles/115004846068-Slack-updates-and-changes"
+
+
+def parse_date(text):
+    """RFC 2822, ISO 8601 or "October 22, 2026" → aware datetime, else None."""
+    if not text:
+        return None
+    text = text.strip()
+    for parse in (
+        lambda t: datetime.fromisoformat(t.replace("Z", "+00:00")),
+        parsedate_to_datetime,
+        lambda t: datetime.strptime(t, "%B %d, %Y"),
+    ):
+        try:
+            dt = parse(text)
+        except (ValueError, TypeError, IndexError):
+            continue
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt
+    return None
+
+
+def _slug(text, limit=60):
+    return re.sub(r"-+", "-", re.sub(r"[^a-z0-9]+", "-", text.lower())).strip("-")[:limit]
+
+
+def _md_text(text):
+    """Flatten markdown links and emphasis left after clip() stripped the HTML."""
+    text = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", text)
+    return re.sub(r"(\*\*|__)(.+?)\1", r"\2", text)
+
+
+def _feed_entries(xml_text):
+    """RSS <item> and Atom <entry> elements as dicts. Unlike _rss_items this
+    keeps every <category> and reads an Atom link's href."""
+    root = safe_xml(xml_text)
+    for el in root.iter():
+        if el.tag.split("}")[-1] not in ("item", "entry"):
+            continue
+        fields = {"categories": []}
+        for c in el:
+            tag = c.tag.split("}")[-1]
+            if tag == "category":
+                # WordPress wraps categories in CDATA with entities intact.
+                fields["categories"].append(unescape(c.text or c.get("term") or "").strip())
+            elif tag == "link" and not (c.text or "").strip():
+                if c.get("rel", "alternate") == "alternate":
+                    fields["link"] = c.get("href", "")
+            elif tag not in fields:
+                fields[tag] = c.text or ""
+        yield fields
+
+
+def _update_item(title, url, published, excerpt, content, source):
+    item = make_item(title, url, 0, "",
+                     published.astimezone(timezone.utc).isoformat() if published else None,
+                     excerpt=_md_text(clip(excerpt, 200)), extra=source)
+    item["content"] = _md_text(clip(content, UPDATE_CONTENT_CLIP))
+    return item
+
+
+def _rss_update_items(src, cutoff):
+    """Entries of an RSS/Atom feed inside the window. Options: `categories`
+    (keep only entries carrying one of them), `skip_title` (regex),
+    `title` (format with {title}), `extra` = "categories" (name the feed by
+    the entry's categories), `pages` (WordPress ?paged=N, read until a page
+    is older than the window)."""
+    items = []
+    allow = src.get("categories")
+    skip = src.get("skip_title")
+    for page in range(1, src.get("pages", 1) + 1):
+        url = src["url"] if page == 1 else f"{src['url']}?paged={page}"
+        entries = list(_feed_entries(http_get(url)))
+        if not entries:
+            break
+        oldest = None
+        for e in entries:
+            published = parse_date(e.get("pubDate") or e.get("published")
+                                   or e.get("updated") or e.get("date"))
+            if published and (oldest is None or published < oldest):
+                oldest = published
+            title = clip(e.get("title", ""), 300)
+            link = (e.get("link") or e.get("guid") or "").strip()
+            cats = [c for c in e["categories"] if c]
+            if (not link or (skip and re.search(skip, title))
+                    or (allow and not set(cats) & set(allow))
+                    or (published and published < cutoff)):
+                continue
+            if src.get("title"):
+                title = src["title"].format(title=title)
+            source = ", ".join(cats[:3]) if src.get("extra") == "categories" and cats else src["name"]
+            desc = e.get("description") or e.get("summary") or ""
+            items.append(_update_item(title, link, published, desc,
+                                      e.get("encoded") or e.get("content") or desc, source))
+        if oldest is not None and oldest < cutoff:
+            break
+    return items
+
+
+def _github_release_items(releases, src, cutoff):
+    """Stable releases inside the window; drafts and prereleases (Codex alphas,
+    Orca mobile builds) are left out."""
+    items = []
+    for r in releases:
+        if r.get("draft") or r.get("prerelease"):
+            continue
+        published = parse_date(r.get("published_at"))
+        if published and published < cutoff:
+            continue
+        version = (r.get("name") or r.get("tag_name") or "").strip()
+        body = r.get("body") or ""
+        items.append(_update_item(f"{src['name']} {version}".strip(), r.get("html_url") or "",
+                                  published, body, body, src["name"]))
+    return items
+
+
+def _github_update_items(src, cutoff):
+    headers = {"Accept": "application/vnd.github+json"}
+    token = os.environ.get("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    data = get_json(f"https://api.github.com/repos/{src['repo']}/releases"
+                    f"?per_page={src.get('per_page', 20)}", headers)
+    return _github_release_items(data, src, cutoff)
+
+
+def _claude_platform_items(md, cutoff):
+    """One item per dated section of the markdown page ("### October 22, 2026"
+    followed by bullets), newest first; the anchor matches the rendered page."""
+    items = []
+    parts = re.split(r"^###\s+(.+?)\s*$", md, flags=re.M)
+    for k in range(1, len(parts) - 1, 2):
+        heading, body = parts[k].strip(), parts[k + 1]
+        published = parse_date(heading)
+        if published is None:
+            continue
+        if published < cutoff:
+            break
+        bullets = [clip(b, 600) for b in re.findall(r"^\*\s+(.+)$", body, flags=re.M)]
+        if not bullets:
+            continue
+        items.append(_update_item(f"Claude Platform release notes ({heading})",
+                                  f"{CLAUDE_PLATFORM_URL}#{_slug(heading)}", published,
+                                  bullets[0], " ".join(bullets), "Platform"))
+    return items
+
+
+def _claude_apps_items(html, cutoff):
+    """Entries sit under <h3 id>date</h3> as one all-bold title paragraph
+    followed by description paragraphs; several entries can share a date."""
+    items = []
+    chunks = re.split(r'<h3[^>]*\bid="([^"]+)"[^>]*>(.*?)</h3>', html, flags=re.S)
+    for k in range(1, len(chunks) - 2, 3):
+        anchor, heading, section = chunks[k], clip(chunks[k + 1], 100), chunks[k + 2]
+        published = parse_date(heading)
+        if published is None:
+            continue
+        if published < cutoff:
+            break
+        entries, title, desc = [], None, []
+        for raw in re.findall(r"<p>(.*?)</p>", section, flags=re.S):
+            text = clip(raw, 1500)
+            if not text:
+                continue
+            if re.fullmatch(r"\s*<b>.*?</b>\s*", raw, flags=re.S):
+                if title:
+                    entries.append((title, desc))
+                title, desc = text, []
+            elif title:
+                desc.append(text)
+        if title:
+            entries.append((title, desc))
+        for title, desc in entries:
+            text = " ".join(desc)
+            items.append(_update_item(title, f"{CLAUDE_APPS_URL}#{anchor}-{_slug(title)}",
+                                      published, text, text, "Claude Apps"))
+    return items
+
+
+def _slack_help_items(html, months=2):
+    """Feature entries (<h3 id>) of the newest `months` month sections (<h2>)
+    of the help-centre changelog. Entries are dated by month only, so
+    published_at stays None and the month goes into the feed name."""
+    items = []
+    body = html.split('class="article_body"', 1)[-1]
+    for section in re.split(r"<h2[^>]*>", body)[1:months + 1]:
+        month = clip(section.split("</h2>", 1)[0], 40)
+        for m in re.finditer(r'<h3[^>]*\bid="([^"]+)"[^>]*>(.*?)</h3>(.*?)(?=<h3|\Z)',
+                             section, flags=re.S):
+            title = clip(m.group(2), 300)
+            if not title:
+                continue
+            desc = clip(re.split(r"<div|<footer|</article", m.group(3), maxsplit=1)[0], UPDATE_CONTENT_CLIP)
+            items.append(_update_item(title, f"{SLACK_HELP_URL}#{m.group(1)}", None,
+                                      desc, desc, f"What's new · {month}"))
+    return items
+
+
+UPDATE_FETCHERS = {
+    "rss": _rss_update_items,
+    "github": _github_update_items,
+    "claude_platform": lambda src, cutoff: _claude_platform_items(
+        http_get(CLAUDE_PLATFORM_URL + ".md"), cutoff),
+    "claude_apps": lambda src, cutoff: _claude_apps_items(http_get(CLAUDE_APPS_URL), cutoff),
+    "slack_help": lambda src, cutoff: _slack_help_items(http_get(SLACK_HELP_URL)),
+}
+
+UPDATE_PRODUCTS = [
+    {"id": "claude", "label": "Claude", "sources": [
+        {"kind": "github", "repo": "anthropics/claude-code", "name": "Claude Code"},
+        {"kind": "claude_platform", "name": "Platform"},
+        {"kind": "claude_apps", "name": "Claude Apps"},
+    ]},
+    {"id": "openai", "label": "OpenAI", "sources": [
+        # Alphas ship several times a day, so look further back for the stable ones.
+        {"kind": "github", "repo": "openai/codex", "name": "Codex CLI", "per_page": 40},
+        # The CLI releases also appear here without a body; GitHub covers them.
+        {"kind": "rss", "url": "https://developers.openai.com/codex/changelog/rss.xml",
+         "name": "Codex / ChatGPT", "skip_title": r"^Codex CLI Release:"},
+        # The newsroom mixes customer stories and research in; Product is the launches.
+        {"kind": "rss", "url": "https://openai.com/news/rss.xml", "name": "News",
+         "categories": ["Product"]},
+    ]},
+    {"id": "devin", "label": "Devin", "sources": [
+        {"kind": "rss", "url": "https://docs.devin.ai/release-notes/overview/rss.xml",
+         "name": "Release notes", "title": "Devin release notes ({title})"},
+    ]},
+    {"id": "cursor", "label": "Cursor", "sources": [
+        {"kind": "rss", "url": "https://cursor.com/changelog/rss.xml", "name": "Changelog"},
+        # Grok Bot and model availability are announced here, not in the changelog.
+        {"kind": "rss", "url": "https://forum.cursor.com/c/announcements/11.rss", "name": "Forum"},
+    ]},
+    {"id": "github_changelog", "label": "GitHub", "sources": [
+        # 10 entries per page; a busy week needs a few pages.
+        {"kind": "rss", "url": "https://github.blog/changelog/feed/", "name": "Changelog",
+         "pages": 4, "extra": "categories"},
+    ]},
+    {"id": "orca", "label": "Orca", "sources": [
+        {"kind": "github", "repo": "stablyai/orca", "name": "Orca"},
+    ]},
+    {"id": "slack", "label": "Slack", "sources": [
+        {"kind": "slack_help", "name": "What's new"},
+        {"kind": "rss", "url": "https://docs.slack.dev/changelog/rss.xml", "name": "Platform"},
+    ]},
+]
+
+
+def update_cutoff(cfg, now=None):
+    """Start of the window, floored to midnight UTC so day-dated entries
+    (release-note pages) on the boundary day are kept."""
+    now = now or datetime.now(timezone.utc)
+    days = cfg.get("updates_window_days", UPDATE_WINDOW_DAYS)
+    return (now - timedelta(days=days)).replace(hour=0, minute=0, second=0, microsecond=0)
+
+
+def fetch_updates(product, cfg):
+    """Run every feed of one product. A failed feed is named in the note
+    while the others still count; only all feeds failing fails the product."""
+    cutoff = update_cutoff(cfg)
+    items, failed, urls = [], [], set()
+    for src in product["sources"]:
+        try:
+            fetched = UPDATE_FETCHERS[src["kind"]](src, cutoff)
+        except Exception as e:  # noqa: BLE001 - isolate one feed of the product
+            failed.append(f"{src['name']} ({type(e).__name__}: {e})")
+            continue
+        for it in fetched:
+            if it["url"] not in urls:
+                urls.add(it["url"])
+                items.append(it)
+    if failed and len(failed) == len(product["sources"]):
+        raise RuntimeError("; ".join(failed))
+    # UTC ISO strings, so the lexicographic order is chronological; undated last.
+    items.sort(key=lambda x: x.get("published_at") or "", reverse=True)
+    note = f"取得失敗: {'; '.join(failed)}" if failed else ""
+    return {"status": "ok", "note": note, "items": items}
+
+
 SERVICES = [
     {"id": "hackernews", "label": "Hacker News", "market": "global", "fetch": fetch_hackernews},
     {"id": "lobsters", "label": "Lobsters", "market": "global", "fetch": fetch_lobsters},
@@ -549,6 +850,9 @@ SERVICES = [
     {"id": "hatena", "label": "はてなブックマーク", "market": "japan", "fetch": fetch_hatena},
     {"id": "zenn", "label": "Zenn", "market": "japan", "fetch": fetch_zenn},
     {"id": "qiita", "label": "Qiita", "market": "japan", "fetch": fetch_qiita},
+] + [
+    {"id": p["id"], "label": p["label"], "market": "updates", "fetch": partial(fetch_updates, p)}
+    for p in UPDATE_PRODUCTS
 ]
 
 
@@ -837,11 +1141,24 @@ def main():
 
     keep = cfg.get("items_per_service", 10) * 2
     services = []
+    dropped = {}
     for svc, res in zip(active, results):
         items = res.get("items", [])
-        add_base_scores(items, now)
-        items.sort(key=lambda x: x.get("base_score", 0), reverse=True)
-        items = items[:keep]
+        if svc["market"] == "updates":
+            # Release notes carry no engagement, so there is no score and the
+            # order stays newest first. An entry shown on an earlier day is
+            # dropped rather than badged — a release is news once — and only
+            # the entries that survive are recorded as seen.
+            unseen = [it for it in items
+                      if not (seen.get(it["url"]) and seen[it["url"]] < target)]
+            dropped[svc["id"]] = len(items) - len(unseen)
+            items = unseen[:keep]
+            for it in items:
+                it["base_score"] = 0
+        else:
+            add_base_scores(items, now)
+            items.sort(key=lambda x: x.get("base_score", 0), reverse=True)
+            items = items[:keep]
         apply_seen(items, seen, target)
         services.append({
             "id": svc["id"], "label": svc["label"], "market": svc["market"],
@@ -876,7 +1193,9 @@ def main():
         print(f"DISABLED: {', '.join(sorted(disabled - set(unknown)))} (config.json の disabled_sources)")
     for s in services:
         note = f" — {s['note']}" if s["note"] else ""
-        print(f"{s['id']:<11} {s['status']:<8} {len(s['items']):>3} items{note}")
+        if dropped.get(s["id"]):
+            note = f" (既出 {dropped[s['id']]} 件を除外){note}"
+        print(f"{s['id']:<16} {s['status']:<8} {len(s['items']):>3} items{note}")
     print(f"raw: {raw_path}")
     print(f"run_dir: {run_dir}")
 
