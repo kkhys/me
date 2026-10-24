@@ -58,6 +58,7 @@ const createHarness = (pagefind: Partial<PagefindModule>) => {
   const module: PagefindModule = {
     options: vi.fn<PagefindModule["options"]>(() => Promise.resolve()),
     init: vi.fn<PagefindModule["init"]>(() => Promise.resolve()),
+    search: vi.fn<PagefindModule["search"]>().mockResolvedValue(response([])),
     debouncedSearch: respond([]),
     ...pagefind,
   };

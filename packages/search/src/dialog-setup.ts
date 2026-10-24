@@ -1,7 +1,8 @@
 import { type ExcerptPart, parseExcerpt } from "./excerpt";
 import { cycleIndex, isToggleShortcut } from "./keyboard";
+import { loadPagefind } from "./loader";
 import { createSearchRunner, type SearchStage } from "./runner";
-import type { PagefindModule, PagefindSearchFragment, PagefindSearchOptions } from "./types";
+import type { PagefindSearchFragment, PagefindSearchOptions } from "./types";
 
 export const requireElement = <T extends Element>(
   root: ParentNode,
@@ -64,8 +65,6 @@ export const setupSearchDialog = (
   dialog: HTMLDialogElement,
   options: SearchDialogOptions,
 ): SearchDialogApi => {
-  const pagefindUrl = `${options.bundlePath}pagefind.js`;
-
   // Every selector below points at markup in dialog.astro, so a miss is a
   // programming error and should fail loudly instead of leaving a dead UI.
   const input = requireElement(
@@ -89,35 +88,20 @@ export const setupSearchDialog = (
     ...document.querySelectorAll<HTMLButtonElement>(`button[commandfor="${dialog.id}"]`),
   ];
 
-  let pagefindPromise: Promise<PagefindModule> | undefined;
   let composing = false;
 
-  // The promise is cached even when it rejects: a failed module fetch is
-  // recorded in the module map, so re-importing the same URL fails
-  // identically without a page reload.
-  const loadPagefind = () => {
-    pagefindPromise ??= (async () => {
-      const pagefind = (await import(
-        /* @vite-ignore */
-        pagefindUrl
-      )) as PagefindModule;
-      await pagefind.options({ excerptLength: options.excerptLength });
-      await pagefind.init();
-      return pagefind;
-    })();
-    return pagefindPromise;
-  };
+  const load = () => loadPagefind(options.bundlePath, { excerptLength: options.excerptLength });
 
   // Best-effort warm-up on hover/open. The failure is swallowed here so that
   // hovering in a dev server without a build neither logs "Search failed"
   // nor writes to the status line; the next real search reports it.
   const warmUp = () => {
-    loadPagefind().catch(() => {});
+    load().catch(() => {});
   };
 
   const search = createSearchRunner(
     {
-      loadPagefind,
+      loadPagefind: load,
       render: (fragments) => {
         list.replaceChildren(
           ...fragments.map((fragment) => options.renderResult(fragment, template)),

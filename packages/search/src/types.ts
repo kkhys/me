@@ -2,8 +2,8 @@
 // `pagefind_web_js/types/index.d.ts` at Pagefind 1.5.2 (the `pagefind` npm
 // package only types the Node indexing API). Names follow the upstream file
 // so it can be diffed on a Pagefind upgrade; only the members the dialogs call
-// or read are declared, and `filters` / `sort` keep their simple forms (the
-// compound `{ any: [...] }` / `{ not: ... }` syntax is left out).
+// or read are declared, and `sort` keeps its simple form. Of the compound
+// filter syntax only `{ any: [...] }` is declared (`{ not: ... }` is left out).
 
 export interface PagefindIndexOptions {
   basePath?: string | undefined;
@@ -13,8 +13,11 @@ export interface PagefindIndexOptions {
   exactDiacritics?: boolean | undefined;
 }
 
+/** A filter value: one value, every value of a list (AND), or any of them. */
+export type PagefindFilterValue = string | string[] | { any: string[] };
+
 export interface PagefindSearchOptions {
-  filters?: Record<string, string | string[]> | undefined;
+  filters?: Record<string, PagefindFilterValue> | undefined;
   /** Pagefind honours a single key and warns on the rest. */
   sort?: Record<string, "asc" | "desc"> | undefined;
 }
@@ -83,6 +86,7 @@ export interface PagefindModule {
    * instead.
    */
   init: () => Promise<void>;
+  search: (query: string, options?: PagefindSearchOptions) => Promise<PagefindIndexesSearchResults>;
   /** Resolves to `null` when a newer call superseded this one. */
   debouncedSearch: (
     query: string,
