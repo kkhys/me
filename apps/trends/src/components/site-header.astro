@@ -1,4 +1,6 @@
 ---
+import SearchButton from "#/features/search/components/search-button.astro";
+
 const path = Astro.url.pathname.replace(/\/$/u, "") || "/";
 const links = [
   { href: "/archive", label: "Archive" },
@@ -20,6 +22,7 @@ const links = [
         ))
       }
     </nav>
+    <SearchButton />
   </div>
 </header>
 
@@ -30,6 +33,7 @@ const links = [
     padding: 0.625rem var(--space-4);
     display: flex;
     align-items: center;
+    gap: var(--space-4);
   }
 
   /* Keep the brand aligned with the content column edge (see digest-view). */

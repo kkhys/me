@@ -13,14 +13,18 @@ import { sortMarketsGlobalFirst } from "#/utils/markets";
 import { formatGeneratedAt } from "#/utils/runs";
 import { countSeen } from "#/utils/seen";
 import { UPDATES_ID } from "#/utils/updates";
+import { buildDateMeta, buildDateSort } from "#/features/search/utils/meta";
 
 interface Props {
   entry: CollectionEntry<"runs">;
   prev: string | undefined;
   next: string | undefined;
+  /* Whether this page is the one Pagefind indexes for the run. `/` renders the
+     latest run too and passes false, so a day shows up once in the search. */
+  indexable: boolean;
 }
 
-const { entry, prev, next } = Astro.props;
+const { entry, prev, next, indexable } = Astro.props;
 const { date, digest, generated_at, updates } = entry.data;
 const markets = sortMarketsGlobalFirst(entry.data.markets);
 const itemTotal =
@@ -47,7 +51,12 @@ const highlightedAnchors = new Set(anchors.values());
 </aside>
 <div class="wrap">
   <DateNav current={date} prev={prev} next={next} />
-  <main id="main">
+  <main
+    id="main"
+    data-pagefind-body={indexable ? "" : undefined}
+    data-pagefind-meta={indexable ? buildDateMeta(date) : undefined}
+    data-pagefind-sort={indexable ? buildDateSort(date) : undefined}
+  >
     <DigestHero digest={digest} anchors={anchors} />
     <DigestToolbar date={date} total={itemTotal} seen={seenTotal} />
     {

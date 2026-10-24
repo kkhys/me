@@ -1,0 +1,53 @@
+---
+import SearchIcon from "@kkhys/ui/icons/search.svg";
+import { searchConfig } from "#/features/search/config";
+---
+
+<button
+  type="button"
+  class="search-button"
+  commandfor={searchConfig.dialogId}
+  command="show-modal"
+  aria-label="記事を検索"
+  data-umami-event="search-open"
+>
+  <SearchIcon aria-hidden="true" />
+</button>
+
+<style>
+  /* Sized to the menu links' 18px line box so the header keeps its height;
+     coloured like them too. */
+  .search-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    appearance: none;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    color: var(--c-sub);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  /* Extend the hit area to the 24px WCAG 2.5.8 minimum without changing the
+     visual. */
+  .search-button::before {
+    content: "";
+    position: absolute;
+    inset: -0.1875rem;
+  }
+
+  .search-button:hover {
+    color: var(--c-text);
+  }
+
+  .search-button svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+</style>

@@ -10,7 +10,7 @@ export default defineConfig({
   test: {
     exclude: ["node_modules", ".direnv", "dist"],
     coverage: {
-      include: ["src/utils/*.ts"],
+      include: ["src/utils/*.ts", "src/features/**/*.ts"],
     },
   },
 });

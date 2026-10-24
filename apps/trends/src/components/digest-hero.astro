@@ -32,7 +32,9 @@ const { digest, anchors } = Astro.props;
                 <span class="hl-title palt">
                   <a href={highlight.url} target="_blank" rel="noreferrer">
                     {highlight.title_ja || highlight.title}
-                    <span class="sr-only">(新しいタブで開く)</span>
+                    <span class="sr-only" data-pagefind-ignore>
+                      (新しいタブで開く)
+                    </span>
                   </a>
                   {anchor ? (
                     <a class="hl-service is-link" href={`#${anchor}`} title="一覧の該当記事へ移動">

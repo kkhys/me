@@ -6,6 +6,7 @@ import HeadMeta from "@kkhys/ui/head-meta.astro";
 import SkipLink from "@kkhys/ui/skip-link.astro";
 import OpenGraph from "@kkhys/seo/open-graph.astro";
 import TwitterCard from "@kkhys/seo/twitter-card.astro";
+import SearchDialog from "#/features/search/components/search-dialog.astro";
 
 interface Props {
   title?: string | undefined;
@@ -32,5 +33,6 @@ const { title = SITE_NAME, description = SITE_DESCRIPTION } = Astro.props;
 <body>
 <SkipLink label="本文へ移動" />
 <slot/>
+<SearchDialog />
 </body>
 </html>

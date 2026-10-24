@@ -18,7 +18,7 @@ type Update = CollectionEntry<"runs">["data"]["updates"][number]["items"][number
 interface Props {
   item: Update;
   rank: number;
-  /* Row id; the hero's service chips jump here. */
+  /* Id of the title heading; the hero's service chips and the search results jump here. */
   anchorId: string;
   highlighted: boolean;
 }
@@ -32,15 +32,18 @@ const foldParagraphs = splitParagraphs(item.article_summary);
 const stars = interestStars(item.interest);
 ---
 
-<article class:list={["item", { "is-highlight": highlighted }]} id={anchorId}>
+<article class:list={["item", { "is-highlight": highlighted }]}>
   <span class="rank">{rank}</span>
   <div class="body">
     <Budoux>
-      <div class="title palt">
+      <h4 class="title palt" id={anchorId}>
         <a href={item.url} target="_blank" rel="noreferrer">
-          {displayTitle}<span class="sr-only">(新しいタブで開く)</span>
+          {displayTitle}
+          <span class="sr-only" data-pagefind-ignore>
+            (新しいタブで開く)
+          </span>
         </a>
-      </div>
+      </h4>
     </Budoux>
     {originalTitle && <p class="original-title">{originalTitle}</p>}
     {
@@ -53,7 +56,7 @@ const stars = interestStars(item.interest);
     {
       foldParagraphs.length > 0 && (
         <details class="discussion">
-          <summary>変更点の要約</summary>
+          <summary data-pagefind-ignore>変更点の要約</summary>
           <div class="fold-body">
             <Budoux>
               {foldParagraphs.map((paragraph) => (
@@ -66,13 +69,17 @@ const stars = interestStars(item.interest);
     }
     <div class="meta">
       <span class="facts">
-        {highlighted && <span class="chip highlight">ハイライト</span>}
+        {highlighted && (
+          <span class="chip highlight" data-pagefind-ignore>
+            ハイライト
+          </span>
+        )}
         {item.source && <span class="chip">{item.source}</span>}
         {host && <span>{host}</span>}
       </span>
       {
         stars && (
-          <span class="stars" title="興味マッチ度">
+          <span class="stars" title="興味マッチ度" data-pagefind-ignore>
             <span class="sr-only">興味マッチ度 {item.interest}</span>
             <span aria-hidden="true">{"★".repeat(stars.filled) + "☆".repeat(stars.empty)}</span>
           </span>
@@ -88,8 +95,6 @@ const stars = interestStars(item.interest);
     gap: var(--space-3);
     padding: var(--space-4) var(--space-1);
     border-bottom: 1px solid var(--c-border);
-    /* Lands below the two sticky bars when jumped to from the hero. */
-    scroll-margin-top: calc(var(--toolbar-height) + var(--service-header-height) + var(--space-2));
   }
 
   .rank {
@@ -119,9 +124,15 @@ const stars = interestStars(item.interest);
   }
 
   .title {
+    margin: 0;
     font-size: 0.9375rem;
     font-weight: var(--fw-medium);
     line-height: 1.6;
+    /* The jump target of the hero chips and the search results: lands below
+       the two sticky bars with the row's top padding above it. */
+    scroll-margin-top: calc(
+      var(--toolbar-height) + var(--service-header-height) + var(--space-2) + var(--space-4)
+    );
   }
 
   .original-title {

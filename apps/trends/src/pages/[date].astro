@@ -36,5 +36,5 @@ const { entry, prev, next } = Astro.props;
   description={entry.data.digest.headline}
 >
   <SiteHeader />
-  <DigestView entry={entry} prev={prev} next={next} />
+  <DigestView entry={entry} prev={prev} next={next} indexable />
 </BaseLayout>

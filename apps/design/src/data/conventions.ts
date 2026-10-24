@@ -581,9 +581,20 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         evidence: [at("packages/search/src/dialog.astro", 41)],
       },
       {
-        rule: "検索結果の文言は 2 アプリで同一",
+        rule: "検索結果の文言は共有 runner で全アプリ同一",
         values: ["「{query}」に一致する〜はありません", "{total} 件中 {shown} 件を表示"],
         evidence: [at("packages/search/src/runner.ts", 31)],
+      },
+      {
+        rule: "見出しで節に分かれるページの検索結果は、重みが最大の sub_result を 1 件選び「ページ名 / 節の見出し」で出す",
+        detail:
+          "Pagefind は sub_results を文書順で返すので pickSubResult が選び直す。節に当たらないヒットはページ自身として扱い、ページ名だけを出す。",
+        values: ["pickSubResult", "toSectionHref"],
+        evidence: [
+          at("packages/search/src/sub-result.ts", 12),
+          at("apps/design/src/components/search-dialog.astro", 126),
+          at("apps/trends/src/features/search/components/search-dialog.astro", 134),
+        ],
       },
       {
         rule: "無限スクロールは IntersectionObserver + rootMargin 200px。スピナーは最低 500ms 出す",
