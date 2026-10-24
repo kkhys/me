@@ -523,9 +523,14 @@ try:
     with tempfile.TemporaryDirectory() as tmp:
         state = Path(tmp)
         today = datetime.now().astimezone().strftime("%Y-%m-%d")
-        # /a was first seen on an earlier day: a trend service badges it, a
-        # product drops it; /b is new to both.
-        (state / "seen.json").write_text(json.dumps({"https://example.com/a": "2026-01-01"}), encoding="utf-8")
+        # /a is already in a run file of the site: a product drops it, a trend
+        # service is unaffected; /b is new. The seen history plays no part.
+        site = Path(tmp) / "site"
+        runs = site / "apps" / "trends" / "src" / "content" / "runs"
+        runs.mkdir(parents=True)
+        (runs / "2026-01-01.json").write_text(json.dumps({"updates": [
+            {"id": "claude", "items": [{"url": "https://example.com/a"}]}]}), encoding="utf-8")
+        (state / "config.json").write_text(json.dumps({"site_repo": str(site)}), encoding="utf-8")
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             rc = run_main(state, [], {})
@@ -533,24 +538,29 @@ try:
         by_id = {s["id"]: s for s in raw["services"]}
         check("registers the products under market updates",
               all(by_id[p["id"]]["market"] == "updates" for p in ft.UPDATE_PRODUCTS))
-        check("a trend service keeps a seen item with the badge",
-              [(i["url"], i["seen_before"]) for i in by_id["hackernews"]["items"]] ==
-              [("https://example.com/a", True), ("https://example.com/b", False)],
+        check("a trend service keeps the item the site already placed as an update",
+              [i["url"] for i in by_id["hackernews"]["items"]] == ["https://example.com/a", "https://example.com/b"],
               by_id["hackernews"]["items"])
-        check("a product drops the seen item",
+        check("a product drops the placed item",
               [i["url"] for i in by_id["claude"]["items"]] == ["https://example.com/b"],
               [i["url"] for i in by_id["claude"]["items"]])
-        check("product items carry no score", by_id["claude"]["items"][0]["base_score"] == 0)
-        check("reports the dropped count", "claude" in out.getvalue() and "既出 1 件を除外" in out.getvalue(), out.getvalue())
+        item = by_id["claude"]["items"][0]
+        check("product items carry no score and no 既出", item["base_score"] == 0 and item["seen_before"] is False)
+        check("tags the entry with its local publication day", item["day"] == "2026-08-05", item["day"])
+        check("reports the dropped count", "掲載済み 1 件を除外" in out.getvalue(), out.getvalue())
         seen = json.loads((state / "seen.json").read_text(encoding="utf-8"))
-        check("records the kept product item as seen today", seen.get("https://example.com/b") == today)
-        # Rerunning on the same day keeps what was first seen today.
-        with contextlib.redirect_stdout(io.StringIO()):
-            run_main(state, [], {})
-        raw = json.loads((state / "runs" / today / "raw.json").read_text(encoding="utf-8"))
-        by_id = {s["id"]: s for s in raw["services"]}
-        check("a same-day rerun keeps the product item",
-              [i["url"] for i in by_id["claude"]["items"]] == ["https://example.com/b"])
+        check("records trend items but not update entries in the seen history",
+              seen.get("https://example.com/a") == today and seen.get("https://example.com/b") == today
+              and all(v == today for v in seen.values()))
+
+    print("update_day / placed_update_urls")
+    undated = ft._update_item("x", "https://u.example/x", None, "", "", "F")
+    check("an undated entry takes the run's day", ft.update_day(undated, "2026-10-24") == "2026-10-24")
+    late = ft._update_item("y", "https://u.example/y", datetime(2026, 10, 23, 23, 39, tzinfo=timezone.utc), "", "", "F")
+    check("a late-UTC entry belongs to the next local day in JST",
+          ft.update_day(late, "x") == datetime(2026, 10, 23, 23, 39, tzinfo=timezone.utc).astimezone().strftime("%Y-%m-%d"))
+    check("no site repo means nothing is placed", ft.placed_update_urls({}) == set())
+    check("a missing runs dir means nothing is placed", ft.placed_update_urls({"site_repo": "/nonexistent"}) == set())
 
     with tempfile.TemporaryDirectory() as tmp:
         state = Path(tmp)

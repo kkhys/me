@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { formatUpdateDate, splitProducts } from "#/utils/updates";
+import { splitProducts } from "#/utils/updates";
 
 const product = (label: string, status: "ok" | "error" | "skipped", items: number) => ({
   label,
@@ -36,23 +36,5 @@ describe("splitProducts", () => {
 
   it("handles an empty list", () => {
     expect(splitProducts([])).toEqual({ active: [], quiet: [] });
-  });
-});
-
-describe("formatUpdateDate", () => {
-  it("formats the JST day with dots", () => {
-    expect(formatUpdateDate("2026-10-23T05:00:00+00:00")).toBe("2026.10.23");
-  });
-
-  it("rolls a late UTC timestamp over to the next JST day", () => {
-    expect(formatUpdateDate("2026-10-23T23:39:00+00:00")).toBe("2026.10.24");
-  });
-
-  it("returns an empty string for month-dated entries", () => {
-    expect(formatUpdateDate("")).toBe("");
-  });
-
-  it("returns an empty string for garbage", () => {
-    expect(formatUpdateDate("not a date")).toBe("");
   });
 });

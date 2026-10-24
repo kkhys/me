@@ -29,30 +29,6 @@ interface TocEntry {
 
 const entries: TocEntry[] = [];
 
-/* Same order as the page: the updates group first, only the products that
-   render as cards. */
-if (updates.length > 0) {
-  entries.push({
-    depth: 2,
-    id: UPDATES_ID,
-    label: UPDATES_LABEL,
-    color: undefined,
-    total: undefined,
-    fresh: undefined,
-  });
-
-  for (const product of splitProducts(updates).active) {
-    entries.push({
-      depth: 3,
-      id: `${UPDATES_ID}-${product.id}`,
-      label: product.label,
-      color: SERVICE_COLORS[product.id] ?? "var(--c-sub)",
-      total: product.items.length,
-      fresh: undefined,
-    });
-  }
-}
-
 for (const market of markets) {
   entries.push({
     depth: 2,
@@ -73,6 +49,30 @@ for (const market of markets) {
       color: SERVICE_COLORS[service.id] ?? "var(--c-sub)",
       total: service.items.length,
       fresh: seen > 0 ? service.items.length - seen : undefined,
+    });
+  }
+}
+
+/* Same order as the page: the updates group last, only the products that
+   render as cards. */
+if (updates.length > 0) {
+  entries.push({
+    depth: 2,
+    id: UPDATES_ID,
+    label: UPDATES_LABEL,
+    color: undefined,
+    total: undefined,
+    fresh: undefined,
+  });
+
+  for (const product of splitProducts(updates).active) {
+    entries.push({
+      depth: 3,
+      id: `${UPDATES_ID}-${product.id}`,
+      label: product.label,
+      color: SERVICE_COLORS[product.id] ?? "var(--c-sub)",
+      total: product.items.length,
+      fresh: undefined,
     });
   }
 }

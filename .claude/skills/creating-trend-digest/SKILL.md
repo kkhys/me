@@ -90,11 +90,18 @@ products as services of market `updates`, one service per product:
 | `orca`             | Orca   | GitHub releases (stable only)                                                                      |
 | `slack`            | Slack  | Help-centre "Slack updates and changes" page, platform changelog (docs.slack.dev)                  |
 
-The script keeps entries published within `updates_window_days` (default 7) of the run, and drops entries it already fetched on an earlier day — a
-release is news once, so there is no 既出 badge here. Each item carries
-`extra` naming its feed ("Claude Code", "Platform", "Claude Apps", "Codex
-CLI", "Forum", GitHub's categories, "What's new · October 2026" ...),
-`published_at` (null for Slack's help page, which dates by month only),
+An entry belongs to the digest of the day it was published (local time),
+not to the day it was fetched: the script keeps entries published within
+`updates_window_days` (default 7) of the run, tags each with `day`
+(`YYYY-MM-DD`), and drops every URL already present in an `updates` block
+of the site's run files (`site_repo`) — those files, not `seen.json`, are
+the record of what has been shown, so there is no 既出 badge here. A run
+therefore carries today's entries plus the ones that appeared after the
+earlier runs of the past days; step 4 writes each into its own day's file.
+Entries without a date (Slack's help page dates by month only) get the
+run's day. Each item carries `extra` naming its feed ("Claude Code",
+"Platform", "Claude Apps", "Codex CLI", "Forum", GitHub's categories,
+"What's new · October 2026" ...), `published_at` (null when undated),
 `excerpt`, and `content` (the release body, clipped to 3000 chars); there
 is no engagement, `base_score` is 0 and the order is newest first. A
 product id in `disabled_sources` removes it like any other source. A feed
@@ -195,8 +202,9 @@ changes, not the changelog:
   works, and marketing or customer-story posts.
 - A release that bundles notable and trivial changes stays; the summary
   names the notable ones.
-- At most `items_per_service` entries per product, newest first (raw.json
-  order). A product with nothing notable gets `items: []` with its
+- Judge every entry of the run, whichever `day` it carries. Per product
+  and day, at most `items_per_service` entries, newest first (raw.json
+  order). A product with nothing notable on a day gets `items: []` with its
   `status` — the site folds it into one 更新なし line.
 
 Each kept entry:
@@ -209,7 +217,8 @@ Each kept entry:
   Foundry でも利用可能に"). Otherwise the usual rule: translation, `""`
   when already Japanese.
 - `source`: `extra` from raw.json unchanged.
-- `published_at`: from raw.json unchanged, `""` when it is null.
+- `published_at`: from raw.json unchanged, `""` when it is null. The site
+  shows no date — the entry sits in the digest of its `day`.
 - `interest`: stars from the profile, same scale as the items.
 - `summary`: 1-2 Japanese sentences naming what changed concretely
   (feature, model, price, version).
@@ -339,9 +348,17 @@ Write `$REPO/apps/trends/src/content/runs/<date>.json` in this shape:
   section for them.
 - `updates` lists every `updates` service of raw.json in its order (claude,
   openai, devin, cursor, github_changelog, orca, slack) with `status` /
-  `note` carried through and the entries kept in step 2; a product with
-  nothing notable keeps `items: []`. Disabled products stay absent. In a
-  backfill write `"updates": []`.
+  `note` carried through and the entries kept in step 2 whose `day` is
+  this date; a product with nothing notable keeps `items: []`. Disabled
+  products stay absent. In a backfill write `"updates": []`.
+- Entries with an earlier `day` go into that day's file,
+  `$REPO/apps/trends/src/content/runs/<day>.json`: read it, append the
+  entries to the matching product of its `updates` (newest first; create
+  the full 7-product block with `status: "ok"` when the file predates the
+  field), change nothing else in it — the hero, the markets and the other
+  entries stay as published — and keep `generated_at` as it is. Skip a
+  `day` with no file (the digest was not run that day). Note the days you
+  touched for the report.
 - The site's zod schema (`apps/trends/src/content.config.ts`) is strict:
   unknown or retired fields (e.g. `action_note`) fail the build. When the
   schema changes, update it, this JSON example, and the existing files in
@@ -354,17 +371,18 @@ Then commit → deploy → push, in this order — deploy must succeed before
 anything is pushed:
 
 ```bash
-git -C $REPO add apps/trends/src/content/runs/<date>.json
+git -C $REPO add apps/trends/src/content/runs/<date>.json apps/trends/src/content/runs/<earlier day>.json ...
 git -C $REPO commit -m "chore(trends): add digest for <date>"
 pnpm -C $REPO deploy:trends
 git -C $REPO push origin main
 open https://trends.kkhys.me/
 ```
 
-Use `update digest for <date>` as the message when overwriting. Failure
-handling:
+Stage every run file the run changed — today's and the earlier days that
+received entries — in the one commit. Use `update digest for <date>` as
+the message when overwriting. Failure handling:
 
-- Build fails on a zod error → fix the JSON, `git add` it, then
+- Build fails on a zod error → fix the JSON, `git add` the file(s), then
   `git -C $REPO commit --amend --no-edit` and retry the deploy (max 2
   retries). The commit is not pushed yet, so amending is safe.
 - Deploy fails otherwise → retry once. If it still fails, do NOT push; leave
@@ -377,8 +395,8 @@ handling:
 ### 5. Report
 
 Reply with 2-3 sentences: today's main takeaway, anything unusual (failed
-sources, bootstrap notice), the published URL (https://trends.kkhys.me/),
-and the commit hash.
+sources, bootstrap notice, earlier days that received update entries), the
+published URL (https://trends.kkhys.me/), and the commit hash.
 
 ## Feedback → profile updates (the secretary loop)
 

@@ -36,7 +36,7 @@ const seenTotal = markets.reduce(
 /* The updates group resolves like a market, so a highlight can jump to a
    release-note row too. */
 const anchors = highlightAnchors(
-  [{ id: UPDATES_ID, services: updates }, ...markets],
+  [...markets, { id: UPDATES_ID, services: updates }],
   digest.highlights,
 );
 const highlightedAnchors = new Set(anchors.values());
@@ -50,7 +50,6 @@ const highlightedAnchors = new Set(anchors.values());
   <main id="main">
     <DigestHero digest={digest} anchors={anchors} />
     <DigestToolbar date={date} total={itemTotal} seen={seenTotal} />
-    <UpdatesSection updates={updates} highlightedAnchors={highlightedAnchors} />
     {
       markets.map((market) => (
         <GroupSection id={market.id} label={market.label}>
@@ -64,6 +63,7 @@ const highlightedAnchors = new Set(anchors.values());
         </GroupSection>
       ))
     }
+    <UpdatesSection updates={updates} highlightedAnchors={highlightedAnchors} />
   </main>
   <DateNav current={date} prev={prev} next={next} position="bottom" />
   <footer class="site">生成: {formatGeneratedAt(generated_at)}</footer>

@@ -17,18 +17,3 @@ export const splitProducts = <T extends ProductRef>(
   active: products.filter((p) => p.items.length > 0 || p.status !== "ok"),
   quiet: products.filter((p) => p.items.length === 0 && p.status === "ok").map((p) => p.label),
 });
-
-const JST_DATE = new Intl.DateTimeFormat("ja-JP", {
-  timeZone: "Asia/Tokyo",
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-});
-
-/* Publication day in JST, in the site's 2026.10.24 format; "" for feeds that
-   date entries by month only, and for anything unparsable. */
-export const formatUpdateDate = (iso: string): string => {
-  const date = new Date(iso);
-
-  return iso && !Number.isNaN(date.getTime()) ? JST_DATE.format(date).replaceAll("/", ".") : "";
-};

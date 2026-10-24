@@ -1,9 +1,10 @@
 ---
 /**
  * One release-note entry: rank → title → summary → fold → meta row (source
- * chip, publication day, host; stars on the right). The trend rows' score
- * bar, engagement and 既出 badge have no counterpart here, so this is a
- * trimmed sibling of item-row.astro — keep the shared styles in step.
+ * chip, host; stars on the right). Every entry of a digest was published on
+ * that day, so no date is shown. The trend rows' score bar, engagement and
+ * 既出 badge have no counterpart here, so this is a trimmed sibling of
+ * item-row.astro — keep the shared styles in step.
  */
 import type { CollectionEntry } from "astro:content";
 
@@ -11,7 +12,6 @@ import Budoux from "@kkhys/ui/budoux.astro";
 import { formatHost } from "#/utils/host";
 import { splitParagraphs } from "#/utils/paragraphs";
 import { interestStars } from "#/utils/stars";
-import { formatUpdateDate } from "#/utils/updates";
 
 type Update = CollectionEntry<"runs">["data"]["updates"][number]["items"][number];
 
@@ -29,7 +29,6 @@ const host = formatHost(item.url);
 const displayTitle = item.title_ja || item.title;
 const originalTitle = item.title_ja ? item.title : "";
 const foldParagraphs = splitParagraphs(item.article_summary);
-const date = formatUpdateDate(item.published_at);
 const stars = interestStars(item.interest);
 ---
 
@@ -69,7 +68,6 @@ const stars = interestStars(item.interest);
       <span class="facts">
         {highlighted && <span class="chip highlight">ハイライト</span>}
         {item.source && <span class="chip">{item.source}</span>}
-        {date && <time class="date" datetime={item.published_at}>{date}</time>}
         {host && <span>{host}</span>}
       </span>
       {
@@ -205,10 +203,6 @@ const stars = interestStars(item.interest);
      line when there is room, instead of always dropping below them. */
   .facts {
     display: contents;
-  }
-
-  .date {
-    font-variant-numeric: tabular-nums;
   }
 
   .stars {
