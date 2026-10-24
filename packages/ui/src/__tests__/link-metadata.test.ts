@@ -72,6 +72,13 @@ interface YoutubeStub {
   hq?: boolean;
 }
 
+const thumbnail = (exists: boolean) =>
+  Promise.resolve(
+    exists
+      ? new Response(JPEG_BYTES as unknown as ResponseBody)
+      : new Response(null, { status: 404 }),
+  );
+
 // Typed from the call signature rather than `typeof fetch`: this package's
 // lib declares static members on it that a bare mock can't satisfy.
 const stubYoutube = ({
@@ -80,20 +87,13 @@ const stubYoutube = ({
   maxres = true,
   hq = true,
 }: YoutubeStub = {}) => {
-  const image = (exists: boolean) =>
-    Promise.resolve(
-      exists
-        ? new Response(JPEG_BYTES as unknown as ResponseBody)
-        : new Response(null, { status: 404 }),
-    );
-
   const spy = vi.fn<(input: string | URL | Request) => Promise<Response>>((input) => {
     const url = String(input);
     if (url.startsWith("https://www.youtube.com/oembed")) {
       return Promise.resolve(new Response(JSON.stringify(payload), { status }));
     }
-    if (url === MAXRES_THUMBNAIL) return image(maxres);
-    if (url === HQ_THUMBNAIL) return image(hq);
+    if (url === MAXRES_THUMBNAIL) return thumbnail(maxres);
+    if (url === HQ_THUMBNAIL) return thumbnail(hq);
     // Anything else is the scraper reading the page to check its status.
     return Promise.resolve(new Response(documentWith(""), { headers: PAGE_HEADERS }));
   });
