@@ -192,13 +192,17 @@ changes, not the changelog:
   products and surfaces (apps, integrations, platforms), pricing / plan /
   limit changes, breaking changes, deprecations, GA or beta transitions of
   significant features, security advisories.
-- **Drop**: releases whose body is only bug fixes, reliability or
-  performance work ("Bug fixes and reliability improvements"), docs or
-  typo changes, dependency bumps, cosmetic UI polish, enterprise
+- **Drop**: releases whose body is only fixes — bug fixes, reliability or
+  performance work, security and sandbox / permission hardening, CVE
+  patches ("Bug fixes and reliability improvements", "Fixed ...") — docs
+  or typo changes, dependency bumps, cosmetic UI polish, enterprise
   administration minutiae that does not change how an individual developer
-  works, and marketing or customer-story posts.
-- A release that bundles notable and trivial changes stays; the summary
-  names the notable ones.
+  works, and marketing or customer-story posts. The reader follows these
+  tools to see and try what is new; a repaired bug is not that, however
+  serious it was (feedback 2026-10-24).
+- A release that bundles new features and fixes stays, and its `title_ja`,
+  `summary` and `article_summary` describe the new features only — leave
+  the fixes out entirely, no "修正では..." paragraph.
 - At most `items_per_service` entries per product, newest first (raw.json
   order). A product with nothing notable gets `items: []` with its
   `status` — the site folds it into one 更新なし line.
