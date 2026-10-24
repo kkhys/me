@@ -267,6 +267,29 @@ check("titles the release with the feed name and version", gh[0]["title"] == "Cl
 check("flattens markdown links in the body", gh[0]["content"] == "## What's changed - Added the Monitor tool", repr(gh[0]["content"]))
 check("names the feed", gh[0]["extra"] == "Claude Code")
 
+print("github releases paging")
+served_pages = {}
+original_get_json = ft.get_json
+calls = []
+def fake_get_json(url, headers=None):
+    calls.append(url)
+    page = int(url.rsplit("page=", 1)[1])
+    return served_pages.get(page, [])
+ft.get_json = fake_get_json
+try:
+    served_pages[1] = [RELEASES[1]]          # a prerelease inside the window
+    served_pages[2] = [RELEASES[0]]          # the stable one on the next page
+    served_pages[3] = [RELEASES[2]]          # older than the window
+    served_pages[4] = [RELEASES[0]]          # never reached
+    got = ft._github_update_items({"repo": "x/y", "name": "N", "pages": 4}, CUTOFF)
+    check("reads on until a page ends before the window", len(calls) == 3, calls)
+    check("collects the stable releases across pages", [i["url"] for i in got] == ["https://gh.example/r/310"], got)
+    calls.clear()
+    ft._github_update_items({"repo": "x/y", "name": "N"}, CUTOFF)
+    check("defaults to one page", len(calls) == 1, calls)
+finally:
+    ft.get_json = original_get_json
+
 print("claude platform notes")
 PLATFORM_MD = """---
 title: Claude Platform release notes

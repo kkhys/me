@@ -678,13 +678,25 @@ def _github_release_items(releases, src, cutoff):
 
 
 def _github_update_items(src, cutoff):
+    """Releases inside the window, reading further pages (`pages`, default 1)
+    until a page ends before the window — prereleases can outnumber the
+    stable releases many times over."""
     headers = {"Accept": "application/vnd.github+json"}
     token = os.environ.get("GITHUB_TOKEN")
     if token:
         headers["Authorization"] = f"Bearer {token}"
-    data = get_json(f"https://api.github.com/repos/{src['repo']}/releases"
-                    f"?per_page={src.get('per_page', 20)}", headers)
-    return _github_release_items(data, src, cutoff)
+    items = []
+    for page in range(1, src.get("pages", 1) + 1):
+        data = get_json(f"https://api.github.com/repos/{src['repo']}/releases"
+                        f"?per_page={src.get('per_page', 20)}&page={page}", headers)
+        if not data:
+            break
+        items.extend(_github_release_items(data, src, cutoff))
+        oldest = min((parse_date(r.get("published_at")) for r in data if r.get("published_at")),
+                     default=None)
+        if oldest is None or oldest < cutoff:
+            break
+    return items
 
 
 def _claude_platform_items(md, cutoff):
