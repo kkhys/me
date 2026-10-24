@@ -9,9 +9,9 @@ source is left out of the run entirely. Stdlib only.
 A second group of services, market "updates", collects the release notes of
 the products in UPDATE_PRODUCTS (Claude, OpenAI, Devin, Cursor, GitHub, Orca,
 Slack): one service per product, fed by that product's feeds. They carry no
-engagement. Each entry belongs to the digest of its publication day (`day`,
-local date), so a run also fills in the days before it; entries already
-placed in a run file of the site repo are left out.
+engagement. Like a morning paper, a run carries what appeared since the
+previous run: entries already placed in a run file of the site repo are
+left out, and the rest go to the run's own day.
 
 Each source failure is isolated: the service is reported with status
 "error" and the rest of the run continues, so one flaky API never kills
@@ -553,8 +553,7 @@ BACKFILL_FETCHERS = {
 # Release notes of the tools the reader uses. Each product becomes one service
 # of market "updates", fed by several feeds; a feed is stored under `extra`
 # so the digest can name it. Entries older than updates_window_days are left
-# out; entries with no per-entry date (Slack's monthly page) pass the window
-# and land on the run's own day.
+# out; entries with no per-entry date (Slack's monthly page) pass the window.
 
 UPDATE_WINDOW_DAYS = 7
 UPDATE_CONTENT_CLIP = 3000
@@ -811,8 +810,8 @@ UPDATE_PRODUCTS = [
 
 def placed_update_urls(cfg, limit=14):
     """URLs already written to an `updates` block of the site's newest run
-    files — the source of truth for what the digest has shown, so a run can
-    fill in earlier days without repeating an entry."""
+    files — the source of truth for what the digest has shown, so a run
+    carries only what appeared since the previous one."""
     repo = cfg.get("site_repo")
     if not repo:
         return set()
@@ -828,12 +827,6 @@ def placed_update_urls(cfg, limit=14):
         for product in run.get("updates", []):
             urls.update(it.get("url", "") for it in product.get("items", []))
     return urls
-
-
-def update_day(item, fallback):
-    """Local calendar day an entry belongs to; undated entries take the run's."""
-    dt = parse_date(item.get("published_at"))
-    return dt.astimezone().strftime("%Y-%m-%d") if dt else fallback
 
 
 def update_cutoff(cfg, now=None):
@@ -1175,16 +1168,16 @@ def main():
         items = res.get("items", [])
         if svc["market"] == "updates":
             # Release notes carry no engagement, so there is no score; the
-            # order stays newest first. Each entry is tagged with the day it
-            # belongs to, and one already placed in a run file is dropped.
-            # The seen history is left alone: the run files are the record.
+            # order stays newest first. An entry already placed in a run file
+            # is dropped, which leaves exactly what appeared since the
+            # previous run. The seen history is left alone: the run files
+            # are the record.
             fresh = [it for it in items if it["url"] not in placed]
             dropped[svc["id"]] = len(items) - len(fresh)
             items = fresh
             for it in items:
                 it["base_score"] = 0
                 it["seen_before"] = False
-                it["day"] = update_day(it, target)
         else:
             add_base_scores(items, now)
             items.sort(key=lambda x: x.get("base_score", 0), reverse=True)
@@ -1223,12 +1216,8 @@ def main():
         print(f"DISABLED: {', '.join(sorted(disabled - set(unknown)))} (config.json の disabled_sources)")
     for s in services:
         note = f" — {s['note']}" if s["note"] else ""
-        if s["market"] == "updates":
-            days = sorted({it["day"] for it in s["items"]}, reverse=True)
-            if days:
-                note = f" ({', '.join(f'{d}: {sum(it['day'] == d for it in s['items'])}' for d in days)}){note}"
-            if dropped.get(s["id"]):
-                note = f" (掲載済み {dropped[s['id']]} 件を除外){note}"
+        if dropped.get(s["id"]):
+            note = f" (掲載済み {dropped[s['id']]} 件を除外){note}"
         print(f"{s['id']:<16} {s['status']:<8} {len(s['items']):>3} items{note}")
     print(f"raw: {raw_path}")
     print(f"run_dir: {run_dir}")

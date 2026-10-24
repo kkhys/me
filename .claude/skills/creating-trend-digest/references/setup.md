@@ -23,12 +23,11 @@ dev.to と Hugging Face Daily Papers は 2026-09-05 に対象から外した。f
 | `orca`             | GitHub Releases `stablyai/orca` (prerelease のモバイル版は除外)                                                                                                         |
 | `slack`            | ヘルプセンター「Slack updates and changes」(en-gb の HTML。日付は月単位なので `published_at` は null) / docs.slack.dev/changelog RSS                                    |
 
-- エントリは公開日 (ローカル日付、`day`) のダイジェストに載る。
+- 朝刊方式: その日の実行は「前回の実行以降に出たもの」を当日分に載せる。
   `updates_window_days` (既定 7) 以内に公開されたエントリを取り、`site_repo`
   の run ファイルの `updates` に既に載っている URL は落とす (seen.json は
-  使わない。掲載済みかどうかの記録は run ファイルそのもの)。前日の遅い
-  時間に出たエントリは翌日の実行で前日のファイルに追記される。日付のない
-  エントリ (Slack のヘルプページ) は実行日に載る。
+  使わない。掲載済みかどうかの記録は run ファイルそのもの)。残ったものは
+  公開時刻に関わらず当日分に載り、過去の日のファイルは書き換えない。
 - 製品内の一部フィードが失敗しても、他が取れていれば `status: ok` で note に
   `取得失敗: ...` が付く。全フィード失敗で `error`。
 - 対象外: anthropic.com/news (RSS がなく、モデル発表は Claude Apps release

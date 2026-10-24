@@ -42,10 +42,9 @@ const update = z.object({
   // Which feed of the product the entry came from ("Claude Code", "Platform",
   // "Forum" ...), rendered as a chip.
   source: z.string().default(""),
-  // ISO 8601 provenance; the entry sits in the digest of its local
-  // publication day, so the site does not render it. "" when the feed dates
-  // entries by month only (Slack), which puts the entry on the day it was
-  // fetched.
+  // ISO 8601 provenance; a digest carries what appeared since the previous
+  // run, so the site does not render it. "" when the feed dates entries by
+  // month only (Slack).
   published_at: z.string().default(""),
   interest: z.number().int().min(1).max(3),
   summary: z.string().default(""),

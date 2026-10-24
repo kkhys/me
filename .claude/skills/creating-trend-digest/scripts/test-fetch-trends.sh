@@ -546,19 +546,13 @@ try:
               [i["url"] for i in by_id["claude"]["items"]])
         item = by_id["claude"]["items"][0]
         check("product items carry no score and no 既出", item["base_score"] == 0 and item["seen_before"] is False)
-        check("tags the entry with its local publication day", item["day"] == "2026-08-05", item["day"])
         check("reports the dropped count", "掲載済み 1 件を除外" in out.getvalue(), out.getvalue())
         seen = json.loads((state / "seen.json").read_text(encoding="utf-8"))
         check("records trend items but not update entries in the seen history",
               seen.get("https://example.com/a") == today and seen.get("https://example.com/b") == today
               and all(v == today for v in seen.values()))
 
-    print("update_day / placed_update_urls")
-    undated = ft._update_item("x", "https://u.example/x", None, "", "", "F")
-    check("an undated entry takes the run's day", ft.update_day(undated, "2026-10-24") == "2026-10-24")
-    late = ft._update_item("y", "https://u.example/y", datetime(2026, 10, 23, 23, 39, tzinfo=timezone.utc), "", "", "F")
-    check("a late-UTC entry belongs to the next local day in JST",
-          ft.update_day(late, "x") == datetime(2026, 10, 23, 23, 39, tzinfo=timezone.utc).astimezone().strftime("%Y-%m-%d"))
+    print("placed_update_urls")
     check("no site repo means nothing is placed", ft.placed_update_urls({}) == set())
     check("a missing runs dir means nothing is placed", ft.placed_update_urls({"site_repo": "/nonexistent"}) == set())
 
