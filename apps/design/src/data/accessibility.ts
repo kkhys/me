@@ -65,8 +65,8 @@ export const A11Y_GROUPS: ConventionGroup[] = [
         evidence: [
           at("packages/styles/components.css", 21),
           at("packages/styles/components.css", 42),
-          at("packages/search/src/dialog.astro", 169),
-          at("packages/search/src/dialog.astro", 174),
+          at("packages/search/src/dialog.astro", 173),
+          at("packages/search/src/dialog.astro", 178),
         ],
       },
       {
@@ -182,7 +182,7 @@ export const A11Y_GROUPS: ConventionGroup[] = [
           at("apps/me/src/features/blog/components/ui/entry-list.astro", 46),
           at("apps/memo/src/components/post-header.astro", 34),
           at("apps/trends/src/components/item-row.astro", 49),
-          at("packages/search/src/dialog.astro", 20),
+          at("packages/search/src/dialog.astro", 21),
         ],
       },
       {
@@ -264,9 +264,9 @@ export const A11Y_GROUPS: ConventionGroup[] = [
         rule: "モーダルとメニューはネイティブ dialog / popover。フォーカストラップ・Esc・背景クリックはブラウザ任せ",
         detail: "自前で書くのは「開いたら入力欄へ」「Esc で入力を保持したまま閉じる」の 2 点だけ。",
         evidence: [
-          at("packages/search/src/dialog.astro", 19),
-          at("packages/search/src/dialog-setup.ts", 134),
-          at("packages/search/src/dialog-setup.ts", 170),
+          at("packages/search/src/dialog.astro", 20),
+          at("packages/search/src/dialog-setup.ts", 180),
+          at("packages/search/src/dialog-setup.ts", 222),
           at("apps/me/src/components/ui/site-nav.astro", 58),
           at("apps/me/src/features/blog/components/ui/pagination.astro", 71),
         ],
@@ -276,8 +276,9 @@ export const A11Y_GROUPS: ConventionGroup[] = [
         detail:
           "isComposing のあいだは Esc も矢印も候補選択に使われるので、ダイアログは何もしない。",
         evidence: [
-          at("packages/search/src/dialog-setup.ts", 179),
-          at("packages/search/src/dialog-setup.ts", 169),
+          at("packages/search/src/dialog-setup.ts", 231),
+          at("packages/search/src/dialog-setup.ts", 221),
+          at("packages/search/src/dialog-setup.ts", 175),
         ],
       },
       {
@@ -330,7 +331,7 @@ export const A11Y_GROUPS: ConventionGroup[] = [
           at("packages/styles/components.css", 23),
           at("packages/ui/src/site-header.astro", 109),
           at("apps/trends/src/components/seen-filter.astro", 79),
-          at("packages/search/src/dialog.astro", 211),
+          at("packages/search/src/dialog.astro", 215),
           at("apps/design/src/components/theme-toggle.astro", 87),
         ],
       },
@@ -340,7 +341,7 @@ export const A11Y_GROUPS: ConventionGroup[] = [
           "WCAG 2.1.4 は単キーのショートカットに無効化か付け替えを求める。設定画面のない静的サイトではどちらも用意できないので、検索を開く / は持たない。Alt を除外するのは AltGr で文字を打つ配列のため。",
         evidence: [
           at("packages/search/src/keyboard.ts", 5),
-          at("packages/search/src/dialog-setup.ts", 207),
+          at("packages/search/src/dialog-setup.ts", 259),
         ],
       },
       {
@@ -349,7 +350,7 @@ export const A11Y_GROUPS: ConventionGroup[] = [
           "iOS がフォーカス時にページをズームするのを防ぐ。拡大を禁止する viewport 設定は持たない。",
         values: ["font-size: max(16px, var(--fs-base))", "width=device-width, initial-scale=1"],
         evidence: [
-          at("packages/search/src/dialog.astro", 160),
+          at("packages/search/src/dialog.astro", 164),
           at("packages/ui/src/head-meta.astro", 19),
         ],
       },
@@ -388,8 +389,8 @@ export const A11Y_GROUPS: ConventionGroup[] = [
         detail:
           "display: none にするとライブリージョンから外れ、最初の告知が落ちる。空のときは sr-only 相当で残す。",
         evidence: [
-          at("packages/search/src/dialog.astro", 41),
-          at("packages/search/src/dialog.astro", 231),
+          at("packages/search/src/dialog.astro", 42),
+          at("packages/search/src/dialog.astro", 235),
         ],
       },
       {
