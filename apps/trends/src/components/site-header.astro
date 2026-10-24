@@ -1,6 +1,13 @@
 ---
+import AskButton from "#/features/ask/components/ask-button.astro";
 import SearchButton from "#/features/search/components/search-button.astro";
 
+interface Props {
+  /* Renders the AI button; only the digest pages mount the dialog it opens. */
+  ask?: boolean | undefined;
+}
+
+const { ask = false } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/u, "") || "/";
 const links = [
   { href: "/archive", label: "Archive" },
@@ -22,6 +29,7 @@ const links = [
         ))
       }
     </nav>
+    {ask && <AskButton />}
     <SearchButton />
   </div>
 </header>

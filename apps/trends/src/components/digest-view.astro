@@ -8,23 +8,26 @@ import GroupSection from "#/components/group-section.astro";
 import ServiceCard from "#/components/service-card.astro";
 import SourceToc from "#/components/source-toc.astro";
 import UpdatesSection from "#/components/updates-section.astro";
+import AskDialog from "#/features/ask/components/ask-dialog.astro";
 import { highlightAnchors } from "#/utils/highlights";
 import { sortMarketsGlobalFirst } from "#/utils/markets";
 import { formatGeneratedAt } from "#/utils/runs";
 import { countSeen } from "#/utils/seen";
 import { UPDATES_ID } from "#/utils/updates";
-import { buildDateMeta, buildDateSort } from "#/features/search/utils/meta";
+import { buildDateMeta, buildDateSort, buildMonthFilter } from "#/features/search/utils/meta";
 
 interface Props {
   entry: CollectionEntry<"runs">;
   prev: string | undefined;
   next: string | undefined;
+  /* The first run, the far end of the AI dialog's 全期間 scope. */
+  firstDate: string;
   /* Whether this page is the one Pagefind indexes for the run. `/` renders the
      latest run too and passes false, so a day shows up once in the search. */
   indexable: boolean;
 }
 
-const { entry, prev, next, indexable } = Astro.props;
+const { entry, prev, next, firstDate, indexable } = Astro.props;
 const { date, digest, generated_at, updates } = entry.data;
 const markets = sortMarketsGlobalFirst(entry.data.markets);
 const itemTotal =
@@ -56,6 +59,7 @@ const highlightedAnchors = new Set(anchors.values());
     data-pagefind-body={indexable ? "" : undefined}
     data-pagefind-meta={indexable ? buildDateMeta(date) : undefined}
     data-pagefind-sort={indexable ? buildDateSort(date) : undefined}
+    data-pagefind-filter={indexable ? buildMonthFilter(date) : undefined}
   >
     <DigestHero digest={digest} anchors={anchors} />
     <DigestToolbar date={date} total={itemTotal} seen={seenTotal} />
@@ -77,6 +81,7 @@ const highlightedAnchors = new Set(anchors.values());
   <DateNav current={date} prev={prev} next={next} position="bottom" />
   <footer class="site">生成: {formatGeneratedAt(generated_at)}</footer>
 </div>
+<AskDialog date={date} firstDate={firstDate} />
 
 <style>
   @media (width >= 1280px) {

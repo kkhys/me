@@ -17,6 +17,12 @@ if (!latest) {
 {/* The description stays the site-level default: `/` always shows the newest
     run, so a per-day headline here would churn the OG card every day. */}
 <BaseLayout>
-  <SiteHeader />
-  <DigestView entry={latest} prev={runs[1]?.id} next={undefined} indexable={false} />
+  <SiteHeader ask />
+  <DigestView
+    entry={latest}
+    prev={runs[1]?.id}
+    next={undefined}
+    firstDate={runs.at(-1)?.id ?? latest.id}
+    indexable={false}
+  />
 </BaseLayout>
