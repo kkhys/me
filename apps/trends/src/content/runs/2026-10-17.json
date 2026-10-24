@@ -1305,7 +1305,7 @@
           "published_at": "2026-10-16T20:53:06+00:00",
           "interest": 2,
           "summary": "クライアント側の auto mode 分類器が使うモデルを `CLAUDE_CODE_AUTO_MODE_MODEL` で選べるようになった（サーバー側 auto mode には影響しない）。`/config` にアイドル compaction を切り替える行が加わり、`/design-sync` と `/design-login` には単体の Claude Design（claude.ai/design）が 2026 年 12 月 14 日に終了する旨の通知が出る。",
-          "article_summary": "追加は、クライアント側 auto mode 分類器のモデルを選ぶ `CLAUDE_CODE_AUTO_MODE_MODEL`（サーバー側 auto mode には影響しない）、`/config` のアイドル compaction 切替行（実行後の通知にも無効化方法が載る）、`/design-sync` と `/design-login` への単体 Claude Design（claude.ai/design）が 2026 年 12 月 14 日に終了する通知。\n\n修正では、compaction 中に turn を止めると「Prompt is too long」になる問題、セッション途中で Vertex / Bedrock に切り替えると「diagnostics: Extra inputs are not permitted」で失敗する問題、Read ツールが任意サイズの画像やパイプをメモリに丸ごと読む問題（128 MB 超は拒否）、セッション途中に追加したツールが ToolSearch や compaction 後に再読み込みされるとプロンプトキャッシュを外す問題が直った。\n\nそのほか、`claude plugin` などのサブコマンドが設定書き込みの完了前に終了して変更を失う問題、git の reftable 形式でマーケットプレイスが毎回再クローンされる問題、PowerShell ツールがプラグインの `bin/` を見つけられない問題なども修正された。"
+          "article_summary": "追加は、クライアント側 auto mode 分類器のモデルを選ぶ `CLAUDE_CODE_AUTO_MODE_MODEL`（サーバー側 auto mode には影響しない）、`/config` のアイドル compaction 切替行（実行後の通知にも無効化方法が載る）、`/design-sync` と `/design-login` への単体 Claude Design（claude.ai/design）が 2026 年 12 月 14 日に終了する通知。"
         }
       ]
     },

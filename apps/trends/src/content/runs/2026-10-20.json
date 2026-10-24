@@ -1335,7 +1335,7 @@
           "published_at": "2026-10-19T21:34:39+00:00",
           "interest": 3,
           "summary": "プロジェクトと最近のセッションを読んで auto mode に環境を教える `/auto-mode-setup`、Managed Agents の設定を Anthropic のセキュリティガイドと比較する `/claude-api managed-agents-secure` が加わった。mod の `tool.check` では `decider: \"person\"` で人の承認を必須にでき、`e.isReadOnly` で読み取り専用の呼び出しを判別できる。",
-          "article_summary": "追加のコマンドは `/auto-mode-setup`（プロジェクトと最近のセッションを読み、auto mode に環境を教えるガイド付きセットアップ。Bedrock、Vertex、Foundry、Claude apps gateway、テレメトリ無効のセッションでも使える）と `/claude-api managed-agents-secure`（Managed Agents のエージェント設定を Anthropic 公開のセキュリティガイドと比較し、何も変更しない）。\n\nmod 向けには、`tool.check` の応答に `decider: \"person\"` を指定すると権限ダイアログかホストのコールバックだけが承認でき、誰にも聞けない場合は mod の理由で拒否される。イベントには読み取り専用の呼び出しを示す `e.isReadOnly` が付き、先に動くプラグインが mod の hook を飛ばした時はトランスクリプトに行が出る。\n\nPro / Max プランでは、休止していた会話の再開が 5 時間の利用上限のかなりの割合を使う場合に警告が出る。compaction の要約には以前呼んだツール名が載る。修正には、`denyRead` の glob に `[user-id]` のような角括弧があるとサンドボックスが起動しない問題などが含まれる。"
+          "article_summary": "追加のコマンドは `/auto-mode-setup`（プロジェクトと最近のセッションを読み、auto mode に環境を教えるガイド付きセットアップ。Bedrock、Vertex、Foundry、Claude apps gateway、テレメトリ無効のセッションでも使える）と `/claude-api managed-agents-secure`（Managed Agents のエージェント設定を Anthropic 公開のセキュリティガイドと比較し、何も変更しない）。\n\nmod 向けには、`tool.check` の応答に `decider: \"person\"` を指定すると権限ダイアログかホストのコールバックだけが承認でき、誰にも聞けない場合は mod の理由で拒否される。イベントには読み取り専用の呼び出しを示す `e.isReadOnly` が付き、先に動くプラグインが mod の hook を飛ばした時はトランスクリプトに行が出る。\n\nPro / Max プランでは、休止していた会話の再開が 5 時間の利用上限のかなりの割合を使う場合に警告が出る。compaction の要約には以前呼んだツール名が載る。"
         }
       ]
     },

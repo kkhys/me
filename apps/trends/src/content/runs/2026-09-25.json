@@ -1230,7 +1230,7 @@
           "published_at": "2026-09-24T18:38:05+00:00",
           "interest": 2,
           "summary": "横長のターミナルで散文の幅だけを抑え、表とコードブロックは全幅のままにする `maxProseWidth` 設定が加わった。プロジェクト設定で無視されたりテレメトリを切ったりした変数を起動時と `/status`、`claude doctor` で示し、`allowClaudeInChromeWithManagedMcp` で排他的な `managed-mcp.json` と `claude --chrome` を併用できる。",
-          "article_summary": "追加は `maxProseWidth`（横長ターミナルで Claude の散文幅を抑え、表とコードブロックは全幅のまま）、プロジェクト設定ファイル内で無視された・テレメトリを無効にしたテレメトリ変数を起動時通知と `/status`、`claude doctor` に列挙する機能、管理設定 `allowClaudeInChromeWithManagedMcp`（排他的な `managed-mcp.json` と `claude --chrome` の併用を許可）。\n\n修正では、API が復号できない Web 検索結果を履歴に含む会話で全リクエストが 400 になる問題、`--continue` / `--resume` で以前のメッセージが変形して再送され推論が失われる問題、作業中に `/model` などを使うと extended thinking が落ちる問題、`redacted_thinking` の API エラーでセッションが毎回失敗する問題（thinking ブロックを落として 1 回リトライ）、要約リクエストが拒否されると compaction が失敗する問題（フォールバックモデルでリトライ）が直った。"
+          "article_summary": "追加は `maxProseWidth`（横長ターミナルで Claude の散文幅を抑え、表とコードブロックは全幅のまま）、プロジェクト設定ファイル内で無視された・テレメトリを無効にしたテレメトリ変数を起動時通知と `/status`、`claude doctor` に列挙する機能、管理設定 `allowClaudeInChromeWithManagedMcp`（排他的な `managed-mcp.json` と `claude --chrome` の併用を許可）。"
         },
         {
           "title": "Claude Platform release notes (September 24, 2026)",

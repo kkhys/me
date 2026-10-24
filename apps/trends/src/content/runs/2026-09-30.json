@@ -1305,7 +1305,7 @@
           "published_at": "2026-09-29T19:27:30+00:00",
           "interest": 3,
           "summary": "`CLAUDE_CODE_DISABLE_WEB_FETCH` で WebFetch ツールを無効化でき、`claude --desktop` で現在のディレクトリやセッションを Claude デスクトップアプリで開ける。`claude plugin configure` でプラグインの設定項目と未設定の値を確認・保存でき、`allowedProviders` 管理設定で使える API プロバイダーを制限できる。",
-          "article_summary": "追加は、WebFetch ツールを無効にする `CLAUDE_CODE_DISABLE_WEB_FETCH`、現在のディレクトリ（または `--continue` / `--resume` のセッション）を Claude デスクトップアプリで開く `claude --desktop`、プラグインの設定項目と未設定の値を表示し `--values-stdin` で保存する `claude plugin configure`、`claude plugin install --config` でバンドルされた `.mcpb` MCP サーバーの設定をインストール時に与える機能。\n\n管理設定 `allowedProviders` でマシンが使える API プロバイダー（Anthropic API、カスタムエンドポイント、Bedrock、Mantle、Vertex AI、Foundry、Claude Platform on AWS、クラウドゲートウェイ）を制限できる。`CLAUDE_CODE_NONSTREAMING_TIMEOUT_RETRIES` で非ストリーミングのフォールバック要求がタイムアウトした時の再送回数を抑えられる。\n\n修正では、`CLAUDE_CODE_FORK_SUBAGENT=1` のサブエージェントが自身の Agent 呼び出し結果を受け取れない問題、SSH 経由のプラグインインストールが `GIT_SSH` や `core.sshCommand` を無視する問題、OS が管理設定ファイルの読み取りを拒否すると起動できない問題（警告して起動）、`@` を含む URL パスワードの一部がログに残る問題などが直った。"
+          "article_summary": "追加は、WebFetch ツールを無効にする `CLAUDE_CODE_DISABLE_WEB_FETCH`、現在のディレクトリ（または `--continue` / `--resume` のセッション）を Claude デスクトップアプリで開く `claude --desktop`、プラグインの設定項目と未設定の値を表示し `--values-stdin` で保存する `claude plugin configure`、`claude plugin install --config` でバンドルされた `.mcpb` MCP サーバーの設定をインストール時に与える機能。\n\n管理設定 `allowedProviders` でマシンが使える API プロバイダー（Anthropic API、カスタムエンドポイント、Bedrock、Mantle、Vertex AI、Foundry、Claude Platform on AWS、クラウドゲートウェイ）を制限できる。`CLAUDE_CODE_NONSTREAMING_TIMEOUT_RETRIES` で非ストリーミングのフォールバック要求がタイムアウトした時の再送回数を抑えられる。"
         }
       ]
     },
@@ -1333,7 +1333,7 @@
           "published_at": "2026-09-29T08:05:42+00:00",
           "interest": 2,
           "summary": "オプトインの `instant_interrupt` を有効にすると、モデルの応答中や長い code-mode 呼び出しの最中でも新しい入力で Codex を方向転換できる。新規セッションにはコンパクトな歓迎画面と一貫したヘッダーが付き、書き込み可能ルート配下の `.aws` ディレクトリは既定で保護される。フォローアップ候補の自動表示は廃止された。",
-          "article_summary": "新機能は、モデルの応答中や長い code-mode 呼び出し中に新しい入力で Codex を方向転換させるオプトインの `instant_interrupt`、新規セッションのコンパクトな歓迎画面と turn 中・後のヒント表示、閉じると確認済みの警告を消す警告ビューア（`k` で保留）、プランの実装を判断する間のトランスクリプトスクロール、Mermaid のエッジ・ラベル・ノードグループ描画の拡充、app-server クライアント向けの特定アイテムからのスレッド履歴ページング。\n\n修正では、Windows で MCP サーバーや code-mode ホスト起動時のコンソールウィンドウ抑止、トランスクリプトコピー時の Markdown テーブルと書式の保持、空セッションの下書き保持、ChatGPT サインインのブラウザ起動の安定化、承認済みコマンドでのファイルシステム拒否設定の維持と `.aws` ディレクトリの既定保護、ネットワーク有効サンドボックスでの macOS TLS アクセスが入った。\n\nフォローアップ候補の自動表示と `tui.prompt_suggestions` 設定、同梱の `plugin-creator` スキルは削除された。"
+          "article_summary": "新機能は、モデルの応答中や長い code-mode 呼び出し中に新しい入力で Codex を方向転換させるオプトインの `instant_interrupt`、新規セッションのコンパクトな歓迎画面と turn 中・後のヒント表示、閉じると確認済みの警告を消す警告ビューア（`k` で保留）、プランの実装を判断する間のトランスクリプトスクロール、Mermaid のエッジ・ラベル・ノードグループ描画の拡充、app-server クライアント向けの特定アイテムからのスレッド履歴ページング。\n\nフォローアップ候補の自動表示と `tui.prompt_suggestions` 設定、同梱の `plugin-creator` スキルは削除された。"
         },
         {
           "title": "GPT-6.1 Sol in Codex and ChatGPT Work",

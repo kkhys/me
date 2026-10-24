@@ -1255,7 +1255,7 @@
           "published_at": "2026-09-22T16:38:14+00:00",
           "interest": 3,
           "summary": "Claude Opus 5.5 が既定の Opus モデルになった（1M コンテキスト、$4 / $20 per Mtok、キャッシュ読み取り $0.20）。`/skills` のホイールスクロールなどマウス対応が広がり、MCP ツール説明文の 2,048 文字上限を `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` で変えられる。",
-          "article_summary": "Claude Opus 5.5 が既定の Opus モデルになり、1M コンテキスト、$4 / $20 per Mtok、キャッシュ読み取り $0.20 / Mtok で使える。フルスクリーンモードでは `/skills` 一覧のホイールスクロールや `/plugin` のスキル状態のクリック操作が加わった。\n\n`CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` で MCP ツール説明文とサーバー指示の 2,048 文字上限をセッション全体で変更できる。`hook_execution_complete` の OpenTelemetry イベントに hook 出力サイズと、サイズ超過でファイルに退避した出力数が加わった。\n\n修正では、シンボリックリンク経由の書き込みがツリー内の綴りで判定され外側への書き込みが承認されていた問題、auto mode が安全チェックの未回答時に同じアクションを繰り返していた問題（10 回連続で停止）、各ダイアログで Ctrl+C / Ctrl+D を 2 回押すと Claude Code 自体が終了していた問題などが直った。"
+          "article_summary": "Claude Opus 5.5 が既定の Opus モデルになり、1M コンテキスト、$4 / $20 per Mtok、キャッシュ読み取り $0.20 / Mtok で使える。フルスクリーンモードでは `/skills` 一覧のホイールスクロールや `/plugin` のスキル状態のクリック操作が加わった。\n\n`CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` で MCP ツール説明文とサーバー指示の 2,048 文字上限をセッション全体で変更できる。`hook_execution_complete` の OpenTelemetry イベントに hook 出力サイズと、サイズ超過でファイルに退避した出力数が加わった。"
         }
       ]
     },
@@ -1283,7 +1283,7 @@
           "published_at": "2026-09-22T19:51:01+00:00",
           "interest": 3,
           "summary": "`/tui` でトランスクリプト検索、マウス選択、右クリックコピー付きのフルスクリーン UI を次回起動から使える。音声会話が既定で有効になり F8 で切り替える。`/usage` でアカウントの使用量やプラグイン・スキルの利用状況を見られ、エージェントコマンドセンターから worktree セッションを作れる（worktree は既定で有効）。",
-          "article_summary": "新機能は、`/tui` で選ぶフルスクリーン UI（トランスクリプト検索、マウス選択、右クリックコピー）、既定で有効になった音声会話（F8 で切替、`/voice settings`、Linux / Windows 向け音声ランタイム同梱）、使用量・トークン合計・プラグインとスキルの利用状況を見る `/usage` 分析ダッシュボード、エージェントコマンドセンターでのタスクのステータス絞り込みと worktree セッション作成（worktree は既定で有効）。\n\nターミナルのテーマが 6 つ増え、応答内の Mermaid 図と数式を直接表示できる。ローカルのバックグラウンドサーバーは `/daemon` で更新し、`--no-daemon` で迂回できる。\n\n修正では、turn の失敗や中断時にストリーミング中の回答とプランを保持、tmux / SSH でのクリップボード転送、セッション再開時の Plan モード復元、Windows の受信接続や特権ソケット、読み取り専用の macOS ファイルハンドル経由の書き込みなどサンドボックスの隔離の隙間が塞がれた。"
+          "article_summary": "新機能は、`/tui` で選ぶフルスクリーン UI（トランスクリプト検索、マウス選択、右クリックコピー）、既定で有効になった音声会話（F8 で切替、`/voice settings`、Linux / Windows 向け音声ランタイム同梱）、使用量・トークン合計・プラグインとスキルの利用状況を見る `/usage` 分析ダッシュボード、エージェントコマンドセンターでのタスクのステータス絞り込みと worktree セッション作成（worktree は既定で有効）。\n\nターミナルのテーマが 6 つ増え、応答内の Mermaid 図と数式を直接表示できる。ローカルのバックグラウンドサーバーは `/daemon` で更新し、`--no-daemon` で迂回できる。"
         },
         {
           "title": "Introducing GPT-6 Sol and Luna",

@@ -1320,7 +1320,7 @@
           "published_at": "2026-10-02T20:19:57+00:00",
           "interest": 2,
           "summary": "Ctrl+C で消したプロンプトを空のプロンプトで Up を押すと貼り付けテキストや画像ごと復元できる。`/code-review` に `--max-findings <n>|all` が加わり、mod はフルスクリーンで選択中のテキストを `$.ui.selection()` で取れる。エージェントビューでは Ctrl+F でセッション名を検索し Alt+↑/↓ でグループ間を移動できる。",
-          "article_summary": "操作面では、Ctrl+C で消したプロンプトを空のプロンプトで Up を押すと貼り付けテキストや画像ごと復元できる。`/code-review` は `--max-findings <n>|all` で報告する指摘の数を変えられ、選択は `--max-findings default` を渡すまで保持される。エージェントビューでは Ctrl+F でセッション名を検索し、Alt+↑/↓ でグループ間を移動できる（キーは `keybindings.json` で変更可）。\n\nmod 向けに、フルスクリーンで最後に選択したテキストとその行を返す `$.ui.selection()` が加わった。GitHub CLI のないクラウドセッションには built-in の `gh api` が入り、MCP サーバーがツール呼び出し中に追加の OAuth スコープを求めた時は再認証のプロンプトが出る。\n\n修正では、応答途中の API タイムアウトで turn が失敗する問題（非対話セッションとサブエージェントは部分応答から続行）、最後の応答のトークン使用量が 0 と報告された長い会話が自動 compaction されない問題、`--resume` が compaction 直後に復元したファイルを落とす問題、Mantle や構造化出力を拒否するゲートウェイでセッションタイトルやメモリ呼び出しが失敗する問題（`CLAUDE_CODE_DISABLE_STRUCTURED_OUTPUTS` 追加）などが直った。"
+          "article_summary": "操作面では、Ctrl+C で消したプロンプトを空のプロンプトで Up を押すと貼り付けテキストや画像ごと復元できる。`/code-review` は `--max-findings <n>|all` で報告する指摘の数を変えられ、選択は `--max-findings default` を渡すまで保持される。エージェントビューでは Ctrl+F でセッション名を検索し、Alt+↑/↓ でグループ間を移動できる（キーは `keybindings.json` で変更可）。\n\nmod 向けに、フルスクリーンで最後に選択したテキストとその行を返す `$.ui.selection()` が加わった。GitHub CLI のないクラウドセッションには built-in の `gh api` が入り、MCP サーバーがツール呼び出し中に追加の OAuth スコープを求めた時は再認証のプロンプトが出る。"
         }
       ]
     },

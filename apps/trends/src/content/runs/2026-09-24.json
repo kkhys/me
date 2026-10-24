@@ -1275,7 +1275,7 @@
           "published_at": "2026-09-23T19:19:15+00:00",
           "interest": 2,
           "summary": "settings.json の `\"attribution\": false` でコミットと PR の帰属表記をすべて消せるようになった。MCP サーバーがブラウザのフローを開かせる URL モード elicitation（2026-07-28 プロトコル）に対応し、`claude plugin validate` が `.mcp.json` の無視される項目や未宣言の `${user_config.*}` を報告する。",
-          "article_summary": "設定面では、`settings.json` の `\"attribution\": false` でコミットと PR の帰属表記をすべて隠せる（古い CLI はこの値を持つ設定ファイルを読み飛ばすため、共有するファイルではオブジェクト形式を保つ）。`/insights` には auto mode が最近のセッションでどれだけの許可プロンプトを処理できたかの推定が加わった。\n\nMCP では 2026-07-28 プロトコル接続で URL モードの elicitation に対応し、サーバーがブラウザベースのフローを開かせられる。`claude plugin validate` は読み込み時に黙って落とされる `.mcp.json` の項目、未宣言の `${user_config.*}` 参照、安全でない URL を報告する。\n\nClaude apps gateway には Claude Desktop 向けポリシーキー（`blockReadsOutsideWorkingDirectories` など）、Bedrock upstream の `assume_role` と `guardrail` が加わった。修正では、API リトライ中のクラッシュ、`--max-turns` を無視して無限にリトライする turn、再開したセッションが以前の turn を変形して再送し推論が失われる問題などが直った。"
+          "article_summary": "設定面では、`settings.json` の `\"attribution\": false` でコミットと PR の帰属表記をすべて隠せる（古い CLI はこの値を持つ設定ファイルを読み飛ばすため、共有するファイルではオブジェクト形式を保つ）。`/insights` には auto mode が最近のセッションでどれだけの許可プロンプトを処理できたかの推定が加わった。\n\nMCP では 2026-07-28 プロトコル接続で URL モードの elicitation に対応し、サーバーがブラウザベースのフローを開かせられる。`claude plugin validate` は読み込み時に黙って落とされる `.mcp.json` の項目、未宣言の `${user_config.*}` 参照、安全でない URL を報告する。\n\nClaude apps gateway には Claude Desktop 向けポリシーキー（`blockReadsOutsideWorkingDirectories` など）、Bedrock upstream の `assume_role` と `guardrail` が加わった。"
         }
       ]
     },

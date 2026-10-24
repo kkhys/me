@@ -1335,7 +1335,7 @@
           "published_at": "2026-10-09T19:28:59+00:00",
           "interest": 2,
           "summary": "サブエージェントの frontmatter と `--agents` 定義に `autoCompactWindow` が加わり、メインの会話より早く自動 compaction できる。`CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL` で全ワークフローエージェントを 1 つのモデルで動かせ、Read ツールの `allow_large` で通常の上限を超えるテキストファイルを 1 回で読める。",
-          "article_summary": "追加は、サブエージェントの frontmatter と `--agents` 定義の `autoCompactWindow`（メインの会話より早く自動 compaction する）、ワークフローエージェントだけを 1 つのモデルで動かす `CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL`、529 リトライの最大待ち時間を伸ばす `CLAUDE_CODE_OVERLOADED_RETRY_MAX_DELAY_MS`、通常のサイズ上限を超えるテキストファイルを 1 回で読む Read ツールの `allow_large` オプション。Claude apps gateway の `managed.policies[]` には Claude Desktop の Code タブにも適用される `code` キーが加わった。\n\n`/plugin` では同名の別プラグインが有効なために hook が無効化されたプラグインに注記が出る。\n\n修正では、管理設定の PreToolUse hook が `\"continue\": false` で拒否しても turn が終わらなかった問題、ヘッドレスセッションがフォルダで無効化した `.mcp.json` のサーバーを起動する問題、Haiku 5.5 など adaptive thinking のみのモデルでトークン数がゲートウェイ経由で失敗する問題、共有トランスクリプトの秘密情報のマスク漏れなどが直った。"
+          "article_summary": "追加は、サブエージェントの frontmatter と `--agents` 定義の `autoCompactWindow`（メインの会話より早く自動 compaction する）、ワークフローエージェントだけを 1 つのモデルで動かす `CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL`、529 リトライの最大待ち時間を伸ばす `CLAUDE_CODE_OVERLOADED_RETRY_MAX_DELAY_MS`、通常のサイズ上限を超えるテキストファイルを 1 回で読む Read ツールの `allow_large` オプション。Claude apps gateway の `managed.policies[]` には Claude Desktop の Code タブにも適用される `code` キーが加わった。\n\n`/plugin` では同名の別プラグインが有効なために hook が無効化されたプラグインに注記が出る。"
         },
         {
           "title": "Claude Platform release notes (October 9, 2026)",

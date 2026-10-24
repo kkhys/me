@@ -1335,7 +1335,7 @@
           "published_at": "2026-10-15T19:22:06+00:00",
           "interest": 2,
           "summary": "vim モードで対応する括弧へ飛ぶ `%` モーションが使える（d / c / y との組み合わせ可）。mod の `Input` に `rows` が付き複数行の入力欄を作れる。OpenTelemetry の `tool_decision` イベントに `classifier_verdict`、`permission_mode`、`classifier_category` が加わり、auto mode 分類器の判定を権限ルールと区別できる。",
-          "article_summary": "追加は、vim モードの `%` モーション（対応する括弧へジャンプ。d / c / y と組み合わせ可）、mod の `Input` の `rows`（複数行の入力欄。Enter で送信、Shift+Enter か行末のバックスラッシュで改行）、`claude-api` スキルへの OpenTelemetry トレース設定ガイド、無人リトライモードが遠すぎる利用上限のリセットを待たずに終える `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS`。\n\nOpenTelemetry の `tool_decision` イベントには `classifier_verdict` と `permission_mode` が加わり、auto mode 分類器の判定を権限ルールと区別できる。`OTEL_LOG_TOOL_DETAILS=1` では分類器がブロックした組み込みルール名 `classifier_category` も出る。\n\n修正では、未 push のコミットを含むかもしれない `WorktreeCreate` hook 製の worktree を終了時に無断で削除していた問題、組織で最新 Fable が使えない時に `fable` / `best` エイリアスがエラーになる問題（前の Fable で 1 回リトライ）、Grep / Glob が検索プログラムの異常終了を「一致なし」と報告する問題、PreToolUse hook が Edit / Write を覆う環境でアーティファクト更新が拒否される問題などが直った。"
+          "article_summary": "追加は、vim モードの `%` モーション（対応する括弧へジャンプ。d / c / y と組み合わせ可）、mod の `Input` の `rows`（複数行の入力欄。Enter で送信、Shift+Enter か行末のバックスラッシュで改行）、`claude-api` スキルへの OpenTelemetry トレース設定ガイド、無人リトライモードが遠すぎる利用上限のリセットを待たずに終える `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS`。\n\nOpenTelemetry の `tool_decision` イベントには `classifier_verdict` と `permission_mode` が加わり、auto mode 分類器の判定を権限ルールと区別できる。`OTEL_LOG_TOOL_DETAILS=1` では分類器がブロックした組み込みルール名 `classifier_category` も出る。"
         }
       ]
     },
@@ -1353,7 +1353,7 @@
           "published_at": "2026-10-15T21:30:38+00:00",
           "interest": 3,
           "summary": "`/config` でカテゴリ横断に設定を検索し、対応する設定はその場で変更できる（再起動が必要なものは表示）。Codex の応答中にフォローアップを送ると即座に方向転換し、turn の中断は Code Mode のセルも止める。`/keymap` でリーダーキー（既定 Ctrl+X）を設定でき、Codex はスキル・メモリ・会話履歴の参照など読み取り専用ツールを並列に実行する。",
-          "article_summary": "新機能は、カテゴリ横断で設定を検索し対応するものはその場で変更できる `/config`（再起動が必要な変更は明示）、応答中のフォローアップ送信による即時の方向転換（turn 中断は Code Mode のセルと入れ子のツール呼び出しも停止）、`/keymap` でのリーダーキー設定（既定 Ctrl+X、音声ミュートは F9 に移動）、`/daemon` からの管理バックグラウンドサーバーの再起動（中断される作業を警告して自動再接続）、スキル・メモリ・会話履歴の参照など独立した読み取り専用ツールの並列実行。Daybreak は対象アカウントで既定有効になった。\n\n修正では、保存スレッドの再開時に権限とネットワーク承認を復元、ネットワークプロキシが DNS 解決前に権限を確認し重複 `Host` ヘッダーを拒否、スレッド切替後に `/side` で既存のサイド会話へ戻る、Windows の `Ctrl+V` / `Shift+Insert` でのテキスト貼り付け、WSL でのクリップボード処理などが入った。\n\nCodex は標準のシェル実行器を使うようになり、パッチ済みの `zsh` を同梱しなくなった。廃止されたシェル関連フラグを使う設定には移行通知が出る。"
+          "article_summary": "新機能は、カテゴリ横断で設定を検索し対応するものはその場で変更できる `/config`（再起動が必要な変更は明示）、応答中のフォローアップ送信による即時の方向転換（turn 中断は Code Mode のセルと入れ子のツール呼び出しも停止）、`/keymap` でのリーダーキー設定（既定 Ctrl+X、音声ミュートは F9 に移動）、`/daemon` からの管理バックグラウンドサーバーの再起動（中断される作業を警告して自動再接続）、スキル・メモリ・会話履歴の参照など独立した読み取り専用ツールの並列実行。Daybreak は対象アカウントで既定有効になった。\n\nCodex は標準のシェル実行器を使うようになり、パッチ済みの `zsh` を同梱しなくなった。廃止されたシェル関連フラグを使う設定には移行通知が出る。"
         }
       ]
     },

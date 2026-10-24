@@ -1335,7 +1335,7 @@
           "published_at": "2026-10-21T22:17:02+00:00",
           "interest": 3,
           "summary": "Claude API を使うコードを API バージョン `2026-10-21` へ移行する `/claude-api api-version` と、権限ルール・auto mode・安全チェック・hook・サンドボックスがツール呼び出しを止めたり確認したりするたびに記録する `claude_code.safety_event` イベントが加わった。",
-          "article_summary": "追加は 2 つ。`/claude-api api-version` は Claude API を呼ぶコードを API バージョン `2026-10-21` に移す。`claude_code.safety_event` は OpenTelemetry イベントで、権限ルール、auto mode、安全チェック、hook、サンドボックスのいずれかがツール呼び出しを停止・確認・差し戻した時に記録される。\n\n修正では、`CLAUDE_CODE_DISABLE_1M_CONTEXT` 設定時に `opus[1m]` のようなエイリアスで model-not-found になる問題、`prompt-caching-scope` ベータヘッダーが効果のないカスタムゲートウェイや Foundry にも送られていた問題、macOS のキーチェーンがロック中に `claude -p` で MCP サーバーが「needs authentication」と出る問題を直した。\n\nHTTP MCP のツール呼び出しが接続切断時に二重送信される問題は、読み取り専用か冪等なツールだけをリトライするよう変わった。PDF や画像を多く読む turn での「Autocompact is thrashing」エラー、クラウドセッション再起動後に `/clear` した会話が戻る問題も修正された。"
+          "article_summary": "追加は 2 つ。`/claude-api api-version` は Claude API を呼ぶコードを API バージョン `2026-10-21` に移す。`claude_code.safety_event` は OpenTelemetry イベントで、権限ルール、auto mode、安全チェック、hook、サンドボックスのいずれかがツール呼び出しを停止・確認・差し戻した時に記録される。"
         },
         {
           "title": "Claude Platform release notes (October 21, 2026)",

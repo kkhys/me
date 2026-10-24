@@ -1260,7 +1260,7 @@
           "published_at": "2026-09-28T18:02:03+00:00",
           "interest": 3,
           "summary": "Claude Sonnet 5.5 が Anthropic API での既定の Sonnet モデルになった（1M コンテキスト、$2 / $10 per Mtok）。auto mode の作業ディレクトリ外読み取りの確認に「Yes, but ask again next time」が加わり、失敗した MCP サーバーをまとめて再接続する `/mcp reconnect all` が入った。",
-          "article_summary": "Claude Sonnet 5.5（`claude-sonnet-5-5`）が Anthropic API での既定の Sonnet モデルになり、1M コンテキスト、$2 / $10 per Mtok、キャッシュ読み取り $0.20 / Mtok で使える。auto mode の作業ディレクトリ外の読み取り確認に「Yes, but ask again next time」が加わり、その 1 回だけ許可して以降は再度確認させられる。\n\n`/mcp reconnect all` は接続に失敗した、または認証が必要な MCP サーバーをまとめて再試行する。`/effort` スライダーの矢印と Tab は `effortSlider:*` と `toggleUltracode` のキーバインド操作として `keybindings.json` で変えられる。claude.ai 契約者向けに `/rate-limit-options` が `/help` とコマンドメニューに載った。\n\nClaude apps gateway では `/usage` とステータスラインに支出上限のドル額が出る（例「$271.40 / $500.00 spent this month」）。修正では、壊れた応答ストリームが「JSON Parse error」や「undefined」を本文に書き出す問題、compaction 後も「Prompt is too long」が続く場合にもう一度詰めて compaction する動作などが入った。"
+          "article_summary": "Claude Sonnet 5.5（`claude-sonnet-5-5`）が Anthropic API での既定の Sonnet モデルになり、1M コンテキスト、$2 / $10 per Mtok、キャッシュ読み取り $0.20 / Mtok で使える。auto mode の作業ディレクトリ外の読み取り確認に「Yes, but ask again next time」が加わり、その 1 回だけ許可して以降は再度確認させられる。\n\n`/mcp reconnect all` は接続に失敗した、または認証が必要な MCP サーバーをまとめて再試行する。`/effort` スライダーの矢印と Tab は `effortSlider:*` と `toggleUltracode` のキーバインド操作として `keybindings.json` で変えられる。claude.ai 契約者向けに `/rate-limit-options` が `/help` とコマンドメニューに載った。\n\nClaude apps gateway では `/usage` とステータスラインに支出上限のドル額が出る（例「$271.40 / $500.00 spent this month」）。"
         },
         {
           "title": "Claude Platform release notes (September 28, 2026)",
@@ -1298,7 +1298,7 @@
           "published_at": "2026-09-28T05:07:23+00:00",
           "interest": 2,
           "summary": "事前登録した OAuth クライアントシークレットを要求する MCP サーバーに `codex mcp add --oauth-client-secret` で接続できる。exec サーバーへの直接の WebSocket 接続がベアラートークンで保護され、フルスクリーン TUI では選択時コピーと右クリック貼り付けを設定でき、コピーした選択範囲は Markdown の書式を保つ。",
-          "article_summary": "新機能は、フルスクリーン TUI の選択時コピーと右クリック貼り付けの設定（コピーは Markdown 書式を保持）、事前登録の OAuth クライアントシークレットが必要な MCP サーバーへの接続（`codex mcp add --oauth-client-secret`）、exec サーバーへの直接の WebSocket 接続のベアラートークン保護、画像生成・編集での透過背景の明示指定とファイルベースの会話画像の編集、昇格権限で動くコマンドでのターミナル入力承認の既定有効化。\n\n修正では、Windows サンドボックスの通常パス・保存済み認証情報・大きな権限ポリシーに関する失敗、Linux サンドボックスのネストした書き込み可能ルートでの起動失敗と Git メタデータ保護の維持、macOS のパッチ操作がシステムパスのエイリアスを既存権限として認識せず不要な承認を求める問題、Mermaid フローチャートの引用ラベルとアンパサンドの描画などが直った。"
+          "article_summary": "新機能は、フルスクリーン TUI の選択時コピーと右クリック貼り付けの設定（コピーは Markdown 書式を保持）、事前登録の OAuth クライアントシークレットが必要な MCP サーバーへの接続（`codex mcp add --oauth-client-secret`）、exec サーバーへの直接の WebSocket 接続のベアラートークン保護、画像生成・編集での透過背景の明示指定とファイルベースの会話画像の編集、昇格権限で動くコマンドでのターミナル入力承認の既定有効化。"
         }
       ]
     },

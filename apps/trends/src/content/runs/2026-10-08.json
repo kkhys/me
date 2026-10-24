@@ -1320,7 +1320,7 @@
           "published_at": "2026-10-07T18:10:20+00:00",
           "interest": 3,
           "summary": "Claude Haiku 5.5 が Anthropic API での既定の Haiku モデルになった（1M コンテキスト、$0.10 / $0.50 per Mtok、10 万トークン超のプロンプトは $0.50 / $2.50）。`subagentStatusLine` のペイロードに `agentType` が加わり、mod の `$.tool.register` は `isDeferred: false` でツールスキーマを最初からプロンプトに載せられる。",
-          "article_summary": "Claude Haiku 5.5（`claude-haiku-5-5`）が Anthropic API での既定の Haiku モデルになり、1M コンテキスト、$0.10 / $0.50 per Mtok（10 万トークン超のプロンプトは $0.50 / $2.50）で使える。`subagentStatusLine` のペイロードに `agentType` が加わりカスタムサブエージェントの種類をスクリプトで区別でき、mod の `$.tool.register` に `isDeferred` が付いて `false` ならツール検索の裏に隠さず最初からスキーマを載せる。\n\n修正では、compaction 前の自分の最後の操作を完了済みと誤認して作業を取り消したりやり直したりする問題、HTTP MCP 接続が送ったリクエストをすべて保持し続けるメモリリーク、`←` でセッションをバックグラウンドに回すと作業中に送ったメッセージが失われる問題、`/model` の effort 切替が端を越えて Low を保存してしまう問題などが直った。\n\n`claude logs` / `stop` / `kill` や `claude daemon` の各コマンドが期限切れ直前のログインでサインアウトさせてしまう問題、`/ultrareview` のアップロードが一部リポジトリを誤って拒否する問題も修正された。"
+          "article_summary": "Claude Haiku 5.5（`claude-haiku-5-5`）が Anthropic API での既定の Haiku モデルになり、1M コンテキスト、$0.10 / $0.50 per Mtok（10 万トークン超のプロンプトは $0.50 / $2.50）で使える。`subagentStatusLine` のペイロードに `agentType` が加わりカスタムサブエージェントの種類をスクリプトで区別でき、mod の `$.tool.register` に `isDeferred` が付いて `false` ならツール検索の裏に隠さず最初からスキーマを載せる。"
         },
         {
           "title": "Claude Platform release notes (October 7, 2026)",
@@ -1368,7 +1368,7 @@
           "published_at": "2026-10-07T15:58:45+00:00",
           "interest": 2,
           "summary": "GPT-6.1 Sol が同梱カタログと Amazon Bedrock カタログの既定モデルになった。実行中のターミナルセッションから `/mcp login <server>` で MCP サーバーにサインインでき、音声会話で使うマイク・スピーカー・入力チャンネルを選べる。Daybreak は `--enable cli_daybreak` または `features.cli_daybreak=true` のオプトインで、既定では操作や表示が隠れる。",
-          "article_summary": "新機能は、既定モデルとしての GPT-6.1 Sol（同梱カタログと Amazon Bedrock カタログ）、Bedrock での multi-agent V2 と Ultra reasoning のサポートと Bedrock Mantle の AWS GovCloud リージョン対応、実行中のターミナルセッションからの `/mcp login <server>`、音声会話のマイク・スピーカー・入力チャンネルの選択（設定はローカル保存）。\n\nDaybreak は `--enable cli_daybreak` または `features.cli_daybreak=true` によるオプトインになり、`daybreak=true` だけでは有効にならない。既定では操作と表示が隠れ、`/daybreak` は使えず、保存済みスレッドでも自動の Cyber ルーティングは行われない。`codex exec --cyber-access-program` や TypeScript SDK の `cyberAccessProgram` で turn ごとに Cyber アクセスプログラムを選べる。\n\n修正では、承認したファイルシステム昇格で拒否した読み取りとネットワーク制限を保ったまま書き込み範囲を広げる、明示した起動時権限のターミナル再接続後の維持、昇格した Windows ターミナルでの埋め込みサーバー起動、貼り付け検知後の Enter 送信、SQLite の破損の早期検知とバックアップ、オーバーロード時のサーバーの retry 指示の尊重などが入った。"
+          "article_summary": "新機能は、既定モデルとしての GPT-6.1 Sol（同梱カタログと Amazon Bedrock カタログ）、Bedrock での multi-agent V2 と Ultra reasoning のサポートと Bedrock Mantle の AWS GovCloud リージョン対応、実行中のターミナルセッションからの `/mcp login <server>`、音声会話のマイク・スピーカー・入力チャンネルの選択（設定はローカル保存）。\n\nDaybreak は `--enable cli_daybreak` または `features.cli_daybreak=true` によるオプトインになり、`daybreak=true` だけでは有効にならない。既定では操作と表示が隠れ、`/daybreak` は使えず、保存済みスレッドでも自動の Cyber ルーティングは行われない。`codex exec --cyber-access-program` や TypeScript SDK の `cyberAccessProgram` で turn ごとに Cyber アクセスプログラムを選べる。"
         },
         {
           "title": "GPT-6 and Intelligent UI for everyone",
@@ -1442,12 +1442,12 @@
       "items": [
         {
           "title": "Orca v1.4.222",
-          "title_ja": "Orca v1.4.222: 大きな CSV の編集に対応、日本語・中国語・韓国語入力の Enter 確定で誤送信しない修正、OpenCode ワーカーの改善",
+          "title_ja": "Orca v1.4.222: 大きな CSV の表示と編集に対応、OpenCode ワーカーの改善、使用量メニューに各エージェントのクレジット残高",
           "url": "https://github.com/stablyai/orca/releases/tag/v1.4.222",
           "source": "Orca",
           "published_at": "2026-10-07T02:20:45+00:00",
           "interest": 1,
-          "summary": "大きな CSV ファイルを丸ごと読まずに開き、列幅の変更、セル編集、行と列の追加・削除、範囲のコピー・貼り付け、ソートとフィルターができる。日本語・中国語・韓国語の入力で変換確定の Enter がフィールド送信やファイル作成、コメント送信を引き起こさなくなった。OpenCode ワーカーはビジーなマシンでもタスクを未送信のまま残さず、要求したモデルを既定を変えずに使える。",
+          "summary": "大きな CSV ファイルを丸ごと読まずに開き、列幅の変更、セル編集、行と列の追加・削除、範囲のコピー・貼り付け、ソートとフィルターができる。OpenCode ワーカーはビジーなマシンでもタスクを未送信のまま残さず、要求したモデルを既定を変えずに使え、使用量メニューに Claude のクレジット、OpenCode Zen の残高、Codex のクレジットが並ぶ。",
           "article_summary": ""
         }
       ]

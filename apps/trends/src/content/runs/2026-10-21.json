@@ -1329,13 +1329,13 @@
       "items": [
         {
           "title": "Claude Code v2.1.305",
-          "title_ja": "Claude Code v2.1.305: sandbox.allowNestedUserNamespaces の追加と、Vertex / Bedrock で全リクエストが失敗する 2.1.304 のリグレッション修正",
+          "title_ja": "Claude Code v2.1.305: サンドボックス内で user namespace を許可する `sandbox.allowNestedUserNamespaces`、無人リトライが解除済みの利用上限に気づく環境変数",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305",
           "source": "Claude Code",
           "published_at": "2026-10-20T20:46:50+00:00",
           "interest": 3,
-          "summary": "Linux のサンドボックス内で Chromium や rootless podman が user namespace を作れるようにする `sandbox.allowNestedUserNamespaces` が加わった（サンドボックスのファイル保護を回避できる点に注意書き）。2.1.304 で Vertex / Bedrock などがツール検索を拒否して全リクエストが失敗していた問題を修正。",
-          "article_summary": "追加は、Linux のサンドボックス内コマンドが user namespace を作れるようにする `sandbox.allowNestedUserNamespaces`（Chromium や rootless podman 向け。サンドボックスのファイル保護を回避できる）と、無人リトライモード `CLAUDE_CODE_RETRY_WATCHDOG` が解除済みの利用上限に気づくための `CLAUDE_CODE_RETRY_WATCHDOG_USAGE_LIMIT_RECHECK_MS`。\n\n修正の中心は 2.1.304 のリグレッションで、Vertex、Bedrock などのエンドポイントやゲートウェイがツール検索を拒否すると全リクエストが失敗していた問題。ツール検索なしでリトライするようになった。`/effort` と `/autocompact` の設定が `modelOverrides` と大文字小文字や `[1m]` タグで食い違うと効かない問題も直った。\n\nそのほか、bare リポジトリでの新規 worktree の起点、ディスクフル時の `ENOSPC` エラー文、クラウドセッションや SDK の `setMcpServers` で渡した MCP サーバーが同名の設定に置き換わる問題、サブエージェントのフォールバック後のモデル名表示などが修正された。"
+          "summary": "Linux のサンドボックス内で Chromium や rootless podman が user namespace を作れるようにする `sandbox.allowNestedUserNamespaces` が加わった（サンドボックスのファイル保護を回避できる点に注意書き）。無人リトライモード `CLAUDE_CODE_RETRY_WATCHDOG` が解除済みの利用上限に気づくための `CLAUDE_CODE_RETRY_WATCHDOG_USAGE_LIMIT_RECHECK_MS` も入った。",
+          "article_summary": ""
         },
         {
           "title": "Claude Platform release notes (October 20, 2026)",

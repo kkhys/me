@@ -1320,7 +1320,7 @@
           "published_at": "2026-10-06T18:59:30+00:00",
           "interest": 3,
           "summary": "`claude plugin install --marketplace <name>` でマーケットプレイスの追加とプラグインのインストールを一度に行える。Agent ツールに `effort` パラメータが付き、サブエージェントを指定の effort で動かせる。mod はプロンプト欄の補完候補を `prompt.autocomplete` で追加でき、`$.model.complete` でプロンプトキャッシュを使える。",
-          "article_summary": "追加は、マーケットプレイスの追加（`claude plugin marketplace add` と同じポリシーチェック）とインストールを一度に行う `claude plugin install --marketplace <name>`、サブエージェントを指定の effort で動かす Agent ツールの `effort` パラメータ、529（overloaded）リトライの基本待ち時間を伸ばす `CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS`。\n\nmod 向けには、プロンプト欄の補完一覧に行を足す `prompt.autocomplete` イベント、`$.model.complete` の `prompt` / `system` でブロック単位の `cache: true` によるプロンプトキャッシュ、`agent.spawn` hook にワークフローエージェント（run と index 付き）が渡され拒否できる機能が加わった。\n\n修正にはセキュリティ関連が多い。PreToolUse hook の承認と auto mode がネットワーク（UNC）パスのファイル読み取りで権限プロンプトを迂回していた問題、サンドボックス内コマンドが `/ultrareview` のアップロード用ファイルを読めた問題、改ざんされたサーバー管理設定のキャッシュで組み込みポリシープラグインが外せた問題、macOS / Windows でノートブックや PDF の読み取り中にリンクを差し替えると承認外のファイルを返せた問題などが直った。"
+          "article_summary": "追加は、マーケットプレイスの追加（`claude plugin marketplace add` と同じポリシーチェック）とインストールを一度に行う `claude plugin install --marketplace <name>`、サブエージェントを指定の effort で動かす Agent ツールの `effort` パラメータ、529（overloaded）リトライの基本待ち時間を伸ばす `CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS`。\n\nmod 向けには、プロンプト欄の補完一覧に行を足す `prompt.autocomplete` イベント、`$.model.complete` の `prompt` / `system` でブロック単位の `cache: true` によるプロンプトキャッシュ、`agent.spawn` hook にワークフローエージェント（run と index 付き）が渡され拒否できる機能が加わった。"
         }
       ]
     },

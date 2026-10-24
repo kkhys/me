@@ -1335,7 +1335,7 @@
           "published_at": "2026-10-01T18:00:22+00:00",
           "interest": 3,
           "summary": "プラグインがより深い挙動を変更できる Claude Mods が入った。built-in の mod「You should know」は副エージェントがユーザーと Claude の見落としを指摘するもので、`/plugin enable cc-plugin-you-should-know@builtin` で有効にする。エージェントビューにセッション名とタスクで絞る `n:` フィルターも加わった。",
-          "article_summary": "Claude Mods により、プラグインは従来より深い挙動を変更できるようになった。built-in の mod「You should know」は副エージェントがユーザーや Claude が見落としそうな点を指摘するもので、`/plugin enable cc-plugin-you-should-know@builtin` で有効化する（テレメトリ有効のファーストパーティセッション向け）。\n\nエージェントビューにはセッション名とタスクに一致する `n:` フィルターが加わり、折りたたんだセクション内の一致も表示し、Enter で先頭の一致を開く。MCP サーバーからの URL プロンプト（2025-11-25 プロトコル）に対応し、更新後に接続できないサーバーは MCP 設定に `\"bareElicitationCapability\": true` を足す。セルフホストランナーでは GitHub CLI がないマシン向けの built-in `gh api`（REST のみ）が入った。\n\n修正では、Remote Control が再接続要求に応答がないと数分間メッセージを受け取れない問題、`asyncRewake` の hook がスクリプト欠落で繰り返し起こす問題、Opus 5.5 と Sonnet 5.5 の切り替えで以前の extended thinking が落ちる問題などが直った。"
+          "article_summary": "Claude Mods により、プラグインは従来より深い挙動を変更できるようになった。built-in の mod「You should know」は副エージェントがユーザーや Claude が見落としそうな点を指摘するもので、`/plugin enable cc-plugin-you-should-know@builtin` で有効化する（テレメトリ有効のファーストパーティセッション向け）。\n\nエージェントビューにはセッション名とタスクに一致する `n:` フィルターが加わり、折りたたんだセクション内の一致も表示し、Enter で先頭の一致を開く。MCP サーバーからの URL プロンプト（2025-11-25 プロトコル）に対応し、更新後に接続できないサーバーは MCP 設定に `\"bareElicitationCapability\": true` を足す。セルフホストランナーでは GitHub CLI がないマシン向けの built-in `gh api`（REST のみ）が入った。"
         },
         {
           "title": "Claude Platform release notes (October 1, 2026)",

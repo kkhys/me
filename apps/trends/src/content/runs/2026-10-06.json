@@ -1275,7 +1275,7 @@
           "published_at": "2026-10-05T23:33:17+00:00",
           "interest": 2,
           "summary": "`claude attach` と `claude logs` がセッション ID の代わりに名前の一部で使えるようになった。Managed Agents のパターンを `ant apply` ファイルとして用意する `/claude-api managed-agents-onboard` が加わり、WebFetch は 10 万文字を超えるページで未読分の量を示し `offset` で続きを読める。mod の hook には `serverToolUses`、`agentId`、`ceiling` が加わった。",
-          "article_summary": "mod 向けには、`turn.step` hook の結果に API 側が実行したツール呼び出し（advisor）を示す `serverToolUses`、プラグイン hook の `tool.check` イベントにサブエージェントの権限チェックを区別する `agentId`、組織が要求する承認を示す `ceiling`、テーマ色の型 `ThemeKey` / `Color` が加わった。`claude plugin validate` はゲート位置に登録された各 hook に `.catch` があるかを列挙する。\n\n`claude attach` と `claude logs` はセッション名の一部で動く。`/claude-api managed-agents-onboard` は Managed Agents のパターンを `ant apply` ファイルとして用意し、`deep-researcher` のような Console のクイックスタートテンプレートも `ant` CLI で組み立てる。\n\n修正では、400 以外のステータスでベータヘッダーを拒否するプロキシ経由の失敗、数百枚の画像を含む長いセッションが「unprocessable」で止まる問題、出力コンテンツフィルターで思考中に turn が終わる問題（1 回リトライ）、WebFetch が 10 万文字超を黙って落とす問題（未読量を示し `offset` で続きを読める）、`/rewind` に作業中に送ったプロンプトが出ない問題などが直った。"
+          "article_summary": "mod 向けには、`turn.step` hook の結果に API 側が実行したツール呼び出し（advisor）を示す `serverToolUses`、プラグイン hook の `tool.check` イベントにサブエージェントの権限チェックを区別する `agentId`、組織が要求する承認を示す `ceiling`、テーマ色の型 `ThemeKey` / `Color` が加わった。`claude plugin validate` はゲート位置に登録された各 hook に `.catch` があるかを列挙する。\n\n`claude attach` と `claude logs` はセッション名の一部で動く。`/claude-api managed-agents-onboard` は Managed Agents のパターンを `ant apply` ファイルとして用意し、`deep-researcher` のような Console のクイックスタートテンプレートも `ant` CLI で組み立てる。"
         }
       ]
     },
@@ -1326,13 +1326,13 @@
       "items": [
         {
           "title": "Orca v1.4.221",
-          "title_ja": "Orca v1.4.221: Copilot の設定ファイルが他ユーザーから読めた問題を修正、Windows の Codex が自分の `~/.codex` を使用、Codex ワーカーで `max` / `ultra` effort",
+          "title_ja": "Orca v1.4.221: Windows の Codex が Orca 外と同じ `~/.codex` を使用、Codex ワーカーで `max` / `ultra` effort、Qoder CLI China と Qwen Code を起動可能",
           "url": "https://github.com/stablyai/orca/releases/tag/v1.4.221",
           "source": "Orca",
           "published_at": "2026-10-05T23:49:29+00:00",
           "interest": 2,
-          "summary": "フォルダを GitHub Copilot 向けに信頼済みにすると、Copilot のログイントークンを含みうる `~/.copilot/config.json` が同じマシンの他ユーザーから読める状態になっていた問題を修正（v1.4.219 / 220 では SSH ホストでも発生）。Windows の Codex が macOS / Linux と同様に Orca 外と同じ `~/.codex` を使うようになり、`worker-start` が gpt-6.x 系向けの `max` / `ultra` effort を受け付ける。",
-          "article_summary": "セキュリティ修正として、Orca がフォルダを GitHub Copilot 向けに信頼済みにした際に `~/.copilot/config.json`（Copilot のログイントークンを含みうる）を同じマシンの他ユーザーから読める状態にしていた問題を直した。v1.4.219 と v1.4.220 では共有されがちな SSH ホストでも発生していた。ファイルは Orca が書き込んだ後は所有者のみ読める。\n\nWindows の Codex は macOS / Linux と同じく Orca の外と同じ `~/.codex` フォルダを使うようになった。Orca 内だけでサインインしていた場合はコピーされ、フォルダの信頼やコマンド承認を再度求められることがあり、Orca 内だけで追加した MCP サーバーは追加し直す。\n\nCodex ワーカーの `worker-start` は gpt-6.x 系など Orca が未掲載のモデル向けに `max` / `ultra` effort を受け付ける。Qoder の会話がセッション履歴と検索に入り、Qoder CLI China と Qwen Code を起動でき、OpenCode と Devin は別々のアカウントプロファイルを持てる。ペアリング済み Orca サーバー上のワークスペースはチャットが既定なら構造化チャットで開く。"
+          "summary": "Windows の Codex が macOS / Linux と同様に Orca の外と同じ `~/.codex` フォルダを使うようになり、Orca 内だけのサインインはコピーされる。`worker-start` が gpt-6.x 系向けの `max` / `ultra` effort を受け付け、Qoder CLI China と Qwen Code を起動でき、OpenCode と Devin は別々のアカウントプロファイルを持てる。",
+          "article_summary": "Windows の Codex は macOS / Linux と同じく Orca の外と同じ `~/.codex` フォルダを使うようになった。Orca 内だけでサインインしていた場合はコピーされ、フォルダの信頼やコマンド承認を再度求められることがあり、Orca 内だけで追加した MCP サーバーは追加し直す。更新前から開いていた Codex ターミナルは Orca の旧フォルダで動き続ける。\n\nCodex ワーカーの `worker-start` は gpt-6.x 系など Orca が未掲載のモデル向けに `max` / `ultra` effort を受け付ける。Qoder の会話がセッション履歴と検索に入り、Qoder CLI China と Qwen Code を起動でき、GLM Coding Plan を ZCode なしで紐付けられる。OpenCode と Devin は別々のアカウントプロファイルを持て、Antigravity にはアカウントカードが付き、Antigravity IDE / 2.0 の会話を新しい CLI 会話で続けられる。\n\nネイティブチャット（実験的）では、ペアリング済み Orca サーバー上のワークスペースがチャット既定なら構造化チャットで開き、OpenCode のセッションも Chat を使える。Codex の「Implement this plan?」メニューと未回答の質問は待機中として扱われる。"
         }
       ]
     },
