@@ -12,7 +12,7 @@ import type {
   PagefindSearchResult,
 } from "../types";
 
-const searchConfig = { maxResults: 10, debounceMs: 120, noun: "メモ" } as const;
+const searchConfig = { pageSize: 10, debounceMs: 120, noun: "メモ" } as const;
 
 const fragment = (url: string): PagefindSearchFragment => ({
   url,
@@ -37,6 +37,26 @@ const response = (results: PagefindSearchResult[]): PagefindIndexesSearchResults
   totalFilters: {},
   timings: { preload: 0, search: 0, total: 0 },
 });
+
+const urls = (from: number, to: number) =>
+  Array.from({ length: to - from }, (_, i) => `/${from + i}.html`);
+
+const fragmentsOf = (from: number, to: number) => urls(from, to).map((url) => fragment(url));
+
+/** `length` hits whose `data()` records its URL; `override` swaps the load of an index. */
+const trackedResults = (
+  length: number,
+  override: Record<number, () => Promise<PagefindSearchFragment>> = {},
+) => {
+  const loaded: string[] = [];
+  const results = Array.from({ length }, (_, i) =>
+    result(`/${i}.html`, () => {
+      loaded.push(`/${i}.html`);
+      return (override[i] ?? (() => Promise.resolve(fragment(`/${i}.html`))))();
+    }),
+  );
+  return { loaded, results };
+};
 
 const respond = (results: PagefindSearchResult[]) =>
   vi.fn<PagefindModule["debouncedSearch"]>().mockResolvedValue(response(results));
@@ -65,10 +85,13 @@ const createHarness = (pagefind: Partial<PagefindModule>) => {
   const deps = {
     loadPagefind: vi.fn<() => Promise<PagefindModule>>(() => Promise.resolve(module)),
     render: vi.fn<(fragments: readonly PagefindSearchFragment[]) => void>(),
+    append: vi.fn<(fragments: readonly PagefindSearchFragment[]) => void>(),
     setStatus: vi.fn<(text: string) => void>(),
+    setHasMore: vi.fn<(hasMore: boolean) => void>(),
     onError: vi.fn<(stage: SearchStage, error: unknown) => void>(),
   };
-  return { module, deps, run: createSearchRunner(deps, searchConfig) };
+  const runner = createSearchRunner(deps, searchConfig);
+  return { module, deps, run: runner.search, loadMore: runner.loadMore };
 };
 
 // Starts `run(first)` with its search still `pending`, then runs `second` to
@@ -132,6 +155,7 @@ describe("createSearchRunner", () => {
     expect(deps.loadPagefind).not.toHaveBeenCalled();
     expect(deps.render).toHaveBeenCalledWith([]);
     expect(deps.setStatus).toHaveBeenCalledWith("");
+    expect(deps.setHasMore).toHaveBeenCalledWith(false);
   });
 
   it("normalizes the query and forwards the options and debounce", async () => {
@@ -145,6 +169,7 @@ describe("createSearchRunner", () => {
     );
     expect(deps.render).toHaveBeenCalledWith([fragment("/a.html")]);
     expect(deps.setStatus).toHaveBeenLastCalledWith("1 件");
+    expect(deps.setHasMore).toHaveBeenLastCalledWith(false);
   });
 
   it("clears the list and names the normalized query when nothing matched", async () => {
@@ -163,20 +188,14 @@ describe("createSearchRunner", () => {
     expect(deps.setStatus).not.toHaveBeenCalled();
   });
 
-  it("only loads fragments for the first maxResults hits and reports the total", async () => {
-    const loaded: string[] = [];
-    const results = Array.from({ length: searchConfig.maxResults + 5 }, (_, i) =>
-      result(`/${i}.html`, () => {
-        loaded.push(`/${i}.html`);
-        return Promise.resolve(fragment(`/${i}.html`));
-      }),
-    );
+  it("only loads fragments for the first page and offers the rest", async () => {
+    const { loaded, results } = trackedResults(15);
     const { deps, run } = createHarness({ debouncedSearch: respond(results) });
     await run("q");
-    expect(loaded).toEqual(Array.from({ length: searchConfig.maxResults }, (_, i) => `/${i}.html`));
-    expect(deps.setStatus).toHaveBeenLastCalledWith(
-      `${searchConfig.maxResults + 5} 件中 ${searchConfig.maxResults} 件を表示`,
-    );
+    expect(loaded).toEqual(urls(0, 10));
+    expect(deps.render).toHaveBeenCalledWith(fragmentsOf(0, 10));
+    expect(deps.setStatus).toHaveBeenLastCalledWith("15 件中 10 件を表示");
+    expect(deps.setHasMore).toHaveBeenLastCalledWith(true);
   });
 
   it("drops a superseded response even when Pagefind still returns it", async () => {
@@ -250,6 +269,7 @@ describe("createSearchRunner", () => {
     expect(deps.onError).toHaveBeenCalledWith("load", error);
     expect(deps.render).toHaveBeenCalledWith([]);
     expect(deps.setStatus).toHaveBeenCalledWith(formatErrorStatus("load"));
+    expect(deps.setHasMore).toHaveBeenCalledWith(false);
   });
 
   it("treats a rejected search (missing index) as a load-class failure", async () => {
@@ -306,5 +326,130 @@ describe("createSearchRunner", () => {
     });
     await expect(run("q")).rejects.toBe(error);
     expect(deps.setStatus).toHaveBeenLastCalledWith(formatErrorStatus("render"));
+  });
+});
+
+describe("loadMore", () => {
+  it("appends the next page and stops offering more once every hit is on screen", async () => {
+    const { loaded, results } = trackedResults(25);
+    const { deps, run, loadMore } = createHarness({ debouncedSearch: respond(results) });
+    await run("q");
+
+    await loadMore();
+    expect(loaded).toEqual(urls(0, 20));
+    expect(deps.append).toHaveBeenLastCalledWith(fragmentsOf(10, 20));
+    expect(deps.setStatus).toHaveBeenLastCalledWith("25 件中 20 件を表示");
+    expect(deps.setHasMore).toHaveBeenLastCalledWith(true);
+
+    await loadMore();
+    expect(deps.append).toHaveBeenLastCalledWith(fragmentsOf(20, 25));
+    expect(deps.setStatus).toHaveBeenLastCalledWith("25 件");
+    expect(deps.setHasMore).toHaveBeenLastCalledWith(false);
+
+    await loadMore();
+    expect(deps.append).toHaveBeenCalledTimes(2);
+    expect(loaded).toHaveLength(25);
+    expect(deps.render).toHaveBeenCalledTimes(1);
+  });
+
+  it("does nothing before a search has rendered", async () => {
+    const { deps, loadMore } = createHarness({});
+    await loadMore();
+    expect(deps.append).not.toHaveBeenCalled();
+    expect(deps.setStatus).not.toHaveBeenCalled();
+  });
+
+  it("does nothing once the input was cleared", async () => {
+    const { results } = trackedResults(15);
+    const { deps, run, loadMore } = createHarness({ debouncedSearch: respond(results) });
+    await run("q");
+    await run("");
+    expect(deps.setHasMore).toHaveBeenLastCalledWith(false);
+    await loadMore();
+    expect(deps.append).not.toHaveBeenCalled();
+  });
+
+  it("drops a batch that lands after a newer search has rendered", async () => {
+    const pending = deferred<PagefindSearchFragment>();
+    const { results } = trackedResults(15, { 10: () => pending.promise });
+    const debouncedSearch = vi
+      .fn<PagefindModule["debouncedSearch"]>()
+      .mockResolvedValueOnce(response(results))
+      .mockResolvedValueOnce(response([result("/new.html")]));
+    const { deps, run, loadMore } = createHarness({ debouncedSearch });
+    await run("old");
+    const older = loadMore();
+    await run("new");
+    expect(deps.render).toHaveBeenLastCalledWith([fragment("/new.html")]);
+
+    pending.resolve(fragment("/10.html"));
+    await older;
+    expect(deps.append).not.toHaveBeenCalled();
+    expect(deps.setStatus).toHaveBeenLastCalledWith("1 件");
+    expect(deps.setHasMore).toHaveBeenLastCalledWith(false);
+  });
+
+  it("loads one batch at a time", async () => {
+    const pending = deferred<PagefindSearchFragment>();
+    const { loaded, results } = trackedResults(30, { 10: () => pending.promise });
+    const { deps, run, loadMore } = createHarness({ debouncedSearch: respond(results) });
+    await run("q");
+    const first = loadMore();
+    await loadMore();
+    expect(loaded).toHaveLength(20);
+
+    pending.resolve(fragment("/10.html"));
+    await first;
+    expect(deps.append).toHaveBeenCalledTimes(1);
+    expect(deps.setStatus).toHaveBeenLastCalledWith("30 件中 20 件を表示");
+
+    await loadMore();
+    expect(loaded).toHaveLength(30);
+    expect(deps.setStatus).toHaveBeenLastCalledWith("30 件");
+  });
+
+  it("moves past fragments that failed to load and keeps counting them", async () => {
+    const error = new Error("gunzip");
+    const { results } = trackedResults(22, {
+      3: () => Promise.reject(error),
+      15: () => Promise.reject(error),
+    });
+    const { deps, run, loadMore } = createHarness({ debouncedSearch: respond(results) });
+    await run("q");
+    expect(deps.setStatus).toHaveBeenLastCalledWith(
+      "22 件中 9 件を表示（1 件を読み込めませんでした）",
+    );
+
+    await loadMore();
+    expect(deps.append).toHaveBeenLastCalledWith([...fragmentsOf(10, 15), ...fragmentsOf(16, 20)]);
+    expect(deps.onError).toHaveBeenLastCalledWith("fragments", [error]);
+    expect(deps.setStatus).toHaveBeenLastCalledWith(
+      "22 件中 18 件を表示（2 件を読み込めませんでした）",
+    );
+    expect(deps.setHasMore).toHaveBeenLastCalledWith(true);
+
+    await loadMore();
+    expect(deps.setStatus).toHaveBeenLastCalledWith(
+      "22 件中 20 件を表示（2 件を読み込めませんでした）",
+    );
+    expect(deps.setHasMore).toHaveBeenLastCalledWith(false);
+  });
+
+  it("reports a failed append and clears the list", async () => {
+    const error = new Error("template drift");
+    const { results } = trackedResults(15);
+    const { deps, run, loadMore } = createHarness({ debouncedSearch: respond(results) });
+    await run("q");
+    deps.append.mockImplementationOnce(() => {
+      throw error;
+    });
+    await loadMore();
+    expect(deps.onError).toHaveBeenCalledWith("render", error);
+    expect(deps.setStatus).toHaveBeenLastCalledWith(formatErrorStatus("render"));
+    expect(deps.render).toHaveBeenLastCalledWith([]);
+    expect(deps.setHasMore).toHaveBeenLastCalledWith(false);
+
+    await loadMore();
+    expect(deps.append).toHaveBeenCalledTimes(1);
   });
 });

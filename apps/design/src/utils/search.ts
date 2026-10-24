@@ -5,7 +5,7 @@ export const searchConfig = {
   // astro-pagefind writes the bundle to `<outDir>/pagefind` and serves
   // `/pagefind/` from there in dev, so build and dev share this absolute path.
   bundlePath: "/pagefind/",
-  maxResults: 10,
+  pageSize: 10,
   debounceMs: 120,
   // Pagefind counts excerpt length in segmented words and centres the excerpt
   // on the match; with short Japanese segments the default 30 spills past the

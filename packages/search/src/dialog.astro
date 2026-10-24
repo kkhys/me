@@ -2,10 +2,11 @@
 import SearchIcon from "@kkhys/ui/icons/search.svg";
 
 /* The command-palette shell shared by the Pagefind search dialogs: field,
-   close button, status line and the results list. What a result row looks
-   like is the app's business — it supplies the row `<template>` through the
-   `template` slot and renders into it via `setupSearchDialog`. An optional
-   `filters` slot sits under the field (category chips on the blog). */
+   close button, status line, the results list and the さらに表示 button
+   under it. What a result row looks like is the app's business — it
+   supplies the row `<template>` through the `template` slot and renders
+   into it via `setupSearchDialog`. An optional `filters` slot sits under
+   the field (category chips on the blog). */
 interface Props {
   id: string;
   /** Accessible name of the dialog, e.g. 記事を検索. */
@@ -39,7 +40,10 @@ const { id, label, placeholder } = Astro.props;
       <slot name="filters" />
     </form>
     <p class="search-status" role="status"></p>
-    <ol class="search-results scroller-thin" aria-label="検索結果"></ol>
+    <div class="search-scroller scroller-thin">
+      <ol class="search-results" aria-label="検索結果"></ol>
+      <button type="button" class="search-more" hidden>さらに表示</button>
+    </div>
   </search>
   <slot name="template" />
 </dialog>
@@ -241,19 +245,58 @@ const { id, label, placeholder } = Astro.props;
 
   /* With nothing below it (no hits, load failure) the status line is the
      dialog's last visible row, so match its top padding below. */
-  .search-status:has(+ .search-results:empty) {
+  .search-status:has(+ .search-scroller > .search-results:empty) {
     padding-bottom: var(--space-3);
+  }
+
+  /* The list and the さらに表示 button scroll as one, so the button follows
+     the last row instead of taking a fixed strip off the list. */
+  .search-scroller {
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .search-results {
     margin: 0;
     padding: var(--space-2);
     list-style: none;
-    overflow-y: auto;
-    overscroll-behavior: contain;
   }
 
   .search-results:empty {
     display: none;
+  }
+
+  /* Where the next row would be: the rows' inset and radius, in the notes
+     size and colour so it reads as a control rather than a hit. */
+  .search-more {
+    display: block;
+    width: calc(100% - var(--space-2) * 2);
+    margin: 0 var(--space-2) var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-radius: var(--radius-md);
+    font: inherit;
+    font-size: var(--fs-xs);
+    text-align: start;
+    color: var(--c-sub);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  /* `display: block` above would otherwise beat the attribute. */
+  .search-more[hidden] {
+    display: none;
+  }
+
+  .search-more:hover {
+    color: var(--c-text);
+  }
+
+  /* The scroller clips, so keep the ring inside the button like the rows. */
+  .search-more:focus-visible {
+    outline: var(--ring-width) solid var(--ring);
+    outline-offset: calc(-1 * var(--ring-width));
   }
 </style>
