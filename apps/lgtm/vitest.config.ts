@@ -14,6 +14,9 @@ export default defineConfig({
   },
   test: {
     exclude: ["**/node_modules/**", "**/dist/**", "**/.direnv/**"],
+    // lgtm-image.test.tsx encodes AVIF through sharp for every case; on the
+    // CI runners one encode lands around the 5s default and fails the job.
+    testTimeout: 20_000,
     coverage: {
       include: [
         "src/components/lgtm-image.tsx",
