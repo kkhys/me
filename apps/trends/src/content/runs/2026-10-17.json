@@ -1310,18 +1310,7 @@
       "label": "Devin",
       "status": "ok",
       "note": "",
-      "items": [
-        {
-          "title": "Devin release notes (October 16, 2026)",
-          "title_ja": "Devin 10/16: 1 つのメッセージから複数のサイドチャット、GitLab MR での /devin コマンド、Bitbucket Cloud のマージ可否表示",
-          "url": "https://docs.devin.ai/release-notes/overview#october-16-2026",
-          "source": "Release notes",
-          "published_at": "2026-10-17T12:27:19+00:00",
-          "interest": 2,
-          "summary": "サイドチャットを持つメッセージからさらに別のサイドチャットを始められ、`/devin review` と `/devin <prompt>` が GitLab のマージリクエストでも動くようになった。Devin Review は Bitbucket Cloud の PR でマージ可否を表示する。",
-          "article_summary": "会話まわりでは、既にサイドチャットを持つメッセージからメニューで新しいサイドチャットを始められ、Cmd+K のセッション検索がアーカイブ済みセッションも対象にし、Devin が停止中や休止中でもキューのメッセージを送信・編集・削除・並べ替えできる。チャットの画像はタブで開ける。\n\nコードホスティング連携では、`/devin review` と `/devin <prompt>` のコメントが GitLab のマージリクエストで動く。Devin Review は Bitbucket Cloud の PR について、必要な承認、デフォルトレビュアーの承認、ビルド、変更要求によるブロック状況を含むマージ可否を表示する。\n\nDevin Review の diff では、隣接行が追加・削除されていても編集行の変更箇所を単語単位でハイライトする。数値表記は表示言語の桁区切りに従い、休止中セッションのブラウザプレビューを開くと背後のサーバーが自動で再起動する。"
-        }
-      ]
+      "items": []
     },
     {
       "id": "cursor",
@@ -1342,18 +1331,7 @@
       "label": "Orca",
       "status": "ok",
       "note": "",
-      "items": [
-        {
-          "title": "Orca v1.4.229",
-          "title_ja": "Orca v1.4.229: ネイティブチャットで turn ごとの編集をインラインレビュー、共有スキルを 20 エージェントに追加対応、Jira のボードとスプリント",
-          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.229",
-          "source": "Orca",
-          "published_at": "2026-10-17T06:54:05+00:00",
-          "interest": 3,
-          "summary": "実験的なネイティブチャットでエージェントの編集を turn ごとに会話内で確認でき、Claude の目標と Codex のコンテキスト使用量が見える。共有スキルのインストールが Kiro、Qoder、CodeBuddy など 20 のエージェントに広がり、Jira 連携にボードとスプリント表示が加わった。",
-          "article_summary": "ネイティブチャット（実験的）では、エージェントの編集を turn ごとに会話内でレビューし、図をパン・ズームで拡大し、チャットの画像をワンクリックで共有でき、Claude の目標と Codex のコンテキスト使用量を表示する。キーボードでの回答、未読の区切り線、選択時コピーで長い会話を追いやすくなった。\n\n共有スキルのインストールは新たに 20 のエージェントに対応し、WSL の検出範囲が広がり、Kiro、Qoder、CodeBuddy などには正しいインストール先を使う。Jira 連携は課題一覧とボードの切替、現在のスプリントへの絞り込み、保存した JQL と Jira のお気に入りの再利用に対応し、デスクトップとスマートフォンのどちらからでもワークスペースを始められ、エージェントは Orca CLI から Jira チケットを読み書きできる。\n\nスマートフォンのワークスペースのフィルター・グループ化・並び替えはデスクトップと共有され、SSH の再接続は分割ペインと貼り付け順を保つ。Cmd/Ctrl+J から Web サイトを開け、worktree 作成中のチェックアウト進捗が見える。"
-        }
-      ]
+      "items": []
     },
     {
       "id": "slack",

@@ -1328,16 +1328,6 @@
       "note": "",
       "items": [
         {
-          "title": "Claude Platform release notes (October 22, 2026)",
-          "title_ja": "Claude Platform: Google Cloud 経由で Anthropic が運用する Claude API「Claude Models on Google Cloud (Anthropic managed)」を提供開始",
-          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-22-2026",
-          "source": "Platform",
-          "published_at": "2026-10-22T00:00:00+00:00",
-          "interest": 2,
-          "summary": "Google Cloud プロジェクトから Anthropic が運用する Claude API に到達できる「Claude Models on Google Cloud (Anthropic managed)」が開始。アクセス制御は Google Cloud IAM、課金は Google Cloud Marketplace が担い、Claude Opus 5.5 の Fast mode も使える。",
-          "article_summary": ""
-        },
-        {
           "title": "Claude Code v2.1.307",
           "title_ja": "Claude Code v2.1.307: API バージョン移行用の /claude-api api-version と、安全機構の発火を記録する OpenTelemetry イベントを追加",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.307",
@@ -1346,6 +1336,26 @@
           "interest": 3,
           "summary": "Claude API を使うコードを API バージョン `2026-10-21` へ移行する `/claude-api api-version` と、権限ルール・auto mode・安全チェック・hook・サンドボックスがツール呼び出しを止めたり確認したりするたびに記録する `claude_code.safety_event` イベントが加わった。",
           "article_summary": "追加は 2 つ。`/claude-api api-version` は Claude API を呼ぶコードを API バージョン `2026-10-21` に移す。`claude_code.safety_event` は OpenTelemetry イベントで、権限ルール、auto mode、安全チェック、hook、サンドボックスのいずれかがツール呼び出しを停止・確認・差し戻した時に記録される。\n\n修正では、`CLAUDE_CODE_DISABLE_1M_CONTEXT` 設定時に `opus[1m]` のようなエイリアスで model-not-found になる問題、`prompt-caching-scope` ベータヘッダーが効果のないカスタムゲートウェイや Foundry にも送られていた問題、macOS のキーチェーンがロック中に `claude -p` で MCP サーバーが「needs authentication」と出る問題を直した。\n\nHTTP MCP のツール呼び出しが接続切断時に二重送信される問題は、読み取り専用か冪等なツールだけをリトライするよう変わった。PDF や画像を多く読む turn での「Autocompact is thrashing」エラー、クラウドセッション再起動後に `/clear` した会話が戻る問題も修正された。"
+        },
+        {
+          "title": "Claude Platform release notes (October 21, 2026)",
+          "title_ja": "Claude Platform: API バージョン 2026-10-21 を公開、各 SDK と ant CLI がメジャー更新で破壊的変更と Apache 2.0 への変更",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-21-2026",
+          "source": "Platform",
+          "published_at": "2026-10-21T00:00:00+00:00",
+          "interest": 3,
+          "summary": "API バージョン `2026-10-21` がリリースされ、それを既定で送る Python SDK 2.0.0、TypeScript SDK 1.0.0、Go SDK 2.0.0、Java SDK 3.0.0 などの新版と `ant` CLI 2.0.0 が出た。SDK と CLI には API バージョンに依らない破壊的変更があり、ライセンスは MIT から Apache 2.0 に変わった。",
+          "article_summary": "API バージョン `2026-10-21` が公開され、移行ガイド「Migrating to API version 2026-10-21」が用意された。新しいクライアント SDK（Python 2.0.0、TypeScript 1.0.0、C# 13.0.0、Go 2.0.0、Java 3.0.0、PHP 1.0.0、Ruby 2.0.0）と `ant` CLI 2.0.0 は既定でこのバージョンを送る。\n\n新しい SDK と CLI には API バージョンとは独立した破壊的変更があり、ライセンスは MIT License から Apache 2.0 に変わった。詳細は移行ガイドの「SDK and CLI changes」にまとめられている。\n\nユーザープロファイルに `enforcement_status` と `enforcement_actions` フィールドが加わり、Anthropic がエンドユーザーを制限・停止しているかを確認できる。一覧 API の `enforcement_status[]` フィルターで該当プロファイルを絞り込める。"
+        },
+        {
+          "title": "Claude Duet research preview for Pro and Max plans",
+          "title_ja": "Pro / Max プラン向けに Claude Duet のリサーチプレビューを開始",
+          "url": "https://support.claude.com/en/articles/12138966-release-notes#h_fdbb85f303-claude-duet-research-preview-for-pro-and-max-plans",
+          "source": "Claude Apps",
+          "published_at": "2026-10-21T00:00:00+00:00",
+          "interest": 3,
+          "summary": "Claude が能動的なエージェントとして働く新アプリ Claude Duet のリサーチプレビューが、Pro / Max プランのユーザー向けに始まった。詳細はブログ記事「Introducing Claude Duet」にある。",
+          "article_summary": ""
         }
       ]
     },
@@ -1361,18 +1371,7 @@
       "label": "Devin",
       "status": "ok",
       "note": "",
-      "items": [
-        {
-          "title": "Devin release notes (October 21, 2026)",
-          "title_ja": "Devin 10/21: Devin Review が Bitbucket Cloud に対応、レビュー指摘をチャットに引用、Oncall の Lite モード",
-          "url": "https://docs.devin.ai/release-notes/overview#october-21-2026",
-          "source": "Release notes",
-          "published_at": "2026-10-22T00:47:02+00:00",
-          "interest": 2,
-          "summary": "Devin Review が Bitbucket Cloud に対応し、Settings > Connections からワークスペースを接続すると review の webhook が自動設定される。各レビュー指摘には「Quote in chat」ボタンが付き、Cmd+I でチャットに引用できる。",
-          "article_summary": "Devin Review は Bitbucket Cloud に対応し、ワークスペースを接続すると webhook が自動で入り、メンバーが個人アカウントを紐付けると Devin Review は本人として投稿する。各指摘にはインラインコメントと一覧に「Quote in chat」ボタンが付き、Cmd+I でも開いている指摘をチャットへ引用できる。\n\nGitHub でマージ要件をバイパスできるアカウントは、ブロックされた PR を確認のうえ Devin Review から直接マージできる。PR に `/devin review` とコメントすると開始時に 👀、完了時に 👍 のリアクションが付く。アナリティクスの「解決済み」は後続の push か Devin によってコードで修正された指摘だけを数えるようになり、却下や重複は含まれないため数値は下がる。\n\nセッションの「Received feedback from …」行をクリックすると該当 PR コメントが開く。Devin Oncall の responder とインシデント調査は Lite モードで動かせるようになった。"
-        }
-      ]
+      "items": []
     },
     {
       "id": "cursor",
@@ -1404,25 +1403,35 @@
       "label": "Orca",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Orca v1.4.237",
+          "title_ja": "Orca v1.4.237: GitHub 10 万スター。スマートフォンからのノート編集、Claude の巻き戻しコンテキスト維持、ヘッドレスホスト経由の音声入力",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.237",
+          "source": "Orca",
+          "published_at": "2026-10-21T07:25:23+00:00",
+          "interest": 3,
+          "summary": "GitHub スター 10 万到達に合わせたリリース。スマートフォンからヘッドレスホスト上のノート作成・Markdown 保存・埋め込み画像の表示ができ、Codex チャットが undo 後に正しく再開し、Claude はロールバック後も巻き戻したコンテキストを保つ。",
+          "article_summary": "スマートフォン版では、ノートの作成と編集、ヘッドレスホストへの Markdown 保存、相対リンクの追従、埋め込み画像の表示ができ、未送信のターミナル入力がワークスペース移動をまたいで残る。音声入力はヘッドレスの `orca serve` ホスト経由でも動き、ホストの OpenAI キーを設定する CLI コマンドが付いた。\n\nチャットでは、Codex チャットが undo 後に正しく再開し、Claude は Orca のロールバックをまたいで巻き戻したコンテキストを保ち、スクリーンショットが会話に残る。Codex のスキルピッカーは実際に読み込まれたスキルを反映する。\n\n編集の保護として、Discard は同じファイルのワークスペース横断の自動保存を止め、読み取り専用の Markdown / CSV ビューが未保存編集を守る。リモートでは、再起動後に隠れたターミナルタブを再接続し、再ペアリング時にブラウザのログインを保ち、数千ホストの SSH 設定を固まらずに検索できる。"
+        },
+        {
+          "title": "Orca v1.4.235",
+          "title_ja": "Orca v1.4.235: Claude チャットの「Rewind to here」、会話ごとのモデル・effort・Fast 設定の保持、ツール出力の全文保存",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.235",
+          "source": "Orca",
+          "published_at": "2026-10-20T22:52:23+00:00",
+          "interest": 3,
+          "summary": "turn を始めたメッセージで「Rewind to here」を選びプロンプトを編集して Claude の会話を分岐できる。各会話はモデル・effort・Fast の設定を個別に記憶し、完了した返答とツール結果はプレビュー上限で切らず全文保存される。",
+          "article_summary": "Claude チャットは、turn を始めたメッセージの「Rewind to here」からプロンプトを編集して別方向に進められ、残した履歴から続く。各会話はモデル、effort、Fast の設定を自分で記憶し、モデル切替時に互換な選択を保ち、エージェント既定値の変更が設定済みのチャットを黙って動かさなくなった。\n\n完了した返答とツール結果はプレビュー上限で切らずに全文保存され、デスクトップとスマートフォンの「Show full output」「Show full message」で読み込める。New Chat はすぐにコンポーザーを開き、ワークスペースのジャンプパレットは事前読み込みされ、エディタは全ワークスペースではなく活動中・最近・リスクのあるワークスペースだけを監視する。\n\nスマートフォンでは、ライブチャットが中断箇所から再接続し、プロジェクトグループがデスクトップと同期し、クラウドの音声認識モデルを選べる。ワークスペース作成はフォーム入力中にチェックアウトの準備を始める。"
+        }
+      ]
     },
     {
       "id": "slack",
       "label": "Slack",
       "status": "ok",
       "note": "",
-      "items": [
-        {
-          "title": "Release: Slack CLI v4.11.0",
-          "title_ja": "Slack CLI v4.11.0: サンドボックス作成がパスワードなしサインインに、侵害された eMudhra CA を信頼しない Go / Deno へ更新",
-          "url": "https://docs.slack.dev/changelog/2026/10/22/slack-cli",
-          "source": "Platform",
-          "published_at": "2026-10-22T00:00:00+00:00",
-          "interest": 1,
-          "summary": "`slack sandbox create` は既定でメールのリンクによるサインインになり、`features.user_connections` マニフェストプロパティに対応。CLI は Go 1.27.3、ローカル開発の Deno は 2.9.8 以上に上がり、いずれも侵害された eMudhra の認証局を信頼しない。",
-          "article_summary": ""
-        }
-      ]
+      "items": []
     }
   ]
 }

@@ -1268,14 +1268,14 @@
       "note": "",
       "items": [
         {
-          "title": "Claude Code v2.1.309",
-          "title_ja": "Claude Code v2.1.309: サンドボックスと権限チェックの抜け穴を多数修正",
-          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.309",
-          "source": "Claude Code",
-          "published_at": "2026-10-22T22:18:57+00:00",
-          "interest": 3,
-          "summary": "macOS / Linux のサンドボックスがシェルの起動ファイルをサンドボックス外で実行していた問題や、`--mcp-config` で渡した設定ファイルをサンドボックス内コマンドが書き換えられた問題など、サンドボックスと権限チェックの修正をまとめたリリース。",
-          "article_summary": "サンドボックス関連では、macOS / Linux で各コマンドの前にシェルの起動ファイルがサンドボックス外で実行されていた問題、`denyWrite` の glob がシンボリックリンク経由の実パスに効かなかった問題、サンドボックス内コマンドや自動承認された編集が `--mcp-config` で渡した設定ファイルを変更できた問題を修正した。\n\n権限チェックでは、`cd` をラップした複合コマンドで git を実行しても確認が出なかった問題、`Edit(path)` の deny ルールがサブシェルを含む Bash のリダイレクトを止めなかった問題、worktree 分離セッションがロケール接頭辞や算術コマンドを通していた問題を直した。\n\nそのほか、巨大なネストした CLAUDE.md を読むと compaction を繰り返す問題（上限超過時は先頭だけ読み込む）、ctrl+enter の送信タイミング、ctrl+o で他エージェントからの未配信メッセージが見えない問題などが修正された。"
+          "title": "Claude Platform release notes (October 22, 2026)",
+          "title_ja": "Claude Platform: Google Cloud 経由で Anthropic が運用する Claude API「Claude Models on Google Cloud (Anthropic managed)」を提供開始",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-22-2026",
+          "source": "Platform",
+          "published_at": "2026-10-22T00:00:00+00:00",
+          "interest": 2,
+          "summary": "Google Cloud プロジェクトから Anthropic が運用する Claude API に到達できる「Claude Models on Google Cloud (Anthropic managed)」が開始。アクセス制御は Google Cloud IAM、課金は Google Cloud Marketplace が担い、Claude Opus 5.5 の Fast mode も使える。",
+          "article_summary": ""
         }
       ]
     },
@@ -1285,16 +1285,6 @@
       "status": "ok",
       "note": "",
       "items": [
-        {
-          "title": "Codex CLI 0.164.0",
-          "title_ja": "Codex CLI 0.164.0: /presets で再利用プロンプトを 10 枠保存、/model と /permissions のインライン引数、Kitty / Sixel での画像プレビュー",
-          "url": "https://github.com/openai/codex/releases/tag/rust-v0.164.0",
-          "source": "Codex CLI",
-          "published_at": "2026-10-23T04:48:10+00:00",
-          "interest": 3,
-          "summary": "再利用するプロンプトとスラッシュコマンドを番号付きの /presets 10 枠に保存でき、/model と /permissions で引数を直接指定できるようになった。Kitty / Sixel 対応ターミナルではフルスクリーンのトランスクリプトで画像をプレビューできる。",
-          "article_summary": "新機能は、番号付きの /presets 10 枠に再利用プロンプトとスラッシュコマンドを保存してキーボードメニューから呼び出す機能、/model と /permissions のインライン引数によるモデル・推論量・速度・権限プロファイルの指定、Kitty / Sixel 対応ターミナルでの画像プレビュー。\n\nエンタープライズの MCP 接続を Codex アカウントの権限付与か専用サインインで認証できるようになり（シークレットが必要な OAuth クライアントを含む）、リモートの Bash コマンドと Zsh スナップショットセッションでは認証情報がマスクされる。Amazon Bedrock のセットアップウィザードは既定で有効になった。\n\n修正では、compaction 失敗時に部分的な要約が履歴に残る問題、セッション再開時に圧縮済み履歴やスレッド設定が復元されない問題、Windows のプロキシ認証（Negotiate / NTLM）への対応、キューに入れたプロンプトが権限選択を待たずに進む問題などが直った。"
-        },
         {
           "title": "Build more responsive apps with the Decisions API",
           "title_ja": "Decisions API: アプリ向けの高速・低コストな判断専用 API",
@@ -1312,7 +1302,18 @@
       "label": "Devin",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Devin release notes (October 21, 2026)",
+          "title_ja": "Devin 10/21: Devin Review が Bitbucket Cloud に対応、レビュー指摘をチャットに引用、Oncall の Lite モード",
+          "url": "https://docs.devin.ai/release-notes/overview#october-21-2026",
+          "source": "Release notes",
+          "published_at": "2026-10-22T00:47:02+00:00",
+          "interest": 2,
+          "summary": "Devin Review が Bitbucket Cloud に対応し、Settings > Connections からワークスペースを接続すると review の webhook が自動設定される。各レビュー指摘には「Quote in chat」ボタンが付き、Cmd+I でチャットに引用できる。",
+          "article_summary": "Devin Review は Bitbucket Cloud に対応し、ワークスペースを接続すると webhook が自動で入り、メンバーが個人アカウントを紐付けると Devin Review は本人として投稿する。各指摘にはインラインコメントと一覧に「Quote in chat」ボタンが付き、Cmd+I でも開いている指摘をチャットへ引用できる。\n\nGitHub でマージ要件をバイパスできるアカウントは、ブロックされた PR を確認のうえ Devin Review から直接マージできる。PR に `/devin review` とコメントすると開始時に 👀、完了時に 👍 のリアクションが付く。アナリティクスの「解決済み」は後続の push か Devin によってコードで修正された指摘だけを数えるようになり、却下や重複は含まれないため数値は下がる。\n\nセッションの「Received feedback from …」行をクリックすると該当 PR コメントが開く。Devin Oncall の responder とインシデント調査は Lite モードで動かせるようになった。"
+        }
+      ]
     },
     {
       "id": "cursor",
@@ -1326,18 +1327,7 @@
       "label": "GitHub",
       "status": "ok",
       "note": "",
-      "items": [
-        {
-          "title": "GitHub Copilot in Visual Studio — September update",
-          "title_ja": "Copilot in Visual Studio 9 月更新: Git エージェントによる PR 探索、BYOM が新 Agent (Preview) 必須に、NuGet 脆弱性の修正アクション",
-          "url": "https://github.blog/changelog/2026-10-22-github-copilot-in-visual-studio-september-update-2",
-          "source": "Release, copilot",
-          "published_at": "2026-10-23T00:17:51+00:00",
-          "interest": 3,
-          "summary": "Git エージェントが PR を要約し、コメントやファイルへのリンク付きで探索できるようになった。BYOM（Bring Your Own Model）はプレビューで既定有効になる一方、新しい Agent (Preview) が必須になり、従来の Ask / Agent モードでは使えず Ollama モデルの再登録が必要という破壊的変更を含む。",
-          "article_summary": ""
-        }
-      ]
+      "items": []
     },
     {
       "id": "orca",
@@ -1351,7 +1341,18 @@
       "label": "Slack",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Release: Slack CLI v4.11.0",
+          "title_ja": "Slack CLI v4.11.0: サンドボックス作成がパスワードなしサインインに、侵害された eMudhra CA を信頼しない Go / Deno へ更新",
+          "url": "https://docs.slack.dev/changelog/2026/10/22/slack-cli",
+          "source": "Platform",
+          "published_at": "2026-10-22T00:00:00+00:00",
+          "interest": 1,
+          "summary": "`slack sandbox create` は既定でメールのリンクによるサインインになり、`features.user_connections` マニフェストプロパティに対応。CLI は Go 1.27.3、ローカル開発の Deno は 2.9.8 以上に上がり、いずれも侵害された eMudhra の認証局を信頼しない。",
+          "article_summary": ""
+        }
+      ]
     }
   ]
 }

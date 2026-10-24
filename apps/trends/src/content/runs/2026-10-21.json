@@ -1328,26 +1328,6 @@
       "note": "",
       "items": [
         {
-          "title": "Claude Platform release notes (October 21, 2026)",
-          "title_ja": "Claude Platform: API バージョン 2026-10-21 を公開、各 SDK と ant CLI がメジャー更新で破壊的変更と Apache 2.0 への変更",
-          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-21-2026",
-          "source": "Platform",
-          "published_at": "2026-10-21T00:00:00+00:00",
-          "interest": 3,
-          "summary": "API バージョン `2026-10-21` がリリースされ、それを既定で送る Python SDK 2.0.0、TypeScript SDK 1.0.0、Go SDK 2.0.0、Java SDK 3.0.0 などの新版と `ant` CLI 2.0.0 が出た。SDK と CLI には API バージョンに依らない破壊的変更があり、ライセンスは MIT から Apache 2.0 に変わった。",
-          "article_summary": "API バージョン `2026-10-21` が公開され、移行ガイド「Migrating to API version 2026-10-21」が用意された。新しいクライアント SDK（Python 2.0.0、TypeScript 1.0.0、C# 13.0.0、Go 2.0.0、Java 3.0.0、PHP 1.0.0、Ruby 2.0.0）と `ant` CLI 2.0.0 は既定でこのバージョンを送る。\n\n新しい SDK と CLI には API バージョンとは独立した破壊的変更があり、ライセンスは MIT License から Apache 2.0 に変わった。詳細は移行ガイドの「SDK and CLI changes」にまとめられている。\n\nユーザープロファイルに `enforcement_status` と `enforcement_actions` フィールドが加わり、Anthropic がエンドユーザーを制限・停止しているかを確認できる。一覧 API の `enforcement_status[]` フィルターで該当プロファイルを絞り込める。"
-        },
-        {
-          "title": "Claude Duet research preview for Pro and Max plans",
-          "title_ja": "Pro / Max プラン向けに Claude Duet のリサーチプレビューを開始",
-          "url": "https://support.claude.com/en/articles/12138966-release-notes#h_fdbb85f303-claude-duet-research-preview-for-pro-and-max-plans",
-          "source": "Claude Apps",
-          "published_at": "2026-10-21T00:00:00+00:00",
-          "interest": 3,
-          "summary": "Claude が能動的なエージェントとして働く新アプリ Claude Duet のリサーチプレビューが、Pro / Max プランのユーザー向けに始まった。詳細はブログ記事「Introducing Claude Duet」にある。",
-          "article_summary": ""
-        },
-        {
           "title": "Claude Code v2.1.305",
           "title_ja": "Claude Code v2.1.305: sandbox.allowNestedUserNamespaces の追加と、Vertex / Bedrock で全リクエストが失敗する 2.1.304 のリグレッション修正",
           "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.305",
@@ -1356,6 +1336,16 @@
           "interest": 3,
           "summary": "Linux のサンドボックス内で Chromium や rootless podman が user namespace を作れるようにする `sandbox.allowNestedUserNamespaces` が加わった（サンドボックスのファイル保護を回避できる点に注意書き）。2.1.304 で Vertex / Bedrock などがツール検索を拒否して全リクエストが失敗していた問題を修正。",
           "article_summary": "追加は、Linux のサンドボックス内コマンドが user namespace を作れるようにする `sandbox.allowNestedUserNamespaces`（Chromium や rootless podman 向け。サンドボックスのファイル保護を回避できる）と、無人リトライモード `CLAUDE_CODE_RETRY_WATCHDOG` が解除済みの利用上限に気づくための `CLAUDE_CODE_RETRY_WATCHDOG_USAGE_LIMIT_RECHECK_MS`。\n\n修正の中心は 2.1.304 のリグレッションで、Vertex、Bedrock などのエンドポイントやゲートウェイがツール検索を拒否すると全リクエストが失敗していた問題。ツール検索なしでリトライするようになった。`/effort` と `/autocompact` の設定が `modelOverrides` と大文字小文字や `[1m]` タグで食い違うと効かない問題も直った。\n\nそのほか、bare リポジトリでの新規 worktree の起点、ディスクフル時の `ENOSPC` エラー文、クラウドセッションや SDK の `setMcpServers` で渡した MCP サーバーが同名の設定に置き換わる問題、サブエージェントのフォールバック後のモデル名表示などが修正された。"
+        },
+        {
+          "title": "Claude Platform release notes (October 20, 2026)",
+          "title_ja": "Claude Platform: Claude Tag API がベータ提供。Slack のチャンネル・ワークスペースの Claude Tag 設定を API で操作",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-20-2026",
+          "source": "Platform",
+          "published_at": "2026-10-20T00:00:00+00:00",
+          "interest": 1,
+          "summary": "Claude Enterprise 組織向けに、`experimental-claude-tag-2026-10-21` ベータヘッダーで Claude Tag API が使える。`/v1/organizations/claude_tag/` エンドポイントで Slack チャンネルとワークスペースの設定を読み書きし、`read:claude_tag` / `write:claude_tag` スコープの Admin API キーで呼ぶ。",
+          "article_summary": ""
         }
       ]
     },
@@ -1371,7 +1361,18 @@
       "label": "Devin",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Devin release notes (October 19, 2026)",
+          "title_ja": "Devin 10/19: Devin Oncall が GA、Devin Review のルールエディタ、コミット・ブランチ・タグの CI ステータス確認",
+          "url": "https://docs.devin.ai/release-notes/overview#october-19-2026",
+          "source": "Release notes",
+          "published_at": "2026-10-20T02:36:26+00:00",
+          "interest": 2,
+          "summary": "Slack / Teams のチャンネルや PagerDuty のインシデントを見張り、テレメトリやコード、runbook から原因と次の手を投稿する Devin Oncall が全組織で使えるようになった。Devin Review には除外とルールを 1 つの一覧で編集するルールエディタが付いた。",
+          "article_summary": "Devin Oncall が一般提供になった。responder が Slack や Microsoft Teams のチャンネルと PagerDuty のインシデントを監視し、新しいアラート・バグ報告・サポート依頼をトリアージして、テレメトリツール、コード、デプロイ、runbook から推定原因と推奨アクションを投稿する。インシデントチャンネルに参加して調査を続け、自己更新するインシデントレポートを維持し、定期レポートで調査したインシデントと出荷した修正をまとめる。\n\nDevin Review の設定に、除外とレビュールールを展開可能なカードの 1 つの一覧で編集するルールエディタが入った。以前のコミットでレビュー済みの PR に新しいコミットがあると「Latest changes haven't been reviewed」と表示し、自動レビューを有効にせずに最新コミットだけを「Review now」で一度レビューできる。\n\nCI ステータスは PR だけでなくコミット、ブランチ、タグ（main へのマージ後の実行など）でも確認できる。作業ログは「Deciding action」ではなく要約ができ次第それを表示し、内部的な処理を実況しなくなった。"
+        }
+      ]
     },
     {
       "id": "cursor",
@@ -1405,6 +1406,16 @@
           "interest": 2,
           "summary": "エンドポイントや内部レジストリと上流のパッケージリポジトリの間に置くファイアウォール。メタデータ要求とダウンロードをクールダウン期間、GitHub Advisory Database、attestation のダウングレード検査などのポリシーで評価する。GitHub Enterprise Cloud 向けのパブリックプレビュー。",
           "article_summary": ""
+        },
+        {
+          "title": "Dependabot now supports npm 12, pnpm 11 and 12, and Bun 1.4",
+          "title_ja": "Dependabot が npm 12、pnpm 11 / 12、Bun 1.4 に対応",
+          "url": "https://github.blog/changelog/2026-10-20-dependabot-now-supports-npm-12-pnpm-11-and-12-and-bun-1-4",
+          "source": "Improvement, supply chain security",
+          "published_at": "2026-10-20T13:52:38+00:00",
+          "interest": 2,
+          "summary": "npm 12、pnpm 11 / 12、Bun 1.4 に上げても Dependabot の更新を受け取れる。pnpm 12 既定の 2 文書形式の pnpm-lock.yaml は dependency graph がまだ検出せず、version updates は動くが alerts と security updates は作られない既知の制限がある。",
+          "article_summary": ""
         }
       ]
     },
@@ -1415,24 +1426,14 @@
       "note": "",
       "items": [
         {
-          "title": "Orca v1.4.237",
-          "title_ja": "Orca v1.4.237: GitHub 10 万スター。スマートフォンからのノート編集、Claude の巻き戻しコンテキスト維持、ヘッドレスホスト経由の音声入力",
-          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.237",
+          "title": "Orca v1.4.232",
+          "title_ja": "Orca v1.4.232: エージェント権限に Manual / Auto / Yolo、ネイティブチャットで OpenCode 2、スマートフォンのコンポーザー強化",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.232",
           "source": "Orca",
-          "published_at": "2026-10-21T07:25:23+00:00",
+          "published_at": "2026-10-20T06:20:47+00:00",
           "interest": 3,
-          "summary": "GitHub スター 10 万到達に合わせたリリース。スマートフォンからヘッドレスホスト上のノート作成・Markdown 保存・埋め込み画像の表示ができ、Codex チャットが undo 後に正しく再開し、Claude はロールバック後も巻き戻したコンテキストを保つ。",
-          "article_summary": "スマートフォン版では、ノートの作成と編集、ヘッドレスホストへの Markdown 保存、相対リンクの追従、埋め込み画像の表示ができ、未送信のターミナル入力がワークスペース移動をまたいで残る。音声入力はヘッドレスの `orca serve` ホスト経由でも動き、ホストの OpenAI キーを設定する CLI コマンドが付いた。\n\nチャットでは、Codex チャットが undo 後に正しく再開し、Claude は Orca のロールバックをまたいで巻き戻したコンテキストを保ち、スクリーンショットが会話に残る。Codex のスキルピッカーは実際に読み込まれたスキルを反映する。\n\n編集の保護として、Discard は同じファイルのワークスペース横断の自動保存を止め、読み取り専用の Markdown / CSV ビューが未保存編集を守る。リモートでは、再起動後に隠れたターミナルタブを再接続し、再ペアリング時にブラウザのログインを保ち、数千ホストの SSH 設定を固まらずに検索できる。"
-        },
-        {
-          "title": "Orca v1.4.235",
-          "title_ja": "Orca v1.4.235: Claude チャットの「Rewind to here」、会話ごとのモデル・effort・Fast 設定の保持、ツール出力の全文保存",
-          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.235",
-          "source": "Orca",
-          "published_at": "2026-10-20T22:52:23+00:00",
-          "interest": 3,
-          "summary": "turn を始めたメッセージで「Rewind to here」を選びプロンプトを編集して Claude の会話を分岐できる。各会話はモデル・effort・Fast の設定を個別に記憶し、完了した返答とツール結果はプレビュー上限で切らず全文保存される。",
-          "article_summary": "Claude チャットは、turn を始めたメッセージの「Rewind to here」からプロンプトを編集して別方向に進められ、残した履歴から続く。各会話はモデル、effort、Fast の設定を自分で記憶し、モデル切替時に互換な選択を保ち、エージェント既定値の変更が設定済みのチャットを黙って動かさなくなった。\n\n完了した返答とツール結果はプレビュー上限で切らずに全文保存され、デスクトップとスマートフォンの「Show full output」「Show full message」で読み込める。New Chat はすぐにコンポーザーを開き、ワークスペースのジャンプパレットは事前読み込みされ、エディタは全ワークスペースではなく活動中・最近・リスクのあるワークスペースだけを監視する。\n\nスマートフォンでは、ライブチャットが中断箇所から再接続し、プロジェクトグループがデスクトップと同期し、クラウドの音声認識モデルを選べる。ワークスペース作成はフォーム入力中にチェックアウトの準備を始める。"
+          "summary": "Settings → Agents で Manual / Auto / Yolo を選べ、Auto では対応する Claude / Codex エージェントが承認を自ら処理し、新しいネイティブチャットもその設定に従う。実験的なネイティブチャットでは OpenCode 2 を直接開き、`$` で Codex のスキルを探せる。",
+          "article_summary": "権限は Settings → Agents で Manual / Auto / Yolo から選び、Auto は対応する Claude と Codex のエージェントに承認を任せ、新しいネイティブチャットもその選択に従う。他のエージェントには別の権限モードを指定でき、既存のチャットは自分の設定を保つ。\n\n実験的なネイティブチャットでは、OpenCode 2 をチャットで直接開き、`$` で Codex のスキルを検索し、画像プレビューをパン・ズームできる。長い会話でも Rewind が動き、利用上限はリセット時刻と Continue ボタンを表示する。スマートフォンのコンポーザーは写真に加えてファイルを添付でき、スキルをインラインで挿入し、モデル・effort・権限を 1 つのシートで選べる。\n\nSSH では、ペアリングを失った管理サーバーの復旧、再起動したサーバーのポートに追従するトンネル、高遅延回線でのファイルアップロード改善、nodejs.org を遮断するネットワーク向けの Node.js ミラー設定が加わった。デスクトップとブラウザのアセット共有でアプリが軽くなり、Mac の更新が速くなった。"
         }
       ]
     },
