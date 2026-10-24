@@ -99,10 +99,10 @@ step).
   `</head>`, where `fetch-site-metadata` has already stopped parsing — a
   scrape that comes back with no title is retried by re-reading the whole
   document with linkedom, which also covers the charset repair.
-- `icons/*.svg` — the 12 Lucide glyphs shared by the apps: `arrow-left`,
+- `icons/*.svg` — the 13 Lucide glyphs shared by the apps: `arrow-left`,
   `check`, `copy`, `globe`, `info`, `lightbulb`, `link`,
   `message-square-warning`, `move-up-right`, `octagon-alert`, `search`,
-  `triangle-alert`. Import as `@kkhys/ui/icons/<name>.svg` and pass
+  `sparkles`, `triangle-alert`. Import as `@kkhys/ui/icons/<name>.svg` and pass
   `width` / `height` / `class`. `globe` is only used by `link-card.astro`.
   Brand icons stay in the app that uses them.
 
