@@ -16,7 +16,7 @@ interface Props {
 const { date, total, seen } = Astro.props;
 ---
 
-<div class:list={["toolbar", { "has-seen": seen > 0 }]}>
+<div class:list={["toolbar", { "has-seen": seen > 0 }]} data-pagefind-ignore>
   <a class="date" href={`/${date}`} title="この日の固定 URL">
     <time datetime={date}>{formatRunDate(date)}</time>
   </a>

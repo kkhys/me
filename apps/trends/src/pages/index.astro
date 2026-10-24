@@ -18,5 +18,5 @@ if (!latest) {
     run, so a per-day headline here would churn the OG card every day. */}
 <BaseLayout>
   <SiteHeader />
-  <DigestView entry={latest} prev={runs[1]?.id} next={undefined} />
+  <DigestView entry={latest} prev={runs[1]?.id} next={undefined} indexable={false} />
 </BaseLayout>

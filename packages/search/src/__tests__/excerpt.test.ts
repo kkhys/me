@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseExcerpt } from "../excerpt";
+import { parseExcerpt, stripLeadingText } from "../excerpt";
 
 describe("parseExcerpt", () => {
   it("splits Pagefind's <mark> wrappers from the surrounding text", () => {
@@ -52,5 +52,49 @@ describe("parseExcerpt", () => {
 
   it("returns nothing for an empty excerpt", () => {
     expect(parseExcerpt("")).toEqual([]);
+  });
+});
+
+describe("stripLeadingText", () => {
+  const parts = parseExcerpt;
+
+  it("drops the heading and the separator Pagefind puts after it", () => {
+    expect(
+      stripLeadingText(parts("<mark>Kimi</mark> Work. Moonshot AI の環境"), "Kimi Work"),
+    ).toEqual([{ text: "Moonshot AI の環境", marked: false }]);
+  });
+
+  it("keeps a mark that continues past the heading", () => {
+    expect(
+      stripLeadingText(parts("<mark>Kimi K3</mark> <mark>Kimi</mark> の解説"), "Kimi K3"),
+    ).toEqual([
+      { text: "Kimi", marked: true },
+      { text: " の解説", marked: false },
+    ]);
+  });
+
+  it("splits a part that runs past the heading", () => {
+    expect(stripLeadingText(parts("Report [pdf] Kimi-K3 の構成"), "Report [pdf]")).toEqual([
+      { text: "Kimi-K3 の構成", marked: false },
+    ]);
+  });
+
+  it("leaves an excerpt that starts elsewhere untouched", () => {
+    const original = parts("の構成と <mark>学習</mark> 手法");
+    expect(stripLeadingText(original, "Report")).toEqual(original);
+  });
+
+  it("leaves an excerpt shorter than the heading untouched", () => {
+    const original = parts("Kimi");
+    expect(stripLeadingText(original, "Kimi Work")).toEqual(original);
+  });
+
+  it("is empty when the excerpt is only the heading", () => {
+    expect(stripLeadingText(parts("<mark>Kimi</mark> Work."), "Kimi Work")).toEqual([]);
+  });
+
+  it("does nothing for an empty heading", () => {
+    const original = parts("<mark>Kimi</mark> Work");
+    expect(stripLeadingText(original, "")).toEqual(original);
   });
 });

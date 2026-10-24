@@ -26,13 +26,17 @@ const { id, label, dotColor, total, fresh, note, empty, allSeen } = Astro.props;
   <header>
     <span class="dot" style={`background:${dotColor}`}></span>
     <h3 id={id}>{label}</h3>
-    <span class="count total">{total}件</span>
-    {fresh !== undefined && <span class="count fresh">{fresh}件</span>}
-    {note && <span class="note">{note}</span>}
+    <span class="count total" data-pagefind-ignore>{total}件</span>
+    {fresh !== undefined && (
+      <span class="count fresh" data-pagefind-ignore>
+        {fresh}件
+      </span>
+    )}
+    {note && <span class="note" data-pagefind-ignore>{note}</span>}
   </header>
   <slot />
-  {empty && <p class="empty">{empty}</p>}
-  {allSeen && <p class="empty all-seen">すべて既出</p>}
+  {empty && <p class="empty" data-pagefind-ignore>{empty}</p>}
+  {allSeen && <p class="empty all-seen" data-pagefind-ignore>すべて既出</p>}
 </section>
 
 <style>

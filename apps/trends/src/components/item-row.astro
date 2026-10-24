@@ -13,7 +13,7 @@ type Item =
 interface Props {
   item: Item;
   rank: number;
-  /* Row id; the hero's service chips jump here. */
+  /* Id of the title heading; the hero's service chips and the search results jump here. */
   anchorId: string;
   highlighted: boolean;
 }
@@ -31,18 +31,18 @@ const foldLabel = discussionParagraphs.length > 0 ? "コメントの要約" : "�
 const stars = interestStars(item.interest);
 ---
 
-<article
-  class:list={["item", { "is-seen": item.seen_before, "is-highlight": highlighted }]}
-  id={anchorId}
->
+<article class:list={["item", { "is-seen": item.seen_before, "is-highlight": highlighted }]}>
   <span class="rank">{rank}</span>
   <div class="body">
     <Budoux>
-      <div class="title palt">
+      <h4 class="title palt" id={anchorId}>
         <a href={item.url} target="_blank" rel="noreferrer">
-          {displayTitle}<span class="sr-only">(新しいタブで開く)</span>
+          {displayTitle}
+          <span class="sr-only" data-pagefind-ignore>
+            (新しいタブで開く)
+          </span>
         </a>
-      </div>
+      </h4>
     </Budoux>
     {originalTitle && <p class="original-title">{originalTitle}</p>}
     {
@@ -55,7 +55,7 @@ const stars = interestStars(item.interest);
     {
       foldParagraphs.length > 0 && (
         <details class="discussion">
-          <summary>{foldLabel}</summary>
+          <summary data-pagefind-ignore>{foldLabel}</summary>
           <div class="fold-body">
             <Budoux>
               {foldParagraphs.map((paragraph) => (
@@ -68,20 +68,34 @@ const stars = interestStars(item.interest);
     }
     <div class="meta">
       <span class="facts">
-        {highlighted && <span class="chip highlight">ハイライト</span>}
+        {highlighted && (
+          <span class="chip highlight" data-pagefind-ignore>
+            ハイライト
+          </span>
+        )}
         {item.category && <span class="chip">{item.category}</span>}
         {host && <span>{host}</span>}
-        {item.engagement_label && <span>{item.engagement_label}</span>}
-        {item.seen_before && <span class="seen">既出</span>}
+        {item.engagement_label && <span data-pagefind-ignore>{item.engagement_label}</span>}
+        {item.seen_before && (
+          <span class="seen" data-pagefind-ignore>
+            既出
+          </span>
+        )}
         {
           hasDiscussionLink && (
-            <a class="comments" href={item.comments_url} target="_blank" rel="noreferrer">
+            <a
+              class="comments"
+              href={item.comments_url}
+              target="_blank"
+              rel="noreferrer"
+              data-pagefind-ignore
+            >
               コメントを見る<span class="sr-only">(新しいタブで開く)</span>
             </a>
           )
         }
       </span>
-      <span class="signal">
+      <span class="signal" data-pagefind-ignore>
         <span
           class:list={["score", scoreLevel(item.score)]}
           title="スコア: ソース内の相対的な盛り上がり (0-100)"
@@ -109,8 +123,6 @@ const stars = interestStars(item.interest);
     gap: var(--space-3);
     padding: var(--space-4) var(--space-1);
     border-bottom: 1px solid var(--c-border);
-    /* Lands below the two sticky bars when jumped to from the hero. */
-    scroll-margin-top: calc(var(--toolbar-height) + var(--service-header-height) + var(--space-2));
   }
 
   :global(html[data-seen-filter="hide"]) .item.is-seen {
@@ -144,9 +156,15 @@ const stars = interestStars(item.interest);
   }
 
   .title {
+    margin: 0;
     font-size: 0.9375rem;
     font-weight: var(--fw-medium);
     line-height: 1.6;
+    /* The jump target of the hero chips and the search results: lands below
+       the two sticky bars with the row's top padding above it. */
+    scroll-margin-top: calc(
+      var(--toolbar-height) + var(--service-header-height) + var(--space-2) + var(--space-4)
+    );
   }
 
   .original-title {

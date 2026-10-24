@@ -29,3 +29,41 @@ export const parseExcerpt = (excerpt: string): ExcerptPart[] => {
   push(excerpt.slice(cursor), false);
   return parts;
 };
+
+// Pagefind joins block elements with ". " (or a space when the block already
+// ends in punctuation), so a section excerpt that starts at the section's
+// heading reads "Heading. Body…".
+const SEPARATOR_PATTERN = /^\.?\s*/u;
+
+/**
+ * Drops `prefix` from the front of a parsed excerpt, plus the separator that
+ * follows it, so a result row that already shows the heading does not repeat
+ * it in the excerpt. The parts come back unchanged when the excerpt does not
+ * start with `prefix`; `<mark>` boundaries inside the prefix are preserved.
+ */
+export const stripLeadingText = (parts: readonly ExcerptPart[], prefix: string): ExcerptPart[] => {
+  if (prefix === "") return [...parts];
+  let remaining = prefix;
+  let index = 0;
+  let carry: ExcerptPart | undefined;
+  while (remaining !== "" && index < parts.length) {
+    const part = parts[index];
+    if (part === undefined) break;
+    if (part.text.length <= remaining.length) {
+      if (!remaining.startsWith(part.text)) return [...parts];
+      remaining = remaining.slice(part.text.length);
+    } else {
+      if (!part.text.startsWith(remaining)) return [...parts];
+      carry = { text: part.text.slice(remaining.length), marked: part.marked };
+      remaining = "";
+    }
+    index += 1;
+  }
+  if (remaining !== "") return [...parts];
+  const rest = carry === undefined ? parts.slice(index) : [carry, ...parts.slice(index)];
+  const first = rest[0];
+  if (first !== undefined && !first.marked) {
+    rest[0] = { text: first.text.replace(SEPARATOR_PATTERN, ""), marked: false };
+  }
+  return rest.filter((part) => part.text !== "");
+};

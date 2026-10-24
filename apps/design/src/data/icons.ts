@@ -13,7 +13,7 @@ export interface IconNote {
 
 /* Order is the display order: navigation, actions, then the alert set. */
 export const ICON_NOTES: Record<string, IconNote> = {
-  search: { role: "検索を開く", usedBy: ["me", "memo", "@kkhys/search SearchDialog"] },
+  search: { role: "検索を開く", usedBy: ["me", "memo", "trends", "@kkhys/search SearchDialog"] },
   "arrow-left": { role: "戻る", usedBy: ["lgtm", "@kkhys/ui SiteHeader"] },
   "move-up-right": { role: "外部リンク", usedBy: ["me"] },
   link: { role: "見出しのアンカー", usedBy: ["me"] },

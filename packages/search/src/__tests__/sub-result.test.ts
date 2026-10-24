@@ -1,6 +1,6 @@
-import type { PagefindSearchFragment, PagefindSubResult } from "@kkhys/search/types";
 import { describe, expect, it } from "vitest";
-import { pickSubResult, toSectionHref } from "#/utils/search";
+import { pickSubResult } from "../sub-result";
+import type { PagefindSearchFragment, PagefindSubResult } from "../types";
 
 const subResult = (title: string, weights: number[], anchor?: string): PagefindSubResult => ({
   title,
@@ -49,13 +49,30 @@ describe("pickSubResult", () => {
   });
 });
 
-describe("toSectionHref", () => {
-  it("drops .html and keeps the heading fragment", () => {
-    expect(toSectionHref("/components.html#search-dialog")).toBe("/components#search-dialog");
+const isRow = (section: PagefindSubResult) => section.anchor?.element === "h4";
+const row = (title: string, weights: number[], anchor: string): PagefindSubResult => ({
+  ...subResult(title, weights, anchor),
+  anchor: { element: "h4", id: anchor, location: 0 },
+});
+
+describe("pickSubResult with a preference", () => {
+  it("picks among the preferred sections when any of them matched", () => {
+    const picked = pickSubResult(
+      fragment([
+        subResult("Headline", [7, 7]),
+        row("Kimi K3", [4], "global-hackernews-1"),
+        row("Kimi K3 Technical Report", [4, 4], "global-hackernews-2"),
+      ]),
+      isRow,
+    );
+    expect(picked?.title).toBe("Kimi K3 Technical Report");
   });
 
-  it("handles the page itself", () => {
-    expect(toSectionHref("/components.html")).toBe("/components");
-    expect(toSectionHref("/index.html")).toBe("/");
+  it("falls back to every section when no preferred one matched", () => {
+    const picked = pickSubResult(
+      fragment([subResult("Headline", [7]), subResult("Hacker News", [5], "global-hackernews")]),
+      isRow,
+    );
+    expect(picked?.title).toBe("Headline");
   });
 });

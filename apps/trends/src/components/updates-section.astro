@@ -23,7 +23,11 @@ const { active, quiet } = splitProducts(updates);
       {active.map((product) => (
         <UpdateCard product={product} highlightedAnchors={highlightedAnchors} />
       ))}
-      {quiet.length > 0 && <p class="quiet">更新なし: {quiet.join(" / ")}</p>}
+      {quiet.length > 0 && (
+        <p class="quiet" data-pagefind-ignore>
+          更新なし: {quiet.join(" / ")}
+        </p>
+      )}
     </GroupSection>
   )
 }

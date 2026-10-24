@@ -1,9 +1,11 @@
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
+import pagefind from "astro-pagefind";
+import { verifyPagefindIndex } from "./src/features/search/verify-index";
 
 export default defineConfig({
   site: "https://trends.kkhys.me",
-  integrations: [sitemap()],
+  integrations: [sitemap(), pagefind(), verifyPagefindIndex()],
   build: {
     format: "file",
   },

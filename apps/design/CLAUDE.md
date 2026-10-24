@@ -5,8 +5,9 @@ of the kkhys monorepo. Astro 7 static site on Cloudflare Pages. Documents
 the shared tokens (`@kkhys/styles`) and components (`@kkhys/ui`) by parsing
 the actual CSS sources at build time — token pages can never drift from the
 real values. Also consumes `@kkhys/seo` (BaseSEO in `base-layout.astro`) and
-`@kkhys/search` (the dialog shell in `components/search-dialog.astro`, the
-query helpers in `utils/search.ts`). TypeScript strictest mode. Path alias:
+`@kkhys/search` (the dialog shell, `pickSubResult` / `toSectionHref` and the
+index check, used by `components/search-dialog.astro`, `utils/search.ts` and
+`integrations/verify-pagefind-index.ts`). TypeScript strictest mode. Path alias:
 `#/*` → `./src/*`.
 
 ## Project Map
@@ -42,10 +43,10 @@ src/
   utils/prose.ts              # enhanceProse: BudouX over prose blocks + h2[id] section index (unit-tested)
   utils/demos.ts              # DEMO_KINDS / DemoKind / isDemoKind / previewPath
   utils/feed-demo.ts          # FEED_DEMO paging constants + feedDemoPage (unit-tested)
-  utils/search.ts             # searchConfig, pickSubResult, toSectionHref (unit-tested)
+  utils/search.ts             # searchConfig (dialog id, bundle path, result limits)
   utils/source-refs.ts        # splitSourceRefs / SourceRefPart — `path:line` refs in prose (unit-tested)
-  utils/pagefind-index.ts     # Index coverage check helpers (unit-tested)
-  integrations/verify-pagefind-index.ts  # Fails the build unless the index covers every doc page
+  utils/pagefind-index.ts     # isDocPage — the root .html files the index must cover (unit-tested)
+  integrations/verify-pagefind-index.ts  # @kkhys/search verifyPagefindIndex over isDocPage: fails the build unless the index covers every doc page
   utils/icons.ts              # parseSvgAttributes / iconNameFromPath / iconImportName (unit-tested)
   data/conventions.ts         # Convention groups: rule / detail / values / evidence (path:line) / deviation
   data/accessibility.ts       # Contrast pairs, a11y rule groups, known gaps (with WCAG SC), new-screen checklist
@@ -85,12 +86,14 @@ vrt/
   end of the frontmatter.
 - Search is real: `astro-pagefind` indexes the eight doc pages at build
   time (`data-pagefind-body` sits on `<main>` in `base-layout.astro`, so
-  `/preview/*` stays out) and `verify-pagefind-index` fails the build if
-  the index covers a different number of pages than `dist/*.html`. The
+  `/preview/*` stays out) and `verify-pagefind-index` (the shared
+  `verifyPagefindIndex` from `@kkhys/search/verify-index` over `isDocPage`)
+  fails the build if the index covers a different number of pages than
+  `dist/*.html`. The
   dialog (`components/search-dialog.astro`, mounted by the SearchDialog
   demo) renders one row per page: the page title, the `h2` section with
-  the heaviest match (`pickSubResult` — Pagefind lists `sub_results` in
-  document order) and that section's excerpt, linking to the heading.
+  the heaviest match (`pickSubResult` from `@kkhys/search/sub-result` —
+  Pagefind lists `sub_results` in document order) and that section's excerpt, linking to the heading.
   Stages carry `data-pagefind-ignore` (demo labels and fixture text are not
   docs) and `enhanceProse` marks the `h2 > small` count badges the same
   way so they stay out of the anchor titles. The dialog id is

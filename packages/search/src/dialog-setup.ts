@@ -1,4 +1,4 @@
-import { parseExcerpt } from "./excerpt";
+import { type ExcerptPart, parseExcerpt } from "./excerpt";
 import { cycleIndex, isToggleShortcut } from "./keyboard";
 import { createSearchRunner, type SearchStage } from "./runner";
 import type { PagefindModule, PagefindSearchFragment, PagefindSearchOptions } from "./types";
@@ -18,10 +18,10 @@ export const requireElement = <T extends Element>(
 export const isHTMLElement = (element: Element): element is HTMLElement =>
   element instanceof HTMLElement;
 
-/** Fills `element` with the excerpt as text nodes plus real `<mark>`s. */
-export const renderExcerpt = (element: HTMLElement, excerpt: string) => {
+/** Fills `element` with parsed excerpt parts as text nodes plus real `<mark>`s. */
+export const renderExcerptParts = (element: HTMLElement, parts: readonly ExcerptPart[]) => {
   element.replaceChildren(
-    ...parseExcerpt(excerpt).map(({ text, marked }) => {
+    ...parts.map(({ text, marked }) => {
       if (!marked) return document.createTextNode(text);
       const mark = document.createElement("mark");
       mark.textContent = text;
@@ -29,6 +29,10 @@ export const renderExcerpt = (element: HTMLElement, excerpt: string) => {
     }),
   );
 };
+
+/** Fills `element` with the excerpt as text nodes plus real `<mark>`s. */
+export const renderExcerpt = (element: HTMLElement, excerpt: string) =>
+  renderExcerptParts(element, parseExcerpt(excerpt));
 
 export interface SearchDialogOptions {
   /** Leading and trailing slash required: `pagefind.js` is appended verbatim. */

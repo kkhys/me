@@ -22,7 +22,7 @@ Packages:
 - `packages/og` — `@kkhys/og`, Satori OG image + favicon generators.
 - `packages/ui` — `@kkhys/ui`, shared Astro components: site header / footer chrome, head meta, skip link, blur-up images, link card, infinite scroll + paginated guard, TOC scrollspy, link-metadata fetcher, Lucide icons, and the BudouX wrapper + cached parser.
 - `packages/analytics` — `@kkhys/analytics`, self-hosted Umami tracker component.
-- `packages/search` — `@kkhys/search`, the Pagefind search dialog shell, setup script, runner, and helpers shared by me, memo, and design.
+- `packages/search` — `@kkhys/search`, the Pagefind search dialog shell, setup script, runner, and helpers shared by me, memo, design, and trends.
 - `packages/release` — `@kkhys/release`, date-based release tagging used by `scripts/release.ts`.
 
 Shared packages are consumed as source (no build step); each app supplies its own config via thin wrappers. Dependency versions are centralized in the `catalog:` of `pnpm-workspace.yaml`.
