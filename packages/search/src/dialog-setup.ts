@@ -106,6 +106,9 @@ export const setupSearchDialog = (
         list.replaceChildren(
           ...fragments.map((fragment) => options.renderResult(fragment, template)),
         );
+        // A new query's best hits are at the top; the list would otherwise
+        // keep the scroll offset of the previous one.
+        list.scrollTop = 0;
       },
       setStatus: (text) => {
         status.textContent = text;
