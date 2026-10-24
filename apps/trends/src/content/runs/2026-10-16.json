@@ -1319,5 +1319,130 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.301",
+          "title_ja": "Claude Code v2.1.301: vim モードに `%` モーション、mod の複数行入力 `Input` `rows`、auto mode 判定を区別する OpenTelemetry 属性",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.301",
+          "source": "Claude Code",
+          "published_at": "2026-10-15T19:22:06+00:00",
+          "interest": 2,
+          "summary": "vim モードで対応する括弧へ飛ぶ `%` モーションが使える（d / c / y との組み合わせ可）。mod の `Input` に `rows` が付き複数行の入力欄を作れる。OpenTelemetry の `tool_decision` イベントに `classifier_verdict`、`permission_mode`、`classifier_category` が加わり、auto mode 分類器の判定を権限ルールと区別できる。",
+          "article_summary": "追加は、vim モードの `%` モーション（対応する括弧へジャンプ。d / c / y と組み合わせ可）、mod の `Input` の `rows`（複数行の入力欄。Enter で送信、Shift+Enter か行末のバックスラッシュで改行）、`claude-api` スキルへの OpenTelemetry トレース設定ガイド、無人リトライモードが遠すぎる利用上限のリセットを待たずに終える `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS`。\n\nOpenTelemetry の `tool_decision` イベントには `classifier_verdict` と `permission_mode` が加わり、auto mode 分類器の判定を権限ルールと区別できる。`OTEL_LOG_TOOL_DETAILS=1` では分類器がブロックした組み込みルール名 `classifier_category` も出る。\n\n修正では、未 push のコミットを含むかもしれない `WorktreeCreate` hook 製の worktree を終了時に無断で削除していた問題、組織で最新 Fable が使えない時に `fable` / `best` エイリアスがエラーになる問題（前の Fable で 1 回リトライ）、Grep / Glob が検索プログラムの異常終了を「一致なし」と報告する問題、PreToolUse hook が Edit / Write を覆う環境でアーティファクト更新が拒否される問題などが直った。"
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Codex CLI 0.163.0",
+          "title_ja": "Codex CLI 0.163.0: 設定を検索・即時変更する `/config`、応答中のフォローアップで即座に方向転換、`/keymap` のリーダーキー、読み取り専用ツールの並列実行",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.163.0",
+          "source": "Codex CLI",
+          "published_at": "2026-10-15T21:30:38+00:00",
+          "interest": 3,
+          "summary": "`/config` でカテゴリ横断に設定を検索し、対応する設定はその場で変更できる（再起動が必要なものは表示）。Codex の応答中にフォローアップを送ると即座に方向転換し、turn の中断は Code Mode のセルも止める。`/keymap` でリーダーキー（既定 Ctrl+X）を設定でき、Codex はスキル・メモリ・会話履歴の参照など読み取り専用ツールを並列に実行する。",
+          "article_summary": "新機能は、カテゴリ横断で設定を検索し対応するものはその場で変更できる `/config`（再起動が必要な変更は明示）、応答中のフォローアップ送信による即時の方向転換（turn 中断は Code Mode のセルと入れ子のツール呼び出しも停止）、`/keymap` でのリーダーキー設定（既定 Ctrl+X、音声ミュートは F9 に移動）、`/daemon` からの管理バックグラウンドサーバーの再起動（中断される作業を警告して自動再接続）、スキル・メモリ・会話履歴の参照など独立した読み取り専用ツールの並列実行。Daybreak は対象アカウントで既定有効になった。\n\n修正では、保存スレッドの再開時に権限とネットワーク承認を復元、ネットワークプロキシが DNS 解決前に権限を確認し重複 `Host` ヘッダーを拒否、スレッド切替後に `/side` で既存のサイド会話へ戻る、Windows の `Ctrl+V` / `Shift+Insert` でのテキスト貼り付け、WSL でのクリップボード処理などが入った。\n\nCodex は標準のシェル実行器を使うようになり、パッチ済みの `zsh` を同梱しなくなった。廃止されたシェル関連フラグを使う設定には移行通知が出る。"
+        }
+      ]
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Devin release notes (October 14, 2026)",
+          "title_ja": "Devin 10/14: チャット幅の設定、割り込み時に部分的な返答を保持、コードスキャン結果の SARIF エクスポート、「Manage Devin Review」権限",
+          "url": "https://docs.devin.ai/release-notes/overview#october-14-2026",
+          "source": "Release notes",
+          "published_at": "2026-10-15T02:00:32+00:00",
+          "interest": 1,
+          "summary": "Preferences → Appearance の Chat width で大きな画面のチャットとコンポーザーを広げられる。Devin の返答中にメッセージを送っても、表示済みの部分が消えずに残る。コードスキャンの結果を CSV に加えて SARIF 2.1.0 でエクスポートでき、「Manage Devin Review」権限があれば管理者でなくても Review 設定とルールを編集できる。Devin Review はリポジトリとブランチごとに最後に選んだマージ方法を記憶する。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Upcoming deprecation of selected GitHub Copilot models in mid-November",
+          "title_ja": "GitHub Copilot で Claude Opus 4.8、Claude Opus 5、GPT-5.6 Terra を 11 月 16 日に廃止予定",
+          "url": "https://github.blog/changelog/2026-10-15-upcoming-deprecation-of-selected-github-copilot-models-in-mid-november",
+          "source": "Retired, copilot",
+          "published_at": "2026-10-15T19:35:13+00:00",
+          "interest": 2,
+          "summary": "2026 年 11 月 16 日に全 Copilot 体験で Claude Opus 4.8、Claude Opus 5、GPT-5.6 Terra が廃止される。代替は Opus 5.5 と GPT-6.1 Sol / GPT-6 Luna。年間プランの個人契約者には Opus 4.8 が引き続き提供される。",
+          "article_summary": ""
+        },
+        {
+          "title": "AI Scan for pull requests generally available",
+          "title_ja": "PR 向けの AI Scan が一般提供。CodeQL が対応しない PHP、Shell、Terraform、Dockerfile などの脆弱性を検出",
+          "url": "https://github.blog/changelog/2026-10-15-ai-scan-for-pull-requests-generally-available",
+          "source": "Release, application security, universe26",
+          "published_at": "2026-10-15T15:04:51+00:00",
+          "interest": 2,
+          "summary": "code scanning の AI Scan for pull requests が一般提供された。CodeQL が対応しない PHP、Shell / Bash、Terraform（HCL）、Dockerfile、JSP、Blazor などの PR の変更から脆弱性を見つけ、CodeQL の結果と並べて「AI」ラベル付きで表示し、説明と autofix の提案を含む。結果は助言扱いでチェックを失敗させたりマージを止めたりしない。公開リポジトリは無料、私有・内部リポジトリは Code Security / Advanced Security が必要で、Copilot ライセンスは不要。",
+          "article_summary": ""
+        },
+        {
+          "title": "Agentic autofix for code scanning alerts general availability",
+          "title_ja": "Code scanning アラートの agentic autofix が一般提供。CodeQL を再実行して修正を検証し、draft PR を開く",
+          "url": "https://github.blog/changelog/2026-10-15-agentic-autofix-for-code-scanning-alerts-general-availability",
+          "source": "Release, application security, copilot",
+          "published_at": "2026-10-15T13:49:20+00:00",
+          "interest": 2,
+          "summary": "code scanning アラートを Copilot に割り当てると、関連ファイルを探索して修正を提案し、CodeQL を再実行してアラートが閉じることを確認してから draft PR を開く agentic autofix が一般提供された。既定ブランチのアラートが対象で、最大 25 件をまとめて 1 つの PR で修正でき、REST API では assignees に `copilot-swe-agent[bot]` を指定する。Code Security / Advanced Security 顧客向けで AI Credits と Actions 分を消費する。",
+          "article_summary": ""
+        },
+        {
+          "title": "Email notifications for repository push events have been retired",
+          "title_ja": "リポジトリの push イベントのメール通知を廃止。スパムと悪用の防止のため",
+          "url": "https://github.blog/changelog/2026-10-15-email-notifications-for-repository-push-events-have-been-retired",
+          "source": "Retired, community engagement",
+          "published_at": "2026-10-15T13:42:19+00:00",
+          "interest": 1,
+          "summary": "2026 年 10 月 15 日付でリポジトリの push イベントのメール通知が廃止され、送信されなくなった。受信者の同意なしに送れるため GitHub のメール基盤を使った迷惑メールに悪用されうるのが理由。代替は push イベントで起動する GitHub Actions ワークフローから自前の SMTP やメールプロバイダーで送る方法。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

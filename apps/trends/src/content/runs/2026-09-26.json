@@ -1319,5 +1319,109 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.283",
+          "title_ja": "Claude Code v2.1.283: 古いモデル向けのプロンプト癖を監査する `/doctor prompt-audit`、モデルを厳密に制限する管理設定、ゲートウェイ向けヒントヘッダー",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.283",
+          "source": "Claude Code",
+          "published_at": "2026-09-25T21:50:12+00:00",
+          "interest": 2,
+          "summary": "CLAUDE.md、スキル、エージェント、コマンドを古いモデル向けのプロンプトパターンがないか監査する `/doctor prompt-audit` が加わった。管理設定に `availableModelsMatch: \"exact\"` と `deniedModels` が入り、`CLAUDE_CODE_GATEWAY_HINT_HEADERS=1` で 1 プロンプト分のリクエストを束ねる `x-claude-code-prompt-id` ヘッダーを送れる。",
+          "article_summary": "`/doctor prompt-audit`（`/checkup prompt-audit`）は CLAUDE.md、スキル、エージェント、コマンドを古いモデル向けに書かれたプロンプトパターンがないか監査する。フルスクリーンでは他セッションからの切り詰められたメッセージをクリックで展開できる。\n\n管理設定では `availableModelsMatch: \"exact\"` で `availableModels` に書いたバージョンだけを許可し、新リリースを一覧に載せるまでブロックできる。`deniedModels` は `availableModels` が許可していても特定モデルをブロックする。`OTEL_LOG_TOOL_CONTENT=1` で MCP ツール、WebFetch、WebSearch の出力が `tool.output` スパンイベントに載る。\n\nゲートウェイ向けには `x-claude-code-prompt-id` ヒントヘッダー（`CLAUDE_CODE_GATEWAY_HINT_HEADERS=1` で有効）、Claude apps gateway の負荷試験モードと Bedrock Mantle upstream が加わった。修正では、長時間実行の MCP ツール呼び出しがバックグラウンドに移ると進捗通知が捨てられていた問題、ステートレスなリモート MCP サーバーの一時的な 404 でそのサーバーが使えなくなる問題などが直った。"
+        },
+        {
+          "title": "Build plugins for Claude",
+          "title_ja": "Claude ディレクトリ向けプラグインの開発者ポータルを公開。提出・審査・利用分析ができる",
+          "url": "https://support.claude.com/en/articles/12138966-release-notes#h_83e7e1a987-build-plugins-for-claude",
+          "source": "Claude Apps",
+          "published_at": "2026-09-25T00:00:00+00:00",
+          "interest": 3,
+          "summary": "新しい開発者ポータルから Claude ディレクトリにプラグインを提出し、審査の進捗を追い、公開後の利用分析を見られるようになった。詳細はブログ「Build plugins for Claude」。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Codex CLI 0.157.0",
+          "title_ja": "Codex CLI 0.157.0: GPT-6 Sol / Luna を追加（Bedrock 対応）、フルスクリーントランスクリプトが既定、バックグラウンドサーバーの自動起動、`f` で会話をフォーク",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.157.0",
+          "source": "Codex CLI",
+          "published_at": "2026-09-25T02:31:06+00:00",
+          "interest": 2,
+          "summary": "GPT-6 Sol と Luna が Amazon Bedrock 対応と旧モデルからの移行プロンプト付きで加わった。フルスクリーントランスクリプトが既定になり Shift クリックで選択範囲を広げられる。対話セッションではバックグラウンドサーバーが自動起動し、`f` で別アプリで開いている会話を下書きとキュー付きでフォークできる。",
+          "article_summary": "新機能は、GPT-6 Sol / Luna の追加（Amazon Bedrock 対応と旧モデルからの移行プロンプト付き）、既定で有効になったフルスクリーントランスクリプトと Shift クリックでの選択拡張、対象の対話セッションでのバックグラウンドサーバー自動起動（設定が非互換なら復旧の選択肢を出す）、別アプリで開いている会話を下書きとキュー済みプロンプトごとフォークする `f` ショートカット、リモートとバックグラウンドサーバーのセッションでも使える `/import`。\n\n修正では、スレッド切替時に音声会話を維持、tmux のマウス設定の尊重、SSH 越しの Terminal.app のネイティブスクロールバック復元、realtime 接続と Web 検索でのプロキシ設定の適用、ファイルアップロードのリトライとタイムアウト延長（5 分）、リダイレクトや進行中の HTTP / WebSocket 通信へのネットワーク制限の適用（ポリシー変更時はキャンセル）が入った。"
+        },
+        {
+          "title": "macOS security update",
+          "title_ja": "Codex アプリ macOS 版のセキュリティ更新。CVE-2026-100754 を修正",
+          "url": "https://developers.openai.com/codex/changelog/#codex-2026-09-25-app",
+          "source": "Codex / ChatGPT",
+          "published_at": "2026-09-25T00:00:00+00:00",
+          "interest": 2,
+          "summary": "Codex アプリの macOS 版 26.924.20706 で CVE-2026-100754 が修正された。報告者は Objective-See Foundation の Patrick Wardle。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Orca v1.4.211",
+          "title_ja": "Orca v1.4.211: Muse Code が監督付きワーカーのハーネスに、ネイティブチャットに Codex の目標表示、大きなワークスペースでのファイル名検索",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.211",
+          "source": "Orca",
+          "published_at": "2026-09-25T06:17:19+00:00",
+          "interest": 1,
+          "summary": "Muse Code がローカルの使用量報告付きの監督付きワーカーハーネスとして正式対応した。ネイティブチャットはツールの実行状態を保ち、コンポーザーの上に Codex の目標を表示する。大きなローカルワークスペースでファイル名検索ができ、エディタのプレビュータブを設定で無効化できる。使用量の料金表に GPT-6 Sol / Luna、Opus 5.5、Fable 5.1 が加わった。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

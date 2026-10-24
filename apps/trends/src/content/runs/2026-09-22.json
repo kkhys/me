@@ -1274,5 +1274,121 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Platform release notes (September 22, 2026)",
+          "title_ja": "Claude Platform: Claude Opus 5.5 を提供開始。1M コンテキスト既定、$4 / $20 per MTok、インラインツール定義がベータ",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#september-22-2026",
+          "source": "Platform",
+          "published_at": "2026-09-22T00:00:00+00:00",
+          "interest": 3,
+          "summary": "Claude Opus 5.5（claude-opus-5-5）が Claude API、Bedrock、Claude Platform on AWS で使えるようになった。1M トークンのコンテキストが既定、最大出力 128k、常時オンの adaptive thinking で、価格は $4 / $20 per MTok（Opus 5 は $5 / $25）。",
+          "article_summary": "Claude Opus 5.5 は長時間のエージェント的なコーディングと知識労働向けのモデルで、1M トークンのコンテキストウィンドウが既定、最大出力 128k トークン、adaptive thinking は常時オン。価格は入力 $4 / 出力 $20 per MTok と Opus 5（$5 / $25）より下がった。`tool_choice` の `any` と `tool` は Fable 5.1 と同様に 400 を返すため、strict tool use と `auto` を使う。\n\nClaude API と Google Cloud では Opus 5.5 でコンピュータ操作（リサーチプレビュー）が使える。\n\n会話途中の system メッセージ内でツールを定義できる機能が `inline-tools-2026-09-15` ベータヘッダーで入った。`tool_addition` ブロックにツール定義を載せることで、`tools` を書き換えたりプロンプトキャッシュを無効化したりせずにツールの追加、スキーマ変更、サーバーツールの新バージョンへの移行ができる。"
+        },
+        {
+          "title": "Claude Opus 5.5 launch",
+          "title_ja": "Claude Opus 5.5 を公開。Fable 5.1 と同等の性能で Opus 5 より 40% 安い",
+          "url": "https://support.claude.com/en/articles/12138966-release-notes#h_1ff986cf68-claude-opus-5-5-launch",
+          "source": "Claude Apps",
+          "published_at": "2026-09-22T00:00:00+00:00",
+          "interest": 3,
+          "summary": "Claude 5.5 ファミリーの最初のモデル Claude Opus 5.5 を公開。多くの作業で Claude Fable 5.1 と同等の性能を出し、実行コストは Opus 5 より 40% 低いと説明している。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "GPT-6 Sol and Luna in Codex and ChatGPT Work",
+          "title_ja": "GPT-6 Sol と GPT-6 Luna が Codex と ChatGPT Work に展開。GPT-5.6 より低いトークン価格",
+          "url": "https://developers.openai.com/codex/changelog/#codex-2026-09-22-gpt-6-sol-luna",
+          "source": "Codex / ChatGPT",
+          "published_at": "2026-09-22T00:00:00+00:00",
+          "interest": 3,
+          "summary": "GPT-6 Sol と GPT-6 Luna が、前身の GPT-5.6 より低いトークン価格で Codex と ChatGPT Work に展開された。Sol は複雑なコーディングとエージェント的ワークフロー、Luna は焦点の絞られた大量処理向け。Plus / Pro / Business / Enterprise / Edu が対象で、CLI では `codex --model gpt-6-sol` のように指定する。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Devin release notes (September 21, 2026)",
+          "title_ja": "Devin 9/21: Cognition 次世代モデル SWE-2 がリサーチプレビュー、フォルダ添付、PR タブのファイルツリーと Checks タブ、Bitbucket Data Center 対応",
+          "url": "https://docs.devin.ai/release-notes/overview#september-21-2026",
+          "source": "Release notes",
+          "published_at": "2026-09-22T00:12:06+00:00",
+          "interest": 3,
+          "summary": "Cognition の次世代ソフトウェアエンジニアリングモデル SWE-2 がエージェント選択の「Research preview」に入り、推論量（Medium / High / Max）を選んでセッションを始めるか途中で切り替えられる（Slack では `!swe2`）。フォルダ丸ごとの添付、PR タブのファイルツリーと Checks タブ、Devin Review の Bitbucket Data Center 対応も加わった。",
+          "article_summary": "SWE-2 はエージェント選択の「Research preview」セクションから選び、推論量（Medium / High / Max）を指定してセッションを始めるか、メッセージ入力横のトグルで途中から切り替える。Slack では `!swe2`。Enterprise 管理者が有効化し、組織管理者が組織ごとにオン / オフする。\n\nメッセージにフォルダ丸ごとを添付でき（ブラウザで圧縮して zip として添付）、Devin はセッション活動から 12 時間以内（承認済み PR は 36 時間）のマージコンフリクトを自動で直す範囲が広がった。ワークログにシェルコマンドの所要時間が出て、PR・Issue・コミットへの言及がリンクになる。\n\nPR タブにはスクロールに追従するファイルツリー、PR をフラットなファイル一覧で見る Smart diffs、「Open in editor」ボタン、CI 状況を示す Checks タブが加わり、大きな PR の差分表示とスクロールが速くなった。Devin Review はスペイン語とポルトガル語に対応し、Bitbucket Data Center のリポジトリでも自動レビューを有効にできる。"
+        }
+      ]
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Grok 4.7 is now Live!",
+          "title_ja": "Grok 4.7 が Cursor で利用可能。CursorBench 4.0 で 46.3%、Terminal-Bench 4.0 は Grok 4.6 の約 2 倍",
+          "url": "https://forum.cursor.com/t/grok-4-7-is-now-live/172526",
+          "source": "Forum",
+          "published_at": "2026-09-21T16:22:10+00:00",
+          "interest": 2,
+          "summary": "xAI の Grok 4.7 が Cursor と Grok Build で当日から使えるようになった。Grok 4.6 と同じ価格と速度で、CursorBench 4.0 は 40.4% から 46.3% に、Terminal-Bench 4.0 は 20.3% から 38.0% に上がった。長時間の難しいタスクに向けた強化学習で、自己検証と長いコンテキストの扱いが改善し、Grok Bot のハーネスをネイティブに理解するよう訓練されている。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Grok 4.7 is now available in GitHub Copilot",
+          "title_ja": "Grok 4.7 が GitHub Copilot に展開。Pro / Pro+ / Max / Business / Enterprise で利用可能",
+          "url": "https://github.blog/changelog/2026-09-21-grok-4-7-is-now-available-in-github-copilot",
+          "source": "Release, copilot",
+          "published_at": "2026-09-21T14:54:12+00:00",
+          "interest": 2,
+          "summary": "xAI の Grok 4.7 が GitHub Copilot に段階的に展開される。エージェント的なコーディングと複雑な多段階ワークフロー向けで、プロバイダー定価の従量課金。VS Code、Visual Studio、Copilot CLI、クラウドエージェント、Copilot アプリ、JetBrains、Xcode、Eclipse のモデルピッカーで選べる。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

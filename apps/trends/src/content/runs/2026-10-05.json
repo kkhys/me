@@ -1244,5 +1244,67 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Orca v1.4.220",
+          "title_ja": "Orca v1.4.220: ネイティブチャットの Stop が Claude のプロセスごと終了、Mac のスクリーンショットを Claude Code ターミナルにドロップ、Node 不要の SSH 用 Orca ランタイム",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.220",
+          "source": "Orca",
+          "published_at": "2026-10-04T05:01:05+00:00",
+          "interest": 2,
+          "summary": "ネイティブチャット（実験的）の Stop ボタンがバックグラウンドコマンドやサブエージェントを含めて Claude のプロセスを終了し、Codex が停止要求に応じない場合も Orca が終了させる。Mac のスクリーンショットのサムネイルをローカルの Claude Code ターミナルや新規ワークスペースのコンポーザーにドロップでき、SSH ホストには Node、npm、コンパイラなしで動く Orca ランタイムをオプションで使える。",
+          "article_summary": "ネイティブチャット（実験的）では Stop がバックグラウンドコマンドとサブエージェントを含めて Claude のプロセスを終了し、Codex が応じない場合も Orca が終了させる。未送信メッセージは Retry まで未送信のまま、steer したメッセージは重複せず、中断された turn の状態が明確になった。`/clear` は即座にチャットを切り替え、AI ノートを開いているチャットに送れる。\n\nエージェントの状態では、Esc のキャンセルで Codex ペインが即座に落ち着き、コピー用の Ctrl+C を中断と誤認しなくなった。使用量メーターは Antigravity 自身のクォータを Gemini CLI のサインインなしで表示する。ワークスペース作成は大きなリポジトリで速くなり、バックグラウンドで完了しても表示が切り替わらない。\n\nSSH ホストは Node、npm、コンパイラのないホストでも動くオプションの Orca ランタイムに対応し（既定は Auto）、標準の Windows SSH アカウントでも動く。Mac のスクリーンショットをローカルの Claude Code ターミナルや新規ワークスペースのコンポーザーにドロップすると、エージェントが読める一時画像のコピーが渡る。"
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

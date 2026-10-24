@@ -1214,5 +1214,98 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Origin App Marketplace",
+          "title_ja": "Origin App Marketplace が公開。Cloudflare、Linear、Sentry など 20 以上のアプリと連携し、公開提出を受け付け",
+          "url": "https://cursor.com/changelog/origin-app-marketplace",
+          "source": "Changelog",
+          "published_at": "2026-10-13T00:00:00+00:00",
+          "interest": 2,
+          "summary": "Cursor の git forge「Origin」のアプリマーケットプレイスが、デプロイ（Cloudflare、Vercel など）、CI（Buildkite、CircleCI など）、コードレビュー（CodeRabbit、Greptile）、セキュリティ（Semgrep、Socket Security）、監視（Sentry）、プロジェクト管理（Linear）の 20 以上のアプリと連携した。開発者ツールを作るチームは誰でもアプリを公開提出でき、Origin API で認証・webhook・check run・PR コメントを扱う。",
+          "article_summary": ""
+        },
+        {
+          "title": "Introducing The X Subscription",
+          "title_ja": "The X Subscription を発表。Grok、Grok Bot、Cursor、X Premium を 1 つのプランに統合し、Grok モデルの使用量を共有",
+          "url": "https://forum.cursor.com/t/introducing-the-x-subscription/174450",
+          "source": "Forum",
+          "published_at": "2026-10-12T22:51:46+00:00",
+          "interest": 2,
+          "summary": "Grok（チャット、音声、画像・動画生成）、Grok Bot、Cursor、X Premium を 1 つのプランにまとめた The X Subscription が発表された。有料プランには Grok アプリ、X 上の Grok、Cursor で共有される Grok モデルの使用量プールが週単位で更新され、各プランは同等の Cursor プランの 2 倍以上のコーディング使用量を含む。Premium 以上ではサードパーティモデルを API 定価で別課金で使える。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Gemini 4 Argon in GitHub Copilot",
+          "title_ja": "Google の Gemini 4 Argon が GitHub Copilot で一般提供。Pro+ / Max / Business / Enterprise 向け",
+          "url": "https://github.blog/changelog/2026-10-13-gemini-4-argon-in-github-copilot",
+          "source": "Release, copilot",
+          "published_at": "2026-10-13T18:39:56+00:00",
+          "interest": 2,
+          "summary": "Google の最新フロンティアモデル Gemini 4 Argon が GitHub Copilot で一般提供された。複雑なコーディング、エージェント、推論タスク向けで、初期テストでは全コーディングベンチマークで以前の Gemini モデルより多くのタスクを解き、Copilot CLI で最も伸びた。完了前にエッジケースを試して自己検証する。Pro+ / Max / Business / Enterprise で従量課金。",
+          "article_summary": ""
+        },
+        {
+          "title": "Secret scanning blocks Anthropic keys by default, adds Salesforce",
+          "title_ja": "Secret scanning が Anthropic の API キーを検出し、push protection で既定ブロック。Salesforce と Cloudsmith も追加",
+          "url": "https://github.blog/changelog/2026-10-13-secret-scanning-blocks-anthropic-keys-by-default-adds-salesforce",
+          "source": "Improvement, application security",
+          "published_at": "2026-10-13T16:12:36+00:00",
+          "interest": 2,
+          "summary": "Secret scanning に anthropic_service_api_key と anthropic_user_api_key の検出が加わり、secret scanning を有効にしたリポジトリ（無料の公開リポジトリ含む）ではこれらを含むコミットが push protection で既定でブロックされる。Salesforce は secret scanning パートナーになり、Cloudsmith の API キーも検出対象に入った。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

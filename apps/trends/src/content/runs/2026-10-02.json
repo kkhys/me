@@ -1319,5 +1319,138 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.287",
+          "title_ja": "Claude Code v2.1.287: Claude Mods を導入。プラグインがより深い挙動を変更でき、built-in の「You should know」mod が副エージェントで見落としを指摘",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.287",
+          "source": "Claude Code",
+          "published_at": "2026-10-01T18:00:22+00:00",
+          "interest": 3,
+          "summary": "プラグインがより深い挙動を変更できる Claude Mods が入った。built-in の mod「You should know」は副エージェントがユーザーと Claude の見落としを指摘するもので、`/plugin enable cc-plugin-you-should-know@builtin` で有効にする。エージェントビューにセッション名とタスクで絞る `n:` フィルターも加わった。",
+          "article_summary": "Claude Mods により、プラグインは従来より深い挙動を変更できるようになった。built-in の mod「You should know」は副エージェントがユーザーや Claude が見落としそうな点を指摘するもので、`/plugin enable cc-plugin-you-should-know@builtin` で有効化する（テレメトリ有効のファーストパーティセッション向け）。\n\nエージェントビューにはセッション名とタスクに一致する `n:` フィルターが加わり、折りたたんだセクション内の一致も表示し、Enter で先頭の一致を開く。MCP サーバーからの URL プロンプト（2025-11-25 プロトコル）に対応し、更新後に接続できないサーバーは MCP 設定に `\"bareElicitationCapability\": true` を足す。セルフホストランナーでは GitHub CLI がないマシン向けの built-in `gh api`（REST のみ）が入った。\n\n修正では、Remote Control が再接続要求に応答がないと数分間メッセージを受け取れない問題、`asyncRewake` の hook がスクリプト欠落で繰り返し起こす問題、Opus 5.5 と Sonnet 5.5 の切り替えで以前の extended thinking が落ちる問題などが直った。"
+        },
+        {
+          "title": "Claude Platform release notes (October 1, 2026)",
+          "title_ja": "Claude Platform: Models API にモデル系統を示す `line` フィールド。Dreams が Opus 5.5 / Fable 5.1 / Sonnet 5.5 に対応",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-1-2026",
+          "source": "Platform",
+          "published_at": "2026-10-01T00:00:00+00:00",
+          "interest": 1,
+          "summary": "`GET /v1/models` と `GET /v1/models/{model_id}` が各モデルの系統を示す `line`（例: Opus 4.5 と 4.6 はどちらも `opus`）を返すようになり、ID を解析せずにモデルをグループ化できる。Dreams（リサーチプレビュー）は Claude Opus 5.5、Claude Fable 5.1、Claude Sonnet 5.5 に対応した。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "GitHub Copilot can now interact with desktop apps with computer use",
+          "title_ja": "GitHub Copilot がデスクトップアプリを操作するコンピュータ操作をパブリックプレビュー。Copilot CLI と Copilot アプリの macOS / Windows",
+          "url": "https://github.blog/changelog/2026-10-01-github-copilot-can-now-interact-with-desktop-apps",
+          "source": "Release, client apps, copilot",
+          "published_at": "2026-10-01T19:11:26+00:00",
+          "interest": 3,
+          "summary": "Copilot CLI と GitHub Copilot アプリ（macOS / Windows）で、アクセシビリティ情報と画面の文脈を読み、クリック・入力・キー操作・スクロール・ドラッグでデスクトップアプリを操作するコンピュータ操作がパブリックプレビューになった。API や CLI、MCP のないレガシー / GUI 専用ソフトの作業を自動化でき、アプリ操作の前に承認を求める。CLI では `/computer on` で有効化する。",
+          "article_summary": ""
+        },
+        {
+          "title": "GitHub Actions: macOS 14 runner image retirement",
+          "title_ja": "GitHub Actions の macOS 14 ランナーイメージが 11 月 2 日に廃止。10 月中に段階的なブラウンアウト",
+          "url": "https://github.blog/changelog/2026-10-01-github-actions-macos-14-runner-image-retirement",
+          "source": "Retired, actions",
+          "published_at": "2026-10-01T19:11:23+00:00",
+          "interest": 1,
+          "summary": "macOS 14 ランナーイメージ（macos-14、macos-14-large、macos-14-xlarge）が 2026 年 11 月 2 日に廃止される。10 月 5 日から 30 日にかけて複数回の 14:00 UTC〜翌 00:00 UTC のブラウンアウトでジョブが一時的に失敗し、キュー時間も伸びうる。移行先は macos-latest（macos-26）、macos-15、各 xlarge。",
+          "article_summary": ""
+        },
+        {
+          "title": "GitHub Copilot in VS Code, September 2026 releases",
+          "title_ja": "Copilot in VS Code 9 月（v1.136〜1.140）: 定期実行の automations、レビュー対応やチェック失敗を処理する agent merge、Dev Container でのエージェントセッション",
+          "url": "https://github.blog/changelog/2026-10-01-github-copilot-in-vs-code-september-2026-releases",
+          "source": "Release, copilot",
+          "published_at": "2026-10-01T19:09:10+00:00",
+          "interest": 2,
+          "summary": "VS Code 1.136〜1.140 の Copilot 更新。Agents ウィンドウで時間・日・週単位のタスクを走らせる automations、レビューフィードバック・失敗したチェック・コンフリクト・ワークフロー再実行をエージェントに任せる agent merge、Copilot / Claude / Codex のエージェントセッションからの PR 作成、関連チャットの階層表示、Dev Container（SSH / Tunnel / WSL 含む）でのセッション開始が入った。HydraFusion もモデルピッカーで選べる。",
+          "article_summary": "Agents ウィンドウでは、時間・日・週単位の定期実行かオンデマンドで動く automations（プレビュー）、進行中のセッションで有効にするとレビューフィードバック・失敗したチェック・マージコンフリクト・ワークフロー再実行をエージェントが処理する agent merge（プレビュー）、Copilot / Claude / Codex のエージェントセッションからタイトルと説明を編集して PR を作る機能が加わった。\n\nエージェントが新しいチャットやセッションを作ると、元のチャットへのリンクと階層表示のセッション一覧で辿れる。PR マージ後の「Mark as Done」提案や自動クリーンアップ、新しい結果や入力要求を Dock やタスクバーのバッジで知らせる機能もプレビューで入った。ローカル / リモートフォルダのメニューから Dev Container を使ったセッションを SSH、Tunnel、WSL ホストでも始められる。\n\n対象ユーザーはプレビュー機能を有効にすれば HydraFusion をモデルピッカーで選び、モデルとワークフローの選択を任せられる。"
+        },
+        {
+          "title": "Dynamic workflows in Copilot CLI and the Copilot app",
+          "title_ja": "Copilot CLI・Copilot アプリ・Copilot SDK に動的ワークフロー。コードで定義した多段階・並列のエージェント処理",
+          "url": "https://github.blog/changelog/2026-10-01-dynamic-workflows-in-copilot-cli-and-the-copilot-app",
+          "source": "Release, copilot",
+          "published_at": "2026-10-01T16:30:10+00:00",
+          "interest": 3,
+          "summary": "複数エージェントの作業をコードで定義する動的ワークフローが Copilot CLI、GitHub Copilot アプリ、Copilot SDK で使える。自動化ステップとエージェントの判断を組み合わせ、逐次・並列に実行し、構造化した結果を次の段階に渡し、チェックポイントで止めてレビューできる。Copilot 拡張の中に置き、自分で書くことも Copilot に書かせることもできる。",
+          "article_summary": "動的ワークフローはタスクの進め方を定義するプログラムで、自動化ステップと 1 つ以上のエージェントの作業を組み合わせ、逐次・並列・その両方で実行する。ステップ、エージェントの関与タイミング、結果の使い方はコードで定め、分析や判断が要る部分をエージェントに任せる。プログラム自体は GitHub Copilot 拡張の中にあり、Copilot の拡張 API を使える。\n\nできることは、コマンドやツール、他サービスの呼び出し、目標をタスクに分けての並列実行、構造化した結果の段階間の受け渡し、サブエージェント同士の検証、クライアント対応時のユーザーへの質問、チェックポイントでの一時停止と再開。Copilot がサブエージェントに委譲して並列で調整する `/fleet` と違い、コードで定義した手順を実行する。\n\n用途の例として、リリースチェックを実行して失敗をエージェントに評価させレビューで止める、PR の多数の変更ファイルを並列にレビューする、マージ済み PR の未解決レビューコメントを 2 つのモデルに判定させ両者が一致した時だけ報告する、といった流れが挙げられている。"
+        },
+        {
+          "title": "New dashboard experience now the default",
+          "title_ja": "GitHub の新ダッシュボードが既定に。エージェントセッション・Issue・PR を 1 か所に表示",
+          "url": "https://github.blog/changelog/2026-10-01-new-dashboard-experience-now-the-default",
+          "source": "Improvement, collaboration tools",
+          "published_at": "2026-10-01T16:14:56+00:00",
+          "interest": 1,
+          "summary": "プレビューだった新しいダッシュボードが全員の既定になった。進行中のエージェントセッション、Issue、PR を 1 か所で見てフィルターでき、フィードは別タブに分かれた。Issue を Copilot コーディングエージェントに割り当てるなどの操作もダッシュボードから始められる。「Preview」横のドロップダウンで以前の表示に戻せる。",
+          "article_summary": ""
+        },
+        {
+          "title": "GitHub async merge API generally available",
+          "title_ja": "GitHub の非同期マージ API が一般提供。スタック PR のマージに対応する唯一のマージ API",
+          "url": "https://github.blog/changelog/2026-10-01-github-async-merge-api-generally-available",
+          "source": "Release, collaboration tools",
+          "published_at": "2026-10-01T14:00:51+00:00",
+          "interest": 1,
+          "summary": "個別またはスタックされた PR のマージ、マージキューへの追加、直接マージを非同期に行う async merge API が一般提供された。PUT で要求し、返ってきたリクエスト ID を GET でポーリングする。プログラムからのマージはこの API が推奨で、スタック PR をマージできる唯一のマージ API。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

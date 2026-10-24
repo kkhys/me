@@ -1259,5 +1259,88 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.281",
+          "title_ja": "Claude Code v2.1.281: コミット・PR の帰属表記を消す `\"attribution\": false`、MCP の URL モード elicitation、`claude plugin validate` の MCP チェック",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.281",
+          "source": "Claude Code",
+          "published_at": "2026-09-23T19:19:15+00:00",
+          "interest": 2,
+          "summary": "settings.json の `\"attribution\": false` でコミットと PR の帰属表記をすべて消せるようになった。MCP サーバーがブラウザのフローを開かせる URL モード elicitation（2026-07-28 プロトコル）に対応し、`claude plugin validate` が `.mcp.json` の無視される項目や未宣言の `${user_config.*}` を報告する。",
+          "article_summary": "設定面では、`settings.json` の `\"attribution\": false` でコミットと PR の帰属表記をすべて隠せる（古い CLI はこの値を持つ設定ファイルを読み飛ばすため、共有するファイルではオブジェクト形式を保つ）。`/insights` には auto mode が最近のセッションでどれだけの許可プロンプトを処理できたかの推定が加わった。\n\nMCP では 2026-07-28 プロトコル接続で URL モードの elicitation に対応し、サーバーがブラウザベースのフローを開かせられる。`claude plugin validate` は読み込み時に黙って落とされる `.mcp.json` の項目、未宣言の `${user_config.*}` 参照、安全でない URL を報告する。\n\nClaude apps gateway には Claude Desktop 向けポリシーキー（`blockReadsOutsideWorkingDirectories` など）、Bedrock upstream の `assume_role` と `guardrail` が加わった。修正では、API リトライ中のクラッシュ、`--max-turns` を無視して無限にリトライする turn、再開したセッションが以前の turn を変形して再送し推論が失われる問題などが直った。"
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Node 20 is no longer available in GitHub Actions",
+          "title_ja": "GitHub Actions で Node 20 が利用不可に。JavaScript アクションは Node 24 へ",
+          "url": "https://github.blog/changelog/2026-09-23-node-20-is-no-longer-available-in-github-actions",
+          "source": "Retired, actions",
+          "published_at": "2026-09-23T20:46:07+00:00",
+          "interest": 2,
+          "summary": "GitHub Actions のランナーで Node 20 が使えなくなり、JavaScript アクションは Node 24 で動く。一時的な回避策 ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION も廃止された。アクションの保守者は `runs.using` を `node24` にして新版を公開し、利用側は Node 24 対応版へ更新する。Node 24 は macOS 13.4 以前と ARM32 を非対応とする。",
+          "article_summary": ""
+        },
+        {
+          "title": "Local sandboxing in the GitHub Copilot app",
+          "title_ja": "GitHub Copilot アプリにローカルサンドボックス（パブリックプレビュー）。ファイル・ネットワーク・認証情報へのアクセスをプロジェクト単位で制限",
+          "url": "https://github.blog/changelog/2026-09-23-local-sandboxing-in-the-github-copilot-app",
+          "source": "Release, copilot",
+          "published_at": "2026-09-23T15:00:57+00:00",
+          "interest": 2,
+          "summary": "Copilot アプリで、ローカルリポジトリと working tree のセッションに対しファイルシステム（追加の読み書き・読み取り専用・拒否フォルダ）、ネットワーク（インターネット・ローカルネットワーク）、認証情報（Git と GitHub CLI）の制限をプロジェクト単位で設定できる。既定ではオフで、`/sandbox on` で実行中のセッションにも適用できる。OS が要求したポリシーを強制できない場合はサンドボックスなしで動かずエラーになる。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

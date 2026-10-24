@@ -1296,7 +1296,18 @@
       "label": "Claude",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Claude Code v2.1.302",
+          "title_ja": "Claude Code v2.1.302: auto mode 分類器のモデルを選ぶ `CLAUDE_CODE_AUTO_MODE_MODEL`、`/config` にアイドル compaction の切替、単体の Claude Design は 12 月 14 日に終了",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.302",
+          "source": "Claude Code",
+          "published_at": "2026-10-16T20:53:06+00:00",
+          "interest": 2,
+          "summary": "クライアント側の auto mode 分類器が使うモデルを `CLAUDE_CODE_AUTO_MODE_MODEL` で選べるようになった（サーバー側 auto mode には影響しない）。`/config` にアイドル compaction を切り替える行が加わり、`/design-sync` と `/design-login` には単体の Claude Design（claude.ai/design）が 2026 年 12 月 14 日に終了する旨の通知が出る。",
+          "article_summary": "追加は、クライアント側 auto mode 分類器のモデルを選ぶ `CLAUDE_CODE_AUTO_MODE_MODEL`（サーバー側 auto mode には影響しない）、`/config` のアイドル compaction 切替行（実行後の通知にも無効化方法が載る）、`/design-sync` と `/design-login` への単体 Claude Design（claude.ai/design）が 2026 年 12 月 14 日に終了する通知。\n\n修正では、compaction 中に turn を止めると「Prompt is too long」になる問題、セッション途中で Vertex / Bedrock に切り替えると「diagnostics: Extra inputs are not permitted」で失敗する問題、Read ツールが任意サイズの画像やパイプをメモリに丸ごと読む問題（128 MB 超は拒否）、セッション途中に追加したツールが ToolSearch や compaction 後に再読み込みされるとプロンプトキャッシュを外す問題が直った。\n\nそのほか、`claude plugin` などのサブコマンドが設定書き込みの完了前に終了して変更を失う問題、git の reftable 形式でマーケットプレイスが毎回再クローンされる問題、PowerShell ツールがプラグインの `bin/` を見つけられない問題なども修正された。"
+        }
+      ]
     },
     {
       "id": "openai",
@@ -1317,21 +1328,54 @@
       "label": "Cursor",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Cloud Agent Canvases and Environment Improvements",
+          "title_ja": "クラウドエージェントが対話的なキャンバスを作成、Environments API がベータ、環境は最大 300 リポジトリで読み込みが 5 倍高速",
+          "url": "https://cursor.com/changelog/cloud-agent-canvases-and-environments",
+          "source": "Changelog",
+          "published_at": "2026-10-16T00:00:00+00:00",
+          "interest": 2,
+          "summary": "クラウドエージェントが作業の一部として対話的なキャンバスを作り、リンクでチームに共有できるようになった。エージェントが動くクラウド環境をプログラムで作成・管理する Environments API がベータで使え、環境は最大 300 リポジトリに対応し、大きな環境の読み込みが 5 倍速くなった。",
+          "article_summary": ""
+        }
+      ]
     },
     {
       "id": "github_changelog",
       "label": "GitHub",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Multi-repository support and other improvements for GitHub in Slack and Teams",
+          "title_ja": "Slack / Teams の @GitHub が 1 つの会話で複数リポジトリを扱えるように。メッセージ途中のメンションや Slack スレッドの文脈利用も",
+          "url": "https://github.blog/changelog/2026-10-15-copilot-in-slack-and-teams-adds-model-and-repository-updates",
+          "source": "Improvement, collaboration tools, copilot",
+          "published_at": "2026-10-16T02:16:35+00:00",
+          "interest": 1,
+          "summary": "Slack と Teams の @GitHub が、会話を切り替えずに複数リポジトリにまたがって Issue 作成、PR 作成、バグ調査を行えるようになった。メッセージの先頭以外でもメンションでき、共有された Slack メッセージやスレッドを文脈として使え、リポジトリの切り替えとエラーからの復旧も改善した。",
+          "article_summary": ""
+        }
+      ]
     },
     {
       "id": "orca",
       "label": "Orca",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Orca v1.4.227",
+          "title_ja": "Orca v1.4.227: ネイティブチャットごとの権限モード、ターミナルの会話をネイティブチャットで再開、Codex Ultrafast を速度として選択可",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.227",
+          "source": "Orca",
+          "published_at": "2026-10-16T03:42:35+00:00",
+          "interest": 2,
+          "summary": "Claude / Codex の新しいネイティブチャットごとに Settings → Chat → Behavior で権限モードを選べ、既存チャットは使っていたモードを保ち、モデル変更でもリセットされない。大きなターミナル会話を新しいネイティブチャットで再開でき、バックグラウンドでしか動いていなかったチャットも再起動後に復旧する。Codex チャットは 0.136.0 以降が必要で、Codex Ultrafast を速度として選べる。",
+          "article_summary": ""
+        }
+      ]
     },
     {
       "id": "slack",

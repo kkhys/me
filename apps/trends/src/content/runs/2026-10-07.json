@@ -1304,5 +1304,89 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.292",
+          "title_ja": "Claude Code v2.1.292: `claude plugin install --marketplace`、Agent ツールの `effort` パラメータ、mod 向け `prompt.autocomplete` と `$.model.complete` のプロンプトキャッシュ",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292",
+          "source": "Claude Code",
+          "published_at": "2026-10-06T18:59:30+00:00",
+          "interest": 3,
+          "summary": "`claude plugin install --marketplace <name>` でマーケットプレイスの追加とプラグインのインストールを一度に行える。Agent ツールに `effort` パラメータが付き、サブエージェントを指定の effort で動かせる。mod はプロンプト欄の補完候補を `prompt.autocomplete` で追加でき、`$.model.complete` でプロンプトキャッシュを使える。",
+          "article_summary": "追加は、マーケットプレイスの追加（`claude plugin marketplace add` と同じポリシーチェック）とインストールを一度に行う `claude plugin install --marketplace <name>`、サブエージェントを指定の effort で動かす Agent ツールの `effort` パラメータ、529（overloaded）リトライの基本待ち時間を伸ばす `CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS`。\n\nmod 向けには、プロンプト欄の補完一覧に行を足す `prompt.autocomplete` イベント、`$.model.complete` の `prompt` / `system` でブロック単位の `cache: true` によるプロンプトキャッシュ、`agent.spawn` hook にワークフローエージェント（run と index 付き）が渡され拒否できる機能が加わった。\n\n修正にはセキュリティ関連が多い。PreToolUse hook の承認と auto mode がネットワーク（UNC）パスのファイル読み取りで権限プロンプトを迂回していた問題、サンドボックス内コマンドが `/ultrareview` のアップロード用ファイルを読めた問題、改ざんされたサーバー管理設定のキャッシュで組み込みポリシープラグインが外せた問題、macOS / Windows でノートブックや PDF の読み取り中にリンクを差し替えると承認外のファイルを返せた問題などが直った。"
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Devin release notes (October 5, 2026)",
+          "title_ja": "Devin 10/5: セッションワークスペースに Terminal タブ、キーボードショートカットとコマンドパレットが全員に、Devin Review の effort レベル",
+          "url": "https://docs.devin.ai/release-notes/overview#october-5-2026",
+          "source": "Release notes",
+          "published_at": "2026-10-06T02:31:47+00:00",
+          "interest": 2,
+          "summary": "セッションワークスペースに Devin のマシンでコマンドを実行する Terminal タブが加わり、Files タブは Devin の休止中も開ける（開くと Devin が起きる）。Settings → Keyboard shortcuts が全員に開放され、⌘⇧E でセッションを完了にし、⌘K のコマンドパレットからセッションの … メニューの操作を呼べる。Devin Review の effort レベルをトリガーごとに設定できる。",
+          "article_summary": "セッションワークスペースの Terminal タブで Devin のマシン上でコマンドを実行できる。Files タブは Devin が休止中でも開け、Files か Terminal を開くと Devin が起きる。Settings → Keyboard shortcuts が全員に開放され、⌘⇧E / Ctrl+Shift+E で現在のセッションを完了（または未完了）にし、セッションの … メニューの操作を ⌘K のコマンドパレットから呼べる。\n\nHTML / PDF / SVG の添付は「Open in new tab」でダウンロードせずに別タブで開ける。PR リンクのホバーカードは PR を作成・引き継いだセッション内でも出る。Devin Review ではトリガーごとに effort レベルを設定でき、Enterprise 管理者が既定の effort を決められる。Devin Review の実行権限がなくてもリポジトリアクセスがあれば PR の diff と既存の指摘を読める。\n\nAzure DevOps では Devin Review のサマリーコメントがクローズ済みスレッドとして投稿され、「コメントを解決すること」のブランチポリシーで PR をブロックしなくなった。"
+        }
+      ]
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Stacked pull requests generally available",
+          "title_ja": "GitHub のスタック PR が一般提供。rebase 後も承認と署名を維持、マージキューで 1 グループとして処理、自動マージも展開中",
+          "url": "https://github.blog/changelog/2026-10-06-stacked-pull-requests-generally-available",
+          "source": "Release, collaboration tools",
+          "published_at": "2026-10-06T20:16:41+00:00",
+          "interest": 3,
+          "summary": "大きな変更を独立にレビューしまとめてマージできるスタック PR が一般提供された。ベースブランチが進んだ後の Rebase stack で承認が維持され（stale approval を却下するリポジトリでも）、置き換えコミットは署名される。スタックはマージキューに 1 つのマージグループとして入り、merge commit 方式では PR ごとに 1 つのマージコミットを作る。スタックの自動マージも数週間かけて展開される。",
+          "article_summary": "プレビュー以降、スタックを使うリポジトリではマージされたコードが同等のリポジトリより 9% 増え、上位 1% のリポジトリの 3 分の 2 以上がスタック PR を使い time-to-merge が 5% 改善したとしている。\n\nマージと rebase では、ベースブランチが進んだ後の Rebase stack が承認を維持し（stale approval を却下するリポジトリでも）、rebase されたコミットは元の作者情報を保ったまま署名される。部分マージ後の自動 rebase も、ブランチルールが署名を要求するか元のコミットが署名済みなら署名する。ルールのバイパス権限を持つユーザーはスタック最下段の未マージ PR をマージでき、スタックはマージキューに 1 つのマージグループとして入って着地する。merge commit 方式ではグループ全体でなく PR ごとに 1 つのマージコミットを作る。\n\nスタックのベースブランチが削除されると最下段の PR をクローズせず自動で retarget する。スタックの自動マージは数週間かけて展開され、PR グループを選ぶとマージ要件を満たした時点でまとめてマージされる。スタック情報は PR ページの固定ヘッダーに常に表示される。"
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

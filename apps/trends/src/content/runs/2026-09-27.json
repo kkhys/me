@@ -1244,5 +1244,67 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Orca v1.4.214",
+          "title_ja": "Orca v1.4.214: `.ipynb` ノートブックをネイティブ表示・編集、永続 Jupyter カーネルで実行。ネイティブチャットにコンテキスト使用量、プロファイルを SQLite へ",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.214",
+          "source": "Orca",
+          "published_at": "2026-09-26T22:36:54+00:00",
+          "interest": 3,
+          "summary": "対話的な `.ipynb` ノートブックをクリックで編集できるセルとしてネイティブに表示し、永続的な Jupyter カーネルで実行できる。pip が使えない環境では仮想環境を自動で用意し、ワークスペースを信頼するまでインタープリタを動かさない。ネイティブチャットはコンポーザーにコンテキストウィンドウの使用量をリアルタイム表示し、プロファイル保存は SQLite に移行した。",
+          "article_summary": "ノートブックは `.ipynb` をノートブックらしく表示し、セルをクリックして編集し、永続的な Jupyter カーネルで実行する。pip がロックされていれば `.venv` を作って ipykernel の準備状況を示し、ワークスペースを信頼するまでインタープリタを実行しない。\n\nネイティブチャットはコンポーザーにコンテキストウィンドウの使用量をリアルタイム表示し、送信済みメッセージにコピーボタンが付き、スクロールで古い履歴を自動読み込みする。Codex 0.157 以降は Orca 管理のホームディレクトリでもパス長（`SUN_LEN`）で失敗せずに起動する。サブエージェントと子作業の状態は Codex、Claude、Pi、Grok で追跡され、ZCode が正式対応のハーネスに加わった。\n\nプロファイル保存は SQLite に移行してバックグラウンド書き込みになり、ヘッドレス Orca には Bun が同梱される。ローカル・WSL・SSH の検索は同梱の ripgrep で動き、トランスクリプト読み込みや準備確認の遅延が大きく減った。ターミナルペインの閉じるボタン、管理 WSL ターミナルへの Orca CLI 自動提供も加わった。"
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

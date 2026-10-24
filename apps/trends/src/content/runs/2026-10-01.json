@@ -1274,5 +1274,110 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Platform release notes (September 30, 2026)",
+          "title_ja": "Claude Platform: Admin API がベータ卒業。Claude Sonnet 4.5 は 11 月 30 日に API から退役予定",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#september-30-2026",
+          "source": "Platform",
+          "published_at": "2026-09-30T00:00:00+00:00",
+          "interest": 2,
+          "summary": "Python SDK 1.10.0、TypeScript SDK 0.130.0、`ant` CLI 1.37.0 などで、組織情報・メンバー・ワークスペース・API キー・レート制限などの Admin API メソッドがベータを卒業し `client.organization` から呼べる。Claude Sonnet 4.5（claude-sonnet-4-5-20250929）の非推奨化が告知され、Claude API での退役は 2026 年 11 月 30 日の予定。移行先は Sonnet 5.5。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Opt-in dist-tag permissions for npm trusted publishing",
+          "title_ja": "npm の trusted publishing で dist-tag の管理をオプトイン許可。長期トークンなしで latest などを更新",
+          "url": "https://github.blog/changelog/2026-09-30-opt-in-dist-tag-permissions-for-npm-trusted-publishing",
+          "source": "Improvement, supply chain security",
+          "published_at": "2026-09-30T21:03:09+00:00",
+          "interest": 2,
+          "summary": "npm の trusted publishing 設定に「Allow npm dist-tag」権限が加わり、短命の OIDC 資格情報で dist-tag（latest への昇格、next / beta の更新など）を管理できる。これまでは公開とステージングは OIDC でも、タグ操作には長期のアクセストークンが必要だった。既定はオフで、新規・既存の設定とも自動では有効にならない。",
+          "article_summary": ""
+        },
+        {
+          "title": "HydraFusion in VS Code and the GitHub Copilot app",
+          "title_ja": "複数モデルを編成する HydraFusion が VS Code と Copilot アプリでもリサーチプレビュー。Single / Cascade / Critique の 3 ワークフロー",
+          "url": "https://github.blog/changelog/2026-09-30-hydrafusion-in-vs-code-and-the-github-copilot-app",
+          "source": "Release, copilot",
+          "published_at": "2026-09-30T14:31:19+00:00",
+          "interest": 2,
+          "summary": "Copilot CLI 限定だった HydraFusion のリサーチプレビューが VS Code（1.140 以降）と GitHub Copilot アプリでも使える。モデルピッカーに出るが単一モデルではなく、推論・コード生成・デバッグ・ツール使用の能力シグナルから Single（1 モデル）、Cascade（効率的なモデルの下書きを品質ゲートで判定し必要なら上位モデルへ）、Critique（別系統のモデルが読み取り専用で批評し 1 回修正）のいずれかを選ぶ。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Orca v1.4.218",
+          "title_ja": "Orca v1.4.218: Codex ターミナルごとに専用サーバーで動かす切替（既定オン）、DeepSeek Harness / Freebuff / Qoder / CodeBuddy を内蔵、Reset Terminal",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.218",
+          "source": "Orca",
+          "published_at": "2026-09-30T20:53:08+00:00",
+          "interest": 2,
+          "summary": "Settings → Agents に「Run each Codex terminal on its own server」が加わり既定でオンになった。エージェントの状態表示とタブを閉じる動作が正しく動き、オフにすると Codex 共有サーバーとエージェント概要に戻る。DeepSeek Harness、Freebuff、Qoder、CodeBuddy を Orca から起動でき、右クリックの Reset Terminal がクラッシュしたプログラムの残したキーボード / マウスモードを解除する。",
+          "article_summary": "Codex ターミナルは既定で専用サーバー上で動くようになり（Settings → Agents で切替、新規ターミナルに適用）、エージェントの状態表示とタブを閉じる動作が正しく働く。cmd.exe のタブやフルパスで起動した Codex も専用サーバーになり、ビジーな Codex 0.150〜0.157 のタブがアイドルと表示されなくなった。\n\nDeepSeek Harness、Freebuff、Qoder、CodeBuddy が内蔵エージェントになり、Orca から起動してサイドバーに状態が出る。ZCode CLI の会話はセッション履歴に入り、Coding Plan のクォータが使用量に表示される。\n\nターミナルでは右クリックメニューの Reset Terminal がクラッシュしたプログラムの残したモードを解除し、Ctrl+C 後も Codex や Claude Code で Shift+Enter や Option / Alt が効き続ける。数百のターミナルを開いても出力が止まらなくなった。ネイティブチャット（実験的）では構造化チャット自身がオーケストレーションを実行してワーカーの結果を受け取れる。"
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Release: Node Slack SDK updates",
+          "title_ja": "Node Slack SDK 更新: Socket Mode が WebSocket を HTTP/1.1 に固定、Block Kit の ContainerBlock と data_table、Slack Code 向け agents.conversations.* メソッド",
+          "url": "https://docs.slack.dev/changelog/2026/09/30/node-sdk",
+          "source": "Platform",
+          "published_at": "2026-09-30T00:00:00+00:00",
+          "interest": 1,
+          "summary": "Socket Mode v3.1.0 は undici 8 が HTTP/2 を既定にしたため WebSocket 接続を HTTP/1.1 に固定する。Types v3.2.0 に ContainerBlock、data_table ブロック、TableBlock の raw_number セルが加わり、Web API v8.2.0 に Slack Code 向けの agents.conversations.*（create、archive、setView、getCanvas、setCanvasContent など）が入った。",
+          "article_summary": ""
+        }
+      ]
+    }
   ]
 }

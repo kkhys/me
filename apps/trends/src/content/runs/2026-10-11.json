@@ -1259,5 +1259,67 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Orca v1.4.224",
+          "title_ja": "Orca v1.4.224: Automations でエージェントのモデルと effort を実行ごとに指定、SSH ホストに管理 Orca サーバー、チャットが既定ビューならエージェントは構造化チャットで開く",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.224",
+          "source": "Orca",
+          "published_at": "2026-10-10T04:30:28+00:00",
+          "interest": 3,
+          "summary": "Automations の Advanced にある Extra agent arguments（CLI は `--extra-agent-args`）で `-model haiku --effort high` のように実行ごとのモデルと effort を指定できる（Claude、Codex、Grok、CodeBuddy、Cursor、OMP が対象）。SSH ホストは Orca 同梱のランタイムによる管理 Orca サーバーで動き、Node のバージョンやビルドツールの有無で接続が失敗しなくなった。チャットを既定にしていれば対応エージェントは構造化チャットで開く。",
+          "article_summary": "Automations は Advanced の Extra agent arguments（`orca automations create` / `edit` の `--extra-agent-args`）で実行ごとにモデルと effort を指定でき、Claude、Codex、Grok、CodeBuddy（モデルと effort）、Cursor（モデル）、OMP（モデル）に対応する。各実行は新しいセッションで始まり、他の automation はホストの既定を保つ。Orca サーバー上の既存ワークスペースでのスケジュール実行は、Aider、Goose、Amp のように起動後にタスクを読むエージェントにも渡る。\n\nSSH ホストは管理 Orca サーバーで動く。Orca が自前のランタイムを接続時に設定するため、Node のバージョン違いやビルドツール不足で失敗しない。ターミナルを開いていないホストは次回接続で切り替わり、開いているホストは「Move to a managed Orca server」を提示する。Settings → Managed servers で各サーバーの確認、更新、ロールバック、復旧、削除ができる。\n\nネイティブチャット（実験的）では、チャットを既定ビューにしていれば対応エージェントが構造化チャットで開き、タブの右クリックやセッション履歴からチャットとターミナルの間で会話を移せる。OpenCode 2.x、Pi、OMP も構造化チャットで開き、返答内に図やモックアップを描け、Cmd/Ctrl+F の検索、返答の一部引用、Up/Down でのプロンプト履歴、数字キーでの質問回答が入った。"
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

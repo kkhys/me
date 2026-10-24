@@ -1319,5 +1319,119 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.300",
+          "title_ja": "Claude Code v2.1.300: Claude Platform on AWS で `/advisor`、OpenTelemetry のスパンに GenAI セマンティック規約の属性、mod のプロンプト装飾 `virtualText`",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.300",
+          "source": "Claude Code",
+          "published_at": "2026-10-14T18:24:25+00:00",
+          "interest": 2,
+          "summary": "Claude Platform on AWS で `/advisor` が使えるようになった（`/advisor`、`advisorModel`、`--advisor` で選ぶまで advisor は動かない）。トレーススパンに `gen_ai.provider.name` や `gen_ai.tool.name` などの GenAI セマンティック規約の属性が付き、`api_request` イベントはキャッシュ書き込みを 5 分と 1 時間で分けて報告する。",
+          "article_summary": "Claude Platform on AWS で `/advisor` が使える。`/advisor`、`advisorModel`、`--advisor` のいずれかで選ぶまで advisor は動かず、`CLAUDE_CODE_DISABLE_ADVISOR_TOOL=1` で無効化できる。OpenTelemetry では `api_request` イベントに `cache_creation_5m_tokens` と `cache_creation_1h_tokens` が加わってキャッシュ書き込みを寿命で分け、トレーススパンに `gen_ai.provider.name`、`gen_ai.conversation.id`、`gen_ai.tool.name`、`error.type` などの GenAI セマンティック規約の属性が付く。\n\nmod 向けには、下書きにも送信にも入らないプロンプト欄の装飾テキスト `virtualText`、エージェントのトランスクリプトをメインビューに出す `$.ui.view({ agentId })`、右から左に書く言語向けの `Text` の `dir`、プロンプト欄の文字がタイプ以外で変わった時に起きる `prompt.change` hook、`agent.spawn` hook でワークフローエージェントの `prompt` と `model` を書き換える機能が加わった。\n\n修正では、クラウドセッションが自身のネットワーク設定によるブロックを組織ポリシーと説明していた問題、バックグラウンドコマンド実行中に終了すると SessionEnd hook が走らない問題、メッセージを送ったサブエージェントが完了直後に `/tasks` から消える問題などが直った。"
+        },
+        {
+          "title": "Claude Code v2.1.299",
+          "title_ja": "Claude Code v2.1.299: アイドル中の自動 compaction、`@` ファイル参照を本文でなくパスで渡す環境変数、mod 向け `Text` の `size` / `weight` / `mono`",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.299",
+          "source": "Claude Code",
+          "published_at": "2026-10-14T02:49:42+00:00",
+          "interest": 3,
+          "summary": "20 万トークン超の会話を約 54 分放置すると、1 時間のプロンプトキャッシュが切れる前に compaction するアイドル compaction がターミナルに入った（`\"idleCompaction\": false` で無効化）。`CLAUDE_CODE_DISABLE_FILE_MENTIONS` で `@` ファイル参照を本文でなくパスとして渡せる。",
+          "article_summary": "アイドル compaction は 20 万トークン以上の会話を約 54 分放置すると、1 時間のプロンプトキャッシュが切れる前に compaction し、次のメッセージで全体を再処理しないようにする。最小トークン数は `CLAUDE_CODE_IDLE_COMPACT_MIN_TOKENS` で変えられ、settings.json の `\"idleCompaction\": false` で無効化できる。`CLAUDE_CODE_DISABLE_FILE_MENTIONS` を設定すると `@` のファイル参照は本文でなくパスとして渡され、Claude がファイルツールで読む。\n\nエージェントビューでは `/effort` と `/fast` で新しいセッションの初期値を決められ、引数なしの `/model` / `/effort` / `/fast` はピッカーを開く。`claude plugin eval` に特定の組み込みツールを評価から外す `--disallow-tools` が加わった。\n\nmod 向けには、管理設定でインストールされた mod が添付画像や文書のバイト列を読む `$.prompt.media`、サインイン方法と組織を返す `$.session.identity()`、`Text` の `size` / `weight` / `mono` / `tabular` と `Box` の間隔ステップ、`skill.prompt` hook へのスキルの frontmatter とソースの受け渡しが加わった。セルフホストランナーには SIGTERM 時の猶予 `--shutdown-drain-sec` が入った。"
+        },
+        {
+          "title": "Claude Platform release notes (October 14, 2026)",
+          "title_ja": "Claude Platform: OpenTelemetry エクスポートをベータ提供。Messages API と Managed Agents のセッションをトレースできる",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-14-2026",
+          "source": "Platform",
+          "published_at": "2026-10-14T00:00:00+00:00",
+          "interest": 2,
+          "summary": "Messages API のリクエストと Claude Managed Agents のセッションを自分の可観測性基盤でトレースできる OpenTelemetry エクスポートがベータで入った。Claude SDK は Python、TypeScript、C#、Go、Java、PHP、Ruby でスパンを出し、API 側のスパンは Claude Console で OpenTelemetry の送信先を追加すると得られる。Managed Agents のスケジュール済みデプロイが Claude Platform on AWS でも使える。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "GPT-5.5 retirement in Codex",
+          "title_ja": "Codex で GPT-5.5 が退役。10 月 14 日正午 PDT 以降、ChatGPT サインインのユーザーは GPT-6.1 Sol へ",
+          "url": "https://developers.openai.com/codex/changelog/#codex-2026-10-14-gpt-55-retirement",
+          "source": "Codex / ChatGPT",
+          "published_at": "2026-10-14T00:00:00+00:00",
+          "interest": 2,
+          "summary": "2026 年 10 月 14 日正午 PDT（19:00 UTC）に、ChatGPT でサインインしたユーザー向けの Codex から GPT-5.5 が退役した。OpenAI API と API キー認証の Codex セッションは対象外。代替は `gpt-6.1-sol` で、ワークスペースの既定、保存済みモデル設定、カスタムエージェント、スケジュールタスク、スクリプトの `gpt-5.5` 指定を更新する必要がある。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "HydraFusion updates and new Max option",
+          "title_ja": "HydraFusion を更新し HydraFusion Max を追加。モデルプールに Opus 5.5、GPT-6 Astra、GPT-6.1 Sol、GPT-6 Luna",
+          "url": "https://github.blog/changelog/2026-10-14-hydrafusion-updates-and-new-max-option",
+          "source": "Release, copilot",
+          "published_at": "2026-10-14T20:01:35+00:00",
+          "interest": 1,
+          "summary": "HydraFusion のモデルプールが Claude Opus 5.5、GPT-6 Astra、GPT-6.1 Sol、GPT-6 Luna を含むようになり、下書きは medium、レビューは high と段階ごとに推論量を変える。Cascade は判定ステップを挟んで必要な時だけ修正を要求し、Critique は要約でなくツールでワークスペースを直接検査し複数の批評モデルを並列に使う。より要求の高いタスク向けの HydraFusion Max が加わり、VS Code、Copilot アプリ、Copilot CLI で使える（リサーチプレビュー）。",
+          "article_summary": ""
+        },
+        {
+          "title": "GitHub Actions workflow lockfiles in public preview",
+          "title_ja": "GitHub Actions のワークフロー lockfile がパブリックプレビュー。タグやブランチが動いてもロックしたコミットで実行",
+          "url": "https://github.blog/changelog/2026-10-14-github-actions-workflow-lockfiles-in-public-preview",
+          "source": "Release, actions",
+          "published_at": "2026-10-14T13:49:15+00:00",
+          "interest": 2,
+          "summary": "`gh actions-lock` 拡張で `.github/workflows/actions.lock` を生成し、アクションとその推移的依存、再利用ワークフローをレビュー済みのコミットに固定できる。オンボードしたワークフローは lockfile の記録コミットで実行され、タグやブランチが動いても変わらない。「Require lockfile」ポリシーで Enterprise / 組織 / リポジトリ単位に必須化でき、Dependabot はアクション更新時に lockfile も同じ PR で更新する。Free / Team / Enterprise Cloud が対象。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

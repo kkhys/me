@@ -1304,5 +1304,171 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.293",
+          "title_ja": "Claude Code v2.1.293: Haiku 5.5 が既定の Haiku モデルに、`subagentStatusLine` に `agentType`、mod のツール登録に `isDeferred`",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.293",
+          "source": "Claude Code",
+          "published_at": "2026-10-07T18:10:20+00:00",
+          "interest": 3,
+          "summary": "Claude Haiku 5.5 が Anthropic API での既定の Haiku モデルになった（1M コンテキスト、$0.10 / $0.50 per Mtok、10 万トークン超のプロンプトは $0.50 / $2.50）。`subagentStatusLine` のペイロードに `agentType` が加わり、mod の `$.tool.register` は `isDeferred: false` でツールスキーマを最初からプロンプトに載せられる。",
+          "article_summary": "Claude Haiku 5.5（`claude-haiku-5-5`）が Anthropic API での既定の Haiku モデルになり、1M コンテキスト、$0.10 / $0.50 per Mtok（10 万トークン超のプロンプトは $0.50 / $2.50）で使える。`subagentStatusLine` のペイロードに `agentType` が加わりカスタムサブエージェントの種類をスクリプトで区別でき、mod の `$.tool.register` に `isDeferred` が付いて `false` ならツール検索の裏に隠さず最初からスキーマを載せる。\n\n修正では、compaction 前の自分の最後の操作を完了済みと誤認して作業を取り消したりやり直したりする問題、HTTP MCP 接続が送ったリクエストをすべて保持し続けるメモリリーク、`←` でセッションをバックグラウンドに回すと作業中に送ったメッセージが失われる問題、`/model` の effort 切替が端を越えて Low を保存してしまう問題などが直った。\n\n`claude logs` / `stop` / `kill` や `claude daemon` の各コマンドが期限切れ直前のログインでサインアウトさせてしまう問題、`/ultrareview` のアップロードが一部リポジトリを誤って拒否する問題も修正された。"
+        },
+        {
+          "title": "Claude Platform release notes (October 7, 2026)",
+          "title_ja": "Claude Platform: Sonnet 5.5 のキャッシュ読み取りが $0.10 に半額、Claude Haiku 5.5 を提供開始、SDK にブラウザ / コンピュータ操作ツールのクラス",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-7-2026",
+          "source": "Platform",
+          "published_at": "2026-10-07T00:00:00+00:00",
+          "interest": 3,
+          "summary": "Claude Sonnet 5.5 のプロンプトキャッシュ読み取りが $0.20 から $0.10 per MTok（基本入力価格の 0.05 倍）に下がった。Claude Haiku 5.5（claude-haiku-5-5）が提供開始され、1M コンテキスト、最大出力 128k、effort パラメータ付き adaptive thinking。Python / TypeScript SDK にブラウザ操作とコンピュータ操作ツールのクラスがベータで入った。",
+          "article_summary": "Claude Sonnet 5.5 のプロンプトキャッシュ読み取り価格が $0.20 から $0.10 USD per MTok に下がった（基本入力価格の 0.1 倍から 0.05 倍）。キャッシュ書き込みと他の価格は据え置き。\n\nClaude Haiku 5.5（`claude-haiku-5-5`）は大量・低遅延の作業向けで、1M トークンのコンテキスト、最大出力 128k、effort パラメータ付きの adaptive thinking を持ち、Claude API、Bedrock、Claude Platform などで使える。Haiku 4.5 向けのコードは、手動 extended thinking（`budget_tokens`）、`temperature` などのサンプリングパラメータ、assistant メッセージの prefill、`computer_20250124` ツールがそれぞれ 400 を返す点で壊れうる。adaptive thinking が既定で有効なため応答が `thinking` ブロックで始まることがある。\n\nPython / TypeScript SDK にブラウザ操作ツールとコンピュータ操作ツールのクラスがベータで入り、サブクラスで自前の自動化に対するメソッドを書くと SDK がツールループと URL / ファイルのポリシー、承認コールバックを回す。Managed Agents では `limited` ネットワークの `allowed_hosts` が `web_search` と `web_fetch` にも適用される。"
+        },
+        {
+          "title": "Claude Haiku 5.5 launch",
+          "title_ja": "Claude Haiku 5.5 を公開。最も安く速い小型モデル",
+          "url": "https://support.claude.com/en/articles/12138966-release-notes#h_90213b2c7a-claude-haiku-5-5-launch",
+          "source": "Claude Apps",
+          "published_at": "2026-10-07T00:00:00+00:00",
+          "interest": 3,
+          "summary": "Claude Haiku 5.5 を公開。これまでで最も安く、速く、高性能な小型モデルで、大量処理やコスト重視のタスク向けと説明している。詳細はブログ「Claude Haiku 5.5」。",
+          "article_summary": ""
+        },
+        {
+          "title": "Monthly API credits for Max and Team plans",
+          "title_ja": "Max / Team プランに月間 API クレジットが付属。Claude Console の組織を紐付けて受け取る",
+          "url": "https://support.claude.com/en/articles/12138966-release-notes#h_90213b2c7a-monthly-api-credits-for-max-and-team-plans",
+          "source": "Claude Apps",
+          "published_at": "2026-10-07T00:00:00+00:00",
+          "interest": 3,
+          "summary": "Max プランと Team プランに、Claude Platform で自分のアプリやエージェントを動かすための月間 API クレジットが付くようになった。数日かけて順次展開され、Settings > Billing（Max）または Organization settings > Billing（Team）で Claude Console の組織を紐付けると受け取れる。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Codex CLI 0.161.0",
+          "title_ja": "Codex CLI 0.161.0: GPT-6.1 Sol が既定モデルに、セッション中に `/mcp login`、音声デバイスの選択、Daybreak はオプトイン",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.161.0",
+          "source": "Codex CLI",
+          "published_at": "2026-10-07T15:58:45+00:00",
+          "interest": 2,
+          "summary": "GPT-6.1 Sol が同梱カタログと Amazon Bedrock カタログの既定モデルになった。実行中のターミナルセッションから `/mcp login <server>` で MCP サーバーにサインインでき、音声会話で使うマイク・スピーカー・入力チャンネルを選べる。Daybreak は `--enable cli_daybreak` または `features.cli_daybreak=true` のオプトインで、既定では操作や表示が隠れる。",
+          "article_summary": "新機能は、既定モデルとしての GPT-6.1 Sol（同梱カタログと Amazon Bedrock カタログ）、Bedrock での multi-agent V2 と Ultra reasoning のサポートと Bedrock Mantle の AWS GovCloud リージョン対応、実行中のターミナルセッションからの `/mcp login <server>`、音声会話のマイク・スピーカー・入力チャンネルの選択（設定はローカル保存）。\n\nDaybreak は `--enable cli_daybreak` または `features.cli_daybreak=true` によるオプトインになり、`daybreak=true` だけでは有効にならない。既定では操作と表示が隠れ、`/daybreak` は使えず、保存済みスレッドでも自動の Cyber ルーティングは行われない。`codex exec --cyber-access-program` や TypeScript SDK の `cyberAccessProgram` で turn ごとに Cyber アクセスプログラムを選べる。\n\n修正では、承認したファイルシステム昇格で拒否した読み取りとネットワーク制限を保ったまま書き込み範囲を広げる、明示した起動時権限のターミナル再接続後の維持、昇格した Windows ターミナルでの埋め込みサーバー起動、貼り付け検知後の Enter 送信、SQLite の破損の早期検知とバックアップ、オーバーロード時のサーバーの retry 指示の尊重などが入った。"
+        },
+        {
+          "title": "GPT-6 and Intelligent UI for everyone",
+          "title_ja": "GPT-6 と Intelligent UI が ChatGPT の全ユーザーに展開。応答が速くなり視覚的・対話的な体験を直接操作できる",
+          "url": "https://openai.com/index/gpt-6-for-everyone",
+          "source": "News",
+          "published_at": "2026-10-07T00:00:00+00:00",
+          "interest": 3,
+          "summary": "GPT-6 が Intelligent UI とともに ChatGPT で世界展開された。応答が速くなり、ビジュアルや対話的な体験を応答内で直接探索・操作できる。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Haiku 5.5 in GitHub Copilot",
+          "title_ja": "Claude Haiku 5.5 が GitHub Copilot で一般提供。サブエージェントや小さな編集、ターミナル作業向け",
+          "url": "https://github.blog/changelog/2026-10-07-claude-haiku-5-5-in-github-copilot",
+          "source": "Release, copilot",
+          "published_at": "2026-10-07T20:12:18+00:00",
+          "interest": 2,
+          "summary": "Anthropic の Claude Haiku 5.5 が GitHub Copilot で一般提供された。サブエージェント、素早い編集、ターミナルタスクなど高速・大量の作業向けで、初期テストでは多くのコーディングタスクで Claude Sonnet 5 に匹敵しつつトークンとステップが大幅に少なかった。Pro / Pro+ / Max / Business / Enterprise で従量課金。",
+          "article_summary": ""
+        },
+        {
+          "title": "Local sandboxing for GitHub Copilot now generally available",
+          "title_ja": "GitHub Copilot のローカルサンドボックスが一般提供。Copilot CLI、Copilot アプリ、VS Code の Agent Host で共通ポリシー",
+          "url": "https://github.blog/changelog/2026-10-07-local-sandboxing-for-github-copilot-now-generally-available",
+          "source": "Release, application security, copilot",
+          "published_at": "2026-10-07T15:46:17+00:00",
+          "interest": 2,
+          "summary": "Copilot が起動するツールとコマンドのファイルシステム・ネットワーク・認証情報へのアクセスを制限するローカルサンドボックスが、Copilot CLI、GitHub Copilot アプリ、Agent Host を使う VS Code セッションで一般提供された。Microsoft eXecution Container（MXC）が共通のサンドボックスポリシーを Windows / macOS / Linux のネイティブ制御に変換する。企業管理設定で必須化でき、追加費用なし。",
+          "article_summary": ""
+        },
+        {
+          "title": "Discover local models in GitHub Copilot CLI",
+          "title_ja": "Copilot CLI が Ollama のローカルモデルを `/model` で検出。セッションを再起動せずに切り替え",
+          "url": "https://github.blog/changelog/2026-10-07-discover-local-models-in-github-copilot-cli",
+          "source": "Improvement, copilot",
+          "published_at": "2026-10-07T15:46:13+00:00",
+          "interest": 2,
+          "summary": "Copilot CLI 1.0.94-0 から、`/model` で実行中のローカル Ollama インスタンスの対応モデルを、設定済みモデルと GitHub Copilot のクラウドモデルと並べて検出できる。検出だけでは追加されず、プロバイダーとエンドポイントを確認して「Add and use for this session」か「Add without switching」を選ぶ。モデルはツール呼び出しとストリーミングに対応している必要があり、ローカルモデルを選んでもオフラインモードにはならない。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Orca v1.4.222",
+          "title_ja": "Orca v1.4.222: 大きな CSV の編集に対応、日本語・中国語・韓国語入力の Enter 確定で誤送信しない修正、OpenCode ワーカーの改善",
+          "url": "https://github.com/stablyai/orca/releases/tag/v1.4.222",
+          "source": "Orca",
+          "published_at": "2026-10-07T02:20:45+00:00",
+          "interest": 1,
+          "summary": "大きな CSV ファイルを丸ごと読まずに開き、列幅の変更、セル編集、行と列の追加・削除、範囲のコピー・貼り付け、ソートとフィルターができる。日本語・中国語・韓国語の入力で変換確定の Enter がフィールド送信やファイル作成、コメント送信を引き起こさなくなった。OpenCode ワーカーはビジーなマシンでもタスクを未送信のまま残さず、要求したモデルを既定を変えずに使える。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Slack Code for developers",
+          "title_ja": "Slack Code が開発者向けに公開。エージェントが既存の会話から一時的な専用チャンネルを作って人と作業する",
+          "url": "https://docs.slack.dev/changelog/2026/10/07/slack-code-for-devs",
+          "source": "Platform",
+          "published_at": "2026-10-07T00:00:00+00:00",
+          "interest": 2,
+          "summary": "Slack Code は、エージェントが既存の会話から一時的な専用チャンネルを作り、人との共同作業の場として管理する仕組み。ユーザーの依頼が短い質問より大きな作業を伴う時にコードチャンネルを作り、進捗を共有する。SDK では agents.conversations.* メソッド群で操作する。",
+          "article_summary": ""
+        }
+      ]
+    }
   ]
 }

@@ -1304,5 +1304,98 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.288",
+          "title_ja": "Claude Code v2.1.288: Ctrl+C で消したプロンプトを Up で復元、`/code-review --max-findings`、mod 向け `$.ui.selection()`、エージェントビューの検索",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.288",
+          "source": "Claude Code",
+          "published_at": "2026-10-02T20:19:57+00:00",
+          "interest": 2,
+          "summary": "Ctrl+C で消したプロンプトを空のプロンプトで Up を押すと貼り付けテキストや画像ごと復元できる。`/code-review` に `--max-findings <n>|all` が加わり、mod はフルスクリーンで選択中のテキストを `$.ui.selection()` で取れる。エージェントビューでは Ctrl+F でセッション名を検索し Alt+↑/↓ でグループ間を移動できる。",
+          "article_summary": "操作面では、Ctrl+C で消したプロンプトを空のプロンプトで Up を押すと貼り付けテキストや画像ごと復元できる。`/code-review` は `--max-findings <n>|all` で報告する指摘の数を変えられ、選択は `--max-findings default` を渡すまで保持される。エージェントビューでは Ctrl+F でセッション名を検索し、Alt+↑/↓ でグループ間を移動できる（キーは `keybindings.json` で変更可）。\n\nmod 向けに、フルスクリーンで最後に選択したテキストとその行を返す `$.ui.selection()` が加わった。GitHub CLI のないクラウドセッションには built-in の `gh api` が入り、MCP サーバーがツール呼び出し中に追加の OAuth スコープを求めた時は再認証のプロンプトが出る。\n\n修正では、応答途中の API タイムアウトで turn が失敗する問題（非対話セッションとサブエージェントは部分応答から続行）、最後の応答のトークン使用量が 0 と報告された長い会話が自動 compaction されない問題、`--resume` が compaction 直後に復元したファイルを落とす問題、Mantle や構造化出力を拒否するゲートウェイでセッションタイトルやメモリ呼び出しが失敗する問題（`CLAUDE_CODE_DISABLE_STRUCTURED_OUTPUTS` 追加）などが直った。"
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Copilot code review: API support and new default effort level",
+          "title_ja": "Copilot code review を REST / GraphQL API から要求可能に。既定の effort レベルは Balanced",
+          "url": "https://github.blog/changelog/2026-10-02-copilot-code-review-api-support-and-new-default-effort-level",
+          "source": "Improvement, copilot",
+          "published_at": "2026-10-02T19:13:50+00:00",
+          "interest": 2,
+          "summary": "GitHub Copilot のコードレビューを REST と GraphQL API から要求でき、要求ごとに effort レベルを指定できるようになった。既定の effort は 8 月 28 日の告知どおり 9 月 28 日から Balanced になり、Lite を明示していた設定は維持される。Enterprise / 組織 / リポジトリ / 個人の各レベルで上書きできる。",
+          "article_summary": ""
+        },
+        {
+          "title": "npm staged publishing now supports creating new packages",
+          "title_ja": "npm のステージ公開で新規パッケージを作成可能に。自動化ワークフローから初回公開なしで作れる",
+          "url": "https://github.blog/changelog/2026-10-02-npm-staged-publishing-now-supports-creating-new-packages",
+          "source": "Improvement, supply chain security",
+          "published_at": "2026-10-02T19:05:17+00:00",
+          "interest": 1,
+          "summary": "`npm stage publish` でローカルセッションまたは granular access token（stage 専用トークン含む）を使って新しい npm パッケージを作れるようになった。手動の初回公開なしに自動化ワークフローからパッケージを作成でき、最初のバージョンはステージ済みキューに入りメンテナーの昇格でインストール可能になる。",
+          "article_summary": ""
+        },
+        {
+          "title": "Selected models in GitHub Copilot deprecated",
+          "title_ja": "GitHub Copilot で Gemini 3.5 / 3.6 Flash、Kimi K2.7 Code、Claude Opus 4.7 を廃止",
+          "url": "https://github.blog/changelog/2026-10-02-selected-models-in-github-copilot-deprecated",
+          "source": "Retired, copilot",
+          "published_at": "2026-10-02T18:24:19+00:00",
+          "interest": 2,
+          "summary": "2026 年 10 月 2 日付で、Copilot Chat・インライン編集・ask / agent モード・補完を含む全 Copilot 体験で Gemini 3.5 Flash、Gemini 3.6 Flash、Kimi K2.7 Code、Claude Opus 4.7 が廃止された。代替は Gemini 3.8 Flash、Kimi K3、Claude Opus 5.5。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

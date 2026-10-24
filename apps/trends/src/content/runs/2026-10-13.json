@@ -1214,5 +1214,78 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Devin release notes (October 9, 2026)",
+          "title_ja": "Devin 10/9: セッションをまたぐ個人メモリと夜間の dreaming、リポジトリの AGENTS.md を読む、セッション再開期間が 14 日に短縮",
+          "url": "https://docs.devin.ai/release-notes/overview#october-9-2026",
+          "source": "Release notes",
+          "published_at": "2026-10-12T21:47:26+00:00",
+          "interest": 3,
+          "summary": "Devin がユーザーと作業について学んだことをセッションをまたいで記憶するようになった。メモリは個人のもので組織には共有されず、Settings > Customization > Memory で内容を確認し切り替えられる。毎晩、最近のセッションを見直して記憶を整理する dreaming が走る。リポジトリ設定時にルートの AGENTS.md を読んで従い、セッションの再開期間は 30 日から 14 日に短縮された。",
+          "article_summary": "メモリはユーザー個人のもので組織には共有されず、Settings > Customization > Memory でファイルを確認したりオン / オフしたりできる。毎晩 Devin が最近のセッションを見直し、Memory タブの「Recent dreaming sessions」で記憶を整理する。組織管理者は組織単位で、Enterprise 管理者は全組織に対して強制的にオン / オフできる。\n\nセッションの再開期間は休止から 30 日だったものが 14 日になり、それ以降は履歴は残るが新しい作業には新規セッションが必要。リポジトリのセットアップ時にはルートの AGENTS.md を読んでその指示に従う。\n\nSettings > Appearance でトランスクリプトとエディタのフォントファミリーとサイズを選べ、大きなファイルの書き換えはトランスクリプトに実際の diff で出る（約 5,000 行超は行数のみ）。ほとんどのユーザー設定はサーバー側に保存され、Web アプリ、Devin Desktop、デバイス間で同期する。"
+        }
+      ]
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Push attribution for commits in limited public preview",
+          "title_ja": "コミットの push 者を記録する push attribution が限定パブリックプレビュー。「Committer must match pusher」ルールで ID 偽装を防ぐ",
+          "url": "https://github.blog/changelog/2026-10-12-push-attribution-public-preview",
+          "source": "Release, application security, platform governance",
+          "published_at": "2026-10-12T16:30:11+00:00",
+          "interest": 2,
+          "summary": "GitHub がコミットごとに認証済みの push 者を永続的に記録し、author / committer と並べて UI と API に表示するようになった。author と committer は push 側が任意に設定できる文字列のため、低権限アカウントの乗っ取りで信頼されたメンテナーを装えた。新しいリポジトリルール「Committer must match pusher」は committer が push 者の検証済みメールと一致しない push をブロックする。GitHub Enterprise 顧客向けの限定プレビューで、アカウントチームへの申請が必要。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

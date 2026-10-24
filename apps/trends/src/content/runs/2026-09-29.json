@@ -1244,5 +1244,109 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.284",
+          "title_ja": "Claude Code v2.1.284: Sonnet 5.5 が既定の Sonnet モデルに、auto mode に「今回だけ許可」の選択肢、`/mcp reconnect all`",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.284",
+          "source": "Claude Code",
+          "published_at": "2026-09-28T18:02:03+00:00",
+          "interest": 3,
+          "summary": "Claude Sonnet 5.5 が Anthropic API での既定の Sonnet モデルになった（1M コンテキスト、$2 / $10 per Mtok）。auto mode の作業ディレクトリ外読み取りの確認に「Yes, but ask again next time」が加わり、失敗した MCP サーバーをまとめて再接続する `/mcp reconnect all` が入った。",
+          "article_summary": "Claude Sonnet 5.5（`claude-sonnet-5-5`）が Anthropic API での既定の Sonnet モデルになり、1M コンテキスト、$2 / $10 per Mtok、キャッシュ読み取り $0.20 / Mtok で使える。auto mode の作業ディレクトリ外の読み取り確認に「Yes, but ask again next time」が加わり、その 1 回だけ許可して以降は再度確認させられる。\n\n`/mcp reconnect all` は接続に失敗した、または認証が必要な MCP サーバーをまとめて再試行する。`/effort` スライダーの矢印と Tab は `effortSlider:*` と `toggleUltracode` のキーバインド操作として `keybindings.json` で変えられる。claude.ai 契約者向けに `/rate-limit-options` が `/help` とコマンドメニューに載った。\n\nClaude apps gateway では `/usage` とステータスラインに支出上限のドル額が出る（例「$271.40 / $500.00 spent this month」）。修正では、壊れた応答ストリームが「JSON Parse error」や「undefined」を本文に書き出す問題、compaction 後も「Prompt is too long」が続く場合にもう一度詰めて compaction する動作などが入った。"
+        },
+        {
+          "title": "Claude Platform release notes (September 28, 2026)",
+          "title_ja": "Claude Platform: Claude Sonnet 5.5 を提供開始。Sonnet 5 向けのコードが壊れる 5 つの変更点あり",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#september-28-2026",
+          "source": "Platform",
+          "published_at": "2026-09-28T00:00:00+00:00",
+          "interest": 3,
+          "summary": "Claude Sonnet 5.5（claude-sonnet-5-5）が Claude API、Bedrock、Claude Platform on AWS、Google Cloud、Microsoft Foundry で使える。Sonnet 5 向けのコードは、thinking を切るには `between_tools` を使う、強制ツール使用が 400 を返す、古い computer use ツールが使えないなど 5 点で壊れうる。",
+          "article_summary": "Claude Sonnet 5.5（`claude-sonnet-5-5`）は Claude API、Claude in Amazon Bedrock、Claude Platform on AWS、Claude on Google Cloud、Claude in Microsoft Foundry で提供される。\n\nSonnet 5 向けに書いたコードは 5 つの点で壊れうる。事前の thinking を切るには `thinking: {\"type\": \"between_tools\"}` を `disabled` の代わりに送る（effort は high 以下）。強制ツール使用（`tool_choice` の `any` / `tool`）は 400 を返す。thinking ブロックはモデルと会話に紐付く。Claude API と Google Cloud では古い `computer_20251124` ツールが受け付けられない。advisor ツールは Opus 4.8、Opus 4.7、Sonnet 5 を advisor として拒否する。"
+        },
+        {
+          "title": "Claude Sonnet 5.5 launch",
+          "title_ja": "Claude Sonnet 5.5 を公開。Opus 5.5 を補完する高速・低コストモデル",
+          "url": "https://support.claude.com/en/articles/12138966-release-notes#h_2ca93eb100-claude-sonnet-5-5-launch",
+          "source": "Claude Apps",
+          "published_at": "2026-09-28T00:00:00+00:00",
+          "interest": 3,
+          "summary": "Claude 5.5 ファミリーの 2 番目のモデル Claude Sonnet 5.5 を公開。Claude Opus 5.5 を補完する、より速く低コストなモデルと説明している。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Codex CLI 0.158.0",
+          "title_ja": "Codex CLI 0.158.0: OAuth クライアントシークレットが必要な MCP サーバーに対応、exec サーバーの WebSocket をベアラートークンで保護、画像生成の透過背景",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.158.0",
+          "source": "Codex CLI",
+          "published_at": "2026-09-28T05:07:23+00:00",
+          "interest": 2,
+          "summary": "事前登録した OAuth クライアントシークレットを要求する MCP サーバーに `codex mcp add --oauth-client-secret` で接続できる。exec サーバーへの直接の WebSocket 接続がベアラートークンで保護され、フルスクリーン TUI では選択時コピーと右クリック貼り付けを設定でき、コピーした選択範囲は Markdown の書式を保つ。",
+          "article_summary": "新機能は、フルスクリーン TUI の選択時コピーと右クリック貼り付けの設定（コピーは Markdown 書式を保持）、事前登録の OAuth クライアントシークレットが必要な MCP サーバーへの接続（`codex mcp add --oauth-client-secret`）、exec サーバーへの直接の WebSocket 接続のベアラートークン保護、画像生成・編集での透過背景の明示指定とファイルベースの会話画像の編集、昇格権限で動くコマンドでのターミナル入力承認の既定有効化。\n\n修正では、Windows サンドボックスの通常パス・保存済み認証情報・大きな権限ポリシーに関する失敗、Linux サンドボックスのネストした書き込み可能ルートでの起動失敗と Git メタデータ保護の維持、macOS のパッチ操作がシステムパスのエイリアスを既存権限として認識せず不要な承認を求める問題、Mermaid フローチャートの引用ラベルとアンパサンドの描画などが直った。"
+        }
+      ]
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Sonnet 5.5 in GitHub Copilot",
+          "title_ja": "Claude Sonnet 5.5 が GitHub Copilot で一般提供。Pro を含む全有料プラン",
+          "url": "https://github.blog/changelog/2026-09-28-claude-sonnet-5-5-in-github-copilot",
+          "source": "Release, copilot",
+          "published_at": "2026-09-28T18:03:57+00:00",
+          "interest": 2,
+          "summary": "Anthropic の Claude Sonnet 5.5 が GitHub Copilot で一般提供された。機能追加やバグ修正など範囲の定まった日常的な作業向けで、初期テストでは Sonnet 5 と同等の性能を大幅に少ないステップ・トークン・ツール呼び出しで達成し、完了も速かった。Pro / Pro+ / Max / Business / Enterprise で従量課金。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

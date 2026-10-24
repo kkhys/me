@@ -1319,5 +1319,88 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Code v2.1.296",
+          "title_ja": "Claude Code v2.1.296: サブエージェント単位の `autoCompactWindow`、ワークフローエージェントのモデルを固定する環境変数、Read ツールの `allow_large`",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.296",
+          "source": "Claude Code",
+          "published_at": "2026-10-09T19:28:59+00:00",
+          "interest": 2,
+          "summary": "サブエージェントの frontmatter と `--agents` 定義に `autoCompactWindow` が加わり、メインの会話より早く自動 compaction できる。`CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL` で全ワークフローエージェントを 1 つのモデルで動かせ、Read ツールの `allow_large` で通常の上限を超えるテキストファイルを 1 回で読める。",
+          "article_summary": "追加は、サブエージェントの frontmatter と `--agents` 定義の `autoCompactWindow`（メインの会話より早く自動 compaction する）、ワークフローエージェントだけを 1 つのモデルで動かす `CLAUDE_CODE_WORKFLOW_SUBAGENT_MODEL`、529 リトライの最大待ち時間を伸ばす `CLAUDE_CODE_OVERLOADED_RETRY_MAX_DELAY_MS`、通常のサイズ上限を超えるテキストファイルを 1 回で読む Read ツールの `allow_large` オプション。Claude apps gateway の `managed.policies[]` には Claude Desktop の Code タブにも適用される `code` キーが加わった。\n\n`/plugin` では同名の別プラグインが有効なために hook が無効化されたプラグインに注記が出る。\n\n修正では、管理設定の PreToolUse hook が `\"continue\": false` で拒否しても turn が終わらなかった問題、ヘッドレスセッションがフォルダで無効化した `.mcp.json` のサーバーを起動する問題、Haiku 5.5 など adaptive thinking のみのモデルでトークン数がゲートウェイ経由で失敗する問題、共有トランスクリプトの秘密情報のマスク漏れなどが直った。"
+        },
+        {
+          "title": "Claude Platform release notes (October 9, 2026)",
+          "title_ja": "Claude Platform: Managed Agents が動的ワークフローをベータ提供。エージェントが多段階・並列のワークフローを書いてサーバーで実行",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#october-9-2026",
+          "source": "Platform",
+          "published_at": "2026-10-09T00:00:00+00:00",
+          "interest": 2,
+          "summary": "`managed-agents-2026-04-01` ベータヘッダーで、Claude Managed Agents のエージェントに動的ワークフローを使わせられる。数百の文書をレビューするような作業では、エージェントが複数エージェントをフェーズごとに走らせ結果を統合するプログラム（ワークフロー）を書き、サーバーがバックグラウンドのワークフロー実行として動かす。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Composer predictions in Codex",
+          "title_ja": "Codex デスクトップアプリに Composer predictions。次のメッセージを自動補完風に提案",
+          "url": "https://developers.openai.com/codex/changelog/#codex-2026-10-09-composer-predictions",
+          "source": "Codex / ChatGPT",
+          "published_at": "2026-10-09T00:00:00+00:00",
+          "interest": 2,
+          "summary": "Codex デスクトップアプリに、応答後の会話内容から次のプロンプトをメッセージ欄に提案する Composer predictions が入った。Tab で編集可能な下書きとして受け入れ、受け入れても送信はされない。対象は 18 歳以上の個人の ChatGPT Pro プランで、GPT-6 Astra と GPT-6.1 Sol のローカル / SSH スレッドのベータ。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }

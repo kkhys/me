@@ -1229,5 +1229,160 @@
         }
       ]
     }
+  ],
+  "updates": [
+    {
+      "id": "claude",
+      "label": "Claude",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Platform release notes (September 23, 2026)",
+          "title_ja": "Claude Platform: キャッシュ診断がベータを卒業。`diagnostics` オブジェクトで有効化し、応答に常に `diagnostics` フィールドが付く",
+          "url": "https://platform.claude.com/docs/en/release-notes/overview#september-23-2026",
+          "source": "Platform",
+          "published_at": "2026-09-23T00:00:00+00:00",
+          "interest": 2,
+          "summary": "Claude API のキャッシュ診断がベータを卒業し、`cache-diagnosis-2026-04-07` ヘッダーが不要になった。Messages リクエストに `diagnostics` オブジェクトを付けると有効になり、`POST /v1/messages` の応答には常に `diagnostics` フィールド（未指定時は null）が含まれる。",
+          "article_summary": ""
+        },
+        {
+          "title": "Claude Code v2.1.280",
+          "title_ja": "Claude Code v2.1.280: Opus 5.5 が既定の Opus モデルに、フルスクリーンでのマウス操作拡大、MCP 説明文の上限を変更する環境変数",
+          "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.280",
+          "source": "Claude Code",
+          "published_at": "2026-09-22T16:38:14+00:00",
+          "interest": 3,
+          "summary": "Claude Opus 5.5 が既定の Opus モデルになった（1M コンテキスト、$4 / $20 per Mtok、キャッシュ読み取り $0.20）。`/skills` のホイールスクロールなどマウス対応が広がり、MCP ツール説明文の 2,048 文字上限を `CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` で変えられる。",
+          "article_summary": "Claude Opus 5.5 が既定の Opus モデルになり、1M コンテキスト、$4 / $20 per Mtok、キャッシュ読み取り $0.20 / Mtok で使える。フルスクリーンモードでは `/skills` 一覧のホイールスクロールや `/plugin` のスキル状態のクリック操作が加わった。\n\n`CLAUDE_CODE_MAX_MCP_DESCRIPTION_LENGTH` で MCP ツール説明文とサーバー指示の 2,048 文字上限をセッション全体で変更できる。`hook_execution_complete` の OpenTelemetry イベントに hook 出力サイズと、サイズ超過でファイルに退避した出力数が加わった。\n\n修正では、シンボリックリンク経由の書き込みがツリー内の綴りで判定され外側への書き込みが承認されていた問題、auto mode が安全チェックの未回答時に同じアクションを繰り返していた問題（10 回連続で停止）、各ダイアログで Ctrl+C / Ctrl+D を 2 回押すと Claude Code 自体が終了していた問題などが直った。"
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "label": "OpenAI",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Better prompt caching for GPT-6",
+          "title_ja": "OpenAI が GPT-6 のプロンプトキャッシュ改善を解説。ヒット率向上、診断、明示的なブレークポイント",
+          "url": "https://openai.com/index/better-prompt-caching-for-gpt-6",
+          "source": "News",
+          "published_at": "2026-09-22T21:00:00+00:00",
+          "interest": 2,
+          "summary": "GPT-6 でプロンプトキャッシュのヒット率が上がり、新しい診断情報、明示的なキャッシュブレークポイント、遅延とコストを下げる制御が加わったことを解説する記事。",
+          "article_summary": ""
+        },
+        {
+          "title": "Codex CLI 0.156.0",
+          "title_ja": "Codex CLI 0.156.0: `/tui` でフルスクリーン UI、音声会話が既定で有効、`/usage` の分析ダッシュボード、worktree セッションが既定で有効",
+          "url": "https://github.com/openai/codex/releases/tag/rust-v0.156.0",
+          "source": "Codex CLI",
+          "published_at": "2026-09-22T19:51:01+00:00",
+          "interest": 3,
+          "summary": "`/tui` でトランスクリプト検索、マウス選択、右クリックコピー付きのフルスクリーン UI を次回起動から使える。音声会話が既定で有効になり F8 で切り替える。`/usage` でアカウントの使用量やプラグイン・スキルの利用状況を見られ、エージェントコマンドセンターから worktree セッションを作れる（worktree は既定で有効）。",
+          "article_summary": "新機能は、`/tui` で選ぶフルスクリーン UI（トランスクリプト検索、マウス選択、右クリックコピー）、既定で有効になった音声会話（F8 で切替、`/voice settings`、Linux / Windows 向け音声ランタイム同梱）、使用量・トークン合計・プラグインとスキルの利用状況を見る `/usage` 分析ダッシュボード、エージェントコマンドセンターでのタスクのステータス絞り込みと worktree セッション作成（worktree は既定で有効）。\n\nターミナルのテーマが 6 つ増え、応答内の Mermaid 図と数式を直接表示できる。ローカルのバックグラウンドサーバーは `/daemon` で更新し、`--no-daemon` で迂回できる。\n\n修正では、turn の失敗や中断時にストリーミング中の回答とプランを保持、tmux / SSH でのクリップボード転送、セッション再開時の Plan モード復元、Windows の受信接続や特権ソケット、読み取り専用の macOS ファイルハンドル経由の書き込みなどサンドボックスの隔離の隙間が塞がれた。"
+        },
+        {
+          "title": "Introducing GPT-6 Sol and Luna",
+          "title_ja": "OpenAI が GPT-6 Sol と Luna を発表。能力とコストのバランスが異なる 2 モデル",
+          "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna",
+          "source": "News",
+          "published_at": "2026-09-22T18:00:00+00:00",
+          "interest": 3,
+          "summary": "OpenAI がフロンティア級の知能を日常業務に向けた GPT-6 Sol と Luna を発表。能力とコストのバランスが異なる 2 つのモデルで、Sol が高機能側、Luna が低コスト側。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "devin",
+      "label": "Devin",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "cursor",
+      "label": "Cursor",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Rollouts and Security Review",
+          "title_ja": "Cursor が Rollouts と Security Review の 2 つのボットを公開。デプロイ後の変更の健全性監視と PR ごとの脆弱性報告",
+          "url": "https://cursor.com/changelog/rollouts-and-security-reviewer",
+          "source": "Changelog",
+          "published_at": "2026-09-23T00:00:00+00:00",
+          "interest": 3,
+          "summary": "コードを出荷する最後の工程向けに 2 つのボットが Teams / Enterprise プランで使える。Rollouts は PR ごとに監視プランを書き、デプロイ後にログ・メトリクス・トレースを環境別に検証して回帰を検知し、設定によっては revert PR を開く。Security Review は PR をコードベースの文脈で読み、悪用可能なバグだけを 1 つのレビューコメントで報告する。",
+          "article_summary": "Rollouts は Firetiger Change Monitors を Bot Development Kit で作り直したもので、PR が開くと diff と影響するシステムを読んで監視プラン（想定リスク、意図した効果、確認するシグナル、計測の欠落）を PR コメントとして書く。プランは PR 上で編集でき、Rollouts はその版を使う。\n\nデプロイイベントで起き、ログ・メトリクス・トレースに対してプランを実行し、ステージングと本番を別々に追跡する。回帰を検知すると疑わしい変更を名指しして作者に通知し、設定次第で revert PR を開くかクラウドエージェントに修正を渡す。自動でのマージやロールバックはしない。ソース管理は Origin か GitHub、デプロイイベントは CD システム、シグナルは Datadog などのテレメトリプロバイダーと連携する。\n\nSecurity Review は PR をコードベースの文脈で読み、悪用可能なバグを報告する 1 つのレビューコメントを投稿する。スタイルと品質は Bugbot の担当のまま。"
+        }
+      ]
+    },
+    {
+      "id": "github_changelog",
+      "label": "GitHub",
+      "status": "ok",
+      "note": "",
+      "items": [
+        {
+          "title": "Claude Opus 5.5 is now available in GitHub Copilot",
+          "title_ja": "Claude Opus 5.5 が GitHub Copilot で利用可能。Pro+ / Max / Business / Enterprise 向け",
+          "url": "https://github.blog/changelog/2026-09-22-claude-opus-5-5-is-now-available-in-github-copilot",
+          "source": "Release, copilot",
+          "published_at": "2026-09-22T17:10:23+00:00",
+          "interest": 2,
+          "summary": "Anthropic の Claude Opus 5.5 が GitHub Copilot で使えるようになった。初期テストでは Opus 5 と同等のタスク解決率をかなり少ないステップとトークンで達成し、多段階タスクでのエラー回復が速い。出力テキストには透かしが入るが意味や品質、トークン数には影響しない。Pro+ / Max / Business / Enterprise で従量課金。",
+          "article_summary": ""
+        },
+        {
+          "title": "OpenAI’s GPT-6 Sol and GPT-6 Luna now available",
+          "title_ja": "OpenAI の GPT-6 Sol と GPT-6 Luna が GitHub Copilot で利用可能",
+          "url": "https://github.blog/changelog/2026-09-22-openais-gpt-6-sol-and-gpt-6-luna-now-available",
+          "source": "Release, copilot",
+          "published_at": "2026-09-22T17:00:14+00:00",
+          "interest": 2,
+          "summary": "GitHub Copilot の GPT-6 ファミリーに GPT-6 Sol（対話的・エージェント的コーディング向けのバランス型）と GPT-6 Luna（軽量・低コスト）が加わった。Sol は Pro+ / Max / Business / Enterprise、Luna は Pro も含む各プランで、従量課金。VS Code、Copilot CLI、クラウドエージェント、github.com、モバイル、各 IDE のモデルピッカーで選べる。",
+          "article_summary": ""
+        },
+        {
+          "title": "Security improvements for SSH",
+          "title_ja": "GitHub の SSH セキュリティ変更: SHA-1 の RSA と DH group exchange を廃止、新規 RSA 鍵は 3072 ビット以上、ポスト量子の鍵交換 mlkem768x25519 に対応",
+          "url": "https://github.blog/changelog/2026-09-22-security-improvements-for-ssh",
+          "source": "Retired, account management, application security",
+          "published_at": "2026-09-22T14:11:47+00:00",
+          "interest": 2,
+          "summary": "2026 年 10 月 14 日以降に登録する RSA SSH 鍵は 3072 ビット以上が必須になり、同日にポスト量子の鍵交換 mlkem768x25519-sha256 が github.com で有効になる。SHA-1 を使う ssh-rsa 署名と diffie-hellman-group-exchange-sha256 は 11 月 4 日と 12 月 9 日のブラウンアウトを経て 2027 年 1 月 13 日に廃止される。HTTPS のリモートには影響しない。",
+          "article_summary": ""
+        },
+        {
+          "title": "Refreshed repository pull requests page generally available",
+          "title_ja": "リポジトリの新しい Pull requests ページが一般提供。AND / OR 検索、折りたたみサイドバー、一括操作",
+          "url": "https://github.blog/changelog/2026-09-21-refreshed-repository-pull-requests-page-generally-available",
+          "source": "Release, collaboration tools",
+          "published_at": "2026-09-22T01:25:53+00:00",
+          "interest": 1,
+          "summary": "刷新されたリポジトリの Pull requests ページが全ユーザーに一般提供された。フィルターの入力補助、AND / OR とネストに対応した高度な検索、「Authored by me」などのフィルターを持つ折りたたみ可能なサイドバー、コンパクト表示、ステータスチェック数やスタック表示に加え、プレビュー後のフィードバックでクローズ・ラベル付けなどの一括操作が入った。",
+          "article_summary": ""
+        }
+      ]
+    },
+    {
+      "id": "orca",
+      "label": "Orca",
+      "status": "ok",
+      "note": "",
+      "items": []
+    },
+    {
+      "id": "slack",
+      "label": "Slack",
+      "status": "ok",
+      "note": "",
+      "items": []
+    }
   ]
 }
