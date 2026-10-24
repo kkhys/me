@@ -21,6 +21,7 @@ export const getStaticPaths = (async () => {
         entry,
         prev: runs[i + 1]?.id,
         next: i > 0 ? runs[i - 1]?.id : undefined,
+        firstDate: runs.at(-1)?.id ?? entry.id,
       },
     };
   });
@@ -28,13 +29,13 @@ export const getStaticPaths = (async () => {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { entry, prev, next } = Astro.props;
+const { entry, prev, next, firstDate } = Astro.props;
 ---
 
 <BaseLayout
   title={`${entry.data.date} | Trend Digest`}
   description={entry.data.digest.headline}
 >
-  <SiteHeader />
-  <DigestView entry={entry} prev={prev} next={next} indexable />
+  <SiteHeader ask />
+  <DigestView entry={entry} prev={prev} next={next} firstDate={firstDate} indexable />
 </BaseLayout>

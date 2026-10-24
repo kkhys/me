@@ -1,0 +1,63 @@
+---
+import SparklesIcon from "@kkhys/ui/icons/sparkles.svg";
+import { askConfig } from "#/features/ask/config";
+
+/* Header entry to the AI dialog, beside the search button and drawn like
+   it. Ships hidden: mount.ts reveals it only once Chrome's Prompt API is
+   found and not reported unavailable, so other browsers never see a button
+   that cannot work. */
+---
+
+<button
+  type="button"
+  class="ask-button"
+  commandfor={askConfig.dialogId}
+  command="show-modal"
+  aria-label="AI に質問"
+  data-umami-event="ask-open"
+  hidden
+>
+  <SparklesIcon aria-hidden="true" />
+</button>
+
+<style>
+  /* Same icon button as the search button next to it (features/search/
+     components/search-button.astro): sized to the menu links' 18px line box. */
+  .ask-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    appearance: none;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    color: var(--c-sub);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .ask-button[hidden] {
+    display: none;
+  }
+
+  /* Extend the hit area to the 24px WCAG 2.5.8 minimum without changing the
+     visual. */
+  .ask-button::before {
+    content: "";
+    position: absolute;
+    inset: -0.1875rem;
+  }
+
+  .ask-button:hover {
+    color: var(--c-text);
+  }
+
+  .ask-button svg {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+</style>

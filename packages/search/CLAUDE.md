@@ -23,6 +23,12 @@ search icon in `src/dialog.astro`).
   for filters; it gets back `{ input, runSearch, openDialog }`.
   `requireElement` / `isHTMLElement` / `renderExcerpt` are exported for
   renderers. All four apps use `mountSearchDialog`.
+- `loader` — `loadPagefind(bundlePath, options)`: imports
+  `${bundlePath}pagefind.js`, applies the index options and runs `init()`,
+  once per URL per page (the promise is memoised, rejections included).
+  `pagefind.init()` reloads the entry, metadata and WASM on every call, so
+  anything else on a page that searches — trends' AI dialog — goes through
+  this and shares the dialog's load.
 - `runner` — `createSearchRunner(deps, { maxResults, debounceMs, noun })`:
   stale-request discarding, partial fragment failures, and the status
   strings (`noun` is 記事 / メモ / ページ).
@@ -58,4 +64,4 @@ that names the indexable pages (memo: `/posts/*.html`; trends:
 `src/components/search-dialog.astro`, config lives in `src/utils/search.ts`,
 and the wrapper is `src/integrations/verify-pagefind-index.ts` over
 `src/utils/pagefind-index.ts` (`isDocPage`). `vitest run` covers runner /
-keyboard / excerpt / query / sub-result / verify-index.
+loader / keyboard / excerpt / query / sub-result / verify-index.

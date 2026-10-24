@@ -7,6 +7,8 @@ interface SearchConfig {
   bundlePath: "/pagefind/";
   /** Pagefind metadata keys the dialog reads off each result fragment. */
   metaKeys: Record<"date", string>;
+  /** Pagefind filter keys; `month` narrows the AI dialog's cross-day search to a range. */
+  filterKeys: Record<"month", string>;
   /** Pagefind sort key of the run date, for the 新しい順 ordering. */
   sortKey: string;
   /** localStorage key of the chosen ordering. */
@@ -21,6 +23,9 @@ export const searchConfig = {
   bundlePath: "/pagefind/",
   metaKeys: {
     date: "date",
+  },
+  filterKeys: {
+    month: "month",
   },
   sortKey: "date",
   sortStorageKey: "trends:search-sort",

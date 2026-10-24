@@ -9,3 +9,7 @@ export const buildDateMeta = (date: string): string => `${searchConfig.metaKeys.
 
 /** The same date as a sort value; ISO dates order correctly as strings. */
 export const buildDateSort = (date: string): string => `${searchConfig.sortKey}:${date}`;
+
+/** The run's month (YYYY-MM) as a filter value, so a search can be held to a few months. */
+export const buildMonthFilter = (date: string): string =>
+  `${searchConfig.filterKeys.month}:${date.slice(0, 7)}`;

@@ -20,6 +20,7 @@ export const ICON_NOTES: Record<string, IconNote> = {
   globe: { role: "favicon の代替", usedBy: ["@kkhys/ui LinkCard"] },
   check: { role: "完了・チェック済み", usedBy: ["me", "lgtm"] },
   copy: { role: "クリップボードへコピー", usedBy: ["lgtm"] },
+  sparkles: { role: "AI に質問", usedBy: ["trends"] },
   info: { role: "Alert: note", usedBy: ["me"] },
   lightbulb: { role: "Alert: tip", usedBy: ["me"] },
   "message-square-warning": { role: "Alert: important", usedBy: ["me"] },

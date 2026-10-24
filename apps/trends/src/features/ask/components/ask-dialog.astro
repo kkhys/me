@@ -1,0 +1,506 @@
+---
+import SparklesIcon from "@kkhys/ui/icons/sparkles.svg";
+import { askConfig } from "#/features/ask/config";
+
+/* The AI question dialog. Chrome's built-in Gemini Nano answers from the
+   digests — this day, the 7 or 30 days ending on it, or all of them — and
+   nothing leaves the device. The markup ships to every browser but stays
+   unreachable outside Chrome 148+ on desktop: the toolbar button is `hidden`
+   until the inline script finds the Prompt API, and only then does it import
+   the behaviour (features/ask/mount.ts), so neither the invoker nor the light
+   dismiss needs the fallbacks the search dialog carries. */
+interface Props {
+  date: string;
+  /** The first run, the far end of the 全期間 scope. */
+  firstDate: string;
+}
+
+const { date, firstDate } = Astro.props;
+const { dialogId, scopes } = askConfig;
+const defaultScope = scopes[0].id;
+---
+
+<dialog
+  id={dialogId}
+  class="ask-dialog"
+  closedby="any"
+  aria-label="ダイジェストに AI で質問"
+  data-date={date}
+  data-first-date={firstDate}
+  data-scope={defaultScope}
+>
+  <div class="ask">
+    <header class="ask-head">
+      <SparklesIcon class="ask-head-icon" aria-hidden="true" />
+      <h2 class="ask-title">AI に質問</h2>
+      <button type="button" class="ask-reset" hidden>履歴を消す</button>
+      <button type="button" class="ask-close" commandfor={dialogId} command="close" aria-label="閉じる">
+        esc
+      </button>
+    </header>
+    <div class="ask-scope" role="group" aria-label="範囲">
+      {
+        scopes.map((scope, i) => (
+          <>
+            {i > 0 && (
+              <span class="sep" aria-hidden="true">
+                /
+              </span>
+            )}
+            <button
+              type="button"
+              data-scope={scope.id}
+              aria-pressed={scope.id === defaultScope ? "true" : "false"}
+              data-umami-event="ask-scope"
+              data-umami-event-scope={scope.id}
+            >
+              {scope.label}
+            </button>
+          </>
+        ))
+      }
+    </div>
+    <div class="ask-setup" hidden>
+      <p>初回だけ Gemini Nano のダウンロードが必要です（数 GB、Wi-Fi 推奨）。</p>
+      <button type="button" class="btn ask-download">ダウンロードして始める</button>
+    </div>
+    <ol class="ask-log scroller-thin" aria-label="会話"></ol>
+    <p class="ask-about">
+      Chrome 内蔵の Gemini Nano が端末内で答えます。<br />
+      選んだ範囲のダイジェストを根拠にし、内容は外部へ送られません。
+    </p>
+    {
+      scopes.map((scope) => (
+        <div class="ask-suggestions" role="group" aria-label="質問の例" data-scope={scope.id}>
+          {scope.suggestions.map((text) => (
+            <button type="button" class="ask-suggestion">
+              {text}
+            </button>
+          ))}
+        </div>
+      ))
+    }
+    <p class="ask-status" role="status"></p>
+    <form class="ask-form">
+      <input
+        type="text"
+        class="ask-input"
+        name="q"
+        placeholder={scopes[0].placeholder}
+        aria-label="質問"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        enterkeyhint="send"
+      />
+      <button type="submit" class="ask-send">送信</button>
+      <button type="button" class="ask-stop" hidden>停止</button>
+    </form>
+  </div>
+  <template class="ask-turn-template">
+    <li class="ask-turn">
+      <p class="ask-q"></p>
+      <p class="ask-a"></p>
+      <p class="ask-refs" hidden>参考: </p>
+    </li>
+  </template>
+</dialog>
+
+<style>
+  /* The shell mirrors the search dialog (packages/search/src/dialog.astro):
+     same placement, border, shadow and the paired open / close transition. */
+  :global(html:has(.ask-dialog:modal)) {
+    overflow: hidden;
+  }
+
+  .ask-dialog {
+    position: fixed;
+    inset: 0;
+    width: min(100% - 2rem, 36rem);
+    max-height: min(80dvh, 40rem);
+    margin: 12vh auto auto;
+    padding: 0;
+    overflow: hidden;
+    background: var(--c-bg);
+    color: var(--c-text);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 14px 28px -6px oklch(var(--uchu-yin-raw) / 20%),
+      0 2px 4px -1px oklch(var(--uchu-yin-raw) / 12%);
+    opacity: 1;
+    translate: 0 0;
+    transition:
+      opacity 0.2s,
+      translate 0.2s,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  .ask-dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @starting-style {
+    .ask-dialog[open] {
+      opacity: 0;
+      translate: 0 -8px;
+    }
+  }
+
+  .ask-dialog:not([open]) {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+
+  .ask-dialog::backdrop {
+    background: oklch(var(--uchu-yin-raw) / 30%);
+    opacity: 1;
+    transition:
+      opacity 0.2s,
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  @starting-style {
+    .ask-dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  .ask-dialog:not([open])::backdrop {
+    opacity: 0;
+  }
+
+  .ask {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .ask-head {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.875rem var(--space-4);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .ask-head-icon {
+    flex-shrink: 0;
+    width: 1rem;
+    height: 1rem;
+    color: var(--c-sub);
+  }
+
+  .ask-title {
+    margin: 0;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+  }
+
+  /* Text-only buttons are 18px tall; extend the hit area to the 24px
+     WCAG 2.5.8 minimum without changing the visual. */
+  .ask-reset,
+  .ask-send,
+  .ask-stop,
+  .ask-scope button {
+    position: relative;
+    appearance: none;
+    border: 0;
+    background: none;
+    padding: 0;
+    font: inherit;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+
+  .ask-reset::before,
+  .ask-send::before,
+  .ask-stop::before,
+  .ask-scope button::before {
+    content: "";
+    position: absolute;
+    inset: -0.25rem 0;
+  }
+
+  .ask-reset:hover,
+  .ask-send:hover,
+  .ask-stop:hover,
+  .ask-scope button:hover {
+    color: var(--c-text);
+  }
+
+  .ask-reset {
+    margin-left: auto;
+  }
+
+  .ask-close {
+    position: relative;
+    flex-shrink: 0;
+    margin-left: auto;
+    appearance: none;
+    padding: 0.125rem 0.375rem;
+    background: transparent;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    line-height: 1.25;
+    color: var(--c-sub);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .ask-reset:not([hidden]) + .ask-close {
+    margin-left: 0;
+  }
+
+  .ask-close:hover {
+    color: var(--c-text);
+  }
+
+  .ask-close::before {
+    content: "";
+    position: absolute;
+    inset: -0.25rem 0;
+  }
+
+  /* Same text toggle as the search dialog's 関連度 / 新しい順 and the
+     toolbar's 既出 filter: the pressed choice in body colour and weight,
+     the others in --c-sub. */
+  .ask-scope {
+    display: flex;
+    flex-shrink: 0;
+    align-items: baseline;
+    gap: 0.625rem;
+    padding: var(--space-3) var(--space-4) 0;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  .ask-scope button[aria-pressed="true"] {
+    color: var(--c-text);
+    font-weight: var(--fw-medium);
+  }
+
+  .ask-scope .sep {
+    color: var(--c-faint);
+  }
+
+  .ask-setup {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-4) 0;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-sm);
+  }
+
+  .ask-setup p {
+    margin: 0;
+  }
+
+  /* The one primary action of the dialog, so the shared .btn; the grid
+     would otherwise stretch it across the row. */
+  .ask-download {
+    justify-self: start;
+  }
+
+  /* While the gate is up the form, which closes the dialog with its own
+     padding, is gone; give the intro the bottom it would have had. */
+  .ask:has(.ask-form[hidden]) {
+    padding-bottom: var(--space-4);
+  }
+
+  .ask-log {
+    display: grid;
+    gap: var(--space-4);
+    margin: 0;
+    padding: var(--space-4);
+    list-style: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-base);
+  }
+
+  .ask-log:empty {
+    display: none;
+  }
+
+  .ask-turn {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+  }
+
+  .ask-turn p {
+    margin: 0;
+  }
+
+  .ask-q {
+    font-weight: var(--fw-medium);
+  }
+
+  /* The model's text, written through textContent only: pre-wrap keeps its
+     paragraph breaks without parsing anything it says as markup. */
+  .ask-a {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .ask-refs {
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+    color: var(--c-sub);
+  }
+
+  .ask-refs a {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  .ask-refs a:hover {
+    color: var(--c-text);
+  }
+
+  .ask-about {
+    margin: 0;
+    padding: var(--space-4) var(--space-4) 0;
+    font-size: var(--fs-xs);
+    line-height: var(--lh-sm);
+    color: var(--c-sub);
+  }
+
+  /* The intro only makes sense before the first question. */
+  .ask-log:not(:empty) ~ .ask-about {
+    display: none;
+  }
+
+  /* One set of examples per scope, shown only before the first question
+     and never over the download gate (which hides them with the attribute):
+     the dialog's data-scope picks the set. */
+  .ask-suggestions {
+    display: none;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4) 0;
+  }
+
+  .ask-dialog[data-scope="day"] .ask-log:empty ~ .ask-suggestions[data-scope="day"]:not([hidden]),
+  .ask-dialog[data-scope="week"] .ask-log:empty ~ .ask-suggestions[data-scope="week"]:not([hidden]),
+  .ask-dialog[data-scope="month"] .ask-log:empty ~ .ask-suggestions[data-scope="month"]:not([hidden]),
+  .ask-dialog[data-scope="all"] .ask-log:empty ~ .ask-suggestions[data-scope="all"]:not([hidden]) {
+    display: flex;
+  }
+
+  .ask-suggestion {
+    appearance: none;
+    padding: 0.125rem 0.625rem;
+    background: transparent;
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-full);
+    font: inherit;
+    font-size: var(--fs-xs);
+    line-height: 1.25rem;
+    color: var(--c-sub);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .ask-suggestion:hover {
+    color: var(--c-text);
+  }
+
+  .ask-status {
+    flex-shrink: 0;
+    margin: 0;
+    padding: var(--space-3) var(--space-4) 0;
+    font-size: var(--fs-xs);
+    color: var(--c-sub);
+  }
+
+  /* Hidden visually rather than with display: none so the live region stays
+     in the accessibility tree and the first announcement is not dropped. */
+  .ask-status:empty {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    border: 0;
+  }
+
+  .ask-form {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+    padding: 0.875rem var(--space-4);
+    border-top: 1px solid var(--c-border);
+  }
+
+  .ask-input {
+    flex: 1;
+    min-width: 0;
+    appearance: none;
+    padding: 0;
+    background: transparent;
+    border: none;
+    font: inherit;
+    /* Never below 16px: iOS zooms the page into any smaller focused input. */
+    font-size: max(16px, var(--fs-base));
+    color: var(--c-text);
+    /* Re-declared as an underline in :focus-visible below. */
+    outline: none;
+  }
+
+  /* An underline instead of the shared ring: the input has no box of its
+     own inside the form row, so a ring would float around bare text. */
+  .ask-input:focus-visible {
+    box-shadow: 0 var(--ring-width) 0 var(--ring);
+  }
+
+  @media (forced-colors: active) {
+    .ask-input:focus-visible {
+      outline: var(--ring-width) solid var(--ring);
+      outline-offset: var(--ring-offset);
+    }
+  }
+
+  .ask-input::placeholder {
+    color: var(--c-sub);
+  }
+</style>
+
+<script>
+  import { askConfig } from "#/features/ask/config";
+  import { getLanguageModel, LANGUAGE_MODEL_EXPECTATIONS } from "#/features/ask/language-model";
+
+  // The gate every browser runs; the behaviour is a separate chunk that only
+  // an engine with a usable Prompt API ever fetches.
+  const dialog = document.querySelector(`#${askConfig.dialogId}`);
+  const languageModel = getLanguageModel();
+  if (dialog instanceof HTMLDialogElement && languageModel) {
+    try {
+      const availability = await languageModel
+        .availability(LANGUAGE_MODEL_EXPECTATIONS)
+        .catch(() => "unavailable" as const);
+      if (availability !== "unavailable") {
+        const { mountAskDialog } = await import("#/features/ask/mount");
+        mountAskDialog(dialog, languageModel, availability);
+      }
+    } catch (error) {
+      console.error("ask-dialog", error);
+    }
+  }
+</script>

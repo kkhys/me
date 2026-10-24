@@ -1,9 +1,10 @@
-@layer reset, tokens, base;
+@layer reset, tokens, base, components;
 
 @import "kiso.css" layer(reset);
 @import "@kkhys/styles/uchu.css" layer(tokens);
 @import "@kkhys/styles/tokens.css" layer(tokens);
 @import "@kkhys/styles/base.css" layer(base);
+@import "@kkhys/styles/components.css" layer(components);
 
 /* ===== Design Tokens ===== */
 

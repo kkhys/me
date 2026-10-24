@@ -265,8 +265,8 @@ export const A11Y_GROUPS: ConventionGroup[] = [
         detail: "自前で書くのは「開いたら入力欄へ」「Esc で入力を保持したまま閉じる」の 2 点だけ。",
         evidence: [
           at("packages/search/src/dialog.astro", 19),
-          at("packages/search/src/dialog-setup.ts", 146),
-          at("packages/search/src/dialog-setup.ts", 182),
+          at("packages/search/src/dialog-setup.ts", 134),
+          at("packages/search/src/dialog-setup.ts", 170),
           at("apps/me/src/components/ui/site-nav.astro", 58),
           at("apps/me/src/features/blog/components/ui/pagination.astro", 71),
         ],
@@ -276,8 +276,8 @@ export const A11Y_GROUPS: ConventionGroup[] = [
         detail:
           "isComposing のあいだは Esc も矢印も候補選択に使われるので、ダイアログは何もしない。",
         evidence: [
-          at("packages/search/src/dialog-setup.ts", 191),
-          at("packages/search/src/dialog-setup.ts", 181),
+          at("packages/search/src/dialog-setup.ts", 179),
+          at("packages/search/src/dialog-setup.ts", 169),
         ],
       },
       {
@@ -340,7 +340,7 @@ export const A11Y_GROUPS: ConventionGroup[] = [
           "WCAG 2.1.4 は単キーのショートカットに無効化か付け替えを求める。設定画面のない静的サイトではどちらも用意できないので、検索を開く / は持たない。Alt を除外するのは AltGr で文字を打つ配列のため。",
         evidence: [
           at("packages/search/src/keyboard.ts", 5),
-          at("packages/search/src/dialog-setup.ts", 219),
+          at("packages/search/src/dialog-setup.ts", 207),
         ],
       },
       {
