@@ -7,7 +7,7 @@ interface SearchConfig {
   bundlePath: "/pagefind/";
   /** Pagefind metadata keys the dialog reads off each result fragment. */
   metaKeys: Record<"author" | "date" | "datetime" | "avatar", string>;
-  maxResults: number;
+  pageSize: number;
   debounceMs: number;
   excerptLength: number;
 }
@@ -21,7 +21,7 @@ export const searchConfig = {
     datetime: "datetime",
     avatar: "avatar",
   },
-  maxResults: 10,
+  pageSize: 10,
   debounceMs: 120,
   // Pagefind's own default, pinned because the layout depends on it: memos
   // have no title, so the excerpt is the whole result row under a three-line

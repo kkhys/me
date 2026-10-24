@@ -13,7 +13,7 @@ interface SearchConfig {
   sortKey: string;
   /** localStorage key of the chosen ordering. */
   sortStorageKey: string;
-  maxResults: number;
+  pageSize: number;
   debounceMs: number;
   excerptLength: number;
 }
@@ -29,7 +29,7 @@ export const searchConfig = {
   },
   sortKey: "date",
   sortStorageKey: "trends:search-sort",
-  maxResults: 10,
+  pageSize: 10,
   debounceMs: 120,
   // Pagefind counts excerpt length in segmented words and centres the excerpt
   // on the match; with short Japanese segments the default 30 spills past the

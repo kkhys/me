@@ -114,7 +114,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
           "translate: 0 8px",
         ],
         evidence: [
-          at("packages/search/src/dialog.astro", 88),
+          at("packages/search/src/dialog.astro", 92),
           at("apps/me/src/components/ui/site-nav.astro", 205),
           at("apps/me/src/features/blog/components/ui/pagination.astro", 233),
         ],
@@ -472,7 +472,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         values: ['command="show-modal"', "commandfor", "popovertarget", 'closedby="any"'],
         evidence: [
           at("apps/memo/src/features/search/components/search-button.astro", 10),
-          at("packages/search/src/dialog.astro", 19),
+          at("packages/search/src/dialog.astro", 20),
           at("apps/me/src/components/ui/site-nav.astro", 49),
           at("apps/me/src/features/blog/components/ui/pagination.astro", 46),
         ],
@@ -490,14 +490,14 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         rule: "テキスト入力は 16px 未満にしない",
         detail: "iOS がフォーカス時にズームするのを防ぐ。",
         values: ["font-size: max(16px, var(--fs-base))"],
-        evidence: [at("packages/search/src/dialog.astro", 160)],
+        evidence: [at("packages/search/src/dialog.astro", 164)],
       },
       {
         rule: "内側スクローラには overscroll-behavior: contain を付ける",
         values: ["overscroll-behavior: contain"],
         evidence: [
           at("apps/me/src/features/blog/components/ui/toc.astro", 110),
-          at("packages/search/src/dialog.astro", 253),
+          at("packages/search/src/dialog.astro", 256),
           at("apps/trends/src/components/source-toc.astro", 67),
         ],
       },
@@ -578,12 +578,24 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
     items: [
       {
         rule: "検索の状態表示は p[role=status]。空のときも sr-only で残し、ライブリージョンを外さない",
-        evidence: [at("packages/search/src/dialog.astro", 41)],
+        evidence: [at("packages/search/src/dialog.astro", 42)],
       },
       {
         rule: "検索結果の文言は共有 runner で全アプリ同一",
         values: ["「{query}」に一致する〜はありません", "{total} 件中 {shown} 件を表示"],
-        evidence: [at("packages/search/src/runner.ts", 31)],
+        evidence: [at("packages/search/src/runner.ts", 51)],
+      },
+      {
+        rule: "検索結果は 10 件ずつ。一覧の末尾の「さらに表示」が見えたら次の 10 件を自動で足す",
+        detail:
+          "ボタンは残す: 押しても足せる、↓ で届く、全件出ると消えて終わりが分かる。IntersectionObserver の root はダイアログ内のスクロール領域、rootMargin は 2 行ぶんの 100px。ボタン経由のフォーカスは足した先頭行へ移す。ヒット数分の fragment を一度に読まない。",
+        values: ["pageSize: 10", "さらに表示", "rootMargin: 0px 0px 100px 0px"],
+        evidence: [
+          at("packages/search/src/dialog.astro", 45),
+          at("packages/search/src/runner.ts", 175),
+          at("packages/search/src/dialog-setup.ts", 111),
+          at("packages/search/src/dialog-setup.ts", 137),
+        ],
       },
       {
         rule: "見出しで節に分かれるページの検索結果は、重みが最大の sub_result を 1 件選び「ページ名 / 節の見出し」で出す",
@@ -713,7 +725,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         values: ["0 14px 28px -6px", "0 2px 4px -1px"],
         evidence: [
           at("packages/styles/tokens.css", 39),
-          at("packages/search/src/dialog.astro", 72),
+          at("packages/search/src/dialog.astro", 76),
           at("apps/me/src/features/blog/components/ui/toc.astro", 113),
         ],
       },

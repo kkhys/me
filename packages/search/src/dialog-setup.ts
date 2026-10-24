@@ -39,7 +39,8 @@ export interface SearchDialogOptions {
   /** Leading and trailing slash required: `pagefind.js` is appended verbatim. */
   bundlePath: string;
   excerptLength: number;
-  maxResults: number;
+  /** Rows per search and per さらに表示. */
+  pageSize: number;
   debounceMs: number;
   /** What a result is called in the status line, e.g. 記事 / メモ. */
   noun: string;
@@ -57,9 +58,10 @@ export interface SearchDialogApi {
 
 /**
  * Wires the shared dialog shell: Pagefind loading and warm-up, the search
- * runner, keyboard handling (⌘K / Ctrl+K, arrows, Escape, IME composition),
- * invoker and light-dismiss fallbacks. Returns the handles an app needs for
- * its own controls (e.g. re-running the search after a filter change).
+ * runner, the さらに表示 button, keyboard handling (⌘K / Ctrl+K, arrows,
+ * Escape, IME composition), invoker and light-dismiss fallbacks. Returns
+ * the handles an app needs for its own controls (e.g. re-running the
+ * search after a filter change).
  */
 export const setupSearchDialog = (
   dialog: HTMLDialogElement,
@@ -78,11 +80,17 @@ export const setupSearchDialog = (
     (element): element is HTMLFormElement => element instanceof HTMLFormElement,
   );
   const status = requireElement(dialog, ".search-status", isHTMLElement);
+  const scroller = requireElement(dialog, ".search-scroller", isHTMLElement);
   const list = requireElement(dialog, ".search-results", isHTMLElement);
   const template = requireElement(
     dialog,
     ".search-result-template",
     (element): element is HTMLTemplateElement => element instanceof HTMLTemplateElement,
+  );
+  const more = requireElement(
+    dialog,
+    ".search-more",
+    (element): element is HTMLButtonElement => element instanceof HTMLButtonElement,
   );
   const triggers = [
     ...document.querySelectorAll<HTMLButtonElement>(`button[commandfor="${dialog.id}"]`),
@@ -92,6 +100,22 @@ export const setupSearchDialog = (
 
   const load = () => loadPagefind(options.bundlePath, { excerptLength: options.excerptLength });
 
+  // Scrolling the button into view presses it, so the list grows on its own;
+  // the button stays for keyboard users, engines without the observer, and
+  // as the visible end of the list. The margin is about two rows of
+  // lookahead so the next page is usually there before the reader reaches
+  // the button, without fetching a second page for every query on a tall
+  // (phone) scroller.
+  const observer =
+    "IntersectionObserver" in window
+      ? new IntersectionObserver(
+          (entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) more.click();
+          },
+          { root: scroller, rootMargin: "0px 0px 100px 0px" },
+        )
+      : undefined;
+
   // Best-effort warm-up on hover/open. The failure is swallowed here so that
   // hovering in a dev server without a build neither logs "Search failed"
   // nor writes to the status line; the next real search reports it.
@@ -99,27 +123,48 @@ export const setupSearchDialog = (
     load().catch(() => {});
   };
 
-  const search = createSearchRunner(
+  const runner = createSearchRunner(
     {
       loadPagefind: load,
       render: (fragments) => {
         list.replaceChildren(
           ...fragments.map((fragment) => options.renderResult(fragment, template)),
         );
+        // A new query's best hits are at the top; the scroller would
+        // otherwise keep the offset of the previous list.
+        scroller.scrollTop = 0;
+      },
+      append: (fragments) => {
+        const before = list.querySelectorAll(".search-result").length;
+        list.append(...fragments.map((fragment) => options.renderResult(fragment, template)));
+        // Focus that came through the button (keyboard, or a click in the
+        // engines that focus buttons) moves onto the first row it added, so
+        // a screen reader reads on from there and ↓ keeps walking the list.
+        if (document.activeElement === more) {
+          list.querySelectorAll<HTMLElement>(".search-result")[before]?.focus();
+        }
       },
       setStatus: (text) => {
         status.textContent = text;
+      },
+      setHasMore: (hasMore) => {
+        more.hidden = !hasMore;
+        // Observing afresh repeats the initial notification, so a button
+        // still in view after a page (a short batch, a tall scroller)
+        // keeps loading until it leaves the view or the hits run out.
+        observer?.unobserve(more);
+        if (hasMore) observer?.observe(more);
       },
       onError: (stage: SearchStage, error) => {
         console.error(`Search failed at stage "${stage}"`, { query: input.value, error });
       },
     },
-    { maxResults: options.maxResults, debounceMs: options.debounceMs, noun: options.noun },
+    { pageSize: options.pageSize, debounceMs: options.debounceMs, noun: options.noun },
   );
 
   const runSearch = () => {
     // The runner catches everything it expects; anything left is a bug.
-    search(input.value, options.searchOptions?.()).catch((error: unknown) => {
+    runner.search(input.value, options.searchOptions?.()).catch((error: unknown) => {
       console.error("Search runner threw", error);
     });
   };
@@ -127,6 +172,7 @@ export const setupSearchDialog = (
   const focusableItems = () => [
     input,
     ...list.querySelectorAll<HTMLAnchorElement>(".search-result"),
+    ...(more.hidden ? [] : [more]),
   ];
 
   const onOpened = () => {
@@ -161,6 +207,12 @@ export const setupSearchDialog = (
     // form; that Enter must not follow the first result.
     if (composing) return;
     list.querySelector<HTMLAnchorElement>(".search-result")?.click();
+  });
+
+  more.addEventListener("click", () => {
+    runner.loadMore().catch((error: unknown) => {
+      console.error("Search runner threw", error);
+    });
   });
 
   dialog.addEventListener("keydown", (event) => {
