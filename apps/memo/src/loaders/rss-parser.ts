@@ -7,13 +7,15 @@ export interface RssItem {
 
 const stripCdata = (text: string): string => text.replace(/^<!\[CDATA\[([\s\S]*?)\]\]>$/u, "$1");
 
+const XML_ENTITIES = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'" } as const;
+
+// One pass over the text: sequential replaceAll calls would turn `&amp;lt;`
+// into `<` by decoding the `&` first and then the `&lt;` it produced.
 const decodeEntities = (text: string): string =>
-  text
-    .replaceAll("&amp;", "&")
-    .replaceAll("&lt;", "<")
-    .replaceAll("&gt;", ">")
-    .replaceAll("&quot;", '"')
-    .replaceAll("&apos;", "'");
+  text.replaceAll(
+    /&(amp|lt|gt|quot|apos);/gu,
+    (_, name: keyof typeof XML_ENTITIES) => XML_ENTITIES[name],
+  );
 
 const extractTag = (xml: string, tag: string): string | undefined => {
   const match = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, "u"));

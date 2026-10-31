@@ -49,6 +49,16 @@ describe("extractDescription", () => {
     expect(extractDescription(body)).toBe("テキスト前。 テキスト後。");
   });
 
+  it("removes alert blockquotes with blank quote lines", () => {
+    const body = "> [!TIP]\n>\n> ヒント本文。\n\nテキスト後。";
+    expect(extractDescription(body)).toBe("テキスト後。");
+  });
+
+  it("keeps a separate blockquote after an alert", () => {
+    const body = "> [!NOTE]\n> ノート。\n\n> 通常の引用。\n\nテキスト後。";
+    expect(extractDescription(body)).toBe("通常の引用。 テキスト後。");
+  });
+
   it("removes blockquote markers but keeps text", () => {
     const body = "> 引用テキストです。\n\n通常テキスト。";
     expect(extractDescription(body)).toBe("引用テキストです。 通常テキスト。");

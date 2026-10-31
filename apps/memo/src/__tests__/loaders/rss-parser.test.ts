@@ -119,6 +119,32 @@ describe("parseRssItems", () => {
     expect(items).toHaveLength(1);
     expect(items[0]?.title).toBe("Rock & Roll");
   });
+
+  test("should decode every supported entity", () => {
+    const xml = `<rss><channel>
+      <item>
+        <title>&lt;a href=&quot;x&quot;&gt; it&apos;s</title>
+        <link>https://example.com/post</link>
+        <guid>https://example.com/post</guid>
+        <pubDate>Mon, 09 Mar 2026 00:00:00 GMT</pubDate>
+      </item>
+    </channel></rss>`;
+
+    expect(parseRssItems(xml)[0]?.title).toBe(`<a href="x"> it's`);
+  });
+
+  test("should not double-decode entities", () => {
+    const xml = `<rss><channel>
+      <item>
+        <title>&amp;lt;script&amp;gt; &amp;amp;</title>
+        <link>https://example.com/post</link>
+        <guid>https://example.com/post</guid>
+        <pubDate>Mon, 09 Mar 2026 00:00:00 GMT</pubDate>
+      </item>
+    </channel></rss>`;
+
+    expect(parseRssItems(xml)[0]?.title).toBe("&lt;script&gt; &amp;");
+  });
 });
 
 describe("generateRssEntryId", () => {
