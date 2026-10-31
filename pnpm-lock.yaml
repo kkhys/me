@@ -201,8 +201,8 @@ catalogs:
       specifier: 2.0.1
       version: 2.0.1
     budoux:
-      specifier: 0.10.1
-      version: 0.10.1
+      specifier: 0.10.2
+      version: 0.10.2
     fetch-site-metadata:
       specifier: 0.2.0
       version: 0.2.0
@@ -249,8 +249,8 @@ catalogs:
       specifier: 5.0.5
       version: 5.0.5
     wrangler:
-      specifier: 4.155.0
-      version: 4.155.0
+      specifier: 4.156.0
+      version: 4.156.0
     yaml:
       specifier: 2.9.1
       version: 2.9.1
@@ -322,7 +322,7 @@ importers:
         version: 5.0.5(@types/node@26.1.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.5(@types/node@26.1.2)(esbuild@0.28.2)(terser@5.49.2)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.155.0(@types/node@26.1.2)
+        version: 4.156.0(@types/node@26.1.2)
       yaml:
         specifier: 'catalog:'
         version: 2.9.1
@@ -383,7 +383,7 @@ importers:
         version: 5.0.5(@types/node@26.1.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.5(@types/node@26.1.2)(esbuild@0.28.2)(terser@5.49.2)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.155.0(@types/node@26.1.2)
+        version: 4.156.0(@types/node@26.1.2)
 
   apps/diary:
     dependencies:
@@ -438,7 +438,7 @@ importers:
         version: 5.0.5(@types/node@26.1.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.5(@types/node@26.1.2)(esbuild@0.28.2)(terser@5.49.2)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.155.0(@types/node@26.1.2)
+        version: 4.156.0(@types/node@26.1.2)
 
   apps/lgtm:
     dependencies:
@@ -514,7 +514,7 @@ importers:
         version: 5.0.5(@types/node@26.1.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.5(@types/node@26.1.2)(esbuild@0.28.2)(terser@5.49.2)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.155.0(@types/node@26.1.2)
+        version: 4.156.0(@types/node@26.1.2)
 
   apps/me:
     dependencies:
@@ -653,7 +653,7 @@ importers:
         version: 5.0.5(@types/node@26.1.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.5(@types/node@26.1.2)(esbuild@0.28.2)(terser@5.49.2)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.155.0(@types/node@26.1.2)
+        version: 4.156.0(@types/node@26.1.2)
 
   apps/memo:
     dependencies:
@@ -753,7 +753,7 @@ importers:
         version: 5.0.5(@types/node@26.1.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.5(@types/node@26.1.2)(esbuild@0.28.2)(terser@5.49.2)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.155.0(@types/node@26.1.2)
+        version: 4.156.0(@types/node@26.1.2)
 
   apps/studio:
     dependencies:
@@ -848,7 +848,7 @@ importers:
         version: 5.0.5(@types/node@26.1.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.5(@types/node@26.1.2)(esbuild@0.28.2)(terser@5.49.2)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.155.0(@types/node@26.1.2)
+        version: 4.156.0(@types/node@26.1.2)
 
   packages/analytics:
     devDependencies:
@@ -955,7 +955,7 @@ importers:
     dependencies:
       budoux:
         specifier: 'catalog:'
-        version: 0.10.1
+        version: 0.10.2
       fetch-site-metadata:
         specifier: 'catalog:'
         version: 0.2.0(supports-color@10.2.2)
@@ -2708,8 +2708,9 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
-  budoux@0.10.1:
-    resolution: {integrity: sha512-nSq29N1dluXnyPX5crFfBVeiQkF8WzFqvr9veCdfMDRXNqGfGdfhO9bW0jjVb3RKZ+8pgXyHYE9wfHiSMgm5nQ==}
+  budoux@0.10.2:
+    resolution: {integrity: sha512-b9xs9NrUGC7rB4io0yC7OtRjU7oj/2OEAIAhLZm2KETupgDfPU2bOO6E3Mp0OheJkZ99HrZSxuFfmn8AIN3Mow==}
+    engines: {node: '>=22'}
     hasBin: true
 
   buffer-from@1.1.2:
@@ -3829,8 +3830,8 @@ packages:
     resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
     hasBin: true
 
-  miniflare@5.20261023.2-beta:
-    resolution: {integrity: sha512-sXpZloQnIUe4raXXdwwqd2ioRHox9a/1B4nB2/p4JWKDwGuVgEK4DugCNgIeQf0iVuSgBItdYpodJe4iwY6SrQ==}
+  miniflare@5.20261023.3-beta:
+    resolution: {integrity: sha512-thdXzlktu5GE1o/BlmMAPeJ0Cu6Tu5LpMbRlyfRrpVvMRrhd6p52TMqcITCZZLVzt1UO92VGBkLDhLOpryUAyQ==}
     engines: {node: '>=22.0.0'}
 
   mlly@1.7.4:
@@ -4762,8 +4763,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@4.155.0:
-    resolution: {integrity: sha512-gBKtAg2e0abQDvXPRQu611YMTd/cfAaJTOLAs/89tTxFxEeUyC260MRJRK+m3gLmQjDYWFwJv+ErwuJ/GuALpA==}
+  wrangler@4.156.0:
+    resolution: {integrity: sha512-kVLAShuLiNgE3jcrmXcymDf/iPKDPrSxACe5ueugW/33HeNB9E9CkKYchudCeBwgmsnl4k+1zt4NO7vqb/fRuQ==}
     engines: {node: '>=22.0.0'}
     hasBin: true
     peerDependencies:
@@ -6415,7 +6416,7 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  budoux@0.10.1:
+  budoux@0.10.2:
     dependencies:
       commander: 15.0.0
       linkedom: 0.18.14
@@ -7919,7 +7920,7 @@ snapshots:
 
   mini-svg-data-uri@1.4.4: {}
 
-  miniflare@5.20261023.2-beta(@types/node@26.1.2):
+  miniflare@5.20261023.3-beta(@types/node@26.1.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       sharp: 0.35.5(@types/node@26.1.2)
@@ -8954,13 +8955,13 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20261023.1
       '@cloudflare/workerd-windows-64': 1.20261023.1
 
-  wrangler@4.155.0(@types/node@26.1.2):
+  wrangler@4.156.0(@types/node@26.1.2):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
       '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261023.1)
       blake3-wasm: 2.1.5
       esbuild: 0.28.2
-      miniflare: 5.20261023.2-beta(@types/node@26.1.2)
+      miniflare: 5.20261023.3-beta(@types/node@26.1.2)
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
       workerd: 1.20261023.1
