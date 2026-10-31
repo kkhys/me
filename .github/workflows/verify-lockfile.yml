@@ -1,0 +1,36 @@
+name: Verify lockfile
+
+# Fails when .github/workflows/actions.lock is out of sync with the workflows,
+# or when a locked pin no longer verifies upstream. Like ci.yml this does not
+# run on push to main: every change reaches main through a checked PR. The
+# weekly run catches a release tag that was re-pointed after the lockfile was
+# committed, which no PR would surface.
+on:
+  pull_request:
+  schedule:
+    - cron: "0 18 * * 0" # Mondays 03:00 JST
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify actions.lock
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      # Pinned so a new extension release cannot change what this check
+      # accepts without a reviewed PR. Renovate bumps the pin (see renovate.json).
+      - run: gh extension install github/gh-actions-lock --pin v0.4.0
+
+      - run: gh actions-lock --verify
