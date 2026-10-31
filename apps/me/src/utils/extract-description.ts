@@ -13,11 +13,10 @@ export const extractDescription = (body: string, maxLength = 120): string => {
   // Remove fenced code blocks
   text = text.replaceAll(/```[\s\S]*?```/gu, "");
 
-  // Remove alert blockquotes (> [!NOTE] etc. and continuation lines)
-  text = text.replaceAll(
-    /^> \[!(?:NOTE|TIP|IMPORTANT|WARNING|CAUTION)\].*(?:\n(?:>\s?.*)?)*$/gmu,
-    "",
-  );
+  // Remove alert blockquotes (> [!NOTE] etc. and their `>` continuation lines).
+  // Each repetition consumes exactly one line, so the match is unambiguous and
+  // cannot backtrack exponentially; a blank line ends the alert, as in Markdown.
+  text = text.replaceAll(/^> \[!(?:NOTE|TIP|IMPORTANT|WARNING|CAUTION)\].*(?:\n>.*)*$/gmu, "");
 
   // Remove blockquote markers
   text = text.replaceAll(/^>\s?/gmu, "");
@@ -41,8 +40,14 @@ export const extractDescription = (body: string, maxLength = 120): string => {
   // Remove horizontal rules
   text = text.replaceAll(/^[-*_]{3,}$/gmu, "");
 
-  // Remove HTML tags
-  text = text.replaceAll(/<[^>]+>/gu, "");
+  // Remove HTML tags. A single pass already strips every `<…>` pair, but
+  // CodeQL (js/incomplete-multi-character-sanitization) only accepts a
+  // replace that runs to a fixpoint, so loop rather than suppress the alert.
+  let previous: string;
+  do {
+    previous = text;
+    text = text.replaceAll(/<[^>]+>/gu, "");
+  } while (text !== previous);
 
   // Remove footnote references
   text = text.replaceAll(/\[\^[^\]]*\]/gu, "");

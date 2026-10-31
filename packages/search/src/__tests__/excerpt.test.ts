@@ -50,6 +50,19 @@ describe("parseExcerpt", () => {
     ]);
   });
 
+  it("keeps an unclosed <mark> as literal text", () => {
+    expect(parseExcerpt("<mark>a</mark> b <mark>c")).toEqual([
+      { text: "a", marked: true },
+      { text: " b <mark>c", marked: false },
+    ]);
+  });
+
+  it("stays linear on many unclosed <mark>s", () => {
+    // The lazy-regex version rescanned to the end for each one: seconds at this size.
+    const excerpt = "<mark>" + "<mark>a".repeat(50_000);
+    expect(parseExcerpt(excerpt)).toEqual([{ text: excerpt, marked: false }]);
+  }, 1_000);
+
   it("returns nothing for an empty excerpt", () => {
     expect(parseExcerpt("")).toEqual([]);
   });

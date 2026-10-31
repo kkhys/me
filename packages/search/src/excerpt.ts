@@ -3,7 +3,8 @@ export interface ExcerptPart {
   marked: boolean;
 }
 
-const MARK_PATTERN = /<mark>([\s\S]*?)<\/mark>/gu;
+const MARK_OPEN = "<mark>";
+const MARK_CLOSE = "</mark>";
 
 // Pagefind escapes only `<` and `>` in the page text before wrapping matches
 // in `<mark>`, so those are the only entities to undo; everything else in the
@@ -20,11 +21,18 @@ export const parseExcerpt = (excerpt: string): ExcerptPart[] => {
   const push = (text: string, marked: boolean) => {
     if (text !== "") parts.push({ text: decodeText(text), marked });
   };
+  // indexOf rather than a lazy `<mark>([\s\S]*?)</mark>` regex: that rescans
+  // to the end of the string for every unclosed `<mark>`, which is quadratic
+  // on hostile input.
   let cursor = 0;
-  for (const match of excerpt.matchAll(MARK_PATTERN)) {
-    push(excerpt.slice(cursor, match.index), false);
-    push(match[1] ?? "", true);
-    cursor = match.index + match[0].length;
+  let open = excerpt.indexOf(MARK_OPEN);
+  while (open !== -1) {
+    const close = excerpt.indexOf(MARK_CLOSE, open + MARK_OPEN.length);
+    if (close === -1) break;
+    push(excerpt.slice(cursor, open), false);
+    push(excerpt.slice(open + MARK_OPEN.length, close), true);
+    cursor = close + MARK_CLOSE.length;
+    open = excerpt.indexOf(MARK_OPEN, cursor);
   }
   push(excerpt.slice(cursor), false);
   return parts;
