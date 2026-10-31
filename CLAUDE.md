@@ -32,6 +32,7 @@ Shared packages are consumed as source (no build step); each app supplies its ow
 Run from the repo root:
 
 - `pnpm build` / `pnpm test` / `pnpm check` — workspace-wide via `pnpm -r`
+- `pnpm coverage` — the test suite with coverage thresholds enforced; this is what CI runs instead of `pnpm test`
 - `pnpm lint` / `pnpm lint:fix` — oxlint + oxfmt over the whole repo
 - `pnpm dev:me` / `pnpm build:me` / `pnpm deploy:me` — me shortcuts (`:lgtm` / `:diary` / `:trends` / `:design` / `:art` variants too)
 - `pnpm --filter @kkhys/memo <script>` — target a single app
@@ -39,15 +40,18 @@ Run from the repo root:
 
 ## CI / Deploy
 
-- `.github/workflows/ci.yml` — runs on PRs. Lint → test → type check → build across the workspace against fixtures (all apps read `USE_FIXTURE_DATA`); content submodules are skipped. The `skip-ci` label opts out.
+- `.github/workflows/ci.yml` — runs on PRs and in the merge queue. Lint → test with coverage thresholds → type check → build across the workspace against fixtures (all apps read `USE_FIXTURE_DATA`); content submodules are skipped. There is no opt-out label: a skipped required check counts as passing.
+- `.github/workflows/codeql.yml` — CodeQL advanced setup (actions, javascript-typescript, python) on PRs, in the merge queue, on push to main, and weekly. Default setup is off; it never runs in the merge queue.
 - `.github/workflows/deploy-memo.yml` — on push to main touching `apps/memo/**` or `packages/**`, re-runs memo's checks then deploys to Cloudflare Pages.
-- `.github/workflows/verify-lockfile.yml` — runs `gh actions-lock --verify` on PRs and weekly. Every `uses:` is a version tag; the commit it resolves to is pinned in `.github/workflows/actions.lock`, which is machine-generated (never edit by hand). After adding a workflow or changing any `uses:` (including `.github/actions/*/action.yml`), run `gh actions-lock` and commit the lockfile with the change. Same-repo actions are referenced as `$/.github/actions/...`, which runs at the workflow's own commit. Renovate regenerates the lockfile when it bumps an action.
+- `.github/workflows/verify-lockfile.yml` — runs `gh actions-lock --verify` on PRs, in the merge queue, and weekly. Every `uses:` is a version tag; the commit it resolves to is pinned in `.github/workflows/actions.lock`, which is machine-generated (never edit by hand). After adding a workflow or changing any `uses:` (including `.github/actions/*/action.yml`), run `gh actions-lock` and commit the lockfile with the change. Same-repo actions are referenced as `$/.github/actions/...`, which runs at the workflow's own commit. Renovate regenerates the lockfile when it bumps an action.
 - me, lgtm, diary, trends, design, and art are built and deployed locally (`pnpm deploy:me` / `pnpm deploy:lgtm` / `pnpm deploy:diary` / `pnpm deploy:trends` / `pnpm deploy:design` / `pnpm deploy:art`), not from CI. trends is normally published end-to-end by the `creating-trend-digest` skill in `.claude/skills/` (data commit → deploy → push).
-- PRs land through GitHub auto-merge: the `main` ruleset requires the CI check, and the `enabling-auto-merge` skill in `.claude/skills/` marks a PR ready and enables auto-merge with a merge commit. Run it as the last step after `creating-pr`.
+- PRs land through the merge queue: the `main` ruleset requires the CI check, `Verify actions.lock`, and CodeQL results, and merges only via a merge queue that re-runs those checks on main plus the PR before merging with a merge commit. The `enabling-auto-merge` skill in `.claude/skills/` marks a PR ready and enables auto-merge, which queues it as soon as its own checks pass. Run it as the last step after `creating-pr`.
+- The daily trends digest is the one direct push to main (the `creating-trend-digest` skill); the ruleset's admin bypass exists for that, so keep `bypass_mode` at `always`.
 
 ## Gotchas
 
 - `exactOptionalPropertyTypes: true` — optional props need `| undefined`, not just `?:`
 - `.astro` files can't be imported from `.ts` (tsc doesn't resolve them)
+- Coverage thresholds in every `vitest.config.ts` ratchet: `autoUpdate` rewrites them when coverage improves, so commit the bumped values with the change; a drop fails `pnpm coverage` and therefore CI. Lower a threshold by hand only when the drop is deliberate.
 - Per-app specifics (content schemas, blog/memo conventions) live in each app's `CLAUDE.md` — read those first when working inside an app.
 - UI changes (`.astro` / `.css` / `.tsx` under `apps/*/src`, `packages/ui`, `packages/styles`) follow the design system in `apps/design` (design.kkhys.me). `.claude/rules/design-system.md` loads for those files and names the sources to read — consult it first when a task is UI work, even before opening a file.

@@ -4,9 +4,11 @@ name: Verify lockfile
 # or when a locked pin no longer verifies upstream. Like ci.yml this does not
 # run on push to main: every change reaches main through a checked PR. The
 # weekly run catches a release tag that was re-pointed after the lockfile was
-# committed, which no PR would surface.
+# committed, which no PR would surface. The main ruleset requires this check,
+# so it must also report inside the merge queue (merge_group).
 on:
   pull_request:
+  merge_group:
   schedule:
     - cron: "0 18 * * 0" # Mondays 03:00 JST
   workflow_dispatch:

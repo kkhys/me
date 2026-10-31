@@ -10,6 +10,13 @@ export default defineConfig({
         "src/memo-format.ts",
         "src/request-guard.ts",
       ],
+      thresholds: {
+        lines: 100,
+        functions: 100,
+        branches: 97.33,
+        statements: 98.52,
+        autoUpdate: true,
+      },
     },
   },
 });
