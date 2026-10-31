@@ -10,27 +10,18 @@
   "rebaseWhen": "behind-base-branch",
   "packageRules": [
     {
-      "groupName": "DevDependencies",
       "matchDepTypes": ["devDependencies"],
       "automerge": true
     },
     {
-      "groupName": "Dependencies (minor update)",
       "matchDepTypes": ["dependencies"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
     },
     {
-      "groupName": "pnpm catalog (non-major)",
       "matchDepTypes": ["pnpm.catalog.default"],
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
-    },
-    {
-      "groupName": "pnpm catalog (major)",
-      "matchDepTypes": ["pnpm.catalog.default"],
-      "matchUpdateTypes": ["major"],
-      "automerge": false
     },
     {
       "description": "TypeScript 7 is the native (tsgo) rewrite and no longer exposes the legacy compiler API that @astrojs/language-server needs for `astro check`. Lift once the language server supports it.",
@@ -38,6 +29,7 @@
       "allowedVersions": "<7"
     },
     {
+      "description": "astro-expressive-code and its plugins ship in lockstep at one version and are not in Renovate's monorepo presets, so they stay grouped to keep the lockfile on a single version.",
       "groupName": "Expressive Code",
       "matchPackageNames": ["astro-expressive-code", "@expressive-code/**"],
       "automerge": true
