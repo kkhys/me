@@ -16,6 +16,7 @@ workflows:
         - 'kkhys/gh-labeler-actions@v1.0.0'
     '.github/workflows/sync-submodule.yml':
         - 'actions/checkout@v7.0.1'
+    '.github/workflows/update-behind-prs.yml': []
     '.github/workflows/verify-lockfile.yml':
         - 'actions/checkout@v7.0.1'
 dependencies:

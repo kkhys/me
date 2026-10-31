@@ -15,6 +15,13 @@ export default defineConfig({
     coverage: {
       include: ["src/utils/*.ts", "src/lib/**/*.ts", "src/features/**/*.ts"],
       exclude: ["src/lib/expressive-code.ts", "src/lib/rehype-mermaid-options.ts"],
+      thresholds: {
+        lines: 96.31,
+        functions: 91.47,
+        branches: 92.85,
+        statements: 94.86,
+        autoUpdate: true,
+      },
     },
   },
 });

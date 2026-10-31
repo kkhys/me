@@ -1,5 +1,5 @@
 # Inherits the shared base label set (Conventional Commits types,
-# type: bump-version, skip-ci):
+# type: bump-version):
 # https://github.com/kkhys/.github/blob/main/.github/labels.yml
 extends: kkhys/.github
 
@@ -8,3 +8,7 @@ labels:
   - name: "type: submodule"
     description: "Submodule update"
     color: "#d6e8ff"
+  # A skipped required check counts as passing, so a CI opt-out label would
+  # let auto-merge land an unchecked PR. ci.yml no longer honours the label.
+  - name: "skip-ci"
+    delete: true

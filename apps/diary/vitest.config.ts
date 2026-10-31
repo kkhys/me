@@ -11,6 +11,13 @@ export default defineConfig({
     exclude: ["node_modules", ".direnv", "dist"],
     coverage: {
       include: ["src/utils/*.ts"],
+      thresholds: {
+        lines: 100,
+        functions: 100,
+        branches: 100,
+        statements: 100,
+        autoUpdate: true,
+      },
     },
   },
 });

@@ -1,0 +1,43 @@
+name: Update behind PRs
+
+# The main ruleset requires a PR branch to be up to date, and auto-merge never
+# updates a branch on its own, so a PR armed for auto-merge would stall as
+# BEHIND the moment another PR landed. On every push to main this merges main
+# into each open, auto-merge-armed PR that fell behind; the push re-runs its
+# checks and auto-merge then finishes. Renovate PRs are skipped: Renovate
+# rebases its own branches (rebaseWhen in renovate.json) and stops doing so
+# once anyone else pushes to them.
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: update-behind-prs
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    name: Update behind PRs
+    runs-on: ubuntu-latest
+    steps:
+      # A personal token, not GITHUB_TOKEN: a branch updated with GITHUB_TOKEN
+      # triggers no workflows, so the PR's checks would never re-run.
+      - env:
+          GH_TOKEN: ${{ secrets.SUBMODULE_TOKEN }}
+        run: |
+          gh pr list --repo "$GITHUB_REPOSITORY" --state open --limit 50 \
+            --json number,headRefOid,autoMergeRequest,author \
+            --jq '.[] | select(.autoMergeRequest != null and (.author.is_bot | not)) | "\(.number) \(.headRefOid)"' |
+          while read -r number head; do
+            behind=$(gh api "repos/${GITHUB_REPOSITORY}/compare/${head}...${GITHUB_SHA}" --jq '.ahead_by')
+            if [ "$behind" = "0" ]; then
+              echo "#${number} is up to date"
+              continue
+            fi
+            echo "#${number} is ${behind} commit(s) behind main; updating"
+            gh pr update-branch "$number" --repo "$GITHUB_REPOSITORY"
+          done

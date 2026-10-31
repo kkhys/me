@@ -24,6 +24,13 @@ export default defineConfig({
         "src/pages/[id].[format].ts",
         "src/pages/api/ids.json.ts",
       ],
+      thresholds: {
+        lines: 100,
+        functions: 100,
+        branches: 66.66,
+        statements: 100,
+        autoUpdate: true,
+      },
     },
   },
 });
