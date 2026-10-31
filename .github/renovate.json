@@ -1,11 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    ":prHourlyLimitNone",
-    ":timezone(Asia/Tokyo)",
-    "helpers:pinGitHubActionDigests"
-  ],
+  "extends": ["config:recommended", ":prHourlyLimitNone", ":timezone(Asia/Tokyo)"],
   "schedule": ["after 1am and before 6am"],
   "dependencyDashboard": true,
   "assignees": ["kkhys"],
@@ -45,6 +40,18 @@
       "groupName": "Expressive Code",
       "matchPackageNames": ["astro-expressive-code", "@expressive-code/**"],
       "automerge": true
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Bump the gh-actions-lock extension pinned in verify-lockfile.yml.",
+      "managerFilePatterns": ["/^\\.github/workflows/verify-lockfile\\.yml$/"],
+      "matchStrings": [
+        "gh extension install github/gh-actions-lock --pin (?<currentValue>v\\d+\\.\\d+\\.\\d+)"
+      ],
+      "depNameTemplate": "github/gh-actions-lock",
+      "datasourceTemplate": "github-releases"
     }
   ]
 }
