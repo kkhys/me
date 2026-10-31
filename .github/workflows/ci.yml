@@ -1,15 +1,14 @@
 name: CI
 
-# Runs on pull requests and inside the merge queue only. A push to main does
-# not re-run these checks: every change reaches main through a checked PR, the
-# memo deploy re-gates itself in deploy-memo.yml, and me is built locally
-# before its manual deploy. There is deliberately no opt-out label: a skipped
-# required check counts as passing, which would let auto-merge land an
-# unchecked PR.
+# Runs on pull requests only. A push to main does not re-run these checks:
+# every change reaches main through a checked PR whose branch the main
+# ruleset requires to be up to date, the memo deploy re-gates itself in
+# deploy-memo.yml, and me is built locally before its manual deploy. There
+# is deliberately no opt-out label: a skipped required check counts as
+# passing, which would let auto-merge land an unchecked PR.
 on:
   pull_request:
     branches: ["*"]
-  merge_group:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

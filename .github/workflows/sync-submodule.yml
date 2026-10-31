@@ -72,6 +72,4 @@ jobs:
             --label "type: submodule" \
             --assignee kkhys
 
-          # The merge queue on main applies its own merge method and the
-          # repository deletes merged branches, so neither is chosen here.
-          gh pr merge --auto --merge
+          gh pr merge --auto --squash --delete-branch
