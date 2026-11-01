@@ -74,7 +74,10 @@ const dateMeta = indexable ? buildDateMeta() : undefined;
         font-variant-numeric: tabular-nums;
     }
 
+    /* An inline <time> sits on this box's strut, so the box needs the same font
+       size as the author name for their baselines to line up. */
     .post-time-link {
+        font-size: var(--fs-xs);
         text-decoration: none;
     }
 
