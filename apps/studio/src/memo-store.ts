@@ -24,7 +24,11 @@ export type MemoImageExt = "jpg" | "png";
 export interface MemoImageInput {
   data: Uint8Array;
   ext: MemoImageExt;
-  /** Read in place of the photo; the memo app renders it as the img alt. */
+  /**
+   * Read in place of the photo; the memo app renders it as the img alt. Blank
+   * writes no frontmatter entry, so memo announces a numbered placeholder
+   * rather than hiding the image behind alt="".
+   */
   alt: string;
 }
 
@@ -161,12 +165,6 @@ const validateInput = (input: CreateMemoInput): void => {
   if (input.images !== undefined && input.images.length > MAX_IMAGES) {
     throw new MemoValidationError(`Too many images: ${input.images.length} (limit: ${MAX_IMAGES})`);
   }
-
-  input.images?.forEach((image, index) => {
-    if (image.alt.trim() === "") {
-      throw new MemoValidationError(`Alt text is required for image ${index + 1}`);
-    }
-  });
 };
 
 /**
@@ -205,10 +203,10 @@ export const createMemo = (baseDir: string, input: CreateMemoInput): MemoSummary
         quote: input.quote,
         isDraft: input.isDraft,
         hideLinkCard: input.hideLinkCard,
-        images: images.map((image, index) => ({
-          file: imageNames[index] as string,
-          alt: image.alt.trim(),
-        })),
+        images: images.flatMap((image, index) => {
+          const alt = image.alt.trim();
+          return alt === "" ? [] : [{ file: imageNames[index] as string, alt }];
+        }),
       },
       body,
     ),

@@ -46,7 +46,7 @@ memo-content/                   # Git submodule — all production content/perso
 
 ## Content System
 
-Each memo is a directory in `memo-content/memo/` containing `index.md` and optional images (max 4, JPG/PNG). Schema: `id` (ULID), `createdAt`, `tag?`, `images?` (`{ file, alt }[]` — alt text keyed by file name; the files themselves are discovered from the directory by `utils/image.ts`), `comment?` (parent ULID for threaded replies), `quote?` (quoted ULID), `isDraft`, `author`, `hideLinkCard`, `isBot`, `isPinned` (listed first in the main and author feeds), `hideComments` (feeds collapse the replies to a count; the detail page still shows them). Images without an `images[].alt` entry render with a numbered placeholder alt; new memos get their alt from the studio composer.
+Each memo is a directory in `memo-content/memo/` containing `index.md` and optional images (max 4, JPG/PNG). Schema: `id` (ULID), `createdAt`, `tag?`, `images?` (`{ file, alt }[]` — alt text keyed by file name; the files themselves are discovered from the directory by `utils/image.ts`), `comment?` (parent ULID for threaded replies), `quote?` (quoted ULID), `isDraft`, `author`, `hideLinkCard`, `isBot`, `isPinned` (listed first in the main and author feeds), `hideComments` (feeds collapse the replies to a count; the detail page still shows them). Images without an `images[].alt` entry render with a numbered placeholder alt; new memos get their alt from the studio composer, where it is optional.
 
 Personal data (user profiles, OSS project list) lives in `memo-content/data/` to keep it out of the public repo. Avatar/cover images stay in `src/assets`. Site-level personal config (author name, site URL, blog RSS URL) is centralized in `src/config/constants.ts`.
 
