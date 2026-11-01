@@ -455,14 +455,13 @@ export const GAPS: Gap[] = [
   {
     issue: "alt 未記入の memo 添付画像",
     impact:
-      'frontmatter に images[].alt を持たない旧 memo(151 件、155 枚)は "Image 1" のような番号だけで、何が写っているか伝わらない。新規投稿は studio が alt を必須にするので増えない。',
+      'frontmatter に images[].alt を持たない memo(旧 memo だけで 151 件、155 枚)は "Image 1" のような番号だけで、何が写っているか伝わらない。studio の alt は任意入力なので、未記入の新規投稿でも増える。',
     fix: "memo-content の各 index.md に images[].alt を書く(コンテンツ側の作業)。書いた分から番号の alt が消える。",
     sc: "1.1.1 Non-text Content",
     severity: "medium",
     evidence: [
       at("apps/memo/src/utils/image-alt.ts", 15),
-      at("apps/studio/src/memo-store.ts", 167),
-      at("apps/studio/src/client.ts", 92),
+      at("apps/studio/src/memo-store.ts", 208),
     ],
   },
   {

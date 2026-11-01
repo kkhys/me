@@ -84,12 +84,10 @@ const renderPreviews = (): void => {
       renderPreviews();
     });
 
-    // The memo app renders this as the img alt, so it is required per image.
     const alt = document.createElement("input");
     alt.type = "text";
     alt.className = "compose__input compose__preview-alt";
     alt.placeholder = "Alt text";
-    alt.required = true;
     alt.value = attachment.alt;
     alt.setAttribute("aria-label", `Alt text for image ${index + 1}`);
     alt.addEventListener("input", () => {

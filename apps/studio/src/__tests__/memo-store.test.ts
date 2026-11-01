@@ -85,17 +85,33 @@ describe("createMemo", () => {
     );
   });
 
-  it("rejects an image without alt text", () => {
-    expect(() =>
-      createMemo(baseDir, {
-        body: "x",
-        images: [
-          { data: new Uint8Array([1]), ext: "jpg", alt: "ok" },
-          { data: new Uint8Array([2]), ext: "jpg", alt: "  " },
-        ],
-      }),
-    ).toThrow("Alt text is required for image 2");
-    expect(readdirSync(baseDir)).toEqual([]);
+  it("writes no frontmatter entry for an image with a blank alt", () => {
+    const memo = createMemo(baseDir, {
+      body: "x",
+      createdAt: "2026-07-04 12:00:00",
+      images: [
+        { data: new Uint8Array([1]), ext: "jpg", alt: "ok" },
+        { data: new Uint8Array([2]), ext: "jpg", alt: "  " },
+      ],
+    });
+
+    expect(memo.images).toEqual(["01.jpg", "02.jpg"]);
+    expect(readFileSync(join(baseDir, memo.dirName, "index.md"), "utf-8")).toBe(
+      `---\nid: ${memo.id}\ncreatedAt: 2026-07-04 12:00:00\nimages:\n  - file: 01.jpg\n    alt: "ok"\n---\n\nx\n`,
+    );
+  });
+
+  it("omits the images key when every alt is blank", () => {
+    const memo = createMemo(baseDir, {
+      body: "x",
+      createdAt: "2026-07-04 12:00:00",
+      images: [{ data: new Uint8Array([1]), ext: "jpg", alt: "" }],
+    });
+
+    expect(memo.images).toEqual(["01.jpg"]);
+    expect(readFileSync(join(baseDir, memo.dirName, "index.md"), "utf-8")).toBe(
+      `---\nid: ${memo.id}\ncreatedAt: 2026-07-04 12:00:00\n---\n\nx\n`,
+    );
   });
 
   it("defaults createdAt to now", () => {
@@ -214,6 +230,21 @@ describe("listMemos", () => {
     writeMemoFixture("20260101_000000", "no frontmatter here");
 
     expect(listMemos(baseDir)).toEqual([]);
+  });
+
+  it("ignores stray files in the memo directory", () => {
+    writeFileSync(join(baseDir, ".DS_Store"), "");
+
+    expect(listMemos(baseDir)).toEqual([]);
+  });
+
+  it("ignores frontmatter lines without a colon", () => {
+    writeMemoFixture(
+      "20260101_000000",
+      "---\nid: 01aaaaaaaaaaaaaaaaaaaaaaaa\nstray line\ncreatedAt: 2026-01-01 00:00:00\n---\n\nBody\n",
+    );
+
+    expect(listMemos(baseDir).map((memo) => memo.body)).toEqual(["Body"]);
   });
 
   it("round-trips a memo written by createMemo", () => {

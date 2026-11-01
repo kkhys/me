@@ -5,8 +5,8 @@ export interface MemoImageAlt {
 
 /**
  * Alt for an attached image, looked up by file name in the memo's
- * frontmatter. Memos written before alt text was recorded fall back to a
- * numbered placeholder so the attachment is at least announced.
+ * frontmatter. Memos with no alt text recorded fall back to a numbered
+ * placeholder so the attachment is at least announced.
  */
 export const memoImageAlt = (
   file: string,
