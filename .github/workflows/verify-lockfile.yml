@@ -31,6 +31,6 @@ jobs:
 
       # Pinned so a new extension release cannot change what this check
       # accepts without a reviewed PR. Renovate bumps the pin (see renovate.json).
-      - run: gh extension install github/gh-actions-lock --pin v0.4.0
+      - run: gh extension install github/gh-actions-lock --pin v0.4.1
 
       - run: gh actions-lock --verify
