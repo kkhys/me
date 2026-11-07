@@ -1,9 +1,20 @@
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import type { Metadata } from "@kkhys/ui/link-metadata";
 import { afterEach, describe, expect, test } from "vitest";
-import { readLinkMetadata, writeLinkMetadata } from "#/lib/link-metadata-cache";
+import { LINK_METADATA_PATH, readLinkMetadata, writeLinkMetadata } from "#/lib/link-metadata-cache";
+
+describe("LINK_METADATA_PATH", () => {
+  // The build bundles the module into dist/, so the path must not hang off its
+  // own location; it has to land on the submodule from the app root.
+  test("should point at the submodule's cache from the app root", () => {
+    expect(LINK_METADATA_PATH).toBe(
+      fileURLToPath(new URL("../../../memo-content/data/link-metadata.json", import.meta.url)),
+    );
+  });
+});
 
 const dirs: string[] = [];
 
