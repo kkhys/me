@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { resolve } from "node:path";
 import type { Metadata } from "@kkhys/ui/link-metadata";
 
 /**
@@ -11,9 +11,11 @@ import type { Metadata } from "@kkhys/ui/link-metadata";
  * result is then baked into a static page. The build reads whatever was
  * resolved here before falling back to its own fetch.
  */
-export const LINK_METADATA_PATH = fileURLToPath(
-  new URL("../../memo-content/data/link-metadata.json", import.meta.url),
-);
+// Relative to the app root (the cwd of astro build, vitest, the refresh script
+// and studio's sync), like memo-loader's OSS_PROJECTS_PATH. Not import.meta.url:
+// astro build bundles this module into dist/, where the relative path missed the
+// file and the build silently fell back to fetching from CI.
+export const LINK_METADATA_PATH = resolve("memo-content/data/link-metadata.json");
 
 /** JSON shape: absent keys instead of nulls, so the file stays small. */
 interface StoredEntry {
