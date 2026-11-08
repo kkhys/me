@@ -758,7 +758,7 @@ export const CONVENTION_GROUPS: ConventionGroup[] = [
         values: ["scroll-margin: 3rem", "scroll-margin-top: 1.25rem"],
         evidence: [
           at("apps/me/src/features/blog/components/ui/blocks/heading.astro", 25),
-          at("apps/trends/src/components/source-card.astro", 72),
+          at("apps/trends/src/components/source-card.astro", 49),
           at("apps/art/src/pages/index.astro", 79),
         ],
       },

@@ -5,7 +5,8 @@
  * over the rows passed through the slot, plus the two empty states.
  */
 interface Props {
-  /* Also the h3 id the TOC jumps to. */
+  /* The section's id, which the TOC jumps to. The h3 gets `${id}-title`: Pagefind
+     only splits a page at headings with ids. */
   id: string;
   label: string;
   dotColor: string;
@@ -22,10 +23,10 @@ interface Props {
 const { id, label, dotColor, total, fresh, note, empty, allSeen } = Astro.props;
 ---
 
-<section class:list={["service", { "has-seen": fresh !== undefined }]}>
+<section id={id} class:list={["service", { "has-seen": fresh !== undefined }]}>
   <header>
     <span class="dot" style={`background:${dotColor}`}></span>
-    <h3 id={id}>{label}</h3>
+    <h3 id={`${id}-title`}>{label}</h3>
     <span class="count total" data-pagefind-ignore>{total}件</span>
     {fresh !== undefined && (
       <span class="count fresh" data-pagefind-ignore>
@@ -42,6 +43,10 @@ const { id, label, dotColor, total, fresh, note, empty, allSeen } = Astro.props;
 <style>
   .service {
     margin-bottom: 2.5rem;
+    /* The jump target is the section, not the sticky header: a fragment jump
+       measures the element where it is stuck, so from below the section it
+       would stop short of the section's top. */
+    scroll-margin-top: var(--toolbar-height);
   }
 
   /* Sticks under the toolbar while its own rows scroll, so the source is
@@ -72,7 +77,7 @@ const { id, label, dotColor, total, fresh, note, empty, allSeen } = Astro.props;
     margin: 0;
     font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
-    /* Jump targets land exactly where the header sticks. */
+    /* Search results link here and land exactly where the header sticks. */
     scroll-margin-top: calc(var(--toolbar-height) + var(--space-3));
   }
 
