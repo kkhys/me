@@ -601,8 +601,8 @@ importers:
         specifier: 'catalog:'
         version: 0.2.0(supports-color@10.2.2)
       hast-util-from-html:
-        specifier: 2.0.3
-        version: 2.0.3
+        specifier: 2.1.0
+        version: 2.1.0
       hast-util-to-html:
         specifier: 9.0.6
         version: 9.0.6
@@ -3194,6 +3194,10 @@ packages:
     resolution: {integrity: sha512-zwfzJecQ/Uej6tusMqwAqU/6KL2XaB2VZ2Jg54Je6ahNBGNH6Ek6g3jjNCF0fG9EWQKGZNddNjU5F1ZQn/sBnA==}
     engines: {node: '>=20.19.0'}
 
+  entities@9.0.0:
+    resolution: {integrity: sha512-oJFNDJg3kTPwAD1cNn2+WmUq4wFoo09npc3Ydf1D7ED4smRiWrsKnaLxykrTWgyGEcusc87P5dxlAleol9kpkg==}
+    engines: {node: '>=20.19.0'}
+
   error-stack-parser-es@1.0.5:
     resolution: {integrity: sha512-5qucVt2XcuGMcEGgWI7i+yZpmpByQ8J1lHhcL7PwqCwu9FPP3VUXzT4ltHe5i2z9dePwEHcDVOAfSnHsOlCXRA==}
 
@@ -3365,8 +3369,8 @@ packages:
   harfbuzzjs@0.10.0:
     resolution: {integrity: sha512-SN8LVwCOzvTq3OPNd0+EAghgXugItz56wst567D1vs7LnnKGWprhi3EG58aVOBwhN8HEbQxL4I9NDWkcXUutRw==}
 
-  hast-util-from-html@2.0.3:
-    resolution: {integrity: sha512-CUSRHXyKjzHov8yKsQjGOElXy/3EKpyX56ELnkHH34vDVw1N1XSQ1ZcAvTyAPtGqLTuKP/uxM+aLkSPqF/EtMw==}
+  hast-util-from-html@2.1.0:
+    resolution: {integrity: sha512-873p9AuH93gBnATbH8rU3YvjTKxyrIeWd/M9tiLMzn3G82Os0xhQurctfnbYUSrDXoyjbJGpJ2qmTpefMw7ZaQ==}
 
   hast-util-from-parse5@8.0.3:
     resolution: {integrity: sha512-3kxEVkEKt0zvcZ3hCRYI8rqrgwtlIOFMWkbclACvjlDw8Li9S2hk/d51OI0nr/gIpdMHNepwgOKqZ/sy0Clpyg==}
@@ -3975,6 +3979,9 @@ packages:
 
   parse5@7.3.0:
     resolution: {integrity: sha512-IInvU7fabl34qmi9gY8XOVxhYyMyuH2xUNpb2q8/Y+7552KlejkRvqvD19nMoUW/uQGGbqNpA6Tufu5FL5BZgw==}
+
+  parse5@8.1.0:
+    resolution: {integrity: sha512-sq3qBFpee5jeocbFbO48VHlGr8sT7mbXS0vxlKN6sottBtJzrOG3998sr0llSZcQAGgfpdmEYAIZE0P9z0dE8w==}
 
   pascal-case@3.1.2:
     resolution: {integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==}
@@ -4967,7 +4974,7 @@ snapshots:
       acorn: 8.19.0
       estree-util-visit: 2.0.0
       github-slugger: 2.0.0
-      hast-util-from-html: 2.0.3
+      hast-util-from-html: 2.1.0
       hast-util-to-html: 9.0.6
       hast-util-to-text: 4.0.2
       mdast-util-definitions: 6.0.0
@@ -6893,6 +6900,8 @@ snapshots:
 
   entities@8.0.0: {}
 
+  entities@9.0.0: {}
+
   error-stack-parser-es@1.0.5: {}
 
   es-module-lexer@2.3.2: {}
@@ -7099,12 +7108,12 @@ snapshots:
 
   harfbuzzjs@0.10.0: {}
 
-  hast-util-from-html@2.0.3:
+  hast-util-from-html@2.1.0:
     dependencies:
       '@types/hast': 3.0.5
       devlop: 1.1.0
       hast-util-from-parse5: 8.0.3
-      parse5: 7.3.0
+      parse5: 8.1.0
       vfile: 6.0.3
       vfile-message: 4.0.2
 
@@ -8113,6 +8122,10 @@ snapshots:
   parse5@7.3.0:
     dependencies:
       entities: 6.0.1
+
+  parse5@8.1.0:
+    dependencies:
+      entities: 9.0.0
 
   pascal-case@3.1.2:
     dependencies:
