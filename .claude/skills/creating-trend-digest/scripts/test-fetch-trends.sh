@@ -227,6 +227,8 @@ try:
     check("no engagement", got[0]["engagement"] == 0 and got[0]["engagement_label"] == "")
     got = ft._rss_update_items({**src, "skip_title": r"^Codex CLI Release:"}, CUTOFF)
     check("skip_title removes matching titles", [i["title"] for i in got] == ["Copilot in Teams"])
+    got = ft._rss_update_items({**src, "link": r"^https://gh\.example/"}, CUTOFF)
+    check("link keeps only entries whose link matches", [i["title"] for i in got] == ["Copilot in Teams"], [i["title"] for i in got])
     got = ft._rss_update_items({**src, "categories": ["Product"]}, CUTOFF)
     check("categories keeps only entries carrying one", got == [], [i["title"] for i in got])
     got = ft._rss_update_items({**src, "categories": ["copilot"]}, CUTOFF)
@@ -339,6 +341,34 @@ check("gathers the description paragraphs", apps[2]["content"] ==
       "Max and Team plans now include monthly API credits. They roll out over a few days.", repr(apps[2]["content"]))
 check("builds a unique anchor per entry", apps[1]["url"] != apps[2]["url"] and apps[1]["url"].startswith(ft.CLAUDE_APPS_URL + "#h_7e1-"), apps[1]["url"])
 check("stops at the first section older than the window", all("Old" not in i["title"] for i in apps))
+
+print("claude blog")
+def blog_post(slug, date, category="product-updates", **extra):
+    return {"_id": f"id-{slug}", "_type": "blogPost", "slug": slug, "externalUrl": None, "date": date,
+            "category": {"name": "x", "slug": category}, "categorySlugs": [category],
+            "title": f"Title {slug}", "excerpt": f"About {slug}.", **extra}
+compact = lambda v: json.dumps(v, separators=(",", ":"))  # the flight data's own form
+FLIGHT = ('3f:["$","$L41",null,{"curated":{"items":[' + compact(blog_post("finance", "2026-10-22")) + ","
+          + compact(blog_post("tips", "2026-10-22", "best-practices")) + ","
+          + compact(blog_post("old", "2026-09-01")) + ","
+          + compact(blog_post("elsewhere", "2026-10-22", externalUrl="https://x.example/")) + ","
+          + compact(blog_post("bare", "2026-10-21", excerpt=None)) + "]}}]\n"
+          + "40:" + compact([blog_post("finance", "2026-10-22", title="Repeated")]))
+half = len(FLIGHT) // 2
+BLOG_HTML = "".join(f'<script>self.__next_f.push([1,{json.dumps(part)}])</script>'
+                    for part in (FLIGHT[:half], FLIGHT[half:]))
+blog = ft._claude_blog_items(BLOG_HTML, CUTOFF)
+check("keeps product updates inside the window, once per slug",
+      [i["title"] for i in blog] == ["Title finance", "Title bare"], [i["title"] for i in blog])
+check("links the article page", blog[0]["url"] == ft.CLAUDE_ARTICLE_URL + "finance", blog[0]["url"])
+check("dates the post by its day", blog[0]["published_at"] == "2026-10-22T00:00:00+00:00", blog[0]["published_at"])
+check("uses the excerpt as content", blog[0]["content"] == "About finance." and blog[0]["extra"] == "Blog", blog[0])
+check("tolerates a post without an excerpt", blog[1]["content"] == "", repr(blog[1]["content"]))
+try:
+    ft._claude_blog_items("<html><body>no flight data</body></html>", CUTOFF)
+    check("a listing without posts raises", False, "no exception")
+except ValueError:
+    check("a listing without posts raises", True)
 
 print("slack help page")
 SLACK_HTML = """<html><body><nav><h2>Site nav</h2></nav><div class="article_body"><p>See what's new.</p>
@@ -578,6 +608,17 @@ try:
     print("placed_update_urls")
     check("no site repo means nothing is placed", ft.placed_update_urls({}) == set())
     check("a missing runs dir means nothing is placed", ft.placed_update_urls({"site_repo": "/nonexistent"}) == set())
+    with tempfile.TemporaryDirectory() as tmp:
+        runs = Path(tmp) / "apps" / "trends" / "src" / "content" / "runs"
+        runs.mkdir(parents=True)
+        # An undated entry (Slack's help page) stays in the window for months,
+        # so a run placed long ago must still count.
+        for day in range(1, 31):
+            items = [{"url": "https://example.com/undated"}] if day == 1 else []
+            (runs / f"2026-10-{day:02d}.json").write_text(
+                json.dumps({"updates": [{"id": "slack", "items": items}]}), encoding="utf-8")
+        check("reads every run file, not only the latest ones",
+              ft.placed_update_urls({"site_repo": tmp}) == {"https://example.com/undated"})
 
     with tempfile.TemporaryDirectory() as tmp:
         state = Path(tmp)

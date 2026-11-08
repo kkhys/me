@@ -80,15 +80,15 @@ them — leave those files alone.
 Besides the 8 trend sources, the script collects the release notes of 7
 products as services of market `updates`, one service per product:
 
-| id                 | label  | feeds                                                                                              |
-| ------------------ | ------ | -------------------------------------------------------------------------------------------------- |
-| `claude`           | Claude | Claude Code GitHub releases, Claude Platform release notes, Claude Apps release notes              |
-| `openai`           | OpenAI | Codex CLI GitHub releases (stable only), ChatGPT & Codex changelog, OpenAI News (Product category) |
-| `devin`            | Devin  | Release notes (one entry per release day)                                                          |
-| `cursor`           | Cursor | Changelog, forum announcements (Grok Bot and model availability are announced there)               |
-| `github_changelog` | GitHub | github.blog changelog, Copilot included                                                            |
-| `orca`             | Orca   | GitHub releases (stable only)                                                                      |
-| `slack`            | Slack  | Help-centre "Slack updates and changes" page, platform changelog (docs.slack.dev)                  |
+| id                 | label  | feeds                                                                                                                    |
+| ------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `claude`           | Claude | Claude Code GitHub releases, Claude Platform release notes, Claude Apps release notes, claude.com blog (Product updates) |
+| `openai`           | OpenAI | Codex CLI GitHub releases (stable only), ChatGPT & Codex changelog, OpenAI News (Product category)                       |
+| `devin`            | Devin  | Release notes (one entry per release day), Devin Blog (product category)                                                 |
+| `cursor`           | Cursor | Changelog, forum announcements (Grok Bot and model availability are announced there)                                     |
+| `github_changelog` | GitHub | github.blog changelog, Copilot included                                                                                  |
+| `orca`             | Orca   | GitHub releases (stable only)                                                                                            |
+| `slack`            | Slack  | Help-centre "Slack updates and changes" page, platform changelog (docs.slack.dev), Slack blog (news / developers posts)  |
 
 Like a morning paper, a run carries what appeared since the previous run:
 the script keeps entries published within `updates_window_days` (default 7) of the run and drops every URL already present in an `updates` block of
@@ -97,7 +97,7 @@ record of what has been shown, so there is no 既出 badge here. Everything
 that survives belongs to today's digest, whatever its publication time: a
 release from last night is today's news. Earlier days' files are never
 edited. Each item carries `extra` naming its feed ("Claude Code",
-"Platform", "Claude Apps", "Codex CLI", "Forum", GitHub's categories,
+"Platform", "Claude Apps", "Blog", "Codex CLI", "Forum", GitHub's categories,
 "What's new · October 2026" ...), `published_at` (null for Slack's help
 page, which dates by month only), `excerpt`, and `content` (the release
 body, clipped to 3000 chars); there is no engagement, `base_score` is 0

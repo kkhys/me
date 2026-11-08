@@ -560,6 +560,8 @@ UPDATE_CONTENT_CLIP = 3000
 
 CLAUDE_PLATFORM_URL = "https://platform.claude.com/docs/en/release-notes/overview"
 CLAUDE_APPS_URL = "https://support.claude.com/en/articles/12138966-release-notes"
+CLAUDE_BLOG_URL = "https://claude.com/blog"
+CLAUDE_ARTICLE_URL = "https://claude.com/resources/articles/"
 SLACK_HELP_URL = "https://slack.com/intl/en-gb/help/articles/115004846068-Slack-updates-and-changes"
 
 
@@ -624,12 +626,14 @@ def _update_item(title, url, published, excerpt, content, source):
 
 def _rss_update_items(src, cutoff):
     """Entries of an RSS/Atom feed inside the window. Options: `categories`
-    (keep only entries carrying one of them), `skip_title` (regex),
+    (keep only entries carrying one of them), `link` (regex the entry link
+    must match, for feeds without categories), `skip_title` (regex),
     `title` (format with {title}), `extra` = "categories" (name the feed by
     the entry's categories), `pages` (WordPress ?paged=N, read until a page
     is older than the window)."""
     items = []
     allow = src.get("categories")
+    link_re = src.get("link")
     skip = src.get("skip_title")
     for page in range(1, src.get("pages", 1) + 1):
         url = src["url"] if page == 1 else f"{src['url']}?paged={page}"
@@ -646,6 +650,7 @@ def _rss_update_items(src, cutoff):
             link = (e.get("link") or e.get("guid") or "").strip()
             cats = [c for c in e["categories"] if c]
             if (not link or (skip and re.search(skip, title))
+                    or (link_re and not re.search(link_re, link))
                     or (allow and not set(cats) & set(allow))
                     or (published and published < cutoff)):
                 continue
@@ -752,6 +757,35 @@ def _claude_apps_items(html, cutoff):
     return items
 
 
+def _claude_blog_items(html, cutoff):
+    """Posts of the claude.com blog listing. The page has no feed; its posts
+    ride in the Next.js flight data as blogPost objects carrying slug, date
+    (day only), category and excerpt. A listing with no post at all means the
+    page changed shape, so it raises rather than reporting a quiet day."""
+    chunks = re.findall(r'self\.__next_f\.push\(\[1,("(?:[^"\\]|\\.)*")\]\)', html)
+    flight = "".join(json.loads(c) for c in chunks)
+    decoder = json.JSONDecoder()
+    posts, items = {}, []
+    for m in re.finditer(r'\{"_id":"[^"]+","_type":"blogPost"', flight):
+        try:
+            post, _ = decoder.raw_decode(flight, m.start())
+        except json.JSONDecodeError:
+            continue
+        if post.get("slug"):
+            posts.setdefault(post["slug"], post)
+    if not posts:
+        raise ValueError("no blogPost in the claude.com blog listing")
+    for slug, post in posts.items():
+        published = parse_date(post.get("date"))
+        if (post.get("externalUrl") or "product-updates" not in (post.get("categorySlugs") or [])
+                or not published or published < cutoff):
+            continue
+        excerpt = post.get("excerpt") or ""
+        items.append(_update_item(post.get("title", ""), CLAUDE_ARTICLE_URL + slug,
+                                  published, excerpt, excerpt, "Blog"))
+    return items
+
+
 def _slack_help_items(html, months=2):
     """Feature entries (<h3 id>) of the newest `months` month sections (<h2>)
     of the help-centre changelog. Entries are dated by month only, so
@@ -777,6 +811,7 @@ UPDATE_FETCHERS = {
     "claude_platform": lambda src, cutoff: _claude_platform_items(
         http_get(CLAUDE_PLATFORM_URL + ".md"), cutoff),
     "claude_apps": lambda src, cutoff: _claude_apps_items(http_get(CLAUDE_APPS_URL), cutoff),
+    "claude_blog": lambda src, cutoff: _claude_blog_items(http_get(CLAUDE_BLOG_URL), cutoff),
     "slack_help": lambda src, cutoff: _slack_help_items(http_get(SLACK_HELP_URL)),
 }
 
@@ -785,6 +820,8 @@ UPDATE_PRODUCTS = [
         {"kind": "github", "repo": "anthropics/claude-code", "name": "Claude Code"},
         {"kind": "claude_platform", "name": "Platform"},
         {"kind": "claude_apps", "name": "Claude Apps"},
+        # Enterprise and vertical launches (legal, finance) are announced only here.
+        {"kind": "claude_blog", "name": "Blog"},
     ]},
     {"id": "openai", "label": "OpenAI", "sources": [
         # Alphas ship several times a day, so look further back for the stable ones.
@@ -799,6 +836,10 @@ UPDATE_PRODUCTS = [
     {"id": "devin", "label": "Devin", "sources": [
         {"kind": "rss", "url": "https://docs.devin.ai/release-notes/overview/rss.xml",
          "name": "Release notes", "title": "Devin release notes ({title})"},
+        # Launches such as Devin Review 2.0 are announced only here; Product
+        # leaves out the engineering posts and customer stories.
+        {"kind": "rss", "url": "https://devin.ai/rss.xml", "name": "Blog",
+         "categories": ["product"]},
     ]},
     {"id": "cursor", "label": "Cursor", "sources": [
         {"kind": "rss", "url": "https://cursor.com/changelog/rss.xml", "name": "Changelog"},
@@ -816,14 +857,22 @@ UPDATE_PRODUCTS = [
     {"id": "slack", "label": "Slack", "sources": [
         {"kind": "slack_help", "name": "What's new"},
         {"kind": "rss", "url": "https://docs.slack.dev/changelog/rss.xml", "name": "Platform"},
+        # New products (Slack Frontline, the Slack Code API) are announced only
+        # here. The feed has no categories and is mostly evergreen SEO posts,
+        # so keep the news / developers paths; the monthly Feature Drop recaps
+        # the help-centre entries already collected.
+        {"kind": "rss", "url": "https://slack.com/blog/rss", "name": "Blog",
+         "link": r"^https://slack\.com/blog/(news|developers)/", "skip_title": r"^Slack Feature Drop"},
     ]},
 ]
 
 
-def placed_update_urls(cfg, limit=14):
-    """URLs already written to an `updates` block of the site's newest run
+def placed_update_urls(cfg):
+    """URLs already written to an `updates` block of any of the site's run
     files — the source of truth for what the digest has shown, so a run
-    carries only what appeared since the previous one."""
+    carries only what appeared since the previous one. Every file, not just
+    the latest days: an undated entry (Slack's help page lists two months)
+    never leaves the window, so a shorter lookback shows it again."""
     repo = cfg.get("site_repo")
     if not repo:
         return set()
@@ -831,7 +880,7 @@ def placed_update_urls(cfg, limit=14):
     if not runs.is_dir():
         return set()
     urls = set()
-    for path in sorted(runs.glob("*.json"), reverse=True)[:limit]:
+    for path in runs.glob("*.json"):
         try:
             run = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):

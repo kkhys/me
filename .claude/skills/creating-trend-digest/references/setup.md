@@ -13,26 +13,28 @@ dev.to と Hugging Face Daily Papers は 2026-09-05 に対象から外した。f
 トレンド 8 ソースとは別に、7 製品のリリースノートを market `updates` の
 サービスとして取得する (fetch_trends.py の `UPDATE_PRODUCTS`)。認証不要。
 
-| id                 | フィード                                                                                                                                                                |
-| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `claude`           | GitHub Releases `anthropics/claude-code` / Claude Platform release notes (platform.claude.com の `.md`) / Claude Apps release notes (support.claude.com の HTML)        |
-| `openai`           | GitHub Releases `openai/codex` (prerelease の alpha は除外) / ChatGPT & Codex changelog RSS (developers.openai.com) / OpenAI News RSS のうち category が Product のもの |
-| `devin`            | docs.devin.ai の release notes RSS (1 日分が 1 エントリ)                                                                                                                |
-| `cursor`           | cursor.com/changelog RSS / forum.cursor.com の Announcements カテゴリ RSS (Grok Bot やモデル提供の告知はここに出る)                                                     |
-| `github_changelog` | github.blog/changelog RSS (10 件/ページなので最大 4 ページ読む。Copilot を含む)                                                                                         |
-| `orca`             | GitHub Releases `stablyai/orca` (prerelease のモバイル版は除外)                                                                                                         |
-| `slack`            | ヘルプセンター「Slack updates and changes」(en-gb の HTML。日付は月単位なので `published_at` は null) / docs.slack.dev/changelog RSS                                    |
+| id                 | フィード                                                                                                                                                                                                                                                                                                                         |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `claude`           | GitHub Releases `anthropics/claude-code` / Claude Platform release notes (platform.claude.com の `.md`) / Claude Apps release notes (support.claude.com の HTML) / claude.com/blog の Product updates (RSS がないので一覧ページに埋め込まれた Next.js のデータを読む。記事が 1 件も読めなければ形式変更とみなして取得失敗にする) |
+| `openai`           | GitHub Releases `openai/codex` (prerelease の alpha は除外) / ChatGPT & Codex changelog RSS (developers.openai.com) / OpenAI News RSS のうち category が Product のもの                                                                                                                                                          |
+| `devin`            | docs.devin.ai の release notes RSS (1 日分が 1 エントリ) / devin.ai の Devin Blog RSS のうち category が product のもの (Devin Review などの発表はここにだけ出る)                                                                                                                                                                |
+| `cursor`           | cursor.com/changelog RSS / forum.cursor.com の Announcements カテゴリ RSS (Grok Bot やモデル提供の告知はここに出る)                                                                                                                                                                                                              |
+| `github_changelog` | github.blog/changelog RSS (10 件/ページなので最大 4 ページ読む。Copilot を含む)                                                                                                                                                                                                                                                  |
+| `orca`             | GitHub Releases `stablyai/orca` (prerelease のモバイル版は除外)                                                                                                                                                                                                                                                                  |
+| `slack`            | ヘルプセンター「Slack updates and changes」(en-gb の HTML。日付は月単位なので `published_at` は null) / docs.slack.dev/changelog RSS / slack.com/blog RSS のうち URL が `/blog/news/`・`/blog/developers/` のもの (Slack Frontline などの新製品はここにだけ出る。月次の Feature Drop はヘルプセンターと重なるので除外)           |
 
 - 朝刊方式: その日の実行は「前回の実行以降に出たもの」を当日分に載せる。
   `updates_window_days` (既定 7) 以内に公開されたエントリを取り、`site_repo`
   の run ファイルの `updates` に既に載っている URL は落とす (seen.json は
-  使わない。掲載済みかどうかの記録は run ファイルそのもの)。残ったものは
-  公開時刻に関わらず当日分に載り、過去の日のファイルは書き換えない。
+  使わない。掲載済みかどうかの記録は run ファイルそのもの。日付のない Slack
+  ヘルプセンターの項目は 2 か月分残り続けるので、直近だけでなく全 run
+  ファイルを読む)。残ったものは公開時刻に関わらず当日分に載り、過去の日の
+  ファイルは書き換えない。
 - 製品内の一部フィードが失敗しても、他が取れていれば `status: ok` で note に
   `取得失敗: ...` が付く。全フィード失敗で `error`。
 - 対象外: anthropic.com/news (RSS がなく、モデル発表は Claude Apps release
-  notes に載る)、x.ai/news (スクリプトの UA は 403)。Grok Bot は Cursor の
-  フォーラム告知で拾う。
+  notes に、製品発表は claude.com/blog に載る)、x.ai/news (スクリプトの UA
+  は 403)。Grok Bot は Cursor のフォーラム告知で拾う。
 - `GITHUB_TOKEN` があれば GitHub API のレート制限 (未認証 60 回/時) に余裕が
   出る。1 回の実行で使うのは 3 回。
 - バックフィル (`--date`) では全製品 `skipped`。
