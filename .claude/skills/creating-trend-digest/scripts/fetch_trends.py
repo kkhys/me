@@ -867,12 +867,14 @@ UPDATE_PRODUCTS = [
 ]
 
 
-def placed_update_urls(cfg):
-    """URLs already written to an `updates` block of any of the site's run
-    files — the source of truth for what the digest has shown, so a run
-    carries only what appeared since the previous one. Every file, not just
-    the latest days: an undated entry (Slack's help page lists two months)
-    never leaves the window, so a shorter lookback shows it again."""
+def placed_update_urls(cfg, date):
+    """URLs already written to an `updates` block of the site's run files —
+    the source of truth for what the digest has shown, so a run carries only
+    what appeared since the previous one. Every file, not just the latest
+    days: an undated entry (Slack's help page lists two months) never leaves
+    the window, so a shorter lookback shows it again. The file of `date`
+    itself is skipped: a same-day re-run overwrites it and must keep what it
+    placed."""
     repo = cfg.get("site_repo")
     if not repo:
         return set()
@@ -881,6 +883,8 @@ def placed_update_urls(cfg):
         return set()
     urls = set()
     for path in runs.glob("*.json"):
+        if path.stem == date:
+            continue
         try:
             run = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
@@ -1205,7 +1209,7 @@ def main():
 
     seen_path = args.state_dir / "seen.json"
     seen = json.loads(seen_path.read_text(encoding="utf-8")) if seen_path.exists() else {}
-    placed = placed_update_urls(cfg)
+    placed = placed_update_urls(cfg, target)
 
     def run(svc):
         fetch = BACKFILL_FETCHERS.get(svc["id"]) if backfill else svc["fetch"]

@@ -92,7 +92,8 @@ products as services of market `updates`, one service per product:
 
 Like a morning paper, a run carries what appeared since the previous run:
 the script keeps entries published within `updates_window_days` (default 7) of the run and drops every URL already present in an `updates` block of
-the site's run files (`site_repo`) — those files, not `seen.json`, are the
+the site's run files (`site_repo`), except the run date's own file, which a
+same-day re-run overwrites — those files, not `seen.json`, are the
 record of what has been shown, so there is no 既出 badge here. Everything
 that survives belongs to today's digest, whatever its publication time: a
 release from last night is today's news. Earlier days' files are never

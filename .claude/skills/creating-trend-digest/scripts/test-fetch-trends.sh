@@ -606,19 +606,22 @@ try:
               and all(v == today for v in seen.values()))
 
     print("placed_update_urls")
-    check("no site repo means nothing is placed", ft.placed_update_urls({}) == set())
-    check("a missing runs dir means nothing is placed", ft.placed_update_urls({"site_repo": "/nonexistent"}) == set())
+    check("no site repo means nothing is placed", ft.placed_update_urls({}, "2026-11-01") == set())
+    check("a missing runs dir means nothing is placed",
+          ft.placed_update_urls({"site_repo": "/nonexistent"}, "2026-11-01") == set())
     with tempfile.TemporaryDirectory() as tmp:
         runs = Path(tmp) / "apps" / "trends" / "src" / "content" / "runs"
         runs.mkdir(parents=True)
         # An undated entry (Slack's help page) stays in the window for months,
         # so a run placed long ago must still count.
         for day in range(1, 31):
-            items = [{"url": "https://example.com/undated"}] if day == 1 else []
+            items = ([{"url": "https://example.com/undated"}] if day == 1 else
+                     [{"url": "https://example.com/today"}] if day == 30 else [])
             (runs / f"2026-10-{day:02d}.json").write_text(
                 json.dumps({"updates": [{"id": "slack", "items": items}]}), encoding="utf-8")
-        check("reads every run file, not only the latest ones",
-              ft.placed_update_urls({"site_repo": tmp}) == {"https://example.com/undated"})
+        placed = ft.placed_update_urls({"site_repo": tmp}, "2026-10-30")
+        check("reads every run file, not only the latest ones", "https://example.com/undated" in placed, placed)
+        check("skips the file a same-day re-run overwrites", "https://example.com/today" not in placed, placed)
 
     with tempfile.TemporaryDirectory() as tmp:
         state = Path(tmp)
