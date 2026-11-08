@@ -820,10 +820,12 @@ UPDATE_PRODUCTS = [
 ]
 
 
-def placed_update_urls(cfg, limit=14):
-    """URLs already written to an `updates` block of the site's newest run
+def placed_update_urls(cfg):
+    """URLs already written to an `updates` block of any of the site's run
     files — the source of truth for what the digest has shown, so a run
-    carries only what appeared since the previous one."""
+    carries only what appeared since the previous one. Every file, not just
+    the latest days: an undated entry (Slack's help page lists two months)
+    never leaves the window, so a shorter lookback shows it again."""
     repo = cfg.get("site_repo")
     if not repo:
         return set()
@@ -831,7 +833,7 @@ def placed_update_urls(cfg, limit=14):
     if not runs.is_dir():
         return set()
     urls = set()
-    for path in sorted(runs.glob("*.json"), reverse=True)[:limit]:
+    for path in runs.glob("*.json"):
         try:
             run = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):

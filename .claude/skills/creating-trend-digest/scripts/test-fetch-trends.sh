@@ -578,6 +578,17 @@ try:
     print("placed_update_urls")
     check("no site repo means nothing is placed", ft.placed_update_urls({}) == set())
     check("a missing runs dir means nothing is placed", ft.placed_update_urls({"site_repo": "/nonexistent"}) == set())
+    with tempfile.TemporaryDirectory() as tmp:
+        runs = Path(tmp) / "apps" / "trends" / "src" / "content" / "runs"
+        runs.mkdir(parents=True)
+        # An undated entry (Slack's help page) stays in the window for months,
+        # so a run placed long ago must still count.
+        for day in range(1, 31):
+            items = [{"url": "https://example.com/undated"}] if day == 1 else []
+            (runs / f"2026-10-{day:02d}.json").write_text(
+                json.dumps({"updates": [{"id": "slack", "items": items}]}), encoding="utf-8")
+        check("reads every run file, not only the latest ones",
+              ft.placed_update_urls({"site_repo": tmp}) == {"https://example.com/undated"})
 
     with tempfile.TemporaryDirectory() as tmp:
         state = Path(tmp)
