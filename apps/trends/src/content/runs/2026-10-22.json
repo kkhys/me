@@ -1356,6 +1356,16 @@
           "interest": 3,
           "summary": "Claude が能動的なエージェントとして働く新アプリ Claude Duet のリサーチプレビューが、Pro / Max プランのユーザー向けに始まった。詳細はブログ記事「Introducing Claude Duet」にある。",
           "article_summary": ""
+        },
+        {
+          "title": "Claude Security now scans continuously and tracks fixes",
+          "title_ja": "Claude Security がコードの変更に合わせて継続的にスキャンし、修正の反映まで追跡するように",
+          "url": "https://claude.com/resources/articles/claude-security-now-scans-continuously-and-tracks-fixes",
+          "source": "Blog",
+          "published_at": "2026-10-21T00:00:00+00:00",
+          "interest": 2,
+          "summary": "Claude Security が接続したリポジトリをコードの変更に応じて継続的にスキャンし、修正が入った指摘を自動で解決済みにするようになった。Enterprise 向けのパブリックベータで、API、Webhook、Claude.ai / Claude Code の MCP コネクタからも指摘を扱える。",
+          "article_summary": "最初に深いベースラインスキャンを行い、その後はリスクと複雑さに応じて変更を定期的にスキャンする。GitHub（GitHub Enterprise Server を含む）や GitLab などに対応し、1 つのプロジェクトに複数のリポジトリをまとめてサービス間の問題も拾う。指摘は修正が入ると解決済みになり、再発すると自動で再オープンされる。\n\nプロジェクトごとのナレッジベースにデプロイ方法やセキュリティポリシーを書け、コードから生成した脅威モデルを編集して判定に使う。各指摘には脅威モデルに基づく深刻度と攻撃経路の説明が付く。\n\nAPI でプロジェクトと指摘の一覧、解決、再オープンができ、Webhook で新しい指摘を通知する。Enterprise の組織には 2 か月間、毎月 2 万 5,000 ドル分の無料クレジットが付く。"
         }
       ]
     },

@@ -1336,6 +1336,16 @@
           "interest": 2,
           "summary": "vim モードで対応する括弧へ飛ぶ `%` モーションが使える（d / c / y との組み合わせ可）。mod の `Input` に `rows` が付き複数行の入力欄を作れる。OpenTelemetry の `tool_decision` イベントに `classifier_verdict`、`permission_mode`、`classifier_category` が加わり、auto mode 分類器の判定を権限ルールと区別できる。",
           "article_summary": "追加は、vim モードの `%` モーション（対応する括弧へジャンプ。d / c / y と組み合わせ可）、mod の `Input` の `rows`（複数行の入力欄。Enter で送信、Shift+Enter か行末のバックスラッシュで改行）、`claude-api` スキルへの OpenTelemetry トレース設定ガイド、無人リトライモードが遠すぎる利用上限のリセットを待たずに終える `CLAUDE_CODE_RETRY_WATCHDOG_MAX_USAGE_LIMIT_WAIT_MS`。\n\nOpenTelemetry の `tool_decision` イベントには `classifier_verdict` と `permission_mode` が加わり、auto mode 分類器の判定を権限ルールと区別できる。`OTEL_LOG_TOOL_DETAILS=1` では分類器がブロックした組み込みルール名 `classifier_category` も出る。"
+        },
+        {
+          "title": "Code Review is now generally available",
+          "title_ja": "Code Review を一般提供開始",
+          "url": "https://claude.com/resources/articles/code-review-is-now-generally-available",
+          "source": "Blog",
+          "published_at": "2026-10-15T00:00:00+00:00",
+          "interest": 3,
+          "summary": "PR を自動でレビューする Code Review がリサーチプレビューを終え、Team / Enterprise プランで一般提供になった。レビューはプレビュー時の約 20 分から 6〜10 分に短くなり、管理者はリポジトリごとに Quick / Standard / Deep の深さを選べる。",
+          "article_summary": ""
         }
       ]
     },
@@ -1442,7 +1452,18 @@
       "label": "Slack",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Work With Live App Content Without Leaving Slack",
+          "title_ja": "Slack から離れずにアプリのコンテンツを操作できる Work Object Embeds",
+          "url": "https://slack.com/blog/news/work-object-embeds",
+          "source": "Blog",
+          "published_at": "2026-10-15T20:50:21+00:00",
+          "interest": 1,
+          "summary": "対応アプリやエージェントのリンクを、スレッド内で操作できるコンテンツとして開く Work Object Embeds を公開した。Box のノートの編集、Amplitude のダッシュボード、Confluence のページの確認を Slack 上ででき、閲覧範囲は各アプリの認証に従う。",
+          "article_summary": ""
+        }
+      ]
     }
   ]
 }

@@ -1321,6 +1321,16 @@
           "interest": 3,
           "summary": "コマンド / HTTP hook に `onFailure: \"block\"` が加わり、起動できない・タイムアウトした・想定外の終了コードを返した hook は通過させずにアクションをブロックする。Program Status Protocol（OSC 7501）に対応し、対応ターミナルは Claude Code が作業中・入力待ち・完了のどれかを表示できる。",
           "article_summary": "hook 周りでは、コマンド / HTTP hook の `onFailure: \"block\"` で hook が起動できない、タイムアウトする、想定外の終了コードを返した時にアクションをブロックできる。`claude plugin install` / `enable` / `disable` / `marketplace add` は書き込み先の設定ファイルが読み込めない時に警告する。\n\nターミナル連携では Program Status Protocol（OSC 7501）に対応し、対応するターミナルが作業中・入力待ち・完了を表示できる。`/copy` の候補に引用テキストが加わり `>` なしでコピーできる。`claude -p` が最後の turn の後も開いたままの時、何を待っているかを stderr に出す。mod 向けには通知を上げる `$.ui.notify`、`Button` の子要素（文字列と `Text`）が加わった。\n\n無人リトライモード（`CLAUDE_CODE_RETRY_WATCHDOG`）が 429 / 529 を待つ時間を `CLAUDE_CODE_RETRY_WATCHDOG_MAX_WAIT_MS` で制限できる。Claude apps gateway には upstream の `models` リスト、`timeouts.upstream_ttfb_ms`、監査イベントの `upstream_request_id`、応答の `request-id` ヘッダー、ユーザー設定での `forceLoginMethod: \"gateway\"` が加わった。"
+        },
+        {
+          "title": "Build live dashboards and animate explainers with Claude",
+          "title_ja": "Claude Dashboards と Claude Motion をベータ提供、Docs・Slides・Design は全プランで正式提供に",
+          "url": "https://claude.com/resources/articles/dashboards-and-motion",
+          "source": "Blog",
+          "published_at": "2026-10-08T00:00:00+00:00",
+          "interest": 2,
+          "summary": "データ基盤につないで最新の状態を保つダッシュボードを作る Claude Dashboards（有料プラン）と、コードでアニメーションを組む Claude Motion（Team / Enterprise）がベータになった。Docs、Slides、Design はベータを外れ、Free を含む全プランで使える。",
+          "article_summary": "Claude Dashboards は BigQuery、Databricks、Snowflake、Amazon Redshift、ClickHouse などのデータ基盤や Salesforce などのコネクタにつなぎ、自然文の質問からダッシュボードを作ってデータの変化に合わせて更新する。数値をクリックすると元のクエリを確認でき、Amplitude、Grafana、Hex、PostHog などへ送って分析を続けられる。有料プランでベータ。\n\nClaude Motion はテキスト、グラフ、図形、画像をコードでアニメーションにし、MP4 で書き出す。動画生成モデルは使わない。Team / Enterprise でベータ。\n\nDocs、Slides、Design はベータを外れて Free を含む全プランで提供され、アーティファクトの CMEK 対応、チームでの共同編集、組織外への共有が加わった。"
         }
       ]
     },
@@ -1407,7 +1417,18 @@
       "label": "Slack",
       "status": "ok",
       "note": "",
-      "items": []
+      "items": [
+        {
+          "title": "Slackbot Skills Are Now Shareable: Send Them Anywhere",
+          "title_ja": "Slackbot のスキルを組織の外にも共有できるように",
+          "url": "https://slack.com/blog/news/slackbot-shareable-skills",
+          "source": "Blog",
+          "published_at": "2026-10-08T14:57:46+00:00",
+          "interest": 2,
+          "summary": "Slackbot のスキルに外部共有リンクを作れるようになり、他の Slack 組織のユーザーもコピーして自分の Slackbot に追加できる。リンクは取り消せ、管理者は共有する側と受け入れる側を別々に許可できる。",
+          "article_summary": ""
+        }
+      ]
     }
   ]
 }
