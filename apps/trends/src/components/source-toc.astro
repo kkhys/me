@@ -209,7 +209,13 @@ if (updates.length > 0) {
     const links = [...toc.querySelectorAll<HTMLAnchorElement>(".toc-link")];
     observeActiveHeading({
       links,
-      headingSelector: "main :is(h2, h3)[id]",
+      headingSelector: "main :is(h2, section)[id]",
+      /* Whatever sits under the sticky toolbar is not the current section; after
+         a jump the previous section ends exactly at the viewport top, and a
+         zero-area edge touch still counts as intersecting.
+         shortcut: 40px is --toolbar-height at a 16px root (rootMargin takes no
+         rem), read the token if the band must track font scaling. */
+      rootMargin: "-40px 0px -80% 0px",
       onChange: (_id, activeLink) => {
         for (const link of links) {
           link.classList.toggle(ACTIVE_CLASS, link === activeLink);
